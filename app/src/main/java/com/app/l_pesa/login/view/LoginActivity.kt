@@ -195,6 +195,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
             if(CommonMethod.isNetworkAvailable(this@LoginActivity))
             {
                progressBar.visibility = View.VISIBLE
+               txtLogin.isClickable   = false
+
                if (ActivityCompat.checkSelfPermission(this@LoginActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale((this@LoginActivity),
                                     Manifest.permission.CALL_PHONE)) {
@@ -257,16 +259,17 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
     override fun onSuccessLogin(data: LoginData) {
 
         progressBar.visibility = View.INVISIBLE
+        txtLogin.isClickable   = true
         Toast.makeText(this@LoginActivity,data.user_info.phone_number,Toast.LENGTH_SHORT).show()
     }
 
     override fun onErrorLogin(jsonMessage: String) {
 
       progressBar.visibility = View.INVISIBLE
+      txtLogin.isClickable   = true
       CommonMethod.setSnackBar(this@LoginActivity,ll_root,jsonMessage)
 
     }
-
 
     private fun countrySpinner(countryList: ResModelData)
     {
