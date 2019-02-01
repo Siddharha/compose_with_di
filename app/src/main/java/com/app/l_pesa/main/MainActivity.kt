@@ -55,11 +55,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initCurrentLocation()
     {
-        val locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            alertLocation()
-        }
-
         startLocationTrackerService()
     }
 
@@ -122,15 +117,6 @@ class MainActivity : AppCompatActivity() {
            // Log.e(LOG_TAG, "requestCode does not match:$requestCode")
     }
 
-    private fun alertLocation() {
-        val builder = AlertDialog.Builder(this@MainActivity)
-        builder.setMessage(resources.getString(R.string.turn_on_location))
-                .setCancelable(true)
-                .setPositiveButton("Yes") { _, _ -> startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) }
-        // .setNegativeButton("No") { _, _ -> Toast.makeText(this@MainActivity, "Can not access location", Toast.LENGTH_SHORT).show() }
-        val alertDialog = builder.create()
-        alertDialog.show()
-    }
 
     private fun geoCoderCountry( lat:Double, lng:Double)
     {
