@@ -1,13 +1,10 @@
 package com.app.l_pesa.login.presenter
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.support.annotation.Keep
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginRequest
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +20,6 @@ import retrofit2.HttpException
 
 class PresenterLogin {
 
-
     fun doLogin(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogin)
     {
        RetrofitHelper.getRetrofit(BaseService::class.java).doLogin(jsonRequest)
@@ -34,12 +30,12 @@ class PresenterLogin {
                     responseBody
                 }
                 .subscribe({ response ->
-                    System.out.println("JSON_2")
+
                     try
                     {
                       if(response.status.isSuccess)
                       {
-                          System.out.println("JSON_3")
+
                           if(response.data.user_info.register_step=="3")
                           {
                               callBackOBJ.onSuccessLogin(response.data)

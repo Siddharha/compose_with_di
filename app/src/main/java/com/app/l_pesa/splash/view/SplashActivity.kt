@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import com.google.gson.Gson
 
 
-
-
 class SplashActivity : AppCompatActivity(), ICallBackCountry {
 
 
@@ -47,12 +45,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry {
 
     private fun splashLoading()
     {
-        Handler().postDelayed(Runnable
-         /*
-         * Showing splash screen with a timer. This will be useful when you
-         * want to show case your app logo / company
-         */
-        {
+        Handler().postDelayed({
             progressBar.visibility          = View.INVISIBLE
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             overridePendingTransition(R.anim.right_in, R.anim.left_out)

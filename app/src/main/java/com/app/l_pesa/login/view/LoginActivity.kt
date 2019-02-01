@@ -17,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.telephony.TelephonyManager
 import android.text.TextUtils
+import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -31,7 +32,6 @@ import com.app.l_pesa.login.presenter.PresenterLogin
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_login.*
 import com.app.l_pesa.login.model.LoginData
-import com.app.l_pesa.login.model.LoginRequest
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
@@ -194,7 +194,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
             if(CommonMethod.isNetworkAvailable(this@LoginActivity))
             {
-                /*if (ActivityCompat.checkSelfPermission(this@LoginActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+               progressBar.visibility = View.VISIBLE
+               if (ActivityCompat.checkSelfPermission(this@LoginActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale((this@LoginActivity),
                                     Manifest.permission.CALL_PHONE)) {
                     } else {
@@ -202,7 +203,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                                 arrayOf(Manifest.permission.CALL_PHONE),
                                 200)
                     }
-                }*/
+                }
 
                 val displayMetrics = resources.displayMetrics
                 val width = displayMetrics.widthPixels
@@ -219,15 +220,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
                 val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-               /* val deviceData= LoginRequest.DeviceData(deviceId, ""+Build.VERSION.SDK_INT, imeiId, ""+telephonyManager.subscriberId,
-                                                    ""+telephonyManager.simSerialNumber, telephonyManager.simOperatorName,
-                                                    "" + height, "" + width
-                                                    , Build.DEVICE, Build.MODEL, Build.PRODUCT,Build.MANUFACTURER)
-*/
-               // val jsonLoginRequest=LoginRequest(etPhone.text.toString(),countryCode,etPassword.text.toString(),"A","",deviceData)
-
-                //val presenterLoginObj=PresenterLogin()
-               // presenterLoginObj.doLogin(this@LoginActivity,jsonLoginRequest,this)
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
                 jsonObject.addProperty("country_code",countryCode)
@@ -235,10 +227,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 jsonObject.addProperty("platform_type","A")
                 jsonObject.addProperty("device_token"," ")
 
-
                 val jsonObjectRequestChild = JsonObject()
-                val deviceId2= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-                jsonObjectRequestChild.addProperty("device_id", deviceId2)
+                jsonObjectRequestChild.addProperty("device_id", deviceId)
                 jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
                 jsonObjectRequestChild.addProperty("imei",imeiId)
                 jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
@@ -253,8 +243,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
-
-
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
@@ -268,11 +256,13 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
     override fun onSuccessLogin(data: LoginData) {
 
+        progressBar.visibility = View.INVISIBLE
         Toast.makeText(this@LoginActivity,data.user_info.phone_number,Toast.LENGTH_SHORT).show()
     }
 
     override fun onErrorLogin(jsonMessage: String) {
 
+      progressBar.visibility = View.INVISIBLE
       CommonMethod.setSnackBar(this@LoginActivity,ll_root,jsonMessage)
 
     }
