@@ -25,6 +25,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.password.view.ForgetPasswordActivity
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
@@ -270,7 +271,9 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
-        Toast.makeText(this@LoginActivity,data.user_info.phone_number,Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
     }
 
     override fun onErrorLogin(jsonMessage: String) {

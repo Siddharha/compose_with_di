@@ -46,8 +46,10 @@
         <activity
             android:name=".registration.view.RegistrationStepTwoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".password.view.ForgetPasswordActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".password.view.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".dashboard.view.DashboardActivity"></activity>
     </application>
 
 </manifest>
