@@ -40,9 +40,13 @@
         <activity
             android:name=".login.view.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".registration.view.RegistrationStepOneActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".registration.view.RegistrationStepTwoActivity"
+        <activity
+            android:name=".registration.view.RegistrationStepOneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".registration.view.RegistrationStepTwoActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".password.view.ForgetPasswordActivity"
             android:screenOrientation="portrait"/>
     </application>
 

@@ -11,11 +11,12 @@
     <string name="s3_bucket_url_id_proof_pic">https://s3.eu-central-1.amazonaws.com/s3.l-pesa.com/dev_server_id_imgs/</string>
     <string name="no_more_data">No more data available to read</string>
     <string name="no_country">Country list is empty</string>
-    <string name="phone_no">Phone no</string>
+    <string name="phone_no">Mobile no</string>
     <string name="password">Password</string>
-    <string name="email">Email</string>
+    <string name="email_address">Email Address</string>
     <string name="login">Login</string>
     <string name="register_now">Register now</string>
+    <string name="or">Or</string>
     <string name="forgot_password">Forgot password</string>
 
     <!--Registration Message-->

@@ -8,8 +8,8 @@
     <ImageView
         android:contentDescription="@string/app_name"
         android:id="@+id/imgLogo"
-        android:layout_width="@dimen/_85sdp"
-        android:layout_height="@dimen/_85sdp"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_75sdp"
         android:src="@drawable/lpesa_logo"
         android:layout_centerInParent="true"/>
 

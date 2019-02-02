@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_85sdp"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
             android:src="@drawable/lpesa_logo"
             android:contentDescription="@string/app_name"
 
@@ -255,7 +255,7 @@
         android:layout_weight=".05"/>
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txt_forgot_password"
+        android:id="@+id/txtForgotPassword"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".60"

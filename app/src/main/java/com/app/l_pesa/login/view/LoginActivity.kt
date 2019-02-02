@@ -25,6 +25,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.password.view.ForgetPasswordActivity
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
@@ -62,6 +63,15 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         loadCountry()
         loginProcess()
         register()
+        forgetPassword()
+    }
+
+    private fun forgetPassword()
+    {
+        txtForgotPassword.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ForgetPasswordActivity::class.java))
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
     }
 
     private fun register()

@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="@dimen/_85sdp"
-            android:layout_height="@dimen/_85sdp"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
             android:src="@drawable/lpesa_logo"
             android:contentDescription="@string/app_name"
 
@@ -189,7 +189,7 @@
             android:layout_height="match_parent"
             android:layout_toEndOf="@+id/viewEmail"
             android:layout_marginStart="@dimen/_7sdp"
-            android:hint="@string/email"
+            android:hint="@string/email_address"
             android:paddingStart="@dimen/_3sdp"
             android:paddingEnd="@dimen/_2sdp"
             android:background="@android:color/transparent"

@@ -2,6 +2,7 @@ package com.app.l_pesa.API
 
 import android.support.annotation.Keep
 import com.app.l_pesa.login.model.ResLogin
+import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.splash.model.ResModelCountry
 import com.google.gson.JsonObject
@@ -21,10 +22,13 @@ interface BaseService{
     fun countryList(): Observable<ResModelCountry>
 
     @POST("user/login")
-    fun doLogin(@Body  loginRequest: JsonObject): Observable<ResLogin>
+    fun doLogin(@Body  request: JsonObject): Observable<ResLogin>
+
+    @POST("forget_password")
+    fun doForgetPassword(@Body  request: JsonObject): Observable<ResForgetPassword>
 
     @POST("user/register")
-    fun doRegister(@Body jsonRequest: JsonObject): Observable<ResRegistrationOne>
+    fun doRegister(@Body request: JsonObject): Observable<ResRegistrationOne>
 
 }
 
