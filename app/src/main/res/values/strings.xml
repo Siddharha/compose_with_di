@@ -24,6 +24,7 @@
     <string name="see_you_quality">See if you qualify</string>
 
     <!--Caution Message-->
+    <string name="required_phone_email">Required valid phone number or email</string>
     <string name="required_phone">Required valid phone number</string>
     <string name="required_password">Required password</string>
     <string name="required_email">Required valid email</string>
