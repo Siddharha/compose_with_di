@@ -1,5 +1,6 @@
 package com.app.l_pesa.password.view
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -7,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.password.inter.ICallBackPassword
 import com.app.l_pesa.password.presenter.PresenterPassword
 import com.google.gson.JsonObject
@@ -79,5 +81,13 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword {
     override fun onErrorResetPassword(jsonMessage: String) {
 
         Toast.makeText(this@ForgetPasswordActivity,"Fail",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onBackPressed() {
+
+        val intent = Intent(this@ForgetPasswordActivity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 }
