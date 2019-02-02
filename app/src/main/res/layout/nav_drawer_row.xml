@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_main"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_35sdp"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/imgMenu"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:contentDescription="@string/app_name"
+        />
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/imgMenu"
+        android:text=""
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/_13sdp"
+        tools:ignore="HardcodedText" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#e3e3e3"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_32sdp"/>
+
+</RelativeLayout>
