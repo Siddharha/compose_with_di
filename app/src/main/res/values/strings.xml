@@ -17,6 +17,7 @@
     <string name="login">Login</string>
     <string name="register_now">Register now</string>
     <string name="or">Or</string>
+    <string name="submit">Submit</string>
     <string name="forgot_password">Forgot password</string>
 
     <!--Registration Message-->
