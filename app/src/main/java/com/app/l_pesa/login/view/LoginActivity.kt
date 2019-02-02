@@ -20,12 +20,11 @@ import android.text.TextUtils
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.dashboard.DashboardActivity
 import com.app.l_pesa.password.view.ForgetPasswordActivity
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList

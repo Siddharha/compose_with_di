@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,7 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity implements  View.On
 
     public boolean isAddSlidingMenu = false;
    /* public static final int container = R.id.ll_fragment_container;*/
-  //  public static final int container = R.id.container_body;
+   // public static final int container = R.id.container_body;
     private ImageView btn_menu,btn_back; private TextView tv_title;
     public static TextView tv_toolBar;
     public static TextView tv_credit_score_in_navigation;

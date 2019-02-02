@@ -16,13 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.l_pesa.R;
-import com.app.l_pesa.dashboard.view.DashboardActivity;
+import com.app.l_pesa.dashboard.DashboardActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class FragmentDrawer extends Fragment {
+
 
     private static String[] titles = null;
     private RecyclerView recyclerView;
@@ -91,6 +92,8 @@ public class FragmentDrawer extends Fragment {
     }
 
 
+
+
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar, final DashboardActivity act) {
         containerView = getActivity().findViewById(fragmentId);
 
@@ -101,7 +104,7 @@ public class FragmentDrawer extends Fragment {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
 
-               /* User usr = act.returnSavedUser();
+                /*User usr = act.returnSavedUser();
                 Picasso.with(getActivity()).load("https://s3.eu-central-1.amazonaws.com/s3.l-pesa.com/dev_server_imgs/"+usr.getProfile_pic()).into((CircleImageView)drawerView.findViewById(R.id.user_image));
                 ((CustomTextView)drawerView.findViewById(R.id.user_name)).setText(usr.getFirst_name());
                 ((CustomTextView)drawerView.findViewById(R.id.user_creditscore)).setText("Credit Score: "+usr.getCredit_score());*/
@@ -188,3 +191,4 @@ public class FragmentDrawer extends Fragment {
     }
 
 }
+
