@@ -53,7 +53,7 @@
             android:name=".password.view.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".dashboard.DashboardActivity" android:screenOrientation="portrait">
+        <activity android:name=".dashboard.view.DashboardActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

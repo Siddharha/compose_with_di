@@ -37,18 +37,9 @@
 
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string-array name="nav_drawer_labels">
-        <item>@string/nav_item_home</item>
-        <item>@string/nav_item_view_plans</item>
-        <item>@string/nav_item_group</item>
-        <item>@string/nav_item_loan_history</item>
-        <item>@string/nav_item_search</item>
-        <item>@string/nav_item_profile</item>
-        <item>@string/nav_item_notifications</item>
-        <item>@string/nav_item_settings</item>
-        <item>@string/nav_item_logout</item>
+    <string name="dashboard">Dashboard</string>
+    <string name="view_loan">View loans</string>
 
-    </string-array>
 
     <string name="nav_item_home">Dashboard</string>
     <string name="nav_item_view_plans">View Loans</string>
