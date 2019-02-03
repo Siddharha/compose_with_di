@@ -15,6 +15,7 @@ import android.text.Spannable
 import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
+import android.text.TextUtils
 import android.widget.Toast
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
@@ -81,13 +82,22 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         val navigationView  = findViewById<NavigationView>(R.id.nav_view)
         val header          = navigationView.getHeaderView(0)
-        val txtName= header.findViewById<CommonTextRegular>(R.id.txtName)
+        val txtName         = header.findViewById<CommonTextRegular>(R.id.txtName)
+        val txtCreditScore  = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
         val sharedPrefOBJ= SharedPref(this@DashboardActivity)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
         if(userData!=null)
         {
-            Toast.makeText(this@DashboardActivity,""+userData.user_personal_info.first_name,Toast.LENGTH_SHORT).show()
-            txtName.text = userData.user_personal_info.first_name+" "+userData.user_personal_info.last_name
+
+            if(!TextUtils.isEmpty(userData.user_personal_info.first_name))
+            {
+                txtName.text            = userData.user_personal_info.first_name+" "+userData.user_personal_info.last_name
+            }
+            if(!TextUtils.isEmpty(userData.user_info.credit_score))
+            {
+                txtCreditScore.text     = resources.getString(R.string.credit_score)+userData.user_info.credit_score
+            }
+
         }
 
     }
