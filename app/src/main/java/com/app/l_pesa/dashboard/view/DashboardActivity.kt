@@ -144,6 +144,30 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, ProfileFragment()).commit()
             }
+            R.id.action_loan -> {
+                toolbar.title =resources.getString(R.string.nav_item_loan)
+
+            }
+            R.id.action_points -> {
+                toolbar.title =resources.getString(R.string.nav_item_points)
+
+            }
+            R.id.action_investment -> {
+                toolbar.title =resources.getString(R.string.nav_item_investment)
+
+            }
+            R.id.action_lpk-> {
+                toolbar.title =resources.getString(R.string.nav_item_lpk)
+
+            }
+            R.id.action_wallet-> {
+                toolbar.title =resources.getString(R.string.nav_item_wallet)
+
+            }
+            R.id.action_settings-> {
+                toolbar.title =resources.getString(R.string.nav_item_settings)
+
+            }
 
             R.id.action_logout -> {
                 doLogout()
