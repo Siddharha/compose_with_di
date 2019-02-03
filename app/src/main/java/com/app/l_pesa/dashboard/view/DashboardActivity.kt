@@ -51,18 +51,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun  initMenu()
     {
-        val attr = intArrayOf(android.R.attr.listDivider)
-
-        val a = obtainStyledAttributes(attr)
-        val divider = a.getDrawable(0)
-        val inset = resources.getDimensionPixelSize(R.dimen._10sdp)
-        val insetDivider = InsetDrawable(divider, inset, 0, 0, 0)
-        a.recycle()
-
-        val navMenuView = nav_view.getChildAt(0) as NavigationMenuView
-        val itemDecoration = DividerItemDecoration(this@DashboardActivity, DividerItemDecoration.VERTICAL)
-        itemDecoration.setDrawable(insetDivider)
-        navMenuView.addItemDecoration(itemDecoration)
 
         val m = nav_view.menu
         for (i in 0 until m.size())

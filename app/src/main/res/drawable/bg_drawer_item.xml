@@ -5,8 +5,7 @@
             <solid android:color="@color/colorWhite"/>
         </shape>
     </item>
-    <item android:left="@dimen/_7sdp"
-         >
+    <item android:left="@dimen/_7sdp" android:right="@dimen/_2sdp">
         <shape android:shape="rectangle">
             <solid android:color="@color/colorPrimaryLight"/>
         </shape>
