@@ -279,7 +279,14 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         progressBar.visibility      = View.INVISIBLE
         txtLogin.isClickable        = true
         sharedPrefOBJ.loginStatus   = this@LoginActivity.getString(R.string.login_success)
-        startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+
+
+        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()
     }

@@ -106,7 +106,12 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
     override fun onSuccessLogin(data: LoginData) {
 
         progressBar.visibility          = View.INVISIBLE
-        startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+        val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()
     }
