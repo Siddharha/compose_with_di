@@ -16,17 +16,11 @@ import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
 import android.text.TextUtils
-import android.widget.Toast
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.nav_header_main.*
-import android.view.WindowManager
-import android.os.Build
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.ActionBar
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +29,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+        toolbar.title =resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
 
 
@@ -76,6 +71,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun initFragment()
     {
+
         val fManager = supportFragmentManager
         val tx = fManager.beginTransaction()
         tx.add(R.id.frame,DashboardFragment())
@@ -128,11 +124,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         when (item.itemId) {
             R.id.action_dashboard ->
             {
+                toolbar.title =resources.getString(R.string.nav_item_dashboard)
                 supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, DashboardFragment()).commit()
             }
 
             R.id.action_profile -> {
+                toolbar.title =resources.getString(R.string.nav_item_profile)
                 supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, ProfileFragment()).commit()
             }
