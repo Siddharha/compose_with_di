@@ -77,9 +77,9 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
 
     override fun onSuccessCountry(countries_list: ResModelData) {
 
-        val gsonObj         =   Gson()
-        val json            =   gsonObj.toJson(countries_list)
-        val sharedPrefOBJ   =   SharedPref(this@SplashActivity)
+        val gsonObj                 =   Gson()
+        val json                    =   gsonObj.toJson(countries_list)
+        val sharedPrefOBJ           =   SharedPref(this@SplashActivity)
         sharedPrefOBJ.countryList   = json
         progressBar.visibility      = View.INVISIBLE
 
@@ -106,6 +106,10 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
     override fun onSuccessLogin(data: LoginData) {
 
         progressBar.visibility = View.INVISIBLE
+        val sharedPrefOBJ=SharedPref(this@SplashActivity)
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.userInfo  = json
         val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
