@@ -15,7 +15,14 @@ import android.text.Spannable
 import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
+import android.support.design.internal.NavigationMenuView
+import android.support.v7.widget.DividerItemDecoration
 import android.view.SubMenu
+import android.graphics.drawable.InsetDrawable
+import android.graphics.drawable.Drawable
+import android.content.res.TypedArray
+
+
 
 
 
@@ -30,32 +37,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(toolbar)
 
-
-
-
-        val m = nav_view.getMenu()
-        for (i in 0 until m.size()) {
-            val mi = m.getItem(i)
-
-            //for aapplying a font to subMenu ...
-            val subMenu = mi.getSubMenu()
-            if (subMenu != null && subMenu!!.size() > 0) {
-                for (j in 0 until subMenu!!.size()) {
-                    val subMenuItem = subMenu!!.getItem(j)
-                    applyFontToMenuItem(subMenuItem)
-                }
-            }
-
-            //the method we have create in activity
-            applyFontToMenuItem(mi)
-        }
-
-        var fManager = supportFragmentManager
-        var tx = fManager.beginTransaction()
-        tx.add(R.id.frame1,DashboardFragment())
-        tx.commit()
-
-
+        initMenu()
+        initFragment()
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close
@@ -64,6 +47,45 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    private fun  initMenu()
+    {
+        val attr = intArrayOf(android.R.attr.listDivider)
+
+        val a = obtainStyledAttributes(attr)
+        val divider = a.getDrawable(0)
+        val inset = resources.getDimensionPixelSize(R.dimen._10sdp)
+        val insetDivider = InsetDrawable(divider, inset, 0, 0, 0)
+        a.recycle()
+
+        val navMenuView = nav_view.getChildAt(0) as NavigationMenuView
+        val itemDecoration = DividerItemDecoration(this@DashboardActivity, DividerItemDecoration.VERTICAL)
+        itemDecoration.setDrawable(insetDivider)
+        navMenuView.addItemDecoration(itemDecoration)
+
+        val m = nav_view.menu
+        for (i in 0 until m.size())
+        {
+            val mi = m.getItem(i)
+            val subMenu = mi.subMenu
+            if (subMenu != null && subMenu.size() > 0)
+            {
+                for (j in 0 until subMenu.size()) {
+                    val subMenuItem = subMenu.getItem(j)
+                    applyFontToMenuItem(subMenuItem)
+                }
+            }
+            applyFontToMenuItem(mi)
+        }
+    }
+
+    private fun initFragment()
+    {
+        val fManager = supportFragmentManager
+        val tx = fManager.beginTransaction()
+        tx.add(R.id.frame,DashboardFragment())
+        tx.commit()
     }
 
     override fun onBackPressed() {
@@ -87,7 +109,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.action_dashboard-> {
                 val fManager = supportFragmentManager
                 val tx = fManager.beginTransaction()
-                tx.replace(R.id.frame1, DashboardFragment())
+                tx.replace(R.id.frame, DashboardFragment())
                 tx.commit()
             }
             /* "Courses" -> {

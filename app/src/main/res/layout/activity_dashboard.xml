@@ -20,8 +20,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="false"
-        app:itemBackground="@drawable/bg_drawer_item"
+        app:itemTextAppearance="@style/NavDrawerTextStyle"
         app:headerLayout="@layout/nav_header_main"
+
         app:menu="@menu/activity_main_drawer"/>
 
 </android.support.v4.widget.DrawerLayout>
