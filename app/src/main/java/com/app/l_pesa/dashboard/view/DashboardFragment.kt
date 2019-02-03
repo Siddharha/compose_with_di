@@ -1,32 +1,32 @@
 package com.app.l_pesa.dashboard.view
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
-import android.support.v4.widget.SwipeRefreshLayout
-
+import kotlinx.android.synthetic.main.dashboard_layout.*
 
 
 class DashboardFragment: Fragment() {
 
-    lateinit var swipeRefreshLayoutOBJ :SwipeRefreshLayout
 
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.dashboard_layout, container,false)
-        initUI(view)
-        return view
+        return inflater.inflate(R.layout.dashboard_layout, container,false)
     }
 
-    private fun initUI(view: View)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        swipeRefresh()
+    }
+
+    private fun swipeRefresh()
     {
-        swipeRefreshLayoutOBJ=view.findViewById(R.id.swipeRefreshLayout)
-        swipeRefreshLayoutOBJ.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayoutOBJ.setOnRefreshListener {
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
 
           //  swipeRefreshLayoutOBJ.isRefreshing = false
         }
