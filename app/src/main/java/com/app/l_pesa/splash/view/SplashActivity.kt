@@ -10,15 +10,19 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.login.inter.ICallBackLogin
+import com.app.l_pesa.login.model.LoginData
+import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.model.ResModelData
 import com.app.l_pesa.splash.presenter.PresenterCountry
 import kotlinx.android.synthetic.main.activity_splash.*
 import com.google.gson.Gson
+import com.google.gson.JsonParser
 
 
-class SplashActivity : AppCompatActivity(), ICallBackCountry {
+class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,31 +30,32 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry {
      setContentView(R.layout.activity_splash)
 
         val sharedPrefOBJ=SharedPref(this@SplashActivity)
-        if(TextUtils.isEmpty(sharedPrefOBJ.countryList))
+        if(sharedPrefOBJ.loginStatus==this@SplashActivity.getString(R.string.login_success))
         {
-            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-            {
-                loadCountry()
-            }
-            else
-            {
-                showSnackBar(resources.getString(R.string.no_internet))
-            }
+            val jsonObject          = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+            val presenterLoginObj   = PresenterLogin()
+            presenterLoginObj.doLogin(this@SplashActivity,jsonObject,this)
+
         }
         else
         {
-            if(sharedPrefOBJ.loginStatus==this@SplashActivity.getString(R.string.login_success))
+            if(TextUtils.isEmpty(sharedPrefOBJ.countryList))
             {
-                startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
-                overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                finish()
+                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+                {
+                    loadCountry()
+                }
+                else
+                {
+                    showSnackBar(resources.getString(R.string.no_internet))
+                }
             }
             else
             {
                 splashLoading()
             }
-
         }
+
 
     }
 
@@ -96,6 +101,20 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry {
     {
         progressBar.visibility=View.INVISIBLE
         CommonMethod.setSnackBar(this@SplashActivity,rootLayout,message)
+    }
+
+    override fun onSuccessLogin(data: LoginData) {
+
+        progressBar.visibility          = View.INVISIBLE
+        startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
+    }
+
+    override fun onErrorLogin(jsonMessage: String) {
+
+        progressBar.visibility = View.INVISIBLE
+        CommonMethod.setSnackBar(this@SplashActivity,rootLayout,jsonMessage)
     }
 
 }

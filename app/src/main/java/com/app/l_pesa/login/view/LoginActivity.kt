@@ -306,13 +306,17 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
-         val options = RequestOptions()
-                options.centerCrop()
-                Glide.with(this@LoginActivity)
-                        .load(resModelCountryList.image)
-                        .apply(options)
-                        .into(img_country)
-                countryCode=resModelCountryList.country_code
+        val sharedPref          =SharedPref(this@LoginActivity)
+        sharedPref.countryCode  =resModelCountryList.code
+        countryCode             =resModelCountryList.country_code
+        val options = RequestOptions()
+            options.centerCrop()
+            Glide.with(this@LoginActivity)
+            .load(resModelCountryList.image)
+            .apply(options)
+            .into(img_country)
+
+
     }
 
     override fun onBackPressed() {

@@ -52,11 +52,10 @@
             android:name=".password.view.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".dashboard.view.DashboardActivity"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".dashboard.view.DashboardActivity"
+            android:screenOrientation="portrait"/>
 
-
-        </activity>
 
     </application>
 
