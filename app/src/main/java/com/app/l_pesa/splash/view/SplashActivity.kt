@@ -61,11 +61,11 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry {
 
     override fun onSuccessCountry(countries_list: ResModelData) {
 
-        val gson = Gson()
-        val json = gson.toJson(countries_list)
-        val sharedPrefOBJ=SharedPref(this@SplashActivity)
-        sharedPrefOBJ.countryList= json
-        progressBar.visibility   = View.INVISIBLE
+        val gsonObj         =   Gson()
+        val json            =   gsonObj.toJson(countries_list)
+        val sharedPrefOBJ   =   SharedPref(this@SplashActivity)
+        sharedPrefOBJ.countryList   = json
+        progressBar.visibility      = View.INVISIBLE
 
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)

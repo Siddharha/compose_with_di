@@ -268,6 +268,10 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
     override fun onSuccessLogin(data: LoginData) {
 
+        val sharedPrefOBJ=SharedPref(this@LoginActivity)
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.userInfo=json
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
         startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))

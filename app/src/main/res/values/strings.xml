@@ -37,18 +37,15 @@
 
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="dashboard">Dashboard</string>
-    <string name="view_loan">View loans</string>
-    <string name="my_profile">My profile</string>
 
-
-    <string name="nav_item_home">Dashboard</string>
-    <string name="nav_item_view_plans">View Loans</string>
-    <string name="nav_item_group">My Profile</string>
-    <string name="nav_item_loan_history">Loan History</string>
-    <string name="nav_item_search">Buy Points</string>
-    <string name="nav_item_profile">Refer a Friend</string>
-    <string name="nav_item_notifications">Customer Care</string>
+    <!--MENU-->
+    <string name="nav_item_dashboard">Dashboard</string>
+    <string name="nav_item_profile">My Profile</string>
+    <string name="nav_item_loan">Loan</string>
+    <string name="nav_item_points">Buy Points</string>
+    <string name="nav_item_investment">Investment</string>
+    <string name="nav_item_lpk">LPK(Kripton)</string>
+    <string name="nav_item_wallet">Wallet</string>
     <string name="nav_item_settings">Settings</string>
     <string name="nav_item_logout">Logout</string>
 </resources>

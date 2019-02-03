@@ -18,6 +18,7 @@ data class LoginData(val user_info:UserInfo,val user_personal_info:UserPersonalI
 
 @Keep
 data class UserInfo(val id:Int,val profile_image:String,val phone_number:String,val credit_score:String,val register_step:String)
+
 @Keep
 data class UserPersonalInfo(val title:String,val first_name:String,
                             val middle_name:String,val last_name:String,

@@ -1,5 +1,6 @@
 package com.app.l_pesa.dashboard.view
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -14,7 +15,13 @@ import android.text.Spannable
 import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
+import android.widget.Toast
+import com.app.l_pesa.common.CommonTextRegular
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.profile.view.ProfileFragment
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +32,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(toolbar)
 
+        initData()
         initMenu()
         initFragment()
 
@@ -65,6 +73,22 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val tx = fManager.beginTransaction()
         tx.add(R.id.frame,DashboardFragment())
         tx.commit()
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initData()
+    {
+        val navigationView  = findViewById<NavigationView>(R.id.nav_view)
+        val header          = navigationView.getHeaderView(0)
+        val txtName= header.findViewById<CommonTextRegular>(R.id.txtName)
+        val sharedPrefOBJ= SharedPref(this@DashboardActivity)
+        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        if(userData!=null)
+        {
+            Toast.makeText(this@DashboardActivity,""+userData.user_personal_info.first_name,Toast.LENGTH_SHORT).show()
+            txtName.text = userData.user_personal_info.first_name+" "+userData.user_personal_info.last_name
+        }
 
     }
 

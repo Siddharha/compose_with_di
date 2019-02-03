@@ -7,16 +7,40 @@
 
         <item android:id="@+id/action_dashboard"
               android:icon="@mipmap/ic_launcher"
-              android:title="@string/dashboard" />
-        <item
-            android:id="@+id/action_view_loan"
-            android:icon="@mipmap/ic_launcher"
-            android:title="@string/view_loan" />
+              android:title="@string/nav_item_dashboard" />
 
         <item
             android:id="@+id/action_profile"
             android:icon="@mipmap/ic_launcher"
-            android:title="@string/my_profile" />
+            android:title="@string/nav_item_profile" />
+        <item
+            android:id="@+id/action_loan"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/nav_item_loan" />
+        <item
+            android:id="@+id/action_points"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/nav_item_points" />
+        <item
+            android:id="@+id/action_investment"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/nav_item_investment" />
+        <item
+            android:id="@+id/action_lpk"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/nav_item_lpk" />
+        <item
+            android:id="@+id/action_wallet"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/nav_item_wallet" />
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/nav_item_settings" />
+        <item
+            android:id="@+id/action_logout"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/nav_item_logout" />
 
     </group>
 
