@@ -256,6 +256,9 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
                 println("JSON"+jsonObject.toString())
+                val sharedPrefOBJ=SharedPref(this@LoginActivity)
+                sharedPrefOBJ.loginRequest=jsonObject.toString()
+
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
@@ -272,9 +275,10 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         val sharedPrefOBJ=SharedPref(this@LoginActivity)
         val gson = Gson()
         val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo=json
-        progressBar.visibility = View.INVISIBLE
-        txtLogin.isClickable   = true
+        sharedPrefOBJ.userInfo      = json
+        progressBar.visibility      = View.INVISIBLE
+        txtLogin.isClickable        = true
+        sharedPrefOBJ.loginStatus   = this@LoginActivity.getString(R.string.login_success)
         startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()

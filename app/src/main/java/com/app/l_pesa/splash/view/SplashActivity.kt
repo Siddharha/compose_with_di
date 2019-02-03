@@ -9,6 +9,7 @@ import android.view.View
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.model.ResModelData
@@ -38,7 +39,17 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry {
         }
         else
         {
-            splashLoading()
+            if(sharedPrefOBJ.loginStatus==this@SplashActivity.getString(R.string.login_success))
+            {
+                startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                finish()
+            }
+            else
+            {
+                splashLoading()
+            }
+
         }
 
     }

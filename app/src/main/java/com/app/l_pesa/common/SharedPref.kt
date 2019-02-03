@@ -34,6 +34,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var loginRequest: String
+        get() = pref.getString(KEY_SET_LOGIN_REQUEST, "")!!
+        set(loginRequest) {
+            editor.remove(KEY_SET_LOGIN_REQUEST)
+            editor.putString(KEY_SET_LOGIN_REQUEST, loginRequest)
+            editor.commit()
+        }
+
     var countryList: String
         get() = pref.getString(KEY_SET_COUNTRY_LIST, "")!!
         set(countryList) {
@@ -86,6 +94,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_COUNTRY_LIST = "KEY_SET_COUNTRY_LIST"
         private const val KEY_SET_COUNTRY_CODE = "KEY_SET_COUNTRY_CODE"
         private const val KEY_SET_USER_INFO    = "KEY_SET_USER_INFO"
+        private const val KEY_SET_LOGIN_REQUEST= "KEY_SET_LOGIN_REQUEST"
     }
 
 
