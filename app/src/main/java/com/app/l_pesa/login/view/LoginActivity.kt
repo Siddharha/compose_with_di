@@ -273,22 +273,19 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
     override fun onSuccessLogin(data: LoginData) {
 
         val sharedPrefOBJ=SharedPref(this@LoginActivity)
+        sharedPrefOBJ.accessToken   =data.access_token
         val gson = Gson()
         val json = gson.toJson(data)
         sharedPrefOBJ.userInfo      = json
         progressBar.visibility      = View.INVISIBLE
         txtLogin.isClickable        = true
-        sharedPrefOBJ.loginStatus   = this@LoginActivity.getString(R.string.login_success)
-
 
         val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
+
     }
 
     override fun onErrorLogin(jsonMessage: String) {

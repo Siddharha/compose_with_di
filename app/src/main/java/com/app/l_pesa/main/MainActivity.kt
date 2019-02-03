@@ -62,9 +62,9 @@ class MainActivity : AppCompatActivity() {
     {
         buttonLogin.setOnClickListener {
 
-            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
-
 
         }
     }

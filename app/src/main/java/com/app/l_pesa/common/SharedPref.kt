@@ -26,13 +26,6 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
-    var loginStatus: String
-        get() = pref.getString(KEY_SET_LOGIN_STATUS, "")!!
-        set(loginStatus) {
-            editor.remove(KEY_SET_LOGIN_STATUS)
-            editor.putString(KEY_SET_LOGIN_STATUS, loginStatus)
-            editor.commit()
-        }
 
     var loginRequest: String
         get() = pref.getString(KEY_SET_LOGIN_REQUEST, "")!!
@@ -57,6 +50,13 @@ constructor(context: Context) // Constructor
             editor.putString(KEY_SET_USER_INFO, userInfo)
             editor.commit()
         }
+    var accessToken: String
+        get() = pref.getString(KEY_SET_ACCESS_TOKEN, "INIT")!!
+        set(accessToken) {
+            editor.remove(KEY_SET_ACCESS_TOKEN)
+            editor.putString(KEY_SET_ACCESS_TOKEN, accessToken)
+            editor.commit()
+        }
 
     var countryCode: String
         get() = pref.getString(KEY_SET_COUNTRY_CODE, "tz")!!
@@ -66,6 +66,12 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    fun removeToken() {
+
+        editor.remove("KEY_SET_ACCESS_TOKEN")
+        editor.commit()
+        editor.apply()
+    }
 
     init {
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -73,28 +79,17 @@ constructor(context: Context) // Constructor
 
     }
 
-    /*
-    *  Set Method Generally Store Data;
-    *  Get Method Generally Retrieve Data ;
-    * */
-
-    fun clearShared() {
-
-        editor.clear()
-        editor.commit()
-        editor.apply()
-    }
 
     companion object {
         private const val PREF_NAME = "L_PESA"
 
         // All Shared Preferences Keys Declare as #public
         private const val KEY_SET_APP_VERSION  = "KEY_SET_APP_VERSION"
-        private const val KEY_SET_LOGIN_STATUS = "KEY_SET_LOGIN_STATUS"
         private const val KEY_SET_COUNTRY_LIST = "KEY_SET_COUNTRY_LIST"
         private const val KEY_SET_COUNTRY_CODE = "KEY_SET_COUNTRY_CODE"
         private const val KEY_SET_USER_INFO    = "KEY_SET_USER_INFO"
         private const val KEY_SET_LOGIN_REQUEST= "KEY_SET_LOGIN_REQUEST"
+        private const val KEY_SET_ACCESS_TOKEN = "KEY_SET_ACCESS_TOKEN"
     }
 
 

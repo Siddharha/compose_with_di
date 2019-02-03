@@ -115,10 +115,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_HOME)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            finishAffinity()
         }
     }
 
@@ -223,13 +220,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onSuccessLogout() {
 
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@DashboardActivity)
-        val editor = sharedPref.edit()
-        editor.remove("KEY_SET_LOGIN_STATUS")
-        editor.remove("KEY_SET_USER_INFO")
-        editor.remove("KEY_SET_LOGIN_REQUEST")
-        editor.apply()
-
+        val sharedPrefOBJ= SharedPref(this@DashboardActivity)
+        sharedPrefOBJ.removeToken()
         startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()

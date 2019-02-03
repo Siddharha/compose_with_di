@@ -30,7 +30,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
      setContentView(R.layout.activity_splash)
 
         val sharedPrefOBJ=SharedPref(this@SplashActivity)
-        if(sharedPrefOBJ.loginStatus==this@SplashActivity.getString(R.string.login_success))
+        if(sharedPrefOBJ.accessToken!=resources.getString(R.string.init))
         {
             val jsonObject          = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
             val presenterLoginObj   = PresenterLogin()
@@ -105,15 +105,13 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
 
     override fun onSuccessLogin(data: LoginData) {
 
-        progressBar.visibility          = View.INVISIBLE
+        progressBar.visibility = View.INVISIBLE
         val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
+
     }
 
     override fun onErrorLogin(jsonMessage: String) {
