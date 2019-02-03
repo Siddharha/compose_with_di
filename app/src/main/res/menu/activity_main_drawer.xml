@@ -7,13 +7,16 @@
 
         <item android:id="@+id/action_dashboard"
               android:icon="@mipmap/ic_launcher"
-              android:title="@string/dashboard"
-
-        />
+              android:title="@string/dashboard" />
         <item
             android:id="@+id/action_view_loan"
             android:icon="@mipmap/ic_launcher"
             android:title="@string/view_loan" />
+
+        <item
+            android:id="@+id/action_profile"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/my_profile" />
 
     </group>
 

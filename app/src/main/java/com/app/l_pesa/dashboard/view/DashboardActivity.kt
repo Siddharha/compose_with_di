@@ -8,25 +8,13 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import com.app.l_pesa.R
-import com.app.l_pesa.dashboard.view.DashboardFragment
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.text.Spannable
 import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
-import android.support.design.internal.NavigationMenuView
-import android.support.v7.widget.DividerItemDecoration
-import android.view.SubMenu
-import android.graphics.drawable.InsetDrawable
-import android.graphics.drawable.Drawable
-import android.content.res.TypedArray
-
-
-
-
-
-
+import com.app.l_pesa.profile.view.ProfileFragment
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +39,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun  initMenu()
     {
+        nav_view.setCheckedItem(R.id.action_dashboard)
+        nav_view.bringToFront()
+        nav_view.setNavigationItemSelectedListener(this)
 
         val m = nav_view.menu
         for (i in 0 until m.size())
@@ -74,6 +65,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val tx = fManager.beginTransaction()
         tx.add(R.id.frame,DashboardFragment())
         tx.commit()
+
     }
 
     override fun onBackPressed() {
@@ -86,19 +78,23 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun applyFontToMenuItem(mi: MenuItem) {
         val font = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
-        val mNewTitle = SpannableString(mi.title)
-        mNewTitle.setSpan(CustomTypefaceSpan("", font), 0, mNewTitle.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-        mi.title = mNewTitle
+        val title = SpannableString(mi.title)
+        title.setSpan(CustomTypefaceSpan("", font), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        mi.title = title
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
        // Handle navigation view item clicks here.
-        when (item.groupId) {
-            R.id.action_dashboard-> {
-                val fManager = supportFragmentManager
-                val tx = fManager.beginTransaction()
-                tx.replace(R.id.frame, DashboardFragment())
-                tx.commit()
+        when (item.itemId) {
+            R.id.action_dashboard ->
+            {
+                supportFragmentManager.beginTransaction()
+                .replace(R.id.frame, DashboardFragment()).commit()
+            }
+
+            R.id.action_profile -> {
+                supportFragmentManager.beginTransaction()
+                .replace(R.id.frame, ProfileFragment()).commit()
             }
             /* "Courses" -> {
                  var fManager = supportFragmentManager

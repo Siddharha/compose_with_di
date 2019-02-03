@@ -39,6 +39,7 @@
     <string name="drawer_close">Close</string>
     <string name="dashboard">Dashboard</string>
     <string name="view_loan">View loans</string>
+    <string name="my_profile">My profile</string>
 
 
     <string name="nav_item_home">Dashboard</string>

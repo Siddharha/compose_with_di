@@ -29,13 +29,12 @@
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait">
 
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
+
         </activity>
         <activity
             android:name=".main.MainActivity"
@@ -53,13 +52,9 @@
             android:name=".password.view.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".dashboard.view.DashboardActivity" android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".dashboard.view.DashboardActivity"
+            android:screenOrientation="portrait"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
