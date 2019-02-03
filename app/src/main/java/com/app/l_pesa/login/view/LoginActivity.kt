@@ -255,6 +255,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
+                println("JSON"+jsonObject.toString())
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 

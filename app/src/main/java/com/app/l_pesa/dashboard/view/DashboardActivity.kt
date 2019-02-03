@@ -15,23 +15,27 @@ import android.text.Spannable
 import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
+import android.provider.Settings
 import android.text.TextUtils
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.model.LoginData
+import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 
 
-class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
         toolbar.title =resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
-
 
         initData()
         initMenu()
@@ -134,6 +138,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, ProfileFragment()).commit()
             }
+
+            R.id.action_logout -> {
+                doLogout()
+            }
             /* "Courses" -> {
                  var fManager = supportFragmentManager
                  var tx = fManager.beginTransaction()
@@ -162,5 +170,28 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun doLogout()
+    {
+        if(CommonMethod.isNetworkAvailable(this@DashboardActivity))
+        {
+            val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("device_id",deviceId)
+        }
+        else
+        {
+            CommonMethod.setSnackBar(this@DashboardActivity,drawer_layout,resources.getString(R.string.no_internet))
+        }
+
+    }
+
+    override fun onSuccessLogout() {
+
+    }
+
+    override fun onErrorLogout() {
+
     }
 }

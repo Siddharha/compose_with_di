@@ -30,6 +30,9 @@ interface BaseService{
     @POST("user/register")
     fun doRegister(@Body request: JsonObject): Observable<ResRegistrationOne>
 
+    @POST("user/logout")
+    fun doLogout(@Body request: JsonObject): Observable<ResRegistrationOne>
+
 }
 
 
