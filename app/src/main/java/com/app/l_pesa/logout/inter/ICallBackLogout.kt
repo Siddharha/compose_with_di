@@ -9,5 +9,5 @@ package com.app.l_pesa.logout.inter
 interface ICallBackLogout {
 
     fun onSuccessLogout()
-    fun onErrorLogout()
+    fun onErrorLogout(message: String)
 }

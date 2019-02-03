@@ -1,12 +1,12 @@
 package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.view.Menu
 import android.view.MenuItem
 import com.app.l_pesa.R
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -22,6 +22,8 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
+import com.app.l_pesa.logout.presenter.PresenterLogout
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -176,9 +178,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         if(CommonMethod.isNetworkAvailable(this@DashboardActivity))
         {
-            val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-            val jsonObject = JsonObject()
+
+            val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+            val jsonObject  = JsonObject()
             jsonObject.addProperty("device_id",deviceId)
+
+            val presenterLogoutObj=PresenterLogout()
+            presenterLogoutObj.doLogout(this@DashboardActivity,jsonObject,this)
         }
         else
         {
@@ -189,9 +195,15 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onSuccessLogout() {
 
+        val sharedOBJ = SharedPref(this@DashboardActivity)
+        sharedOBJ.clearShared()
+        startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
     }
 
-    override fun onErrorLogout() {
+    override fun onErrorLogout(message: String) {
 
+        CommonMethod.setSnackBar(this@DashboardActivity,drawer_layout,message)
     }
 }

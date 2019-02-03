@@ -4,7 +4,7 @@ import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.login.inter.ICallBackLogin
+import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,9 +20,9 @@ import retrofit2.HttpException
 class PresenterLogout {
 
 
-    fun doLogin(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogin)
+    fun doLogout(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogout)
     {
-        RetrofitHelper.getRetrofit(BaseService::class.java).doLogin(jsonRequest)
+        RetrofitHelper.getRetrofit(BaseService::class.java).doLogout(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -35,15 +35,11 @@ class PresenterLogout {
                     {
                         if(response.status.isSuccess)
                         {
-
-                            if(response.data.user_info.register_step=="3")
-                            {
-                                callBackOBJ.onSuccessLogin(response.data)
-                            }
-
+                          callBackOBJ.onSuccessLogout()
                         }
-                        else{
-                            callBackOBJ.onErrorLogin(response.status.message)
+                        else
+                        {
+                            callBackOBJ.onErrorLogout(response.status.message)
                         }
                     }
                     catch (e: Exception)
@@ -54,18 +50,18 @@ class PresenterLogout {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
+                        val errorVal       = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus=    jsonError.getJSONObject("status")
+                        val jsonError      =    JSONObject(errorVal.response().errorBody()?.string())
+                        val  jsonStatus    =    jsonError.getJSONObject("status")
                         val jsonMessage    =    jsonStatus.getString("message")
 
-                        callBackOBJ.onErrorLogin(jsonMessage)
+                        callBackOBJ.onErrorLogout(jsonMessage)
                     }
                     catch (exp: Exception)
                     {
                         val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
-                        callBackOBJ.onErrorLogin(errorMessageOBJ)
+                        callBackOBJ.onErrorLogout(errorMessageOBJ)
                     }
 
                 })
