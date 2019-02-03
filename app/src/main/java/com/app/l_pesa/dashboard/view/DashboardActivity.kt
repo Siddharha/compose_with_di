@@ -28,9 +28,6 @@ import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import android.preference.PreferenceManager
-import android.content.SharedPreferences
-
-
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
