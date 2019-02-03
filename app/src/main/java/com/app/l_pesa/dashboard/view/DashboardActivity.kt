@@ -32,6 +32,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
 
 
+
         val m = nav_view.getMenu()
         for (i in 0 until m.size()) {
             val mi = m.getItem(i)

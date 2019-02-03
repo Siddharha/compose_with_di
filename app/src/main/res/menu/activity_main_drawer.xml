@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/action_dashboard" android:icon="@mipmap/ic_launcher" android:title="@string/dashboard"
 
-            />
-        <item android:icon="@mipmap/ic_launcher" android:title="@string/view_loan" />
+        <item android:id="@+id/action_dashboard"
+              android:icon="@mipmap/ic_launcher"
+              android:title="@string/dashboard"
+
+        />
+        <item
+            android:id="@+id/action_view_loan"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/view_loan" />
 
     </group>
 
