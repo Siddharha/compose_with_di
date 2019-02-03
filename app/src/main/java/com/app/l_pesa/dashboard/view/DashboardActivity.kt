@@ -23,6 +23,11 @@ import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.nav_header_main.*
+import android.view.WindowManager
+import android.os.Build
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.ActionBar
+
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -31,6 +36,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         setSupportActionBar(toolbar)
+
 
         initData()
         initMenu()
@@ -41,6 +47,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+
 
         nav_view.setNavigationItemSelectedListener(this)
     }

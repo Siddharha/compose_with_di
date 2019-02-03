@@ -6,7 +6,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+
     tools:openDrawer="start">
 
     <include
@@ -19,12 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="false"
+        android:layout_marginTop="@dimen/abc_action_bar_default_height_material"
         android:background="@color/colorWhite"
         app:itemTextAppearance="@style/NavDrawerTextStyle"
         app:headerLayout="@layout/nav_header_main"
         app:itemBackground="@drawable/bg_drawer_item"
         app:itemTextColor="@drawable/bg_text_drawer"
-        app:menu="@menu/activity_main_drawer"/>
+        app:menu="@menu/activity_main_drawer"
+        android:fitsSystemWindows="true"
+       />
 
 </android.support.v4.widget.DrawerLayout>
