@@ -27,6 +27,10 @@ import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import android.preference.PreferenceManager
+import android.content.SharedPreferences
+
+
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
@@ -195,8 +199,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onSuccessLogout() {
 
-        val sharedOBJ = SharedPref(this@DashboardActivity)
-        sharedOBJ.clearShared()
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this@DashboardActivity)
+        val editor = sharedPref.edit()
+        editor.remove("KEY_SET_LOGIN_STATUS")
+        editor.remove("KEY_SET_USER_INFO")
+        editor.remove("KEY_SET_LOGIN_REQUEST")
+        editor.apply()
+
         startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()
