@@ -58,6 +58,7 @@ class ChangePasswordFragment : Fragment() {
             actionBar.setDisplayShowTitleEnabled(false)
 
             actionBar.customView = v
+
             // remove Burger Icon
             (activity as DashboardActivity).toolbar.navigationIcon = null
 
