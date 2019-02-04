@@ -42,6 +42,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
+
         toolbar.title =resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
 
@@ -81,6 +82,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             applyFontToMenuItem(mi)
         }
     }
+
+
 
     private fun initFragment()
     {
