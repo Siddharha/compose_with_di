@@ -50,6 +50,24 @@
     <string name="nav_item_settings">Settings</string>
     <string name="nav_item_logout">Logout</string>
 
+    <string-array name="settings_item_name">
+        <item>Change Password</item>
+        <item>Change Pin</item>
+        <item>Refer a Friend</item>
+        <item>Notification</item>
+        <item>Help &amp; Support</item>
+
+    </string-array>
+
+    <string-array name="settings_item_icon">
+        <item>@drawable/ic_change_password</item>
+        <item>@drawable/ic_change_pin</item>
+        <item>@drawable/ic_refer_friend</item>
+        <item>@drawable/ic_notifications</item>
+        <item>@drawable/ic_help</item>
+
+    </string-array>
+
     <!--Dashboard-->
     <string name="credit_score">Credit Score:</string>
 
