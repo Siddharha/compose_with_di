@@ -28,6 +28,7 @@ import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import android.support.v7.app.AppCompatDelegate
+import com.app.l_pesa.settings.view.SettingsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
@@ -187,6 +188,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_settings-> {
                 toolbar.title =resources.getString(R.string.nav_item_settings)
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.frame, SettingsFragment()).commit()
 
             }
 
