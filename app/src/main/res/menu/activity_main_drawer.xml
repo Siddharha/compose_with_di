@@ -11,15 +11,15 @@
 
         <item
             android:id="@+id/action_profile"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_profile"
             android:title="@string/nav_item_profile" />
         <item
             android:id="@+id/action_loan"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_view_loan_plan"
             android:title="@string/nav_item_loan" />
         <item
             android:id="@+id/action_points"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_buy_point_icon"
             android:title="@string/nav_item_points" />
         <item
             android:id="@+id/action_investment"
@@ -35,11 +35,11 @@
             android:title="@string/nav_item_wallet" />
         <item
             android:id="@+id/action_settings"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_settings_icon"
             android:title="@string/nav_item_settings" />
         <item
             android:id="@+id/action_logout"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_logout_icon"
             android:title="@string/nav_item_logout" />
 
     </group>

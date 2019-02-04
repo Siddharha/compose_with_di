@@ -58,8 +58,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    private fun  initMenu()
+    private fun initMenu()
     {
+        nav_view.itemIconTintList = null
         nav_view.setCheckedItem(R.id.action_dashboard)
         nav_view.bringToFront()
         nav_view.setNavigationItemSelectedListener(this)
