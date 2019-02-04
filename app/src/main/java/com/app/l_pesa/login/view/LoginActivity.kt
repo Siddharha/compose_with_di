@@ -191,7 +191,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
     private fun verifyField()
     {
         CommonMethod.hideKeyboard(this@LoginActivity)
-        if(etPhone.text.toString().length<10)
+        if(etPhone.text.toString().length<8)
         {
             CommonMethod.setSnackBar(this@LoginActivity,ll_root,resources.getString(R.string.required_phone))
         }

@@ -27,7 +27,11 @@ import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatDelegate
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import de.hdodenhof.circleimageview.CircleImageView
+import java.lang.Exception
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
@@ -36,6 +40,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         toolbar.title =resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
@@ -89,10 +94,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
-        val navigationView  = findViewById<NavigationView>(R.id.nav_view)
-        val header          = navigationView.getHeaderView(0)
-        val txtName         = header.findViewById<CommonTextRegular>(R.id.txtName)
-        val txtCreditScore  = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
+        val navigationView          = findViewById<NavigationView>(R.id.nav_view)
+        val header                          = navigationView.getHeaderView(0)
+        val txtName              = header.findViewById<CommonTextRegular>(R.id.txtName)
+        val txtCreditScore       = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
+        val imgProfile              = header.findViewById<CircleImageView>(R.id.imgProfile)
+
         val sharedPrefOBJ= SharedPref(this@DashboardActivity)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
         if(userData!=null)
@@ -106,6 +113,23 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             {
                 txtCreditScore.text     = resources.getString(R.string.credit_score)+userData.user_info.credit_score
             }
+
+            try {
+
+                val options = RequestOptions()
+                options.placeholder(R.mipmap.ic_launcher)
+                options.error(R.mipmap.ic_launcher)
+                options.centerCrop()
+                Glide.with(this@DashboardActivity)
+                        .load(userData.user_personal_info.profile_image)
+                        .apply(options)
+                        .into(imgProfile)
+            }
+            catch (exception:Exception)
+            {
+
+            }
+
 
         }
 

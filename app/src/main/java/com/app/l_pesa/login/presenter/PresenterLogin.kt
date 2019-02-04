@@ -36,7 +36,7 @@ class PresenterLogin {
                       if(response.status.isSuccess)
                       {
 
-                          if(response.data.user_info.register_step=="3")
+                          if(response.data.user_info.register_step=="3" || response.data.user_info.register_step=="")
                           {
                               callBackOBJ.onSuccessLogin(response.data)
                           }
