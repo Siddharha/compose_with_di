@@ -40,7 +40,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         toolbar.title =resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
