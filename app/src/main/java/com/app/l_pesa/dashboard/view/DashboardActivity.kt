@@ -117,8 +117,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             try {
 
                 val options = RequestOptions()
-                options.placeholder(R.mipmap.ic_launcher)
-                options.error(R.mipmap.ic_launcher)
+                options.placeholder(R.drawable.ic_profile)
+                options.error(R.drawable.ic_profile)
                 options.centerCrop()
                 Glide.with(this@DashboardActivity)
                         .load(userData.user_personal_info.profile_image)

@@ -17,7 +17,7 @@
           android:id="@+id/imgProfile"
           android:layout_width="@dimen/_55sdp"
           android:layout_height="@dimen/_55sdp"
-          android:src="@mipmap/ic_launcher"
+          android:src="@drawable/ic_profile"
           app:civ_border_color="@color/screenBackground"
           app:civ_border_width="@dimen/_1sdp"
           android:layout_centerInParent="true"
