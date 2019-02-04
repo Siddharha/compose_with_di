@@ -18,6 +18,7 @@ import com.app.l_pesa.settings.adapter.RecyclerViewAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick
 import com.app.l_pesa.settings.model.SettingsItem
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -44,7 +45,7 @@ class SettingsFragment : Fragment(), ICallBackListClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        (activity as DashboardActivity).toolbar.title=resources.getString(R.string.nav_item_settings)
         initData()
 
         rv_list.layoutManager = LinearLayoutManager(activity)
@@ -69,6 +70,8 @@ class SettingsFragment : Fragment(), ICallBackListClick {
         if(position==0)
         {
            CommonMethod.startFragment(activity!!,R.id.frame,ChangePasswordFragment.newInstance())
+
+
         }
 
     }

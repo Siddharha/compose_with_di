@@ -29,7 +29,6 @@ import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import android.support.v7.app.AppCompatDelegate
 import com.app.l_pesa.settings.view.SettingsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -55,7 +54,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    fun initToggle()
+   private fun initToggle()
     {
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close
