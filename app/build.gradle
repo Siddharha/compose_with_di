@@ -4,14 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    signingConfigs {
-         config {
-             keyAlias 'android'
-             keyPassword 'android'
-             storeFile file('E:/Amiyo/L-Pesa Android/app/src/JKS/lpesa.jks')
-             storePassword 'android'
-         }
-     }
     /*signingConfigs {
         config {
             keyAlias 'android'
@@ -20,6 +12,14 @@ android {
             storePassword 'android'
         }
     }*/
+    signingConfigs {
+        config {
+            keyAlias 'android'
+            keyPassword 'android'
+            storeFile file('E:/Amiyo/L_Pesa_Intellij/l-pesa/app/KEY/lpesa.jks')
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.app.l_pesa"
@@ -27,23 +27,21 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        signingConfig signingConfigs.config
+
     }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
             debuggable true
-            proguardFile 'E:/Amiyo/L-Pesa Android/app/proguard-rules.pro'
             //proguardFile '/home/amiyo/AndroidProject/Office/L-Pesa Intellij/app/proguard-rules.pro'
+            signingConfig signingConfigs.config
+            proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
         }
         build {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
         }
-
     }
     productFlavors {
     }
