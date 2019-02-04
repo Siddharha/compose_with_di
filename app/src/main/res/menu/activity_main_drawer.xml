@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
 
         <item android:id="@+id/action_dashboard"
-              android:icon="@mipmap/ic_launcher"
+              android:icon="@drawable/ic_dashboard"
               android:title="@string/nav_item_dashboard" />
 
         <item
