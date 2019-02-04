@@ -100,7 +100,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             if(!TextUtils.isEmpty(userData.user_personal_info.first_name))
             {
-                txtName.text            = userData.user_personal_info.first_name+" "+userData.user_personal_info.last_name
+                txtName.text            = userData.user_personal_info.first_name+" "+userData.user_personal_info.middle_name+" "+userData.user_personal_info.last_name
             }
             if(!TextUtils.isEmpty(userData.user_info.credit_score))
             {
