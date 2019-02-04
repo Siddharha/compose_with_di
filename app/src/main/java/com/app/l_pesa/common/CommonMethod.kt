@@ -5,12 +5,15 @@ import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import java.util.regex.Pattern
 
 /**
@@ -28,6 +31,28 @@ object CommonMethod {
             isConnected = activeNetwork != null && activeNetwork.isConnected
 
         return isConnected
+    }
+
+    fun startFragment(context: Context,fragment_container:Int,fragment: Fragment)
+    {
+
+        val fragmentManager =(context as DashboardActivity ).supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        val className = fragment.javaClass.name
+        fragmentTransaction.replace(fragment_container, fragment, className)
+        fragmentTransaction.addToBackStack(className)
+        fragmentTransaction.commitAllowingStateLoss()
+        fragmentManager.executePendingTransactions()
+    }
+
+    private fun clearBackStack(context: Context)
+    {
+        val manager = (context as DashboardActivity ).supportFragmentManager
+        if (manager.backStackEntryCount > 0) {
+            val first = manager.getBackStackEntryAt(0)
+            manager.popBackStack(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
     }
 
 

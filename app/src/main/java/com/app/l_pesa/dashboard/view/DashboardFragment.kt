@@ -11,7 +11,11 @@ import kotlinx.android.synthetic.main.dashboard_layout.*
 
 class DashboardFragment: Fragment() {
 
-
+    companion object {
+        fun newInstance(): Fragment {
+            return DashboardFragment()
+        }
+    }
     override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.dashboard_layout, container,false)

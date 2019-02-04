@@ -3,16 +3,21 @@ package com.app.l_pesa.settings.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.password.view.ChangePasswordFragment
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.app.l_pesa.settings.adapter.RecyclerViewAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick
 import com.app.l_pesa.settings.model.SettingsItem
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -23,15 +28,22 @@ import kotlinx.android.synthetic.main.fragment_settings.*
  */
 class SettingsFragment : Fragment(), ICallBackListClick {
 
+    companion object {
+        fun newInstance(): Fragment {
+            return SettingsFragment()
+        }
+    }
 
     private var settingsList: MutableList<SettingsItem> = mutableListOf()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_settings, container,false)
+        val view= inflater.inflate(R.layout.fragment_settings, container,false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         initData()
 
@@ -56,11 +68,7 @@ class SettingsFragment : Fragment(), ICallBackListClick {
 
         if(position==0)
         {
-
-            val fManager = activity!!.supportFragmentManager
-            val tx = fManager.beginTransaction()
-            tx.add(R.id.frame, ProfileFragment())
-            tx.commit()
+           CommonMethod.startFragment(activity!!,R.id.frame,ChangePasswordFragment.newInstance())
         }
 
     }

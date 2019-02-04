@@ -16,6 +16,8 @@ import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
 import android.provider.Settings
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.text.TextUtils
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -42,22 +44,24 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-
         toolbar.title =resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
 
         initData()
         initMenu()
         initFragment()
+        initToggle()
 
+        nav_view.setNavigationItemSelectedListener(this)
+    }
+
+    fun initToggle()
+    {
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
-
-        nav_view.setNavigationItemSelectedListener(this)
     }
 
     private fun initMenu()
@@ -87,11 +91,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun initFragment()
     {
-
-        val fManager = supportFragmentManager
-        val tx = fManager.beginTransaction()
-        tx.add(R.id.frame,DashboardFragment())
-        tx.commit()
+        navigateToFragment(DashboardFragment.newInstance())
 
     }
 
@@ -160,14 +160,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.action_dashboard ->
             {
                 toolbar.title =resources.getString(R.string.nav_item_dashboard)
-                supportFragmentManager.beginTransaction()
-                .replace(R.id.frame, DashboardFragment()).commit()
+                navigateToFragment(DashboardFragment.newInstance())
             }
 
             R.id.action_profile -> {
                 toolbar.title =resources.getString(R.string.nav_item_profile)
-                supportFragmentManager.beginTransaction()
-                .replace(R.id.frame, ProfileFragment()).commit()
+                navigateToFragment(ProfileFragment.newInstance())
             }
             R.id.action_loan -> {
                 toolbar.title =resources.getString(R.string.nav_item_loan)
@@ -191,38 +189,15 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_settings-> {
                 toolbar.title =resources.getString(R.string.nav_item_settings)
-                supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame, SettingsFragment()).commit()
+               // CommonMethod.startFragment(this@DashboardActivity,R.id.frame,SettingsFragment(),false)
+                navigateToFragment(SettingsFragment.newInstance())
 
             }
 
             R.id.action_logout -> {
                 doLogout()
             }
-            /* "Courses" -> {
-                 var fManager = supportFragmentManager
-                 var tx = fManager.beginTransaction()
-                 tx.replace(R.id.frame1,CoursesFrag())
-                 tx.commit()
-             }
-             "Projects" -> {
-                 var fManager = supportFragmentManager
-                 var tx = fManager.beginTransaction()
-                 tx.replace(R.id.frame1,ProjectsFrag())
-                 tx.commit()
-             }
-             "Materials" -> {
-                 var fManager = supportFragmentManager
-                 var tx = fManager.beginTransaction()
-                 tx.replace(R.id.frame1,MaterialsFrag())
-                 tx.commit()
-             }
-             "ContactUs" -> {
-                 var fManager = supportFragmentManager
-                 var tx = fManager.beginTransaction()
-                 tx.replace(R.id.frame1,ContactUsFrag())
-                 tx.commit()
-             }*/
+
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
@@ -260,5 +235,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     override fun onErrorLogout(message: String) {
 
         CommonMethod.setSnackBar(this@DashboardActivity,drawer_layout,message)
+    }
+
+    private fun navigateToFragment(fragmentToNavigate: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 }

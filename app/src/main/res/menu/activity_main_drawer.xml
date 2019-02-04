@@ -11,7 +11,7 @@
 
         <item
             android:id="@+id/action_profile"
-            android:icon="@drawable/ic_profile"
+            android:icon="@mipmap/ic_launcher"
             android:title="@string/nav_item_profile" />
         <item
             android:id="@+id/action_loan"
