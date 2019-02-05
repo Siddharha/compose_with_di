@@ -67,6 +67,11 @@ class SettingsFragment : Fragment(), ICallBackListClick {
             startActivity(Intent(activity, ChangePasswordActivity::class.java))
             activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
+       else if(position==1)
+        {
+            startActivity(Intent(activity, ChangePasswordActivity::class.java))
+            activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
 
     }
 }

@@ -15,9 +15,6 @@ import android.app.Activity
 
 
 
-
-
-
 class ChangePasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
