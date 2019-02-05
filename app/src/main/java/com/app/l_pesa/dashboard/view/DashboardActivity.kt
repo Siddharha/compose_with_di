@@ -1,6 +1,7 @@
 package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import android.graphics.Typeface
 import android.provider.Settings
 import android.support.v4.app.Fragment
 import android.text.TextUtils
+import android.widget.TextView
 import com.app.l_pesa.common.*
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
@@ -56,6 +58,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+        toolbarFont(this@DashboardActivity)
     }
 
     private fun initMenu()
@@ -138,6 +141,21 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             finishAffinity()
+        }
+    }
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val tv = view
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (tv.text == toolbar.title) {
+                    tv.typeface = titleFont
+                    break
+                }
+            }
         }
     }
 

@@ -9,6 +9,11 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.content_change_password.*
 import android.text.Editable
 import android.text.TextWatcher
+import android.graphics.Typeface
+import android.widget.TextView
+import android.app.Activity
+
+
 
 
 
@@ -21,9 +26,25 @@ class ChangePasswordActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        toolbarFont(this@ChangePasswordActivity)
         textWatcherPassword()
 
 
+    }
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val tv = view
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (tv.text == toolbar.title) {
+                    tv.typeface = titleFont
+                    break
+                }
+            }
+        }
     }
 
     private fun textWatcherPassword()
