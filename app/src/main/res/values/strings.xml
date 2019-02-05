@@ -43,6 +43,11 @@
     <string name="required_phone_email">Required valid phone number or email</string>
     <string name="required_phone">Required valid phone number</string>
     <string name="required_password">Required password</string>
+    <string name="enter_current_password">Please enter the current password.</string>
+    <string name="enter_new_password">Please enter the new password.</string>
+    <string name="enter_confirm_password">Please enter the confirm password.</string>
+    <string name="confirm_password_not_match">Confirm password do not match.</string>
+    <string name="enter_password_rule">Password should follow mentioned rule.</string>
     <string name="required_email">Required valid email</string>
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>

@@ -13,6 +13,16 @@ import android.graphics.Typeface
 import android.widget.TextView
 import android.app.Activity
 import android.text.TextUtils
+import android.widget.Toast
+import android.widget.EditText
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import android.support.design.widget.Snackbar
+import android.view.View
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonTextRegular
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class ChangePasswordActivity : AppCompatActivity() {
@@ -44,10 +54,72 @@ class ChangePasswordActivity : AppCompatActivity() {
 
             if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
             {
+                hideKeyBoard()
+                customSnackBar(rootLayout,resources.getString(R.string.enter_current_password))
+            }
+            else if(TextUtils.isEmpty(etNewPassword.text.toString()))
+            {
+                hideKeyBoard()
+                customSnackBar(rootLayout,resources.getString(R.string.enter_new_password))
+            }
+            else if(!passwordRegex(etNewPassword.text.toString()))
+            {
+                hideKeyBoard()
+                customSnackBar(rootLayout,resources.getString(R.string.enter_password_rule))
+            }
+            else if(TextUtils.isEmpty(etConfirmNewPassword.text.toString()))
+            {
+                hideKeyBoard()
+                customSnackBar(rootLayout,resources.getString(R.string.enter_confirm_password))
+            }
+            else if(etNewPassword.text.toString()!=etConfirmNewPassword.text.toString())
+            {
+                hideKeyBoard()
+                customSnackBar(rootLayout,resources.getString(R.string.confirm_password_not_match))
+            }
+            else
+            {
+                if(CommonMethod.isNetworkAvailable(this@ChangePasswordActivity))
+                {
 
+                }
+                else
+                {
+                    customSnackBar(rootLayout,resources.getString(R.string.no_internet))
+                }
             }
 
         }
+    }
+
+    private fun passwordRegex(password: String): Boolean {
+
+        val pattern: Pattern
+        val matcher: Matcher
+
+        val passwordPattern =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,16}\$"
+        pattern = Pattern.compile(passwordPattern)
+        matcher = pattern.matcher(password)
+        return matcher.matches()
+
+    }
+
+    private fun hideKeyBoard()
+    {
+        CommonMethod.hideKeyboard(this@ChangePasswordActivity)
+    }
+
+    private fun customSnackBar(view: View,message:String) {
+
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(this).inflate(R.layout.custom_snackbar, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+        txtTitle.text = message
+        snackBarOBJ.show()
     }
 
     private fun toolbarFont(context: Activity) {
