@@ -45,6 +45,11 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
     private fun initUI()
     {
+        val fontRegular        = Typeface.createFromAsset(this@ChangePasswordActivity.assets, "fonts/Montserrat-Regular.ttf")
+        tilCurrentPassword.typeface     = fontRegular
+        tilNewPassword.typeface         = fontRegular
+        tilConfirmNewPassword.typeface  = fontRegular
+
         etConfirmNewPassword.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
