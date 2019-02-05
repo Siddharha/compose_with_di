@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.support.design.widget.Snackbar
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.password.inter.ICallBackPassword
@@ -37,13 +38,21 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
         toolbarFont(this@ChangePasswordActivity)
         textWatcherPassword()
-        cancelButton()
+        initUI()
 
 
     }
 
-    private fun cancelButton()
+    private fun initUI()
     {
+        etConfirmNewPassword.setOnEditorActionListener { _, actionId, _ ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                doValidate()
+                handled = true
+            }
+            handled
+        }
         buttonCancel.setOnClickListener {
 
             onBackPressed()
@@ -52,52 +61,55 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         }
 
         buttonSubmit.setOnClickListener {
+            doValidate()
 
+        }
+    }
 
-            if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
+    private fun doValidate()
+    {
+        if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
+        {
+            hideKeyBoard()
+            customSnackBar(rootLayout,resources.getString(R.string.enter_current_password))
+        }
+        else if(TextUtils.isEmpty(etNewPassword.text.toString()))
+        {
+            hideKeyBoard()
+            customSnackBar(rootLayout,resources.getString(R.string.enter_new_password))
+        }
+        else if(!passwordRegex(etNewPassword.text.toString()))
+        {
+            hideKeyBoard()
+            customSnackBar(rootLayout,resources.getString(R.string.enter_password_rule))
+        }
+        else if(TextUtils.isEmpty(etConfirmNewPassword.text.toString()))
+        {
+            hideKeyBoard()
+            customSnackBar(rootLayout,resources.getString(R.string.enter_confirm_password))
+        }
+        else if(etNewPassword.text.toString()!=etConfirmNewPassword.text.toString())
+        {
+            hideKeyBoard()
+            customSnackBar(rootLayout,resources.getString(R.string.confirm_password_not_match))
+        }
+        else
+        {
+            hideKeyBoard()
+            if(CommonMethod.isNetworkAvailable(this@ChangePasswordActivity))
             {
-                hideKeyBoard()
-                customSnackBar(rootLayout,resources.getString(R.string.enter_current_password))
-            }
-            else if(TextUtils.isEmpty(etNewPassword.text.toString()))
-            {
-                hideKeyBoard()
-                customSnackBar(rootLayout,resources.getString(R.string.enter_new_password))
-            }
-            else if(!passwordRegex(etNewPassword.text.toString()))
-            {
-                hideKeyBoard()
-                customSnackBar(rootLayout,resources.getString(R.string.enter_password_rule))
-            }
-            else if(TextUtils.isEmpty(etConfirmNewPassword.text.toString()))
-            {
-                hideKeyBoard()
-                customSnackBar(rootLayout,resources.getString(R.string.enter_confirm_password))
-            }
-            else if(etNewPassword.text.toString()!=etConfirmNewPassword.text.toString())
-            {
-                hideKeyBoard()
-                customSnackBar(rootLayout,resources.getString(R.string.confirm_password_not_match))
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("old_password",etCurrentPassword.text.toString())
+                jsonObject.addProperty("new_password",etNewPassword.text.toString())
+                jsonObject.addProperty("new_c_password",etConfirmNewPassword.text.toString())
+
+                val presenterPassword= PresenterPassword()
+                presenterPassword.doResetPassword(this@ChangePasswordActivity,jsonObject,this)
             }
             else
             {
-                hideKeyBoard()
-                if(CommonMethod.isNetworkAvailable(this@ChangePasswordActivity))
-                {
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("old_password",etCurrentPassword.text.toString())
-                    jsonObject.addProperty("new_password",etNewPassword.text.toString())
-                    jsonObject.addProperty("new_c_password",etConfirmNewPassword.text.toString())
-
-                    val presenterPassword= PresenterPassword()
-                    presenterPassword.doResetPassword(this@ChangePasswordActivity,jsonObject,this)
-                }
-                else
-                {
-                    customSnackBar(rootLayout,resources.getString(R.string.no_internet))
-                }
+                customSnackBar(rootLayout,resources.getString(R.string.no_internet))
             }
-
         }
     }
 
