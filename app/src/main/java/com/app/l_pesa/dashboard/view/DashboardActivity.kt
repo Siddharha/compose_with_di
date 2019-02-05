@@ -188,7 +188,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_settings-> {
                 toolbar.title =resources.getString(R.string.nav_item_settings)
-               // CommonMethod.startFragment(this@DashboardActivity,R.id.frame,SettingsFragment(),false)
                 navigateToFragment(SettingsFragment.newInstance())
 
             }
