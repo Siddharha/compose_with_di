@@ -1,5 +1,6 @@
 package com.app.l_pesa.settings.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.password.view.ChangePasswordActivity
 import com.app.l_pesa.settings.adapter.RecyclerViewAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick
 import com.app.l_pesa.settings.model.SettingsItem
@@ -62,7 +64,8 @@ class SettingsFragment : Fragment(), ICallBackListClick {
 
         if(position==0)
         {
-
+            startActivity(Intent(activity, ChangePasswordActivity::class.java))
+            activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
 
     }

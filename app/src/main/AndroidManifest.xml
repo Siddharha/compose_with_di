@@ -28,21 +28,18 @@
         <activity
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".main.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.view.LoginActivity"
-            android:screenOrientation="portrait"
-           />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".registration.view.RegistrationStepOneActivity"
             android:screenOrientation="portrait" />
@@ -52,12 +49,14 @@
         <activity
             android:name=".password.view.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".dashboard.view.DashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".password.view.ChangePasswordActivity"
+            android:label="@string/change_password"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"/>
-
-
     </application>
 
 </manifest>
