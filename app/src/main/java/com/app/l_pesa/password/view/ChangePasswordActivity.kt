@@ -28,8 +28,19 @@ class ChangePasswordActivity : AppCompatActivity() {
 
         toolbarFont(this@ChangePasswordActivity)
         textWatcherPassword()
+        cancelButton()
 
 
+    }
+
+    private fun cancelButton()
+    {
+        buttonCancel.setOnClickListener {
+
+            onBackPressed()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+        }
     }
 
     private fun toolbarFont(context: Activity) {
