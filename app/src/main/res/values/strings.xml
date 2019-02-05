@@ -36,7 +36,7 @@
     <string name="password_rule_one">Minimum 8 &amp; maximum 16 characters.</string>
     <string name="password_rule_two">At least 1 numeric character.</string>
     <string name="password_rule_three">At least 1 lowercase character.</string>
-    <string name="password_rule_four">At least 1 upper character.</string>
+    <string name="password_rule_four">At least 1 uppercase character.</string>
     <string name="password_rule_five">At least 1 special character (like !@#$%*?).</string>
 
     <!--Caution Message-->
