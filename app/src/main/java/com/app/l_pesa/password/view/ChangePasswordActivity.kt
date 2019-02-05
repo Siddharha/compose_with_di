@@ -79,6 +79,7 @@ class ChangePasswordActivity : AppCompatActivity() {
             }
             else
             {
+                hideKeyBoard()
                 if(CommonMethod.isNetworkAvailable(this@ChangePasswordActivity))
                 {
 
