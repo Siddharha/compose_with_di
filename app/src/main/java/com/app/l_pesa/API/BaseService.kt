@@ -1,7 +1,8 @@
 package com.app.l_pesa.API
 
-import android.support.annotation.Keep
+
 import com.app.l_pesa.login.model.ResLogin
+import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.splash.model.ResModelCountry
@@ -26,6 +27,9 @@ interface BaseService{
 
     @POST("forget_password")
     fun doForgetPassword(@Body  request: JsonObject): Observable<ResForgetPassword>
+
+    @POST("settings/change_password")
+    fun doChangePassword(@Body  request: JsonObject): Observable<ResChangePassword>
 
     @POST("user/register")
     fun doRegister(@Body request: JsonObject): Observable<ResRegistrationOne>

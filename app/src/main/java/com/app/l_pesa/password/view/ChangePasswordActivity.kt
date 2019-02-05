@@ -13,19 +13,21 @@ import android.graphics.Typeface
 import android.widget.TextView
 import android.app.Activity
 import android.text.TextUtils
-import android.widget.Toast
-import android.widget.EditText
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.support.design.widget.Snackbar
 import android.view.View
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
+import com.app.l_pesa.password.inter.ICallBackPassword
+import com.app.l_pesa.password.presenter.PresenterPassword
+import com.google.gson.JsonObject
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-class ChangePasswordActivity : AppCompatActivity() {
+class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +84,13 @@ class ChangePasswordActivity : AppCompatActivity() {
                 hideKeyBoard()
                 if(CommonMethod.isNetworkAvailable(this@ChangePasswordActivity))
                 {
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("old_password",etCurrentPassword.text.toString())
+                    jsonObject.addProperty("new_password",etNewPassword.text.toString())
+                    jsonObject.addProperty("new_c_password",etConfirmNewPassword.text.toString())
 
+                    val presenterPassword= PresenterPassword()
+                    presenterPassword.doResetPassword(this@ChangePasswordActivity,jsonObject,this)
                 }
                 else
                 {
@@ -246,6 +254,14 @@ class ChangePasswordActivity : AppCompatActivity() {
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onSuccessResetPassword() {
+
+    }
+
+    override fun onErrorResetPassword(jsonMessage: String) {
+
     }
 
 }
