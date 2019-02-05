@@ -12,7 +12,7 @@ import android.text.TextWatcher
 import android.graphics.Typeface
 import android.widget.TextView
 import android.app.Activity
-
+import android.text.TextUtils
 
 
 class ChangePasswordActivity : AppCompatActivity() {
@@ -38,6 +38,16 @@ class ChangePasswordActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
         }
+
+        buttonSubmit.setOnClickListener {
+
+
+            if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
+            {
+
+            }
+
+        }
     }
 
     private fun toolbarFont(context: Activity) {
@@ -57,7 +67,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     private fun textWatcherPassword()
     {
-        tieNewPassword.addTextChangedListener(textWatcherPasswordRule)
+        etNewPassword.addTextChangedListener(textWatcherPasswordRule)
 
     }
 
