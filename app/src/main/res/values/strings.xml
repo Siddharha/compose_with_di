@@ -17,8 +17,9 @@
     <string name="register_now">Register now</string>
     <string name="or">Or</string>
     <string name="submit">Submit</string>
-    <string name="forgot_password">Forgot password</string>
-    <string name="change_password">Change password</string>
+    <string name="cancel">Cancel</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="change_password">Change Password</string>
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
@@ -28,12 +29,12 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
-    <string name="password_should">Password should</string>
-    <string name="password_rule_one">Have minimum 8 characters &amp; maximum 16 characters.</string>
-    <string name="password_rule_two">Contain at least 1 numeric characters.</string>
-    <string name="password_rule_three">Contain at least 1 lowercase characters.</string>
-    <string name="password_rule_four">Contain at least 1 upper characters.</string>
-    <string name="password_rule_five">Contain at least 1 special character(like !@#$%*?).</string>
+    <string name="password_should">Password should have</string>
+    <string name="password_rule_one">Minimum 8 &amp; maximum 16 characters.</string>
+    <string name="password_rule_two">At least 1 numeric characters.</string>
+    <string name="password_rule_three">At least 1 lowercase characters.</string>
+    <string name="password_rule_four">At least 1 upper characters.</string>
+    <string name="password_rule_five">At least 1 special character (like !@#$%*?).</string>
 
     <!--Caution Message-->
     <string name="required_phone_email">Required valid phone number or email</string>

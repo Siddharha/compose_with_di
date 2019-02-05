@@ -46,42 +46,52 @@ class ChangePasswordActivity : AppCompatActivity() {
 
             if(s.length<8)
             {
+                imgRuleOne.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_one.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
             }
             else
             {
+                imgRuleOne.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_one.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
             if(countNumeric(s.toString())==0)
             {
+                imgRuleTwo.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_two.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
             }
             else
             {
+                imgRuleTwo.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_two.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
             if(!hasLowerCase(s.toString()))
             {
+                imgRuleThree.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_three.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
             }
             else
             {
+                imgRuleThree.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_three.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
             if(!hasUpperCase(s.toString()))
             {
+                imgRuleFour.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_four.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
             }
             else
             {
+                imgRuleFour.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_four.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
             if(!hasSymbol(s.toString()))
             {
+                imgRuleFive.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_five.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
             }
             else
             {
+                imgRuleFive.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_five.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
         }
