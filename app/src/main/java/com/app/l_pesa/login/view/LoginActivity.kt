@@ -165,8 +165,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
 
         ll_flag_section.setOnClickListener {
-            val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
-            countrySpinner(countryData)
+            val modelCountry = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
+            countrySpinner(modelCountry)
         }
     }
 

@@ -12,7 +12,7 @@
        android:background="@color/colorAccent"
        >
 
-      <de.hdodenhof.circleimageview.CircleImageView
+      <com.app.l_pesa.common.CircularImageView
           xmlns:app="http://schemas.android.com/apk/res-auto"
           android:id="@+id/imgProfile"
           android:layout_width="@dimen/_55sdp"

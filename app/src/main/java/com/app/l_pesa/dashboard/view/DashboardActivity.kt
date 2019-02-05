@@ -12,16 +12,12 @@ import com.app.l_pesa.R
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.text.Spannable
-import com.app.l_pesa.common.CustomTypefaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
 import android.provider.Settings
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import android.text.TextUtils
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CommonTextRegular
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
@@ -32,7 +28,6 @@ import com.google.gson.JsonObject
 import com.app.l_pesa.settings.view.SettingsFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import de.hdodenhof.circleimageview.CircleImageView
 import java.lang.Exception
 
 
@@ -97,11 +92,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
-        val navigationView          = findViewById<NavigationView>(R.id.nav_view)
+        val navigationView           = findViewById<NavigationView>(R.id.nav_view)
         val header                          = navigationView.getHeaderView(0)
         val txtName              = header.findViewById<CommonTextRegular>(R.id.txtName)
         val txtCreditScore       = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
-        val imgProfile              = header.findViewById<CircleImageView>(R.id.imgProfile)
+        val imgProfile             = header.findViewById<CircularImageView>(R.id.imgProfile)
 
         val sharedPrefOBJ= SharedPref(this@DashboardActivity)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
