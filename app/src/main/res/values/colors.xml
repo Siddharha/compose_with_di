@@ -11,5 +11,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="screenBackground">#f3f3f3</color>
     <color name="colorYellow">#f3bb25</color>
+    <color name="colorRed">#ff3333</color>
     <color name="mtrl_textinput_default_box_stroke_color">#009987</color>
 </resources>

@@ -1,10 +1,15 @@
 package com.app.l_pesa.password.view
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import com.app.l_pesa.R
 import kotlinx.android.synthetic.main.activity_change_password.*
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.content_change_password.*
+import android.text.Editable
+import android.text.TextWatcher
+
 
 
 
@@ -16,7 +21,95 @@ class ChangePasswordActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        textWatcherPassword()
 
+
+    }
+
+    private fun textWatcherPassword()
+    {
+        tieNewPassword.addTextChangedListener(textWatcherPasswordRule)
+
+    }
+
+    private val textWatcherPasswordRule = object : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+        }
+
+        override fun afterTextChanged(s: Editable) {
+
+            if(s.length<8)
+            {
+                txt_rule_one.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
+            }
+            else
+            {
+                txt_rule_one.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
+            }
+            if(countNumeric(s.toString())==0)
+            {
+                txt_rule_two.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
+            }
+            else
+            {
+                txt_rule_two.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
+            }
+            if(!hasLowerCase(s.toString()))
+            {
+                txt_rule_three.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
+            }
+            else
+            {
+                txt_rule_three.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
+            }
+            if(!hasUpperCase(s.toString()))
+            {
+                txt_rule_four.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
+            }
+            else
+            {
+                txt_rule_four.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
+            }
+            if(!hasSymbol(s.toString()))
+            {
+                txt_rule_five.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
+            }
+            else
+            {
+                txt_rule_five.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
+            }
+        }
+    }
+
+    fun countNumeric(number: String): Int {
+        var flag = 0
+        for (i in 0 until number.length) {
+            if (Character.isDigit(number[i])) {
+                flag++
+            }
+        }
+        return flag
+    }
+
+    private fun hasSymbol(data: CharSequence): Boolean {
+        val password = data.toString()
+        return !password.matches("[A-Za-z0-9 ]*".toRegex())
+    }
+
+    private fun hasUpperCase(data: CharSequence): Boolean {
+        val password = data.toString()
+        return password != password.toLowerCase()
+    }
+
+    private fun hasLowerCase(data: CharSequence): Boolean {
+        val password = data.toString()
+        return password != password.toUpperCase()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

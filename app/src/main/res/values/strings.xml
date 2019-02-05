@@ -12,10 +12,6 @@
     <string name="no_more_data">No more data available to read</string>
     <string name="no_country">Country list is empty</string>
     <string name="phone_no">Mobile no</string>
-    <string name="password">Password</string>
-    <string name="current_password">Current Password</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_new_password">Confirm New Password</string>
     <string name="email_address">Email Address</string>
     <string name="login">Login</string>
     <string name="register_now">Register now</string>
@@ -26,6 +22,18 @@
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
+
+    <!--Password section-->
+    <string name="password">Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="password_should">Password should</string>
+    <string name="password_rule_one">Have minimum 8 characters &amp; maximum 16 characters.</string>
+    <string name="password_rule_two">Contain at least 1 numeric characters.</string>
+    <string name="password_rule_three">Contain at least 1 lowercase characters.</string>
+    <string name="password_rule_four">Contain at least 1 upper characters.</string>
+    <string name="password_rule_five">Contain at least 1 special character(like !@#$%*?).</string>
 
     <!--Caution Message-->
     <string name="required_phone_email">Required valid phone number or email</string>
