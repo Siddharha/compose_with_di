@@ -29,7 +29,8 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp"
-            android:text="@string/no_internet"/>
+            android:text="@string/no_internet"
+            android:visibility="invisible"/>
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtHeader"
@@ -43,7 +44,8 @@
             android:layout_marginTop="@dimen/_3sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp"
-            android:text="@string/no_internet_details"/>
+            android:text="@string/no_internet_details"
+            android:visibility="invisible"/>
 
 
         <com.app.l_pesa.common.CustomButtonRegular
@@ -57,7 +59,8 @@
             android:textColor="@color/colorSemiBlack"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bg_yellow_bg"
-            android:text="@string/retry"/>
+            android:text="@string/retry"
+            android:visibility="invisible"/>
 
 
 
@@ -70,6 +73,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:visibility="invisible"
 
             />
 

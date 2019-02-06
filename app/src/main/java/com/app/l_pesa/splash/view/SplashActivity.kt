@@ -26,62 +26,103 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-     super.onCreate(savedInstanceState)
-     setContentView(R.layout.activity_splash)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
 
-        val sharedPrefOBJ=SharedPref(this@SplashActivity)
-        if(sharedPrefOBJ.accessToken!=resources.getString(R.string.init))
-        {
-            val jsonObject          = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-            val presenterLoginObj   = PresenterLogin()
-            presenterLoginObj.doLogin(this@SplashActivity,jsonObject,this)
-
-        }
-        else
-        {
-            if(TextUtils.isEmpty(sharedPrefOBJ.countryList))
-            {
-                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-                {
-                    loadCountry()
-                }
-                else
-                {
-                    showSnackBar(resources.getString(R.string.no_internet))
-                }
-            }
-            else
-            {
-                splashLoading()
-            }
-        }
-
+        initUI()
 
     }
 
-    private fun splashLoading()
+    private fun visibleInvisibleStatus(connectivity:Boolean)
     {
+        if(connectivity)
+        {
+            txtTitle.visibility     =View.INVISIBLE
+            txtHeader.visibility    =View.INVISIBLE
+            buttonRetry.visibility  =View.INVISIBLE
+            progressBar.visibility  =View.VISIBLE
+        }
+        else
+        {
+            txtTitle.visibility     =View.VISIBLE
+            txtHeader.visibility    =View.VISIBLE
+            buttonRetry.visibility  =View.VISIBLE
+            progressBar.visibility  =View.INVISIBLE
+
+            buttonRetry.setOnClickListener {
+
+                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+                {
+                    initUI()
+                    visibleInvisibleStatus(true)
+                }
+                else
+                {
+                    visibleInvisibleStatus(false)
+                }
+            }
+        }
+    }
+
+    private fun initUI()
+    {
+        val sharedPrefOBJ = SharedPref(this@SplashActivity)
+        if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
+        {
+            if (CommonMethod.isNetworkAvailable(this@SplashActivity))
+            {
+                val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+                val presenterLoginObj = PresenterLogin()
+                presenterLoginObj.doLogin(this@SplashActivity, jsonObject, this)
+            }
+            else
+            {
+                visibleInvisibleStatus(false)
+
+            }
+
+
+        } else
+        {
+            if (TextUtils.isEmpty(sharedPrefOBJ.countryList))
+            {
+                if (CommonMethod.isNetworkAvailable(this@SplashActivity))
+                {
+                    visibleInvisibleStatus(true)
+                    loadCountry()
+                } else
+                {
+                    visibleInvisibleStatus(false)
+                }
+            } else
+            {
+                visibleInvisibleStatus(true)
+                splashLoading()
+            }
+        }
+    }
+
+    private fun splashLoading() {
         Handler().postDelayed({
-            progressBar.visibility          = View.INVISIBLE
+            progressBar.visibility = View.INVISIBLE
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
             finish()
         }, 1000)
     }
 
-    private fun loadCountry()
-    {
-        val presenterCountry= PresenterCountry()
-        presenterCountry.getCountry(this@SplashActivity,this)
+    private fun loadCountry() {
+        val presenterCountry = PresenterCountry()
+        presenterCountry.getCountry(this@SplashActivity, this)
     }
 
     override fun onSuccessCountry(countries_list: ResModelData) {
 
-        val gsonObj                 =   Gson()
-        val json                    =   gsonObj.toJson(countries_list)
-        val sharedPrefOBJ           =   SharedPref(this@SplashActivity)
-        sharedPrefOBJ.countryList   = json
-        progressBar.visibility      = View.INVISIBLE
+        val gsonObj = Gson()
+        val json = gsonObj.toJson(countries_list)
+        val sharedPrefOBJ = SharedPref(this@SplashActivity)
+        sharedPrefOBJ.countryList = json
+        progressBar.visibility = View.INVISIBLE
 
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -97,19 +138,18 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
 
     }
 
-    private fun showSnackBar(message:String)
-    {
-        progressBar.visibility=View.INVISIBLE
-        CommonMethod.setSnackBar(this@SplashActivity,rootLayout,message)
+    private fun showSnackBar(message: String) {
+        progressBar.visibility = View.INVISIBLE
+        CommonMethod.setSnackBar(this@SplashActivity, rootLayout, message)
     }
 
     override fun onSuccessLogin(data: LoginData) {
 
         progressBar.visibility = View.INVISIBLE
-        val sharedPrefOBJ=SharedPref(this@SplashActivity)
+        val sharedPrefOBJ = SharedPref(this@SplashActivity)
         val gson = Gson()
         val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo  = json
+        sharedPrefOBJ.userInfo = json
         val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -121,7 +161,14 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
     override fun onErrorLogin(jsonMessage: String) {
 
         progressBar.visibility = View.INVISIBLE
-        CommonMethod.setSnackBar(this@SplashActivity,rootLayout,jsonMessage)
+        CommonMethod.setSnackBar(this@SplashActivity, rootLayout, jsonMessage)
     }
 
+
 }
+
+
+
+
+
+
