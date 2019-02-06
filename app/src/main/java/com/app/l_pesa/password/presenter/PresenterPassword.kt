@@ -66,7 +66,7 @@ class PresenterPassword {
         val sharedPrefOBJ= SharedPref(contextOBJ)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
 
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,userData.access_token).doForgetPassword(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,userData.access_token).doChangePassword(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

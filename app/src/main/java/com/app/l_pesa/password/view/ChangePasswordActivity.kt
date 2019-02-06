@@ -18,6 +18,7 @@ import android.view.LayoutInflater
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.RelativeLayout
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.password.inter.ICallBackPassword
@@ -72,31 +73,33 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
         {
             hideKeyBoard()
-            customSnackBar(rootLayout,resources.getString(R.string.enter_current_password))
+            customSnackBar(rootLayout,resources.getString(R.string.enter_current_password),R.color.colorRed)
         }
         else if(TextUtils.isEmpty(etNewPassword.text.toString()))
         {
             hideKeyBoard()
-            customSnackBar(rootLayout,resources.getString(R.string.enter_new_password))
+            customSnackBar(rootLayout,resources.getString(R.string.enter_new_password),R.color.colorRed)
         }
         else if(!CommonMethod.passwordRegex(etNewPassword.text.toString()))
         {
             hideKeyBoard()
-            customSnackBar(rootLayout,resources.getString(R.string.enter_password_rule))
+            customSnackBar(rootLayout,resources.getString(R.string.enter_password_rule),R.color.colorRed)
         }
         else if(TextUtils.isEmpty(etConfirmNewPassword.text.toString()))
         {
             hideKeyBoard()
-            customSnackBar(rootLayout,resources.getString(R.string.enter_confirm_password))
+            customSnackBar(rootLayout,resources.getString(R.string.enter_confirm_password),R.color.colorRed)
         }
         else if(etNewPassword.text.toString()!=etConfirmNewPassword.text.toString())
         {
             hideKeyBoard()
-            customSnackBar(rootLayout,resources.getString(R.string.confirm_password_not_match))
+            customSnackBar(rootLayout,resources.getString(R.string.confirm_password_not_match),R.color.colorRed)
         }
         else
         {
             hideKeyBoard()
+            buttonSubmit.isClickable    = false
+            progressBar.visibility      = View.VISIBLE
             if(CommonMethod.isNetworkAvailable(this@ChangePasswordActivity))
             {
                 val jsonObject = JsonObject()
@@ -109,7 +112,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
             }
             else
             {
-                customSnackBar(rootLayout,resources.getString(R.string.no_internet))
+                customSnackBar(rootLayout,resources.getString(R.string.no_internet),R.color.colorRed)
             }
         }
     }
@@ -120,16 +123,19 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         CommonMethod.hideKeyboard(this@ChangePasswordActivity)
     }
 
-    private fun customSnackBar(view: View,message:String) {
+    private fun customSnackBar(view: View,message:String,colorCode:Int) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@ChangePasswordActivity,colorCode))
         (snackBarOBJ.view as ViewGroup).removeAllViews()
         val customView = LayoutInflater.from(this).inflate(R.layout.custom_snackbar, null)
         (snackBarOBJ.view as ViewGroup).addView(customView)
 
         val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+        val rlRoot=customView.findViewById(R.id.rlRoot) as RelativeLayout
+        rlRoot.setBackgroundColor(colorCode)
         txtTitle.text = message
+
         snackBarOBJ.show()
     }
 
@@ -237,10 +243,17 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
     override fun onSuccessResetPassword() {
 
+        buttonSubmit.isClickable = true
+        progressBar.visibility   = View.INVISIBLE
+        customSnackBar(rootLayout,resources.getString(R.string.enter_current_password),R.color.colorPrimaryLight)
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onErrorResetPassword(jsonMessage: String) {
-
+        buttonSubmit.isClickable    = true
+        progressBar.visibility      = View.INVISIBLE
+        customSnackBar(rootLayout,jsonMessage,R.color.colorRed)
     }
 
     override fun onBackPressed() {
