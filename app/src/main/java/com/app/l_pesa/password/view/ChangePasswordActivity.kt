@@ -73,7 +73,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         hashMapPassword["Password"] = etCurrentPassword.text.toString()
 
         val hashMapNewPassword:HashMap<String,String> = HashMap()
-        hashMapNewPassword["NewPassword"] = etNewPassword.text.toString()
+        hashMapNewPassword["Password"] = etNewPassword.text.toString()
 
         if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
         {
