@@ -8,7 +8,8 @@
     <color name="colorAppDeep">#016A5D</color>
     <color name="colorAppLight">#47C9B7</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorSemiBlack">#404040</color>
+    <color name="colorSemiBlack">#61666b</color>
+    <color name="colorSemiLightBlack">#bcbfc2</color>
     <color name="colorGrey">#bfbfbf</color>
     <color name="colorGreyDeep">#949ba6</color>
     <color name="colorGreyLight">#DADFDE</color>
