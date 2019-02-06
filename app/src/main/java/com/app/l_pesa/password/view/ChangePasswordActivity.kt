@@ -25,6 +25,8 @@ import com.app.l_pesa.password.presenter.PresenterPassword
 import com.google.gson.JsonObject
 
 
+
+
 class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
 
@@ -67,6 +69,12 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
     private fun doValidate()
     {
+        val hashMapPassword:HashMap<String,String> = HashMap()
+        hashMapPassword["Password"] = etCurrentPassword.text.toString()
+
+        val hashMapNewPassword:HashMap<String,String> = HashMap()
+        hashMapNewPassword["NewPassword"] = etNewPassword.text.toString()
+
         if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
         {
             hideKeyBoard()
@@ -91,6 +99,11 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         {
             hideKeyBoard()
             customSnackBarError(rootLayout,resources.getString(R.string.confirm_password_not_match))
+        }
+        else if (hashMapPassword==(hashMapNewPassword))
+        {
+            hideKeyBoard()
+            customSnackBarError(rootLayout,resources.getString(R.string.new_old_password_different))
         }
         else
         {
