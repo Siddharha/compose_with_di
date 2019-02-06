@@ -10,13 +10,11 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
-import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.password.view.ChangePasswordActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
 import com.app.l_pesa.settings.adapter.RecyclerViewAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick
 import com.app.l_pesa.settings.model.SettingsItem
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 

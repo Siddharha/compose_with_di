@@ -33,7 +33,9 @@ class RecyclerViewAdapter(private val context: Context, private val items: List<
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bindItem(items: SettingsItem,position: Int, callBack: ICallBackListClick){
             itemView.txtSetting.text = items.name
-            Glide.with(itemView.context).load(items.image).into(itemView.imgSetting)
+            Glide.with(itemView.context)
+                    .load(items.image).
+                    into(itemView.imgSetting)
 
             itemView.llRoot.setOnClickListener {
 

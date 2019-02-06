@@ -16,11 +16,12 @@
         android:gravity="center"
         >
 
-    <ImageView
+      <android.support.v7.widget.AppCompatImageView
         android:id="@+id/imgSetting"
         android:contentDescription="@string/app_name"
         android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_22sdp"
+        android:scaleType="fitXY"
        />
 
     </LinearLayout>
