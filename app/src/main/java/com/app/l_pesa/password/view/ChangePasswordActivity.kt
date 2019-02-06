@@ -79,7 +79,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
             hideKeyBoard()
             customSnackBar(rootLayout,resources.getString(R.string.enter_new_password))
         }
-        else if(!passwordRegex(etNewPassword.text.toString()))
+        else if(!CommonMethod.passwordRegex(etNewPassword.text.toString()))
         {
             hideKeyBoard()
             customSnackBar(rootLayout,resources.getString(R.string.enter_password_rule))
@@ -114,17 +114,6 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         }
     }
 
-    private fun passwordRegex(password: String): Boolean {
-
-        val pattern: Pattern
-        val matcher: Matcher
-
-        val passwordPattern =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,16}\$"
-        pattern = Pattern.compile(passwordPattern)
-        matcher = pattern.matcher(password)
-        return matcher.matches()
-
-    }
 
     private fun hideKeyBoard()
     {
@@ -187,7 +176,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
                 imgRuleOne.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_one.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
-            if(countNumeric(s.toString())==0)
+            if(CommonMethod.countNumeric(s.toString())==0)
             {
                 imgRuleTwo.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_two.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
@@ -197,7 +186,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
                 imgRuleTwo.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_two.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
-            if(!hasLowerCase(s.toString()))
+            if(!CommonMethod.hasLowerCase(s.toString()))
             {
                 imgRuleThree.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_three.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
@@ -207,7 +196,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
                 imgRuleThree.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_three.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
-            if(!hasUpperCase(s.toString()))
+            if(!CommonMethod.hasUpperCase(s.toString()))
             {
                 imgRuleFour.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_four.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
@@ -217,7 +206,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
                 imgRuleFour.setImageResource(R.drawable.ic_green_tick)
                 txt_rule_four.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimary))
             }
-            if(!hasSymbol(s.toString()))
+            if(!CommonMethod.hasSymbol(s.toString()))
             {
                 imgRuleFive.setImageResource(R.drawable.ic_red_tick)
                 txt_rule_five.setTextColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorRed))
@@ -230,30 +219,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         }
     }
 
-    fun countNumeric(number: String): Int {
-        var flag = 0
-        for (i in 0 until number.length) {
-            if (Character.isDigit(number[i])) {
-                flag++
-            }
-        }
-        return flag
-    }
 
-    private fun hasSymbol(data: CharSequence): Boolean {
-        val password = data.toString()
-        return !password.matches("[A-Za-z0-9 ]*".toRegex())
-    }
-
-    private fun hasUpperCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toLowerCase()
-    }
-
-    private fun hasLowerCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toUpperCase()
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -278,7 +244,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
     }
 
     override fun onBackPressed() {
-        onBackPressed()
+        super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 

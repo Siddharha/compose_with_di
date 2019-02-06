@@ -63,4 +63,9 @@ class ChangePinActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
 }

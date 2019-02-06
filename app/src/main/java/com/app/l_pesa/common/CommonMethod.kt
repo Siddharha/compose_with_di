@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 /**
@@ -66,6 +67,18 @@ object CommonMethod {
 
     }
 
+    fun passwordRegex(password: String): Boolean {
+
+        val pattern: Pattern
+        val matcher: Matcher
+
+        val passwordPattern =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,16}\$"
+        pattern = Pattern.compile(passwordPattern)
+        matcher = pattern.matcher(password)
+        return matcher.matches()
+
+    }
+
 
     fun isValidEmailAddress(email: String): Boolean {
         val emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
@@ -83,6 +96,31 @@ object CommonMethod {
             e.printStackTrace()
         }
 
+    }
+
+    fun countNumeric(number: String): Int {
+        var flag = 0
+        for (i in 0 until number.length) {
+            if (Character.isDigit(number[i])) {
+                flag++
+            }
+        }
+        return flag
+    }
+
+    fun hasSymbol(data: CharSequence): Boolean {
+        val password = data.toString()
+        return !password.matches("[A-Za-z0-9 ]*".toRegex())
+    }
+
+    fun hasUpperCase(data: CharSequence): Boolean {
+        val password = data.toString()
+        return password != password.toLowerCase()
+    }
+
+    fun hasLowerCase(data: CharSequence): Boolean {
+        val password = data.toString()
+        return password != password.toUpperCase()
     }
 
     

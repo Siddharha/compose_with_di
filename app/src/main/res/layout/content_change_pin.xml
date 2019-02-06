@@ -21,9 +21,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.5"
+        android:layout_weight="4.25"
         android:orientation="vertical"
-        android:weightSum="8"
+        android:weightSum="7.50"
         android:background="@drawable/bg_white_view"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp">
@@ -31,114 +31,129 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1.85"
             android:orientation="horizontal"
             tools:ignore="NestedWeights"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp">
 
-            <android.support.design.widget.TextInputLayout
+            <com.app.l_pesa.common.CommonInputLayout
                 style="@style/customInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:passwordToggleEnabled="true"
                 >
 
-                <android.support.design.widget.TextInputEditText
+                <com.app.l_pesa.common.CommonEditTextRegular
                     android:id="@+id/etCurrentPin"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="@string/current_pin"
                     android:inputType="textPassword"
                     android:maxLength="6"
                     android:maxLines="1"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_13sdp"
                     app:autoSizeMaxTextSize="@dimen/_14sdp"
                     app:autoSizeMinTextSize="@dimen/_10sdp"
                     app:autoSizeStepGranularity="0.2sp"
                     app:autoSizeTextType="uniform"
+                    android:textColorHint="@color/colorGreyDeep"
                     />
-            </android.support.design.widget.TextInputLayout>
+            </com.app.l_pesa.common.CommonInputLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="1.85"
             android:orientation="horizontal"
             tools:ignore="NestedWeights"
+            android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp">
 
-            <android.support.design.widget.TextInputLayout
+            <com.app.l_pesa.common.CommonInputLayout
                 style="@style/customInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:passwordToggleEnabled="true"
                 >
 
                 <com.app.l_pesa.common.CommonEditTextRegular
                     android:id="@+id/etNewPin"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="@string/new_pin"
                     android:inputType="textPassword"
                     android:maxLength="6"
                     android:maxLines="1"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_13sdp"
                     app:autoSizeMaxTextSize="@dimen/_14sdp"
                     app:autoSizeMinTextSize="@dimen/_10sdp"
                     app:autoSizeStepGranularity="0.2sp"
                     app:autoSizeTextType="uniform"
+                    android:textColorHint="@color/colorGreyDeep"
                     />
-            </android.support.design.widget.TextInputLayout>
+            </com.app.l_pesa.common.CommonInputLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            tools:ignore="NestedWeights"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/tilConfirmNewPassword"
-                style="@style/customInputLayoutStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <com.app.l_pesa.common.CommonEditTextRegular
-                    android:id="@+id/etConfirmPin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/confirm_new_pin"
-                    android:inputType="textPassword"
-                    android:maxLength="6"
-                    android:maxLines="1"
-                    android:textSize="@dimen/_12sdp"
-                    app:autoSizeMaxTextSize="@dimen/_14sdp"
-                    app:autoSizeMinTextSize="@dimen/_10sdp"
-                    app:autoSizeStepGranularity="0.2sp"
-                    app:autoSizeTextType="uniform"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="1.85"
             android:orientation="horizontal"
             tools:ignore="NestedWeights"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp">
+
+            <com.app.l_pesa.common.CommonInputLayout
+                android:id="@+id/tilConfirmNewPassword"
+                style="@style/customInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <com.app.l_pesa.common.CommonEditTextRegular
+                    android:id="@+id/etConfirmNewPin"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/confirm_new_pin"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_13sdp"
+                    app:autoSizeMaxTextSize="@dimen/_14sdp"
+                    app:autoSizeMinTextSize="@dimen/_10sdp"
+                    app:autoSizeStepGranularity="0.2sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColorHint="@color/colorGreyDeep"
+                    android:imeOptions="actionDone"
+                    />
+            </com.app.l_pesa.common.CommonInputLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".25"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.25"
+            android:orientation="horizontal"
+            tools:ignore="NestedWeights"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:weightSum="1">
 
             <com.app.l_pesa.common.CustomButtonRegular
@@ -165,9 +180,10 @@
                 android:layout_weight=".45"
                 android:background="@drawable/bg_grey_view"
                 android:textSize="@dimen/_12sdp"
-                android:textColor="@color/colorSemiBlack"
+                android:textColor="@color/colorGreyDeep"
                 android:text="@string/cancel"
                 android:textAllCaps="true"
+
                 />
 
         </LinearLayout>
@@ -180,6 +196,7 @@
         android:layout_weight=".50"
         android:orientation="vertical"
         />
+
 
 
 </LinearLayout>
