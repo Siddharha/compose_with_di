@@ -8,6 +8,6 @@ package com.app.l_pesa.password.inter
  */
 interface ICallBackPassword {
 
-    fun onSuccessResetPassword()
+    fun onSuccessResetPassword(message: String)
     fun onErrorResetPassword(jsonMessage: String)
 }

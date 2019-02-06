@@ -35,7 +35,7 @@ class PresenterPassword {
 
                     try {
                         if (response.status.isSuccess) {
-                            callBackOBJ.onSuccessResetPassword()
+                            callBackOBJ.onSuccessResetPassword(response.status.message)
 
                         } else {
                             callBackOBJ.onErrorResetPassword(response.status.message)
@@ -78,7 +78,7 @@ class PresenterPassword {
                     try {
                         if (response.status.isSuccess)
                         {
-                            callBackOBJ.onSuccessResetPassword()
+                            callBackOBJ.onSuccessResetPassword(response.status.message)
 
                         } else {
                             callBackOBJ.onErrorResetPassword(response.status.message)

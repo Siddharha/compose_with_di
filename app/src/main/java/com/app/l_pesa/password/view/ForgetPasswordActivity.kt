@@ -73,7 +73,7 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword {
 
     }
 
-    override fun onSuccessResetPassword() {
+    override fun onSuccessResetPassword(message: String) {
 
         Toast.makeText(this@ForgetPasswordActivity,"Success",Toast.LENGTH_SHORT).show()
     }
