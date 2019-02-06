@@ -17,6 +17,48 @@
 
             />
 
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_15sdp"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:text="@string/no_internet"/>
+
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtHeader"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13sdp"
+            android:layout_below="@+id/txtTitle"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:text="@string/no_internet_details"/>
+
+
+        <com.app.l_pesa.common.CustomButtonRegular
+            android:id="@+id/buttonRetry"
+            android:layout_width="@dimen/_125sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:gravity="center"
+            android:textSize="@dimen/_12sdp"
+            android:layout_below="@+id/txtHeader"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorSemiBlack"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/bg_yellow_bg"
+            android:text="@string/retry"/>
+
 
 
         <ProgressBar
