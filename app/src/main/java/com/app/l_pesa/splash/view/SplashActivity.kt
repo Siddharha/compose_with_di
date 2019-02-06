@@ -71,6 +71,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin {
         {
             if (CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
+                visibleInvisibleStatus(true)
                 val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
                 val presenterLoginObj = PresenterLogin()
                 presenterLoginObj.doLogin(this@SplashActivity, jsonObject, this)
