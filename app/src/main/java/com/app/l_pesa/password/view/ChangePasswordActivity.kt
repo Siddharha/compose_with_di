@@ -268,9 +268,9 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
         buttonSubmit.isClickable = true
         progressBar.visibility   = View.INVISIBLE
-        customSnackBarSuccess(rootLayout,message)
-        super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        customSnackBarSuccess(rootLayout,resources.getString(R.string.password_change_success))
+        //super.onBackPressed()
+        //overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onErrorResetPassword(jsonMessage: String) {

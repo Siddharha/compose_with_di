@@ -54,6 +54,7 @@
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">Please try after sometime!</string>
     <string name="no_internet">No Internet Connection</string>
+    <string name="password_change_success">Your password has been changed successfully!</string>
     <string name="no_internet_details">You are not connected with internet, make sure Wi-Fi/Data is on, Airplane mode is off and try again.</string>
     <string name="turn_on_location">To continue using our services, you need to turn on your GPS and use High Accuracy Mode. Do you want to turn it on?</string>
     <string name="retry">Retry</string>
