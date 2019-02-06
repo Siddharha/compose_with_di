@@ -108,7 +108,7 @@
             tools:ignore="NestedWeights"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_2sdp">
+            android:layout_marginTop="@dimen/_3sdp">
 
             <com.app.l_pesa.common.CommonInputLayout
                 android:id="@+id/tilConfirmNewPassword"
