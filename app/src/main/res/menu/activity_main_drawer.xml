@@ -23,15 +23,15 @@
             android:title="@string/nav_item_points" />
         <item
             android:id="@+id/action_investment"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_menu_investment_icon"
             android:title="@string/nav_item_investment" />
         <item
             android:id="@+id/action_lpk"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/menu_lpk_icon"
             android:title="@string/nav_item_lpk" />
         <item
             android:id="@+id/action_wallet"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_menu_wallet_icon"
             android:title="@string/nav_item_wallet" />
         <item
             android:id="@+id/action_settings"
