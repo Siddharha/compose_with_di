@@ -56,6 +56,11 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
             verifyField()
 
         }
+
+        txtCancel.setOnClickListener {
+            back()
+
+        }
     }
 
     private fun verifyField()
@@ -97,13 +102,17 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
         CommonMethod.customSnackBarError(ll_root,jsonMessage,this@ForgetPasswordActivity)
     }
-
-    override fun onBackPressed() {
-
+    private fun back()
+    {
         val intent = Intent(this@ForgetPasswordActivity, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    override fun onBackPressed() {
+
+        back()
     }
 
     private fun loadCountry()
