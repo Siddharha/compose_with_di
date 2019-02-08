@@ -7,9 +7,12 @@ import android.net.NetworkInfo
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import com.app.l_pesa.R
@@ -34,7 +37,34 @@ object CommonMethod {
         return isConnected
     }
 
+     fun customSnackBarSuccess(view: View,message:String,context:Context) {
 
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLight))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_success, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+        txtTitle.text = message
+
+        snackBarOBJ.show()
+    }
+
+    fun customSnackBarError(view: View,message:String, context:Context) {
+
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorRed))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_error, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+
+        txtTitle.text = message
+
+        snackBarOBJ.show()
+    }
 
 
     fun setSnackBar(context:Context, coordinatorLayout: View, snackTitle: String)
