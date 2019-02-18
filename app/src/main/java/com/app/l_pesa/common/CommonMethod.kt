@@ -37,21 +37,7 @@ object CommonMethod {
         return isConnected
     }
 
-     /*fun customSnackBarSuccess(view: View,message:String,context:Context) {
-
-        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLight))
-        (snackBarOBJ.view as ViewGroup).removeAllViews()
-        val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_success, null)
-        (snackBarOBJ.view as ViewGroup).addView(customView)
-
-        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
-        txtTitle.text = message
-
-        snackBarOBJ.show()
-    }
-
-    fun customSnackBarError(view: View,message:String, context:Context) {
+    fun customSnackBarError(view: View,context: Context,message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
         snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorRed))
@@ -64,21 +50,8 @@ object CommonMethod {
         txtTitle.text = message
 
         snackBarOBJ.show()
-    }*/
-
-
-    fun setSnackBar(context:Context, coordinatorLayout: View, snackTitle: String)
-    {
-        val snackBar = Snackbar.make(coordinatorLayout, snackTitle, Snackbar.LENGTH_SHORT)
-        snackBar.show()
-        val view = snackBar.view
-        val txtView = view.findViewById(android.support.design.R.id.snackbar_text) as TextView
-        val font = Typeface.createFromAsset(context.assets,"fonts/Montserrat-Regular.ttf")
-        txtView.typeface = font
-        txtView.gravity = Gravity.CENTER_HORIZONTAL
-        txtView.textSize = 12F
-
     }
+
 
     fun commonCatchBlock(exp:Exception,contextOBJ: Context): String {
 

@@ -63,11 +63,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         CommonMethod.hideKeyboard(this@RegistrationStepOneActivity)
         if((etPhone.text.toString().length<10))
         {
-            CommonMethod.setSnackBar(this@RegistrationStepOneActivity,ll_root,resources.getString(R.string.required_phone))
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
         }
         else if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
-            CommonMethod.setSnackBar(this@RegistrationStepOneActivity,ll_root,resources.getString(R.string.required_email))
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
         }
         else
         {
@@ -85,7 +85,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             }
             else
             {
-                CommonMethod.setSnackBar(this@RegistrationStepOneActivity,ll_root,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.no_internet))
             }
         }
     }
@@ -176,6 +176,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onErrorRegistrationOne(jsonMessage: String) {
 
-        CommonMethod.setSnackBar(this@RegistrationStepOneActivity,ll_root,jsonMessage)
+        CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,jsonMessage)
     }
 }

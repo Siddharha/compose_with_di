@@ -229,7 +229,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
         else
         {
-            CommonMethod.setSnackBar(this@DashboardActivity,drawer_layout,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(drawer_layout,this@DashboardActivity,resources.getString(R.string.no_internet))
         }
 
     }
@@ -245,7 +245,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onErrorLogout(message: String) {
 
-        CommonMethod.setSnackBar(this@DashboardActivity,drawer_layout,message)
+        CommonMethod.customSnackBarError(drawer_layout,this@DashboardActivity,message)
     }
 
     private fun navigateToFragment(fragmentToNavigate: Fragment) {

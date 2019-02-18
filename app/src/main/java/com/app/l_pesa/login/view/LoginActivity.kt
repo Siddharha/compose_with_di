@@ -193,11 +193,11 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         CommonMethod.hideKeyboard(this@LoginActivity)
         if(etPhone.text.toString().length<8)
         {
-            CommonMethod.setSnackBar(this@LoginActivity,ll_root,resources.getString(R.string.required_phone))
+            CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_phone))
         }
         else if(TextUtils.isEmpty(etPassword.text.toString()))
         {
-            CommonMethod.setSnackBar(this@LoginActivity,ll_root,resources.getString(R.string.required_password))
+            CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_password))
         }
         else
         {
@@ -265,7 +265,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
             }
             else
             {
-                CommonMethod.setSnackBar(this@LoginActivity,ll_root,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.no_internet))
             }
         }
     }
@@ -292,7 +292,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
       progressBar.visibility = View.INVISIBLE
       txtLogin.isClickable   = true
-      CommonMethod.setSnackBar(this@LoginActivity,ll_root,jsonMessage)
+        CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)
 
     }
 
