@@ -292,7 +292,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
       progressBar.visibility = View.INVISIBLE
       txtLogin.isClickable   = true
-        CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)
+      CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)
 
     }
 

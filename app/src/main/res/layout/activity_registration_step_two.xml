@@ -1,9 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".registration.view.RegistrationStepTwoActivity">
+    android:orientation="vertical"
+    android:weightSum="15"
+    android:background="@drawable/login_bg">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.5"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+
+        >
+        <com.app.l_pesa.common.CommonTextRegular
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/thank_you"
+            android:gravity="center"
+            android:textColor="@color/colorYellow"
+            android:shadowColor="#000000"
+            android:shadowDx="2.7"
+            android:shadowDy="2.7"
+            android:shadowRadius="1"
+            android:textSize="@dimen/_15sdp"/>
+
+        <com.app.l_pesa.common.CommonTextRegular
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_selfie_picture"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_12sdp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_PHONE"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".50"
+        android:orientation="vertical"
+
+        />
+
+    <RelativeLayout
+        android:id="@+id/rlEmail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        android:gravity="center"
+       />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".50"
+        android:orientation="vertical"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+
+
+        >
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.75"
+        android:orientation="vertical"
+
+        />
+
+</LinearLayout>
+

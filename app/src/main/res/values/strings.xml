@@ -23,6 +23,8 @@
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
+    <string name="thank_you">Thank you!</string>
+    <string name="upload_selfie_picture">Upload selfie picture and write your name</string>
 
     <!--Password section-->
     <string name="password">Password</string>
