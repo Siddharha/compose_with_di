@@ -37,7 +37,7 @@ object CommonMethod {
         return isConnected
     }
 
-     fun customSnackBarSuccess(view: View,message:String,context:Context) {
+     /*fun customSnackBarSuccess(view: View,message:String,context:Context) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
         snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLight))
@@ -64,7 +64,7 @@ object CommonMethod {
         txtTitle.text = message
 
         snackBarOBJ.show()
-    }
+    }*/
 
 
     fun setSnackBar(context:Context, coordinatorLayout: View, snackTitle: String)

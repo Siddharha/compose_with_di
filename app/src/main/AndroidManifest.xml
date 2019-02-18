@@ -51,7 +51,7 @@
             android:name=".registration.view.RegistrationStepTwoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".password.view.ForgetPasswordActivity"
+            android:name=".password.view.ForgotPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".dashboard.view.DashboardActivity"

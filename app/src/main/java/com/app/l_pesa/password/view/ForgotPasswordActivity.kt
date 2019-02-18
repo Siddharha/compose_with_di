@@ -4,14 +4,19 @@ import android.app.Dialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
@@ -26,7 +31,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_forget_password.*
 
-class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBackCountryList {
+class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBackCountryList {
 
     private var countryCode     ="+255"
     private var countryFound    = false
@@ -65,46 +70,65 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
     private fun verifyField()
     {
-        CommonMethod.hideKeyboard(this@ForgetPasswordActivity)
+        CommonMethod.hideKeyboard(this@ForgotPasswordActivity)
         if(etPhone.text.toString().length<10 && !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
-            CommonMethod.customSnackBarError(ll_root,resources.getString(R.string.required_phone_email),this@ForgetPasswordActivity)
+            customSnackBarError(ll_root,resources.getString(R.string.required_phone_email))
         }
         else if(!TextUtils.isEmpty(etPhone.text.toString()) && !TextUtils.isEmpty(etEmail.text.toString()))
         {
-            CommonMethod.customSnackBarError(ll_root,resources.getString(R.string.required_phone_email),this@ForgetPasswordActivity)
+            customSnackBarError(ll_root,resources.getString(R.string.required_phone_email))
         }
         else
         {
-            if(CommonMethod.isNetworkAvailable(this@ForgetPasswordActivity))
+            if(CommonMethod.isNetworkAvailable(this@ForgotPasswordActivity))
             {
+                progressBar.visibility= View.VISIBLE
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
                 jsonObject.addProperty("country_code",countryCode)
 
                 val presenterForgetPassword=PresenterPassword()
-                presenterForgetPassword.doForgetPassword(this@ForgetPasswordActivity,jsonObject,this)
+                presenterForgetPassword.doForgetPassword(this@ForgotPasswordActivity,jsonObject,this)
             }
             else
             {
-                CommonMethod.customSnackBarError(ll_root,resources.getString(R.string.no_internet),this@ForgetPasswordActivity)
+                customSnackBarError(ll_root,resources.getString(R.string.no_internet))
             }
         }
 
     }
 
+    private fun customSnackBarError(view: View,message:String) {
+
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@ForgotPasswordActivity,R.color.colorRed))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(this).inflate(R.layout.snackbar_error, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+
+        txtTitle.text = message
+
+        snackBarOBJ.show()
+    }
+
+
     override fun onSuccessResetPassword(message: String) {
 
-        CommonMethod.customSnackBarSuccess(ll_root,message,this@ForgetPasswordActivity)
+        progressBar.visibility= View.INVISIBLE
+
     }
 
     override fun onErrorResetPassword(jsonMessage: String) {
 
-        CommonMethod.customSnackBarError(ll_root,jsonMessage,this@ForgetPasswordActivity)
+        progressBar.visibility= View.INVISIBLE
+        customSnackBarError(ll_root,jsonMessage)
     }
     private fun back()
     {
-        val intent = Intent(this@ForgetPasswordActivity, LoginActivity::class.java)
+        val intent = Intent(this@ForgotPasswordActivity, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
@@ -117,7 +141,7 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
     private fun loadCountry()
     {
-        val sharedPrefOBJ= SharedPref(this@ForgetPasswordActivity)
+        val sharedPrefOBJ= SharedPref(this@ForgotPasswordActivity)
         val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
         if(countryData.countries_list.size>0)
@@ -132,7 +156,7 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
                     countryFound=true
                     val options = RequestOptions()
                     options.centerCrop()
-                    Glide.with(this@ForgetPasswordActivity)
+                    Glide.with(this@ForgotPasswordActivity)
                             .load(countryListCode.image)
                             .apply(options)
                             .into(img_country)
@@ -145,7 +169,7 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
             {
                 val options = RequestOptions()
                 options.centerCrop()
-                Glide.with(this@ForgetPasswordActivity)
+                Glide.with(this@ForgotPasswordActivity)
                         .load(countryData.countries_list[0].image)
                         .apply(options)
                         .into(img_country)
@@ -162,24 +186,24 @@ class ForgetPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
     private fun countrySpinner(countryList: ResModelData)
     {
-        val dialog= Dialog(this@ForgetPasswordActivity)
+        val dialog= Dialog(this@ForgotPasswordActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         val recyclerView    = dialog.findViewById(R.id.recycler_country) as RecyclerView?
-        val countryAdapter              = CountryListAdapter(this@ForgetPasswordActivity, countryList.countries_list,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@ForgetPasswordActivity, LinearLayoutManager.VERTICAL, false)
+        val countryAdapter              = CountryListAdapter(this@ForgotPasswordActivity, countryList.countries_list,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ForgotPasswordActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = countryAdapter
         dialog.show()
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
-        val sharedPref          =SharedPref(this@ForgetPasswordActivity)
+        val sharedPref          =SharedPref(this@ForgotPasswordActivity)
         sharedPref.countryCode  =resModelCountryList.code
         countryCode             =resModelCountryList.country_code
         val options = RequestOptions()
         options.centerCrop()
-        Glide.with(this@ForgetPasswordActivity)
+        Glide.with(this@ForgotPasswordActivity)
                 .load(resModelCountryList.image)
                 .apply(options)
                 .into(img_country)
