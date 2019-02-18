@@ -20,6 +20,7 @@
     <string name="cancel">Cancel</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="change_password">Change Password</string>
+    <string name="enter_name">Enter Name</string>
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
