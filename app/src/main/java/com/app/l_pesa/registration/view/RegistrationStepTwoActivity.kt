@@ -77,7 +77,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private fun galleryClick()
     {
-        val checkSelfPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val checkSelfPermission = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this@RegistrationStepTwoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
         }
