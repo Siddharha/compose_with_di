@@ -71,7 +71,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         }
 
         val intent = Intent("android.media.action.IMAGE_CAPTURE")
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri!!)
         startActivityForResult(intent, FINAL_TAKE_PHOTO)
     }
 
@@ -110,7 +110,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         when(requestCode){
             FINAL_TAKE_PHOTO ->
                 if (resultCode == Activity.RESULT_OK) {
-                    val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(imageUri!!))
+                    val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(imageUri))
                     imgProfilePhoto!!.setImageBitmap(bitmap)
                 }
             FINAL_CHOOSE_PHOTO ->
