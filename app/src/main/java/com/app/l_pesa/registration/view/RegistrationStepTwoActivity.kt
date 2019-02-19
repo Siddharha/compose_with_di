@@ -1,14 +1,17 @@
 package com.app.l_pesa.registration.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -17,14 +20,21 @@ import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RegistrationStepTwoActivity : AppCompatActivity() {
 
-    private val FINAL_TAKE_PHOTO    = 1
-    private val FINAL_CHOOSE_PHOTO  = 2
+    private val PHOTO               = 1
+    private val GALLEY              = 2
     private var imageUri: Uri?      = null
+    private var captureFile: File?  = null
+    private var imageFilePath       = ""
+    private var imageSelectStatus   : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,20 +69,31 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private fun cameraClick()
     {
-        val outputImage = File(externalCacheDir, "output_image.jpg")
-        if(outputImage.exists()) {
-            outputImage.delete()
-        }
-        outputImage.createNewFile()
-        imageUri = if(Build.VERSION.SDK_INT >= 24){
-            FileProvider.getUriForFile(this, "com.app.l_pesa.fileprovider", outputImage)
-        } else {
-            Uri.fromFile(outputImage)
-        }
 
-        val intent = Intent("android.media.action.IMAGE_CAPTURE")
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri!!)
-        startActivityForResult(intent, FINAL_TAKE_PHOTO)
+        try {
+            val imageFile = createImageFile()
+            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+            val authorities = "com.app.l_pesa.fileprovider"
+            val imageUri = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, authorities, imageFile)
+            callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+            startActivityForResult(callCameraIntent, PHOTO)
+
+        } catch (e: IOException) {
+            Toast.makeText(this@RegistrationStepTwoActivity,"Could not create file!",Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName: String = "l_pesa" + timeStamp + "_"
+        val storageDir: File = this@RegistrationStepTwoActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        if (!storageDir.exists()) storageDir.mkdirs()
+        captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)
+        imageFilePath = captureFile!!.absolutePath
+        return captureFile!!
     }
 
     private fun galleryClick()
@@ -89,7 +110,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, FINAL_CHOOSE_PHOTO)
+        startActivityForResult(intent, GALLEY)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -108,17 +129,52 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            FINAL_TAKE_PHOTO ->
-                if (resultCode == Activity.RESULT_OK) {
+            PHOTO ->
+               /* if (resultCode == Activity.RESULT_OK && data!=null)
+                {
                     val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(imageUri))
                     imgProfilePhoto!!.setImageBitmap(bitmap)
+                }*/
+                if (resultCode == Activity.RESULT_OK) {
+                    imgProfilePhoto.setImageBitmap(scaleBitmap())
+                    CommonMethod.fileCompress(captureFile!!)
+                    imageSelectStatus=true
+                } else
+
+                {
+                    if(imageSelectStatus)
+                    {
+                    }
+                    else
+                    {
+                        imageSelectStatus=false
+                    }
+
                 }
-            FINAL_CHOOSE_PHOTO ->
+            GALLEY ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
                 }
         }
+    }
+
+    private fun scaleBitmap(): Bitmap
+    {
+        val imageViewWidth = imgProfilePhoto.width
+        val imageViewHeight = imgProfilePhoto.height
+
+        val bmOptions = BitmapFactory.Options()
+        bmOptions.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(imageFilePath, bmOptions)
+        val bitmapWidth = bmOptions.outWidth
+        val bitmapHeight = bmOptions.outHeight
+        val scaleFactor = Math.min(bitmapWidth / imageViewWidth, bitmapHeight / imageViewHeight)
+
+        bmOptions.inJustDecodeBounds = false
+        bmOptions.inSampleSize = scaleFactor
+        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+
     }
 
     private fun handleImage(data: Intent?) {
