@@ -170,6 +170,10 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
 
+        val sharedPrefOBJ=SharedPref(this@SplashActivity)
+        val gson                          = Gson()
+        val dashBoardData           = gson.toJson(data)
+        sharedPrefOBJ.userDashBoard       = dashBoardData
 
         progressBar.visibility = View.INVISIBLE
         val intent = Intent(this@SplashActivity, DashboardActivity::class.java)

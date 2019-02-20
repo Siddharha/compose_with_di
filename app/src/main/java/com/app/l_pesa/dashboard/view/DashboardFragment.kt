@@ -11,6 +11,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.presenter.PresenterDashboard
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.dashboard_layout.*
 
 
@@ -47,9 +48,26 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
 
     private fun initData()
     {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val dashBoard = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+
+        if(dashBoard!=null)
+        {
+            setDashBoard(dashBoard)
+        }
+        else
+        {
+            loadDashboard()
+        }
+
+
+    }
+
+    private fun loadDashboard()
+    {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-           // swipeRefreshLayout.isRefreshing = true
+            // swipeRefreshLayout.isRefreshing = true
             val sharedPrefOBJ= SharedPref(activity!!)
             val presenterDashboard= PresenterDashboard()
             presenterDashboard.getDashboard(activity!!,sharedPrefOBJ.accessToken,this)
@@ -58,7 +76,13 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
         {
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
         }
+    }
 
+    private fun setDashBoard(dashBoard: ResDashboard.Data)
+    {
+
+        left_header_txt.text=dashBoard.fixedDepositAmount
+        right_header_txt.text=dashBoard.savingsAmount
     }
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
