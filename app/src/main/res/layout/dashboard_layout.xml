@@ -1,58 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content">-->
 
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rootLayout"
+        >
+        <RelativeLayout
+            android:id="@+id/top_bar_dashboard"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/total_header"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            >
+
+            <RelativeLayout
+                android:id="@+id/total_header_left"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@color/colorWhite"
+                >
+
+                <ImageView
+                    android:id="@+id/left_header"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_centerInParent="true"
+
+
+                    />
+
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:layout_below="@+id/left_header"
+                    android:id="@+id/left_header_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorApp"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:background="@color/colorAccent"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:layout_centerInParent="true">
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/total_header_right"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/_15sdp"
+                >
+
+                <ImageView
+                    android:id="@+id/right_header"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_centerInParent="true"
+
+                    />
+
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:layout_below="@+id/right_header"
+                    android:id="@+id/right_header_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorApp"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_centerHorizontal="true"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/header_below_layout"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_below="@+id/total_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingStart="@dimen/_5sdp"
+            >
+            <TextView
+                android:id="@+id/credit_score_lable"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your L-Pesa Credit Score"
+
+                android:layout_marginTop="@dimen/_7sdp"
+                />
+
+            <SeekBar
+                android:id="@+id/seek_bar"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+
+
+                />
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"/>
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/full_score"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seek_bar"
+                android:layout_marginTop="@dimen/_3sdp"
+
+                />
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_score"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seek_bar"
+                android:layout_marginTop="6dp"
+
+                />
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_made"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seek_bar"
+                android:layout_marginTop="6dp"
+
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/banner_layout"
+            android:layout_below="@+id/header_below_layout"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp">
+            <ImageView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                />
+            <ImageView
+                android:id="@+id/close_banner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/_5sdp"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@+id/banner_layout"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/loan_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+<!--<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+  <RelativeLayout
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <RelativeLayout
-        android:id="@+id/top_bar_dashboard"
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/total_header"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
         android:background="@color/colorAccent"
-        >
+       >
 
         <RelativeLayout
             android:id="@+id/total_header_left"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-           android:background="@color/colorWhite"
-         >
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/semi_white">
 
             <ImageView
                 android:id="@+id/left_header"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_centerInParent="true"
-
+                app:srcCompat="@drawable/ic_my_fixed_deposit"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
 
                 />
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:layout_below="@+id/left_header"
                 android:id="@+id/left_header_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TZ 1040000"
-                android:textColor="#00695c"
+                android:textColor="@color/colorApp"
                 android:textSize="@dimen/_13sdp"
                 android:layout_centerHorizontal="true"
                 />
@@ -60,20 +287,19 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="@dimen/_1sdp"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:background="@color/colorAccent"
-
+            android:background="@color/semi_white"
             >
 
             <LinearLayout
                 android:layout_width="@dimen/_1sdp"
                 android:layout_height="match_parent"
-                android:background="@color/colorAccent"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:layout_marginBottom="@dimen/_4sdp"
+                android:background="@color/color_gray_light"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_centerInParent="true">
 
             </LinearLayout>
@@ -85,27 +311,30 @@
             android:id="@+id/total_header_right"
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@color/semi_white"
             android:gravity="center"
-            android:layout_marginEnd="@dimen/_15sdp"
             >
 
             <ImageView
                 android:id="@+id/right_header"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                app:srcCompat="@drawable/ic_my_savings_account"
                 android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+
 
                 />
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:layout_below="@+id/right_header"
                 android:id="@+id/right_header_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TZ 1040000"
-                android:textColor="#00695c"
+                android:textColor="@color/colorApp"
                 android:textSize="@dimen/_13sdp"
                 android:layout_centerHorizontal="true"
                 />
@@ -121,27 +350,27 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_below="@+id/total_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_65sdp"
         android:paddingEnd="@dimen/_5sdp"
         android:paddingStart="@dimen/_5sdp"
->
-        <TextView
-            android:id="@+id/credit_score_lable"
+        android:background="@color/semi_white">
+
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/credit_score_label"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your L-Pesa Credit Score"
-
+            android:textSize="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_7sdp"
-           />
+            android:textColor="@color/color_gray_text"/>
 
         <SeekBar
             android:id="@+id/seek_bar"
             android:layout_centerInParent="true"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"
-
+            android:layout_height="@dimen/_10sdp"
+            android:background="@drawable/progressbar_background"
 
             />
         <ImageView
@@ -149,37 +378,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_pointer"
             android:layout_centerVertical="true"
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="12dp"/>
-        <TextView
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"/>
+
+        <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/full_score"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/seek_bar"
-            android:layout_marginTop="6dp"
-            android:text="918"
-
+            android:layout_marginTop="@dimen/_3sdp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/color_gray_text"
 
             />
-        <TextView
+        <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/start_score"
             android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/seek_bar"
-            android:layout_marginTop="6dp"
-
+            android:layout_marginTop="@dimen/_3sdp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/color_gray_text"
             />
-        <TextView
+        <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/score_made"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/seek_bar"
             android:layout_marginTop="6dp"
-
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/color_gray_text"
             />
 
     </RelativeLayout>
@@ -187,25 +420,27 @@
     <RelativeLayout
         android:id="@+id/banner_layout"
         android:layout_below="@+id/header_below_layout"
-        android:layout_height="@dimen/_50sdp"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/_75sdp"
         android:layout_marginTop="@dimen/_7sdp"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp">
+        
         <ImageView
-
+            android:contentDescription="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            />
+           />
         <ImageView
             android:id="@+id/close_banner"
+            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_margin="@dimen/_5sdp"
-          />
+           />
 
     </RelativeLayout>
     <RelativeLayout
@@ -222,12 +457,15 @@
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            >
+            android:background="@color/screenBackground">
 
         </android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>
 
-</RelativeLayout>
-</android.support.v4.widget.SwipeRefreshLayout>
+  </RelativeLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>-->
+
+
 

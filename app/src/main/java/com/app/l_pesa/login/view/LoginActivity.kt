@@ -285,6 +285,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
 
     }
 

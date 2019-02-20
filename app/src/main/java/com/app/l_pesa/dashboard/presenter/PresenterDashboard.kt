@@ -1,29 +1,28 @@
-package com.app.l_pesa.splash.presenter
+package com.app.l_pesa.dashboard.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.splash.inter.ICallBackCountry
+import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 import retrofit2.HttpException
 
 
-
 /**
- * Created by Intellij Amiya on 23-01-2019.
+ * Created by Intellij Amiya on 20-02-2019.
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class PresenterCountry{
+class PresenterDashboard {
 
     @SuppressLint("CheckResult")
-    fun getCountry(contextOBJ: Context, callBackOBJ: ICallBackCountry)
+    fun getDashboard(contextOBJ: Context, accessToken:String,callBackOBJ: ICallBackDashboard)
     {
-        RetrofitHelper.getRetrofit(BaseService::class.java).getCountryList()
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,accessToken).getDashboard()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -33,15 +32,12 @@ class PresenterCountry{
 
                     try
                     {
-                        if(response.data.countries_list.size>0)
+                        if(response.status!!.isSuccess!! && response.data!!.loans!!.size>0)
                         {
 
-                            callBackOBJ.onSuccessCountry(response.data)
+                            callBackOBJ.onSuccessDashboard(response.data!!)
                         }
-                        else
-                        {
-                            callBackOBJ.onEmptyCountry()
-                        }
+
 
                     }
                     catch (e: Exception)
@@ -58,12 +54,12 @@ class PresenterCountry{
                         val  jsonStatus=    jsonError.getJSONObject("status")
                         val jsonMessage    =    jsonStatus.getString("message")
 
-                        callBackOBJ.onFailureCountry(jsonMessage)
+                        callBackOBJ.onFailureDashboard(jsonMessage)
                     }
                     catch (exp: Exception)
                     {
                         val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
-                        callBackOBJ.onFailureCountry(errorMessageOBJ)
+                        callBackOBJ.onFailureDashboard(errorMessageOBJ)
                     }
 
                 })
