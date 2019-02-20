@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
+import android.support.v7.app.AppCompatDelegate
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.telephony.TelephonyManager
@@ -24,6 +25,9 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.inter.ICallBackDashboard
+import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.password.view.ForgotPasswordActivity
 import com.app.l_pesa.login.adapter.CountryListAdapter
@@ -42,7 +46,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 
 
-class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList {
+class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList, ICallBackDashboard {
 
 
     private var runTimePermission: RunTimePermission? = null
@@ -53,7 +57,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         runTimePermission       =  RunTimePermission(this@LoginActivity)
         if (!runTimePermission!!.checkPermissionForPhoneState())
         {
@@ -277,15 +281,9 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         val gson = Gson()
         val json = gson.toJson(data)
         sharedPrefOBJ.userInfo      = json
-        progressBar.visibility      = View.INVISIBLE
-        txtLogin.isClickable        = true
 
-        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
+        val presenterDashboard= PresenterDashboard()
+        presenterDashboard.getDashboard(this@LoginActivity,data.access_token,this)
 
     }
 
@@ -307,6 +305,31 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         recyclerView?.layoutManager     = LinearLayoutManager(this@LoginActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = countryAdapter
         dialog.show()
+    }
+
+    override fun onSuccessDashboard(data: ResDashboard.Data) {
+
+        val sharedPrefOBJ=SharedPref(this@LoginActivity)
+        val gson                          = Gson()
+        val dashBoardData           = gson.toJson(data)
+        sharedPrefOBJ.userDashBoard       = dashBoardData
+
+        progressBar.visibility = View.INVISIBLE
+        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
+    }
+
+    override fun onFailureDashboard(jsonMessage: String) {
+
+        val sharedPrefOBJ= SharedPref(this@LoginActivity)
+        sharedPrefOBJ.removeToken()
+        progressBar.visibility = View.INVISIBLE
+        txtLogin.isClickable   = true
+        CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {

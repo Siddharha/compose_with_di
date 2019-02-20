@@ -1,0 +1,223 @@
+package com.app.l_pesa.dashboard.adapter
+
+
+/**
+ * Created by Intellij Amiya on 20-02-2019.
+ * A good programmer is someone who looks both ways before crossing a One-way street.
+ * Kindly follow https://source.android.com/setup/code-style
+ */
+import android.content.Context
+import android.graphics.Color
+import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonTextRegular
+import com.app.l_pesa.dashboard.model.ResDashboard
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+
+
+class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, private val contextOBJ: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
+    {
+
+        val viewHolder = holder as SelectViewHolder
+
+        if(al_loadOBJ.size!=0)
+        {
+
+            if (al_loadOBJ[position].name == "Business Loan")
+            {
+                viewHolder.imv.setImageResource(R.drawable.ic_business_loan_icon)
+                viewHolder.loanName.text = contextOBJ!!.resources.getString(R.string.business_loan)
+
+                if (al_loadOBJ[position].status=="Apply Now")
+                {
+                    viewHolder.view_divider.visibility                =View.GONE
+                    viewHolder.btn_apply_loan.text                    =al_loadOBJ[position].status
+                    viewHolder.txt_loan_detailsOBJ.text               =contextOBJ.resources.getString(R.string.you_do_not_have_business_loan)
+                    viewHolder.ll_bottom.visibility                   =View.GONE
+                    viewHolder.btn_apply_loan.visibility              =View.VISIBLE
+                    viewHolder.txt_amount_first.visibility            =View.GONE
+                    viewHolder.txt_amount_second.visibility           =View.GONE
+                    viewHolder.ll_center.visibility                   =View.GONE
+
+                    viewHolder.btn_apply_loan.setOnClickListener {
+
+                       /* if (Util.isNetworkAvailable(_contextOBJ))
+                        {
+                           // val loanAPPLY = Intent(_contextOBJ, LoanPlansActivity::class.java)
+                           // _contextOBJ!!.startActivity(loanAPPLY)
+                        }
+                        else
+                        {
+                           // DialogUtil.showMessageAlert(_contextOBJ, "There is no internet connection , please check your internet connection")
+                        }*/
+
+                    }
+
+                }
+                else
+                {
+                    val totalRange = al_loadOBJ[position].repay!!.done + al_loadOBJ[position].repay!!.left
+                    viewHolder.seekbarOBJ.setIndicatorPopupEnabled(true)
+                    viewHolder.seekbarOBJ.max=totalRange
+                    viewHolder.seekbarOBJ.min=0
+                    viewHolder.seekbarOBJ.isEnabled = false
+                    viewHolder.seekbarOBJ.progress = al_loadOBJ[position].repay!!.done
+
+                    viewHolder.txt_loan_detailsOBJ.text                 =al_loadOBJ[position].nextRepay!!.leftDaysText
+                    viewHolder.loanBtn.text                             =al_loadOBJ[position].status
+                    viewHolder.txt_amount_first.text                    =al_loadOBJ[position].repay!!.amount
+                    viewHolder.txt_amount_second.text                   =al_loadOBJ[position].nextRepay!!.amount
+                    viewHolder.txt_MAX.text                             =totalRange.toString()
+                    viewHolder.view_vertical_divider.visibility         =View.INVISIBLE
+
+                    when {
+                        al_loadOBJ[position].status=="Pending" //YELLOW
+                        -> viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_yellow_btn)
+                        al_loadOBJ[position].status=="Due" //RED
+                        -> viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_red_btn) //GREEN
+                        else -> viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_approve_button)
+                    }
+
+
+                }
+
+            }
+
+            else if (al_loadOBJ[position].name == ("Current Loan"))
+            {
+
+                viewHolder.imv.setImageResource(R.drawable.ic_current_loan_icon)
+                viewHolder.loanName.text = contextOBJ!!.resources.getString(R.string.current_loan)
+
+                if (al_loadOBJ[position].status=="Apply Now")
+                {
+                    viewHolder.view_divider.visibility                =View.GONE
+                    viewHolder.btn_apply_loan.text                    =al_loadOBJ[position].status
+                    viewHolder.txt_loan_detailsOBJ.text               =contextOBJ.resources.getString(R.string.you_do_not_have_current_loan)
+                    viewHolder.ll_bottom.visibility                   =View.GONE
+                    viewHolder.btn_apply_loan.visibility              =View.VISIBLE
+                    viewHolder.txt_amount_first.visibility            =View.GONE
+                    viewHolder.txt_amount_second.visibility           =View.GONE
+                    viewHolder.ll_center.visibility                   =View.GONE
+
+                    viewHolder.btn_apply_loan.setOnClickListener {
+
+                       /* if (Util.isNetworkAvailable(_contextOBJ))
+                        {
+                            val loanAPPLY = Intent(_contextOBJ, LoanPlansActivity::class.java)
+                            _contextOBJ!!.startActivity(loanAPPLY)
+                        }
+                        else
+                        {
+                            DialogUtil.showMessageAlert(_contextOBJ, "There is no internet connection , please check your internet connection")
+                        }*/
+
+                    }
+
+                }
+                else
+                {
+                    val totalRange = al_loadOBJ[position].repay!!.done + al_loadOBJ[position].repay!!.left
+                    viewHolder.seekbarOBJ.setIndicatorPopupEnabled(true)
+                    viewHolder.seekbarOBJ.max=totalRange
+                    viewHolder.seekbarOBJ.min=0
+                    viewHolder.seekbarOBJ.isEnabled = false
+                    viewHolder.seekbarOBJ.progress = al_loadOBJ[position].repay!!.done
+
+                    viewHolder.txt_loan_detailsOBJ.text                  =al_loadOBJ[position].nextRepay!!.leftDaysText
+                    viewHolder.loanBtn.text                             =al_loadOBJ[position].status
+                    viewHolder.txt_amount_first.text =al_loadOBJ[position].repay!!.amount
+                    viewHolder.txt_amount_second.text =al_loadOBJ[position].nextRepay!!.amount
+                    viewHolder.txt_MAX.text                             =totalRange.toString()
+                    viewHolder.view_vertical_divider.visibility =View.INVISIBLE
+
+                    if(al_loadOBJ[position].status=="Pending") //YELLOW
+                    {
+                        viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_yellow_btn)
+                    }
+                    else if(al_loadOBJ[position].status=="Due") //RED
+                    {
+                        viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_red_btn)
+                        viewHolder.ll_top.setBackgroundColor(Color.parseColor("#e95758"))
+                    }
+                    else //GREEN
+                    {
+                        viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_approve_button)
+                    }
+
+                }
+
+            }
+            /*else if (al_loadOBJ[position].name == ("Bitcoin"))
+            {
+
+                holder.imv.setImageResource(R.drawable.ic_bitcoin_icon)
+                holder.loanName.text                          = "L-Pesa Coin"
+                holder.txt_loan_detailsOBJ.text               = "You don't have any L-Pesa Coin"
+                holder.txt_amount_first.text                  = al_loadOBJ[position].coin_cash
+                holder.btn_apply_loan.text                    ="Get Cash"
+
+                holder.view_divider.visibility                =View.GONE
+                holder.loanBtn.text                           ="Apply Now"
+                holder.ll_bottom.visibility                   =View.GONE
+                holder.btn_apply_loan.visibility              =View.VISIBLE
+                holder.txt_amount_first.visibility            =View.GONE
+                holder.txt_amount_second.visibility           =View.GONE
+                holder.ll_center.visibility                   =View.GONE
+
+
+            }*/
+        }
+
+
+    }
+
+    override fun getItemCount(): Int
+            = al_loadOBJ.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+    {
+
+        var recyclerView: RecyclerView.ViewHolder
+
+        var itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_dashboard_loan, parent, false)
+        recyclerView = SelectViewHolder(itemView)
+
+        return recyclerView
+    }
+
+    companion object
+    {
+        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+        {
+
+            val imv: ImageView                          = itemView.findViewById(R.id.loan_image)
+            val loanName : CommonTextRegular = itemView.findViewById(R.id.txt_loan_type)
+            val seekbarOBJ : DiscreteSeekBar = itemView.findViewById(R.id.seek_bar)
+            val loanBtn : Button                        = itemView.findViewById(R.id.btn_pay_now)
+            val txt_loan_detailsOBJ : CommonTextRegular          = itemView.findViewById(R.id.txt_loan_details)
+            val txt_amount_first : CommonTextRegular             = itemView.findViewById(R.id.txt_amount_first)
+            val txt_amount_second : CommonTextRegular            = itemView.findViewById(R.id.txt_amount_second)
+            val btn_apply_loan : Button                 = itemView.findViewById(R.id.btn_apply_loan)
+            val txt_MAX : CommonTextRegular                      = itemView.findViewById(R.id.txt_MAX)
+            val ll_bottom : LinearLayout                = itemView.findViewById(R.id.ll_bottom)
+            val ll_center : LinearLayout                = itemView.findViewById(R.id.ll_center)
+            val ll_top : LinearLayout                   = itemView.findViewById(R.id.ll_top)
+
+            val view_divider : View                     = itemView.findViewById(R.id.view_divider)
+            val view_vertical_divider : View            = itemView.findViewById(R.id.view_vertical_divider)
+
+
+        }
+
+    }
+
+}

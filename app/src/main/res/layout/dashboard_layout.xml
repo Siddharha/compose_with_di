@@ -138,8 +138,6 @@
                 </LinearLayout>
             </FrameLayout>
 
-
-
         </LinearLayout>
 
         <View
@@ -220,10 +218,64 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".20"/>
 
+    <LinearLayout
+        android:id="@+id/ll_banner"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@color/semi_white"
+        android:orientation="horizontal">
 
+        <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/add_banner"/>
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:contentDescription="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/_3sdp"
+            android:src="@drawable/ic_credit_score_icon"/>
+
+    </RelativeLayout>
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".20"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/loan_list"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4.65"
+        />
+
+    </LinearLayout>
+
 
 <!--<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

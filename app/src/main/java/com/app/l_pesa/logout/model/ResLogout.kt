@@ -1,7 +1,7 @@
 package com.app.l_pesa.logout.model
 
 import android.support.annotation.Keep
-import com.app.l_pesa.common.CommonStatus
+import com.app.l_pesa.common.CommonStatusModel
 
 /**
  * Created by Intellij Amiya on 3/2/19.
@@ -10,4 +10,4 @@ import com.app.l_pesa.common.CommonStatus
  * Kindly follow https://source.android.com/setup/code-style
  */
 @Keep
-data class ResLogout(val status: CommonStatus)
+data class ResLogout(val status: CommonStatusModel)

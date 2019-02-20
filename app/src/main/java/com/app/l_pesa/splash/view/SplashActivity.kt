@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AppCompatDelegate
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
@@ -29,11 +30,10 @@ import com.google.gson.JsonParser
 class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, ICallBackDashboard {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         initUI()
 
     }
@@ -80,6 +80,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
                 val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
                 val presenterLoginObj = PresenterLogin()
                 presenterLoginObj.doLogin(this@SplashActivity, jsonObject, this)
+
             }
             else
             {

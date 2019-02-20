@@ -1,7 +1,6 @@
 package com.app.l_pesa.dashboard.model
 
 import android.support.annotation.Keep
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 import java.util.ArrayList
@@ -15,99 +14,104 @@ import java.util.ArrayList
 class ResDashboard {
 
     @SerializedName("status")
-    @Expose
+   
     var status: Status? = null
     @SerializedName("data")
-    @Expose
+   
     var data: Data? = null
 
+    @Keep
     inner class Loan {
 
         @SerializedName("type")
-        @Expose
+       
         var type: String? = null
         @SerializedName("name")
-        @Expose
-        var name: String? = null
+       
+        var name: String = ""
         @SerializedName("status")
-        @Expose
-        var status: String? = null
+       
+        var status: String = ""
         @SerializedName("repay")
-        @Expose
+       
         var repay: Repay? = null
         @SerializedName("next_repay")
-        @Expose
+       
         var nextRepay: NextRepay? = null
 
     }
 
+    @Keep
     inner class NextRepay {
 
         @SerializedName("date")
-        @Expose
-        var date: String? = null
+       
+        var date: String = ""
         @SerializedName("amount")
-        @Expose
-        var amount: String? = null
+       
+        var amount: String = ""
         @SerializedName("left_days")
-        @Expose
-        var leftDays: Int? = null
+       
+        var leftDays: Int = 0
         @SerializedName("left_days_text")
-        @Expose
-        var leftDaysText: String? = null
+       
+        var leftDaysText: String = ""
 
     }
 
+    @Keep
     inner class Repay {
 
         @SerializedName("amount")
-        @Expose
-        var amount: String? = null
+       
+        var amount: String = ""
         @SerializedName("left")
-        @Expose
-        var left: Int? = null
+       
+        var left: Int = 0
         @SerializedName("done")
-        @Expose
-        var done: Int? = null
+       
+        var done: Int = 0
         @SerializedName("total")
-        @Expose
-        var total: Int? = null
+       
+        var total: Int = 0
 
     }
 
+    @Keep
     inner class Status {
 
         @SerializedName("statusCode")
-        @Expose
+       
         var statusCode: Int? = null
         @SerializedName("isSuccess")
-        @Expose
+       
         var isSuccess: Boolean? = null
         @SerializedName("message")
-        @Expose
-        var message: String? = null
+       
+        var message: String = ""
 
     }
 
+    @Keep
     inner class Data {
 
         @SerializedName("fixed_deposit_amount")
-        @Expose
-        var fixedDepositAmount: String? = null
+       
+        var fixedDepositAmount: String = ""
         @SerializedName("savings_amount")
-        @Expose
-        var savingsAmount: String? = null
+       
+        var savingsAmount: String = ""
         @SerializedName("credit_score")
-        @Expose
+       
         var creditScore: Int = 0
         @SerializedName("max_credit_score")
-        @Expose
+       
         var maxCreditScore: Int = 0
         @SerializedName("min_credit_score")
-        @Expose
+       
         var minCreditScore: Int = 0
         @SerializedName("loans")
-        @Expose
+       
         var loans: ArrayList<Loan>? = null
 
     }

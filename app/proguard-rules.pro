@@ -33,6 +33,23 @@
 
 #-dontwarn android.support.**
 
+-keep class android.support.v4.app.** { *; }
+-keep interface android.support.v4.app.** { *; }
+-dontwarn android.support.**
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class com.app.l_pesa.common.** { *; }
+-keep class com.app.l_pesa.login.model.** { *; }
+-keepclassmembers class com.app.l_pesa.login.model.** { *; }
+-keep class com.app.l_pesa.splash.model.** { *; }
+
+
+
+
 
 
 

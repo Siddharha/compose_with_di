@@ -1,7 +1,7 @@
 package com.app.l_pesa.password.model
 
 import android.support.annotation.Keep
-import com.app.l_pesa.common.CommonStatus
+import com.app.l_pesa.common.CommonStatusModel
 
 
 /**
@@ -10,4 +10,4 @@ import com.app.l_pesa.common.CommonStatus
  * Kindly follow https://source.android.com/setup/code-style
  */
 @Keep
-data class ResChangePassword(val status: CommonStatus)
+data class ResChangePassword(val status: CommonStatusModel)

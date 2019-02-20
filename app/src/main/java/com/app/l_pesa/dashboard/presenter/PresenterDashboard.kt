@@ -32,7 +32,7 @@ class PresenterDashboard {
 
                     try
                     {
-                        if(response.status!!.isSuccess!! && response.data!!.loans!!.size>0)
+                        if(response.status!!.isSuccess!!)
                         {
 
                             callBackOBJ.onSuccessDashboard(response.data!!)

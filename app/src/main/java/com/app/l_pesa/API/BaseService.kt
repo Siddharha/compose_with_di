@@ -24,7 +24,7 @@ interface BaseService{
     fun getCountryList(): Observable<ResModelCountry>
 
     @POST("user/login")
-    fun doLogin(@Body  request: JsonObject): Observable<ResLogin>
+    fun doLogin(@Body request: JsonObject): Observable<ResLogin>
 
     @GET("user/dashboard")
     fun getDashboard(): Observable<ResDashboard>

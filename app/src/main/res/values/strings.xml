@@ -107,6 +107,11 @@
     <!--Dashboard-->
 
     <string name="your_credit_score">Your L-Pesa Credit Score</string>
+    <string name="apply_loan">Apply Loan</string>
+    <string name="business_loan">Business Loan</string>
+    <string name="current_loan">Current Loan</string>
+    <string name="you_do_not_have_business_loan">You don\'t have any Business Loan</string>
+    <string name="you_do_not_have_current_loan">You don\'t have any Current Loan</string>
 
 
 </resources>

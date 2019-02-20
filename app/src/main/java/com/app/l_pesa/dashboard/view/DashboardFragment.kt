@@ -1,5 +1,7 @@
 package com.app.l_pesa.dashboard.view
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,11 +15,15 @@ import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.dashboard_layout.*
+import com.app.l_pesa.R.id.view
+import android.opengl.ETC1.getHeight
+import android.support.v7.widget.LinearLayoutManager
+import android.view.animation.TranslateAnimation
+import android.widget.LinearLayout
+import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 
 
 class DashboardFragment: Fragment(), ICallBackDashboard {
-
-
 
 
     companion object {
@@ -32,8 +38,38 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         swipeRefresh()
+        initUI()
         initData()
+    }
+
+    private fun initUI()
+    {
+        loan_list.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+        imgClose.setOnClickListener {
+            ll_banner.animate()
+                    ?.translationY(ll_banner.height.toFloat())
+                    ?.alpha(0.0f)
+                    ?.setDuration(500)
+                    ?.setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationEnd(animation: Animator) {
+                            super.onAnimationEnd(animation)
+                            ll_banner.visibility = View.GONE
+
+                            val animate = TranslateAnimation(
+                                    0f, // fromXDelta
+                                    0f, // toXDelta
+                                    loan_list.height.toFloat(), // fromYDelta
+                                    0f)                // toYDelta
+                            animate.duration = 500
+                            animate.fillAfter = true
+                            loan_list.startAnimation(animate)
+                        }
+                    })
+
+
+        }
     }
 
     private fun swipeRefresh()
@@ -55,10 +91,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
         {
             setDashBoard(dashBoard)
         }
-        else
-        {
-            loadDashboard()
-        }
+
 
 
     }
@@ -110,6 +143,14 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
             seekBar.isEnabled       = false
 
         })
+
+        if(dashBoard.loans!!.size>0)
+        {
+
+            val adapterDashBoard        = LoanListAdapter(dashBoard.loans!!,activity)
+            loan_list.adapter           = adapterDashBoard
+            adapterDashBoard.notifyDataSetChanged()
+        }
 
     }
 }

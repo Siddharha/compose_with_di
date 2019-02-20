@@ -1,7 +1,7 @@
 package com.app.l_pesa.registration.model
 
 import android.support.annotation.Keep
-import com.app.l_pesa.common.CommonStatus
+import com.app.l_pesa.common.CommonStatusModel
 
 
 /**
@@ -11,7 +11,7 @@ import com.app.l_pesa.common.CommonStatus
  */
 
 @Keep
-data class ResRegistrationOne(val status: CommonStatus, val data: RegistrationData)
+data class ResRegistrationOne(val status: CommonStatusModel, val data: RegistrationData)
 @Keep
 data class RegistrationData(val access_token:String)
 
