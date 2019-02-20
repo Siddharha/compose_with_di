@@ -104,7 +104,9 @@
     <string name="personal_info">Personal Information</string>
 
 
+    <!--Dashboard-->
 
+    <string name="your_credit_score">Your L-Pesa Credit Score</string>
 
 
 </resources>

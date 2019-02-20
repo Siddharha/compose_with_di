@@ -99,13 +99,13 @@ class ResDashboard {
         var savingsAmount: String? = null
         @SerializedName("credit_score")
         @Expose
-        var creditScore: Int? = null
+        var creditScore: Int = 0
         @SerializedName("max_credit_score")
         @Expose
-        var maxCreditScore: Int? = null
+        var maxCreditScore: Int = 0
         @SerializedName("min_credit_score")
         @Expose
-        var minCreditScore: Int? = null
+        var minCreditScore: Int = 0
         @SerializedName("loans")
         @Expose
         var loans: ArrayList<Loan>? = null

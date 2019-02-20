@@ -81,20 +81,36 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
     private fun setDashBoard(dashBoard: ResDashboard.Data)
     {
 
-        left_header_txt.text=dashBoard.fixedDepositAmount
-        right_header_txt.text=dashBoard.savingsAmount
+        setData(dashBoard)
     }
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
 
-       // swipeRefreshLayout.isRefreshing = false
-        //left_header_txt.text=data.fixedDepositAmount
-        //right_header_txt.text=data.savingsAmount
+        setData(data)
     }
 
     override fun onFailureDashboard(jsonMessage: String) {
 
        // swipeRefreshLayout.isRefreshing = false
+    }
+
+    private fun setData(dashBoard: ResDashboard.Data)
+    {
+        val middleVal       = dashBoard.maxCreditScore /2
+        left_header_txt.text    = dashBoard.fixedDepositAmount
+        right_header_txt.text   = dashBoard.savingsAmount
+        txt_start.text          = dashBoard.minCreditScore.toString()
+        txt_middle.text         = middleVal.toString()
+        txt_max.text            = dashBoard.maxCreditScore.toString()
+
+
+        seekBar.post(Runnable {
+            seekBar.max             = dashBoard.maxCreditScore
+            seekBar.progress        = dashBoard.creditScore
+            seekBar.isEnabled       = false
+
+        })
+
     }
 }
 
