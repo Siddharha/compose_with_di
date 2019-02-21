@@ -19,10 +19,20 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
 import com.app.l_pesa.dashboard.adapter.LoanListAdapter
+import com.app.l_pesa.dashboard.model.SeekBarProgress
 
 
 class DashboardFragment: Fragment(), ICallBackDashboard {
 
+
+    private val totalSpan = 99f
+    private val redSpan = 33f
+    private val blueSpan = 33f
+    private val greenSpan = 33f
+
+
+    private var progressItemList=ArrayList<SeekBarProgress>()
+    lateinit var  mProgressItem:SeekBarProgress
 
     companion object {
         fun newInstance(): Fragment {
@@ -68,6 +78,32 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
 
 
         }
+
+        initSeekBar()
+    }
+
+    private fun initSeekBar()
+    {
+        progressItemList = ArrayList()
+
+        mProgressItem = SeekBarProgress()
+        mProgressItem.progressItemPercentage = redSpan / totalSpan * 100
+        mProgressItem.color = R.color.colorRed
+        progressItemList.add(mProgressItem)
+
+        mProgressItem = SeekBarProgress()
+        mProgressItem.progressItemPercentage = blueSpan / totalSpan * 100
+        mProgressItem.color = R.color.colorBlack
+        progressItemList.add(mProgressItem)
+
+        mProgressItem = SeekBarProgress()
+        mProgressItem.progressItemPercentage = greenSpan / totalSpan * 100
+        mProgressItem.color = R.color.colorApp
+        progressItemList.add(mProgressItem)
+
+        seekBar.initData(progressItemList)
+        seekBar.invalidate()
+
     }
 
     private fun swipeRefresh()

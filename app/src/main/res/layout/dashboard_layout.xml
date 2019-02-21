@@ -170,17 +170,16 @@
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textColor="@color/color_gray_text"/>
 
-            <SeekBar
-                android:id="@+id/seekBar"
-                android:layout_centerInParent="true"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_15sdp"
-                android:thumb="@drawable/ic_pointer"
-                android:background="@drawable/progressbar_background"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                android:thumbOffset="12dp"
-                />
+                <com.app.l_pesa.common.CustomSeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    android:thumb="@drawable/ic_pointer"
+                    />
+
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txt_max"
