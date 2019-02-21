@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">L-Pesa</string>
     <string name="starter_loan">$ Starter Loan</string>
     <string name="sign_in">Sign In</string>
@@ -106,7 +106,7 @@
 
     <!--Dashboard-->
 
-    <string name="your_credit_score">Your L-Pesa Credit Score</string>
+    <string name="your_credit_score" tools:ignore="ExtraTranslation">Your L-Pesa Credit Score</string>
     <string name="apply_loan">Apply Loan</string>
     <string name="business_loan">Business Loan</string>
     <string name="current_loan">Current Loan</string>

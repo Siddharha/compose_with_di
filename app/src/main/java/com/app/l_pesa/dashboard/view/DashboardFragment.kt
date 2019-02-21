@@ -15,8 +15,6 @@ import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.dashboard_layout.*
-import com.app.l_pesa.R.id.view
-import android.opengl.ETC1.getHeight
 import android.support.v7.widget.LinearLayoutManager
 import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
@@ -137,12 +135,12 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
         txt_max.text            = dashBoard.maxCreditScore.toString()
 
 
-        seekBar.post(Runnable {
+        seekBar.post {
             seekBar.max             = dashBoard.maxCreditScore
             seekBar.progress        = dashBoard.creditScore
             seekBar.isEnabled       = false
 
-        })
+        }
 
         if(dashBoard.loans!!.size>0)
         {

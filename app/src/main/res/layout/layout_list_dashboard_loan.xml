@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_height="@dimen/_75sdp"
+    android:layout_marginBottom="@dimen/_3sdp"
     android:id="@+id/ll_root"
     android:orientation="vertical"
+    android:background="@drawable/bg_white_view"
     >
 
     <LinearLayout
@@ -13,10 +14,7 @@
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="5dp"
+
 
         >
         <RelativeLayout
@@ -27,10 +25,12 @@
 
             >
             <ImageView
+                android:contentDescription="@string/app_name"
                 android:id="@+id/loan_image"
                 app:srcCompat="@drawable/ic_dashboard"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp" />
+                android:scaleType="fitXY"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp" />
 
         </RelativeLayout>
 
@@ -39,7 +39,8 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:gravity="center"
-            android:paddingLeft="5dp"
+            android:paddingStart="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_1sdp"
 
             >
 
@@ -48,7 +49,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-
                 android:textSize="@dimen/_13sdp"
                 android:maxLines="1"/>
 
@@ -58,10 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:text=""
                 android:textColor="@color/semi_light_black"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_11sdp" />
 
 
         </RelativeLayout>
@@ -69,8 +69,10 @@
         <View
             android:id="@+id/view_vertical_divider"
             android:layout_height="match_parent"
-            android:layout_width="1dp"
-            android:background="#d9d9d9"
+            android:layout_width="@dimen/_1sdp"
+            android:background="@color/colorGrey"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
 
             />
 
@@ -79,7 +81,8 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:gravity="center"
-            android:paddingLeft="3dp"
+            android:paddingStart="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_1sdp"
 
             >
 
@@ -89,18 +92,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_12sdp"
                 android:maxLines="1"/>
 
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/btn_apply_loan"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:visibility="gone"
-                android:layout_width="85dp"
-                android:layout_height="28dp"
                 android:gravity="center"
                 android:textSize="@dimen/_10sdp"
-
                 android:text="@string/apply_loan"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
@@ -114,8 +117,8 @@
                 android:layout_below="@+id/txt_amount_first"
                 android:textColor="@color/colorRed"
                 android:text=""
-                android:layout_marginTop="3dp"
-                android:textSize="@dimen/_11sdp" />
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
 
@@ -125,13 +128,11 @@
     <LinearLayout
         android:id="@+id/ll_center"
         android:layout_below="@+id/ll_top"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/_3sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right"
+        android:gravity="end"
         >
 
         <RelativeLayout
@@ -146,18 +147,20 @@
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:gravity="center|top"
-            android:paddingLeft="3dp"
+            android:paddingStart="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_1sdp"
 
 
             >
 
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/btn_pay_now"
-                android:layout_width="85dp"
-                android:layout_height="28dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
                 android:gravity="center"
                 android:textSize="@dimen/_10sdp"
-
                 android:text="@string/apply_loan"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
@@ -167,84 +170,6 @@
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/view_divider"
-        android:layout_below="@+id/ll_center"
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:background="#d9d9d9"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="7dp"
-
-        />
-
-    <LinearLayout
-        android:id="@+id/ll_bottom"
-        android:layout_below="@+id/view_divider"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="7dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp"
-        >
-
-        <com.app.l_pesa.common.CommonTextRegular
-            android:layout_marginLeft="5dp"
-            android:id="@+id/txt_bottom_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_13sdp"
-            android:textColor="@color/colorSemiBlack"
-          />
-
-        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-            android:id="@+id/seek_bar"
-            android:layout_marginTop="3dp"
-            android:layout_centerInParent="true"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            app:dsb_trackHeight="4dp"
-            app:dsb_min="0"
-            app:dsb_scrubberHeight="4dp"
-            app:dsb_trackColor="#ff2f22"
-            app:dsb_progressColor="#01bfa5"
-
-            />
-
-        <RelativeLayout
-
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_MIN"
-                android:text="0"
-                android:gravity="start"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/semi_light_black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_MAX"
-                android:gravity="end"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/semi_light_black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-        </RelativeLayout>
-
-
-
-    </LinearLayout>
 
 
 </RelativeLayout>
