@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import android.support.v4.view.ViewPager
 import android.support.design.widget.TabLayout
-import com.app.l_pesa.R.id.tabLayout
 import com.app.l_pesa.loanplan.model.LoanTabPager
 import android.graphics.Typeface
 import android.widget.TextView
-import com.app.l_pesa.R.id.tabLayout
-
 
 
 
