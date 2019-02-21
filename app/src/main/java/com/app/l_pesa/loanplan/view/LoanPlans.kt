@@ -20,14 +20,14 @@ import android.widget.TextView
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class LoanPlansFragment : Fragment() {
+class LoanPlans : Fragment() {
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
 
     companion object {
         fun newInstance(): Fragment {
-            return LoanPlansFragment()
+            return LoanPlans()
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

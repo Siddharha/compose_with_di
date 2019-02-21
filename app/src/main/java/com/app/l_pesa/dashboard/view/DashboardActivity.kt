@@ -20,7 +20,7 @@ import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.widget.TextView
 import com.app.l_pesa.common.*
-import com.app.l_pesa.loanplan.view.LoanPlansFragment
+import com.app.l_pesa.loanplan.view.LoanPlans
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
@@ -182,7 +182,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_loan -> {
                 toolbar.title =resources.getString(R.string.nav_item_loan)
-                navigateToFragment(LoanPlansFragment.newInstance())
+                navigateToFragment(LoanPlans.newInstance())
             }
             R.id.action_points -> {
                 toolbar.title =resources.getString(R.string.nav_item_points)

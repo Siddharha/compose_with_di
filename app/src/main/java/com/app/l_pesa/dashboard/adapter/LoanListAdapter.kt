@@ -68,7 +68,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.loanBtn.text                             =al_loadOBJ[position].status
                     viewHolder.txt_amount_first.text                    =al_loadOBJ[position].repay!!.amount
                     viewHolder.txt_amount_second.text                   =al_loadOBJ[position].nextRepay!!.amount
-                     viewHolder.view_vertical_divider.visibility         =View.INVISIBLE
+                    viewHolder.view_vertical_divider.visibility         =View.INVISIBLE
 
                     when {
                         al_loadOBJ[position].status=="Pending" //YELLOW
