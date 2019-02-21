@@ -6,7 +6,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.loanplan.adapter.BusinessLoanPlanAdapter
 import com.app.l_pesa.loanplan.adapter.CurrentLoanPlanAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
 import com.app.l_pesa.loanplan.model.ResLoan
@@ -37,7 +39,7 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        loanLoan()
     }
 
     private fun loanLoan()
@@ -50,16 +52,18 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onSuccessLoanPlans(loanHistory: ArrayList<ResLoan.LoanHistory>) {
 
-        val countryAdapter       = CurrentLoanPlanAdapter(activity!!, loanHistory)
+        val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, loanHistory)
         rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rvLoan.adapter           = countryAdapter
+        rvLoan.adapter           = businessLoanAdapter
     }
 
     override fun onEmptyLoanPlans() {
 
+        Toast.makeText(activity,"",Toast.LENGTH_SHORT).show()
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
 
+        Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 }

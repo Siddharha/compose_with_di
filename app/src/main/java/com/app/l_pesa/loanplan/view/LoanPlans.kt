@@ -20,7 +20,8 @@ import android.widget.TextView
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class LoanPlans : Fragment() {
+class LoanPlans : Fragment(),TabLayout.OnTabSelectedListener {
+
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
@@ -32,8 +33,7 @@ class LoanPlans : Fragment() {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_loan_plan, container,false)
-        return view
+        return inflater.inflate(R.layout.fragment_loan_plan, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +53,20 @@ class LoanPlans : Fragment() {
         val adapter = LoanTabPager(childFragmentManager, tabLayout!!.tabCount)
         viewPager!!.adapter = adapter
         changeTabsFont()
+        tabLayout!!.addOnTabSelectedListener(this)
+    }
+
+    override fun onTabReselected(p0: TabLayout.Tab?) {
+
+    }
+
+    override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+    }
+
+    override fun onTabSelected(p0: TabLayout.Tab?) {
+        viewPager!!.currentItem = p0!!.position
+
     }
 
     private fun changeTabsFont() {

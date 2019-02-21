@@ -50,9 +50,9 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onSuccessLoanPlans(loanHistory: ArrayList<ResLoan.LoanHistory>) {
 
-       val countryAdapter        = CurrentLoanPlanAdapter(activity!!, loanHistory)
+       val currentLoanAdapter    = CurrentLoanPlanAdapter(activity!!, loanHistory)
         rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rvLoan.adapter           = countryAdapter
+        rvLoan.adapter           = currentLoanAdapter
     }
 
     override fun onEmptyLoanPlans() {
