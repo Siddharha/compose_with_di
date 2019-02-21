@@ -30,9 +30,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
     private val blueSpan = 33f
     private val greenSpan = 33f
 
-
     private var progressItemList=ArrayList<SeekBarProgress>()
-    lateinit var  mProgressItem:SeekBarProgress
+    private lateinit var  mProgressItem:SeekBarProgress
 
     companion object {
         fun newInstance(): Fragment {

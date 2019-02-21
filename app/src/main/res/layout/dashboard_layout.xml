@@ -244,7 +244,7 @@
             android:contentDescription="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
+            android:background="@color/colorApp"
             />
 
         <ImageView
@@ -255,7 +255,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/ic_credit_score_icon"/>
+            android:src="@drawable/ic_white_cross"/>
 
     </RelativeLayout>
 

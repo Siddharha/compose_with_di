@@ -95,7 +95,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.btn_apply_loan.setBackgroundResource(R.drawable.ic_approve_button)
                     viewHolder.btn_apply_loan.text                    =al_loadOBJ[position].status
                     viewHolder.txt_loan_detailsOBJ.text               =contextOBJ.resources.getString(R.string.you_do_not_have_current_loan)
-                     viewHolder.btn_apply_loan.visibility              =View.VISIBLE
+                    viewHolder.btn_apply_loan.visibility              =View.VISIBLE
                     viewHolder.txt_amount_first.visibility            =View.GONE
                     viewHolder.txt_amount_second.visibility           =View.GONE
                     viewHolder.ll_center.visibility                   =View.GONE
@@ -124,42 +124,36 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.txt_amount_second.text =al_loadOBJ[position].nextRepay!!.amount
                     viewHolder.view_vertical_divider.visibility =View.INVISIBLE
 
-                    if(al_loadOBJ[position].status=="Pending") //YELLOW
-                    {
-                        viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_yellow_btn)
-                    }
-                    else if(al_loadOBJ[position].status=="Due") //RED
-                    {
-                        viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_red_btn)
-                        viewHolder.ll_top.setBackgroundColor(Color.parseColor("#e95758"))
-                    }
-                    else //GREEN
-                    {
-                        viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_approve_button)
+                    when {
+                        al_loadOBJ[position].status=="Pending" //YELLOW
+                        -> viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_yellow_btn)
+                        al_loadOBJ[position].status=="Due" //RED
+                        -> {
+                            viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_red_btn)
+                            viewHolder.ll_top.setBackgroundColor(Color.parseColor("#e95758"))
+                        }
+                        else //GREEN
+                        -> viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_approve_button)
                     }
 
                 }
 
             }
-            /*else if (al_loadOBJ[position].name == ("Bitcoin"))
+           else if (al_loadOBJ[position].name == ("Bitcoin"))
             {
 
-                holder.imv.setImageResource(R.drawable.ic_bitcoin_icon)
-                holder.loanName.text                          = "L-Pesa Coin"
-                holder.txt_loan_detailsOBJ.text               = "You don't have any L-Pesa Coin"
-                holder.txt_amount_first.text                  = al_loadOBJ[position].coin_cash
-                holder.btn_apply_loan.text                    ="Get Cash"
-
-                holder.view_divider.visibility                =View.GONE
-                holder.loanBtn.text                           ="Apply Now"
-                holder.ll_bottom.visibility                   =View.GONE
-                holder.btn_apply_loan.visibility              =View.VISIBLE
-                holder.txt_amount_first.visibility            =View.GONE
-                holder.txt_amount_second.visibility           =View.GONE
-                holder.ll_center.visibility                   =View.GONE
+                viewHolder.imgLoan.setImageResource(R.drawable.menu_lpk_icon)
+                viewHolder.loanName.text                          = contextOBJ!!.resources.getString(R.string.cash_out_lpk)
+                viewHolder.txt_loan_detailsOBJ.text               ="You have 500 LPK"
+                viewHolder.btn_apply_loan.visibility              =View.VISIBLE
+                viewHolder.btn_apply_loan.text                    =contextOBJ.resources.getString(R.string.lets_do)
+                viewHolder.btn_apply_loan.setBackgroundResource(R.drawable.ic_approve_button)
+                viewHolder.txt_amount_first.visibility            =View.GONE
+                viewHolder.txt_amount_second.visibility           =View.GONE
+                viewHolder.ll_center.visibility                   =View.GONE
 
 
-            }*/
+            }
         }
 
 
@@ -171,9 +165,8 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     {
 
-        var recyclerView: RecyclerView.ViewHolder
-
-        var itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_dashboard_loan, parent, false)
+        val recyclerView: RecyclerView.ViewHolder
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_dashboard_loan, parent, false)
         recyclerView = SelectViewHolder(itemView)
 
         return recyclerView
