@@ -102,7 +102,19 @@
     <string name="profile_information">Profile Information</string>
     <string name="contact_no">+972544682519</string>
     <string name="personal_info">Personal Information</string>
-
+    <string name="date_of_birth">Date Of Birth:</string>
+    <string name="gender">Gender:</string>
+    <string name="marital_status">Marital Status:</string>
+    <string name="mother_maiden_name">Mother\'s Maiden Name:</string>
+    <string name="id_info">ID Information</string>
+    <string name="contact_info">Contact Information</string>
+    <string name="employment_info">Employment Information</string>
+    <string name="type_of_employer">Type of Employer:</string>
+    <string name="name_of_employer">Name of Employer:</string>
+    <string name="department">Department:</string>
+    <string name="occupation">Occupation/Position:</string>
+    <string name="employees_id_no">Employee\'s ID Number:</string>
+    <string name="city">City/Town:</string>
 
 
 
