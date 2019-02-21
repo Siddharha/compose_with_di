@@ -7,7 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+    </style>
 
+    <style name="styleTabLayout" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
