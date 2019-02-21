@@ -27,7 +27,6 @@
             <ImageView
                 android:contentDescription="@string/app_name"
                 android:id="@+id/loan_image"
-                app:srcCompat="@drawable/ic_dashboard"
                 android:scaleType="fitXY"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp" />
@@ -98,7 +97,7 @@
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/btn_apply_loan"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_height="@dimen/_29sdp"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:visibility="gone"
@@ -156,7 +155,7 @@
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/btn_pay_now"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_height="@dimen/_29sdp"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:gravity="center"
