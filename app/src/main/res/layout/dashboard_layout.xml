@@ -174,10 +174,12 @@
                 android:id="@+id/seekBar"
                 android:layout_centerInParent="true"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_10sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:thumb="@drawable/ic_pointer"
                 android:background="@drawable/progressbar_background"
-
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:thumbOffset="12dp"
                 />
 
             <com.app.l_pesa.common.CommonTextRegular
@@ -186,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/seekBar"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/color_gray_text"
                 android:layout_marginEnd="@dimen/_5sdp"
@@ -198,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/seekBar"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/color_gray_text"
                 android:layout_marginStart="@dimen/_5sdp"
@@ -209,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/seekBar"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/color_gray_text"
                 />
