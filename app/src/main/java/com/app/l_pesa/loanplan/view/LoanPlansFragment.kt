@@ -10,6 +10,11 @@ import android.support.v4.view.ViewPager
 import android.support.design.widget.TabLayout
 import com.app.l_pesa.R.id.tabLayout
 import com.app.l_pesa.loanplan.model.LoanTabPager
+import android.graphics.Typeface
+import android.widget.TextView
+import com.app.l_pesa.R.id.tabLayout
+
+
 
 
 /**
@@ -50,5 +55,22 @@ class LoanPlansFragment : Fragment() {
 
         val adapter = LoanTabPager(childFragmentManager, tabLayout!!.tabCount)
         viewPager!!.adapter = adapter
+        changeTabsFont()
+    }
+
+    private fun changeTabsFont() {
+        val vg = tabLayout!!.getChildAt(0) as ViewGroup
+        val tabsCount = vg.childCount
+        for (j in 0 until tabsCount) {
+            val vgTab = vg.getChildAt(j) as ViewGroup
+            val tabChildsCount = vgTab.childCount
+            for (i in 0 until tabChildsCount) {
+                val tabViewChild = vgTab.getChildAt(i)
+                if (tabViewChild is TextView) {
+                    val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+                    tabViewChild.typeface = face
+                }
+            }
+        }
     }
 }
