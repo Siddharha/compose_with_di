@@ -2,15 +2,17 @@ package com.app.l_pesa.loanplan.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.loanplan.adapter.CurrentLoanPlanAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
 import com.app.l_pesa.loanplan.model.ResLoan
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
 /**
@@ -29,8 +31,7 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_loan_plan_list, container,false)
-        return view
+        return inflater.inflate(R.layout.fragment_loan_plan_list, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +50,9 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onSuccessLoanPlans(loanHistory: ArrayList<ResLoan.LoanHistory>) {
 
-        Toast.makeText(activity,loanHistory.size.toString(),Toast.LENGTH_SHORT).show()
+       val countryAdapter        = CurrentLoanPlanAdapter(activity!!, loanHistory)
+        rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        rvLoan.adapter           = countryAdapter
     }
 
     override fun onEmptyLoanPlans() {
