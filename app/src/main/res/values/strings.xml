@@ -115,8 +115,10 @@
     <string name="occupation">Occupation/Position:</string>
     <string name="employees_id_no">Employee\'s ID Number:</string>
     <string name="city">City/Town:</string>
-
-
-
+    <string name="business_info">Business &amp; Personal Information</string>
+    <string name="business_name">Business Name:</string>
+    <string name="tin_number">TIN Number:</string>
+    <string name="id_type">ID Type:</string>
+    <string name="id_number">ID Number:</string>
 
 </resources>
