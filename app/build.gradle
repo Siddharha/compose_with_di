@@ -4,27 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    /*signingConfigs {
-        config {
-            keyAlias 'android'
-            keyPassword 'android'
-            storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/app/src/JKS/lpesa.jks')
-            storePassword 'android'
-        }
-    }*/
-    /* signingConfigs {
-         config {
-             keyAlias 'android'
-             keyPassword 'android'
-             storeFile file('E:/Amiyo/L_Pesa_Intellij/l-pesa/app/KEY/lpesa.jks')
-             storePassword 'android'
-         }
-     }*/
     signingConfigs {
         config {
             keyAlias 'android'
             keyPassword 'android'
-            storeFile file('/home/kritika/AndroidStudioProjects/L-Pesa/l-pesa/app/KEY/lpesa.jks')
+            //storeFile file('E:/Amiyo/L_Pesa_Intellij/l-pesa/app/KEY/lpesa.jks')
+            storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
             storePassword 'android'
         }
     }
@@ -33,6 +18,7 @@ android {
         applicationId "com.app.l_pesa"
         minSdkVersion 21
         targetSdkVersion 28
+        buildToolsVersion "28.0.3"
         versionCode 1
         versionName "1.0"
 
@@ -43,13 +29,19 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
-            //proguardFile '/home/amiyo/AndroidProject/Office/L-Pesa Intellij/app/proguard-rules.pro'
-            // signingConfig signingConfigs.config
-            //proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
             signingConfig signingConfigs.config
+           // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
+            proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
         }
         build {
+           // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.config
+           // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
+            proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
         }
     }
     productFlavors {

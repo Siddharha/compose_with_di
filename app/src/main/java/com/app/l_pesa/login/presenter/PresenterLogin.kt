@@ -22,8 +22,7 @@ class PresenterLogin {
 
     fun doLogin(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogin)
     {
-       RetrofitHelper.getRetrofit(BaseService::class.java).doLogin(jsonRequest)
-
+        RetrofitHelper.getRetrofit(BaseService::class.java).doLogin(jsonRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -33,6 +32,7 @@ class PresenterLogin {
 
                     try
                     {
+
                       if(response.status.isSuccess)
                       {
 

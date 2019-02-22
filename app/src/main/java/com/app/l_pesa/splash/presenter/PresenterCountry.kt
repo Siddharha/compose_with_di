@@ -23,7 +23,7 @@ class PresenterCountry{
     @SuppressLint("CheckResult")
     fun getCountry(contextOBJ: Context, callBackOBJ: ICallBackCountry)
     {
-        RetrofitHelper.getRetrofit(BaseService::class.java).countryList()
+        RetrofitHelper.getRetrofit(BaseService::class.java).getCountryList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->

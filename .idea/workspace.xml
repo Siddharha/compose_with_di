@@ -9,8 +9,39 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="332b5284-1a8d-4138-b104-5290cb485099" name="Default Changelist" comment="Implements first card of 'My Profile'">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_tin_no_icon.xml" afterDir="false" />
+    <list default="true" id="332b5284-1a8d-4138-b104-5290cb485099" name="Default Changelist" comment="Implements 'Business Information' card of 'My Profile'">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CustomSeekBar.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/LockViewPager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/inter/ICallBackDashboard.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/model/ResDashboard.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/model/SeekBarProgress.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/presenter/PresenterDashboard.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/BusinessLoanPlanAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/CurrentLoanPlanAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/inter/ICallBackLoanPlans.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/LoanTabPager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/ResLoan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/presenter/PresenterLoanPlans.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlans.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bg_green_circle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_approve_button.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_bitcoin_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_business_loan_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_current_credit_score.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_current_loan_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_my_fixed_deposit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_my_savings_account.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_pointer.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_red_btn.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_white_cross.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_yellow_btn.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_plan.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_plan_list.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_loan_list.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -20,9 +51,35 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/proguard-rules.pro" beforeDir="false" afterPath="$PROJECT_DIR$/app/proguard-rules.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CommonStatus.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/model/ResRegistrationOne.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CommonStatusModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CommonStatusModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/NavigationDrawerAdapter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/model/ResLogin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/model/ResLogin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/presenter/PresenterLogin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/presenter/PresenterLogin.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/logout/model/ResLogout.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/logout/model/ResLogout.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/model/ResChangePassword.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/model/ResChangePassword.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/model/ResForgetPassword.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/model/ResForgetPassword.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/splash/presenter/PresenterCountry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/splash/presenter/PresenterCountry.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/splash/view/SplashActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/splash/view/SplashActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dashboard_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/nav_drawer_row.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/proguard-files/proguard-android-optimize.txt-3.2.1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/proguard-files/proguard-android.txt-3.2.1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/proguard-files/proguard-defaults.txt-3.2.1" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,32 +113,36 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gradle" value="1" />
-          <entry key="kt" value="2" />
+          <entry key="gradle" value="2" />
+          <entry key="kt" value="13" />
           <entry key="png" value="1" />
-          <entry key="xml" value="42" />
+          <entry key="pro" value="1" />
+          <entry key="xml" value="50" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Groovy" value="1" />
+          <entry key="Groovy" value="2" />
           <entry key="Image" value="1" />
-          <entry key="Kotlin" value="2" />
-          <entry key="XML" value="42" />
+          <entry key="Kotlin" value="13" />
+          <entry key="ProGuard File" value="1" />
+          <entry key="XML" value="50" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gradle" value="10" />
-          <entry key="txt" value="164" />
-          <entry key="xml" value="4304" />
+          <entry key="gradle" value="18" />
+          <entry key="kt" value="30" />
+          <entry key="txt" value="195" />
+          <entry key="xml" value="4350" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Groovy" value="10" />
-          <entry key="PLAIN_TEXT" value="164" />
-          <entry key="XML" value="4304" />
+          <entry key="Groovy" value="18" />
+          <entry key="Kotlin" value="30" />
+          <entry key="PLAIN_TEXT" value="195" />
+          <entry key="XML" value="4350" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -94,109 +155,75 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
-          <provider editor-type-id="android-designer2" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
+            <state relative-caret-position="114">
+              <caret line="198" column="39" selection-start-line="198" selection-start-column="39" selection-end-line="198" selection-end-column="39" />
               <folding>
-                <element signature="e#679#694#0" expanded="true" />
-                <element signature="e#732#746#0" expanded="true" />
-                <element signature="e#786#801#0" expanded="true" />
-                <element signature="e#1225#1240#0" expanded="true" />
-                <element signature="e#1286#1300#0" expanded="true" />
-                <element signature="e#1346#1360#0" expanded="true" />
-                <element signature="e#1409#1423#0" expanded="true" />
-                <element signature="e#1457#1486#0" expanded="true" />
-                <element signature="e#1582#1597#0" expanded="true" />
-                <element signature="e#2188#2203#0" expanded="true" />
-                <element signature="e#2249#2264#0" expanded="true" />
-                <element signature="e#5107#5122#0" expanded="true" />
-                <element signature="e#5168#5182#0" expanded="true" />
-                <element signature="e#5231#5245#0" expanded="true" />
-                <element signature="e#28926#28940#0" expanded="true" />
-                <element signature="e#30407#30422#0" expanded="true" />
-                <element signature="e#31817#31832#0" expanded="true" />
-                <element signature="e#31870#31885#0" expanded="true" />
-                <element signature="e#31925#31940#0" expanded="true" />
-                <element signature="e#34597#34612#0" expanded="true" />
-                <element signature="e#34658#34673#0" expanded="true" />
-                <element signature="e#35208#35222#0" expanded="true" />
-                <element signature="e#35268#35282#0" expanded="true" />
-                <element signature="e#36218#36232#0" expanded="true" />
-                <element signature="e#36773#36787#0" expanded="true" />
-                <element signature="e#36833#36847#0" expanded="true" />
-                <element signature="e#38260#38274#0" expanded="true" />
-                <element signature="e#38320#38334#0" expanded="true" />
-                <element signature="e#39741#39755#0" expanded="true" />
-                <element signature="e#39801#39815#0" expanded="true" />
-                <element signature="e#41232#41246#0" expanded="true" />
-                <element signature="e#41292#41306#0" expanded="true" />
-                <element signature="e#42161#42175#0" expanded="true" />
-                <element signature="e#42224#42239#0" expanded="true" />
-                <element signature="e#42772#42786#0" expanded="true" />
-                <element signature="e#42832#42846#0" expanded="true" />
-                <element signature="e#43684#43699#0" expanded="true" />
-                <element signature="e#43737#43752#0" expanded="true" />
-                <element signature="e#43792#43807#0" expanded="true" />
-                <element signature="e#43830#43845#0" expanded="true" />
-                <element signature="e#44232#44247#0" expanded="true" />
-                <element signature="e#44293#44307#0" expanded="true" />
-                <element signature="e#44353#44367#0" expanded="true" />
-                <element signature="e#44455#44478#0" expanded="true" />
-                <element signature="e#44574#44589#0" expanded="true" />
-                <element signature="e#46456#46471#0" expanded="true" />
-                <element signature="e#46517#46532#0" expanded="true" />
-                <element signature="e#47137#47151#0" expanded="true" />
-                <element signature="e#47197#47211#0" expanded="true" />
-                <element signature="e#47414#47437#0" expanded="true" />
-                <element signature="e#47365#47380#0" expanded="true" />
-                <element signature="e#48089#48104#0" expanded="true" />
-                <element signature="e#48150#48164#0" expanded="true" />
-                <element signature="e#48703#48717#0" expanded="true" />
-                <element signature="e#48763#48777#0" expanded="true" />
-                <element signature="e#48811#48831#0" expanded="true" />
-                <element signature="e#48985#49000#0" expanded="true" />
-                <element signature="e#49584#49599#0" expanded="true" />
-                <element signature="e#49645#49659#0" expanded="true" />
-                <element signature="e#50197#50211#0" expanded="true" />
-                <element signature="e#50257#50271#0" expanded="true" />
-                <element signature="e#50296#50313#0" expanded="true" />
-                <element signature="e#50467#50482#0" expanded="true" />
-                <element signature="e#51066#51081#0" expanded="true" />
-                <element signature="e#51127#51141#0" expanded="true" />
-                <element signature="e#51190#51205#0" expanded="true" />
-                <element signature="e#51736#51750#0" expanded="true" />
-                <element signature="e#51787#51801#0" expanded="true" />
-                <element signature="e#51995#52014#0" expanded="true" />
-                <element signature="e#51946#51961#0" expanded="true" />
+                <element signature="e#1590#1638#0" expanded="true" />
+                <element signature="e#1948#1968#1" expanded="true" />
+                <element signature="e#1970#1991#1" expanded="true" />
+                <element signature="e#4012#4054#0" expanded="true" />
+                <element signature="e#5877#5925#0" expanded="true" />
+                <element signature="e#6077#6123#0" expanded="true" />
+                <element signature="e#6269#6312#0" expanded="true" />
+                <element signature="e#6454#6499#0" expanded="true" />
+                <element signature="e#6586#6635#0" expanded="true" />
+                <element signature="e#6714#6756#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+            <state relative-caret-position="399">
+              <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+              <folding>
+                <element signature="e#33#210#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+        <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="121" column="39" selection-start-line="121" selection-start-column="39" selection-end-line="121" selection-end-column="39" />
+            <state relative-caret-position="148">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2755">
+              <caret line="235" selection-start-line="235" selection-end-line="235" />
               <folding>
-                <element signature="e#6416#6421#0" expanded="true" />
+                <element signature="e#35#1885#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-684" />
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -261,10 +288,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformClassesAndResourcesWithProguardForRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="validateSigningDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -312,6 +335,11 @@
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="deviceCheck" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs the Build build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="installBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -478,6 +506,10 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="mergeDebugAndroidTestAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesAndResourcesWithProguardForBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -676,10 +708,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformClassesAndDexWithShrinkResForRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileReleaseAidl" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -699,10 +727,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileBuildUnitTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -967,6 +991,10 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformClassesAndDexWithShrinkResForBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildDebugPreBundle" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -996,17 +1024,16 @@
                 <option name="name" value="assembleDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Runs lint on just the fatal issues in the build build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="lintVitalBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="packageBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="checkDebugClasspath" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1098,6 +1125,10 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="validateSigningBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="generateReleaseUnitTestAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1162,6 +1193,10 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileDebugAidl" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="shrinkBuildResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Compiles the build kotlin." />
@@ -1253,10 +1288,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="javaPreCompileDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="shrinkReleaseResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
@@ -1437,10 +1468,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="transformClassesAndResourcesWithProguardForRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="validateSigningDebugAndroidTest" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1488,6 +1515,11 @@
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="deviceCheck" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs the Build build." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="installBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -1654,6 +1686,10 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="mergeDebugAndroidTestAssets" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="transformClassesAndResourcesWithProguardForBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -1852,10 +1888,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="transformClassesAndDexWithShrinkResForRelease" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="compileReleaseAidl" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1875,10 +1907,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="compileBuildUnitTestSources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -2138,6 +2166,10 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="transformClassesAndDexWithShrinkResForBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="buildDebugPreBundle" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -2167,17 +2199,16 @@
                 <option name="name" value="assembleDebug" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Runs lint on just the fatal issues in the build build." />
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="lintVitalBuild" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="packageBuild" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="checkDebugClasspath" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="transformDexArchiveWithExternalLibsDexMergerForRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
@@ -2269,6 +2300,10 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="validateSigningBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="generateReleaseUnitTestAssets" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -2333,6 +2368,10 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="compileDebugAidl" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="shrinkBuildResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Compiles the build kotlin." />
@@ -2419,10 +2458,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="javaPreCompileDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="shrinkReleaseResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
@@ -3145,11 +3180,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_token_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet_address.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/FragmentTokenWithdrawal.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WalletAddressFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" />
       </list>
     </option>
   </component>
@@ -3175,11 +3218,6 @@
             </path>
             <path>
               <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
               <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
             </path>
           </expand>
@@ -3194,9 +3232,10 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="device.picker.selection" value="ZY22286T8H" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../CodelogicxCRM" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
-    <property name="sync.plugin.last.upgrade.timestamp" value="1550576267141" />
+    <property name="sync.plugin.last.upgrade.timestamp" value="1550837498554" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -3303,35 +3342,56 @@
       <option name="project" value="LOCAL" />
       <updated>1550754588222</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Implements 'Business Information' card of 'My Profile'">
+      <created>1550818267718</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1550818267718</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implements 'Business Information' card of 'My Profile'">
+      <created>1550818561166</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1550818561166</updated>
+    </task>
+    <task id="LOCAL-00006" summary="UI Rectify">
+      <created>1550837430719</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1550837430719</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.49727964" visible="true" weight="0.2274488" />
-      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4952381" visible="true" weight="0.2274488" />
+      <window_info id="Structure" order="2" sideWeight="0.50476193" side_tool="true" weight="0.2274488" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Build Variants" order="4" sideWeight="0.50272036" side_tool="true" weight="0.2274488" />
+      <window_info id="Build Variants" order="4" sideWeight="0.50476193" side_tool="true" visible="true" weight="0.2274488" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.0" />
-      <window_info anchor="bottom" id="Logcat" order="1" visible="true" weight="0.0" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.0" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" weight="0.32901832" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5002767" side_tool="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32972974" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4997233" weight="0.54594594" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4997233" visible="true" weight="0.54594594" />
       <window_info anchor="bottom" id="Messages" order="8" />
       <window_info anchor="bottom" id="Android Profiler" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info active="true" anchor="right" id="Preview" order="4" visible="true" weight="0.30824572" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.2739347" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
     </layout>
   </component>
@@ -3341,16 +3401,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implements first card of 'My Profile'" />
     <MESSAGE value="Implements 'Personal Info','Id Info','Contact Info' and 'Employment Info' cards for 'My Profile'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implements 'Personal Info','Id Info','Contact Info' and 'Employment Info' cards for 'My Profile'" />
+    <MESSAGE value="Implements 'Business Information' card of 'My Profile'" />
+    <MESSAGE value="UI Rectify" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI Rectify" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -3447,106 +3502,235 @@
       </provider>
       <provider editor-type-id="android-manifest" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4784">
-          <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="121" column="39" selection-start-line="121" selection-start-column="39" selection-end-line="121" selection-end-column="39" />
-          <folding>
-            <element signature="e#6416#6421#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="323">
+          <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="55" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
+        <state relative-caret-position="1206">
+          <caret line="488" column="44" lean-forward="true" selection-start-line="488" selection-start-column="44" selection-end-line="488" selection-end-column="44" />
           <folding>
-            <element signature="e#679#694#0" expanded="true" />
-            <element signature="e#732#746#0" expanded="true" />
-            <element signature="e#786#801#0" expanded="true" />
-            <element signature="e#1225#1240#0" expanded="true" />
-            <element signature="e#1286#1300#0" expanded="true" />
-            <element signature="e#1346#1360#0" expanded="true" />
-            <element signature="e#1409#1423#0" expanded="true" />
-            <element signature="e#1457#1486#0" expanded="true" />
-            <element signature="e#1582#1597#0" expanded="true" />
-            <element signature="e#2188#2203#0" expanded="true" />
-            <element signature="e#2249#2264#0" expanded="true" />
-            <element signature="e#5107#5122#0" expanded="true" />
-            <element signature="e#5168#5182#0" expanded="true" />
-            <element signature="e#5231#5245#0" expanded="true" />
-            <element signature="e#28926#28940#0" expanded="true" />
-            <element signature="e#30407#30422#0" expanded="true" />
-            <element signature="e#31817#31832#0" expanded="true" />
-            <element signature="e#31870#31885#0" expanded="true" />
-            <element signature="e#31925#31940#0" expanded="true" />
-            <element signature="e#34597#34612#0" expanded="true" />
-            <element signature="e#34658#34673#0" expanded="true" />
-            <element signature="e#35208#35222#0" expanded="true" />
-            <element signature="e#35268#35282#0" expanded="true" />
-            <element signature="e#36218#36232#0" expanded="true" />
-            <element signature="e#36773#36787#0" expanded="true" />
-            <element signature="e#36833#36847#0" expanded="true" />
-            <element signature="e#38260#38274#0" expanded="true" />
-            <element signature="e#38320#38334#0" expanded="true" />
-            <element signature="e#39741#39755#0" expanded="true" />
-            <element signature="e#39801#39815#0" expanded="true" />
-            <element signature="e#41232#41246#0" expanded="true" />
-            <element signature="e#41292#41306#0" expanded="true" />
-            <element signature="e#42161#42175#0" expanded="true" />
-            <element signature="e#42224#42239#0" expanded="true" />
-            <element signature="e#42772#42786#0" expanded="true" />
-            <element signature="e#42832#42846#0" expanded="true" />
-            <element signature="e#43684#43699#0" expanded="true" />
-            <element signature="e#43737#43752#0" expanded="true" />
-            <element signature="e#43792#43807#0" expanded="true" />
-            <element signature="e#43830#43845#0" expanded="true" />
-            <element signature="e#44232#44247#0" expanded="true" />
-            <element signature="e#44293#44307#0" expanded="true" />
-            <element signature="e#44353#44367#0" expanded="true" />
-            <element signature="e#44455#44478#0" expanded="true" />
-            <element signature="e#44574#44589#0" expanded="true" />
-            <element signature="e#46456#46471#0" expanded="true" />
-            <element signature="e#46517#46532#0" expanded="true" />
-            <element signature="e#47137#47151#0" expanded="true" />
-            <element signature="e#47197#47211#0" expanded="true" />
-            <element signature="e#47414#47437#0" expanded="true" />
-            <element signature="e#47365#47380#0" expanded="true" />
-            <element signature="e#48089#48104#0" expanded="true" />
-            <element signature="e#48150#48164#0" expanded="true" />
-            <element signature="e#48703#48717#0" expanded="true" />
-            <element signature="e#48763#48777#0" expanded="true" />
-            <element signature="e#48811#48831#0" expanded="true" />
-            <element signature="e#48985#49000#0" expanded="true" />
-            <element signature="e#49584#49599#0" expanded="true" />
-            <element signature="e#49645#49659#0" expanded="true" />
-            <element signature="e#50197#50211#0" expanded="true" />
-            <element signature="e#50257#50271#0" expanded="true" />
-            <element signature="e#50296#50313#0" expanded="true" />
-            <element signature="e#50467#50482#0" expanded="true" />
-            <element signature="e#51066#51081#0" expanded="true" />
-            <element signature="e#51127#51141#0" expanded="true" />
-            <element signature="e#51190#51205#0" expanded="true" />
-            <element signature="e#51736#51750#0" expanded="true" />
-            <element signature="e#51787#51801#0" expanded="true" />
-            <element signature="e#51995#52014#0" expanded="true" />
-            <element signature="e#51946#51961#0" expanded="true" />
+            <element signature="e#628#643#0" expanded="true" />
+            <element signature="e#681#695#0" expanded="true" />
+            <element signature="e#735#750#0" expanded="true" />
+            <element signature="e#1174#1189#0" expanded="true" />
+            <element signature="e#1235#1249#0" expanded="true" />
+            <element signature="e#1295#1309#0" expanded="true" />
+            <element signature="e#1358#1372#0" expanded="true" />
+            <element signature="e#1406#1435#0" expanded="true" />
+            <element signature="e#1531#1546#0" expanded="true" />
+            <element signature="e#2137#2152#0" expanded="true" />
+            <element signature="e#2198#2213#0" expanded="true" />
+            <element signature="e#2736#2751#0" expanded="true" />
+            <element signature="e#2794#2809#0" expanded="true" />
+            <element signature="e#2857#2872#0" expanded="true" />
+            <element signature="e#2918#2932#0" expanded="true" />
+            <element signature="e#2981#2995#0" expanded="true" />
+            <element signature="e#2676#2694#0" expanded="true" />
+            <element signature="e#3692#3707#0" expanded="true" />
+            <element signature="e#3753#3767#0" expanded="true" />
+            <element signature="e#3513#3531#0" expanded="true" />
+            <element signature="e#5263#5278#0" expanded="true" />
+            <element signature="e#5324#5338#0" expanded="true" />
+            <element signature="e#5387#5401#0" expanded="true" />
+            <element signature="e#5140#5158#0" expanded="true" />
+            <element signature="e#10456#10474#0" expanded="true" />
+            <element signature="e#11914#11932#0" expanded="true" />
+            <element signature="e#13651#13669#0" expanded="true" />
+            <element signature="e#15165#15183#0" expanded="true" />
+            <element signature="e#19587#19605#0" expanded="true" />
+            <element signature="e#20478#20496#0" expanded="true" />
+            <element signature="e#22111#22129#0" expanded="true" />
+            <element signature="e#23607#23625#0" expanded="true" />
+            <element signature="e#27948#27966#0" expanded="true" />
+            <element signature="e#29622#29636#0" expanded="true" />
+            <element signature="e#29438#29456#0" expanded="true" />
+            <element signature="e#31178#31193#0" expanded="true" />
+            <element signature="e#30988#31006#0" expanded="true" />
+            <element signature="e#32588#32603#0" expanded="true" />
+            <element signature="e#32641#32656#0" expanded="true" />
+            <element signature="e#32696#32711#0" expanded="true" />
+            <element signature="e#35434#35449#0" expanded="true" />
+            <element signature="e#35495#35510#0" expanded="true" />
+            <element signature="e#35368#35386#0" expanded="true" />
+            <element signature="e#36045#36059#0" expanded="true" />
+            <element signature="e#36105#36119#0" expanded="true" />
+            <element signature="e#37064#37078#0" expanded="true" />
+            <element signature="e#36824#36842#0" expanded="true" />
+            <element signature="e#37619#37633#0" expanded="true" />
+            <element signature="e#37679#37693#0" expanded="true" />
+            <element signature="e#38454#38472#0" expanded="true" />
+            <element signature="e#39190#39204#0" expanded="true" />
+            <element signature="e#39250#39264#0" expanded="true" />
+            <element signature="e#40019#40037#0" expanded="true" />
+            <element signature="e#40755#40769#0" expanded="true" />
+            <element signature="e#40815#40829#0" expanded="true" />
+            <element signature="e#41583#41601#0" expanded="true" />
+            <element signature="e#42267#42281#0" expanded="true" />
+            <element signature="e#42327#42341#0" expanded="true" />
+            <element signature="e#43280#43294#0" expanded="true" />
+            <element signature="e#43343#43358#0" expanded="true" />
+            <element signature="e#43153#43171#0" expanded="true" />
+            <element signature="e#43891#43905#0" expanded="true" />
+            <element signature="e#43951#43965#0" expanded="true" />
+            <element signature="e#44821#44836#0" expanded="true" />
+            <element signature="e#44874#44889#0" expanded="true" />
+            <element signature="e#44929#44944#0" expanded="true" />
+            <element signature="e#44985#45000#0" expanded="true" />
+            <element signature="e#45425#45440#0" expanded="true" />
+            <element signature="e#45486#45500#0" expanded="true" />
+            <element signature="e#45546#45560#0" expanded="true" />
+            <element signature="e#45648#45671#0" expanded="true" />
+            <element signature="e#45767#45782#0" expanded="true" />
+            <element signature="e#47658#47673#0" expanded="true" />
+            <element signature="e#47719#47734#0" expanded="true" />
+            <element signature="e#47592#47610#0" expanded="true" />
+            <element signature="e#48339#48353#0" expanded="true" />
+            <element signature="e#48399#48413#0" expanded="true" />
+            <element signature="e#48505#48528#0" expanded="true" />
+            <element signature="e#48624#48639#0" expanded="true" />
+            <element signature="e#49296#49311#0" expanded="true" />
+            <element signature="e#49357#49371#0" expanded="true" />
+            <element signature="e#49230#49248#0" expanded="true" />
+            <element signature="e#49910#49924#0" expanded="true" />
+            <element signature="e#49970#49984#0" expanded="true" />
+            <element signature="e#50076#50096#0" expanded="true" />
+            <element signature="e#50192#50207#0" expanded="true" />
+            <element signature="e#50799#50814#0" expanded="true" />
+            <element signature="e#50860#50874#0" expanded="true" />
+            <element signature="e#50676#50694#0" expanded="true" />
+            <element signature="e#51412#51426#0" expanded="true" />
+            <element signature="e#51472#51486#0" expanded="true" />
+            <element signature="e#51578#51595#0" expanded="true" />
+            <element signature="e#51691#51706#0" expanded="true" />
+            <element signature="e#52298#52313#0" expanded="true" />
+            <element signature="e#52359#52373#0" expanded="true" />
+            <element signature="e#52422#52437#0" expanded="true" />
+            <element signature="e#52232#52250#0" expanded="true" />
+            <element signature="e#52968#52982#0" expanded="true" />
+            <element signature="e#53028#53042#0" expanded="true" />
+            <element signature="e#53134#53153#0" expanded="true" />
+            <element signature="e#53249#53264#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/settings/view/SettingsFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="46" column="5" lean-forward="true" selection-start-line="25" selection-start-column="23" selection-end-line="46" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/font_certs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/font/montserrat.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="49" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet_address.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WalletAddressFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+          <folding>
+            <element signature="e#33#210#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+          <folding>
+            <element signature="e#33#210#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+          <folding>
+            <element signature="e#33#210#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_token_withdrawal.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1976">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2755">
+          <caret line="235" selection-start-line="235" selection-end-line="235" />
+          <folding>
+            <element signature="e#35#1885#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-684" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="198" column="39" selection-start-line="198" selection-start-column="39" selection-end-line="198" selection-end-column="39" />
+          <folding>
+            <element signature="e#1590#1638#0" expanded="true" />
+            <element signature="e#1948#1968#1" expanded="true" />
+            <element signature="e#1970#1991#1" expanded="true" />
+            <element signature="e#4012#4054#0" expanded="true" />
+            <element signature="e#5877#5925#0" expanded="true" />
+            <element signature="e#6077#6123#0" expanded="true" />
+            <element signature="e#6269#6312#0" expanded="true" />
+            <element signature="e#6454#6499#0" expanded="true" />
+            <element signature="e#6586#6635#0" expanded="true" />
+            <element signature="e#6714#6756#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -58,6 +58,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var userDashBoard: String
+        get() = pref.getString(KEY_SET_DASHBOARD, "INIT")!!
+        set(dashboard) {
+            editor.remove(KEY_SET_DASHBOARD)
+            editor.putString(KEY_SET_DASHBOARD, dashboard)
+            editor.commit()
+        }
+
     var countryCode: String
         get() = pref.getString(KEY_SET_COUNTRY_CODE, "tz")!!
         set(countryCode) {
@@ -90,6 +98,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_USER_INFO    = "KEY_SET_USER_INFO"
         private const val KEY_SET_LOGIN_REQUEST= "KEY_SET_LOGIN_REQUEST"
         private const val KEY_SET_ACCESS_TOKEN = "KEY_SET_ACCESS_TOKEN"
+        private const val KEY_SET_DASHBOARD    = "KEY_SET_DASHBOARD"
     }
 
 
