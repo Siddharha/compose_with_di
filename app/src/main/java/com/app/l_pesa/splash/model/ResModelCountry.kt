@@ -10,11 +10,11 @@ import com.app.l_pesa.common.CommonStatusModel
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-@Keep
+
 data class ResModelCountry(val status:CommonStatusModel,val data:ResModelData)
-@Keep
+
 data class ResModelData(val countries_list:ArrayList<ResModelCountryList>)
-@Keep
+
 data class ResModelCountryList(
 
                                 val id:Int,

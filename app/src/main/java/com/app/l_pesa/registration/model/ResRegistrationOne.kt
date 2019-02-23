@@ -1,6 +1,5 @@
 package com.app.l_pesa.registration.model
 
-import android.support.annotation.Keep
 import com.app.l_pesa.common.CommonStatusModel
 
 
@@ -10,8 +9,7 @@ import com.app.l_pesa.common.CommonStatusModel
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-@Keep
 data class ResRegistrationOne(val status: CommonStatusModel, val data: RegistrationData)
-@Keep
+
 data class RegistrationData(val access_token:String)
 
