@@ -74,8 +74,8 @@
 #}
 
 -keep class com.app.l_pesa.common.** { *; }
--keep class com.app.l_pesa.login.** { *; }
--keep class com.app.l_pesa.dashboard.** { *; }
+-keep class com.app.l_pesa.login.model.** { *; }
+-keep class com.app.l_pesa.dashboard.model.** { *; }
 -keep class com.app.l_pesa.splash.** { *; }
 -keep class com.app.l_pesa.logout.** { *; }
 
