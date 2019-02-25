@@ -186,6 +186,11 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
             adapterDashBoard.notifyDataSetChanged()
         }
 
+        val sharedPrefOBJ=SharedPref(activity!!)
+        val gson                          = Gson()
+        val dashBoardData                 = gson.toJson(dashBoard)
+        sharedPrefOBJ.userDashBoard       = dashBoardData
+
     }
 }
 
