@@ -3,16 +3,16 @@ package com.app.l_pesa.loanplan.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanplan.model.ResLoanPlans
-import java.lang.Exception
+
 
 /**
  * Created by Intellij Amiya on 21/2/19.
@@ -59,6 +59,15 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
         else
         {
             viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_orange_view)
+        }
+
+
+        viewHolder.buttonLoanStatus.setOnClickListener {
+
+            if(loanPlanList[position].details.btnStatus!="disable")
+            {
+                Toast.makeText(context,"",Toast.LENGTH_SHORT).show()
+            }
         }
 
 

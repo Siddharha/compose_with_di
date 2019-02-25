@@ -20,6 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -ignorewarnings
+-dontwarn okio.**
 
 -dontwarn retrofit2.**
 -keep class retrofit2.** { *; }
