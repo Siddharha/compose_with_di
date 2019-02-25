@@ -2,21 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+
 android {
-    /*signingConfigs {
-        config {
-            keyAlias 'android'
-            keyPassword 'android'
-            //storeFile file('E:/Amiyo/L_Pesa_Intellij/l-pesa/app/KEY/lpesa.jks')
-            storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
-            storePassword 'android'
-        }
-    }*/
     signingConfigs {
         config {
             keyAlias 'android'
             keyPassword 'android'
-            storeFile file('/home/kritika/AndroidStudioProjects/L-Pesa/l-pesa/app/KEY/lpesa.jks')
+            //storeFile file('E:/Amiyo/L_Pesa_Intellij/l-pesa/app/KEY/lpesa.jks')
+            storeFile file('/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/KEY/lpesa.jks')
             storePassword 'android'
         }
     }
@@ -28,18 +21,17 @@ android {
         buildToolsVersion "28.0.3"
         versionCode 1
         versionName "1.0"
+
     }
     buildTypes {
         release {
-            /* minifyEnabled true
-             shrinkResources true*/
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
             signingConfig signingConfigs.config
             // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
-            // proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
-            proguardFile '/home/kritika/AndroidStudioProjects/L-Pesa/l-pesa/app/proguard-rules.pro'
+            proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
         }
         build {
             // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -49,12 +41,13 @@ android {
             debuggable true
             signingConfig signingConfigs.config
             // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
-            //proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
+            proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
         }
     }
     productFlavors {
     }
 }
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:support-v4:28.0.0'

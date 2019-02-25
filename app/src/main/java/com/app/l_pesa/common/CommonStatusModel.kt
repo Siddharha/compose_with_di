@@ -1,6 +1,5 @@
 package com.app.l_pesa.common
 
-import android.support.annotation.Keep
 
 
 /**
@@ -9,5 +8,5 @@ import android.support.annotation.Keep
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-@Keep
+
 data class CommonStatusModel(val statusCode: String, val isSuccess: Boolean, val message: String)
