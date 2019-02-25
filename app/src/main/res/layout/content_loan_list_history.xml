@@ -8,4 +8,7 @@
     tools:context=".loanHistory.view.LoanHistoryListActivity"
     tools:showIn="@layout/activity_loan_list_history">
 
+    <include
+        layout="@layout/fragment_loan_plan"/>
+
 </android.support.constraint.ConstraintLayout>
