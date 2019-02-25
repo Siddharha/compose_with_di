@@ -38,6 +38,8 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList:
 
         }
 
+        viewHolder.txtRate.text            = context.resources.getString(R.string.interest_rate)+" "+loanHistoryList[position].details.loanInterestRate.toString()+"%"
+
     }
 
     override fun getItemCount(): Int = loanHistoryList.size
@@ -57,6 +59,7 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList:
            var txtLoanAmount   : TextView = itemView.findViewById(R.id.txtLoanAmount) as TextView
            var txtRequiredScore: TextView = itemView.findViewById(R.id.txtRequiredScore) as TextView
            var txtDuration     : TextView = itemView.findViewById(R.id.txtDuration) as TextView
+           var txtRate         : TextView = itemView.findViewById(R.id.txtRate) as TextView
 
 
         }
