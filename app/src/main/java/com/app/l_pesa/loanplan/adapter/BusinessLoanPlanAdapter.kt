@@ -21,7 +21,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanHistoryList
 
 
         val viewHolder = holder as SelectViewHolder
-        viewHolder.txtCredit.text=loanHistoryList[position].details.status
+        viewHolder.txtLoanAmount.text=loanHistoryList[position].details.status
 
     }
 
@@ -39,7 +39,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanHistoryList
     companion object {
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            var txtCredit: TextView = itemView.findViewById(R.id.txt_credit) as TextView
+            var txtLoanAmount: TextView = itemView.findViewById(R.id.txtLoanAmount) as TextView
 
 
 

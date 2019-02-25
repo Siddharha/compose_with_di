@@ -95,7 +95,7 @@
         <item>@drawable/ic_help</item>
     </string-array>
 
-    <string name="credit_score">Credit Score:</string>
+    <string name="credit_score">Credit Score: </string>
     <string name="change_pin">Change Pin</string>
 
     <!--Profile Section-->
@@ -139,6 +139,10 @@
     <!--Loan Plans-->
     <string name="current_loan_plans">Current Loan Plans</string>
     <string name="business_loan_plans">Business Loan Plans</string>
+    <string name="weeks">Weeks </string>
+    <string name="days">Days </string>
+    <string name="duration">Duration:</string>
+    <string name="interest_rate">Interest Rate/Day</string>
 
 
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_75sdp"
-    android:layout_marginBottom="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_7sdp"
     android:layout_marginStart="@dimen/_7sdp"
     android:layout_marginEnd="@dimen/_7sdp"
     android:background="@drawable/bg_white_view">
@@ -18,13 +18,13 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".25"
+            android:layout_weight=".20"
             android:gravity="center"
 
             >
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_credit"
+                android:id="@+id/txtLoanAmount"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_width="@dimen/_50sdp"
                 android:background="@drawable/bg_aquamarine_circle"
@@ -38,10 +38,52 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".50"
-            android:gravity="center"
-
+            android:layout_weight=".55"
+            android:orientation="vertical"
             >
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtRequiredScore"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/_13sdp"
+                android:paddingStart="@dimen/_2sdp"
+                android:paddingEnd="@dimen/_2sdp"
+                android:textColor="@color/colorTextBlack"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtDuration"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/_11sdp"
+                android:paddingStart="@dimen/_2sdp"
+                android:paddingEnd="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textColor="@color/colorTextBlackLight"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:drawableStart="@drawable/ic_request_date"
+                android:gravity="center|start"
+
+                />
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtRate"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/_11sdp"
+                android:paddingStart="@dimen/_2sdp"
+                android:paddingEnd="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:textColor="@color/colorTextBlackLight"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:drawableStart="@drawable/ic_rate_interest_icon"
+                android:gravity="center|start"
+                />
 
         </LinearLayout>
 

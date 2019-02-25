@@ -24,7 +24,19 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList:
 
 
         val viewHolder = holder as SelectViewHolder
-        viewHolder.txtCredit.text="$"+loanHistoryList[position].details.loanAmount.toString()
+
+        viewHolder.txtRequiredScore.text    = context.resources.getString(R.string.credit_score)+" "+loanHistoryList[position].details.requiredCreditScore.toString()
+        viewHolder.txtLoanAmount.text       = "$"+loanHistoryList[position].details.loanAmount.toString()
+
+        if(loanHistoryList[position].details.loanPeriodType=="D")
+        {
+            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanHistoryList[position].details.loanPeriod+" "+context.resources.getString(R.string.days)
+        }
+        else
+        {
+            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanHistoryList[position].details.loanPeriod+" "+context.resources.getString(R.string.weeks)
+
+        }
 
     }
 
@@ -42,8 +54,9 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList:
     companion object {
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-           var txtCredit: TextView = itemView.findViewById(R.id.txt_credit) as TextView
-
+           var txtLoanAmount   : TextView = itemView.findViewById(R.id.txtLoanAmount) as TextView
+           var txtRequiredScore: TextView = itemView.findViewById(R.id.txtRequiredScore) as TextView
+           var txtDuration     : TextView = itemView.findViewById(R.id.txtDuration) as TextView
 
 
         }

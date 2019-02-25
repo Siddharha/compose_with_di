@@ -9,6 +9,8 @@
     <color name="colorAppLight">#47C9B7</color>
     <color name="aquamarine">#4ee3cf</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorTextBlack">#555759</color>
+    <color name="colorTextBlackLight">#777b7e</color>
     <color name="colorSemiBlack">#61666b</color>
     <color name="colorSemiLightBlack">#bcbfc2</color>
     <color name="colorGrey">#bfbfbf</color>
