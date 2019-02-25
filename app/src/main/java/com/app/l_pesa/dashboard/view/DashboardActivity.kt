@@ -197,8 +197,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.action_lpk-> {
                 toolbar.title =resources.getString(R.string.nav_item_lpk)
                 //navigateToFragment(LpkFragment.newInstance())
-               // navigateToFragment(TokenWithdrawalFragment.newInstance())
-                navigateToFragment(WalletAddressFragment.newInstance())
+                navigateToFragment(TokenWithdrawalFragment.newInstance())
+                //navigateToFragment(WalletAddressFragment.newInstance())
             }
             R.id.action_wallet-> {
                 toolbar.title =resources.getString(R.string.nav_item_wallet)

@@ -102,7 +102,6 @@
     <string name="profile_information">Profile Information</string>
     <string name="contact_no">+972544682519</string>
     <string name="personal_info">Personal Information</string>
-
     <string name="date_of_birth">Date Of Birth:</string>
     <string name="gender">Gender:</string>
     <string name="marital_status">Marital Status:</string>
@@ -124,7 +123,6 @@
 
 
     <!--Dashboard-->
-
     <string name="your_credit_score" tools:ignore="ExtraTranslation">Your L-Pesa Credit Score</string>
     <string name="apply_loan">Apply Loan</string>
     <string name="business_loan">Business Loan</string>
@@ -144,5 +142,8 @@
     <string name="erc_address">ERC-20 Address*</string>
     <string name="install_the_app">or install the App Iam Token from Play Store</string>
     <string name="update">Update</string>
+    <string name="wallet_address_link">http://www.myetherwallet.com/</string>
+    <string name="enter_token">Enter Token</string>
+    <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
 
 </resources>

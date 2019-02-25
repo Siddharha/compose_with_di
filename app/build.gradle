@@ -9,7 +9,7 @@ android {
             keyAlias 'android'
             keyPassword 'android'
             //storeFile file('E:/Amiyo/L_Pesa_Intellij/l-pesa/app/KEY/lpesa.jks')
-            storeFile file('/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/KEY/lpesa.jks')
+            storeFile file('/home/kritika/AndroidStudioProjects/L-Pesa/l-pesa/app/KEY/lpesa.jks')
             storePassword 'android'
         }
     }
@@ -25,23 +25,25 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            /*minifyEnabled true
+            shrinkResources true*/
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
             signingConfig signingConfigs.config
             // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
-            proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
+            proguardFile '/home/kritika/AndroidStudioProjects/L-Pesa/l-pesa/app/proguard-rules.pro'
         }
         build {
             // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+           /* minifyEnabled true
+            shrinkResources true*/
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
             signingConfig signingConfigs.config
             // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
-            proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
+            proguardFile '/home/kritika/AndroidStudioProjects/L-Pesa/l-pesa/app/proguard-rules.pro'
         }
     }
     productFlavors {

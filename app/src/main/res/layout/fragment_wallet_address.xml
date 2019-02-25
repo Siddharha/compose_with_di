@@ -36,8 +36,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/get_wallet_address"
                 android:fontFamily="@font/montserrat"
+                android:text="@string/get_wallet_address"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintBottom_toTopOf="@+id/textView30"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +49,9 @@
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:fontFamily="@font/montserrat"
+                android:text="@string/wallet_address_link"
+                android:textColor="@color/wallet_addr_link_color"
                 app:layout_constraintBottom_toTopOf="@+id/textView31"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -62,8 +63,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorBlack"
                 android:text="@string/install_the_app"
+                android:textColor="@color/colorBlack"
                 app:layout_constraintBottom_toTopOf="@id/commonInputLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -76,21 +77,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_23sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 app:layout_constraintBottom_toTopOf="@id/button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView31">
 
-
                 <com.app.l_pesa.common.CommonEditTextRegular
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/montserrat"
                     android:hint="@string/erc_address"
-                    android:textColorHint="@color/colorAppLight" />
-
+                    android:textSize="@dimen/_11sdp" />
 
             </com.app.l_pesa.common.CommonInputLayout>
 
@@ -98,11 +97,11 @@
                 android:id="@+id/button"
                 android:layout_width="@dimen/_130sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginBottom="@dimen/_19sdp"
-                android:background="@color/colorAppLight"
-                android:text="@string/update"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_marginBottom="@dimen/_24sdp"
+                android:background="@drawable/btn_round"
                 android:fontFamily="@font/montserrat"
+                android:text="@string/update"
                 android:textAllCaps="false"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"

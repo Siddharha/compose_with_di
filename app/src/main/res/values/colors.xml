@@ -26,5 +26,7 @@
     <color name="semi_light_black">#7d7d7d</color>
     <color name="mtrl_textinput_default_box_stroke_color">#949BA6</color>
     <color name="textColors">#535559</color>
+    <color name="wallet_addr_link_color">#9caf01</color>
+    <color name="total_lpk_color">#4e6485</color>
 
 </resources>
