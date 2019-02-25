@@ -25,10 +25,10 @@ import com.app.l_pesa.dashboard.model.SeekBarProgress
 class DashboardFragment: Fragment(), ICallBackDashboard {
 
 
-    private val totalSpan = 99f
-    private val redSpan = 33f
-    private val blueSpan = 33f
-    private val greenSpan = 33f
+    private val totalSpan   = 99f
+    private val redSpan     = 33f
+    private val blueSpan    = 33f
+    private val greenSpan   = 33f
 
     private var progressItemList=ArrayList<SeekBarProgress>()
     private lateinit var  mProgressItem:SeekBarProgress
@@ -108,11 +108,11 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
     private fun swipeRefresh()
     {
 
-        /*swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
-            initData()
-        }*/
+            loadDashboard()
+        }
     }
 
     private fun initData()
@@ -133,13 +133,14 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            // swipeRefreshLayout.isRefreshing = true
+            swipeRefreshLayout.isRefreshing = true
             val sharedPrefOBJ= SharedPref(activity!!)
             val presenterDashboard= PresenterDashboard()
             presenterDashboard.getDashboard(activity!!,sharedPrefOBJ.accessToken,this)
         }
         else
         {
+            swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
         }
     }
@@ -151,18 +152,18 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
     }
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
-
+        swipeRefreshLayout.isRefreshing = false
         setData(data)
     }
 
     override fun onFailureDashboard(jsonMessage: String) {
 
-       // swipeRefreshLayout.isRefreshing = false
+       swipeRefreshLayout.isRefreshing = false
     }
 
     private fun setData(dashBoard: ResDashboard.Data)
     {
-        val middleVal       = dashBoard.maxCreditScore /2
+        val middleVal           = dashBoard.maxCreditScore /2
         left_header_txt.text    = dashBoard.fixedDepositAmount
         right_header_txt.text   = dashBoard.savingsAmount
         txt_start.text          = dashBoard.minCreditScore.toString()
