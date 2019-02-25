@@ -17,7 +17,7 @@ class WalletAddressFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_token_withdrawal, container, false)
+        return inflater.inflate(R.layout.fragment_wallet_address, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

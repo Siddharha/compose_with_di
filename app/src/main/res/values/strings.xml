@@ -139,6 +139,10 @@
     <string name="current_loan_plans">Current Loan Plans</string>
     <string name="business_loan_plans">Business Loan Plans</string>
 
-
+    <!--LPK Withdrawal-->
+    <string name="get_wallet_address">Get a wallet address at</string>
+    <string name="erc_address">ERC-20 Address*</string>
+    <string name="install_the_app">or install the App Iam Token from Play Store</string>
+    <string name="update">Update</string>
 
 </resources>
