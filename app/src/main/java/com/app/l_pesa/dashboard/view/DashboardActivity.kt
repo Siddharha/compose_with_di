@@ -26,6 +26,8 @@ import com.app.l_pesa.loanplan.view.LoanPlans
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
+import com.app.l_pesa.lpk.view.TokenWithdrawalFragment
+import com.app.l_pesa.lpk.view.WalletAddressFragment
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
@@ -206,7 +208,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_lpk-> {
                 toolbar.title =resources.getString(R.string.nav_item_lpk)
-
+                //navigateToFragment(LpkFragment.newInstance())
+                //navigateToFragment(TokenWithdrawalFragment.newInstance(),false)
+                navigateToFragment(WalletAddressFragment.newInstance(),false)
             }
             R.id.action_wallet-> {
                 toolbar.title =resources.getString(R.string.nav_item_wallet)
