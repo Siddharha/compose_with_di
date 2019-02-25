@@ -2,12 +2,15 @@ package com.app.l_pesa.loanplan.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 
 /**
@@ -17,7 +20,7 @@ import com.app.l_pesa.loanplan.model.ResLoanPlans
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList: ArrayList<ResLoanPlans.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -25,24 +28,27 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList:
 
         val viewHolder = holder as SelectViewHolder
 
-        viewHolder.txtRequiredScore.text    = context.resources.getString(R.string.credit_score)+" "+loanHistoryList[position].details.requiredCreditScore.toString()
-        viewHolder.txtLoanAmount.text       = "$"+loanHistoryList[position].details.loanAmount.toString()
+        viewHolder.txtRequiredScore.text    = context.resources.getString(R.string.credit_score)+" "+loanPlanList[position].details.requiredCreditScore.toString()
+        viewHolder.txtLoanAmount.text       = "$"+loanPlanList[position].details.loanAmount.toString()
 
-        if(loanHistoryList[position].details.loanPeriodType=="D")
+        if(loanPlanList[position].details.loanPeriodType=="D")
         {
-            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanHistoryList[position].details.loanPeriod+" "+context.resources.getString(R.string.days)
+            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanPlanList[position].details.loanPeriod+" "+context.resources.getString(R.string.days)
         }
         else
         {
-            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanHistoryList[position].details.loanPeriod+" "+context.resources.getString(R.string.weeks)
+            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanPlanList[position].details.loanPeriod+" "+context.resources.getString(R.string.weeks)
 
         }
 
-        viewHolder.txtRate.text            = context.resources.getString(R.string.interest_rate)+" "+loanHistoryList[position].details.loanInterestRate.toString()+"%"
+        viewHolder.txtRate.text            = context.resources.getString(R.string.interest_rate)+" "+loanPlanList[position].details.loanInterestRate.toString()+"%"
+
+        viewHolder.buttonLoanStatus.text   = loanPlanList[position].details.btnText
+        //viewHolder.buttonLoanStatus.textColors= Color.parseColor(loanPlanList[position].details.btnHexColor.toString())
 
     }
 
-    override fun getItemCount(): Int = loanHistoryList.size
+    override fun getItemCount(): Int = loanPlanList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -56,10 +62,11 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList:
     companion object {
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-           var txtLoanAmount   : TextView = itemView.findViewById(R.id.txtLoanAmount) as TextView
-           var txtRequiredScore: TextView = itemView.findViewById(R.id.txtRequiredScore) as TextView
-           var txtDuration     : TextView = itemView.findViewById(R.id.txtDuration) as TextView
-           var txtRate         : TextView = itemView.findViewById(R.id.txtRate) as TextView
+           var txtLoanAmount        : TextView              = itemView.findViewById(R.id.txtLoanAmount) as TextView
+           var txtRequiredScore     : TextView              = itemView.findViewById(R.id.txtRequiredScore) as TextView
+           var txtDuration          : TextView              = itemView.findViewById(R.id.txtDuration) as TextView
+           var txtRate              : TextView              = itemView.findViewById(R.id.txtRate) as TextView
+           var buttonLoanStatus     : CustomButtonRegular   = itemView.findViewById(R.id.buttonLoanStatus) as CustomButtonRegular
 
 
         }
