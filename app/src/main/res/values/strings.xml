@@ -144,6 +144,7 @@
     <string name="duration">Duration:</string>
     <string name="interest_rate">Interest Rate:</string>
 
-
+    <!--Loan History-->
+    <string name="loan_history">Loan History</string>
 
 </resources>

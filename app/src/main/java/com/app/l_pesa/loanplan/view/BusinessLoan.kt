@@ -40,6 +40,18 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
         super.onViewCreated(view, savedInstanceState)
 
         loanLoan()
+        swipeRefresh()
+    }
+
+    private fun swipeRefresh()
+    {
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+
+            swipeRefreshLayout.isRefreshing = true
+            loanLoan()
+        }
     }
 
     private fun loanLoan()
@@ -52,6 +64,7 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>) {
 
+        swipeRefreshLayout.isRefreshing = false
         val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, item)
         rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter           = businessLoanAdapter
@@ -59,11 +72,11 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onEmptyLoanPlans() {
 
-        Toast.makeText(activity,"",Toast.LENGTH_SHORT).show()
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
 
-        Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
+        swipeRefreshLayout.isRefreshing = false
     }
 }

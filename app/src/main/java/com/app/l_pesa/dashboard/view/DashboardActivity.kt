@@ -20,8 +20,8 @@ import android.support.v4.app.Fragment
 import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.common.*
+import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
 import com.app.l_pesa.loanplan.view.LoanPlans
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
@@ -144,7 +144,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         buttonRight.setOnClickListener {
 
-            Toast.makeText(this@DashboardActivity,"",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@DashboardActivity, LoanHistoryListActivity::class.java))
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
     }
 
