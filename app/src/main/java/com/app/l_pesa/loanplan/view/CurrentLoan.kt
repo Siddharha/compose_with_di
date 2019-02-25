@@ -40,19 +40,31 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
         super.onViewCreated(view, savedInstanceState)
 
         loanLoan()
+        swipeRefresh()
     }
 
     private fun loanLoan()
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            swipeRefreshLayout.isRefreshing=true
+            swipeRefreshLayout.isRefreshing = true
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanPlans= PresenterLoanPlans()
             presenterLoanPlans.getLoanPlans(activity!!,jsonObject,this)
         }
 
+    }
+
+    private fun swipeRefresh()
+    {
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+
+            swipeRefreshLayout.isRefreshing = true
+            loanLoan()
+        }
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>) {
@@ -65,12 +77,12 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onEmptyLoanPlans() {
 
-        swipeRefreshLayout.isRefreshing=false
+        swipeRefreshLayout.isRefreshing = false
 
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        swipeRefreshLayout.isRefreshing = false
     }
 }

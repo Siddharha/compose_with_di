@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanplan.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -18,11 +19,12 @@ import com.app.l_pesa.loanplan.model.ResLoanPlans
 
 class CurrentLoanPlanAdapter (val context: Context, private val loanHistoryList: ArrayList<ResLoanPlans.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
         val viewHolder = holder as SelectViewHolder
-        viewHolder.txtCredit.text=loanHistoryList[position].details.status
+        viewHolder.txtCredit.text="$"+loanHistoryList[position].details.loanAmount.toString()
 
     }
 
