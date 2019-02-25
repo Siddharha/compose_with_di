@@ -18,7 +18,9 @@ import android.graphics.Typeface
 import android.provider.Settings
 import android.support.v4.app.Fragment
 import android.text.TextUtils
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.common.*
 import com.app.l_pesa.loanplan.view.LoanPlans
 import com.app.l_pesa.login.model.LoginData
@@ -89,18 +91,18 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun initFragment()
     {
-        navigateToFragment(DashboardFragment.newInstance())
+        navigateToFragment(DashboardFragment.newInstance(),false)
 
     }
 
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
-        val navigationView           = findViewById<NavigationView>(R.id.nav_view)
-        val header                          = navigationView.getHeaderView(0)
+        val navigationView       = findViewById<NavigationView>(R.id.nav_view)
+        val header               = navigationView.getHeaderView(0)
         val txtName              = header.findViewById<CommonTextRegular>(R.id.txtName)
         val txtCreditScore       = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
-        val imgProfile             = header.findViewById<CircularImageView>(R.id.imgProfile)
+        val imgProfile           = header.findViewById<CircularImageView>(R.id.imgProfile)
 
         val sharedPrefOBJ= SharedPref(this@DashboardActivity)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
@@ -134,7 +136,16 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
 
         }
+        openHistory()
 
+    }
+
+    fun openHistory()
+    {
+        buttonRight.setOnClickListener {
+
+            Toast.makeText(this@DashboardActivity,"",Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onBackPressed() {
@@ -173,16 +184,16 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.action_dashboard ->
             {
                 toolbar.title =resources.getString(R.string.nav_item_dashboard)
-                navigateToFragment(DashboardFragment.newInstance())
+                navigateToFragment(DashboardFragment.newInstance(),false)
             }
 
             R.id.action_profile -> {
                 toolbar.title =resources.getString(R.string.nav_item_profile)
-                navigateToFragment(ProfileFragment.newInstance())
+                navigateToFragment(ProfileFragment.newInstance(),false)
             }
             R.id.action_loan -> {
                 toolbar.title =resources.getString(R.string.nav_item_loan)
-                navigateToFragment(LoanPlans.newInstance())
+                navigateToFragment(LoanPlans.newInstance(),true)
             }
             R.id.action_points -> {
                 toolbar.title =resources.getString(R.string.nav_item_points)
@@ -202,7 +213,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_settings-> {
                 toolbar.title =resources.getString(R.string.nav_item_settings)
-                navigateToFragment(SettingsFragment.newInstance())
+                navigateToFragment(SettingsFragment.newInstance(),false)
 
             }
 
@@ -249,7 +260,17 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         CommonMethod.customSnackBarError(drawer_layout,this@DashboardActivity,message)
     }
 
-    private fun navigateToFragment(fragmentToNavigate: Fragment) {
+    private fun navigateToFragment(fragmentToNavigate: Fragment,isVisible:Boolean)
+    {
+        if(isVisible)
+        {
+            buttonRight.visibility=View.VISIBLE
+        }
+        else
+        {
+            buttonRight.visibility=View.INVISIBLE
+        }
+
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)

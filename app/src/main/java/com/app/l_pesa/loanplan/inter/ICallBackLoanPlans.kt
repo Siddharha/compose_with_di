@@ -1,6 +1,6 @@
 package com.app.l_pesa.loanplan.inter
 
-import com.app.l_pesa.loanplan.model.ResLoan
+import com.app.l_pesa.loanplan.model.ResLoanPlans
 import java.util.ArrayList
 
 /**
@@ -11,7 +11,7 @@ import java.util.ArrayList
  */
 interface ICallBackLoanPlans {
 
-    fun onSuccessLoanPlans(loanHistory: ArrayList<ResLoan.LoanHistory>)
+    fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>)
     fun onEmptyLoanPlans()
     fun onFailureLoanPlans(jsonMessage: String)
 }

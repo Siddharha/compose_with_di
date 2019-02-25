@@ -11,7 +11,7 @@ import android.support.design.widget.TabLayout
 import com.app.l_pesa.loanplan.model.LoanTabPager
 import android.graphics.Typeface
 import android.widget.TextView
-
+import com.app.l_pesa.dashboard.view.DashboardActivity
 
 
 /**
@@ -40,6 +40,7 @@ class LoanPlans : Fragment(),TabLayout.OnTabSelectedListener {
         super.onViewCreated(view, savedInstanceState)
 
        initUI()
+
     }
 
     private fun initUI()

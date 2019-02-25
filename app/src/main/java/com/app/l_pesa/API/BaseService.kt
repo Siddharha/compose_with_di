@@ -2,7 +2,8 @@ package com.app.l_pesa.API
 
 
 import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.loanplan.model.ResLoan
+import com.app.l_pesa.loanplan.model.ResLoanHistory
+import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.password.model.ResChangePassword
@@ -43,8 +44,11 @@ interface BaseService{
     @POST("user/logout")
     fun doLogout(@Body request: JsonObject): Observable<ResLogout>
 
-    @POST("loan/active")
-    fun doLoanList(@Body request: JsonObject): Observable<ResLoan>
+    /*@POST("loan/active")
+    fun doLoanList(@Body request: JsonObject): Observable<ResLoanHistory>*/
+
+    @POST("products/list")
+    fun doLoanList(@Body request: JsonObject): Observable<ResLoanPlans>
 
 }
 

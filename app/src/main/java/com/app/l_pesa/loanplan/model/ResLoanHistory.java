@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-public class ResLoan {
+public class ResLoanHistory {
 
     @SerializedName("status")
     @Expose
@@ -83,6 +83,26 @@ public class ResLoan {
         @SerializedName("due_date")
         @Expose
         private String dueDate;
+
+        /*"loan_history": [
+      {
+        "loan_id": 167849,
+        "identity_number": "11100167849",
+        "loan_amount": 5,
+        "interest_rate": "1.1%",
+        "convertion_dollar_value": "TZS 2300.7",
+        "convertion_loan_amount": "TZS 11504",
+        "actual_loan_amount": "TZS 10256",
+        "applied_date": "23/01/2019",
+        "sanctioned_date": "23/01/2019",
+        "finished_date": "25/02/2019",
+        "disapprove_date": "",
+        "loan_status": "A",
+        "currency_code": "TZS",
+        "loan_status_txt": [
+          "Active",
+          false
+        ]*/
 
         public Integer getLoanId() {
             return loanId;

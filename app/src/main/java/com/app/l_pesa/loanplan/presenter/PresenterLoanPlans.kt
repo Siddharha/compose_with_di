@@ -36,9 +36,9 @@ class PresenterLoanPlans {
 
                         if(response.status.isSuccess)
                         {
-                           if(response.data.loanHistory.size>0)
+                           if(response.data[0].item.size>0)
                            {
-                               callBackOBJ.onSuccessLoanPlans(response.data.loanHistory)
+                               callBackOBJ.onSuccessLoanPlans(response.data[0].item)
                            }
                             else
                            {
@@ -59,8 +59,8 @@ class PresenterLoanPlans {
                         val errorVal     = error as HttpException
 
                         val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus=    jsonError.getJSONObject("status")
-                        val jsonMessage    =    jsonStatus.getString("message")
+                        val  jsonStatus           =    jsonError.getJSONObject("status")
+                        val jsonMessage           =    jsonStatus.getString("message")
 
                         callBackOBJ.onFailureLoanPlans(jsonMessage)
                     }
