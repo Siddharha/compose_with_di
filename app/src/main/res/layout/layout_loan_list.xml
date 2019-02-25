@@ -38,7 +38,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".57"
+            android:layout_weight=".50"
             android:orientation="vertical"
             >
 
@@ -90,17 +90,18 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".23"
+            android:layout_weight=".30"
             android:gravity="center">
 
 
             <com.app.l_pesa.common.CustomButtonRegular
              android:id="@+id/buttonLoanStatus"
-             android:layout_height="@dimen/_28sdp"
+             android:layout_height="@dimen/_27sdp"
              android:layout_width="match_parent"
              android:textSize="@dimen/_10sdp"
              android:layout_marginStart="@dimen/_2sdp"
              android:layout_marginEnd="@dimen/_2sdp"
+             android:textAllCaps="false"
 
             />
         </LinearLayout>
