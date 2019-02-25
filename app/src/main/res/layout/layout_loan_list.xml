@@ -98,7 +98,7 @@
              android:id="@+id/buttonLoanStatus"
              android:layout_height="@dimen/_27sdp"
              android:layout_width="match_parent"
-             android:textSize="@dimen/_10sdp"
+             android:textSize="@dimen/_9sdp"
              android:layout_marginStart="@dimen/_2sdp"
              android:layout_marginEnd="@dimen/_2sdp"
              android:textAllCaps="false"

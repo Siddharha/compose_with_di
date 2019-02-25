@@ -44,6 +44,7 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
         viewHolder.txtRate.text            = context.resources.getString(R.string.interest_rate)+" "+loanPlanList[position].details.loanInterestRate.toString()+"%"
 
         viewHolder.buttonLoanStatus.text   = loanPlanList[position].details.btnText
+        viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details.btnHexColor))
         viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
 
     }

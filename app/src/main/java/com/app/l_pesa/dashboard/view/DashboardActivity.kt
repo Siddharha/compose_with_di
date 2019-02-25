@@ -140,7 +140,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     }
 
-    fun openHistory()
+    private fun openHistory()
     {
         buttonRight.setOnClickListener {
 
