@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanplan.model.ResLoanPlans
+import java.lang.Exception
 
 /**
  * Created by Intellij Amiya on 21/2/19.
@@ -45,7 +46,22 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
         viewHolder.buttonLoanStatus.text   = loanPlanList[position].details.btnText
         viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details.btnHexColor))
-        viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
+
+
+        if(loanPlanList[position].details.btnColor!!.contentEquals("green"))
+        {
+            viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
+        }
+        else if(loanPlanList[position].details.btnColor!!.contentEquals("blue"))
+        {
+            viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_blue_view)
+        }
+        else
+        {
+            viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_orange_view)
+        }
+
+
 
     }
 
