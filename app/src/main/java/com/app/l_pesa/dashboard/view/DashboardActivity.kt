@@ -153,7 +153,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            finishAffinity()
+            this@DashboardActivity.moveTaskToBack(true)
         }
     }
 
