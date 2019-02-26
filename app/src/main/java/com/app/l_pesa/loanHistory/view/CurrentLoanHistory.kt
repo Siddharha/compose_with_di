@@ -18,6 +18,7 @@ import java.util.ArrayList
 
 class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
+    private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
 
     companion object {
         fun newInstance(): Fragment {
@@ -39,6 +40,8 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     private fun loadHistory()
     {
+        listLoanHistory= ArrayList()
+
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -63,7 +66,9 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     override fun onSuccessLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>) {
 
         swipeRefreshLayout.isRefreshing = false
-        val currentLoanAdapter          = CurrentLoanHistoryAdapter(activity!!, loanHistory)
+        listLoanHistory!!.clear()
+        listLoanHistory!!.addAll(loanHistory)
+        val currentLoanAdapter          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
         rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                  = currentLoanAdapter
     }
@@ -76,5 +81,46 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     override fun onFailureLoanHistory(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing = false
+    }
+
+
+    private fun loadMore()
+    {
+
+        val loanStatus         = ResLoanHistory.LoanStatus(false)
+        val listLoanStatus     = ArrayList<ResLoanHistory.LoanStatus>()
+        listLoanStatus.add(loanStatus)
+
+        val loanStatusModel    = ResLoanHistory.LoanHistory(0,"",0,"",
+                                                            "","","",
+                                                            "","","","","",
+                                                            "","" +
+                                                            "",listLoanStatus)
+
+        listLoanHistory!!.add(loanStatusModel)
+        /*val blockModel              = VisitorInsideBlock("")
+        val unitModel               = VisitorUnit("","","",0,"",0,blockModel)
+        val visitorGatePassUnit     = VisitorGatePassUnit("")
+        val visitorGatePass         = VisitorGatePass(0,"","","",visitorGatePassUnit)
+        val unitAssociationModel    = VisitorUnitAssociations("",unitModel)
+        val unitAssociationList     = ArrayList<VisitorUnitAssociations>()
+        val visitorGatePassList     = ArrayList<VisitorGatePass>()
+        visitorGatePassList.add(visitorGatePass)
+        unitAssociationList.add(unitAssociationModel)
+        val visitorDataModel        = VisitorInsideLogs(0,"","","","","",0,"","",
+                visitorModel,unitAssociationList,visitorGatePassList)
+
+        val jsonObject = JSONObject()
+        jsonObject.accumulate("date",date)
+
+        val jsonParser              =  JsonParser()
+        val jsonRequest  =  jsonParser.parse(jsonObject.toString())
+
+        visitorApprovedList!!.add(visitorDataModel)
+        visitorLogAdapterOBJ!!.notifyItemInserted(visitorApprovedList!!.size-1)
+        val visitorLogPresenterOBJ  =  VisitorLogPresenter()
+        visitorLogPresenterOBJ.visitorLogPagination(activity,accessToken,unitId,"REGULAR",cursorAFTER,jsonRequest.asJsonObject,this)*/
+
+
     }
 }
