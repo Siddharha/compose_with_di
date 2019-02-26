@@ -16,6 +16,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
+
 class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
@@ -59,7 +60,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     private fun swipeRefresh()
     {
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setColorSchemeResources(com.app.l_pesa.R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
             loadHistory()
@@ -68,24 +69,27 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     override fun onSuccessLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>) {
 
-        swipeRefreshLayout.isRefreshing = false
-        listLoanHistory!!.clear()
-        listLoanHistory!!.addAll(loanHistory)
-        adapterLoanHistory              = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
-        rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rvLoan.adapter                  = adapterLoanHistory
-        adapterLoanHistory!!.setMoreDataAvailable(false)
-        adapterLoanHistory!!.setLoadMoreListener(object : CurrentLoanHistoryAdapter.OnLoadMoreListener {
-            override fun onLoadMore() {
+        activity!!.runOnUiThread {
 
-                rvLoan.post {
+            swipeRefreshLayout.isRefreshing = false
+            listLoanHistory!!.clear()
+            listLoanHistory!!.addAll(loanHistory)
+            adapterLoanHistory              = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
+            rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+            rvLoan.adapter                  = adapterLoanHistory
+            adapterLoanHistory!!.notifyDataSetChanged()
+            adapterLoanHistory!!.setLoadMoreListener(object : CurrentLoanHistoryAdapter.OnLoadMoreListener {
+                override fun onLoadMore() {
 
-                     loadMore()
+                    rvLoan.post {
+
+                        loadMore()
+
+                    }
 
                 }
-
-            }
-        })
+            })
+        }
 
     }
 
@@ -94,6 +98,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
         if(listLoanHistory!!.size!=0)
         {
             try {
+
                 listLoanHistory!!.removeAt(listLoanHistory!!.size - 1)
                 adapterLoanHistory!!.notifyDataChanged()
                 listLoanHistory!!.addAll(loanHistory)
@@ -109,7 +114,8 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     override fun onEmptyPaginateLoanHistory() {
 
-      adapterLoanHistory!!.setMoreDataAvailable(false)
+      // adapterLoanHistory!!.setMoreDataAvailable(false)
+
 
     }
 

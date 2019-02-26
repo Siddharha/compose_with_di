@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.loanHistory.model.ResLoanHistory
@@ -13,7 +14,7 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistory
 class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryList: ArrayList<ResLoanHistory.LoanHistory>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
-    private var                 isLoading           = false
+    var                         isLoading           = false
     private var                 isMoreDataAvailable = true
 
 
@@ -31,18 +32,17 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
 
         }
 
-
     }
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val txt_loan_no       : CommonTextRegular = itemView.findViewById(R.id.txt_loan_no)
+        private val txtLoanNo       : CommonTextRegular = itemView.findViewById(R.id.txt_loan_no)
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, loanHistory: ResLoanHistory.LoanHistory )
         {
 
-            txt_loan_no.text = loanHistory.actual_loan_amount
+            txtLoanNo.text = loanHistory.actual_loan_amount
         }
     }
 
@@ -69,7 +69,9 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
     }
 
 
-    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+     inner class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+         val progressBar       : ProgressBar = itemView.findViewById(R.id.progressBar)
 
         fun bindUser(userName: String)
         {
@@ -80,6 +82,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
 
     fun setMoreDataAvailable(moreDataAvailable: Boolean) {
         isMoreDataAvailable = moreDataAvailable
+
     }
 
     fun notifyDataChanged() {
@@ -91,7 +94,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
         fun onLoadMore()
     }
 
-    internal fun setLoadMoreListener(loadMoreListener: OnLoadMoreListener) {
+    fun setLoadMoreListener(loadMoreListener: OnLoadMoreListener) {
         this.loadMoreListener = loadMoreListener
     }
 }
