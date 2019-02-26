@@ -147,6 +147,8 @@
     <string name="loan_history">Loan History</string>
     <string name="current_loan_history">Current Loan History</string>
     <string name="business_loan_history">Business Loan History</string>
+    <string name="loan_no">Loan No:</string>
+    <string name="loan_amount">Loan Amount:</string>
 
     <!--LPK Withdrawal-->
     <string name="get_wallet_address">Get a wallet address at</string>

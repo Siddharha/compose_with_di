@@ -2,11 +2,13 @@ package com.app.l_pesa.loanHistory.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.loanHistory.adapter.CurrentLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistory
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
@@ -61,6 +63,9 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     override fun onSuccessLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>) {
 
         swipeRefreshLayout.isRefreshing = false
+        val currentLoanAdapter          = CurrentLoanHistoryAdapter(activity!!, loanHistory)
+        rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        rvLoan.adapter                  = currentLoanAdapter
     }
 
     override fun onEmptyLoanHistory() {
