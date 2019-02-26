@@ -39,11 +39,11 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loanLoan()
+        loadLoan()
         swipeRefresh()
     }
 
-    private fun loanLoan()
+    private fun loadLoan()
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -62,8 +62,7 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
-            swipeRefreshLayout.isRefreshing = true
-            loanLoan()
+           loadLoan()
         }
     }
 

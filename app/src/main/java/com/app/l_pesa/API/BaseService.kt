@@ -2,7 +2,7 @@ package com.app.l_pesa.API
 
 
 import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.loanplan.model.ResLoanHistory
+import com.app.l_pesa.loanHistory.model.ResLoanHistory
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
@@ -49,6 +49,9 @@ interface BaseService{
 
     @POST("products/list")
     fun doLoanList(@Body request: JsonObject): Observable<ResLoanPlans>
+
+    @POST("loan/history")
+    fun doLoanHistory(@Body request: JsonObject): Observable<ResLoanHistory>
 
 }
 
