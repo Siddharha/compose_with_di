@@ -21,6 +21,8 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
     private var adapterLoanHistory              : CurrentLoanHistoryAdapter? = null
 
+    private var loadCount=0
+
     companion object {
         fun newInstance(): Fragment {
             return CurrentLoanHistory()
@@ -41,15 +43,15 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     private fun loadHistory()
     {
-        listLoanHistory= ArrayList()
-
+        listLoanHistory      = ArrayList()
+        adapterLoanHistory   = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,this)
+            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,loadCount.toDouble(),this)
         }
 
     }
@@ -72,13 +74,13 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
         adapterLoanHistory              = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
         rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                  = adapterLoanHistory
-
-
+        adapterLoanHistory!!.setMoreDataAvailable(false)
         adapterLoanHistory!!.setLoadMoreListener(object : CurrentLoanHistoryAdapter.OnLoadMoreListener {
             override fun onLoadMore() {
 
                 rvLoan.post {
 
+                     loadMore()
 
                 }
 
@@ -87,9 +89,33 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     }
 
+    override fun onSuccessPaginateLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>) {
+
+        if(listLoanHistory!!.size!=0)
+        {
+            try {
+                listLoanHistory!!.removeAt(listLoanHistory!!.size - 1)
+                adapterLoanHistory!!.notifyDataChanged()
+                listLoanHistory!!.addAll(loanHistory)
+                adapterLoanHistory!!.notifyItemRangeInserted(0, listLoanHistory!!.size)
+
+            }
+            catch (e:Exception)
+            {}
+        }
+
+
+    }
+
+    override fun onEmptyPaginateLoanHistory() {
+
+      adapterLoanHistory!!.setMoreDataAvailable(false)
+
+    }
+
     override fun onEmptyLoanHistory() {
 
-        swipeRefreshLayout.isRefreshing = false
+       swipeRefreshLayout.isRefreshing = false
 
     }
 
@@ -103,39 +129,23 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     private fun loadMore()
     {
 
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+            val loanStatusModel  = ResLoanHistory.LoanHistory(0,"",0,"",
+                                    "","","",
+                                    "","","","","",
+                                    "","")
 
-        val loanStatusModel    = ResLoanHistory.LoanHistory(0,"",0,"",
-                                                            "","","",
-                                                            "","","","","",
-                                                            "","" +
-                                                            "")
+            listLoanHistory!!.add(loanStatusModel)
+            adapterLoanHistory!!.notifyItemInserted(listLoanHistory!!.size-1)
+            loadCount += 5
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("loan_type","current_loan")
+            val presenterLoanHistory= PresenterLoanHistory()
+            presenterLoanHistory.getLoanHistoryPaginate(activity!!,jsonObject,loadCount.toDouble(),this)
 
-        listLoanHistory!!.add(loanStatusModel)
+        }
 
+   }
 
-        /*val blockModel              = VisitorInsideBlock("")
-        val unitModel               = VisitorUnit("","","",0,"",0,blockModel)
-        val visitorGatePassUnit     = VisitorGatePassUnit("")
-        val visitorGatePass         = VisitorGatePass(0,"","","",visitorGatePassUnit)
-        val unitAssociationModel    = VisitorUnitAssociations("",unitModel)
-        val unitAssociationList     = ArrayList<VisitorUnitAssociations>()
-        val visitorGatePassList     = ArrayList<VisitorGatePass>()
-        visitorGatePassList.add(visitorGatePass)
-        unitAssociationList.add(unitAssociationModel)
-        val visitorDataModel        = VisitorInsideLogs(0,"","","","","",0,"","",
-                visitorModel,unitAssociationList,visitorGatePassList)
-
-        val jsonObject = JSONObject()
-        jsonObject.accumulate("date",date)
-
-        val jsonParser              =  JsonParser()
-        val jsonRequest  =  jsonParser.parse(jsonObject.toString())
-
-        visitorApprovedList!!.add(visitorDataModel)
-        visitorLogAdapterOBJ!!.notifyItemInserted(visitorApprovedList!!.size-1)
-        val visitorLogPresenterOBJ  =  VisitorLogPresenter()
-        visitorLogPresenterOBJ.visitorLogPagination(activity,accessToken,unitId,"REGULAR",cursorAFTER,jsonRequest.asJsonObject,this)*/
-
-
-    }
 }

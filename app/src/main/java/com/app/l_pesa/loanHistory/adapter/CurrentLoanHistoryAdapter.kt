@@ -12,9 +12,9 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistory
 
 class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryList: ArrayList<ResLoanHistory.LoanHistory>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    lateinit var        loadMoreListener    : OnLoadMoreListener
-    var                 isLoading           = false
-    var                 isMoreDataAvailable = true
+    private lateinit var        loadMoreListener    : OnLoadMoreListener
+    private var                 isLoading           = false
+    private var                 isMoreDataAvailable = true
 
 
     @SuppressLint("SetTextI18n")
@@ -78,7 +78,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
     }
 
 
-    internal fun setMoreDataAvailable(moreDataAvailable: Boolean) {
+    fun setMoreDataAvailable(moreDataAvailable: Boolean) {
         isMoreDataAvailable = moreDataAvailable
     }
 

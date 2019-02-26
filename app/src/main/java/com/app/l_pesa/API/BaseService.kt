@@ -15,6 +15,7 @@ import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * Created by Intellij Amiya on 23-01-2019.
@@ -51,7 +52,7 @@ interface BaseService{
     fun doLoanList(@Body request: JsonObject): Observable<ResLoanPlans>
 
     @POST("loan/history")
-    fun doLoanHistory(@Body request: JsonObject): Observable<ResLoanHistory>
+    fun doLoanHistory(@Body request: JsonObject, @Query("start") start:Double ): Observable<ResLoanHistory>
 
 }
 
