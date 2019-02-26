@@ -19,6 +19,7 @@ import java.util.ArrayList
 class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
+    private var adapterLoanHistory              : CurrentLoanHistoryAdapter? = null
 
     companion object {
         fun newInstance(): Fragment {
@@ -68,36 +69,50 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
         swipeRefreshLayout.isRefreshing = false
         listLoanHistory!!.clear()
         listLoanHistory!!.addAll(loanHistory)
-        val currentLoanAdapter          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
+        adapterLoanHistory              = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
         rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rvLoan.adapter                  = currentLoanAdapter
+        rvLoan.adapter                  = adapterLoanHistory
+
+
+        adapterLoanHistory!!.setLoadMoreListener(object : CurrentLoanHistoryAdapter.OnLoadMoreListener {
+            override fun onLoadMore() {
+
+                rvLoan.post {
+
+
+                }
+
+            }
+        })
+
     }
 
     override fun onEmptyLoanHistory() {
 
         swipeRefreshLayout.isRefreshing = false
+
     }
 
     override fun onFailureLoanHistory(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing = false
+
     }
 
 
     private fun loadMore()
     {
 
-        val loanStatus         = ResLoanHistory.LoanStatus(false)
-        val listLoanStatus     = ArrayList<ResLoanHistory.LoanStatus>()
-        listLoanStatus.add(loanStatus)
 
         val loanStatusModel    = ResLoanHistory.LoanHistory(0,"",0,"",
                                                             "","","",
                                                             "","","","","",
                                                             "","" +
-                                                            "",listLoanStatus)
+                                                            "")
 
         listLoanHistory!!.add(loanStatusModel)
+
+
         /*val blockModel              = VisitorInsideBlock("")
         val unitModel               = VisitorUnit("","","",0,"",0,blockModel)
         val visitorGatePassUnit     = VisitorGatePassUnit("")
