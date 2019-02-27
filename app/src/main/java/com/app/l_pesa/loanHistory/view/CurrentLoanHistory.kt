@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import java.util.ArrayList
 
 
 class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
+
 
     private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
@@ -45,7 +47,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     private fun loadHistory()
     {
         listLoanHistory      = ArrayList()
-        adapterLoanHistory   = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
+        adapterLoanHistory   = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -77,7 +79,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             swipeRefreshLayout.isRefreshing = false
             listLoanHistory!!.clear()
             listLoanHistory!!.addAll(loanHistory)
-            adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
+            adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
             rvLoan.layoutManager        = llmOBJ
@@ -164,5 +166,10 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
         }
 
    }
+
+    override fun onClickList() {
+        startActivity(Intent(activity, LoanHistoryDetailsActivity::class.java))
+        activity?.overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
 
 }

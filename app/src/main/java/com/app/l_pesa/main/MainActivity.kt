@@ -1,19 +1,14 @@
 package com.app.l_pesa.main
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
-
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import com.app.l_pesa.R
-
 import android.support.v4.content.ContextCompat
 import android.content.Intent
 import android.location.*
-import android.provider.Settings
-import android.support.v7.app.AlertDialog
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity

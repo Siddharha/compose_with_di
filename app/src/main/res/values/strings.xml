@@ -159,6 +159,7 @@
     <string name="due_on">Due on:</string>
     <string name="disapproved_on">Disapproved on:</string>
     <string name="completed_on">Completed on:</string>
+    <string name="loan_details">Loan Details</string>
 
     <!--LPK Withdrawal-->
     <string name="get_wallet_address">Get a wallet address at</string>
@@ -168,6 +169,7 @@
     <string name="wallet_address_link">http://www.myetherwallet.com/</string>
     <string name="enter_token">Enter Token</string>
     <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
+
 
 
 </resources>

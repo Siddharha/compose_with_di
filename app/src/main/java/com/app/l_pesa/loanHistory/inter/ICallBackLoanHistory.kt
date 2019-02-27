@@ -10,4 +10,5 @@ interface ICallBackLoanHistory {
     fun onEmptyLoanHistory()
     fun onEmptyPaginateLoanHistory()
     fun onFailureLoanHistory(jsonMessage: String)
+    fun onClickList()
 }

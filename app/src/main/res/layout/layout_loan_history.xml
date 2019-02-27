@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <LinearLayout
         android:id="@+id/ll_personal_information_card"
@@ -208,7 +210,7 @@
                         android:text=""
                         android:gravity="center|start"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="#8e8963"
+                        android:textColor="@color/color_light_gold"
 
                         />
 
@@ -217,7 +219,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="#000000"
+                        android:textColor="@color/color_semi_deep_black"
                         android:textSize="@dimen/_12sdp"
 
                         />
