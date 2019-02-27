@@ -169,7 +169,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     override fun onClickList() {
         startActivity(Intent(activity, LoanHistoryDetailsActivity::class.java))
-        activity?.overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
 }

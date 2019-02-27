@@ -160,6 +160,15 @@
     <string name="disapproved_on">Disapproved on:</string>
     <string name="completed_on">Completed on:</string>
     <string name="loan_details">Loan Details</string>
+    <string name="loan_product">Loan Product</string>
+    <string name="loan_purpose">Loan Purpose</string>
+    <string name="payment_scheduled">Payment Scheduled</string>
+    <string name="payment_history">Payment History</string>
+    <string name="reason_for_disapproved">Reason for Disapproved</string>
+    <string name="status">Status</string>
+    <string name="loan_duration">Loan Duration</string>
+    <string name="approval_date">Approval Date</string>
+    <string name="request_date">Request Date</string>
 
     <!--LPK Withdrawal-->
     <string name="get_wallet_address">Get a wallet address at</string>

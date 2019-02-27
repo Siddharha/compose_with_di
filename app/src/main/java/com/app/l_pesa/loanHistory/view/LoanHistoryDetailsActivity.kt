@@ -3,13 +3,14 @@ package com.app.l_pesa.loanHistory.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.loanHistory.model.ModelHistoryData
 
 import kotlinx.android.synthetic.main.activity_loan_history_details.*
+import kotlinx.android.synthetic.main.content_loan_history_details.*
 
 class LoanHistoryDetailsActivity : AppCompatActivity() {
 
@@ -19,6 +20,15 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanHistoryDetailsActivity)
+
+        initData()
+    }
+
+    private fun initData()
+    {
+        val loanHistoryData= ModelHistoryData.getInstance().modelData
+
+        txt_loan_no_val.text = loanHistoryData!!.loan_id.toString()
     }
 
     private fun toolbarFont(context: Activity) {
