@@ -237,7 +237,7 @@
                     android:id="@+id/rl_approved_on"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAquaDeep"
+                    android:background="@color/color_light_green"
 
                     >
 

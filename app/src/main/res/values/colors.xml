@@ -31,8 +31,9 @@
     <color name="textColors">#535559</color>
     <color name="wallet_addr_link_color">#9caf01</color>
     <color name="total_lpk_color">#4e6485</color>
-
-    <color name="color_yellow">#f3bd29</color>
-    <color name="color_light_yellow">#f3ec29</color>
+    <color name="color_light_yellow">#FFF5BC</color>
+    <color name="color_deep_green">#4E970E</color>
+    <color name="color_deep_gold">#b39800</color>
+    <color name="color_light_green">#DAFFEB</color>
 
 </resources>

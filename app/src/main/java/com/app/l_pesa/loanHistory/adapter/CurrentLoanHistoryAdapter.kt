@@ -90,6 +90,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
                 itemView.txt_applied_on_date.text=loanHistory.sanctioned_date
                 itemView.txt_applied_on.text = context.resources.getString(R.string.approved_on)
                 itemView.txt_status.text = context.resources.getString(R.string.approved)
+                itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
                 itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
             }
             else if(loanHistory.loan_status=="C")
@@ -97,6 +98,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
                 itemView.txt_applied_on_date.text=loanHistory.finished_date
                 itemView.txt_applied_on.text = context.resources.getString(R.string.completed_on)
                 itemView.txt_status.text = context.resources.getString(R.string.completed)
+                itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorBlack))
                 itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
 
             }
@@ -105,7 +107,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
                 itemView.txt_applied_on_date.text=loanHistory.applied_date
                 itemView.txt_applied_on.text = context.resources.getString(R.string.applied_on)
                 itemView.txt_status.text = context.resources.getString(R.string.pending)
-                itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
+                itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
                 itemView.img_status.setImageResource(R.drawable.ic_pending_icon)
             }
             else if(loanHistory.loan_status=="DA")
