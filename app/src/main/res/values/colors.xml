@@ -33,7 +33,8 @@
     <color name="total_lpk_color">#4e6485</color>
     <color name="color_light_yellow">#FFF5BC</color>
     <color name="color_deep_green">#4E970E</color>
-    <color name="color_deep_gold">#b39800</color>
+    <color name="color_deep_gold">#de970e</color>
+    <color name="color_semi_deep_black">#333333</color>
     <color name="color_light_green">#DAFFEB</color>
 
 </resources>

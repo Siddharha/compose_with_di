@@ -84,7 +84,6 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
             itemView.txt_interest_rate.text="$"+loanHistory.interest_rate
 
 
-
             if(loanHistory.loan_status=="A")
             {
                 itemView.txt_applied_on_date.text=loanHistory.sanctioned_date
@@ -98,7 +97,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
                 itemView.txt_applied_on_date.text=loanHistory.finished_date
                 itemView.txt_applied_on.text = context.resources.getString(R.string.completed_on)
                 itemView.txt_status.text = context.resources.getString(R.string.completed)
-                itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorBlack))
+                itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_semi_deep_black))
                 itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
 
             }
