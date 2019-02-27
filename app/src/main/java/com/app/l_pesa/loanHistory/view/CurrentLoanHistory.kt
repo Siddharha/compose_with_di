@@ -3,7 +3,6 @@ package com.app.l_pesa.loanHistory.view
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,7 @@ import java.util.ArrayList
 class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
-    private var adapterLoanHistory              : CurrentLoanHistoryAdapter? = null
+    private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
 
     private var loadCount=0
 
@@ -54,7 +53,10 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()
             presenterLoanHistory.getLoanHistory(activity!!,jsonObject,loadCount.toDouble(),this)
+
+
         }
+
 
     }
 
@@ -75,21 +77,31 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             swipeRefreshLayout.isRefreshing = false
             listLoanHistory!!.clear()
             listLoanHistory!!.addAll(loanHistory)
-            adapterLoanHistory              = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
-            rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-            rvLoan.adapter                  = adapterLoanHistory
-            adapterLoanHistory!!.notifyDataSetChanged()
-            adapterLoanHistory!!.setLoadMoreListener(object : CurrentLoanHistoryAdapter.OnLoadMoreListener {
+            adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!)
+            val llmOBJ                  = LinearLayoutManager(activity)
+            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            rvLoan.layoutManager        = llmOBJ
+            rvLoan.adapter              = adapterLoanHistory
+
+            adapterLoanHistory.setLoadMoreListener(object : CurrentLoanHistoryAdapter.OnLoadMoreListener {
                 override fun onLoadMore() {
 
                     rvLoan.post {
 
-                        loadMore()
+                        if(listLoanHistory!!.size>19)
+                        {}
+                        else
+                        {
+                            loadMore()
+                        }
+
 
                     }
 
                 }
             })
+
+
         }
 
     }
@@ -101,9 +113,9 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             try {
 
                 listLoanHistory!!.removeAt(listLoanHistory!!.size - 1)
-                adapterLoanHistory!!.notifyDataChanged()
+                adapterLoanHistory.notifyDataChanged()
                 listLoanHistory!!.addAll(loanHistory)
-                adapterLoanHistory!!.notifyItemRangeInserted(0, listLoanHistory!!.size)
+                adapterLoanHistory.notifyItemRangeInserted(0, listLoanHistory!!.size)
 
             }
             catch (e:Exception)
@@ -115,14 +127,12 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     override fun onEmptyPaginateLoanHistory() {
 
-      adapterLoanHistory!!.setMoreDataAvailable(false)
-
 
     }
 
     override fun onEmptyLoanHistory() {
 
-       swipeRefreshLayout.isRefreshing = false
+        swipeRefreshLayout.isRefreshing = false
 
     }
 
@@ -144,7 +154,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
                                     "","")
 
             listLoanHistory!!.add(loanStatusModel)
-            adapterLoanHistory!!.notifyItemInserted(listLoanHistory!!.size-1)
+            adapterLoanHistory.notifyItemInserted(listLoanHistory!!.size-1)
             loadCount += 5
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")

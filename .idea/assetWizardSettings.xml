@@ -14,8 +14,9 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_info_icon" />
-                            <entry key="sourceFile" value="$USER_HOME$/snap/skype/common/lpk_withdral/info_icon.svg" />
+                            <entry key="autoMirrored" value="true" />
+                            <entry key="outputName" value="ic_pending_icon" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/L-Peas_icon/loan_history/pending_icon.svg" />
                           </map>
                         </option>
                       </PersistentState>

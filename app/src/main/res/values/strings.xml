@@ -149,6 +149,16 @@
     <string name="business_loan_history">Business Loan History</string>
     <string name="loan_no">Loan No:</string>
     <string name="loan_amount">Loan Amount:</string>
+    <string name="completed">Completed</string>
+    <string name="approved">Approved</string>
+    <string name="disapproved">Disapproved</string>
+    <string name="due">Due</string>
+    <string name="pending">Pending</string>
+    <string name="applied_on">Applied on:</string>
+    <string name="approved_on">Approved on:</string>
+    <string name="due_on">Due on:</string>
+    <string name="disapproved_on">Disapproved on:</string>
+    <string name="completed_on">Completed on:</string>
 
     <!--LPK Withdrawal-->
     <string name="get_wallet_address">Get a wallet address at</string>

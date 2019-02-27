@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="@dimen/_3sdp"
-        android:layout_margin="@dimen/_7sdp"
+        android:layout_margin="@dimen/_4sdp"
         android:orientation="horizontal"
         android:background="@drawable/bg_white_view"
         android:weightSum="1">
@@ -32,25 +32,25 @@
                 >
 
                 <ImageView
-
+                    android:src="@drawable/ic_loan_no_icon"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-
+                    android:scaleType="fitXY"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:contentDescription="@string/app_name"/>
 
                 <ImageView
+                    android:src="@drawable/ic_loan_amount_icon"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-
                     android:layout_marginTop="@dimen/_7sdp"
                     android:contentDescription="@string/app_name"/>
 
 
                 <ImageView
+                    android:src="@drawable/ic_interest_rate_icon"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:contentDescription="@string/app_name"/>
@@ -150,9 +150,6 @@
 
                 </RelativeLayout>
 
-
-
-
             </LinearLayout>
 
         </LinearLayout>
@@ -169,7 +166,8 @@
                 android:id="@+id/rl_card_right"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".49"
+                android:layout_weight=".50"
+                android:background="@color/color_light_yellow"
                 android:orientation="horizontal"
                 android:weightSum="1"
                 >
@@ -185,6 +183,8 @@
 
                     <ImageView
                         android:id="@+id/img_applied_on"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="fitXY"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         app:srcCompat="@drawable/ic_calendar_icon"/>
@@ -224,22 +224,12 @@
 
                 </LinearLayout>
 
-
-
-
             </LinearLayout>
-
-            <View
-
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/colorWhite"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight=".51"
+                android:layout_weight=".50"
 
                 >
 
@@ -247,6 +237,7 @@
                     android:id="@+id/rl_approved_on"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/colorAquaDeep"
 
                     >
 
@@ -266,6 +257,7 @@
 
                             <ImageView
                                 android:id="@+id/img_status"
+                                android:contentDescription="@string/app_name"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_20sdp"
 
