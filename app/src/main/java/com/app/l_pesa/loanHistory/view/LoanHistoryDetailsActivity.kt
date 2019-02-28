@@ -2,6 +2,8 @@ package com.app.l_pesa.loanHistory.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -47,7 +49,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
         txt_loan_no_val.text = loanHistoryData.loan_id.toString()
         txt_interest_rate.text = loanHistoryData.interest_rate
-        txt_loan_amount_value.text = loanHistoryData.actual_loan_amount
+        txt_loan_amount_value.text = loanHistoryData.currency_code+" "+loanHistoryData.actual_loan_amount
         txt_request_date.text = loanHistoryData.applied_date
         txt_approval_date.text = loanHistoryData.sanctioned_date
         txt_loan_duration.text = loanHistoryData.duration
@@ -62,23 +64,33 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
 
         when {
             loanHistoryData.loan_status=="C" -> {
+                rlDisApproved.visibility=View.GONE
                 txt_status.text = resources.getString(R.string.completed)
                 imgStatus.setBackgroundResource(R.drawable.ic_approved_icon)
             }
             loanHistoryData.loan_status=="A" -> {
+                rlDisApproved.visibility=View.GONE
                 txt_status.text = resources.getString(R.string.approved)
                 imgStatus.setBackgroundResource(R.drawable.ic_approved_icon)
             }
             loanHistoryData.loan_status=="P" -> {
+                rlDisApproved.visibility=View.GONE
                 txt_status.text = resources.getString(R.string.pending)
                 imgStatus.setBackgroundResource(R.drawable.ic_pending_icon)
+                rlPayment.visibility=View.GONE
             }
             loanHistoryData.loan_status=="DA" -> {
                 txt_status.text = resources.getString(R.string.disapproved)
+                txt_status.setTextColor(Color.RED)
                 imgStatus.setBackgroundResource(R.drawable.ic_disapproved_icon)
+                rlDisApproved.visibility=View.VISIBLE
+                rlPayment.visibility=View.GONE
+                txt_disapproved.text = loanHistoryData.disapprove_reason
             }
             else -> {
+                rlDisApproved.visibility=View.GONE
                 txt_status.text = resources.getString(R.string.due)
+                txt_status.setTextColor(Color.RED)
                 imgStatus.setBackgroundResource(R.drawable.ic_due_icon)
             }
         }
@@ -88,6 +100,14 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
 
             if(CommonMethod.isNetworkAvailable(this@LoanHistoryDetailsActivity))
             {
+                val bundle     = intent.extras
+                val loanType   = bundle!!.getString("LOAN_TYPE")
+                bundle.putString("LOAN_TYPE",loanType)
+                bundle.putString("LOAN_ID",loanHistoryData.loan_id.toString())
+                val intent = Intent(this@LoanHistoryDetailsActivity, LoanPaybackScheduledActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent,bundle)
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
             }
             else

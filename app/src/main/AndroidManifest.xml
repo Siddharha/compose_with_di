@@ -26,6 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".loanHistory.view.LoanPaybackScheduledActivity"
+            android:label="@string/payment_schedule"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity
             android:name=".loanHistory.view.LoanHistoryDetailsActivity"
             android:label="@string/loan_details"
             android:screenOrientation="portrait"

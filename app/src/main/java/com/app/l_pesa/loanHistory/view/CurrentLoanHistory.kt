@@ -156,7 +156,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             val loanStatusModel  = ResLoanHistory.LoanHistory(0,"",0,"",
                                     "","","",
                                     "","","","","",
-                                    "","","","","","","","","")
+                                    "","","","","","","","","","")
 
             listLoanHistory!!.add(loanStatusModel)
             adapterLoanHistory.notifyItemInserted(listLoanHistory!!.size-1)
@@ -170,7 +170,11 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
    }
 
     override fun onClickList() {
-        startActivity(Intent(activity, LoanHistoryDetailsActivity::class.java))
+        val bundle = Bundle()
+        bundle.putString("LOAN_TYPE","current_loan")
+        val intent = Intent(activity, LoanPaybackScheduledActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent,bundle)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 

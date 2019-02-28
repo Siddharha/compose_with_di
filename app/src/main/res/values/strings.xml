@@ -163,6 +163,7 @@
     <string name="loan_product">Loan Product: </string>
     <string name="loan_purpose">Loan Purpose</string>
     <string name="payment_scheduled">Payment Scheduled</string>
+    <string name="payment_schedule">Payment Schedule</string>
     <string name="payment_history">Payment History</string>
     <string name="reason_for_disapproved">Reason for Disapproved</string>
     <string name="status">Status:</string>
@@ -178,7 +179,6 @@
     <string name="actual_loan_amount">Actual Loan Amount</string>
 
 
-
     <!--LPK Withdrawal-->
     <string name="get_wallet_address">Get a wallet address at</string>
     <string name="erc_address">ERC-20 Address*</string>
@@ -187,7 +187,5 @@
     <string name="wallet_address_link">http://www.myetherwallet.com/</string>
     <string name="enter_token">Enter Token</string>
     <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
-
-
 
 </resources>

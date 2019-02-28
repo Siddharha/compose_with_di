@@ -928,8 +928,8 @@
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_toEndOf="@+id/img_purpose"
                         android:text="@string/loan_purpose"
-                        android:textColor="@color/color_gray_light"
-                        android:textSize="@dimen/_11sdp" />
+                        android:textColor="@color/color_semi_deep_black"
+                        android:textSize="@dimen/_12sdp" />
                 </RelativeLayout>
 
                 <com.app.l_pesa.common.CommonTextRegular
@@ -939,12 +939,12 @@
                     android:layout_below="@+id/rl_purpose_header"
                     android:padding="@dimen/_3sdp"
                     android:text=""
-                    android:textColor="@color/color_semi_deep_black"
+                    android:textColor="@color/color_gray_light"
                     android:textSize="@dimen/_12sdp" />
          </RelativeLayout>
 
 
-            <RelativeLayout
+        <RelativeLayout
                 android:id="@+id/rlPayment"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_28sdp"
@@ -999,6 +999,58 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+            </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/rlDisApproved"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlPurpose"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/bg_white_view"
+                android:visibility="gone"
+                >
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_disapproved_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center|start"
+
+                    >
+
+                    <ImageView
+                        android:id="@+id/img_disapproved"
+                        android:scaleType="fitXY"
+                        android:layout_width="@dimen/_27sdp"
+                        android:layout_height="@dimen/_27sdp"
+                        android:contentDescription="@string/app_name"
+                        app:srcCompat="@drawable/ic_disapproved_icon" />
+
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_toEndOf="@+id/img_disapproved"
+                        android:text="@string/reason_for_disapproved"
+                        android:textColor="@color/color_semi_deep_black"
+                        android:textSize="@dimen/_12sdp" />
+
+                </RelativeLayout>
+
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/txt_disapproved"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_disapproved_header"
+                    android:textColor="@color/color_gray_light"
+                    android:textSize="@dimen/_12sdp"
+                    android:padding="@dimen/_3sdp"/>
 
             </RelativeLayout>
 
