@@ -15,8 +15,14 @@ import kotlinx.android.synthetic.main.activity_loan_history_details.*
 import kotlinx.android.synthetic.main.content_loan_history_details.*
 import android.text.Html
 import android.os.Build
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.text.Spanned
-
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonTextRegular
 
 
 class LoanHistoryDetailsActivity : AppCompatActivity() {
@@ -49,7 +55,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_currency_conversion.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_loan_amount
         txt_processing_fee.text = loanHistoryData.processing_fees+" ("+loanHistoryData.currency_code+ loanHistoryData.processing_fees_amount+")"
         txt_purpose.text = loanHistoryData.loan_purpose_message
-        txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+ loanHistoryData.conversion_charge_amount+")"
+        txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+" "+ loanHistoryData.conversion_charge_amount+")"
 
         txt_credit_score.text =  fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+shared.userCreditScore+"</font>")
         txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+loanHistoryData.cr_sc_when_requesting_loan+"</font>")
@@ -78,7 +84,36 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         }
 
 
+        ll_payment_scheduled.setOnClickListener {
+
+            if(CommonMethod.isNetworkAvailable(this@LoanHistoryDetailsActivity))
+            {
+
+            }
+            else
+            {
+                customSnackBarError(rlRoot,resources.getString(R.string.no_internet))
+            }
+        }
+
+
     }
+
+    private fun customSnackBarError(view: View, message:String) {
+
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@LoanHistoryDetailsActivity,R.color.colorRed))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(this).inflate(R.layout.snackbar_error, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+
+        txtTitle.text = message
+
+        snackBarOBJ.show()
+    }
+
 
     private fun fromHtml(source: String): Spanned {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

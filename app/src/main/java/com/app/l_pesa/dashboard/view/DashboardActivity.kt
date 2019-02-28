@@ -16,9 +16,13 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.graphics.Typeface
 import android.provider.Settings
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.common.*
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
@@ -143,9 +147,32 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         buttonRight.setOnClickListener {
 
-            startActivity(Intent(this@DashboardActivity, LoanHistoryListActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            if(CommonMethod.isNetworkAvailable(this@DashboardActivity))
+            {
+                startActivity(Intent(this@DashboardActivity, LoanHistoryListActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                customSnackBarError(drawer_layout,resources.getString(R.string.no_internet))
+            }
+
         }
+    }
+
+    private fun customSnackBarError(view: View, message:String) {
+
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@DashboardActivity,R.color.colorRed))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(this).inflate(R.layout.snackbar_error, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+
+        txtTitle.text = message
+
+        snackBarOBJ.show()
     }
 
     override fun onBackPressed() {

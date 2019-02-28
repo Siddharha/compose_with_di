@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/screenBackground"
+    android:id="@+id/rlRoot"
    >
 
     <ScrollView
@@ -273,7 +274,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                android:textColor="@color/color_gray_light"
-                                android:textSize="@dimen/_13sdp"
+                                android:textSize="@dimen/_12sdp"
 
                                 />
 
@@ -395,7 +396,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 
@@ -535,7 +536,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 
@@ -594,7 +595,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 
