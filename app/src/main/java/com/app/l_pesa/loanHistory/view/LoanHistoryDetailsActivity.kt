@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
@@ -24,11 +25,13 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         initData()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initData()
     {
         val loanHistoryData= ModelHistoryData.getInstance().modelData
-
-        txt_loan_no_val.text = loanHistoryData!!.loan_id.toString()
+        txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
+        txt_loan_no_val.text = loanHistoryData.loan_id.toString()
+        txt_interest_rate.text = loanHistoryData.interest_rate
     }
 
     private fun toolbarFont(context: Activity) {

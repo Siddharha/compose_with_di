@@ -160,7 +160,7 @@
     <string name="disapproved_on">Disapproved on:</string>
     <string name="completed_on">Completed on:</string>
     <string name="loan_details">Loan Details</string>
-    <string name="loan_product">Loan Product</string>
+    <string name="loan_product">Loan Product: </string>
     <string name="loan_purpose">Loan Purpose</string>
     <string name="payment_scheduled">Payment Scheduled</string>
     <string name="payment_history">Payment History</string>
