@@ -8,6 +8,7 @@ import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
+import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.splash.model.ResModelCountry
 import com.google.gson.JsonObject
@@ -29,6 +30,9 @@ interface BaseService{
 
     @POST("user/login")
     fun doLogin(@Body request: JsonObject): Observable<ResLogin>
+
+    @GET("user/info")
+    fun getUserInfo(): Observable<ResUserInfo>
 
     @GET("user/dashboard")
     fun getDashboard(): Observable<ResDashboard>
@@ -52,7 +56,7 @@ interface BaseService{
     fun doLoanList(@Body request: JsonObject): Observable<ResLoanPlans>
 
     @POST("loan/history")
-    fun doLoanHistory(@Body request: JsonObject, @Query("start") start:Double ): Observable<ResLoanHistory>
+    fun doLoanHistory(@Body request: JsonObject, @Query("cursors") cursors:String ): Observable<ResLoanHistory>
 
 }
 

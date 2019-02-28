@@ -5,8 +5,8 @@ import java.util.ArrayList
 
 interface ICallBackLoanHistory {
 
-    fun onSuccessLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>, user_credit_score: Int)
-    fun onSuccessPaginateLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>)
+    fun onSuccessLoanHistory(loan_history: ArrayList<ResLoanHistory.LoanHistory>, cursors: ResLoanHistory.Cursors, user_credit_score: Int)
+    fun onSuccessPaginateLoanHistory(loan_history: ArrayList<ResLoanHistory.LoanHistory>, cursors: ResLoanHistory.Cursors)
     fun onEmptyLoanHistory()
     fun onEmptyPaginateLoanHistory()
     fun onFailureLoanHistory(jsonMessage: String)

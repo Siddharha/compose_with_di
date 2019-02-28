@@ -25,7 +25,8 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
 
-    private var loadCount=0
+    private var hasNext=false
+    private var after=""
 
     companion object {
         fun newInstance(): Fragment {
@@ -55,7 +56,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,loadCount.toDouble(),this)
+            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,"",this)
 
         }
 
@@ -72,15 +73,16 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
         }
     }
 
-    override fun onSuccessLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>, user_credit_score: Int) {
+    override fun onSuccessLoanHistory(loan_history: ArrayList<ResLoanHistory.LoanHistory>, cursors: ResLoanHistory.Cursors, user_credit_score: Int) {
 
         activity!!.runOnUiThread {
-
+            hasNext =cursors.hasNext
+            after   =cursors.after
             swipeRefreshLayout.isRefreshing = false
             val shared=SharedPref(activity!!)
             shared.userCreditScore=user_credit_score.toString()
             listLoanHistory!!.clear()
-            listLoanHistory!!.addAll(loanHistory)
+            listLoanHistory!!.addAll(loan_history)
             adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
@@ -92,9 +94,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
                     rvLoan.post {
 
-                        if(listLoanHistory!!.size>19)
-                        {}
-                        else
+                        if(hasNext)
                         {
                             loadMore()
                         }
@@ -110,15 +110,17 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     }
 
-    override fun onSuccessPaginateLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>) {
+    override fun onSuccessPaginateLoanHistory(loan_history: ArrayList<ResLoanHistory.LoanHistory>, cursors: ResLoanHistory.Cursors) {
 
+        hasNext =cursors.hasNext
+        after   =cursors.after
         if(listLoanHistory!!.size!=0)
         {
             try {
 
                 listLoanHistory!!.removeAt(listLoanHistory!!.size - 1)
                 adapterLoanHistory.notifyDataChanged()
-                listLoanHistory!!.addAll(loanHistory)
+                listLoanHistory!!.addAll(loan_history)
                 adapterLoanHistory.notifyItemRangeInserted(0, listLoanHistory!!.size)
 
             }
@@ -159,11 +161,10 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
             listLoanHistory!!.add(loanStatusModel)
             adapterLoanHistory.notifyItemInserted(listLoanHistory!!.size-1)
-            loadCount += 5
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryPaginate(activity!!,jsonObject,loadCount.toDouble(),this)
+            presenterLoanHistory.getLoanHistoryPaginate(activity!!,jsonObject,after,this)
 
         }
 

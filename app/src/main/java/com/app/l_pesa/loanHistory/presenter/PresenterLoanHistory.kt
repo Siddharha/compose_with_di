@@ -14,10 +14,10 @@ import retrofit2.HttpException
 
 class PresenterLoanHistory {
 
-    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject,loadCount:Double,callBackOBJ: ICallBackLoanHistory)
+    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject,cursors:String,callBackOBJ: ICallBackLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,loadCount)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -32,7 +32,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackOBJ.onSuccessLoanHistory(response.data.loan_history,response.data.user_credit_score)
+                                callBackOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score)
                             }
                             else
                             {
@@ -69,10 +69,10 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject,loadCount:Double,callBackOBJ: ICallBackLoanHistory)
+    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject,cursors:String,callBackOBJ: ICallBackLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,loadCount)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -87,7 +87,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackOBJ.onSuccessPaginateLoanHistory(response.data.loan_history)
+                                callBackOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors)
                             }
                             else
                             {

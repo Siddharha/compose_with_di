@@ -53,15 +53,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="@dimen/_84sdp"
-                    android:layout_height="@dimen/_66sdp"
+                <com.app.l_pesa.common.CircularImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="@dimen/_65sdp"
+                    android:layout_height="@dimen/_65sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitXY"
                     android:src="@drawable/ic_user_no_img_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/imageView2"
@@ -77,8 +76,8 @@
                     android:contentDescription="@string/app_name"
                     app:layout_constraintBottom_toTopOf="@+id/imageView3"
                     app:layout_constraintRight_toLeftOf="@+id/textView2"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/imgProfile"
+                    app:layout_constraintTop_toTopOf="@+id/imgProfile"
                     app:srcCompat="@drawable/ic_call_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
@@ -103,9 +102,9 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:contentDescription="@string/app_name"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
                     app:layout_constraintRight_toLeftOf="@+id/textView3"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/imgProfile"
                     app:layout_constraintTop_toBottomOf="@+id/imageView2"
                     app:srcCompat="@drawable/ic_credit_score_icon" />
 
