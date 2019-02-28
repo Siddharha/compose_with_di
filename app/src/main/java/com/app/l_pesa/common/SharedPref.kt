@@ -66,6 +66,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var userCreditScore: String
+        get() = pref.getString(KEY_SET_CREDIT_SCORE, "")!!
+        set(creditScore) {
+            editor.remove(KEY_SET_CREDIT_SCORE)
+            editor.putString(KEY_SET_CREDIT_SCORE, creditScore)
+            editor.commit()
+        }
+
     var countryCode: String
         get() = pref.getString(KEY_SET_COUNTRY_CODE, "tz")!!
         set(countryCode) {
@@ -99,6 +107,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_LOGIN_REQUEST= "KEY_SET_LOGIN_REQUEST"
         private const val KEY_SET_ACCESS_TOKEN = "KEY_SET_ACCESS_TOKEN"
         private const val KEY_SET_DASHBOARD    = "KEY_SET_DASHBOARD"
+        private const val KEY_SET_CREDIT_SCORE = "KEY_SET_CREDIT_SCORE"
     }
 
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.adapter.CurrentLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistory
@@ -56,7 +57,6 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             val presenterLoanHistory= PresenterLoanHistory()
             presenterLoanHistory.getLoanHistory(activity!!,jsonObject,loadCount.toDouble(),this)
 
-
         }
 
 
@@ -72,11 +72,13 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
         }
     }
 
-    override fun onSuccessLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>) {
+    override fun onSuccessLoanHistory(loanHistory: ArrayList<ResLoanHistory.LoanHistory>, user_credit_score: Int) {
 
         activity!!.runOnUiThread {
 
             swipeRefreshLayout.isRefreshing = false
+            val shared=SharedPref(activity!!)
+            shared.userCreditScore=user_credit_score.toString()
             listLoanHistory!!.clear()
             listLoanHistory!!.addAll(loanHistory)
             adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!,this)

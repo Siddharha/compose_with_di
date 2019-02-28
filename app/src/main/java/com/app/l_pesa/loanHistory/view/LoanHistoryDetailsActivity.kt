@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.ModelHistoryData
 
 import kotlinx.android.synthetic.main.activity_loan_history_details.*
@@ -28,10 +29,13 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
+        val shared= SharedPref(this@LoanHistoryDetailsActivity)
+
         val loanHistoryData= ModelHistoryData.getInstance().modelData
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
         txt_loan_no_val.text = loanHistoryData.loan_id.toString()
         txt_interest_rate.text = loanHistoryData.interest_rate
+        txt_credit_score.text =  shared.userCreditScore
     }
 
     private fun toolbarFont(context: Activity) {

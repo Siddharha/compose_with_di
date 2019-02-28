@@ -5,7 +5,7 @@ import java.util.ArrayList
 
 class ResLoanHistory(val status: CommonStatusModel, val data: Data) {
 
-  data class Data(var loan_history: ArrayList<LoanHistory>)
+  data class Data(var loan_history: ArrayList<LoanHistory>, var user_credit_score:Int)
 
   /*"loan_history": [
       {

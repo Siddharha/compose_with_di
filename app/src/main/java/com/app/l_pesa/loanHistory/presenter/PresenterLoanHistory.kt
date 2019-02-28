@@ -32,7 +32,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackOBJ.onSuccessLoanHistory(response.data.loan_history)
+                                callBackOBJ.onSuccessLoanHistory(response.data.loan_history,response.data.user_credit_score)
                             }
                             else
                             {

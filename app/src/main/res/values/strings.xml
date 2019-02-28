@@ -165,10 +165,19 @@
     <string name="payment_scheduled">Payment Scheduled</string>
     <string name="payment_history">Payment History</string>
     <string name="reason_for_disapproved">Reason for Disapproved</string>
-    <string name="status">Status</string>
-    <string name="loan_duration">Loan Duration</string>
-    <string name="approval_date">Approval Date</string>
-    <string name="request_date">Request Date</string>
+    <string name="status">Status:</string>
+    <string name="loan_duration">Loan Duration:</string>
+    <string name="approval_date">Approval Date:</string>
+    <string name="request_date">Request Date:</string>
+    <string name="credit_score_at_time">Credit Score at time of Application:</string>
+    <string name="currency_conversion_rate">Currency Conversion Rate($1):</string>
+    <string name="conversion_charge">Conversion Charge(%)</string>
+    <string name="loan_after_currency_conversion">Loan after Currency Conversion:</string>
+    <string name="processing_fee">Processing Fee(%)</string>
+    <string name="current_credit_score">Current Credit Score:</string>
+    <string name="actual_loan_amount">Actual Loan Amount</string>
+
+
 
     <!--LPK Withdrawal-->
     <string name="get_wallet_address">Get a wallet address at</string>
