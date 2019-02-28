@@ -168,115 +168,6 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-
-
-               <!-- <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/txt_loan_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/img_loan"
-                    android:gravity="center"
-                    android:text="@string/loan_product"
-                    android:textColor="@color/color_gray_text"
-                    android:textSize="@dimen/_14sdp" />
-
-
-                <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/txt_loan_product_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toEndOf="@+id/txt_loan_product"
-                    android:layout_below="@+id/img_loan"
-                     android:text="gggggg"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_below="@+id/txt_loan_product"
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:background="@color/color_gray_light" />
-
-                <LinearLayout
-                    android:id="@+id/ll_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:layout_below="@+id/txt_price"
-                    android:layout_marginTop="@dimen/_1sdp"
-                    android:baselineAligned="false"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".50"
-                        android:orientation="horizontal"
-                        android:paddingEnd="@dimen/_1sdp"
-                        android:paddingStart="@dimen/_5sdp"
-
-                        >
-
-                        <com.app.l_pesa.common.CommonTextRegular
-                            android:id="@+id/txt_loan_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="@string/loan_no"
-                            android:textColor="@color/color_gray_text"
-                            android:textSize="@dimen/_12sdp" />
-
-                        <com.app.l_pesa.common.CommonTextRegular
-                            android:id="@+id/txt_loan_no_val"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/txt_loan_no"
-                            android:paddingEnd="@dimen/_1sdp"
-                            android:paddingStart="@dimen/_2sdp"
-                            android:textColor="@color/color_gray_text"
-                            android:textSize="@dimen/_12sdp"
-
-                            />
-
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight=".50"
-                        android:orientation="horizontal">
-
-                        <com.app.l_pesa.common.CommonTextRegular
-                            android:id="@+id/text_interest_rate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:paddingEnd="@dimen/_1sdp"
-                            android:paddingStart="@dimen/_5sdp"
-                            android:text="@string/interest_rate"
-                            android:textColor="@color/color_gray_text"
-                            android:textSize="@dimen/_12sdp" />
-
-                        <com.app.l_pesa.common.CommonTextRegular
-                            android:id="@+id/txt_interest_rate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@+id/text_interest_rate"
-                            android:paddingEnd="@dimen/_1sdp"
-                            android:paddingStart="@dimen/_2sdp"
-                            android:textColor="@color/color_gray_text"
-                            android:textSize="@dimen/_12sdp"
-
-                            />
-
-                    </RelativeLayout>
-                </LinearLayout>-->
             </RelativeLayout>
 
 
@@ -746,8 +637,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/bg_white_view"
-                    android:elevation="@dimen/_3sdp">
+                   >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -783,17 +673,20 @@
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_weight=".80"
                                 android:orientation="vertical"
-                                android:padding="@dimen/_5sdp">
+                                android:padding="@dimen/_5sdp"
+
+                                >
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/request_date"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_12sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_request_date"
@@ -852,7 +745,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/approval_date"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_12sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_currency_conversion_after_loan"
@@ -933,7 +827,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/loan_duration"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_12sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_loan_duration"
@@ -992,7 +887,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/status"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_12sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_approval_date"
@@ -1013,7 +909,109 @@
 
             </RelativeLayout>
 
-        </RelativeLayout>
+
+         <RelativeLayout
+                android:id="@+id/rlPurpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlLoanDate"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/bg_white_view"
+                android:elevation="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_purpose_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_5sdp"
+                    android:gravity="center|start"
+                    >
+                    <ImageView
+                        android:id="@+id/img_purpose"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="fitXY"
+                        android:layout_width="@dimen/_27sdp"
+                        android:layout_height="@dimen/_27sdp"
+                        app:srcCompat="@drawable/ic_loan_purpose" />
+
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_toEndOf="@+id/img_purpose"
+                        android:text="@string/loan_purpose"
+                        android:textColor="@color/color_gray_light"
+                        android:textSize="@dimen/_11sdp" />
+                </RelativeLayout>
+
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/txt_purpose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_purpose_header"
+                    android:padding="@dimen/_3sdp"
+                    android:text=""
+                    android:textColor="@color/color_semi_deep_black"
+                    android:textSize="@dimen/_12sdp" />
+         </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_PAYMENT"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_below="@+id/rlPurpose"
+                android:layout_margin="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:id="@+id/ll_pay_back_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+                    <LinearLayout
+                        android:id="@+id/ll_payment_scheduled"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/payment_scheduled_button"
+                        android:gravity="center">
+                        <com.app.l_pesa.common.CommonTextRegular
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/payment_scheduled"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_payment_history"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/payment_history_button"
+                        android:gravity="center">
+
+                        <com.app.l_pesa.common.CommonTextRegular
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/payment_history"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+      </RelativeLayout>
+
+
+
 
     </ScrollView>
 
