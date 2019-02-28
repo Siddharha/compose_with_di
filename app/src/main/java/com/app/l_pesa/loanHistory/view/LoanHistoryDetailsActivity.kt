@@ -36,6 +36,10 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_loan_no_val.text = loanHistoryData.loan_id.toString()
         txt_interest_rate.text = loanHistoryData.interest_rate
         txt_credit_score.text =  shared.userCreditScore
+        txt_loan_amount_value.text = loanHistoryData.actual_loan_amount
+        txt_request_date.text = loanHistoryData.applied_date
+        txt_approval_date.text = loanHistoryData.sanctioned_date
+        //txt_loan_duration.text = loanHistoryData.sanctioned_date
     }
 
     private fun toolbarFont(context: Activity) {

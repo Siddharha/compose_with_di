@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_white_view"
-                android:elevation="@dimen/_3sdp">
+                >
 
 
                 <ImageView
@@ -178,7 +178,7 @@
                 android:layout_below="@+id/rl_title"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_white_view"
-                android:elevation="@dimen/_3sdp">
+               >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -310,7 +310,7 @@
                 android:layout_below="@+id/rlCredit"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_white_view"
-                android:elevation="@dimen/_3sdp">
+                >
 
 
                 <ImageView
@@ -346,7 +346,8 @@
                         android:layout_below="@+id/txt_loan_amount"
                         android:textColor="@color/colorApp"
                         android:textSize="@dimen/_15sdp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                       />
 
                 </RelativeLayout>
 
@@ -356,7 +357,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rlLoanCurrency"
                     android:layout_margin="@dimen/_5sdp"
-                    android:elevation="@dimen/_3sdp">
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -629,7 +630,7 @@
                 android:layout_below="@+id/rlLoanAmount"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_white_view"
-                android:elevation="@dimen/_3sdp">
+               >
 
 
                 <RelativeLayout
@@ -749,7 +750,7 @@
                                     android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
-                                    android:id="@+id/txt_currency_conversion_after_loan"
+                                    android:id="@+id/txt_approval_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
@@ -891,7 +892,7 @@
                                     android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
-                                    android:id="@+id/txt_approval_date"
+                                    android:id="@+id/txt_status"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
@@ -917,7 +918,7 @@
                 android:layout_below="@+id/rlLoanDate"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_white_view"
-                android:elevation="@dimen/_5sdp">
+                >
 
                 <RelativeLayout
                     android:id="@+id/rl_purpose_header"
@@ -985,7 +986,7 @@
                             android:layout_gravity="center_vertical"
                             android:text="@string/payment_scheduled"
                             android:textColor="@color/colorWhite"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textSize="@dimen/_10sdp" />
 
                     </LinearLayout>
                     <LinearLayout
@@ -1003,7 +1004,7 @@
                             android:layout_gravity="center_vertical"
                             android:text="@string/payment_history"
                             android:textColor="@color/colorWhite"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textSize="@dimen/_10sdp" />
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
