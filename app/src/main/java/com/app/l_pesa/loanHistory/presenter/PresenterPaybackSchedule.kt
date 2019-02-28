@@ -1,11 +1,11 @@
-package com.app.l_pesa.loanplan.presenter
+package com.app.l_pesa.loanHistory.presenter
 
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.loanplan.inter.ICallBackPaybackSchedule
+import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -30,11 +30,13 @@ class PresenterPaybackSchedule {
 
                         if(response.status.isSuccess)
                         {
-                            if(response.data.paybackSchedule.size>0)
-                            {
-                                callBackOBJ.onSuccessPaybackSchedule(response.data)
-                            }
 
+                           callBackOBJ.onSuccessPaybackSchedule(response.data)
+
+                        }
+                        else
+                        {
+                            callBackOBJ.onErrorPaybackSchedule(response.status.message)
                         }
 
                     }

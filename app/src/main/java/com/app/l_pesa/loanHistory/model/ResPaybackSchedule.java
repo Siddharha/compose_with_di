@@ -1,4 +1,4 @@
-package com.app.l_pesa.loanplan.model;
+package com.app.l_pesa.loanHistory.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -162,7 +162,7 @@ public class ResPaybackSchedule {
         private String eDate;
         @SerializedName("current_balance")
         @Expose
-        private Integer currentBalance;
+        private String currentBalance;
         @SerializedName("payanytime_button_status")
         @Expose
         private Boolean payanytimeButtonStatus;
@@ -223,11 +223,11 @@ public class ResPaybackSchedule {
             this.eDate = eDate;
         }
 
-        public Integer getCurrentBalance() {
+        public String getCurrentBalance() {
             return currentBalance;
         }
 
-        public void setCurrentBalance(Integer currentBalance) {
+        public void setCurrentBalance(String currentBalance) {
             this.currentBalance = currentBalance;
         }
 

@@ -156,7 +156,7 @@
             android:textSize="@dimen/_16sdp"
             android:textColor="@color/colorWhite"
             android:textAllCaps="true"
-            android:background="@drawable/bg_yellow_bg"
+            android:background="@drawable/bg_button_yellow"
             android:textStyle="bold"
             />
     </RelativeLayout>

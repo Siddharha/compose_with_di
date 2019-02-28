@@ -4,17 +4,20 @@ import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.widget.TextView
 import com.app.l_pesa.R
-import com.app.l_pesa.loanplan.inter.ICallBackPaybackSchedule
-import com.app.l_pesa.loanplan.model.ResPaybackSchedule
-import com.app.l_pesa.loanplan.presenter.PresenterPaybackSchedule
+import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
+import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
+import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
+import com.app.l_pesa.loanHistory.presenter.PresenterPaybackSchedule
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_payback_scheduled.*
+import kotlinx.android.synthetic.main.content_loan_payback_scheduled.*
 
 
-class LoanPaybackScheduledActivity : AppCompatActivity(),ICallBackPaybackSchedule {
+class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedule {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,15 +42,28 @@ class LoanPaybackScheduledActivity : AppCompatActivity(),ICallBackPaybackSchedul
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
 
+
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)
     }
 
     override fun onSuccessPaybackSchedule(data: ResPaybackSchedule.Data) {
 
+
+        txt_total_payback.text = data.loanInfo.totalPayback
+
+        if(data.paybackSchedule.size>0)
+        {
+
+
+            val adapterPaymentSchedule          = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.paybackSchedule)
+            rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, LinearLayoutManager.VERTICAL, false)
+            rlPayback.adapter                  = adapterPaymentSchedule
+        }
     }
 
     override fun onErrorPaybackSchedule(jsonMessage: String) {
+
 
     }
 

@@ -58,7 +58,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorSemiBlack"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/bg_yellow_bg"
+            android:background="@drawable/bg_button_yellow"
             android:text="@string/retry"
             android:visibility="invisible"/>
 

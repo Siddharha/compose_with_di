@@ -1,6 +1,6 @@
-package com.app.l_pesa.loanplan.inter
+package com.app.l_pesa.loanHistory.inter
 
-import com.app.l_pesa.loanplan.model.ResPaybackSchedule
+import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 
 interface ICallBackPaybackSchedule {
 

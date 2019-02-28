@@ -172,7 +172,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
     override fun onClickList() {
         val bundle = Bundle()
         bundle.putString("LOAN_TYPE","current_loan")
-        val intent = Intent(activity, LoanPaybackScheduledActivity::class.java)
+        val intent = Intent(activity, LoanHistoryDetailsActivity::class.java)
         intent.putExtras(bundle)
         startActivity(intent,bundle)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)

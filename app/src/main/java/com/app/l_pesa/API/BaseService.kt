@@ -4,7 +4,7 @@ package com.app.l_pesa.API
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.loanHistory.model.ResLoanHistory
 import com.app.l_pesa.loanplan.model.ResLoanPlans
-import com.app.l_pesa.loanplan.model.ResPaybackSchedule
+import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.password.model.ResChangePassword

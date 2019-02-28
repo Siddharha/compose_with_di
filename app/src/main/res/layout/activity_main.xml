@@ -74,7 +74,7 @@
             android:gravity="center"
             android:textSize="@dimen/_14sdp"
             android:textColor="@color/colorWhite"
-            android:background="@drawable/bg_yellow_bg"
+            android:background="@drawable/bg_button_yellow"
             android:text="@string/get_started"
             android:textStyle="bold"
             />
