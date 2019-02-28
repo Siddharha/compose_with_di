@@ -169,7 +169,7 @@
     <string name="loan_duration">Loan Duration:</string>
     <string name="approval_date">Approval Date:</string>
     <string name="request_date">Request Date:</string>
-    <string name="credit_score_at_time">Credit Score at time of Application:</string>
+    <string name="previous_credit_score">Previous Credit Score:</string>
     <string name="currency_conversion_rate">Currency Conversion Rate($1):</string>
     <string name="conversion_charge">Conversion Charge(%)</string>
     <string name="loan_after_currency_conversion">Loan after Currency Conversion:</string>

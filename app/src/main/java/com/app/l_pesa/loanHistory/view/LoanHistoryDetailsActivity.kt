@@ -13,6 +13,11 @@ import com.app.l_pesa.loanHistory.model.ModelHistoryData
 
 import kotlinx.android.synthetic.main.activity_loan_history_details.*
 import kotlinx.android.synthetic.main.content_loan_history_details.*
+import android.text.Html
+import android.os.Build
+import android.text.Spanned
+
+
 
 class LoanHistoryDetailsActivity : AppCompatActivity() {
 
@@ -32,17 +37,22 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         val shared= SharedPref(this@LoanHistoryDetailsActivity)
 
         val loanHistoryData= ModelHistoryData.getInstance().modelData
+
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
         txt_loan_no_val.text = loanHistoryData.loan_id.toString()
         txt_interest_rate.text = loanHistoryData.interest_rate
-        txt_credit_score.text =  shared.userCreditScore
         txt_loan_amount_value.text = loanHistoryData.actual_loan_amount
         txt_request_date.text = loanHistoryData.applied_date
         txt_approval_date.text = loanHistoryData.sanctioned_date
         txt_loan_duration.text = loanHistoryData.duration
-        txt_currency_conversion_rate.text = loanHistoryData.currency_code+""+loanHistoryData.convertion_dollar_value
-        txt_currency_conversion.text = loanHistoryData.currency_code+""+loanHistoryData.convertion_loan_amount
+        txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_dollar_value
+        txt_currency_conversion.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_loan_amount
+        txt_processing_fee.text = loanHistoryData.processing_fees+" ("+loanHistoryData.currency_code+ loanHistoryData.processing_fees_amount+")"
+        txt_purpose.text = loanHistoryData.loan_purpose_message
+        txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+ loanHistoryData.conversion_charge_amount+")"
 
+        txt_credit_score.text =  fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+shared.userCreditScore+"</font>")
+        txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+loanHistoryData.cr_sc_when_requesting_loan+"</font>")
 
         when {
             loanHistoryData.loan_status=="C" -> {
@@ -65,6 +75,16 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
                 txt_status.text = resources.getString(R.string.due)
                 imgStatus.setBackgroundResource(R.drawable.ic_due_icon)
             }
+        }
+
+
+    }
+
+    private fun fromHtml(source: String): Spanned {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(source)
         }
     }
 

@@ -29,7 +29,15 @@ class ResLoanHistory(val status: CommonStatusModel, val data: Data) {
            var loan_status:String,
            var currency_code:String,
            var due_date:String,
-           var duration:String)
+           var duration:String,
+           var conversion_charge:String,
+           var conversion_charge_amount:String,
+           var loan_purpose_message:String,
+           var cr_sc_when_requesting_loan:String,
+           var processing_fees:String,
+           var processing_fees_amount:String
+
+  )
 
 
 

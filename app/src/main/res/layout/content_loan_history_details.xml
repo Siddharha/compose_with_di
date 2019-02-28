@@ -211,30 +211,22 @@
                         </LinearLayout>
 
 
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight=".80"
-                            android:orientation="vertical"
                             android:padding="@dimen/_5sdp">
-
-                            <com.app.l_pesa.common.CommonTextRegular
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/credit_score_at_time"
-                                android:textColor="@color/color_gray_light"
-                                android:textSize="@dimen/_12sdp" />
 
                             <com.app.l_pesa.common.CommonTextRegular
                                 android:id="@+id/txt_credit_score_at_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_gray_text"
-                                android:textSize="@dimen/_13sdp"
+                                android:textColor="@color/color_gray_light"
+                                android:textSize="@dimen/_12sdp"
 
                                 />
 
-                        </LinearLayout>
+                        </RelativeLayout>
 
                     </LinearLayout>
 
@@ -276,18 +268,11 @@
                             android:orientation="vertical"
                             android:padding="@dimen/_5sdp">
 
-                            <com.app.l_pesa.common.CommonTextRegular
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/current_credit_score"
-                                android:textColor="@color/color_gray_light"
-                                android:textSize="@dimen/_12sdp" />
-
-                            <com.app.l_pesa.common.CommonTextRegular
+                           <com.app.l_pesa.common.CommonTextRegular
                                 android:id="@+id/txt_credit_score"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_gray_text"
+                               android:textColor="@color/color_gray_light"
                                 android:textSize="@dimen/_13sdp"
 
                                 />
