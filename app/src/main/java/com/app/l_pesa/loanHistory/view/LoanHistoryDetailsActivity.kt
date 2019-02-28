@@ -39,7 +39,9 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_loan_amount_value.text = loanHistoryData.actual_loan_amount
         txt_request_date.text = loanHistoryData.applied_date
         txt_approval_date.text = loanHistoryData.sanctioned_date
-        //txt_loan_duration.text = loanHistoryData.sanctioned_date
+        txt_loan_duration.text = loanHistoryData.duration
+        txt_currency_conversion_rate.text = loanHistoryData.currency_code+""+loanHistoryData.convertion_dollar_value
+        txt_currency_conversion.text = loanHistoryData.currency_code+""+loanHistoryData.convertion_loan_amount
 
 
         when {

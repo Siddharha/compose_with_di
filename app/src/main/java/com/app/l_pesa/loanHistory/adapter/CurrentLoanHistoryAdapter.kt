@@ -80,10 +80,17 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
         fun  bindData(context: Context, loanHistory: ResLoanHistory.LoanHistory, callBack: ICallBackLoanHistory)
         {
 
-
             itemView.txt_loan_no.text=loanHistory.identity_number
             itemView.txt_loan_amount.text="$"+loanHistory.loan_amount
-            itemView.txt_interest_rate.text="$"+loanHistory.interest_rate
+
+            if(loanHistory.interest_rate.endsWith(".0%"))
+            {
+                itemView.txt_interest_rate.text=loanHistory.interest_rate.substring(0,loanHistory.interest_rate.length-3)+"%"
+            }
+            else
+            {
+                itemView.txt_interest_rate.text=loanHistory.interest_rate
+            }
 
 
             when {

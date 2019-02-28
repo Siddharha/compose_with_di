@@ -155,7 +155,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             val loanStatusModel  = ResLoanHistory.LoanHistory(0,"",0,"",
                                     "","","",
                                     "","","","","",
-                                    "","")
+                                    "","","")
 
             listLoanHistory!!.add(loanStatusModel)
             adapterLoanHistory.notifyItemInserted(listLoanHistory!!.size-1)

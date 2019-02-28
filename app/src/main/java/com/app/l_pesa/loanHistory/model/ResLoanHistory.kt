@@ -44,7 +44,8 @@ class ResLoanHistory(val status: CommonStatusModel, val data: Data) {
            var disapprove_date:String,
            var loan_status:String,
            var currency_code:String,
-           var due_date:String)
+           var due_date:String,
+           var duration:String)
 
 
 
