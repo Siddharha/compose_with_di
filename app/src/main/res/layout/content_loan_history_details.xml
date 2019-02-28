@@ -332,7 +332,7 @@
                     >
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_loan_amount"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@string/actual_loan_amount"
@@ -341,8 +341,9 @@
 
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_loan_amount_value"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:layout_below="@+id/txt_loan_amount"
                         android:textColor="@color/colorApp"
                         android:textSize="@dimen/_15sdp"
