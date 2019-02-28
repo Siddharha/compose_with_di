@@ -812,7 +812,7 @@
                                     android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
-                                    app:srcCompat="@drawable/ic_conversion_charge" />
+                                    app:srcCompat="@drawable/ic_loan_duration" />
 
                             </LinearLayout>
 
@@ -868,11 +868,12 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
+                                    android:id="@+id/imgStatus"
                                     android:contentDescription="@string/app_name"
                                     android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
-                                    app:srcCompat="@drawable/ic_interest_rate_icon" />
+                                     />
 
                             </LinearLayout>
 

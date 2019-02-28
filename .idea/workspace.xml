@@ -12,17 +12,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="332b5284-1a8d-4138-b104-5290cb485099" name="Default Changelist" comment="Merge branch 'dev_kritika' of https://bitbucket.org/bamiyo/l-pesa into dev_amiyo&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/values/strings.xml">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_loan_history_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_loan_history_details.xml" afterDir="false" />
     </list>
@@ -117,7 +106,7 @@
           <entry key="class" value="4" />
           <entry key="gradle" value="2" />
           <entry key="java" value="6" />
-          <entry key="kt" value="82" />
+          <entry key="kt" value="83" />
           <entry key="pro" value="2" />
           <entry key="xml" value="75" />
         </counts>
@@ -127,7 +116,7 @@
           <entry key="CLASS" value="4" />
           <entry key="Groovy" value="2" />
           <entry key="JAVA" value="6" />
-          <entry key="Kotlin" value="82" />
+          <entry key="Kotlin" value="83" />
           <entry key="ProGuard File" value="2" />
           <entry key="XML" value="75" />
         </counts>
@@ -135,19 +124,19 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="29" />
-          <entry key="kt" value="3324" />
+          <entry key="kt" value="3412" />
           <entry key="pro" value="9" />
-          <entry key="txt" value="68" />
-          <entry key="xml" value="3026" />
+          <entry key="txt" value="69" />
+          <entry key="xml" value="3097" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="29" />
-          <entry key="Kotlin" value="3324" />
-          <entry key="PLAIN_TEXT" value="68" />
+          <entry key="Kotlin" value="3412" />
+          <entry key="PLAIN_TEXT" value="69" />
           <entry key="ProGuard File" value="9" />
-          <entry key="XML" value="3026" />
+          <entry key="XML" value="3097" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -164,12 +153,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_loan_history_details.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="885" column="32" selection-start-line="885" selection-start-column="32" selection-end-line="885" selection-end-column="32" />
+            <state relative-caret-position="303">
+              <caret line="896" column="63" selection-start-line="896" selection-start-column="53" selection-end-line="896" selection-end-column="63" />
               <folding>
                 <element signature="e#573#700#0" />
                 <element signature="e#1225#1240#0" expanded="true" />
@@ -290,11 +279,27 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+            <state relative-caret-position="478">
+              <caret line="67" column="66" selection-start-line="67" selection-start-column="66" selection-end-line="67" selection-end-column="66" />
+              <folding>
+                <element signature="e#1741#1780#0" expanded="true" />
+                <element signature="e#1954#1992#0" expanded="true" />
+                <element signature="e#2166#2203#0" expanded="true" />
+                <element signature="e#2377#2418#0" expanded="true" />
+                <element signature="e#2558#2591#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/CurrentLoanHistoryAdapter.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="116" column="87" selection-start-line="116" selection-start-column="68" selection-end-line="116" selection-end-column="87" />
             </state>
           </provider>
         </entry>
@@ -314,7 +319,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>LIST_IS_</find>
       <find>LIST_IS</find>
       <find>isLoading</find>
       <find>onCreateViewHolder</find>
@@ -344,6 +348,7 @@
       <find>txt_conversion_charge</find>
       <find>elevation</find>
       <find>txt_approval_date</find>
+      <find>&quot;C&quot;</find>
     </findStrings>
     <replaceStrings>
       <replace>: Boolean? = false</replace>
@@ -3789,14 +3794,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551341380077</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="UI Rectify">
+      <created>1551341954803</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1551341954803</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.92" visible="true" weight="0.19756502" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.92" visible="true" weight="0.19756502" />
       <window_info id="Structure" order="2" sideWeight="0.11598746" side_tool="true" weight="0.17985612" />
       <window_info id="Favorites" order="3" sideWeight="0.07210031" side_tool="true" weight="0.17985612" />
       <window_info id="Build Variants" order="4" sideWeight="0.08" side_tool="true" visible="true" weight="0.19756502" />
@@ -3807,7 +3819,7 @@
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.39027026" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
-      <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.3243243" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.3243243" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5002767" side_tool="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32972974" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4997233" weight="0.32972974" />
@@ -3818,7 +3830,7 @@
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Preview" order="4" visible="true" weight="0.21748754" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.21748754" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
     </layout>
   </component>
@@ -3833,9 +3845,9 @@
     <MESSAGE value="Implements 'Token Withdrawal' card of 'LPK Withdrawal'" />
     <MESSAGE value="Implement loan history section" />
     <MESSAGE value="Merge branch 'dev_kritika' of https://bitbucket.org/bamiyo/l-pesa into dev_amiyo&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/values/strings.xml" />
-    <MESSAGE value="UI Rectify" />
     <MESSAGE value="Rectify Loan History" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rectify Loan History" />
+    <MESSAGE value="UI Rectify" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI Rectify" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/LoanTabPager.kt">
@@ -4155,13 +4167,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/CurrentLoanHistoryAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="15" column="31" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -4194,18 +4199,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_loan_history_details.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="885" column="32" selection-start-line="885" selection-start-column="32" selection-end-line="885" selection-end-column="32" />
+        <state relative-caret-position="303">
+          <caret line="896" column="63" selection-start-line="896" selection-start-column="53" selection-end-line="896" selection-end-column="63" />
           <folding>
             <element signature="e#573#700#0" />
             <element signature="e#1225#1240#0" expanded="true" />
@@ -4321,6 +4319,27 @@
             <element signature="e#46484#46498#0" expanded="true" />
             <element signature="e#46942#46967#0" expanded="true" />
             <element signature="e#47082#47097#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/CurrentLoanHistoryAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="116" column="87" selection-start-line="116" selection-start-column="68" selection-end-line="116" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="67" column="66" selection-start-line="67" selection-start-column="66" selection-end-line="67" selection-end-column="66" />
+          <folding>
+            <element signature="e#1741#1780#0" expanded="true" />
+            <element signature="e#1954#1992#0" expanded="true" />
+            <element signature="e#2166#2203#0" expanded="true" />
+            <element signature="e#2377#2418#0" expanded="true" />
+            <element signature="e#2558#2591#0" expanded="true" />
           </folding>
         </state>
       </provider>

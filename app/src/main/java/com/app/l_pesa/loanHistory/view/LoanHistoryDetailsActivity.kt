@@ -40,6 +40,30 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_request_date.text = loanHistoryData.applied_date
         txt_approval_date.text = loanHistoryData.sanctioned_date
         //txt_loan_duration.text = loanHistoryData.sanctioned_date
+
+
+        when {
+            loanHistoryData.loan_status=="C" -> {
+                txt_status.text = resources.getString(R.string.completed)
+                imgStatus.setBackgroundResource(R.drawable.ic_approved_icon)
+            }
+            loanHistoryData.loan_status=="A" -> {
+                txt_status.text = resources.getString(R.string.approved)
+                imgStatus.setBackgroundResource(R.drawable.ic_approved_icon)
+            }
+            loanHistoryData.loan_status=="P" -> {
+                txt_status.text = resources.getString(R.string.pending)
+                imgStatus.setBackgroundResource(R.drawable.ic_pending_icon)
+            }
+            loanHistoryData.loan_status=="DA" -> {
+                txt_status.text = resources.getString(R.string.disapproved)
+                imgStatus.setBackgroundResource(R.drawable.ic_disapproved_icon)
+            }
+            else -> {
+                txt_status.text = resources.getString(R.string.due)
+                imgStatus.setBackgroundResource(R.drawable.ic_due_icon)
+            }
+        }
     }
 
     private fun toolbarFont(context: Activity) {
