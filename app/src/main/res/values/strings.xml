@@ -100,7 +100,6 @@
 
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>
-    <string name="contact_no">+972544682519</string>
     <string name="personal_info">Personal Information</string>
     <string name="date_of_birth">Date Of Birth:</string>
     <string name="gender">Gender:</string>

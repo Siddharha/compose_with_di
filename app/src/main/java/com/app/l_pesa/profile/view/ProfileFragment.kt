@@ -1,5 +1,6 @@
 package com.app.l_pesa.profile.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -54,10 +55,11 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setData(data: ResUserInfo.Data)
     {
 
-        Toast.makeText(activity,"",Toast.LENGTH_SHORT).show()
+
         try {
 
             val options = RequestOptions()
@@ -70,6 +72,13 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
 
         }
+
+        txtPhone.text = data.userInfo.phoneNumber
+        txtCreditScore.text = resources.getString(R.string.credit_score)+" "+data.userInfo.creditScore
+        txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo.dob
+        txtGender.text = resources.getString(R.string.gender)+" "+data.userPersonalInfo.sex
+        txtMartialStatus.text = resources.getString(R.string.marital_status)+" "+data.userPersonalInfo.meritalStatus
+        txtMotherName.text = resources.getString(R.string.mother_maiden_name)+" "+data.userPersonalInfo.motherMaidenName
     }
 }
 
