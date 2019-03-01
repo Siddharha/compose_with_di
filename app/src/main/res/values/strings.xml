@@ -162,7 +162,6 @@
     <string name="loan_details">Loan Details</string>
     <string name="loan_product">Loan Product: </string>
     <string name="loan_purpose">Loan Purpose</string>
-    <string name="payment_scheduled">Payment Scheduled</string>
     <string name="payment_schedule">Payment Schedule</string>
     <string name="payment_history">Payment History</string>
     <string name="reason_for_disapproved">Reason for Disapproved</string>

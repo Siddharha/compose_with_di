@@ -974,7 +974,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="@string/payment_scheduled"
+                            android:text="@string/payment_schedule"
                             android:textColor="@color/colorWhite"
                             android:textSize="@dimen/_10sdp" />
 
