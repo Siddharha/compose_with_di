@@ -1,5 +1,6 @@
 package com.app.l_pesa.profile.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
+import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 
 class ProfileEditPersonalActivity : AppCompatActivity() {
 
@@ -24,11 +26,34 @@ class ProfileEditPersonalActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@ProfileEditPersonalActivity)
 
-        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        initData()
 
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun initData()
+    {
+        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+
+       // txtTitle.setText(profileData.userPersonalInfo.title)
+        etNameF.setText(profileData.userPersonalInfo.firstName)
+        etNameM.setText(profileData.userPersonalInfo.middleName)
+        etNameL.setText(profileData.userPersonalInfo.lastName)
+        etEmail.setText(profileData.userPersonalInfo.emailAddress)
+        etMotherName.setText(profileData.userPersonalInfo.motherMaidenName)
+
+        if(profileData.userPersonalInfo.sex=="M")
+        {
+            radioMale.isChecked=true
+            radioFemale.isChecked=false
+        }
+        else
+        {
+            radioMale.isChecked=false
+            radioFemale.isChecked=true
+        }
+    }
 
 
 

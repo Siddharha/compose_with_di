@@ -55,9 +55,11 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/txtTitle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/title"
+                            android:textSize="@dimen/_12sdp"
                             android:inputType="text" />
 
                     </com.app.l_pesa.common.CommonInputLayout>
@@ -74,10 +76,12 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/etNameF"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/first_name"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:textSize="@dimen/_12sdp"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>
 
@@ -94,10 +98,12 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout4">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/etNameM"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/middle_name"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:textSize="@dimen/_12sdp"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>
 
@@ -114,10 +120,12 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout5">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/etNameL"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/last_name"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:textSize="@dimen/_12sdp"/>
                     </com.app.l_pesa.common.CommonInputLayout>
 
                     <com.app.l_pesa.common.CommonInputLayout
@@ -133,10 +141,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout6">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/etEmail"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/email"
-                            android:inputType="textEmailAddress" />
+                            android:inputType="textEmailAddress"
+                            android:textSize="@dimen/_12sdp"/>
+
                     </com.app.l_pesa.common.CommonInputLayout>
 
                     <com.app.l_pesa.common.CommonInputLayout
@@ -189,10 +200,13 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout9">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/etMotherName"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="@string/edit_mother_maiden_name"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:textSize="@dimen/_12sdp"/>
+
                     </com.app.l_pesa.common.CommonInputLayout>
 
                     <TextView
@@ -243,6 +257,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView10">
 
                         <RadioButton
+                            android:id="@+id/radioMale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -251,6 +266,7 @@
                             android:button="@drawable/custom_male_radio_button" />
 
                         <RadioButton
+                            android:id="@+id/radioFemale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
