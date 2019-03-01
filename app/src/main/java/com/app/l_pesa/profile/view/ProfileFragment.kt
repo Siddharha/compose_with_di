@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
@@ -59,6 +58,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     private fun setData(data: ResUserInfo.Data)
     {
 
+        /*Profile Information*/
 
         try {
 
@@ -79,6 +79,70 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         txtGender.text = resources.getString(R.string.gender)+" "+data.userPersonalInfo.sex
         txtMartialStatus.text = resources.getString(R.string.marital_status)+" "+data.userPersonalInfo.meritalStatus
         txtMotherName.text = resources.getString(R.string.mother_maiden_name)+" "+data.userPersonalInfo.motherMaidenName
+
+        /* ID Information*/
+
+        if(data.userIdsInfo.size>0)
+        {
+            if(data.userIdsInfo.size==1)
+            {
+                userInformation(data.userIdsInfo[0])
+            }
+            else
+            {
+                userInformation(data.userIdsInfo[data.userIdsInfo.size-1])
+            }
+        }
+
+        /*Contact Information*/
+
+        txtAddress.text=data.userContactInfo.streetAddress+", "+data.userContactInfo.city+"- "+data.userContactInfo.postalAddress
+        txtEmail.text=data.userPersonalInfo.emailAddress
+        txtContact.text=data.userContactInfo.phoneNumber
+
+        /* Employment Info*/
+
+        txtEmployeeType.text=resources.getString(R.string.type_of_employer)+" "+data.userEmploymentInfo.employerType
+        txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+data.userEmploymentInfo.employerName
+        txtDepartment.text=resources.getString(R.string.department)+" "+data.userEmploymentInfo.department
+        txtOccupation.text=resources.getString(R.string.occupation)+" "+data.userEmploymentInfo.position
+        txtEmployeeID.text=resources.getString(R.string.occupation)+" "+data.userEmploymentInfo.employeesIdNumber
+        txtEmployeeCity.text=resources.getString(R.string.city)+" "+data.userEmploymentInfo.city
+
+        /* Business Info*/
+
+        txtBusinessName.text=resources.getString(R.string.business_name)+" "+data.userBusinessInfo.businessName
+        txtTIN.text=resources.getString(R.string.tin_number)+" "+data.userBusinessInfo.tinNumber
+        txtIDType.text=resources.getString(R.string.id_type)+" "+data.userBusinessInfo.idType
+        txtIdNo.text=resources.getString(R.string.id_number)+" "+data.userBusinessInfo.idNumber
+
+
+
+    }
+
+    private fun userInformation(userIdsInfo: ResUserInfo.UserIdsInfo)
+    {
+
+        try {
+
+            val options = RequestOptions()
+            Glide.with(activity!!)
+                    .load(userIdsInfo.fileName)
+                    .apply(options)
+                    .into(imgID)
+
+
+        }
+        catch (exception: Exception)
+        {
+
+        }
+
+        txtIdType.text      = userIdsInfo.idTypeName
+        txtIdNumber.text    = userIdsInfo.idNumber
+        txtCreatedTime.text = userIdsInfo.created
+
+
     }
 }
 

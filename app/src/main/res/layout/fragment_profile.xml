@@ -33,7 +33,7 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:text="@string/profile_information"
                     android:textColor="@color/textColors"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view3"
@@ -160,7 +160,7 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:text="@string/personal_info"
                     android:textColor="@color/textColors"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view"
@@ -330,7 +330,7 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:text="@string/id_info"
                     android:textColor="@color/textColors"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view5"
@@ -357,16 +357,16 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/colorGreyLight"
-                    app:layout_constraintBottom_toTopOf="@id/imageView11"
+                    app:layout_constraintBottom_toTopOf="@id/imgID"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <ImageView
-                    android:id="@+id/imageView11"
-                    android:layout_width="130dp"
-                    android:layout_height="90dp"
+                    android:id="@+id/imgID"
+                    android:layout_width="@dimen/_125sdp"
+                    android:layout_height="@dimen/_85sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
@@ -386,18 +386,17 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:contentDescription="@string/app_name"
                     app:layout_constraintBottom_toTopOf="@+id/imageView13"
-                    app:layout_constraintStart_toEndOf="@+id/imageView11"
-                    app:layout_constraintTop_toTopOf="@+id/imageView11"
+                    app:layout_constraintStart_toEndOf="@+id/imgID"
+                    app:layout_constraintTop_toTopOf="@+id/imgID"
                     app:layout_constraintVertical_chainStyle="spread"
                     app:srcCompat="@drawable/ic_id_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView10"
+                    android:id="@+id/txtIdType"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="TextView"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:fontFamily="@font/montserrat"
@@ -416,17 +415,16 @@
                     android:layout_marginTop="@dimen/_3sdp"
                     android:contentDescription="@string/app_name"
                     app:layout_constraintBottom_toTopOf="@+id/imageView14"
-                    app:layout_constraintLeft_toRightOf="@+id/imageView11"
+                    app:layout_constraintLeft_toRightOf="@+id/imgID"
                     app:layout_constraintTop_toBottomOf="@+id/imageView12"
                     app:srcCompat="@drawable/ic_id_no_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView11"
+                    android:id="@+id/txtIdNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="TextView"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:fontFamily="@font/montserrat"
@@ -443,18 +441,17 @@
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:contentDescription="@string/app_name"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-                    app:layout_constraintStart_toEndOf="@+id/imageView11"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgID"
+                    app:layout_constraintStart_toEndOf="@+id/imgID"
                     app:layout_constraintTop_toBottomOf="@+id/imageView13"
                     app:srcCompat="@drawable/ic_calendar_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView12"
+                    android:id="@+id/txtCreatedTime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="TextView"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:fontFamily="@font/montserrat"
@@ -488,7 +485,7 @@
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:text="@string/contact_info"
                     android:textColor="@color/textColors"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view6"
@@ -533,13 +530,12 @@
                     app:srcCompat="@drawable/ic_address_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView14"
+                    android:id="@+id/txtAddress"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView16"
@@ -560,13 +556,12 @@
                     app:srcCompat="@drawable/ic_mail_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView15"
+                    android:id="@+id/txtEmail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView17"
@@ -588,13 +583,12 @@
                     app:srcCompat="@drawable/ic_mobile_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView16"
+                    android:id="@+id/txtContact"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="TextView"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView19"
@@ -627,7 +621,7 @@
                     android:layout_marginBottom="6dp"
                     android:text="@string/employment_info"
                     android:textColor="@color/textColors"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view2"
@@ -672,13 +666,12 @@
                     app:srcCompat="@drawable/ic_employer_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView23"
+                    android:id="@+id/txtEmployeeType"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/type_of_employer"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView25"
@@ -700,13 +693,12 @@
                     app:srcCompat="@drawable/ic_employer_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView24"
+                    android:id="@+id/txtEmployeeName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/name_of_employer"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView26"
@@ -728,13 +720,12 @@
                     app:srcCompat="@drawable/ic_id_no_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView25"
+                    android:id="@+id/txtOccupation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/occupation"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView27"
@@ -756,13 +747,12 @@
                     app:srcCompat="@drawable/ic_id_no_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView26"
+                    android:id="@+id/txtEmployeeID"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/employees_id_no"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView28"
@@ -783,13 +773,12 @@
                     app:srcCompat="@drawable/ic_department_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView27"
+                    android:id="@+id/txtDepartment"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/department"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView29"
@@ -812,13 +801,12 @@
                     app:srcCompat="@drawable/ic_address_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView28"
+                    android:id="@+id/txtEmployeeCity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/city"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView30"
@@ -854,7 +842,7 @@
                     android:layout_marginBottom="6dp"
                     android:text="@string/business_info"
                     android:textColor="@color/textColors"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view4"
@@ -899,13 +887,12 @@
                     app:srcCompat="@drawable/ic_employer_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView19"
+                    android:id="@+id/txtBusinessName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/business_name"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView21"
@@ -927,13 +914,12 @@
                     app:srcCompat="@drawable/ic_tin_no_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView20"
+                    android:id="@+id/txtTIN"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/tin_number"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView22"
@@ -954,13 +940,12 @@
                     app:srcCompat="@drawable/ic_id_no_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView21"
+                    android:id="@+id/txtIDType"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/id_type"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView23"
@@ -982,13 +967,12 @@
                     app:srcCompat="@drawable/ic_id_no_icon" />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/textView22"
+                    android:id="@+id/txtIdNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/id_number"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/imageView24"
