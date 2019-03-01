@@ -138,7 +138,6 @@
         </LinearLayout>
 
 
-
     </LinearLayout>
 
 
@@ -216,8 +215,95 @@
 
                 </LinearLayout>
 
+
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".50"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:id="@+id/llPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="gone"
+
+                    >
+                    <com.app.l_pesa.common.CustomButtonRegular
+                        android:id="@+id/btnPayNow"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_27sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/ic_red_btn"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_11sdp"
+                        android:text="@string/pay_now"
+                        />
+                </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llPaid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+              >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".22"
+                    android:gravity="center"
+
+                    >
+                    <ImageView
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_approved_icon"
+                        android:layout_width="@dimen/_23sdp"
+                        android:layout_height="@dimen/_23sdp"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"
+
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".78"
+                    android:gravity="center|top|start"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_5sdp"
+
+                    >
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/paid"
+                        android:textSize="@dimen/_11sdp"
+                        android:textColor="@color/color_deep_green"
+
+                        />
+
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:id="@+id/txt_paid_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/color_semi_deep_black"
+
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+           </LinearLayout>
 
         </LinearLayout>
 

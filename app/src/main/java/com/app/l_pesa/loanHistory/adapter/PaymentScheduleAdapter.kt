@@ -1,23 +1,26 @@
 package com.app.l_pesa.loanHistory.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 
 
 class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPaybackSchedule.PaybackSchedule>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
 
-        // SET VALUE
         if(!al_loadOBJ[position].paidAmount.isEmpty())
         {
            viewHolder.txtRepayAmount.text=al_loadOBJ[position].paidAmount
@@ -26,45 +29,39 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
         {
             viewHolder.txtRepayDate.text=al_loadOBJ[position].sDate
         }
-       if(!al_loadOBJ[position].currentBalance.isEmpty())
-       {
+        if(!al_loadOBJ[position].currentBalance.isEmpty())
+        {
            viewHolder.txtCurrentBalance.text=al_loadOBJ[position].currentBalance
-       }
-        /*if(!al_loadOBJ[position].paidStatus.isEmpty())
-       {
-           viewHolder.text_buttonOBJ.text=al_loadOBJ[position].paidStatus
-       }
-*/
+        }
 
 
         if(!al_loadOBJ[position].paidStatus.isEmpty())
         {
 
-           /* if (al_loadOBJ[position].paidStatus == "Pending")
+            if (al_loadOBJ[position].paidStatus =="C")
             {
-                if (al_loadOBJ[position].canPay)
-                {
-                    viewHolder.rl_payment_section.visibility    =View.GONE
-                    viewHolder.rl_pay_now.visibility            =View.VISIBLE
-                    //viewHolder.rl_pay_now.setBackgroundResource(R.drawable.green_button)
-                }
-                else
-                {
-                    viewHolder.rl_payment_section.visibility    =View.GONE
-                    viewHolder.rl_pay_now.visibility            =View.VISIBLE
-                    //viewHolder.rl_pay_now.setBackgroundResource(R.drawable.ash_button)
-                }
-
+                viewHolder.llPayment.visibility        = View.GONE
+                viewHolder.llPaid.visibility           = View.VISIBLE
+                viewHolder.txtPaidDate.text            = context.resources.getString(R.string.paid_on)+" "+al_loadOBJ[position].paidDate
 
             }
 
             else
             {
-                viewHolder.rl_payment_section.visibility    =View.VISIBLE
-                viewHolder.rl_pay_now.visibility            =View.GONE
-                //viewHolder.txt_img_status_valueOBJ.text     ="Paid on "+al_loadOBJ[position].paid_date
+                if (al_loadOBJ[position].canPay)
+                {
+                    viewHolder.llPaid.visibility            =   View.GONE
+                    viewHolder.llPaid.visibility            =   View.VISIBLE
+                    viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_green)
+                }
+                else
+                {
+                    viewHolder.llPaid.visibility                =   View.GONE
+                    viewHolder.llPaid.visibility                =   View.VISIBLE
+                    viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_grey)
+                }
             }
-*/
+
 
         }
 
@@ -126,6 +123,10 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
            var  txtRepayAmount:TextView        =itemView.findViewById(R.id.txt_repay_amount) as TextView
            var  txtRepayDate:TextView          =itemView.findViewById(R.id.txt_repay_date) as TextView
            var  txtCurrentBalance:TextView     =itemView.findViewById(R.id.txt_current_balance) as TextView
+           var  txtPaidDate:TextView           =itemView.findViewById(R.id.txt_paid_date) as TextView
+           var  llPayment:LinearLayout         =itemView.findViewById(R.id.llPayment) as LinearLayout
+           var  llPaid:LinearLayout            =itemView.findViewById(R.id.llPaid) as LinearLayout
+           var  btnPayNow:CustomButtonRegular  =itemView.findViewById(R.id.btnPayNow) as CustomButtonRegular
 
         }
 

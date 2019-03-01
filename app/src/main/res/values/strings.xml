@@ -182,6 +182,9 @@
     <string name="repay_amount">Repay Amount:</string>
     <string name="current_balance">Current Balance:</string>
     <string name="repay_date">Repay Date:</string>
+    <string name="paid">Paid</string>
+    <string name="paid_on">Paid on: </string>
+    <string name="pay_now">Pay Now</string>
 
 
     <!--LPK Withdrawal-->
