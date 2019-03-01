@@ -20,20 +20,20 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
         // SET VALUE
         if(!al_loadOBJ[position].paidAmount.isEmpty())
         {
-            viewHolder.text_buttonOBJ.text=al_loadOBJ[position].paidAmount
+           viewHolder.txtRepayAmount.text=al_loadOBJ[position].paidAmount
         }
-       /* if(!al_loadOBJ[position].sDate.isEmpty())
+        if(!al_loadOBJ[position].sDate.isEmpty())
         {
-            viewHolder.txt_img_loan_duration_valueOBJ.text=al_loadOBJ[position].sDate
+            viewHolder.txtRepayDate.text=al_loadOBJ[position].sDate
         }
-        if(!al_loadOBJ[position].currentBalance.isEmpty())
-        {
-            viewHolder.txt_img_approved_calender_valueOBJ.text=al_loadOBJ[position].currentBalance
-        }
-        if(!al_loadOBJ[position].paidStatus.isEmpty())
-        {
-            viewHolder.text_buttonOBJ.text=al_loadOBJ[position].paidStatus
-        }
+       if(!al_loadOBJ[position].currentBalance.isEmpty())
+       {
+           viewHolder.txtCurrentBalance.text=al_loadOBJ[position].currentBalance
+       }
+        /*if(!al_loadOBJ[position].paidStatus.isEmpty())
+       {
+           viewHolder.text_buttonOBJ.text=al_loadOBJ[position].paidStatus
+       }
 */
 
 
@@ -123,8 +123,9 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-
-            var  text_buttonOBJ:TextView                        =itemView.findViewById<TextView>(R.id.text_button) as TextView
+           var  txtRepayAmount:TextView        =itemView.findViewById(R.id.txt_repay_amount) as TextView
+           var  txtRepayDate:TextView          =itemView.findViewById(R.id.txt_repay_date) as TextView
+           var  txtCurrentBalance:TextView     =itemView.findViewById(R.id.txt_current_balance) as TextView
 
         }
 

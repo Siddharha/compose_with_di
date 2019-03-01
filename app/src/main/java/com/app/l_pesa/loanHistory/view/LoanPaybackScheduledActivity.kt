@@ -55,7 +55,6 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         if(data.paybackSchedule.size>0)
         {
 
-
             val adapterPaymentSchedule          = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.paybackSchedule)
             rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, LinearLayoutManager.VERTICAL, false)
             rlPayback.adapter                  = adapterPaymentSchedule

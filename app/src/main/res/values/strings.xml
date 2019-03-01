@@ -179,6 +179,9 @@
     <string name="actual_loan_amount">Actual Loan Amount</string>
     <string name="total_payback">Total Payback:</string>
     <string name="pay_full_amount">Pay Full Amount</string>
+    <string name="repay_amount">Repay Amount:</string>
+    <string name="current_balance">Current Balance:</string>
+    <string name="repay_date">Repay Date:</string>
 
 
     <!--LPK Withdrawal-->

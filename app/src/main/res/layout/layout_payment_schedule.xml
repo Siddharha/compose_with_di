@@ -1,217 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="@dimen/_82sdp"
+        android:layout_margin="@dimen/_4sdp"
+        android:elevation="@dimen/_1sdp"
+        android:background="@drawable/bg_white_view"
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:elevation="4dp"
-        android:background="@drawable/bg_white_view">
 
-        <RelativeLayout
-            android:id="@+id/rl_row_first"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".50"
+        android:weightSum="1"
+        android:orientation="vertical"
+        tools:ignore="NestedWeights"
+        >
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="62dp">
+            android:layout_height="0dp"
+            android:layout_weight=".50"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            >
 
-            <ImageView
-                android:id="@+id/img_applied_calender"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
-                />
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_request_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#7c7c7c"
-                android:text="Repay Amount:"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="6dp"
-                android:textSize="@dimen/_11sdp"
-                android:layout_toRightOf="@+id/img_applied_calender"/>
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_request_date_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#353535"
-                android:text=""
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="6dp"
-                android:textSize="@dimen/_11sdp"
-                android:layout_toRightOf="@+id/img_applied_calender"
-                android:layout_below="@+id/txt_request_date"/>
-
-            <View
-                android:id="@+id/view_coloum_first"
-                android:layout_width="1dp"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
-                android:background="@color/color_gray_light"
-                android:layout_centerHorizontal="true"/>
+                android:layout_weight=".22"
+                android:gravity="center"
 
-            <ImageView
-                android:id="@+id/img_approved_calender"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginLeft="8dp"
-                android:layout_toRightOf="@+id/view_coloum_first"
-                android:layout_centerVertical="true"
-              />
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_img_approved_calender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#7c7c7c"
-                android:text="Current Balance:"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="6dp"
-                android:textSize="@dimen/_11sdp"
-                android:layout_toRightOf="@+id/img_approved_calender"/>
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_img_approved_calender_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#353535"
-                android:text=""
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="6dp"
-                android:textSize="@dimen/_11sdp"
-                android:layout_toRightOf="@+id/img_approved_calender"
-                android:layout_below="@+id/txt_img_approved_calender"/>
-
-        </RelativeLayout>
-
-        <View
-            android:id="@+id/view_center_line"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:visibility="gone"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/color_gray_light"
-            android:layout_below="@+id/rl_row_first"/>
-
-
-        <RelativeLayout
-            android:id="@+id/rl_row_second"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_below="@+id/view_center_line">
-
-
-            <ImageView
-                android:id="@+id/img_loan_duration"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginLeft="8dp"
-                android:layout_centerVertical="true"
-               />
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_img_loan_duration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#7c7c7c"
-                android:text="Repay Date:"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="6dp"
-                android:textSize="@dimen/_11sdp"
-                android:layout_toRightOf="@+id/img_loan_duration"/>
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_img_loan_duration_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#353535"
-                android:text=""
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="6dp"
-                android:textSize="@dimen/_11sdp"
-                android:layout_toRightOf="@+id/img_loan_duration"
-                android:layout_below="@+id/txt_img_loan_duration"/>
-
-
-            <View
-                android:id="@+id/view_coloum_second"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/color_gray_light"
-                android:layout_centerHorizontal="true"/>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/rl_payment_section"
-                android:visibility="gone"
-                android:layout_toRightOf="@+id/view_coloum_second">
-
+                >
                 <ImageView
-                    android:id="@+id/img_status"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_ref_no"
+                    android:layout_width="@dimen/_23sdp"
+                    android:layout_height="@dimen/_23sdp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".78"
+                android:gravity="center|top|start"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_5sdp"
+
+                >
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/repay_amount"
+                    android:textSize="@dimen/_11sdp"
+                    android:textColor="@color/color_gray_light"
+
                     />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/txt_img_status_calender"
+                    android:id="@+id/txt_repay_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorApp"
-                    android:text="Paid Successful:"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginLeft="6dp"
-                    android:textSize="@dimen/_11sdp"
-                    android:layout_toRightOf="@+id/img_status"/>
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/color_semi_deep_black"
 
+                    />
+
+           </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".50"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".22"
+                android:gravity="center"
+
+                >
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_request_date"
+                    android:layout_width="@dimen/_23sdp"
+                    android:layout_height="@dimen/_23sdp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".78"
+                android:gravity="center|top|start"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_5sdp"
+
+                >
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/txt_img_status_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#353535"
-                    android:text=""
-                    android:layout_marginTop="2dp"
-                    android:layout_marginLeft="6dp"
+                    android:text="@string/repay_date"
                     android:textSize="@dimen/_11sdp"
-                    android:layout_toRightOf="@+id/img_status"
-                    android:layout_below="@+id/txt_img_status_calender"/>
+                    android:textColor="@color/color_gray_light"
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_pay_now"
-                android:layout_width="125dp"
-                android:layout_height="32dp"
-                android:layout_toRightOf="@+id/view_coloum_second"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="40dp"
-               >
+                    />
 
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:id="@+id/text_button"
-                    android:layout_width="match_parent"
+                    android:id="@+id/txt_repay_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/color_semi_deep_black"
+
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="1px"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@color/divider_color"
+        />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".49"
+            android:weightSum="1"
+            android:orientation="vertical"
+            tools:ignore="NestedWeights">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".50"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight=".22"
                     android:gravity="center"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/colorWhite"
-                    android:layout_centerInParent="true"/>
 
-            </RelativeLayout>
+                    >
+                    <ImageView
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_loan_no_icon"
+                        android:layout_width="@dimen/_23sdp"
+                        android:layout_height="@dimen/_23sdp"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"
+
+                        />
+
+                </LinearLayout>
 
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".78"
+                    android:gravity="center|top|start"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_5sdp"
 
-    </RelativeLayout>
+                    >
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/current_balance"
+                        android:textSize="@dimen/_11sdp"
+                        android:textColor="@color/color_gray_light"
 
-</RelativeLayout>
+                        />
+
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:id="@+id/txt_current_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/color_semi_deep_black"
+
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+

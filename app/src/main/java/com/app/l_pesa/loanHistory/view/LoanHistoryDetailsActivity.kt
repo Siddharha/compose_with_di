@@ -76,13 +76,13 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
             loanHistoryData.loan_status=="P" -> {
                 rlDisApproved.visibility=View.GONE
                 txt_status.text = resources.getString(R.string.pending)
-                imgStatus.setBackgroundResource(R.drawable.ic_pending_icon)
+                imgStatus.setBackgroundResource(R.drawable.ic_loan_pending)
                 rlPayment.visibility=View.GONE
             }
             loanHistoryData.loan_status=="DA" -> {
                 txt_status.text = resources.getString(R.string.disapproved)
                 txt_status.setTextColor(Color.RED)
-                imgStatus.setBackgroundResource(R.drawable.ic_disapproved_icon)
+                imgStatus.setBackgroundResource(R.drawable.ic_loan_disapproved)
                 rlDisApproved.visibility=View.VISIBLE
                 rlPayment.visibility=View.GONE
                 txt_disapproved.text = loanHistoryData.disapprove_reason
