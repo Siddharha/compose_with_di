@@ -2,12 +2,15 @@ package com.app.l_pesa.profile.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
@@ -33,25 +36,58 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipeRefresh()
         loadProfileInfo()
+    }
+
+    private fun swipeRefresh()
+    {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+
+            loadProfileInfo()
+        }
     }
 
     private fun loadProfileInfo()
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+           swipeRefreshLayout.isRefreshing=true
            val presenterUserInfo= PresenterUserInfo()
-            presenterUserInfo.getProfileInfo(activity!!,this)
+           presenterUserInfo.getProfileInfo(activity!!,this)
         }
+        else
+        {
+            swipeRefreshLayout.isRefreshing=false
+            customSnackBarError(llRoot,resources.getString(R.string.no_internet))
+        }
+    }
+
+    private fun customSnackBarError(view: View, message:String) {
+
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(activity!!,R.color.colorRed))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(activity!!).inflate(R.layout.snackbar_error, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+
+        txtTitle.text = message
+
+        snackBarOBJ.show()
     }
 
     override fun onSuccessUserInfo(data: ResUserInfo.Data) {
 
+        swipeRefreshLayout.isRefreshing=false
         setData(data)
     }
 
     override fun onErrorUserInfo(message: String) {
 
+        swipeRefreshLayout.isRefreshing=false
     }
 
     @SuppressLint("SetTextI18n")
@@ -106,7 +142,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+data.userEmploymentInfo.employerName
         txtDepartment.text=resources.getString(R.string.department)+" "+data.userEmploymentInfo.department
         txtOccupation.text=resources.getString(R.string.occupation)+" "+data.userEmploymentInfo.position
-        txtEmployeeID.text=resources.getString(R.string.occupation)+" "+data.userEmploymentInfo.employeesIdNumber
+        txtEmployeeID.text=resources.getString(R.string.employees_id_no)+" "+data.userEmploymentInfo.employeesIdNumber
         txtEmployeeCity.text=resources.getString(R.string.city)+" "+data.userEmploymentInfo.city
 
         /* Business Info*/
