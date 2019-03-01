@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +14,9 @@
     tools:showIn="@layout/activity_loan_payback_scheduled"
     tools:context=".loanHistory.view.LoanPaybackScheduledActivity"
     android:layout_margin="@dimen/_5sdp"
+    android:id="@+id/llRoot"
     android:orientation="vertical">
+
 
     <LinearLayout
         android:id="@+id/rl_content"
@@ -17,7 +25,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:padding="@dimen/_3sdp"
+        android:padding="@dimen/_5sdp"
 
         >
 
@@ -41,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/colorSemiBlack"
-                android:text="@string/payment_scheduled"
+                android:text="@string/total_payback"
                 />
 
             <com.app.l_pesa.common.CommonTextRegular
@@ -66,12 +74,12 @@
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/button_pay_all"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:text="@string/pay_full_amount"
                 android:background="@drawable/bg_button_green"
                 android:textAllCaps="false"
                 android:gravity="center"
-                android:textColor="#FFFFFFFF"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_11sdp"
                 />
 
@@ -91,55 +99,7 @@
            />
     </LinearLayout>
 
-
-
-    <!--<RelativeLayout
-        android:id="@+id/rl_show_content"
-        android:layout_below="@+id/rl_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_rectangle"
-        android:visibility="gone"
-        >
-
-        <ImageView
-            android:id="@+id/img_icon"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            app:srcCompat="@drawable/ic_no_loan_icon"
-            android:layout_margin="7dp"
-            />
-
-        <util.CustomTextView
-            android:layout_below="@+id/img_icon"
-            android:id="@+id/txt_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_15sdp"
-            android:text="You haven't applied for any loans yet from L-Pesa. Start your journey to financial freedom with the first loan from L-Pesa."
-            android:gravity="center|left"
-            android:layout_margin="10dp"
-            />
-
-        <TextView
-
-            android:id="@+id/txt_loan_apply"
-            android:textColor="@color/semi_white"
-            android:gravity="center"
-            android:background="@drawable/rounded_background"
-            android:layout_width="125dp"
-            android:layout_height="35dp"
-            android:layout_below="@+id/txt_content"
-            android:textSize="@dimen/_13sdp"
-            android:fontFamily="@fonts/Roboto-Thin"
-            android:text="Apply Now"
-            android:layout_margin="10dp"
-            android:layout_centerInParent="true"
-            />
-
-
-    </RelativeLayout>-->
-
 </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+

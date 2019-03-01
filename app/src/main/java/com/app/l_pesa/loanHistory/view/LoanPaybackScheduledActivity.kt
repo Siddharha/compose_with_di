@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
@@ -27,13 +28,35 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanPaybackScheduledActivity)
 
+        swipeRefresh()
         initLoad()
 
 
     }
 
+    private fun swipeRefresh()
+    {
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+
+            if(CommonMethod.isNetworkAvailable(this@LoanPaybackScheduledActivity))
+            {
+                initLoad()
+            }
+            else
+            {
+
+               CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.no_internet))
+
+            }
+
+        }
+    }
+
     private fun initLoad()
     {
+        swipeRefreshLayout.isRefreshing = true
         val bundle     = intent.extras
         val loanType   = bundle!!.getString("LOAN_TYPE")
         val loanId     = bundle.getString("LOAN_ID")
@@ -42,14 +65,13 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
 
-
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)
     }
 
     override fun onSuccessPaybackSchedule(data: ResPaybackSchedule.Data) {
 
-
+        swipeRefreshLayout.isRefreshing = false
         txt_total_payback.text = data.loanInfo.totalPayback
 
         if(data.paybackSchedule.size>0)
@@ -63,6 +85,8 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     override fun onErrorPaybackSchedule(jsonMessage: String) {
 
+        swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,jsonMessage)
 
     }
 
