@@ -1,6 +1,7 @@
 package com.app.l_pesa.profile.view
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
@@ -11,11 +12,14 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.lang.Exception
 
@@ -62,6 +66,21 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             swipeRefreshLayout.isRefreshing=false
             customSnackBarError(llRoot,resources.getString(R.string.no_internet))
         }
+
+        imgEditPersonalInfo.setOnClickListener {
+
+            if(!swipeRefreshLayout.isRefreshing)
+            {
+                startActivity(Intent(activity, ProfileEditPersonalActivity::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                customSnackBarError(llRoot,resources.getString(R.string.please_wait))
+            }
+
+
+        }
     }
 
     private fun customSnackBarError(view: View, message:String) {
@@ -93,6 +112,13 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     @SuppressLint("SetTextI18n")
     private fun setData(data: ResUserInfo.Data)
     {
+
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val gson                          = Gson()
+        val profileData                   = gson.toJson(data)
+        sharedPrefOBJ.profileInfo         = profileData
+
+
 
         /*Profile Information*/
 

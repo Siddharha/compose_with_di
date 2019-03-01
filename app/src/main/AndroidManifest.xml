@@ -25,11 +25,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".profile.view.ProfileEditPersonalActivity"
+            android:label="@string/personal_info"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".loanHistory.view.LoanPaybackScheduledActivity"
             android:label="@string/payment_schedule"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".loanHistory.view.LoanHistoryDetailsActivity"
             android:label="@string/loan_details"

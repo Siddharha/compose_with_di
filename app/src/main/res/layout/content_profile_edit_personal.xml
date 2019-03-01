@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".profile.view.ProfileEditPersonalActivity"
+    tools:showIn="@layout/activity_profile_edit_personal">
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/screenBackground"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/earn_credit_coins"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_4sdp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_10sdp">
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout2"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintRight_toLeftOf="@+id/commonInputLayout4"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/title"
+                            android:inputType="text" />
+
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout4"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/commonInputLayout2"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/first_name"
+                            android:inputType="text" />
+
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout5"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/commonInputLayout6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout4">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/middle_name"
+                            android:inputType="text" />
+
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout6"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/commonInputLayout7"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout5">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/last_name"
+                            android:inputType="text" />
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout7"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/commonInputLayout8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout6">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress" />
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout8"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/commonInputLayout9"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout7">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/edit_dob"
+                            android:inputType="date" />
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout9"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintBottom_toTopOf="@+id/commonInputLayout10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout8">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/edit_marital_status"
+                            android:inputType="text" />
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <com.app.l_pesa.common.CommonInputLayout
+                        android:id="@+id/commonInputLayout10"
+                        style="@style/customInputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout9">
+
+                        <com.app.l_pesa.common.CommonEditTextRegular
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/edit_mother_maiden_name"
+                            android:inputType="text" />
+                    </com.app.l_pesa.common.CommonInputLayout>
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/upload_profile_image"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout10" />
+
+
+                    <ImageButton
+                        android:id="@+id/imageView7"
+                        android:contentDescription="@string/app_name"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:background="?selectableItemBackgroundBorderless"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        app:srcCompat="@drawable/ic_upload_photo" />
+
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/edit_gender"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView10"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout10" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView10"
+                        app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/_3sdp"
+                            android:layout_marginRight="@dimen/_3sdp"
+                            android:button="@drawable/custom_male_radio_button" />
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:button="@drawable/custom_female_radio_button" />
+                    </RadioGroup>
+
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/btn_round"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/submit"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+                    <Button
+                        android:id="@+id/button4"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/bg_grey_view"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/cancel"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorGrey"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView10"
+                        app:layout_constraintTop_toTopOf="@+id/button3" />
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:contentDescription="@string/app_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:src="@drawable/divider_line"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/commonInputLayout10" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat"
+                android:text="@string/make_inquiries"
+                android:textSize="@dimen/_10sdp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -59,6 +59,7 @@
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
     <string name="password_change_success">Your password was changed.</string>
     <string name="no_internet">No Internet Connection</string>
+    <string name="please_wait">Please wait…</string>
     <string name="no_internet_details">You are not connected to internet, make sure Wi-Fi/Data is on, Airplane mode is off and try again.</string>
     <string name="turn_on_location">To continue using our services, you need to turn on your GPS and use High Accuracy Mode. Do you want to turn it on?</string>
     <string name="retry">Retry</string>
@@ -183,6 +184,22 @@
     <string name="paid">Paid</string>
     <string name="paid_on">Paid on: </string>
     <string name="pay_now">Pay Now</string>
+
+
+
+    <!--Edit Personal Information-->
+    <string name="title">Title</string>
+    <string name="first_name">First Name*</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name*</string>
+    <string name="email">Email*</string>
+    <string name="edit_dob">Date of Birth</string>
+    <string name="edit_marital_status">Marital Status</string>
+    <string name="edit_mother_maiden_name">Mother\'s Maiden Name*</string>
+    <string name="upload_profile_image">Upload Profile Image*</string>
+    <string name="edit_gender">Gender</string>
+    <string name="make_inquiries">Make inquiries from CreditInfo Tanzania or any mentioned referee to confirm any information provided by the customer.</string>
+    <string name="earn_credit_coins">Earn 2 credit score points!</string>
 
 
     <!--LPK Withdrawal-->

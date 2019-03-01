@@ -162,20 +162,6 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         snackBarOBJ.show()
     }
 
-    private fun toolbarFont(context: Activity) {
-
-        for (i in 0 until toolbar.childCount) {
-            val view = toolbar.getChildAt(i)
-            if (view is TextView) {
-                val tv = view
-                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
-                    break
-                }
-            }
-        }
-    }
 
     private fun textWatcherPassword()
     {
@@ -248,6 +234,37 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         }
     }
 
+    override fun onSuccessResetPassword(message: String) {
+
+        buttonSubmit.isClickable = true
+        progressBar.visibility   = View.INVISIBLE
+        customSnackBarSuccess(rootLayout,resources.getString(R.string.password_change_success))
+        //super.onBackPressed()
+        //overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    override fun onErrorResetPassword(jsonMessage: String) {
+        buttonSubmit.isClickable    = true
+        progressBar.visibility      = View.INVISIBLE
+        customSnackBarError(rootLayout,jsonMessage)
+    }
+
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val tv = view
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (tv.text == toolbar.title) {
+                    tv.typeface = titleFont
+                    break
+                }
+            }
+        }
+    }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -264,20 +281,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
         }
     }
 
-    override fun onSuccessResetPassword(message: String) {
 
-        buttonSubmit.isClickable = true
-        progressBar.visibility   = View.INVISIBLE
-        customSnackBarSuccess(rootLayout,resources.getString(R.string.password_change_success))
-        //super.onBackPressed()
-        //overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
-    override fun onErrorResetPassword(jsonMessage: String) {
-        buttonSubmit.isClickable    = true
-        progressBar.visibility      = View.INVISIBLE
-        customSnackBarError(rootLayout,jsonMessage)
-    }
 
     override fun onBackPressed() {
         super.onBackPressed()

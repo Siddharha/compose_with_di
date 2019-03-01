@@ -168,7 +168,6 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
             if(!countryFound)
             {
                 val options = RequestOptions()
-                options.centerCrop()
                 Glide.with(this@ForgotPasswordActivity)
                         .load(countryData.countries_list[0].image)
                         .apply(options)
@@ -202,7 +201,6 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
         sharedPref.countryCode  =resModelCountryList.code
         countryCode             =resModelCountryList.country_code
         val options = RequestOptions()
-        options.centerCrop()
         Glide.with(this@ForgotPasswordActivity)
                 .load(resModelCountryList.image)
                 .apply(options)

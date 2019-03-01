@@ -50,6 +50,14 @@ constructor(context: Context) // Constructor
             editor.putString(KEY_SET_USER_INFO, userInfo)
             editor.commit()
         }
+
+    var profileInfo: String
+        get() = pref.getString(KEY_SET_PROFILE_INFO, "")!!
+        set(profileInfo) {
+            editor.remove(KEY_SET_PROFILE_INFO)
+            editor.putString(KEY_SET_PROFILE_INFO, profileInfo)
+            editor.commit()
+        }
     var accessToken: String
         get() = pref.getString(KEY_SET_ACCESS_TOKEN, "INIT")!!
         set(accessToken) {
@@ -108,6 +116,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_ACCESS_TOKEN = "KEY_SET_ACCESS_TOKEN"
         private const val KEY_SET_DASHBOARD    = "KEY_SET_DASHBOARD"
         private const val KEY_SET_CREDIT_SCORE = "KEY_SET_CREDIT_SCORE"
+        private const val KEY_SET_PROFILE_INFO = "KEY_SET_PROFILE_INFO"
     }
 
 

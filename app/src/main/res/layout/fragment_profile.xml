@@ -44,7 +44,6 @@
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view3"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -130,16 +129,6 @@
                     app:layout_constraintStart_toEndOf="@+id/imageView3"
                     app:layout_constraintTop_toTopOf="@id/imageView3" />
 
-                <ImageButton
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:padding="@dimen/_5sdp"
-                    app:layout_constraintBottom_toTopOf="@+id/view3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_edit_icon" />
 
 
             </android.support.constraint.ConstraintLayout>
@@ -172,13 +161,14 @@
                     android:textStyle="bold"
                     app:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toTopOf="@+id/view"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                    app:layout_constraintEnd_toStartOf="@+id/imgEditPersonalInfo"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="spread" />
 
                 <ImageButton
-                    android:id="@+id/imageView5"
+                    android:id="@+id/imgEditPersonalInfo"
+                    android:contentDescription="@string/app_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?selectableItemBackgroundBorderless"
