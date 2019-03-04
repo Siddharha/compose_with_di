@@ -18,7 +18,9 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.adapter.MaritalListAdapter
 import com.app.l_pesa.profile.adapter.TitleListAdapter
+import com.app.l_pesa.profile.inter.ICallBackMarital
 import com.app.l_pesa.profile.inter.ICallBackTitle
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.bumptech.glide.Glide
@@ -28,7 +30,8 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 
-class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle {
+class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle {
 
         initData()
         loadTitle()
+        loadMarital()
 
     }
 
@@ -101,10 +105,45 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle {
         }
     }
 
+    private fun loadMarital()
+    {
+        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.meritalStatus))
+        {
+            txtMarital.setText(profileData.userPersonalInfo.meritalStatus)
+        }
+
+        txtMarital.isFocusable=false
+        txtMarital.setOnClickListener {
+
+            showMarital()
+
+        }
+    }
+
+    private fun showMarital()
+    {
+        val listTitle = arrayListOf("Married", "Un-Married")
+
+
+        val dialog= Dialog(this@ProfileEditPersonalActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_country)
+        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val titleAdapter                = MaritalListAdapter(this@ProfileEditPersonalActivity, listTitle,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter           = titleAdapter
+        dialog.show()
+    }
+
+
+
 
     private fun showTitle()
     {
-        val listTitle = arrayListOf("Mr", "Mrs", "Mis","Dr","Prof")
+        val listTitle = arrayListOf("Mr", "Mrs", "Miss","Dr","Prof")
         val listIcon = arrayListOf(R.drawable.ic_mr_icon,R.drawable.ic_mrs_icon,R.drawable.ic_mrs_icon,R.drawable.ic_dr_icon,R.drawable.ic_professor_icon)
 
         val dialog= Dialog(this@ProfileEditPersonalActivity)
@@ -115,6 +154,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle {
         recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
+    }
+
+    override fun onChangeMarital(s: String) {
+
+        txtMarital.setText(s)
     }
 
     private fun onChangeEmail()

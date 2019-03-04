@@ -190,12 +190,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout8">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/txtMarital"
+                            android:textColor="@color/textColors"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/edit_marital_status"
+                            android:hint="@string/marital_status"
+                            android:textSize="@dimen/_12sdp"
                             android:inputType="text"
-                            android:textColor="@color/textColors"/>
-                    </com.app.l_pesa.common.CommonInputLayout>
+                            android:drawableEnd="@drawable/ic_dropdown"/>
+
+                        </com.app.l_pesa.common.CommonInputLayout>
 
                     <com.app.l_pesa.common.CommonInputLayout
                         android:id="@+id/commonInputLayout10"
