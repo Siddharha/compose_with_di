@@ -43,6 +43,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         initData()
         loadTitle()
         loadMarital()
+        loadDate()
 
     }
 
@@ -125,7 +126,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun showMarital()
     {
-        val listTitle = arrayListOf("Married", "Un-Married")
+        val listTitle = arrayListOf("Married", "Unmarried")
 
 
         val dialog= Dialog(this@ProfileEditPersonalActivity)
@@ -138,7 +139,23 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         dialog.show()
     }
 
+    private fun loadDate()
+    {
+        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
 
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.dob))
+        {
+            txtDOB.setText(profileData.userPersonalInfo.dob)
+        }
+
+        txtDOB.isFocusable=false
+        txtDOB.setOnClickListener {
+
+           // showMarital()
+
+        }
+    }
 
 
     private fun showTitle()

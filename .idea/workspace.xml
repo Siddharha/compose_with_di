@@ -13,8 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="332b5284-1a8d-4138-b104-5290cb485099" name="Default Changelist" comment="Merge branch 'dev_kritika' of https://bitbucket.org/bamiyo/l-pesa into dev_amiyo&#10;&#10;# Conflicts:&#10;#&#9;app/src/main/res/values/strings.xml">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/MaritalListAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackMarital.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml" afterDir="false" />
@@ -112,7 +116,7 @@
           <entry key="java" value="14" />
           <entry key="kt" value="174" />
           <entry key="pro" value="5" />
-          <entry key="xml" value="166" />
+          <entry key="xml" value="167" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -122,25 +126,25 @@
           <entry key="JAVA" value="14" />
           <entry key="Kotlin" value="174" />
           <entry key="ProGuard File" value="5" />
-          <entry key="XML" value="166" />
+          <entry key="XML" value="167" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="92" />
-          <entry key="kt" value="6334" />
+          <entry key="kt" value="6390" />
           <entry key="pro" value="22" />
           <entry key="txt" value="121" />
-          <entry key="xml" value="6079" />
+          <entry key="xml" value="6112" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="92" />
-          <entry key="Kotlin" value="6334" />
+          <entry key="Kotlin" value="6390" />
           <entry key="PLAIN_TEXT" value="121" />
           <entry key="ProGuard File" value="22" />
-          <entry key="XML" value="6079" />
+          <entry key="XML" value="6112" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -157,11 +161,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="134" column="53" lean-forward="true" selection-start-line="134" selection-start-column="53" selection-end-line="134" selection-end-column="53" />
+            <state relative-caret-position="355">
+              <caret line="148" column="59" selection-start-line="148" selection-start-column="59" selection-end-line="148" selection-end-column="59" />
               <folding>
                 <element signature="e#37#858#0" expanded="true" />
               </folding>
@@ -170,32 +174,16 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/MaritalListAdapter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="35" column="94" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="94" />
-              <folding>
-                <element signature="e#40#409#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_marital.xml">
-          <provider editor-type-id="android-designer2" />
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="192" column="55" selection-start-line="192" selection-start-column="45" selection-end-line="192" selection-end-column="55" />
+            <state relative-caret-position="162">
+              <caret line="172" column="51" selection-start-line="172" selection-start-column="45" selection-end-line="172" selection-end-column="51" />
               <folding>
-                <element signature="e#10748#10772#0" expanded="true" />
-                <element signature="e#10743#10758#0" expanded="true" />
+                <element signature="e#9556#9579#0" expanded="true" />
+                <element signature="e#9630#9645#0" expanded="true" />
+                <element signature="e#10946#10970#0" expanded="true" />
+                <element signature="e#11016#11031#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3271,11 +3259,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackTitle.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/TitleListAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_title.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackMarital.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/MaritalListAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_marital.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/MaritalListAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" />
       </list>
     </option>
   </component>
@@ -3794,7 +3782,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.6315789" visible="true" weight="0.19479801" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.6315789" visible="true" weight="0.19479801" />
       <window_info id="Structure" order="2" sideWeight="0.11598746" side_tool="true" weight="0.17985612" />
       <window_info id="Favorites" order="3" sideWeight="0.07210031" side_tool="true" weight="0.17985612" />
       <window_info id="Build Variants" order="4" sideWeight="0.36842105" side_tool="true" visible="true" weight="0.19479801" />
@@ -3805,7 +3793,7 @@
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.38918918" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32972974" />
-      <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.32216215" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.32216215" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5002767" side_tool="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32972974" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4997233" weight="0.32972974" />
@@ -4158,37 +4146,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_title.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="29" column="47" lean-forward="true" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-          <folding>
-            <element signature="e#575#590#0" expanded="true" />
-            <element signature="e#625#640#0" expanded="true" />
-            <element signature="e#1118#1132#0" expanded="true" />
-            <element signature="e#1256#1271#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit_personal.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="192" column="55" selection-start-line="192" selection-start-column="45" selection-end-line="192" selection-end-column="55" />
-          <folding>
-            <element signature="e#10748#10772#0" expanded="true" />
-            <element signature="e#10743#10758#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4216,29 +4178,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_title.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="134" column="53" lean-forward="true" selection-start-line="134" selection-start-column="53" selection-end-line="134" selection-end-column="53" />
+        <state relative-caret-position="189">
+          <caret line="21" column="53" lean-forward="true" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_marital.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
           <folding>
-            <element signature="e#37#858#0" expanded="true" />
+            <element signature="e#213#228#0" expanded="true" />
+            <element signature="e#398#413#0" expanded="true" />
+            <element signature="e#1118#1132#0" expanded="true" />
+            <element signature="e#1256#1271#0" expanded="true" />
+            <element signature="e#1512#1527#0" expanded="true" />
+            <element signature="e#1561#1576#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/MaritalListAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="35" column="94" selection-start-line="35" selection-start-column="82" selection-end-line="35" selection-end-column="94" />
+        <state relative-caret-position="-66">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#40#409#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_marital.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml">
       <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="172" column="51" selection-start-line="172" selection-start-column="45" selection-end-line="172" selection-end-column="51" />
+          <folding>
+            <element signature="e#9556#9579#0" expanded="true" />
+            <element signature="e#9630#9645#0" expanded="true" />
+            <element signature="e#10946#10970#0" expanded="true" />
+            <element signature="e#11016#11031#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="148" column="59" selection-start-line="148" selection-start-column="59" selection-end-line="148" selection-end-column="59" />
+          <folding>
+            <element signature="e#37#858#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

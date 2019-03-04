@@ -170,11 +170,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout7">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
+                            android:id="@+id/txtDOB"
+                            android:textColor="@color/textColors"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/edit_dob"
+                            android:hint="@string/date_of_birth"
+                            android:textSize="@dimen/_12sdp"
                             android:inputType="date"
-                            android:textColor="@color/textColors"/>
+                            android:drawableEnd="@drawable/ic_date_of_birth_icon"/>
                     </com.app.l_pesa.common.CommonInputLayout>
 
                     <com.app.l_pesa.common.CommonInputLayout
