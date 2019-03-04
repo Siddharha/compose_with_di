@@ -29,11 +29,17 @@ import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
+import android.app.DatePickerDialog
+import android.widget.DatePicker
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+   override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_personal)
         setSupportActionBar(toolbar)
@@ -139,6 +145,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         dialog.show()
     }
 
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun loadDate()
     {
         val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
@@ -146,13 +153,52 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         if(!TextUtils.isEmpty(profileData.userPersonalInfo.dob))
         {
-            txtDOB.setText(profileData.userPersonalInfo.dob)
+            val inputFormat =  SimpleDateFormat("yyyy-MM-dd")
+            val date = inputFormat.parse(profileData.userPersonalInfo.dob)
+
+            val outputFormat = SimpleDateFormat("dd-MM-yyyy")
+            txtDOB.setText(outputFormat.format(date))
         }
 
         txtDOB.isFocusable=false
         txtDOB.setOnClickListener {
 
-           // showMarital()
+            val c       = Calendar.getInstance()
+            val year    = c.get(Calendar.YEAR)
+            val month   = c.get(Calendar.MONTH)+1
+            val day     = c.get(Calendar.DAY_OF_MONTH)
+
+            val dpd = DatePickerDialog(this@ProfileEditPersonalActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+
+                if(dayOfMonth.toString().length==1)
+                {
+                    if(monthOfYear.toString().length==1)
+                    {
+                        txtDOB.setText("0$dayOfMonth-0$month-$year")
+                    }
+                    else
+                    {
+                        txtDOB.setText("0$dayOfMonth-$month-$year")
+                    }
+
+                }
+                else
+                {
+                    if(monthOfYear.toString().length==1)
+                    {
+                        txtDOB.setText("$dayOfMonth-0$month-$year")
+                    }
+                    else
+                    {
+                        txtDOB.setText("$dayOfMonth-$monthOfYear-$year")
+                    }
+
+                }
+
+            }, year, month, day)
+
+            dpd.show()
+            dpd.datePicker.maxDate = System.currentTimeMillis()
 
         }
     }
