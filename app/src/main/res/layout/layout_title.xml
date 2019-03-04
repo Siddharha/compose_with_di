@@ -17,8 +17,8 @@
         <ImageView
             android:id="@+id/img_flag"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_marginStart="@dimen/_3sdp"
             android:adjustViewBounds="true"
             android:layout_centerInParent="true"

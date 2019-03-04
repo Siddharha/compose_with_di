@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.Window
@@ -84,6 +85,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle {
 
     private fun loadTitle()
     {
+        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.title))
+        {
+            txtTitle.setText(profileData.userPersonalInfo.title)
+        }
 
         txtTitle.isFocusable=false
         txtTitle.setOnClickListener {

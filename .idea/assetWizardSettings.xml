@@ -15,8 +15,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="autoMirrored" value="true" />
-                            <entry key="outputName" value="ic_loan_disapproved" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/L-Peas_icon/Loan_details/loan_disapproved.svg" />
+                            <entry key="outputName" value="ic_professor_icon" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/professor_icon.svg" />
                           </map>
                         </option>
                       </PersistentState>
