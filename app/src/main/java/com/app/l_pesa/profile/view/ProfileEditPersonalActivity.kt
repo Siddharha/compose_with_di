@@ -30,8 +30,6 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 import android.app.DatePickerDialog
-import android.widget.DatePicker
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 

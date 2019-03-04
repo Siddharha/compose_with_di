@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -107,6 +109,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     override fun onErrorUserInfo(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
+        Toast.makeText(activity,message,Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("SetTextI18n")
@@ -117,7 +120,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         val gson                          = Gson()
         val profileData                   = gson.toJson(data)
         sharedPrefOBJ.profileInfo         = profileData
-
 
 
         /*Profile Information*/
@@ -158,26 +160,78 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         /*Contact Information*/
 
-        txtAddress.text=data.userContactInfo.streetAddress+", "+data.userContactInfo.city+"- "+data.userContactInfo.postalAddress
-        txtEmail.text=data.userPersonalInfo.emailAddress
-        txtContact.text=data.userContactInfo.phoneNumber
+        if(!TextUtils.isEmpty(data.userContactInfo.city) && !TextUtils.isEmpty(data.userContactInfo.postalAddress))
+        {
+            txtAddress.text=data.userContactInfo.streetAddress+", "+data.userContactInfo.city+"- "+data.userContactInfo.postalAddress
+        }
+
+        if(!TextUtils.isEmpty(data.userPersonalInfo.emailAddress))
+        {
+            txtEmail.text=data.userPersonalInfo.emailAddress
+        }
+
+        if(!TextUtils.isEmpty(data.userContactInfo.phoneNumber))
+        {
+            txtContact.text=data.userContactInfo.phoneNumber
+        }
+
+
 
         /* Employment Info*/
 
-        txtEmployeeType.text=resources.getString(R.string.type_of_employer)+" "+data.userEmploymentInfo.employerType
-        txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+data.userEmploymentInfo.employerName
-        txtDepartment.text=resources.getString(R.string.department)+" "+data.userEmploymentInfo.department
-        txtOccupation.text=resources.getString(R.string.occupation)+" "+data.userEmploymentInfo.position
-        txtEmployeeID.text=resources.getString(R.string.employees_id_no)+" "+data.userEmploymentInfo.employeesIdNumber
-        txtEmployeeCity.text=resources.getString(R.string.city)+" "+data.userEmploymentInfo.city
+        if(!TextUtils.isEmpty(data.userEmploymentInfo.employerType))
+        {
+            txtEmployeeType.text=resources.getString(R.string.type_of_employer)+" "+data.userEmploymentInfo.employerType
+        }
+
+        if(!TextUtils.isEmpty(data.userEmploymentInfo.employerName))
+        {
+            txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+data.userEmploymentInfo.employerName
+        }
+
+        if(!TextUtils.isEmpty(data.userEmploymentInfo.department))
+        {
+            txtDepartment.text=resources.getString(R.string.department)+" "+data.userEmploymentInfo.department
+        }
+
+        if(!TextUtils.isEmpty(data.userEmploymentInfo.position))
+        {
+            txtOccupation.text = resources.getString(R.string.occupation) + " " + data.userEmploymentInfo.position
+        }
+
+        if(!TextUtils.isEmpty(data.userEmploymentInfo.employeesIdNumber))
+        {
+            txtEmployeeID.text=resources.getString(R.string.employees_id_no)+" "+data.userEmploymentInfo.employeesIdNumber
+        }
+
+        if(!TextUtils.isEmpty(data.userEmploymentInfo.city))
+        {
+            txtEmployeeCity.text=resources.getString(R.string.city)+" "+data.userEmploymentInfo.city
+        }
+
+
 
         /* Business Info*/
 
-        txtBusinessName.text=resources.getString(R.string.business_name)+" "+data.userBusinessInfo.businessName
-        txtTIN.text=resources.getString(R.string.tin_number)+" "+data.userBusinessInfo.tinNumber
-        txtIDType.text=resources.getString(R.string.id_type)+" "+data.userBusinessInfo.idType
-        txtIdNo.text=resources.getString(R.string.id_number)+" "+data.userBusinessInfo.idNumber
+        if(!TextUtils.isEmpty(data.userBusinessInfo.businessName))
+        {
+            txtBusinessName.text=resources.getString(R.string.business_name)+" "+data.userBusinessInfo.businessName
+        }
 
+        if(!TextUtils.isEmpty(data.userBusinessInfo.tinNumber))
+        {
+            txtTIN.text=resources.getString(R.string.tin_number)+" "+data.userBusinessInfo.tinNumber
+        }
+
+        if(!TextUtils.isEmpty(data.userBusinessInfo.idType))
+        {
+            txtIDType.text=resources.getString(R.string.id_type)+" "+data.userBusinessInfo.idType
+        }
+
+        if(!TextUtils.isEmpty(data.userBusinessInfo.idNumber))
+        {
+            txtIdNo.text=resources.getString(R.string.id_number)+" "+data.userBusinessInfo.idNumber
+        }
 
 
     }
@@ -200,9 +254,19 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         }
 
-        txtIdType.text      = userIdsInfo.idTypeName
-        txtIdNumber.text    = userIdsInfo.idNumber
-        txtCreatedTime.text = userIdsInfo.created
+        if(!TextUtils.isEmpty(userIdsInfo.idTypeName))
+        {
+            txtIdType.text      = userIdsInfo.idTypeName
+        }
+        if(!TextUtils.isEmpty(userIdsInfo.idNumber))
+        {
+            txtIdNumber.text    = userIdsInfo.idNumber
+        }
+        if(!TextUtils.isEmpty(userIdsInfo.created))
+        {
+            txtCreatedTime.text = userIdsInfo.created
+        }
+
 
 
     }

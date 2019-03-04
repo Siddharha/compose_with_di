@@ -364,10 +364,10 @@ public class ResUserInfo {
         private String fileName;
         @SerializedName("verified")
         @Expose
-        private Integer verified;
+        private String verified;
         @SerializedName("locked")
         @Expose
-        private Integer locked;
+        private String locked;
         @SerializedName("created")
         @Expose
         private String created;
@@ -428,19 +428,19 @@ public class ResUserInfo {
             this.fileName = fileName;
         }
 
-        public Integer getVerified() {
+        public String getVerified() {
             return verified;
         }
 
-        public void setVerified(Integer verified) {
+        public void setVerified(String verified) {
             this.verified = verified;
         }
 
-        public Integer getLocked() {
+        public String getLocked() {
             return locked;
         }
 
-        public void setLocked(Integer locked) {
+        public void setLocked(String locked) {
             this.locked = locked;
         }
 
