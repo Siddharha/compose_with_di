@@ -2,19 +2,23 @@ package com.app.l_pesa.profile.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
+import android.view.Window
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.adapter.TitleListAdapter
+import com.app.l_pesa.profile.inter.ICallBackTitle
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -23,7 +27,7 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 
-class ProfileEditPersonalActivity : AppCompatActivity() {
+class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,7 @@ class ProfileEditPersonalActivity : AppCompatActivity() {
         toolbarFont(this@ProfileEditPersonalActivity)
 
         initData()
+        loadTitle()
 
     }
 
@@ -67,7 +72,41 @@ class ProfileEditPersonalActivity : AppCompatActivity() {
             radioFemale.isChecked=true
         }
 
+
         onChangeEmail()
+    }
+
+
+    override fun onChangeTitle(s: String)
+    {
+        txtTitle.setText(s)
+    }
+
+    private fun loadTitle()
+    {
+
+        txtTitle.isFocusable=false
+        txtTitle.setOnClickListener {
+
+            showTitle()
+
+        }
+    }
+
+
+    private fun showTitle()
+    {
+        val listTitle = arrayListOf("Mr", "Mrs", "Mis","Dr","Prof")
+        val listIcon = arrayListOf(R.drawable.ic_mr_icon,R.drawable.ic_mrs_icon,R.drawable.ic_mrs_icon,R.drawable.ic_dr_icon,R.drawable.ic_professor_icon)
+
+        val dialog= Dialog(this@ProfileEditPersonalActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_country)
+        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val titleAdapter                = TitleListAdapter(this@ProfileEditPersonalActivity, listTitle,listIcon,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter           = titleAdapter
+        dialog.show()
     }
 
     private fun onChangeEmail()

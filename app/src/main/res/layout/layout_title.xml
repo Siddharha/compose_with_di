@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlRoot"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_45sdp"
+    android:gravity="center|start"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rlData"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_44sdp"
+
+        >
+
+        <ImageView
+            android:id="@+id/img_flag"
+            android:contentDescription="@string/app_name"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:adjustViewBounds="true"
+            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerCrop" />
+
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txt_country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toEndOf="@+id/img_flag"
+            android:gravity="center|start"
+            android:textSize="@dimen/_13sdp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/rlData"
+        android:background="@color/colorApp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        />
+</RelativeLayout>
+

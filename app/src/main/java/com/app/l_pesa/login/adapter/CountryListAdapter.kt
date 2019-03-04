@@ -23,7 +23,7 @@ import com.bumptech.glide.request.RequestOptions
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class CountryListAdapter (val context: Context, private val countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CountryListAdapter(val context: Context, private val countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -35,8 +35,7 @@ class CountryListAdapter (val context: Context, private val countryList: ArrayLi
         }
 
        val options = RequestOptions()
-        options.centerCrop()
-        Glide.with(context)
+       Glide.with(context)
                 .load(countryList[position].image)
                 .apply(options)
                 .into(holder.imgFlag)
