@@ -12,6 +12,8 @@ import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.profile.model.ResUserInfo
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
@@ -35,6 +37,13 @@ class ProfileEditPersonalActivity : AppCompatActivity() {
     {
         val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
         val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+
+
+        val options = RequestOptions()
+        Glide.with(this@ProfileEditPersonalActivity)
+                .load(profileData!!.userInfo.profileImage)
+                .apply(options)
+                .into(imgProfile)
 
        // txtTitle.setText(profileData.userPersonalInfo.title)
         etNameF.setText(profileData.userPersonalInfo.firstName)

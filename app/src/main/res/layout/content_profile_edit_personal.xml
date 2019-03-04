@@ -222,11 +222,11 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout10" />
 
 
-                    <ImageButton
-                        android:id="@+id/imageView7"
+                    <com.app.l_pesa.common.CircularImageView
+                        android:id="@+id/imgProfile"
                         android:contentDescription="@string/app_name"
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_80sdp"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
                         android:background="?selectableItemBackgroundBorderless"
                         app:layout_constraintEnd_toStartOf="@+id/imageView10"
                         app:layout_constraintStart_toStartOf="parent"
@@ -289,7 +289,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView10"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                        app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
                     <Button
                         android:id="@+id/button4"
