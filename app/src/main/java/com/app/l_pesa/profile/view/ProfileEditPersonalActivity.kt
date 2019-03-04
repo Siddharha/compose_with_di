@@ -5,11 +5,15 @@ import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.bumptech.glide.Glide
@@ -62,6 +66,35 @@ class ProfileEditPersonalActivity : AppCompatActivity() {
             radioMale.isChecked=false
             radioFemale.isChecked=true
         }
+
+        onChangeEmail()
+    }
+
+    private fun onChangeEmail()
+    {
+        etEmail.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+               if(!CommonMethod.isValidEmailAddress(s.toString()))
+               {
+                   etEmail.setTextColor(ContextCompat.getColor(this@ProfileEditPersonalActivity,R.color.colorRed))
+               }
+                else
+               {
+                   etEmail.setTextColor(ContextCompat.getColor(this@ProfileEditPersonalActivity,R.color.textColors))
+               }
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
     }
 
 
