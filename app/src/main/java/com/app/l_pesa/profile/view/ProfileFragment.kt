@@ -147,17 +147,8 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         /* ID Information*/
 
-        if(data.userIdsInfo.size>0)
-        {
-            if(data.userIdsInfo.size==1)
-            {
-                userInformation(data.userIdsInfo[0])
-            }
-            else
-            {
-                userInformation(data.userIdsInfo[data.userIdsInfo.size-1])
-            }
-        }
+        userInformation(data.userIdsInfo)
+
 
         /*Contact Information*/
 
@@ -243,6 +234,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         try {
 
             val options = RequestOptions()
+            options.error(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
                     .load(userIdsInfo.fileName)
                     .apply(options)

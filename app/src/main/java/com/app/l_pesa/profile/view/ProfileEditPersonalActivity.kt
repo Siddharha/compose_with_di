@@ -131,68 +131,115 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         buttonSubmit.setOnClickListener {
 
-           if(TextUtils.isEmpty(txtTitle.text.toString()))
-           {
-               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_title))
-           }
-           else if(TextUtils.isEmpty(etNameF.text.toString()))
-           {
-               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_f))
-           }
-           else if(TextUtils.isEmpty(etNameL.text.toString()))
-           {
-               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_l))
-           }
-           else if(!CommonMethod.isValidEmailAddress(etEmail.text.toString()))
-           {
-               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_email))
-           }
-           else if(TextUtils.isEmpty(etMotherName.text.toString()))
-           {
-               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
-           }
-           else
-           {
-               if(CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity))
-               {
-                   swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                   swipeRefreshLayout.isRefreshing=true
-
-                   var gender="M"
-                   gender = if(radioMale.isChecked) {
-                       "M"
-                   } else {
-                       "F"
-                   }
-
-                   val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
-                   val date         = inputFormat.parse(txtDOB.text.toString())
-
-                   val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-                   val dateRequest  = outputFormat.format(date)
-
-                   val jsonObject = JsonObject()
-                   jsonObject.addProperty("title",txtTitle.text.toString())
-                   jsonObject.addProperty("first_name",etNameF.text.toString())
-                   jsonObject.addProperty("middle_name",etNameM.text.toString())
-                   jsonObject.addProperty("last_name",etNameL.text.toString())
-                   jsonObject.addProperty("email_address",etEmail.text.toString())
-                   jsonObject.addProperty("dob",dateRequest)
-                   jsonObject.addProperty("sex",gender)
-                   jsonObject.addProperty("merital_status",txtMarital.text.toString())
-                   jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
-                   jsonObject.addProperty("profile_image","proimg_new_61455_121a941dc8544874fa50c59ff3a63668.jpg")
+            var gender="M"
+            gender = if(radioMale.isChecked) {
+                "M"
+            } else {
+                "F"
+            }
 
 
-                   val presenterPersonalInfo= PresenterPersonalInfo()
-                   presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
-               }
-               else
-               {
-                   CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.no_internet))
-               }
+            val hashMapOLD = HashMap<String, String>()
+            hashMapOLD["title"]     = profileData.userPersonalInfo.title
+            hashMapOLD["nameF"]     = profileData.userPersonalInfo.firstName
+            hashMapOLD["nameM"]     = profileData.userPersonalInfo.middleName
+            hashMapOLD["nameL"]     = profileData.userPersonalInfo.lastName
+            hashMapOLD["email"]     = profileData.userPersonalInfo.emailAddress
+            hashMapOLD["dob"]       = profileData.userPersonalInfo.dob
+            hashMapOLD["status"]    = profileData.userPersonalInfo.meritalStatus
+            hashMapOLD["motherM"]   = profileData.userPersonalInfo.motherMaidenName
+            hashMapOLD["sex"]       = profileData.userPersonalInfo.sex
 
-           }
+
+            val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+            val date         = inputFormat.parse(txtDOB.text.toString())
+
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+            val dateRequest  = outputFormat.format(date)
+
+            val hashMapNew = HashMap<String, String>()
+            hashMapNew["title"]     = txtTitle.text.toString()
+            hashMapNew["nameF"]     = etNameF.text.toString()
+            hashMapNew["nameM"]     = etNameM.text.toString()
+            hashMapNew["nameL"]     = etNameL.text.toString()
+            hashMapNew["email"]     = etEmail.text.toString()
+            hashMapNew["dob"]       = dateRequest
+            hashMapNew["status"]    = txtMarital.text.toString()
+            hashMapNew["motherM"]   = etMotherName.text.toString()
+            hashMapNew["sex"]       = gender
+
+
+            if(hashMapOLD == hashMapNew)
+            {
+                CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.change_one_info))
+            }
+            else
+            {
+                if(TextUtils.isEmpty(txtTitle.text.toString()))
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_title))
+                }
+                else if(TextUtils.isEmpty(etNameF.text.toString()))
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_f))
+                }
+                else if(TextUtils.isEmpty(etNameL.text.toString()))
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_l))
+                }
+                else if(!CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_email))
+                }
+                else if(TextUtils.isEmpty(etMotherName.text.toString()))
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
+                }
+                else
+                {
+                    if(CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity))
+                    {
+                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+                        swipeRefreshLayout.isRefreshing=true
+
+                        var gender="M"
+                        gender = if(radioMale.isChecked) {
+                            "M"
+                        } else {
+                            "F"
+                        }
+
+                        val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+                        val date         = inputFormat.parse(txtDOB.text.toString())
+
+                        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+                        val dateRequest  = outputFormat.format(date)
+
+                        val jsonObject = JsonObject()
+                        jsonObject.addProperty("title",txtTitle.text.toString())
+                        jsonObject.addProperty("first_name",etNameF.text.toString())
+                        jsonObject.addProperty("middle_name",etNameM.text.toString())
+                        jsonObject.addProperty("last_name",etNameL.text.toString())
+                        jsonObject.addProperty("email_address",etEmail.text.toString())
+                        jsonObject.addProperty("dob",dateRequest)
+                        jsonObject.addProperty("sex",gender)
+                        jsonObject.addProperty("merital_status",txtMarital.text.toString())
+                        jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
+                        jsonObject.addProperty("profile_image","proimg_new_61455_121a941dc8544874fa50c59ff3a63668.jpg")
+
+
+                        val presenterPersonalInfo= PresenterPersonalInfo()
+                        presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
+                    }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.no_internet))
+                    }
+
+                }
+
+            }
+
 
         }
     }
@@ -613,8 +660,16 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                if(swipeRefreshLayout.isRefreshing)
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                }
+
                 true
             }
 

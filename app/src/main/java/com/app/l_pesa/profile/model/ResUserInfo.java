@@ -48,7 +48,7 @@ public class ResUserInfo {
         private UserPersonalInfo userPersonalInfo;
         @SerializedName("user_ids_info")
         @Expose
-        private ArrayList<UserIdsInfo> userIdsInfo = null;
+        private UserIdsInfo userIdsInfo;
 
         public UserInfo getUserInfo() {
             return userInfo;
@@ -90,11 +90,11 @@ public class ResUserInfo {
             this.userPersonalInfo = userPersonalInfo;
         }
 
-        public ArrayList<UserIdsInfo> getUserIdsInfo() {
+        public UserIdsInfo getUserIdsInfo() {
             return userIdsInfo;
         }
 
-        public void setUserIdsInfo(ArrayList<UserIdsInfo> userIdsInfo) {
+        public void setUserIdsInfo(UserIdsInfo userIdsInfo) {
             this.userIdsInfo = userIdsInfo;
         }
 
@@ -365,9 +365,6 @@ public class ResUserInfo {
         @SerializedName("verified")
         @Expose
         private String verified;
-        @SerializedName("locked")
-        @Expose
-        private String locked;
         @SerializedName("created")
         @Expose
         private String created;
@@ -434,14 +431,6 @@ public class ResUserInfo {
 
         public void setVerified(String verified) {
             this.verified = verified;
-        }
-
-        public String getLocked() {
-            return locked;
-        }
-
-        public void setLocked(String locked) {
-            this.locked = locked;
         }
 
         public String getCreated() {
