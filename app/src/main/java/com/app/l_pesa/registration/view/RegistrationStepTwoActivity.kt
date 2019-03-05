@@ -209,8 +209,17 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private fun displayImage(imagePath: String?){
         if (imagePath != null) {
-            val bitmap = BitmapFactory.decodeFile(imagePath)
-            imgProfilePhoto?.setImageBitmap(bitmap)
+            val imgSize = File(imagePath)
+            if(imgSize.length()>3072) // Max Size Under 3MB
+            {
+                Toast.makeText(this@RegistrationStepTwoActivity, "Image size maximum 3MB", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                val bitmap = BitmapFactory.decodeFile(imagePath)
+                imgProfilePhoto?.setImageBitmap(bitmap)
+            }
+
         }
         else {
             Toast.makeText(this@RegistrationStepTwoActivity, "Failed to get image", Toast.LENGTH_SHORT).show()

@@ -12,4 +12,5 @@ interface ICallBackLogin {
 
     fun onSuccessLogin(data: LoginData)
     fun onErrorLogin(jsonMessage: String)
+    fun onFailureLogin(jsonMessage: String)
 }

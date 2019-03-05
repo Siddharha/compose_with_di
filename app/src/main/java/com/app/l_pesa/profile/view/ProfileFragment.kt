@@ -127,6 +127,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         try {
 
             val options = RequestOptions()
+            options.error(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
                     .load(data.userInfo.profileImage)
                     .apply(options)

@@ -127,6 +127,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             try {
 
                 val options = RequestOptions()
+                options.error(R.drawable.ic_id_no_image)
                 Glide.with(this@DashboardActivity)
                         .load(userData.user_personal_info.profile_image)
                         .apply(options)

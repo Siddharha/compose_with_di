@@ -168,6 +168,11 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
         loadMain(jsonMessage)
     }
 
+    override fun onFailureLogin(jsonMessage: String) {
+
+        loadMain(jsonMessage)
+    }
+
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
 

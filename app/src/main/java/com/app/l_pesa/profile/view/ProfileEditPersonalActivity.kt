@@ -39,17 +39,30 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.widget.Toast
+import com.app.l_pesa.dashboard.presenter.PresenterDashboard
+import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.login.inter.ICallBackLogin
+import com.app.l_pesa.login.model.LoginData
+import com.app.l_pesa.login.presenter.PresenterLogin
+import com.app.l_pesa.logout.inter.ICallBackLogout
+import com.app.l_pesa.logout.presenter.PresenterLogout
+import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
+import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital {
+class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackLogin {
+
 
     private val PHOTO               = 1
     private val GALLEY              = 2
@@ -70,7 +83,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         loadTitle(profileData)
         loadMarital(profileData)
         loadDate(profileData)
-        buttonEvent()
+        buttonEvent(profileData)
 
     }
 
@@ -84,7 +97,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 .apply(options)
                 .into(imgProfile)
 
-       // txtTitle.setText(profileData.userPersonalInfo.title)
         etNameF.setText(profileData.userPersonalInfo.firstName)
         etNameM.setText(profileData.userPersonalInfo.middleName)
         etNameL.setText(profileData.userPersonalInfo.lastName)
@@ -103,11 +115,12 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
 
 
-        onChangeEmail()
+        onChangeEmail(profileData)
         onChangeProfileImage()
     }
 
-    private fun buttonEvent()
+    @SuppressLint("SimpleDateFormat")
+    private fun buttonEvent(profileData: ResUserInfo.Data)
     {
         buttonCancel.setOnClickListener {
 
@@ -130,7 +143,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
            {
                CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_l))
            }
-           else if(TextUtils.isEmpty(etEmail.text.toString()) && !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+           else if(!CommonMethod.isValidEmailAddress(etEmail.text.toString()))
            {
                CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_email))
            }
@@ -142,7 +155,37 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
            {
                if(CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity))
                {
+                   swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                    swipeRefreshLayout.isRefreshing=true
+
+                   var gender="M"
+                   gender = if(radioMale.isChecked) {
+                       "M"
+                   } else {
+                       "F"
+                   }
+
+                   val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+                   val date         = inputFormat.parse(txtDOB.text.toString())
+
+                   val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+                   val dateRequest  = outputFormat.format(date)
+
+                   val jsonObject = JsonObject()
+                   jsonObject.addProperty("title",txtTitle.text.toString())
+                   jsonObject.addProperty("first_name",etNameF.text.toString())
+                   jsonObject.addProperty("middle_name",etNameM.text.toString())
+                   jsonObject.addProperty("last_name",etNameL.text.toString())
+                   jsonObject.addProperty("email_address",etEmail.text.toString())
+                   jsonObject.addProperty("dob",dateRequest)
+                   jsonObject.addProperty("sex",gender)
+                   jsonObject.addProperty("merital_status",txtMarital.text.toString())
+                   jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
+                   jsonObject.addProperty("profile_image","proimg_new_61455_121a941dc8544874fa50c59ff3a63668.jpg")
+
+
+                   val presenterPersonalInfo= PresenterPersonalInfo()
+                   presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
                }
                else
                {
@@ -152,6 +195,50 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
            }
 
         }
+    }
+
+    override fun onsuccessPersonalInfo() {
+
+        val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
+        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+        val presenterLoginObj = PresenterLogin()
+        presenterLoginObj.doLogin(this@ProfileEditPersonalActivity, jsonObject, this)
+
+    }
+
+    override fun onfailurePersonalInfo(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
+    }
+
+    override fun onSuccessLogin(data: LoginData) {
+
+        val sharedPrefOBJ=SharedPref(this@ProfileEditPersonalActivity)
+        sharedPrefOBJ.accessToken   =data.access_token
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.userInfo      = json
+
+        swipeRefreshLayout.isRefreshing=false
+        val intent = Intent(this@ProfileEditPersonalActivity, DashboardActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+    }
+
+    override fun onErrorLogin(jsonMessage: String) {
+
+     swipeRefreshLayout.isRefreshing=false
+     Toast.makeText(this@ProfileEditPersonalActivity,jsonMessage,Toast.LENGTH_SHORT).show()
+
+
+    }
+
+    override fun onFailureLogin(jsonMessage: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.no_internet))
     }
 
     private fun onChangeProfileImage()
@@ -180,7 +267,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun cameraClick()
     {
-
         try {
             val imageFile = createImageFile()
             val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -269,7 +355,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun scaleBitmap(): Bitmap
     {
-        val imageViewWidth = 500
+        val imageViewWidth  = 500
         val imageViewHeight = 500
 
         val bmOptions = BitmapFactory.Options()
@@ -323,15 +409,23 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun displayImage(imagePath: String?){
         if (imagePath != null) {
-            val bitmap = BitmapFactory.decodeFile(imagePath)
-            imgProfile.setImageBitmap(bitmap)
+
+            val imgSize = File(imagePath)
+            if(imgSize.length()>3072) // Max Size Under 3MB
+            {
+                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3MB", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                val bitmap = BitmapFactory.decodeFile(imagePath)
+                imgProfile.setImageBitmap(bitmap)
+            }
+
         }
         else {
             Toast.makeText(this@ProfileEditPersonalActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
 
     override fun onChangeTitle(s: String)
@@ -372,7 +466,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun showMarital()
     {
-        val listTitle = arrayListOf("Married", "Unmarried")
+        val listTitle = arrayListOf("Married", "Divorced","Single")
 
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -461,31 +555,40 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         txtMarital.setText(s)
     }
 
-    private fun onChangeEmail()
+    private fun onChangeEmail(profileData: ResUserInfo.Data)
     {
-        etEmail.addTextChangedListener(object : TextWatcher {
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.emailAddress))
+        {
+            etEmail.isEnabled=false
+        }
+        else
+        {
+            etEmail.addTextChangedListener(object : TextWatcher {
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
-               if(!CommonMethod.isValidEmailAddress(s.toString()))
-               {
-                   etEmail.setTextColor(ContextCompat.getColor(this@ProfileEditPersonalActivity,R.color.colorRed))
-               }
-                else
-               {
-                   etEmail.setTextColor(ContextCompat.getColor(this@ProfileEditPersonalActivity,R.color.textColors))
-               }
+                    if(!CommonMethod.isValidEmailAddress(s.toString()))
+                    {
+                        etEmail.setTextColor(ContextCompat.getColor(this@ProfileEditPersonalActivity,R.color.colorRed))
+                    }
+                    else
+                    {
+                        etEmail.setTextColor(ContextCompat.getColor(this@ProfileEditPersonalActivity,R.color.textColors))
+                    }
 
-            }
+                }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
 
-            }
+                }
 
-            override fun afterTextChanged(s: Editable) {
+                override fun afterTextChanged(s: Editable) {
 
-            }
-        })
+                }
+            })
+        }
+
+
     }
 
 

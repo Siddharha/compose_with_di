@@ -57,15 +57,15 @@ class PresenterLogin {
                         val errorVal     = error as HttpException
 
                         val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus=    jsonError.getJSONObject("status")
-                        val jsonMessage    =    jsonStatus.getString("message")
+                        val  jsonStatus           =    jsonError.getJSONObject("status")
+                        val jsonMessage           =    jsonStatus.getString("message")
 
-                        callBackOBJ.onErrorLogin(jsonMessage)
+                        callBackOBJ.onFailureLogin(jsonMessage)
                     }
                     catch (exp: Exception)
                     {
                         val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
-                        callBackOBJ.onErrorLogin(errorMessageOBJ)
+                        callBackOBJ.onFailureLogin(errorMessageOBJ)
                     }
 
                 })

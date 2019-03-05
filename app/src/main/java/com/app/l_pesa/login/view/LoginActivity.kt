@@ -293,6 +293,14 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
+    override fun onFailureLogin(jsonMessage: String) {
+
+        progressBar.visibility = View.INVISIBLE
+        txtLogin.isClickable   = true
+        CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)
+
+    }
+
     private fun countrySpinner(countryList: ResModelData)
     {
         val dialog= Dialog(this@LoginActivity)
