@@ -210,7 +210,8 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     private fun displayImage(imagePath: String?){
         if (imagePath != null) {
             val imgSize = File(imagePath)
-            if(imgSize.length()>3072) // Max Size Under 3MB
+            val length  = imgSize.length() / 1024
+            if(length>3000) // Max Size Under 3MB
             {
                 Toast.makeText(this@RegistrationStepTwoActivity, "Image size maximum 3MB", Toast.LENGTH_SHORT).show()
             }

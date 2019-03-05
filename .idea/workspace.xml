@@ -16,17 +16,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/model/ResUserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/model/ResUserInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,7 +115,7 @@
           <entry key="class" value="4" />
           <entry key="gradle" value="5" />
           <entry key="java" value="19" />
-          <entry key="kt" value="209" />
+          <entry key="kt" value="210" />
           <entry key="pro" value="6" />
           <entry key="xml" value="190" />
         </counts>
@@ -129,7 +125,7 @@
           <entry key="CLASS" value="4" />
           <entry key="Groovy" value="5" />
           <entry key="JAVA" value="19" />
-          <entry key="Kotlin" value="209" />
+          <entry key="Kotlin" value="210" />
           <entry key="ProGuard File" value="6" />
           <entry key="XML" value="190" />
         </counts>
@@ -137,7 +133,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="150" />
-          <entry key="kt" value="8163" />
+          <entry key="kt" value="8263" />
           <entry key="pro" value="22" />
           <entry key="txt" value="121" />
           <entry key="xml" value="6372" />
@@ -146,7 +142,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="150" />
-          <entry key="Kotlin" value="8163" />
+          <entry key="Kotlin" value="8263" />
           <entry key="PLAIN_TEXT" value="121" />
           <entry key="ProGuard File" value="22" />
           <entry key="XML" value="6372" />
@@ -169,26 +165,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="173" column="141" selection-start-line="173" selection-start-column="141" selection-end-line="173" selection-end-column="141" />
+            <state relative-caret-position="239">
+              <caret line="166" column="22" selection-start-line="166" selection-start-column="22" selection-end-line="166" selection-end-column="22" />
               <folding>
-                <element signature="e#7019#7063#1" expanded="true" />
-                <element signature="e#7270#7315#1" expanded="true" />
-                <element signature="e#7522#7567#1" expanded="true" />
-                <element signature="e#7790#7834#1" expanded="true" />
-                <element signature="e#8046#8103#1" expanded="true" />
-                <element signature="e#10233#10274#1" expanded="true" />
-                <element signature="e#11836#11877#1" expanded="true" />
+                <element signature="e#6599#6644#1" expanded="true" />
+                <element signature="e#6874#6918#1" expanded="true" />
+                <element signature="e#7125#7170#1" expanded="true" />
+                <element signature="e#7377#7422#1" expanded="true" />
+                <element signature="e#7645#7689#1" expanded="true" />
+                <element signature="e#7901#7958#1" expanded="true" />
+                <element signature="e#10088#10129#1" expanded="true" />
+                <element signature="e#11680#11721#1" expanded="true" />
+                <element signature="e#24742#24783#1" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="64" column="33" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -209,11 +198,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>payment</find>
-      <find>content_loan_history_details</find>
-      <find>swipeRefreshLayout</find>
-      <find>if(CommonMethod.isNetworkAvailable</find>
-      <find>txtEmployeeID</find>
       <find>dialog</find>
       <find>loadTitle</find>
       <find>user_business_info</find>
@@ -239,6 +223,11 @@
       <find>inte</find>
       <find>Glide</find>
       <find>ontextw</find>
+      <find>// Max Size Under 3MB</find>
+      <find>setDataAndType</find>
+      <find>prese</find>
+      <find>false</find>
+      <find>imageSelectStatus</find>
     </findStrings>
     <replaceStrings>
       <replace>: Boolean? = false</replace>
@@ -3254,7 +3243,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_marital.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/MaritalListAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackPersonalInfo.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/model/ResPersonalInfo.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" />
@@ -3267,6 +3255,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/model/ResUserInfo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" />
       </list>
     </option>
@@ -4091,13 +4080,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/font/montserrat.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="214" column="63" selection-start-line="214" selection-start-column="63" selection-end-line="214" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/presenter/PresenterUserInfo.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
@@ -4288,23 +4270,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="64" column="33" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="33" />
+        <state relative-caret-position="369">
+          <caret line="74" column="46" lean-forward="true" selection-start-line="74" selection-start-column="46" selection-end-line="74" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="213" column="49" selection-start-line="213" selection-start-column="49" selection-end-line="213" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="173" column="141" selection-start-line="173" selection-start-column="141" selection-end-line="173" selection-end-column="141" />
+        <state relative-caret-position="239">
+          <caret line="166" column="22" selection-start-line="166" selection-start-column="22" selection-end-line="166" selection-end-column="22" />
           <folding>
-            <element signature="e#7019#7063#1" expanded="true" />
-            <element signature="e#7270#7315#1" expanded="true" />
-            <element signature="e#7522#7567#1" expanded="true" />
-            <element signature="e#7790#7834#1" expanded="true" />
-            <element signature="e#8046#8103#1" expanded="true" />
-            <element signature="e#10233#10274#1" expanded="true" />
-            <element signature="e#11836#11877#1" expanded="true" />
+            <element signature="e#6599#6644#1" expanded="true" />
+            <element signature="e#6874#6918#1" expanded="true" />
+            <element signature="e#7125#7170#1" expanded="true" />
+            <element signature="e#7377#7422#1" expanded="true" />
+            <element signature="e#7645#7689#1" expanded="true" />
+            <element signature="e#7901#7958#1" expanded="true" />
+            <element signature="e#10088#10129#1" expanded="true" />
+            <element signature="e#11680#11721#1" expanded="true" />
+            <element signature="e#24742#24783#1" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -39,18 +39,14 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.widget.Toast
-import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
-import com.app.l_pesa.logout.inter.ICallBackLogout
-import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
 import com.google.gson.JsonObject
@@ -149,6 +145,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapOLD["status"]    = profileData.userPersonalInfo.meritalStatus
             hashMapOLD["motherM"]   = profileData.userPersonalInfo.motherMaidenName
             hashMapOLD["sex"]       = profileData.userPersonalInfo.sex
+            hashMapOLD["imgChange"] = "false"
 
 
             val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
@@ -167,6 +164,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapNew["status"]    = txtMarital.text.toString()
             hashMapNew["motherM"]   = etMotherName.text.toString()
             hashMapNew["sex"]       = gender
+            hashMapNew["imgChange"] = imageSelectStatus.toString()
 
 
             if(hashMapOLD == hashMapNew)
@@ -229,7 +227,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
 
                         val presenterPersonalInfo= PresenterPersonalInfo()
-                        presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
+                       // presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
                     }
                     else
                     {
@@ -458,18 +456,22 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         if (imagePath != null) {
 
             val imgSize = File(imagePath)
-            if(imgSize.length()>3072) // Max Size Under 3MB
+            val length  = imgSize.length() / 1024
+            if(length>3000) // Max Size Under 3MB
             {
-                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3MB", Toast.LENGTH_SHORT).show()
+                imageSelectStatus=false
+                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else
             {
+                imageSelectStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfile.setImageBitmap(bitmap)
             }
 
         }
         else {
+            imageSelectStatus=false
             Toast.makeText(this@ProfileEditPersonalActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
     }
