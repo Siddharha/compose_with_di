@@ -157,7 +157,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             if(!countryFound)
             {
                 val options = RequestOptions()
-                options.centerCrop()
                 Glide.with(this@LoginActivity)
                         .load(countryData.countries_list[0].image)
                         .apply(options)

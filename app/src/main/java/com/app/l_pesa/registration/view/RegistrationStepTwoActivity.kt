@@ -31,7 +31,6 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private val PHOTO               = 1
     private val GALLEY              = 2
-    private var imageUri: Uri?      = null
     private var captureFile: File?  = null
     private var imageFilePath       = ""
     private var imageSelectStatus   : Boolean = false
@@ -64,7 +63,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
                     dialog.dismiss()
             }
         }
-        dialogView.show() // show dialog
+        dialogView.show()
     }
 
     private fun cameraClick()
@@ -130,12 +129,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
             PHOTO ->
-               /* if (resultCode == Activity.RESULT_OK && data!=null)
-                {
-                    val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(imageUri))
-                    imgProfilePhoto!!.setImageBitmap(bitmap)
-                }*/
-                if (resultCode == Activity.RESULT_OK) {
+               if (resultCode == Activity.RESULT_OK) {
                     imgProfilePhoto.setImageBitmap(scaleBitmap())
                     CommonMethod.fileCompress(captureFile!!)
                     imageSelectStatus=true
@@ -161,8 +155,8 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private fun scaleBitmap(): Bitmap
     {
-        val imageViewWidth = imgProfilePhoto.width
-        val imageViewHeight = imgProfilePhoto.height
+        val imageViewWidth = 500
+        val imageViewHeight = 500
 
         val bmOptions = BitmapFactory.Options()
         bmOptions.inJustDecodeBounds = true

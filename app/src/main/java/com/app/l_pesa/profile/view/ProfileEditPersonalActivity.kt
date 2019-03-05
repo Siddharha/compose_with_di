@@ -30,12 +30,32 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 import android.app.DatePickerDialog
+import android.content.ContentUris
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Environment
+import android.provider.DocumentsContract
+import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.FileProvider
+import android.support.v7.app.AlertDialog
+import android.widget.Toast
+import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital {
 
+    private val PHOTO               = 1
+    private val GALLEY              = 2
+    private var captureFile: File?  = null
+    private var imageFilePath       = ""
+    private var imageSelectStatus   : Boolean = false
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,23 +64,23 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@ProfileEditPersonalActivity)
 
-        initData()
-        loadTitle()
-        loadMarital()
-        loadDate()
+        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        initData(profileData)
+        loadTitle(profileData)
+        loadMarital(profileData)
+        loadDate(profileData)
+        buttonEvent()
 
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initData()
+    private fun initData(profileData: ResUserInfo.Data)
     {
-        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
-
 
         val options = RequestOptions()
         Glide.with(this@ProfileEditPersonalActivity)
-                .load(profileData!!.userInfo.profileImage)
+                .load(profileData.userInfo.profileImage)
                 .apply(options)
                 .into(imgProfile)
 
@@ -84,7 +104,234 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
 
         onChangeEmail()
+        onChangeProfileImage()
     }
+
+    private fun buttonEvent()
+    {
+        buttonCancel.setOnClickListener {
+
+            onBackPressed()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+        }
+
+        buttonSubmit.setOnClickListener {
+
+           if(TextUtils.isEmpty(txtTitle.text.toString()))
+           {
+               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_title))
+           }
+           else if(TextUtils.isEmpty(etNameF.text.toString()))
+           {
+               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_f))
+           }
+           else if(TextUtils.isEmpty(etNameL.text.toString()))
+           {
+               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_l))
+           }
+           else if(TextUtils.isEmpty(etEmail.text.toString()) && !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+           {
+               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_email))
+           }
+           else if(TextUtils.isEmpty(etMotherName.text.toString()))
+           {
+               CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
+           }
+           else
+           {
+               if(CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity))
+               {
+                   swipeRefreshLayout.isRefreshing=true
+               }
+               else
+               {
+                   CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.no_internet))
+               }
+
+           }
+
+        }
+    }
+
+    private fun onChangeProfileImage()
+    {
+
+        imgProfile.setOnClickListener {
+
+            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
+            val dialogView = AlertDialog.Builder(this@ProfileEditPersonalActivity)
+            dialogView.setTitle("Choose Options")
+
+            dialogView.setItems(items) { dialog, item ->
+
+                when {
+                    items[item] == "Camera" -> // open camera
+                        cameraClick() // open default camera
+                    items[item] == "Gallery" -> // open gallery
+                        galleryClick() // open default gallery
+                    items[item] == "Cancel" -> // close dialog
+                        dialog.dismiss()
+                }
+            }
+            dialogView.show()
+        }
+    }
+
+    private fun cameraClick()
+    {
+
+        try {
+            val imageFile = createImageFile()
+            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+            val authorities = "com.app.l_pesa.fileprovider"
+            val imageUri = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, authorities, imageFile)
+            callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
+            startActivityForResult(callCameraIntent, PHOTO)
+
+        } catch (e: IOException) {
+            Toast.makeText(this@ProfileEditPersonalActivity,"Could not create file!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName: String = "l_pesa" + timeStamp + "_"
+        val storageDir: File = this@ProfileEditPersonalActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        if (!storageDir.exists()) storageDir.mkdirs()
+        captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)
+        imageFilePath = captureFile!!.absolutePath
+        return captureFile!!
+    }
+
+    private fun galleryClick()
+    {
+        val checkSelfPermission = ContextCompat.checkSelfPermission(this@ProfileEditPersonalActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this@ProfileEditPersonalActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+        }
+        else{
+            openAlbum()
+        }
+    }
+
+    private fun openAlbum(){
+        val intent = Intent("android.intent.action.GET_CONTENT")
+        intent.type = "image/*"
+        startActivityForResult(intent, GALLEY)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            1 ->
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    openAlbum()
+                }
+                else {
+                    Toast.makeText(this@ProfileEditPersonalActivity, "You denied the permission", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            PHOTO ->
+
+                if (resultCode == Activity.RESULT_OK) {
+                    imgProfile.setImageBitmap(scaleBitmap())
+                    CommonMethod.fileCompress(captureFile!!)
+                    imageSelectStatus=true
+                } else
+
+                {
+                    if(imageSelectStatus)
+                    {
+                    }
+                    else
+                    {
+                        imageSelectStatus=false
+                    }
+
+                }
+            GALLEY ->
+                if (resultCode == Activity.RESULT_OK) {
+                    handleImage(data)
+
+                }
+        }
+    }
+
+    private fun scaleBitmap(): Bitmap
+    {
+        val imageViewWidth = 500
+        val imageViewHeight = 500
+
+        val bmOptions = BitmapFactory.Options()
+        bmOptions.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(imageFilePath, bmOptions)
+        val bitmapWidth = bmOptions.outWidth
+        val bitmapHeight = bmOptions.outHeight
+        val scaleFactor = Math.min(bitmapWidth / imageViewWidth, bitmapHeight / imageViewHeight)
+
+        bmOptions.inJustDecodeBounds = false
+        bmOptions.inSampleSize = scaleFactor
+        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+
+    }
+
+    private fun handleImage(data: Intent?) {
+        var imagePath=""
+        val uri = data!!.data
+        if (DocumentsContract.isDocumentUri(this, uri)){
+            val docId = DocumentsContract.getDocumentId(uri)
+            if ("com.android.providers.media.documents" == uri!!.authority){
+                val id = docId.split(":")[1]
+                val section = MediaStore.Images.Media._ID + "=" + id
+                imagePath = imagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, section)
+            }
+            else if ("com.android.providers.downloads.documents" == uri.authority){
+                val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
+                imagePath = imagePath(contentUri, null)
+            }
+        }
+        else if ("content".equals(uri!!.scheme, ignoreCase = true)){
+            imagePath = imagePath(uri, null)
+        }
+        else if ("file".equals(uri.scheme, ignoreCase = true)){
+            imagePath = uri.path!!
+        }
+        displayImage(imagePath)
+    }
+
+    private fun imagePath(uri: Uri?, selection: String?): String {
+        var path: String? = null
+        val cursor = contentResolver.query(uri!!, null, selection, null, null )
+        if (cursor != null){
+            if (cursor.moveToFirst()) {
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
+            }
+            cursor.close()
+        }
+        return path!!
+    }
+
+    private fun displayImage(imagePath: String?){
+        if (imagePath != null) {
+            val bitmap = BitmapFactory.decodeFile(imagePath)
+            imgProfile.setImageBitmap(bitmap)
+        }
+        else {
+            Toast.makeText(this@ProfileEditPersonalActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
 
 
     override fun onChangeTitle(s: String)
@@ -92,11 +339,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         txtTitle.setText(s)
     }
 
-    private fun loadTitle()
+    private fun loadTitle(profileData: ResUserInfo.Data)
     {
-        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
-
         if(!TextUtils.isEmpty(profileData.userPersonalInfo.title))
         {
             txtTitle.setText(profileData.userPersonalInfo.title)
@@ -110,10 +354,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
-    private fun loadMarital()
+    private fun loadMarital(profileData: ResUserInfo.Data)
     {
-        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
 
         if(!TextUtils.isEmpty(profileData.userPersonalInfo.meritalStatus))
         {
@@ -132,7 +374,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     {
         val listTitle = arrayListOf("Married", "Unmarried")
 
-
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
@@ -144,10 +385,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    private fun loadDate()
+    private fun loadDate(profileData: ResUserInfo.Data)
     {
-        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
 
         if(!TextUtils.isEmpty(profileData.userPersonalInfo.dob))
         {
@@ -271,8 +510,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                // todo: goto back activity from here
-
                 onBackPressed()
                 overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 true

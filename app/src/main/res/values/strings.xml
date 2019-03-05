@@ -44,16 +44,20 @@
     <string name="password_rule_five">At least 1 special character (like !@#$%*?).</string>
 
     <!--Caution Message-->
-    <string name="required_phone_email">Enter valid phone no. or email.</string>
+    <string name="required_title">Required title</string>
+    <string name="required_name_f">Required first name</string>
+    <string name="required_name_l">Required last name</string>
+    <string name="required_mother_maiden_name">Required mothers maiden name</string>
+    <string name="required_phone_email">Required valid phone no or email.</string>
     <string name="required_phone">Please enter valid phone number.</string>
     <string name="required_password">Please enter the password.</string>
-    <string name="enter_current_password">Please enter the current password.</string>
-    <string name="enter_new_password">Please enter the new password.</string>
+    <string name="enter_current_password">Required current password.</string>
+    <string name="enter_new_password">Required new password.</string>
     <string name="enter_confirm_password">Retype the new password to confirm.</string>
     <string name="confirm_password_not_match">New passwords do not match.</string>
     <string name="new_old_password_different">New and old password should be different.</string>
     <string name="enter_password_rule">Password should follow mentioned rule.</string>
-    <string name="required_email">Please enter valid email address.</string>
+    <string name="required_email">Required valid email address.</string>
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
