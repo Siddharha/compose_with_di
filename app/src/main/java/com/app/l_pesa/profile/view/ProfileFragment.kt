@@ -50,7 +50,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-
+            shimmerLayout.stopShimmerAnimation()
             loadProfileInfo()
         }
     }
@@ -59,7 +59,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-           swipeRefreshLayout.isRefreshing=true
+            shimmerLayout.startShimmerAnimation()
            val presenterUserInfo= PresenterUserInfo()
            presenterUserInfo.getProfileInfo(activity!!,this)
         }
@@ -103,10 +103,12 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     override fun onSuccessUserInfo(data: ResUserInfo.Data) {
 
         swipeRefreshLayout.isRefreshing=false
+        shimmerLayout.stopShimmerAnimation()
         setData(data)
     }
 
     override fun onErrorUserInfo(message: String) {
+        shimmerLayout.stopShimmerAnimation()
 
         swipeRefreshLayout.isRefreshing=false
         Toast.makeText(activity,message,Toast.LENGTH_SHORT).show()
