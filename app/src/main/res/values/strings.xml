@@ -216,4 +216,9 @@
     <string name="enter_token">Enter Token</string>
     <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
 
+    <!--Investment-->
+    <string name="investment_plan">Investment Plan</string>
+    <string name="investment_history">Investment History</string>
+    <string name="apply">Apply</string>
+
 </resources>

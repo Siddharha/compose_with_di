@@ -185,7 +185,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_l))
                 }
-                else if(!CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+                else if(TextUtils.isEmpty(etEmail.text.toString()))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_email))
                 }
@@ -227,7 +227,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
 
                         val presenterPersonalInfo= PresenterPersonalInfo()
-                       // presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
+                        presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
                     }
                     else
                     {

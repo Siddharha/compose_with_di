@@ -9,6 +9,6 @@
     tools:showIn="@layout/activity_loan_list_history">
 
     <include
-        layout="@layout/fragment_loan_plan"/>
+        layout="@layout/layout_tab_common"/>
 
 </android.support.constraint.ConstraintLayout>

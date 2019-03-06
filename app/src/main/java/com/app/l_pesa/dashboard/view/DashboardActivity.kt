@@ -25,12 +25,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.common.*
+import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
-import com.app.l_pesa.loanplan.view.LoanPlans
+import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
-import com.app.l_pesa.lpk.view.TokenWithdrawalFragment
 import com.app.l_pesa.lpk.view.WalletAddressFragment
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.view.ProfileFragment
@@ -221,7 +221,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_loan -> {
                 toolbar.title =resources.getString(R.string.nav_item_loan)
-                navigateToFragment(LoanPlans.newInstance(),true)
+                navigateToFragment(LoanPlansFragment.newInstance(),true)
             }
             R.id.action_points -> {
                 toolbar.title =resources.getString(R.string.nav_item_points)
@@ -229,6 +229,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_investment -> {
                 toolbar.title =resources.getString(R.string.nav_item_investment)
+                navigateToFragment(InvestmentFragment.newInstance(),true)
 
             }
             R.id.action_lpk-> {
@@ -294,6 +295,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         if(isVisible)
         {
+            if(fragmentToNavigate is InvestmentFragment)
+            {
+                buttonRight.text = resources.getString(R.string.apply)
+            }
+            else if(fragmentToNavigate is LoanPlansFragment)
+            {
+                buttonRight.text = resources.getString(R.string.history)
+            }
             buttonRight.visibility=View.VISIBLE
         }
         else
