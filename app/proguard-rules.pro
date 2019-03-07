@@ -81,6 +81,7 @@
 -keep class com.app.l_pesa.loanplan.model.** { *; }
 -keep class com.app.l_pesa.loanHistory.** { *; }
 -keep class com.app.l_pesa.loanplan.** { *; }
+-keep class com.app.l_pesa.investment.** { *; }
 -keep class com.app.l_pesa.profile.** { *; }
 -keep class com.app.l_pesa.logout.** { *; }
 

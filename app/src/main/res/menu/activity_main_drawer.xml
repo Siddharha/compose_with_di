@@ -15,7 +15,7 @@
             android:title="@string/nav_item_profile" />
         <item
             android:id="@+id/action_loan"
-            android:icon="@drawable/ic_view_loan_plan"
+            android:icon="@drawable/ic_loan_purpose"
             android:title="@string/nav_item_loan" />
         <item
             android:id="@+id/action_points"

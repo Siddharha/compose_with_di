@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,9 +60,13 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
         viewHolder.buttonLoanStatus.setOnClickListener {
 
-            if(loanPlanList[position].details!!.btnStatus!="disable")
+            if(loanPlanList[position].details!!.btnStatus=="disable" && !TextUtils.isEmpty(loanPlanList[position].details!!.alertMgs!!))
             {
-                Toast.makeText(context,"",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,loanPlanList[position].details!!.alertMgs,Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+
             }
         }
 

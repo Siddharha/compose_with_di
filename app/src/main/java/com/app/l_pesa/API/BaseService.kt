@@ -2,6 +2,7 @@ package com.app.l_pesa.API
 
 
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.loanHistory.model.ResLoanHistory
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
@@ -61,6 +62,9 @@ interface BaseService{
 
     @POST("loan/paybackschedule")
     fun doPaybackSchedule(@Body request: JsonObject): Observable<ResPaybackSchedule>
+
+    @GET("investment/plans")
+    fun getInvestmentPlan(): Observable<ResInvestmentPlan>
 
     @POST("user/personal_info")
     fun doChangePersonalInfo(@Body request: JsonObject): Observable<ResPersonalInfo>
