@@ -40,19 +40,17 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@ProfileEditContactInfoActivity)
 
-        initData()
-        initClickEvent()
+        val sharedPrefOBJ= SharedPref(this@ProfileEditContactInfoActivity)
+        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        initData(profileData)
+        initClickEvent(profileData)
 
     }
 
-    private fun initData()
+    private fun initData(profileData: ResUserInfo.Data)
     {
-        val sharedPrefOBJ= SharedPref(this@ProfileEditContactInfoActivity)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
 
-        if(profileData!=null)
-        {
-            if(!TextUtils.isEmpty(profileData.userContactInfo.streetAddress))
+           if(!TextUtils.isEmpty(profileData.userContactInfo.streetAddress))
             {
                 etAddress.setText(profileData.userContactInfo.streetAddress)
             }
@@ -73,58 +71,79 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
                 etMob.setText(profileData.userContactInfo.phoneNumber)
             }
 
-        }
+
     }
 
-    private fun initClickEvent()
+    private fun initClickEvent(profileData: ResUserInfo.Data)
     {
 
         buttonSubmit.setOnClickListener {
 
-            if(TextUtils.isEmpty(etAddress.text.toString()))
+            val hashMapOLD = HashMap<String, String>()
+            hashMapOLD["address"]           = ""+profileData.userContactInfo.streetAddress
+            hashMapOLD["postal"]            = ""+profileData.userContactInfo.postalAddress
+            hashMapOLD["city"]              = ""+profileData.userContactInfo.city
+            hashMapOLD["mob"]               = ""+profileData.userContactInfo.phoneNumber
+
+            val hashMapNew = HashMap<String, String>()
+            hashMapNew["address"]          = etAddress.text.toString()
+            hashMapNew["postal"]           = etPostalAddress.text.toString()
+            hashMapNew["city"]             = etCity.text.toString()
+            hashMapNew["mob"]              = etMob.text.toString()
+
+
+            if(hashMapOLD == hashMapNew)
             {
-                customSnackBarError(llRoot,resources.getString(R.string.required_street_address))
-            }
-            else if(TextUtils.isEmpty(etPostalAddress.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_postal_code))
-            }
-            else if(TextUtils.isEmpty(etCity.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_city))
-            }
-            else if(TextUtils.isEmpty(etEmail.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_email))
-            }
-            else if(!TextUtils.isEmpty(etMob.text.toString()) && etMob.text.toString().length<9)
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_phone))
+                CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,resources.getString(R.string.change_one_info))
             }
             else
             {
-                if(CommonMethod.isNetworkAvailable(this@ProfileEditContactInfoActivity))
+                if(TextUtils.isEmpty(etAddress.text.toString()))
                 {
-                    buttonSubmit.isClickable=false
-                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                    swipeRefreshLayout.isRefreshing=true
-
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("street_address",etAddress.text.toString())
-                    jsonObject.addProperty("postal_address",etPostalAddress.text.toString())
-                    jsonObject.addProperty("city",etCity.text.toString())
-                    jsonObject.addProperty("email",etEmail.text.toString())
-                    jsonObject.addProperty("phone_number",etMob.text.toString())
-
-                    val presenterContactInfo= PresenterContactInfo()
-                    presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)
+                    customSnackBarError(llRoot,resources.getString(R.string.required_street_address))
+                }
+                else if(TextUtils.isEmpty(etPostalAddress.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_postal_code))
+                }
+                else if(TextUtils.isEmpty(etCity.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_city))
+                }
+                else if(TextUtils.isEmpty(etEmail.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_email))
+                }
+                else if(!TextUtils.isEmpty(etMob.text.toString()) && etMob.text.toString().length<9)
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_phone))
                 }
                 else
                 {
+                    if(CommonMethod.isNetworkAvailable(this@ProfileEditContactInfoActivity))
+                    {
+                        buttonSubmit.isClickable=false
+                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+                        swipeRefreshLayout.isRefreshing=true
 
-                    customSnackBarError(llRoot,resources.getString(R.string.no_internet))
+                        val jsonObject = JsonObject()
+                        jsonObject.addProperty("street_address",etAddress.text.toString())
+                        jsonObject.addProperty("postal_address",etPostalAddress.text.toString())
+                        jsonObject.addProperty("city",etCity.text.toString())
+                        jsonObject.addProperty("email",etEmail.text.toString())
+                        jsonObject.addProperty("phone_number",etMob.text.toString())
+
+                        val presenterContactInfo= PresenterContactInfo()
+                        presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)
+                    }
+                    else
+                    {
+
+                        customSnackBarError(llRoot,resources.getString(R.string.no_internet))
+                    }
                 }
             }
+
         }
 
         buttonCancel.setOnClickListener {
