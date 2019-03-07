@@ -37,7 +37,6 @@ import java.util.HashMap
 
 class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallBackBusinessInfo, ICallBackLogin {
 
-
     var idType=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -137,10 +136,10 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
 
 
             val hashMapOLD = HashMap<String, String>()
-            hashMapOLD["business_name"]     = profileData.userBusinessInfo.businessName
-            hashMapOLD["tin_number"]        = profileData.userBusinessInfo.tinNumber
-            hashMapOLD["id_type"]           = profileData.userBusinessInfo.idType
-            hashMapOLD["id_number"]         = profileData.userBusinessInfo.idNumber
+            hashMapOLD["business_name"]     = ""+profileData.userBusinessInfo.businessName
+            hashMapOLD["tin_number"]        = ""+profileData.userBusinessInfo.tinNumber
+            hashMapOLD["id_type"]           = ""+profileData.userBusinessInfo.idType
+            hashMapOLD["id_number"]         = ""+profileData.userBusinessInfo.idNumber
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["business_name"]     = etBusinessName.text.toString()

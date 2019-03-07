@@ -286,7 +286,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         if(!TextUtils.isEmpty(data.userBusinessInfo.idType))
         {
-            txtIDType.text=resources.getString(R.string.id_type)+" "+data.userBusinessInfo.idType
+            txtIDType.text=resources.getString(R.string.id_type)+" "+returnIdType(data.userBusinessInfo.idType)
         }
 
         if(!TextUtils.isEmpty(data.userBusinessInfo.idNumber))
@@ -295,6 +295,15 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
 
 
+    }
+
+    private fun returnIdType(idType:String): String {
+        return when (idType) {
+            "passport"          -> "Passport"
+            "driving_license"   -> "Drivers License"
+            "national_id"       -> "National ID"
+            else                -> "Voters ID"
+        }
     }
 
     private fun userInformation(userIdsInfo: ResUserInfo.UserIdsInfo)
