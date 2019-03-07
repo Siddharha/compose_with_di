@@ -159,7 +159,6 @@
                         app:autoSizeStepGranularity="0.2sp"
                         app:autoSizeTextType="uniform"
                         android:textColorHint="@color/colorGreyDeep"
-                        android:imeOptions="actionDone"
                         android:longClickable="false"
                         />
                 </com.app.l_pesa.common.CommonInputLayout>
@@ -198,7 +197,6 @@
                         app:autoSizeStepGranularity="0.2sp"
                         app:autoSizeTextType="uniform"
                         android:textColorHint="@color/colorGreyDeep"
-                        android:imeOptions="actionDone"
                         android:longClickable="false"
                         />
                 </com.app.l_pesa.common.CommonInputLayout>
@@ -236,7 +234,6 @@
                         app:autoSizeStepGranularity="0.2sp"
                         app:autoSizeTextType="uniform"
                         android:textColorHint="@color/colorGreyDeep"
-                        android:imeOptions="actionDone"
                         android:longClickable="false"
                         />
                 </com.app.l_pesa.common.CommonInputLayout>
@@ -275,7 +272,6 @@
                         app:autoSizeStepGranularity="0.2sp"
                         app:autoSizeTextType="uniform"
                         android:textColorHint="@color/colorGreyDeep"
-                        android:imeOptions="actionDone"
                         android:longClickable="false"
                         />
                 </com.app.l_pesa.common.CommonInputLayout>

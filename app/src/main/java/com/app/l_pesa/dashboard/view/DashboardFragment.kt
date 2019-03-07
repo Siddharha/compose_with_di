@@ -1,7 +1,5 @@
 package com.app.l_pesa.dashboard.view
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +14,6 @@ import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.dashboard_layout.*
 import android.support.v7.widget.LinearLayoutManager
-import android.view.animation.TranslateAnimation
 import android.widget.LinearLayout
 import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 import com.app.l_pesa.dashboard.model.SeekBarProgress

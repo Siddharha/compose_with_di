@@ -51,6 +51,12 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
     private fun initData(profileData: ResUserInfo.Data)
     {
 
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+
+            swipeRefreshLayout.isRefreshing=false
+        }
+
            if(!TextUtils.isEmpty(profileData.userEmploymentInfo.employerType))
             {
                 etTypeEmp.setText(profileData.userEmploymentInfo.employerType)

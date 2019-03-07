@@ -1,25 +1,31 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.app.Dialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
+import android.view.*
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.adapter.IdListAdapter
+import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_profile_edit_business_info.*
+import kotlinx.android.synthetic.main.content_profile_edit_business_info.*
 
-class ProfileEditBusinessInfoActivity : AppCompatActivity() {
+class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId {
+
+    var idType=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +36,90 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity() {
 
         val sharedPrefOBJ= SharedPref(this@ProfileEditBusinessInfoActivity)
         val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        initData(profileData)
+        buttonClickEvent(profileData)
 
+    }
+
+    private fun initData(profileData: ResUserInfo.Data)
+    {
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing=false
+        }
+
+        etIdType.isFocusable=false
+        etIdType.setOnClickListener {
+
+           showIdType()
+
+        }
+
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo.businessName))
+        {
+            etBusinessName.setText(profileData.userBusinessInfo.businessName)
+        }
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo.tinNumber))
+        {
+            etBusinessTinNo.setText(profileData.userBusinessInfo.tinNumber)
+        }
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo.idNumber))
+        {
+            etBusinessIdNumber.setText(profileData.userBusinessInfo.idNumber)
+        }
+
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo.idType))
+        {
+            idType=profileData.userBusinessInfo.idType
+            etIdType.setText(returnIdType(profileData.userBusinessInfo.idType))
+        }
+
+    }
+
+    private fun returnIdType(idType:String): String {
+        return when (idType) {
+            "passport"          -> "Passport"
+            "driving_license"   -> "Drivers License"
+            "national_id"       -> "National ID"
+            else                -> "Voters ID"
+        }
+    }
+
+    override fun onClickIdType(position: Int, type: String) {
+
+        val listId = arrayListOf("passport","driving_license","national_id","voter_card")
+        idType=listId[position]
+        etIdType.setText(type)
+    }
+
+    private fun showIdType()
+    {
+        val listTitle = arrayListOf("Passport", "Drivers License", "National ID","Voters ID")
+
+        val dialog= Dialog(this@ProfileEditBusinessInfoActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_country)
+        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val titleAdapter                = IdListAdapter(this@ProfileEditBusinessInfoActivity, listTitle,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditBusinessInfoActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter           = titleAdapter
+        dialog.show()
+
+    }
+
+    private fun buttonClickEvent(profileData: ResUserInfo.Data)
+    {
+        buttonCancel.setOnClickListener {
+
+            onBackPressed()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
+
+        buttonSubmit.setOnClickListener {
+
+
+        }
     }
 
     private fun toolbarFont(context: Activity) {
