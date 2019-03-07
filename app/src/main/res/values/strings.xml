@@ -12,7 +12,7 @@
     <string name="no_more_data">No more data to read</string>
     <string name="no_country">/No country was listed.</string>
     <string name="phone_no">Mobile No.</string>
-    <string name="email_address">Email Address</string>
+    <string name="email_address">Email Address*</string>
     <string name="login">Login</string>
     <string name="final_step">Final step</string>
     <string name="register_now">Register Now</string>
@@ -49,7 +49,7 @@
     <string name="required_name_l">Required last name</string>
     <string name="required_mother_maiden_name">Required mothers maiden name</string>
     <string name="required_phone_email">Required valid phone no or email.</string>
-    <string name="required_phone">Please enter valid phone number.</string>
+    <string name="required_phone">Required valid phone number.</string>
     <string name="required_password">Please enter the password.</string>
     <string name="enter_current_password">Required current password.</string>
     <string name="enter_new_password">Required new password.</string>
@@ -69,6 +69,9 @@
     <string name="turn_on_location">To continue using our services, you need to turn on your GPS and use High Accuracy Mode. Do you want to turn it on?</string>
     <string name="retry">Retry</string>
     <string name="init">INIT</string>
+    <string name="required_street_address">Required Street Address</string>
+    <string name="required_postal_code">Required Postal Code</string>
+    <string name="required_city">Required City</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
@@ -221,6 +224,10 @@
     <string name="apply">Apply</string>
 
     <!--Contact Info-->
+    <string name="street_physical_address">Street/Physical Address*</string>
+    <string name="postal_code_address">Postal Code Address*</string>
+    <string name="city_town">City/Town*</string>
+    <string name="second_mob_no">Second Mobile Number</string>
 
 
 

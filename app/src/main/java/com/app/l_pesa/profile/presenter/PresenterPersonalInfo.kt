@@ -29,11 +29,11 @@ class PresenterPersonalInfo {
                     try {
                         if (response.status.isSuccess)
                         {
-                            callBackOBJ.onsuccessPersonalInfo()
+                            callBackOBJ.onSuccessPersonalInfo()
 
                         } else
                         {
-                            callBackOBJ.onfailurePersonalInfo(response.status.message)
+                            callBackOBJ.onFailurePersonalInfo(response.status.message)
                         }
                     } catch (e: Exception) {
 
@@ -47,12 +47,12 @@ class PresenterPersonalInfo {
                         val jsonError   = JSONObject(errorVal.response().errorBody()?.string())
                         val jsonStatus  = jsonError.getJSONObject("status")
                         val jsonMessage = jsonStatus.getString("message")
-                        callBackOBJ.onfailurePersonalInfo(jsonMessage)
+                        callBackOBJ.onFailurePersonalInfo(jsonMessage)
 
 
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
-                        callBackOBJ.onfailurePersonalInfo(errorMessageOBJ)
+                        callBackOBJ.onFailurePersonalInfo(errorMessageOBJ)
                     }
 
                 })

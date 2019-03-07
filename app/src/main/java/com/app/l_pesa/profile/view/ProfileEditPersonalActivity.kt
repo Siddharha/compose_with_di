@@ -242,7 +242,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
-    override fun onsuccessPersonalInfo() {
+    override fun onSuccessPersonalInfo() {
 
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
         val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
@@ -251,7 +251,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     }
 
-    override fun onfailurePersonalInfo(message: String) {
+    override fun onFailurePersonalInfo(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
@@ -283,7 +283,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onFailureLogin(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.no_internet))
+        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,jsonMessage)
     }
 
     private fun onChangeProfileImage()
