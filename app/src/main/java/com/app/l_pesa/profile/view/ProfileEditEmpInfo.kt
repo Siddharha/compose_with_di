@@ -18,6 +18,7 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 
 import kotlinx.android.synthetic.main.activity_profile_edit_emp_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_emp_info.*
@@ -113,6 +114,18 @@ class ProfileEditEmpInfo : AppCompatActivity() {
                     buttonSubmit.isClickable=false
                     swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                     swipeRefreshLayout.isRefreshing=true
+
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("employer_type",etTypeEmp.text.toString())
+                    jsonObject.addProperty("employer_name",etNameEmp.text.toString())
+                    jsonObject.addProperty("department",etDepartment.text.toString())
+                    jsonObject.addProperty("position",etPosition.text.toString())
+                    jsonObject.addProperty("employees_id_number",etId.text.toString())
+                    jsonObject.addProperty("city",etCity.text.toString())
+
+                    //val presenterContactInfo= PresenterContactInfo()
+                    //presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)
+
                 }
                 else
                 {
