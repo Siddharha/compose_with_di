@@ -1,6 +1,7 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -12,18 +13,26 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.login.inter.ICallBackLogin
+import com.app.l_pesa.login.model.LoginData
+import com.app.l_pesa.login.presenter.PresenterLogin
+import com.app.l_pesa.profile.inter.ICallBackEmpInfo
 import com.app.l_pesa.profile.model.ResUserInfo
+import com.app.l_pesa.profile.presenter.PresenterEmpInfo
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_profile_edit_emp_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_emp_info.*
 
-class ProfileEditEmpInfo : AppCompatActivity() {
+class ProfileEditEmpInfo : AppCompatActivity(), ICallBackEmpInfo, ICallBackLogin {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,18 +42,16 @@ class ProfileEditEmpInfo : AppCompatActivity() {
         toolbarFont(this@ProfileEditEmpInfo)
 
 
-        initData()
-        buttonClickEvent()
-    }
-
-    private fun initData()
-    {
         val sharedPrefOBJ= SharedPref(this@ProfileEditEmpInfo)
         val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        initData(profileData)
+        buttonClickEvent(profileData)
+    }
 
-        if(profileData!=null)
-        {
-            if(!TextUtils.isEmpty(profileData.userEmploymentInfo.employerType))
+    private fun initData(profileData: ResUserInfo.Data)
+    {
+
+           if(!TextUtils.isEmpty(profileData.userEmploymentInfo.employerType))
             {
                 etTypeEmp.setText(profileData.userEmploymentInfo.employerType)
             }
@@ -69,10 +76,10 @@ class ProfileEditEmpInfo : AppCompatActivity() {
                 etCity.setText(profileData.userEmploymentInfo.city)
             }
 
-        }
+
     }
 
-    private fun buttonClickEvent()
+    private fun buttonClickEvent(profileData: ResUserInfo.Data)
     {
         buttonCancel.setOnClickListener {
 
@@ -83,59 +90,124 @@ class ProfileEditEmpInfo : AppCompatActivity() {
         buttonSubmit.setOnClickListener {
 
 
-            if(TextUtils.isEmpty(etTypeEmp.text.toString()))
+            val hashMapOLD = HashMap<String, String>()
+            hashMapOLD["type"]          = ""+profileData.userEmploymentInfo.employerType
+            hashMapOLD["name"]          = ""+profileData.userEmploymentInfo.employerName
+            hashMapOLD["department"]    = ""+profileData.userEmploymentInfo.department
+            hashMapOLD["position"]      = ""+profileData.userEmploymentInfo.position
+            hashMapOLD["id"]            = ""+profileData.userEmploymentInfo.employeesIdNumber
+            hashMapOLD["city"]          = ""+profileData.userEmploymentInfo.city
+
+            val hashMapNew = HashMap<String, String>()
+            hashMapNew["type"]          = etTypeEmp.text.toString()
+            hashMapNew["name"]          = etNameEmp.text.toString()
+            hashMapNew["department"]    = etDepartment.text.toString()
+            hashMapNew["position"]      = etPosition.text.toString()
+            hashMapNew["id"]            = etId.text.toString()
+            hashMapNew["city"]          = etCity.text.toString()
+
+            if(hashMapOLD == hashMapNew)
             {
-                customSnackBarError(llRoot,resources.getString(R.string.required_emp_type))
-            }
-            else if(TextUtils.isEmpty(etNameEmp.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_emp_name))
-            }
-            else if(TextUtils.isEmpty(etDepartment.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_emp_department))
-            }
-            else if(TextUtils.isEmpty(etPosition.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_emp_occupation))
-            }
-            else if(TextUtils.isEmpty(etId.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_emp_id))
-            }
-            else if(TextUtils.isEmpty(etCity.text.toString()))
-            {
-                customSnackBarError(llRoot,resources.getString(R.string.required_emp_city))
+                CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfo,resources.getString(R.string.change_one_info))
             }
             else
             {
-                if(CommonMethod.isNetworkAvailable(this@ProfileEditEmpInfo))
+                if(TextUtils.isEmpty(etTypeEmp.text.toString()))
                 {
-                    buttonSubmit.isClickable=false
-                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                    swipeRefreshLayout.isRefreshing=true
-
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("employer_type",etTypeEmp.text.toString())
-                    jsonObject.addProperty("employer_name",etNameEmp.text.toString())
-                    jsonObject.addProperty("department",etDepartment.text.toString())
-                    jsonObject.addProperty("position",etPosition.text.toString())
-                    jsonObject.addProperty("employees_id_number",etId.text.toString())
-                    jsonObject.addProperty("city",etCity.text.toString())
-
-                    //val presenterContactInfo= PresenterContactInfo()
-                    //presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)
-
+                    customSnackBarError(llRoot,resources.getString(R.string.required_emp_type))
+                }
+                else if(TextUtils.isEmpty(etNameEmp.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_emp_name))
+                }
+                else if(TextUtils.isEmpty(etDepartment.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_emp_department))
+                }
+                else if(TextUtils.isEmpty(etPosition.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_emp_occupation))
+                }
+                else if(TextUtils.isEmpty(etId.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_emp_id))
+                }
+                else if(TextUtils.isEmpty(etCity.text.toString()))
+                {
+                    customSnackBarError(llRoot,resources.getString(R.string.required_emp_city))
                 }
                 else
                 {
-                    customSnackBarError(llRoot,resources.getString(R.string.no_internet))
+                    if(CommonMethod.isNetworkAvailable(this@ProfileEditEmpInfo))
+                    {
+                        buttonSubmit.isClickable=false
+                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+                        swipeRefreshLayout.isRefreshing=true
+
+                        val jsonObject = JsonObject()
+                        jsonObject.addProperty("employer_type",etTypeEmp.text.toString())
+                        jsonObject.addProperty("employer_name",etNameEmp.text.toString())
+                        jsonObject.addProperty("department",etDepartment.text.toString())
+                        jsonObject.addProperty("position",etPosition.text.toString())
+                        jsonObject.addProperty("employees_id_number",etId.text.toString())
+                        jsonObject.addProperty("city",etCity.text.toString())
+
+                        val presenterEmpInfo= PresenterEmpInfo()
+                        presenterEmpInfo.doChangeEmpInfo(this@ProfileEditEmpInfo,jsonObject,this)
+
+                    }
+                    else
+                    {
+                        customSnackBarError(llRoot,resources.getString(R.string.no_internet))
+                    }
                 }
+
             }
 
 
 
         }
+    }
+
+    override fun onSuccessEmpInfo() {
+
+        val sharedPrefOBJ = SharedPref(this@ProfileEditEmpInfo)
+        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+        val presenterLoginObj = PresenterLogin()
+        presenterLoginObj.doLogin(this@ProfileEditEmpInfo, jsonObject, this)
+    }
+
+    override fun onFailureEmpInfo(message: String) {
+
+        buttonSubmit.isClickable=true
+        swipeRefreshLayout.isRefreshing=false
+    }
+
+    override fun onSuccessLogin(data: LoginData) {
+
+        val sharedPrefOBJ=SharedPref(this@ProfileEditEmpInfo)
+        sharedPrefOBJ.accessToken   =data.access_token
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.userInfo      = json
+
+        swipeRefreshLayout.isRefreshing=false
+        val intent = Intent(this@ProfileEditEmpInfo, DashboardActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+    }
+
+    override fun onErrorLogin(jsonMessage: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
+        Toast.makeText(this@ProfileEditEmpInfo,jsonMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onFailureLogin(jsonMessage: String) {
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
+        CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfo,jsonMessage)
     }
 
     private fun customSnackBarError(view: View, message:String) {
@@ -173,15 +245,15 @@ class ProfileEditEmpInfo : AppCompatActivity() {
         return when (item.itemId) {
             android.R.id.home -> {
 
-                /*if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing)
                 {
-                    CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,resources.getString(R.string.please_wait))
+                    CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfo,resources.getString(R.string.please_wait))
                 }
                 else
-                {*/
+                {
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
-               // }
+               }
                 true
             }
 

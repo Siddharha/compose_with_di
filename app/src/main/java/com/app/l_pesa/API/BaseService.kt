@@ -10,6 +10,7 @@ import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.profile.model.ResContactInfo
+import com.app.l_pesa.profile.model.ResEmpInfo
 import com.app.l_pesa.profile.model.ResPersonalInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.registration.model.ResRegistrationOne
@@ -69,6 +70,9 @@ interface BaseService{
 
     @POST("user/contact_info")
     fun doChangeContactInfo(@Body request: JsonObject): Observable<ResContactInfo>
+
+    @POST("user/employment_info")
+    fun doChangeEmpInfo(@Body request: JsonObject): Observable<ResEmpInfo>
 
 }
 

@@ -267,7 +267,7 @@
                         android:layout_height="match_parent"
                         android:hint="@string/emp_city"
                         android:inputType="textNoSuggestions|text"
-                        android:maxLength="15"
+                        android:maxLength="25"
                         android:maxLines="1"
                         android:textSize="@dimen/_13sdp"
                         app:autoSizeMaxTextSize="@dimen/_14sdp"

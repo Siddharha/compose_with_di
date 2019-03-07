@@ -33,8 +33,6 @@ import kotlinx.android.synthetic.main.content_profile_edit_contact_info.*
 
 class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo, ICallBackLogin {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_contact_info)
