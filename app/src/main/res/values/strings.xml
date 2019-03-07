@@ -78,6 +78,9 @@
     <string name="required_emp_occupation">Required Employer Occupation</string>
     <string name="required_emp_id">Required Employer Id</string>
     <string name="required_emp_city">Required Employer City</string>
+    <string name="required_business_name">Required Business Name</string>
+    <string name="required_tin_number">Required TIN Number</string>
+    <string name="required_id_number">Required ID Number</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
@@ -253,5 +256,6 @@
     <string name="business_tin_number">TIN Number</string>
     <string name="business_id_type">ID Type</string>
     <string name="business_id_number">ID Number</string>
+    <string name="passport">Passport</string>
 
 </resources>
