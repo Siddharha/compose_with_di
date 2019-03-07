@@ -240,11 +240,6 @@
         android:background="@color/semi_white"
         android:orientation="horizontal">
 
-        <RelativeLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
 
         <ImageView
             android:contentDescription="@string/app_name"
@@ -253,17 +248,6 @@
             android:background="@color/colorApp"
             />
 
-        <ImageView
-            android:id="@+id/imgClose"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/_3sdp"
-            android:src="@drawable/ic_white_cross"/>
-
-    </RelativeLayout>
 
     </LinearLayout>
 

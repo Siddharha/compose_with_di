@@ -15,7 +15,6 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
@@ -43,29 +42,37 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefresh()
-        loadProfileInfo()
+        loadProfileInfo(true)
     }
 
     private fun swipeRefresh()
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-            shimmerLayout.stopShimmerAnimation()
-            loadProfileInfo()
+        loadProfileInfo(false)
         }
     }
 
-    private fun loadProfileInfo()
+    private fun loadProfileInfo(shimmerStatus: Boolean)
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            shimmerLayout.startShimmerAnimation()
-           val presenterUserInfo= PresenterUserInfo()
-           presenterUserInfo.getProfileInfo(activity!!,this)
+            if(shimmerStatus)
+            {
+                shimmerLayout.startShimmerAnimation()
+            }
+            else
+            {
+                shimmerLayout.stopShimmerAnimation()
+            }
+
+            val presenterUserInfo= PresenterUserInfo()
+            presenterUserInfo.getProfileInfo(activity!!,this)
         }
         else
         {
             swipeRefreshLayout.isRefreshing=false
+            shimmerLayout.startShimmerAnimation()
             customSnackBarError(llRoot,resources.getString(R.string.no_internet))
         }
 
@@ -84,6 +91,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         }
     }
+
 
     private fun customSnackBarError(view: View, message:String) {
 

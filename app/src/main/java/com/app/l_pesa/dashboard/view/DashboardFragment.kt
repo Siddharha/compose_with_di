@@ -53,32 +53,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
 
     private fun initUI()
     {
-        loan_list.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-        imgClose.setOnClickListener {
-            ll_banner.animate()
-                    ?.translationY(ll_banner.height.toFloat())
-                    ?.alpha(0.0f)
-                    ?.setDuration(500)
-                    ?.setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            super.onAnimationEnd(animation)
-                            ll_banner.visibility = View.GONE
-
-                            val animate = TranslateAnimation(
-                                    0f, // fromXDelta
-                                    0f, // toXDelta
-                                    loan_list.height.toFloat(), // fromYDelta
-                                    0f)                // toYDelta
-                            animate.duration = 500
-                            animate.fillAfter = true
-                            loan_list.startAnimation(animate)
-                        }
-                    })
-
-
-        }
-
-        initSeekBar()
+         initSeekBar()
     }
 
     private fun initSeekBar()
@@ -180,7 +155,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
 
         if(dashBoard.loans!!.size>0)
         {
-
+            loan_list.layoutManager     = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
             val adapterDashBoard        = LoanListAdapter(dashBoard.loans!!,activity)
             loan_list.adapter           = adapterDashBoard
             adapterDashBoard.notifyDataSetChanged()
