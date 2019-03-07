@@ -229,7 +229,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_investment -> {
                 toolbar.title =resources.getString(R.string.nav_item_investment)
-                navigateToFragment(InvestmentFragment.newInstance(),true)
+                navigateToFragment(InvestmentFragment.newInstance(),false)
 
             }
             R.id.action_lpk-> {
@@ -295,11 +295,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         if(isVisible)
         {
-            if(fragmentToNavigate is InvestmentFragment)
-            {
-                buttonRight.text = resources.getString(R.string.apply)
-            }
-            else if(fragmentToNavigate is LoanPlansFragment)
+            if(fragmentToNavigate is LoanPlansFragment)
             {
                 buttonRight.text = resources.getString(R.string.history)
             }

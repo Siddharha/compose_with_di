@@ -27,30 +27,30 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
 
         val viewHolder = holder as SelectViewHolder
 
-        viewHolder.txtRequiredScore.text    = context.resources.getString(R.string.credit_score)+" "+loanPlanList[position].details.requiredCreditScore.toString()
-        viewHolder.txtLoanAmount.text       = "$"+loanPlanList[position].details.loanAmount.toString()
+        viewHolder.txtRequiredScore.text    = context.resources.getString(R.string.credit_score)+" "+loanPlanList[position].details!!.requiredCreditScore.toString()
+        viewHolder.txtLoanAmount.text       = "$"+loanPlanList[position].details!!.loanAmount.toString()
 
-        if(loanPlanList[position].details.loanPeriodType=="D")
+        if(loanPlanList[position].details!!.loanPeriodType=="D")
         {
-            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanPlanList[position].details.loanPeriod+" "+context.resources.getString(R.string.days)
+            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanPlanList[position].details!!.loanPeriod+" "+context.resources.getString(R.string.days)
         }
         else
         {
-            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanPlanList[position].details.loanPeriod+" "+context.resources.getString(R.string.weeks)
+            viewHolder.txtDuration.text    = context.resources.getString(R.string.duration)+" "+loanPlanList[position].details!!.loanPeriod+" "+context.resources.getString(R.string.weeks)
 
         }
 
-        viewHolder.txtRate.text            = context.resources.getString(R.string.interest_rate)+" "+loanPlanList[position].details.loanInterestRate.toString()+"%"
+        viewHolder.txtRate.text            = context.resources.getString(R.string.interest_rate)+" "+loanPlanList[position].details!!.loanInterestRate.toString()+"%"
 
-        viewHolder.buttonLoanStatus.text   = loanPlanList[position].details.btnText
-        viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details.btnHexColor))
+        viewHolder.buttonLoanStatus.text   = loanPlanList[position].details!!.btnText
+        viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details!!.btnHexColor))
 
 
-        if(loanPlanList[position].details.btnColor!!.contentEquals("green"))
+        if(loanPlanList[position].details!!.btnColor!!.contentEquals("green"))
         {
             viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
         }
-        else if(loanPlanList[position].details.btnColor!!.contentEquals("blue"))
+        else if(loanPlanList[position].details!!.btnColor!!.contentEquals("blue"))
         {
             viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_blue_view)
         }
@@ -62,7 +62,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
 
         viewHolder.buttonLoanStatus.setOnClickListener {
 
-            if(loanPlanList[position].details.btnStatus!="disable")
+            if(loanPlanList[position].details!!.btnStatus!="disable")
             {
                 Toast.makeText(context,"", Toast.LENGTH_SHORT).show()
             }

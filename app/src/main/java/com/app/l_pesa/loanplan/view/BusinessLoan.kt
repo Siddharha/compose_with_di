@@ -6,11 +6,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.loanplan.adapter.BusinessLoanPlanAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
-import com.app.l_pesa.loanplan.model.ResLoanHistory
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.google.gson.JsonObject

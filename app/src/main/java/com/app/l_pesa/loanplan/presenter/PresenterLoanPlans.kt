@@ -34,11 +34,11 @@ class PresenterLoanPlans {
                     try
                     {
 
-                        if(response.status.isSuccess)
+                        if(response.status!!.isSuccess)
                         {
-                           if(response.data[0].item.size>0)
+                           if(response.data!![0].item!!.size>0)
                            {
-                               callBackOBJ.onSuccessLoanPlans(response.data[0].item)
+                               callBackOBJ.onSuccessLoanPlans(response.data!![0].item!!)
                            }
                             else
                            {
