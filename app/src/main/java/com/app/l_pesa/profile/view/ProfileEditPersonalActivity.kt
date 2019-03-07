@@ -93,11 +93,26 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 .apply(options)
                 .into(imgProfile)
 
-        etNameF.setText(profileData.userPersonalInfo.firstName)
-        etNameM.setText(profileData.userPersonalInfo.middleName)
-        etNameL.setText(profileData.userPersonalInfo.lastName)
-        etEmail.setText(profileData.userPersonalInfo.emailAddress)
-        etMotherName.setText(profileData.userPersonalInfo.motherMaidenName)
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.firstName))
+        {
+            etNameF.setText(profileData.userPersonalInfo.firstName)
+        }
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.middleName))
+        {
+            etNameM.setText(profileData.userPersonalInfo.middleName)
+        }
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.lastName))
+        {
+            etNameL.setText(profileData.userPersonalInfo.lastName)
+        }
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.emailAddress))
+        {
+            etEmail.setText(profileData.userPersonalInfo.emailAddress)
+        }
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo.motherMaidenName))
+        {
+            etMotherName.setText(profileData.userPersonalInfo.motherMaidenName)
+        }
 
         if(profileData.userPersonalInfo.sex=="M")
         {

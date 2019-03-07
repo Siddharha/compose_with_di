@@ -105,6 +105,21 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
 
         }
+
+        imgEditEmpInfo.setOnClickListener {
+
+            if(!swipeRefreshLayout.isRefreshing)
+            {
+                startActivity(Intent(activity, ProfileEditEmpInfo::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                customSnackBarError(llRoot,resources.getString(R.string.please_wait))
+            }
+
+
+        }
     }
 
 

@@ -54,11 +54,26 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
 
         if(profileData!=null)
         {
-            etAddress.setText(profileData.userContactInfo.streetAddress)
-            etPostalAddress.setText(profileData.userContactInfo.postalAddress)
-            etCity.setText(profileData.userContactInfo.city)
-            etEmail.setText(profileData.userPersonalInfo.emailAddress)
-            etMob.setText(profileData.userContactInfo.phoneNumber)
+            if(!TextUtils.isEmpty(profileData.userContactInfo.streetAddress))
+            {
+                etAddress.setText(profileData.userContactInfo.streetAddress)
+            }
+            if(!TextUtils.isEmpty(profileData.userContactInfo.postalAddress))
+            {
+                etPostalAddress.setText(profileData.userContactInfo.postalAddress)
+            }
+            if(!TextUtils.isEmpty(profileData.userContactInfo.city))
+            {
+                etCity.setText(profileData.userContactInfo.city)
+            }
+            if(!TextUtils.isEmpty(profileData.userPersonalInfo.emailAddress))
+            {
+                etEmail.setText(profileData.userPersonalInfo.emailAddress)
+            }
+            if(!TextUtils.isEmpty(profileData.userContactInfo.phoneNumber))
+            {
+                etMob.setText(profileData.userContactInfo.phoneNumber)
+            }
 
         }
     }

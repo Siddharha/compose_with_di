@@ -9,7 +9,8 @@
     tools:context=".profile.view.ProfileEditContactInfoActivity"
     tools:showIn="@layout/activity_profile_edit_contact_info">
 
-<LinearLayout
+
+    <LinearLayout
     android:id="@+id/llRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,6 +26,20 @@
         android:layout_weight=".25"
         android:orientation="vertical"
         />
+
+     <TextView
+         android:fontFamily="@font/montserrat"
+         android:text="@string/earn_credit_coins_three"
+         android:textColor="@color/colorBlack"
+         android:textSize="@dimen/_15sdp"
+         android:textStyle="bold"
+         android:layout_width="match_parent"
+         android:gravity="center|start"
+         android:layout_height="0dp"
+         android:layout_weight=".5"
+         android:layout_marginStart="@dimen/_10sdp"
+         android:layout_marginEnd="@dimen/_10sdp"
+         />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -281,23 +296,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".25"
-        android:orientation="vertical"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1.75"
         android:orientation="vertical"
-      >
-
-
-
-    </LinearLayout>
+      />
 
     <LinearLayout
         android:layout_width="match_parent"

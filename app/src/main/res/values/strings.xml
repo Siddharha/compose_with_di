@@ -72,6 +72,12 @@
     <string name="required_street_address">Required Street Address</string>
     <string name="required_postal_code">Required Postal Code</string>
     <string name="required_city">Required City</string>
+    <string name="required_emp_type">Required Employer Type</string>
+    <string name="required_emp_name">Required Employer Name</string>
+    <string name="required_emp_department">Required Employer Department</string>
+    <string name="required_emp_occupation">Required Employer Occupation</string>
+    <string name="required_emp_id">Required Employer Id</string>
+    <string name="required_emp_city">Required Employer City</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
@@ -228,7 +234,17 @@
     <string name="postal_code_address">Postal Code Address*</string>
     <string name="city_town">City/Town*</string>
     <string name="second_mob_no">Second Mobile Number</string>
+    <string name="title_activity_profile_edit_emp_info">ProfileEditEmpInfo</string>
+    <string name="earn_credit_coins_three">Earn 3 credit score points!</string>
 
+    <!--Emp Info-->
+    <string name="earn_credit_coins_ten">Earn 10 credit score points!</string>
+    <string name="type_of_emp">Type of Employer</string>
+    <string name="name_of_emp">Name of Employer</string>
+    <string name="emp_department">Department</string>
+    <string name="emp_position">Occupation/Position</string>
+    <string name="emp_id">Employer Id</string>
+    <string name="emp_city">City/Town</string>
 
 
 </resources>

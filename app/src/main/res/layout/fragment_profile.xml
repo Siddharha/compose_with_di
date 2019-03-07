@@ -946,12 +946,13 @@
                             android:textStyle="bold"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toTopOf="@+id/view10"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView18"
+                            app:layout_constraintEnd_toStartOf="@+id/imgEditEmpInfo"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/imageView18"
+                            android:id="@+id/imgEditEmpInfo"
+                            android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?selectableItemBackgroundBorderless"
