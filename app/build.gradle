@@ -35,13 +35,12 @@ android {
         }
         build {
             // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
             signingConfig signingConfigs.config
             // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
-            proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
+            //proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
         }
     }
     productFlavors {

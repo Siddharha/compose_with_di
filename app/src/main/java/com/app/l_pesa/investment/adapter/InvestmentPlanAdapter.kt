@@ -18,7 +18,7 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
 
         val viewHolder = holder as SelectViewHolder
 
-        //viewHolder.txtInterest.text = investmentList[position].depositInterestRate.toString()+"%"
+        viewHolder.txtInterest.text = investmentList[position].depositInterestRate.toString()+"%"
         viewHolder.txtTitle.text = investmentList[position].planName
     }
 

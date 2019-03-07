@@ -46,7 +46,7 @@ class ResInvestmentPlan {
         var maximumInvestAmount: Int = 0
         @SerializedName("exit_point_penalty_percentage")
         @Expose
-        var exitPointPenaltyPercentage: Int = 0
+        var exitPointPenaltyPercentage: Double = 0.0
         @SerializedName("status")
         @Expose
         var status: String = ""
