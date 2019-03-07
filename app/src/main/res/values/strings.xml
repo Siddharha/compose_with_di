@@ -191,7 +191,6 @@
     <string name="pay_now">Pay Now</string>
 
 
-
     <!--Edit Personal Information-->
     <string name="title">Title</string>
     <string name="first_name">First Name*</string>
@@ -220,5 +219,9 @@
     <string name="investment_plan">Investment Plan</string>
     <string name="investment_history">Investment History</string>
     <string name="apply">Apply</string>
+
+    <!--Contact Info-->
+
+
 
 </resources>

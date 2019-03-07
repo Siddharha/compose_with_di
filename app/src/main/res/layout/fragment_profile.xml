@@ -809,12 +809,13 @@
                             android:textStyle="bold"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toTopOf="@+id/view9"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView15"
+                            app:layout_constraintEnd_toStartOf="@+id/imgEditContactInfo"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/imageView15"
+                            android:id="@+id/imgEditContactInfo"
+                            android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?selectableItemBackgroundBorderless"
