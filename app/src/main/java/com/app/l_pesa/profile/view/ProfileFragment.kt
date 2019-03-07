@@ -110,7 +110,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
             if(!swipeRefreshLayout.isRefreshing)
             {
-                startActivity(Intent(activity, ProfileEditEmpInfo::class.java))
+                startActivity(Intent(activity, ProfileEditEmpInfoActivity::class.java))
                 activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
             }
             else
@@ -118,6 +118,35 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
                 customSnackBarError(llRoot,resources.getString(R.string.please_wait))
             }
 
+
+        }
+
+        imgEditEmpInfo.setOnClickListener {
+
+            if(!swipeRefreshLayout.isRefreshing)
+            {
+                startActivity(Intent(activity, ProfileEditEmpInfoActivity::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                customSnackBarError(llRoot,resources.getString(R.string.please_wait))
+            }
+
+
+        }
+
+        imgEditBusinessInfo.setOnClickListener {
+
+            if(!swipeRefreshLayout.isRefreshing)
+            {
+                startActivity(Intent(activity, ProfileEditBusinessInfoActivity::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                customSnackBarError(llRoot,resources.getString(R.string.please_wait))
+            }
 
         }
     }

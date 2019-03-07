@@ -246,5 +246,12 @@
     <string name="emp_id">Employer Id</string>
     <string name="emp_city">City/Town</string>
 
+    <!--Business Info-->
+    <string name="business_personal_info">Business &amp; Personal Information</string>
+    <string name="earn_credit_coins_forty">Earn 40 credit score points!</string>
+    <string name="business_info_name">Business Name</string>
+    <string name="business_tin_number">TIN Number</string>
+    <string name="business_id_type">ID Type</string>
+    <string name="business_id_number">ID Number</string>
 
 </resources>

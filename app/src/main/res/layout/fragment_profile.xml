@@ -1173,12 +1173,13 @@
                             android:textStyle="bold"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toTopOf="@+id/view4"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView20"
+                            app:layout_constraintEnd_toStartOf="@+id/imgEditBusinessInfo"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/imageView20"
+                            android:id="@+id/imgEditBusinessInfo"
+                            android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?selectableItemBackgroundBorderless"
