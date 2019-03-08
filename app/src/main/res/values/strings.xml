@@ -257,5 +257,6 @@
     <string name="business_id_type">ID Type</string>
     <string name="business_id_number">ID Number</string>
     <string name="passport">Passport</string>
+    <string name="months">Months:</string>
 
 </resources>

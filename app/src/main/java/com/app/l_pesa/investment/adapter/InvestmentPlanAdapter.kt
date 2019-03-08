@@ -20,6 +20,11 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
 
         viewHolder.txtInterest.text = investmentList[position].depositInterestRate.toString()+"%"
         viewHolder.txtTitle.text = investmentList[position].planName
+        viewHolder.txtDuration.text = context.resources.getString(R.string.months)+"" +
+                ""+investmentList[position].depositMonth.toString()
+
+        viewHolder.txtRate.text = context.resources.getString(R.string.interest_rate)+"" +
+                ""+investmentList[position].depositInterestRate+"%"
     }
 
     override fun getItemCount(): Int = investmentList.size

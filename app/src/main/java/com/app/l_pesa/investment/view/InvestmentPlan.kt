@@ -61,7 +61,6 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
     override fun onSuccessInvestmentPlan(investmentPlans: ArrayList<ResInvestmentPlan.InvestmentPlan>) {
 
-        Toast.makeText(activity,""+investmentPlans.size,Toast.LENGTH_SHORT).show()
         swipeRefreshLayout.isRefreshing    = false
         val investmentPlanAdapter          = InvestmentPlanAdapter(activity!!, investmentPlans)
         rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
