@@ -16,9 +16,11 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.graphics.Typeface
 import android.provider.Settings
+import android.support.design.internal.NavigationMenuView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -92,6 +94,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             applyFontToMenuItem(mi)
         }
+
     }
 
 

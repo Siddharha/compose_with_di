@@ -13,6 +13,7 @@
     <color name="colorTextBlackLight">#777b7e</color>
     <color name="colorSemiBlack">#61666b</color>
     <color name="colorSemiLightBlack">#bcbfc2</color>
+    <color name="colorSemiWhite">#f2f2f2</color>
     <color name="colorGrey">#bfbfbf</color>
     <color name="colorGreyDeep">#949ba6</color>
     <color name="colorGreyLight">#DADFDE</color>
