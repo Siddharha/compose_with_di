@@ -90,6 +90,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var profileUpdate: String
+        get() = pref.getString(KEY_SET_PROFILE_UPDATE, "FALSE")!!
+        set(profileUpdate) {
+            editor.remove(KEY_SET_PROFILE_UPDATE)
+            editor.putString(KEY_SET_PROFILE_UPDATE, profileUpdate)
+            editor.commit()
+        }
+
     fun removeToken() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -108,15 +116,16 @@ constructor(context: Context) // Constructor
         private const val PREF_NAME = "L_PESA"
 
         // All Shared Preferences Keys Declare as #public
-        private const val KEY_SET_APP_VERSION  = "KEY_SET_APP_VERSION"
-        private const val KEY_SET_COUNTRY_LIST = "KEY_SET_COUNTRY_LIST"
-        private const val KEY_SET_COUNTRY_CODE = "KEY_SET_COUNTRY_CODE"
-        private const val KEY_SET_USER_INFO    = "KEY_SET_USER_INFO"
-        private const val KEY_SET_LOGIN_REQUEST= "KEY_SET_LOGIN_REQUEST"
-        private const val KEY_SET_ACCESS_TOKEN = "KEY_SET_ACCESS_TOKEN"
-        private const val KEY_SET_DASHBOARD    = "KEY_SET_DASHBOARD"
-        private const val KEY_SET_CREDIT_SCORE = "KEY_SET_CREDIT_SCORE"
-        private const val KEY_SET_PROFILE_INFO = "KEY_SET_PROFILE_INFO"
+        private const val KEY_SET_APP_VERSION       = "KEY_SET_APP_VERSION"
+        private const val KEY_SET_COUNTRY_LIST      = "KEY_SET_COUNTRY_LIST"
+        private const val KEY_SET_COUNTRY_CODE      = "KEY_SET_COUNTRY_CODE"
+        private const val KEY_SET_USER_INFO         = "KEY_SET_USER_INFO"
+        private const val KEY_SET_LOGIN_REQUEST     = "KEY_SET_LOGIN_REQUEST"
+        private const val KEY_SET_ACCESS_TOKEN      = "KEY_SET_ACCESS_TOKEN"
+        private const val KEY_SET_DASHBOARD         = "KEY_SET_DASHBOARD"
+        private const val KEY_SET_CREDIT_SCORE      = "KEY_SET_CREDIT_SCORE"
+        private const val KEY_SET_PROFILE_INFO      = "KEY_SET_PROFILE_INFO"
+        private const val KEY_SET_PROFILE_UPDATE    = "KEY_SET_PROFILE_UPDATE"
     }
 
 

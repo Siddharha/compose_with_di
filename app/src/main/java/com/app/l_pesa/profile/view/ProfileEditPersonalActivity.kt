@@ -253,7 +253,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
             }
 
-
         }
     }
 
@@ -275,15 +274,14 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onSuccessLogin(data: LoginData) {
 
         val sharedPrefOBJ=SharedPref(this@ProfileEditPersonalActivity)
-        sharedPrefOBJ.accessToken   =data.access_token
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        sharedPrefOBJ.accessToken   = data.access_token
         val gson = Gson()
         val json = gson.toJson(data)
         sharedPrefOBJ.userInfo      = json
-
         swipeRefreshLayout.isRefreshing=false
-        val intent = Intent(this@ProfileEditPersonalActivity, DashboardActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
     }
 
@@ -652,10 +650,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             })
         }
 
-
     }
-
-
 
     private fun toolbarFont(context: Activity) {
 

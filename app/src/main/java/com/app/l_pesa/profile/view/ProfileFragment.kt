@@ -53,7 +53,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
     }
 
-    private fun loadProfileInfo(shimmerStatus: Boolean)
+    fun loadProfileInfo(shimmerStatus: Boolean)
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -338,8 +338,8 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             txtCreatedTime.text = userIdsInfo.created
         }
 
-
-
     }
+
+
 }
 

@@ -192,15 +192,14 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
     override fun onSuccessLogin(data: LoginData) {
 
         val sharedPrefOBJ=SharedPref(this@ProfileEditEmpInfoActivity)
-        sharedPrefOBJ.accessToken   =data.access_token
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        sharedPrefOBJ.accessToken   = data.access_token
         val gson = Gson()
         val json = gson.toJson(data)
         sharedPrefOBJ.userInfo      = json
-
         swipeRefreshLayout.isRefreshing=false
-        val intent = Intent(this@ProfileEditEmpInfoActivity, DashboardActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onErrorLogin(jsonMessage: String) {

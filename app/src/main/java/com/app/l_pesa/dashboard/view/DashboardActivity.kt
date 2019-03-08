@@ -24,6 +24,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
@@ -102,7 +103,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initData()
+    fun initData()
     {
         val navigationView       = findViewById<NavigationView>(R.id.nav_view)
         val header               = navigationView.getHeaderView(0)
@@ -311,5 +312,23 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    public override fun onResume()
+    {
+        super.onResume()
+        val sharedPrefOBJ=SharedPref(this@DashboardActivity)
+        val currentFragment =this@DashboardActivity.supportFragmentManager.findFragmentById(R.id.frame)
+        if(currentFragment is ProfileFragment)
+        {
+            if(sharedPrefOBJ.profileUpdate==resources.getString(R.string.status_true))
+            {
+                currentFragment.loadProfileInfo(true)
+                sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
+                initData()
+            }
+
+        }
+
     }
 }
