@@ -46,18 +46,16 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
         viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details!!.btnHexColor))
 
 
-        if(loanPlanList[position].details!!.btnColor!!.contentEquals("green"))
-        {
-            viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
+        when {
+            loanPlanList[position].details!!.btnColor.contentEquals("green")-> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("lightgreen")-> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_light_green_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("blue") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_blue_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("darkgrey") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_darkgrey_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("red") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_red_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("auqa") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_aqua_view)
+            else -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_orange_view)
         }
-        else if(loanPlanList[position].details!!.btnColor!!.contentEquals("blue"))
-        {
-            viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_blue_view)
-        }
-        else
-        {
-            viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_orange_view)
-        }
+
 
 
         viewHolder.buttonLoanStatus.setOnClickListener {

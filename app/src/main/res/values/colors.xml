@@ -39,5 +39,6 @@
     <color name="color_light_green">#DAFFEB</color>
     <color name="color_light_gold">#8F8862</color>
     <color name="shimmerBackground">#dddddd</color>
+    <color name="color_aqua">#0ddabf</color>
 
 </resources>
