@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
@@ -60,21 +61,21 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
         viewHolder.buttonLoanStatus.setOnClickListener {
 
-            if(loanPlanList[position].details!!.btnStatus=="disable")
+            if(loanPlanList[position].details!!.btnStatus=="enable")
             {
-               // callBackObj.onSuccessLoanPlansDetails(loanPlanList[position].details)
-                /*if(appliedProduct==null)
-                {
+                callBackObj.onSuccessLoanPlansDetails(loanPlanList[position].details)
 
-                }
-                else
-                {
-
-                }*/
             }
             else
             {
-                callBackObj.onSuccessLoanPlansDetails(loanPlanList[position].details)
+               if(loanPlanList[position].details!!.btnStatus=="disable" && loanPlanList[position].details!!.productId==appliedProduct.productId)
+               {
+                   Toast.makeText(context,"Goto History",Toast.LENGTH_SHORT).show()
+               }
+                else
+               {
+                 Toast.makeText(context,loanPlanList[position].details!!.alertMgs,Toast.LENGTH_SHORT).show()
+               }
             }
 
         }
