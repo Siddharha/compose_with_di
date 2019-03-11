@@ -21,7 +21,7 @@ import com.app.l_pesa.loanplan.model.ResLoanPlans
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>, private val callBackObj: ICallBackLoanPlans) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>,private val appliedProduct: ResLoanPlans.AppliedProduct, private val callBackObj: ICallBackLoanPlans) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -60,7 +60,19 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
         viewHolder.buttonLoanStatus.setOnClickListener {
 
-            if(loanPlanList[position].details!!.btnText=="Waiting for You")
+            if(loanPlanList[position].details!!.btnStatus=="disable")
+            {
+               // callBackObj.onSuccessLoanPlansDetails(loanPlanList[position].details)
+                /*if(appliedProduct==null)
+                {
+
+                }
+                else
+                {
+
+                }*/
+            }
+            else
             {
                 callBackObj.onSuccessLoanPlansDetails(loanPlanList[position].details)
             }

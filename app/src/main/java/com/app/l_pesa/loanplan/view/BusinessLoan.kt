@@ -61,7 +61,7 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
         presenterLoanPlans.getLoanPlans(activity!!,jsonObject,this)
     }
 
-    override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>) {
+    override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
 
         swipeRefreshLayout.isRefreshing = false
         val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, item)

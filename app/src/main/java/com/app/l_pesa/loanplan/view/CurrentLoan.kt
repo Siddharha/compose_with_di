@@ -11,7 +11,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.loanplan.adapter.CurrentLoanPlanAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
-import com.app.l_pesa.loanplan.model.ResLoanHistory
+import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.google.gson.JsonObject
@@ -67,10 +67,10 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
         }
     }
 
-    override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>) {
+    override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
 
         swipeRefreshLayout.isRefreshing = false
-        val currentLoanAdapter          = CurrentLoanPlanAdapter(activity!!, item,this)
+        val currentLoanAdapter          = CurrentLoanPlanAdapter(activity!!, item,appliedProduct!!,this)
         rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                  = currentLoanAdapter
     }
@@ -88,6 +88,8 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?) {
 
+         val globalLoanPlanModel= GlobalLoanPlanModel.getInstance()
+        globalLoanPlanModel.modelData=details
         startActivity(Intent(activity, LoanPlanDetailsActivity::class.java))
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }

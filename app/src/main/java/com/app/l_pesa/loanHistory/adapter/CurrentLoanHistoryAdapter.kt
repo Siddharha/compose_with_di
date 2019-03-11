@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanHistory
-import com.app.l_pesa.loanHistory.model.ModelHistoryData
+import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
 import com.app.l_pesa.loanHistory.model.ResLoanHistory
 import kotlinx.android.synthetic.main.layout_loan_history.view.*
 
@@ -127,7 +127,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
 
             itemView.rlRoot.setOnClickListener {
 
-                val modelData=ModelHistoryData.getInstance()
+                val modelData=GlobalLoanHistoryModel.getInstance()
                 modelData.modelData=loanHistory
                 callBack.onClickList()
             }

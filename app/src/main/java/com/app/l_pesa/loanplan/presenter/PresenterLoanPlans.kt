@@ -38,7 +38,7 @@ class PresenterLoanPlans {
                         {
                            if(response.data!!.item!!.size>0)
                            {
-                               callBackOBJ.onSuccessLoanPlans(response.data!!.item!!)
+                               callBackOBJ.onSuccessLoanPlans(response.data!!.item!!,response.data!!.appliedProduct)
                            }
                             else
                            {
