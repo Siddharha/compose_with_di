@@ -265,6 +265,7 @@
     <string name="choose_loan_purpose_description">Choose loan purpose description</string>
     <string name="choose_description">Choose Description</string>
     <string name="loan_purpose_description">Enter your loan purpose description:</string>
+    <string name="enter_purpose">Enter purpose</string>
     <string name="max_500_words">Max 500 words</string>
 
 </resources>

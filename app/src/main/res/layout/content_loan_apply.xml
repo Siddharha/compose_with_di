@@ -4,63 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".loanplan.view.LoanApplyActivity"
-    tools:showIn="@layout/activity_loan_apply">
+    tools:showIn="@layout/activity_loan_apply"
+    android:background="@color/screenBackground">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/llRoot"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="10"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/screenBackground">
 
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".25"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6.25"
-            android:orientation="vertical"
-            android:weightSum="12.50"
             android:background="@drawable/bg_white_view"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             tools:ignore="NestedWeights">
 
             <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_description"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.25"
+                android:layout_height="wrap_content"
                 android:gravity="center|start"
                 android:text="@string/choose_loan_purpose_description"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_13sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+
                 />
 
 
             <LinearLayout
+                android:id="@+id/llDescription"
+                android:layout_below="@+id/txt_description"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.85"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 tools:ignore="NestedWeights"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_2sdp">
+                >
 
                 <com.app.l_pesa.common.CommonInputLayout
                     android:id="@+id/tilChooseDescription"
@@ -89,41 +83,48 @@
 
             </LinearLayout>
 
-            <com.app.l_pesa.common.CommonTextRegular
+          <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_loan_description"
+                android:layout_below="@+id/llDescription"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.25"
+                android:layout_height="wrap_content"
                 android:gravity="center|start"
                 android:text="@string/loan_purpose_description"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_13sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 />
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/rlPurpose"
+                android:layout_below="@+id/txt_loan_description"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5.50"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 tools:ignore="NestedWeights"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_2sdp">
+                android:visibility="gone"
+                >
 
                 <com.app.l_pesa.common.CommonInputLayout
-                    android:id="@+id/tilBusinessIdNumber"
+                    android:id="@+id/tilDescription"
                     style="@style/customInputLayoutStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     >
 
                     <com.app.l_pesa.common.CommonEditTextRegular
-                        android:id="@+id/etBusinessIdNumber"
+                        android:id="@+id/etDescription"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="@dimen/_100sdp"
                         android:inputType="textNoSuggestions|text|textMultiLine"
                         android:maxLength="500"
+                        android:hint="@string/enter_purpose"
                         android:textSize="@dimen/_13sdp"
                         app:autoSizeMaxTextSize="@dimen/_14sdp"
                         app:autoSizeMinTextSize="@dimen/_10sdp"
@@ -136,35 +137,34 @@
                         />
                 </com.app.l_pesa.common.CommonInputLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_max_words"
+                android:layout_below="@+id/rlPurpose"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".75"
+                android:layout_height="wrap_content"
                 android:gravity="center|end"
+                android:padding="@dimen/_3sdp"
                 android:text="@string/max_500_words"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".25"
 
-                />
 
             <LinearLayout
+                android:layout_below="@+id/txt_max_words"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.25"
+                android:layout_height="@dimen/_35sdp"
                 android:orientation="horizontal"
                 tools:ignore="NestedWeights"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_5sdp"
                 android:weightSum="1">
 
                 <com.app.l_pesa.common.CustomButtonRegular
@@ -199,37 +199,8 @@
 
             </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_gravity="center"
-            >
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="@dimen/_27sdp"
-                android:layout_height="@dimen/_27sdp"
-                android:indeterminateTint="@color/colorPrimary"
-                android:visibility="invisible"
-
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
 
