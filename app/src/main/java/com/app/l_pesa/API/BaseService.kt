@@ -6,6 +6,7 @@ import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.loanHistory.model.ResLoanHistory
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
+import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.password.model.ResChangePassword
@@ -77,6 +78,9 @@ interface BaseService{
 
     @POST("user/business_info")
     fun doChangeBusinessInfo(@Body request: JsonObject): Observable<ResBusinessInfo>
+
+    @POST("loan/apply")
+    fun doLoanApply(@Body request: JsonObject): Observable<ResLoanApply>
 
 }
 
