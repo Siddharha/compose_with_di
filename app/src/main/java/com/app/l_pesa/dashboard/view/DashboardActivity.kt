@@ -326,7 +326,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         {
             if(sharedPrefOBJ.profileUpdate==resources.getString(R.string.status_true))
             {
-                currentFragment.loadProfileInfo(true)
+                currentFragment.loadProfileInfo(false)
                 sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
                 initData()
             }
