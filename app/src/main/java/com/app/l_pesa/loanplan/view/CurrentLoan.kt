@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanplan.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -69,7 +70,7 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>) {
 
         swipeRefreshLayout.isRefreshing = false
-        val currentLoanAdapter          = CurrentLoanPlanAdapter(activity!!, item)
+        val currentLoanAdapter          = CurrentLoanPlanAdapter(activity!!, item,this)
         rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                  = currentLoanAdapter
     }
@@ -83,5 +84,11 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
     override fun onFailureLoanPlans(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?) {
+
+        startActivity(Intent(activity, LoanPlanDetailsActivity::class.java))
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 }

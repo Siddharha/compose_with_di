@@ -26,10 +26,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".loanplan.view.LoanPlanDetailsActivity"
+            android:label="@string/loan_plan_details"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity
             android:name=".profile.view.ProfileEditBusinessInfoActivity"
             android:label="@string/business_personal_info"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".profile.view.ProfileEditEmpInfoActivity"
             android:label="@string/employment_info"

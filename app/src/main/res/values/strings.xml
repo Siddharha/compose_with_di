@@ -259,4 +259,7 @@
     <string name="passport">Passport</string>
     <string name="months">Months:</string>
 
+    <!--Loan-->
+    <string name="loan_plan_details">Loan Plan Details</string>
+
 </resources>

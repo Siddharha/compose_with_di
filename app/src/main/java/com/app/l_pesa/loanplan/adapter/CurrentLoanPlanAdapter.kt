@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
+import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 
 
@@ -22,7 +21,7 @@ import com.app.l_pesa.loanplan.model.ResLoanPlans
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>, private val callBackObj: ICallBackLoanPlans) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -50,26 +49,23 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
 
         when {
-            loanPlanList[position].details!!.btnColor!!.contentEquals("green") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
-            loanPlanList[position].details!!.btnColor!!.contentEquals("blue") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_blue_view)
-            loanPlanList[position].details!!.btnColor!!.contentEquals("darkgrey") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_darkgrey_view)
-            loanPlanList[position].details!!.btnColor!!.contentEquals("red") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_red_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("green")-> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("lightgreen")-> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_light_green_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("blue") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_blue_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("darkgrey") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_darkgrey_view)
+            loanPlanList[position].details!!.btnColor.contentEquals("red") -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_red_view)
             else -> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_orange_view)
         }
 
 
         viewHolder.buttonLoanStatus.setOnClickListener {
 
-            if(loanPlanList[position].details!!.btnStatus=="disable" && !TextUtils.isEmpty(loanPlanList[position].details!!.alertMgs!!))
+            if(loanPlanList[position].details!!.btnText=="Waiting for You")
             {
-                Toast.makeText(context,loanPlanList[position].details!!.alertMgs,Toast.LENGTH_SHORT).show()
+                callBackObj.onSuccessLoanPlansDetails(loanPlanList[position].details)
             }
-            else
-            {
 
-            }
         }
-
 
 
     }
