@@ -11,16 +11,9 @@
     tools:showIn="@layout/activity_loan_plan_details"
     >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-
-        >
-
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
 
             >
 
@@ -542,8 +535,7 @@
 
             </RelativeLayout>
 
-
-            <RelativeLayout
+        <RelativeLayout
                 android:id="@+id/rl_status"
                 android:layout_below="@+id/rlLoanAmount"
                 android:layout_width="match_parent"
@@ -571,9 +563,7 @@
                     app:srcCompat="@drawable/ic_approved_icon"
                     />
 
-
                 </RelativeLayout>
-
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -589,7 +579,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:textColor="@color/color_deep_green"
 
                         />
@@ -599,8 +589,23 @@
 
             </RelativeLayout>
 
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_apply_loan"
+                android:layout_alignParentBottom="true"
+                android:layout_width="@dimen/_125sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:text="@string/apply_loan"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/blue_button"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_centerInParent="true"
+               />
+
+
     </RelativeLayout>
 
-    </ScrollView>
+
 
 </RelativeLayout>

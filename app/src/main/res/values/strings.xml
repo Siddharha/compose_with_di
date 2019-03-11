@@ -261,5 +261,6 @@
 
     <!--Loan-->
     <string name="loan_plan_details">Loan Plan Details</string>
+    <string name="description_of_loan_purpose">Description of Loan Purpose</string>
 
 </resources>

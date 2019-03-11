@@ -210,7 +210,7 @@
                                 android:scaleType="fitXY"
                                 android:layout_width="@dimen/_23sdp"
                                 android:layout_height="@dimen/_23sdp"
-                                app:srcCompat="@drawable/ic_credit_score_icon" />
+                                app:srcCompat="@drawable/ic_need_credit_score" />
 
                         </LinearLayout>
 
@@ -970,7 +970,7 @@
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/payment_scheduled_button"
+                        android:background="@drawable/blue_button"
                         android:gravity="center">
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -989,7 +989,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/payment_history_button"
+                        android:background="@drawable/yellow_button"
                         android:gravity="center">
 
                         <com.app.l_pesa.common.CommonTextRegular

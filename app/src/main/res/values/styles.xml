@@ -9,6 +9,10 @@
 
     </style>
 
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/_14sdp</item>
+    </style>
+
     <style name="styleTabLayout" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>

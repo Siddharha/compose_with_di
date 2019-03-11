@@ -2,11 +2,11 @@ package com.app.l_pesa.loanplan.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.text.Spanned
 import android.view.MenuItem
@@ -14,7 +14,6 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
-
 import kotlinx.android.synthetic.main.activity_loan_plan_details.*
 import kotlinx.android.synthetic.main.content_loan_plan_details.*
 
@@ -43,6 +42,18 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         txt_credit_score.text = fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+sharedPref.userCreditScore+"</font>")
         txt_loan_amount_value.text = globalLoanPlanModel.currencyCode
         txt_loan_status.text = globalLoanPlanModel.btnText
+
+        txt_apply_loan.setOnClickListener {
+
+            val bundle = Bundle()
+            bundle.putString("PRODUCT_ID",globalLoanPlanModel.productId.toString())
+            bundle.putString("LOAN_TYPE","current_loan")
+            val intent = Intent(this@LoanPlanDetailsActivity, LoanApplyActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent,bundle)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+        }
     }
 
     private fun fromHtml(source: String): Spanned {
