@@ -88,7 +88,7 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?) {
 
-         val globalLoanPlanModel= GlobalLoanPlanModel.getInstance()
+        val globalLoanPlanModel= GlobalLoanPlanModel.getInstance()
         globalLoanPlanModel.modelData=details
         startActivity(Intent(activity, LoanPlanDetailsActivity::class.java))
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
