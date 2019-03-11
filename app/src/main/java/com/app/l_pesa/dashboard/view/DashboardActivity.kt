@@ -101,7 +101,17 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun initFragment()
     {
-        navigateToFragment(DashboardFragment.newInstance(),false)
+        val sharedPref=SharedPref(this@DashboardActivity)
+        if(sharedPref.navigationTab==resources.getString(R.string.open_tab_loan))
+        {
+            navigateToFragment(LoanPlansFragment.newInstance(),true)
+            sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
+        }
+        else
+        {
+            navigateToFragment(DashboardFragment.newInstance(),false)
+        }
+
 
     }
 

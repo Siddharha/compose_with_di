@@ -4,4 +4,7 @@
     <string name="status_true">TRUE</string>
     <string name="status_false">FALSE</string>
 
+    <string name="open_tab_default">DEFAULT</string>
+    <string name="open_tab_loan">LOAN</string>
+
 </resources>

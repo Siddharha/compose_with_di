@@ -2,6 +2,7 @@ package com.app.l_pesa.loanplan.view
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -14,6 +15,8 @@ import android.view.Window
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
 import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
@@ -136,6 +139,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     override fun onSuccessLoanApply() {
         swipeRefreshLayout.isRefreshing = false
         buttonSubmit.isClickable =true
+        val sharedPref=SharedPref(this@LoanApplyActivity)
+        sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
+        val intent = Intent(this@LoanApplyActivity, DashboardActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finishAffinity()
     }
 
     override fun onErrorLoanApply(message: String) {

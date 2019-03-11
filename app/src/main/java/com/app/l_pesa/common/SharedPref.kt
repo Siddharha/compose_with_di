@@ -98,6 +98,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var navigationTab: String
+        get() = pref.getString(KEY_SET_NAVIGATION_TAB, "FALSE")!!
+        set(navigationTab) {
+            editor.remove(KEY_SET_NAVIGATION_TAB)
+            editor.putString(KEY_SET_NAVIGATION_TAB, navigationTab)
+            editor.commit()
+        }
+
     fun removeToken() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -126,6 +134,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_CREDIT_SCORE      = "KEY_SET_CREDIT_SCORE"
         private const val KEY_SET_PROFILE_INFO      = "KEY_SET_PROFILE_INFO"
         private const val KEY_SET_PROFILE_UPDATE    = "KEY_SET_PROFILE_UPDATE"
+        private const val KEY_SET_NAVIGATION_TAB    = "KEY_SET_NAVIGATION_TAB"
     }
 
 
