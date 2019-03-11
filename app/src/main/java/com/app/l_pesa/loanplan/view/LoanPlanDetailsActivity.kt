@@ -29,7 +29,6 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
 
         initData()
 
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -43,6 +42,7 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+"</font>")
         txt_credit_score.text = fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+sharedPref.userCreditScore+"</font>")
         txt_loan_amount_value.text = globalLoanPlanModel.currencyCode
+        txt_loan_status.text = globalLoanPlanModel.btnText
     }
 
     private fun fromHtml(source: String): Spanned {

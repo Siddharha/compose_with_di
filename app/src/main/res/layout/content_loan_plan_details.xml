@@ -221,7 +221,6 @@
 
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:id="@+id/rlLoanAmount"
                 android:layout_width="match_parent"
@@ -543,7 +542,64 @@
 
             </RelativeLayout>
 
-        </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_status"
+                android:layout_below="@+id/rlLoanAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@drawable/bg_white_view"
+                >
+
+
+                <RelativeLayout
+                    android:id="@+id/rlImageStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/_2sdp">
+
+
+                <ImageView
+                    android:id="@+id/imgStatus"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitXY"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/_23sdp"
+                    android:layout_height="@dimen/_23sdp"
+                    app:srcCompat="@drawable/ic_approved_icon"
+                    />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlImageStatus"
+                    android:gravity="center"
+                    android:padding="@dimen/_3sdp"
+
+                    >
+
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:id="@+id/txt_loan_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/color_deep_green"
+
+                        />
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+    </RelativeLayout>
 
     </ScrollView>
 
