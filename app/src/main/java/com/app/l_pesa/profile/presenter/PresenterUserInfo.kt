@@ -26,13 +26,13 @@ class PresenterUserInfo {
                 .subscribe({ response ->
 
                     try {
-                        if (response.status.isSuccess)
+                        if (response.status!!.isSuccess)
                         {
-                            callBackOBJ.onSuccessUserInfo(response.data)
+                            callBackOBJ.onSuccessUserInfo(response.data!!)
 
                         } else
                         {
-                            callBackOBJ.onErrorUserInfo(response.status.message)
+                            callBackOBJ.onErrorUserInfo(response.status!!.message)
                         }
                     } catch (e: Exception) {
 

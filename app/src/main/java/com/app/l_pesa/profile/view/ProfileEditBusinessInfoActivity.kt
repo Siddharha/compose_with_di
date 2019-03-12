@@ -2,7 +2,6 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -18,7 +17,6 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
@@ -68,27 +66,27 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
 
         }
 
-        if(!TextUtils.isEmpty(profileData.userBusinessInfo.businessName))
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo!!.businessName))
         {
-            etBusinessName.setText(profileData.userBusinessInfo.businessName)
+            etBusinessName.setText(profileData.userBusinessInfo!!.businessName)
         }
-        if(!TextUtils.isEmpty(profileData.userBusinessInfo.tinNumber))
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo!!.tinNumber))
         {
-            etBusinessTinNo.setText(profileData.userBusinessInfo.tinNumber)
+            etBusinessTinNo.setText(profileData.userBusinessInfo!!.tinNumber)
         }
-        if(!TextUtils.isEmpty(profileData.userBusinessInfo.idType))
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo!!.idType))
         {
-            idType=profileData.userBusinessInfo.idType
-            etIdType.setText(returnIdType(profileData.userBusinessInfo.idType))
+            idType=profileData.userBusinessInfo!!.idType
+            etIdType.setText(returnIdType(profileData.userBusinessInfo!!.idType))
         }
         else
         {
             idType="passport"
             etIdType.setText(resources.getString(R.string.passport))// Default
         }
-        if(!TextUtils.isEmpty(profileData.userBusinessInfo.idNumber))
+        if(!TextUtils.isEmpty(profileData.userBusinessInfo!!.idNumber))
         {
-            etBusinessIdNumber.setText(profileData.userBusinessInfo.idNumber)
+            etBusinessIdNumber.setText(profileData.userBusinessInfo!!.idNumber)
         }
 
     }
@@ -136,10 +134,10 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
 
 
             val hashMapOLD = HashMap<String, String>()
-            hashMapOLD["business_name"]     = ""+profileData.userBusinessInfo.businessName
-            hashMapOLD["tin_number"]        = ""+profileData.userBusinessInfo.tinNumber
-            hashMapOLD["id_type"]           = ""+profileData.userBusinessInfo.idType
-            hashMapOLD["id_number"]         = ""+profileData.userBusinessInfo.idNumber
+            hashMapOLD["business_name"]     = ""+profileData.userBusinessInfo!!.businessName
+            hashMapOLD["tin_number"]        = ""+profileData.userBusinessInfo!!.tinNumber
+            hashMapOLD["id_type"]           = ""+profileData.userBusinessInfo!!.idType
+            hashMapOLD["id_number"]         = ""+profileData.userBusinessInfo!!.idNumber
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["business_name"]     = etBusinessName.text.toString()

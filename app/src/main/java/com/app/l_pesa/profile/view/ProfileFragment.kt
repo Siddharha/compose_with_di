@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.lang.Exception
+import java.util.ArrayList
 
 
 class ProfileFragment: Fragment(), ICallBackUserInfo {
@@ -212,7 +213,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(data.userInfo.profileImage)
+                    .load(data.userInfo!!.profileImage)
                     .apply(options)
                     .into(imgProfile)
         }
@@ -221,91 +222,106 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         }
 
-        txtPhone.text = data.userInfo.phoneNumber
-        txtCreditScore.text = resources.getString(R.string.credit_score)+" "+data.userInfo.creditScore
-        txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo.dob
-        txtGender.text = resources.getString(R.string.gender)+" "+data.userPersonalInfo.sex
-        txtMartialStatus.text = resources.getString(R.string.marital_status)+" "+data.userPersonalInfo.meritalStatus
-        txtMotherName.text = resources.getString(R.string.mother_maiden_name)+" "+data.userPersonalInfo.motherMaidenName
+        txtPhone.text = data.userInfo!!.phoneNumber
+        txtCreditScore.text = resources.getString(R.string.credit_score)+" "+data.userInfo!!.creditScore
+        txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo!!.dob
+        txtGender.text = resources.getString(R.string.gender)+" "+data.userPersonalInfo!!.sex
+        txtMartialStatus.text = resources.getString(R.string.marital_status)+" "+data.userPersonalInfo!!.meritalStatus
+        txtMotherName.text = resources.getString(R.string.mother_maiden_name)+" "+data.userPersonalInfo!!.motherMaidenName
 
         /* ID Information*/
 
-        userInformation(data.userIdsInfo)
+        if(data.userIdsPersonalInfo!!.size>0)
+        {
+            userInformationPersonal(data.userIdsPersonalInfo!!)
+        }
+        else
+        {
+            if(data.userIdsBusinessInfo!!.size>0)
+            {
+                userInformationBusiness(data.userIdsBusinessInfo!!)
+            }
+            else
+            {
+
+            }
+        }
+
 
 
         /*Contact Information*/
 
-        if(!TextUtils.isEmpty(data.userContactInfo.city) && !TextUtils.isEmpty(data.userContactInfo.postalAddress))
+        if(!TextUtils.isEmpty(data.userContactInfo!!.city) && !TextUtils.isEmpty(data.userContactInfo!!.postalAddress))
         {
-            txtAddress.text=data.userContactInfo.streetAddress+", "+data.userContactInfo.city+"- "+data.userContactInfo.postalAddress
+            txtAddress.text=data.userContactInfo!!.streetAddress+", "+data.userContactInfo!!.city+"- "+data.userContactInfo!!.postalAddress
         }
 
-        if(!TextUtils.isEmpty(data.userPersonalInfo.emailAddress))
+        if(!TextUtils.isEmpty(data.userPersonalInfo!!.emailAddress))
         {
-            txtEmail.text=data.userPersonalInfo.emailAddress
+            txtEmail.text=data.userPersonalInfo!!.emailAddress
         }
 
-        if(!TextUtils.isEmpty(data.userContactInfo.phoneNumber))
+        if(!TextUtils.isEmpty(data.userContactInfo!!.phoneNumber))
         {
-            txtContact.text=data.userContactInfo.phoneNumber
+            txtContact.text=data.userContactInfo!!.phoneNumber
         }
 
 
 
         /* Employment Info*/
 
-        if(!TextUtils.isEmpty(data.userEmploymentInfo.employerType))
+        if(!TextUtils.isEmpty(data.userEmploymentInfo!!.employerType))
         {
-            txtEmployeeType.text=resources.getString(R.string.type_of_employer)+" "+data.userEmploymentInfo.employerType
+            txtEmployeeType.text=resources.getString(R.string.type_of_employer)+" "+data.userEmploymentInfo!!.employerType
         }
 
-        if(!TextUtils.isEmpty(data.userEmploymentInfo.employerName))
+        if(!TextUtils.isEmpty(data.userEmploymentInfo!!.employerName))
         {
-            txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+data.userEmploymentInfo.employerName
+            txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+data.userEmploymentInfo!!.employerName
         }
 
-        if(!TextUtils.isEmpty(data.userEmploymentInfo.department))
+        if(!TextUtils.isEmpty(data.userEmploymentInfo!!.department))
         {
-            txtDepartment.text=resources.getString(R.string.department)+" "+data.userEmploymentInfo.department
+            txtDepartment.text=resources.getString(R.string.department)+" "+data.userEmploymentInfo!!.department
         }
 
-        if(!TextUtils.isEmpty(data.userEmploymentInfo.position))
+        if(!TextUtils.isEmpty(data.userEmploymentInfo!!.position))
         {
-            txtOccupation.text = resources.getString(R.string.occupation) + " " + data.userEmploymentInfo.position
+            txtOccupation.text = resources.getString(R.string.occupation) + " " + data.userEmploymentInfo!!.position
         }
 
-        if(!TextUtils.isEmpty(data.userEmploymentInfo.employeesIdNumber))
+        if(!TextUtils.isEmpty(data.userEmploymentInfo!!.employeesIdNumber))
         {
-            txtEmployeeID.text=resources.getString(R.string.employees_id_no)+" "+data.userEmploymentInfo.employeesIdNumber
+            txtEmployeeID.text=resources.getString(R.string.employees_id_no)+" "+data.userEmploymentInfo!!.employeesIdNumber
         }
 
-        if(!TextUtils.isEmpty(data.userEmploymentInfo.city))
+        if(!TextUtils.isEmpty(data.userEmploymentInfo!!.city))
         {
-            txtEmployeeCity.text=resources.getString(R.string.city)+" "+data.userEmploymentInfo.city
+            txtEmployeeCity.text=resources.getString(R.string.city)+" "+data.userEmploymentInfo!!.city
         }
 
 
 
         /* Business Info*/
 
-        if(!TextUtils.isEmpty(data.userBusinessInfo.businessName))
+        if(!TextUtils.isEmpty(data.userBusinessInfo!!.businessName))
         {
-            txtBusinessName.text=resources.getString(R.string.business_name)+" "+data.userBusinessInfo.businessName
+            txtBusinessName.text=resources.getString(R.string.business_name)+" "+data.userBusinessInfo!!.businessName
         }
 
-        if(!TextUtils.isEmpty(data.userBusinessInfo.tinNumber))
+        if(!TextUtils.isEmpty(data.userBusinessInfo!!.tinNumber))
         {
-            txtTIN.text=resources.getString(R.string.tin_number)+" "+data.userBusinessInfo.tinNumber
+            txtTIN.text=resources.getString(R.string.tin_number)+" "+data.userBusinessInfo!!.tinNumber
         }
 
-        if(!TextUtils.isEmpty(data.userBusinessInfo.idType))
+        if(!TextUtils.isEmpty(data.userBusinessInfo!!.idType))
         {
-            txtIDType.text=resources.getString(R.string.id_type)+" "+returnIdType(data.userBusinessInfo.idType)
+            txtIDType.text=resources.getString(R.string.id_type)+" "+returnIdType(data.userBusinessInfo!!.idType)
         }
 
-        if(!TextUtils.isEmpty(data.userBusinessInfo.idNumber))
+        if(!TextUtils.isEmpty(data.userBusinessInfo!!.idNumber))
         {
-            txtIdNo.text=resources.getString(R.string.id_number)+" "+data.userBusinessInfo.idNumber
+            txtIdNo.text=resources.getString(R.string.id_number)+" "+data.userBusinessInfo!!.idNumber
         }
 
 
@@ -320,15 +336,37 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
     }
 
-    private fun userInformation(userIdsInfo: ResUserInfo.UserIdsInfo)
+    private fun userInformationPersonal(userIdsInfo: ArrayList<ResUserInfo.UserIdsPersonalInfo>)
     {
 
+        val totalSize = 0 until userIdsInfo.size
+
+        for(i in totalSize)
+        {
+            if(userIdsInfo[i].verified==1)
+            {
+                loadIdInfo(userIdsInfo[i])
+                break
+            }
+            else
+            {
+                loadIdInfo(userIdsInfo[i])
+                break
+            }
+
+        }
+
+
+    }
+
+    private fun loadIdInfo(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo)
+    {
         try {
 
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(userIdsInfo.fileName)
+                    .load(userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgID)
 
@@ -339,17 +377,69 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         }
 
-        if(!TextUtils.isEmpty(userIdsInfo.idTypeName))
+        if(!TextUtils.isEmpty(userIdsPersonalInfo.idTypeName))
         {
-            txtIdType.text      = userIdsInfo.idTypeName
+            txtIdType.text      = userIdsPersonalInfo.idTypeName
         }
-        if(!TextUtils.isEmpty(userIdsInfo.idNumber))
+        if(!TextUtils.isEmpty(userIdsPersonalInfo.idNumber))
         {
-            txtIdNumber.text    = userIdsInfo.idNumber
+            txtIdNumber.text    = userIdsPersonalInfo.idNumber
         }
-        if(!TextUtils.isEmpty(userIdsInfo.created))
+        if(!TextUtils.isEmpty(userIdsPersonalInfo.created))
         {
-            txtCreatedTime.text = userIdsInfo.created
+            txtCreatedTime.text = userIdsPersonalInfo.created
+        }
+    }
+
+    private fun loadIdInfoBusiness(userIdsPersonalInfo: ResUserInfo.UserIdsBusinessInfo)
+    {
+        try {
+
+            val options = RequestOptions()
+            options.error(R.drawable.ic_id_no_image)
+            Glide.with(activity!!)
+                    .load(userIdsPersonalInfo.fileName)
+                    .apply(options)
+                    .into(imgID)
+
+
+        }
+        catch (exception: Exception)
+        {
+
+        }
+
+        if(!TextUtils.isEmpty(userIdsPersonalInfo.idTypeName))
+        {
+            txtIdType.text      = userIdsPersonalInfo.idTypeName
+        }
+        if(!TextUtils.isEmpty(userIdsPersonalInfo.idNumber))
+        {
+            txtIdNumber.text    = userIdsPersonalInfo.idNumber
+        }
+        if(!TextUtils.isEmpty(userIdsPersonalInfo.created))
+        {
+            txtCreatedTime.text = userIdsPersonalInfo.created
+        }
+    }
+
+    private fun userInformationBusiness(userIdsBusinessInfo: ArrayList<ResUserInfo.UserIdsBusinessInfo>)
+    {
+        val totalSize = 0 until userIdsBusinessInfo.size
+
+        for(i in totalSize)
+        {
+            if(userIdsBusinessInfo[i].verified==1)
+            {
+                loadIdInfoBusiness(userIdsBusinessInfo[i])
+                break
+            }
+            else
+            {
+                loadIdInfoBusiness(userIdsBusinessInfo[i])
+                break
+            }
+
         }
 
     }

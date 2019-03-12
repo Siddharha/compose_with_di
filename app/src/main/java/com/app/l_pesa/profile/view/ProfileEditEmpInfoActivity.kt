@@ -1,7 +1,6 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -18,7 +17,6 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
@@ -57,29 +55,29 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
             swipeRefreshLayout.isRefreshing=false
         }
 
-           if(!TextUtils.isEmpty(profileData.userEmploymentInfo.employerType))
+           if(!TextUtils.isEmpty(profileData.userEmploymentInfo!!.employerType))
             {
-                etTypeEmp.setText(profileData.userEmploymentInfo.employerType)
+                etTypeEmp.setText(profileData.userEmploymentInfo!!.employerType)
             }
-            if(!TextUtils.isEmpty(profileData.userEmploymentInfo.employerName))
+            if(!TextUtils.isEmpty(profileData.userEmploymentInfo!!.employerName))
             {
-                etNameEmp.setText(profileData.userEmploymentInfo.employerName)
+                etNameEmp.setText(profileData.userEmploymentInfo!!.employerName)
             }
-            if(!TextUtils.isEmpty(profileData.userEmploymentInfo.department))
+            if(!TextUtils.isEmpty(profileData.userEmploymentInfo!!.department))
             {
-                etDepartment.setText(profileData.userEmploymentInfo.department)
+                etDepartment.setText(profileData.userEmploymentInfo!!.department)
             }
-            if(!TextUtils.isEmpty(profileData.userEmploymentInfo.position))
+            if(!TextUtils.isEmpty(profileData.userEmploymentInfo!!.position))
             {
-                etPosition.setText(profileData.userEmploymentInfo.position)
+                etPosition.setText(profileData.userEmploymentInfo!!.position)
             }
-            if(!TextUtils.isEmpty(profileData.userEmploymentInfo.employeesIdNumber))
+            if(!TextUtils.isEmpty(profileData.userEmploymentInfo!!.employeesIdNumber))
             {
-                etId.setText(profileData.userEmploymentInfo.employeesIdNumber)
+                etId.setText(profileData.userEmploymentInfo!!.employeesIdNumber)
             }
-            if(!TextUtils.isEmpty(profileData.userEmploymentInfo.city))
+            if(!TextUtils.isEmpty(profileData.userEmploymentInfo!!.city))
             {
-                etCity.setText(profileData.userEmploymentInfo.city)
+                etCity.setText(profileData.userEmploymentInfo!!.city)
             }
 
 
@@ -97,12 +95,12 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
 
 
             val hashMapOLD = HashMap<String, String>()
-            hashMapOLD["type"]          = ""+profileData.userEmploymentInfo.employerType
-            hashMapOLD["name"]          = ""+profileData.userEmploymentInfo.employerName
-            hashMapOLD["department"]    = ""+profileData.userEmploymentInfo.department
-            hashMapOLD["position"]      = ""+profileData.userEmploymentInfo.position
-            hashMapOLD["id"]            = ""+profileData.userEmploymentInfo.employeesIdNumber
-            hashMapOLD["city"]          = ""+profileData.userEmploymentInfo.city
+            hashMapOLD["type"]          = ""+profileData.userEmploymentInfo!!.employerType
+            hashMapOLD["name"]          = ""+profileData.userEmploymentInfo!!.employerName
+            hashMapOLD["department"]    = ""+profileData.userEmploymentInfo!!.department
+            hashMapOLD["position"]      = ""+profileData.userEmploymentInfo!!.position
+            hashMapOLD["id"]            = ""+profileData.userEmploymentInfo!!.employeesIdNumber
+            hashMapOLD["city"]          = ""+profileData.userEmploymentInfo!!.city
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["type"]          = etTypeEmp.text.toString()

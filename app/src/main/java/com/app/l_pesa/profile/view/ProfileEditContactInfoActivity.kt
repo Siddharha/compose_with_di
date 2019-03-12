@@ -1,7 +1,6 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -18,7 +17,6 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
@@ -55,25 +53,25 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
             swipeRefreshLayout.isRefreshing=false
         }
 
-           if(!TextUtils.isEmpty(profileData.userContactInfo.streetAddress))
+           if(!TextUtils.isEmpty(profileData.userContactInfo!!.streetAddress))
             {
-                etAddress.setText(profileData.userContactInfo.streetAddress)
+                etAddress.setText(profileData.userContactInfo!!.streetAddress)
             }
-            if(!TextUtils.isEmpty(profileData.userContactInfo.postalAddress))
+            if(!TextUtils.isEmpty(profileData.userContactInfo!!.postalAddress))
             {
-                etPostalAddress.setText(profileData.userContactInfo.postalAddress)
+                etPostalAddress.setText(profileData.userContactInfo!!.postalAddress)
             }
-            if(!TextUtils.isEmpty(profileData.userContactInfo.city))
+            if(!TextUtils.isEmpty(profileData.userContactInfo!!.city))
             {
-                etCity.setText(profileData.userContactInfo.city)
+                etCity.setText(profileData.userContactInfo!!.city)
             }
-            if(!TextUtils.isEmpty(profileData.userPersonalInfo.emailAddress))
+            if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.emailAddress))
             {
-                etEmail.setText(profileData.userPersonalInfo.emailAddress)
+                etEmail.setText(profileData.userPersonalInfo!!.emailAddress)
             }
-            if(!TextUtils.isEmpty(profileData.userContactInfo.phoneNumber))
+            if(!TextUtils.isEmpty(profileData.userContactInfo!!.phoneNumber))
             {
-                etMob.setText(profileData.userContactInfo.phoneNumber)
+                etMob.setText(profileData.userContactInfo!!.phoneNumber)
             }
 
 
@@ -85,10 +83,10 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         buttonSubmit.setOnClickListener {
 
             val hashMapOLD = HashMap<String, String>()
-            hashMapOLD["address"]           = ""+profileData.userContactInfo.streetAddress
-            hashMapOLD["postal"]            = ""+profileData.userContactInfo.postalAddress
-            hashMapOLD["city"]              = ""+profileData.userContactInfo.city
-            hashMapOLD["mob"]               = ""+profileData.userContactInfo.phoneNumber
+            hashMapOLD["address"]           = ""+profileData.userContactInfo!!.streetAddress
+            hashMapOLD["postal"]            = ""+profileData.userContactInfo!!.postalAddress
+            hashMapOLD["city"]              = ""+profileData.userContactInfo!!.city
+            hashMapOLD["mob"]               = ""+profileData.userContactInfo!!.phoneNumber
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["address"]          = etAddress.text.toString()

@@ -22,7 +22,6 @@ import com.app.l_pesa.profile.adapter.MaritalListAdapter
 import com.app.l_pesa.profile.adapter.TitleListAdapter
 import com.app.l_pesa.profile.inter.ICallBackMarital
 import com.app.l_pesa.profile.inter.ICallBackTitle
-import com.app.l_pesa.profile.model.ResUserInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
@@ -43,11 +42,11 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.widget.Toast
-import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
+import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -89,32 +88,32 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val options = RequestOptions()
         Glide.with(this@ProfileEditPersonalActivity)
-                .load(profileData.userInfo.profileImage)
+                .load(profileData.userInfo!!.profileImage)
                 .apply(options)
                 .into(imgProfile)
 
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.firstName))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.firstName))
         {
-            etNameF.setText(profileData.userPersonalInfo.firstName)
+            etNameF.setText(profileData.userPersonalInfo!!.firstName)
         }
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.middleName))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.middleName))
         {
-            etNameM.setText(profileData.userPersonalInfo.middleName)
+            etNameM.setText(profileData.userPersonalInfo!!.middleName)
         }
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.lastName))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.lastName))
         {
-            etNameL.setText(profileData.userPersonalInfo.lastName)
+            etNameL.setText(profileData.userPersonalInfo!!.lastName)
         }
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.emailAddress))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.emailAddress))
         {
-            etEmail.setText(profileData.userPersonalInfo.emailAddress)
+            etEmail.setText(profileData.userPersonalInfo!!.emailAddress)
         }
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.motherMaidenName))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.motherMaidenName))
         {
-            etMotherName.setText(profileData.userPersonalInfo.motherMaidenName)
+            etMotherName.setText(profileData.userPersonalInfo!!.motherMaidenName)
         }
 
-        if(profileData.userPersonalInfo.sex=="M")
+        if(profileData.userPersonalInfo!!.sex=="M")
         {
             radioMale.isChecked=true
             radioFemale.isChecked=false
@@ -151,15 +150,15 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
 
             val hashMapOLD = HashMap<String, String>()
-            hashMapOLD["title"]     = profileData.userPersonalInfo.title
-            hashMapOLD["nameF"]     = profileData.userPersonalInfo.firstName
-            hashMapOLD["nameM"]     = profileData.userPersonalInfo.middleName
-            hashMapOLD["nameL"]     = profileData.userPersonalInfo.lastName
-            hashMapOLD["email"]     = profileData.userPersonalInfo.emailAddress
-            hashMapOLD["dob"]       = profileData.userPersonalInfo.dob
-            hashMapOLD["status"]    = profileData.userPersonalInfo.meritalStatus
-            hashMapOLD["motherM"]   = profileData.userPersonalInfo.motherMaidenName
-            hashMapOLD["sex"]       = profileData.userPersonalInfo.sex
+            hashMapOLD["title"]     = profileData.userPersonalInfo!!.title
+            hashMapOLD["nameF"]     = profileData.userPersonalInfo!!.firstName
+            hashMapOLD["nameM"]     = profileData.userPersonalInfo!!.middleName
+            hashMapOLD["nameL"]     = profileData.userPersonalInfo!!.lastName
+            hashMapOLD["email"]     = profileData.userPersonalInfo!!.emailAddress
+            hashMapOLD["dob"]       = profileData.userPersonalInfo!!.dob
+            hashMapOLD["status"]    = profileData.userPersonalInfo!!.meritalStatus
+            hashMapOLD["motherM"]   = profileData.userPersonalInfo!!.motherMaidenName
+            hashMapOLD["sex"]       = profileData.userPersonalInfo!!.sex
             hashMapOLD["imgChange"] = "false"
 
 
@@ -497,9 +496,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun loadTitle(profileData: ResUserInfo.Data)
     {
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.title))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.title))
         {
-            txtTitle.setText(profileData.userPersonalInfo.title)
+            txtTitle.setText(profileData.userPersonalInfo!!.title)
         }
 
         txtTitle.isFocusable=false
@@ -513,9 +512,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     private fun loadMarital(profileData: ResUserInfo.Data)
     {
 
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.meritalStatus))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.meritalStatus))
         {
-            txtMarital.setText(profileData.userPersonalInfo.meritalStatus)
+            txtMarital.setText(profileData.userPersonalInfo!!.meritalStatus)
         }
 
         txtMarital.isFocusable=false
@@ -544,10 +543,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     private fun loadDate(profileData: ResUserInfo.Data)
     {
 
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.dob))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.dob))
         {
             val inputFormat =  SimpleDateFormat("yyyy-MM-dd")
-            val date = inputFormat.parse(profileData.userPersonalInfo.dob)
+            val date = inputFormat.parse(profileData.userPersonalInfo!!.dob)
 
             val outputFormat = SimpleDateFormat("dd-MM-yyyy")
             txtDOB.setText(outputFormat.format(date))
@@ -619,7 +618,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun onChangeEmail(profileData: ResUserInfo.Data)
     {
-        if(!TextUtils.isEmpty(profileData.userPersonalInfo.emailAddress))
+        if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.emailAddress))
         {
             etEmail.isEnabled=false
         }
