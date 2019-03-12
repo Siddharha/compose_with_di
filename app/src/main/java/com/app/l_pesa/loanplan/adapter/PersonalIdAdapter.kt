@@ -1,0 +1,61 @@
+package com.app.l_pesa.loanplan.adapter
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import com.app.l_pesa.R
+import com.app.l_pesa.profile.model.ResUserInfo
+import java.util.ArrayList
+
+class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: ArrayList<ResUserInfo.UserIdsPersonalInfo>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    @SuppressLint("SetTextI18n")
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+
+        val viewHolder = holder as SelectViewHolder
+
+        viewHolder.txtIdType.text       = context.resources.getString(R.string.id_type)+" "+userIdsPersonalInfo[position].idTypeName
+        viewHolder.txtUploadTime.text   = context.resources.getString(R.string.uploaded_on)+" "+userIdsPersonalInfo[position].created
+
+        if(userIdsPersonalInfo[position].verified==1)
+        {
+            viewHolder.imgVerifiedStatus.visibility=View.VISIBLE
+        }
+        else
+        {
+            viewHolder.imgVerifiedStatus.visibility=View.INVISIBLE
+        }
+
+
+    }
+
+    override fun getItemCount(): Int = userIdsPersonalInfo.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        val recyclerView: RecyclerView.ViewHolder
+
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_id_information, parent, false)
+        recyclerView = SelectViewHolder(itemView)
+        return recyclerView
+    }
+
+    companion object {
+        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+            var txtIdType            : TextView = itemView.findViewById(R.id.txtIdType) as TextView
+            var txtUploadTime        : TextView = itemView.findViewById(R.id.txtUploadTime) as TextView
+            var imgVerifiedStatus    : ImageView= itemView.findViewById(R.id.imgVerifiedStatus) as ImageView
+
+        }
+
+
+    }
+}

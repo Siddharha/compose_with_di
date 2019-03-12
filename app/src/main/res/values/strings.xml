@@ -279,6 +279,7 @@
     <string name="profile_image">Profile Image*</string>
     <string name="personal_id_type">Personal ID Type*</string>
     <string name="edit_id_number">ID Number*</string>
+    <string name="uploaded_on">Uploaded On:</string>
     <string name="enter_id_no">If you choose any id then just enter that id no. in the above text box!</string>
     <string name="upload_scanned_id">Please upload a scanned clear color of your ID.You can scan your Physical ID using a scanner or take a photo with your phone and upload it.</string>
 
