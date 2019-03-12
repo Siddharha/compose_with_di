@@ -1,5 +1,7 @@
 package com.app.l_pesa.profile.view
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -17,10 +19,6 @@ import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import com.app.l_pesa.common.ActionItem
 import com.app.l_pesa.common.QuickAction
 import java.util.ArrayList
-import android.widget.ArrayAdapter
-
-
-
 
 
 class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
@@ -57,9 +55,9 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
         if(profileInfo.userIdsPersonalInfo!!.size>0)
         {
             listPersonalId!!.addAll(profileInfo.userIdsPersonalInfo!!)
-            personalIdAdapter                    = PersonalIdAdapter(activity!!,listPersonalId!!,this)
-            rvPersonalId.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-            rvPersonalId.adapter                  = personalIdAdapter
+            personalIdAdapter                 = PersonalIdAdapter(activity!!,listPersonalId!!,this)
+            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+            rvPersonalId.adapter              = personalIdAdapter
         }
 
 
@@ -67,17 +65,26 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
     override fun onClickIdList(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, position: Int, it: View) {
 
-        val nextItem = ActionItem(TYPE_VIEW, activity!!.resources.getString(R.string.view_file), ContextCompat.getDrawable(activity!!,R.drawable.ic_view_file))
-        val prevItem = ActionItem(TYPE_DELETE, activity!!.resources.getString(R.string.delete), ContextCompat.getDrawable(activity!!,R.drawable.ic_delete))
+        val itemView   = ActionItem(TYPE_VIEW, activity!!.resources.getString(R.string.view_file), ContextCompat.getDrawable(activity!!,R.drawable.ic_view_file))
+        val itemDelete = ActionItem(TYPE_DELETE, activity!!.resources.getString(R.string.delete), ContextCompat.getDrawable(activity!!,R.drawable.ic_delete))
         val quickAction = QuickAction(activity!!, QuickAction.VERTICAL)
-        quickAction.addActionItem(nextItem)
-        quickAction.addActionItem(prevItem)
+           if(userIdsPersonalInfo.verified==1)
+           {
+               quickAction.addActionItem(itemView)
+           }
+            else
+           {
+               quickAction.addActionItem(itemView)
+               quickAction.addActionItem(itemDelete)
+           }
+
+        quickAction.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(activity!!,R.color.screenBackground)))
         quickAction.show(it)
+
 
         quickAction.setOnActionItemClickListener(object : QuickAction.OnActionItemClickListener {
             override fun onItemClick(source: QuickAction, pos: Int, actionId: Int) {
 
-                //val actionItem = quickAction.getActionItem(pos)
                 if(pos==1)
                 {
                     listPersonalId!!.removeAt(position)

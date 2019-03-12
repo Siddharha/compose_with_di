@@ -3,22 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
+
     >
 
     <ScrollView
         android:id="@+id/scroller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fadingEdgeLength="@dimen/_5sdp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        >
 
         <LinearLayout
             android:id="@+id/tracks"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"/>
+           />
 
     </ScrollView >
 
@@ -27,7 +27,8 @@
         android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       />
+
+        />
 
     <ImageView
         android:id="@+id/arrow_down"
@@ -36,6 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/scroller"
 
-      />
+        />
 
 </RelativeLayout>

@@ -95,6 +95,7 @@ open class PopupWindows
         mRootView = root
 
         mWindow.contentView = root
+
     }
 
     /**

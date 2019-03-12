@@ -21,24 +21,8 @@ import java.util.ArrayList
 import android.util.DisplayMetrics
 
 
-
-
-/**
- * QuickAction dialog, shows action list as icon and text like the one in Gallery3D app. Currently supports vertical
- * and horizontal layout.
- *
- * @author Lorensius W. L. T <lorenz></lorenz>@londatiga.net>
- *
- * Contributors:
- * - Kevin Peck <kevinwpeck></kevinwpeck>@gmail.com>
- */
 class QuickAction
-/**
- * Constructor allowing orientation override
- *
- * @param context    Context
- * @param orientation Layout orientation, can be vartical or horizontal
- */
+
 @JvmOverloads constructor(context: Context, private val mOrientation: Int = VERTICAL) : PopupWindows(context), OnDismissListener {
     override var mRootView: View? = null
     private var mArrowUp: ImageView? = null
@@ -78,7 +62,7 @@ class QuickAction
      *
      * @return  Action Item at the position
      */
-    fun getActionItem(index: Int): ActionItem {
+    private fun getActionItem(index: Int): ActionItem {
         return actionItems[index]
     }
 
@@ -87,17 +71,14 @@ class QuickAction
      *
      * @param id Layout resource id
      */
-    fun setRootViewId(id: Int) {
+    private fun setRootViewId(id: Int) {
         mRootView = mInflater.inflate(id, null) as ViewGroup
         mTrack = mRootView!!.findViewById(R.id.tracks) as ViewGroup
 
         mArrowDown = mRootView!!.findViewById(R.id.arrow_down) as ImageView
         mArrowUp = mRootView!!.findViewById(R.id.arrow_up) as ImageView
-
         mScroller = mRootView!!.findViewById(R.id.scroller) as ScrollView
-
         mRootView!!.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-
         setContentView(mRootView!!)
     }
 
@@ -130,13 +111,12 @@ class QuickAction
         val title = action.title
         val icon = action.icon
 
-        val container: View
+        val container: View = mInflater.inflate(R.layout.action_item_vertical, null)
 
-       /* if (mOrientation == HORIZONTAL) {
-            container = mInflater.inflate(R.layout.action_item_horizontal, null)
-        } else {*/
-            container = mInflater.inflate(R.layout.action_item_vertical, null)
-      //  }
+        /* if (mOrientation == HORIZONTAL) {
+             container = mInflater.inflate(R.layout.action_item_horizontal, null)
+         } else {*/
+        //  }
 
         val img = container.findViewById(R.id.iv_icon) as ImageView
         val text = container.findViewById(R.id.tv_title) as TextView
@@ -219,10 +199,10 @@ class QuickAction
             rootWidth = mRootView!!.measuredWidth
         }
 
-        val displaymetrics = DisplayMetrics()
-        mWindowManager.defaultDisplay.getMetrics(displaymetrics)
-        val screenWidth = displaymetrics.widthPixels
-        val screenHeight = displaymetrics.heightPixels
+        val displayMetrics = DisplayMetrics()
+        mWindowManager.defaultDisplay.getMetrics(displayMetrics)
+        val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
 
         //automatically get X coord of popup (top left)
         if (anchorRect.left + rootWidth > screenWidth) {
@@ -232,10 +212,10 @@ class QuickAction
             arrowPos = anchorRect.centerX() - xPos
 
         } else {
-            if (anchor.width > rootWidth) {
-                xPos = anchorRect.centerX() - rootWidth / 2
+            xPos = if (anchor.width > rootWidth) {
+                anchorRect.centerX() - rootWidth / 2
             } else {
-                xPos = anchorRect.left
+                anchorRect.left
             }
 
             arrowPos = anchorRect.centerX() - xPos
@@ -283,7 +263,6 @@ class QuickAction
 
         when (mAnimStyle) {
             ANIM_GROW_FROM_LEFT -> mWindow.animationStyle = R.style.Animations_PopDownMenu_Left
-
 
         }
     }
@@ -344,13 +323,7 @@ class QuickAction
     companion object {
 
         val VERTICAL = 1
-
         val ANIM_GROW_FROM_LEFT = 1
 
     }
 }
-/**
- * Constructor for default vertical layout
- *
- * @param context  Context
- */
