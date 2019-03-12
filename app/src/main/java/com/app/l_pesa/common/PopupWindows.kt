@@ -1,6 +1,6 @@
 package com.app.l_pesa.common
 
-import android.graphics.drawable.BitmapDrawable
+
 import android.graphics.drawable.Drawable
 
 import android.view.LayoutInflater
@@ -64,9 +64,8 @@ open class PopupWindows
 
         onShow()
 
-        if (mBackground == null)
-            mWindow.setBackgroundDrawable(BitmapDrawable())
-        else
+        if (mBackground != null)
+
             mWindow.setBackgroundDrawable(mBackground)
 
         mWindow.width = WindowManager.LayoutParams.WRAP_CONTENT

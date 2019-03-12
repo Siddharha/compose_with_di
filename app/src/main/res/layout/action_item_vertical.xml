@@ -1,25 +1,30 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_35sdp"
     android:clickable="true"
     android:focusable="true"
+    android:background="@color/colorWhite"
     >
 
     <ImageView
         android:id="@+id/iv_icon"
+        android:contentDescription="@string/app_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingStart="5dip"
-        android:paddingEnd="10dip"
-        android:text="Chart"
-        android:textColor="#fff"/>
+        android:fontFamily="@font/montserrat"
+        android:text="@string/ref_no"
+        android:textColor="#3b3e42"
+        android:textSize="@dimen/_13sdp"
+        android:padding="@dimen/_2sdp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

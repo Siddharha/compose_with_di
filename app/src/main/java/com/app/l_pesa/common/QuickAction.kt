@@ -14,12 +14,14 @@ import android.widget.PopupWindow.OnDismissListener
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup.LayoutParams
 import android.view.ViewGroup
-
 import com.app.l_pesa.R
 import java.util.ArrayList
+import android.util.DisplayMetrics
+
+
+
 
 /**
  * QuickAction dialog, shows action list as icon and text like the one in Gallery3D app. Currently supports vertical
@@ -94,9 +96,6 @@ class QuickAction
 
         mScroller = mRootView!!.findViewById(R.id.scroller) as ScrollView
 
-        //This was previously defined on show() method, moved here to prevent force close that occured
-        //when tapping fastly on a view to show quickaction dialog.
-        //Thanx to zammbi (github.com/zammbi)
         mRootView!!.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         setContentView(mRootView!!)
@@ -220,8 +219,10 @@ class QuickAction
             rootWidth = mRootView!!.measuredWidth
         }
 
-        val screenWidth = mWindowManager.getDefaultDisplay().getWidth()
-        val screenHeight = mWindowManager.getDefaultDisplay().getHeight()
+        val displaymetrics = DisplayMetrics()
+        mWindowManager.defaultDisplay.getMetrics(displaymetrics)
+        val screenWidth = displaymetrics.widthPixels
+        val screenHeight = displaymetrics.heightPixels
 
         //automatically get X coord of popup (top left)
         if (anchorRect.left + rootWidth > screenWidth) {
@@ -243,7 +244,7 @@ class QuickAction
         val dyTop = anchorRect.top
         val dyBottom = screenHeight - anchorRect.bottom
 
-        val onTop = if (dyTop > dyBottom) true else false
+        val onTop = dyTop > dyBottom
 
         if (onTop) {
             if (rootHeight > dyTop) {
@@ -281,7 +282,7 @@ class QuickAction
         val arrowPos = requestedX - mArrowUp!!.measuredWidth / 2
 
         when (mAnimStyle) {
-            ANIM_GROW_FROM_LEFT -> mWindow.setAnimationStyle(R.style.Animations_PopDownMenu_Left)
+            ANIM_GROW_FROM_LEFT -> mWindow.animationStyle = R.style.Animations_PopDownMenu_Left
 
 
         }
