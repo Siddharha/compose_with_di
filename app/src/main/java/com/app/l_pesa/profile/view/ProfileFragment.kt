@@ -248,7 +248,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
 
 
-
         /*Contact Information*/
 
         if(!TextUtils.isEmpty(data.userContactInfo!!.city) && !TextUtils.isEmpty(data.userContactInfo!!.postalAddress))
@@ -345,12 +344,12 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
             if(userIdsInfo[i].verified==1)
             {
-                loadIdInfo(userIdsInfo[i])
+                loadIdInfoPersonal(userIdsInfo[i])
                 break
             }
             else
             {
-                loadIdInfo(userIdsInfo[i])
+                loadIdInfoPersonal(userIdsInfo[i])
                 break
             }
 
@@ -359,7 +358,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     }
 
-    private fun loadIdInfo(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo)
+    private fun loadIdInfoPersonal(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo)
     {
         try {
 
@@ -369,7 +368,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
                     .load(userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgID)
-
 
         }
         catch (exception: Exception)

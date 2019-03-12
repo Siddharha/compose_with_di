@@ -274,5 +274,7 @@
 
     <!-- ID Information-->
     <string name="id_information">Id Information</string>
+    <string name="personal_id_information">Personal Id Information</string>
+    <string name="business_id_information">Business Id Information</string>
 
 </resources>
