@@ -3,9 +3,9 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/_8sdp"
+    android:layout_marginStart="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_5sdp"
-    android:layout_marginRight="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
     android:layout_marginBottom="@dimen/_5sdp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -70,7 +70,7 @@
             android:id="@+id/txtDepositAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:textColor="#3b3e42"
             android:textSize="@dimen/_15sdp"
@@ -94,7 +94,7 @@
             android:id="@+id/txtDuration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/months"
             android:textColor="#7c7d80"
@@ -106,6 +106,7 @@
 
         <ImageView
             android:id="@+id/imageView4"
+            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -119,7 +120,7 @@
             android:id="@+id/txtInterestRate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/interest_rate"
             android:textColor="#7c7d80"
@@ -142,6 +143,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
+            android:contentDescription="@string/app_name"
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -156,7 +158,7 @@
             android:id="@+id/textView6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/maturity_amount"
             android:textColor="#7c7d80"
@@ -180,9 +182,10 @@
 
         <ImageView
             android:id="@+id/imageView6"
+            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView8"
@@ -193,7 +196,7 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/maturity_on"
             android:textColor="#7c7d80"
