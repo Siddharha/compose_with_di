@@ -40,5 +40,7 @@
     <color name="color_light_gold">#8F8862</color>
     <color name="shimmerBackground">#dddddd</color>
     <color name="color_aqua">#0ddabf</color>
+    <color name="round_text_view_color">#26d0b9</color>
+    <color name="light_text_color">#7c7d80</color>
 
 </resources>
