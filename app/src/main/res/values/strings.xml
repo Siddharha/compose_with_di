@@ -272,4 +272,7 @@
     <string name="maturity_amount">Maturity Amount</string>
     <string name="maturity_on">Maturity On</string>
 
+    <!-- ID Information-->
+    <string name="id_information">Id Information</string>
+
 </resources>

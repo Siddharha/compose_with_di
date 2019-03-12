@@ -350,7 +350,6 @@
                             android:textStyle="bold"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toTopOf="@+id/view7"
-                            app:layout_constraintEnd_toStartOf="@+id/imageButton"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -644,12 +643,13 @@
                             android:textStyle="bold"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toTopOf="@+id/view8"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                            app:layout_constraintEnd_toStartOf="@+id/imgEditIdInfo"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/imageView10"
+                            android:id="@+id/imgEditIdInfo"
+                            android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?selectableItemBackgroundBorderless"
