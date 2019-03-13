@@ -45,7 +45,9 @@ import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
 import com.app.l_pesa.profile.inter.ICallBackProof
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
+import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ModelWindowPopUp
+import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.JsonObject
@@ -55,7 +57,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof {
+class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload {
+
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
@@ -128,22 +131,9 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     swipeRefreshLayout.isRefreshing=true
                     buttonSubmit.isClickable=false
 
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("id_image","per_new_138308_7397641a67801aad9fe694c4cfd3c48a.jpg") // Static
-                    jsonObject.addProperty("id_type",personalId.toString())
-                    if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
-                    {
-                        jsonObject.addProperty("id_number","")
-                    }
-                    else
-                    {
-                        jsonObject.addProperty("id_number",etIdNumber.text.toString())
-                    }
+                    val presenterAWSPersonalId= PresenterAWSPersonalId()
+                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,captureFile)
 
-                    jsonObject.addProperty("type_name","Personal")
-
-                    val presenterAddProof= PresenterAddProof()
-                    presenterAddProof.doAddProof(activity!!,jsonObject,this)
                 }
                 else
                 {
@@ -186,6 +176,37 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
 
 
+    }
+
+    override fun onSuccessUploadAWS(url: String) {
+
+        val jsonObject = JsonObject()
+        //jsonObject.addProperty("id_image","per_new_138308_7397641a67801aad9fe694c4cfd3c48a.jpg") // Static
+        jsonObject.addProperty("id_image",url) // Static
+        jsonObject.addProperty("id_type",personalId.toString())
+        if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
+        {
+            jsonObject.addProperty("id_number","")
+        }
+        else
+        {
+            jsonObject.addProperty("id_number",etIdNumber.text.toString())
+        }
+
+        jsonObject.addProperty("type_name","Personal")
+
+        println("JSON_REQ"+jsonObject)
+
+        val presenterAddProof= PresenterAddProof()
+        presenterAddProof.doAddProof(activity!!,jsonObject,this)
+
+    }
+
+    override fun onFailureUploadAWS(string: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
+        CommonMethod.customSnackBarError(llRoot,activity!!,string)
     }
 
     private fun swipeRefresh()
@@ -373,7 +394,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             val imageFile = createImageFile()
             val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-            val authorities = "com.app.l_pesa.fileprovider"
+            val authorities = "com.app.l_pesa.provider"
             val imageUri = FileProvider.getUriForFile(activity!!, authorities, imageFile)
             callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             startActivityForResult(callCameraIntent, PHOTO)
@@ -434,7 +455,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 if (resultCode == Activity.RESULT_OK) {
                     imgProfile.setImageBitmap(scaleBitmap())
                     CommonMethod.fileCompress(captureFile!!)
-                    imageSelectStatus=true
+                    imageSelectStatus=true //captureFile
                 } else
 
                 {
@@ -524,6 +545,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 imageSelectStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfile.setImageBitmap(bitmap)
+                captureFile=imgSize
+                CommonMethod.fileCompress(captureFile!!)
             }
 
         }

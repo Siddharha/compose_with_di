@@ -61,6 +61,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         initToggle()
 
         nav_view.setNavigationItemSelectedListener(this)
+        cacheDir.deleteRecursively() // Clean Cache
     }
 
    private fun initToggle()
