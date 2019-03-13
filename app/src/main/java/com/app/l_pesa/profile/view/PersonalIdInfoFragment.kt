@@ -1,5 +1,6 @@
 package com.app.l_pesa.profile.view
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,17 +13,20 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.PopupWindow
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
+import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.model.ModelWindowPopUp
 import java.util.ArrayList
@@ -69,7 +73,6 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
         buttonSubmit.setOnClickListener {
 
-
             if(TextUtils.isEmpty(etIdNumber.text.toString()))
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
@@ -96,7 +99,21 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
         etPersonalId.isFocusable=false
         etPersonalId.setOnClickListener {
 
-            Toast.makeText(activity,"",Toast.LENGTH_SHORT).show()
+            val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+
+            if(userDashBoard.personalIdTypes!!.size>0)
+            {
+                val dialog= Dialog(activity!!)
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.dialog_country)
+                val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+                val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog)
+                recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                recyclerView?.adapter           = personalIdAdapter
+                dialog.show()
+            }
+
+
         }
 
 

@@ -9,17 +9,17 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.app.l_pesa.R
-import com.app.l_pesa.profile.inter.ICallBackId
+import com.app.l_pesa.dashboard.model.ResDashboard
 
-class IdListAdapter (val context: Context, private val titleText: ArrayList<String>, private val dialogOBJ: Dialog, private val callBack: ICallBackId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PersonalIdListAdapter (val context: Context, private val titleText: ArrayList<ResDashboard.PersonalIdType>, private val dialogOBJ: Dialog) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
-        viewHolder.titleText.text = titleText[position]
+        viewHolder.titleText.text = titleText[position].name
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()
-            callBack.onClickIdType(position,titleText[position])
+           // callBack.onClickIdType(position,titleText[position])
         }
 
     }
@@ -43,7 +43,6 @@ class IdListAdapter (val context: Context, private val titleText: ArrayList<Stri
             var rlRootObj : RelativeLayout = itemView.findViewById(R.id.rlRoot) as RelativeLayout
 
         }
-
 
     }
 

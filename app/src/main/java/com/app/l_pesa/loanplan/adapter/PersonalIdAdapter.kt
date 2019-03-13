@@ -62,7 +62,6 @@ class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: A
             var txtUploadTime        : TextView     = itemView.findViewById(R.id.txtUploadTime) as TextView
             var imgVerifiedStatus    : ImageView    = itemView.findViewById(R.id.imgVerifiedStatus) as ImageView
             var imgEdit              : ImageButton  = itemView.findViewById(R.id.imgEdit) as ImageButton
-            var rlRoot               : RelativeLayout= itemView.findViewById(R.id.rlRoot) as RelativeLayout
 
         }
 
