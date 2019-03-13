@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat.finishAffinity
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -30,17 +29,16 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
-import com.app.l_pesa.profile.inter.ICallBackAddProof
+import com.app.l_pesa.profile.inter.ICallBackProof
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.model.ModelWindowPopUp
 import com.app.l_pesa.profile.presenter.PresenterAddProof
+import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.JsonObject
 import java.util.ArrayList
 
 
-class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAddProof {
-
-
+class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof {
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
@@ -220,14 +218,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
     override fun onClickIdList(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, position: Int, it: View) {
 
         dismissPopup()
-        filterPopup = showAlertFilter(userIdsPersonalInfo,position,it)
+        filterPopup = showAlertFilter(userIdsPersonalInfo,position)
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         filterPopup?.showAsDropDown(it)
     }
 
-    private fun showAlertFilter(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, filterposition: Int, it: View): PopupWindow {
+    private fun showAlertFilter(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int): PopupWindow {
 
         val filterItemList = mutableListOf<ModelWindowPopUp>()
         if(userIdsPersonalInfo.verified==1)
@@ -258,8 +256,18 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
 
                 if(position==1)
                 {
-                    listPersonalId!!.removeAt(filterposition)
-                    personalIdAdapter!!.notifyDataSetChanged()
+
+                    if(CommonMethod.isNetworkAvailable(activity!!))
+                    {
+
+                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+                        swipeRefreshLayout.isRefreshing=true
+                        deletePersonalIdProof(userIdsPersonalInfo,pos)
+                    }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                    }
                 }
                 else
                 {
@@ -273,10 +281,17 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
         return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
+    private fun deletePersonalIdProof(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int)
+    {
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("user_type_id",userIdsPersonalInfo.id.toString())
+
+        val presenterDeleteProof= PresenterDeleteProof()
+        presenterDeleteProof.doDeleteProof(activity!!,jsonObject,pos,this)
+    }
+
     override fun onSuccessAddProof() {
 
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
         val sharedPref=SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
         val intent = Intent(activity!!, DashboardActivity::class.java)
@@ -289,6 +304,17 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
 
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true
+        CommonMethod.customSnackBarError(llRoot,activity!!,message)
+    }
+
+    override fun onSuccessDeleteProof(position: Int) {
+        swipeRefreshLayout.isRefreshing=false
+        listPersonalId!!.removeAt(position)
+        personalIdAdapter!!.notifyDataSetChanged()
+    }
+
+    override fun onFailureDeleteProof(message: String) {
+        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(llRoot,activity!!,message)
     }
 

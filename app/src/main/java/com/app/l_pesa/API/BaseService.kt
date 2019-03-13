@@ -87,7 +87,10 @@ interface BaseService{
     fun doLoanApply(@Body request: JsonObject): Observable<ResLoanApply>
 
     @POST("user/add_proof")
-    fun doAddProof(@Body request: JsonObject): Observable<ResAddProof>
+    fun doAddProof(@Body request: JsonObject): Observable<ResProof>
+
+    @POST("user/delete_proof")
+    fun doDeleteProof(@Body request: JsonObject): Observable<ResProof>
 
 }
 

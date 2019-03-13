@@ -5,7 +5,7 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.profile.inter.ICallBackAddProof
+import com.app.l_pesa.profile.inter.ICallBackProof
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +14,7 @@ import retrofit2.HttpException
 
 class PresenterAddProof {
 
-    fun doAddProof(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackAddProof) {
+    fun doAddProof(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackProof) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doAddProof(jsonRequest)
