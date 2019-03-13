@@ -1,7 +1,6 @@
 package com.app.l_pesa.profile.adapter
 
 import android.content.Context
-import android.os.Build
 import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
@@ -11,13 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.app.l_pesa.R
-import com.app.l_pesa.profile.inter.ICallBackRecyclerviewCallbacks
+import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.model.ModelWindowPopUp
 
 class AdapterPopupWindow(val context: Context) : RecyclerView.Adapter<AdapterPopupWindow.MyViewHolder>() {
 
     var filerList : List<ModelWindowPopUp> = mutableListOf()
-    var callback: ICallBackRecyclerviewCallbacks<ModelWindowPopUp>? = null
+    var callback: ICallBackRecyclerCallbacks<ModelWindowPopUp>? = null
     private var selectedItem: Int = -1
 
     fun addAlertFilter(filers: List<ModelWindowPopUp>) {
@@ -37,7 +36,7 @@ class AdapterPopupWindow(val context: Context) : RecyclerView.Adapter<AdapterPop
 
     }
 
-    fun setOnClick(click: ICallBackRecyclerviewCallbacks<ModelWindowPopUp>){
+    fun setOnClick(click: ICallBackRecyclerCallbacks<ModelWindowPopUp>){
         callback = click
     }
 
@@ -55,8 +54,6 @@ class AdapterPopupWindow(val context: Context) : RecyclerView.Adapter<AdapterPop
 
         var tvName      :TextView   = itemView.findViewById(R.id.alert_filter_name)
         var imgIcon     : ImageView = itemView.findViewById(R.id.alert_filter_icon)
-        var imgSelected : ImageView = itemView.findViewById(R.id.alert_filter_selected)
-
         var filterLayout:ConstraintLayout = itemView.findViewById(R.id.alert_filter_item_layout)
 
         init {

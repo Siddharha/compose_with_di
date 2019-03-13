@@ -20,7 +20,7 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
-import com.app.l_pesa.profile.inter.ICallBackRecyclerviewCallbacks
+import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.model.ModelWindowPopUp
 import java.util.ArrayList
 
@@ -113,7 +113,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
         recyclerView.adapter = adapter
         adapter.selectedItem(selectedItem)
 
-        adapter.setOnClick(object : ICallBackRecyclerviewCallbacks<ModelWindowPopUp>{
+        adapter.setOnClick(object : ICallBackRecyclerCallbacks<ModelWindowPopUp>{
             override fun onItemClick(view: View, position: Int, item:ModelWindowPopUp) {
                 selectedItem = position
 
