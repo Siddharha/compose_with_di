@@ -1,14 +1,17 @@
 package com.app.l_pesa.profile.view
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
@@ -16,15 +19,16 @@ import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
-import com.app.l_pesa.common.ActionItem
-import com.app.l_pesa.common.QuickAction
+import com.app.l_pesa.profile.adapter.AdapterPopupWindow
+import com.app.l_pesa.profile.inter.ICallBackRecyclerviewCallbacks
+import com.app.l_pesa.profile.model.ModelWindowPopUp
 import java.util.ArrayList
 
 
 class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
-    private val TYPE_VIEW   = 1
-    private val TYPE_DELETE = 2
+    private var filterPopup: PopupWindow? = null
+    private var selectedItem: Int = -1
     var listPersonalId      : ArrayList<ResUserInfo.UserIdsPersonalInfo>? = null
     var personalIdAdapter   : PersonalIdAdapter? = null
 
@@ -63,40 +67,68 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
     }
 
+    private fun dismissPopup() {
+        filterPopup?.let {
+            if(it.isShowing){
+                it.dismiss()
+            }
+            filterPopup = null
+        }
+
+    }
+
+
     override fun onClickIdList(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, position: Int, it: View) {
 
-        val itemView   = ActionItem(TYPE_VIEW, activity!!.resources.getString(R.string.view_file), ContextCompat.getDrawable(activity!!,R.drawable.ic_view_file))
-        val itemDelete = ActionItem(TYPE_DELETE, activity!!.resources.getString(R.string.delete), ContextCompat.getDrawable(activity!!,R.drawable.ic_delete))
-        val quickAction = QuickAction(activity!!, QuickAction.VERTICAL)
-           if(userIdsPersonalInfo.verified==1)
-           {
-               quickAction.addActionItem(itemView)
-           }
-            else
-           {
-               quickAction.addActionItem(itemView)
-               quickAction.addActionItem(itemDelete)
-           }
+        dismissPopup()
+        filterPopup = showAlertFilter(userIdsPersonalInfo,position,it)
+        filterPopup?.isOutsideTouchable = true
+        filterPopup?.isFocusable = true
+        filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        filterPopup?.showAsDropDown(it)
+    }
 
-        quickAction.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(activity!!,R.color.screenBackground)))
-        quickAction.show(it)
+    private fun showAlertFilter(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, filterposition: Int, it: View): PopupWindow {
+
+        val filterItemList = mutableListOf<ModelWindowPopUp>()
+        if(userIdsPersonalInfo.verified==1)
+        {
+            filterItemList.add(ModelWindowPopUp(R.drawable.ic_view_file,resources.getString(R.string.view_file)))
+        }
+        else
+        {
+            filterItemList.add(ModelWindowPopUp(R.drawable.ic_view_file,resources.getString(R.string.view_file)))
+            filterItemList.add(ModelWindowPopUp(R.drawable.ic_delete,resources.getString(R.string.delete)))
+        }
 
 
-        quickAction.setOnActionItemClickListener(object : QuickAction.OnActionItemClickListener {
-            override fun onItemClick(source: QuickAction, pos: Int, actionId: Int) {
+        val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.layout_only_recyclerview, null)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
 
-                if(pos==1)
+        val adapter = AdapterPopupWindow(activity!!)
+        adapter.addAlertFilter(filterItemList)
+        recyclerView.adapter = adapter
+        adapter.selectedItem(selectedItem)
+
+        adapter.setOnClick(object : ICallBackRecyclerviewCallbacks<ModelWindowPopUp>{
+            override fun onItemClick(view: View, position: Int, item:ModelWindowPopUp) {
+                selectedItem = position
+
+                if(position==1)
                 {
-                    listPersonalId!!.removeAt(position)
+                    listPersonalId!!.removeAt(filterposition)
                     personalIdAdapter!!.notifyDataSetChanged()
                 }
-                else
-                {
 
-                }
-
-
+                dismissPopup()
             }
         })
+
+        return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
+
+
 }

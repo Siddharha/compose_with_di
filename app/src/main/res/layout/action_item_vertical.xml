@@ -1,33 +1,44 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_45sdp"
-    android:clickable="true"
-    android:focusable="true"
-    android:background="@color/colorSemiWhite"
-    android:padding="@dimen/_5sdp"
-    >
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/alert_filter_item_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_3sdp"
+    android:background="@color/screenBackground">
 
     <ImageView
-        android:id="@+id/iv_icon"
+        android:id="@+id/alert_filter_icon"
         android:contentDescription="@string/app_name"
         android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_22sdp"
-        android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:adjustViewBounds="true"/>
+        android:adjustViewBounds="true"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/alert_filter_name"
+        android:layout_width="@dimen/_135sdp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/ref_no"
-        android:textColor="#3b3e42"
-        android:textSize="@dimen/_12sdp"
-        android:padding="@dimen/_2sdp"
-        android:layout_gravity="center"/>
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:textSize="@dimen/_15sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/alert_filter_icon"
+        app:layout_constraintStart_toEndOf="@+id/alert_filter_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/alert_filter_selected"
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toEndOf="@+id/alert_filter_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
