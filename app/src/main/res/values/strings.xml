@@ -81,6 +81,7 @@
     <string name="required_business_name">Required Business Name</string>
     <string name="required_tin_number">Required TIN Number</string>
     <string name="required_id_number">Required ID Number</string>
+    <string name="required_id_type">Required ID Type</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+ <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,6 +14,7 @@
     android:background="@color/screenBackground"
     android:orientation="vertical"
     android:id="@+id/llRoot">
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -211,3 +219,5 @@
         />
 
 </LinearLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

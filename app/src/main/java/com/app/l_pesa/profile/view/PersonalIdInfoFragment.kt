@@ -56,6 +56,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipeRefresh()
         initData()
 
     }
@@ -77,7 +78,12 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
         buttonSubmit.setOnClickListener {
 
-            if(TextUtils.isEmpty(etIdNumber.text.toString()))
+            if(personalId==0)
+            {
+                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
+                showDialogIdType(sharedPrefOBJ)
+            }
+            else if(TextUtils.isEmpty(etIdNumber.text.toString()))
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
             }
@@ -86,6 +92,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
 
+                    swipeRefreshLayout.isRefreshing=true
+                    buttonSubmit.isClickable=false
                 }
                 else
                 {
@@ -101,33 +109,37 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
         }
 
         etPersonalId.isFocusable=false
+
+        etPersonalId.setOnClickListener {
+            showDialogIdType(sharedPrefOBJ)
+
+        }
+
+
+    }
+
+    private fun swipeRefresh()
+    {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+        swipeRefreshLayout.isRefreshing=false
+        }
+    }
+
+    private fun showDialogIdType(sharedPrefOBJ: SharedPref)
+    {
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
         if(userDashBoard.personalIdTypes!!.size>0)
         {
-            etPersonalId.setText(userDashBoard.personalIdTypes!![0].name)
-            personalIdType=userDashBoard.personalIdTypes!![0].type
-            personalIdName=userDashBoard.personalIdTypes!![0].name
-            personalId=userDashBoard.personalIdTypes!![0].id
+            val dialog= Dialog(activity!!)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_id_type)
+            val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+            val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
+            recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            recyclerView?.adapter           = personalIdAdapter
+            dialog.show()
         }
-
-        etPersonalId.setOnClickListener {
-
-            if(userDashBoard.personalIdTypes!!.size>0)
-            {
-                val dialog= Dialog(activity!!)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.setContentView(R.layout.dialog_country)
-                val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
-                val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
-                recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-                recyclerView?.adapter           = personalIdAdapter
-                dialog.show()
-            }
-
-
-        }
-
-
     }
 
     private fun dismissPopup() {
@@ -142,10 +154,27 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
     override fun onSelectIdType(id: Int, name: String, type: String) {
 
-        personalIdType=type
-        personalIdName=name
-        personalId=id
-        etPersonalId.setText(personalIdName)
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        val totalSize = 0 until profileInfo.userIdsPersonalInfo!!.size
+
+        for(i in totalSize)
+        {
+
+            if(profileInfo.userIdsPersonalInfo!![i].verified==1 && profileInfo.userIdsPersonalInfo!![i].idTypeName==name)
+            {
+              Toast.makeText(activity, "Your $name is already verified",Toast.LENGTH_SHORT).show()
+              break
+
+            }
+            else
+            {
+                personalIdType=type
+                personalIdName=name
+                personalId=id
+                etPersonalId.setText(personalIdName)
+            }
+        }
     }
 
 
