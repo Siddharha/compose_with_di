@@ -805,10 +805,10 @@
 
                         <ImageButton
                             android:id="@+id/imgEditContactInfo"
-                            android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="?selectableItemBackgroundBorderless"
+                            android:contentDescription="@string/app_name"
                             android:padding="@dimen/_5sdp"
                             app:layout_constraintBottom_toBottomOf="@+id/view9"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -833,11 +833,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:contentDescription="@string/app_name"
-                            app:layout_constraintBottom_toTopOf="@+id/imageView17"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtAddress"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/view9"
+                            app:layout_constraintTop_toTopOf="@+id/txtAddress"
                             app:layout_constraintVertical_chainStyle="spread"
                             app:srcCompat="@drawable/ic_address_icon" />
 
@@ -847,24 +846,25 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+                            app:layout_constraintBottom_toTopOf="@+id/txtEmail"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/imageView16"
-                            app:layout_constraintTop_toTopOf="@id/imageView16" />
+                            app:layout_constraintTop_toBottomOf="@+id/view9" />
 
                         <ImageView
                             android:id="@+id/imageView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_6sdp"
                             android:contentDescription="@string/app_name"
-                            app:layout_constraintBottom_toTopOf="@+id/imageView19"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtEmail"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView16"
+                            app:layout_constraintTop_toTopOf="@+id/txtEmail"
                             app:srcCompat="@drawable/ic_mail_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -876,22 +876,22 @@
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintBottom_toTopOf="@+id/txtContact"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/imageView17"
-                            app:layout_constraintTop_toTopOf="@+id/imageView17" />
+                            app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
 
                         <ImageView
                             android:id="@+id/imageView19"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_6sdp"
-                            android:layout_marginBottom="@dimen/_10sdp"
                             android:contentDescription="@string/app_name"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtContact"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView17"
+                            app:layout_constraintTop_toTopOf="@+id/txtContact"
                             app:srcCompat="@drawable/ic_mobile_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -900,13 +900,16 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toBottomOf="@id/imageView19"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/imageView19"
-                            app:layout_constraintTop_toTopOf="@+id/imageView19" />
+                            app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
                     </android.support.constraint.ConstraintLayout>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_55sdp"
+    android:layout_height="@dimen/_75sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/_3sdp"
     android:background="@drawable/bg_white_view"
@@ -18,25 +18,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            app:layout_constraintRight_toLeftOf="@+id/txtIdType"
             android:textColor="@color/color_semi_deep_black"
             android:textSize="@dimen/_13sdp"
+            app:layout_constraintRight_toLeftOf="@+id/txtIdType"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtIdNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/id_number"
+            android:textColor="@color/colorSemiBlack"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toTopOf="@+id/txtUploadTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtIdType" />
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtUploadTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_1sdp"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorSemiBlack"
-            android:textSize="@dimen/_12sdp"
             android:text="@string/uploaded_on"
+            android:textColor="@color/colorSemiBlack"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/txtIdNumber" />
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtIdType"
@@ -46,31 +62,33 @@
             android:text="@string/id_type"
             android:textColor="@color/colorSemiBlack"
             android:textSize="@dimen/_13sdp"
+            app:layout_constraintBottom_toTopOf="@+id/txtIdNumber"
             app:layout_constraintEnd_toStartOf="@+id/imgVerifiedStatus"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/imgEdit"
-            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
+            android:contentDescription="@string/app_name"
+            android:rotation="90"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_edit_icon"
-            android:rotation="90"/>
+            app:srcCompat="@drawable/ic_edit_icon" />
 
         <ImageView
             android:id="@+id/imgVerifiedStatus"
-            android:contentDescription="@string/app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_7sdp"
+            android:contentDescription="@string/app_name"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/imgEdit"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_uploaded_tick"
-            android:visibility="invisible"/>
+            app:srcCompat="@drawable/ic_uploaded_tick" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -35,6 +35,16 @@ class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: A
             viewHolder.imgVerifiedStatus.visibility=View.INVISIBLE
         }
 
+        if(userIdsPersonalInfo[position].typeName=="" && userIdsPersonalInfo[position].idTypeUnique=="")
+        {
+
+            viewHolder.txtIdNumber.visibility=View.INVISIBLE
+        }
+        else
+        {
+
+        }
+
         viewHolder.imgEdit.setOnClickListener {
 
 
@@ -58,6 +68,7 @@ class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: A
     companion object {
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+            var txtIdNumber          : TextView     = itemView.findViewById(R.id.txtIdNumber) as TextView
             var txtIdType            : TextView     = itemView.findViewById(R.id.txtIdType) as TextView
             var txtUploadTime        : TextView     = itemView.findViewById(R.id.txtUploadTime) as TextView
             var imgVerifiedStatus    : ImageView    = itemView.findViewById(R.id.imgVerifiedStatus) as ImageView
