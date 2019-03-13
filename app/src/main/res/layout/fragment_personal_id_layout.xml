@@ -75,6 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/montserrat"
+                    android:hint="@string/personal_id_type"
                     android:textSize="@dimen/_12sdp"
                     android:longClickable="false"
                     app:autoSizeStepGranularity="0.2sp"

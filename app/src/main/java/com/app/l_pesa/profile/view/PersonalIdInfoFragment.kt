@@ -34,10 +34,14 @@ import java.util.ArrayList
 
 class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
-    private var filterPopup: PopupWindow? = null
+
+    private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
     var listPersonalId      : ArrayList<ResUserInfo.UserIdsPersonalInfo>? = null
     var personalIdAdapter   : PersonalIdAdapter? = null
+    var personalIdType=""
+    var personalIdName=""
+    var personalId=0
 
     companion object {
         fun newInstance(): Fragment {
@@ -97,9 +101,16 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
         }
 
         etPersonalId.isFocusable=false
-        etPersonalId.setOnClickListener {
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        if(userDashBoard.personalIdTypes!!.size>0)
+        {
+            etPersonalId.setText(userDashBoard.personalIdTypes!![0].name)
+            personalIdType=userDashBoard.personalIdTypes!![0].type
+            personalIdName=userDashBoard.personalIdTypes!![0].name
+            personalId=userDashBoard.personalIdTypes!![0].id
+        }
 
-            val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        etPersonalId.setOnClickListener {
 
             if(userDashBoard.personalIdTypes!!.size>0)
             {
@@ -107,7 +118,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 dialog.setContentView(R.layout.dialog_country)
                 val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
-                val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog)
+                val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
                 recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
                 recyclerView?.adapter           = personalIdAdapter
                 dialog.show()
@@ -127,6 +138,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
             filterPopup = null
         }
 
+    }
+
+    override fun onSelectIdType(id: Int, name: String, type: String) {
+
+        personalIdType=type
+        personalIdName=name
+        personalId=id
+        etPersonalId.setText(personalIdName)
     }
 
 

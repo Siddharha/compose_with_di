@@ -6,4 +6,5 @@ import com.app.l_pesa.profile.model.ResUserInfo
 interface ICallBackClickPersonalId {
 
     fun onClickIdList(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, position: Int, it: View)
+    fun onSelectIdType(id: Int, name: String, type: String)
 }

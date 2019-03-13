@@ -10,21 +10,22 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 
-class PersonalIdListAdapter (val context: Context, private val titleText: ArrayList<ResDashboard.PersonalIdType>, private val dialogOBJ: Dialog) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PersonalIdListAdapter (val context: Context, private val listIdType: ArrayList<ResDashboard.PersonalIdType>, private val dialogOBJ: Dialog,private val callBack: ICallBackClickPersonalId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
-        viewHolder.titleText.text = titleText[position].name
+        viewHolder.titleText.text = listIdType[position].name
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()
-           // callBack.onClickIdType(position,titleText[position])
+            callBack.onSelectIdType(listIdType[position].id,listIdType[position].name,listIdType[position].type)
         }
 
     }
 
-    override fun getItemCount(): Int = titleText.size
+    override fun getItemCount(): Int = listIdType.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
