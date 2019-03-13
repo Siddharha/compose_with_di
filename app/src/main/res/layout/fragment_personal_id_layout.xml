@@ -37,13 +37,13 @@
                 android:text="@string/profile_image"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_11sdp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView7"
+                app:layout_constraintBottom_toTopOf="@+id/imgProfile"
                 app:layout_constraintEnd_toStartOf="@+id/ilIdNumber"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/imageView7"
+            <ImageView
+                android:id="@+id/imgProfile"
                 android:contentDescription="@string/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
