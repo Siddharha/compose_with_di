@@ -2,9 +2,11 @@ package com.app.l_pesa.profile.view
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat.finishAffinity
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.model.ResUserInfo
@@ -27,12 +30,16 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
+import com.app.l_pesa.profile.inter.ICallBackAddProof
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.model.ModelWindowPopUp
+import com.app.l_pesa.profile.presenter.PresenterAddProof
+import com.google.gson.JsonObject
 import java.util.ArrayList
 
 
-class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
+class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAddProof {
+
 
 
     private var filterPopup : PopupWindow? = null
@@ -92,8 +99,16 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
 
+                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                     swipeRefreshLayout.isRefreshing=true
                     buttonSubmit.isClickable=false
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("id_image","")
+                    jsonObject.addProperty("id_type",personalIdType)
+                    jsonObject.addProperty("id_number",etIdNumber.text.toString())
+                    jsonObject.addProperty("type_name",personalIdName)
+                    val presenterAddProof= PresenterAddProof()
+                    presenterAddProof.doAddProof(activity!!,jsonObject,this)
                 }
                 else
                 {
@@ -232,6 +247,25 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
         })
 
         return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    override fun onSuccessAddProof() {
+
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
+        val sharedPref=SharedPref(activity!!)
+        sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
+        val intent = Intent(activity!!, DashboardActivity::class.java)
+        startActivity(intent)
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        activity?.finishAffinity()
+    }
+
+    override fun onFailureAddProof(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
+        CommonMethod.customSnackBarError(llRoot,activity!!,message)
     }
 
 

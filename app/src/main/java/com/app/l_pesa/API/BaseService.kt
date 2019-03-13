@@ -86,6 +86,9 @@ interface BaseService{
     @POST("loan/apply")
     fun doLoanApply(@Body request: JsonObject): Observable<ResLoanApply>
 
+    @POST("user/add_proof")
+    fun doAddProof(@Body request: JsonObject): Observable<ResAddProof>
+
 }
 
 
