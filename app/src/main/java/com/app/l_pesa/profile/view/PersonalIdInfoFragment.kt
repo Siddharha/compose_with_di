@@ -311,6 +311,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         swipeRefreshLayout.isRefreshing=false
         listPersonalId!!.removeAt(position)
         personalIdAdapter!!.notifyDataSetChanged()
+        val sharedPrefOBJ= SharedPref(activity!!)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
     }
 
     override fun onFailureDeleteProof(message: String) {
