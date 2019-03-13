@@ -90,7 +90,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
             }
-            else if(TextUtils.isEmpty(etIdNumber.text.toString()))
+            else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString()))
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
             }
@@ -108,7 +108,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
                     jsonObject.addProperty("id_type",personalId.toString())
                     if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
                     {
-                        jsonObject.addProperty("id_number","null")
+                        jsonObject.addProperty("id_number","")
                     }
                     else
                     {
@@ -197,15 +197,20 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
                 if(name==resources.getString(R.string.address_prof))
                 {
                     ilIdNumber.visibility=View.INVISIBLE
+                    personalIdName=name
+                    etPersonalId.setText(personalIdName)
+                    personalIdType=type
+                    personalId=id
                 }
                 else
                 {
                     ilIdNumber.visibility=View.VISIBLE
                     etPersonalId.setText(personalIdName)
+                    personalIdName=name
+                    personalIdType=type
+                    personalId=id
                 }
-                personalIdType=type
-                personalIdName=name
-                personalId=id
+
 
             }
         }
