@@ -37,17 +37,6 @@
         <item name="boxStrokeWidth">@dimen/_2sdp</item>
     </style>
 
-    <style name="Animations" />
-
-    <!-- PopDownMenu -->
-    <style name="Animations.PopDownMenu" />
-
-
-
-    <style name="Animations.PopDownMenu.Left">
-        <item name="android:windowEnterAnimation">@anim/grow_from_topleft_to_bottomright</item>
-        <item name="android:windowExitAnimation">@anim/shrink_from_bottomright_to_topleft</item>
-    </style>
 
 
 

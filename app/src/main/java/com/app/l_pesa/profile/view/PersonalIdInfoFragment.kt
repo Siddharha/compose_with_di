@@ -8,11 +8,13 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
@@ -62,6 +64,32 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
             personalIdAdapter                 = PersonalIdAdapter(activity!!,listPersonalId!!,this)
             rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
             rvPersonalId.adapter              = personalIdAdapter
+        }
+
+        buttonSubmit.setOnClickListener {
+
+
+            if(TextUtils.isEmpty(etIdNumber.text.toString()))
+            {
+                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
+            }
+            else
+            {
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                }
+            }
+        }
+
+        buttonCancel.setOnClickListener {
+
+            activity!!.onBackPressed()
+            activity!!.overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
 
@@ -121,6 +149,10 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
                 {
                     listPersonalId!!.removeAt(filterposition)
                     personalIdAdapter!!.notifyDataSetChanged()
+                }
+                else
+                {
+                    // View File
                 }
 
                 dismissPopup()
