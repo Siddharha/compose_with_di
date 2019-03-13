@@ -71,10 +71,16 @@
                 app:layout_constraintStart_toEndOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="parent">
                 <com.app.l_pesa.common.CommonEditTextRegular
+                    android:id="@+id/etPersonalId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/montserrat"
-                    android:hint="@string/personal_id_type" />
+                    android:textSize="@dimen/_12sdp"
+                    android:longClickable="false"
+                    app:autoSizeStepGranularity="0.2sp"
+                    app:autoSizeTextType="uniform"
+                    android:textColorHint="@color/colorGreyDeep"
+                    android:drawableEnd="@drawable/ic_dropdown"/>
             </com.app.l_pesa.common.CommonInputLayout>
 
             <com.app.l_pesa.common.CommonInputLayout
@@ -97,6 +103,7 @@
                     android:maxLines="1"
                     android:inputType="text|textNoSuggestions"
                     android:maxLength="15"
+                    android:textSize="@dimen/_12sdp"
                     />
             </com.app.l_pesa.common.CommonInputLayout>
 

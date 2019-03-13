@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -90,6 +91,12 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId {
 
             activity!!.onBackPressed()
             activity!!.overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
+
+        etPersonalId.isFocusable=false
+        etPersonalId.setOnClickListener {
+
+            Toast.makeText(activity,"",Toast.LENGTH_SHORT).show()
         }
 
 
