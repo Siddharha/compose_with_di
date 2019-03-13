@@ -278,6 +278,7 @@
     <string name="personal_id_information">Personal Id Information</string>
     <string name="business_id_information">Business Id Information</string>
     <string name="profile_image">Profile Image*</string>
+    <string name="required_profile_image">Required profile image</string>
     <string name="personal_id_type">Personal ID Type*</string>
     <string name="edit_id_number">ID Number*</string>
     <string name="view_file">View File</string>

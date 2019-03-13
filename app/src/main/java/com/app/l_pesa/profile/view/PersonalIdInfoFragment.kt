@@ -106,7 +106,11 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         buttonSubmit.setOnClickListener {
 
-            if(personalId==0)
+            if(!imageSelectStatus)
+            {
+                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_profile_image))
+            }
+            else if(personalId==0)
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)

@@ -7,7 +7,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="CMakeSettings">
@@ -17,15 +17,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dcb9a0f-2251-4036-b270-e9f0e752bc92" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal_id_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal_id_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/sessions/kotlin-compiler-3429498017892402751.salive" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -70,19 +62,19 @@
           <entry key="dummy" value="2" />
           <entry key="gradle" value="27" />
           <entry key="java" value="105" />
-          <entry key="kt" value="8153" />
+          <entry key="kt" value="8176" />
           <entry key="pro" value="2" />
-          <entry key="xml" value="6112" />
+          <entry key="xml" value="6136" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="27" />
           <entry key="JAVA" value="105" />
-          <entry key="Kotlin" value="8153" />
+          <entry key="Kotlin" value="8176" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="ProGuard File" value="2" />
-          <entry key="XML" value="6112" />
+          <entry key="XML" value="6136" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -102,11 +94,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="373" column="34" selection-start-line="373" selection-start-column="34" selection-end-line="373" selection-end-column="34" />
+            <state relative-caret-position="236">
+              <caret line="110" column="109" selection-start-line="110" selection-start-column="109" selection-end-line="110" selection-end-column="109" />
               <folding>
                 <element signature="e#37#2232#0" expanded="true" />
               </folding>
@@ -114,14 +106,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_personal_id_layout.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="282">
+              <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
               <folding>
                 <element signature="e#2076#2091#0" expanded="true" />
                 <element signature="e#2130#2145#0" expanded="true" />
+                <element signature="e#2190#2205#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3189,8 +3182,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_id_information.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/PersonalIdAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_personal_id_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" />
       </list>
     </option>
   </component>
@@ -3560,6 +3553,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6258503" visible="true" weight="0.2257886" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
@@ -3577,7 +3571,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Logcat" order="7" weight="0.53081083" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.36432433" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.36432433" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32972974" />
       <window_info anchor="bottom" id="Build" order="11" weight="0.32864866" />
@@ -3591,7 +3585,7 @@
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info active="true" anchor="right" id="Preview" order="8" visible="true" weight="0.28610957" />
+      <window_info anchor="right" id="Preview" order="8" weight="0.25069174" />
     </layout>
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -4026,27 +4020,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_personal_id_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="50" column="46" selection-start-line="50" selection-start-column="46" selection-end-line="50" selection-end-column="46" />
+          <folding>
+            <element signature="e#2076#2091#0" expanded="true" />
+            <element signature="e#2130#2145#0" expanded="true" />
+            <element signature="e#2190#2205#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="373" column="34" selection-start-line="373" selection-start-column="34" selection-end-line="373" selection-end-column="34" />
+        <state relative-caret-position="236">
+          <caret line="110" column="109" selection-start-line="110" selection-start-column="109" selection-end-line="110" selection-end-column="109" />
           <folding>
             <element signature="e#37#2232#0" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_personal_id_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="e#2076#2091#0" expanded="true" />
-            <element signature="e#2130#2145#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
   </component>
   <component name="masterDetails">
