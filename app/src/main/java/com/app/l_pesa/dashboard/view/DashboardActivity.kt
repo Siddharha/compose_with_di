@@ -76,7 +76,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun initMenu()
     {
         nav_view.itemIconTintList = null
-        nav_view.setCheckedItem(R.id.action_dashboard)
+        val sharedPref=SharedPref(this@DashboardActivity)
+
+        when {
+            sharedPref.navigationTab==resources.getString(R.string.open_tab_loan) -> nav_view.setCheckedItem(R.id.action_loan)
+            sharedPref.navigationTab==resources.getString(R.string.open_tab_profile) -> nav_view.setCheckedItem(R.id.action_profile)
+            else -> nav_view.setCheckedItem(R.id.action_dashboard)
+        }
+
         nav_view.bringToFront()
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -98,18 +105,19 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
 
-
     private fun initFragment()
     {
         val sharedPref=SharedPref(this@DashboardActivity)
-        if(sharedPref.navigationTab==resources.getString(R.string.open_tab_loan))
-        {
-            navigateToFragment(LoanPlansFragment.newInstance(),true)
-            sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
-        }
-        else
-        {
-            navigateToFragment(DashboardFragment.newInstance(),false)
+        when {
+            sharedPref.navigationTab==resources.getString(R.string.open_tab_loan) -> {
+                navigateToFragment(LoanPlansFragment.newInstance(),true)
+                sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
+            }
+            sharedPref.navigationTab==resources.getString(R.string.open_tab_profile) -> {
+                navigateToFragment(ProfileFragment.newInstance(),false)
+                sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
+            }
+            else -> navigateToFragment(DashboardFragment.newInstance(),false)
         }
 
 
@@ -248,9 +256,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_lpk-> {
                 toolbar.title =resources.getString(R.string.nav_item_lpk)
-                //navigateToFragment(LpkFragment.newInstance())
-                //navigateToFragment(TokenWithdrawalFragment.newInstance(),false)
-                navigateToFragment(WalletAddressFragment.newInstance(),false)
+               navigateToFragment(WalletAddressFragment.newInstance(),false)
             }
             R.id.action_wallet-> {
                 toolbar.title =resources.getString(R.string.nav_item_wallet)

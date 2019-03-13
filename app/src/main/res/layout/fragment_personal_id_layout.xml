@@ -38,7 +38,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toTopOf="@+id/imageView7"
-                app:layout_constraintEnd_toStartOf="@+id/commonInputLayout1"
+                app:layout_constraintEnd_toStartOf="@+id/ilIdNumber"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,7 +50,7 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:background="?selectableItemBackgroundBorderless"
                 app:layout_constraintBottom_toTopOf="@+id/view3"
-                app:layout_constraintEnd_toStartOf="@+id/commonInputLayout1"
+                app:layout_constraintEnd_toStartOf="@+id/ilIdNumber"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9"
                 app:srcCompat="@drawable/ic_upload_photo" />
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_7sdp"
-                app:layout_constraintBottom_toTopOf="@+id/commonInputLayout1"
+                app:layout_constraintBottom_toTopOf="@+id/ilIdNumber"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
                 app:layout_constraintTop_toTopOf="parent">
@@ -93,7 +93,7 @@
             </com.app.l_pesa.common.CommonInputLayout>
 
             <com.app.l_pesa.common.CommonInputLayout
-                android:id="@+id/commonInputLayout1"
+                android:id="@+id/ilIdNumber"
                 style="@style/customInputLayoutStyle"
                 android:layout_width="@dimen/_165sdp"
                 android:layout_height="wrap_content"

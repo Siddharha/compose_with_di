@@ -102,11 +102,21 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
                     swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                     swipeRefreshLayout.isRefreshing=true
                     buttonSubmit.isClickable=false
+
                     val jsonObject = JsonObject()
-                    jsonObject.addProperty("id_image","")
-                    jsonObject.addProperty("id_type",personalIdType)
-                    jsonObject.addProperty("id_number",etIdNumber.text.toString())
-                    jsonObject.addProperty("type_name",personalIdName)
+                    jsonObject.addProperty("id_image","per_new_138308_7397641a67801aad9fe694c4cfd3c48a.jpg") // Static
+                    jsonObject.addProperty("id_type",personalId.toString())
+                    if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
+                    {
+                        jsonObject.addProperty("id_number","null")
+                    }
+                    else
+                    {
+                        jsonObject.addProperty("id_number",etIdNumber.text.toString())
+                    }
+
+                    jsonObject.addProperty("type_name","Personal")
+
                     val presenterAddProof= PresenterAddProof()
                     presenterAddProof.doAddProof(activity!!,jsonObject,this)
                 }
@@ -184,10 +194,19 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
             }
             else
             {
+                if(name==resources.getString(R.string.address_prof))
+                {
+                    ilIdNumber.visibility=View.INVISIBLE
+                }
+                else
+                {
+                    ilIdNumber.visibility=View.VISIBLE
+                    etPersonalId.setText(personalIdName)
+                }
                 personalIdType=type
                 personalIdName=name
                 personalId=id
-                etPersonalId.setText(personalIdName)
+
             }
         }
     }
@@ -254,7 +273,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackAd
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true
         val sharedPref=SharedPref(activity!!)
-        sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
+        sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
         val intent = Intent(activity!!, DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
