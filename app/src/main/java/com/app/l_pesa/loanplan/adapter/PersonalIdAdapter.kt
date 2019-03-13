@@ -35,14 +35,15 @@ class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: A
             viewHolder.imgVerifiedStatus.visibility=View.INVISIBLE
         }
 
-        if(userIdsPersonalInfo[position].typeName=="" && userIdsPersonalInfo[position].idTypeUnique=="")
+        if(userIdsPersonalInfo[position].typeName=="Personal" && userIdsPersonalInfo[position].idTypeUnique=="Identity Proof")
         {
 
-            viewHolder.txtIdNumber.visibility=View.INVISIBLE
+            viewHolder.txtIdNumber.visibility=View.VISIBLE
+            viewHolder.txtIdNumber.text=context.resources.getString(R.string.id_number)+" "+userIdsPersonalInfo[position].idNumber
         }
         else
         {
-
+            viewHolder.txtIdNumber.visibility=View.GONE
         }
 
         viewHolder.imgEdit.setOnClickListener {
