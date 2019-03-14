@@ -386,7 +386,6 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:contentDescription="@string/app_name"
-                            app:layout_constraintBottom_toTopOf="@+id/imageView3"
                             app:layout_constraintRight_toLeftOf="@+id/txtPhone"
                             app:layout_constraintStart_toEndOf="@+id/imgProfile"
                             app:layout_constraintTop_toTopOf="@+id/imgProfile"
@@ -406,18 +405,46 @@
                             app:layout_constraintStart_toEndOf="@id/imageView2"
                             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
+
+                        <ImageView
+                            android:id="@+id/imageView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtEmail"
+                            android:contentDescription="@string/app_name"
+                            app:layout_constraintStart_toEndOf="@+id/imgProfile"
+                            app:layout_constraintTop_toTopOf="@+id/txtEmail"
+                            app:srcCompat="@drawable/ic_mail_icon" />
+
+                        <com.app.l_pesa.common.CommonTextRegular
+                            android:id="@+id/txtEmail"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            app:layout_constraintTop_toBottomOf="@+id/txtPhone"
+                            android:fontFamily="@font/montserrat"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textColor="@color/textColors"
+                            android:textSize="@dimen/_12sdp"
+                            app:layout_constraintBottom_toTopOf="@+id/txtCreditScore"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView17" />
+
+
                         <ImageView
                             android:id="@+id/imageView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:contentDescription="@string/app_name"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
-                            android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
                             app:layout_constraintRight_toLeftOf="@+id/txtCreditScore"
                             app:layout_constraintStart_toEndOf="@+id/imgProfile"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView17"
                             app:srcCompat="@drawable/ic_credit_score_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -425,7 +452,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/credit_score"
@@ -723,7 +750,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toTopOf="@+id/imageView14"
                             app:layout_constraintLeft_toRightOf="@+id/imgID"
@@ -749,7 +776,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_6sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toBottomOf="@+id/imgID"
@@ -835,6 +862,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:contentDescription="@string/app_name"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtAddress"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/txtAddress"
                             app:layout_constraintVertical_chainStyle="spread"
@@ -850,38 +878,12 @@
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toTopOf="@+id/txtEmail"
+                            app:layout_constraintBottom_toTopOf="@+id/txtContact"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/imageView16"
                             app:layout_constraintTop_toBottomOf="@+id/view9" />
 
-                        <ImageView
-                            android:id="@+id/imageView17"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:contentDescription="@string/app_name"
-                            app:layout_constraintBottom_toBottomOf="@+id/txtEmail"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/txtEmail"
-                            app:srcCompat="@drawable/ic_mail_icon" />
-
-                        <com.app.l_pesa.common.CommonTextRegular
-                            android:id="@+id/txtEmail"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:fontFamily="@font/montserrat"
-                            android:textColor="@color/textColors"
-                            android:textSize="@dimen/_12sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            app:layout_constraintBottom_toTopOf="@+id/txtContact"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/imageView17"
-                            app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
 
                         <ImageView
                             android:id="@+id/imageView19"
@@ -900,7 +902,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
@@ -909,7 +911,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/imageView19"
-                            app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+                            app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
 
                     </android.support.constraint.ConstraintLayout>
 

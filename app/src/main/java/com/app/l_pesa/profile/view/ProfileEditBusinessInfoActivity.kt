@@ -35,7 +35,7 @@ import java.util.HashMap
 
 class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallBackBusinessInfo, ICallBackLogin {
 
-    var idType=""
+    private var idType=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

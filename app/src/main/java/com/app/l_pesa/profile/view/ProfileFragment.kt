@@ -221,6 +221,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
 
         }
+        if(!TextUtils.isEmpty(data.userPersonalInfo!!.emailAddress))
+        {
+            txtEmail.text=data.userPersonalInfo!!.emailAddress
+        }
 
         txtPhone.text = data.userInfo!!.phoneNumber
         txtCreditScore.text = resources.getString(R.string.credit_score)+" "+data.userInfo!!.creditScore
@@ -255,10 +259,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             txtAddress.text=data.userContactInfo!!.streetAddress+", "+data.userContactInfo!!.city+"- "+data.userContactInfo!!.postalAddress
         }
 
-        if(!TextUtils.isEmpty(data.userPersonalInfo!!.emailAddress))
-        {
-            txtEmail.text=data.userPersonalInfo!!.emailAddress
-        }
 
         if(!TextUtils.isEmpty(data.userContactInfo!!.phoneNumber))
         {
