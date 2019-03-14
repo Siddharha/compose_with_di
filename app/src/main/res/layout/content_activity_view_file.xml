@@ -13,7 +13,7 @@
         android:id="@+id/imgFile"
         android:contentDescription="@string/app_name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_height="@dimen/_250sdp"
         />
 
 </RelativeLayout>

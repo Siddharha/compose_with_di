@@ -73,8 +73,10 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var captureFile: File?  = null
     private var imageFilePath       = ""
     private var imageSelectStatus   : Boolean = false
+    private var idTypeExists        = "FALSE"
+    private var imgFileAddress      = ""
 
-    companion object {
+   companion object {
         fun newInstance(): Fragment {
             return PersonalIdInfoFragment()
         }
@@ -94,7 +96,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun initData()
     {
-        listPersonalId= ArrayList()
+        listPersonalId = ArrayList()
         val sharedPrefOBJ= SharedPref(activity!!)
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
         listPersonalId!!.clear()
@@ -131,8 +133,18 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     swipeRefreshLayout.isRefreshing=true
                     buttonSubmit.isClickable=false
 
-                    val presenterAWSPersonalId= PresenterAWSPersonalId()
-                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,captureFile)
+                    /*if(idTypeExists=="TRUE")
+                    {*/
+                        val presenterAWSPersonalId= PresenterAWSPersonalId()
+                       // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
+                        presenterAWSPersonalId.uploadPersonalId(activity!!,this,captureFile)
+                    /*}
+                    else
+                    {
+                        val presenterAWSPersonalId= PresenterAWSPersonalId()
+                        presenterAWSPersonalId.uploadPersonalId(activity!!,this,captureFile)
+                    }*/
+
 
                 }
                 else
@@ -177,6 +189,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
 
     }
+
+
 
     override fun onSuccessUploadAWS(url: String) {
 
@@ -254,12 +268,25 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
             if(profileInfo.userIdsPersonalInfo!![i].verified==1 && profileInfo.userIdsPersonalInfo!![i].idTypeName==name)
             {
-              Toast.makeText(activity, "Your $name is already verified",Toast.LENGTH_SHORT).show()
+              Toast.makeText(activity, "Your $name already verified",Toast.LENGTH_SHORT).show()
               break
 
             }
             else
             {
+/*
+                if (profileInfo.userIdsPersonalInfo!![i].idTypeName == personalIdName)
+                {
+                    idTypeExists="TRUE"
+                    imgFileAddress=profileInfo.userIdsPersonalInfo!![i].fileName
+                    break
+                }
+                else
+                {
+                    idTypeExists="FALSE"
+                }*/
+
+
                 if(name==resources.getString(R.string.address_prof))
                 {
                     ilIdNumber.visibility=View.INVISIBLE
@@ -267,6 +294,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     etPersonalId.setText(personalIdName)
                     personalIdType=type
                     personalId=id
+
                 }
                 else
                 {

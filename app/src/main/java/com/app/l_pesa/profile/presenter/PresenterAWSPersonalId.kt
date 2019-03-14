@@ -1,7 +1,6 @@
 package com.app.l_pesa.profile.presenter
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.amazonaws.auth.CognitoCachingCredentialsProvider
 import com.amazonaws.mobile.client.AWSMobileClient
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
@@ -18,7 +17,8 @@ import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
 import java.io.File
-
+import com.amazonaws.AmazonServiceException
+import com.amazonaws.services.s3.model.DeleteObjectRequest
 
 
 class PresenterAWSPersonalId {
@@ -82,5 +82,32 @@ class PresenterAWSPersonalId {
             }
 
         })
+    }
+
+
+    fun deletePersonalAWS(ctxOBJ: Context, fileName: String)
+    {
+
+        try {
+            val cachingCredentialsProvider = CognitoCachingCredentialsProvider(
+                    ctxOBJ,
+                    BuildConfig.AWS_PULL, // Identity Pool ID
+                    Regions.EU_CENTRAL_1
+            )
+
+            s3Client    = AmazonS3Client(cachingCredentialsProvider)
+
+            s3Client!!.deleteObject(DeleteObjectRequest(BuildConfig.AWS_BUCKET+"/uploads/business",fileName))
+        } catch (e: AmazonServiceException) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace()
+        } catch (e: Exception) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace()
+        }
+
+
     }
 }
