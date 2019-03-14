@@ -42,7 +42,7 @@ class AdapterPopupWindow(val context: Context) : RecyclerView.Adapter<AdapterPop
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder {
-        val view = LayoutInflater.from(p0.context).inflate(R.layout.action_item_vertical,p0,false)
+        val view = LayoutInflater.from(p0.context).inflate(R.layout.layout_popup_window,p0,false)
         return MyViewHolder(view)
     }
 

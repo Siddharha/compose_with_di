@@ -61,7 +61,7 @@
             android:fontFamily="@font/montserrat"
             android:text="@string/id_type"
             android:textColor="@color/colorSemiBlack"
-            android:textSize="@dimen/_13sdp"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/txtIdNumber"
             app:layout_constraintEnd_toStartOf="@+id/imgVerifiedStatus"
             app:layout_constraintHorizontal_bias="0.5"

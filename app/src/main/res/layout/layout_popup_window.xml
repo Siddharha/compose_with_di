@@ -12,8 +12,6 @@
         android:contentDescription="@string/app_name"
         android:layout_width="@dimen/_22sdp"
         android:layout_height="@dimen/_22sdp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,20 +23,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:textStyle="bold"
-        android:textSize="@dimen/_15sdp"
+        android:fontFamily="@font/montserrat"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="@+id/alert_filter_icon"
         app:layout_constraintStart_toEndOf="@+id/alert_filter_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/alert_filter_selected"
-        android:contentDescription="@string/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintStart_toEndOf="@+id/alert_filter_name"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
