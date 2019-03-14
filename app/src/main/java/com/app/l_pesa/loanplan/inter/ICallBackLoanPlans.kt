@@ -15,4 +15,5 @@ interface ICallBackLoanPlans {
     fun onEmptyLoanPlans()
     fun onFailureLoanPlans(jsonMessage: String)
     fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?)
+    fun onSuccessLoanHistory()
 }

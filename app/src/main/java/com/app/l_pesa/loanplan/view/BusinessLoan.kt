@@ -24,6 +24,7 @@ import java.util.ArrayList
 class BusinessLoan:Fragment(), ICallBackLoanPlans {
 
 
+
     companion object {
         fun newInstance(): Fragment {
             return BusinessLoan()
@@ -80,6 +81,10 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
     }
 
     override fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?) {
+
+    }
+
+    override fun onSuccessLoanHistory() {
 
     }
 }

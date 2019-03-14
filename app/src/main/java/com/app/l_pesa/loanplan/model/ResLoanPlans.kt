@@ -119,6 +119,12 @@ class ResLoanPlans {
         @SerializedName("lost_date")
         @Expose
         var lostDate: String = ""
+        @SerializedName("sanctioned_date")
+        @Expose
+        var sanctionedDate: String = ""
+        @SerializedName("due_date")
+        @Expose
+        var dueDate: String = ""
 
     }
 

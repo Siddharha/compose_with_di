@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.CurrentLoanPlanAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
@@ -25,6 +26,7 @@ import java.util.ArrayList
  * Kindly follow https://source.android.com/setup/code-style
  */
 class CurrentLoan:Fragment(), ICallBackLoanPlans {
+
 
 
     companion object {
@@ -91,6 +93,15 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
         val globalLoanPlanModel= GlobalLoanPlanModel.getInstance()
         globalLoanPlanModel.modelData=details
         startActivity(Intent(activity, LoanPlanDetailsActivity::class.java))
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+    }
+
+    override fun onSuccessLoanHistory() {
+        val bundle = Bundle()
+        bundle.putString("LOAN_TYPE","current_loan")
+        val intent = Intent(activity, LoanHistoryDetailsActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent,bundle)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 }
