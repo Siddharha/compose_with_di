@@ -10,20 +10,20 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.loanHistory.adapter.CurrentLoanHistoryAdapter
-import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
-import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
+import com.app.l_pesa.loanHistory.adapter.BusinessLoanHistoryAdapter
+import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
 
-class BusinessLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
+class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
 
-    private var listLoanHistoryCurrent          : ArrayList<ResLoanHistoryCurrent.LoanHistory>? = null
-    private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
+    private var listLoanHistoryBusiness         : ArrayList<ResLoanHistoryBusiness.LoanHistory>? = null
+    private lateinit var adapterLoanHistory     : BusinessLoanHistoryAdapter
 
     private var hasNext=false
     private var after=""
@@ -48,15 +48,15 @@ class BusinessLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
     private fun loadHistory()
     {
-        listLoanHistoryCurrent      = ArrayList()
-        adapterLoanHistory   = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
+        listLoanHistoryBusiness      = ArrayList()
+        adapterLoanHistory           = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
             val jsonObject = JsonObject()
-            jsonObject.addProperty("loan_type","current_loan")
+            jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,"",this)
+            presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,"",this)
 
         }
 
@@ -73,7 +73,7 @@ class BusinessLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         }
     }
 
-    override fun onSuccessLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors, user_credit_score: Int) {
+    override fun onSuccessLoanHistory(loan_historyBusiness: ArrayList<ResLoanHistoryBusiness.LoanHistory>, cursors: ResLoanHistoryBusiness.Cursors, user_credit_score: Int) {
 
         activity!!.runOnUiThread {
             hasNext =cursors.hasNext
@@ -81,15 +81,15 @@ class BusinessLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
             swipeRefreshLayout.isRefreshing = false
             val shared=SharedPref(activity!!)
             shared.userCreditScore=user_credit_score.toString()
-            listLoanHistoryCurrent!!.clear()
-            listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
-            adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
+            listLoanHistoryBusiness!!.clear()
+            listLoanHistoryBusiness!!.addAll(loan_historyBusiness)
+            adapterLoanHistory          = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterLoanHistory
 
-            adapterLoanHistory.setLoadMoreListener(object : CurrentLoanHistoryAdapter.OnLoadMoreListener {
+            adapterLoanHistory.setLoadMoreListener(object : BusinessLoanHistoryAdapter.OnLoadMoreListener {
                 override fun onLoadMore() {
 
                     rvLoan.post {
@@ -109,18 +109,18 @@ class BusinessLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
     }
 
-    override fun onSuccessPaginateLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors) {
+    override fun onSuccessPaginateLoanHistory(loan_historyBusiness: ArrayList<ResLoanHistoryBusiness.LoanHistory>, cursors: ResLoanHistoryBusiness.Cursors) {
 
         hasNext =cursors.hasNext
         after   =cursors.after
-        if(listLoanHistoryCurrent!!.size!=0)
+        if(listLoanHistoryBusiness!!.size!=0)
         {
             try {
 
-                listLoanHistoryCurrent!!.removeAt(listLoanHistoryCurrent!!.size - 1)
+                listLoanHistoryBusiness!!.removeAt(listLoanHistoryBusiness!!.size - 1)
                 adapterLoanHistory.notifyDataChanged()
-                listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
-                adapterLoanHistory.notifyItemRangeInserted(0, listLoanHistoryCurrent!!.size)
+                listLoanHistoryBusiness!!.addAll(loan_historyBusiness)
+                adapterLoanHistory.notifyItemRangeInserted(0, listLoanHistoryBusiness!!.size)
 
             }
             catch (e:Exception)
@@ -153,17 +153,17 @@ class BusinessLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            val loanStatusModel  = ResLoanHistoryCurrent.LoanHistory(0,"",0,"",
+            val loanStatusModel  = ResLoanHistoryBusiness.LoanHistory(0,"",0,"",
                     "","","",
                     "","","","","",
                     "","","","","","","","","","")
 
-            listLoanHistoryCurrent!!.add(loanStatusModel)
-            adapterLoanHistory.notifyItemInserted(listLoanHistoryCurrent!!.size-1)
+            listLoanHistoryBusiness!!.add(loanStatusModel)
+            adapterLoanHistory.notifyItemInserted(listLoanHistoryBusiness!!.size-1)
             val jsonObject = JsonObject()
-            jsonObject.addProperty("loan_type","current_loan")
+            jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryPaginate(activity!!,jsonObject,after,this)
+            presenterLoanHistory.getLoanHistoryPaginateBusiness(activity!!,jsonObject,after,this)
 
         }
 
@@ -171,7 +171,7 @@ class BusinessLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
     override fun onClickList() {
         val bundle = Bundle()
-        bundle.putString("LOAN_TYPE","current_loan")
+        bundle.putString("LOAN_TYPE","business_loan")
         val intent = Intent(activity, LoanHistoryDetailsActivity::class.java)
         intent.putExtras(bundle)
         startActivity(intent,bundle)

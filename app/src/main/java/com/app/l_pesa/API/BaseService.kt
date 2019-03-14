@@ -4,6 +4,7 @@ package com.app.l_pesa.API
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.model.ResInvestmentPlan
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
@@ -61,6 +62,9 @@ interface BaseService{
 
     @POST("loan/history")
     fun doLoanHistory(@Body request: JsonObject, @Query("cursors") cursors:String ): Observable<ResLoanHistoryCurrent>
+
+    @POST("loan/history")
+    fun doLoanHistoryBusiness(@Body request: JsonObject, @Query("cursors") cursors:String ): Observable<ResLoanHistoryBusiness>
 
     @POST("loan/paybackschedule")
     fun doPaybackSchedule(@Body request: JsonObject): Observable<ResPaybackSchedule>

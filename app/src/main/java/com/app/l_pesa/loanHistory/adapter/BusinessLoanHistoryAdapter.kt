@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
-import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
+import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.GlobalBusinessLoanHistoryModel
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import kotlinx.android.synthetic.main.layout_loan_history.view.*
 
-class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryBusiness.LoanHistory>, private val callBackCurrent: ICallBackCurrentLoanHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryBusiness.LoanHistory>, private val callBackBusiness: ICallBackBusinessLoanHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
@@ -40,7 +40,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
         }
 
         if (getItemViewType(position) == 0) {
-            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackCurrent)
+            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackBusiness)
 
         }
     }
@@ -77,7 +77,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
-        fun  bindData(context: Context, loanHistoryBusiness: ResLoanHistoryBusiness.LoanHistory, callBackCurrent: ICallBackCurrentLoanHistory)
+        fun  bindData(context: Context, loanHistoryBusiness: ResLoanHistoryBusiness.LoanHistory, callBackCurrent: ICallBackBusinessLoanHistory)
         {
 
             itemView.txt_loan_no.text=loanHistoryBusiness.identity_number
