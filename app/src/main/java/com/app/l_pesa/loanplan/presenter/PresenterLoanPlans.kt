@@ -20,7 +20,7 @@ import retrofit2.HttpException
  */
 class PresenterLoanPlans {
 
-    fun getLoanPlans(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLoanPlans)
+    fun doLoanPlans(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLoanPlans)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanList(jsonRequest)

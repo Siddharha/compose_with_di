@@ -58,7 +58,7 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
         val jsonObject = JsonObject()
         jsonObject.addProperty("loan_type","business_loan")
         val presenterLoanPlans= PresenterLoanPlans()
-        presenterLoanPlans.getLoanPlans(activity!!,jsonObject,this)
+        presenterLoanPlans.doLoanPlans(activity!!,jsonObject,this)
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {

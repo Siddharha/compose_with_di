@@ -52,7 +52,7 @@ class CurrentLoan:Fragment(), ICallBackLoanPlans {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanPlans= PresenterLoanPlans()
-            presenterLoanPlans.getLoanPlans(activity!!,jsonObject,this)
+            presenterLoanPlans.doLoanPlans(activity!!,jsonObject,this)
         }
 
     }
