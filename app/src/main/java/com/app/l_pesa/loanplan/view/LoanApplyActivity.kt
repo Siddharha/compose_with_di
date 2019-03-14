@@ -13,6 +13,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
+import android.widget.Button
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -23,9 +24,10 @@ import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.google.gson.JsonObject
-
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
+
+
 
 class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply {
 
@@ -72,12 +74,13 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             }
             else
             {
-                val builder = AlertDialog.Builder(this@LoanApplyActivity)
-                builder.setTitle(resources.getString(R.string.app_name))
-                builder.setMessage(resources.getString(R.string.want_to_apply_loan))
-                builder.setPositiveButton("Yes") { _, _ -> applyLoan(loan_type,product_id) }
+                val alertDialog = AlertDialog.Builder(this@LoanApplyActivity)
+                alertDialog.setTitle(resources.getString(R.string.app_name))
+                alertDialog.setMessage(resources.getString(R.string.want_to_apply_loan))
+                alertDialog.setPositiveButton("Yes") { _, _ -> applyLoan(loan_type,product_id) }
                         .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
-                builder.show()
+                alertDialog.show()
+
 
             }
 
