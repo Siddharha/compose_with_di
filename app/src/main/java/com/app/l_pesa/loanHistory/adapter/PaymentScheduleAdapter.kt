@@ -29,10 +29,6 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
         {
             viewHolder.txtRepayDate.text=al_loadOBJ[position].sDate
         }
-        if(!al_loadOBJ[position].currentBalance.isEmpty())
-        {
-           viewHolder.txtCurrentBalance.text=al_loadOBJ[position].currentBalance
-        }
 
 
         if(!al_loadOBJ[position].paidStatus.isEmpty())
@@ -48,7 +44,7 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
 
             else
             {
-                if (al_loadOBJ[position].canPay)
+                /*if (al_loadOBJ[position].canPay)
                 {
                     viewHolder.llPaid.visibility            =   View.GONE
                     viewHolder.llPaid.visibility            =   View.VISIBLE
@@ -59,7 +55,7 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
                     viewHolder.llPaid.visibility                =   View.GONE
                     viewHolder.llPaid.visibility                =   View.VISIBLE
                     viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_grey)
-                }
+                }*/
             }
 
 

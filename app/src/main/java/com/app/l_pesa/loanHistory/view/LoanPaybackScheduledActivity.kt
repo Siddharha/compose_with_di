@@ -65,6 +65,8 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
 
+        println("JSON"+jsonObject)
+
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)
     }
@@ -72,12 +74,12 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     override fun onSuccessPaybackSchedule(data: ResPaybackSchedule.Data) {
 
         swipeRefreshLayout.isRefreshing = false
-        txt_total_payback.text = data.loanInfo.totalPayback
+        txt_total_payback.text = data.loanInfo!!.totalPayback
 
-        if(data.paybackSchedule.size>0)
+        if(data.paybackSchedule!!.size>0)
         {
 
-            val adapterPaymentSchedule         = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.paybackSchedule)
+            val adapterPaymentSchedule         = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.paybackSchedule!!)
             rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, LinearLayoutManager.VERTICAL, false)
             rlPayback.adapter                  = adapterPaymentSchedule
         }

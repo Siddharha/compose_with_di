@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-        android:layout_height="@dimen/_82sdp"
-        android:layout_margin="@dimen/_4sdp"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_95sdp"
+        android:layout_margin="@dimen/_3sdp"
         android:elevation="@dimen/_1sdp"
         android:background="@drawable/bg_white_view"
         android:orientation="horizontal"
@@ -296,7 +296,7 @@
 
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_paid_date"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_12sdp"
                         android:textColor="@color/color_semi_deep_black"

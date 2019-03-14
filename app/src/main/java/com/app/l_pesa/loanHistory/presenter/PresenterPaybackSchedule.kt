@@ -28,15 +28,15 @@ class PresenterPaybackSchedule {
                     try
                     {
 
-                        if(response.status.isSuccess)
+                        if(response.status!!.isSuccess)
                         {
 
-                           callBackOBJ.onSuccessPaybackSchedule(response.data)
+                           callBackOBJ.onSuccessPaybackSchedule(response.data!!)
 
                         }
                         else
                         {
-                            callBackOBJ.onErrorPaybackSchedule(response.status.message)
+                            callBackOBJ.onErrorPaybackSchedule(response.status!!.message)
                         }
 
                     }
