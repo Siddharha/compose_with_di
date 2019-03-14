@@ -38,7 +38,8 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
 
         txt_loan_product_price.text = "$"+globalLoanPlanModel!!.loanAmount.toString()
         txt_interest_rate.text = globalLoanPlanModel.loanInterestRate.toString()+"%"
-        txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+"</font>")
+        txt_required_credit_score.text = fromHtml(resources.getString(R.string.required_credit_score)+"<font color='#333333'>"+ globalLoanPlanModel.requiredCreditScore.toString()+"</font>")
+        txt_currency_conversion_rate.text = fromHtml("<font color='#333333'>"+ globalLoanPlanModel.currencyCode+globalLoanPlanModel.convertionDollarValue+"</font>")
         txt_credit_score.text = fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+sharedPref.userCreditScore+"</font>")
         txt_loan_amount_value.text = globalLoanPlanModel.currencyCode
         txt_loan_status.text = globalLoanPlanModel.btnText

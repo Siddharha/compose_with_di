@@ -422,6 +422,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:maxLines="1"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             app:layout_constraintTop_toBottomOf="@+id/txtPhone"
                             android:fontFamily="@font/montserrat"
@@ -911,7 +912,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/imageView19"
-                            app:layout_constraintTop_toBottomOf="@+id/txtAddress" />
+                            app:layout_constraintTop_toBottomOf="@+id/txtAddress"
+                            tools:ignore="TooManyViews" />
 
                     </android.support.constraint.ConstraintLayout>
 

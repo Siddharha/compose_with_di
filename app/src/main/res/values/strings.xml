@@ -187,6 +187,7 @@
     <string name="loan_duration">Loan Duration:</string>
     <string name="approval_date">Approval Date:</string>
     <string name="request_date">Request Date:</string>
+    <string name="required_credit_score">Required Credit Score:</string>
     <string name="previous_credit_score">Previous Credit Score:</string>
     <string name="currency_conversion_rate">Currency Conversion Rate($1):</string>
     <string name="conversion_charge">Conversion Charge(%)</string>
@@ -272,6 +273,7 @@
     <string name="ref_no">Ref. No:</string>
     <string name="maturity_amount">Maturity Amount</string>
     <string name="maturity_on">Maturity On</string>
+    <string name="want_to_apply_loan">You Want to apply this loan?</string>
 
     <!-- ID Information-->
     <string name="id_information">Id Information</string>

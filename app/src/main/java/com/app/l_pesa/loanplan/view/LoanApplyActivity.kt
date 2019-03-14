@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -71,7 +72,23 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             }
             else
             {
-                if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
+                val builder = AlertDialog.Builder(this@LoanApplyActivity)
+                builder.setTitle(resources.getString(R.string.app_name))
+                builder.setMessage(resources.getString(R.string.want_to_apply_loan))
+                builder.setPositiveButton("Yes") { _, _ -> applyLoan(loan_type,product_id) }
+                        .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                builder.show()
+
+            }
+
+        }
+
+
+    }
+
+    private fun applyLoan(loan_type: String?, product_id: String?)
+    {
+        if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
                 {
                     buttonSubmit.isClickable =false
                     swipeRefreshLayout.isRefreshing = true
@@ -89,11 +106,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 {
                     CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.no_internet))
                 }
-            }
-
-        }
-
-
     }
 
     private fun loadDescription()
