@@ -340,6 +340,23 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 else
                 {
                     // View File
+                    if(!TextUtils.isEmpty(userIdsPersonalInfo.fileName))
+                    {
+                        if(CommonMethod.isNetworkAvailable(activity!!))
+                        {
+                            val bundle = Bundle()
+                            bundle.putString("FILE_NAME",userIdsPersonalInfo.fileName)
+                            val intent = Intent(activity, ActivityViewFile::class.java)
+                            intent.putExtras(bundle)
+                            startActivity(intent,bundle)
+                            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                        }
+                        else
+                        {
+                            CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                        }
+
+                    }
                 }
 
                 dismissPopup()
