@@ -290,7 +290,6 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         personalId = id
                     }
 
-
                 }
             }
         }
@@ -303,7 +302,6 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 personalIdType = type
                 personalId = id
             }
-
 
     }
 

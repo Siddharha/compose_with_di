@@ -213,7 +213,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(data.userInfo!!.profileImage)
+                    .load(resources.getString(R.string.profile_image_url)+data.userInfo!!.profileImage)
                     .apply(options)
                     .into(imgProfile)
         }
@@ -264,7 +264,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
             txtContact.text=data.userContactInfo!!.phoneNumber
         }
-
 
 
         /* Employment Info*/
@@ -365,7 +364,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(userIdsPersonalInfo.fileName)
+                    .load(resources.getString(R.string.upload_business_url)+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgID)
 
@@ -396,7 +395,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(userIdsPersonalInfo.fileName)
+                    .load(resources.getString(R.string.profile_image_url)+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgID)
 
