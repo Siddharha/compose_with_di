@@ -355,7 +355,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             val imageFile = createImageFile()
             val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-            val authorities = "com.app.l_pesa.fileprovider"
+            val authorities = "com.app.l_pesa.provider"
             val imageUri = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, authorities, imageFile)
             callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             startActivityForResult(callCameraIntent, PHOTO)
@@ -370,7 +370,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     @Throws(IOException::class)
     private fun createImageFile(): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName: String = "l_pesa" + timeStamp + "_"
+        val imageFileName: String = "profile" + timeStamp + "_"
         val storageDir: File = this@ProfileEditPersonalActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         if (!storageDir.exists()) storageDir.mkdirs()
         captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)

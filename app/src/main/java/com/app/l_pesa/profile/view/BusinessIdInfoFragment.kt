@@ -113,10 +113,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
             }
-            else if(etBusinessId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString()))
-            {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
-            }
+
             else
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
@@ -180,7 +177,6 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         }
 
-
     }
 
 
@@ -192,8 +188,6 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         jsonObject.addProperty("id_type",businessId.toString())
         jsonObject.addProperty("id_number","")
         jsonObject.addProperty("type_name","Business")
-
-        println("JSON_REQ"+jsonObject)
 
         val presenterAddProof= PresenterAddProof()
         presenterAddProof.doAddProof(activity!!,jsonObject,this)
@@ -339,7 +333,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                         if(CommonMethod.isNetworkAvailable(activity!!))
                         {
                             val bundle = Bundle()
-                            bundle.putString("FILE_NAME",userIdsBusinessInfo.fileName)
+                            bundle.putString("FILE_NAME",resources.getString(R.string.upload_business_url)+userIdsBusinessInfo.fileName)
                             val intent = Intent(activity, ActivityViewFile::class.java)
                             intent.putExtras(bundle)
                             startActivity(intent,bundle)
