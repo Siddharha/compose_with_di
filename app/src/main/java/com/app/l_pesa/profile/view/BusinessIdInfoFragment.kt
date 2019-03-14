@@ -47,7 +47,7 @@ import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -76,7 +76,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_personal_id_layout, container,false)
+        return inflater.inflate(R.layout.fragment_business_id_layout, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,8 +98,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         {
             listBusinessId!!.addAll(profileInfo.userIdsBusinessInfo!!)
             businessIdAdapter                 = BusinessIdAdapter(activity!!,listBusinessId!!,this)
-            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-            rvPersonalId.adapter              = businessIdAdapter
+            rvBusinessId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+            rvBusinessId.adapter              = businessIdAdapter
         }
 
         buttonSubmit.setOnClickListener {
@@ -113,7 +113,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
             }
-            else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString()))
+            else if(etBusinessId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString()))
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
             }
@@ -153,8 +153,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
             activity!!.overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
-        etPersonalId.isFocusable=false
-        etPersonalId.setOnClickListener {
+        etBusinessId.isFocusable=false
+        etBusinessId.setOnClickListener {
             showDialogIdType(sharedPrefOBJ)
 
         }
@@ -190,15 +190,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         //jsonObject.addProperty("id_image","per_new_138308_7397641a67801aad9fe694c4cfd3c48a.jpg") // Static
         jsonObject.addProperty("id_image",url) // Static
         jsonObject.addProperty("id_type",businessId.toString())
-        if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
-        {
-            jsonObject.addProperty("id_number","")
-        }
-        else
-        {
-            jsonObject.addProperty("id_number",etIdNumber.text.toString())
-        }
-
+        jsonObject.addProperty("id_number","")
         jsonObject.addProperty("type_name","Business")
 
         println("JSON_REQ"+jsonObject)
@@ -255,51 +247,33 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
         val totalSize = 0 until profileInfo.userIdsBusinessInfo!!.size
 
-        for(i in totalSize)
+        if(profileInfo.userIdsBusinessInfo!!.size>0)
         {
-
-            if(profileInfo.userIdsBusinessInfo!![i].verified==1 && profileInfo.userIdsBusinessInfo!![i].idTypeName==name)
+            for(i in totalSize)
             {
-                Toast.makeText(activity, "Your $name already verified", Toast.LENGTH_SHORT).show()
-                break
-
-            }
-            else
-            {
-/*
-                if (profileInfo.userIdsPersonalInfo!![i].idTypeName == businessIdName)
+                if(profileInfo.userIdsBusinessInfo!![i].verified==1 && profileInfo.userIdsBusinessInfo!![i].idTypeName==name)
                 {
-                    idTypeExists="TRUE"
-                    imgFileAddress=profileInfo.userIdsPersonalInfo!![i].fileName
+                    Toast.makeText(activity, "Your $name already verified", Toast.LENGTH_SHORT).show()
                     break
                 }
                 else
                 {
-                    idTypeExists="FALSE"
-                }*/
-
-
-                if(name==resources.getString(R.string.address_prof))
-                {
-                    ilIdNumber.visibility=View.INVISIBLE
                     businessIdName=name
-                    etPersonalId.setText(businessIdName)
+                    etBusinessId.setText(businessIdName)
                     businessIdType=type
                     businessId=id
 
                 }
-                else
-                {
-                    ilIdNumber.visibility=View.VISIBLE
-                    businessIdName=name
-                    etPersonalId.setText(businessIdName)
-                    businessIdType=type
-                    businessId=id
-                }
-
-
             }
         }
+        else
+        {
+            businessIdName=name
+            etBusinessId.setText(businessIdName)
+            businessIdType=type
+            businessId=id
+        }
+
     }
 
 

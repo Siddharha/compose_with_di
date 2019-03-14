@@ -263,51 +263,48 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
         val totalSize = 0 until profileInfo.userIdsPersonalInfo!!.size
 
-        for(i in totalSize)
+        if(profileInfo.userIdsPersonalInfo!!.size>0)
         {
-
-            if(profileInfo.userIdsPersonalInfo!![i].verified==1 && profileInfo.userIdsPersonalInfo!![i].idTypeName==name)
+            for (i in totalSize)
             {
-              Toast.makeText(activity, "Your $name already verified",Toast.LENGTH_SHORT).show()
-              break
 
-            }
-            else
-            {
-/*
-                if (profileInfo.userIdsPersonalInfo!![i].idTypeName == personalIdName)
-                {
-                    idTypeExists="TRUE"
-                    imgFileAddress=profileInfo.userIdsPersonalInfo!![i].fileName
+                if (profileInfo.userIdsPersonalInfo!![i].verified == 1 && profileInfo.userIdsPersonalInfo!![i].idTypeName == name) {
+                    Toast.makeText(activity, "Your $name already verified", Toast.LENGTH_SHORT).show()
                     break
-                }
-                else
+
+                } else
                 {
-                    idTypeExists="FALSE"
-                }*/
 
+                    if (name == resources.getString(R.string.address_prof)) {
+                        ilIdNumber.visibility = View.INVISIBLE
+                        personalIdName = name
+                        etPersonalId.setText(personalIdName)
+                        personalIdType = type
+                        personalId = id
 
-                if(name==resources.getString(R.string.address_prof))
-                {
-                    ilIdNumber.visibility=View.INVISIBLE
-                    personalIdName=name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType=type
-                    personalId=id
+                    } else {
+                        ilIdNumber.visibility = View.VISIBLE
+                        personalIdName = name
+                        etPersonalId.setText(personalIdName)
+                        personalIdType = type
+                        personalId = id
+                    }
+
 
                 }
-                else
-                {
-                    ilIdNumber.visibility=View.VISIBLE
-                    personalIdName=name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType=type
-                    personalId=id
-                }
-
-
             }
         }
+
+        else
+            {
+                ilIdNumber.visibility = View.VISIBLE
+                personalIdName = name
+                etPersonalId.setText(personalIdName)
+                personalIdType = type
+                personalId = id
+            }
+
+
     }
 
 

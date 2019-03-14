@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/screenBackground"
+        android:orientation="vertical"
+        android:id="@+id/llRoot">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_4sdp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_3sdp">
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/profile_image"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/imgProfile"
+                    app:layout_constraintEnd_toStartOf="@+id/ilIdNumber"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:contentDescription="@string/app_name"
+                    android:layout_width="@dimen/_75sdp"
+                    android:layout_height="@dimen/_75sdp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    app:layout_constraintBottom_toTopOf="@+id/view3"
+                    app:layout_constraintEnd_toStartOf="@+id/ilIdNumber"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9"
+                    app:srcCompat="@drawable/ic_upload_photo" />
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@color/divider_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/commonInputLayout2"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="@dimen/_165sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/ilIdNumber"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etBusinessId"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:hint="@string/business_type"
+                        android:textSize="@dimen/_12sdp"
+                        android:longClickable="false"
+                        app:autoSizeStepGranularity="0.2sp"
+                        app:autoSizeTextType="uniform"
+                        android:textColorHint="@color/colorGreyDeep"
+                        android:drawableEnd="@drawable/ic_dropdown"/>
+                </com.app.l_pesa.common.CommonInputLayout>
+
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/ilIdNumber"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="@dimen/_165sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_12sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/view3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/commonInputLayout2"
+                    android:visibility="invisible">
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etIdNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/montserrat"
+                        android:hint="@string/edit_id_number"
+                        android:maxLines="1"
+                        android:inputType="text|textNoSuggestions"
+                        android:maxLength="15"
+                        android:textSize="@dimen/_12sdp"
+
+                        />
+                </com.app.l_pesa.common.CommonInputLayout>
+
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/textView10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:fontFamily="@font/montserrat"
+                    android:lineSpacingExtra="@dimen/_1sdp"
+                    android:text="@string/enter_id_no"
+                    android:textColor="@color/light_text_color"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toTopOf="@id/textView11"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView11"
+                    app:layout_constraintTop_toTopOf="@+id/view3"
+                    app:layout_constraintVertical_chainStyle="spread_inside" />
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/textView11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:drawablePadding="@dimen/_2sdp"
+                    android:fontFamily="@font/montserrat"
+                    android:lineSpacingExtra="@dimen/_1sdp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:text="@string/upload_scanned_id"
+                    android:textColor="@color/light_text_color"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/imageView12"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                <Button
+                    android:id="@+id/buttonSubmit"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/ripple_green_button"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/submit"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonCancel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                <Button
+                    android:id="@+id/buttonCancel"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/bg_grey_view"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorGreyDeep"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/buttonSubmit"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                <ImageView
+                    android:id="@+id/imageView11"
+                    android:contentDescription="@string/app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/textView10"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView10"
+                    app:srcCompat="@drawable/ic_green_tick" />
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:contentDescription="@string/app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/textView11"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView11"
+                    app:srcCompat="@drawable/ic_green_tick" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvBusinessId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_4sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            />
+
+    </LinearLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>
