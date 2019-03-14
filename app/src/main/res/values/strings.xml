@@ -162,7 +162,7 @@
 
 
     <!--Loan History-->
-    <string name="loan_history">Loan History</string>
+    <string name="loan_historyCurrent">Loan History</string>
     <string name="current_loan_history">Current Loan History</string>
     <string name="business_loan_history">Business Loan History</string>
     <string name="loan_no">Loan No:</string>
@@ -281,6 +281,7 @@
     <string name="business_id_information">Business Id Information</string>
     <string name="profile_image">Profile Image*</string>
     <string name="required_profile_image">Required profile image</string>
+    <string name="required_id_image">Required id image</string>
     <string name="personal_id_type">Personal ID Type*</string>
     <string name="business_type">Business ID Type*</string>
     <string name="edit_id_number">ID Number*</string>

@@ -11,18 +11,18 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.adapter.CurrentLoanHistoryAdapter
-import com.app.l_pesa.loanHistory.inter.ICallBackLoanHistory
-import com.app.l_pesa.loanHistory.model.ResLoanHistory
+import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
 
-class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
+class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
 
-    private var listLoanHistory                 : ArrayList<ResLoanHistory.LoanHistory>? = null
+    private var listLoanHistoryCurrent          : ArrayList<ResLoanHistoryCurrent.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
 
     private var hasNext=false
@@ -48,8 +48,8 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     private fun loadHistory()
     {
-        listLoanHistory      = ArrayList()
-        adapterLoanHistory   = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!,this)
+        listLoanHistoryCurrent      = ArrayList()
+        adapterLoanHistory   = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -73,7 +73,7 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
         }
     }
 
-    override fun onSuccessLoanHistory(loan_history: ArrayList<ResLoanHistory.LoanHistory>, cursors: ResLoanHistory.Cursors, user_credit_score: Int) {
+    override fun onSuccessLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors, user_credit_score: Int) {
 
         activity!!.runOnUiThread {
             hasNext =cursors.hasNext
@@ -81,9 +81,9 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
             swipeRefreshLayout.isRefreshing = false
             val shared=SharedPref(activity!!)
             shared.userCreditScore=user_credit_score.toString()
-            listLoanHistory!!.clear()
-            listLoanHistory!!.addAll(loan_history)
-            adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistory!!,this)
+            listLoanHistoryCurrent!!.clear()
+            listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
+            adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
             rvLoan.layoutManager        = llmOBJ
@@ -109,18 +109,18 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
     }
 
-    override fun onSuccessPaginateLoanHistory(loan_history: ArrayList<ResLoanHistory.LoanHistory>, cursors: ResLoanHistory.Cursors) {
+    override fun onSuccessPaginateLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors) {
 
         hasNext =cursors.hasNext
         after   =cursors.after
-        if(listLoanHistory!!.size!=0)
+        if(listLoanHistoryCurrent!!.size!=0)
         {
             try {
 
-                listLoanHistory!!.removeAt(listLoanHistory!!.size - 1)
+                listLoanHistoryCurrent!!.removeAt(listLoanHistoryCurrent!!.size - 1)
                 adapterLoanHistory.notifyDataChanged()
-                listLoanHistory!!.addAll(loan_history)
-                adapterLoanHistory.notifyItemRangeInserted(0, listLoanHistory!!.size)
+                listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
+                adapterLoanHistory.notifyItemRangeInserted(0, listLoanHistoryCurrent!!.size)
 
             }
             catch (e:Exception)
@@ -153,13 +153,13 @@ class CurrentLoanHistory:Fragment(), ICallBackLoanHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            val loanStatusModel  = ResLoanHistory.LoanHistory(0,"",0,"",
+            val loanStatusModel  = ResLoanHistoryCurrent.LoanHistory(0,"",0,"",
                                     "","","",
                                     "","","","","",
                                     "","","","","","","","","","")
 
-            listLoanHistory!!.add(loanStatusModel)
-            adapterLoanHistory.notifyItemInserted(listLoanHistory!!.size-1)
+            listLoanHistoryCurrent!!.add(loanStatusModel)
+            adapterLoanHistory.notifyItemInserted(listLoanHistoryCurrent!!.size-1)
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()

@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
-import com.app.l_pesa.loanHistory.inter.ICallBackLoanHistory
-import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
-import com.app.l_pesa.loanHistory.model.ResLoanHistory
+import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
+import com.app.l_pesa.loanHistory.model.GlobalCurrentLoanHistoryModel
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import kotlinx.android.synthetic.main.layout_loan_history.view.*
 
-class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryList: ArrayList<ResLoanHistory.LoanHistory>,private val callBack: ICallBackLoanHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryCurrent.LoanHistory>, private val callBackCurrent: ICallBackCurrentLoanHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
@@ -40,14 +40,14 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
         }
 
         if (getItemViewType(position) == 0) {
-            (holder as UserViewHolder).bindData(context, loanHistoryList[position],callBack)
+            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackCurrent)
 
         }
     }
 
     override fun getItemViewType(position: Int): Int
     {
-        return if(loanHistoryList[position].loan_id!=0){
+        return if(loanHistoryCurrentList[position].loan_id!=0){
             0
         }else{
             1
@@ -55,7 +55,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
     }
 
     override fun getItemCount(): Int {
-        return loanHistoryList.size
+        return loanHistoryCurrentList.size
     }
 
 
@@ -77,38 +77,38 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
-        fun  bindData(context: Context, loanHistory: ResLoanHistory.LoanHistory, callBack: ICallBackLoanHistory)
+        fun  bindData(context: Context, loanHistoryCurrent: ResLoanHistoryCurrent.LoanHistory, callBackCurrent: ICallBackCurrentLoanHistory)
         {
 
-            itemView.txt_loan_no.text=loanHistory.identity_number
-            itemView.txt_loan_amount.text="$"+loanHistory.loan_amount
-            itemView.txt_interest_rate.text=loanHistory.interest_rate
+            itemView.txt_loan_no.text=loanHistoryCurrent.identity_number
+            itemView.txt_loan_amount.text="$"+loanHistoryCurrent.loan_amount
+            itemView.txt_interest_rate.text=loanHistoryCurrent.interest_rate
 
             when {
-                loanHistory.loan_status=="A" -> {
-                    itemView.txt_applied_on_date.text=loanHistory.sanctioned_date
+                loanHistoryCurrent.loan_status=="A" -> {
+                    itemView.txt_applied_on_date.text=loanHistoryCurrent.sanctioned_date
                     itemView.txt_applied_on.text = context.resources.getString(R.string.approved_on)
                     itemView.txt_status.text = context.resources.getString(R.string.approved)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
                     itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
                 }
-                loanHistory.loan_status=="C" -> {
-                    itemView.txt_applied_on_date.text=loanHistory.finished_date
+                loanHistoryCurrent.loan_status=="C" -> {
+                    itemView.txt_applied_on_date.text=loanHistoryCurrent.finished_date
                     itemView.txt_applied_on.text = context.resources.getString(R.string.completed_on)
                     itemView.txt_status.text = context.resources.getString(R.string.completed)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_semi_deep_black))
                     itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
 
                 }
-                loanHistory.loan_status=="P" -> {
-                    itemView.txt_applied_on_date.text=loanHistory.applied_date
+                loanHistoryCurrent.loan_status=="P" -> {
+                    itemView.txt_applied_on_date.text=loanHistoryCurrent.applied_date
                     itemView.txt_applied_on.text = context.resources.getString(R.string.applied_on)
                     itemView.txt_status.text = context.resources.getString(R.string.pending)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
                     itemView.img_status.setImageResource(R.drawable.ic_pending_icon)
                 }
-                loanHistory.loan_status=="DA" -> {
-                    itemView.txt_applied_on_date.text=loanHistory.disapprove_date
+                loanHistoryCurrent.loan_status=="DA" -> {
+                    itemView.txt_applied_on_date.text=loanHistoryCurrent.disapprove_date
                     itemView.txt_applied_on.text = context.resources.getString(R.string.disapproved_on)
                     itemView.txt_status.text = context.resources.getString(R.string.disapproved)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
@@ -116,7 +116,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
 
                 }
                 else -> {
-                    itemView.txt_applied_on_date.text=loanHistory.applied_date
+                    itemView.txt_applied_on_date.text=loanHistoryCurrent.applied_date
                     itemView.txt_applied_on.text = context.resources.getString(R.string.due_on)
                     itemView.txt_status.text = context.resources.getString(R.string.due)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
@@ -127,9 +127,9 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryLi
 
             itemView.rlRoot.setOnClickListener {
 
-                val modelData=GlobalLoanHistoryModel.getInstance()
-                modelData.modelData=loanHistory
-                callBack.onClickList()
+                val modelData=GlobalCurrentLoanHistoryModel.getInstance()
+                modelData.modelData=loanHistoryCurrent
+                callBackCurrent.onClickList()
             }
 
 

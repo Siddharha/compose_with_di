@@ -11,7 +11,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
+import com.app.l_pesa.loanHistory.model.GlobalCurrentLoanHistoryModel
 
 import kotlinx.android.synthetic.main.activity_loan_history_details.*
 import kotlinx.android.synthetic.main.content_loan_history_details.*
@@ -44,7 +44,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
     {
         val shared= SharedPref(this@LoanHistoryDetailsActivity)
 
-        val loanHistoryData= GlobalLoanHistoryModel.getInstance().modelData
+        val loanHistoryData= GlobalCurrentLoanHistoryModel.getInstance().modelData
 
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
         txt_loan_no_val.text = loanHistoryData.loan_id.toString()

@@ -4,7 +4,7 @@ package com.app.l_pesa.API
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.model.ResInvestmentPlan
-import com.app.l_pesa.loanHistory.model.ResLoanHistory
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import com.app.l_pesa.loanplan.model.ResLoanApply
@@ -54,13 +54,13 @@ interface BaseService{
     fun doLogout(@Body request: JsonObject): Observable<ResLogout>
 
     /*@POST("loan/active")
-    fun doLoanList(@Body request: JsonObject): Observable<ResLoanHistory>*/
+    fun doLoanList(@Body request: JsonObject): Observable<ResLoanHistoryCurrent>*/
 
     @POST("products/list")
     fun doLoanList(@Body request: JsonObject): Observable<ResLoanPlans>
 
     @POST("loan/history")
-    fun doLoanHistory(@Body request: JsonObject, @Query("cursors") cursors:String ): Observable<ResLoanHistory>
+    fun doLoanHistory(@Body request: JsonObject, @Query("cursors") cursors:String ): Observable<ResLoanHistoryCurrent>
 
     @POST("loan/paybackschedule")
     fun doPaybackSchedule(@Body request: JsonObject): Observable<ResPaybackSchedule>

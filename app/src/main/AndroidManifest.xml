@@ -90,7 +90,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".loanHistory.view.LoanHistoryListActivity"
-            android:label="@string/loan_history"
+            android:label="@string/loan_historyCurrent"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />

@@ -106,7 +106,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
             if(!imageSelectStatus)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_profile_image))
+                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_image))
             }
             else if(businessId==0)
             {

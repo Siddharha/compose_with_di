@@ -113,7 +113,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
             if(!imageSelectStatus)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_profile_image))
+                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_image))
             }
             else if(personalId==0)
             {
@@ -368,7 +368,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         if(CommonMethod.isNetworkAvailable(activity!!))
                         {
                             val bundle = Bundle()
-                            bundle.putString("FILE_NAME",userIdsPersonalInfo.fileName)
+                            bundle.putString("FILE_NAME",resources.getString(R.string.upload_business_url)+userIdsPersonalInfo.fileName)
                             val intent = Intent(activity, ActivityViewFile::class.java)
                             intent.putExtras(bundle)
                             startActivity(intent,bundle)

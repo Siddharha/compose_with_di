@@ -5,7 +5,7 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.loanHistory.inter.ICallBackLoanHistory
+import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +14,7 @@ import retrofit2.HttpException
 
 class PresenterLoanHistory {
 
-    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject,cursors:String,callBackOBJ: ICallBackLoanHistory)
+    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors)
@@ -32,16 +32,16 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score)
+                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score)
                             }
                             else
                             {
-                                callBackOBJ.onEmptyLoanHistory()
+                                callBackCurrentOBJ.onEmptyLoanHistory()
                             }
                         }
                         else
                         {
-                            callBackOBJ.onFailureLoanHistory(response.status.message)
+                            callBackCurrentOBJ.onFailureLoanHistory(response.status.message)
                         }
                     }
                     catch (e: Exception)
@@ -58,18 +58,18 @@ class PresenterLoanHistory {
                         val  jsonStatus         =    jsonError.getJSONObject("status")
                         val jsonMessage         =    jsonStatus.getString("message")
 
-                        callBackOBJ.onFailureLoanHistory(jsonMessage)
+                        callBackCurrentOBJ.onFailureLoanHistory(jsonMessage)
                     }
                     catch (exp: Exception)
                     {
                         val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
-                        callBackOBJ.onFailureLoanHistory(errorMessageOBJ)
+                        callBackCurrentOBJ.onFailureLoanHistory(errorMessageOBJ)
                     }
 
                 })
     }
 
-    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject,cursors:String,callBackOBJ: ICallBackLoanHistory)
+    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors)
@@ -87,16 +87,16 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors)
+                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors)
                             }
                             else
                             {
-                                callBackOBJ.onEmptyPaginateLoanHistory()
+                                callBackCurrentOBJ.onEmptyPaginateLoanHistory()
                             }
                         }
                         else
                         {
-                            callBackOBJ.onFailureLoanHistory(response.status.message)
+                            callBackCurrentOBJ.onFailureLoanHistory(response.status.message)
                         }
                     }
                     catch (e: Exception)
@@ -113,12 +113,12 @@ class PresenterLoanHistory {
                         val  jsonStatus         =    jsonError.getJSONObject("status")
                         val jsonMessage         =    jsonStatus.getString("message")
 
-                        callBackOBJ.onFailureLoanHistory(jsonMessage)
+                        callBackCurrentOBJ.onFailureLoanHistory(jsonMessage)
                     }
                     catch (exp: Exception)
                     {
                         val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
-                        callBackOBJ.onFailureLoanHistory(errorMessageOBJ)
+                        callBackCurrentOBJ.onFailureLoanHistory(errorMessageOBJ)
                     }
 
                 })

@@ -11,8 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
-import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
-import com.app.l_pesa.loanHistory.model.ResLoanHistory
+import com.app.l_pesa.loanHistory.model.GlobalCurrentLoanHistoryModel
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 
@@ -73,8 +73,8 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
             {
                if(loanPlanList[position].details!!.btnStatus=="disable" && loanPlanList[position].details!!.productId==appliedProduct.productId)
                {
-                   val modelData=   GlobalLoanHistoryModel.getInstance()
-                   val loanData =   ResLoanHistory.LoanHistory(appliedProduct.loanId,appliedProduct.identityNumber,appliedProduct.loanAmount,appliedProduct.interestRate,
+                   val modelData=   GlobalCurrentLoanHistoryModel.getInstance()
+                   val loanData =   ResLoanHistoryCurrent.LoanHistory(appliedProduct.loanId,appliedProduct.identityNumber,appliedProduct.loanAmount,appliedProduct.interestRate,
                                     appliedProduct.convertionDollarValue.toString(),appliedProduct.convertionLoanAmount.toString(),appliedProduct.actualLoanAmount.toString(),appliedProduct.appliedDate,
                                     appliedProduct.sanctionedDate,appliedProduct.finishedDate,appliedProduct.disapproveDate,appliedProduct.loanStatus,appliedProduct.currencyCode,appliedProduct.dueDate,
                                     appliedProduct.duration,appliedProduct.conversionCharge,appliedProduct.conversionChargeAmount,appliedProduct.loanPurposeMessage,appliedProduct.crScWhenRequestingLoan,
