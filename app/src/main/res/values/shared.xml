@@ -10,4 +10,7 @@
     <string name="open_tab_loan">LOAN</string>
     <string name="open_tab_profile">PROFILE</string>
 
+
+    <string name="profile_image_url">https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/</string>
+
 </resources>

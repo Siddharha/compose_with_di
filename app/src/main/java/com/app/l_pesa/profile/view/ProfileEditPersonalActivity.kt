@@ -46,7 +46,9 @@ import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
+import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
+import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -56,8 +58,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackLogin {
-
+class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackLogin , ICallBackUpload {
 
     private val PHOTO               = 1
     private val GALLEY              = 2
@@ -88,7 +89,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val options = RequestOptions()
         Glide.with(this@ProfileEditPersonalActivity)
-                .load(profileData.userInfo!!.profileImage)
+                .load(resources.getString(R.string.profile_image_url)+profileData.userInfo!!.profileImage)
                 .apply(options)
                 .into(imgProfile)
 
@@ -213,35 +214,16 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     {
                         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                         swipeRefreshLayout.isRefreshing=true
-
-                        var gender="M"
-                        gender = if(radioMale.isChecked) {
-                            "M"
-                        } else {
-                            "F"
+                        buttonSubmit.isClickable=false
+                        if(imageSelectStatus)
+                        {
+                            val presenterAWSProfile= PresenterAWSProfile()
+                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity,this,captureFile)
                         }
-
-                        val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
-                        val date         = inputFormat.parse(txtDOB.text.toString())
-
-                        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-                        val dateRequest  = outputFormat.format(date)
-
-                        val jsonObject = JsonObject()
-                        jsonObject.addProperty("title",txtTitle.text.toString())
-                        jsonObject.addProperty("first_name",etNameF.text.toString())
-                        jsonObject.addProperty("middle_name",etNameM.text.toString())
-                        jsonObject.addProperty("last_name",etNameL.text.toString())
-                        jsonObject.addProperty("email_address",etEmail.text.toString())
-                        jsonObject.addProperty("dob",dateRequest)
-                        jsonObject.addProperty("sex",gender)
-                        jsonObject.addProperty("merital_status",txtMarital.text.toString())
-                        jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
-                        jsonObject.addProperty("profile_image","proimg_new_61455_121a941dc8544874fa50c59ff3a63668.jpg")
-
-
-                        val presenterPersonalInfo= PresenterPersonalInfo()
-                        presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
+                        else
+                        {
+                            uploadData(profileData.userPersonalInfo!!.profileImage)
+                        }
                     }
                     else
                     {
@@ -255,6 +237,50 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
+    override fun onSuccessUploadAWS(url: String) {
+
+        uploadData(url)
+    }
+
+    override fun onFailureUploadAWS(string: String) {
+        swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,string)
+    }
+
+    private fun uploadData(imageURL: String)
+    {
+        var gender="M"
+        gender = if(radioMale.isChecked) {
+            "M"
+        } else {
+            "F"
+        }
+
+        val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+        val date         = inputFormat.parse(txtDOB.text.toString())
+
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+        val dateRequest  = outputFormat.format(date)
+
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("title",txtTitle.text.toString())
+        jsonObject.addProperty("first_name",etNameF.text.toString())
+        jsonObject.addProperty("middle_name",etNameM.text.toString())
+        jsonObject.addProperty("last_name",etNameL.text.toString())
+        jsonObject.addProperty("email_address",etEmail.text.toString())
+        jsonObject.addProperty("dob",dateRequest)
+        jsonObject.addProperty("sex",gender)
+        jsonObject.addProperty("merital_status",txtMarital.text.toString())
+        jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
+       // jsonObject.addProperty("profile_image","proimg_new_61455_121a941dc8544874fa50c59ff3a63668.jpg")
+        jsonObject.addProperty("profile_image",imageURL)
+
+
+        val presenterPersonalInfo= PresenterPersonalInfo()
+        presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
+
+    }
+
     override fun onSuccessPersonalInfo() {
 
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
@@ -266,6 +292,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     override fun onFailurePersonalInfo(message: String) {
 
+        buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
     }
@@ -289,11 +316,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
      swipeRefreshLayout.isRefreshing=false
      Toast.makeText(this@ProfileEditPersonalActivity,jsonMessage,Toast.LENGTH_SHORT).show()
 
-
     }
 
     override fun onFailureLogin(jsonMessage: String) {
 
+        buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,jsonMessage)
     }
@@ -479,6 +506,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 imageSelectStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfile.setImageBitmap(bitmap)
+                captureFile=imgSize
+                CommonMethod.fileCompress(captureFile!!)
             }
 
         }
