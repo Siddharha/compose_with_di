@@ -299,8 +299,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 else
                 {
                     ilIdNumber.visibility=View.VISIBLE
-                    etPersonalId.setText(personalIdName)
                     personalIdName=name
+                    etPersonalId.setText(personalIdName)
                     personalIdType=type
                     personalId=id
                 }

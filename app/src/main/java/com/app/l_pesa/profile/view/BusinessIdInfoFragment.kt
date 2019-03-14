@@ -36,16 +36,13 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
-import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
-import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
-import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
-import com.app.l_pesa.profile.inter.ICallBackProof
-import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
-import com.app.l_pesa.profile.inter.ICallBackUpload
+import com.app.l_pesa.profile.adapter.BusinessIdAdapter
+import com.app.l_pesa.profile.adapter.BusinessIdListAdapter
+import com.app.l_pesa.profile.inter.*
 import com.app.l_pesa.profile.model.ModelWindowPopUp
 import com.app.l_pesa.profile.model.ResUserInfo
-import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
+import com.app.l_pesa.profile.presenter.PresenterAWSBusinesslId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
@@ -56,15 +53,15 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload {
+class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
-    var listPersonalId      : ArrayList<ResUserInfo.UserIdsPersonalInfo>? = null
-    var personalIdAdapter   : PersonalIdAdapter? = null
-    var personalIdType=""
-    var personalIdName=""
-    var personalId=0
+    var listBusinessId      : ArrayList<ResUserInfo.UserIdsBusinessInfo>? = null
+    var businessIdAdapter   : BusinessIdAdapter? = null
+    var businessIdType=""
+    var businessIdName=""
+    var businessId=0
 
     private val PHOTO               = 1
     private val GALLEY              = 2
@@ -92,17 +89,17 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun initData()
     {
-        listPersonalId = ArrayList()
+        listBusinessId = ArrayList()
         val sharedPrefOBJ= SharedPref(activity!!)
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
-        listPersonalId!!.clear()
+        listBusinessId!!.clear()
 
-        if(profileInfo.userIdsPersonalInfo!!.size>0)
+        if(profileInfo.userIdsBusinessInfo!!.size>0)
         {
-            listPersonalId!!.addAll(profileInfo.userIdsPersonalInfo!!)
-            personalIdAdapter                 = PersonalIdAdapter(activity!!,listPersonalId!!,this)
+            listBusinessId!!.addAll(profileInfo.userIdsBusinessInfo!!)
+            businessIdAdapter                 = BusinessIdAdapter(activity!!,listBusinessId!!,this)
             rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-            rvPersonalId.adapter              = personalIdAdapter
+            rvPersonalId.adapter              = businessIdAdapter
         }
 
         buttonSubmit.setOnClickListener {
@@ -111,7 +108,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_profile_image))
             }
-            else if(personalId==0)
+            else if(businessId==0)
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
@@ -131,9 +128,9 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                     /*if(idTypeExists=="TRUE")
                     {*/
-                    val presenterAWSPersonalId= PresenterAWSPersonalId()
+                    val presenterAWSBusinessId= PresenterAWSBusinesslId()
                     // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,captureFile)
+                    presenterAWSBusinessId.uploadBusinessId(activity!!,this,captureFile)
                     /*}
                     else
                     {
@@ -187,13 +184,12 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
 
-
     override fun onSuccessUploadAWS(url: String) {
 
         val jsonObject = JsonObject()
         //jsonObject.addProperty("id_image","per_new_138308_7397641a67801aad9fe694c4cfd3c48a.jpg") // Static
         jsonObject.addProperty("id_image",url) // Static
-        jsonObject.addProperty("id_type",personalId.toString())
+        jsonObject.addProperty("id_type",businessId.toString())
         if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
         {
             jsonObject.addProperty("id_number","")
@@ -203,7 +199,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             jsonObject.addProperty("id_number",etIdNumber.text.toString())
         }
 
-        jsonObject.addProperty("type_name","Personal")
+        jsonObject.addProperty("type_name","Business")
 
         println("JSON_REQ"+jsonObject)
 
@@ -230,15 +226,15 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private fun showDialogIdType(sharedPrefOBJ: SharedPref)
     {
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
-        if(userDashBoard.personalIdTypes!!.size>0)
+        if(userDashBoard.businessIdTypes!!.size>0)
         {
             val dialog= Dialog(activity!!)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_id_type)
             val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-            val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
+            val businessIdAdapter           = BusinessIdListAdapter(activity!!, userDashBoard.businessIdTypes!!,dialog,this)
             recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            recyclerView?.adapter           = personalIdAdapter
+            recyclerView?.adapter           = businessIdAdapter
             dialog.show()
         }
     }
@@ -257,12 +253,12 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         val sharedPrefOBJ= SharedPref(activity!!)
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
-        val totalSize = 0 until profileInfo.userIdsPersonalInfo!!.size
+        val totalSize = 0 until profileInfo.userIdsBusinessInfo!!.size
 
         for(i in totalSize)
         {
 
-            if(profileInfo.userIdsPersonalInfo!![i].verified==1 && profileInfo.userIdsPersonalInfo!![i].idTypeName==name)
+            if(profileInfo.userIdsBusinessInfo!![i].verified==1 && profileInfo.userIdsBusinessInfo!![i].idTypeName==name)
             {
                 Toast.makeText(activity, "Your $name already verified", Toast.LENGTH_SHORT).show()
                 break
@@ -271,7 +267,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             else
             {
 /*
-                if (profileInfo.userIdsPersonalInfo!![i].idTypeName == personalIdName)
+                if (profileInfo.userIdsPersonalInfo!![i].idTypeName == businessIdName)
                 {
                     idTypeExists="TRUE"
                     imgFileAddress=profileInfo.userIdsPersonalInfo!![i].fileName
@@ -286,19 +282,19 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 if(name==resources.getString(R.string.address_prof))
                 {
                     ilIdNumber.visibility=View.INVISIBLE
-                    personalIdName=name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType=type
-                    personalId=id
+                    businessIdName=name
+                    etPersonalId.setText(businessIdName)
+                    businessIdType=type
+                    businessId=id
 
                 }
                 else
                 {
                     ilIdNumber.visibility=View.VISIBLE
-                    etPersonalId.setText(personalIdName)
-                    personalIdName=name
-                    personalIdType=type
-                    personalId=id
+                    businessIdName=name
+                    etPersonalId.setText(businessIdName)
+                    businessIdType=type
+                    businessId=id
                 }
 
 
@@ -307,20 +303,20 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
 
-    override fun onClickIdList(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, position: Int, it: View) {
+    override fun onClickIdList(userIdsBusinessInfo: ResUserInfo.UserIdsBusinessInfo, position: Int, it: View) {
 
         dismissPopup()
-        filterPopup = showAlertFilter(userIdsPersonalInfo,position)
+        filterPopup = showAlertFilter(userIdsBusinessInfo,position)
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         filterPopup?.showAsDropDown(it)
     }
 
-    private fun showAlertFilter(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int): PopupWindow {
+    private fun showAlertFilter(userIdsBusinessInfo:ResUserInfo.UserIdsBusinessInfo, pos: Int): PopupWindow {
 
         val filterItemList = mutableListOf<ModelWindowPopUp>()
-        if(userIdsPersonalInfo.verified==1)
+        if(userIdsBusinessInfo.verified==1)
         {
             filterItemList.add(ModelWindowPopUp(R.drawable.ic_view_file,resources.getString(R.string.view_file)))
         }
@@ -354,7 +350,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                         swipeRefreshLayout.isRefreshing=true
-                        deletePersonalIdProof(userIdsPersonalInfo,pos)
+                        deletePersonalIdProof(userIdsBusinessInfo,pos)
                     }
                     else
                     {
@@ -364,12 +360,12 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 else
                 {
                     // View File
-                    if(!TextUtils.isEmpty(userIdsPersonalInfo.fileName))
+                    if(!TextUtils.isEmpty(userIdsBusinessInfo.fileName))
                     {
                         if(CommonMethod.isNetworkAvailable(activity!!))
                         {
                             val bundle = Bundle()
-                            bundle.putString("FILE_NAME",userIdsPersonalInfo.fileName)
+                            bundle.putString("FILE_NAME",userIdsBusinessInfo.fileName)
                             val intent = Intent(activity, ActivityViewFile::class.java)
                             intent.putExtras(bundle)
                             startActivity(intent,bundle)
@@ -390,10 +386,10 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
-    private fun deletePersonalIdProof(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int)
+    private fun deletePersonalIdProof(userIdsBusinessInfo: ResUserInfo.UserIdsBusinessInfo, pos: Int)
     {
         val jsonObject = JsonObject()
-        jsonObject.addProperty("user_type_id",userIdsPersonalInfo.id.toString())
+        jsonObject.addProperty("user_type_id",userIdsBusinessInfo.id.toString())
 
         val presenterDeleteProof= PresenterDeleteProof()
         presenterDeleteProof.doDeleteProof(activity!!,jsonObject,pos,this)
@@ -418,8 +414,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onSuccessDeleteProof(position: Int) {
         swipeRefreshLayout.isRefreshing=false
-        listPersonalId!!.removeAt(position)
-        personalIdAdapter!!.notifyDataSetChanged()
+        listBusinessId!!.removeAt(position)
+        businessIdAdapter!!.notifyDataSetChanged()
         val sharedPrefOBJ= SharedPref(activity!!)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
     }
