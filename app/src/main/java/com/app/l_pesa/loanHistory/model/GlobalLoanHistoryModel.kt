@@ -1,21 +1,21 @@
 package com.app.l_pesa.loanHistory.model
 
-class GlobalCurrentLoanHistoryModel
+class GlobalLoanHistoryModel
 
     private constructor() {
         var modelData: ResLoanHistoryCurrent.LoanHistory? = null
 
         companion object {
 
-            private var instance: GlobalCurrentLoanHistoryModel? = null
+            private var instance: GlobalLoanHistoryModel? = null
 
             @Synchronized
-            fun getInstance(): GlobalCurrentLoanHistoryModel {
+            fun getInstance(): GlobalLoanHistoryModel {
                 if (instance == null) {
                     instance =
-                            GlobalCurrentLoanHistoryModel()
+                            GlobalLoanHistoryModel()
                 }
-                return instance as GlobalCurrentLoanHistoryModel
+                return instance as GlobalLoanHistoryModel
             }
         }
 
