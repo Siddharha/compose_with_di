@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
+        android:layout_height="@dimen/_200sdp"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/_3sdp"
         >

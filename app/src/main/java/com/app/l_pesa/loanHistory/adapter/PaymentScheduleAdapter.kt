@@ -3,9 +3,12 @@ package com.app.l_pesa.loanHistory.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
+import android.text.Html
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +38,7 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
             viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate
             viewHolder.txtCurrentBalance.text   = "0"
-            viewHolder.txtPaidDate.text         = context.resources.getString(R.string.paid_on)+" "+alScheduleOBJ[position].paidDate
+            viewHolder.txtPaidDate.text         = fromHtml("<font color='#a4a4a4'>"+context.resources.getString(R.string.date)+"</font>"+"<font color='#333333'>"+alScheduleOBJ[position].paidDate+"</font>")
         }
         else
         {
@@ -82,8 +85,8 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
 
                     txtTitle.text   =   loanInfo.payment_message!!.header
                     txtContent.text =   loanInfo.payment_message!!.header2
-                    txtData.text    =   "Amount to pay is: "+loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()+
-                                        "Reference number is: "+loanInfo.identityNumber+
+                    txtData.text    =   "Amount to pay is: "+loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()+"\n"+
+                                        "Reference number is: "+loanInfo.identityNumber+"\n"+
                                         "L-Pesa Short code is: "+loanInfo.merchantCode.toString()
 
                 }
@@ -91,6 +94,14 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
         }
 
 
+    }
+
+    private fun fromHtml(source: String): Spanned {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(source)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -299,9 +299,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/color_semi_deep_black"
-
-                        />
+                     />
 
                 </LinearLayout>
 

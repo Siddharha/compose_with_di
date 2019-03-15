@@ -182,7 +182,7 @@
     <string name="loan_purpose">Loan Purpose</string>
     <string name="payment_schedule">Payment Schedule</string>
     <string name="payment_history">Payment History</string>
-    <string name="reason_for_disapproved">Reason for Disapproved</string>
+    <string name="reason_for_disapproval">Reason for Disapproval</string>
     <string name="status">Status:</string>
     <string name="loan_duration">Loan Duration:</string>
     <string name="approval_date">Approval Date:</string>
@@ -202,6 +202,7 @@
     <string name="repay_date">Repay Date:</string>
     <string name="paid">Paid</string>
     <string name="paid_on">Paid on: </string>
+    <string name="date">Date</string>
     <string name="pay_now">Pay Now</string>
 
 

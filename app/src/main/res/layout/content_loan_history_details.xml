@@ -1040,7 +1040,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_toEndOf="@+id/img_disapproved"
-                        android:text="@string/reason_for_disapproved"
+                        android:text="@string/reason_for_disapproval"
                         android:textColor="@color/color_semi_deep_black"
                         android:textSize="@dimen/_12sdp" />
 

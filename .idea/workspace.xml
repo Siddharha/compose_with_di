@@ -17,7 +17,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dcb9a0f-2251-4036-b270-e9f0e752bc92" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_payment_schedule.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -29,8 +28,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanPaybackScheduledActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanPaybackScheduledActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_loan_history_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_loan_history_details.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_payment_schedule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_payment_schedule.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_payment_schedule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_payment_schedule.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,18 +57,18 @@
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="19" />
-          <entry key="kt" value="484" />
+          <entry key="kt" value="485" />
           <entry key="pro" value="3" />
-          <entry key="xml" value="329" />
+          <entry key="xml" value="336" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="19" />
-          <entry key="Kotlin" value="484" />
+          <entry key="Kotlin" value="485" />
           <entry key="ProGuard File" value="3" />
-          <entry key="XML" value="329" />
+          <entry key="XML" value="336" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -75,19 +76,19 @@
           <entry key="dummy" value="2" />
           <entry key="gradle" value="45" />
           <entry key="java" value="139" />
-          <entry key="kt" value="11369" />
+          <entry key="kt" value="11410" />
           <entry key="pro" value="4" />
-          <entry key="xml" value="7218" />
+          <entry key="xml" value="7261" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="45" />
           <entry key="JAVA" value="139" />
-          <entry key="Kotlin" value="11369" />
+          <entry key="Kotlin" value="11410" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="ProGuard File" value="4" />
-          <entry key="XML" value="7218" />
+          <entry key="XML" value="7261" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -119,27 +120,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="86" column="40" selection-start-line="86" selection-start-column="40" selection-end-line="86" selection-end-column="40" />
+            <state relative-caret-position="294">
+              <caret line="40" column="158" selection-start-line="40" selection-start-column="158" selection-end-line="40" selection-end-column="158" />
+              <folding>
+                <element signature="e#1821#1863#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_payment_schedule.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_payment_schedule.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="42" column="32" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="32" />
+            <state relative-caret-position="250">
+              <caret line="301" column="21" selection-start-line="301" selection-start-column="21" selection-end-line="301" selection-end-column="21" />
               <folding>
-                <element signature="e#296#312#0" expanded="true" />
-                <element signature="e#388#402#0" expanded="true" />
-                <element signature="e#608#623#0" expanded="true" />
-                <element signature="e#705#719#0" expanded="true" />
-                <element signature="e#1241#1256#0" expanded="true" />
-                <element signature="e#1285#1299#0" expanded="true" />
-                <element signature="e#1573#1588#0" expanded="true" />
-                <element signature="e#1670#1684#0" expanded="true" />
+                <element signature="e#8485#8499#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -160,8 +157,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>textEmailAddress</find>
-      <find>bus</find>
       <find>email</find>
       <find>txtContact</find>
       <find>plan</find>
@@ -190,6 +185,8 @@
       <find>btnPayNow</find>
       <find>setTextColor</find>
       <find>&lt;TextView</find>
+      <find>reason</find>
+      <find>html</find>
     </findStrings>
     <replaceStrings>
       <replace>userEmploymentInfo!!</replace>
@@ -3175,7 +3172,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_loan_plan_details.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/CurrentLoanPlanAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/BusinessIdInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResLoanHistory.kt" />
@@ -3204,12 +3200,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_red_btn.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_button_red.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_payment_schedule.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanPaybackScheduledActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_payment_schedule.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_payment_schedule.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" />
       </list>
     </option>
@@ -3436,6 +3433,12 @@
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
               <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
@@ -3706,16 +3709,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="51" column="71" selection-start-line="51" selection-start-column="71" selection-end-line="51" selection-end-column="71" />
-          <folding>
-            <element signature="e#1451#1502#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/ResLoanPlans.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -3740,17 +3733,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="283" column="35" selection-start-line="283" selection-start-column="18" selection-end-line="283" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/BusinessIdInfoFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="104" column="20" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="20" />
+          <folding>
+            <element signature="e#37#2088#0" expanded="true" />
+            <element signature="e#4084#4131#1" expanded="true" />
+            <element signature="e#12568#12617#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3758,6 +3749,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
           <caret line="115" column="113" selection-start-line="115" selection-start-column="113" selection-end-line="115" selection-end-column="113" />
+          <folding>
+            <element signature="e#37#2277#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3765,6 +3759,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="836">
           <caret line="44" selection-start-line="44" selection-end-line="44" />
+          <folding>
+            <element signature="e#42#115#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3863,6 +3860,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
           <caret line="25" column="62" selection-start-line="25" selection-start-column="62" selection-end-line="25" selection-end-column="62" />
+          <folding>
+            <element signature="e#41#771#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3870,6 +3870,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#41#757#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3960,13 +3963,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_button_green.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_button_red.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -3985,19 +3981,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="274">
           <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_payment_schedule.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="243" column="49" lean-forward="true" selection-start-line="243" selection-start-column="49" selection-end-line="243" selection-end-column="49" />
-          <folding>
-            <element signature="e#8354#8369#0" expanded="true" />
-            <element signature="e#8421#8435#0" expanded="true" />
-            <element signature="e#8485#8499#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4067,8 +4050,8 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_payment_schedule.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="42" column="32" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="32" />
+        <state relative-caret-position="76">
+          <caret line="4" column="5" lean-forward="true" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
           <folding>
             <element signature="e#296#312#0" expanded="true" />
             <element signature="e#388#402#0" expanded="true" />
@@ -4082,10 +4065,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="204" column="28" selection-start-line="204" selection-start-column="28" selection-end-line="204" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="42" column="154" lean-forward="true" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="154" />
+          <folding>
+            <element signature="e#1797#1847#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="37" column="47" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_payment_schedule.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="301" column="21" selection-start-line="301" selection-start-column="21" selection-end-line="301" selection-end-column="21" />
+          <folding>
+            <element signature="e#8485#8499#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="86" column="40" selection-start-line="86" selection-start-column="40" selection-end-line="86" selection-end-column="40" />
+        <state relative-caret-position="294">
+          <caret line="40" column="158" selection-start-line="40" selection-start-column="158" selection-end-line="40" selection-end-column="158" />
+          <folding>
+            <element signature="e#1821#1863#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
