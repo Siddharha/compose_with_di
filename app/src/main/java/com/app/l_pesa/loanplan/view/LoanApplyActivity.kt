@@ -98,7 +98,16 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                     val jsonObject = JsonObject()
                     jsonObject.addProperty("loan_type",loan_type)
                     jsonObject.addProperty("product_id",product_id)
-                    jsonObject.addProperty("loan_purpose",loanPurpose)
+                    if(loanPurpose=="Others")
+                    {
+                        jsonObject.addProperty("loan_purpose",etDescription.text.toString())
+                    }
+                    else
+                    {
+                        jsonObject.addProperty("loan_purpose",loanPurpose)
+
+                    }
+
                     jsonObject.addProperty("latitude","22.56")
                     jsonObject.addProperty("longitude","88.36")
 
