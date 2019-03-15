@@ -270,6 +270,7 @@
     <string name="loan_purpose_description">Enter your loan purpose description:</string>
     <string name="enter_purpose">Enter purpose</string>
     <string name="required_loan_purpose">Required loan purpose</string>
+    <string name="required_loan_purpose_description">Required loan purpose description</string>
     <string name="max_500_words">Max 500 words</string>
     <string name="ref_no">Ref. No:</string>
     <string name="maturity_amount">Maturity Amount</string>

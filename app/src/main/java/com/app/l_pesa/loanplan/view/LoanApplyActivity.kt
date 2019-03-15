@@ -49,8 +49,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private fun initData()
     {
         val bundle       = intent.extras
-        val product_id   = bundle!!.getString("PRODUCT_ID")
-        val loan_type    = bundle.getString("LOAN_TYPE")
+        val productID    = bundle!!.getString("PRODUCT_ID")
+        val loanType     = bundle.getString("LOAN_TYPE")
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
@@ -67,17 +67,22 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         buttonSubmit.setOnClickListener {
 
-            if(loanPurpose=="Others" && TextUtils.isEmpty(etDescription.text.toString()))
+            if(TextUtils.isEmpty(loanPurpose))
+            {
+                showDescription()
+                CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose))
+            }
+            else if(loanPurpose=="Others" && TextUtils.isEmpty(etDescription.text.toString()))
             {
                 etDescription.requestFocus()
-                CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose))
+                CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose_description))
             }
             else
             {
                 val alertDialog = AlertDialog.Builder(this@LoanApplyActivity)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.want_to_apply_loan))
-                alertDialog.setPositiveButton("Yes") { _, _ -> applyLoan(loan_type,product_id) }
+                alertDialog.setPositiveButton("Yes") { _, _ -> applyLoan(loanType,productID) }
                         .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
 
@@ -122,22 +127,26 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loadDescription()
     {
-        etChooseDescription.setText(listTitle[0])
-        loanPurpose=listTitle[0]
         etChooseDescription.isFocusable =false
         etChooseDescription.setOnClickListener {
 
-            val dialog= Dialog(this@LoanApplyActivity)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.dialog_country)
-            val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
-            val titleAdapter                = DescriptionAdapter(this@LoanApplyActivity, listTitle,dialog,this)
-            recyclerView?.layoutManager     = LinearLayoutManager(this@LoanApplyActivity, LinearLayoutManager.VERTICAL, false)
-            recyclerView?.adapter           = titleAdapter
-            dialog.show()
+            showDescription()
         }
 
 
+    }
+
+    private fun showDescription()
+    {
+
+        val dialog= Dialog(this@LoanApplyActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_country)
+        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val titleAdapter                = DescriptionAdapter(this@LoanApplyActivity, listTitle,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanApplyActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter           = titleAdapter
+        dialog.show()
     }
 
     override fun onSelectDescription(s: String) {
