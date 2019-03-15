@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
@@ -65,16 +66,17 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
 
-        println("JSON"+jsonObject)
+       // println("JSON"+jsonObject)
 
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onSuccessPaybackSchedule(data: ResPaybackSchedule.Data) {
 
         swipeRefreshLayout.isRefreshing = false
-        txt_total_payback.text          = data.loanInfo!!.totalPayback.toString()
+        txt_total_payback.text          = data.loanInfo!!.currencyCode+" "+data.loanInfo!!.totalPayback.toString()
 
         if(data.schedule!!.size>0)
         {

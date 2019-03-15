@@ -61,6 +61,22 @@ class ResPaybackSchedule {
         @Expose
         var payfullamount: Payfullamount? = null
 
+        @SerializedName("payment_message")
+        @Expose
+        var payment_message: PaymentMessage? = null
+
+    }
+
+    inner class PaymentMessage {
+
+        @SerializedName("header")
+        @Expose
+        var header: String = ""
+
+        @SerializedName("header2")
+        @Expose
+        var header2: String = ""
+
     }
 
     inner class Payanytime {
