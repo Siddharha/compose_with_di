@@ -103,6 +103,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             applyFontToMenuItem(mi)
         }
 
+        //nav_view.menu.findItem(R.id.action_investment).isVisible = false
     }
 
 
