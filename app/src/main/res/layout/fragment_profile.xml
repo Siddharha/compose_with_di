@@ -386,9 +386,10 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:contentDescription="@string/app_name"
+                            app:layout_constraintBottom_toTopOf="@+id/imageView17"
                             app:layout_constraintRight_toLeftOf="@+id/txtPhone"
                             app:layout_constraintStart_toEndOf="@+id/imgProfile"
-                            app:layout_constraintTop_toTopOf="@+id/imgProfile"
+                            app:layout_constraintTop_toBottomOf="@+id/textView6"
                             app:srcCompat="@drawable/ic_call_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -411,27 +412,26 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            app:layout_constraintBottom_toBottomOf="@+id/txtEmail"
                             android:contentDescription="@string/app_name"
+                            app:layout_constraintBottom_toTopOf="@+id/imageView3"
                             app:layout_constraintStart_toEndOf="@+id/imgProfile"
-                            app:layout_constraintTop_toTopOf="@+id/txtEmail"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView2"
                             app:srcCompat="@drawable/ic_mail_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txtEmail"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            app:layout_constraintTop_toBottomOf="@+id/txtPhone"
                             android:fontFamily="@font/montserrat"
-                            android:layout_marginTop="@dimen/_5sdp"
+                            android:maxLines="1"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toTopOf="@+id/txtCreditScore"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView17"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView17" />
+                            app:layout_constraintStart_toEndOf="@+id/imageView17"
+                            app:layout_constraintTop_toTopOf="@+id/imageView17" />
 
 
                         <ImageView
@@ -439,10 +439,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:contentDescription="@string/app_name"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
+                            android:contentDescription="@string/app_name"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/txtCreditScore"
                             app:layout_constraintStart_toEndOf="@+id/imgProfile"
                             app:layout_constraintTop_toBottomOf="@+id/imageView17"
@@ -453,9 +452,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:text="@string/credit_score"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_13sdp"
@@ -464,7 +461,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView3"
                             app:layout_constraintTop_toTopOf="@id/imageView3" />
-
 
 
                     </android.support.constraint.ConstraintLayout>
@@ -511,7 +507,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/view"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_edit_icon" />
+                            app:srcCompat="@drawable/ic_edit_pencil_icon" />
 
                         <View
                             android:id="@+id/view"
@@ -686,7 +682,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/view8"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_edit_icon" />
+                            app:srcCompat="@drawable/ic_edit_pencil_icon" />
 
 
                         <View
@@ -842,7 +838,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/view9"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_edit_icon" />
+                            app:srcCompat="@drawable/ic_edit_pencil_icon" />
 
                         <View
                             android:id="@+id/view9"
@@ -957,7 +953,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/view10"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_edit_icon" />
+                            app:srcCompat="@drawable/ic_edit_pencil_icon" />
 
                         <View
                             android:id="@+id/view10"
@@ -1184,7 +1180,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/view4"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_edit_icon" />
+                            app:srcCompat="@drawable/ic_edit_pencil_icon" />
 
                         <View
                             android:id="@+id/view4"
