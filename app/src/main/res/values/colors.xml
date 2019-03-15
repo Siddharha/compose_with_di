@@ -22,6 +22,7 @@
     <color name="screenBackground">#f3f3f3</color>
     <color name="colorYellow">#f3bb25</color>
     <color name="colorRed">#D2322D</color>
+    <color name="colorRedLight">#e0706c</color>
     <color name="semi_white">#FEFFFF</color>
     <color name="color_gray_light">#a4a4a4</color>
     <color name="color_gray_text">#727272</color>

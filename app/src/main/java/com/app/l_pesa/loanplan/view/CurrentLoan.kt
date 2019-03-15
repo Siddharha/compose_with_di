@@ -11,7 +11,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.CurrentLoanPlanAdapter
-import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
+import com.app.l_pesa.loanplan.inter.ICallBackCurrentLoan
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
@@ -25,7 +25,7 @@ import java.util.ArrayList
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class CurrentLoan:Fragment(), ICallBackLoanPlans {
+class CurrentLoan:Fragment(), ICallBackCurrentLoan {
 
 
 

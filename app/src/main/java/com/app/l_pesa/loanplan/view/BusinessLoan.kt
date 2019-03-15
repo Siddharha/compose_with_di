@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanplan.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -7,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.BusinessLoanPlanAdapter
-import com.app.l_pesa.loanplan.inter.ICallBackLoanPlans
+import com.app.l_pesa.loanplan.inter.ICallBackBusinessLoan
+import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.google.gson.JsonObject
@@ -21,9 +24,7 @@ import java.util.ArrayList
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class BusinessLoan:Fragment(), ICallBackLoanPlans {
-
-
+class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
     companion object {
         fun newInstance(): Fragment {
@@ -59,13 +60,13 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
         val jsonObject = JsonObject()
         jsonObject.addProperty("loan_type","business_loan")
         val presenterLoanPlans= PresenterLoanPlans()
-        presenterLoanPlans.doLoanPlans(activity!!,jsonObject,this)
+        presenterLoanPlans.doLoanPlansBusiness(activity!!,jsonObject,this)
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
 
         swipeRefreshLayout.isRefreshing = false
-        val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, item)
+        val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, item,appliedProduct!!,this)
         rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter           = businessLoanAdapter
     }
@@ -82,9 +83,19 @@ class BusinessLoan:Fragment(), ICallBackLoanPlans {
 
     override fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?) {
 
+        val globalLoanPlanModel= GlobalLoanPlanModel.getInstance()
+        globalLoanPlanModel.modelData=details
+        startActivity(Intent(activity, LoanPlanDetailsActivity::class.java))
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
     override fun onSuccessLoanHistory() {
 
+        val bundle = Bundle()
+        bundle.putString("LOAN_TYPE","business_loan")
+        val intent = Intent(activity, LoanHistoryDetailsActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent,bundle)
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 }

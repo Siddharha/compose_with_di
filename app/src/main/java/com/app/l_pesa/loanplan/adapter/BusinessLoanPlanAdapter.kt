@@ -11,6 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
+import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
+import com.app.l_pesa.loanplan.inter.ICallBackBusinessLoan
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 
 /**
@@ -19,7 +22,7 @@ import com.app.l_pesa.loanplan.model.ResLoanPlans
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>,private val appliedProduct: ResLoanPlans.AppliedProduct, private val callBackObj: ICallBackBusinessLoan) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -57,15 +60,35 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
         }
 
 
-
         viewHolder.buttonLoanStatus.setOnClickListener {
 
-            if(loanPlanList[position].details!!.btnStatus!="disable")
+            if(loanPlanList[position].details!!.btnStatus=="enable")
             {
-                Toast.makeText(context,"", Toast.LENGTH_SHORT).show()
-            }
-        }
+                callBackObj.onSuccessLoanPlansDetails(loanPlanList[position].details)
 
+            }
+            else
+            {
+                if(loanPlanList[position].details!!.btnStatus=="disable" && loanPlanList[position].details!!.productId==appliedProduct.productId)
+                {
+                    val modelData=   GlobalLoanHistoryModel.getInstance()
+                    val loanData =   ResLoanHistoryCurrent.LoanHistory(appliedProduct.loanId,appliedProduct.identityNumber,appliedProduct.loanAmount,appliedProduct.interestRate,
+                            appliedProduct.convertionDollarValue.toString(),appliedProduct.convertionLoanAmount.toString(),appliedProduct.actualLoanAmount.toString(),appliedProduct.appliedDate,
+                            appliedProduct.sanctionedDate,appliedProduct.finishedDate,appliedProduct.disapproveDate,appliedProduct.loanStatus,appliedProduct.currencyCode,appliedProduct.dueDate,
+                            appliedProduct.duration,appliedProduct.conversionCharge,appliedProduct.conversionChargeAmount,appliedProduct.loanPurposeMessage,appliedProduct.crScWhenRequestingLoan,
+                            appliedProduct.processingFees,appliedProduct.processingFeesAmount,appliedProduct.disapproveReason)
+
+                    modelData.modelData=loanData
+                    callBackObj.onSuccessLoanHistory()
+
+                }
+                else
+                {
+                    Toast.makeText(context,loanPlanList[position].details!!.alertMgs,Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
 
 
     }
@@ -88,7 +111,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
             var txtRequiredScore     : TextView              = itemView.findViewById(R.id.txtRequiredScore) as TextView
             var txtDuration          : TextView              = itemView.findViewById(R.id.txtDuration) as TextView
             var txtRate              : TextView              = itemView.findViewById(R.id.txtRate) as TextView
-            var buttonLoanStatus     : CustomButtonRegular = itemView.findViewById(R.id.buttonLoanStatus) as CustomButtonRegular
+            var buttonLoanStatus     : CustomButtonRegular   = itemView.findViewById(R.id.buttonLoanStatus) as CustomButtonRegular
 
 
         }
