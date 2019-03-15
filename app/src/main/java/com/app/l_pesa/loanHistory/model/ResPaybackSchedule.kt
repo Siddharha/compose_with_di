@@ -6,6 +6,7 @@ import java.util.ArrayList
 
 class ResPaybackSchedule {
 
+
     @SerializedName("status")
     @Expose
     var status: Status? = null
@@ -20,55 +21,120 @@ class ResPaybackSchedule {
         var loanInfo: LoanInfo? = null
         @SerializedName("schedule")
         @Expose
-        var paybackSchedule: ArrayList<PaybackSchedule>? = null
+        var schedule: ArrayList<Schedule>? = null
 
     }
-
 
     inner class LoanInfo {
 
         @SerializedName("loan_id")
         @Expose
         var loanId: Int = 0
-        @SerializedName("ref_no")
+        @SerializedName("identity_number")
         @Expose
-        var refNo: String = ""
+        var identityNumber: String = ""
+        @SerializedName("currency_code")
+        @Expose
+        var currencyCode: String = ""
+        @SerializedName("total_payback")
+        @Expose
+        var totalPayback: Int = 0
+        @SerializedName("loan_status")
+        @Expose
+        var loanStatus: String = ""
+        @SerializedName("loan_amount")
+        @Expose
+        var loanAmount: Int = 0
+        @SerializedName("full_interest_rate")
+        @Expose
+        var fullInterestRate: Int = 0
+        @SerializedName("discount_payanytime")
+        @Expose
+        var discountPayanytime: Int = 0
+        @SerializedName("current_balance")
+        @Expose
+        var currentBalance: Int = 0
         @SerializedName("merchant_code")
         @Expose
         var merchantCode: Int = 0
-        @SerializedName("total_payback")
+        @SerializedName("payfullamount")
         @Expose
-        var totalPayback: String = ""
-        @SerializedName("payfullamount_button_status")
-        @Expose
-        var payfullamountButtonStatus: Boolean = false
-        @SerializedName("payfullamount_button_text")
-        @Expose
-        var payfullamountButtonText: String = ""
-        @SerializedName("payfullamount_message")
-        @Expose
-        var payfullamountMessage: String = ""
+        var payfullamount: Payfullamount? = null
 
     }
 
-    inner class PaybackSchedule {
+    inner class Payanytime {
 
-        @SerializedName("paid_date")
+        @SerializedName("btnVisibility")
         @Expose
-        var paidDate: String = ""
+        var btnVisibility: Boolean = false
+        @SerializedName("btnStatus")
+        @Expose
+        var btnStatus: String = ""
+        @SerializedName("btnColor")
+        @Expose
+        var btnColor: String = ""
+        @SerializedName("btnHexColor")
+        @Expose
+        var btnHexColor: String = ""
+        @SerializedName("btnText")
+        @Expose
+        var btnText: String = ""
+        @SerializedName("alertMgs")
+        @Expose
+        var alertMgs: String = ""
+        @SerializedName("paidAmount")
+        @Expose
+        var paidAmount: Int = 0
+        @SerializedName("mgsText")
+        @Expose
+        var mgsText: String = ""
+
+    }
+
+    inner class Payfullamount {
+
+        @SerializedName("btnStatus")
+        @Expose
+        var btnStatus: Boolean = false
+        @SerializedName("paidAmount")
+        @Expose
+        var paidAmount: Int = 0
+        @SerializedName("btnText")
+        @Expose
+        var btnText: String = ""
+        @SerializedName("mgsText")
+        @Expose
+        var mgsText: String = ""
+
+    }
+
+    inner class Schedule {
+
         @SerializedName("loan_history_id")
         @Expose
-        var loan_history_id: Int = 0
+        var loanHistoryId: Int = 0
+        @SerializedName("currency_code")
+        @Expose
+        var currencyCode: String = ""
         @SerializedName("paid_amount")
         @Expose
-        var paidAmount: String = ""
-        @SerializedName("paid_status")
+        var paidAmount: Int = 0
+        @SerializedName("paid_by_user_amount")
         @Expose
-        var paidStatus: String = ""
+        var paidByUserAmount: Int = 0
         @SerializedName("s_date")
         @Expose
         var sDate: String = ""
-
+        @SerializedName("paid_status")
+        @Expose
+        var paidStatus: String = ""
+        @SerializedName("paid_date")
+        @Expose
+        var paidDate: String = ""
+        @SerializedName("payanytime")
+        @Expose
+        var payanytime: Payanytime? = null
 
     }
 

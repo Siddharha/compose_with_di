@@ -13,7 +13,7 @@ import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 
 
-class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPaybackSchedule.PaybackSchedule>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<ResPaybackSchedule.Schedule>, var loanInfo: ResPaybackSchedule.LoanInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     @SuppressLint("SetTextI18n")
@@ -21,7 +21,26 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
 
         val viewHolder = holder as SelectViewHolder
 
-        if(!al_loadOBJ[position].paidAmount.isEmpty())
+        if(alScheduleOBJ[position].paidStatus=="C")
+        {
+            viewHolder.llPayment.visibility     = View.GONE
+            viewHolder.llPaid.visibility        = View.VISIBLE
+            viewHolder.txtRepayAmount.text      = alScheduleOBJ[position].paidAmount.toString()
+            viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate
+            viewHolder.txtCurrentBalance.text   = "0"
+            viewHolder.txtPaidDate.text         = context.resources.getString(R.string.paid_on)+" "+alScheduleOBJ[position].paidDate
+        }
+        else
+        {
+            viewHolder.llPaid.visibility        = View.GONE
+            viewHolder.llPayment.visibility     = View.VISIBLE
+
+            viewHolder.txtRepayAmount.text      = alScheduleOBJ[position].paidAmount.toString()
+            viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate
+            viewHolder.txtCurrentBalance.text   = loanInfo.currentBalance.toString()
+        }
+
+        /*if(!al_loadOBJ[position].paidAmount.isEmpty())
         {
            viewHolder.txtRepayAmount.text=al_loadOBJ[position].paidAmount
         }
@@ -44,7 +63,7 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
 
             else
             {
-                /*if (al_loadOBJ[position].canPay)
+                *//*if (al_loadOBJ[position].canPay)
                 {
                     viewHolder.llPaid.visibility            =   View.GONE
                     viewHolder.llPaid.visibility            =   View.VISIBLE
@@ -55,11 +74,11 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
                     viewHolder.llPaid.visibility                =   View.GONE
                     viewHolder.llPaid.visibility                =   View.VISIBLE
                     viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_grey)
-                }*/
+                }*//*
             }
 
 
-        }
+        }*/
 
         // On Click Functionality
        // viewHolder.rl_pay_now.setOnClickListener{
@@ -100,7 +119,7 @@ class PaymentScheduleAdapter(val context:Context,var al_loadOBJ: ArrayList<ResPa
 
     override fun getItemCount(): Int {
 
-        return al_loadOBJ.size
+        return alScheduleOBJ.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RecyclerView.ViewHolder {

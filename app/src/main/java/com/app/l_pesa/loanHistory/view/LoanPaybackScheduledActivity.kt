@@ -74,12 +74,12 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     override fun onSuccessPaybackSchedule(data: ResPaybackSchedule.Data) {
 
         swipeRefreshLayout.isRefreshing = false
-        txt_total_payback.text = data.loanInfo!!.totalPayback
+        txt_total_payback.text          = data.loanInfo!!.totalPayback.toString()
 
-        if(data.paybackSchedule!!.size>0)
+        if(data.schedule!!.size>0)
         {
 
-            val adapterPaymentSchedule         = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.paybackSchedule!!)
+            val adapterPaymentSchedule         = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.schedule!!,data.loanInfo!!)
             rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, LinearLayoutManager.VERTICAL, false)
             rlPayback.adapter                  = adapterPaymentSchedule
         }

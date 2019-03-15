@@ -240,14 +240,15 @@
                         android:id="@+id/btnPayNow"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_27sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
                         android:background="@drawable/ic_red_btn"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/_11sdp"
                         android:text="@string/pay_now"
+                        android:textAllCaps="false"
                         />
-                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llPaid"
