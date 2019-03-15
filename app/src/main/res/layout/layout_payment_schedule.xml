@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_95sdp"
+        android:layout_height="@dimen/_80sdp"
         android:layout_margin="@dimen/_3sdp"
         android:elevation="@dimen/_1sdp"
         android:background="@drawable/bg_white_view"
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/color_semi_deep_black"
+                    android:textColor="@color/colorSemiBlack"
 
                     />
 
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/color_semi_deep_black"
+                    android:textColor="@color/colorSemiBlack"
 
                     />
 
@@ -212,7 +212,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/color_semi_deep_black"
+                        android:textColor="@color/colorSemiBlack"
 
                         />
 
@@ -240,8 +240,8 @@
                         android:id="@+id/btnPayNow"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
-                        android:layout_marginStart="@dimen/_7sdp"
-                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/_11sdp"
                         android:text="@string/pay_now"
