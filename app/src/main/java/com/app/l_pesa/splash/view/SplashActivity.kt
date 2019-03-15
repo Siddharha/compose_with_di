@@ -147,7 +147,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
 
     private fun showSnackBar(message: String) {
         progressBar.visibility = View.INVISIBLE
-        CommonMethod.customSnackBarError(rootLayout,this@SplashActivity,  message)
+        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  message)
     }
 
     override fun onSuccessLogin(data: LoginData) {

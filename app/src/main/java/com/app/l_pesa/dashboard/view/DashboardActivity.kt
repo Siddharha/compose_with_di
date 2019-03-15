@@ -59,9 +59,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         initMenu()
         initFragment()
         initToggle()
-
+        //cacheDir.deleteRecursively()
         nav_view.setNavigationItemSelectedListener(this)
-        cacheDir.deleteRecursively() // Clean Cache
+
     }
 
    private fun initToggle()
@@ -150,7 +150,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             try {
 
                 val options = RequestOptions()
-                options.error(R.drawable.ic_id_no_image)
+                options.error(R.drawable.ic_profile)
                 Glide.with(this@DashboardActivity)
                         .load(resources.getString(R.string.profile_image_url)+userData.user_personal_info.profile_image)
                         .apply(options)
@@ -160,6 +160,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             {
 
             }
+
 
 
         }
