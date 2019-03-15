@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
@@ -50,6 +51,19 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             {
 
                 viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_green)
+            }
+
+            viewHolder.btnPayNow.setOnClickListener {
+
+                if(alScheduleOBJ[position].payanytime!!.btnStatus=="disable")
+                {
+
+                   Toast.makeText(context,alScheduleOBJ[position].payanytime!!.alertMgs,Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+
+                }
             }
         }
 
