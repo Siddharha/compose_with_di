@@ -2,6 +2,8 @@ package com.app.l_pesa.loanHistory.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +40,17 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             viewHolder.txtRepayAmount.text      = alScheduleOBJ[position].paidAmount.toString()
             viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate
             viewHolder.txtCurrentBalance.text   = loanInfo.currentBalance.toString()
+
+            if(alScheduleOBJ[position].payanytime!!.btnStatus=="disable")
+            {
+
+                viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_red)
+            }
+            else
+            {
+
+                viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_green)
+            }
         }
 
         /*if(!al_loadOBJ[position].paidAmount.isEmpty())
