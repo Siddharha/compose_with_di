@@ -18,16 +18,20 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
+import android.text.TextUtils
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.profile.inter.ICallBackUpload
+import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RegistrationStepTwoActivity : AppCompatActivity() {
+class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload {
+
 
     private val PHOTO               = 1
     private val GALLEY              = 2
@@ -44,6 +48,56 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
             selectImage()
         }
+
+        txtSubmit.setOnClickListener {
+
+            onSubmit()
+        }
+    }
+
+    private fun onSubmit()
+    {
+        if(!imageSelectStatus)
+        {
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.required_profile_image))
+        }
+        else if(TextUtils.isEmpty(etName.text.toString()))
+        {
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.required_name))
+        }
+        else
+        {
+            if(CommonMethod.isNetworkAvailable(this@RegistrationStepTwoActivity))
+            {
+                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+                swipeRefreshLayout.isRefreshing=true
+                txtSubmit.isClickable=false
+
+                val presenterAWSProfile= PresenterAWSProfile()
+                presenterAWSProfile.uploadProfileImage(this@RegistrationStepTwoActivity,this,captureFile)
+
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.no_internet))
+            }
+        }
+    }
+
+    override fun onSuccessUploadAWS(url: String) {
+
+        uploadData(url)
+    }
+
+    override fun onFailureUploadAWS(string: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        txtSubmit.isClickable=true
+    }
+
+    private fun uploadData(imageURL: String)
+    {
+
     }
 
     private fun selectImage() {
@@ -73,7 +127,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
             val imageFile = createImageFile()
             val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-            val authorities = "com.app.l_pesa.fileprovider"
+            val authorities = "com.app.l_pesa.provider"
             val imageUri = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, authorities, imageFile)
             callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             startActivityForResult(callCameraIntent, PHOTO)
@@ -87,7 +141,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     @Throws(IOException::class)
     private fun createImageFile(): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName: String = "l_pesa" + timeStamp + "_"
+        val imageFileName: String = "profile_a_" + timeStamp + "_"
         val storageDir: File = this@RegistrationStepTwoActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         if (!storageDir.exists()) storageDir.mkdirs()
         captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)

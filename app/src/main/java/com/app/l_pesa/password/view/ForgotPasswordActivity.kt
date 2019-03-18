@@ -161,6 +161,7 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
                             .apply(options)
                             .into(img_country)
                     countryCode=countryListCode.country_code
+                    break
 
                 }
 

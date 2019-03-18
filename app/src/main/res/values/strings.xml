@@ -45,6 +45,7 @@
 
     <!--Caution Message-->
     <string name="required_title">Required title</string>
+    <string name="required_name">Required name</string>
     <string name="required_name_f">Required first name</string>
     <string name="required_name_l">Required last name</string>
     <string name="required_mother_maiden_name">Required mothers maiden name</string>

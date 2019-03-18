@@ -112,6 +112,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                             .apply(options)
                             .into(img_country)
                     countryCode=countryListCode.country_code
+                    break
 
                 }
 

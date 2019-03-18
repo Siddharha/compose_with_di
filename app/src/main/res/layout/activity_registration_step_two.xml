@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipeRefreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_root"
     android:layout_width="match_parent"
@@ -73,7 +79,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:src="@drawable/ic_profile"
+                android:src="@drawable/ic_cam_icon"
                 android:layout_gravity="bottom|center"
 
                 />
@@ -104,7 +110,7 @@
 
 
             <com.app.l_pesa.common.CommonEditTextRegular
-                android:id="@+id/etPhone"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_7sdp"
@@ -115,7 +121,7 @@
                 android:textSize="@dimen/_15sdp"
                 android:layout_margin="@dimen/_5sdp"
                 android:textColor="@color/colorWhite"
-                android:inputType="text|textPassword"
+                android:inputType="text|textNoSuggestions"
                 android:textColorHint="@color/colorWhite"
                 android:maxLength="30"
                 android:text=""
@@ -148,7 +154,7 @@
         >
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/txtLogin"
+            android:id="@+id/txtSubmit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/final_step"
@@ -170,4 +176,6 @@
         />
 
 </LinearLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>
 
