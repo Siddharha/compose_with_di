@@ -297,6 +297,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 imageSelectStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfilePhoto?.setImageBitmap(bitmap)
+                captureFile=imgSize
+                CommonMethod.fileCompress(captureFile!!)
             }
 
         }

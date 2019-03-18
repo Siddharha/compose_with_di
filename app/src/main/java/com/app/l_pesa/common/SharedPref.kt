@@ -109,6 +109,7 @@ constructor(context: Context) // Constructor
     fun removeToken() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
+        editor.remove("KEY_SET_LOGIN_REQUEST")
         editor.commit()
         editor.apply()
     }
