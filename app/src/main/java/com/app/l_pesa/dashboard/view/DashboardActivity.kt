@@ -103,7 +103,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             applyFontToMenuItem(mi)
         }
 
-        //nav_view.menu.findItem(R.id.action_investment).isVisible = false
+        val userData = Gson().fromJson<LoginData>(sharedPref.userInfo, LoginData::class.java)
+        nav_view.menu.findItem(R.id.action_investment).isVisible = userData.menu_services.service_status.savings != 0
+
+
     }
 
 

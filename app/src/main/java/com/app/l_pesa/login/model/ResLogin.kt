@@ -12,7 +12,11 @@ import com.app.l_pesa.common.CommonStatusModel
 
 data class ResLogin(val status: CommonStatusModel, val data: LoginData)
 
-data class LoginData(val user_info:UserInfo,val user_personal_info:UserPersonalInfo, val access_token:String)
+data class LoginData(val user_info:UserInfo,val user_personal_info:UserPersonalInfo, val menu_services:MenuServices, val access_token:String)
+
+data class MenuServices(val service_status:MenuServicesStatus)
+
+data class MenuServicesStatus( val savings:Int)
 
 data class UserInfo(val id:Int,val profile_image:String,val phone_number:String,val credit_score:String,val register_step:String)
 
