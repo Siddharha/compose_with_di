@@ -94,9 +94,10 @@
 
 -keep class com.app.l_pesa.common.** { *; }
 -keep class com.app.l_pesa.splash.** { *; }
--keep class com.app.l_pesa.login.model.** { *; }
--keep class com.app.l_pesa.dashboard.model.** { *; }
--keep class com.app.l_pesa.loanplan.model.** { *; }
+-keep class com.app.l_pesa.login.** { *; }
+-keep class com.app.l_pesa.registration.** { *; }
+-keep class com.app.l_pesa.dashboard.** { *; }
+-keep class com.app.l_pesa.loanplan.** { *; }
 -keep class com.app.l_pesa.loanHistory.** { *; }
 -keep class com.app.l_pesa.loanplan.** { *; }
 -keep class com.app.l_pesa.investment.** { *; }

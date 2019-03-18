@@ -61,7 +61,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     private fun verifyField()
     {
         CommonMethod.hideKeyboard(this@RegistrationStepOneActivity)
-        if((etPhone.text.toString().length<10))
+        if((etPhone.text.toString().length<9))
         {
             CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
         }
@@ -73,12 +73,18 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         {
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
+                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+                swipeRefreshLayout.isRefreshing=true
+                txtQualify.isClickable=false
+
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
                 jsonObject.addProperty("country_code",countryCode)
                 jsonObject.addProperty("email_address",etEmail.text.toString())
                 jsonObject.addProperty("device_token"," ")
                 jsonObject.addProperty("platform_type","A")
+
+                println("JSON"+jsonObject)
 
                 val presenterRegistrationOneObj= PresenterRegistrationOne()
                 presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
@@ -171,6 +177,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onSuccessRegistrationOne(access_token: String) {
 
+        swipeRefreshLayout.isRefreshing=false
+        txtQualify.isClickable=true
         val sharedPref= SharedPref(this@RegistrationStepOneActivity)
         sharedPref.accessToken=access_token
         startActivity(Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java))
@@ -179,6 +187,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onErrorRegistrationOne(jsonMessage: String) {
 
+        swipeRefreshLayout.isRefreshing=false
+        txtQualify.isClickable=true
         CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,jsonMessage)
     }
 }
