@@ -24,15 +24,21 @@ import android.view.Window
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.profile.inter.ICallBackId
+import com.app.l_pesa.profile.inter.ICallBackUpload
+import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.registration.adapter.PersonalIdListAdapter
+import com.app.l_pesa.registration.inter.ICallBackRegisterThree
+import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.content_registration_step_three.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId {
+class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {
 
 
     private val idList   = arrayListOf("1","2","3","4")
@@ -106,14 +112,56 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId {
           if(CommonMethod.isNetworkAvailable(this@RegistrationStepThreeActivity))
           {
               buttonSubmit.isClickable=false
-              swipeRefreshLayout.isRefreshing=true
               swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+              swipeRefreshLayout.isRefreshing=true
+
+              val presenterAWSProfile= PresenterAWSProfile()
+              presenterAWSProfile.uploadProfileImage(this@RegistrationStepThreeActivity,this,captureFile)
           }
           else
           {
               CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepThreeActivity,resources.getString(R.string.no_internet))
           }
       }
+    }
+
+    override fun onSuccessUploadAWS(url: String) {
+
+        uploadData(url)
+    }
+
+    override fun onFailureUploadAWS(string: String) {
+
+        buttonSubmit.isClickable=true
+        swipeRefreshLayout.isRefreshing=true
+    }
+
+    private fun uploadData(imageURL: String)
+    {
+
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("id_image",imageURL)
+        jsonObject.addProperty("type_id",typeId.toString())
+        jsonObject.addProperty("id_number",etNo.text.toString())
+
+        val presenterRegistrationThree= PresenterRegistrationThree()
+        presenterRegistrationThree.doRegistrationStepThree(this@RegistrationStepThreeActivity,jsonObject,this)
+
+
+    }
+
+    override fun onSuccessRegistrationThree() {
+
+        startActivity(Intent(this@RegistrationStepThreeActivity, LoginActivity::class.java))
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+    }
+
+    override fun onErrorRegistrationThree(jsonMessage: String) {
+
+        buttonSubmit.isClickable=true
+        swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepThreeActivity,jsonMessage)
     }
 
     private fun cameraClick()

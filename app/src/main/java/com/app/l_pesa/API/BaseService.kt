@@ -15,6 +15,7 @@ import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.ResRegistrationOne
+import com.app.l_pesa.registration.model.ResRegistrationThree
 import com.app.l_pesa.registration.model.ResRegistrationTwo
 import com.app.l_pesa.splash.model.ResModelCountry
 import com.google.gson.JsonObject
@@ -54,6 +55,9 @@ interface BaseService{
 
     @POST("user/step_2")
     fun doRegisterTwo(@Body request: JsonObject): Observable<ResRegistrationTwo>
+
+    @POST("user/step_3")
+    fun doRegisterThree(@Body request: JsonObject): Observable<ResRegistrationThree>
 
     @POST("user/logout")
     fun doLogout(@Body request: JsonObject): Observable<ResLogout>
