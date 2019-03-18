@@ -107,6 +107,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         val presenterRegistrationTwo= PresenterRegistrationTwo()
         presenterRegistrationTwo.doRegistrationStepTwo(this@RegistrationStepTwoActivity,jsonObject,this)
 
+
     }
 
     override fun onSuccessRegistrationTwo() {
