@@ -76,10 +76,18 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
         {
             if (CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
-                visibleInvisibleStatus(true)
-                val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-                val presenterLoginObj = PresenterLogin()
-                presenterLoginObj.doLogin(this@SplashActivity, jsonObject, this)
+                if(!TextUtils.isEmpty(sharedPrefOBJ.loginRequest))
+                {
+                    visibleInvisibleStatus(true)
+                    val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+                    val presenterLoginObj = PresenterLogin()
+                    presenterLoginObj.doLogin(this@SplashActivity, jsonObject, this)
+                }
+                else
+                {
+                    loadNext(sharedPrefOBJ)
+                }
+
 
             }
             else
@@ -91,21 +99,26 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
 
         } else
         {
-            if (TextUtils.isEmpty(sharedPrefOBJ.countryList))
-            {
-                if (CommonMethod.isNetworkAvailable(this@SplashActivity))
-                {
-                    visibleInvisibleStatus(true)
-                    loadCountry()
-                } else
-                {
-                    visibleInvisibleStatus(false)
-                }
-            } else
+            loadNext(sharedPrefOBJ)
+        }
+    }
+
+    private fun loadNext(sharedPrefOBJ: SharedPref)
+    {
+        if (TextUtils.isEmpty(sharedPrefOBJ.countryList))
+        {
+            if (CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
                 visibleInvisibleStatus(true)
-                splashLoading()
+                loadCountry()
+            } else
+            {
+                visibleInvisibleStatus(false)
             }
+        } else
+        {
+            visibleInvisibleStatus(true)
+            splashLoading()
         }
     }
 

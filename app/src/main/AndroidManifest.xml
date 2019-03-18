@@ -26,11 +26,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".registration.view.RegistrationStepThreeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
             android:name=".profile.view.ActivityViewFile"
             android:label="@string/view_file"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
 
         <service
             android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
@@ -108,11 +112,14 @@
         <activity
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait">
-            <!--<intent-filter>
+
+
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".main.MainActivity"
@@ -128,14 +135,11 @@
             android:name=".registration.view.RegistrationStepTwoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".password.view.ForgotPasswordActivity"
