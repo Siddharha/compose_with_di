@@ -171,6 +171,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onSuccessRegistrationOne(access_token: String) {
 
+        val sharedPref= SharedPref(this@RegistrationStepOneActivity)
+        sharedPref.accessToken=access_token
         startActivity(Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }

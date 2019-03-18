@@ -24,14 +24,16 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
+import com.app.l_pesa.registration.inter.ICallBackRegisterTwo
+import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload {
-
+class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
     private val PHOTO               = 1
     private val GALLEY              = 2
@@ -74,7 +76,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload {
                 txtSubmit.isClickable=false
 
                 val presenterAWSProfile= PresenterAWSProfile()
-                presenterAWSProfile.uploadProfileImage(this@RegistrationStepTwoActivity,this,captureFile)
+                presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,captureFile)
 
             }
             else
@@ -98,6 +100,24 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload {
     private fun uploadData(imageURL: String)
     {
 
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("name",etName.text.toString())
+        jsonObject.addProperty("image",imageURL)
+
+        val presenterRegistrationTwo= PresenterRegistrationTwo()
+        presenterRegistrationTwo.doRegistrationStepTwo(this@RegistrationStepTwoActivity,jsonObject,this)
+
+    }
+
+    override fun onSuccessRegistrationTwo() {
+
+    }
+
+    override fun onErrorRegistrationTwo(jsonMessage: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        txtSubmit.isClickable=true
+        CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,jsonMessage)
     }
 
     private fun selectImage() {
@@ -140,6 +160,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload {
     @SuppressLint("SimpleDateFormat")
     @Throws(IOException::class)
     private fun createImageFile(): File {
+
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val imageFileName: String = "profile_a_" + timeStamp + "_"
         val storageDir: File = this@RegistrationStepTwoActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
