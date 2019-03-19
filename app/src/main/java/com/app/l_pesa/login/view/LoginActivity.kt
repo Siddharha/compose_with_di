@@ -21,6 +21,7 @@ import android.text.TextUtils
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.RunTimePermission
@@ -291,6 +292,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
+        Toast.makeText(this@LoginActivity,"Registration Process Incomplete",Toast.LENGTH_SHORT).show()
 
     }
 
