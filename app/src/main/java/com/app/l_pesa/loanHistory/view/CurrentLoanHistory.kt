@@ -44,6 +44,11 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         loadHistory()
         swipeRefresh()
 
+        buttonApplyLoan.setOnClickListener {
+
+            activity?.onBackPressed()
+        }
+
     }
 
     private fun loadHistory()

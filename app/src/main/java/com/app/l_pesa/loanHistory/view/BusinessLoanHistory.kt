@@ -30,7 +30,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     companion object {
         fun newInstance(): Fragment {
-            return CurrentLoanHistory()
+            return BusinessLoanHistory()
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,6 +43,11 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
         loadHistory()
         swipeRefresh()
+        buttonApplyLoan.setOnClickListener {
+
+            activity?.onBackPressed()
+        }
+
 
     }
 
@@ -74,6 +79,10 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     }
 
     override fun onSuccessLoanHistory(loan_historyBusiness: ArrayList<ResLoanHistoryBusiness.LoanHistory>, cursors: ResLoanHistoryBusiness.Cursors, user_credit_score: Int) {
+
+
+        cardView.visibility  = View.GONE
+        rvLoan.visibility    = View.VISIBLE
 
         activity!!.runOnUiThread {
             hasNext =cursors.hasNext
@@ -138,6 +147,8 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     override fun onEmptyLoanHistory() {
 
         swipeRefreshLayout.isRefreshing = false
+        rvLoan.visibility  =View.GONE
+        cardView.visibility=View.VISIBLE
 
     }
 
