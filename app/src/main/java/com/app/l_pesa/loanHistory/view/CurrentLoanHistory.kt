@@ -75,6 +75,9 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
     override fun onSuccessLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors, user_credit_score: Int) {
 
+        cardView.visibility  = View.GONE
+        rvLoan.visibility    = View.VISIBLE
+
         activity!!.runOnUiThread {
             hasNext =cursors.hasNext
             after   =cursors.after
@@ -138,6 +141,8 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     override fun onEmptyLoanHistory() {
 
         swipeRefreshLayout.isRefreshing = false
+        rvLoan.visibility  =View.GONE
+        cardView.visibility=View.VISIBLE
 
     }
 
