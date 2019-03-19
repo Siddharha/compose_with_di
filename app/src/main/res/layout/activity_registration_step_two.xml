@@ -161,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_7sdp"
-            android:hint="@string/enter_name"
+            android:hint="@string/enter_otp"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_2sdp"
             android:background="@android:color/transparent"

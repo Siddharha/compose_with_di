@@ -19,6 +19,7 @@ import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.model.ResModelData
 import com.app.l_pesa.splash.presenter.PresenterCountry
@@ -78,6 +79,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
             {
                 if(!TextUtils.isEmpty(sharedPrefOBJ.loginRequest))
                 {
+
                     visibleInvisibleStatus(true)
                     val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
                     val presenterLoginObj = PresenterLogin()
@@ -183,7 +185,11 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
 
     override fun onIncompleteLogin(message: String) {
 
+        Toast.makeText(this@SplashActivity,resources.getString(R.string.refer_to_otp),Toast.LENGTH_LONG).show()
         progressBar.visibility = View.INVISIBLE
+        val intent = Intent(this@SplashActivity, RegistrationStepOneActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
 
     }

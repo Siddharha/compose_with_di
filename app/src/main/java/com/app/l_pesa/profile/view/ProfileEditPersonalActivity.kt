@@ -34,6 +34,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -52,7 +53,9 @@ import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat
@@ -543,6 +546,43 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             Toast.makeText(this@ProfileEditPersonalActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
     }
+
+    /*fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        val wallpaperDirectory = File(
+                (Environment.getExternalStorageDirectory()).toString() +"/lpesa_app")
+        // have the object build the directory structure, if needed.
+
+        if (!wallpaperDirectory.exists())
+        {
+
+            wallpaperDirectory.mkdirs()
+        }
+
+        try
+        {
+            val f = File(wallpaperDirectory, ((Calendar.getInstance()
+                    .timeInMillis).toString() + ".jpg"))
+            f.createNewFile()
+            captureFile=f
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this@ProfileEditPersonalActivity,
+                    arrayOf(f.path),
+                    arrayOf("image/jpeg"), null)
+            fo.close()
+
+
+            return f.getAbsolutePath()
+        }
+        catch (e1: IOException) {
+            e1.printStackTrace()
+        }
+
+        return ""
+    }*/
 
 
     override fun onChangeTitle(s: String)

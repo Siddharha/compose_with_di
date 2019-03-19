@@ -30,7 +30,7 @@
     <string name="upload_selfie_picture">Upload selfie picture and write your name</string>
     <string name="upload_id_picture">Upload your ID picture &amp; choose your ID type &amp; enter your ID number</string>
     <string name="continue_to_login">Continue to login</string>
-	<string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
+    <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
 
     <!--Password section-->
     <string name="password">Password</string>
@@ -90,6 +90,7 @@
     <string name="required_id_type">Please select the type of ID.</string>
 	<string name="required_otp">Please enter the OTP.</string>
 	<string name="otp_not_match">You entered an incorrect OTP.</string>
+
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
