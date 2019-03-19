@@ -292,7 +292,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
-        Toast.makeText(this@LoginActivity,resources.getString(R.string.refer_to_otp),Toast.LENGTH_LONG).show()
+        Toast.makeText(this@LoginActivity,resources.getString(R.string.incomplete_reg_message),Toast.LENGTH_LONG).show()
         val intent = Intent(this@LoginActivity, RegistrationStepOneActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)

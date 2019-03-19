@@ -185,7 +185,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
 
     override fun onIncompleteLogin(message: String) {
 
-        Toast.makeText(this@SplashActivity,resources.getString(R.string.refer_to_otp),Toast.LENGTH_LONG).show()
+        Toast.makeText(this@SplashActivity,resources.getString(R.string.incomplete_reg_message),Toast.LENGTH_LONG).show()
         progressBar.visibility = View.INVISIBLE
         val intent = Intent(this@SplashActivity, RegistrationStepOneActivity::class.java)
         startActivity(intent)

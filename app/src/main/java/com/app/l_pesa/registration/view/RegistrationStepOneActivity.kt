@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.Window
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -178,6 +179,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onSuccessRegistrationOne(data: RegistrationData) {
 
+        Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.incomplete_reg_message), Toast.LENGTH_LONG).show()
         swipeRefreshLayout.isRefreshing=false
         txtQualify.isClickable =true
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
