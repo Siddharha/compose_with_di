@@ -88,6 +88,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     {
 
         val options = RequestOptions()
+        options.error(R.drawable.ic_profile)
         Glide.with(this@ProfileEditPersonalActivity)
                 .load(resources.getString(R.string.profile_image_url)+profileData.userInfo!!.profileImage)
                 .apply(options)
@@ -162,12 +163,17 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapOLD["sex"]       = profileData.userPersonalInfo!!.sex
             hashMapOLD["imgChange"] = "false"
 
+            var dateRequest=""
+            dateRequest = if(!TextUtils.isEmpty(txtDOB.text.toString())) {
+                val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+                val date         = inputFormat.parse(txtDOB.text.toString())
 
-            val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
-            val date         = inputFormat.parse(txtDOB.text.toString())
+                val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+                outputFormat.format(date)
+            } else {
+                ""
+            }
 
-            val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-            val dateRequest  = outputFormat.format(date)
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["title"]     = txtTitle.text.toString()
@@ -203,6 +209,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 else if(TextUtils.isEmpty(etEmail.text.toString()))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_email))
+                }
+                else if(TextUtils.isEmpty(txtDOB.text.toString()))
+                {
+                    showDatePicker()
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_date_of_birth))
                 }
                 else if(TextUtils.isEmpty(etMotherName.text.toString()))
                 {
@@ -272,8 +283,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         jsonObject.addProperty("sex",gender)
         jsonObject.addProperty("merital_status",txtMarital.text.toString())
         jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
-       // jsonObject.addProperty("profile_image","proimg_new_61455_121a941dc8544874fa50c59ff3a63668.jpg")
-        jsonObject.addProperty("profile_image",imageURL)
+        jsonObject.addProperty("profile_image",""+imageURL)
+
+        println("JSON"+jsonObject)
 
 
         val presenterPersonalInfo= PresenterPersonalInfo()
@@ -591,44 +603,49 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         txtDOB.isFocusable=false
         txtDOB.setOnClickListener {
 
-            val c       = Calendar.getInstance()
-            val year    = c.get(Calendar.YEAR)
-            val month   = c.get(Calendar.MONTH)+1
-            val day     = c.get(Calendar.DAY_OF_MONTH)
+            showDatePicker()
 
-            val dpd = DatePickerDialog(this@ProfileEditPersonalActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+        }
+    }
 
-                if(dayOfMonth.toString().length==1)
+    private fun showDatePicker()
+    {
+        val c       = Calendar.getInstance()
+        val year    = c.get(Calendar.YEAR)
+        val month   = c.get(Calendar.MONTH)+1
+        val day     = c.get(Calendar.DAY_OF_MONTH)
+
+        val dpd = DatePickerDialog(this@ProfileEditPersonalActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+
+            if(dayOfMonth.toString().length==1)
+            {
+                if(monthOfYear.toString().length==1)
                 {
-                    if(monthOfYear.toString().length==1)
-                    {
-                        txtDOB.setText("0$dayOfMonth-0$month-$year")
-                    }
-                    else
-                    {
-                        txtDOB.setText("0$dayOfMonth-$month-$year")
-                    }
-
+                    txtDOB.setText("0$dayOfMonth-0$month-$year")
                 }
                 else
                 {
-                    if(monthOfYear.toString().length==1)
-                    {
-                        txtDOB.setText("$dayOfMonth-0$month-$year")
-                    }
-                    else
-                    {
-                        txtDOB.setText("$dayOfMonth-$monthOfYear-$year")
-                    }
-
+                    txtDOB.setText("0$dayOfMonth-$month-$year")
                 }
 
-            }, year, month, day)
+            }
+            else
+            {
+                if(monthOfYear.toString().length==1)
+                {
+                    txtDOB.setText("$dayOfMonth-0$month-$year")
+                }
+                else
+                {
+                    txtDOB.setText("$dayOfMonth-$monthOfYear-$year")
+                }
 
-            dpd.show()
-            dpd.datePicker.maxDate = System.currentTimeMillis()
+            }
 
-        }
+        }, year, month, day)
+
+        dpd.show()
+        dpd.datePicker.maxDate = System.currentTimeMillis()
     }
 
 

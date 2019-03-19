@@ -51,6 +51,7 @@
     <string name="required_name_f">Required first name</string>
     <string name="required_name_l">Required last name</string>
     <string name="required_mother_maiden_name">Required mothers maiden name</string>
+    <string name="required_date_of_birth">Required date of birth</string>
     <string name="required_phone_email">Required valid phone no or email.</string>
     <string name="required_phone">Required valid phone number.</string>
     <string name="required_password">Please enter the password.</string>

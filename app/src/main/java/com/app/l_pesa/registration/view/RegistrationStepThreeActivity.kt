@@ -49,7 +49,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     private var imageFilePath       = ""
     private var imageSelectStatus   : Boolean = false
 
-    var typeId=0
+    var typeId="0"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +94,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
     private fun onSubmitData()
     {
-      if(typeId==0)
+      if(typeId=="0")
       {
           showIdType()
           CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepThreeActivity,resources.getString(R.string.required_id_type))
@@ -116,7 +116,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
               swipeRefreshLayout.isRefreshing=true
 
               val presenterAWSProfile= PresenterAWSProfile()
-              presenterAWSProfile.uploadProfileImage(this@RegistrationStepThreeActivity,this,captureFile)
+              presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepThreeActivity,this,captureFile)
           }
           else
           {
@@ -143,6 +143,8 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         jsonObject.addProperty("id_image",imageURL)
         jsonObject.addProperty("type_id",typeId.toString())
         jsonObject.addProperty("id_number",etNo.text.toString())
+
+        println("JSON"+jsonObject)
 
         val presenterRegistrationThree= PresenterRegistrationThree()
         presenterRegistrationThree.doRegistrationStepThree(this@RegistrationStepThreeActivity,jsonObject,this)
@@ -347,7 +349,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     override fun onClickIdType(position: Int, type: String) {
 
         etIdType.setText(nameList[position])
-        typeId=idList[position].toInt()
+        typeId=idList[position]
     }
 
 
