@@ -179,7 +179,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onSuccessRegistrationOne(data: RegistrationData) {
 
-        Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.incomplete_reg_message), Toast.LENGTH_LONG).show()
+        Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
         swipeRefreshLayout.isRefreshing=false
         txtQualify.isClickable =true
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)

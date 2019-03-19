@@ -23,6 +23,7 @@
     <string name="change_password">Change Password</string>
     <string name="enter_name">Enter Name</string>
 	<string name="enter_otp">Enter OTP</string>
+	<string name="coming_soon">Coming soon</string>
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,370 +7,208 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".profile.view.ProfileEditEmpInfoActivity"
-    tools:showIn="@layout/activity_profile_edit_emp_info">
+    tools:ignore="MissingConstraints">
 
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/llRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/screenBackground"
-        android:orientation="vertical"
-        android:weightSum="10">
+        android:orientation="vertical">
 
 
-        <LinearLayout
+        <com.app.l_pesa.common.CommonTextRegular
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".25"
-            android:orientation="vertical" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_weight=".5"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:fontFamily="@font/montserrat"
-            android:gravity="center|start"
             android:text="@string/earn_credit_coins_ten"
             android:textColor="@color/dark_text_color"
             android:textSize="@dimen/_15sdp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".25"
-            android:orientation="vertical" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_4sdp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_weight="6.75"
-            android:orientation="vertical"
-           >
-
-            <android.support.v7.widget.CardView
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="@dimen/_4sdp"
-                app:cardElevation="@dimen/_2sdp"
-                app:cardUseCompatPadding="true">
+                android:padding="@dimen/_10sdp">
 
-                <LinearLayout
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/tilTypeEmp"
+                    style="@style/customInputLayoutStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="13">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etTypeEmp"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight="1.85"
-                        android:orientation="horizontal"
-                        tools:ignore="NestedWeights">
+                        android:hint="@string/type_of_employer"
+                        android:inputType="text"
+                        android:textColor="@color/textColors"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.app.l_pesa.common.CommonInputLayout
-                            android:id="@+id/tilTypeEmp"
-                            style="@style/customInputLayoutStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            app:passwordToggleEnabled="true">
+                </com.app.l_pesa.common.CommonInputLayout>
 
-                            <com.app.l_pesa.common.CommonEditTextRegular
-                                android:id="@+id/etTypeEmp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:hint="@string/type_of_employer"
-                                android:inputType="textNoSuggestions|text"
-                                android:longClickable="false"
-                                android:maxLength="35"
-                                android:maxLines="1"
-                                android:textColor="@color/textColors"
-                                android:textColorHint="@color/colorGreyDeep"
-                                android:textSize="@dimen/_13sdp"
-                                app:autoSizeMaxTextSize="@dimen/_14sdp"
-                                app:autoSizeMinTextSize="@dimen/_10sdp"
-                                app:autoSizeStepGranularity="0.2sp"
-                                app:autoSizeTextType="uniform" />
-                        </com.app.l_pesa.common.CommonInputLayout>
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/tilNameEmp"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilTypeEmp">
 
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etNameEmp"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight="1.85"
-                        android:orientation="horizontal"
-                        tools:ignore="NestedWeights">
+                        android:layout_height="match_parent"
+                        android:hint="@string/name_of_employer"
+                        android:inputType="text"
+                        android:textColor="@color/textColors"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.app.l_pesa.common.CommonInputLayout
-                            android:id="@+id/tilNameEmp"
-                            style="@style/customInputLayoutStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:passwordToggleEnabled="true">
+                </com.app.l_pesa.common.CommonInputLayout>
 
-                            <com.app.l_pesa.common.CommonEditTextRegular
-                                android:id="@+id/etNameEmp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:hint="@string/name_of_emp"
-                                android:inputType="textNoSuggestions|text"
-                                android:longClickable="false"
-                                android:maxLength="15"
-                                android:maxLines="1"
-                                android:textColor="@color/textColors"
-                                android:textColorHint="@color/colorGreyDeep"
-                                android:textSize="@dimen/_13sdp"
-                                app:autoSizeMaxTextSize="@dimen/_14sdp"
-                                app:autoSizeMinTextSize="@dimen/_10sdp"
-                                app:autoSizeStepGranularity="0.2sp"
-                                app:autoSizeTextType="uniform" />
-                        </com.app.l_pesa.common.CommonInputLayout>
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/tilDepartment"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilNameEmp">
 
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etDepartment"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight="1.85"
-                        android:orientation="horizontal"
-                        tools:ignore="NestedWeights">
+                        android:layout_height="match_parent"
+                        android:hint="@string/department"
+                        android:inputType="text"
+                        android:textColor="@color/textColors"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.app.l_pesa.common.CommonInputLayout
-                            android:id="@+id/tilDepartment"
-                            style="@style/customInputLayoutStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                </com.app.l_pesa.common.CommonInputLayout>
 
-                            <com.app.l_pesa.common.CommonEditTextRegular
-                                android:id="@+id/etDepartment"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:hint="@string/department"
-                                android:inputType="textNoSuggestions|text"
-                                android:longClickable="false"
-                                android:maxLength="20"
-                                android:maxLines="1"
-                                android:textColor="@color/textColors"
-                                android:textColorHint="@color/colorGreyDeep"
-                                android:textSize="@dimen/_13sdp"
-                                app:autoSizeMaxTextSize="@dimen/_14sdp"
-                                app:autoSizeMinTextSize="@dimen/_10sdp"
-                                app:autoSizeStepGranularity="0.2sp"
-                                app:autoSizeTextType="uniform" />
-                        </com.app.l_pesa.common.CommonInputLayout>
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/tilPosition"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilDepartment">
 
-                    </LinearLayout>
-
-
-                    <LinearLayout
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etPosition"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight="1.85"
-                        android:orientation="horizontal"
-                        tools:ignore="NestedWeights">
+                        android:layout_height="match_parent"
+                        android:hint="@string/occupation"
+                        android:inputType="text"
+                        android:textColor="@color/textColors"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.app.l_pesa.common.CommonInputLayout
-                            android:id="@+id/tilPosition"
-                            style="@style/customInputLayoutStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                </com.app.l_pesa.common.CommonInputLayout>
 
-                            <com.app.l_pesa.common.CommonEditTextRegular
-                                android:id="@+id/etPosition"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:hint="@string/emp_position"
-                                android:inputType="textNoSuggestions|text"
-                                android:longClickable="false"
-                                android:maxLength="25"
-                                android:maxLines="1"
-                                android:textColor="@color/textColors"
-                                android:textColorHint="@color/colorGreyDeep"
-                                android:textSize="@dimen/_13sdp"
-                                app:autoSizeMaxTextSize="@dimen/_14sdp"
-                                app:autoSizeMinTextSize="@dimen/_10sdp"
-                                app:autoSizeStepGranularity="0.2sp"
-                                app:autoSizeTextType="uniform" />
-                        </com.app.l_pesa.common.CommonInputLayout>
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/tilId"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilPosition">
 
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etId"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight="1.85"
-                        android:orientation="horizontal"
-                        tools:ignore="NestedWeights">
+                        android:layout_height="match_parent"
+                        android:hint="@string/emp_id"
+                        android:inputType="text"
+                        android:textColor="@color/textColors"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <com.app.l_pesa.common.CommonInputLayout
-                            android:id="@+id/tilId"
-                            style="@style/customInputLayoutStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                </com.app.l_pesa.common.CommonInputLayout>
 
-                            <com.app.l_pesa.common.CommonEditTextRegular
-                                android:id="@+id/etId"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:hint="@string/emp_id"
-                                android:inputType="textNoSuggestions|text"
-                                android:longClickable="false"
-                                android:maxLength="15"
-                                android:maxLines="1"
-                                android:textColor="@color/textColors"
-                                android:textColorHint="@color/colorGreyDeep"
-                                android:textSize="@dimen/_13sdp"
-                                app:autoSizeMaxTextSize="@dimen/_14sdp"
-                                app:autoSizeMinTextSize="@dimen/_10sdp"
-                                app:autoSizeStepGranularity="0.2sp"
-                                app:autoSizeTextType="uniform" />
-                        </com.app.l_pesa.common.CommonInputLayout>
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/tilCity"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilId">
 
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etCity"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight="1.85"
-                        android:orientation="horizontal"
-                        tools:ignore="NestedWeights">
-
-                        <com.app.l_pesa.common.CommonInputLayout
-                            android:id="@+id/tilCity"
-                            style="@style/customInputLayoutStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <com.app.l_pesa.common.CommonEditTextRegular
-                                android:id="@+id/etCity"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:hint="@string/emp_city"
-                                android:inputType="textNoSuggestions|text"
-                                android:longClickable="false"
-                                android:maxLength="25"
-                                android:maxLines="1"
-                                android:textColor="@color/textColors"
-                                android:textColorHint="@color/colorGreyDeep"
-                                android:textSize="@dimen/_13sdp"
-                                app:autoSizeMaxTextSize="@dimen/_14sdp"
-                                app:autoSizeMinTextSize="@dimen/_10sdp"
-                                app:autoSizeStepGranularity="0.2sp"
-                                app:autoSizeTextType="uniform" />
-                        </com.app.l_pesa.common.CommonInputLayout>
+                        android:layout_height="match_parent"
+                        android:hint="@string/emp_city"
+                        android:inputType="text"
+                        android:textColor="@color/textColors"
+                        android:textSize="@dimen/_12sdp" />
 
 
-                    </LinearLayout>
+                </com.app.l_pesa.common.CommonInputLayout>
+
+                <com.app.l_pesa.common.CustomButtonRegular
+                    android:id="@+id/buttonSubmit"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/ripple_green_button"
+                    android:text="@string/submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonCancel"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilCity" />
+
+                <com.app.l_pesa.common.CustomButtonRegular
+                    android:id="@+id/buttonCancel"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@drawable/bg_grey_view"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorGrey"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/buttonSubmit"
+                    app:layout_constraintTop_toBottomOf="@+id/tilCity" />
+
+            </android.support.constraint.ConstraintLayout>
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight=".25"
-
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_weight="1.25"
-                        android:orientation="horizontal"
-                        android:weightSum="1"
-                        tools:ignore="NestedWeights">
-
-                        <com.app.l_pesa.common.CustomButtonRegular
-                            android:id="@+id/buttonSubmit"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".45"
-                            android:background="@drawable/ripple_green_button"
-                            android:text="@string/submit"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorAppDeep"
-                            android:textSize="@dimen/_12sdp" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".10" />
-
-                        <com.app.l_pesa.common.CustomButtonRegular
-                            android:id="@+id/buttonCancel"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".45"
-                            android:background="@drawable/bg_grey_view"
-                            android:text="@string/cancel"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorGreyDeep"
-                            android:textSize="@dimen/_12sdp"
-
-                            />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".25"
-            android:orientation="vertical" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="@dimen/_27sdp"
-                android:layout_height="@dimen/_27sdp"
-                android:indeterminateTint="@color/colorPrimary"
-                android:visibility="invisible"
-
-                />
-
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
+
 </android.support.v4.widget.SwipeRefreshLayout>

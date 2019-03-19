@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/colorSemiWhite" android:state_checked="true" />
-    <item android:drawable="@android:color/transparent" />
-</selector>
-<!--
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
@@ -12,7 +7,7 @@
     </item>
     <item android:left="@dimen/_7sdp" android:right="@dimen/_2sdp">
         <shape android:shape="rectangle">
-            <solid android:color="@color/colorSemiLightBlack"/>
+            <solid android:color="#e2e2e2"/>
         </shape>
     </item>
     <item android:bottom="1px">
@@ -20,4 +15,9 @@
             <solid android:color="@color/colorWhite"/>
         </shape>
     </item>
-</layer-list>-->
+</layer-list>
+
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/colorSemiWhite" android:state_checked="true" />
+    <item android:drawable="@android:color/transparent" />
+</selector>-->

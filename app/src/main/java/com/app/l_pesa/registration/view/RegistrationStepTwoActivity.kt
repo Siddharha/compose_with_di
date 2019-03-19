@@ -116,6 +116,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         val jsonObject = JsonObject()
         jsonObject.addProperty("name",etName.text.toString())
         jsonObject.addProperty("image",imageURL)
+        jsonObject.addProperty("otp",mobileOtp)
 
         val presenterRegistrationTwo= PresenterRegistrationTwo()
         presenterRegistrationTwo.doRegistrationStepTwo(this@RegistrationStepTwoActivity,jsonObject,this)

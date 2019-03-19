@@ -34,12 +34,15 @@ import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
+import com.app.l_pesa.lpk.view.LpkFragment
 import com.app.l_pesa.lpk.view.WalletAddressFragment
 import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.points.view.PointsFragment
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.app.l_pesa.settings.view.SettingsFragment
+import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.lang.Exception
@@ -253,7 +256,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_points -> {
                 toolbar.title =resources.getString(R.string.nav_item_points)
-
+                navigateToFragment(PointsFragment.newInstance(),false)
             }
             R.id.action_investment -> {
                 toolbar.title =resources.getString(R.string.nav_item_investment)
@@ -262,10 +265,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_lpk-> {
                 toolbar.title =resources.getString(R.string.nav_item_lpk)
-               navigateToFragment(WalletAddressFragment.newInstance(),false)
+               navigateToFragment(LpkFragment.newInstance(),false)
             }
             R.id.action_wallet-> {
                 toolbar.title =resources.getString(R.string.nav_item_wallet)
+                navigateToFragment(WalletFragment.newInstance(),false)
 
             }
             R.id.action_settings-> {
