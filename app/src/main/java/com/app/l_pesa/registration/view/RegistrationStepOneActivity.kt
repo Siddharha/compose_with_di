@@ -17,6 +17,7 @@ import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.inter.ICallBackRegisterOne
+import com.app.l_pesa.registration.model.RegistrationData
 import com.app.l_pesa.registration.presenter.PresenterRegistrationOne
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
@@ -175,13 +176,18 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
-    override fun onSuccessRegistrationOne(access_token: String) {
+    override fun onSuccessRegistrationOne(data: RegistrationData) {
 
         swipeRefreshLayout.isRefreshing=false
-        txtQualify.isClickable=true
-        val sharedPref= SharedPref(this@RegistrationStepOneActivity)
-        sharedPref.accessToken=access_token
-        startActivity(Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java))
+        txtQualify.isClickable =true
+        val sharedPref = SharedPref(this@RegistrationStepOneActivity)
+        sharedPref.accessToken=data.access_token
+
+        val bundle = Bundle()
+        bundle.putString("OTP",data.otp)
+        val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent,bundle)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 

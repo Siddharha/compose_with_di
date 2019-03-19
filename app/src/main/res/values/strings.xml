@@ -22,6 +22,7 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="change_password">Change Password</string>
     <string name="enter_name">Enter Name</string>
+	<string name="enter_otp">Enter OTP</string>
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
@@ -29,6 +30,7 @@
     <string name="upload_selfie_picture">Upload selfie picture and write your name</string>
     <string name="upload_id_picture">Upload your ID picture &amp; choose your ID type &amp; enter your ID number</string>
     <string name="continue_to_login">Continue to login</string>
+	<string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
 
     <!--Password section-->
     <string name="password">Password</string>
@@ -46,46 +48,48 @@
     <string name="password_rule_five">At least 1 special character (like !@#$%*?).</string>
 
     <!--Caution Message-->
-    <string name="required_title">Required title</string>
-    <string name="required_name">Required name</string>
-    <string name="required_name_f">Required first name</string>
-    <string name="required_name_l">Required last name</string>
-    <string name="required_mother_maiden_name">Required mothers maiden name</string>
-    <string name="required_date_of_birth">Required date of birth</string>
-    <string name="required_phone_email">Required valid phone no or email.</string>
-    <string name="required_phone">Required valid phone number.</string>
+    <string name="required_title">Please select the title.</string>
+    <string name="required_name">Please enter your name.</string>
+    <string name="required_name_f">Please enter your first name.</string>
+    <string name="required_name_l">Please enter your last name.</string>
+    <string name="required_mother_maiden_name">Please enter your mother\'s maiden name.</string>
+    <string name="required_date_of_birth">Please enter the date of birth.</string>
+    <string name="required_phone_email">Please enter a valid phone number / email address.</string>
+    <string name="required_phone">Please enter valid phone number.</string>
     <string name="required_password">Please enter the password.</string>
-    <string name="enter_current_password">Required current password.</string>
-    <string name="enter_new_password">Required new password.</string>
+    <string name="enter_current_password">Please enter the current password.</string>
+    <string name="enter_new_password">Please enter the new password.</string>
     <string name="enter_confirm_password">Retype the new password to confirm.</string>
     <string name="confirm_password_not_match">New passwords do not match.</string>
     <string name="new_old_password_different">New and old password should be different.</string>
     <string name="enter_password_rule">Password should follow mentioned rule.</string>
-    <string name="required_email">Required valid email address.</string>
+    <string name="required_email">Please enter a valid email address.</string>
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
     <string name="password_change_success">Your password was changed.</string>
-    <string name="change_one_info">Change minimum one information</string>
+    <string name="change_one_info">Nothing to save! You have not yet edited.</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="please_wait">Please wait…</string>
     <string name="no_internet_details">You are not connected to internet, make sure Wi-Fi/Data is on, Airplane mode is off and try again.</string>
     <string name="turn_on_location">To continue using our services, you need to turn on your GPS and use High Accuracy Mode. Do you want to turn it on?</string>
     <string name="retry">Retry</string>
     <string name="init">INIT</string>
-    <string name="required_street_address">Required Street Address</string>
-    <string name="required_postal_code">Required Postal Code</string>
-    <string name="required_city">Required City</string>
-    <string name="required_emp_type">Required Employer Type</string>
-    <string name="required_emp_name">Required Employer Name</string>
-    <string name="required_emp_department">Required Employer Department</string>
-    <string name="required_emp_occupation">Required Employer Occupation</string>
-    <string name="required_emp_id">Required Employer Id</string>
-    <string name="required_emp_city">Required Employer City</string>
-    <string name="required_business_name">Required Business Name</string>
-    <string name="required_tin_number">Required TIN Number</string>
-    <string name="required_id_number">Required Valid ID Number</string>
-    <string name="required_id_type">Required ID Type</string>
+    <string name="required_street_address">Please enter your street address.</string>
+    <string name="required_postal_code">Please enter the postal code.</string>
+    <string name="required_city">Please enter the city.</string>
+    <string name="required_emp_type">Please mention the type of employment.</string>
+    <string name="required_emp_name">Please enter the name of your employer.</string>
+    <string name="required_emp_department">Please enter the deptartment you are employed in.</string>
+    <string name="required_emp_occupation">Please specify your designation.</string>
+    <string name="required_emp_id">Please enter your employee ID.</string>
+    <string name="required_emp_city">Please enter the city of employment.</string>
+    <string name="required_business_name">Please enter the business name.</string>
+    <string name="required_tin_number">Please enter TIN number.</string>
+    <string name="required_id_number">Please enter valid ID number.</string>
+    <string name="required_id_type">Please select the type of ID.</string>
+	<string name="required_otp">Please enter the OTP.</string>
+	<string name="otp_not_match">You entered an incorrect OTP.</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
@@ -152,8 +156,8 @@
     <string name="apply_loan">Apply Loan</string>
     <string name="business_loan">Business Loan</string>
     <string name="current_loan">Current Loan</string>
-    <string name="you_do_not_have_business_loan">You don\'t have any Business Loan</string>
-    <string name="you_do_not_have_current_loan">You don\'t have any Current Loan</string>
+    <string name="you_do_not_have_business_loan">You don\'t have any business loan.</string>
+    <string name="you_do_not_have_current_loan">You don\'t have any current loan.</string>
     <string name="cash_out_lpk">Cash Out LPK</string>
     <string name="lets_do">Let\'s Do</string>
     <string name="history">History</string>
@@ -247,7 +251,7 @@
     <string name="street_physical_address">Street/Physical Address*</string>
     <string name="postal_code_address">Postal Code Address*</string>
     <string name="city_town">City/Town*</string>
-    <string name="second_mob_no">Second Mobile Number</string>
+    <string name="second_mob_no">Secondary Mobile Number</string>
     <string name="title_activity_profile_edit_emp_info">ProfileEditEmpInfo</string>
     <string name="earn_credit_coins_three">Earn 3 credit score points!</string>
 
@@ -272,26 +276,26 @@
 
     <!--Loan-->
     <string name="loan_plan_details">Loan Plan Details</string>
-    <string name="description_of_loan_purpose">Description of Loan Purpose</string>
-    <string name="choose_loan_purpose_description">Choose loan purpose description</string>
-    <string name="choose_description">Choose Description</string>
-    <string name="loan_purpose_description">Enter your loan purpose description:</string>
-    <string name="enter_purpose">Enter purpose</string>
-    <string name="required_loan_purpose">Required loan purpose</string>
-    <string name="required_loan_purpose_description">Required loan purpose description</string>
-    <string name="max_500_words">Max 500 words</string>
+    <string name="description_of_loan_purpose">Loan Purpose</string>
+    <string name="choose_loan_purpose_description">Choose Purpose</string>
+    <string name="choose_description">Select Purpose</string>
+    <string name="loan_purpose_description">Describe Your Purpose:</string>
+    <string name="enter_purpose">Enter Purpose</string>
+    <string name="required_loan_purpose">Please select the purpose of application.</string>
+    <string name="required_loan_purpose_description">Please describe why you need the loan.</string>
+    <string name="max_500_words">Describe within 500 words.</string>
     <string name="ref_no">Ref. No:</string>
     <string name="maturity_amount">Maturity Amount</string>
     <string name="maturity_on">Maturity On</string>
-    <string name="want_to_apply_loan">You Want to apply this loan?</string>
+    <string name="want_to_apply_loan">Do you want to apply for this loan?</string>
 
     <!-- ID Information-->
-    <string name="id_information">Id Information</string>
-    <string name="personal_id_information">Personal Id Information</string>
-    <string name="business_id_information">Business Id Information</string>
+    <string name="id_information">ID Information</string>
+    <string name="personal_id_information">Personal ID Information</string>
+    <string name="business_id_information">Business ID Information</string>
     <string name="profile_image">Profile Image*</string>
-    <string name="required_profile_image">Required profile image</string>
-    <string name="required_id_image">Required id image</string>
+    <string name="required_profile_image">Upload your profile avatar.</string>
+    <string name="required_id_image">Upload a copy of your ID.</string>
     <string name="personal_id_type">Personal ID Type*</string>
     <string name="business_type">Business ID Type*</string>
     <string name="edit_id_number">ID Number*</string>

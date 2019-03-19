@@ -38,12 +38,16 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private val GALLEY              = 2
     private var captureFile: File?  = null
     private var imageFilePath       = ""
+    private var mobileOtp           = ""
     private var imageSelectStatus   : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_two)
 
+
+        val bundle      = intent.extras
+        mobileOtp       = bundle!!.getString("OTP")!!
 
         imgEditPhoto.setOnClickListener {
 
@@ -54,6 +58,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
             onSubmit()
         }
+
+
     }
 
     private fun onSubmit()
@@ -65,6 +71,14 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         else if(TextUtils.isEmpty(etName.text.toString()))
         {
             CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.required_name))
+        }
+        else if (TextUtils.isEmpty(etOTP.text.toString()))
+        {
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.required_otp))
+        }
+        else if(etOTP.text.toString()!=mobileOtp)
+        {
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.otp_not_match))
         }
         else
         {

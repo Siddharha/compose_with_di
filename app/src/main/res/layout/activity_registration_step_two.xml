@@ -115,7 +115,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_7sdp"
                 android:hint="@string/enter_name"
-                android:paddingStart="@dimen/_5sdp"
+                android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_2sdp"
                 android:background="@android:color/transparent"
                 android:textSize="@dimen/_15sdp"
@@ -134,6 +134,53 @@
 
 
                 />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".25"
+        android:orientation="vertical"
+
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:background="@drawable/bg_black_view">
+
+
+
+        <com.app.l_pesa.common.CommonEditTextRegular
+            android:id="@+id/etOTP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:hint="@string/enter_name"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_2sdp"
+            android:background="@android:color/transparent"
+            android:textSize="@dimen/_15sdp"
+            android:layout_margin="@dimen/_5sdp"
+            android:textColor="@color/colorWhite"
+            android:inputType="text|textNoSuggestions"
+            android:textColorHint="@color/colorWhite"
+            android:maxLength="10"
+            android:text=""
+            android:gravity="start|center"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@null"
+            android:focusable="true"
+            android:maxLines="1"
+            android:longClickable="false"
+
+
+            />
 
     </RelativeLayout>
 
@@ -170,7 +217,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.75"
+        android:layout_weight="3.25"
         android:orientation="vertical"
 
         />

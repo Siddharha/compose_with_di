@@ -33,7 +33,7 @@ class PresenterRegistrationOne {
                     {
                         if(response.status.isSuccess)
                         {
-                            callBackOBJ.onSuccessRegistrationOne(response.data.access_token)
+                            callBackOBJ.onSuccessRegistrationOne(response.data)
                         }
                         else
                         {
