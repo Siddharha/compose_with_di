@@ -12,6 +12,7 @@ import android.location.*
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity
+import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.IOException
@@ -37,6 +38,13 @@ class MainActivity : AppCompatActivity() {
         else
         {
             initCurrentLocation()
+        }
+
+        buttonSignUp.setOnClickListener {
+
+            startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
         }
     }
 

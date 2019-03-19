@@ -311,7 +311,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     }
 
-    override fun onIncompleteLogin() {
+    override fun onIncompleteLogin(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true

@@ -207,7 +207,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
         Toast.makeText(this@ProfileEditEmpInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onIncompleteLogin() {
+    override fun onIncompleteLogin(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true

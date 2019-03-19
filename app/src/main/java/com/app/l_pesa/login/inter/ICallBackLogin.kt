@@ -11,7 +11,7 @@ import com.app.l_pesa.login.model.LoginData
 interface ICallBackLogin {
 
     fun onSuccessLogin(data: LoginData)
-    fun onIncompleteLogin()
+    fun onIncompleteLogin(message: String)
     fun onErrorLogin(jsonMessage: String)
     fun onFailureLogin(jsonMessage: String)
 }

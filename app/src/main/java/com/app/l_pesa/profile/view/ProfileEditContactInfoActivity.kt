@@ -190,7 +190,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         Toast.makeText(this@ProfileEditContactInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onIncompleteLogin() {
+    override fun onIncompleteLogin(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true

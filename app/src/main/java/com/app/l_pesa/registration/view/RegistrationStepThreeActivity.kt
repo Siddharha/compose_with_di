@@ -232,7 +232,6 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                     CommonMethod.fileCompress(captureFile!!)
                     imageSelectStatus=true
                 } else
-
                 {
                     if(imageSelectStatus)
                     {

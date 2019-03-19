@@ -40,15 +40,14 @@ class PresenterLogin {
                           {
                               callBackOBJ.onSuccessLogin(response.data)
                           }
-                          else
-                          {
-                              callBackOBJ.onIncompleteLogin()
-                          }
+
 
                       }
-                      else{
+                       else
+                      {
                           callBackOBJ.onErrorLogin(response.status.message)
                       }
+
                     }
                     catch (e: Exception)
                     {
@@ -63,8 +62,18 @@ class PresenterLogin {
                         val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
+                        val jsonStatusCode        =    jsonStatus.getInt("statusCode")
 
-                        callBackOBJ.onFailureLogin(jsonMessage)
+                        if(jsonStatusCode==10008)
+                        {
+                            callBackOBJ.onIncompleteLogin(jsonMessage)
+                        }
+                        else
+                        {
+                            callBackOBJ.onFailureLogin(jsonMessage)
+                        }
+
+
                     }
                     catch (exp: Exception)
                     {

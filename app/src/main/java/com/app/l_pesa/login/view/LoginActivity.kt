@@ -288,11 +288,14 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
-    override fun onIncompleteLogin() {
+    override fun onIncompleteLogin(message: String) {
 
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
-        Toast.makeText(this@LoginActivity,"Registration Process Incomplete",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@LoginActivity,message,Toast.LENGTH_LONG).show()
+        val intent = Intent(this@LoginActivity, RegistrationStepOneActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
     }
 

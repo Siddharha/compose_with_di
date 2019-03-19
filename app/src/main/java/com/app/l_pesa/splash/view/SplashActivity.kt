@@ -181,7 +181,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
         loadMain(jsonMessage)
     }
 
-    override fun onIncompleteLogin() {
+    override fun onIncompleteLogin(message: String) {
 
         progressBar.visibility = View.INVISIBLE
 
