@@ -326,10 +326,10 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     override fun onBackPressed() {
 
-        val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepOneActivity::class.java)
+       /* val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepOneActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)*/
     }
 
 

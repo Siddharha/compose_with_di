@@ -352,5 +352,9 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         typeId=idList[position]
     }
 
+    override fun onBackPressed() {
+
+    }
+
 
 }
