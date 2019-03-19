@@ -40,6 +40,10 @@ class PresenterLogin {
                           {
                               callBackOBJ.onSuccessLogin(response.data)
                           }
+                          else
+                          {
+                              callBackOBJ.onIncompleteLogin()
+                          }
 
                       }
                       else{

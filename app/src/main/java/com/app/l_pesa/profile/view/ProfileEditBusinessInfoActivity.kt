@@ -225,6 +225,13 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         Toast.makeText(this@ProfileEditBusinessInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onIncompleteLogin() {
+
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
+
+    }
+
     override fun onFailureLogin(jsonMessage: String) {
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true

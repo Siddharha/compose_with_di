@@ -287,6 +287,13 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
+    override fun onIncompleteLogin() {
+
+        progressBar.visibility = View.INVISIBLE
+        txtLogin.isClickable   = true
+
+    }
+
     override fun onErrorLogin(jsonMessage: String) {
 
       progressBar.visibility = View.INVISIBLE

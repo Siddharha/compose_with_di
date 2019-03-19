@@ -311,6 +311,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     }
 
+    override fun onIncompleteLogin() {
+
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
+
+    }
+
     override fun onErrorLogin(jsonMessage: String) {
 
      swipeRefreshLayout.isRefreshing=false
