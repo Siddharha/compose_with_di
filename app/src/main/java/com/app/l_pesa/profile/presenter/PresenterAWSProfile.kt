@@ -136,4 +136,58 @@ class PresenterAWSProfile {
         })
     }
 
+    fun uploadPersonalID(ctxOBJ: Context, callBack: ICallBackUpload, imageFile: File?)
+    {
+
+        val getTIME = System.currentTimeMillis()
+        val cachingCredentialsProvider = CognitoCachingCredentialsProvider(
+                ctxOBJ,
+                BuildConfig.AWS_PULL, // Identity Pool ID
+                Regions.EU_CENTRAL_1
+        )
+
+        s3Client    = AmazonS3Client(cachingCredentialsProvider)
+
+        val transferUtility = TransferUtility.builder()
+                .context(ctxOBJ)
+                .awsConfiguration(AWSMobileClient.getInstance().configuration)
+                .s3Client(s3Client)
+                .build()
+
+        s3Client!!.setRegion(Region.getRegion(Regions.EU_CENTRAL_1))
+
+        val uploadObserver = transferUtility.upload(
+                BuildConfig.AWS_BUCKET+"/uploads/business",
+                "a_personal_$getTIME.JPG",
+                imageFile,
+                CannedAccessControlList.PublicRead
+        )
+
+        uploadObserver.setTransferListener(object : TransferListener {
+
+            override fun onStateChanged(id: Int, state: TransferState) {
+                if (TransferState.COMPLETED == state)
+                {
+                    val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
+                    println("AWS_URL"+url)
+                    callBack.onSuccessUploadAWS(uploadObserver.key)
+                }
+
+            }
+
+            override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
+                val percent = bytesCurrent.toFloat() / bytesTotal.toFloat() * 100
+                val percentDone = percent.toInt()
+
+            }
+
+            override fun onError(id: Int, ex: Exception) {
+                ex.printStackTrace()
+                callBack.onFailureUploadAWS(ctxOBJ.resources.getString(R.string.something_went_wrong))
+
+            }
+
+        })
+    }
+
 }

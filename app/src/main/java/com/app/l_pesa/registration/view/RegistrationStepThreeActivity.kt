@@ -116,7 +116,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
               swipeRefreshLayout.isRefreshing=true
 
               val presenterAWSProfile= PresenterAWSProfile()
-              presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepThreeActivity,this,captureFile)
+              presenterAWSProfile.uploadPersonalID(this@RegistrationStepThreeActivity,this,captureFile)
           }
           else
           {
