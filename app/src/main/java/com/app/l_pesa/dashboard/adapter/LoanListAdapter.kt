@@ -39,19 +39,19 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 if (al_loadOBJ[position].status=="Apply Now")
                 {
 
-                    viewHolder.btn_apply_loan.setBackgroundResource(R.drawable.ic_approve_button)
-                    viewHolder.btn_apply_loan.text                    =al_loadOBJ[position].status
+                    viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
+                    viewHolder.buttonApplyLoan.text                    =al_loadOBJ[position].status
                     viewHolder.txtLoanDetails.text               =contextOBJ.resources.getString(R.string.you_do_not_have_business_loan)
-                    viewHolder.btn_apply_loan.visibility              =View.VISIBLE
-                    viewHolder.txt_amount_first.visibility            =View.GONE
-                    viewHolder.txt_amount_second.visibility           =View.GONE
-                    viewHolder.ll_center.visibility                   =View.GONE
+                    viewHolder.buttonApplyLoan.visibility              =View.VISIBLE
+                    viewHolder.txtAmountFirst.visibility            =View.GONE
+                    viewHolder.txtAmountSecond.visibility           =View.GONE
+                    viewHolder.llCenter.visibility                   =View.GONE
 
-                    viewHolder.btn_apply_loan.setOnClickListener {
+                    viewHolder.buttonApplyLoan.setOnClickListener {
 
                         if(CommonMethod.isNetworkAvailable(contextOBJ))
                         {
-                            callBackObj.onClickLoanList()
+                            callBackObj.onClickLoanList("BUSINESS")
                         }
                         else
                         {
@@ -68,8 +68,8 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
 
                     viewHolder.txtLoanDetails.text                     =al_loadOBJ[position].nextRepay!!.leftDaysText
                     viewHolder.loanBtn.text                             =al_loadOBJ[position].status
-                    viewHolder.txt_amount_first.text                    =al_loadOBJ[position].repay!!.amount
-                    viewHolder.txt_amount_second.text                   =al_loadOBJ[position].nextRepay!!.amount
+                    viewHolder.txtAmountFirst.text                    =al_loadOBJ[position].repay!!.amount
+                    viewHolder.txtAmountSecond.text                   =al_loadOBJ[position].nextRepay!!.amount
                     viewHolder.verticalDivider.visibility         =View.INVISIBLE
 
                     when {
@@ -94,21 +94,21 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 if (al_loadOBJ[position].status=="Apply Now")
                 {
 
-                    viewHolder.btn_apply_loan.setBackgroundResource(R.drawable.ic_approve_button)
-                    viewHolder.btn_apply_loan.text                    =al_loadOBJ[position].status
+                    viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
+                    viewHolder.buttonApplyLoan.text                    =al_loadOBJ[position].status
                     viewHolder.txtLoanDetails.text               =contextOBJ.resources.getString(R.string.you_do_not_have_current_loan)
-                    viewHolder.btn_apply_loan.visibility              =View.VISIBLE
-                    viewHolder.txt_amount_first.visibility            =View.GONE
-                    viewHolder.txt_amount_second.visibility           =View.GONE
-                    viewHolder.ll_center.visibility                   =View.GONE
+                    viewHolder.buttonApplyLoan.visibility              =View.VISIBLE
+                    viewHolder.txtAmountFirst.visibility            =View.GONE
+                    viewHolder.txtAmountSecond.visibility           =View.GONE
+                    viewHolder.llCenter.visibility                   =View.GONE
 
-                    viewHolder.btn_apply_loan.setOnClickListener {
+                    viewHolder.buttonApplyLoan.setOnClickListener {
 
-                        viewHolder.btn_apply_loan.setOnClickListener {
+                        viewHolder.buttonApplyLoan.setOnClickListener {
 
                             if(CommonMethod.isNetworkAvailable(contextOBJ))
                             {
-                                callBackObj.onClickLoanList()
+                                callBackObj.onClickLoanList("CURRENT")
                             }
                             else
                             {
@@ -125,8 +125,8 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
 
                     viewHolder.txtLoanDetails.text                  =al_loadOBJ[position].nextRepay!!.leftDaysText
                     viewHolder.loanBtn.text                             =al_loadOBJ[position].status
-                    viewHolder.txt_amount_first.text =al_loadOBJ[position].repay!!.amount
-                    viewHolder.txt_amount_second.text =al_loadOBJ[position].nextRepay!!.amount
+                    viewHolder.txtAmountFirst.text =al_loadOBJ[position].repay!!.amount
+                    viewHolder.txtAmountSecond.text =al_loadOBJ[position].nextRepay!!.amount
                     viewHolder.verticalDivider.visibility =View.INVISIBLE
 
                     when {
@@ -135,7 +135,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                         al_loadOBJ[position].status=="Due" //RED
                         -> {
                             viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_red_btn)
-                            viewHolder.ll_top.setBackgroundColor(Color.parseColor("#e95758"))
+                            viewHolder.llTop.setBackgroundColor(Color.parseColor("#e95758"))
                         }
                         else //GREEN
                         -> viewHolder.loanBtn.setBackgroundResource(R.drawable.ic_approve_button)
@@ -150,12 +150,12 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 viewHolder.imgLoan.setImageResource(R.drawable.menu_lpk_icon)
                 viewHolder.loanName.text                          = contextOBJ!!.resources.getString(R.string.cash_out_lpk)
                 viewHolder.txtLoanDetails.text                    ="You have 500 LPK"
-                viewHolder.btn_apply_loan.visibility              =View.VISIBLE
-                viewHolder.btn_apply_loan.text                    =contextOBJ.resources.getString(R.string.lets_do)
-                viewHolder.btn_apply_loan.setBackgroundResource(R.drawable.ic_approve_button)
-                viewHolder.txt_amount_first.visibility            =View.GONE
-                viewHolder.txt_amount_second.visibility           =View.GONE
-                viewHolder.ll_center.visibility                   =View.GONE
+                viewHolder.buttonApplyLoan.visibility              =View.VISIBLE
+                viewHolder.buttonApplyLoan.text                    =contextOBJ.resources.getString(R.string.lets_do)
+                viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
+                viewHolder.txtAmountFirst.visibility            =View.GONE
+                viewHolder.txtAmountSecond.visibility           =View.GONE
+                viewHolder.llCenter.visibility                   =View.GONE
 
 
             }
@@ -182,16 +182,16 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
         {
 
-            val imgLoan         : ImageView                          = itemView.findViewById(R.id.loan_image)
+            val imgLoan         : ImageView                         = itemView.findViewById(R.id.loan_image)
             val loanName        : CommonTextRegular                 = itemView.findViewById(R.id.txt_loan_type)
             val loanBtn         : Button                            = itemView.findViewById(R.id.btn_pay_now)
             val txtLoanDetails  : CommonTextRegular                 = itemView.findViewById(R.id.txt_loan_details)
-            val txt_amount_first : CommonTextRegular             = itemView.findViewById(R.id.txt_amount_first)
-            val txt_amount_second : CommonTextRegular            = itemView.findViewById(R.id.txt_amount_second)
-            val btn_apply_loan : Button                          = itemView.findViewById(R.id.btn_apply_loan)
-            val ll_center : LinearLayout                        = itemView.findViewById(R.id.ll_center)
-            val ll_top : LinearLayout                           = itemView.findViewById(R.id.ll_top)
-            val verticalDivider : View                    = itemView.findViewById(R.id.view_vertical_divider)
+            val txtAmountFirst : CommonTextRegular                  = itemView.findViewById(R.id.txt_amount_first)
+            val txtAmountSecond : CommonTextRegular                 = itemView.findViewById(R.id.txt_amount_second)
+            val buttonApplyLoan : Button                            = itemView.findViewById(R.id.btn_apply_loan)
+            val llCenter : LinearLayout                             = itemView.findViewById(R.id.ll_center)
+            val llTop : LinearLayout                                = itemView.findViewById(R.id.ll_top)
+            val verticalDivider : View                              = itemView.findViewById(R.id.view_vertical_divider)
 
 
         }

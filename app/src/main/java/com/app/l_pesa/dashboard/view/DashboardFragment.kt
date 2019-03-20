@@ -168,10 +168,11 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick {
 
     }
 
-    override fun onClickLoanList() {
+    override fun onClickLoanList(type: String) {
 
         val sharedPref=SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
+        sharedPref.openTabLoan=type
 
         val intent = Intent(activity, DashboardActivity::class.java)
         startActivity(intent)

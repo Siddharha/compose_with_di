@@ -11,6 +11,7 @@ import android.support.design.widget.TabLayout
 import com.app.l_pesa.loanplan.model.LoanTabPager
 import android.graphics.Typeface
 import android.widget.TextView
+import com.app.l_pesa.common.SharedPref
 
 
 /**
@@ -54,6 +55,16 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
         viewPager!!.adapter = adapter
         changeTabsFont()
         tabLayout!!.addOnTabSelectedListener(this)
+
+        val sharedPref= SharedPref(activity!!)
+        if(sharedPref.openTabLoan=="CURRENT")
+        {
+            tabLayout!!.setScrollPosition(0,0f,true)
+        }
+        else
+        {
+            tabLayout!!.setScrollPosition(1,0f,true)
+        }
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {

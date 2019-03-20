@@ -106,6 +106,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var openTabLoan: String
+        get() = pref.getString(KEY_SET_LOAN_TAB_PLAN, "CURRENT")!!
+        set(openTabLoan) {
+            editor.remove(KEY_SET_LOAN_TAB_PLAN)
+            editor.putString(KEY_SET_LOAN_TAB_PLAN, openTabLoan)
+            editor.commit()
+        }
+
     fun removeToken() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -136,6 +144,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_PROFILE_INFO      = "KEY_SET_PROFILE_INFO"
         private const val KEY_SET_PROFILE_UPDATE    = "KEY_SET_PROFILE_UPDATE"
         private const val KEY_SET_NAVIGATION_TAB    = "KEY_SET_NAVIGATION_TAB"
+        private const val KEY_SET_LOAN_TAB_PLAN     = "KEY_SET_LOAN_TAB_PLAN"
     }
 
 

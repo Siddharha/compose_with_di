@@ -2,5 +2,5 @@ package com.app.l_pesa.dashboard.inter
 
 interface ICallBackListOnClick {
 
-    fun onClickLoanList()
+    fun onClickLoanList(type: String)
 }
