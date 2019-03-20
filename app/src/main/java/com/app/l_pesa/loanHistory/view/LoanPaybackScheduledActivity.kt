@@ -4,12 +4,16 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.Window
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
@@ -21,6 +25,7 @@ import kotlinx.android.synthetic.main.content_loan_payback_scheduled.*
 
 class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedule {
 
+    private var dataOBJ :ResPaybackSchedule.Data ?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,9 +68,36 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
             else
           {
 
+              if(dataOBJ!!.loanInfo!!.loanId!=0)
+              {
+                 payAll(dataOBJ!!)
+              }
           }
 
         }
+    }
+
+    private fun payAll(dataOBJ: ResPaybackSchedule.Data)
+    {
+        val alertDialog         = AlertDialog.Builder(this@LoanPaybackScheduledActivity).create()
+        val inflater            = LayoutInflater.from(this@LoanPaybackScheduledActivity)
+        val dialogView          = inflater.inflate(R.layout.dialog_payment_schedule, null)
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        alertDialog!!.setCancelable(true)
+        alertDialog.setCanceledOnTouchOutside(true)
+        alertDialog.setView(dialogView)
+        alertDialog.show()
+
+        val txtTitle   = dialogView.findViewById<CommonTextRegular>(R.id.txtTitle)
+        val txtContent = dialogView.findViewById<TextView>(R.id.txtContent)
+        val txtData    = dialogView.findViewById<TextView>(R.id.txtData)
+
+        txtTitle.text   =   dataOBJ.loanInfo!!.payment_message!!.header
+        txtContent.text =   dataOBJ.loanInfo!!.payment_message!!.header2
+        txtData.text    =   "Amount to pay is: "+dataOBJ.loanInfo!!.currencyCode+" "+dataOBJ.loanInfo!!.payfullamount!!.paidAmount.toString()+"\n"+
+                "Reference number is: "+dataOBJ.loanInfo!!.identityNumber+"\n"+
+                "L-Pesa Short code is: "+dataOBJ.loanInfo!!.merchantCode.toString()
+
     }
 
     private fun initLoad()
@@ -86,6 +118,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     @SuppressLint("SetTextI18n")
     override fun onSuccessPaybackSchedule(data: ResPaybackSchedule.Data) {
 
+        dataOBJ=data
         swipeRefreshLayout.isRefreshing = false
         txt_total_payback.text          = data.loanInfo!!.currencyCode+" "+data.loanInfo!!.totalPayback.toString()
 
