@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,12 +22,14 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
+import java.lang.Exception
+import java.text.SimpleDateFormat
 
 
 class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<ResPaybackSchedule.Schedule>, var loanInfo: ResPaybackSchedule.LoanInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
@@ -36,7 +39,21 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             viewHolder.llPayment.visibility     = View.GONE
             viewHolder.llPaid.visibility        = View.VISIBLE
             viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
-            viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate
+           /* viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate*/
+            var dateRequest=""
+            dateRequest = if(!TextUtils.isEmpty(alScheduleOBJ[position].sDate))
+            {
+
+                val inputFormat  = SimpleDateFormat("yyyy-MM-dd")
+                val date         = inputFormat.parse(alScheduleOBJ[position].sDate)
+
+                val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                outputFormat.format(date)
+            } else {
+                ""
+            }
+
+            viewHolder.txtRepayDate.text        = dateRequest
             viewHolder.txtCurrentBalance.text   = "0"
             viewHolder.txtPaidDate.text         = fromHtml("<font color='#a4a4a4'>"+context.resources.getString(R.string.date)+"</font>"+"<font color='#61666b'>"+" "+alScheduleOBJ[position].paidDate+"</font>")
         }
@@ -46,8 +63,23 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             viewHolder.llPayment.visibility     = View.VISIBLE
 
             viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
-            viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate
+
             viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" "+loanInfo.currentBalance.toString()
+
+                var dateRequest=""
+                dateRequest = if(!TextUtils.isEmpty(alScheduleOBJ[position].sDate))
+                {
+                    val inputFormat  = SimpleDateFormat("yyyy-MM-dd")
+                    val date         = inputFormat.parse(alScheduleOBJ[position].sDate)
+
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    outputFormat.format(date)
+                } else {
+                    ""
+                }
+
+            viewHolder.txtRepayDate.text        = dateRequest
+
 
             if(alScheduleOBJ[position].payanytime!!.btnStatus=="disable")
             {

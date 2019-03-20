@@ -10,7 +10,7 @@
     </style>
 
     <style name="NavigationTheme" parent="AppTheme">
-        <item name="listPreferredItemHeightSmall">@dimen/_48sdp</item>
+        <item name="listPreferredItemHeightSmall">@dimen/_45sdp</item>
     </style>
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
