@@ -263,20 +263,20 @@
 
     <!--Emp Info-->
     <string name="earn_credit_coins_ten">Earn 10 credit score points!</string>
-    <string name="type_of_emp">Employer Type</string>
-    <string name="name_of_emp">Employer</string>
-    <string name="emp_department">Department</string>
-    <string name="emp_position">Designation</string>
-    <string name="emp_id">Employee ID</string>
-    <string name="emp_city">City/Town</string>
+    <string name="type_of_emp">Employer Type*</string>
+    <string name="name_of_emp">Employer*</string>
+    <string name="emp_department">Department*</string>
+    <string name="emp_position">Designation*</string>
+    <string name="emp_id">Employee ID*</string>
+    <string name="emp_city">City/Town*</string>
 
     <!--Business Info-->
     <string name="business_personal_info">Business &amp; Personal Information</string>
     <string name="earn_credit_coins_forty">Earn 40 credit score points!</string>
-    <string name="business_info_name">Business Name</string>
-    <string name="business_tin_number">TIN Number</string>
-    <string name="business_id_type">ID Type</string>
-    <string name="business_id_number">ID Number</string>
+    <string name="business_info_name">Business Name*</string>
+    <string name="business_tin_number">TIN Number*</string>
+    <string name="business_id_type">ID Type*</string>
+    <string name="business_id_number">ID Number*</string>
     <string name="passport">Passport</string>
     <string name="months">Months:</string>
 
