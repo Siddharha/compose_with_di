@@ -15,7 +15,7 @@
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_12sdp"
         android:textColor="@color/color_semi_deep_black"
         android:padding="@dimen/_2sdp"
         android:gravity="center|start"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:textColor="#3b3e42"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_11sdp"
             android:padding="@dimen/_5sdp"
          />
 

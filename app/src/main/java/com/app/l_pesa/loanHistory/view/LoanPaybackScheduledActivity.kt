@@ -126,6 +126,8 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
 
+        println("")
+
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)
     }

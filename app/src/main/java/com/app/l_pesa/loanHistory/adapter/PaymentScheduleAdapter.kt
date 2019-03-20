@@ -45,7 +45,7 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             viewHolder.llPaid.visibility        = View.GONE
             viewHolder.llPayment.visibility     = View.VISIBLE
 
-            viewHolder.txtRepayAmount.text      = alScheduleOBJ[position].paidAmount.toString()
+            viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
             viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate
             viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" "+loanInfo.currentBalance.toString()
 
