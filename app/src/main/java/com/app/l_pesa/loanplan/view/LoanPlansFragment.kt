@@ -60,10 +60,12 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
         if(sharedPref.openTabLoan=="CURRENT")
         {
             tabLayout!!.setScrollPosition(0,0f,true)
+            viewPager!!.currentItem = 0
         }
         else
         {
             tabLayout!!.setScrollPosition(1,0f,true)
+            viewPager!!.currentItem = 1
         }
     }
 
