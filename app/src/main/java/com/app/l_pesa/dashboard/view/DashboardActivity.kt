@@ -20,6 +20,7 @@ import android.support.design.internal.NavigationMenuView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -231,7 +232,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
     private fun applyFontToMenuItem(mi: MenuItem) {
-        val font = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
+        val font = ResourcesCompat.getFont(this@DashboardActivity, R.font.montserrat)
         val title = SpannableString(mi.title)
         title.setSpan(CustomTypefaceSpan("", font), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         mi.title = title

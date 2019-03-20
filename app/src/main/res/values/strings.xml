@@ -85,7 +85,7 @@
     <string name="required_city">Please enter the city.</string>
     <string name="required_emp_type">Please mention the type of employment.</string>
     <string name="required_emp_name">Please enter the name of your employer.</string>
-    <string name="required_emp_department">Please enter the deptartment you are employed in.</string>
+    <string name="required_emp_department">Please enter the department you are employed in.</string>
     <string name="required_emp_occupation">Please specify your designation.</string>
     <string name="required_emp_id">Please enter your employee ID.</string>
     <string name="required_emp_city">Please enter the city of employment.</string>
@@ -134,18 +134,18 @@
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>
     <string name="personal_info">Personal Information</string>
-    <string name="date_of_birth">Date Of Birth:</string>
+    <string name="date_of_birth">Date of Birth:</string>
     <string name="gender">Gender:</string>
     <string name="marital_status">Marital Status:</string>
     <string name="mother_maiden_name">Mother\'s Maiden Name:</string>
     <string name="id_info">ID Information</string>
     <string name="contact_info">Contact Information</string>
     <string name="employment_info">Employment Information</string>
-    <string name="type_of_employer">Type of Employer:</string>
-    <string name="name_of_employer">Name of Employer:</string>
+    <string name="type_of_employer">Employer Type:</string>
+    <string name="name_of_employer">Employer:</string>
     <string name="department">Department:</string>
-    <string name="occupation">Occupation/Position:</string>
-    <string name="employees_id_no">Employee\'s ID Number:</string>
+    <string name="occupation">Designation:</string>
+    <string name="employees_id_no">Employee ID:</string>
     <string name="city">City/Town:</string>
     <string name="business_info">Business &amp; Personal Information</string>
     <string name="business_name">Business Name:</string>
@@ -263,11 +263,11 @@
 
     <!--Emp Info-->
     <string name="earn_credit_coins_ten">Earn 10 credit score points!</string>
-    <string name="type_of_emp">Type of Employer</string>
-    <string name="name_of_emp">Name of Employer</string>
+    <string name="type_of_emp">Employer Type</string>
+    <string name="name_of_emp">Employer</string>
     <string name="emp_department">Department</string>
-    <string name="emp_position">Occupation/Position</string>
-    <string name="emp_id">Employer Id</string>
+    <string name="emp_position">Designation</string>
+    <string name="emp_id">Employee Id</string>
     <string name="emp_city">City/Town</string>
 
     <!--Business Info-->
