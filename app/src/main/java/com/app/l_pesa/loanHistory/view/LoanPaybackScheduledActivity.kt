@@ -91,6 +91,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun payAll(dataOBJ: ResPaybackSchedule.Data)
     {
         val alertDialog         = AlertDialog.Builder(this@LoanPaybackScheduledActivity).create()

@@ -28,6 +28,8 @@
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
     <string name="thank_you">Thank you!</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="create_one"><u>Create one!</u></string>
     <string name="upload_selfie_picture">Upload selfie picture and write your name</string>
     <string name="upload_id_picture">Upload your ID picture &amp; choose your ID type &amp; enter your ID number</string>
     <string name="continue_to_login">Continue to login</string>

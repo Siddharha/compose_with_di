@@ -151,7 +151,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                         al_loadOBJ[position].status=="Due" //RED
                         -> {
                             viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_red_btn)
-                            viewHolder.llTop.setBackgroundColor(Color.parseColor("#e95758"))
                         }
                         else //GREEN
                         -> viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
