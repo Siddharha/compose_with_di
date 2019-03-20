@@ -56,7 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:hint="@string/type_of_employer"
+                        android:hint="@string/type_of_emp"
                         android:inputType="text"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
@@ -77,7 +77,7 @@
                         android:id="@+id/etNameEmp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/name_of_employer"
+                        android:hint="@string/name_of_emp"
                         android:inputType="text"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
@@ -98,7 +98,7 @@
                         android:id="@+id/etDepartment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/department"
+                        android:hint="@string/emp_department"
                         android:inputType="text"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
@@ -119,7 +119,7 @@
                         android:id="@+id/etPosition"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="@string/occupation"
+                        android:hint="@string/emp_position"
                         android:inputType="text"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />

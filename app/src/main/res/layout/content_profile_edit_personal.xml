@@ -185,7 +185,7 @@
                             android:textColor="@color/textColors"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/date_of_birth"
+                            android:hint="@string/edit_dob"
                             android:textSize="@dimen/_12sdp"
                             android:inputType="date"
                             android:drawableEnd="@drawable/ic_date_of_birth_icon"/>
@@ -208,7 +208,7 @@
                             android:textColor="@color/textColors"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:hint="@string/marital_status"
+                            android:hint="@string/edit_marital_status"
                             android:textSize="@dimen/_12sdp"
                             android:inputType="text"
                             android:drawableEnd="@drawable/ic_dropdown"/>
