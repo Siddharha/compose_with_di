@@ -102,6 +102,9 @@ class ResDashboard {
         @SerializedName("total")
 
         var total: Int = 0
+        @SerializedName("loan_id")
+
+        var loan_id: Int = 0
     }
 
     inner class BusinessIdType {

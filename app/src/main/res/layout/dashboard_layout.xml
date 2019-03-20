@@ -163,7 +163,9 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp">
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/credit_score_label"
@@ -173,10 +175,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/your_credit_score"
                 android:textSize="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textColor="@color/color_gray_text"/>
 
-                <com.app.l_pesa.common.CustomSeekBar
+
+                <SeekBar
                     android:id="@+id/seekBar"
                     android:layout_centerInParent="true"
                     android:layout_width="match_parent"
@@ -184,6 +187,7 @@
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_marginEnd="@dimen/_2sdp"
                     android:thumb="@drawable/ic_pointer"
+                    android:background="@drawable/seekbar"
                     />
 
 
@@ -208,7 +212,7 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/color_gray_text"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 />
                 <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txt_middle"

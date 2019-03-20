@@ -32,7 +32,7 @@ class PresenterDashboard {
 
                     try
                     {
-                        if(response.status!!.isSuccess!!)
+                        if(response.status!!.isSuccess)
                         {
 
                             callBackOBJ.onSuccessDashboard(response.data!!)

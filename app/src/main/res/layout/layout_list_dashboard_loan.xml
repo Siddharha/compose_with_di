@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_75sdp"
+    android:layout_height="@dimen/_85sdp"
     android:layout_marginBottom="@dimen/_3sdp"
     android:id="@+id/ll_root"
     android:orientation="vertical"
@@ -94,21 +94,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:maxLines="1"/>
 
-            <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/btn_apply_loan"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_29sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_3sdp"
-                android:visibility="gone"
-                android:gravity="center"
-                android:textSize="@dimen/_10sdp"
-                android:text="@string/apply_loan"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                />
-
-            <com.app.l_pesa.common.CommonTextRegular
+                <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txt_amount_second"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,6 +104,20 @@
                 android:text=""
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textSize="@dimen/_12sdp" />
+
+            <com.app.l_pesa.common.CustomButtonRegular
+                android:id="@+id/btn_apply_loan"
+                android:layout_below="@+id/txt_amount_second"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_28sdp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textSize="@dimen/_10sdp"
+                android:text="@string/apply_loan"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
 
         </RelativeLayout>
 
