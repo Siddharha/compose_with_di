@@ -59,11 +59,11 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
-    var listPersonalId      : ArrayList<ResUserInfo.UserIdsPersonalInfo>? = null
-    var personalIdAdapter   : PersonalIdAdapter? = null
-    var personalIdType=""
-    var personalIdName=""
-    var personalId=0
+    private var listPersonalId      : ArrayList<ResUserInfo.UserIdsPersonalInfo>? = null
+    private var personalIdAdapter   : PersonalIdAdapter? = null
+    private var personalIdType=""
+    private var personalIdName=""
+    private var personalId=0
 
     private val PHOTO               = 1
     private val GALLEY              = 2

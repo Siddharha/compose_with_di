@@ -57,11 +57,11 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
-    var listBusinessId      : ArrayList<ResUserInfo.UserIdsBusinessInfo>? = null
-    var businessIdAdapter   : BusinessIdAdapter? = null
-    var businessIdType=""
-    var businessIdName=""
-    var businessId=0
+    private var listBusinessId      : ArrayList<ResUserInfo.UserIdsBusinessInfo>? = null
+    private var businessIdAdapter   : BusinessIdAdapter? = null
+    private var businessIdType=""
+    private var businessIdName=""
+    private var businessId=0
 
     private val PHOTO               = 1
     private val GALLEY              = 2

@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_1sdp"
                     android:fontFamily="@font/montserrat"
-                    android:text="@string/profile_image"
+                    android:text="@string/id_image"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toTopOf="@+id/imgProfile"
