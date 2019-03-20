@@ -1,5 +1,6 @@
 package com.app.l_pesa.dashboard.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -16,10 +17,12 @@ import kotlinx.android.synthetic.main.dashboard_layout.*
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.app.l_pesa.dashboard.adapter.LoanListAdapter
+import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.dashboard.model.SeekBarProgress
 
 
-class DashboardFragment: Fragment(), ICallBackDashboard {
+class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick {
+
 
 
     private val totalSpan   = 99f
@@ -153,7 +156,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
         if(dashBoard.loans!!.size>0)
         {
             loan_list.layoutManager     = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-            val adapterDashBoard        = LoanListAdapter(dashBoard.loans!!,activity)
+            val adapterDashBoard        = LoanListAdapter(dashBoard.loans!!,activity,rootLayout,this)
             loan_list.adapter           = adapterDashBoard
             adapterDashBoard.notifyDataSetChanged()
         }
@@ -162,6 +165,17 @@ class DashboardFragment: Fragment(), ICallBackDashboard {
         val gson                          = Gson()
         val dashBoardData                 = gson.toJson(dashBoard)
         sharedPrefOBJ.userDashBoard       = dashBoardData
+
+    }
+
+    override fun onClickLoanList() {
+
+        val sharedPref=SharedPref(activity!!)
+        sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
+
+        val intent = Intent(activity, DashboardActivity::class.java)
+        startActivity(intent)
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
     }
 }
