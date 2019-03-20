@@ -23,7 +23,8 @@
         app:itemBackground="@drawable/bg_drawer_item"
         app:itemTextColor="@drawable/bg_text_drawer"
         app:menu="@menu/activity_main_drawer"
-        android:fitsSystemWindows="true"
+        android:background="@color/colorWhite"
+
        />
 
 </android.support.v4.widget.DrawerLayout>
