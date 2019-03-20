@@ -9,11 +9,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.view.Window
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
@@ -59,22 +61,34 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
         }
 
-        button_pay_all.setOnClickListener {
 
-          if(swipeRefreshLayout.isRefreshing)
-          {
-              CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
-          }
-            else
-          {
-
-              if(dataOBJ!!.loanInfo!!.loanId!=0)
-              {
-                 payAll(dataOBJ!!)
-              }
-          }
-
+        val sharedPref= SharedPref(this@LoanPaybackScheduledActivity)
+        if(sharedPref.payFullAmount=="C" )
+        {
+            button_pay_all.visibility= View.INVISIBLE
         }
+        else
+        {
+            button_pay_all.visibility= View.VISIBLE
+            button_pay_all.setOnClickListener {
+
+                if(swipeRefreshLayout.isRefreshing)
+                {
+                    CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+
+                    if(dataOBJ!!.loanInfo!!.loanId!=0)
+                    {
+                        payAll(dataOBJ!!)
+                    }
+                }
+
+            }
+        }
+
+
     }
 
     private fun payAll(dataOBJ: ResPaybackSchedule.Data)

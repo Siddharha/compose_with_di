@@ -66,6 +66,7 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
         {
             tabLayout!!.setScrollPosition(1,0f,true)
             viewPager!!.currentItem = 1
+            sharedPref.openTabLoan="CURRENT"
         }
     }
 

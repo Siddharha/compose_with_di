@@ -100,6 +100,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
 
             if(CommonMethod.isNetworkAvailable(this@LoanHistoryDetailsActivity))
             {
+                shared.payFullAmount=loanHistoryData.loan_status
                 val bundle     = intent.extras
                 val loanType   = bundle!!.getString("LOAN_TYPE")
                 bundle.putString("LOAN_TYPE",loanType)

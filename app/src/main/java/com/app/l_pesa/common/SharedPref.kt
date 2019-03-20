@@ -114,6 +114,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var payFullAmount: String
+        get() = pref.getString(KEY_SET_PAY_FULL_AMOUNT, "")!!
+        set(payFullAmount) {
+            editor.remove(KEY_SET_PAY_FULL_AMOUNT)
+            editor.putString(KEY_SET_PAY_FULL_AMOUNT, payFullAmount)
+            editor.commit()
+        }
+
     fun removeToken() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -145,6 +153,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_PROFILE_UPDATE    = "KEY_SET_PROFILE_UPDATE"
         private const val KEY_SET_NAVIGATION_TAB    = "KEY_SET_NAVIGATION_TAB"
         private const val KEY_SET_LOAN_TAB_PLAN     = "KEY_SET_LOAN_TAB_PLAN"
+        private const val KEY_SET_PAY_FULL_AMOUNT   = "KEY_SET_PAY_FULL_AMOUNT"
     }
 
 

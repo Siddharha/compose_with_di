@@ -154,6 +154,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick {
 
     override fun onClickPay(type: String,loan_id:String) {
 
+        val sharedPref= SharedPref(activity!!)
+        sharedPref.payFullAmount="A"
         val bundle     = Bundle()
         bundle.putString("LOAN_TYPE",type)
         bundle.putString("LOAN_ID",loan_id)
