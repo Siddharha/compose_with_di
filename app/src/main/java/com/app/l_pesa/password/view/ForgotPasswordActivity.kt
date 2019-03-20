@@ -71,7 +71,7 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
     private fun verifyField()
     {
         CommonMethod.hideKeyboard(this@ForgotPasswordActivity)
-        if(etPhone.text.toString().length<10 && !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+        if(etPhone.text.toString().length<9 && !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
             customSnackBarError(ll_root,resources.getString(R.string.required_phone_email))
         }
@@ -85,7 +85,19 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
             {
                 progressBar.visibility= View.VISIBLE
                 val jsonObject = JsonObject()
-                jsonObject.addProperty("phone_no",etPhone.text.toString())
+                if(!TextUtils.isEmpty(etPhone.text.toString()) && !TextUtils.isEmpty(etEmail.text.toString()))
+                {
+                    jsonObject.addProperty("phone_no",etPhone.text.toString())
+                }
+                else if(TextUtils.isEmpty(etPhone.text.toString()) && !TextUtils.isEmpty(etEmail.text.toString()))
+                {
+                    jsonObject.addProperty("phone_no",etEmail.text.toString())
+                }
+                else
+                {
+                    jsonObject.addProperty("phone_no",etPhone.text.toString())
+                }
+
                 jsonObject.addProperty("country_code",countryCode)
 
                 val presenterForgetPassword=PresenterPassword()

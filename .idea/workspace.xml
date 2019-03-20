@@ -22,13 +22,14 @@
     <list default="true" id="5dcb9a0f-2251-4036-b270-e9f0e752bc92" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_window.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_window.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/view/ForgotPasswordActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/view/ForgotPasswordActivity.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,10 +55,10 @@
         <counts>
           <entry key="gradle" value="8" />
           <entry key="java" value="20" />
-          <entry key="kt" value="682" />
+          <entry key="kt" value="684" />
           <entry key="png" value="5" />
           <entry key="pro" value="8" />
-          <entry key="xml" value="462" />
+          <entry key="xml" value="464" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -65,9 +66,9 @@
           <entry key="Groovy" value="8" />
           <entry key="Image" value="5" />
           <entry key="JAVA" value="20" />
-          <entry key="Kotlin" value="682" />
+          <entry key="Kotlin" value="684" />
           <entry key="ProGuard File" value="8" />
-          <entry key="XML" value="462" />
+          <entry key="XML" value="464" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -75,19 +76,19 @@
           <entry key="dummy" value="2" />
           <entry key="gradle" value="45" />
           <entry key="java" value="139" />
-          <entry key="kt" value="14174" />
+          <entry key="kt" value="14218" />
           <entry key="pro" value="27" />
-          <entry key="xml" value="8711" />
+          <entry key="xml" value="8713" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="45" />
           <entry key="JAVA" value="139" />
-          <entry key="Kotlin" value="14174" />
+          <entry key="Kotlin" value="14218" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="ProGuard File" value="27" />
-          <entry key="XML" value="8711" />
+          <entry key="XML" value="8713" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -110,50 +111,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="128" column="45" selection-start-line="128" selection-start-column="45" selection-end-line="128" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="336" column="34" selection-start-line="336" selection-start-column="34" selection-end-line="336" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/AdapterPopupWindow.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="44" column="75" selection-start-line="44" selection-start-column="75" selection-end-line="44" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_window.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/view/ForgotPasswordActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="664">
+              <caret line="97" column="56" lean-forward="true" selection-start-line="97" selection-start-column="56" selection-end-line="97" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_forget_password.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-              <folding>
-                <element signature="e#312#327#0" expanded="true" />
-                <element signature="e#347#361#0" expanded="true" />
-                <element signature="e#556#571#0" expanded="true" />
-                <element signature="e#602#617#0" expanded="true" />
-                <element signature="e#652#666#0" expanded="true" />
-                <element signature="e#942#958#0" expanded="true" />
-                <element signature="e#1038#1052#0" expanded="true" />
-                <element signature="e#1125#1140#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="176">
+              <caret line="248" column="38" selection-start-line="248" selection-start-column="29" selection-end-line="248" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -173,8 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&lt;android.support.v7.widget.CardView</find>
-      <find>&lt;TextView</find>
       <find>&lt;Button</find>
       <find>reg</find>
       <find>imgID</find>
@@ -194,7 +164,6 @@
       <find>three</find>
       <find>onbackpre</find>
       <find>onba</find>
-      <find>forg</find>
       <find>sche</find>
       <find>android\.R\.id\.home \-\&gt; \{\n                if\(swipeRefreshLayout\.isRefreshing\)</find>
       <find>android\.R\.id\.home \-\&gt; \{\n                if\(swipeRefreshLayout\.isRefreshing\)</find>
@@ -202,7 +171,10 @@
       <find>showAtLocation</find>
       <find>return</find>
       <find>login</find>
+      <find>filterPopup?.showAsDropDown</find>
       <find>showAsDropDown</find>
+      <find>onClickIdList</find>
+      <find>forg</find>
     </findStrings>
     <replaceStrings>
       <replace>userEmploymentInfo!!</replace>
@@ -3173,7 +3145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/adapter/PersonalIdListAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_registration_step_three.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/model/ResRegistrationThree.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" />
@@ -3202,7 +3173,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/splash/view/SplashActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/BusinessIdInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" />
@@ -3224,6 +3194,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_window.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/BusinessIdInfoFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/view/ForgotPasswordActivity.kt" />
       </list>
     </option>
   </component>
@@ -3283,7 +3255,7 @@
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="loanplan" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
@@ -3292,7 +3264,7 @@
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="loanplan" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -3302,7 +3274,7 @@
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
@@ -3311,7 +3283,7 @@
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="login" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -3402,7 +3374,7 @@
     <property name="device.picker.selection" value="5373ab48" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/KEY" />
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
-    <property name="sync.plugin.last.upgrade.timestamp" value="1552978668376" />
+    <property name="sync.plugin.last.upgrade.timestamp" value="1553067965560" />
   </component>
   <component name="RecentsManager">
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -3571,12 +3543,12 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6041237" visible="true" weight="0.25235197" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.60431653" visible="true" weight="0.25235197" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Captures" order="2" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Designer" order="3" />
       <window_info id="Favorites" order="4" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
-      <window_info id="Build Variants" order="5" sideWeight="0.3958763" side_tool="true" visible="true" weight="0.25235197" />
+      <window_info id="Build Variants" order="5" sideWeight="0.39568347" side_tool="true" visible="true" weight="0.25235197" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -3586,8 +3558,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Logcat" order="7" visible="true" weight="0.47567567" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.39891893" />
+      <window_info anchor="bottom" id="Logcat" order="7" weight="0.47567567" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.39891893" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32972974" />
       <window_info anchor="bottom" id="Build" order="11" weight="0.32864866" />
@@ -3601,7 +3573,7 @@
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info active="true" anchor="right" id="Preview" order="8" visible="true" weight="0.2711677" />
+      <window_info anchor="right" id="Preview" order="8" weight="0.2711677" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.61237115" visible="true" weight="0.25235197" />
@@ -3679,21 +3651,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="43" lean-forward="true" selection-end-line="22" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -3903,13 +3860,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/view/ForgotPasswordActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-722">
-          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_loan_payback_scheduled.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -4037,26 +3987,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="128" column="45" selection-start-line="128" selection-start-column="45" selection-end-line="128" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_personal_id_layout.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="27" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="336" column="34" selection-start-line="336" selection-start-column="34" selection-end-line="336" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -4070,18 +4005,56 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_popup_window.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="76">
+          <caret line="4" column="39" lean-forward="true" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
           <folding>
             <element signature="e#312#327#0" expanded="true" />
             <element signature="e#347#361#0" expanded="true" />
             <element signature="e#556#571#0" expanded="true" />
             <element signature="e#602#617#0" expanded="true" />
             <element signature="e#652#666#0" expanded="true" />
+            <element signature="e#507#525#0" expanded="true" />
             <element signature="e#942#958#0" expanded="true" />
             <element signature="e#1038#1052#0" expanded="true" />
             <element signature="e#1125#1140#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/BusinessIdInfoFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="185" column="7" selection-start-line="185" selection-start-column="7" selection-end-line="185" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="380" column="17" selection-start-line="380" selection-start-column="17" selection-end-line="380" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="145" column="53" lean-forward="true" selection-start-line="145" selection-start-column="53" selection-end-line="145" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_forget_password.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="248" column="38" selection-start-line="248" selection-start-column="29" selection-end-line="248" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/password/view/ForgotPasswordActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="664">
+          <caret line="97" column="56" lean-forward="true" selection-start-line="97" selection-start-column="56" selection-end-line="97" selection-end-column="56" />
         </state>
       </provider>
     </entry>
