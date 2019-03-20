@@ -12,6 +12,7 @@
     <color name="colorTextBlack">#555759</color>
     <color name="colorTextBlackLight">#777b7e</color>
     <color name="colorSemiBlack">#61666b</color>
+    <color name="colorMenuTab">#444546</color>
     <color name="colorSemiLightBlack">#bcbfc2</color>
     <color name="colorSemiWhite">#f2f2f2</color>
     <color name="colorGrey">#bfbfbf</color>
