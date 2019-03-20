@@ -53,6 +53,19 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
             }
 
         }
+
+        button_pay_all.setOnClickListener {
+
+          if(swipeRefreshLayout.isRefreshing)
+          {
+              CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
+          }
+            else
+          {
+
+          }
+
+        }
     }
 
     private fun initLoad()
@@ -65,8 +78,6 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         val jsonObject = JsonObject()
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
-
-       // println("JSON"+jsonObject)
 
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)
@@ -113,11 +124,18 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                // todo: goto back activity from here
+                if(swipeRefreshLayout.isRefreshing)
+                {
+                    CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                }
                 true
+
             }
 
             else -> super.onOptionsItemSelected(item)
@@ -125,8 +143,17 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+        if(swipeRefreshLayout.isRefreshing)
+        {
+            CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
+        }
+        else
+        {
+            super.onBackPressed()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
+
     }
 
 }
