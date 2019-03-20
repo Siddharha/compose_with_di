@@ -124,7 +124,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             radioMale.isChecked=true
             radioFemale.isChecked=false
         }
-        else
+        else if(profileData.userPersonalInfo!!.sex=="M")
         {
             radioMale.isChecked=false
             radioFemale.isChecked=true

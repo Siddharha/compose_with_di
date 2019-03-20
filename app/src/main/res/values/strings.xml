@@ -300,6 +300,7 @@
     <string name="personal_id_information">Personal ID Information</string>
     <string name="business_id_information">Business ID Information</string>
     <string name="profile_image">Profile Image*</string>
+    <string name="id_image">ID Image*</string>
     <string name="required_profile_image">Upload your profile avatar.</string>
     <string name="required_id_image">Upload a copy of your ID.</string>
     <string name="personal_id_type">Personal ID Type*</string>

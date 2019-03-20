@@ -229,7 +229,23 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         txtPhone.text = data.userInfo!!.phoneNumber
         txtCreditScore.text = resources.getString(R.string.credit_score)+" "+data.userInfo!!.creditScore
         txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo!!.dob
-        txtGender.text = resources.getString(R.string.gender)+" "+data.userPersonalInfo!!.sex
+        if(!TextUtils.isEmpty(data.userPersonalInfo!!.sex))
+        {
+            if(data.userPersonalInfo!!.sex=="M")
+            {
+                txtGender.text = resources.getString(R.string.gender)+" Male"
+            }
+            else
+            {
+                txtGender.text = resources.getString(R.string.gender)+" Female"
+            }
+
+        }
+        else
+        {
+            txtGender.text = resources.getString(R.string.gender)
+        }
+
         txtMartialStatus.text = resources.getString(R.string.marital_status)+" "+data.userPersonalInfo!!.meritalStatus
         txtMotherName.text = resources.getString(R.string.mother_maiden_name)+" "+data.userPersonalInfo!!.motherMaidenName
 

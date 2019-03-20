@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_height="@dimen/_185sdp"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/_5sdp"
         >
@@ -24,6 +24,7 @@
     <ScrollView
         android:id="@+id/scroller"
         android:layout_below="@+id/txtTitle"
+        android:layout_above="@+id/txtData"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
