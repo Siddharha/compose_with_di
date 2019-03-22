@@ -30,11 +30,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_loan_apply.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_loan_apply.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_one.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_one.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_two.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_two.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,11 +58,11 @@
         <counts>
           <entry key="gradle" value="16" />
           <entry key="java" value="24" />
-          <entry key="kt" value="829" />
+          <entry key="kt" value="831" />
           <entry key="png" value="6" />
           <entry key="pro" value="10" />
           <entry key="ttf" value="1" />
-          <entry key="xml" value="599" />
+          <entry key="xml" value="603" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -73,9 +71,9 @@
           <entry key="Groovy" value="16" />
           <entry key="Image" value="6" />
           <entry key="JAVA" value="24" />
-          <entry key="Kotlin" value="829" />
+          <entry key="Kotlin" value="831" />
           <entry key="ProGuard File" value="10" />
-          <entry key="XML" value="599" />
+          <entry key="XML" value="603" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -83,19 +81,19 @@
           <entry key="dummy" value="2" />
           <entry key="gradle" value="48" />
           <entry key="java" value="139" />
-          <entry key="kt" value="16919" />
+          <entry key="kt" value="16958" />
           <entry key="pro" value="27" />
-          <entry key="xml" value="11285" />
+          <entry key="xml" value="11360" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="48" />
           <entry key="JAVA" value="139" />
-          <entry key="Kotlin" value="16919" />
+          <entry key="Kotlin" value="16958" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="ProGuard File" value="27" />
-          <entry key="XML" value="11285" />
+          <entry key="XML" value="11360" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -123,34 +121,63 @@
           <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="148">
-              <caret line="51" column="50" selection-start-line="51" selection-start-column="50" selection-end-line="51" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="53" column="54" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+              <caret line="135" column="60" selection-start-line="135" selection-start-column="60" selection-end-line="135" selection-end-column="60" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="107" column="49" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
+            <state relative-caret-position="93">
+              <caret line="110" column="89" selection-start-line="110" selection-start-column="89" selection-end-line="110" selection-end-column="89" />
+              <folding>
+                <element signature="e#42#1241#0" expanded="true" />
+                <element signature="e#2409#2452#1" expanded="true" />
+                <element signature="e#2622#2664#1" expanded="true" />
+                <element signature="e#2825#2868#1" expanded="true" />
+                <element signature="e#3497#3538#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_two.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="236">
+              <caret line="81" column="59" selection-start-line="81" selection-start-column="59" selection-end-line="81" selection-end-column="59" />
+              <folding>
+                <element signature="e#697#712#0" expanded="true" />
+                <element signature="e#948#964#0" expanded="true" />
+                <element signature="e#1040#1059#0" expanded="true" />
+                <element signature="e#1140#1155#0" expanded="true" />
+                <element signature="e#1707#1722#0" expanded="true" />
+                <element signature="e#1798#1829#0" expanded="true" />
+                <element signature="e#2317#2332#0" expanded="true" />
+                <element signature="e#2367#2382#0" expanded="true" />
+                <element signature="e#2420#2435#0" expanded="true" />
+                <element signature="e#2575#2589#0" expanded="true" />
+                <element signature="e#2949#2964#0" expanded="true" />
+                <element signature="e#2999#3014#0" expanded="true" />
+                <element signature="e#3495#3510#0" expanded="true" />
+                <element signature="e#3548#3563#0" expanded="true" />
+                <element signature="e#3654#3669#0" expanded="true" />
+                <element signature="e#3701#3715#0" expanded="true" />
+                <element signature="e#3741#3761#0" expanded="true" />
+                <element signature="e#3953#3968#0" expanded="true" />
+                <element signature="e#4419#4434#0" expanded="true" />
+                <element signature="e#4472#4486#0" expanded="true" />
+                <element signature="e#4577#4592#0" expanded="true" />
+                <element signature="e#4624#4638#0" expanded="true" />
+                <element signature="e#4664#4683#0" expanded="true" />
+                <element signature="e#4875#4890#0" expanded="true" />
+                <element signature="e#5298#5313#0" expanded="true" />
+                <element signature="e#5351#5366#0" expanded="true" />
+                <element signature="e#5407#5422#0" expanded="true" />
+                <element signature="e#5505#5525#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -171,11 +198,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>glide</find>
-      <find>paid</find>
-      <find>dsb_value</find>
-      <find>popup</find>
-      <find>spl</find>
       <find>ategory.LAU</find>
       <find>dsb_allowTrackClickToDrag</find>
       <find>txt_max</find>
@@ -200,7 +222,12 @@
       <find>adapter</find>
       <find>onSuccessLoanPlansDetails</find>
       <find>loanap</find>
+      <find>intent.extras</find>
       <find>LoanApplyActivity</find>
+      <find>tilDescription</find>
+      <find>android:drawableEnd=&quot;@drawable/ic_dropdown&quot;</find>
+      <find>reg</find>
+      <find>ll_root</find>
     </findStrings>
     <replaceStrings>
       <replace>userEmploymentInfo!!</replace>
@@ -212,6 +239,7 @@
       <replace>loanHistoryBusiness</replace>
       <replace>: Int = 0</replace>
       <replace>: String = &quot;&quot;</replace>
+      <replace>rootLayout</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -3171,9 +3199,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_settings_icon.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_logout_icon.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_dashboard.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/bg_text_drawer.xml" />
@@ -3217,11 +3242,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_loan_apply.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_loan_apply.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_one.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_two.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt" />
       </list>
     </option>
   </component>
@@ -3687,12 +3715,12 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6032316" visible="true" weight="0.24460432" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.60225445" visible="true" weight="0.24460432" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Captures" order="2" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Designer" order="3" />
       <window_info id="Favorites" order="4" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
-      <window_info id="Build Variants" order="5" sideWeight="0.3967684" side_tool="true" visible="true" weight="0.24460432" />
+      <window_info id="Build Variants" order="5" sideWeight="0.39774558" side_tool="true" visible="true" weight="0.24460432" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -3703,10 +3731,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32972974" />
       <window_info anchor="bottom" id="Logcat" order="7" weight="0.5286487" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.39783785" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.39783785" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32972974" />
-      <window_info anchor="bottom" id="Build" order="11" weight="0.32864866" />
+      <window_info anchor="bottom" id="Build" order="11" visible="true" weight="0.32864866" />
       <window_info anchor="bottom" id="Android Profiler" order="12" weight="0.3295082" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -3819,39 +3847,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit_business_info.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditBusinessInfoActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="174" column="77" selection-start-line="174" selection-start-column="63" selection-end-line="174" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_business_info.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="57" column="49" lean-forward="true" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/LoanTabPager.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="3" lean-forward="true" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
-          <folding>
-            <element signature="e#39#277#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ActivityViewFile.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -4182,62 +4177,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="51" column="50" selection-start-line="51" selection-start-column="50" selection-end-line="51" selection-end-column="50" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_loan_apply.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="23" column="47" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="290" column="42" selection-start-line="290" selection-start-column="18" selection-end-line="290" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_loan_apply.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="68" column="57" selection-start-line="68" selection-start-column="37" selection-end-line="68" selection-end-column="57" />
-          <folding>
-            <element signature="e#398#438#0" expanded="true" />
-            <element signature="e#1242#1257#0" expanded="true" />
-            <element signature="e#1291#1305#0" expanded="true" />
-            <element signature="e#1556#1571#0" expanded="true" />
-            <element signature="e#1880#1921#0" expanded="true" />
-            <element signature="e#2511#2525#0" expanded="true" />
-            <element signature="e#3020#3048#0" expanded="true" />
-            <element signature="e#3158#3173#0" expanded="true" />
-            <element signature="e#3503#3518#0" expanded="true" />
-            <element signature="e#3552#3586#0" expanded="true" />
-            <element signature="e#4191#4205#0" expanded="true" />
-            <element signature="e#4647#4663#0" expanded="true" />
-            <element signature="e#5006#5021#0" expanded="true" />
-            <element signature="e#5070#5085#0" expanded="true" />
-            <element signature="e#5134#5149#0" expanded="true" />
-            <element signature="e#5676#5699#0" expanded="true" />
-            <element signature="e#5801#5815#0" expanded="true" />
-            <element signature="e#6225#6240#0" expanded="true" />
-            <element signature="e#6345#6360#0" expanded="true" />
-            <element signature="e#6521#6536#0" expanded="true" />
-            <element signature="e#6582#6597#0" expanded="true" />
-            <element signature="e#6703#6718#0" expanded="true" />
-            <element signature="e#7271#7286#0" expanded="true" />
-            <element signature="e#7384#7400#0" expanded="true" />
-            <element signature="e#7446#7461#0" expanded="true" />
-            <element signature="e#7558#7573#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4262,24 +4205,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="53" column="54" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="54" />
+        <state relative-caret-position="342">
+          <caret line="107" column="49" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+        <state relative-caret-position="266">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_loan_apply.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="107" column="49" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
+        <state relative-caret-position="328">
+          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="160" column="48" selection-start-line="160" selection-start-column="48" selection-end-line="160" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_loan_apply.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="64" column="53" selection-start-line="64" selection-start-column="53" selection-end-line="64" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_one.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <caret line="128" column="57" selection-start-line="128" selection-start-column="57" selection-end-line="128" selection-end-column="57" />
+          <folding>
+            <element signature="e#521#536#0" expanded="true" />
+            <element signature="e#797#812#0" expanded="true" />
+            <element signature="e#896#911#0" expanded="true" />
+            <element signature="e#1269#1284#0" expanded="true" />
+            <element signature="e#1439#1456#0" expanded="true" />
+            <element signature="e#1529#1544#0" expanded="true" />
+            <element signature="e#1905#1920#0" expanded="true" />
+            <element signature="e#1954#1969#0" expanded="true" />
+            <element signature="e#2052#2067#0" expanded="true" />
+            <element signature="e#2095#2110#0" expanded="true" />
+            <element signature="e#2723#2741#0" expanded="true" />
+            <element signature="e#2853#2868#0" expanded="true" />
+            <element signature="e#2900#2915#0" expanded="true" />
+            <element signature="e#3104#3119#0" expanded="true" />
+            <element signature="e#3453#3471#0" expanded="true" />
+            <element signature="e#3505#3520#0" expanded="true" />
+            <element signature="e#3555#3570#0" expanded="true" />
+            <element signature="e#3920#3938#0" expanded="true" />
+            <element signature="e#4075#4089#0" expanded="true" />
+            <element signature="e#4127#4141#0" expanded="true" />
+            <element signature="e#4531#4545#0" expanded="true" />
+            <element signature="e#4580#4595#0" expanded="true" />
+            <element signature="e#4635#4650#0" expanded="true" />
+            <element signature="e#5146#5161#0" expanded="true" />
+            <element signature="e#5195#5209#0" expanded="true" />
+            <element signature="e#5292#5307#0" expanded="true" />
+            <element signature="e#5335#5350#0" expanded="true" />
+            <element signature="e#5625#5643#0" expanded="true" />
+            <element signature="e#6114#6128#0" expanded="true" />
+            <element signature="e#6163#6178#0" expanded="true" />
+            <element signature="e#6218#6233#0" expanded="true" />
+            <element signature="e#6925#6948#0" expanded="true" />
+            <element signature="e#7064#7079#0" expanded="true" />
+            <element signature="e#7111#7126#0" expanded="true" />
+            <element signature="e#7315#7330#0" expanded="true" />
+            <element signature="e#7766#7781#0" expanded="true" />
+            <element signature="e#7815#7830#0" expanded="true" />
+            <element signature="e#7938#7963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="135" column="60" selection-start-line="135" selection-start-column="60" selection-end-line="135" selection-end-column="60" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_two.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="81" column="59" selection-start-line="81" selection-start-column="59" selection-end-line="81" selection-end-column="59" />
+          <folding>
+            <element signature="e#697#712#0" expanded="true" />
+            <element signature="e#948#964#0" expanded="true" />
+            <element signature="e#1040#1059#0" expanded="true" />
+            <element signature="e#1140#1155#0" expanded="true" />
+            <element signature="e#1707#1722#0" expanded="true" />
+            <element signature="e#1798#1829#0" expanded="true" />
+            <element signature="e#2317#2332#0" expanded="true" />
+            <element signature="e#2367#2382#0" expanded="true" />
+            <element signature="e#2420#2435#0" expanded="true" />
+            <element signature="e#2575#2589#0" expanded="true" />
+            <element signature="e#2949#2964#0" expanded="true" />
+            <element signature="e#2999#3014#0" expanded="true" />
+            <element signature="e#3495#3510#0" expanded="true" />
+            <element signature="e#3548#3563#0" expanded="true" />
+            <element signature="e#3654#3669#0" expanded="true" />
+            <element signature="e#3701#3715#0" expanded="true" />
+            <element signature="e#3741#3761#0" expanded="true" />
+            <element signature="e#3953#3968#0" expanded="true" />
+            <element signature="e#4419#4434#0" expanded="true" />
+            <element signature="e#4472#4486#0" expanded="true" />
+            <element signature="e#4577#4592#0" expanded="true" />
+            <element signature="e#4624#4638#0" expanded="true" />
+            <element signature="e#4664#4683#0" expanded="true" />
+            <element signature="e#4875#4890#0" expanded="true" />
+            <element signature="e#5298#5313#0" expanded="true" />
+            <element signature="e#5351#5366#0" expanded="true" />
+            <element signature="e#5407#5422#0" expanded="true" />
+            <element signature="e#5505#5525#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="110" column="89" selection-start-line="110" selection-start-column="89" selection-end-line="110" selection-end-column="89" />
+          <folding>
+            <element signature="e#42#1241#0" expanded="true" />
+            <element signature="e#2409#2452#1" expanded="true" />
+            <element signature="e#2622#2664#1" expanded="true" />
+            <element signature="e#2825#2868#1" expanded="true" />
+            <element signature="e#3497#3538#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

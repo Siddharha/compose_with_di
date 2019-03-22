@@ -54,7 +54,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             selectImage()
         }
 
-        txtSubmit.setOnClickListener {
+        btnSubmit.setOnClickListener {
 
             onSubmit()
         }
@@ -66,19 +66,19 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     {
         if(!imageSelectStatus)
         {
-            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.required_profile_image))
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_profile_image))
         }
         else if(TextUtils.isEmpty(etName.text.toString()))
         {
-            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.required_name))
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_name))
         }
         else if (TextUtils.isEmpty(etOTP.text.toString()))
         {
-            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.required_otp))
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_otp))
         }
         else if(etOTP.text.toString()!=mobileOtp)
         {
-            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.otp_not_match))
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.otp_not_match))
         }
         else
         {
@@ -86,7 +86,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             {
                 swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                 swipeRefreshLayout.isRefreshing=true
-                txtSubmit.isClickable=false
+                btnSubmit.isClickable=false
 
                 val presenterAWSProfile= PresenterAWSProfile()
                 presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,captureFile)
@@ -94,7 +94,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             }
             else
             {
-                CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.no_internet))
             }
         }
     }
@@ -107,7 +107,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onFailureUploadAWS(string: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        txtSubmit.isClickable=true
+        btnSubmit.isClickable=true
+        Toast.makeText(this@RegistrationStepTwoActivity,string,Toast.LENGTH_SHORT).show()
     }
 
     private fun uploadData(imageURL: String)
@@ -133,8 +134,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onErrorRegistrationTwo(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        txtSubmit.isClickable=true
-        CommonMethod.customSnackBarError(ll_root,this@RegistrationStepTwoActivity,jsonMessage)
+        btnSubmit.isClickable=true
+        CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,jsonMessage)
     }
 
     private fun selectImage() {
