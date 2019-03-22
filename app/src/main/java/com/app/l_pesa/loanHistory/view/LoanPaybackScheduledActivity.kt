@@ -109,7 +109,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
         txtTitle.text   =   dataOBJ.loanInfo!!.payment_message!!.header
         txtContent.text =   dataOBJ.loanInfo!!.payment_message!!.header2
-        txtData.text    =   "Amount to pay is: "+dataOBJ.loanInfo!!.currencyCode+" "+dataOBJ.loanInfo!!.payfullamount!!.paidAmount.toString()+"\n"+
+        txtData.text    =   "Amount to pay is: "+dataOBJ.loanInfo!!.currencyCode+" "+dataOBJ.loanInfo!!.payfullamount!!.loanAmount.toString()+"\n"+
                 "Reference number is: "+dataOBJ.loanInfo!!.identityNumber+"\n"+
                 "L-Pesa Short code is: "+dataOBJ.loanInfo!!.merchantCode.toString()
 
@@ -126,7 +126,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
 
-        println("")
+        println("JSON"+jsonObject)
 
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)

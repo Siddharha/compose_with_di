@@ -117,7 +117,7 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
 
                     txtTitle.text   =   loanInfo.payment_message!!.header
                     txtContent.text =   loanInfo.payment_message!!.header2
-                    txtData.text    =   "Amount to pay is: "+loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()+"\n"+
+                    txtData.text    =   "Amount to pay is: "+loanInfo.currencyCode+" "+alScheduleOBJ[position].payanytime!!.repayAmount.toString()+"\n"+
                                         "Reference number is: "+loanInfo.identityNumber+"\n"+
                                         "L-Pesa Short code is: "+loanInfo.merchantCode.toString()
 

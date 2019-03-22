@@ -99,9 +99,9 @@ class ResPaybackSchedule {
         @SerializedName("alertMgs")
         @Expose
         var alertMgs: String = ""
-        @SerializedName("paidAmount")
+        @SerializedName("repayAmount")
         @Expose
-        var paidAmount: Int = 0
+        var repayAmount: Int = 0
         @SerializedName("mgsText")
         @Expose
         var mgsText: String = ""
@@ -113,9 +113,9 @@ class ResPaybackSchedule {
         @SerializedName("btnStatus")
         @Expose
         var btnStatus: Boolean = false
-        @SerializedName("paidAmount")
+        @SerializedName("loanAmount")
         @Expose
-        var paidAmount: Int = 0
+        var loanAmount: Double = 0.0
         @SerializedName("btnText")
         @Expose
         var btnText: String = ""
@@ -135,7 +135,7 @@ class ResPaybackSchedule {
         var currencyCode: String = ""
         @SerializedName("paid_amount")
         @Expose
-        var paidAmount: Int = 0
+        var paidAmount: Double = 0.0
         @SerializedName("paid_by_user_amount")
         @Expose
         var paidByUserAmount: Int = 0

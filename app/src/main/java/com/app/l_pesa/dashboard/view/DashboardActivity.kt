@@ -2,6 +2,7 @@ package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -253,7 +254,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_loan -> {
                 toolbar.title =resources.getString(R.string.nav_item_loan)
-                navigateToFragment(LoanPlansFragment.newInstance(),true)
+                navigateToFragment(LoanPlansFragment.newInstance(),false)
             }
             R.id.action_points -> {
                 toolbar.title =resources.getString(R.string.nav_item_points)
@@ -343,6 +344,21 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
+
+
+
+    fun isVisibleToolbarRight(isVisible:Boolean)
+    {
+        if(isVisible)
+        {
+            buttonRight.visibility=View.VISIBLE
+        }
+        else
+        {
+            buttonRight.visibility=View.INVISIBLE
+        }
+    }
+
 
     public override fun onResume()
     {

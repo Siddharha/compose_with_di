@@ -3,12 +3,14 @@ package com.app.l_pesa.loanplan.view
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.CurrentLoanPlanAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackCurrentLoan
@@ -26,7 +28,6 @@ import java.util.ArrayList
  * Kindly follow https://source.android.com/setup/code-style
  */
 class CurrentLoan:Fragment(), ICallBackCurrentLoan {
-
 
 
     companion object {
@@ -71,6 +72,8 @@ class CurrentLoan:Fragment(), ICallBackCurrentLoan {
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
 
+        (activity as DashboardActivity).isVisibleToolbarRight(true)
+
         swipeRefreshLayout.isRefreshing = false
         val currentLoanAdapter          = CurrentLoanPlanAdapter(activity!!, item,appliedProduct!!,this)
         rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
@@ -79,12 +82,14 @@ class CurrentLoan:Fragment(), ICallBackCurrentLoan {
 
     override fun onEmptyLoanPlans() {
 
+        (activity as DashboardActivity).isVisibleToolbarRight(false)
         swipeRefreshLayout.isRefreshing = false
 
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
 
+        (activity as DashboardActivity).isVisibleToolbarRight(false)
         swipeRefreshLayout.isRefreshing = false
     }
 
