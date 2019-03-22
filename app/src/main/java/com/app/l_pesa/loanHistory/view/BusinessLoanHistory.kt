@@ -15,7 +15,7 @@ import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
+import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import java.util.ArrayList
 
 
@@ -35,7 +35,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_loan_plan_list, container,false)
+        return inflater.inflate(R.layout.fragment_loan_history_list, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

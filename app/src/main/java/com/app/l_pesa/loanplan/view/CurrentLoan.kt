@@ -73,16 +73,19 @@ class CurrentLoan:Fragment(), ICallBackCurrentLoan {
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
 
         (activity as DashboardActivity).isVisibleToolbarRight(true)
-
+        cardView.visibility   = View.GONE
+        rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
-        val currentLoanAdapter          = CurrentLoanPlanAdapter(activity!!, item,appliedProduct!!,this)
-        rvLoan.layoutManager            = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rvLoan.adapter                  = currentLoanAdapter
+        val currentLoanAdapter = CurrentLoanPlanAdapter(activity!!, item, appliedProduct!!, this)
+        rvLoan.layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        rvLoan.adapter = currentLoanAdapter
     }
 
     override fun onEmptyLoanPlans() {
 
         (activity as DashboardActivity).isVisibleToolbarRight(false)
+        rvLoan.visibility   = View.GONE
+        cardView.visibility = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
 
     }

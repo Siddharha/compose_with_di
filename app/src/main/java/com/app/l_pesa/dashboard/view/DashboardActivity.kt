@@ -2,7 +2,6 @@ package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -17,18 +16,15 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.graphics.Typeface
 import android.provider.Settings
-import android.support.design.internal.NavigationMenuView
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.widget.DividerItemDecoration
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
@@ -37,7 +33,6 @@ import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.lpk.view.LpkFragment
-import com.app.l_pesa.lpk.view.WalletAddressFragment
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.points.view.PointsFragment
 import com.app.l_pesa.profile.view.ProfileFragment
@@ -47,7 +42,6 @@ import com.app.l_pesa.settings.view.SettingsFragment
 import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import java.lang.Exception
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
@@ -156,19 +150,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 txtCreditScore.text     = resources.getString(R.string.credit_score)+userData.user_info.credit_score
             }
 
-            try {
-
-                val options = RequestOptions()
-                options.error(R.drawable.ic_profile)
-                Glide.with(this@DashboardActivity)
-                        .load(resources.getString(R.string.profile_image_url)+userData.user_personal_info.profile_image)
-                        .apply(options)
-                        .into(imgProfile)
-            }
-            catch (exception:Exception)
-            {
-
-            }
+            val options = RequestOptions()
+            options.centerCrop()
+            options.error(R.drawable.ic_user_no_img_icon)
+            Glide.with(this@DashboardActivity)
+                    .load(resources.getString(R.string.profile_image_url)+userData.user_personal_info.profile_image)
+                    .apply(options)
+                    .into(imgProfile)
 
 
 

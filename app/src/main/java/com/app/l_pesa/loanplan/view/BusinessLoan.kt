@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.BusinessLoanPlanAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackBusinessLoan
@@ -65,6 +66,9 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
 
+        (activity as DashboardActivity).isVisibleToolbarRight(true)
+        cardView.visibility   = View.GONE
+        rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
         val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, item,appliedProduct!!,this)
         rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
@@ -73,11 +77,15 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
     override fun onEmptyLoanPlans() {
 
+        (activity as DashboardActivity).isVisibleToolbarRight(false)
+        rvLoan.visibility   = View.GONE
+        cardView.visibility = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
 
+        (activity as DashboardActivity).isVisibleToolbarRight(false)
         swipeRefreshLayout.isRefreshing = false
     }
 

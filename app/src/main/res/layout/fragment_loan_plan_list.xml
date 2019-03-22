@@ -44,30 +44,15 @@
                     android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_12sdp"
-                    android:text="@string/empty_loan_message"
+                    android:text="@string/empty_loan_plan_message"
                     android:gravity="center"
                     android:textColor="@color/textColors"
                     android:fontFamily="@font/montserrat"
                     />
-
-                <Button
-                    android:id="@+id/buttonApplyLoan"
-                    android:layout_width="@dimen/_120sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:layout_marginBottom="@dimen/_7sdp"
-                    android:background="@drawable/ripple_green_button"
-                    android:fontFamily="@font/montserrat"
-                    android:text="@string/apply_loan"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorWhite"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                   />
 
 
 
