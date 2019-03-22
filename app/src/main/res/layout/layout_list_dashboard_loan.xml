@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_85sdp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/_3sdp"
     android:id="@+id/ll_root"
     android:orientation="vertical"
@@ -13,7 +13,7 @@
         android:orientation="horizontal"
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_85sdp"
 
 
         >
@@ -123,46 +123,86 @@
 
     </LinearLayout>
 
-
     <LinearLayout
-        android:id="@+id/ll_center"
-        android:layout_below="@+id/ll_top"
-        android:layout_marginBottom="@dimen/_3sdp"
+        android:id="@+id/ll_SeekBar"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
+        android:background="@color/semi_white"
+        android:orientation="vertical"
+        android:visibility="gone"
         >
 
-        <RelativeLayout
-            android:layout_weight=".70"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-
+        <View
+            android:layout_height="@dimen/_1sdp"
+            android:layout_width="match_parent"
+            android:background="@color/colorGrey"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             />
 
         <RelativeLayout
-            android:layout_weight=".30"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:gravity="center|top"
-            android:paddingStart="@dimen/_2sdp"
-            android:paddingEnd="@dimen/_1sdp"
-
-
             >
 
-            <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/btn_pay_now"
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtRepayments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/repayments"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textColor="@color/color_gray_text"
+                android:layout_marginStart="@dimen/_5sdp"/>
+
+
+            <com.warkiz.widget.IndicatorStayLayout
+                android:id="@+id/seekBarLayout"
+                android:layout_below="@+id/txtRepayments"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_29sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_3sdp"
-                android:gravity="center"
-                android:textSize="@dimen/_10sdp"
-                android:text="@string/apply_loan"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
+                android:layout_height="wrap_content">
+
+                <com.warkiz.widget.IndicatorSeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isb_show_indicator="rectangle"
+                    app:isb_track_background_color="#2bbd83"
+                    app:isb_track_background_size="@dimen/_7sdp"
+                    app:isb_track_progress_color="#fc3026"
+                    app:isb_track_progress_size="@dimen/_7sdp"
+                    app:isb_thumb_color="#08a9ea"
+
+                    />
+
+            </com.warkiz.widget.IndicatorStayLayout>
+
+
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_max"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seekBarLayout"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/color_gray_text"
+                android:layout_marginEnd="@dimen/_5sdp"
+
+                />
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_start"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/seekBarLayout"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/color_gray_text"
+                android:layout_marginStart="@dimen/_10sdp"
                 />
 
         </RelativeLayout>
@@ -170,6 +210,5 @@
     </LinearLayout>
 
 
-
-</RelativeLayout>
+</LinearLayout>
 

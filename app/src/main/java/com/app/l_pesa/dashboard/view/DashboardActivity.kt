@@ -145,7 +145,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             {
                 txtName.text            = userData.user_personal_info.first_name+" "+userData.user_personal_info.middle_name+" "+userData.user_personal_info.last_name
             }
-            if(!TextUtils.isEmpty(userData.user_info.credit_score))
+            if(!TextUtils.isEmpty(userData.user_info.credit_score.toString()))
             {
                 txtCreditScore.text     = resources.getString(R.string.credit_score)+userData.user_info.credit_score
             }

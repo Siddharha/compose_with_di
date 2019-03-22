@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -83,6 +84,7 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
         {
             if(CommonMethod.isNetworkAvailable(this@ForgotPasswordActivity))
             {
+                txtSubmit.isClickable =false
                 progressBar.visibility= View.VISIBLE
                 val jsonObject = JsonObject()
                 if(!TextUtils.isEmpty(etPhone.text.toString()) && !TextUtils.isEmpty(etEmail.text.toString()))
@@ -99,7 +101,6 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
                 }
 
                 jsonObject.addProperty("country_code",countryCode)
-
                 val presenterForgetPassword=PresenterPassword()
                 presenterForgetPassword.doForgetPassword(this@ForgotPasswordActivity,jsonObject,this)
             }
@@ -130,12 +131,15 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
     override fun onSuccessResetPassword(message: String) {
 
         progressBar.visibility= View.INVISIBLE
-
+        Toast.makeText(this@ForgotPasswordActivity,resources.getString(R.string.email_to_reset_password),Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this@ForgotPasswordActivity, LoginActivity::class.java))
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
     override fun onErrorResetPassword(jsonMessage: String) {
 
         progressBar.visibility= View.INVISIBLE
+        txtSubmit.isClickable=true
         customSnackBarError(ll_root,jsonMessage)
     }
     private fun back()

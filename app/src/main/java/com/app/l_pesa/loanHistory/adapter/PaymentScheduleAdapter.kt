@@ -54,7 +54,7 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             }
 
             viewHolder.txtRepayDate.text        = dateRequest
-            viewHolder.txtCurrentBalance.text   = "0"
+            viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" 0"
             viewHolder.txtPaidDate.text         = fromHtml("<font color='#a4a4a4'>"+context.resources.getString(R.string.date)+"</font>"+"<font color='#61666b'>"+" "+alScheduleOBJ[position].paidDate+"</font>")
         }
         else

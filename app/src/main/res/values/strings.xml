@@ -73,6 +73,7 @@
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
     <string name="password_change_success">Your password was changed.</string>
+    <string name="email_to_reset_password">Check your email to reset your password.</string>
     <string name="change_one_info">Nothing to save! You have not yet edited.</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="please_wait">Please wait…</string>
@@ -158,7 +159,8 @@
 
 
     <!--Dashboard-->
-    <string name="your_credit_score" tools:ignore="ExtraTranslation">Your L-Pesa Credit Score</string>
+    <string name="your_credit_score" >Your L-Pesa Credit Score</string>
+    <string name="repayments" >Repayments</string>
     <string name="apply_loan">Apply Loan</string>
     <string name="business_loan">Business Loan</string>
     <string name="current_loan">Current Loan</string>

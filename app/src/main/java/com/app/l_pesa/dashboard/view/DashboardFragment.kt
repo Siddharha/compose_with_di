@@ -23,9 +23,7 @@ import com.app.l_pesa.loanHistory.view.LoanPaybackScheduledActivity
 
 class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
 
-
-
-    companion object {
+   companion object {
         fun newInstance(): Fragment {
             return DashboardFragment()
         }
@@ -105,10 +103,10 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
         left_header_txt.text = dashBoard.fixedDepositAmount
         right_header_txt.text = dashBoard.savingsAmount
 
-        seekBar.post{
+        txt_start.text          = dashBoard.minCreditScore.toString()
+        txt_max.text            = dashBoard.maxCreditScore.toString()
 
-            txt_start.text          = dashBoard.minCreditScore.toString()
-            txt_max.text            = dashBoard.maxCreditScore.toString()
+        seekBar.post{
 
             seekBar.max = dashBoard.maxCreditScore.toFloat()
             seekBar.setProgress(dashBoard.creditScore.toFloat())
