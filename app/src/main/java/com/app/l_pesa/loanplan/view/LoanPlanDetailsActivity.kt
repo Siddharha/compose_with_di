@@ -46,9 +46,10 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
 
         txt_apply_loan.setOnClickListener {
 
-            val bundle = Bundle()
+            val bundleOBJ  = intent.extras
+            val bundle     = Bundle()
             bundle.putString("PRODUCT_ID",globalLoanPlanModel.productId.toString())
-            bundle.putString("LOAN_TYPE","current_loan")
+            bundle.putString("LOAN_TYPE",bundleOBJ!!.getString("LOAN_TYPE"))
             val intent = Intent(this@LoanPlanDetailsActivity, LoanApplyActivity::class.java)
             intent.putExtras(bundle)
             startActivity(intent,bundle)

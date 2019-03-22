@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,200 +9,160 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".loanplan.view.LoanApplyActivity"
     tools:showIn="@layout/activity_loan_apply"
-    android:background="@color/screenBackground">
+    >
 
-
-    <RelativeLayout
-        android:id="@+id/llRoot"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/screenBackground">
+        android:layout_height="match_parent"
+        android:id="@+id/llRoot"
+        android:background="@color/screenBackground"
+        >
 
-
-        <RelativeLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/bg_white_view"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            tools:ignore="NestedWeights">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="@dimen/_10sdp"
+            app:cardCornerRadius="@dimen/_4sdp"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_description"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center|start"
-                android:text="@string/choose_loan_purpose_description"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/_13sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_10sdp">
 
-                />
-
-
-            <LinearLayout
-                android:id="@+id/llDescription"
-                android:layout_below="@+id/txt_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:ignore="NestedWeights"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                >
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/txt_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:text="@string/choose_loan_purpose_description"
+                    android:textColor="@color/dark_text_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.app.l_pesa.common.CommonInputLayout
                     android:id="@+id/tilChooseDescription"
                     style="@style/customInputLayoutStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_description">
 
                     <com.app.l_pesa.common.CommonEditTextRegular
                         android:id="@+id/etChooseDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/choose_description"
-                        android:inputType="textNoSuggestions|text"
-                        android:maxLength="20"
-                        android:maxLines="1"
+                        android:textColor="@color/light_text_color"
                         android:textSize="@dimen/_13sdp"
-                        app:autoSizeMaxTextSize="@dimen/_14sdp"
-                        app:autoSizeMinTextSize="@dimen/_10sdp"
-                        app:autoSizeStepGranularity="0.2sp"
-                        app:autoSizeTextType="uniform"
-                        android:textColorHint="@color/colorGreyDeep"
-                        android:drawableEnd="@drawable/ic_dropdown"
-                        />
+                        android:longClickable="false"
+                        android:drawableEnd="@drawable/ic_dropdown"/>
+
                 </com.app.l_pesa.common.CommonInputLayout>
 
-            </LinearLayout>
-
-          <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_loan_description"
-                android:layout_below="@+id/llDescription"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center|start"
-                android:text="@string/loan_purpose_description"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/_13sdp"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                />
-
-            <RelativeLayout
-                android:id="@+id/rlPurpose"
-                android:layout_below="@+id/txt_loan_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:ignore="NestedWeights"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:visibility="gone"
-                >
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/txt_loan_description"
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/loan_purpose_description"
+                    android:textColor="@color/dark_text_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilChooseDescription" />
 
                 <com.app.l_pesa.common.CommonInputLayout
                     android:id="@+id/tilDescription"
+                    android:visibility="gone"
                     style="@style/customInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:layout_marginTop="@dimen/_7sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_loan_description">
 
                     <com.app.l_pesa.common.CommonEditTextRegular
                         android:id="@+id/etDescription"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
                         android:inputType="textNoSuggestions|text|textMultiLine"
+                        android:longClickable="false"
                         android:maxLength="500"
-                        android:hint="@string/enter_purpose"
+                        android:gravity="top"
+                        android:textColorHint="@color/light_text_color"
                         android:textSize="@dimen/_13sdp"
                         app:autoSizeMaxTextSize="@dimen/_14sdp"
                         app:autoSizeMinTextSize="@dimen/_10sdp"
                         app:autoSizeStepGranularity="0.2sp"
-                        app:autoSizeTextType="uniform"
-                        android:textColorHint="@color/colorGreyDeep"
-                        android:longClickable="false"
-                        android:gravity="start"
+                        app:autoSizeTextType="uniform" />
 
-                        />
+
                 </com.app.l_pesa.common.CommonInputLayout>
 
-            </RelativeLayout>
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_max_words"
-                android:layout_below="@+id/rlPurpose"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center|end"
-                android:padding="@dimen/_3sdp"
-                android:text="@string/max_500_words"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:textColor="@color/colorTextBlackLight"
-                android:textSize="@dimen/_10sdp"
-                />
-
-
-
-            <LinearLayout
-                android:layout_below="@+id/txt_max_words"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:orientation="horizontal"
-                tools:ignore="NestedWeights"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_5sdp"
-                android:weightSum="1">
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/txt_max_words"
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:gravity="end"
+                    android:text="@string/max_500_words"
+                    android:textColor="@color/light_text_color"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tilDescription" />
 
                 <com.app.l_pesa.common.CustomButtonRegular
                     android:id="@+id/buttonSubmit"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".45"
-                    android:background="@drawable/bg_green_view"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/colorAppDeep"
-                    android:text="@string/submit"
-                    android:textAllCaps="true"
-                    />
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".10"
-                    />
+                    android:layout_height="@dimen/_27sdp"
+                    android:background="@drawable/ripple_green_button"
+                    android:text="@string/apply"
+                    android:textAllCaps="false"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonCancel"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_max_words" />
 
                 <com.app.l_pesa.common.CustomButtonRegular
                     android:id="@+id/buttonCancel"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight=".45"
-                    android:background="@drawable/bg_grey_view"
-                    android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/colorGreyDeep"
+                    android:layout_height="@dimen/_27sdp"
+                    style="?android:attr/borderlessButtonStyle"
                     android:text="@string/cancel"
-                    android:textAllCaps="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:textColor="@color/colorGreyDeep"
+                    android:background="@drawable/bg_grey_view"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/buttonSubmit"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_max_words" />
 
-                    />
 
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
-        </RelativeLayout>
 
-    </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </android.support.constraint.ConstraintLayout>
+
 </android.support.v4.widget.SwipeRefreshLayout>
-

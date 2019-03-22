@@ -15,6 +15,7 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -51,6 +52,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val bundle       = intent.extras
         val productID    = bundle!!.getString("PRODUCT_ID")
         val loanType     = bundle.getString("LOAN_TYPE")
+
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
@@ -155,7 +157,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         loanPurpose=s
         if(loanPurpose=="Others")
         {
-            rlPurpose.visibility                = View.VISIBLE
+            txt_loan_description.visibility     = View.VISIBLE
+            tilDescription.visibility           = View.VISIBLE
             txt_max_words.visibility            = View.VISIBLE
             txt_loan_description.visibility     = View.VISIBLE
             etDescription.requestFocus()
@@ -163,7 +166,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
         else
         {
-            rlPurpose.visibility                = View.GONE
+            txt_loan_description.visibility     = View.GONE
+            tilDescription.visibility           = View.GONE
             txt_max_words.visibility            = View.GONE
             txt_loan_description.visibility     = View.GONE
         }

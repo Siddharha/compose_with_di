@@ -93,7 +93,11 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
         val globalLoanPlanModel= GlobalLoanPlanModel.getInstance()
         globalLoanPlanModel.modelData=details
-        startActivity(Intent(activity, LoanPlanDetailsActivity::class.java))
+        val bundle = Bundle()
+        bundle.putString("LOAN_TYPE","business_loan")
+        val intent = Intent(activity, LoanPlanDetailsActivity::class.java)
+        intent.putExtras(bundle)
+        startActivity(intent,bundle)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
