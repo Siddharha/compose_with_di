@@ -70,15 +70,23 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.txtAmountFirst.text                  =al_loadOBJ[position].repay!!.amount
                     viewHolder.txtAmountSecond.text                 =al_loadOBJ[position].nextRepay!!.amount
                     viewHolder.verticalDivider.visibility           =View.INVISIBLE
-                    viewHolder.buttonApplyLoan.visibility           =View.VISIBLE
-                    viewHolder.buttonApplyLoan.text                 = contextOBJ.resources.getString(R.string.pay_now)
 
-                    when {
-                        al_loadOBJ[position].status=="Pending" //YELLOW
-                        -> viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_yellow_btn)
-                        al_loadOBJ[position].status=="Due" //RED
-                        -> viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_red_btn) //GREEN
-                        else -> viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
+                    if(al_loadOBJ[position].status=="Pending")
+                    {
+                        viewHolder.buttonApplyLoan.visibility       =View.INVISIBLE
+                    }
+                    else
+                    {
+                        viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
+                        viewHolder.buttonApplyLoan.text             = contextOBJ.resources.getString(R.string.pay_now)
+                        if(al_loadOBJ[position].status=="Due" )
+                        {
+                            viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_red_btn)
+                        }
+                        else
+                        {
+                            viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
+                        }
                     }
 
                     if(al_loadOBJ[position].status=="Active" || al_loadOBJ[position].status=="Due")
@@ -162,19 +170,27 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.txtAmountFirst.text              =al_loadOBJ[position].repay!!.amount
                     viewHolder.txtAmountSecond.text             =al_loadOBJ[position].nextRepay!!.amount
                     viewHolder.verticalDivider.visibility       =View.INVISIBLE
-                    viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
-                    viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
-                    viewHolder.buttonApplyLoan.text             = contextOBJ.resources.getString(R.string.pay_now)
-                    when {
-                        al_loadOBJ[position].status=="Pending" //YELLOW
-                        -> viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_yellow_btn)
-                        al_loadOBJ[position].status=="Due" //RED
-                        -> {
+
+
+
+                    if(al_loadOBJ[position].status=="Pending")
+                    {
+                        viewHolder.buttonApplyLoan.visibility       =View.INVISIBLE
+                    }
+                    else
+                    {
+                        viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
+                        viewHolder.buttonApplyLoan.text             = contextOBJ.resources.getString(R.string.pay_now)
+                        if(al_loadOBJ[position].status=="Due" )
+                        {
                             viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_red_btn)
                         }
-                        else //GREEN
-                        -> viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
+                        else
+                        {
+                            viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
+                        }
                     }
+
 
                     if(al_loadOBJ[position].status=="Active" || al_loadOBJ[position].status=="Due")
                     {
