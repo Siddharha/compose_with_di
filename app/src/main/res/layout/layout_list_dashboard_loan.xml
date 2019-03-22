@@ -65,16 +65,6 @@
 
         </RelativeLayout>
 
-        <View
-            android:id="@+id/view_vertical_divider"
-            android:layout_height="match_parent"
-            android:layout_width="@dimen/_1sdp"
-            android:background="@color/colorGrey"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-
-            />
-
         <RelativeLayout
             android:layout_weight=".30"
             android:layout_height="match_parent"
@@ -90,15 +80,15 @@
                 android:id="@+id/txt_amount_first"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:gravity="center"
                 android:textSize="@dimen/_12sdp"
                 android:maxLines="1"/>
 
                 <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txt_amount_second"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/txt_amount_first"
                 android:text=""
                 android:layout_marginTop="@dimen/_2sdp"
