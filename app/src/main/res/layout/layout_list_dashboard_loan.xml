@@ -106,6 +106,8 @@
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
                 />
 
         </RelativeLayout>
