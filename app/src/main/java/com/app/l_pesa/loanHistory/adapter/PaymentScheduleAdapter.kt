@@ -80,11 +80,30 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
 
             viewHolder.txtRepayDate.text        = dateRequest
 
-
-            if(alScheduleOBJ[position].payanytime!!.btnStatus=="disable")
+            viewHolder.btnPayNow.text   = alScheduleOBJ[position].payanytime!!.btnText
+            viewHolder.btnPayNow.setTextColor(Color.parseColor(alScheduleOBJ[position].payanytime!!.btnHexColor))
+            if(alScheduleOBJ[position].paidStatus=="P")
             {
 
-                viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_button_red)
+                if(alScheduleOBJ[position].payanytime!!.btnStatus=="disable")
+                {
+
+                  viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_transparent_border_orange_view)
+
+                }
+                else
+                {
+                    if(alScheduleOBJ[position].payanytime!!.btnColor.contentEquals("green"))
+                    {
+                        viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
+                    }
+                    else
+                    {
+                        viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_transparent_border_red_view)
+                    }
+                }
+
+
             }
             else
             {
