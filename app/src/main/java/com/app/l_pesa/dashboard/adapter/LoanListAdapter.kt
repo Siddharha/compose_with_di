@@ -71,6 +71,10 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.txtAmountSecond.text                 =al_loadOBJ[position].nextRepay!!.amount
                     viewHolder.verticalDivider.visibility           =View.INVISIBLE
 
+                    if(al_loadOBJ[position].nextRepay!!.leftDays<0)
+                    {
+                        viewHolder.txtAmountSecond.setTextColor(Color.RED)
+                    }
                     if(al_loadOBJ[position].status=="Pending")
                     {
                         viewHolder.buttonApplyLoan.visibility       =View.INVISIBLE
@@ -171,7 +175,10 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.txtAmountSecond.text             =al_loadOBJ[position].nextRepay!!.amount
                     viewHolder.verticalDivider.visibility       =View.INVISIBLE
 
-
+                    if(al_loadOBJ[position].nextRepay!!.leftDays<0)
+                    {
+                        viewHolder.txtAmountSecond.setTextColor(Color.RED)
+                    }
 
                     if(al_loadOBJ[position].status=="Pending")
                     {
