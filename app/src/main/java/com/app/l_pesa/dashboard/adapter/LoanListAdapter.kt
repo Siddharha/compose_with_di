@@ -65,7 +65,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 }
                 else
                 {
-                    val totalRange = al_loadOBJ[position].repay!!.done + al_loadOBJ[position].repay!!.left
 
                     viewHolder.txtLoanDetails.text                  =al_loadOBJ[position].nextRepay!!.leftDaysText
                     viewHolder.txtAmountFirst.text                  =al_loadOBJ[position].repay!!.amount

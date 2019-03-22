@@ -100,7 +100,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/txt_amount_first"
-                android:textColor="@color/colorRed"
                 android:text=""
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textSize="@dimen/_12sdp" />
