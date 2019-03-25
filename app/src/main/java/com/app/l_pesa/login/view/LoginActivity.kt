@@ -282,6 +282,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         val gson = Gson()
         val json = gson.toJson(data)
         sharedPrefOBJ.userInfo      = json
+        sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
 
         val presenterDashboard= PresenterDashboard()
         presenterDashboard.getDashboard(this@LoginActivity,data.access_token,this)
