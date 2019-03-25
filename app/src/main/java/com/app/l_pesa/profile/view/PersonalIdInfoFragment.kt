@@ -293,11 +293,25 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         else
             {
-                ilIdNumber.visibility = View.VISIBLE
-                personalIdName = name
-                etPersonalId.setText(personalIdName)
-                personalIdType = type
-                personalId = id
+                if (name == resources.getString(R.string.address_prof))
+                {
+                    ilIdNumber.visibility = View.INVISIBLE
+                    personalIdName = name
+                    etPersonalId.setText(personalIdName)
+                    personalIdType = type
+                    personalId = id
+
+                }
+
+                else
+                {
+                    ilIdNumber.visibility = View.VISIBLE
+                    personalIdName = name
+                    etPersonalId.setText(personalIdName)
+                    personalIdType = type
+                    personalId = id
+                }
+
             }
 
     }
