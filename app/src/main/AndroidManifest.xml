@@ -28,12 +28,13 @@
         <activity
             android:name=".investment.view.InvestmentApplyActivity"
             android:label="@string/apply_an_investment"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".registration.view.RegistrationStepThreeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".profile.view.ActivityViewFile"
             android:label="@string/view_file"

@@ -1,11 +1,10 @@
 package com.app.l_pesa.investment.inter
 
 import com.app.l_pesa.investment.model.ResInvestmentPlan
-import java.util.ArrayList
 
 interface ICallBackInvestmentPlan {
 
-    fun onSuccessInvestmentPlan(investmentPlans: ArrayList<ResInvestmentPlan.InvestmentPlan>)
+    fun onSuccessInvestmentPlan(data: ResInvestmentPlan.Data)
     fun onEmptyInvestmentPlan()
     fun onErrorInvestmentPlan(jsonMessage: String)
     fun onClickInvestmentPlan(investmentPlan: ResInvestmentPlan.InvestmentPlan)

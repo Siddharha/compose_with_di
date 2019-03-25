@@ -31,7 +31,7 @@ class PresenterInvestmentPlan {
                         {
                             if(response.data!!.investmentPlans!!.size>0)
                             {
-                                callBackOBJ.onSuccessInvestmentPlan(response.data!!.investmentPlans!!)
+                                callBackOBJ.onSuccessInvestmentPlan(response.data!!)
                             }
                             else
                             {

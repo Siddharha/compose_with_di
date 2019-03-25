@@ -122,6 +122,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var loanPlanList: String
+        get() = pref.getString(KEY_SET_LOAN_PLAN_LIST, "")!!
+        set(loanPlanList) {
+            editor.remove(KEY_SET_LOAN_PLAN_LIST)
+            editor.putString(KEY_SET_LOAN_PLAN_LIST, loanPlanList)
+            editor.commit()
+        }
+
     fun removeToken() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -154,6 +162,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_NAVIGATION_TAB    = "KEY_SET_NAVIGATION_TAB"
         private const val KEY_SET_LOAN_TAB_PLAN     = "KEY_SET_LOAN_TAB_PLAN"
         private const val KEY_SET_PAY_FULL_AMOUNT   = "KEY_SET_PAY_FULL_AMOUNT"
+        private const val KEY_SET_LOAN_PLAN_LIST    = "KEY_SET_LOAN_PLAN_LIST"
     }
 
 

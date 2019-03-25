@@ -1,18 +1,30 @@
 package com.app.l_pesa.investment.view
 
 import android.app.Activity
+import android.app.Dialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.MenuItem
+import android.view.Window
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.investment.adapter.LoanPlanListAdapter
+import com.app.l_pesa.investment.inter.ICallBackLoanPlanList
+import com.app.l_pesa.investment.model.ResInvestmentPlan
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_investment_apply.*
 import kotlinx.android.synthetic.main.content_investment_apply.*
 
-class InvestmentApplyActivity : AppCompatActivity() {
+class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
+
+
+    private var investmentPlanId=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +47,18 @@ class InvestmentApplyActivity : AppCompatActivity() {
 
     fun initData()
     {
+        etPlan.setOnClickListener {
+            showPlan()
+        }
+
         buttonDeposit.setOnClickListener {
 
-            if(TextUtils.isEmpty(etAmount.text.toString()))
+            if(investmentPlanId==0)
+            {
+                showPlan()
+                CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.select_investment_plan))
+            }
+            else if(TextUtils.isEmpty(etAmount.text.toString()))
             {
                 CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.required_investment_amount))
             }
@@ -55,6 +76,28 @@ class InvestmentApplyActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onSelectLoan(planId: Int, planName: String) {
+
+        etPlan.setText(planName)
+        investmentPlanId=planId
+    }
+
+    private fun showPlan()
+    {
+        val sharedPrefOBJ= SharedPref(this@InvestmentApplyActivity)
+        val loanPlanData = Gson().fromJson<ResInvestmentPlan.Data>( sharedPrefOBJ.loanPlanList, ResInvestmentPlan.Data::class.java)
+
+        val dialog= Dialog(this@InvestmentApplyActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_id_type)
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val loanPlanAdapter             = LoanPlanListAdapter(this@InvestmentApplyActivity, loanPlanData.investmentPlans!!,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@InvestmentApplyActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter           = loanPlanAdapter
+        dialog.show()
+
     }
 
     private fun toolbarFont(context: Activity) {
