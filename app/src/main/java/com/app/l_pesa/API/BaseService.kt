@@ -2,6 +2,7 @@ package com.app.l_pesa.API
 
 
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.investment.model.ResApplyInvestment
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
@@ -103,6 +104,9 @@ interface BaseService{
 
     @POST("user/delete_proof")
     fun doDeleteProof(@Body request: JsonObject): Observable<ResProof>
+
+    @POST("investment/apply")
+    fun doInvestmentApply(@Body request: JsonObject): Observable<ResApplyInvestment>
 
 }
 

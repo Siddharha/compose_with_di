@@ -1,6 +1,6 @@
 package com.app.l_pesa.password.model
 
-import android.support.annotation.Keep
+
 import com.app.l_pesa.common.CommonStatusModel
 
 /**
@@ -9,5 +9,5 @@ import com.app.l_pesa.common.CommonStatusModel
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-@Keep
+
 data class ResForgetPassword(val status: CommonStatusModel)

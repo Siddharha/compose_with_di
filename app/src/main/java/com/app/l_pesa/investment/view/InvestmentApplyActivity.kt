@@ -17,12 +17,13 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.investment.adapter.LoanPlanListAdapter
 import com.app.l_pesa.investment.inter.ICallBackLoanPlanList
 import com.app.l_pesa.investment.model.ResInvestmentPlan
+import com.app.l_pesa.investment.presenter.PresenterApplyInvestment
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_investment_apply.*
 import kotlinx.android.synthetic.main.content_investment_apply.*
 
 class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
-
 
     private var investmentPlanId=0
 
@@ -69,6 +70,13 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
                     swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                     swipeRefreshLayout.isRefreshing=true
                     buttonDeposit.isClickable=false
+
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("deposit_id",investmentPlanId.toString())
+                    jsonObject.addProperty("amount",etAmount.text.toString())
+
+                    val presenterApplyInvestment= PresenterApplyInvestment()
+                    presenterApplyInvestment.applyInvestment(this@InvestmentApplyActivity,this,jsonObject)
                 }
                 else
                 {
@@ -76,6 +84,18 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
                 }
             }
         }
+    }
+
+    override fun onSuccessApplyInvestment() {
+        swipeRefreshLayout.isRefreshing=false
+        buttonDeposit.isClickable=true
+        onBackPressed()
+    }
+
+    override fun onErrorApplyInvestment(jsonMessage: String) {
+        swipeRefreshLayout.isRefreshing=false
+        buttonDeposit.isClickable=true
+        CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,jsonMessage)
     }
 
     override fun onSelectLoan(planId: Int, planName: String) {
