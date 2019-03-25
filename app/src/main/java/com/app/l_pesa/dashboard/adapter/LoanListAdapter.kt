@@ -104,7 +104,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                         viewHolder.seekBar.post{
 
                             viewHolder.seekBar.max = al_loadOBJ[position].repay!!.total.toFloat()
-                            viewHolder.seekBar.setProgress(al_loadOBJ[position].repay!!.done.toFloat())
+                            viewHolder.seekBar.setProgress(al_loadOBJ[position].repay!!.total.toFloat()-al_loadOBJ[position].repay!!.done.toFloat())
 
                         }
 
@@ -212,7 +212,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                         viewHolder.seekBar.post{
 
                             viewHolder.seekBar.max = al_loadOBJ[position].repay!!.total.toFloat()
-                            viewHolder.seekBar.setProgress(al_loadOBJ[position].repay!!.done.toFloat())
+                            viewHolder.seekBar.setProgress(al_loadOBJ[position].repay!!.total.toFloat()-al_loadOBJ[position].repay!!.done.toFloat())
 
                         }
 
