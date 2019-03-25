@@ -1,6 +1,7 @@
 package com.app.l_pesa.investment.view
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -62,7 +63,7 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
     override fun onSuccessInvestmentPlan(investmentPlans: ArrayList<ResInvestmentPlan.InvestmentPlan>) {
 
         swipeRefreshLayout.isRefreshing    = false
-        val investmentPlanAdapter          = InvestmentPlanAdapter(activity!!, investmentPlans)
+        val investmentPlanAdapter          = InvestmentPlanAdapter(activity!!, investmentPlans,this)
         rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                     = investmentPlanAdapter
     }
@@ -78,4 +79,12 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
         swipeRefreshLayout.isRefreshing = false
         Toast.makeText(activity,""+jsonMessage,Toast.LENGTH_SHORT).show()
     }
+
+    override fun onClickInvestmentPlan(investmentPlan: ResInvestmentPlan.InvestmentPlan) {
+
+        startActivity(Intent(activity, InvestmentApplyActivity::class.java))
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+    }
+
 }

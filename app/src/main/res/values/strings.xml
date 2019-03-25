@@ -22,8 +22,8 @@
     <string name="forgot_password">Forgot Password</string>
     <string name="change_password">Change Password</string>
     <string name="enter_name">Enter Name</string>
-	<string name="enter_otp">Enter OTP</string>
-	<string name="coming_soon">Coming soon</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="coming_soon">Coming soon</string>
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
@@ -94,8 +94,8 @@
     <string name="required_tin_number">Please enter TIN number.</string>
     <string name="required_id_number">Please enter valid ID number.</string>
     <string name="required_id_type">Please select the type of ID.</string>
-	<string name="required_otp">Please enter the OTP.</string>
-	<string name="otp_not_match">You entered an incorrect OTP.</string>
+    <string name="required_otp">Please enter the OTP.</string>
+    <string name="otp_not_match">You entered an incorrect OTP.</string>
 
 
     <!--Navigation-->
@@ -159,8 +159,8 @@
 
 
     <!--Dashboard-->
-    <string name="your_credit_score" >Your L-Pesa Credit Score</string>
-    <string name="repayments" >Repayments</string>
+    <string name="your_credit_score">Your L-Pesa Credit Score</string>
+    <string name="repayments">Repayments</string>
     <string name="apply_loan">Apply Loan</string>
     <string name="business_loan">Business Loan</string>
     <string name="current_loan">Current Loan</string>
@@ -314,5 +314,17 @@
     <string name="uploaded_on">Uploaded On:</string>
     <string name="enter_id_no">If you choose any id then just enter that id no. in the above text box!</string>
     <string name="upload_scanned_id">Please upload a scanned clear color of your ID.You can scan your Physical ID using a scanner or take a photo with your phone and upload it.</string>
+
+
+    <!--Investment-->
+    <string name="apply_an_investment">Apply an Investment</string>
+    <string name="investment_date">9/1/2019</string>
+    <string name="save_with_lpesa">Save With L-Pesa</string>
+    <string name="choose_a_plan">Choose a plan</string>
+    <string name="provide_amount">Amount</string>
+    <string name="deposit">Deposit</string>
+    <string name="required_investment_amount">Required investment amount</string>
+    <string name="apply_an_investment_note">Your Investment with L-Pesa account has a generous annual interest rate starting from 8% up to 18% annually. You can invest and withdraw your interest funds with fixed \"monthly exit points\" on the investing amount. The longer you invest with L-Pesa, the better the benefits that you will experience. </string>
+
 
 </resources>

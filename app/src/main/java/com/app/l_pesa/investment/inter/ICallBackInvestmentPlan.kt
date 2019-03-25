@@ -8,4 +8,5 @@ interface ICallBackInvestmentPlan {
     fun onSuccessInvestmentPlan(investmentPlans: ArrayList<ResInvestmentPlan.InvestmentPlan>)
     fun onEmptyInvestmentPlan()
     fun onErrorInvestmentPlan(jsonMessage: String)
+    fun onClickInvestmentPlan(investmentPlan: ResInvestmentPlan.InvestmentPlan)
 }

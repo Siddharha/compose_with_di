@@ -2,15 +2,17 @@ package com.app.l_pesa.investment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.investment.inter.ICallBackInvestmentPlan
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 
-class InvestmentPlanAdapter (val context: Context, private val investmentList: ArrayList<ResInvestmentPlan.InvestmentPlan>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InvestmentPlanAdapter (val context: Context, private val investmentList: ArrayList<ResInvestmentPlan.InvestmentPlan>, private val callBack: ICallBackInvestmentPlan) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -25,6 +27,11 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
 
         viewHolder.txtRate.text = context.resources.getString(R.string.interest_rate)+"" +
                 ""+investmentList[position].depositInterestRate+"%"
+
+        viewHolder.rootLayout.setOnClickListener {
+
+            callBack.onClickInvestmentPlan(investmentList[position])
+        }
     }
 
     override fun getItemCount(): Int = investmentList.size
@@ -45,6 +52,7 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
             var txtTitle             : TextView              = itemView.findViewById(R.id.txtTitle) as TextView
             var txtDuration          : TextView              = itemView.findViewById(R.id.txtDuration) as TextView
             var txtRate              : TextView              = itemView.findViewById(R.id.txtRate) as TextView
+            var rootLayout           : CardView              = itemView.findViewById(R.id.rootLayout) as CardView
 
 
 

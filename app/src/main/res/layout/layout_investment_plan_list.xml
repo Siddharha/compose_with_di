@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_75sdp"
-    android:layout_margin="@dimen/_4sdp"
+    android:layout_margin="@dimen/_3sdp"
     android:elevation="@dimen/_1sdp"
     android:background="@drawable/bg_white_view">
 
@@ -68,6 +69,7 @@
                 android:ellipsize="end"
                 android:drawableStart="@drawable/ic_request_date"
                 android:gravity="center|start"
+                android:drawablePadding="@dimen/_3sdp"
 
                 />
             <com.app.l_pesa.common.CommonTextRegular
@@ -81,8 +83,9 @@
                 android:textColor="@color/colorTextBlackLight"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:drawableStart="@drawable/ic_rate_interest_icon"
+                android:drawableStart="@drawable/ic_current_credit_score"
                 android:gravity="center|start"
+                android:drawablePadding="@dimen/_3sdp"
                 />
 
         </LinearLayout>
