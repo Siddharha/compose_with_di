@@ -25,8 +25,6 @@ import com.app.l_pesa.password.presenter.PresenterPassword
 import com.google.gson.JsonObject
 
 
-
-
 class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
 
