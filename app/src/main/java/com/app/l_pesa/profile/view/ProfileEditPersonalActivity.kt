@@ -79,12 +79,21 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
         val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        swipeRefresh()
         initData(profileData)
         loadTitle(profileData)
         loadMarital(profileData)
         loadDate(profileData)
         buttonEvent(profileData)
 
+    }
+
+    private fun swipeRefresh()
+    {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing=false
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -124,7 +133,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             radioMale.isChecked=true
             radioFemale.isChecked=false
         }
-        else if(profileData.userPersonalInfo!!.sex=="M")
+        else if(profileData.userPersonalInfo!!.sex=="F")
         {
             radioMale.isChecked=false
             radioFemale.isChecked=true
@@ -156,15 +165,15 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
 
             val hashMapOLD = HashMap<String, String>()
-            hashMapOLD["title"]     = profileData.userPersonalInfo!!.title
-            hashMapOLD["nameF"]     = profileData.userPersonalInfo!!.firstName
-            hashMapOLD["nameM"]     = profileData.userPersonalInfo!!.middleName
-            hashMapOLD["nameL"]     = profileData.userPersonalInfo!!.lastName
-            hashMapOLD["email"]     = profileData.userPersonalInfo!!.emailAddress
-            hashMapOLD["dob"]       = profileData.userPersonalInfo!!.dob
-            hashMapOLD["status"]    = profileData.userPersonalInfo!!.meritalStatus
-            hashMapOLD["motherM"]   = profileData.userPersonalInfo!!.motherMaidenName
-            hashMapOLD["sex"]       = profileData.userPersonalInfo!!.sex
+            hashMapOLD["title"]     = ""+profileData.userPersonalInfo!!.title
+            hashMapOLD["nameF"]     = ""+profileData.userPersonalInfo!!.firstName
+            hashMapOLD["nameM"]     = ""+profileData.userPersonalInfo!!.middleName
+            hashMapOLD["nameL"]     = ""+profileData.userPersonalInfo!!.lastName
+            hashMapOLD["email"]     = ""+profileData.userPersonalInfo!!.emailAddress
+            hashMapOLD["dob"]       = ""+profileData.userPersonalInfo!!.dob
+            hashMapOLD["status"]    = ""+profileData.userPersonalInfo!!.meritalStatus
+            hashMapOLD["motherM"]   = ""+profileData.userPersonalInfo!!.motherMaidenName
+            hashMapOLD["sex"]       = ""+profileData.userPersonalInfo!!.sex
             hashMapOLD["imgChange"] = "false"
 
             var dateRequest=""

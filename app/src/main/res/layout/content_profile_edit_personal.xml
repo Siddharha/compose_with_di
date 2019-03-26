@@ -93,6 +93,8 @@
                             android:hint="@string/first_name"
                             android:inputType="text"
                             android:textSize="@dimen/_12sdp"
+                            android:maxLength="25"
+                            android:maxLines="1"
                             android:textColor="@color/textColors"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>
@@ -116,6 +118,8 @@
                             android:layout_height="match_parent"
                             android:hint="@string/middle_name"
                             android:inputType="text"
+                            android:maxLength="25"
+                            android:maxLines="1"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp" />
 
@@ -140,6 +144,8 @@
                             android:hint="@string/last_name"
                             android:inputType="text"
                             android:textSize="@dimen/_12sdp"
+                            android:maxLength="25"
+                            android:maxLines="1"
                             android:textColor="@color/textColors"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>

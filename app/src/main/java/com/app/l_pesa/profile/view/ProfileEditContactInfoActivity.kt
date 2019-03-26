@@ -87,12 +87,14 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
             hashMapOLD["postal"]            = ""+profileData.userContactInfo!!.postalAddress
             hashMapOLD["city"]              = ""+profileData.userContactInfo!!.city
             hashMapOLD["mob"]               = ""+profileData.userContactInfo!!.phoneNumber
+            hashMapOLD["email"]             = ""+profileData.userPersonalInfo!!.emailAddress
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["address"]          = etAddress.text.toString()
             hashMapNew["postal"]           = etPostalAddress.text.toString()
             hashMapNew["city"]             = etCity.text.toString()
             hashMapNew["mob"]              = etMob.text.toString()
+            hashMapNew["email"]            = etEmail.text.toString()
 
 
             if(hashMapOLD == hashMapNew)
