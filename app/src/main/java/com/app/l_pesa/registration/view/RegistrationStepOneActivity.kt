@@ -62,7 +62,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     private fun verifyField()
     {
-        CommonMethod.hideKeyboard(this@RegistrationStepOneActivity)
+        CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
         if((etPhone.text.toString().length<9))
         {
             CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))

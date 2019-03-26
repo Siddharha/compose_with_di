@@ -130,7 +130,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
 
     private fun hideKeyBoard()
     {
-        CommonMethod.hideKeyboard(this@ChangePasswordActivity)
+        CommonMethod.hideKeyboardView(this@ChangePasswordActivity)
     }
 
     private fun customSnackBarError(view: View,message:String) {

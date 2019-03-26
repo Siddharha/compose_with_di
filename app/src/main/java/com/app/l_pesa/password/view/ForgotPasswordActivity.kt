@@ -71,7 +71,7 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
     private fun verifyField()
     {
-        CommonMethod.hideKeyboard(this@ForgotPasswordActivity)
+        CommonMethod.hideKeyboardView(this@ForgotPasswordActivity)
         if(etPhone.text.toString().length<9 && !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
             customSnackBarError(ll_root,resources.getString(R.string.required_phone_email))

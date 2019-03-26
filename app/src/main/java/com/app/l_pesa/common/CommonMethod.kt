@@ -123,7 +123,7 @@ object CommonMethod {
         return matcher.matches()
     }
 
-    fun hideKeyboard(activity: AppCompatActivity)
+    fun hideKeyboardView(activity: AppCompatActivity)
     {
         try {
             val inputManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -159,7 +159,8 @@ object CommonMethod {
         return password != password.toUpperCase()
     }
 
-    
+
+
 
 
 }

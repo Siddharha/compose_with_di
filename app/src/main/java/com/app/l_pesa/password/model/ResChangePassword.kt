@@ -1,6 +1,5 @@
 package com.app.l_pesa.password.model
 
-import android.support.annotation.Keep
 import com.app.l_pesa.common.CommonStatusModel
 
 

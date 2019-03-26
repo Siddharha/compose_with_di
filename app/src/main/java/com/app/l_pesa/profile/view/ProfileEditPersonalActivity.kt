@@ -34,6 +34,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.ExifInterface
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
@@ -87,6 +88,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         buttonEvent(profileData)
 
     }
+
+
 
     private fun swipeRefresh()
     {
@@ -445,7 +448,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         when(requestCode){
             PHOTO ->
 
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == Activity.RESULT_OK)
+                {
+
                     imgProfile.setImageBitmap(scaleBitmap())
                     CommonMethod.fileCompress(captureFile!!)
                     imageSelectStatus=true
