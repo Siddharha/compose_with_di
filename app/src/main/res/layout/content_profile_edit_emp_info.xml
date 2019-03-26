@@ -58,6 +58,8 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/type_of_emp"
                         android:inputType="text"
+                        android:maxLength="20"
+                        android:maxLines="1"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -79,6 +81,8 @@
                         android:layout_height="match_parent"
                         android:hint="@string/name_of_emp"
                         android:inputType="text"
+                        android:maxLength="25"
+                        android:maxLines="1"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -100,6 +104,8 @@
                         android:layout_height="match_parent"
                         android:hint="@string/emp_department"
                         android:inputType="text"
+                        android:maxLength="20"
+                        android:maxLines="1"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -121,6 +127,8 @@
                         android:layout_height="match_parent"
                         android:hint="@string/emp_position"
                         android:inputType="text"
+                        android:maxLength="20"
+                        android:maxLines="1"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -142,6 +150,8 @@
                         android:layout_height="match_parent"
                         android:hint="@string/emp_id"
                         android:inputType="text"
+                        android:maxLength="15"
+                        android:maxLines="1"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -163,6 +173,8 @@
                         android:layout_height="match_parent"
                         android:hint="@string/emp_city"
                         android:inputType="text"
+                        android:maxLength="20"
+                        android:maxLines="1"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -175,7 +187,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_27sdp"
                     android:layout_marginTop="@dimen/_13sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@drawable/ripple_green_button"
                     android:text="@string/submit"

@@ -57,6 +57,8 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:hint="@string/business_info_name"
                     android:inputType="text"
+                    android:maxLength="20"
+                    android:maxLines="1"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp" />
 
@@ -78,6 +80,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/business_tin_number"
                     android:inputType="text"
+                    android:maxLength="20"
+                    android:maxLines="1"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp" />
 
@@ -100,7 +104,8 @@
                     android:hint="@string/business_id_type"
                     android:inputType="text"
                     android:textColor="@color/textColors"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    android:drawableEnd="@drawable/ic_dropdown"/>
 
             </com.app.l_pesa.common.CommonInputLayout>
 
@@ -120,6 +125,8 @@
                     android:layout_height="match_parent"
                     android:hint="@string/business_id_number"
                     android:inputType="text"
+                    android:maxLength="20"
+                    android:maxLines="1"
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp" />
 
@@ -131,7 +138,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_27sdp"
                 android:layout_marginTop="@dimen/_13sdp"
-                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/ripple_green_button"
                 android:text="@string/submit"
