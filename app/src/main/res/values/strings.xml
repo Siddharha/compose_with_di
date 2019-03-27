@@ -332,6 +332,9 @@
 
     <!--Token-->
     <string name="transfer">Transfer</string>
+    <string name="lock">Lock</string>
+    <string name="unlock">Unlock</string>
+    <string name="transfer_token">Transfer Token</string>
     <string name="required_token_amount">Required Token Amount</string>
     <string name="token_transfer">Token Transfer</string>
     <string name="transfer_history">Transfer History</string>

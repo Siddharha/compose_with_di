@@ -2,11 +2,13 @@ package com.app.l_pesa.lpk.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.lpk.adapter.AdapterTransferHistory
 import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
 import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
@@ -60,6 +62,9 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>) {
 
         swipeRefreshLayout.isRefreshing = false
+        val adapterTransferHistory = AdapterTransferHistory(activity!!, userTransferHistory)
+        rlList.layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        rlList.adapter = adapterTransferHistory
     }
 
     override fun onEmptyTransferHistory() {
