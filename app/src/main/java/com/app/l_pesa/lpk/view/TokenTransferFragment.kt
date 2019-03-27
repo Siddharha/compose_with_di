@@ -9,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.lpk.inter.ICallBackTokenTransfer
+import com.app.l_pesa.lpk.presenter.PresenterTokenTransfer
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_token_transfer.*
 
-class TokenTransferFragment : Fragment() {
+class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
+
 
     companion object {
         fun newInstance(): Fragment {
@@ -55,6 +59,12 @@ class TokenTransferFragment : Fragment() {
                 {
                     buttonTransfer.isClickable=false
                     swipeRefreshLayout.isRefreshing=true
+                    CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("token_value",etToken.text.toString())
+
+                    val presenterTokenTransfer= PresenterTokenTransfer()
+                    presenterTokenTransfer.doTokenTransfer(activity!!,jsonObject,this)
                 }
                 else
                 {
@@ -63,5 +73,18 @@ class TokenTransferFragment : Fragment() {
             }
 
         }
+    }
+
+    override fun onSuccessTokenTransfer() {
+
+        buttonTransfer.isClickable=true
+        swipeRefreshLayout.isRefreshing=false
+    }
+
+    override fun onErrorTokenTransfer(message: String) {
+
+        buttonTransfer.isClickable=true
+        swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }
