@@ -331,8 +331,21 @@
     <string name="apply_an_investment_note">Your Investment with L-Pesa account has a generous annual interest rate starting from 8% up to 18% annually. You can invest and withdraw your interest funds with fixed \"monthly exit points\" on the investing amount. The longer you invest with L-Pesa, the better the benefits that you will experience. </string>
 
     <!--Token-->
+    <string name="transfer">Transfer</string>
+    <string name="required_token_amount">Required Token Amount</string>
     <string name="token_transfer">Token Transfer</string>
     <string name="transfer_history">Transfer History</string>
     <string name="interest_history">Interest History</string>
     <string name="lpk_savings">LPK Savings</string>
+    <string name="token_transfer_text">This is how it is all coming together.
+        Once you have L-Pesa Kripton, also known as LPK,then you
+        are able to keep it stored within your LPK savings wallet.
+        To make this worthwhile for you,there is the possibility of earning interest every week for the LPK within your savings wallet.
+        This will elevate the value of the LPK that you have.
+        Every week you are automatically receive an interest on top of the tokens within your savings account.
+        You need to have a minimum credit score equaling to 30.
+        You should be able to deposit up to 1000 LPK into your savings wallet , but not less than 100 LPK. Once you have deposited,
+        they are locked up for a period of 30 days to help you avail the long-term benefit!\n\n
+        If you have been blacklisted or you are a loan defaulter, you are not entitled to get the benefits.
+    </string>
 </resources>
