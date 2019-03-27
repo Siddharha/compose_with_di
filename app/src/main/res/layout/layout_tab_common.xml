@@ -15,6 +15,7 @@
         android:minHeight="?attr/actionBarSize"
         app:tabIndicatorColor="@color/colorYellow"
         app:tabIndicatorHeight="@dimen/_2sdp"
+        app:tabMode="scrollable"
         app:tabTextAppearance="@style/styleTabLayout"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 

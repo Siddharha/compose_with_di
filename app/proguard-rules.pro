@@ -98,6 +98,7 @@
 -keep class com.app.l_pesa.registration.** { *; }
 -keep class com.app.l_pesa.password.** { *; }
 -keep class com.app.l_pesa.pin.** { *; }
+-keep class com.app.l_pesa.lpk.** { *; }
 -keep class com.app.l_pesa.dashboard.** { *; }
 -keep class com.app.l_pesa.loanplan.** { *; }
 -keep class com.app.l_pesa.loanHistory.** { *; }
