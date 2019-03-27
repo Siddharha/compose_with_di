@@ -32,6 +32,7 @@ import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
+import com.app.l_pesa.lpk.view.LPKSavingsActivity
 import com.app.l_pesa.lpk.view.LPKSavingsFragment
 import com.app.l_pesa.lpk.view.LpkFragment
 import com.app.l_pesa.main.MainActivity
@@ -256,8 +257,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_lpk-> {
                 toolbar.title =resources.getString(R.string.nav_item_lpk)
-               //navigateToFragment(LpkFragment.newInstance(),false)
-               navigateToFragment(LPKSavingsFragment.newInstance(),false)
+              // navigateToFragment(LpkFragment.newInstance(),false)
+                startActivity(Intent(this@DashboardActivity, LPKSavingsActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
             }
             R.id.action_wallet-> {
                 toolbar.title =resources.getString(R.string.nav_item_wallet)

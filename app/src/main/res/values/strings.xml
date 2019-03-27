@@ -334,4 +334,5 @@
     <string name="token_transfer">Token Transfer</string>
     <string name="transfer_history">Transfer History</string>
     <string name="interest_history">Interest History</string>
+    <string name="lpk_savings">LPK Savings</string>
 </resources>
