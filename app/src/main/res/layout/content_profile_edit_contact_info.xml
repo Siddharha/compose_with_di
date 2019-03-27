@@ -156,7 +156,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/second_mob_no"
-                        android:inputType="text"
+                        android:inputType="phone"
                         android:maxLines="1"
                         android:maxLength="15"
                         android:textColor="@color/textColors"

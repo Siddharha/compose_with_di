@@ -276,10 +276,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
 
 
-        if(!TextUtils.isEmpty(data.userContactInfo!!.phoneNumber))
-        {
-            txtContact.text=data.userContactInfo!!.phoneNumber
-        }
+        txtContact.text=""+data.userContactInfo!!.phoneNumber
 
 
         /* Employment Info*/

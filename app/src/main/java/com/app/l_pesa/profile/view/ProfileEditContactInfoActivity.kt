@@ -65,10 +65,10 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
             {
                 etCity.setText(profileData.userContactInfo!!.city)
             }
-            if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.emailAddress))
+            /*if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.emailAddress))
             {
                 etEmail.setText(profileData.userPersonalInfo!!.emailAddress)
-            }
+            }*/
             if(!TextUtils.isEmpty(profileData.userContactInfo!!.phoneNumber))
             {
                 etMob.setText(profileData.userContactInfo!!.phoneNumber)
@@ -87,14 +87,14 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
             hashMapOLD["postal"]            = ""+profileData.userContactInfo!!.postalAddress
             hashMapOLD["city"]              = ""+profileData.userContactInfo!!.city
             hashMapOLD["mob"]               = ""+profileData.userContactInfo!!.phoneNumber
-            hashMapOLD["email"]             = ""+profileData.userPersonalInfo!!.emailAddress
+            //hashMapOLD["email"]             = ""+profileData.userPersonalInfo!!.emailAddress
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["address"]          = etAddress.text.toString()
             hashMapNew["postal"]           = etPostalAddress.text.toString()
             hashMapNew["city"]             = etCity.text.toString()
             hashMapNew["mob"]              = etMob.text.toString()
-            hashMapNew["email"]            = etEmail.text.toString()
+           // hashMapNew["email"]            = etEmail.text.toString()
 
 
             if(hashMapOLD == hashMapNew)
@@ -119,10 +119,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_email))
                 }
-                else if(!TextUtils.isEmpty(etMob.text.toString()) && etMob.text.toString().length<9)
-                {
-                    customSnackBarError(llRoot,resources.getString(R.string.required_phone))
-                }
+
                 else
                 {
                     if(CommonMethod.isNetworkAvailable(this@ProfileEditContactInfoActivity))
@@ -137,6 +134,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
                         jsonObject.addProperty("city",etCity.text.toString())
                         jsonObject.addProperty("email",etEmail.text.toString())
                         jsonObject.addProperty("phone_number",etMob.text.toString())
+
 
                         val presenterContactInfo= PresenterContactInfo()
                         presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)
