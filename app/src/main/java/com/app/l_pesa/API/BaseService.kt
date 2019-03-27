@@ -13,6 +13,7 @@ import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.ResTokenTransfer
+import com.app.l_pesa.lpk.model.ResTransferHistory
 import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResChangePin
@@ -115,6 +116,9 @@ interface BaseService{
 
     @POST("lpk_savings/token_transfer")
     fun doTokenTransfer(@Body request: JsonObject): Observable<ResTokenTransfer>
+
+    @GET("lpk_savings/token_user_history")
+    fun getTokenHistory(): Observable<ResTransferHistory>
 
 }
 

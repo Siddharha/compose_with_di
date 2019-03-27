@@ -1,0 +1,11 @@
+package com.app.l_pesa.lpk.inter
+
+import com.app.l_pesa.lpk.model.ResTransferHistory
+import java.util.ArrayList
+
+interface ICallBackTransferHistory {
+
+    fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>)
+    fun onEmptyTransferHistory()
+    fun onErrorTransferHistory(message: String)
+}
