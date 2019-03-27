@@ -69,9 +69,10 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
                 if(CommonMethod.isNetworkAvailable(this@ChangePinActivity))
                 {
                     buttonSubmit.isClickable=false
+                    hideKeyboardView(this@ChangePinActivity)
                     swipeRefreshLayout.isRefreshing=true
                     val jsonObject = JsonObject()
-                    jsonObject.addProperty("old_pin",etCurrentPassword.text.toString())
+                    jsonObject.addProperty("old_password",etCurrentPassword.text.toString())
                     jsonObject.addProperty("new_pin",etNewPin.text.toString())
                     jsonObject.addProperty("new_c_pin",etConfirmNewPin.text.toString())
 
@@ -86,6 +87,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
         }
     }
+
 
 
     override fun onSuccessChangePin() {

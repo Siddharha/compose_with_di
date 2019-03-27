@@ -31,7 +31,8 @@ class PresenterPin {
                 .subscribe({ response ->
 
                     try {
-                        if (response.status.isSuccess) {
+                        if (response.status.isSuccess)
+                        {
                             callBackOBJ.onSuccessChangePin()
 
                         } else {
