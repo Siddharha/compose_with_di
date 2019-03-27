@@ -3,7 +3,6 @@ package com.app.l_pesa.lpk.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,7 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.lpk.adapter.SavingsTabAdapter
 
-import kotlinx.android.synthetic.main.activity_lpksavings.*
+import kotlinx.android.synthetic.main.activity_lpk_savings.*
 
 class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
 
@@ -22,7 +21,7 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lpksavings)
+        setContentView(R.layout.activity_lpk_savings)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LPKSavingsActivity)
