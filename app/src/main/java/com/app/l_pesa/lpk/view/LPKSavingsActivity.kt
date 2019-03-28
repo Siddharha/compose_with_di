@@ -47,6 +47,8 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
         changeTabsFont()
         tabLayout!!.addOnTabSelectedListener(this)
 
+        viewPager!!.offscreenPageLimit = 3
+
         imgFilter.setOnClickListener {
 
             if(viewPager!!.currentItem==1)
