@@ -29,7 +29,6 @@
             android:name=".lpk.view.LPKSavingsActivity"
             android:label="@string/lpk_savings"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".investment.view.InvestmentApplyActivity"

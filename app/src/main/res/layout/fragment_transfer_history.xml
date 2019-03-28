@@ -4,22 +4,19 @@
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/screenBackground"
-    android:orientation="vertical"
-    android:id="@+id/rootLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rlList"
-        android:layout_margin="@dimen/_3sdp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        />
-
-
-</LinearLayout>
+        android:background="@color/screenBackground"
+        android:orientation="vertical"
+        android:id="@+id/rootLayout"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rlList"
+            android:layout_margin="@dimen/_3sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
+

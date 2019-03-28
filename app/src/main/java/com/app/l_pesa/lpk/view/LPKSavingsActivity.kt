@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
@@ -55,6 +56,15 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         viewPager!!.currentItem = p0!!.position
+
+        if(p0.position==0)
+        {
+            imgFilter.visibility= View.INVISIBLE
+        }
+        else
+        {
+            imgFilter.visibility= View.VISIBLE
+        }
 
     }
 
