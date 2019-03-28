@@ -32,31 +32,28 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_lpk_withdrawal" />
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/textView14"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/montserrat"
                 android:text="@string/lpk"
                 android:textColor="@color/colorApp"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_19sdp"
                 app:layout_constraintBottom_toTopOf="@+id/textView15"
                 app:layout_constraintEnd_toStartOf="@+id/imgNextWithdrawal"
                 app:layout_constraintStart_toEndOf="@+id/imgWithdrawal"
                 app:layout_constraintTop_toTopOf="@+id/imgWithdrawal" />
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/textView15"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
-                android:fontFamily="@font/montserrat"
                 android:text="@string/withdrawal"
-                android:textSize="@dimen/_17sdp"
+                android:textSize="@dimen/_16sdp"
                 android:textColor="@color/dark_text_color"
                 app:layout_constraintBottom_toBottomOf="@+id/imgWithdrawal"
                 app:layout_constraintEnd_toStartOf="@+id/imgNextWithdrawal"
