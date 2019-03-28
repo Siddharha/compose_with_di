@@ -345,6 +345,7 @@
     <string name="interest_amount">Interest Amount</string>
     <string name="lpk_savings">LPK Savings</string>
     <string name="lpk">LPK</string>
+    <string name="search">Search</string>
     <string name="savings">Savings</string>
     <string name="withdrawal">Withdrawal</string>
     <string name="token_transfer_text">This is how it is all coming together.

@@ -1,19 +1,23 @@
 package com.app.l_pesa.lpk.view
 
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterTransferHistory
 import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
 import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
-import kotlinx.android.synthetic.main.layout_recycler.*
+import kotlinx.android.synthetic.main.fragment_transfer_history.*
 import java.util.ArrayList
+
+
 
 class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
@@ -23,6 +27,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     private var hasNext=false
     private var after=""
 
+    private var mBottomSheetBehavior1: BottomSheetBehavior<*>? = null
     companion object {
         fun newInstance(): Fragment {
             return TransferHistoryFragment()
@@ -31,7 +36,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.layout_recycler, container, false)
+        return inflater.inflate(R.layout.fragment_transfer_history, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,6 +44,10 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         initData()
         swipeRefresh()
+
+        mBottomSheetBehavior1 = BottomSheetBehavior.from<View>(bottom_sheet1)
+        mBottomSheetBehavior1!!.isHideable=true
+        mBottomSheetBehavior1!!.state = BottomSheetBehavior.STATE_HIDDEN
 
     }
 
@@ -70,6 +79,15 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     fun doFilter()
     {
 
+        if(mBottomSheetBehavior1!!.state == BottomSheetBehavior.STATE_HIDDEN)
+        {
+            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+
+        }
+        else {
+            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
     }
 
     override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?) {
