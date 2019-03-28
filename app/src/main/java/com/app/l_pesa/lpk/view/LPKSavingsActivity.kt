@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
@@ -12,8 +13,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.lpk.adapter.SavingsTabAdapter
-
 import kotlinx.android.synthetic.main.activity_lpk_savings.*
+
+
+
 
 class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
 
@@ -43,6 +46,27 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
         viewPager!!.adapter = adapter
         changeTabsFont()
         tabLayout!!.addOnTabSelectedListener(this)
+
+        imgFilter.setOnClickListener {
+
+            if(viewPager!!.currentItem==1)
+            {
+                val fragment = adapter.instantiateItem(viewPager!!, 1) as Fragment
+                if (fragment is TransferHistoryFragment) {
+                    fragment.doFilter()
+
+                }
+            }
+
+            else if(viewPager!!.currentItem==2)
+            {
+                val fragment = adapter.instantiateItem(viewPager!!, 2) as Fragment
+                if (fragment is InterestHistoryFragment) {
+                    fragment.doFilter()
+
+                }
+            }
+        }
 
     }
 

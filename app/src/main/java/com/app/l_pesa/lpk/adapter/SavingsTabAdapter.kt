@@ -7,12 +7,9 @@ import com.app.l_pesa.lpk.view.InterestHistoryFragment
 import com.app.l_pesa.lpk.view.TokenTransferFragment
 import com.app.l_pesa.lpk.view.TransferHistoryFragment
 
-class SavingsTabAdapter//Constructor to the class
-(fm: FragmentManager, //integer to count number of tabs
- private var tabCount: Int)//Initializing tab count
-    : FragmentStatePagerAdapter(fm) {
+class SavingsTabAdapter(fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
-    //Overriding method getItem
+
     override fun getItem(position: Int): Fragment? {
         //Returning the current tabs
         return when (position) {
