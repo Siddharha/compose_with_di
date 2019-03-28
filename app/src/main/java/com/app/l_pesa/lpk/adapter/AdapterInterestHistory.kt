@@ -10,42 +10,85 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.lpk.model.ResInterestHistory
 
-class AdapterInterestHistory (val context: Context, private val listInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterInterestHistory (val context: Context, private val listInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-        val viewHolder = holder as SelectViewHolder
-        viewHolder.txtTokenValue.text = context.getString(R.string.actual_token_values)+":"+listInterestHistory[position].tokens
-        viewHolder.txtAmount.text = listInterestHistory[position].currencyCode+" "+listInterestHistory[position].amount
-        viewHolder.txtNarration.text = context.getString(R.string.narration)+":"+listInterestHistory[position].narration
-        viewHolder.txtRef.text = context.getString(R.string.ref_no)+listInterestHistory[position].identityNumber
-
-    }
-
-    override fun getItemCount(): Int = listInterestHistory.size
+    private lateinit var        loadMoreListener    : OnLoadMoreListener
+    private var                 isLoading           = false
+    private var                 isMoreDataAvailable = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
-
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_interest_history, parent, false)
-        recyclerView = SelectViewHolder(itemView)
-
-        return recyclerView
+        val inflater = LayoutInflater.from(context)
+        return if (viewType == 0)
+        {
+            UserViewHolder(inflater.inflate(R.layout.layout_interest_history, parent, false))
+        } else {
+            LoadingViewHolder(inflater.inflate(R.layout.layout_load_more, parent, false))
+        }
     }
 
-    companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-           var txtTokenValue          : CommonTextRegular = itemView.findViewById(R.id.txtTokenValue) as CommonTextRegular
-           var txtAmount              : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
-           var txtNarration           : CommonTextRegular = itemView.findViewById(R.id.txtNarration) as CommonTextRegular
-           var txtRef                 : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
+        {
+            isLoading = true
+            loadMoreListener.onLoadMore()
+        }
 
+        if (getItemViewType(position) == 0) {
+            (holder as UserViewHolder).bindData(context, listInterestHistory!![position])
+
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int
+    {
+        return if(listInterestHistory!![position].user_id!=0){
+            0
+        }else{
+            1
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return listInterestHistory!!.size
+    }
+
+
+    fun notifyDataChanged() {
+        notifyDataSetChanged()
+        isLoading = false
+    }
+
+    interface OnLoadMoreListener {
+        fun onLoadMore()
+    }
+
+    internal fun setLoadMoreListener(loadMoreListener: OnLoadMoreListener) {
+        this.loadMoreListener = loadMoreListener
+    }
+
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        var txtTokenValue          : CommonTextRegular = itemView.findViewById(R.id.txtTokenValue) as CommonTextRegular
+        var txtAmount              : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
+        var txtNarration           : CommonTextRegular = itemView.findViewById(R.id.txtNarration) as CommonTextRegular
+        var txtRef                 : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+
+
+        @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
+        fun  bindData(context: Context, userInterestHistory: ResInterestHistory.UserInterestHistory)
+        {
+            txtTokenValue.text = context.getString(R.string.actual_token_values)+":"+userInterestHistory.tokens
+            txtAmount.text = userInterestHistory.country_code+" "+userInterestHistory.amount
+            txtNarration.text = context.getString(R.string.narration)+":"+userInterestHistory.narration
+            txtRef.text = context.getString(R.string.ref_no)+userInterestHistory.identity_number
 
         }
 
     }
 
+    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
 }
+

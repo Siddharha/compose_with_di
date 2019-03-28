@@ -5,7 +5,9 @@ import java.util.ArrayList
 
 interface ICallBackInterestHistory {
 
-    fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?)
+    fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?)
     fun onEmptyInterestHistory()
     fun onErrorInterestHistory(message: String)
+
+    fun onSuccessInterestHistoryPaginate(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?)
 }

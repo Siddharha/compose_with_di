@@ -122,7 +122,10 @@ interface BaseService{
     fun getTokenHistory(): Observable<ResTransferHistory>
 
     @GET("lpk_savings/interest_history")
-    fun getInterestHistory(): Observable<ResInterestHistory>
+    fun getInterestHistory(@Query("cursors") cursors:String): Observable<ResInterestHistory>
+
+    @GET("lpk_savings/interest_history")
+    fun getInterestHistoryP(@Query("cursors") cursors:String): Observable<ResInterestHistory>
 
 }
 

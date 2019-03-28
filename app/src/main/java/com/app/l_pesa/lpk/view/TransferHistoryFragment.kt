@@ -63,7 +63,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     fun doFilter()
     {
-        Toast.makeText(activity,"ONE",Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>) {
