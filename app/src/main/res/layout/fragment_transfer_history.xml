@@ -50,12 +50,12 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp">
+        android:layout_margin="@dimen/_5sdp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_7sdp">
 
             <com.app.l_pesa.common.CommonInputLayout
                 android:id="@+id/commonInputLayout19"
@@ -70,9 +70,10 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.app.l_pesa.common.CommonEditTextRegular
+                    android:id="@+id/etFromDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                   android:hint="From date" />
+                    android:hint="From date" />
 
             </com.app.l_pesa.common.CommonInputLayout>
 
@@ -87,6 +88,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.app.l_pesa.common.CommonEditTextRegular
+                    android:id="@+id/etToDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="To date" />
