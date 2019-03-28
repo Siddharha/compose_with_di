@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.activity_lpk_savings.*
 
 
 
-
 class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
 
     private var tabLayout: TabLayout? = null

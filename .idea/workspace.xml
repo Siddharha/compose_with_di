@@ -30,10 +30,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_lpk_savings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_lpk_savings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_lpk_withdrawal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_lpk_withdrawal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,11 +59,11 @@
           <entry key="class" value="1" />
           <entry key="gradle" value="17" />
           <entry key="java" value="32" />
-          <entry key="kt" value="1094" />
+          <entry key="kt" value="1099" />
           <entry key="png" value="6" />
           <entry key="pro" value="14" />
           <entry key="ttf" value="1" />
-          <entry key="xml" value="776" />
+          <entry key="xml" value="778" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -75,9 +73,9 @@
           <entry key="Groovy" value="17" />
           <entry key="Image" value="6" />
           <entry key="JAVA" value="32" />
-          <entry key="Kotlin" value="1094" />
+          <entry key="Kotlin" value="1099" />
           <entry key="ProGuard File" value="14" />
-          <entry key="XML" value="776" />
+          <entry key="XML" value="778" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -85,19 +83,19 @@
           <entry key="dummy" value="6" />
           <entry key="gradle" value="50" />
           <entry key="java" value="202" />
-          <entry key="kt" value="21675" />
+          <entry key="kt" value="21766" />
           <entry key="pro" value="35" />
-          <entry key="xml" value="14451" />
+          <entry key="xml" value="14472" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="50" />
           <entry key="JAVA" value="202" />
-          <entry key="Kotlin" value="21675" />
+          <entry key="Kotlin" value="21766" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="ProGuard File" value="35" />
-          <entry key="XML" value="14451" />
+          <entry key="XML" value="14472" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -123,12 +121,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="35" column="71" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
+            <state relative-caret-position="-868">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
-                <element signature="e#33#263#0" expanded="true" />
+                <element signature="e#33#546#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -3179,7 +3177,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/inter/ICallBackFilter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_transfer_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResInterestHistory.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditContactInfoActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_contact_info.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_token_transfer.xml" />
@@ -3199,13 +3196,14 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_lpk_savings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_lpk_withdrawal.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="394" />
     <option name="y" value="80" />
     <option name="width" value="1380" />
@@ -3412,6 +3410,25 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
               <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="lpk" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="lpk" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -3652,6 +3669,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5889488" visible="true" weight="0.24847814" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
@@ -3779,13 +3797,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/CurrentLoanPlanAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -3906,16 +3917,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="44" column="32" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
-          <folding>
-            <element signature="e#33#546#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4134,16 +4135,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TransferHistoryFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="143" column="40" selection-start-line="143" selection-start-column="40" selection-end-line="143" selection-end-column="40" />
-          <folding>
-            <element signature="e#4176#4217#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -4190,50 +4181,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="103" column="36" selection-start-line="103" selection-start-column="25" selection-end-line="103" selection-end-column="36" />
-          <folding>
-            <element signature="e#493#507#0" expanded="true" />
-            <element signature="e#538#552#0" expanded="true" />
-            <element signature="e#742#757#0" expanded="true" />
-            <element signature="e#875#893#0" expanded="true" />
-            <element signature="e#931#946#0" expanded="true" />
-            <element signature="e#985#1000#0" expanded="true" />
-            <element signature="e#1033#1047#0" expanded="true" />
-            <element signature="e#1629#1644#0" expanded="true" />
-            <element signature="e#1686#1701#0" expanded="true" />
-            <element signature="e#1731#1744#0" expanded="true" />
-            <element signature="e#1830#1845#0" expanded="true" />
-            <element signature="e#2375#2390#0" expanded="true" />
-            <element signature="e#2435#2450#0" expanded="true" />
-            <element signature="e#2480#2500#0" expanded="true" />
-            <element signature="e#2534#2549#0" expanded="true" />
-            <element signature="e#3136#3155#0" expanded="true" />
-            <element signature="e#3541#3559#0" expanded="true" />
-            <element signature="e#4864#4878#0" expanded="true" />
-            <element signature="e#4909#4923#0" expanded="true" />
-            <element signature="e#5113#5128#0" expanded="true" />
-            <element signature="e#5246#5264#0" expanded="true" />
-            <element signature="e#5299#5314#0" expanded="true" />
-            <element signature="e#5356#5371#0" expanded="true" />
-            <element signature="e#5404#5418#0" expanded="true" />
-            <element signature="e#6000#6015#0" expanded="true" />
-            <element signature="e#6057#6072#0" expanded="true" />
-            <element signature="e#6102#6115#0" expanded="true" />
-            <element signature="e#6201#6216#0" expanded="true" />
-            <element signature="e#6746#6761#0" expanded="true" />
-            <element signature="e#6806#6821#0" expanded="true" />
-            <element signature="e#6842#6859#0" expanded="true" />
-            <element signature="e#6905#6920#0" expanded="true" />
-            <element signature="e#7507#7526#0" expanded="true" />
-            <element signature="e#7912#7930#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
@@ -4241,12 +4188,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TransferHistoryFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-437">
+          <caret line="17" column="6" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CommonMethod.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="72" column="8" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="39" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="35" column="71" selection-start-line="35" selection-start-column="71" selection-end-line="35" selection-end-column="71" />
+        <state relative-caret-position="234">
+          <caret line="39" column="82" selection-start-line="39" selection-start-column="82" selection-end-line="39" selection-end-column="82" />
           <folding>
-            <element signature="e#33#263#0" expanded="true" />
+            <element signature="e#33#293#0" expanded="true" />
+            <element signature="e#1279#1320#1" expanded="true" />
+            <element signature="e#1724#1765#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-868">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#33#546#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import kotlinx.android.synthetic.main.fragment_lpk.*
 
 class LpkFragment: Fragment() {
@@ -31,9 +33,32 @@ class LpkFragment: Fragment() {
 
     private fun initData()
     {
+        cardWithdrawal.setOnClickListener {
+
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                Toast.makeText(activity,"Coming soon..",Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+
+
+        }
+
         cardSavings.setOnClickListener {
-            startActivity(Intent(activity, LPKSavingsActivity::class.java))
-            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                startActivity(Intent(activity, LPKSavingsActivity::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+
 
         }
     }
