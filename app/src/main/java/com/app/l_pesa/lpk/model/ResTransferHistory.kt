@@ -20,6 +20,27 @@ class ResTransferHistory {
         @Expose
         var userTransferHistory: ArrayList<UserTransferHistory>? = null
 
+        @SerializedName("cursors")
+        @Expose
+        var cursors: Cursors? = null
+
+    }
+
+    inner class Cursors {
+
+        @SerializedName("hasNext")
+        @Expose
+        var hasNext: Boolean = false
+        @SerializedName("hasPrevious")
+        @Expose
+        var hasPrevious: Boolean = false
+        @SerializedName("before")
+        @Expose
+        var before: String = ""
+        @SerializedName("after")
+        @Expose
+        var after: String = ""
+
     }
 
     inner class Status {
@@ -36,31 +57,17 @@ class ResTransferHistory {
 
     }
 
-    inner class UserTransferHistory {
+    data class UserTransferHistory(
 
-        @SerializedName("id")
-        @Expose
-        var id: Int = 0
-        @SerializedName("user_id")
-        @Expose
-        var userId: Int = 0
-        @SerializedName("identity_number")
-        @Expose
-        var identityNumber: String = ""
-        @SerializedName("tokens")
-        @Expose
-        var tokens: String = ""
-        @SerializedName("status")
-        @Expose
-        var status: String = ""
-        @SerializedName("created")
-        @Expose
-        var created: String = ""
-        @SerializedName("updated")
-        @Expose
-        var updated: String = ""
+       var id: Int,
+       var user_id: Int ,
+       var identity_number: String,
+       var tokens: String ,
+       var status: String ,
+       var created: String ,
+       var updated: String
 
-    }
+    )
 
 
 }

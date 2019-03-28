@@ -5,7 +5,8 @@ import java.util.ArrayList
 
 interface ICallBackTransferHistory {
 
-    fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>)
+    fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?)
+    fun onSuccessTransferHistoryPaginate(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors)
     fun onEmptyTransferHistory()
     fun onErrorTransferHistory(message: String)
 }

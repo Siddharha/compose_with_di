@@ -80,7 +80,7 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
         fun  bindData(context: Context, userInterestHistory: ResInterestHistory.UserInterestHistory)
         {
             txtTokenValue.text = context.getString(R.string.actual_token_values)+":"+userInterestHistory.tokens
-            txtAmount.text = userInterestHistory.country_code+" "+userInterestHistory.amount
+            txtAmount.text = userInterestHistory.currency_code+" "+userInterestHistory.amount
             txtNarration.text = context.getString(R.string.narration)+":"+userInterestHistory.narration
             txtRef.text = context.getString(R.string.ref_no)+userInterestHistory.identity_number
 

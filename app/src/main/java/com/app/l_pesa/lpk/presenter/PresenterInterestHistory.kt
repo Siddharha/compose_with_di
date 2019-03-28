@@ -72,7 +72,7 @@ class PresenterInterestHistory {
     fun getInterestHistoryPaginate(contextOBJ: Context,cursorData:String, callBackOBJ: ICallBackInterestHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistoryP(cursorData)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistory(cursorData)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->

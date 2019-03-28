@@ -119,13 +119,11 @@ interface BaseService{
     fun doTokenTransfer(@Body request: JsonObject): Observable<ResTokenTransfer>
 
     @GET("lpk_savings/token_user_history")
-    fun getTokenHistory(): Observable<ResTransferHistory>
+    fun getTokenHistory(@Query("cursors") cursors:String): Observable<ResTransferHistory>
 
     @GET("lpk_savings/interest_history")
     fun getInterestHistory(@Query("cursors") cursors:String): Observable<ResInterestHistory>
 
-    @GET("lpk_savings/interest_history")
-    fun getInterestHistoryP(@Query("cursors") cursors:String): Observable<ResInterestHistory>
 
 }
 

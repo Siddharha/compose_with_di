@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterTransferHistory
@@ -18,6 +17,11 @@ import java.util.ArrayList
 
 class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
+    private var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>? = null
+    private var adapterTransferHistory        : AdapterTransferHistory?                            = null
+
+    private var hasNext=false
+    private var after=""
 
     companion object {
         fun newInstance(): Fragment {
@@ -48,6 +52,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     private fun initData()
     {
+        listTransferHistory= ArrayList()
+        adapterTransferHistory= AdapterTransferHistory(activity!!,listTransferHistory!!)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -66,12 +72,81 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     }
 
-    override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>) {
+    override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?) {
 
         swipeRefreshLayout.isRefreshing = false
-        val adapterTransferHistory = AdapterTransferHistory(activity!!, userTransferHistory)
-        rlList.layoutManager = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rlList.adapter = adapterTransferHistory
+        activity!!.runOnUiThread {
+
+            swipeRefreshLayout.isRefreshing = false
+
+            listTransferHistory!!.clear()
+            listTransferHistory!!.addAll(userTransferHistory)
+            adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory!!)
+            val llmOBJ                  = LinearLayoutManager(activity)
+            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            rlList.layoutManager        = llmOBJ
+            rlList.adapter              = adapterTransferHistory
+
+            hasNext =cursors!!.hasNext
+            after   =cursors.after
+
+            adapterTransferHistory!!.setLoadMoreListener(object : AdapterTransferHistory.OnLoadMoreListener {
+                override fun onLoadMore() {
+
+                    rlList.post {
+
+                        if(hasNext)
+                        {
+                            loadMore()
+                        }
+
+                    }
+
+                }
+            })
+
+
+        }
+    }
+
+    private fun loadMore()
+    {
+
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+            val loadModel  = ResTransferHistory.UserTransferHistory(0, 0, "","","","","")
+            listTransferHistory!!.add(loadModel)
+            adapterTransferHistory!!.notifyItemInserted(listTransferHistory!!.size-1)
+
+            val presenterTransferHistory = PresenterTransferHistory()
+            presenterTransferHistory.getTokenHistoryPaginate(activity!!,after,this)
+
+        }
+        else{
+            swipeRefreshLayout.isRefreshing = false
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+        }
+    }
+
+    override fun onSuccessTransferHistoryPaginate(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors) {
+
+        swipeRefreshLayout.isRefreshing = false
+
+        hasNext =cursors.hasNext
+        after   =cursors.after
+        if(listTransferHistory!!.size!=0)
+        {
+            try {
+
+                listTransferHistory!!.removeAt(listTransferHistory!!.size - 1)
+                adapterTransferHistory!!.notifyDataChanged()
+                listTransferHistory!!.addAll(userTransferHistory)
+                adapterTransferHistory!!.notifyItemRangeInserted(0, listTransferHistory!!.size)
+
+            }
+            catch (e:Exception)
+            {}
+        }
     }
 
     override fun onEmptyTransferHistory() {

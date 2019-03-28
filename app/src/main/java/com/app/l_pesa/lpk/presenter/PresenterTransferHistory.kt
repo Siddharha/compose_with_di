@@ -16,7 +16,7 @@ class PresenterTransferHistory {
     fun getTokenHistory(contextOBJ: Context, callBackOBJ: ICallBackTransferHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory()
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory("")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -31,7 +31,7 @@ class PresenterTransferHistory {
                         {
                            if(response.data!!.userTransferHistory!!.size>0)
                            {
-                               callBackOBJ.onSuccessTransferHistory(response.data!!.userTransferHistory!!)
+                               callBackOBJ.onSuccessTransferHistory(response.data!!.userTransferHistory!!,response.data!!.cursors)
                            }
                            else
                            {
@@ -42,6 +42,56 @@ class PresenterTransferHistory {
                         {
                             callBackOBJ.onErrorTransferHistory(response.status!!.message)
                         }
+
+                    }
+                    catch (e: Exception)
+                    {
+
+                    }
+                }, {
+                    error ->
+                    try
+                    {
+                        val errorVal              = error as HttpException
+
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val  jsonStatus           =    jsonError.getJSONObject("status")
+                        val jsonMessage           =    jsonStatus.getString("message")
+
+                        callBackOBJ.onErrorTransferHistory(jsonMessage)
+                    }
+                    catch (exp: Exception)
+                    {
+                        val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
+                        callBackOBJ.onErrorTransferHistory(errorMessageOBJ)
+                    }
+
+                })
+    }
+
+    fun getTokenHistoryPaginate(contextOBJ: Context, cursor:String, callBackOBJ: ICallBackTransferHistory)
+    {
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory(cursor)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+                }
+                .subscribe({ response ->
+
+                    try
+                    {
+
+                        if(response.status!!.isSuccess)
+                        {
+                            if(response.data!!.userTransferHistory!!.size>0)
+                            {
+                                callBackOBJ.onSuccessTransferHistoryPaginate(response.data!!.userTransferHistory!!, response.data!!.cursors!!)
+                            }
+
+                        }
+
 
                     }
                     catch (e: Exception)
