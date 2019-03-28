@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screenBackground"
@@ -10,8 +9,8 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/_4sdp"
-        android:layout_margin="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_3sdp"
+        android:layout_margin="@dimen/_7sdp"
         >
 
         <android.support.constraint.ConstraintLayout
@@ -21,14 +20,17 @@
 
 
             <ImageView
-                android:id="@+id/imageView18"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_marginTop="16dp"
+                android:id="@+id/imgWithdrawal"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                android:padding="@dimen/_3sdp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/textView16"
+                app:layout_constraintBottom_toTopOf="@+id/txtLineOne"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/lpesa_logo" />
+                app:srcCompat="@drawable/ic_lpk_withdrawal" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -38,67 +40,64 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat"
-                android:text="TextView"
+                android:text="@string/lpk"
+                android:textColor="@color/colorApp"
                 android:textSize="@dimen/_20sdp"
                 app:layout_constraintBottom_toTopOf="@+id/textView15"
-                app:layout_constraintEnd_toStartOf="@+id/imageView20"
-                app:layout_constraintStart_toEndOf="@+id/imageView18"
-                app:layout_constraintTop_toTopOf="@+id/imageView18" />
+                app:layout_constraintEnd_toStartOf="@+id/imgNextWithdrawal"
+                app:layout_constraintStart_toEndOf="@+id/imgWithdrawal"
+                app:layout_constraintTop_toTopOf="@+id/imgWithdrawal" />
 
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:fontFamily="@font/montserrat"
-                android:text="TextView"
+                android:text="@string/withdrawal"
                 android:textSize="@dimen/_17sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView18"
-                app:layout_constraintEnd_toStartOf="@+id/imageView20"
-                app:layout_constraintStart_toEndOf="@+id/imageView18"
+                android:textColor="@color/dark_text_color"
+                app:layout_constraintBottom_toBottomOf="@+id/imgWithdrawal"
+                app:layout_constraintEnd_toStartOf="@+id/imgNextWithdrawal"
+                app:layout_constraintStart_toEndOf="@+id/imgWithdrawal"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/txtLineOne"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="************************************************************"
+                android:text="@string/star_line"
                 app:layout_constraintBottom_toTopOf="@+id/textView19"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView18" />
+                app:layout_constraintTop_toBottomOf="@+id/imgWithdrawal" />
 
             <ImageView
-                android:id="@+id/imageView20"
+                android:id="@+id/imgNextWithdrawal"
+                android:contentDescription="@string/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView16"
+                app:layout_constraintBottom_toTopOf="@+id/txtLineOne"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_dropdown" />
+                app:srcCompat="@drawable/ic_go_arrow" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="jdhfhjffhjhddfhjvbdfhvbfhbhjefvghbhvgbhvbhvbhfvbhbvhbhvbhjfbvhbfhvbhfvbhbvhbv"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/txtLineOne" />
 
         </android.support.constraint.ConstraintLayout>
 
 
-
     </android.support.v7.widget.CardView>
-
 
 
 

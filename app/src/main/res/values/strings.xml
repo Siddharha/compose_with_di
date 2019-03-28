@@ -333,6 +333,7 @@
     <!--Token-->
     <string name="transfer">Transfer</string>
     <string name="lock">Lock</string>
+    <string name="star_line">************************************************************</string>
     <string name="unlock">Unlock</string>
     <string name="transfer_token">Transfer Token</string>
     <string name="actual_token_values">Actual Tokens Values</string>
@@ -343,6 +344,9 @@
     <string name="narration">Narration</string>
     <string name="interest_amount">Interest Amount</string>
     <string name="lpk_savings">LPK Savings</string>
+    <string name="lpk">LPK</string>
+    <string name="savings">Savings</string>
+    <string name="withdrawal">Withdrawal</string>
     <string name="token_transfer_text">This is how it is all coming together.
         Once you have L-Pesa Kripton, also known as LPK,then you
         are able to keep it stored within your LPK savings wallet.

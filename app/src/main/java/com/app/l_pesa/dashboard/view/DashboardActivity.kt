@@ -257,10 +257,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             R.id.action_lpk-> {
                 toolbar.title =resources.getString(R.string.nav_item_lpk)
-              // navigateToFragment(LpkFragment.newInstance(),false)
-                startActivity(Intent(this@DashboardActivity, LPKSavingsActivity::class.java))
-                overridePendingTransition(R.anim.right_in, R.anim.left_out)
-
+                navigateToFragment(LpkFragment.newInstance(),false)
             }
             R.id.action_wallet-> {
                 toolbar.title =resources.getString(R.string.nav_item_wallet)
