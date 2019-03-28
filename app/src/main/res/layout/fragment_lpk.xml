@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/imgWithdrawal"
                 android:contentDescription="@string/app_name"
-                android:layout_width="@dimen/_75sdp"
+                android:layout_width="@dimen/_85sdp"
                 android:layout_height="@dimen/_75sdp"
                 android:padding="@dimen/_3sdp"
                 android:scaleType="fitXY"
@@ -96,6 +96,95 @@
 
     </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_3sdp"
+        android:layout_margin="@dimen/_7sdp"
+        android:id="@+id/cardSavings"
+        >
 
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_10sdp">
+
+
+            <ImageView
+                android:id="@+id/imgSavings"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/_85sdp"
+                android:layout_height="@dimen/_75sdp"
+                android:padding="@dimen/_3sdp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/txtLineTwo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_lpk_savings" />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/textView21"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/lpk"
+                android:textColor="@color/color_deep_gold"
+                android:textSize="@dimen/_19sdp"
+                app:layout_constraintBottom_toTopOf="@+id/textView22"
+                app:layout_constraintEnd_toStartOf="@+id/imgNextSavings"
+                app:layout_constraintStart_toEndOf="@+id/imgSavings"
+                app:layout_constraintTop_toTopOf="@+id/imgSavings" />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/textView22"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:text="@string/savings"
+                android:textSize="@dimen/_16sdp"
+                android:textColor="@color/dark_text_color"
+                app:layout_constraintBottom_toBottomOf="@+id/imgSavings"
+                app:layout_constraintEnd_toStartOf="@+id/imgNextSavings"
+                app:layout_constraintStart_toEndOf="@+id/imgSavings"
+                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+            <TextView
+                android:id="@+id/txtLineTwo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="@string/star_line"
+                app:layout_constraintBottom_toTopOf="@+id/textView23"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgSavings" />
+
+            <ImageView
+                android:id="@+id/imgNextSavings"
+                android:contentDescription="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/txtLineTwo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_go_arrow" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtLineTwo" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
