@@ -56,6 +56,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         }
         else
         {
+            swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
         }
     }
