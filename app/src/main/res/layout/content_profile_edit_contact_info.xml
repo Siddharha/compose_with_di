@@ -97,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    app:layout_constraintBottom_toTopOf="@+id/tilEmail"
+                    app:layout_constraintBottom_toTopOf="@+id/tilMob"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,30 +114,6 @@
 
                 </com.app.l_pesa.common.CommonInputLayout>
 
-                <com.app.l_pesa.common.CommonInputLayout
-                    android:id="@+id/tilEmail"
-                    style="@style/customInputLayoutStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    app:layout_constraintBottom_toTopOf="@+id/tilMob"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilCity">
-
-                    <com.app.l_pesa.common.CommonEditTextRegular
-                        android:id="@+id/etEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/email_address"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:maxLength="25"
-                        android:textColor="@color/textColors"
-                        android:textSize="@dimen/_12sdp" />
-
-                </com.app.l_pesa.common.CommonInputLayout>
 
                 <com.app.l_pesa.common.CommonInputLayout
                     android:id="@+id/tilMob"
@@ -149,7 +125,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tilEmail">
+                    app:layout_constraintTop_toBottomOf="@+id/tilCity">
 
                     <com.app.l_pesa.common.CommonEditTextRegular
                         android:id="@+id/etMob"
