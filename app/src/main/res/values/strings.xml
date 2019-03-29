@@ -331,6 +331,7 @@
     <string name="apply_an_investment_note">Your Investment with L-Pesa account has a generous annual interest rate starting from 8% up to 18% annually. You can invest and withdraw your interest funds with fixed \"monthly exit points\" on the investing amount. The longer you invest with L-Pesa, the better the benefits that you will experience. </string>
 
     <!--Token-->
+    <string name="request_token">Request Token</string>
     <string name="transfer">Transfer</string>
     <string name="lock">Lock</string>
     <string name="star_line">************************************************************</string>
