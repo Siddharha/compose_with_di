@@ -58,14 +58,6 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
                 }
             }
 
-            else if(viewPager!!.currentItem==2)
-            {
-                val fragment = adapter.instantiateItem(viewPager!!, 2) as Fragment
-                if (fragment is WalletAddressFragment) {
-                    fragment.doFilter()
-
-                }
-            }
         }
 
     }
@@ -81,13 +73,13 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
     override fun onTabSelected(p0: TabLayout.Tab?) {
         viewPager!!.currentItem = p0!!.position
 
-        if(p0.position==0)
+        if(p0.position==1)
         {
-            imgFilter.visibility= View.INVISIBLE
+            imgFilter.visibility= View.VISIBLE
         }
         else
         {
-            imgFilter.visibility= View.VISIBLE
+            imgFilter.visibility= View.INVISIBLE
         }
 
     }

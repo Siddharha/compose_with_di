@@ -26,8 +26,5 @@ class WalletAddressFragment : Fragment() {
 
     }
 
-    fun doFilter()
-    {
 
-    }
 }

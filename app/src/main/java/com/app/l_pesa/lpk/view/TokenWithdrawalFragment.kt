@@ -86,6 +86,6 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
     override fun onErrorTokenWithdrawal(message: String) {
         buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,activity as AppCompatActivity,message)
     }
 }
