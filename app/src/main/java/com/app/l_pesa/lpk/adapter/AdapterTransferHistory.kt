@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
@@ -84,12 +85,29 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
             if(userTransferHistory.status=="L")
             {
                 buttonStatus.text = context.resources.getString(R.string.lock)
-                buttonStatus.setBackgroundResource(R.drawable.blue_button)
             }
             else
             {
                 buttonStatus.text = context.resources.getString(R.string.unlock)
-                buttonStatus.setBackgroundResource(R.drawable.bg_button_green)
+
+            }
+
+            if(!userTransferHistory.actionStatus.status)
+            {
+                buttonStatus.setBackgroundResource(R.drawable.bg_button_grey)
+            }
+            else
+            {
+                buttonStatus.setBackgroundResource(R.drawable.blue_button)
+            }
+
+            buttonStatus.setOnClickListener {
+
+                if(!userTransferHistory.actionStatus.status)
+                {
+                    Toast.makeText(context,userTransferHistory.actionStatus.message,Toast.LENGTH_SHORT).show()
+                }
+
             }
 
         }

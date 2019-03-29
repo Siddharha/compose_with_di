@@ -236,7 +236,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            val loadModel  = ResTransferHistory.UserTransferHistory(0, 0, "","","","","")
+            val modelActionStatus= ResTransferHistory.ActionStatus(false, "")
+            val loadModel  = ResTransferHistory.UserTransferHistory(0, 0, "","","","","",modelActionStatus)
             listTransferHistory!!.add(loadModel)
             adapterTransferHistory!!.notifyItemInserted(listTransferHistory!!.size-1)
 

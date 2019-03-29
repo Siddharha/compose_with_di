@@ -65,8 +65,14 @@ class ResTransferHistory {
        var tokens: String ,
        var status: String ,
        var created: String ,
-       var updated: String
+       var updated: String,
+       var actionStatus: ActionStatus
 
+    )
+
+    data class ActionStatus(
+            var status: Boolean,
+            var message: String
     )
 
 
