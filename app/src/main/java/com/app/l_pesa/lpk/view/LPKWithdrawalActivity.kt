@@ -3,11 +3,10 @@ package com.app.l_pesa.lpk.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,7 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
             if(viewPager!!.currentItem==1)
             {
                 val fragment = adapter.instantiateItem(viewPager!!, 1) as Fragment
-                if (fragment is TransferHistoryFragment) {
+                if (fragment is WithdrawalHistory) {
                     fragment.doFilter()
 
                 }
