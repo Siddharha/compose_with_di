@@ -30,6 +30,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     private var after=""
 
     private var mBottomSheetBehavior1: BottomSheetBehavior<*>? = null
+
     companion object {
         fun newInstance(): Fragment {
             return TransferHistoryFragment()
