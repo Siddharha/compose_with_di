@@ -37,7 +37,8 @@ class LpkFragment: Fragment() {
 
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
-                Toast.makeText(activity,"Coming soon..",Toast.LENGTH_SHORT).show()
+                startActivity(Intent(activity, LPKWithdrawalActivity::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
             }
             else
             {
