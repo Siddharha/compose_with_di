@@ -5,18 +5,26 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.lpk.adapter.AdapterWithdrawalHistory
+import com.app.l_pesa.lpk.inter.ICallBackWithdrawalHistory
+import com.app.l_pesa.lpk.model.ResWithdrawalHistory
+import com.app.l_pesa.lpk.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.fragment_withdrawal_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class WithdrawalHistory:Fragment() {
+class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
+    private var listWithdrawalHistory           : ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>? = null
+    private var adapterWithdrawalHistory        : AdapterWithdrawalHistory?                   = null
     private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
 
     companion object {
@@ -34,6 +42,7 @@ class WithdrawalHistory:Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefresh()
+        initData()
 
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior!!.isHideable=true
@@ -41,20 +50,31 @@ class WithdrawalHistory:Fragment() {
 
     }
 
+    private fun initData()
+    {
+        listWithdrawalHistory       = ArrayList()
+        adapterWithdrawalHistory    = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
+
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+            swipeRefreshLayout.isRefreshing=true
+            val presenterWithdrawalHistory= PresenterWithdrawalHistory()
+            presenterWithdrawalHistory.getInterestHistory(activity!!,this)
+        }
+        else
+        {
+            swipeRefreshLayout.isRefreshing=false
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+        }
+    }
+
     private fun swipeRefresh()
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
-            if(CommonMethod.isNetworkAvailable(activity!!))
-            {
+            initData()
 
-            }
-            else
-            {
-                swipeRefreshLayout.isRefreshing=false
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-            }
         }
     }
 
@@ -88,6 +108,64 @@ class WithdrawalHistory:Fragment() {
             bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
 
         }
+    }
+
+    override fun onSuccessWithdrawalHistory(userWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>) {
+
+        swipeRefreshLayout.isRefreshing=false
+        listWithdrawalHistory!!.clear()
+        listWithdrawalHistory!!.addAll(userWithdrawalHistory)
+        adapterWithdrawalHistory    = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
+        val llmOBJ                  = LinearLayoutManager(activity)
+        llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+        rlList.layoutManager        = llmOBJ
+        rlList.adapter              = adapterWithdrawalHistory
+
+
+        adapterWithdrawalHistory!!.setLoadMoreListener(object : AdapterWithdrawalHistory.OnLoadMoreListener {
+            override fun onLoadMore() {
+
+                rlList.post {
+
+                    /*if(hasNext)
+                    {*/
+                       // loadMore()
+                   // }
+
+                }
+
+            }
+        })
+    }
+
+    private fun loadMore()
+    {
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+            val loadModel  = ResWithdrawalHistory.UserWithdrawalHistory(0, 0,  "",
+                    "", "", "",
+                    "", "", "", "", "","","")
+
+            listWithdrawalHistory!!.add(loadModel)
+            adapterWithdrawalHistory!!.notifyItemInserted(listWithdrawalHistory!!.size-1)
+
+
+
+        }
+        else{
+            swipeRefreshLayout.isRefreshing = false
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+        }
+    }
+
+    override fun onEmptyWithdrawalHistory() {
+
+        swipeRefreshLayout.isRefreshing=false
+    }
+
+    override fun onErrorWithdrawalHistory(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
     }
 
     @SuppressLint("SetTextI18n")

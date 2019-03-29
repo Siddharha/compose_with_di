@@ -15,6 +15,7 @@ import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.ResInterestHistory
 import com.app.l_pesa.lpk.model.ResTokenTransfer
 import com.app.l_pesa.lpk.model.ResTransferHistory
+import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResChangePin
@@ -123,6 +124,9 @@ interface BaseService{
 
     @GET("lpk_savings/interest_history")
     fun getInterestHistory(@Query("cursors") cursors:String): Observable<ResInterestHistory>
+
+    @GET("lpk_withdrawal/user_history")
+    fun getWithdrawalHistory(@Query("cursors") cursors:String): Observable<ResWithdrawalHistory>
 
 
 }
