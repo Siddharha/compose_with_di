@@ -3,9 +3,9 @@ package com.app.l_pesa.lpk.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.app.l_pesa.lpk.view.InterestHistoryFragment
-import com.app.l_pesa.lpk.view.TokenTransferFragment
+import com.app.l_pesa.lpk.view.TokenWithdrawalFragment
 import com.app.l_pesa.lpk.view.TransferHistoryFragment
+import com.app.l_pesa.lpk.view.WalletAddressFragment
 
 class WithdrawalTabAdapter (fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
@@ -14,13 +14,13 @@ class WithdrawalTabAdapter (fm: FragmentManager, private var tabCount: Int): Fra
         //Returning the current tabs
         return when (position) {
             0 -> {
-                TokenTransferFragment()
+                TokenWithdrawalFragment()
             }
             1 -> {
                 TransferHistoryFragment()
             }
             2 -> {
-                InterestHistoryFragment()
+                WalletAddressFragment()
             }
 
             else -> null

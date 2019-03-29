@@ -32,8 +32,6 @@ import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
-import com.app.l_pesa.lpk.view.LPKSavingsActivity
-import com.app.l_pesa.lpk.view.LPKSavingsFragment
 import com.app.l_pesa.lpk.view.LpkFragment
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.points.view.PointsFragment
