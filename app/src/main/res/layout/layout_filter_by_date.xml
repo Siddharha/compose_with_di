@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:orientation="vertical"
-        xmlns:android="http://schemas.android.com/apk/res/android" >
+        android:orientation="vertical">
 
 
         <LinearLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorApp"
-            android:orientation="vertical"
-            xmlns:android="http://schemas.android.com/apk/res/android" >
+            android:orientation="vertical">
 
 
             <android.support.constraint.ConstraintLayout
@@ -32,7 +30,28 @@
                 android:padding="@dimen/_3sdp">
 
 
+                <ImageView
+                    android:id="@+id/imgCancel"
+                    android:contentDescription="@string/app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
+                <TextView
+                    android:id="@+id/txtFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_14sdp"
+                    android:fontFamily="@font/montserrat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgCancel"
+                    app:layout_constraintTop_toTopOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
 
@@ -68,6 +87,8 @@
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp"
                         app:fontFamily="@font/montserrat"
+                        android:drawableEnd="@drawable/ic_request_date"
+                        android:cursorVisible="false"
                         android:longClickable="false"
                         android:inputType="date"
                         android:focusable="false"/>
@@ -92,6 +113,8 @@
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp"
                         app:fontFamily="@font/montserrat"
+                        android:drawableEnd="@drawable/ic_request_date"
+                        android:cursorVisible="false"
                         android:longClickable="false"
                         android:inputType="date"
                         android:focusable="false" />

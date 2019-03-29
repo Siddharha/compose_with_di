@@ -103,6 +103,12 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             showDatePickerTo()
 
         }
+
+        imgCancel.setOnClickListener {
+
+            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
     }
 
     @SuppressLint("SetTextI18n")
