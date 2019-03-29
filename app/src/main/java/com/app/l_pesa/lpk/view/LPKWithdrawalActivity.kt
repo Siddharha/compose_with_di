@@ -62,7 +62,7 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
             else if(viewPager!!.currentItem==2)
             {
                 val fragment = adapter.instantiateItem(viewPager!!, 2) as Fragment
-                if (fragment is InterestHistoryFragment) {
+                if (fragment is WalletAddressFragment) {
                     fragment.doFilter()
 
                 }
