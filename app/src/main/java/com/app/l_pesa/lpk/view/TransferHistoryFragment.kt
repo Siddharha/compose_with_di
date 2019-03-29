@@ -29,7 +29,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     private var hasNext=false
     private var after=""
 
-    private var mBottomSheetBehavior1: BottomSheetBehavior<*>? = null
+    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
 
     companion object {
         fun newInstance(): Fragment {
@@ -48,9 +48,9 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         initData()
         swipeRefresh()
 
-        mBottomSheetBehavior1 = BottomSheetBehavior.from<View>(bottom_sheet)
-        mBottomSheetBehavior1!!.isHideable=true
-        mBottomSheetBehavior1!!.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
+        bottomSheetBehavior!!.isHideable=true
+        bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
 
     }
 
@@ -82,14 +82,14 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     fun doFilter()
     {
 
-        if(mBottomSheetBehavior1!!.state == BottomSheetBehavior.STATE_HIDDEN)
+        if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
 
         }
         else
         {
-            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
 
         }
 
@@ -107,7 +107,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         imgCancel.setOnClickListener {
 
-            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
 
         }
     }
