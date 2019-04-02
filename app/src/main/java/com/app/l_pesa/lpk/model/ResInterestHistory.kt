@@ -30,7 +30,7 @@ class ResInterestHistory {
 
     data class UserInterestHistory( var id: Int, var user_id: Int , var lpk_sav_his_id: Int ,
                                     var country_code: String ,var identity_number: String,var currency_code: String,var amount: String,var tokens: String, var narration: String,
-                                    var interest_amount: String,var interest_token: String,var created: String )
+                                    var interest_amount: String,var interest_token: String,var actual_tokens:String,var created: String )
 
 
     inner class Cursors {

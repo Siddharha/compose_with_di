@@ -82,7 +82,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
     {
         if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
 
         }
         else

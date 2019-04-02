@@ -82,7 +82,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
     {
         if(mBottomSheetBehavior1!!.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_EXPANDED)
+            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
 
         }
         else
@@ -254,7 +254,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
         {
             val loadModel  = ResInterestHistory.UserInterestHistory(0,0,0,"",
                             "","","",
-                            "","","","","")
+                            "","","","","","")
 
             listInterestHistory!!.add(loadModel)
             adapterInterestHistory!!.notifyItemInserted(listInterestHistory!!.size-1)
