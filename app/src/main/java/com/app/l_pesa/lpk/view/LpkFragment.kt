@@ -35,7 +35,7 @@ class LpkFragment: Fragment() {
     {
         cardWithdrawal.setOnClickListener {
 
-            /*if(CommonMethod.isNetworkAvailable(activity!!))
+            if(CommonMethod.isNetworkAvailable(activity!!))
             {
                 startActivity(Intent(activity, LPKWithdrawalActivity::class.java))
                 activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -43,9 +43,7 @@ class LpkFragment: Fragment() {
             else
             {
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-            }*/
-
-            Toast.makeText(activity,"Coming soon..",Toast.LENGTH_SHORT).show()
+            }
 
 
         }

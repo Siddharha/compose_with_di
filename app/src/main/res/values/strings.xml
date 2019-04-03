@@ -368,4 +368,6 @@
         If you have been blacklisted or you are a loan defaulter, you are not entitled to get the benefits.
     </string>
 
+    <string name="required_filter_date">Please select date</string>
+
 </resources>

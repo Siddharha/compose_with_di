@@ -89,7 +89,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         }
         else
         {
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
 
         }
 

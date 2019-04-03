@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,12 +83,13 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
     {
         if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            filterDate()
 
         }
         else
         {
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
 
         }
 
@@ -108,6 +110,22 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
 
         }
+    }
+
+    private fun filterDate()
+    {
+        buttonFilterSubmit.setOnClickListener {
+
+            if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_filter_date))
+            }
+            else
+            {
+
+            }
+        }
+
     }
 
     override fun onSuccessWithdrawalHistory(userWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>) {

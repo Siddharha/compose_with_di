@@ -42,7 +42,7 @@
 
         <include
 
-            layout="@layout/layout_filter_by_date"/>
+            layout="@layout/layout_filter_by_date_amount"/>
 
     </android.support.v4.widget.NestedScrollView>
 
