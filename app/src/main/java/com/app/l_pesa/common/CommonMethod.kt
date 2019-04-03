@@ -1,5 +1,6 @@
 package com.app.l_pesa.common
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,7 @@ import com.app.l_pesa.dashboard.view.DashboardActivity
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -40,6 +43,21 @@ object CommonMethod {
             isConnected = activeNetwork != null && activeNetwork.isConnected
 
         return isConnected
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun dateConvert(inputDate:String): String? {
+
+        return if(!TextUtils.isEmpty(inputDate))
+        {
+            val inputFormat  = SimpleDateFormat("dd/MM/yyyy")
+            val date         = inputFormat.parse(inputDate)
+
+            val outputFormat = SimpleDateFormat("MMMM dd,yyyy")
+            outputFormat.format(date)
+        }
+        else ""
+
     }
 
     fun fileCompress(fileOBJ: File): File

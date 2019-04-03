@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.lpk.model.ResTransferHistory
@@ -76,12 +77,15 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         var txtRef          : TextView              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
         var txtToken        : TextView              = itemView.findViewById(R.id.txtToken) as CommonTextRegular
         var buttonStatus    : CustomButtonRegular   = itemView.findViewById(R.id.buttonStatus) as CustomButtonRegular
+        var txtCreateDate   : CommonTextRegular     = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory)
         {
             txtToken.text = context.resources.getString(R.string.tokens)+": "+userTransferHistory.tokens
             txtRef.text = context.resources.getString(R.string.ref_no)+userTransferHistory.identity_number
+            txtCreateDate.text = CommonMethod.dateConvert(userTransferHistory.created)
+
             if(userTransferHistory.status=="L")
             {
                 if(userTransferHistory.actionStatus.status)
@@ -108,6 +112,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
             {
                 buttonStatus.setBackgroundResource(R.drawable.blue_button)
             }
+
 
             buttonStatus.setOnClickListener {
 

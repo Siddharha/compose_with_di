@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView54"
+                android:id="@+id/txtCreateDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_7sdp"
@@ -35,7 +35,8 @@
                 android:drawablePadding="@dimen/_3sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/light_text_color"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_10sdp"
+                android:gravity="center"
                 app:layout_constraintBottom_toTopOf="@+id/txtRef"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtToken" />
@@ -47,10 +48,10 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/light_text_color"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView54" />
+                app:layout_constraintTop_toBottomOf="@+id/txtCreateDate" />
 
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/buttonStatus"
