@@ -9,7 +9,7 @@
     >
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardWithdrawal"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_3sdp"
@@ -17,8 +17,10 @@
         >
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintWithdrawal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
             android:padding="@dimen/_10sdp">
 
 
@@ -100,7 +102,6 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardSavings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/_3sdp"
@@ -109,6 +110,8 @@
         >
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintSavings"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/_10sdp">

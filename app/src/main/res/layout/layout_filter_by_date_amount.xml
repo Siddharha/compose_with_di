@@ -32,15 +32,16 @@
 
                 <ImageView
                     android:id="@+id/imgCancel"
-                    android:contentDescription="@string/app_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/app_name"
+                    android:focusable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_white_cross"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:focusable="true"/>
+                    app:srcCompat="@drawable/ic_white_cross" />
 
                 <TextView
                     android:id="@+id/txtFilter"
@@ -150,7 +151,9 @@
                    <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/_7sdp">
+                    android:paddingStart="@dimen/_7sdp"
+                    android:paddingEnd="@dimen/_7sdp"
+                    android:paddingBottom="@dimen/_7sdp">
 
                     <com.app.l_pesa.common.CommonInputLayout
                         android:id="@+id/commonInputLayout20"

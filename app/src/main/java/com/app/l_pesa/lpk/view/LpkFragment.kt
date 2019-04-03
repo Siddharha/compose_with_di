@@ -33,7 +33,7 @@ class LpkFragment: Fragment() {
 
     private fun initData()
     {
-        cardWithdrawal.setOnClickListener {
+        constraintWithdrawal.setOnClickListener {
 
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
@@ -48,7 +48,7 @@ class LpkFragment: Fragment() {
 
         }
 
-        cardSavings.setOnClickListener {
+        constraintSavings.setOnClickListener {
 
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
