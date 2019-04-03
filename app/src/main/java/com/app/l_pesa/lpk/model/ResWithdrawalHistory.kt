@@ -19,6 +19,26 @@ class ResWithdrawalHistory {
         @SerializedName("user_withdrawal_history")
         @Expose
         var userWithdrawalHistory: ArrayList<UserWithdrawalHistory>? = null
+        @SerializedName("cursors")
+        @Expose
+        var cursors: Cursors? = null
+
+    }
+
+    inner class Cursors {
+
+        @SerializedName("hasNext")
+        @Expose
+        var hasNext: Boolean = false
+        @SerializedName("hasPrevious")
+        @Expose
+        var hasPrevious: Boolean = false
+        @SerializedName("before")
+        @Expose
+        var before: String = ""
+        @SerializedName("after")
+        @Expose
+        var after: String = ""
 
     }
 

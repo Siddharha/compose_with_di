@@ -31,7 +31,7 @@ class PresenterWithdrawalHistory {
                         {
                             if(response.data!!.userWithdrawalHistory!!.size>0)
                             {
-                                callBackOBJ.onSuccessWithdrawalHistory(response.data!!.userWithdrawalHistory!!)
+                                callBackOBJ.onSuccessWithdrawalHistory(response.data!!.userWithdrawalHistory!!,response.data!!.cursors)
                             }
                             else
                             {
@@ -68,5 +68,59 @@ class PresenterWithdrawalHistory {
 
                 })
     }
+
+    fun getInterestHistoryPaginate(contextOBJ: Context,cursor:String, callBackOBJ: ICallBackWithdrawalHistory)
+    {
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory(cursor)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+                }
+                .subscribe({ response ->
+
+                    try
+                    {
+
+                        if(response.status!!.isSuccess)
+                        {
+                            if(response.data!!.userWithdrawalHistory!!.size>0)
+                            {
+                                callBackOBJ.onSuccessWithdrawalHistoryPaginate(response.data!!.userWithdrawalHistory!!,response.data!!.cursors)
+                            }
+
+                        }
+                        else
+                        {
+                            callBackOBJ.onErrorWithdrawalHistory(response.status!!.message)
+                        }
+
+                    }
+                    catch (e: Exception)
+                    {
+
+                    }
+                }, {
+                    error ->
+                    try
+                    {
+                        val errorVal              = error as HttpException
+
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val  jsonStatus           =    jsonError.getJSONObject("status")
+                        val jsonMessage           =    jsonStatus.getString("message")
+
+                        callBackOBJ.onErrorWithdrawalHistory(jsonMessage)
+                    }
+                    catch (exp: Exception)
+                    {
+                        val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
+                        callBackOBJ.onErrorWithdrawalHistory(errorMessageOBJ)
+                    }
+
+                })
+    }
+
 
 }

@@ -83,7 +83,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory)
         {
             txtToken.text = context.resources.getString(R.string.tokens)+": "+userTransferHistory.tokens
-            txtRef.text = context.resources.getString(R.string.ref_no)+userTransferHistory.identity_number
+            txtRef.text = context.resources.getString(R.string.ref_no)+" "+userTransferHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userTransferHistory.created)
 
             if(userTransferHistory.status=="L")

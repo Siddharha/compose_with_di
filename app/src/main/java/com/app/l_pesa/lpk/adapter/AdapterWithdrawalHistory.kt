@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.lpk.model.ResWithdrawalHistory
@@ -76,6 +77,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
         private var txtReqToken        : CommonTextRegular = itemView.findViewById(R.id.txtReqToken) as CommonTextRegular
         private var txtStatus          : CommonTextRegular = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
+        private var txtCreateDate      : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
         private var buttonStatus       : CustomButtonRegular = itemView.findViewById(R.id.buttonStatus) as CustomButtonRegular
 
 
@@ -83,6 +85,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         fun  bindData(context: Context, userWithdrawalHistory: ResWithdrawalHistory.UserWithdrawalHistory)
         {
             txtReqToken.text = context.getString(R.string.request_token)+": "+userWithdrawalHistory.token_value
+            txtCreateDate.text = CommonMethod.dateConvert(userWithdrawalHistory.created)
 
             if(userWithdrawalHistory.status=="R" )
             {

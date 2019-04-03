@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -24,9 +23,12 @@ import kotlin.collections.ArrayList
 
 class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
+
     private var listWithdrawalHistory           : ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>? = null
     private var adapterWithdrawalHistory        : AdapterWithdrawalHistory?                   = null
     private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
+    private var hasNext=false
+    private var after=""
 
     companion object {
         fun newInstance(): Fragment {
@@ -142,8 +144,10 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
     }
 
-    override fun onSuccessWithdrawalHistory(userWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>) {
+    override fun onSuccessWithdrawalHistory(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?) {
 
+        hasNext =cursors!!.hasNext
+        after   =cursors.after
         swipeRefreshLayout.isRefreshing=false
         listWithdrawalHistory!!.clear()
         listWithdrawalHistory!!.addAll(userWithdrawalHistory)
@@ -159,15 +163,34 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
                 rlList.post {
 
-                    /*if(hasNext)
-                    {*/
-                       // loadMore()
-                   // }
+                    if(hasNext)
+                    {
+                      loadMore()
+                    }
 
                 }
 
             }
         })
+    }
+
+    override fun onSuccessWithdrawalHistoryPaginate(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?) {
+
+        hasNext =cursors!!.hasNext
+        after   =cursors.after
+        if(listWithdrawalHistory!!.size!=0)
+        {
+            try {
+
+                listWithdrawalHistory!!.removeAt(listWithdrawalHistory!!.size - 1)
+                adapterWithdrawalHistory!!.notifyDataChanged()
+                listWithdrawalHistory!!.addAll(userWithdrawalHistory)
+                adapterWithdrawalHistory!!.notifyItemRangeInserted(0, listWithdrawalHistory!!.size)
+
+            }
+            catch (e:Exception)
+            {}
+        }
     }
 
     private fun loadMore()
@@ -181,7 +204,8 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             listWithdrawalHistory!!.add(loadModel)
             adapterWithdrawalHistory!!.notifyItemInserted(listWithdrawalHistory!!.size-1)
 
-
+            val presenterWithdrawalHistory= PresenterWithdrawalHistory()
+            presenterWithdrawalHistory.getInterestHistoryPaginate(activity!!,after,this)
 
         }
         else{
