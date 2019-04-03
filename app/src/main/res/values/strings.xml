@@ -371,5 +371,6 @@
     </string>
 
     <string name="required_filter_date">Please select date</string>
+    <string name="reset">Reset</string>
 
 </resources>

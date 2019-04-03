@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ import com.app.l_pesa.lpk.inter.ICallBackWithdrawalHistory
 import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import com.app.l_pesa.lpk.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.fragment_withdrawal_history.*
-import kotlinx.android.synthetic.main.layout_filter_by_date.*
+import kotlinx.android.synthetic.main.layout_filter_by_date_amount.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -84,6 +83,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HIDDEN)
         {
             bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            resetFilter()
             filterDate()
 
         }
@@ -108,6 +108,18 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         imgCancel.setOnClickListener {
 
             bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
+    }
+
+    private fun  resetFilter()
+    {
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+            etFromAmount.text!!.clear()
+            etToAmount.text!!.clear()
 
         }
     }
