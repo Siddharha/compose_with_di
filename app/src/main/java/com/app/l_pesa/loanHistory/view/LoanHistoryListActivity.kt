@@ -39,6 +39,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.current_loan_history)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.business_loan_history)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout!!.tabMode = TabLayout.MODE_FIXED
 
         val adapter = LoanHistoryTabPager(supportFragmentManager, tabLayout!!.tabCount)
         viewPager!!.adapter = adapter
