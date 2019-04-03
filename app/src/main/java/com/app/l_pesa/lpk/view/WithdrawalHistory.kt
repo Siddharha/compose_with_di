@@ -116,14 +116,14 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
     {
         buttonFilterSubmit.setOnClickListener {
 
-            if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
+            /*if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
             {
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_filter_date))
             }
             else
             {
 
-            }
+            }*/
         }
 
     }
