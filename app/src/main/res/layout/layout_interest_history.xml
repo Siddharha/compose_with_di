@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/commonTextRegular"
+                android:id="@+id/txtCreateDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -36,6 +36,7 @@
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/light_text_color"
                 android:textSize="@dimen/_10sdp"
+                android:gravity="center|start"
                 app:layout_constraintEnd_toStartOf="@+id/view41"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtRef" />
@@ -50,7 +51,7 @@
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintEnd_toStartOf="@+id/view41"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/commonTextRegular" />
+                app:layout_constraintTop_toBottomOf="@+id/txtCreateDate" />
 
             <View
                 android:id="@+id/view41"
@@ -81,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/interest_amount"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_10sdp"
                 android:textColor="@color/dark_text_color"
                 android:layout_marginTop="@dimen/_17sdp"
                 app:layout_constraintBottom_toTopOf="@+id/txtAmount"

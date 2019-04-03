@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.lpk.model.ResInterestHistory
 
@@ -70,19 +71,29 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var txtTokenValue          : CommonTextRegular = itemView.findViewById(R.id.txtTokenValue) as CommonTextRegular
-        var txtAmount              : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
-        var txtNarration           : CommonTextRegular = itemView.findViewById(R.id.txtNarration) as CommonTextRegular
-        var txtRef                 : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        private var txtTokenValue          : CommonTextRegular = itemView.findViewById(R.id.txtTokenValue) as CommonTextRegular
+        private var txtAmount              : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
+        private var txtNarration           : CommonTextRegular = itemView.findViewById(R.id.txtNarration) as CommonTextRegular
+        private var txtRef                 : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        private var txtCreateDate          : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userInterestHistory: ResInterestHistory.UserInterestHistory)
         {
-            txtTokenValue.text = context.getString(R.string.actual_token_values)+":"+userInterestHistory.actual_tokens
+            if(userInterestHistory.amount=="0.00")
+            {
+                txtTokenValue.text = context.getString(R.string.actual_token_values)+": "+userInterestHistory.currency_code+userInterestHistory.amount
+            }
+            else
+            {
+                txtTokenValue.text = context.getString(R.string.actual_token_values)+": "+userInterestHistory.interest_amount
+            }
+
             txtAmount.text = userInterestHistory.currency_code+" "+userInterestHistory.amount
-            txtNarration.text = context.getString(R.string.narration)+":"+userInterestHistory.narration
-            txtRef.text = context.getString(R.string.ref_no)+userInterestHistory.identity_number
+            txtNarration.text = context.getString(R.string.narration)+": "+userInterestHistory.narration
+            txtRef.text = context.getString(R.string.ref_no)+" "+userInterestHistory.identity_number
+            txtCreateDate.text = CommonMethod.dateConvert(userInterestHistory.created)
 
         }
 
