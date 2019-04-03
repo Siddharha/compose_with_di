@@ -164,7 +164,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            val loanStatusModel  = ResLoanHistoryBusiness.LoanHistory(0,"",0,"",
+            val loanStatusModel  = ResLoanHistoryBusiness.LoanHistory(0,"",0.0,"",
                     "","","",
                     "","","","","",
                     "","","","","","","","","","")

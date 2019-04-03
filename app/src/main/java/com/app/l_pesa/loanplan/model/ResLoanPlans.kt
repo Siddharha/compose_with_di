@@ -52,7 +52,7 @@ class ResLoanPlans {
         var productId: Int = 0
         @SerializedName("loan_amount")
         @Expose
-        var loanAmount: Int = 0
+        var loanAmount: Double = 0.0
         @SerializedName("interest_rt")
         @Expose
         var interestRt: Double = 0.0
@@ -76,7 +76,7 @@ class ResLoanPlans {
         var convertionLoanAmount: Int = 0
         @SerializedName("actual_loan_amount")
         @Expose
-        var actualLoanAmount: Int = 0
+        var actualLoanAmount: Double = 0.0
         @SerializedName("conversion_charge")
         @Expose
         var conversionCharge: String = ""
@@ -98,15 +98,9 @@ class ResLoanPlans {
         @SerializedName("disapprove_reason")
         @Expose
         var disapproveReason: String = ""
-        @SerializedName("total_payback")
-        @Expose
-        var totalPayback: String = ""
         @SerializedName("loan_status")
         @Expose
         var loanStatus: String = ""
-        @SerializedName("loan_status_txt")
-        @Expose
-        var loanStatusTxt: ArrayList<String>? = null
         @SerializedName("applied_date")
         @Expose
         var appliedDate: String = ""
@@ -170,7 +164,7 @@ class ResLoanPlans {
         var processingFeesAmount: String = ""
         @SerializedName("loan_amount")
         @Expose
-        var loanAmount: Int = 0
+        var loanAmount: Double = 0.0
         @SerializedName("loan_period")
         @Expose
         var loanPeriod: Int = 0

@@ -163,7 +163,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            val loanStatusModel  = ResLoanHistoryCurrent.LoanHistory(0,"",0,"",
+            val loanStatusModel  = ResLoanHistoryCurrent.LoanHistory(0,"",0.0,"",
                                     "","","",
                                     "","","","","",
                                     "","","","","","","","","","")

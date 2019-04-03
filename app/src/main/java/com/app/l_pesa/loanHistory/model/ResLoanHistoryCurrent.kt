@@ -17,7 +17,7 @@ class ResLoanHistoryCurrent(val status: CommonStatusModel, val data: Data) {
 
            var loan_id:Int,
            var identity_number:String,
-           var loan_amount:Int,
+           var loan_amount:Double,
            var interest_rate:String,
            var convertion_dollar_value:String,
            var convertion_loan_amount:String,
