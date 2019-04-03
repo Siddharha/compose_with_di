@@ -50,6 +50,7 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.current_loan_plans)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.business_loan_plans)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout!!.tabMode=TabLayout.MODE_FIXED
 
         val adapter = LoanTabPager(childFragmentManager, tabLayout!!.tabCount)
         viewPager!!.adapter = adapter

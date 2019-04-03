@@ -80,15 +80,23 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory)
         {
-            txtToken.text = context.resources.getString(R.string.transfer_token)+":"+userTransferHistory.tokens
+            txtToken.text = context.resources.getString(R.string.tokens)+": "+userTransferHistory.tokens
             txtRef.text = context.resources.getString(R.string.ref_no)+userTransferHistory.identity_number
             if(userTransferHistory.status=="L")
             {
-                buttonStatus.text = context.resources.getString(R.string.lock)
+                if(userTransferHistory.actionStatus.status)
+                {
+                    buttonStatus.text = context.resources.getString(R.string.lock)
+                }
+                else
+                {
+                    buttonStatus.text = context.resources.getString(R.string.locked)
+                }
+
             }
             else
             {
-                buttonStatus.text = context.resources.getString(R.string.unlock)
+                buttonStatus.text = context.resources.getString(R.string.unlocked)
 
             }
 

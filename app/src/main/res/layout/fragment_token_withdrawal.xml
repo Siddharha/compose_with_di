@@ -81,7 +81,7 @@
 
                 <com.app.l_pesa.common.CommonEditTextRegular
                     android:id="@+id/etToken"
-                    android:inputType="phone"
+                    android:inputType="numberSigned"
                     android:maxLength="10"
                     android:textSize="@dimen/_13sdp"
                     android:longClickable="false"

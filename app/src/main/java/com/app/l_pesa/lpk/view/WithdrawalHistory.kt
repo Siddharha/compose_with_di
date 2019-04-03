@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -107,7 +108,8 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
         imgCancel.setOnClickListener {
 
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+
 
         }
     }

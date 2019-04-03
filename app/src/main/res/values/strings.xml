@@ -334,9 +334,10 @@
     <string name="request_token">Request Token</string>
     <string name="transfer">Transfer</string>
     <string name="lock">Lock</string>
+    <string name="locked">Locked</string>
     <string name="star_line">************************************************************</string>
-    <string name="unlock">Unlock</string>
-    <string name="transfer_token">Transfer Token</string>
+    <string name="unlocked">Unlocked</string>
+    <string name="tokens">Token</string>
     <string name="filter">Filter</string>
     <string name="actual_token_values">Actual Tokens Values</string>
     <string name="required_token_amount">Required Token Amount</string>
