@@ -89,8 +89,8 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
     override fun onClickInvestmentPlan(investmentPlan: ResInvestmentPlan.InvestmentPlan) {
 
-        val globalLoanPlanModel= GlobalInvestmentPlanData.getInstance()
-        globalLoanPlanModel.modelData=investmentPlan
+        val globalInvestmentPlan= GlobalInvestmentPlanData.getInstance()
+        globalInvestmentPlan.modelData=investmentPlan
 
         startActivity(Intent(activity, InvestmentApplyActivity::class.java))
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)

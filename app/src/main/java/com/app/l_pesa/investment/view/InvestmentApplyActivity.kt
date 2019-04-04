@@ -48,6 +48,11 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
 
     fun initData()
     {
+        val globalInvestmentPlan= GlobalInvestmentPlanData.getInstance().modelData
+        val planName=globalInvestmentPlan!!.planName
+        etPlan.setText(planName)
+        investmentPlanId=globalInvestmentPlan.investmentId
+
         etPlan.setOnClickListener {
             showPlan()
         }
