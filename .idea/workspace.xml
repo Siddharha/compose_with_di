@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dcb9a0f-2251-4036-b270-e9f0e752bc92" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_up_arrow.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -29,6 +30,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterWithdrawalHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterWithdrawalHistory.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_withdrawal_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_withdrawal_history.xml" afterDir="false" />
@@ -62,7 +64,7 @@
           <entry key="png" value="6" />
           <entry key="pro" value="14" />
           <entry key="ttf" value="1" />
-          <entry key="xml" value="887" />
+          <entry key="xml" value="889" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -74,7 +76,7 @@
           <entry key="JAVA" value="36" />
           <entry key="Kotlin" value="1281" />
           <entry key="ProGuard File" value="14" />
-          <entry key="XML" value="887" />
+          <entry key="XML" value="889" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -82,19 +84,19 @@
           <entry key="dummy" value="6" />
           <entry key="gradle" value="50" />
           <entry key="java" value="240" />
-          <entry key="kt" value="24173" />
+          <entry key="kt" value="24177" />
           <entry key="pro" value="35" />
-          <entry key="xml" value="16553" />
+          <entry key="xml" value="16642" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="50" />
           <entry key="JAVA" value="240" />
-          <entry key="Kotlin" value="24173" />
+          <entry key="Kotlin" value="24177" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="ProGuard File" value="35" />
-          <entry key="XML" value="16553" />
+          <entry key="XML" value="16642" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -125,10 +127,11 @@
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
-              <caret line="80" column="48" lean-forward="true" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+              <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
               <folding>
                 <element signature="e#1006#1021#0" expanded="true" />
                 <element signature="e#1841#1856#0" expanded="true" />
+                <element signature="e#2375#2390#0" expanded="true" />
                 <element signature="e#2423#2438#0" expanded="true" />
                 <element signature="e#2480#2494#0" expanded="true" />
                 <element signature="e#2535#2549#0" expanded="true" />
@@ -137,6 +140,7 @@
                 <element signature="e#3660#3674#0" expanded="true" />
                 <element signature="e#3812#3826#0" expanded="true" />
                 <element signature="e#3915#3930#0" expanded="true" />
+                <element signature="e#4479#4494#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -145,8 +149,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterWithdrawalHistory.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
+            <state relative-caret-position="120">
+              <caret line="94" column="85" selection-start-line="94" selection-start-column="85" selection-end-line="94" selection-end-column="85" />
             </state>
           </provider>
         </entry>
@@ -3168,7 +3172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_lpk_savings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/WithdrawalTabAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResWithdrawalHistory.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/inter/ICallBackTokenWithdrawal.kt" />
@@ -3218,6 +3221,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterWithdrawalHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterWithdrawalHistory.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_up_arrow.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_withdrawal_history.xml" />
       </list>
     </option>
@@ -3670,7 +3674,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.57216495" visible="true" weight="0.22136137" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
@@ -3798,16 +3801,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_transparent_border_white_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="64" lean-forward="true" selection-start-line="5" selection-start-column="11" selection-end-line="6" selection-end-column="64" />
-          <folding>
-            <element signature="e#198#213#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_transparent_border_white_ripple.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ripple_green_button.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -4195,10 +4188,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_up_arrow.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterWithdrawalHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="93" column="46" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
+        <state relative-caret-position="120">
+          <caret line="94" column="85" selection-start-line="94" selection-start-column="85" selection-end-line="94" selection-end-column="85" />
         </state>
       </provider>
     </entry>
@@ -4206,10 +4206,11 @@
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="80" column="48" lean-forward="true" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
           <folding>
             <element signature="e#1006#1021#0" expanded="true" />
             <element signature="e#1841#1856#0" expanded="true" />
+            <element signature="e#2375#2390#0" expanded="true" />
             <element signature="e#2423#2438#0" expanded="true" />
             <element signature="e#2480#2494#0" expanded="true" />
             <element signature="e#2535#2549#0" expanded="true" />
@@ -4218,6 +4219,7 @@
             <element signature="e#3660#3674#0" expanded="true" />
             <element signature="e#3812#3826#0" expanded="true" />
             <element signature="e#3915#3930#0" expanded="true" />
+            <element signature="e#4479#4494#0" expanded="true" />
           </folding>
         </state>
       </provider>

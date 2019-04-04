@@ -92,7 +92,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             {
                 buttonStatus.visibility=View.INVISIBLE
                 txtReason.visibility=View.GONE
-                txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_dropdown, 0)
+                txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_up_arrow, 0)
                 txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#D2322D'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
                 txtReason.text=userWithdrawalHistory.reject_reason
 
