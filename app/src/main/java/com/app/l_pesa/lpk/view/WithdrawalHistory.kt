@@ -24,8 +24,8 @@ import kotlin.collections.ArrayList
 class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
 
-    private var listWithdrawalHistory           : ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>? = null
-    private var adapterWithdrawalHistory        : AdapterWithdrawalHistory?                   = null
+    private var listWithdrawalHistory                    : ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>? = null
+    private lateinit var adapterWithdrawalHistory        : AdapterWithdrawalHistory
     private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
     private var hasNext=false
     private var after=""
@@ -146,32 +146,35 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
     override fun onSuccessWithdrawalHistory(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?) {
 
-        hasNext =cursors!!.hasNext
-        after   =cursors.after
-        swipeRefreshLayout.isRefreshing=false
-        listWithdrawalHistory!!.clear()
-        listWithdrawalHistory!!.addAll(userWithdrawalHistory)
-        adapterWithdrawalHistory    = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
-        val llmOBJ                  = LinearLayoutManager(activity)
-        llmOBJ.orientation          = LinearLayoutManager.VERTICAL
-        rlList.layoutManager        = llmOBJ
-        rlList.adapter              = adapterWithdrawalHistory
+        activity!!.runOnUiThread {
+
+            hasNext = cursors!!.hasNext
+            after = cursors.after
+            swipeRefreshLayout.isRefreshing = false
+            listWithdrawalHistory!!.clear()
+            listWithdrawalHistory!!.addAll(userWithdrawalHistory)
+            adapterWithdrawalHistory = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
+            val llmOBJ = LinearLayoutManager(activity)
+            llmOBJ.orientation = LinearLayoutManager.VERTICAL
+            rlList.layoutManager = llmOBJ
+            rlList.adapter = adapterWithdrawalHistory
 
 
-        adapterWithdrawalHistory!!.setLoadMoreListener(object : AdapterWithdrawalHistory.OnLoadMoreListener {
-            override fun onLoadMore() {
+            adapterWithdrawalHistory!!.setLoadMoreListener(object : AdapterWithdrawalHistory.OnLoadMoreListener {
+                override fun onLoadMore() {
 
-                rlList.post {
+                    rlList.post {
 
-                    if(hasNext)
-                    {
-                      loadMore()
+                        if (hasNext)
+                        {
+                            loadMore()
+                        }
+
                     }
 
                 }
-
-            }
-        })
+            })
+        }
     }
 
     override fun onSuccessWithdrawalHistoryPaginate(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?) {
@@ -207,6 +210,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
             presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,this)
 
+            println("JSON_+++"+after)
         }
         else{
             swipeRefreshLayout.isRefreshing = false

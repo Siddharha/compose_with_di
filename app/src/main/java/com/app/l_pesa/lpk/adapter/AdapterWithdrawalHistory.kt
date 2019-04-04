@@ -48,7 +48,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
     override fun getItemViewType(position: Int): Int
     {
-        return if(listWithdrawalHistory!![position].user_id!=0){
+        return if(listWithdrawalHistory!![position].id!=0){
             0
         }else{
             1
@@ -99,14 +99,17 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             }
             else if(userWithdrawalHistory.status=="C" )
             {
+                 buttonStatus.visibility=View.VISIBLE
                  txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00695c'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else if(userWithdrawalHistory.status=="F" )
             {
+                 buttonStatus.visibility=View.VISIBLE
                  txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else if(userWithdrawalHistory.status=="N" )
             {
+                  buttonStatus.visibility=View.VISIBLE
                   txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else
