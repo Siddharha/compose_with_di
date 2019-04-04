@@ -279,6 +279,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         return true
     }
 
+    fun setTitle(title:String)
+    {
+        toolbar.title =title
+    }
+
     private fun doLogout()
     {
         if(CommonMethod.isNetworkAvailable(this@DashboardActivity))

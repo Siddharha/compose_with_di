@@ -251,6 +251,16 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 viewHolder.txtAmountFirst.visibility               =View.GONE
                 viewHolder.txtAmountSecond.visibility              =View.GONE
 
+                viewHolder.buttonApplyLoan.setOnClickListener {
+
+                  viewHolder.buttonApplyLoan.setOnClickListener {
+
+                      callBackObj.onClickLoanList("LPK")
+
+                    }
+
+                }
+
 
             }
         }

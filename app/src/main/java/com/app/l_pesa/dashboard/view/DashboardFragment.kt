@@ -19,6 +19,7 @@ import android.widget.LinearLayout
 import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.loanHistory.view.LoanPaybackScheduledActivity
+import com.app.l_pesa.lpk.view.LPKSavingsActivity
 
 
 class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
@@ -129,13 +130,22 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
 
     override fun onClickLoanList(type: String) {
 
-        val sharedPref = SharedPref(activity!!)
-        sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
-        sharedPref.openTabLoan = type
+        if(type=="LPK")
+        {
+            startActivity(Intent(activity, LPKSavingsActivity::class.java))
+            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+        else
+        {
+            val sharedPref = SharedPref(activity!!)
+            sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
+            sharedPref.openTabLoan = type
 
-        val intent = Intent(activity, DashboardActivity::class.java)
-        startActivity(intent)
-        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            val intent = Intent(activity, DashboardActivity::class.java)
+            startActivity(intent)
+            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+
 
     }
 

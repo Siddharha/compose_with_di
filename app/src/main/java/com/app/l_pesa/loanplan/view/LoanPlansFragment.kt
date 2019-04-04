@@ -13,7 +13,7 @@ import android.graphics.Typeface
 import android.os.Handler
 import android.widget.TextView
 import com.app.l_pesa.common.SharedPref
-
+import com.app.l_pesa.dashboard.view.DashboardActivity
 
 
 /**
@@ -47,6 +47,7 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
 
     private fun initUI()
     {
+        (activity as DashboardActivity).setTitle(resources.getString(R.string.nav_item_loan))
         tabLayout=activity!!.findViewById(R.id.tabLayout)
         viewPager=activity!!.findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.current_loan_plans)))
