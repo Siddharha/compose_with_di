@@ -23,17 +23,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +78,7 @@
           <entry key="dummy" value="6" />
           <entry key="gradle" value="50" />
           <entry key="java" value="240" />
-          <entry key="kt" value="25084" />
+          <entry key="kt" value="25135" />
           <entry key="pro" value="35" />
           <entry key="xml" value="16952" />
         </counts>
@@ -93,7 +87,7 @@
         <counts>
           <entry key="Groovy" value="50" />
           <entry key="JAVA" value="240" />
-          <entry key="Kotlin" value="25084" />
+          <entry key="Kotlin" value="25135" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="ProGuard File" value="35" />
           <entry key="XML" value="16952" />
@@ -135,32 +129,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="244" column="44" selection-start-line="244" selection-start-column="44" selection-end-line="244" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="49" column="93" selection-start-line="49" selection-start-column="93" selection-end-line="49" selection-end-column="93" />
+            <state relative-caret-position="501">
+              <caret line="282" column="56" selection-start-line="282" selection-start-column="56" selection-end-line="282" selection-end-column="56" />
               <folding>
-                <element signature="e#38#538#0" expanded="true" />
+                <element signature="e#8858#8906#0" expanded="true" />
+                <element signature="e#9221#9267#0" expanded="true" />
+                <element signature="e#9578#9621#0" expanded="true" />
+                <element signature="e#9949#9994#0" expanded="true" />
+                <element signature="e#10324#10373#0" expanded="true" />
+                <element signature="e#10697#10739#0" expanded="true" />
+                <element signature="e#11061#11106#0" expanded="true" />
+                <element signature="e#11434#11481#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="258" selection-start-line="258" selection-end-line="258" />
             </state>
           </provider>
         </entry>
@@ -181,7 +164,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>private fun handleImage(data: Intent?)</find>
       <find>android:inputType=&quot;phone&quot;</find>
       <find>KEY_SET_PROFILE_UPDATE</find>
       <find>android.R.id.home -&gt; {</find>
@@ -211,6 +193,7 @@
       <find>buttonApplyLoan</find>
       <find>open_tab_loan</find>
       <find>LoanPlansFragment</find>
+      <find>navigateToFragment</find>
     </findStrings>
     <replaceStrings>
       <replace>userEmploymentInfo!!</replace>
@@ -3230,9 +3213,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" />
       </list>
     </option>
   </component>
@@ -3693,12 +3676,12 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5718901" visible="true" weight="0.22136137" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5714286" visible="true" weight="0.22136137" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Captures" order="2" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Designer" order="3" />
       <window_info id="Favorites" order="4" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
-      <window_info id="Build Variants" order="5" sideWeight="0.42810985" side_tool="true" visible="true" weight="0.22136137" />
+      <window_info id="Build Variants" order="5" sideWeight="0.42857143" side_tool="true" visible="true" weight="0.22136137" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -3708,8 +3691,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32972974" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="7" visible="true" weight="0.33081082" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.39459458" />
+      <window_info anchor="bottom" id="Logcat" order="7" weight="0.33081082" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.39459458" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32972974" />
       <window_info anchor="bottom" id="Build" order="11" weight="0.32864866" />
@@ -4181,19 +4164,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="244" column="44" selection-start-line="244" selection-start-column="44" selection-end-line="244" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="49" column="93" selection-start-line="49" selection-start-column="93" selection-end-line="49" selection-end-column="93" />
           <folding>
             <element signature="e#38#538#0" expanded="true" />
+            <element signature="e#1507#1550#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="282" column="56" selection-start-line="282" selection-start-column="56" selection-end-line="282" selection-end-column="56" />
+          <folding>
+            <element signature="e#8858#8906#0" expanded="true" />
+            <element signature="e#9221#9267#0" expanded="true" />
+            <element signature="e#9578#9621#0" expanded="true" />
+            <element signature="e#9949#9994#0" expanded="true" />
+            <element signature="e#10324#10373#0" expanded="true" />
+            <element signature="e#10697#10739#0" expanded="true" />
+            <element signature="e#11061#11106#0" expanded="true" />
+            <element signature="e#11434#11481#0" expanded="true" />
           </folding>
         </state>
       </provider>

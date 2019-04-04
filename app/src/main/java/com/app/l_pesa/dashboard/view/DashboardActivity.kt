@@ -229,43 +229,101 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
        // Handle navigation view item clicks here.
+        val currentFragment =this@DashboardActivity.supportFragmentManager.findFragmentById(R.id.frame)
+
         when (item.itemId) {
+
             R.id.action_dashboard ->
             {
-                toolbar.title =resources.getString(R.string.nav_item_dashboard)
-                navigateToFragment(DashboardFragment.newInstance(),false)
+                if(currentFragment is DashboardFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_dashboard)
+                    navigateToFragment(DashboardFragment.newInstance(),false)
+                }
+
             }
 
             R.id.action_profile -> {
-                toolbar.title =resources.getString(R.string.nav_item_profile)
-                navigateToFragment(ProfileFragment.newInstance(),false)
+                if(currentFragment is ProfileFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_profile)
+                    navigateToFragment(ProfileFragment.newInstance(),false)
+                }
+
             }
             R.id.action_loan -> {
-                toolbar.title =resources.getString(R.string.nav_item_loan)
-                navigateToFragment(LoanPlansFragment.newInstance(),false)
+                if(currentFragment is LoanPlansFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_loan)
+                    navigateToFragment(LoanPlansFragment.newInstance(),false)
+                }
+
             }
             R.id.action_points -> {
-                toolbar.title =resources.getString(R.string.nav_item_points)
-                navigateToFragment(PointsFragment.newInstance(),false)
+                if(currentFragment is PointsFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_points)
+                    navigateToFragment(PointsFragment.newInstance(),false)
+                }
+
             }
             R.id.action_investment -> {
-                toolbar.title =resources.getString(R.string.nav_item_investment)
-                navigateToFragment(InvestmentFragment.newInstance(),false)
+                if(currentFragment is InvestmentFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_investment)
+                    navigateToFragment(InvestmentFragment.newInstance(),false)
+                }
+
 
             }
             R.id.action_lpk-> {
-                toolbar.title =resources.getString(R.string.nav_item_lpk)
-                navigateToFragment(LpkFragment.newInstance(),false)
+                if(currentFragment is LpkFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_lpk)
+                    navigateToFragment(LpkFragment.newInstance(),false)
+                }
+
 
             }
             R.id.action_wallet-> {
-                toolbar.title =resources.getString(R.string.nav_item_wallet)
-                navigateToFragment(WalletFragment.newInstance(),false)
+                if(currentFragment is WalletFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_wallet)
+                    navigateToFragment(WalletFragment.newInstance(),false)
+                }
+
 
             }
             R.id.action_settings-> {
-                toolbar.title =resources.getString(R.string.nav_item_settings)
-                navigateToFragment(SettingsFragment.newInstance(),false)
+                if(currentFragment is SettingsFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_settings)
+                    navigateToFragment(SettingsFragment.newInstance(),false)
+                }
 
             }
 
