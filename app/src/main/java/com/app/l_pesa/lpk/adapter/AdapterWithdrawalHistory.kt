@@ -99,18 +99,15 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             }
             else if(userWithdrawalHistory.status=="C" )
             {
-                buttonStatus.text=userWithdrawalHistory.statusTxt
-                txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00695c'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
+                 txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00695c'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else if(userWithdrawalHistory.status=="F" )
             {
-                buttonStatus.text=userWithdrawalHistory.statusTxt
-                txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
+                 txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else if(userWithdrawalHistory.status=="N" )
             {
-                buttonStatus.text=userWithdrawalHistory.statusTxt
-                txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
+                  txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else
             {

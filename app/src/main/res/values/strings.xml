@@ -375,5 +375,6 @@
     <string name="reset">Reset</string>
     <string name="required_wallet_address">Required wallet address</string>
     <string name="required_valid_wallet_address">Ether Address is not match</string>
+    <string name="ether_scan_url">Etherscan URL</string>
 
 </resources>
