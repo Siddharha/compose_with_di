@@ -7,10 +7,7 @@ import com.app.l_pesa.investment.view.InvestmentHistory
 import com.app.l_pesa.investment.view.InvestmentPlan
 
 
-class InvestmentTabPager//Constructor to the class
-(fm: FragmentManager, //integer to count number of tabs
- private var tabCount: Int)//Initializing tab count
-    : FragmentStatePagerAdapter(fm) {
+class InvestmentTabPager(fm: FragmentManager,private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
     //Overriding method getItem
     override fun getItem(position: Int): Fragment? {

@@ -78,8 +78,7 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
     override fun onEmptyInvestmentPlan() {
 
-        Toast.makeText(activity,"EMPTY",Toast.LENGTH_SHORT).show()
-        swipeRefreshLayout.isRefreshing = false
+       swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onErrorInvestmentPlan(jsonMessage: String) {
@@ -89,6 +88,9 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
     }
 
     override fun onClickInvestmentPlan(investmentPlan: ResInvestmentPlan.InvestmentPlan) {
+
+        val globalLoanPlanModel= GlobalInvestmentPlanData.getInstance()
+        globalLoanPlanModel.modelData=investmentPlan
 
         startActivity(Intent(activity, InvestmentApplyActivity::class.java))
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
