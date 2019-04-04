@@ -78,6 +78,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         private var txtReqToken        : CommonTextRegular = itemView.findViewById(R.id.txtReqToken) as CommonTextRegular
         private var txtStatus          : CommonTextRegular = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
         private var txtCreateDate      : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
+        private var txtReason          : CommonTextRegular = itemView.findViewById(R.id.txtReason) as CommonTextRegular
         private var buttonStatus       : CustomButtonRegular = itemView.findViewById(R.id.buttonStatus) as CustomButtonRegular
 
 
@@ -90,26 +91,49 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             if(userWithdrawalHistory.status=="R" )
             {
                 buttonStatus.visibility=View.INVISIBLE
+                txtReason.visibility=View.GONE
+                txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_dropdown, 0)
                 txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#D2322D'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
+                txtReason.text=userWithdrawalHistory.reject_reason
+
+                txtStatus.setOnClickListener {
+
+                    if(txtReason.visibility==View.VISIBLE)
+                    {
+                        txtReason.visibility=View.GONE
+                    }
+                    else
+                    {
+                        txtReason.visibility=View.VISIBLE
+                    }
+                }
             }
             else if(userWithdrawalHistory.status=="P" )
             {
                 buttonStatus.visibility=View.INVISIBLE
+                txtReason.visibility=View.GONE
+                txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                 txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#4e6485'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else if(userWithdrawalHistory.status=="C" )
             {
                  buttonStatus.visibility=View.VISIBLE
+                 txtReason.visibility=View.GONE
+                 txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                  txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00695c'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else if(userWithdrawalHistory.status=="F" )
             {
                  buttonStatus.visibility=View.VISIBLE
+                 txtReason.visibility=View.GONE
+                 txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                  txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else if(userWithdrawalHistory.status=="N" )
             {
                   buttonStatus.visibility=View.VISIBLE
+                  txtReason.visibility=View.GONE
+                  txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                   txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
             }
             else
