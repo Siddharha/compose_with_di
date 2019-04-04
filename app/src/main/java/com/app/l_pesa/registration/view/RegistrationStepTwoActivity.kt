@@ -29,6 +29,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
 import java.io.IOException
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -266,26 +267,35 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     private fun handleImage(data: Intent?) {
         var imagePath=""
-        val uri = data!!.data
-        if (DocumentsContract.isDocumentUri(this, uri)){
-            val docId = DocumentsContract.getDocumentId(uri)
-            if ("com.android.providers.media.documents" == uri!!.authority){
-                val id = docId.split(":")[1]
-                val section = MediaStore.Images.Media._ID + "=" + id
-                imagePath = imagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, section)
+        try
+        {
+            val uri = data!!.data
+            when {
+                DocumentsContract.isDocumentUri(this, uri) -> try {
+                    val docId = DocumentsContract.getDocumentId(uri)
+                    if ("com.android.providers.media.documents" == uri!!.authority){
+                        val id = docId.split(":")[1]
+                        val section = MediaStore.Images.Media._ID + "=" + id
+                        imagePath = imagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, section)
+                    } else if ("com.android.providers.downloads.documents" == uri.authority){
+                        val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
+                        imagePath = imagePath(contentUri, null)
+                    }
+
+                }
+                catch (exp: Exception)
+                {
+
+                }
+                "content".equals(uri!!.scheme, ignoreCase = true) -> imagePath = imagePath(uri, null)
+                "file".equals(uri.scheme, ignoreCase = true) -> imagePath = uri.path!!
             }
-            else if ("com.android.providers.downloads.documents" == uri.authority){
-                val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
-                imagePath = imagePath(contentUri, null)
-            }
+             displayImage(imagePath)
         }
-        else if ("content".equals(uri!!.scheme, ignoreCase = true)){
-            imagePath = imagePath(uri, null)
+        catch (exp: Exception)
+        {
+
         }
-        else if ("file".equals(uri.scheme, ignoreCase = true)){
-            imagePath = uri.path!!
-        }
-        displayImage(imagePath)
     }
 
     private fun imagePath(uri: Uri?, selection: String?): String {
