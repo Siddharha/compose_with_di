@@ -181,7 +181,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val intent = Intent(this@LoanApplyActivity, DashboardActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finishAffinity()
+
     }
 
     override fun onErrorLoanApply(message: String) {

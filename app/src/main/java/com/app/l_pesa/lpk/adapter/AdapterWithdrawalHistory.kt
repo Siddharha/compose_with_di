@@ -159,22 +159,11 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                     }
                 }
                 userWithdrawalHistory.status=="N" -> {
-                    buttonStatus.visibility=View.VISIBLE
+                    buttonStatus.visibility=View.INVISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
 
-                    buttonStatus.setOnClickListener {
-
-                        try {
-                            val intent = Intent(Intent.ACTION_VIEW)
-                            intent.data = Uri.parse(userWithdrawalHistory.real_etherscan_url)
-                            context.startActivity(intent)
-                        }
-                        catch (exp:Exception)
-                        {}
-
-                    }
                 }
                 else -> {
 

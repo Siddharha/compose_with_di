@@ -90,7 +90,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
             {
                 if(userTransferHistory.actionStatus.status)
                 {
-                    buttonStatus.text = context.resources.getString(R.string.lock)
+                    buttonStatus.text = context.resources.getString(R.string.unlock)
                 }
                 else
                 {

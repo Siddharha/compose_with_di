@@ -1,6 +1,7 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -10,6 +11,8 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.profile.model.IdInformationTabPager
 
 
@@ -28,7 +31,6 @@ class ProfileEditIdInfoActivity : AppCompatActivity(),TabLayout.OnTabSelectedLis
         toolbarFont(this@ProfileEditIdInfoActivity)
 
         initData()
-
 
     }
 
@@ -92,22 +94,25 @@ class ProfileEditIdInfoActivity : AppCompatActivity(),TabLayout.OnTabSelectedLis
         }
     }
 
-
-
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
 
-                /*if(swipeRefreshLayout.isRefreshing)
+                val sharedPref= SharedPref(this@ProfileEditIdInfoActivity)
+                if(sharedPref.profileUpdate==resources.getString(R.string.status_true))
                 {
-                    CommonMethod.customSnackBarError(llRoot,this@ProfileEditBusinessInfoActivity,resources.getString(R.string.please_wait))
+                    sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
+                    val intent = Intent(this@ProfileEditIdInfoActivity, DashboardActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
                 }
                 else
-                {*/
+                {
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
-               // }
+                }
+
                 true
             }
 
@@ -116,10 +121,20 @@ class ProfileEditIdInfoActivity : AppCompatActivity(),TabLayout.OnTabSelectedLis
     }
 
 
-
     override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        val sharedPref= SharedPref(this@ProfileEditIdInfoActivity)
+        if(sharedPref.profileUpdate==resources.getString(R.string.status_true))
+        {
+            sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
+            val intent = Intent(this@ProfileEditIdInfoActivity, DashboardActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
+        else
+        {
+            super.onBackPressed()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
     }
 
 

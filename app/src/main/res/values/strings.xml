@@ -333,7 +333,7 @@
     <!--Token-->
     <string name="request_token">Request Token</string>
     <string name="transfer">Transfer</string>
-    <string name="lock">Lock</string>
+    <string name="unlock">Unlock</string>
     <string name="locked">Locked</string>
     <string name="star_line">************************************************************</string>
     <string name="unlocked">Unlocked</string>

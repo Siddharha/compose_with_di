@@ -207,8 +207,6 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         jsonObject.addProperty("type_name","Personal")
 
-        println("JSON_REQ"+jsonObject)
-
         val presenterAddProof= PresenterAddProof()
         presenterAddProof.doAddProof(activity!!,jsonObject,this)
 
@@ -419,7 +417,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         val intent = Intent(activity!!, DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        activity?.finishAffinity()
+
     }
 
     override fun onFailureAddProof(message: String) {

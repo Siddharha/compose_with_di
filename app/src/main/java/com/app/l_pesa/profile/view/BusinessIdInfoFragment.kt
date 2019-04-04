@@ -371,7 +371,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         val intent = Intent(activity!!, DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        activity?.finishAffinity()
+
     }
 
     override fun onFailureAddProof(message: String) {

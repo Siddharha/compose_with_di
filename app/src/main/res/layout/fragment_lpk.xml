@@ -27,7 +27,7 @@
             <ImageView
                 android:id="@+id/imgWithdrawal"
                 android:contentDescription="@string/app_name"
-                android:layout_width="@dimen/_85sdp"
+                android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_75sdp"
                 android:padding="@dimen/_3sdp"
                 android:scaleType="fitXY"
@@ -88,6 +88,7 @@
 
             <TextView
                 android:id="@+id/textView19"
+                android:fontFamily="@font/montserrat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
@@ -120,11 +121,9 @@
             <ImageView
                 android:id="@+id/imgSavings"
                 android:contentDescription="@string/app_name"
-                android:layout_width="@dimen/_85sdp"
+                android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_75sdp"
                 android:padding="@dimen/_3sdp"
-                android:scaleType="fitXY"
-                android:adjustViewBounds="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/txtLineTwo"
                 app:layout_constraintTop_toTopOf="parent"
@@ -181,6 +180,7 @@
 
             <TextView
                 android:id="@+id/textView23"
+                android:fontFamily="@font/montserrat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"

@@ -162,7 +162,6 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                // todo: goto back activity from here
 
                 onBackPressed()
                 overridePendingTransition(R.anim.left_in, R.anim.right_out)

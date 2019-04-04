@@ -91,7 +91,7 @@
                         android:hint="@string/provide_amount"
                         android:textColor="@color/light_text_color"
                         android:textSize="@dimen/_13sdp"
-                        android:inputType="phone" />
+                        android:inputType="numberSigned" />
 
                 </com.app.l_pesa.common.CommonInputLayout>
 
