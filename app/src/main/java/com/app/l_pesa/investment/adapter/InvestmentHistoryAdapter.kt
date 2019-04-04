@@ -19,7 +19,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
 
         val viewHolder = holder as SelectViewHolder
 
-        viewHolder.txtInterestRate.text     = context.resources.getString(R.string.interest_rate)+" "+investmentList[position].depositInterestRate.toString()+"%"
+        viewHolder.txtInterestRate.text     = context.resources.getString(R.string.rate)+": "+investmentList[position].depositInterestRate.toString()+"%"
         viewHolder.txtRef.text              = context.resources.getString(R.string.ref_no)+" "+investmentList[position].identityNumber
         if(!TextUtils.isEmpty(investmentList[position].maturityAmount))
         {

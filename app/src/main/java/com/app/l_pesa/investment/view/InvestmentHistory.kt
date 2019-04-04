@@ -68,13 +68,12 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory {
 
     override fun onEmptyInvestmentHistory() {
 
-        Toast.makeText(activity,"EMPTY", Toast.LENGTH_SHORT).show()
         swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onErrorInvestmentHistory(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing = false
-        Toast.makeText(activity,""+jsonMessage,Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 }

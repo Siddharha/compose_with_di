@@ -13,10 +13,7 @@ import com.app.l_pesa.loanplan.view.CurrentLoan
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class LoanTabPager//Constructor to the class
-(fm: FragmentManager, //integer to count number of tabs
- private var tabCount: Int)//Initializing tab count
-    : FragmentStatePagerAdapter(fm) {
+class LoanTabPager(fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
     //Overriding method getItem
     override fun getItem(position: Int): Fragment? {

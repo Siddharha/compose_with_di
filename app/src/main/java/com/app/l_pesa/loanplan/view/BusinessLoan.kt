@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.BusinessLoanPlanAdapter
@@ -58,10 +59,15 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
     private fun loanLoan()
     {
-        val jsonObject = JsonObject()
-        jsonObject.addProperty("loan_type","business_loan")
-        val presenterLoanPlans= PresenterLoanPlans()
-        presenterLoanPlans.doLoanPlansBusiness(activity!!,jsonObject,this)
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+            swipeRefreshLayout.isRefreshing = true
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("loan_type","business_loan")
+            val presenterLoanPlans= PresenterLoanPlans()
+            presenterLoanPlans.doLoanPlansBusiness(activity!!,jsonObject,this)
+        }
+
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {

@@ -10,8 +10,10 @@ import android.support.v4.view.ViewPager
 import android.support.design.widget.TabLayout
 import com.app.l_pesa.loanplan.model.LoanTabPager
 import android.graphics.Typeface
+import android.os.Handler
 import android.widget.TextView
 import com.app.l_pesa.common.SharedPref
+
 
 
 /**
@@ -58,17 +60,20 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
         tabLayout!!.addOnTabSelectedListener(this)
 
         val sharedPref= SharedPref(activity!!)
-        if(sharedPref.openTabLoan=="CURRENT")
-        {
-            tabLayout!!.setScrollPosition(0,0f,true)
-            viewPager!!.currentItem = 0
-        }
-        else
-        {
-            tabLayout!!.setScrollPosition(1,0f,true)
-            viewPager!!.currentItem = 1
-            sharedPref.openTabLoan="CURRENT"
-        }
+
+        Handler().postDelayed(
+                {
+                    if(sharedPref.openTabLoan=="CURRENT")
+                    {
+                        tabLayout!!.getTabAt(0)!!.select()
+                    }
+                    else
+                    {
+                        tabLayout!!.getTabAt(1)!!.select()
+                        sharedPref.openTabLoan="CURRENT"
+                    }
+                }, 100)
+
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {
@@ -81,6 +86,7 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         viewPager!!.currentItem = p0!!.position
+
 
     }
 
