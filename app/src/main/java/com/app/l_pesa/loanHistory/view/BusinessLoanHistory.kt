@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.adapter.BusinessLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
@@ -45,7 +46,12 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         swipeRefresh()
         buttonApplyLoan.setOnClickListener {
 
-            activity?.onBackPressed()
+            val sharedPref = SharedPref(activity!!)
+            sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
+            sharedPref.openTabLoan = "BUSINESS"
+            val intent = Intent(activity, DashboardActivity::class.java)
+            startActivity(intent)
+            activity?.overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
 
