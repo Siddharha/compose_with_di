@@ -51,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_11sdp"
                 android:gravity="start|center"
-                android:layout_marginTop="@dimen/_1sdp"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/light_text_color"
