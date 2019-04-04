@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -33,6 +34,25 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
         viewHolder.txtMaturityDate.text     = investmentList[position].maturityDate
         viewHolder.txtDuration.text         = context.resources.getString(R.string.months)+" "+investmentList[position].depositMonth.toString()
         viewHolder.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList[position].applied_date)
+
+        if(investmentList[position].depositStatus=="IA")
+        {
+
+            viewHolder.imageView5.visibility=View.INVISIBLE
+            viewHolder.textView6.visibility=View.INVISIBLE
+            viewHolder.txtAmount.visibility=View.INVISIBLE
+            viewHolder.imageView6.visibility=View.INVISIBLE
+            viewHolder.textView8.visibility=View.INVISIBLE
+            viewHolder.txtMaturityDate.visibility=View.INVISIBLE
+        }
+        else if(investmentList[position].depositStatus=="A")
+        {
+
+        }
+        if(investmentList[position].depositStatus=="C")
+        {
+
+        }
 
         viewHolder.imgEdit.setOnClickListener {
 
@@ -65,6 +85,10 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
             var txtDuration         : TextView = itemView.findViewById(R.id.txtDuration) as TextView
             var txtAppliedDate      : TextView = itemView.findViewById(R.id.txtAppliedDate) as TextView
             var imgEdit             : ImageButton = itemView.findViewById(R.id.imgEdit) as ImageButton
+            var imageView5          : ImageView   = itemView.findViewById(R.id.imageView5) as ImageView
+            var textView6           : TextView   = itemView.findViewById(R.id.textView6) as TextView
+            var textView8           : TextView   = itemView.findViewById(R.id.textView8) as TextView
+            var imageView6          : ImageView   = itemView.findViewById(R.id.imageView6) as ImageView
 
 
         }
