@@ -7,11 +7,14 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.investment.inter.ICallBackEditHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 
-class InvestmentHistoryAdapter (val context: Context, private val investmentList: ArrayList<ResInvestmentHistory.UserInvestment>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InvestmentHistoryAdapter (val context: Context, private val investmentList: ArrayList<ResInvestmentHistory.UserInvestment>, private val callBack:ICallBackEditHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -29,7 +32,14 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
         viewHolder.txtDepositAmount.text    = investmentList[position].currencyCode+" "+investmentList[position].depositAmount.toString()
         viewHolder.txtMaturityDate.text     = investmentList[position].maturityDate
         viewHolder.txtDuration.text         = context.resources.getString(R.string.months)+" "+investmentList[position].depositMonth.toString()
-        viewHolder.txtAppliedDate.text      = investmentList[position].applied_date
+        viewHolder.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList[position].applied_date)
+
+        viewHolder.imgEdit.setOnClickListener {
+
+            callBack.onEditWindow(viewHolder.imgEdit)
+
+
+        }
 
     }
 
@@ -54,6 +64,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
             var txtDepositAmount    : TextView = itemView.findViewById(R.id.txtDepositAmount) as TextView
             var txtDuration         : TextView = itemView.findViewById(R.id.txtDuration) as TextView
             var txtAppliedDate      : TextView = itemView.findViewById(R.id.txtAppliedDate) as TextView
+            var imgEdit             : ImageButton = itemView.findViewById(R.id.imgEdit) as ImageButton
 
 
         }

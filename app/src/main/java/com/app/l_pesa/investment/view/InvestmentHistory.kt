@@ -1,23 +1,35 @@
 package com.app.l_pesa.investment.view
 
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.PopupWindow
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.investment.adapter.InvestmentHistoryAdapter
+import com.app.l_pesa.investment.inter.ICallBackEditHistory
 import com.app.l_pesa.investment.inter.ICallBackInvestmentHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
+import com.app.l_pesa.profile.adapter.AdapterPopupWindow
+import com.app.l_pesa.profile.model.ModelWindowPopUp
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
-class InvestmentHistory:Fragment(),ICallBackInvestmentHistory {
+class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory {
 
+    private var filterPopup : PopupWindow? = null
+    private var selectedItem: Int = -1
 
     companion object {
         fun newInstance(): Fragment {
@@ -58,10 +70,20 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory {
         }
     }
 
+    private fun dismissPopup() {
+        filterPopup?.let {
+            if(it.isShowing){
+                it.dismiss()
+            }
+            filterPopup = null
+        }
+
+    }
+
     override fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>) {
 
         swipeRefreshLayout.isRefreshing    = false
-        val investmentHistoryAdapter       = InvestmentHistoryAdapter(activity!!, userInvestment)
+        val investmentHistoryAdapter       = InvestmentHistoryAdapter(activity!!, userInvestment,this)
         rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                     = investmentHistoryAdapter
     }
@@ -75,5 +97,38 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory {
 
         swipeRefreshLayout.isRefreshing = false
         Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onEditWindow(imgEdit: ImageButton) {
+
+
+        dismissPopup()
+        filterPopup = showAlertFilter()
+        filterPopup?.isOutsideTouchable = true
+        filterPopup?.isFocusable = true
+        filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+       // filterPopup?.showAsDropDown(rootLayout,150,-420)
+        filterPopup?.showAsDropDown(imgEdit)
+    }
+
+    private fun showAlertFilter(): PopupWindow {
+
+        val filterItemList = mutableListOf<ModelWindowPopUp>()
+
+        filterItemList.add(ModelWindowPopUp(R.drawable.ic_view_file,resources.getString(R.string.view_file)))
+        filterItemList.add(ModelWindowPopUp(R.drawable.ic_delete,resources.getString(R.string.delete)))
+
+        val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.layout_only_recyclerview, null)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
+
+        val adapter = AdapterPopupWindow(activity!!)
+        adapter.addAlertFilter(filterItemList)
+        recyclerView.adapter = adapter
+        adapter.selectedItem(selectedItem)
+
+        return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 }
