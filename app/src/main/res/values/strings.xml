@@ -373,5 +373,7 @@
 
     <string name="required_filter_date">Please select date</string>
     <string name="reset">Reset</string>
+    <string name="required_wallet_address">Required wallet address</string>
+    <string name="required_valid_wallet_address">Ether Address is not match</string>
 
 </resources>

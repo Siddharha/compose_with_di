@@ -128,6 +128,9 @@ interface BaseService{
     @GET("lpk_withdrawal/user_history")
     fun getWithdrawalHistory(@Query("cursors") cursors:String): Observable<ResWithdrawalHistory>
 
+    @POST("user/wallet_address")
+    fun doWalletAddress(@Body request: JsonObject): Observable<ResWalletAddress>
+
 
 }
 
