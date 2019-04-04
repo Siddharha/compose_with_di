@@ -84,12 +84,12 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
             if(userInterestHistory.amount!="0.00")
             {
 
-                txtAmount.text = userInterestHistory.currency_code+userInterestHistory.amount
+                txtAmount.text = userInterestHistory.currency_code+" "+userInterestHistory.amount+" LPK"
             }
             else
             {
 
-                txtAmount.text = userInterestHistory.interest_token
+                txtAmount.text = userInterestHistory.interest_token+" LPK"
             }
 
             txtTokenValue.text = context.getString(R.string.actual_token_values)+": "+userInterestHistory.actual_tokens

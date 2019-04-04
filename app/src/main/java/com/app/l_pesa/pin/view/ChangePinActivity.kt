@@ -92,8 +92,9 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
     override fun onSuccessChangePin() {
         swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        buttonSubmit.isClickable=true
+        CommonMethod.customSnackBarSuccess(rootLayout,this@ChangePinActivity,resources.getString(R.string.pin_change_successfully))
+
     }
 
     override fun onFailureChangePin(message: String) {

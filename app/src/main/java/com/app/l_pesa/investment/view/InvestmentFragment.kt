@@ -43,6 +43,7 @@ class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.investment_plan)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.investment_history)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
+        tabLayout!!.tabMode = TabLayout.MODE_FIXED
 
         val adapter = InvestmentTabPager(childFragmentManager, tabLayout!!.tabCount)
         viewPager!!.adapter = adapter

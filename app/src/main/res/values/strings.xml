@@ -43,6 +43,7 @@
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="current_pin">Current Pin</string>
     <string name="new_pin">New Pin</string>
+    <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
     <string name="password_should">Password should have</string>
     <string name="password_rule_one">Minimum 8 &amp; maximum 16 characters.</string>

@@ -103,6 +103,21 @@ object CommonMethod {
         snackBarOBJ.show()
     }
 
+    fun customSnackBarSuccess(view: View,context: Context,message:String) {
+
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLight))
+        (snackBarOBJ.view as ViewGroup).removeAllViews()
+        val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_success, null)
+        (snackBarOBJ.view as ViewGroup).addView(customView)
+
+        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+
+        txtTitle.text = message
+
+        snackBarOBJ.show()
+    }
+
 
     fun commonCatchBlock(exp:Exception,contextOBJ: Context): String {
 
