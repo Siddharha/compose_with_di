@@ -13,7 +13,7 @@ import retrofit2.HttpException
 
 class PresenterWithdrawalHistory {
 
-    fun getInterestHistory(contextOBJ: Context, callBackOBJ: ICallBackWithdrawalHistory)
+    fun getWithdrawalHistory(contextOBJ: Context, callBackOBJ: ICallBackWithdrawalHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory("")
@@ -69,7 +69,7 @@ class PresenterWithdrawalHistory {
                 })
     }
 
-    fun getInterestHistoryPaginate(contextOBJ: Context,cursor:String, callBackOBJ: ICallBackWithdrawalHistory)
+    fun getWithdrawalHistoryPaginate(contextOBJ: Context,cursor:String, callBackOBJ: ICallBackWithdrawalHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory(cursor)

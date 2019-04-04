@@ -62,7 +62,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getInterestHistory(activity!!,this)
+            presenterWithdrawalHistory.getWithdrawalHistory(activity!!,this)
         }
         else
         {
@@ -205,7 +205,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             adapterWithdrawalHistory!!.notifyItemInserted(listWithdrawalHistory!!.size-1)
 
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getInterestHistoryPaginate(activity!!,after,this)
+            presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,this)
 
         }
         else{
