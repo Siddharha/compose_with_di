@@ -81,16 +81,18 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userInterestHistory: ResInterestHistory.UserInterestHistory)
         {
-            if(userInterestHistory.amount=="0.00")
+            if(userInterestHistory.amount!="0.00")
             {
-                txtTokenValue.text = context.getString(R.string.actual_token_values)+": "+userInterestHistory.currency_code+userInterestHistory.amount
+
+                txtAmount.text = userInterestHistory.currency_code+userInterestHistory.amount
             }
             else
             {
-                txtTokenValue.text = context.getString(R.string.actual_token_values)+": "+userInterestHistory.interest_amount
+
+                txtAmount.text = userInterestHistory.interest_token
             }
 
-            txtAmount.text = userInterestHistory.currency_code+" "+userInterestHistory.amount
+            txtTokenValue.text = context.getString(R.string.actual_token_values)+": "+userInterestHistory.actual_tokens
             txtNarration.text = context.getString(R.string.narration)+": "+userInterestHistory.narration
             txtRef.text = context.getString(R.string.ref_no)+" "+userInterestHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userInterestHistory.created)
