@@ -40,7 +40,8 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
         }
 
         if (getItemViewType(position) == 0) {
-            (holder as UserViewHolder).bindData(context, investmentHistoryList[position])
+            (holder as UserViewHolder).bindData(context, investmentHistoryList[position],callBack)
+
 
         }
     }
@@ -77,7 +78,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
-        fun  bindData(context: Context, investmentList: ResInvestmentHistory.UserInvestment)
+        fun  bindData(context: Context, investmentList: ResInvestmentHistory.UserInvestment, callBack: ICallBackEditHistory)
         {
 
             itemView.txtInterestRate.text     = context.resources.getString(R.string.rate)+": "+investmentList.deposit_interest_rate.toString()+"%"
@@ -115,6 +116,11 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
                 itemView.txtStatus.text=investmentList.deposit_status_txt
                 itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)
+            }
+
+            itemView.imgEdit.setOnClickListener {
+
+                callBack.onEditWindow(itemView.imgEdit)
             }
 
 
