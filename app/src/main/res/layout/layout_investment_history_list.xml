@@ -3,28 +3,25 @@
     android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_5sdp"
-    android:layout_marginTop="@dimen/_5sdp"
-    android:layout_marginEnd="@dimen/_5sdp"
-    android:layout_marginBottom="@dimen/_5sdp"
+    android:layout_margin="@dimen/_3sdp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/_3sdp">
 
 
-        <TextView
+        <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtRef"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:fontFamily="@font/montserrat"
             android:text="@string/ref_no"
-            android:textColor="#3b3e42"
-            android:textSize="@dimen/_13sdp"
+            android:textColor="@color/textColors"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +31,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@color/divider_color"
@@ -54,14 +51,14 @@
             app:layout_constraintTop_toBottomOf="@+id/view"
             app:srcCompat="@drawable/ic_ref_no" />
 
-        <TextView
+        <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtDepositAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_2sdp"
-            android:fontFamily="@font/montserrat"
-            android:textColor="#3b3e42"
-            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/textColors"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="start|center"
             app:layout_constraintBottom_toBottomOf="@+id/imageView2"
             app:layout_constraintEnd_toStartOf="@+id/view4"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -86,8 +83,9 @@
             android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/months"
-            android:textColor="#7c7d80"
+            android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
+            android:gravity="start|center"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/txtDepositAmount"
@@ -112,8 +110,9 @@
             android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/interest_rate"
-            android:textColor="#7c7d80"
+            android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
+            android:gravity="start|center"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="@+id/imageView4" />
@@ -149,20 +148,22 @@
             android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/maturity_amount"
-            android:textColor="#7c7d80"
+            android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
+            android:gravity="start|center"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
-        <TextView
+        <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
-            android:textColor="#3b3e42"
-            android:textSize="@dimen/_13sdp"
+            android:textColor="@color/textColors"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="start|center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -186,32 +187,23 @@
             android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/maturity_on"
-            android:textColor="#7c7d80"
+            android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
+            android:gravity="start|center"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintEnd_toStartOf="@+id/imageView6"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
-        <TextView
-            android:id="@+id/textView35"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textColor="#3b3e42"
-            android:textSize="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtDuration"
-            app:layout_constraintEnd_toStartOf="@+id/view4"
-            app:layout_constraintStart_toEndOf="@+id/txtDuration"
-            app:layout_constraintTop_toTopOf="@+id/txtDuration" />
 
         <TextView
             android:id="@+id/textView36"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_7sdp"
-            android:textColor="#3b3e42"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
+            android:gravity="start|center"
             app:layout_constraintBottom_toBottomOf="@+id/txtInterestRate"
             app:layout_constraintEnd_toStartOf="@+id/view4"
             app:layout_constraintStart_toEndOf="@+id/txtInterestRate"
@@ -221,25 +213,26 @@
             android:id="@+id/txtMaturityDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_2sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_3sdp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#3b3e42"
+            android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
+            android:gravity="start|center"
             app:layout_constraintBottom_toBottomOf="@+id/textView8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView8"
             app:layout_constraintTop_toTopOf="@+id/textView8" />
 
-        <TextView
+       <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtAppliedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_10sdp"
             android:drawableStart="@drawable/ic_calendar_icon"
             android:drawablePadding="@dimen/_3sdp"
-            android:textColor="#7c7d80"
+            android:gravity="center|start"
+            android:textColor="@color/textColors"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="@+id/imgEdit"
             app:layout_constraintStart_toEndOf="@+id/txtRef"

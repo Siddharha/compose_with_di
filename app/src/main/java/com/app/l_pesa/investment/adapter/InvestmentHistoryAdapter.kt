@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.investment.inter.ICallBackEditHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 
@@ -31,7 +32,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
         }
 
         viewHolder.txtDepositAmount.text    = investmentList[position].currencyCode+" "+investmentList[position].depositAmount.toString()
-        viewHolder.txtMaturityDate.text     = investmentList[position].maturityDate
+        viewHolder.txtMaturityDate.text     = CommonMethod.dateConvert(investmentList[position].maturityDate)
         viewHolder.txtDuration.text         = context.resources.getString(R.string.months)+" "+investmentList[position].depositMonth.toString()
         viewHolder.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList[position].applied_date)
 
@@ -49,7 +50,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
         {
 
         }
-        if(investmentList[position].depositStatus=="C")
+        else if(investmentList[position].depositStatus=="C")
         {
 
         }
@@ -77,17 +78,18 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
     companion object {
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            var txtRef              : TextView = itemView.findViewById(R.id.txtRef) as TextView
-            var txtAmount           : TextView = itemView.findViewById(R.id.txtAmount) as TextView
+            var txtRef              : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+            var txtAmount           : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
+            var txtDepositAmount    : CommonTextRegular = itemView.findViewById(R.id.txtDepositAmount) as CommonTextRegular
+            var txtAppliedDate      : CommonTextRegular = itemView.findViewById(R.id.txtAppliedDate) as CommonTextRegular
             var txtMaturityDate     : TextView = itemView.findViewById(R.id.txtMaturityDate) as TextView
             var txtInterestRate     : TextView = itemView.findViewById(R.id.txtInterestRate) as TextView
-            var txtDepositAmount    : TextView = itemView.findViewById(R.id.txtDepositAmount) as TextView
             var txtDuration         : TextView = itemView.findViewById(R.id.txtDuration) as TextView
-            var txtAppliedDate      : TextView = itemView.findViewById(R.id.txtAppliedDate) as TextView
+
             var imgEdit             : ImageButton = itemView.findViewById(R.id.imgEdit) as ImageButton
             var imageView5          : ImageView   = itemView.findViewById(R.id.imageView5) as ImageView
-            var textView6           : TextView   = itemView.findViewById(R.id.textView6) as TextView
-            var textView8           : TextView   = itemView.findViewById(R.id.textView8) as TextView
+            var textView6           : TextView    = itemView.findViewById(R.id.textView6) as TextView
+            var textView8           : TextView    = itemView.findViewById(R.id.textView8) as TextView
             var imageView6          : ImageView   = itemView.findViewById(R.id.imageView6) as ImageView
 
 
