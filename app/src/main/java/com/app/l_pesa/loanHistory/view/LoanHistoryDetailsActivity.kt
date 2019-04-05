@@ -51,7 +51,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_interest_rate.text = loanHistoryData.interest_rate
         txt_loan_amount_value.text = loanHistoryData.currency_code+" "+loanHistoryData.actual_loan_amount
         txt_request_date.text = loanHistoryData.applied_date
-        txt_approval_date.text = loanHistoryData.sanctioned_date
+
         txt_loan_duration.text = loanHistoryData.duration
         txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_dollar_value
         txt_currency_conversion.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_loan_amount
@@ -60,6 +60,19 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+" "+ loanHistoryData.conversion_charge_amount+")"
 
         txt_credit_score.text =  fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+shared.userCreditScore+"</font>")
+        txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+loanHistoryData.cr_sc_when_requesting_loan+"</font>")
+
+        if(loanHistoryData.loan_status=="DA")
+        {
+            txt_date.text = this@LoanHistoryDetailsActivity.resources.getString(R.string.disapproved_on)
+            txt_approval_date.text = loanHistoryData.disapprove_date
+        }
+        else
+        {
+            txt_date.text = this@LoanHistoryDetailsActivity.resources.getString(R.string.approved_on)
+            txt_approval_date.text = loanHistoryData.sanctioned_date
+        }
+
         txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+loanHistoryData.cr_sc_when_requesting_loan+"</font>")
 
         when {
