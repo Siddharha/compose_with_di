@@ -16,7 +16,7 @@ class PresenterInvestmentHistory {
     fun getInvestmentHistory(contextOBJ: Context, callBackOBJ: ICallBackInvestmentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory()
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory("")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -31,12 +31,62 @@ class PresenterInvestmentHistory {
                         {
                             if(response.data!!.userInvestment!!.size>0)
                             {
-                                callBackOBJ.onSuccessInvestmentHistory(response.data!!.userInvestment!!)
+                                callBackOBJ.onSuccessInvestmentHistory(response.data!!.userInvestment!!,response.data!!.cursors)
                             }
                             else
                             {
                                 callBackOBJ.onEmptyInvestmentHistory()
                             }
+
+                        }
+
+                    }
+                    catch (e: Exception)
+                    {
+
+                    }
+                }, {
+                    error ->
+                    try
+                    {
+                        val errorVal     = error as HttpException
+
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val  jsonStatus           =    jsonError.getJSONObject("status")
+                        val jsonMessage           =    jsonStatus.getString("message")
+
+                        callBackOBJ.onErrorInvestmentHistory(jsonMessage)
+                    }
+                    catch (exp: Exception)
+                    {
+                        val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
+                        callBackOBJ.onErrorInvestmentHistory(errorMessageOBJ)
+                    }
+
+                })
+    }
+
+    fun getInvestmentHistoryPaginate(contextOBJ: Context,cursor:String, callBackOBJ: ICallBackInvestmentHistory)
+    {
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory(cursor)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+                }
+                .subscribe({ response ->
+
+                    try
+                    {
+
+                        if(response.status!!.isSuccess)
+                        {
+                            if(response.data!!.userInvestment!!.size>0)
+                            {
+                                callBackOBJ.onSuccessInvestmentHistoryPaginate(response.data!!.userInvestment!!,response.data!!.cursors)
+                            }
+
 
                         }
 

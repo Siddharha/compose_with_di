@@ -33,6 +33,12 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
 
+    private var listInvestment                        : ArrayList<ResInvestmentHistory.UserInvestment>? = null
+    private lateinit var adapterInvestmentHistory     : InvestmentHistoryAdapter
+
+    private var hasNext=false
+    private var after=""
+
     companion object {
         fun newInstance(): Fragment {
             return InvestmentHistory()
@@ -64,6 +70,8 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     private fun initUI()
     {
+        listInvestment      = ArrayList()
+        adapterInvestmentHistory   = InvestmentHistoryAdapter(activity!!, listInvestment!!,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -82,13 +90,83 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     }
 
-    override fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>) {
+    override fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?) {
 
         swipeRefreshLayout.isRefreshing    = false
         val investmentHistoryAdapter       = InvestmentHistoryAdapter(activity!!, userInvestment,this)
         rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                     = investmentHistoryAdapter
+
+        activity!!.runOnUiThread {
+            hasNext =cursors!!.hasNext
+            after   =cursors.after
+            swipeRefreshLayout.isRefreshing = false
+            listInvestment!!.clear()
+            listInvestment!!.addAll(userInvestment)
+            adapterInvestmentHistory    = InvestmentHistoryAdapter(activity!!, listInvestment!!,this)
+            val llmOBJ                  = LinearLayoutManager(activity)
+            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            rvLoan.layoutManager        = llmOBJ
+            rvLoan.adapter              = adapterInvestmentHistory
+
+            adapterInvestmentHistory.setLoadMoreListener(object : InvestmentHistoryAdapter.OnLoadMoreListener {
+                override fun onLoadMore() {
+
+                    rvLoan.post {
+
+                        if(hasNext)
+                        {
+                            loadMore()
+                        }
+
+                    }
+
+                }
+            })
+
+
+        }
+
     }
+
+    override fun onSuccessInvestmentHistoryPaginate(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?) {
+
+        swipeRefreshLayout.isRefreshing    = false
+        hasNext =cursors!!.hasNext
+        after   =cursors.after
+        if(listInvestment!!.size!=0)
+        {
+            try {
+
+                listInvestment!!.removeAt(listInvestment!!.size - 1)
+                adapterInvestmentHistory.notifyDataChanged()
+                listInvestment!!.addAll(userInvestment)
+                adapterInvestmentHistory.notifyItemRangeInserted(0, listInvestment!!.size)
+
+            }
+            catch (e:Exception)
+            {}
+        }
+    }
+
+    private fun loadMore()
+    {
+
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+            val loanStatusModel  = ResInvestmentHistory.UserInvestment(0, 0,0,0,"","","","",
+                                   "","","","",0.0,0.0,0.0,0.0)
+
+            listInvestment!!.add(loanStatusModel)
+            adapterInvestmentHistory.notifyItemInserted(listInvestment!!.size-1)
+
+            val presenterInvestmentHistory= PresenterInvestmentHistory()
+            presenterInvestmentHistory.getInvestmentHistoryPaginate(activity!!,after,this)
+
+        }
+
+    }
+
 
     override fun onEmptyInvestmentHistory() {
 

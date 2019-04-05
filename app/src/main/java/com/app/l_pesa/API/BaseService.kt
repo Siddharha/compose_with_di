@@ -68,9 +68,6 @@ interface BaseService{
     @POST("user/logout")
     fun doLogout(@Body request: JsonObject): Observable<ResLogout>
 
-    /*@POST("loan/active")
-    fun doLoanList(@Body request: JsonObject): Observable<ResLoanHistoryCurrent>*/
-
     @POST("products/list")
     fun doLoanList(@Body request: JsonObject): Observable<ResLoanPlans>
 
@@ -87,7 +84,7 @@ interface BaseService{
     fun getInvestmentPlan(): Observable<ResInvestmentPlan>
 
     @GET("investment/user_list")
-    fun getInvestmentHistory(): Observable<ResInvestmentHistory>
+    fun getInvestmentHistory(@Query("cursors") cursors:String): Observable<ResInvestmentHistory>
 
     @POST("user/personal_info")
     fun doChangePersonalInfo(@Body request: JsonObject): Observable<ResPersonalInfo>

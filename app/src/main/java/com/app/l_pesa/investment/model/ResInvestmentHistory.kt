@@ -19,8 +19,16 @@ class ResInvestmentHistory {
         @SerializedName("user_investment")
         @Expose
         var userInvestment: ArrayList<UserInvestment>? = null
-
+        @SerializedName("cursors")
+        @Expose
+        var cursors: Cursors? = null
     }
+
+    data class Cursors(
+
+            val hasNext:Boolean,
+            val after:String
+    )
 
     inner class Status {
 
@@ -36,54 +44,30 @@ class ResInvestmentHistory {
 
     }
 
-    inner class UserInvestment {
+    data class UserInvestment(
 
-        @SerializedName("investment_id")
-        @Expose
-        var investmentId: Int = 0
-        @SerializedName("identity_number")
-        @Expose
-        var identityNumber: String = ""
-        @SerializedName("currency_code")
-        @Expose
-        var currencyCode: String = ""
-        @SerializedName("deposit_amount")
-        @Expose
-        var depositAmount: Int = 0
-        @SerializedName("deposit_month")
-        @Expose
-        var depositMonth: Int = 0
-        @SerializedName("maturity_amount")
-        @Expose
-        var maturityAmount: String = ""
-        @SerializedName("maturity_date")
-        @Expose
-        var maturityDate: String = ""
-        @SerializedName("applied_date")
-        @Expose
-        var applied_date: String = ""
-        @SerializedName("interest_amount")
-        @Expose
-        var interestAmount: String = ""
-        @SerializedName("deposit_status_txt")
-        @Expose
-        var depositStatusText: String = ""
-        @SerializedName("deposit_interest_rate")
-        @Expose
-        var depositInterestRate: Int = 0
-        @SerializedName("deposit_status")
-        @Expose
-        var depositStatus: String = ""
-        @SerializedName("re_invest_id")
-        @Expose
-        var reInvestId: Int = 0
-        @SerializedName("withdraw_date")
-        @Expose
-        var withdrawDate: String = ""
-        @SerializedName("deposit_date")
-        @Expose
-        var depositDate: String = ""
+            val investment_id:Int,
+            val interest_number:Int,
+            val deposit_month:Int,
+            val re_invest_id:Int,
 
-    }
+            val identity_number:String,
+            val currency_code:String,
+            val deposit_status:String,
+            val deposit_status_txt:String,
+            val applied_date:String,
+            val deposit_date:String,
+            val maturity_date:String,
+            val withdraw_date:String,
+
+            val deposit_amount:Double,
+            val maturity_amount:Double,
+            val interest_amount:Double,
+            val deposit_interest_rate:Double
+
+
+
+    )
+
 
 }
