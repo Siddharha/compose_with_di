@@ -70,7 +70,16 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         else
         {
             txt_date.text = this@LoanHistoryDetailsActivity.resources.getString(R.string.approved_on)
-            txt_approval_date.text = loanHistoryData.sanctioned_date
+            if(loanHistoryData.loan_status=="P")
+            {
+                txt_approval_date.text = "---"
+            }
+            else
+            {
+                txt_approval_date.text = loanHistoryData.sanctioned_date
+            }
+
+
         }
 
         txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+loanHistoryData.cr_sc_when_requesting_loan+"</font>")
