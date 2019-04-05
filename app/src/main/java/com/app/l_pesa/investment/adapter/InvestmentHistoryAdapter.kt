@@ -82,7 +82,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
             var txtAmount           : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
             var txtDepositAmount    : CommonTextRegular = itemView.findViewById(R.id.txtDepositAmount) as CommonTextRegular
             var txtAppliedDate      : CommonTextRegular = itemView.findViewById(R.id.txtAppliedDate) as CommonTextRegular
-            var txtMaturityDate     : TextView = itemView.findViewById(R.id.txtMaturityDate) as TextView
+            var txtMaturityDate     : CommonTextRegular = itemView.findViewById(R.id.txtMaturityDate) as CommonTextRegular
             var txtInterestRate     : TextView = itemView.findViewById(R.id.txtInterestRate) as TextView
             var txtDuration         : TextView = itemView.findViewById(R.id.txtDuration) as TextView
 
