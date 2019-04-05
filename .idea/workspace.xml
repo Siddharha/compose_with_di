@@ -20,13 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dcb9a0f-2251-4036-b270-e9f0e752bc92" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/kotlin/sessions/kotlin-compiler-3014675990321877551.salive" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,11 +54,11 @@
           <entry key="class" value="2" />
           <entry key="gradle" value="18" />
           <entry key="java" value="36" />
-          <entry key="kt" value="1427" />
+          <entry key="kt" value="1430" />
           <entry key="png" value="6" />
           <entry key="pro" value="14" />
           <entry key="ttf" value="1" />
-          <entry key="xml" value="967" />
+          <entry key="xml" value="968" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -67,9 +68,9 @@
           <entry key="Groovy" value="18" />
           <entry key="Image" value="6" />
           <entry key="JAVA" value="36" />
-          <entry key="Kotlin" value="1427" />
+          <entry key="Kotlin" value="1430" />
           <entry key="ProGuard File" value="14" />
-          <entry key="XML" value="967" />
+          <entry key="XML" value="968" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -79,7 +80,7 @@
           <entry key="java" value="240" />
           <entry key="kt" value="26445" />
           <entry key="pro" value="35" />
-          <entry key="xml" value="18084" />
+          <entry key="xml" value="18092" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -89,7 +90,7 @@
           <entry key="Kotlin" value="26445" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="ProGuard File" value="35" />
-          <entry key="XML" value="18084" />
+          <entry key="XML" value="18092" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -116,14 +117,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterInterestHistory.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="74" column="45" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
-              <folding>
-                <element signature="e#3203#3276#0" expanded="true" />
-                <element signature="e#4387#4424#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="200">
+              <caret line="91" column="70" selection-start-line="91" selection-start-column="70" selection-end-line="91" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -144,9 +141,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>disapproved_on</find>
-      <find>txt_status</find>
-      <find>sch</find>
       <find>paid</find>
       <find>txtPaidDate</find>
       <find>android:fontFamily=&quot;@font/montserrat&quot;</find>
@@ -174,6 +168,9 @@
       <find>listLoanHistoryCurrent</find>
       <find>view4</find>
       <find>textView36</find>
+      <find>72</find>
+      <find>txt_approval_date.text</find>
+      <find>LPK</find>
     </findStrings>
     <replaceStrings>
       <replace>userEmploymentInfo!!</replace>
@@ -3194,8 +3191,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/presenter/PresenterInvestmentHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml" />
       </list>
     </option>
   </component>
@@ -3511,7 +3508,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="device.picker.selection" value="5373ab48" />
+    <property name="device.picker.selection" value="ZW222265FR" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/KEY/lpesa.jks" />
     <property name="settings.editor.selected.configurable" value="gradle.compiler" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1554443986483" />
@@ -3700,12 +3697,12 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5691574" visible="true" weight="0.2717211" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5691574" visible="true" weight="0.20199226" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Captures" order="2" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Designer" order="3" />
       <window_info id="Favorites" order="4" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
-      <window_info id="Build Variants" order="5" sideWeight="0.4308426" side_tool="true" visible="true" weight="0.2717211" />
+      <window_info id="Build Variants" order="5" sideWeight="0.4308426" side_tool="true" visible="true" weight="0.20199226" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -3730,7 +3727,7 @@
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Preview" order="8" weight="0.18705036" />
+      <window_info anchor="right" id="Preview" order="8" weight="0.30105147" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.61237115" visible="true" weight="0.25235197" />
@@ -3826,13 +3823,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/PersonalIdAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/inter/ICallBackEditHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -4172,16 +4162,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#43#526#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
@@ -4298,27 +4278,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="69" column="12" lean-forward="true" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+          <folding>
+            <element signature="e#3203#3276#0" expanded="true" />
+            <element signature="e#4387#4424#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="22" column="30" lean-forward="true" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4962">
-          <caret line="280" selection-start-line="280" selection-end-line="280" />
+        <state relative-caret-position="220">
+          <caret line="134" column="47" selection-start-line="134" selection-start-column="47" selection-end-line="134" selection-end-column="47" />
           <folding>
-            <element signature="e#558#572#0" expanded="true" />
-            <element signature="e#2482#2496#0" expanded="true" />
-            <element signature="e#2619#2634#0" expanded="true" />
-            <element signature="e#3653#3667#0" expanded="true" />
-            <element signature="e#3839#3854#0" expanded="true" />
-            <element signature="e#5069#5092#0" expanded="true" />
-            <element signature="e#5172#5187#0" expanded="true" />
-            <element signature="e#5403#5417#0" expanded="true" />
-            <element signature="e#5452#5467#0" expanded="true" />
-            <element signature="e#5505#5519#0" expanded="true" />
-            <element signature="e#5560#5574#0" expanded="true" />
-            <element signature="e#9046#9060#0" expanded="true" />
-            <element signature="e#9211#9226#0" expanded="true" />
-            <element signature="e#10318#10333#0" expanded="true" />
-            <element signature="e#12346#12361#0" expanded="true" />
-            <element signature="e#12444#12458#0" expanded="true" />
+            <element signature="e#5472#5486#0" expanded="true" />
+            <element signature="e#5521#5536#0" expanded="true" />
+            <element signature="e#5574#5588#0" expanded="true" />
+            <element signature="e#5629#5643#0" expanded="true" />
+            <element signature="e#6183#6197#0" expanded="true" />
+            <element signature="e#6235#6249#0" expanded="true" />
+            <element signature="e#6289#6307#0" expanded="true" />
+            <element signature="e#6666#6680#0" expanded="true" />
+            <element signature="e#6756#6781#0" expanded="true" />
+            <element signature="e#6861#6876#0" expanded="true" />
+            <element signature="e#7481#7496#0" expanded="true" />
+            <element signature="e#7925#7939#0" expanded="true" />
+            <element signature="e#7979#7997#0" expanded="true" />
+            <element signature="e#8433#8447#0" expanded="true" />
+            <element signature="e#8566#8587#0" expanded="true" />
+            <element signature="e#8667#8682#0" expanded="true" />
+            <element signature="e#9153#9167#0" expanded="true" />
+            <element signature="e#9247#9262#0" expanded="true" />
+            <element signature="e#9881#9896#0" expanded="true" />
+            <element signature="e#10314#10329#0" expanded="true" />
+            <element signature="e#10359#10374#0" expanded="true" />
+            <element signature="e#10474#10488#0" expanded="true" />
+            <element signature="e#11080#11098#0" expanded="true" />
+            <element signature="e#11479#11493#0" expanded="true" />
+            <element signature="e#11534#11548#0" expanded="true" />
+            <element signature="e#11861#11876#0" expanded="true" />
+            <element signature="e#12387#12402#0" expanded="true" />
+            <element signature="e#12485#12499#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4326,19 +4336,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="83" column="46" selection-start-line="83" selection-start-column="46" selection-end-line="83" selection-end-column="46" />
+        <state relative-caret-position="126">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanHistoryDetailsActivity.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterInterestHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="74" column="45" selection-start-line="74" selection-start-column="45" selection-end-line="74" selection-end-column="45" />
-          <folding>
-            <element signature="e#3203#3276#0" expanded="true" />
-            <element signature="e#4387#4424#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="200">
+          <caret line="91" column="70" selection-start-line="91" selection-start-column="70" selection-end-line="91" selection-end-column="70" />
         </state>
       </provider>
     </entry>
