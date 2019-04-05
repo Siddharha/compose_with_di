@@ -81,15 +81,15 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
         fun  bindData(context: Context, investmentList: ResInvestmentHistory.UserInvestment, callBack: ICallBackEditHistory)
         {
 
-            itemView.txtInterestRate.text     = context.resources.getString(R.string.rate)+": "+investmentList.deposit_interest_rate.toString()+"%"
-            itemView.txtRef.text              = context.resources.getString(R.string.ref_no)+" "+investmentList.identity_number.toString()
+            itemView.txtRate.text             = investmentList.deposit_interest_rate.toString()+"%"
+            itemView.txtRef.text              = context.resources.getString(R.string.ref_no)+" "+investmentList.identity_number
             if(!TextUtils.isEmpty(investmentList.maturity_amount.toString()))
             {
                 itemView.txtAmount.text       = investmentList.currency_code+" "+investmentList.maturity_amount.toString()
             }
             itemView.txtDepositAmount.text    = investmentList.currency_code+" "+investmentList.deposit_amount.toString()
             itemView.txtMaturityDate.text     = CommonMethod.dateConvert(investmentList.maturity_date)
-            itemView.txtDuration.text         = context.resources.getString(R.string.months)+" "+investmentList.deposit_month.toString()
+            itemView.txtDurationTime.text     = " "+investmentList.deposit_month.toString()
             itemView.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList.applied_date)
             if(investmentList.deposit_status=="IA")
             {
