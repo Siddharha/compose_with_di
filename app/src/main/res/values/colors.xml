@@ -44,6 +44,7 @@
     <color name="color_aqua">#0ddabf</color>
     <color name="round_text_view_color">#26d0b9</color>
     <color name="light_text_color">#7c7d80</color>
+    <color name="text_color_blue">#597088</color>
     <color name="dark_text_color">#3b3e42</color>
 
 </resources>

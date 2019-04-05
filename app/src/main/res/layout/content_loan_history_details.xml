@@ -58,7 +58,7 @@
                         android:gravity="center"
                         android:text="@string/loan_product"
                         android:textColor="@color/color_gray_light"
-                        android:textSize="@dimen/_13sdp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_loan_product_price"
@@ -66,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/txt_loan_product"
                         android:textColor="@color/color_semi_deep_black"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
 
                 </RelativeLayout>
@@ -111,7 +111,7 @@
                             android:layout_centerVertical="true"
                             android:text="@string/loan_no"
                             android:textColor="@color/color_gray_light"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textSize="@dimen/_11sdp" />
 
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txt_loan_no_val"
@@ -153,7 +153,7 @@
                             android:paddingStart="@dimen/_5sdp"
                             android:text="@string/interest_day"
                             android:textColor="@color/color_gray_light"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textSize="@dimen/_11sdp" />
 
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txt_interest_rate"
@@ -392,7 +392,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/currency_conversion_rate"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_currency_conversion_rate"
@@ -451,14 +451,14 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/loan_after_currency_conversion"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_currency_conversion"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 
@@ -532,7 +532,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/conversion_charge"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp" />
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_conversion_charge"
@@ -675,7 +675,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/request_date"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp"
+                                    android:textSize="@dimen/_11sdp"
                                     android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
@@ -683,7 +683,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 
@@ -736,7 +736,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/approval_date"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp"
+                                    android:textSize="@dimen/_11sdp"
                                     android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
@@ -744,7 +744,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 
@@ -818,7 +818,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/loan_duration"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp"
+                                    android:textSize="@dimen/_11sdp"
                                     android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
@@ -826,7 +826,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 
@@ -879,7 +879,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/status"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_12sdp"
+                                    android:textSize="@dimen/_11sdp"
                                     android:layout_marginTop="@dimen/_5sdp"/>
 
                                 <com.app.l_pesa.common.CommonTextRegular
@@ -887,7 +887,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/color_gray_text"
-                                    android:textSize="@dimen/_13sdp"
+                                    android:textSize="@dimen/_12sdp"
 
                                     />
 

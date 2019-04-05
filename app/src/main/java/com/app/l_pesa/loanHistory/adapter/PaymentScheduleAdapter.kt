@@ -19,6 +19,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
@@ -39,21 +40,7 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             viewHolder.llPayment.visibility     = View.GONE
             viewHolder.llPaid.visibility        = View.VISIBLE
             viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
-           /* viewHolder.txtRepayDate.text        = alScheduleOBJ[position].sDate*/
-            var dateRequest=""
-            dateRequest = if(!TextUtils.isEmpty(alScheduleOBJ[position].sDate))
-            {
-
-                val inputFormat  = SimpleDateFormat("yyyy-MM-dd")
-                val date         = inputFormat.parse(alScheduleOBJ[position].sDate)
-
-                val outputFormat = SimpleDateFormat("dd/MM/yyyy")
-                outputFormat.format(date)
-            } else {
-                ""
-            }
-
-            viewHolder.txtRepayDate.text        = dateRequest
+            viewHolder.txtRepayDate.text        = CommonMethod.dateConvert((alScheduleOBJ[position].sDate))
             viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" 0"
             viewHolder.txtPaidDate.text         = fromHtml("<font color='#a4a4a4'>"+context.resources.getString(R.string.date)+"</font>"+"<font color='#61666b'>"+" "+alScheduleOBJ[position].paidDate+"</font>")
         }
@@ -61,27 +48,12 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
         {
             viewHolder.llPaid.visibility        = View.GONE
             viewHolder.llPayment.visibility     = View.VISIBLE
-
             viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
-
             viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" "+loanInfo.currentBalance.toString()
-
-                var dateRequest=""
-                dateRequest = if(!TextUtils.isEmpty(alScheduleOBJ[position].sDate))
-                {
-                    val inputFormat  = SimpleDateFormat("yyyy-MM-dd")
-                    val date         = inputFormat.parse(alScheduleOBJ[position].sDate)
-
-                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
-                    outputFormat.format(date)
-                } else {
-                    ""
-                }
-
-            viewHolder.txtRepayDate.text        = dateRequest
-
-            viewHolder.btnPayNow.text   = alScheduleOBJ[position].payanytime!!.btnText
+            viewHolder.txtRepayDate.text        = CommonMethod.dateConvert((alScheduleOBJ[position].sDate))
+            viewHolder.btnPayNow.text           = alScheduleOBJ[position].payanytime!!.btnText
             viewHolder.btnPayNow.setTextColor(Color.parseColor(alScheduleOBJ[position].payanytime!!.btnHexColor))
+
             if(alScheduleOBJ[position].paidStatus=="P")
             {
 
@@ -102,7 +74,6 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
                         viewHolder.btnPayNow.setBackgroundResource(R.drawable.bg_transparent_border_red_view)
                     }
                 }
-
 
             }
             else
@@ -182,7 +153,6 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
            var  btnPayNow:CustomButtonRegular  =itemView.findViewById(R.id.btnPayNow) as CustomButtonRegular
 
         }
-
 
     }
 
