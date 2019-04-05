@@ -47,7 +47,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         val loanHistoryData= GlobalLoanHistoryModel.getInstance().modelData
 
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
-        txt_loan_no_val.text = loanHistoryData.loan_id.toString()
+        txt_loan_no_val.text = loanHistoryData.identity_number
         txt_interest_rate.text = loanHistoryData.interest_rate
         txt_loan_amount_value.text = loanHistoryData.currency_code+" "+loanHistoryData.actual_loan_amount
         txt_request_date.text = loanHistoryData.applied_date
@@ -55,7 +55,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_loan_duration.text = loanHistoryData.duration
         txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_dollar_value
         txt_currency_conversion.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_loan_amount
-        txt_processing_fee.text = loanHistoryData.processing_fees+" ("+loanHistoryData.currency_code+ loanHistoryData.processing_fees_amount+")"
+        txt_processing_fee.text = loanHistoryData.processing_fees+" ("+loanHistoryData.currency_code+" "+loanHistoryData.processing_fees_amount+")"
         txt_purpose.text = loanHistoryData.loan_purpose_message
         txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+" "+ loanHistoryData.conversion_charge_amount+")"
 

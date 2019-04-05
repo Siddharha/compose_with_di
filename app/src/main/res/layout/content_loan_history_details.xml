@@ -7,7 +7,7 @@
     android:background="@color/screenBackground"
     android:id="@+id/rlRoot"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".loanHistoryCurrent.view.LoanHistoryDetailsActivity"
+    tools:context=".loanHistory.view.LoanHistoryDetailsActivity"
     tools:showIn="@layout/activity_loan_history_details"
    >
 
@@ -151,7 +151,7 @@
                             android:layout_centerVertical="true"
                             android:paddingEnd="@dimen/_1sdp"
                             android:paddingStart="@dimen/_5sdp"
-                            android:text="@string/interest_rate"
+                            android:text="@string/interest_day"
                             android:textColor="@color/color_gray_light"
                             android:textSize="@dimen/_12sdp" />
 

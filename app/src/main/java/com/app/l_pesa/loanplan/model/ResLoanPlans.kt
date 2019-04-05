@@ -146,22 +146,22 @@ class ResLoanPlans {
         var requiredCreditScore: Int = 0
         @SerializedName("convertion_dollar_value")
         @Expose
-        var convertionDollarValue: String = ""
+        var convertionDollarValue: Double = 0.0
         @SerializedName("convertion_loan_amount")
         @Expose
-        var convertionLoanAmount: Int = 0
+        var convertionLoanAmount: Double = 0.0
         @SerializedName("conversion_charge")
         @Expose
-        var conversionCharge: String = ""
+        var conversionCharge: Double = 0.0
         @SerializedName("conversion_charge_amount")
         @Expose
-        var conversionChargeAmount: String =""
+        var conversionChargeAmount: Double = 0.0
         @SerializedName("processing_fees")
         @Expose
-        var processingFees: String = ""
+        var processingFees: Double = 0.0
         @SerializedName("processing_fees_amount")
         @Expose
-        var processingFeesAmount: String = ""
+        var processingFeesAmount: Double = 0.0
         @SerializedName("loan_amount")
         @Expose
         var loanAmount: Double = 0.0
@@ -198,6 +198,10 @@ class ResLoanPlans {
         @SerializedName("wizardURL")
         @Expose
         var wizardURL: String = ""
+
+        @SerializedName("actual_loan_amount")
+        @Expose
+        var actualLoanAmount: Double = 0.0
 
     }
 
