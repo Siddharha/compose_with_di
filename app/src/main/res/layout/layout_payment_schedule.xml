@@ -3,17 +3,18 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/_3sdp"
         android:elevation="@dimen/_1sdp"
         android:background="@drawable/bg_white_view"
         android:orientation="horizontal"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:padding="@dimen/_3sdp">
 
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight=".50"
         android:weightSum="1"
         android:orientation="vertical"
@@ -71,7 +72,7 @@
                     android:id="@+id/txt_repay_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_9sdp"
                     android:textColor="@color/colorSemiBlack"
 
                     />
@@ -130,7 +131,7 @@
                     android:id="@+id/txt_repay_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_12sdp"
+                    android:textSize="@dimen/_9sdp"
                     android:textColor="@color/colorSemiBlack"
 
                     />
@@ -153,7 +154,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight=".49"
             android:weightSum="1"
             android:orientation="vertical"
@@ -211,7 +212,7 @@
                         android:id="@+id/txt_current_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_9sdp"
                         android:textColor="@color/colorSemiBlack"
 
                         />
@@ -288,7 +289,7 @@
                     <com.app.l_pesa.common.CommonTextRegular
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/paid"
+                        android:text="@string/paid_on"
                         android:textSize="@dimen/_11sdp"
                         android:textColor="@color/color_deep_green"
 
@@ -298,7 +299,7 @@
                         android:id="@+id/txt_paid_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_9sdp"
                      />
 
                 </LinearLayout>
@@ -308,8 +309,6 @@
            </LinearLayout>
 
         </LinearLayout>
-
-
 
     </LinearLayout>
 

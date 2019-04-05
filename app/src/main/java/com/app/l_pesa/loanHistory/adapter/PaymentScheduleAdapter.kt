@@ -42,7 +42,7 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
             viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
             viewHolder.txtRepayDate.text        = CommonMethod.dateConvert((alScheduleOBJ[position].sDate))
             viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" 0"
-            viewHolder.txtPaidDate.text         = fromHtml("<font color='#a4a4a4'>"+context.resources.getString(R.string.date)+"</font>"+"<font color='#61666b'>"+" "+alScheduleOBJ[position].paidDate+"</font>")
+            viewHolder.txtPaidDate.text         = fromHtml("<font color='#61666b'>"+" "+CommonMethod.dateTimeConvert((alScheduleOBJ[position].paidDate))+"</font>")
         }
         else
         {

@@ -27,7 +27,8 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:padding="@dimen/_5sdp"
+        android:padding="@dimen/_7sdp"
+        android:background="@color/colorWhite"
 
         >
 
@@ -58,8 +59,10 @@
                 android:id="@+id/txt_total_payback"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/colorApp"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginTop="@dimen/_2sdp"
 
                 />
 
@@ -82,7 +85,7 @@
                 android:textAllCaps="false"
                 android:gravity="center"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_10sdp"
                 />
 
         </LinearLayout>
@@ -97,7 +100,7 @@
             android:id="@+id/rlPayback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
+            android:layout_margin="@dimen/_3sdp"
            />
     </LinearLayout>
 
