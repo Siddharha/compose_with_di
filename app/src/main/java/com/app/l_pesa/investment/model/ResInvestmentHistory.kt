@@ -65,6 +65,9 @@ class ResInvestmentHistory {
         @SerializedName("interest_amount")
         @Expose
         var interestAmount: String = ""
+        @SerializedName("deposit_status_txt")
+        @Expose
+        var depositStatusText: String = ""
         @SerializedName("deposit_interest_rate")
         @Expose
         var depositInterestRate: Int = 0
@@ -80,9 +83,6 @@ class ResInvestmentHistory {
         @SerializedName("deposit_date")
         @Expose
         var depositDate: String = ""
-        /*@SerializedName("interest_number")
-        @Expose
-        var interestNumber: Int = 0*/
 
     }
 

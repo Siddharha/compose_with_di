@@ -2,7 +2,11 @@ package com.app.l_pesa.investment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
+import android.text.Html
+import android.text.Spanned
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +24,6 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
 
         val viewHolder = holder as SelectViewHolder
 
@@ -45,24 +48,35 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
             viewHolder.imageView6.visibility=View.INVISIBLE
             viewHolder.textView8.visibility=View.INVISIBLE
             viewHolder.txtMaturityDate.visibility=View.INVISIBLE
-        }
-        else if(investmentList[position].depositStatus=="A")
-        {
+            viewHolder.txtStatus.visibility=View.VISIBLE
+            viewHolder.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
+            viewHolder.txtStatus.text=investmentList[position].depositStatusText
+            viewHolder.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_red,0,0,0)
 
         }
-        else if(investmentList[position].depositStatus=="C")
+        else if(investmentList[position].depositStatus=="P")
         {
 
+            viewHolder.imageView5.visibility=View.INVISIBLE
+            viewHolder.textView6.visibility=View.INVISIBLE
+            viewHolder.txtAmount.visibility=View.INVISIBLE
+            viewHolder.imageView6.visibility=View.INVISIBLE
+            viewHolder.textView8.visibility=View.INVISIBLE
+            viewHolder.txtMaturityDate.visibility=View.INVISIBLE
+            viewHolder.txtStatus.visibility=View.VISIBLE
+            viewHolder.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
+            viewHolder.txtStatus.text=investmentList[position].depositStatusText
+            viewHolder.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)
         }
 
         viewHolder.imgEdit.setOnClickListener {
 
             callBack.onEditWindow(viewHolder.imgEdit)
 
-
         }
 
     }
+
 
     override fun getItemCount(): Int = investmentList.size
 
@@ -83,6 +97,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentList
             var txtDepositAmount    : CommonTextRegular = itemView.findViewById(R.id.txtDepositAmount) as CommonTextRegular
             var txtAppliedDate      : CommonTextRegular = itemView.findViewById(R.id.txtAppliedDate) as CommonTextRegular
             var txtMaturityDate     : CommonTextRegular = itemView.findViewById(R.id.txtMaturityDate) as CommonTextRegular
+            var txtStatus           : CommonTextRegular = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
             var txtInterestRate     : TextView = itemView.findViewById(R.id.txtInterestRate) as TextView
             var txtDuration         : TextView = itemView.findViewById(R.id.txtDuration) as TextView
 
