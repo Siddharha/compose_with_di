@@ -1,5 +1,6 @@
 package com.app.l_pesa.investment.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,13 +17,14 @@ import android.widget.PopupWindow
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.investment.adapter.AdapterWindowInvestmentHistory
 import com.app.l_pesa.investment.adapter.InvestmentHistoryAdapter
 import com.app.l_pesa.investment.inter.ICallBackEditHistory
 import com.app.l_pesa.investment.inter.ICallBackInvestmentHistory
+import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
-import com.app.l_pesa.profile.adapter.AdapterPopupWindow
-import com.app.l_pesa.profile.model.ModelWindowPopUp
+import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
@@ -101,7 +103,6 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     override fun onEditWindow(imgEdit: ImageButton) {
 
-
         dismissPopup()
         filterPopup = showAlertFilter()
         filterPopup?.isOutsideTouchable = true
@@ -111,12 +112,15 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         filterPopup?.showAsDropDown(imgEdit)
     }
 
+
+    @SuppressLint("InflateParams")
     private fun showAlertFilter(): PopupWindow {
 
-        val filterItemList = mutableListOf<ModelWindowPopUp>()
+        val filterItemList = mutableListOf<ModelWindowHistory>()
 
-        filterItemList.add(ModelWindowPopUp(R.drawable.ic_view_file,resources.getString(R.string.view_file)))
-        filterItemList.add(ModelWindowPopUp(R.drawable.ic_delete,resources.getString(R.string.delete)))
+        filterItemList.add(ModelWindowHistory(resources.getString(R.string.withdrawal)))
+        filterItemList.add(ModelWindowHistory(resources.getString(R.string.reinvestment)))
+        filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point)))
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_only_recyclerview, null)
@@ -124,10 +128,18 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
 
-        val adapter = AdapterPopupWindow(activity!!)
+        val adapter = AdapterWindowInvestmentHistory(activity!!)
         adapter.addAlertFilter(filterItemList)
         recyclerView.adapter = adapter
         adapter.selectedItem(selectedItem)
+
+        adapter.setOnClick(object : ICallBackRecyclerCallbacks<ModelWindowHistory> {
+            override fun onItemClick(view: View, position: Int, item:ModelWindowHistory) {
+                selectedItem = position
+
+                dismissPopup()
+            }
+        })
 
         return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }

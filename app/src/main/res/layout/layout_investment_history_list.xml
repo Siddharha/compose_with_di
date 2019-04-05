@@ -246,7 +246,10 @@
             app:layout_constraintHorizontal_bias=".90"
             app:layout_constraintStart_toEndOf="@+id/txtAppliedDate"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_edit_icon" />
+            app:srcCompat="@drawable/ic_edit_icon"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            />
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtStatus"

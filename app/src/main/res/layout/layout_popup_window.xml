@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/_5sdp"
         android:fontFamily="@font/montserrat"
-        android:textSize="@dimen/_13sdp"
+        android:textSize="@dimen/_12sdp"
         android:gravity="center|start"
         app:layout_constraintBottom_toBottomOf="@+id/alert_filter_icon"
         app:layout_constraintStart_toEndOf="@+id/alert_filter_icon"
