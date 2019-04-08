@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -16,17 +17,15 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imgLoan"
-                android:contentDescription="@string/app_name"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/app_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/lpk_round_logo" />
@@ -71,22 +70,102 @@
                 android:id="@+id/btn_apply_loan"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_23sdp"
-                android:layout_margin="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:background="@drawable/bg_button_grey"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/lets_do"
                 android:textAllCaps="false"
                 android:textColor="@color/colorSemiWhite"
                 android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/viewDividerTwo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/view45"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textView74" />
 
+            <View
+                android:id="@+id/viewDividerTwo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/divider_color"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+
+                />
+
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/dark_text_color"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintBottom_toTopOf="@+id/seekBarLayout"
+                app:layout_constraintTop_toBottomOf="@+id/viewDividerTwo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <com.warkiz.widget.IndicatorStayLayout
+                android:id="@+id/seekBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                >
+
+                <com.warkiz.widget.IndicatorSeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isb_show_indicator="rectangle"
+                    app:isb_track_background_color="#2bbd83"
+                    app:isb_track_background_size="@dimen/_7sdp"
+                    app:isb_track_progress_color="#fc3026"
+                    app:isb_track_progress_size="@dimen/_7sdp"
+                    app:isb_thumb_color="#08a9ea"
+
+                    />
+
+            </com.warkiz.widget.IndicatorStayLayout>
+
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/dark_text_color"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekBarLayout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                 />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/dark_text_color"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seekBarLayout"
+                app:layout_constraintBottom_toBottomOf="parent"
+                 />
 
         </android.support.constraint.ConstraintLayout>
 
+
+
     </android.support.v7.widget.CardView>
+
+
 
 
 </LinearLayout>

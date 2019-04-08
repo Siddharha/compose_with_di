@@ -76,7 +76,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     }
                     if(al_loadOBJ[position].status=="Pending")
                     {
-                        viewHolder.buttonApplyLoan.visibility       =View.GONE
+                        viewHolder.buttonApplyLoan.visibility       =View.INVISIBLE
                        // viewHolder.txtAmountSecond.visibility       =View.GONE
                     }
                     else
@@ -182,7 +182,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
 
                     if(al_loadOBJ[position].status=="Pending")
                     {
-                        viewHolder.buttonApplyLoan.visibility       =View.GONE
+                        viewHolder.buttonApplyLoan.visibility       =View.INVISIBLE
                        // viewHolder.txtAmountSecond.visibility       =View.GONE
                     }
                     else
