@@ -71,7 +71,7 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
                     else
                     {
                         tabLayout!!.getTabAt(1)!!.select()
-                        sharedPref.openTabLoan="CURRENT"
+
                     }
                 }, 100)
 

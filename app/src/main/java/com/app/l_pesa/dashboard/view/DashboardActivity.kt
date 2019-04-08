@@ -263,6 +263,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 }
                 else
                 {
+                    val sharedPref= SharedPref(this@DashboardActivity)
+                    sharedPref.openTabLoan="CURRENT"
                     toolbar.title =resources.getString(R.string.nav_item_loan)
                     navigateToFragment(LoanPlansFragment.newInstance(),false)
                 }
