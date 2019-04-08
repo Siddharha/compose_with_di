@@ -87,6 +87,15 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         viewPager!!.currentItem = p0!!.position
+        val sharedPref= SharedPref(activity!!)
+        if(viewPager!!.currentItem==0)
+        {
+            sharedPref.openTabLoan="CURRENT"
+        }
+        else
+        {
+            sharedPref.openTabLoan="BUSINESS"
+        }
 
 
     }

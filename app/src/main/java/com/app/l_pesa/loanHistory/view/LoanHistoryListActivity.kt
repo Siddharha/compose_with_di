@@ -3,6 +3,7 @@ package com.app.l_pesa.loanHistory.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.LoanHistoryTabPager
 
 import kotlinx.android.synthetic.main.activity_loan_list_history.*
@@ -45,6 +47,21 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
         viewPager!!.adapter = adapter
         changeTabsFont()
         tabLayout!!.addOnTabSelectedListener(this)
+
+        val sharedPref= SharedPref(this@LoanHistoryListActivity)
+
+        Handler().postDelayed(
+                {
+                    if(sharedPref.openTabLoan=="CURRENT")
+                    {
+                        tabLayout!!.getTabAt(0)!!.select()
+                    }
+                    else
+                    {
+                        tabLayout!!.getTabAt(1)!!.select()
+                        sharedPref.openTabLoan="CURRENT"
+                    }
+                }, 100)
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {
