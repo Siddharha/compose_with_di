@@ -17,116 +17,123 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_3sdp">
 
             <ImageView
                 android:id="@+id/imgLoan"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:contentDescription="@string/app_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/lpk_round_logo" />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView74"
+                android:id="@+id/txt_loan_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/cash_out_lpk"
                 android:textColor="@color/dark_text_color"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                app:layout_constraintEnd_toStartOf="@+id/view45"
+                android:textSize="@dimen/_13sdp"
+                android:text="@string/app_name"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintEnd_toStartOf="@+id/viewDividerOne"
                 app:layout_constraintStart_toEndOf="@+id/imgLoan"
                 app:layout_constraintTop_toTopOf="@+id/imgLoan" />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView75"
+                android:id="@+id/txt_loan_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_9sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/imgLoan"
-                app:layout_constraintEnd_toStartOf="@+id/view45"
+                android:textColor="@color/textColors"
+                android:text="@string/app_name"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toEndOf="@+id/imgLoan"
-                app:layout_constraintTop_toBottomOf="@+id/textView74" />
+                app:layout_constraintStart_toStartOf="@+id/txt_loan_type"
+                app:layout_constraintTop_toBottomOf="@+id/txt_loan_type"
+                app:layout_constraintEnd_toEndOf="@+id/viewDividerOne"
+                />
 
             <View
-                android:id="@+id/view45"
+                android:id="@+id/viewDividerOne"
                 android:layout_width="@dimen/_1sdp"
                 android:layout_height="0dp"
                 android:visibility="invisible"
                 android:background="@color/divider_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/hh"
-                app:layout_constraintStart_toEndOf="@+id/textView74"
+                app:layout_constraintEnd_toStartOf="@+id/constraintRight"
+                app:layout_constraintStart_toEndOf="@+id/txt_loan_type"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/hh"
+                android:id="@+id/constraintRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/viewDividerOne"
                 app:layout_constraintBottom_toTopOf="@id/viewDividerTwo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView74" >
+                app:layout_constraintTop_toTopOf="parent">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+
                     >
 
                     <com.app.l_pesa.common.CustomButtonRegular
                         android:id="@+id/btn_apply_loan"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_23sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:background="@drawable/bg_button_grey"
+                        android:layout_height="@dimen/_27sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
                         android:fontFamily="@font/montserrat"
-                        android:text="@string/lets_do"
                         android:textAllCaps="false"
-                        android:textColor="@color/colorSemiWhite"
-                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/repayments"
+                        android:gravity="center"
+                        android:textSize="@dimen/_9sdp"
                         />
 
                 </RelativeLayout>
 
-
-
-
             </android.support.constraint.ConstraintLayout>
-
-
 
             <View
                 android:id="@+id/viewDividerTwo"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
                 android:background="@color/divider_color"
-                app:layout_constraintTop_toBottomOf="@+id/imgLoan"
+                app:layout_constraintTop_toBottomOf="@+id/txt_loan_details"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
 
                 />
 
 
-            <TextView
-                android:id="@+id/textView16"
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtRepayments"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
+                android:text="@string/repayments"
                 android:textSize="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@+id/seekBarLayout"
                 app:layout_constraintTop_toBottomOf="@+id/viewDividerTwo"
                 app:layout_constraintStart_toStartOf="parent"
@@ -136,11 +143,12 @@
                 android:id="@+id/seekBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                app:layout_constraintTop_toBottomOf="@+id/txtRepayments"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
+                android:visibility="gone"
                 >
 
                 <com.warkiz.widget.IndicatorSeekBar
@@ -159,25 +167,27 @@
             </com.warkiz.widget.IndicatorStayLayout>
 
 
-            <TextView
-                android:id="@+id/textView20"
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtStart"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seekBarLayout"
                 app:layout_constraintBottom_toBottomOf="parent"
                  />
 
-            <TextView
-                android:id="@+id/textView35"
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtEnd"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/seekBarLayout"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -186,10 +196,7 @@
         </android.support.constraint.ConstraintLayout>
 
 
-
     </android.support.v7.widget.CardView>
-
-
 
 
 </LinearLayout>
