@@ -154,8 +154,9 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val actionStatusModel= ResInvestmentHistory.ActionState(false,false,false)
             val loanStatusModel  = ResInvestmentHistory.UserInvestment(0, 0,0,0,"","","","",
-                                   "","","","",0.0,0.0,0.0,0.0)
+                                   "","","","",0.0,0.0,0.0,0.0,actionStatusModel)
 
             listInvestment!!.add(loanStatusModel)
             adapterInvestmentHistory.notifyItemInserted(listInvestment!!.size-1)

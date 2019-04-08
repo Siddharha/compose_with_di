@@ -118,10 +118,20 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)
             }
 
-            itemView.imgEdit.setOnClickListener {
-
-                callBack.onEditWindow(itemView.imgEdit)
+            if(!investmentList.actionState.btnWithdrawalShow && !investmentList.actionState.btnReinvestShow && !investmentList.actionState.btnExitPointShow)
+            {
+                itemView.imgEdit.visibility=View.INVISIBLE
             }
+            else
+            {
+                itemView.imgEdit.visibility=View.VISIBLE
+                itemView.imgEdit.setOnClickListener {
+
+                    callBack.onEditWindow(itemView.imgEdit)
+                }
+            }
+
+
 
 
         }

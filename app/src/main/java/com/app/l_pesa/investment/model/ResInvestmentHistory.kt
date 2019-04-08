@@ -63,10 +63,19 @@ class ResInvestmentHistory {
             val deposit_amount:Double,
             val maturity_amount:Double,
             val interest_amount:Double,
-            val deposit_interest_rate:Double
+            val deposit_interest_rate:Double,
+
+            val actionState:ActionState
 
 
 
+    )
+
+    data class ActionState(
+
+            val btnWithdrawalShow:Boolean,
+            val btnReinvestShow:Boolean,
+            val btnExitPointShow:Boolean
     )
 
 
