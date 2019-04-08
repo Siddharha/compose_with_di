@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dcb9a0f-2251-4036-b270-e9f0e752bc92" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -32,9 +31,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/sessions/kotlin-compiler-5677714367457710280.salive" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,11 +59,11 @@
           <entry key="class" value="2" />
           <entry key="gradle" value="18" />
           <entry key="java" value="36" />
-          <entry key="kt" value="1433" />
+          <entry key="kt" value="1434" />
           <entry key="png" value="6" />
           <entry key="pro" value="14" />
           <entry key="ttf" value="1" />
-          <entry key="xml" value="974" />
+          <entry key="xml" value="976" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -75,9 +73,9 @@
           <entry key="Groovy" value="18" />
           <entry key="Image" value="6" />
           <entry key="JAVA" value="36" />
-          <entry key="Kotlin" value="1433" />
+          <entry key="Kotlin" value="1434" />
           <entry key="ProGuard File" value="14" />
-          <entry key="XML" value="974" />
+          <entry key="XML" value="976" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -85,19 +83,19 @@
           <entry key="dummy" value="6" />
           <entry key="gradle" value="50" />
           <entry key="java" value="240" />
-          <entry key="kt" value="26552" />
+          <entry key="kt" value="26637" />
           <entry key="pro" value="35" />
-          <entry key="xml" value="18696" />
+          <entry key="xml" value="18901" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="50" />
           <entry key="JAVA" value="240" />
-          <entry key="Kotlin" value="26552" />
+          <entry key="Kotlin" value="26637" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="ProGuard File" value="35" />
-          <entry key="XML" value="18696" />
+          <entry key="XML" value="18901" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -126,40 +124,66 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="277" column="90" selection-start-line="277" selection-start-column="90" selection-end-line="277" selection-end-column="90" />
+            <state relative-caret-position="141">
+              <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
               <folding>
-                <element signature="e#1828#1898#0" expanded="true" />
+                <element signature="e#242#727#0" expanded="true" />
+                <element signature="e#4160#4208#0" expanded="true" />
+                <element signature="e#9028#9076#0" expanded="true" />
+                <element signature="e#11560#11608#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+              <caret line="34" column="48" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="270" column="35" selection-start-line="270" selection-start-column="35" selection-end-line="270" selection-end-column="35" />
               <folding>
-                <element signature="e#281#295#0" expanded="true" />
-                <element signature="e#583#598#0" expanded="true" />
+                <element signature="e#10988#11003#0" expanded="true" />
+                <element signature="e#11039#11054#0" expanded="true" />
               </folding>
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="118" column="49" selection-start-line="118" selection-start-column="49" selection-end-line="118" selection-end-column="49" />
+            <state relative-caret-position="133">
+              <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
               <folding>
-                <element signature="e#39#903#0" expanded="true" />
-                <element signature="e#2621#2662#1" expanded="true" />
+                <element signature="e#368#382#0" expanded="true" />
+                <element signature="e#588#602#0" expanded="true" />
+                <element signature="e#660#675#0" expanded="true" />
+                <element signature="e#710#725#0" expanded="true" />
+                <element signature="e#636#651#0" expanded="true" />
+                <element signature="e#689#704#0" expanded="true" />
+                <element signature="e#745#760#0" expanded="true" />
+                <element signature="e#518#536#0" expanded="true" />
+                <element signature="e#1405#1420#0" expanded="true" />
+                <element signature="e#1350#1365#0" expanded="true" />
+                <element signature="e#1984#1999#0" expanded="true" />
+                <element signature="e#1930#1944#0" expanded="true" />
+                <element signature="e#3058#3073#0" expanded="true" />
+                <element signature="e#3252#3272#0" expanded="true" />
+                <element signature="e#3320#3335#0" expanded="true" />
               </folding>
             </state>
           </provider>
+          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -178,10 +202,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>txtAmount</find>
-      <find>textView35</find>
-      <find>txtMaturityDate</find>
-      <find>imageView5</find>
       <find>kkkk</find>
       <find>Maturity</find>
       <find>&lt;font</find>
@@ -208,6 +228,10 @@
       <find>loan_list</find>
       <find>isFocusable</find>
       <find>r.la</find>
+      <find>imgLoan</find>
+      <find>txtMax</find>
+      <find>CardView</find>
+      <find>&lt;com.app.l_pesa.common.CustomButtonRegular</find>
     </findStrings>
     <replaceStrings>
       <replace>userEmploymentInfo!!</replace>
@@ -3199,7 +3223,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/inter/ICallBackEditHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_plan_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/ResLoanPlans.kt" />
@@ -3228,8 +3251,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterInterestHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dashboard_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" />
       </list>
     </option>
   </component>
@@ -3632,14 +3656,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5675676" visible="true" weight="0.2584394" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5670436" visible="true" weight="0.19701162" />
       <window_info id="Structure" order="1" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Captures" order="2" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
       <window_info id="Designer" order="3" />
       <window_info id="Favorites" order="4" sideWeight="0.36316696" side_tool="true" weight="0.32982844" />
-      <window_info id="Build Variants" order="5" sideWeight="0.43243244" side_tool="true" visible="true" weight="0.2584394" />
+      <window_info id="Build Variants" order="5" sideWeight="0.43295637" side_tool="true" visible="true" weight="0.19701162" />
       <window_info id="Image Layers" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -3649,8 +3672,8 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32972974" />
-      <window_info anchor="bottom" id="Logcat" order="7" weight="0.33081082" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3193096" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="7" visible="true" weight="0.33081082" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3189189" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32972974" />
       <window_info anchor="bottom" id="Build" order="11" weight="0.28756756" />
@@ -3664,7 +3687,7 @@
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info active="true" anchor="right" id="Preview" order="8" visible="true" weight="0.20033205" />
+      <window_info anchor="right" id="Preview" order="8" visible="true" weight="0.20033205" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.61237115" visible="true" weight="0.25235197" />
@@ -4260,51 +4283,58 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+          <folding>
+            <element signature="e#242#727#0" expanded="true" />
+            <element signature="e#4160#4208#0" expanded="true" />
+            <element signature="e#9028#9076#0" expanded="true" />
+            <element signature="e#11560#11608#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="34" column="48" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="269" column="34" selection-start-line="269" selection-start-column="25" selection-end-line="269" selection-end-column="34" />
+        <state relative-caret-position="216">
+          <caret line="270" column="35" selection-start-line="270" selection-start-column="35" selection-end-line="270" selection-end-column="35" />
           <folding>
-            <element signature="e#3164#3179#0" expanded="true" />
-            <element signature="e#3230#3245#0" expanded="true" />
-            <element signature="e#3965#3980#0" expanded="true" />
-            <element signature="e#4101#4115#0" expanded="true" />
-            <element signature="e#4258#4272#0" expanded="true" />
-            <element signature="e#4449#4463#0" expanded="true" />
-            <element signature="e#4516#4530#0" expanded="true" />
+            <element signature="e#10988#11003#0" expanded="true" />
+            <element signature="e#11039#11054#0" expanded="true" />
           </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="118" column="49" selection-start-line="118" selection-start-column="49" selection-end-line="118" selection-end-column="49" />
-          <folding>
-            <element signature="e#39#903#0" expanded="true" />
-            <element signature="e#2621#2662#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="277" column="90" selection-start-line="277" selection-start-column="90" selection-end-line="277" selection-end-column="90" />
-          <folding>
-            <element signature="e#1828#1898#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
+        <state relative-caret-position="133">
+          <caret line="7" column="42" lean-forward="true" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
           <folding>
-            <element signature="e#281#295#0" expanded="true" />
-            <element signature="e#583#598#0" expanded="true" />
+            <element signature="e#368#382#0" expanded="true" />
+            <element signature="e#588#602#0" expanded="true" />
+            <element signature="e#660#675#0" expanded="true" />
+            <element signature="e#710#725#0" expanded="true" />
+            <element signature="e#636#651#0" expanded="true" />
+            <element signature="e#689#704#0" expanded="true" />
+            <element signature="e#745#760#0" expanded="true" />
+            <element signature="e#518#536#0" expanded="true" />
+            <element signature="e#1405#1420#0" expanded="true" />
+            <element signature="e#1350#1365#0" expanded="true" />
+            <element signature="e#1984#1999#0" expanded="true" />
+            <element signature="e#1930#1944#0" expanded="true" />
+            <element signature="e#3058#3073#0" expanded="true" />
+            <element signature="e#3252#3272#0" expanded="true" />
+            <element signature="e#3320#3335#0" expanded="true" />
           </folding>
         </state>
       </provider>

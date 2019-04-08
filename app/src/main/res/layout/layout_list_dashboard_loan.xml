@@ -3,204 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_3sdp"
-    android:id="@+id/ll_root"
     android:orientation="vertical"
-    android:background="@drawable/bg_white_view"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:background="@color/colorWhite"
     >
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/ll_top"
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_85sdp"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/_3sdp">
 
+        <ImageView
+            android:id="@+id/imgLoan"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/lpk_round_logo" />
 
-        >
-        <RelativeLayout
-            android:layout_weight=".15"
-            android:layout_height="match_parent"
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txt_loan_type"
             android:layout_width="0dp"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/dark_text_color"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintEnd_toStartOf="@+id/view45"
+            app:layout_constraintStart_toEndOf="@+id/imgLoan"
+            app:layout_constraintTop_toTopOf="@+id/imgLoan" />
 
-            >
-            <ImageView
-                android:contentDescription="@string/app_name"
-                android:id="@+id/loan_image"
-                android:scaleType="fitXY"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_weight=".50"
-            android:layout_height="match_parent"
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/textView75"
             android:layout_width="0dp"
-            android:gravity="center"
-            android:paddingStart="@dimen/_2sdp"
-            android:paddingEnd="@dimen/_1sdp"
-
-            >
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_loan_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="@dimen/_13sdp"
-                android:maxLines="1"/>
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_loan_details"
-                android:layout_below="@+id/txt_loan_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:text=""
-                android:textColor="@color/semi_light_black"
-                android:textSize="@dimen/_11sdp" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_weight=".30"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:gravity="center"
-            android:paddingStart="@dimen/_2sdp"
-            android:paddingEnd="@dimen/_1sdp"
-
-            >
-
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_amount_first"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/_12sdp"
-                android:maxLines="1"/>
-
-                <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_amount_second"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_amount_first"
-                android:text=""
-                android:layout_marginTop="@dimen/_2sdp"
-                android:textSize="@dimen/_12sdp" />
-
-            <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/btn_apply_loan"
-                android:layout_below="@+id/txt_amount_second"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_28sdp"
-                android:gravity="center"
-                android:focusable="true"
-                android:visibility="gone"
-                android:textSize="@dimen/_10sdp"
-                android:text="@string/apply_loan"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:layout_marginEnd="@dimen/_2sdp"
-                />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_SeekBar"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/semi_white"
-        android:orientation="vertical"
-        android:visibility="gone"
-        >
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/_9sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgLoan"
+            app:layout_constraintEnd_toStartOf="@+id/view45"
+            app:layout_constraintStart_toEndOf="@+id/imgLoan"
+            app:layout_constraintTop_toBottomOf="@+id/txt_loan_type" />
 
         <View
-            android:layout_height="@dimen/_1sdp"
-            android:layout_width="match_parent"
-            android:background="@color/colorGrey"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            />
+            android:id="@+id/view45"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_apply_loan"
+            app:layout_constraintStart_toEndOf="@+id/txt_loan_type"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txtRepayments"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/repayments"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:textColor="@color/color_gray_text"
-                android:layout_marginStart="@dimen/_5sdp"/>
-
-
-            <com.warkiz.widget.IndicatorStayLayout
-                android:id="@+id/seekBarLayout"
-                android:layout_below="@+id/txtRepayments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.warkiz.widget.IndicatorSeekBar
-                    android:id="@+id/seekBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:isb_show_indicator="rectangle"
-                    app:isb_track_background_color="#2bbd83"
-                    app:isb_track_background_size="@dimen/_7sdp"
-                    app:isb_track_progress_color="#fc3026"
-                    app:isb_track_progress_size="@dimen/_7sdp"
-                    app:isb_thumb_color="#08a9ea"
-
-                    />
-
-            </com.warkiz.widget.IndicatorStayLayout>
+        <com.app.l_pesa.common.CustomButtonRegular
+            android:id="@+id/btn_apply_loan"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_22sdp"
+            android:background="@drawable/bg_button_grey"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/apply_loan"
+            android:textAllCaps="false"
+            android:textColor="@color/colorSemiWhite"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view45"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_max"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/seekBarLayout"
-                android:layout_marginTop="@dimen/_1sdp"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/color_gray_text"
-                android:layout_marginEnd="@dimen/_5sdp"
-
-                />
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txt_start"
-                android:layout_alignParentStart="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/seekBarLayout"
-                android:layout_marginTop="@dimen/_1sdp"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/color_gray_text"
-                android:layout_marginStart="@dimen/_10sdp"
-                />
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
 </LinearLayout>
+
+
+
 

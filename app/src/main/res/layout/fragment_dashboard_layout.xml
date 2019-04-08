@@ -261,10 +261,6 @@
 
     </LinearLayout>
 
-       <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".15"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/loan_list"
@@ -272,7 +268,8 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.55"
+        android:layout_weight="4.70"
+
         />
 
     </LinearLayout>
