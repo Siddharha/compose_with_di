@@ -45,8 +45,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.buttonApplyLoan.text                 =al_loadOBJ[position].status
                     viewHolder.txtLoanDetails.text                  =contextOBJ.resources.getString(R.string.you_do_not_have_business_loan)
                     viewHolder.buttonApplyLoan.visibility           =View.VISIBLE
-                    viewHolder.buttonApplyLoan.isFocusable=true
-                    viewHolder.buttonApplyLoan.isFocusableInTouchMode=true
                     viewHolder.txtAmountFirst.visibility            =View.GONE
                     viewHolder.txtAmountSecond.visibility           =View.GONE
 
@@ -84,8 +82,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     else
                     {
                         viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
-                        viewHolder.buttonApplyLoan.isFocusable=true
-                        viewHolder.buttonApplyLoan.isFocusableInTouchMode=true
                         viewHolder.txtAmountSecond.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.text             =al_loadOBJ[position].nextRepay!!.amount
                         viewHolder.buttonApplyLoan.text             = contextOBJ.resources.getString(R.string.pay_now)
@@ -151,8 +147,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.buttonApplyLoan.text                    =al_loadOBJ[position].status
                     viewHolder.txtLoanDetails.text                     =contextOBJ.resources.getString(R.string.you_do_not_have_current_loan)
                     viewHolder.buttonApplyLoan.visibility              =View.VISIBLE
-                    viewHolder.buttonApplyLoan.isFocusable=true
-                    viewHolder.buttonApplyLoan.isFocusableInTouchMode=true
                     viewHolder.txtAmountFirst.visibility               =View.GONE
                     viewHolder.txtAmountSecond.visibility              =View.GONE
 
@@ -194,8 +188,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     else
                     {
                         viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
-                        viewHolder.buttonApplyLoan.isFocusable=true
-                        viewHolder.buttonApplyLoan.isFocusableInTouchMode=true
                         viewHolder.txtAmountSecond.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.text             =al_loadOBJ[position].nextRepay!!.amount
 
@@ -254,8 +246,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 viewHolder.loanName.text                          = contextOBJ!!.resources.getString(R.string.cash_out_lpk)
                 viewHolder.txtLoanDetails.text                    ="You have 500 LPK"
                 viewHolder.buttonApplyLoan.visibility             =View.VISIBLE
-                viewHolder.buttonApplyLoan.isFocusable=true
-                viewHolder.buttonApplyLoan.isFocusableInTouchMode=true
                 viewHolder.buttonApplyLoan.text                    =contextOBJ.resources.getString(R.string.lets_do)
                 viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)
                 viewHolder.txtAmountFirst.visibility               =View.GONE

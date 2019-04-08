@@ -13,7 +13,7 @@ import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.dashboard_layout.*
+import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.LinearLayout
 import com.app.l_pesa.dashboard.adapter.LoanListAdapter
@@ -32,7 +32,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.dashboard_layout, container, false)
+        return inflater.inflate(R.layout.fragment_dashboard_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
