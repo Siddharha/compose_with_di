@@ -6,6 +6,7 @@ package com.app.l_pesa.dashboard.adapter
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
@@ -20,11 +21,15 @@ import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.IndicatorStayLayout
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
+
 
 
 class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, private val contextOBJ: Context?,val rootLayout:LinearLayout,private val callBackObj: ICallBackListOnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
 
@@ -50,17 +55,16 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.txtAmountFirst.visibility            =View.GONE
                     viewHolder.txtAmountSecond.visibility           =View.GONE
 
-                    viewHolder.buttonApplyLoan.setOnClickListener {
+                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
+                        if (event.action == MotionEvent.ACTION_UP) {
 
-                        if(CommonMethod.isNetworkAvailable(contextOBJ))
-                        {
-                            callBackObj.onClickLoanList("BUSINESS")
-                        }
-                        else
-                        {
-                            CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
-                        }
-
+                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
+                                callBackObj.onClickLoanList("BUSINESS")
+                            } else {
+                                CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
+                            }
+                            true
+                        } else false
                     }
 
                 }
@@ -155,22 +159,16 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     viewHolder.txtAmountFirst.visibility               =View.GONE
                     viewHolder.txtAmountSecond.visibility              =View.GONE
 
+                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
+                        if (event.action == MotionEvent.ACTION_UP) {
 
-                    viewHolder.buttonApplyLoan.setOnClickListener {
-
-                        viewHolder.buttonApplyLoan.setOnClickListener {
-
-                            if(CommonMethod.isNetworkAvailable(contextOBJ))
-                            {
+                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
                                 callBackObj.onClickLoanList("CURRENT")
-                            }
-                            else
-                            {
+                            } else {
                                 CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
                             }
-
-                        }
-
+                            true
+                        } else false
                     }
 
                 }
@@ -229,19 +227,18 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                        viewHolder.seekBarLayout.visibility=View.GONE
                     }
 
-                    viewHolder.buttonApplyLoan.setOnClickListener {
+                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
+                        if (event.action == MotionEvent.ACTION_UP) {
 
-                        if(CommonMethod.isNetworkAvailable(contextOBJ))
-                        {
-                            callBackObj.onClickPay("current_loan",""+al_loadOBJ[position].repay!!.loan_id.toString())
-                        }
-                        else
-                        {
-                            CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
-                        }
-
-
+                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
+                                callBackObj.onClickPay("current_loan",""+al_loadOBJ[position].repay!!.loan_id.toString())
+                            } else {
+                                CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
+                            }
+                            true
+                        } else false
                     }
+
 
                 }
 
@@ -262,11 +259,18 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
 
                 viewHolder.buttonApplyLoan.setOnClickListener {
 
-                  viewHolder.buttonApplyLoan.setOnClickListener {
+                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
+                        if (event.action == MotionEvent.ACTION_UP) {
 
-                        callBackObj.onClickLoanList("LPK")
-
+                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
+                                callBackObj.onClickLoanList("LPK")
+                            } else {
+                                CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
+                            }
+                            true
+                        } else false
                     }
+
 
                 }
 
