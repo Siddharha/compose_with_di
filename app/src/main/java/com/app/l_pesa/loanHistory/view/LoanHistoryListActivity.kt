@@ -59,7 +59,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
                     else
                     {
                         tabLayout!!.getTabAt(1)!!.select()
-                        sharedPref.openTabLoan="CURRENT"
+                        sharedPref.openTabLoan="BUSINESS"
                     }
                 }, 100)
     }
@@ -73,7 +73,17 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
     }
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
-        viewPager!!.currentItem = p0!!.position
+
+       viewPager!!.currentItem = p0!!.position
+        val sharedPref= SharedPref(this@LoanHistoryListActivity)
+        if(viewPager!!.currentItem==0)
+        {
+            sharedPref.openTabLoan="CURRENT"
+        }
+        else
+        {
+            sharedPref.openTabLoan="BUSINESS"
+        }
 
     }
 
