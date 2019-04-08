@@ -180,10 +180,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 
-    override fun onEditWindow(imgEdit: ImageButton) {
+    override fun onEditWindow(imgEdit: ImageButton, btnWithdrawalShow: Boolean, btnReinvestShow: Boolean, btnExitPointShow: Boolean) {
 
         dismissPopup()
-        filterPopup = showAlertFilter()
+        filterPopup = showAlertFilter(btnWithdrawalShow,btnReinvestShow,btnExitPointShow)
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -193,13 +193,13 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
 
     @SuppressLint("InflateParams")
-    private fun showAlertFilter(): PopupWindow {
+    private fun showAlertFilter(btnWithdrawalShow: Boolean, btnReinvestShow: Boolean, btnExitPointShow: Boolean): PopupWindow {
 
         val filterItemList = mutableListOf<ModelWindowHistory>()
 
-        filterItemList.add(ModelWindowHistory(resources.getString(R.string.withdrawal)))
-        filterItemList.add(ModelWindowHistory(resources.getString(R.string.reinvestment)))
-        filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point)))
+        filterItemList.add(ModelWindowHistory(resources.getString(R.string.withdrawal),btnWithdrawalShow))
+        filterItemList.add(ModelWindowHistory(resources.getString(R.string.reinvestment),btnReinvestShow))
+        filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point),btnExitPointShow))
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_only_recyclerview, null)
@@ -215,7 +215,6 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         adapter.setOnClick(object : ICallBackRecyclerCallbacks<ModelWindowHistory> {
             override fun onItemClick(view: View, position: Int, item:ModelWindowHistory) {
                 selectedItem = position
-
                 dismissPopup()
             }
         })

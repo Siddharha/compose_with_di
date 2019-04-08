@@ -30,8 +30,11 @@ class AdapterWindowInvestmentHistory(val context: Context) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: MyViewHolder, p1: Int) {
         val item = filerList[p1]
+        if(!filerList[p1].status)
+        {
+            holder.tvName.isEnabled=false
+        }
         holder.tvName.text = item.name
-        holder.imgIcon.visibility=View.GONE
 
     }
 
@@ -41,7 +44,7 @@ class AdapterWindowInvestmentHistory(val context: Context) : RecyclerView.Adapte
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): MyViewHolder {
-        val view = LayoutInflater.from(p0.context).inflate(R.layout.layout_popup_window,p0,false)
+        val view = LayoutInflater.from(p0.context).inflate(R.layout.layout_popup_window_investment,p0,false)
         return MyViewHolder(view)
     }
 
@@ -51,12 +54,11 @@ class AdapterWindowInvestmentHistory(val context: Context) : RecyclerView.Adapte
 
     inner class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
-        var tvName      : TextView   = itemView.findViewById(R.id.alert_filter_name)
-        var imgIcon     : ImageView  = itemView.findViewById(R.id.alert_filter_icon)
-        var filterLayout:ConstraintLayout = itemView.findViewById(R.id.alert_filter_item_layout)
+        var tvName      : TextView          = itemView.findViewById(R.id.txtData)
+        var rootLayout  : ConstraintLayout  = itemView.findViewById(R.id.rootLayout)
 
         init {
-            setClickListener(filterLayout)
+            setClickListener(rootLayout)
         }
 
         private fun setClickListener(view: View) {

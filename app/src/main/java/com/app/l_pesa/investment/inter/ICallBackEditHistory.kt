@@ -4,5 +4,5 @@ import android.widget.ImageButton
 
 interface ICallBackEditHistory {
 
-    fun onEditWindow(imgEdit: ImageButton)
+    fun onEditWindow(imgEdit: ImageButton, btnWithdrawalShow: Boolean, btnReinvestShow: Boolean, btnExitPointShow: Boolean)
 }

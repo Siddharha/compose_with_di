@@ -127,7 +127,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imgEdit.visibility=View.VISIBLE
                 itemView.imgEdit.setOnClickListener {
 
-                    callBack.onEditWindow(itemView.imgEdit)
+                    callBack.onEditWindow(itemView.imgEdit,investmentList.actionState.btnWithdrawalShow,investmentList.actionState.btnReinvestShow,investmentList.actionState.btnExitPointShow)
                 }
             }
 
