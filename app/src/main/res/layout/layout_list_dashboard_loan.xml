@@ -62,24 +62,48 @@
                 android:visibility="invisible"
                 android:background="@color/divider_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_apply_loan"
+                app:layout_constraintEnd_toStartOf="@+id/hh"
                 app:layout_constraintStart_toEndOf="@+id/textView74"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/btn_apply_loan"
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/hh"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_23sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:background="@drawable/bg_button_grey"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/lets_do"
-                android:textAllCaps="false"
-                android:textColor="@color/colorSemiWhite"
-                android:textSize="@dimen/_10sdp"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/viewDividerTwo"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView74" />
+                app:layout_constraintTop_toTopOf="@+id/textView74" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+
+                    <com.app.l_pesa.common.CustomButtonRegular
+                        android:id="@+id/btn_apply_loan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_23sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/bg_button_grey"
+                        android:fontFamily="@font/montserrat"
+                        android:text="@string/lets_do"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorSemiWhite"
+                        android:textSize="@dimen/_10sdp"
+                        />
+
+                </RelativeLayout>
+
+
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
 
             <View
                 android:id="@+id/viewDividerTwo"
