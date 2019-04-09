@@ -3,15 +3,22 @@ package com.app.l_pesa.loanHistory.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.loanHistory.inter.ICallBackPaymentHistory
+import com.app.l_pesa.loanHistory.model.ResPaymentHistory
+import com.app.l_pesa.loanHistory.presenter.PresenterPaymentHistory
 
 import kotlinx.android.synthetic.main.activity_loan_payment_history.*
+import kotlinx.android.synthetic.main.content_loan_payment_history.*
+import java.util.ArrayList
 
-class LoanPaymentHistory : AppCompatActivity() {
+class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +27,53 @@ class LoanPaymentHistory : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanPaymentHistory)
 
+        initData()
+        swipeRefresh()
 
+    }
+
+    private fun initData()
+    {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+
+        val bundle     = intent.extras
+        val loanType   = bundle!!.getString("LOAN_TYPE")
+        val loanId     = bundle.getString("LOAN_ID")
+
+        if(CommonMethod.isNetworkAvailable(this@LoanPaymentHistory))
+        {
+            swipeRefreshLayout.isRefreshing=true
+            val presenterPaymentHistory= PresenterPaymentHistory()
+            presenterPaymentHistory.getPaymentHistory(this@LoanPaymentHistory,loanType!!,this)
+        }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,this@LoanPaymentHistory,resources.getString(R.string.no_internet))
+        }
+    }
+
+    private fun swipeRefresh()
+    {
+
+        swipeRefreshLayout.setOnRefreshListener {
+        initData()
+        }
+    }
+
+    override fun onSuccessPaymentHistory(paymentHistory: ArrayList<ResPaymentHistory.PaymentHistory>) {
+
+        swipeRefreshLayout.isRefreshing=false
+        Toast.makeText(this@LoanPaymentHistory,""+paymentHistory.size,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onEmptyPaymentHistory() {
+
+        swipeRefreshLayout.isRefreshing=false
+    }
+
+    override fun onErrorPaymentHistory(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
     }
 
     private fun toolbarFont(context: Activity) {

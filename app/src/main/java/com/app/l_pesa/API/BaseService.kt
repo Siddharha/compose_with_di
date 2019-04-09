@@ -7,6 +7,7 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
+import com.app.l_pesa.loanHistory.model.ResPaymentHistory
 import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
@@ -134,6 +135,9 @@ interface BaseService{
 
     @POST("user/wallet_address")
     fun doWalletAddress(@Body request: JsonObject): Observable<ResWalletAddress>
+
+    @GET("user/payment_history")
+    fun getPaymentHistory(@Query("type_name") type_name:String): Observable<ResPaymentHistory>
 
 
 }
