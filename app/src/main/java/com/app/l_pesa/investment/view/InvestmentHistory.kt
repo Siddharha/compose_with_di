@@ -25,7 +25,6 @@ import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
-import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
@@ -181,10 +180,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 
-    override fun onEditWindow(imgEdit: ImageButton, actionState: ResInvestmentHistory.ActionState) {
+    override fun onEditWindow(imgEdit: ImageButton, investmentList: ResInvestmentHistory.UserInvestment) {
 
         dismissPopup()
-        filterPopup = showAlertFilter(actionState)
+        filterPopup = showAlertFilter(investmentList)
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -194,21 +193,21 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
 
     @SuppressLint("InflateParams")
-    private fun showAlertFilter(actionState: ResInvestmentHistory.ActionState): PopupWindow {
+    private fun showAlertFilter(investmentList: ResInvestmentHistory.UserInvestment): PopupWindow {
 
         val filterItemList = mutableListOf<ModelWindowHistory>()
 
-        if(actionState.btnWithdrawalShow)
+        if(investmentList.actionState.btnWithdrawalShow)
         {
-            filterItemList.add(ModelWindowHistory(resources.getString(R.string.withdrawal),actionState.btnWithdrawalShow))
+            filterItemList.add(ModelWindowHistory(resources.getString(R.string.withdrawal),investmentList.actionState.btnWithdrawalShow))
         }
-        if(actionState.btnReinvestShow)
+        if(investmentList.actionState.btnReinvestShow)
         {
-            filterItemList.add(ModelWindowHistory(resources.getString(R.string.reinvestment),actionState.btnReinvestShow))
+            filterItemList.add(ModelWindowHistory(resources.getString(R.string.reinvestment),investmentList.actionState.btnReinvestShow))
         }
-        if(actionState.btnExitPointShow)
+        if(investmentList.actionState.btnExitPointShow)
         {
-            filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point),actionState.btnExitPointShow))
+            filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point),investmentList.actionState.btnExitPointShow))
         }
 
 
@@ -227,9 +226,20 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             override fun onItemClick(view: View, position: Int, modelWindowHistory: String) {
                 selectedItem = position
 
-                if(actionState.btnExitPointStatus=="disable" && modelWindowHistory==resources.getString(R.string.exit_point))
+                if(investmentList.actionState.btnExitPointStatus=="disable" && modelWindowHistory==resources.getString(R.string.exit_point))
                 {
-                  Toast.makeText(activity,actionState.btnExitPointStatusMessage,Toast.LENGTH_SHORT).show()
+                  Toast.makeText(activity,investmentList.actionState.btnExitPointStatusMessage,Toast.LENGTH_SHORT).show()
+                }
+                else if(modelWindowHistory==resources.getString(R.string.withdrawal))
+                {
+                  if(CommonMethod.isNetworkAvailable(activity!!))
+                  {
+
+                  }
+                  else
+                  {
+                     CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                  }
                 }
                 dismissPopup()
             }

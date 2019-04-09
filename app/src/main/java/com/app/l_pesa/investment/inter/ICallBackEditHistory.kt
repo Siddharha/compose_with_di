@@ -5,5 +5,5 @@ import com.app.l_pesa.investment.model.ResInvestmentHistory
 
 interface ICallBackEditHistory {
 
-    fun onEditWindow(imgEdit: ImageButton, btnWithdrawalShow: ResInvestmentHistory.ActionState)
+    fun onEditWindow(imgEdit: ImageButton, investmentList: ResInvestmentHistory.UserInvestment)
 }
