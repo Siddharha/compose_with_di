@@ -74,7 +74,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     private fun initUI()
     {
-        listInvestment      = ArrayList()
+        listInvestment             = ArrayList()
         adapterInvestmentHistory   = InvestmentHistoryAdapter(activity!!, listInvestment!!,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -277,6 +277,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("deposit_id",investment_id)
+        println("JSON___W"+jsonObject.toString())
         val presenterInvestmentWithdrawal= PresenterInvestmentWithdrawal()
         presenterInvestmentWithdrawal.doInvestmentWithdrawal(activity!!,this,jsonObject)
     }
@@ -286,6 +287,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("deposit_id",investment_id)
+        println("JSON___R"+jsonObject.toString())
         val presenterInvestmentReinvestment= PresenterInvestmentReinvestment()
         presenterInvestmentReinvestment.doReinvestment(activity!!,this,jsonObject)
     }
@@ -295,6 +297,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("deposit_id",investment_id)
+        println("JSON___E"+jsonObject.toString())
         val presenterInvestmentExitPoint= PresenterInvestmentExitPoint()
         presenterInvestmentExitPoint.doInvestmentExitPoint(activity!!,this,jsonObject)
     }
