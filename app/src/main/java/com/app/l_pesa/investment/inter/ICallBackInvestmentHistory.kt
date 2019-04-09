@@ -15,4 +15,7 @@ interface ICallBackInvestmentHistory {
 
     fun onSuccessReinvestment()
     fun onErrorReinvestment(message: String)
+
+    fun onSuccessExitPoint()
+    fun onErrorExitPoint(message: String)
 }

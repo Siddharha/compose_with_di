@@ -24,6 +24,7 @@ import com.app.l_pesa.investment.inter.ICallBackInvestmentHistory
 import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
+import com.app.l_pesa.investment.presenter.PresenterInvestmentExitPoint
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentReinvestment
 import com.app.l_pesa.investment.presenter.PresenterInvestmentWithdrawal
@@ -32,8 +33,6 @@ import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory {
-
-
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
@@ -230,6 +229,18 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 {
                   Toast.makeText(activity,investmentList.actionState.btnExitPointStatusMessage,Toast.LENGTH_SHORT).show()
                 }
+                else if(investmentList.actionState.btnExitPointStatus=="enable" && modelWindowHistory==resources.getString(R.string.exit_point))
+                {
+                    if(CommonMethod.isNetworkAvailable(activity!!))
+                    {
+
+                        investmentExitPoint(investmentList.investment_id.toString())
+                    }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                    }
+                }
                 else if(modelWindowHistory==resources.getString(R.string.withdrawal))
                 {
                   if(CommonMethod.isNetworkAvailable(activity!!))
@@ -279,6 +290,15 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         presenterInvestmentReinvestment.doReinvestment(activity!!,this,jsonObject)
     }
 
+    private fun investmentExitPoint(investment_id: String)
+    {
+        swipeRefreshLayout.isRefreshing = true
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("deposit_id",investment_id)
+        val presenterInvestmentExitPoint= PresenterInvestmentExitPoint()
+        presenterInvestmentExitPoint.doInvestmentExitPoint(activity!!,this,jsonObject)
+    }
+
     override fun onSuccessInvestmentWithdrawal() {
 
         swipeRefresh()
@@ -295,6 +315,15 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     override fun onErrorReinvestment(message: String) {
+        swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSuccessExitPoint() {
+        swipeRefresh()
+    }
+
+    override fun onErrorExitPoint(message: String) {
         swipeRefreshLayout.isRefreshing = false
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }

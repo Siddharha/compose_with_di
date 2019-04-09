@@ -114,6 +114,9 @@ interface BaseService{
     @POST("investment/reinvest")
     fun doInvestmentReinvestment(@Body request: JsonObject): Observable<ResInvestmentReinvest>
 
+    @POST("investment/exitpoint")
+    fun doInvestmentExitPoint(@Body request: JsonObject): Observable<ResInvestmentExitPoint>
+
     @POST("lpk_savings/token_transfer")
     fun doTokenTransfer(@Body request: JsonObject): Observable<ResTokenTransfer>
 
