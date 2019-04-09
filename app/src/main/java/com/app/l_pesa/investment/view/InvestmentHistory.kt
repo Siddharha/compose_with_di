@@ -95,11 +95,6 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     override fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?) {
 
-        swipeRefreshLayout.isRefreshing    = false
-        val investmentHistoryAdapter       = InvestmentHistoryAdapter(activity!!, userInvestment,this)
-        rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rvLoan.adapter                     = investmentHistoryAdapter
-
         activity!!.runOnUiThread {
             hasNext =cursors!!.hasNext
             after   =cursors.after
