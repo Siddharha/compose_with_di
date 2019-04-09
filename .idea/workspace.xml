@@ -21,8 +21,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dcb9a0f-2251-4036-b270-e9f0e752bc92" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_payment_history_list.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_payment_history_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_payment_history_list.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +74,7 @@
           <entry key="java" value="251" />
           <entry key="kt" value="28933" />
           <entry key="pro" value="35" />
-          <entry key="xml" value="20868" />
+          <entry key="xml" value="21148" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -85,7 +84,7 @@
           <entry key="Kotlin" value="28933" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="ProGuard File" value="35" />
-          <entry key="XML" value="20868" />
+          <entry key="XML" value="21148" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -137,18 +136,23 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_payment_history_list.xml">
           <provider selected="true" editor-type-id="android-designer2" />
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="-180">
-              <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+            <state relative-caret-position="247">
+              <caret line="68" column="42" lean-forward="true" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
               <folding>
-                <element signature="e#461#477#0" expanded="true" />
                 <element signature="e#508#522#0" expanded="true" />
-                <element signature="e#784#802#0" expanded="true" />
-                <element signature="e#836#851#0" expanded="true" />
-                <element signature="e#886#901#0" expanded="true" />
-                <element signature="e#1985#2000#0" expanded="true" />
-                <element signature="e#2035#2050#0" expanded="true" />
-                <element signature="e#2090#2108#0" expanded="true" />
-                <element signature="e#2411#2425#0" expanded="true" />
+                <element signature="e#792#810#0" expanded="true" />
+                <element signature="e#844#859#0" expanded="true" />
+                <element signature="e#894#909#0" expanded="true" />
+                <element signature="e#1109#1123#0" expanded="true" />
+                <element signature="e#2111#2126#0" expanded="true" />
+                <element signature="e#2161#2176#0" expanded="true" />
+                <element signature="e#2216#2234#0" expanded="true" />
+                <element signature="e#2580#2594#0" expanded="true" />
+                <element signature="e#2954#2968#0" expanded="true" />
+                <element signature="e#3009#3023#0" expanded="true" />
+                <element signature="e#3135#3150#0" expanded="true" />
+                <element signature="e#3185#3200#0" expanded="true" />
+                <element signature="e#3138#3152#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -170,7 +174,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>repayments</find>
       <find>txtMax</find>
       <find>txtRepayments</find>
       <find>setBackgroundResource</find>
@@ -200,6 +203,7 @@
       <find>bundle!!.getString(&quot;LOAN_TYPE&quot;)</find>
       <find>app:popupTheme=&quot;@style/AppTheme.PopupOverlay&quot;</find>
       <find>CardV</find>
+      <find>textView39</find>
     </findStrings>
     <replaceStrings>
       <replace>userEmploymentInfo!!</replace>
@@ -4249,18 +4253,23 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_payment_history_list.xml">
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="-180">
-          <caret line="45" column="17" lean-forward="true" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
+        <state relative-caret-position="247">
+          <caret line="68" column="42" lean-forward="true" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
           <folding>
-            <element signature="e#461#477#0" expanded="true" />
             <element signature="e#508#522#0" expanded="true" />
-            <element signature="e#784#802#0" expanded="true" />
-            <element signature="e#836#851#0" expanded="true" />
-            <element signature="e#886#901#0" expanded="true" />
-            <element signature="e#1985#2000#0" expanded="true" />
-            <element signature="e#2035#2050#0" expanded="true" />
-            <element signature="e#2090#2108#0" expanded="true" />
-            <element signature="e#2411#2425#0" expanded="true" />
+            <element signature="e#792#810#0" expanded="true" />
+            <element signature="e#844#859#0" expanded="true" />
+            <element signature="e#894#909#0" expanded="true" />
+            <element signature="e#1109#1123#0" expanded="true" />
+            <element signature="e#2111#2126#0" expanded="true" />
+            <element signature="e#2161#2176#0" expanded="true" />
+            <element signature="e#2216#2234#0" expanded="true" />
+            <element signature="e#2580#2594#0" expanded="true" />
+            <element signature="e#2954#2968#0" expanded="true" />
+            <element signature="e#3009#3023#0" expanded="true" />
+            <element signature="e#3135#3150#0" expanded="true" />
+            <element signature="e#3185#3200#0" expanded="true" />
+            <element signature="e#3138#3152#0" expanded="true" />
           </folding>
         </state>
       </provider>
