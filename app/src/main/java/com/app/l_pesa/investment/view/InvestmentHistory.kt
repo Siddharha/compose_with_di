@@ -21,6 +21,7 @@ import com.app.l_pesa.investment.adapter.AdapterWindowInvestmentHistory
 import com.app.l_pesa.investment.adapter.InvestmentHistoryAdapter
 import com.app.l_pesa.investment.inter.ICallBackEditHistory
 import com.app.l_pesa.investment.inter.ICallBackInvestmentHistory
+import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
@@ -154,7 +155,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            val actionStatusModel= ResInvestmentHistory.ActionState(false,false,false)
+            val actionStatusModel= ResInvestmentHistory.ActionState(false,false,false,"","")
             val loanStatusModel  = ResInvestmentHistory.UserInvestment(0, 0,0,0,"","","","",
                                    "","","","",0.0,0.0,0.0,0.0,actionStatusModel)
 
@@ -180,10 +181,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 
-    override fun onEditWindow(imgEdit: ImageButton, btnWithdrawalShow: Boolean, btnReinvestShow: Boolean, btnExitPointShow: Boolean) {
+    override fun onEditWindow(imgEdit: ImageButton, actionState: ResInvestmentHistory.ActionState) {
 
         dismissPopup()
-        filterPopup = showAlertFilter(btnWithdrawalShow,btnReinvestShow,btnExitPointShow)
+        filterPopup = showAlertFilter(actionState)
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -193,13 +194,23 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
 
     @SuppressLint("InflateParams")
-    private fun showAlertFilter(btnWithdrawalShow: Boolean, btnReinvestShow: Boolean, btnExitPointShow: Boolean): PopupWindow {
+    private fun showAlertFilter(actionState: ResInvestmentHistory.ActionState): PopupWindow {
 
         val filterItemList = mutableListOf<ModelWindowHistory>()
 
-        filterItemList.add(ModelWindowHistory(resources.getString(R.string.withdrawal),btnWithdrawalShow))
-        filterItemList.add(ModelWindowHistory(resources.getString(R.string.reinvestment),btnReinvestShow))
-        filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point),btnExitPointShow))
+        if(actionState.btnWithdrawalShow)
+        {
+            filterItemList.add(ModelWindowHistory(resources.getString(R.string.withdrawal),actionState.btnWithdrawalShow))
+        }
+        if(actionState.btnReinvestShow)
+        {
+            filterItemList.add(ModelWindowHistory(resources.getString(R.string.reinvestment),actionState.btnReinvestShow))
+        }
+        if(actionState.btnExitPointShow)
+        {
+            filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point),actionState.btnExitPointShow))
+        }
+
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_only_recyclerview, null)
@@ -212,9 +223,14 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         recyclerView.adapter = adapter
         adapter.selectedItem(selectedItem)
 
-        adapter.setOnClick(object : ICallBackRecyclerCallbacks<ModelWindowHistory> {
-            override fun onItemClick(view: View, position: Int, item:ModelWindowHistory) {
+        adapter.setOnClick(object : ICallBackPopUpWindow {
+            override fun onItemClick(view: View, position: Int, modelWindowHistory: String) {
                 selectedItem = position
+
+                if(actionState.btnExitPointStatus=="disable" && modelWindowHistory==resources.getString(R.string.exit_point))
+                {
+                  Toast.makeText(activity,actionState.btnExitPointStatusMessage,Toast.LENGTH_SHORT).show()
+                }
                 dismissPopup()
             }
         })

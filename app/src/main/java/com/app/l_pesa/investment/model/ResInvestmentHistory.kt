@@ -75,7 +75,10 @@ class ResInvestmentHistory {
 
             val btnWithdrawalShow:Boolean,
             val btnReinvestShow:Boolean,
-            val btnExitPointShow:Boolean
+            val btnExitPointShow:Boolean,
+
+            val btnExitPointStatus:String,
+            val btnExitPointStatusMessage:String
     )
 
 
