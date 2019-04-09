@@ -139,6 +139,27 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
             }
         }
 
+        ll_payment_history.setOnClickListener {
+
+            if(CommonMethod.isNetworkAvailable(this@LoanHistoryDetailsActivity))
+            {
+                shared.payFullAmount=loanHistoryData.loan_status
+                val bundle     = intent.extras
+                val loanType   = bundle!!.getString("LOAN_TYPE")
+                bundle.putString("LOAN_TYPE",loanType)
+                bundle.putString("LOAN_ID",loanHistoryData.loan_id.toString())
+                val intent = Intent(this@LoanHistoryDetailsActivity, LoanPaymentHistory::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent,bundle)
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+            }
+            else
+            {
+                customSnackBarError(rlRoot,resources.getString(R.string.no_internet))
+            }
+        }
+
 
     }
 

@@ -26,6 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".loanHistory.view.LoanPaymentHistory"
+            android:label="@string/payment_history"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
             android:name=".lpk.view.LPKWithdrawalActivity"
             android:label="@string/lpk_withdrawal"
             android:screenOrientation="portrait"
