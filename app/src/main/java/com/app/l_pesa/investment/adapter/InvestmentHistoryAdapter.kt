@@ -88,7 +88,12 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtAmount.text       = investmentList.currency_code+" "+investmentList.maturity_amount.toString()
             }
             itemView.txtDepositAmount.text    = investmentList.currency_code+" "+investmentList.deposit_amount.toString()
-            itemView.txtMaturityDate.text     = CommonMethod.dateConvert(investmentList.maturity_date)
+
+            if(investmentList.deposit_status!="P")
+            {
+                itemView.txtMaturityDate.text     = CommonMethod.dateConvert(investmentList.maturity_date)
+            }
+
             itemView.txtDurationTime.text     = " "+investmentList.deposit_month.toString()
             itemView.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList.applied_date)
             if(investmentList.deposit_status=="IA")
@@ -130,7 +135,6 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                     callBack.onEditWindow(itemView.imgEdit,investmentList.actionState.btnWithdrawalShow,investmentList.actionState.btnReinvestShow,investmentList.actionState.btnExitPointShow)
                 }
             }
-
 
 
 

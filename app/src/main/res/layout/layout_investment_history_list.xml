@@ -256,14 +256,14 @@
             android:id="@+id/txtStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:gravity="center|start"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintTop_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view4"
-             />
+            />
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtDurationTime"
