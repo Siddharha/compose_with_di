@@ -25,12 +25,14 @@ import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
+import com.app.l_pesa.investment.presenter.PresenterInvestmentReinvestment
 import com.app.l_pesa.investment.presenter.PresenterInvestmentWithdrawal
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory {
+
 
 
     private var filterPopup : PopupWindow? = null
@@ -240,6 +242,18 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                      CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                   }
                 }
+                else if(modelWindowHistory==resources.getString(R.string.reinvestment))
+                {
+                    if(CommonMethod.isNetworkAvailable(activity!!))
+                    {
+
+                        investmentReinvest(investmentList.investment_id.toString())
+                    }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                    }
+                }
                 dismissPopup()
             }
         })
@@ -256,6 +270,15 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         presenterInvestmentWithdrawal.doInvestmentWithdrawal(activity!!,this,jsonObject)
     }
 
+    private fun investmentReinvest(investment_id: String)
+    {
+        swipeRefreshLayout.isRefreshing = true
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("deposit_id",investment_id)
+        val presenterInvestmentReinvestment= PresenterInvestmentReinvestment()
+        presenterInvestmentReinvestment.doReinvestment(activity!!,this,jsonObject)
+    }
+
     override fun onSuccessInvestmentWithdrawal() {
 
         swipeRefresh()
@@ -263,6 +286,15 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     override fun onErrorInvestmentWithdrawal(message: String) {
 
+        swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSuccessReinvestment() {
+        swipeRefresh()
+    }
+
+    override fun onErrorReinvestment(message: String) {
         swipeRefreshLayout.isRefreshing = false
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
