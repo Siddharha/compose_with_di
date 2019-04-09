@@ -25,10 +25,13 @@ import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
+import com.app.l_pesa.investment.presenter.PresenterInvestmentWithdrawal
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
 
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory {
+
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
@@ -235,6 +238,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                   if(CommonMethod.isNetworkAvailable(activity!!))
                   {
 
+                     investmentWithdrawal(investmentList.investment_id.toString())
                   }
                   else
                   {
@@ -246,5 +250,25 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         })
 
         return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    private fun investmentWithdrawal(investment_id: String)
+    {
+        swipeRefreshLayout.isRefreshing = true
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("deposit_id",investment_id)
+        val presenterInvestmentWithdrawal= PresenterInvestmentWithdrawal()
+        presenterInvestmentWithdrawal.doInvestmentWithdrawal(activity!!,this,jsonObject)
+    }
+
+    override fun onSuccessInvestmentWithdrawal() {
+
+        swipeRefresh()
+    }
+
+    override fun onErrorInvestmentWithdrawal(message: String) {
+
+        swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }

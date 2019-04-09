@@ -5,6 +5,7 @@ import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.investment.model.ResApplyInvestment
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.model.ResInvestmentPlan
+import com.app.l_pesa.investment.model.ResInvestmentWithdrawal
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.model.ResLoanPlans
@@ -109,6 +110,9 @@ interface BaseService{
 
     @POST("investment/apply")
     fun doInvestmentApply(@Body request: JsonObject): Observable<ResApplyInvestment>
+
+    @POST("investment/withdrawal")
+    fun doInvestmentWithdrawal(@Body request: JsonObject): Observable<ResInvestmentWithdrawal>
 
     @POST("lpk_savings/token_transfer")
     fun doTokenTransfer(@Body request: JsonObject): Observable<ResTokenTransfer>
