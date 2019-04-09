@@ -305,6 +305,7 @@
     <string name="maturity_amount">Maturity Amount</string>
     <string name="maturity_on">Maturity On</string>
     <string name="want_to_apply_loan">Do you want to apply for this loan?</string>
+    <string name="active">Active</string>
 
     <!-- ID Information-->
     <string name="id_information">ID Information</string>
