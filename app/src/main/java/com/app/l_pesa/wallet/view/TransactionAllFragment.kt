@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
+import kotlinx.android.synthetic.main.layout_recycler.*
 
 class TransactionAllFragment:Fragment() {
 
@@ -24,6 +26,24 @@ class TransactionAllFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipeRefresh()
+        initData()
+
+    }
+
+    private fun swipeRefresh()
+    {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+            initData()
+        }
+    }
+
+    private fun initData()
+    {
+
+        val presenterTransactionAll= PresenterTransactionAll()
+        presenterTransactionAll.getTransactionAll()
 
     }
 }

@@ -20,6 +20,7 @@ import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.registration.model.ResRegistrationThree
 import com.app.l_pesa.registration.model.ResRegistrationTwo
 import com.app.l_pesa.splash.model.ResModelCountry
+import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawal
 import com.google.gson.JsonObject
 import io.reactivex.Observable
@@ -142,6 +143,10 @@ interface BaseService{
 
     @GET("user/payment_history")
     fun getPaymentHistory(@Query("type_name") type_name:String): Observable<ResPaymentHistory>
+
+
+    @GET("lpesa_wallet/history")
+    fun getWalletHistory(): Observable<ResWalletHistory>
 
 
 }
