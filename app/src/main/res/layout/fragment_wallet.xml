@@ -113,14 +113,14 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp">
 
             <com.app.l_pesa.common.CommonInputLayout
                 android:id="@+id/commonInputLayout5"
                 style="@style/customInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="@dimen/_7sdp"
                 app:layout_constraintBottom_toTopOf="@+id/buttonWithdraw"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -144,10 +144,9 @@
             <Button
                 android:id="@+id/buttonWithdraw"
                 style="?android:attr/borderlessButtonStyle"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/ripple_green_button"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/withdraw"
@@ -170,22 +169,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/_10sdp"
+        android:weightSum="1"
         >
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/imgTransactionHistory"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_130sdp"
+            android:layout_width="0dp"
+            android:layout_weight=".50"
             android:layout_height="@dimen/_50sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
             android:background="@drawable/ic_wallet_transaction_history_bg" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/imgWithdrawalHistory"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_130sdp"
+            android:layout_width="0dp"
+            android:layout_weight=".50"
             android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_7sdp"
             android:background="@drawable/ic_wallet_withdrawal_history_bg" />
 
     </LinearLayout>

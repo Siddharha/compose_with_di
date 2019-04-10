@@ -1,5 +1,6 @@
 package com.app.l_pesa.wallet.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -79,6 +80,14 @@ class WalletFragment :Fragment(), ICallBackWallet {
                     CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                 }
             }
+
+        }
+
+        imgTransactionHistory.setOnClickListener {
+
+            val intent = Intent(activity, TransactionHistoryActivity::class.java)
+            startActivity(intent)
+            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
         }
     }

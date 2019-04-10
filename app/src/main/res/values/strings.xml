@@ -395,6 +395,11 @@
     <string name="commission_for_l_pesa">Commission for Lpesa</string>
     <string name="withdrawal_amount">Withdrawal Amount</string>
     <string name="required_withdrawal_amount">Required Withdrawal Amount</string>
+    <string name="wallet_history">L-Pesa Wallet History</string>
+
+    <string name="all">All</string>
+    <string name="credit">Credit</string>
+    <string name="debit">Debit</string>
 
 
 </resources>
