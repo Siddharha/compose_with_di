@@ -63,7 +63,7 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
     override fun onSuccessPaymentHistory(paymentHistory: ArrayList<ResPaymentHistory.PaymentHistory>) {
 
         swipeRefreshLayout.isRefreshing=false
-        Toast.makeText(this@LoanPaymentHistory,""+paymentHistory.size,Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onEmptyPaymentHistory() {
