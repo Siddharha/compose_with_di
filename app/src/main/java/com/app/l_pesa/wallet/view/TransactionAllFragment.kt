@@ -5,11 +5,16 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.wallet.inter.ICallBackTransaction
+import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
 import kotlinx.android.synthetic.main.layout_recycler.*
+import java.util.ArrayList
 
-class TransactionAllFragment:Fragment() {
+class TransactionAllFragment:Fragment(), ICallBackTransaction {
+
 
 
     companion object {
@@ -43,7 +48,20 @@ class TransactionAllFragment:Fragment() {
     {
 
         val presenterTransactionAll= PresenterTransactionAll()
-        presenterTransactionAll.getTransactionAll()
+        presenterTransactionAll.getTransactionAll(activity!!,this)
+
+    }
+
+    override fun onSuccessTransaction(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>) {
+
+        Toast.makeText(activity,""+savingsHistory.size,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onEmptyTransaction() {
+
+    }
+
+    override fun onErrorTransaction(message: String) {
 
     }
 }

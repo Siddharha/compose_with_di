@@ -5,7 +5,7 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.wallet.inter.ICallBackWallet
+import com.app.l_pesa.wallet.inter.ICallBackTransaction
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
@@ -13,7 +13,7 @@ import retrofit2.HttpException
 
 class PresenterTransactionAll {
 
-    fun getTransactionAll(contextOBJ: Context, callBackOBJ: ICallBackWallet) {
+    fun getTransactionAll(contextOBJ: Context, callBackOBJ: ICallBackTransaction) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory()
@@ -26,14 +26,22 @@ class PresenterTransactionAll {
                 .subscribe({ response ->
 
                     try {
-                        /*if (response.status.isSuccess)
+                       if (response.status!!.isSuccess)
                         {
-                            callBackOBJ.onSuccessWalletWithdrawal()
+                            if(response.data!!.savingsHistory!!.size>0)
+                            {
+                                callBackOBJ.onSuccessTransaction(response.data!!.savingsHistory!!)
+                            }
+                            else
+                            {
+                                callBackOBJ.onEmptyTransaction()
+                            }
+
 
                         } else
                         {
-                            callBackOBJ.onErrorWalletWithdrawal(response.status.message)
-                        }*/
+                            callBackOBJ.onErrorTransaction(response.status!!.message)
+                        }
                     } catch (e: Exception) {
 
                     }
@@ -46,12 +54,12 @@ class PresenterTransactionAll {
                         val jsonError   = JSONObject(errorVal.response().errorBody()?.string())
                         val jsonStatus  = jsonError.getJSONObject("status")
                         val jsonMessage = jsonStatus.getString("message")
-                        callBackOBJ.onErrorWalletWithdrawal(jsonMessage)
+                        callBackOBJ.onErrorTransaction(jsonMessage)
 
 
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
-                        callBackOBJ.onErrorWalletWithdrawal(errorMessageOBJ)
+                        callBackOBJ.onErrorTransaction(errorMessageOBJ)
                     }
 
                 })
