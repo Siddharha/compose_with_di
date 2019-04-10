@@ -389,4 +389,12 @@
     <string name="lpk_withdrawal_text">Send us a request if you wish to withdraw LPK to your Ethereum wallet. We will process your request within 48 hours of application. View the status of your application in "Withdrawal History.</string>
     <string name="lpk_saving_text">Earn interest every week for the LPK within your savings wallet. This helps to maintain a healthy ratio of supply and demand, will elevate LPK\'s value that you have while you receive benefits on top of the tokens.</string>
 
+    <!--Wallet-->
+    <string name="withdraw">Withdraw</string>
+    <string name="lpesa_wallet_balance">L-PESA WALLET BALANCE</string>
+    <string name="commission_for_l_pesa">Commission for Lpesa</string>
+    <string name="withdrawal_amount">Withdrawal Amount</string>
+    <string name="required_withdrawal_amount">Required Withdrawal Amount</string>
+
+
 </resources>
