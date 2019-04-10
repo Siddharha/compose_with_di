@@ -20,6 +20,7 @@ import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.registration.model.ResRegistrationThree
 import com.app.l_pesa.registration.model.ResRegistrationTwo
 import com.app.l_pesa.splash.model.ResModelCountry
+import com.app.l_pesa.wallet.model.ResWalletWithdrawal
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -135,6 +136,9 @@ interface BaseService{
 
     @POST("user/wallet_address")
     fun doWalletAddress(@Body request: JsonObject): Observable<ResWalletAddress>
+
+    @POST("lpesa_wallet/withdrawal")
+    fun doWalletWithdrawal(@Body request: JsonObject): Observable<ResWalletWithdrawal>
 
     @GET("user/payment_history")
     fun getPaymentHistory(@Query("type_name") type_name:String): Observable<ResPaymentHistory>

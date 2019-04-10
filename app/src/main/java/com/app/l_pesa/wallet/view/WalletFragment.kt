@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.wallet.inter.ICallBackWallet
+import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_wallet.*
 
-class WalletFragment :Fragment() {
+class WalletFragment :Fragment(), ICallBackWallet {
+
 
     companion object {
         fun newInstance(): Fragment {
@@ -44,7 +48,12 @@ class WalletFragment :Fragment() {
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
+                    buttonWithdraw.isClickable=false
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("amount",etWithdrawalAmount.text.toString().trim())
 
+                    val presenterWithdrawal= PresenterWithdrawal()
+                    presenterWithdrawal.doAddWithdrawal(activity!!,jsonObject,this)
                 }
                 else
                 {
@@ -53,5 +62,16 @@ class WalletFragment :Fragment() {
             }
 
         }
+    }
+
+    override fun onSuccessWalletWithdrawal() {
+
+        buttonWithdraw.isClickable=true
+    }
+
+    override fun onErrorWalletWithdrawal(message: String) {
+
+        buttonWithdraw.isClickable=true
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }
