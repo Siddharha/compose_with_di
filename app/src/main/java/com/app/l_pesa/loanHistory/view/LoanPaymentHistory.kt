@@ -4,11 +4,13 @@ import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.loanHistory.adapter.LoanPaymentHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaymentHistory
 import com.app.l_pesa.loanHistory.model.ResPaymentHistory
 import com.app.l_pesa.loanHistory.presenter.PresenterPaymentHistory
@@ -62,7 +64,11 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
 
     override fun onSuccessPaymentHistory(paymentHistory: ArrayList<ResPaymentHistory.PaymentHistory>) {
 
-        swipeRefreshLayout.isRefreshing=false
+        swipeRefreshLayout.isRefreshing =false
+
+        val adapterPaymentSchedule       = LoanPaymentHistoryAdapter(this@LoanPaymentHistory,paymentHistory)
+        rlPaybackHistory.layoutManager   = LinearLayoutManager(this@LoanPaymentHistory, LinearLayoutManager.VERTICAL, false)
+        rlPaybackHistory.adapter         = adapterPaymentSchedule
 
     }
 

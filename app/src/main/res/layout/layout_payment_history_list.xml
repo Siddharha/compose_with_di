@@ -2,7 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
@@ -11,21 +10,20 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/_5sdp"
+        android:layout_margin="@dimen/_2sdp"
         >
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:padding="@dimen/_3sdp"
         >
-
 
         <ImageView
             android:id="@+id/imageView18"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_23sdp"
             app:srcCompat="@drawable/ic_ref_no"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -36,21 +34,21 @@
             android:id="@+id/textView16"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center|start"
-            android:textSize="@dimen/_11sdp"
-            android:text="@string/ref_no"
-            android:textColor="@color/light_text_color"
             android:fontFamily="@font/montserrat"
+            android:gravity="center|start"
             android:paddingStart="@dimen/_3sdp"
             android:paddingEnd="@dimen/_1sdp"
+            android:text="@string/reference_no"
+            android:textColor="@color/light_text_color"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintBottom_toTopOf="@+id/txtRef"
+            app:layout_constraintEnd_toStartOf="@+id/viewVertical"
             app:layout_constraintStart_toEndOf="@+id/imageView18"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/viewVertical"
-            app:layout_constraintBottom_toTopOf="@+id/textView20"
-             />
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/textView20"
+            android:id="@+id/txtRef"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center|start"
@@ -59,21 +57,22 @@
             app:layout_constraintEnd_toStartOf="@+id/viewVertical"
             android:paddingStart="@dimen/_3sdp"
             android:paddingEnd="@dimen/_1sdp"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/textColors"
             android:fontFamily="@font/montserrat"
             />
 
         <ImageView
             android:id="@+id/imageView35"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_23sdp"
             android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_7sdp"
             android:contentDescription="@string/app_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20"
             app:layout_constraintEnd_toStartOf="@+id/textView39"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRef"
             app:srcCompat="@drawable/ic_request_date" />
 
         <View
@@ -92,12 +91,13 @@
         <ImageView
             android:id="@+id/imageView36"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_23sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             app:srcCompat="@drawable/ic_loan_no_icon"
             app:layout_constraintStart_toStartOf="@+id/viewVertical"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView36"
              />
 
         <TextView
@@ -108,7 +108,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView36"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/textView37"
+            app:layout_constraintBottom_toTopOf="@+id/txtAmount"
             android:textSize="@dimen/_11sdp"
             android:text="@string/transfer_amount"
             android:textColor="@color/light_text_color"
@@ -118,13 +118,14 @@
             />
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/textView37"
+            android:id="@+id/txtAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/imageView36"
             app:layout_constraintTop_toBottomOf="@+id/textView36"
+            app:layout_constraintBottom_toTopOf="@+id/textView41"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/textColors"
             android:fontFamily="@font/montserrat"
             android:paddingStart="@dimen/_3sdp"
@@ -136,23 +137,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center|start"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:textSize="@dimen/_11sdp"
             android:text="@string/txt_id"
             android:textColor="@color/light_text_color"
             android:fontFamily="@font/montserrat"
             android:paddingStart="@dimen/_3sdp"
             android:paddingEnd="@dimen/_1sdp"
-            app:layout_constraintTop_toBottomOf="@+id/textView20"
+            app:layout_constraintTop_toBottomOf="@+id/txtRef"
             app:layout_constraintEnd_toEndOf="@+id/viewVertical"
             app:layout_constraintStart_toEndOf="@+id/imageView35"
-            app:layout_constraintBottom_toTopOf="@+id/textView40"/>
+            app:layout_constraintBottom_toTopOf="@+id/txtTxnId"/>
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/textView40"
+            android:id="@+id/txtTxnId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/textColors"
             android:fontFamily="@font/montserrat"
             android:paddingStart="@dimen/_3sdp"
@@ -165,23 +166,24 @@
         <ImageView
             android:id="@+id/imageView37"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_7sdp"
-            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_23sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             app:srcCompat="@drawable/ic_approved_icon"
+            app:layout_constraintEnd_toStartOf="@+id/textView41"
             app:layout_constraintStart_toStartOf="@+id/viewVertical"
-            app:layout_constraintTop_toBottomOf="@+id/textView37"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtAmount"/>
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/textView41"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageView37"
-            app:layout_constraintTop_toBottomOf="@+id/textView37"
-            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toBottomOf="@+id/txtAmount"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/textColors"
             android:fontFamily="@font/montserrat"
             android:paddingStart="@dimen/_3sdp"
