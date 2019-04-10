@@ -49,6 +49,7 @@ class WalletFragment :Fragment(), ICallBackWallet {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
                     buttonWithdraw.isClickable=false
+                    CommonMethod.hideKeyboardView(activity as AppCompatActivity)
                     val jsonObject = JsonObject()
                     jsonObject.addProperty("amount",etWithdrawalAmount.text.toString().trim())
 
