@@ -23,13 +23,14 @@ import java.util.*
 
 class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
-    private var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>? = null
-    private var adapterTransferHistory        : AdapterTransferHistory?                            = null
+    private lateinit var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>
+    private lateinit var adapterTransferHistory        : AdapterTransferHistory
+    private lateinit var bottomSheetBehavior           : BottomSheetBehavior<*>
 
     private var hasNext=false
     private var after=""
 
-    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
+
 
     companion object {
         fun newInstance(): Fragment {
@@ -49,8 +50,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         swipeRefresh()
 
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
-        bottomSheetBehavior!!.isHideable=true
-        bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.isHideable=true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
     }
 
@@ -82,14 +83,14 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     fun doFilter()
     {
 
-        if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HIDDEN)
+        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
 
         }
-        else
+        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
         {
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         }
 
@@ -107,7 +108,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         imgCancel.setOnClickListener {
 
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
 
         }
     }
@@ -201,9 +202,9 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
             swipeRefreshLayout.isRefreshing = false
 
-            listTransferHistory!!.clear()
-            listTransferHistory!!.addAll(userTransferHistory)
-            adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory!!)
+            listTransferHistory.clear()
+            listTransferHistory.addAll(userTransferHistory)
+            adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
             rlList.layoutManager        = llmOBJ
@@ -212,7 +213,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             hasNext =cursors!!.hasNext
             after   =cursors.after
 
-            adapterTransferHistory!!.setLoadMoreListener(object : AdapterTransferHistory.OnLoadMoreListener {
+            adapterTransferHistory.setLoadMoreListener(object : AdapterTransferHistory.OnLoadMoreListener {
                 override fun onLoadMore() {
 
                     rlList.post {
@@ -238,8 +239,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         {
             val modelActionStatus= ResTransferHistory.ActionStatus(false, "")
             val loadModel  = ResTransferHistory.UserTransferHistory(0, 0, "","","","","",modelActionStatus)
-            listTransferHistory!!.add(loadModel)
-            adapterTransferHistory!!.notifyItemInserted(listTransferHistory!!.size-1)
+            listTransferHistory.add(loadModel)
+            adapterTransferHistory.notifyItemInserted(listTransferHistory.size-1)
 
             val presenterTransferHistory = PresenterTransferHistory()
             presenterTransferHistory.getTokenHistoryPaginate(activity!!,after,this)
@@ -257,14 +258,14 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         hasNext =cursors.hasNext
         after   =cursors.after
-        if(listTransferHistory!!.size!=0)
+        if(listTransferHistory.size!=0)
         {
             try {
 
-                listTransferHistory!!.removeAt(listTransferHistory!!.size - 1)
-                adapterTransferHistory!!.notifyDataChanged()
-                listTransferHistory!!.addAll(userTransferHistory)
-                adapterTransferHistory!!.notifyItemRangeInserted(0, listTransferHistory!!.size)
+                listTransferHistory.removeAt(listTransferHistory.size - 1)
+                adapterTransferHistory.notifyDataChanged()
+                listTransferHistory.addAll(userTransferHistory)
+                adapterTransferHistory.notifyItemRangeInserted(0, listTransferHistory.size)
 
             }
             catch (e:Exception)

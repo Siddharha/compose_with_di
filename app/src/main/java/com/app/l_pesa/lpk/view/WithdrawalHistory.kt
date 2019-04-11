@@ -90,9 +90,9 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             filterDate()
 
         }
-        else
+        else if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
         {
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
 
         }
 

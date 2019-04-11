@@ -22,12 +22,13 @@ import java.util.*
 class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
 
-    private var listInterestHistory           : ArrayList<ResInterestHistory.UserInterestHistory>? = null
-    private var adapterInterestHistory        : AdapterInterestHistory?                   = null
+    private lateinit var listInterestHistory           : ArrayList<ResInterestHistory.UserInterestHistory>
+    private lateinit var adapterInterestHistory        : AdapterInterestHistory
+    private lateinit var bottomSheetBehavior           : BottomSheetBehavior<*>
 
     private var hasNext=false
     private var after=""
-    private var mBottomSheetBehavior1: BottomSheetBehavior<*>? = null
+
 
 
     companion object {
@@ -47,9 +48,9 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
         initData()
         swipeRefresh()
 
-        mBottomSheetBehavior1 = BottomSheetBehavior.from<View>(bottom_sheet)
-        mBottomSheetBehavior1!!.isHideable=true
-        mBottomSheetBehavior1!!.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
+        bottomSheetBehavior!!.isHideable=true
+        bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
 
     }
 
@@ -80,14 +81,14 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
     fun doFilter()
     {
-        if(mBottomSheetBehavior1!!.state == BottomSheetBehavior.STATE_HIDDEN)
+        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
 
         }
-        else
+        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
         {
-            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         }
 
@@ -105,7 +106,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
         imgCancel.setOnClickListener {
 
-            mBottomSheetBehavior1!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
 
         }
     }

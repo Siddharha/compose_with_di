@@ -24,8 +24,8 @@
         <ImageView
             android:id="@+id/imgFilter"
             android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_22sdp"
             android:layout_gravity="end"
             android:src="@drawable/ic_filter"
             android:layout_marginEnd="@dimen/_12sdp"
@@ -39,6 +39,20 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_transaction_history" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:background="@android:color/white"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <include
+
+            layout="@layout/layout_filter_by_date"/>
+
+    </android.support.v4.widget.NestedScrollView>
 
 
 </android.support.design.widget.CoordinatorLayout>
