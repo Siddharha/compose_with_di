@@ -85,13 +85,14 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             itemView.txtRef.text              = context.resources.getString(R.string.ref_no)+" "+investmentList.identity_number
             itemView.txtDepositAmount.text    = investmentList.currency_code+" "+investmentList.deposit_amount.toString()
 
+            itemView.txtDurationTime.text     = investmentList.deposit_month.toString()
+            itemView.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList.applied_date)
+
             if(investmentList.deposit_status!="P")
             {
                 itemView.txtMaturityDate.text     = CommonMethod.dateConvert(investmentList.maturity_date)
             }
 
-            itemView.txtDurationTime.text     = " "+investmentList.deposit_month.toString()
-            itemView.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList.applied_date)
             if(investmentList.deposit_status=="IA")
             {
                 itemView.imageView5.visibility=View.INVISIBLE

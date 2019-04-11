@@ -140,7 +140,9 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                     }
                 }
+
                 userWithdrawalHistory.status=="F" -> {
+
                     buttonStatus.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
@@ -158,7 +160,9 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                     }
                 }
+
                 userWithdrawalHistory.status=="N" -> {
+
                     buttonStatus.visibility=View.INVISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)

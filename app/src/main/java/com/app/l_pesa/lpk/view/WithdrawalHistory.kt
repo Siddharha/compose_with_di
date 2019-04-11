@@ -24,9 +24,9 @@ import kotlin.collections.ArrayList
 class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
 
-    private var listWithdrawalHistory                    : ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>? = null
-    private lateinit var adapterWithdrawalHistory        : AdapterWithdrawalHistory
-    private var bottomSheetBehavior: BottomSheetBehavior<*>? = null
+    private lateinit var listWithdrawalHistory                      : ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>
+    private lateinit var adapterWithdrawalHistory                   : AdapterWithdrawalHistory
+    private lateinit var bottomSheetBehavior                        : BottomSheetBehavior<*>
     private var hasNext=false
     private var after=""
 
@@ -48,8 +48,8 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         initData()
 
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
-        bottomSheetBehavior!!.isHideable=true
-        bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.isHideable=true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
     }
 
@@ -83,16 +83,16 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
     fun doFilter()
     {
-        if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HIDDEN)
+        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
             resetFilter()
             filterDate()
 
         }
-        else if(bottomSheetBehavior!!.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
+        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
         {
-            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         }
 
@@ -110,7 +110,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
         imgCancel.setOnClickListener {
 
-            bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
 
         }
