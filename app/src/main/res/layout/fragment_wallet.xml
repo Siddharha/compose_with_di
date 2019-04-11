@@ -107,14 +107,14 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:cardCornerRadius="@dimen/_4sdp"
         >
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp">
+            android:layout_margin="@dimen/_7sdp">
 
             <com.app.l_pesa.common.CommonInputLayout
                 android:id="@+id/commonInputLayout5"
@@ -146,7 +146,7 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/ripple_green_button"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/withdraw"
@@ -158,7 +158,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginBottom="@dimen/_7sdp"/>
+                android:layout_marginBottom="@dimen/_5sdp"/>
 
         </android.support.constraint.ConstraintLayout>
 

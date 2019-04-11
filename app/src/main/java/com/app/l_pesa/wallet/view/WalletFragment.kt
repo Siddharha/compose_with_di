@@ -44,9 +44,6 @@ class WalletFragment :Fragment(), ICallBackWallet {
     {
         progressDialog=KProgressHUD.create(activity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                //.setBackgroundColor(ContextCompat.getColor(activity!!,R.color.colorApp))
-                //.setLabel("Please wait")
-                //.setDetailsLabel("Downloading data")
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
