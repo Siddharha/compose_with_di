@@ -300,7 +300,7 @@
     <string name="required_loan_purpose">Please select the purpose of application.</string>
     <string name="required_loan_purpose_description">Please describe why you need the loan.</string>
     <string name="max_500_words">Describe within 500 words.</string>
-    <string name="ref_no">Ref.No:</string>
+    <string name="ref_no">Ref. No:</string>
     <string name="reference_no">Reference No:</string>
     <string name="txt_id">TXN ID:</string>
     <string name="transfer_amount">Transfer Amount:</string>

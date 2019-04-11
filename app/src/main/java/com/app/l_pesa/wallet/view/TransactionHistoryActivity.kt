@@ -3,23 +3,29 @@ package com.app.l_pesa.wallet.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
-import com.app.l_pesa.loanplan.model.LoanTabPager
-import com.app.l_pesa.wallet.adapter.WalletTabAdapter
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.wallet.adapter.TransactionAllAdapter
+import com.app.l_pesa.wallet.inter.ICallBackTransaction
+import com.app.l_pesa.wallet.model.ResWalletHistory
+import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
 
 import kotlinx.android.synthetic.main.activity_transaction_history.*
+import kotlinx.android.synthetic.main.layout_recycler.*
+import java.util.ArrayList
 
-class TransactionHistoryActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
+class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
-    private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+
+    private lateinit var listSavingsHistory           : ArrayList<ResWalletHistory.SavingsHistory>
+    private lateinit var adapterTransactionHistory    : TransactionAllAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,54 +34,96 @@ class TransactionHistoryActivity : AppCompatActivity(),TabLayout.OnTabSelectedLi
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@TransactionHistoryActivity)
 
-        initTab()
+        swipeRefresh()
+        initData()
 
     }
 
-    private fun initTab()
+    private fun swipeRefresh()
     {
-        tabLayout=findViewById(R.id.tabLayout)
-        viewPager=findViewById(R.id.viewPager)
-        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.all)))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.credit)))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.debit)))
-        tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-        tabLayout!!.tabMode=TabLayout.MODE_FIXED
-
-        val adapter = WalletTabAdapter(supportFragmentManager, tabLayout!!.tabCount)
-        viewPager!!.adapter = adapter
-        changeTabsFont()
-        tabLayout!!.addOnTabSelectedListener(this)
-    }
-
-    override fun onTabReselected(p0: TabLayout.Tab?) {
-
-    }
-
-    override fun onTabUnselected(p0: TabLayout.Tab?) {
-
-    }
-
-    override fun onTabSelected(p0: TabLayout.Tab?) {
-        viewPager!!.currentItem = p0!!.position
-
-    }
-
-    private fun changeTabsFont() {
-        val vg = tabLayout!!.getChildAt(0) as ViewGroup
-        val tabsCount = vg.childCount
-        for (j in 0 until tabsCount) {
-            val vgTab = vg.getChildAt(j) as ViewGroup
-            val tabChildsCount = vgTab.childCount
-            for (i in 0 until tabChildsCount) {
-                val tabViewChild = vgTab.getChildAt(i)
-                if (tabViewChild is TextView) {
-                    val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
-                    tabViewChild.typeface = face
-                }
-            }
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+            initData()
         }
     }
+
+    private fun initData()
+    {
+        listSavingsHistory           = ArrayList()
+        adapterTransactionHistory    = TransactionAllAdapter(this@TransactionHistoryActivity, listSavingsHistory)
+
+        swipeRefreshLayout.isRefreshing=true
+        val presenterTransactionAll= PresenterTransactionAll()
+        presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,this)
+
+    }
+
+    override fun onSuccessTransaction(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>) {
+
+
+        runOnUiThread {
+
+           // hasNext = cursors!!.hasNext
+            //after = cursors.after
+            swipeRefreshLayout.isRefreshing = false
+            listSavingsHistory.clear()
+            listSavingsHistory.addAll(savingsHistory)
+            adapterTransactionHistory   = TransactionAllAdapter(this@TransactionHistoryActivity, listSavingsHistory)
+            val llmOBJ                  = LinearLayoutManager(this@TransactionHistoryActivity)
+            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            rlList.layoutManager        = llmOBJ
+            rlList.adapter              = adapterTransactionHistory
+            adapterTransactionHistory.notifyDataSetChanged()
+            adapterTransactionHistory.setLoadMoreListener(object : TransactionAllAdapter.OnLoadMoreListener {
+                override fun onLoadMore() {
+
+                    rlList.post {
+
+                        /*if (hasNext)
+                        {
+                            loadMore()
+                        }*/
+
+                    }
+
+                }
+            })
+        }
+    }
+
+    private fun loadMore()
+    {
+        if(CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
+        {
+            val loadModel  = ResWalletHistory.SavingsHistory(0, 0, 0.0,
+                            "", "", "",
+                            "", "", "", "", "", "", "","")
+
+            listSavingsHistory.add(loadModel)
+            adapterTransactionHistory.notifyItemInserted(listSavingsHistory.size-1)
+
+            //val presenterWithdrawalHistory= PresenterWithdrawalHistory()
+            //presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,this)
+
+        }
+        else{
+            swipeRefreshLayout.isRefreshing = false
+            CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,resources.getString(R.string.no_internet))
+        }
+    }
+
+    override fun onEmptyTransaction() {
+
+        swipeRefreshLayout.isRefreshing=false
+    }
+
+    override fun onErrorTransaction(message: String) {
+
+        swipeRefreshLayout.isRefreshing=true
+        CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,message)
+    }
+
+
 
     private fun toolbarFont(context: Activity) {
 

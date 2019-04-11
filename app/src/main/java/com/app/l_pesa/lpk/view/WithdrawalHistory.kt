@@ -160,7 +160,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             rlList.adapter = adapterWithdrawalHistory
 
 
-            adapterWithdrawalHistory!!.setLoadMoreListener(object : AdapterWithdrawalHistory.OnLoadMoreListener {
+            adapterWithdrawalHistory.setLoadMoreListener(object : AdapterWithdrawalHistory.OnLoadMoreListener {
                 override fun onLoadMore() {
 
                     rlList.post {
@@ -186,9 +186,9 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             try {
 
                 listWithdrawalHistory!!.removeAt(listWithdrawalHistory!!.size - 1)
-                adapterWithdrawalHistory!!.notifyDataChanged()
+                adapterWithdrawalHistory.notifyDataChanged()
                 listWithdrawalHistory!!.addAll(userWithdrawalHistory)
-                adapterWithdrawalHistory!!.notifyItemRangeInserted(0, listWithdrawalHistory!!.size)
+                adapterWithdrawalHistory.notifyItemRangeInserted(0, listWithdrawalHistory!!.size)
 
             }
             catch (e:Exception)
@@ -205,12 +205,11 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
                     "", "", "", "", "","","")
 
             listWithdrawalHistory!!.add(loadModel)
-            adapterWithdrawalHistory!!.notifyItemInserted(listWithdrawalHistory!!.size-1)
+            adapterWithdrawalHistory.notifyItemInserted(listWithdrawalHistory!!.size-1)
 
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
             presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,this)
 
-            println("JSON_+++"+after)
         }
         else{
             swipeRefreshLayout.isRefreshing = false

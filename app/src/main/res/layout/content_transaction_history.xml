@@ -10,6 +10,6 @@
 
     <include
 
-        layout="@layout/layout_tab_common"/>
+        layout="@layout/layout_recycler"/>
 
 </android.support.constraint.ConstraintLayout>
