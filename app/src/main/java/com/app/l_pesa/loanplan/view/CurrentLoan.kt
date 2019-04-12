@@ -94,6 +94,7 @@ class CurrentLoan:Fragment(), ICallBackCurrentLoan {
 
         (activity as DashboardActivity).isVisibleToolbarRight(false)
         swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,jsonMessage)
     }
 
     override fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?) {
