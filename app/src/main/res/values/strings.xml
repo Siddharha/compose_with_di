@@ -182,6 +182,7 @@
     <string name="days">Days </string>
     <string name="duration">Duration:</string>
     <string name="interest_rate">Interest Rate:</string>
+    <string name="interest">Interest</string>
     <string name="interest_day">Interest/Day:</string>
     <string name="rate">Rate</string>
     <string name="empty_loan_history_message">You have\'t applied for any loans yet from L-pesa. Start your journey to financial freedom with the first loan from L-pesa.</string>

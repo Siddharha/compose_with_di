@@ -2,8 +2,11 @@ package com.app.l_pesa.investment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
+import android.text.Html
+import android.text.Spanned
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -81,11 +84,9 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
         fun  bindData(context: Context, investmentList: ResInvestmentHistory.UserInvestment, callBack: ICallBackEditHistory)
         {
 
-            itemView.txtRate.text             = investmentList.deposit_interest_rate.toString()+"%"
+            itemView.txtRate.text             = fromHtml(context.resources.getString(R.string.interest_rate)+"<font color='#3b3e42'>"+" "+ investmentList.deposit_interest_rate.toString()+"%"+"</font>")
             itemView.txtRef.text              = context.resources.getString(R.string.ref_no)+" "+investmentList.identity_number
-            itemView.txtDepositAmount.text    = investmentList.currency_code+" "+investmentList.deposit_amount.toString()
-
-           // itemView.txtDurationTime.text     = investmentList.deposit_month.toString()
+            itemView.txtDuration.text         = fromHtml(context.resources.getString(R.string.months)+"<font color='#3b3e42'>"+" "+investmentList.deposit_month.toString()+"</font>")
             itemView.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList.applied_date)
 
             if(investmentList.deposit_status!="P")
@@ -101,10 +102,10 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView6.visibility=View.INVISIBLE
                // itemView.textView8.visibility=View.INVISIBLE
                // itemView.txtMaturityDate.visibility=View.INVISIBLE
-                itemView.txtStatus.visibility=View.VISIBLE
+                /*itemView.txtStatus.visibility=View.VISIBLE
                 itemView.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
                 itemView.txtStatus.text=investmentList.deposit_status_txt
-                itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_red,0,0,0)
+                itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_red,0,0,0)*/
             }
             else if(investmentList.deposit_status=="P")
             {
@@ -114,10 +115,10 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView6.visibility=View.INVISIBLE
                 //itemView.textView8.visibility=View.INVISIBLE
                // itemView.txtMaturityDate.visibility=View.INVISIBLE
-                itemView.txtStatus.visibility=View.VISIBLE
+               /* itemView.txtStatus.visibility=View.VISIBLE
                 itemView.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
                 itemView.txtStatus.text=investmentList.deposit_status_txt
-                itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)
+                itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)*/
             }
             else if(investmentList.deposit_status=="C")
             {
@@ -128,7 +129,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView6.visibility=View.VISIBLE
                // itemView.textView8.visibility=View.VISIBLE
                // itemView.txtMaturityDate.visibility=View.VISIBLE
-                itemView.txtStatus.visibility=View.INVISIBLE
+
 
                // itemView.txtAmount.text=investmentList.currency_code+" "+investmentList.maturity_amount.toString()
             }
@@ -136,16 +137,19 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             else if(investmentList.deposit_status=="A")
             {
 
-                itemView.imageView5.visibility=View.INVISIBLE
-                itemView.txtInterest.visibility=View.INVISIBLE
+                itemView.txtDetails.visibility=View.GONE
+                itemView.imageView5.visibility=View.VISIBLE
+                itemView.txtInterest.visibility=View.VISIBLE
+                itemView.txtMaturity.visibility=View.VISIBLE
                 itemView.imageView6.visibility=View.VISIBLE
-               // itemView.textView8.visibility=View.VISIBLE
-               // itemView.txtMaturityDate.visibility=View.VISIBLE
-                itemView.txtStatus.visibility=View.INVISIBLE
+                itemView.imageView7.setImageResource(R.drawable.ic_approved_icon)
 
-                //itemView.txtAmount.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
-                //itemView.txtAmount.text=context.getString(R.string.active)
-                //itemView.txtAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_approved_icon,0,0,0)
+                itemView.txtAmount.text=fromHtml("<font color='#3b3e42'>"+ investmentList.currency_code+" "+investmentList.deposit_amount.toString()+"</font>")
+                itemView.txtMaturity.text=fromHtml(context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
+                itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+investmentList.interest_amount.toString()+"</font>")
+                itemView.txtWithdrawalStatus.text=context.getString(R.string.active)
+                itemView.txtWithdrawalStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
+
             }
 
             if(!investmentList.actionState.btnWithdrawalShow && !investmentList.actionState.btnReinvestShow && !investmentList.actionState.btnExitPointShow)
@@ -163,6 +167,14 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
 
 
 
+        }
+
+        private fun fromHtml(source: String): Spanned {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                Html.fromHtml(source)
+            }
         }
 
     }
