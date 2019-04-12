@@ -98,7 +98,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             android:contentDescription="@string/app_name"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txtStatusone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
             app:srcCompat="@drawable/ic_current_credit_score" />
@@ -124,7 +124,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@color/divider_color"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txtStatusone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_2sdp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/maturity_amount"
+            android:text="@string/interest_rate"
             android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
             android:gravity="start|center"
@@ -177,6 +177,7 @@
             app:layout_constraintBottom_toBottomOf="@id/textView8"
             app:layout_constraintEnd_toStartOf="@+id/textView8"
             app:layout_constraintStart_toEndOf="@+id/view4"
+            app:layout_constraintBottom_toTopOf="@id/txtStatusone"
             app:srcCompat="@drawable/ic_calendar_icon" />
 
         <TextView
@@ -277,6 +278,18 @@
             app:layout_constraintEnd_toStartOf="@+id/view4"
             app:layout_constraintStart_toEndOf="@+id/txtDuration"
             app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+       <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtStatusone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:fontFamily="@font/montserrat"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_3sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

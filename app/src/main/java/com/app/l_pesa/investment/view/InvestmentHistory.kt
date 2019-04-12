@@ -29,15 +29,17 @@ import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentReinvestment
 import com.app.l_pesa.investment.presenter.PresenterInvestmentWithdrawal
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
+import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.fragment_investment_history.*
 import java.util.ArrayList
 
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory {
 
-    private var filterPopup : PopupWindow? = null
+    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var popupWindow   : PopupWindow
     private var selectedItem: Int = -1
 
-    private var listInvestment                        : ArrayList<ResInvestmentHistory.UserInvestment>? = null
+    private lateinit var listInvestment               : ArrayList<ResInvestmentHistory.UserInvestment>
     private lateinit var adapterInvestmentHistory     : InvestmentHistoryAdapter
 
     private var hasNext=false
@@ -51,7 +53,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_loan_plan_list, container, false)
+        return inflater.inflate(R.layout.fragment_investment_history, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +61,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
         swipeRefresh()
         initUI()
+        switchFunction()
 
     }
 
@@ -75,7 +78,8 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     private fun initUI()
     {
         listInvestment             = ArrayList()
-        adapterInvestmentHistory   = InvestmentHistoryAdapter(activity!!, listInvestment!!,this)
+        adapterInvestmentHistory   = InvestmentHistoryAdapter(activity!!, listInvestment,this)
+
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -84,12 +88,40 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         }
     }
 
+    private fun switchFunction()
+    {
+        switchInvestment.setOnCheckedChangeListener { _, isChecked -> run {
+
+            initLoader()
+            }
+        }
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+                .show()
+
+    }
+
     private fun dismissPopup() {
-        filterPopup?.let {
+        popupWindow.let {
             if(it.isShowing){
                 it.dismiss()
             }
-            filterPopup = null
+
         }
 
     }
@@ -100,9 +132,9 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             hasNext =cursors!!.hasNext
             after   =cursors.after
             swipeRefreshLayout.isRefreshing = false
-            listInvestment!!.clear()
-            listInvestment!!.addAll(userInvestment)
-            adapterInvestmentHistory    = InvestmentHistoryAdapter(activity!!, listInvestment!!,this)
+            listInvestment.clear()
+            listInvestment.addAll(userInvestment)
+            adapterInvestmentHistory    = InvestmentHistoryAdapter(activity!!, listInvestment,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
             rvLoan.layoutManager        = llmOBJ
@@ -133,14 +165,14 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.isRefreshing    = false
         hasNext =cursors!!.hasNext
         after   =cursors.after
-        if(listInvestment!!.size!=0)
+        if(listInvestment.size!=0)
         {
             try {
 
-                listInvestment!!.removeAt(listInvestment!!.size - 1)
+                listInvestment.removeAt(listInvestment.size - 1)
                 adapterInvestmentHistory.notifyDataChanged()
-                listInvestment!!.addAll(userInvestment)
-                adapterInvestmentHistory.notifyItemRangeInserted(0, listInvestment!!.size)
+                listInvestment.addAll(userInvestment)
+                adapterInvestmentHistory.notifyItemRangeInserted(0, listInvestment.size)
 
             }
             catch (e:Exception)
@@ -157,8 +189,8 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             val loanStatusModel  = ResInvestmentHistory.UserInvestment(0, 0,0,0,"","","","",
                                    "","","","",0.0,0.0,0.0,0.0,actionStatusModel)
 
-            listInvestment!!.add(loanStatusModel)
-            adapterInvestmentHistory.notifyItemInserted(listInvestment!!.size-1)
+            listInvestment.add(loanStatusModel)
+            adapterInvestmentHistory.notifyItemInserted(listInvestment.size-1)
 
             val presenterInvestmentHistory= PresenterInvestmentHistory()
             presenterInvestmentHistory.getInvestmentHistoryPaginate(activity!!,after,this)
@@ -182,12 +214,12 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     override fun onEditWindow(imgEdit: ImageButton, investmentList: ResInvestmentHistory.UserInvestment) {
 
         dismissPopup()
-        filterPopup = showAlertFilter(investmentList)
-        filterPopup?.isOutsideTouchable = true
-        filterPopup?.isFocusable = true
-        filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        popupWindow = showAlertFilter(investmentList)
+        popupWindow.isOutsideTouchable = true
+        popupWindow.isFocusable = true
+        popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
        // filterPopup?.showAsDropDown(rootLayout,150,-420)
-        filterPopup?.showAsDropDown(imgEdit)
+        popupWindow.showAsDropDown(imgEdit)
     }
 
 
@@ -277,7 +309,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("deposit_id",investment_id)
-        println("JSON___W"+jsonObject.toString())
+        //println("JSON___W"+jsonObject.toString())
         val presenterInvestmentWithdrawal= PresenterInvestmentWithdrawal()
         presenterInvestmentWithdrawal.doInvestmentWithdrawal(activity!!,this,jsonObject)
     }
@@ -287,7 +319,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("deposit_id",investment_id)
-        println("JSON___R"+jsonObject.toString())
+        //println("JSON___R"+jsonObject.toString())
         val presenterInvestmentReinvestment= PresenterInvestmentReinvestment()
         presenterInvestmentReinvestment.doReinvestment(activity!!,this,jsonObject)
     }
@@ -297,7 +329,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("deposit_id",investment_id)
-        println("JSON___E"+jsonObject.toString())
+        //println("JSON___E"+jsonObject.toString())
         val presenterInvestmentExitPoint= PresenterInvestmentExitPoint()
         presenterInvestmentExitPoint.doInvestmentExitPoint(activity!!,this,jsonObject)
     }
