@@ -16,6 +16,7 @@ import com.app.l_pesa.lpk.presenter.PresenterWalletAddress
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_wallet_address.*
+import java.util.HashMap
 
 class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
@@ -51,6 +52,10 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
     {
         val sharedPrefOBJ=SharedPref(activity!!)
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+
+        val hashMapOLD = HashMap<String, String>()
+        hashMapOLD["wallet"]     = ""+userDashBoard.walletAddress
+
         if(!TextUtils.isEmpty(userDashBoard.walletAddress))
         {
             etWalletAddress.setText(userDashBoard.walletAddress)
@@ -59,23 +64,26 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
         buttonWalletAddress.setOnClickListener {
 
             CommonMethod.hideKeyboardView(activity as AppCompatActivity)
-            if(TextUtils.isEmpty(etWalletAddress.text.toString()))
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_wallet_address))
-            }
-            else
-            {
-                buttonWalletAddress.isClickable=false
-                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                swipeRefreshLayout.isRefreshing=true
 
-                val presenterWalletAddress= PresenterWalletAddress()
-                val jsonObject = JsonObject()
-                jsonObject.addProperty("ether_address",etWalletAddress.text.toString())
+            val hashMapNew = HashMap<String, String>()
+            hashMapNew["wallet"]     = etWalletAddress.text.toString().trim()
 
-                presenterWalletAddress.doWalletAddress(activity!!,jsonObject,this)
+            when {
+                hashMapOLD==hashMapNew -> CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.change_one_info))
+                TextUtils.isEmpty(etWalletAddress.text.toString()) -> CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_wallet_address))
+                else -> {
+                    buttonWalletAddress.isClickable=false
+                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+                    swipeRefreshLayout.isRefreshing=true
+
+                    val presenterWalletAddress= PresenterWalletAddress()
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("ether_address",etWalletAddress.text.toString().trim())
+
+                    presenterWalletAddress.doWalletAddress(activity!!,jsonObject,this)
 
 
+                }
             }
         }
     }

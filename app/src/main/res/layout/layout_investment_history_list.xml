@@ -283,10 +283,12 @@
             android:id="@+id/txtStatusone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+           android:visibility="gone"
             android:text="TextView"
             android:fontFamily="@font/montserrat"
             android:textSize="@dimen/_12sdp"
-            android:padding="@dimen/_3sdp"
+            android:padding="@dimen/_5sdp"
+            android:background="@color/colorGreyLight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
