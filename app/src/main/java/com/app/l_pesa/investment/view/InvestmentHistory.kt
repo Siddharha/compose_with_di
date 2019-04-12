@@ -36,7 +36,7 @@ import java.util.ArrayList
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory {
 
     private lateinit  var progressDialog: KProgressHUD
-    private lateinit  var popupWindow   : PopupWindow
+    private var popupWindow : PopupWindow? = null
     private var selectedItem: Int = -1
 
     private lateinit var listInvestment               : ArrayList<ResInvestmentHistory.UserInvestment>
@@ -117,7 +117,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     private fun dismissPopup() {
-        popupWindow.let {
+        popupWindow?.let {
             if(it.isShowing){
                 it.dismiss()
             }
@@ -215,11 +215,11 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
         dismissPopup()
         popupWindow = showAlertFilter(investmentList)
-        popupWindow.isOutsideTouchable = true
-        popupWindow.isFocusable = true
-        popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        popupWindow!!.isOutsideTouchable = true
+        popupWindow!!.isFocusable = true
+        popupWindow!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
        // filterPopup?.showAsDropDown(rootLayout,150,-420)
-        popupWindow.showAsDropDown(imgEdit)
+        popupWindow!!.showAsDropDown(imgEdit)
     }
 
 
@@ -336,7 +336,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     override fun onSuccessInvestmentWithdrawal() {
 
-        swipeRefresh()
+        initUI()
     }
 
     override fun onErrorInvestmentWithdrawal(message: String) {
@@ -346,7 +346,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     override fun onSuccessReinvestment() {
-        swipeRefresh()
+        initUI()
     }
 
     override fun onErrorReinvestment(message: String) {
@@ -355,7 +355,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     override fun onSuccessExitPoint() {
-        swipeRefresh()
+        initUI()
     }
 
     override fun onErrorExitPoint(message: String) {
