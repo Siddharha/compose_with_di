@@ -123,6 +123,12 @@ class ResDashboard {
 
     inner class Data {
 
+        @SerializedName("wallet_address")
+        @Expose
+        var walletAddress: String = ""
+        @SerializedName("saving_invest_auto_status")
+        @Expose
+        var savingInvestAutoStatus: Int = 0
         @SerializedName("fixed_deposit_amount")
         @Expose
         var fixedDepositAmount: String = ""

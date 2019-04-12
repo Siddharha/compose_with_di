@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.lpk.inter.ICallBackWalletAddress
 import com.app.l_pesa.lpk.presenter.PresenterWalletAddress
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_wallet_address.*
 
@@ -46,6 +49,13 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
     private fun initData()
     {
+        val sharedPrefOBJ=SharedPref(activity!!)
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        if(!TextUtils.isEmpty(userDashBoard.walletAddress))
+        {
+            etWalletAddress.setText(userDashBoard.walletAddress)
+        }
+
         buttonWalletAddress.setOnClickListener {
 
             CommonMethod.hideKeyboardView(activity as AppCompatActivity)

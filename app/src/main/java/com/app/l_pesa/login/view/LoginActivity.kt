@@ -332,7 +332,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         val sharedPrefOBJ=SharedPref(this@LoginActivity)
         val gson                          = Gson()
-        val dashBoardData           = gson.toJson(data)
+        val dashBoardData                 = gson.toJson(data)
         sharedPrefOBJ.userDashBoard       = dashBoardData
 
         progressBar.visibility = View.INVISIBLE

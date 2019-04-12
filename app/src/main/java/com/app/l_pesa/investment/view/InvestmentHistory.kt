@@ -17,6 +17,8 @@ import android.widget.PopupWindow
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.investment.adapter.AdapterWindowInvestmentHistory
 import com.app.l_pesa.investment.adapter.InvestmentHistoryAdapter
 import com.app.l_pesa.investment.inter.ICallBackEditHistory
@@ -28,12 +30,16 @@ import com.app.l_pesa.investment.presenter.PresenterInvestmentExitPoint
 import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
 import com.app.l_pesa.investment.presenter.PresenterInvestmentReinvestment
 import com.app.l_pesa.investment.presenter.PresenterInvestmentWithdrawal
+import com.app.l_pesa.lpk.inter.ICallBackInvestmentStatus
+import com.app.l_pesa.lpk.presenter.PresenterInvestmentStatus
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_investment_history.*
 import java.util.ArrayList
 
-class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory {
+class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus {
+
 
     private lateinit  var progressDialog: KProgressHUD
     private var popupWindow : PopupWindow? = null
@@ -79,6 +85,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     {
         listInvestment             = ArrayList()
         adapterInvestmentHistory   = InvestmentHistoryAdapter(activity!!, listInvestment,this)
+        initLoader()
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -90,11 +97,61 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     private fun switchFunction()
     {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        switchInvestment.isChecked = userDashBoard!!.savingInvestAutoStatus==1
+
         switchInvestment.setOnCheckedChangeListener { _, isChecked -> run {
 
-            initLoader()
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+                    progressDialog.show()
+                    val jsonObject = JsonObject()
+                    if(isChecked)
+                    {
+                        jsonObject.addProperty("steady_income_status","1")
+                    }
+                    else
+                    {
+                        jsonObject.addProperty("steady_income_status","0")
+                    }
+
+                    val presenterInvestmentStatus= PresenterInvestmentStatus()
+                    presenterInvestmentStatus.doInvestmentStatus(activity!!,jsonObject,this)
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                }
             }
         }
+    }
+
+    override fun onSuccessInvestmentStatus() {
+        dismiss()
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        if(switchInvestment.isChecked)
+        {
+            userDashBoard.savingInvestAutoStatus=1
+            val gson = Gson()
+            val json = gson.toJson(userDashBoard)
+            sharedPrefOBJ.userDashBoard      = json
+
+        }
+        else
+        {
+            userDashBoard.savingInvestAutoStatus=0
+            val gson = Gson()
+            val json = gson.toJson(userDashBoard)
+            sharedPrefOBJ.userDashBoard      = json
+        }
+
+    }
+
+    override fun onErrorInvestmentStatus(message: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     private fun dismiss()
@@ -112,7 +169,6 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
-                .show()
 
     }
 
@@ -121,7 +177,6 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             if(it.isShowing){
                 it.dismiss()
             }
-
         }
 
     }

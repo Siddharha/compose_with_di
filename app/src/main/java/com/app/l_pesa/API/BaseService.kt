@@ -144,9 +144,11 @@ interface BaseService{
     @GET("user/payment_history")
     fun getPaymentHistory(@Query("type_name") type_name:String): Observable<ResPaymentHistory>
 
-
     @GET("lpesa_wallet/history")
     fun getWalletHistory(): Observable<ResWalletHistory>
+
+    @POST("investment/steadyincomestatus")
+    fun doInvestmentStatus(@Body request: JsonObject): Observable<ResInvestmentStatus>
 
 
 }
