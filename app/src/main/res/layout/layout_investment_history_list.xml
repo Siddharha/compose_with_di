@@ -274,6 +274,7 @@
             android:gravity="center|start"
             android:padding="@dimen/_5sdp"
             android:textSize="@dimen/_12sdp"
+            android:drawablePadding="@dimen/_3sdp"
             android:textColor="@color/dark_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
