@@ -86,18 +86,19 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
 
             itemView.txtRate.text             = fromHtml(context.resources.getString(R.string.interest_rate)+"<font color='#3b3e42'>"+" "+ investmentList.deposit_interest_rate.toString()+"%"+"</font>")
             itemView.txtRef.text              = context.resources.getString(R.string.ref_no)+" "+investmentList.identity_number
-            itemView.txtDuration.text         = fromHtml(context.resources.getString(R.string.months)+"<font color='#3b3e42'>"+" "+investmentList.deposit_month.toString()+"</font>")
+            itemView.txtDuration.text         = fromHtml(context.resources.getString(R.string.duration)+"<font color='#3b3e42'>"+" "+investmentList.deposit_month.toString()+" Months"+"</font>")
             itemView.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList.applied_date)
+            itemView.txtAmount.text=fromHtml("<font color='#3b3e42'>"+ investmentList.currency_code+" "+investmentList.deposit_amount.toString()+"</font>")
 
-            if(investmentList.deposit_status!="P")
+
+            /*if(investmentList.deposit_status!="P")
             {
                // itemView.txtMaturityDate.text     = CommonMethod.dateConvert(investmentList.maturity_date)
-            }
+            }*/
 
             if(investmentList.deposit_status=="IA")
             {
                 itemView.imageView5.visibility=View.INVISIBLE
-                itemView.txtInterest.visibility=View.INVISIBLE
                 itemView.txtInterest.visibility=View.INVISIBLE
                 itemView.imageView6.visibility=View.INVISIBLE
                // itemView.textView8.visibility=View.INVISIBLE
@@ -111,7 +112,6 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             {
                 itemView.imageView5.visibility=View.INVISIBLE
                 itemView.txtInterest.visibility=View.INVISIBLE
-                itemView.txtInterest.visibility=View.INVISIBLE
                 itemView.imageView6.visibility=View.INVISIBLE
                 //itemView.textView8.visibility=View.INVISIBLE
                // itemView.txtMaturityDate.visibility=View.INVISIBLE
@@ -123,15 +123,20 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             else if(investmentList.deposit_status=="C")
             {
 
-                itemView.imageView5.visibility=View.VISIBLE
-                itemView.txtInterest.visibility=View.VISIBLE
-                itemView.txtInterest.visibility=View.VISIBLE
-                itemView.imageView6.visibility=View.VISIBLE
-               // itemView.textView8.visibility=View.VISIBLE
-               // itemView.txtMaturityDate.visibility=View.VISIBLE
+                itemView.imageView5.visibility      =View.VISIBLE
+                itemView.txtInterest.visibility     =View.VISIBLE
+                itemView.imageView6.visibility      =View.VISIBLE
+                itemView.txtDetails.visibility      =View.VISIBLE
+                itemView.txtMaturity.visibility     =View.VISIBLE
+                itemView.txtWithdrawalStatus.visibility=View.VISIBLE
 
 
-               // itemView.txtAmount.text=investmentList.currency_code+" "+investmentList.maturity_amount.toString()
+                itemView.txtMaturity.text=fromHtml(context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
+                itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+investmentList.interest_amount.toString()+"</font>")
+                itemView.txtDetails.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)
+                itemView.txtDetails.text = investmentList.belowMessage
+                itemView.txtWithdrawalStatus.text=fromHtml(context.resources.getString(R.string.withdraw_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.withdraw_date)+"</font>")
+
             }
 
             else if(investmentList.deposit_status=="A")
@@ -144,11 +149,13 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView6.visibility=View.VISIBLE
                 itemView.imageView7.setImageResource(R.drawable.ic_approved_icon)
 
-                itemView.txtAmount.text=fromHtml("<font color='#3b3e42'>"+ investmentList.currency_code+" "+investmentList.deposit_amount.toString()+"</font>")
                 itemView.txtMaturity.text=fromHtml(context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
                 itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+investmentList.interest_amount.toString()+"</font>")
                 itemView.txtWithdrawalStatus.text=context.getString(R.string.active)
                 itemView.txtWithdrawalStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
+
+            }
+            else{
 
             }
 
@@ -164,7 +171,6 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                     callBack.onEditWindow(itemView.imgEdit,investmentList)
                 }
             }
-
 
 
         }

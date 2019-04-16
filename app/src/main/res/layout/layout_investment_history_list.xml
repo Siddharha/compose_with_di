@@ -214,7 +214,7 @@
             app:layout_constraintEnd_toStartOf="@+id/txtWithdrawalStatus"
             app:srcCompat="@drawable/ic_calendar_icon" />
 
-        <TextView
+        <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtWithdrawalStatus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -270,7 +270,8 @@
             android:fontFamily="@font/montserrat"
             android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_5sdp"
-            android:background="@color/colorGreyLight"
+            android:background="#f2f2f2"
+            android:gravity="center|start"
             app:layout_constraintTop_toBottomOf="@+id/imageView7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

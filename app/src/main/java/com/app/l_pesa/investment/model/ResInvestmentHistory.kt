@@ -59,6 +59,7 @@ class ResInvestmentHistory {
             val deposit_date:String,
             val maturity_date:String,
             val withdraw_date:String,
+            val belowMessage:String,
 
             val deposit_amount:Double,
             val maturity_amount:Double,
