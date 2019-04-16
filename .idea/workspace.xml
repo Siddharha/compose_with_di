@@ -61,7 +61,7 @@
           <entry key="java" value="2" />
           <entry key="kt" value="114" />
           <entry key="pro" value="2" />
-          <entry key="xml" value="101" />
+          <entry key="xml" value="102" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -71,25 +71,25 @@
           <entry key="JAVA" value="2" />
           <entry key="Kotlin" value="114" />
           <entry key="ProGuard File" value="2" />
-          <entry key="XML" value="101" />
+          <entry key="XML" value="102" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="31" />
-          <entry key="kt" value="2509" />
+          <entry key="kt" value="2529" />
           <entry key="pro" value="1" />
-          <entry key="xml" value="2588" />
+          <entry key="xml" value="2676" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="31" />
-          <entry key="Kotlin" value="2509" />
+          <entry key="Kotlin" value="2529" />
           <entry key="ProGuard File" value="1" />
-          <entry key="XML" value="2588" />
+          <entry key="XML" value="2676" />
         </counts>
       </usages-collector>
     </session>
@@ -99,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="188" column="40" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="40" />
+            <state relative-caret-position="303">
+              <caret line="224" column="44" selection-start-line="224" selection-start-column="44" selection-end-line="224" selection-end-column="44" />
               <folding>
                 <element signature="e#10143#10157#0" expanded="true" />
                 <element signature="e#12339#12354#0" expanded="true" />
@@ -110,16 +110,25 @@
           <provider editor-type-id="android-designer2" />
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="33" column="36" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="174" selection-start-line="174" selection-end-line="174" />
+            <state relative-caret-position="361">
+              <caret line="140" column="84" selection-start-line="140" selection-start-column="84" selection-end-line="140" selection-end-column="84" />
               <folding>
                 <element signature="e#3177#3223#0" expanded="true" />
                 <element signature="e#5912#5961#0" expanded="true" />
                 <element signature="e#6110#6156#0" expanded="true" />
-                <element signature="e#6514#6563#0" expanded="true" />
+                <element signature="e#6599#6648#0" expanded="true" />
                 <element signature="e#8262#8311#0" expanded="true" />
                 <element signature="e#8460#8506#0" expanded="true" />
               </folding>
@@ -165,12 +174,12 @@
       <find>txtDetails</find>
       <find>setCompoundDrawablesWithIntrinsicBounds</find>
       <find>r.l</find>
-      <find>txtWithdrawalStatus</find>
       <find>belowMessage</find>
       <find>txtDuration</find>
       <find>imageView5</find>
       <find>txtInterest</find>
       <find>imageView6</find>
+      <find>txtWithdrawalStatus</find>
     </findStrings>
     <replaceStrings>
       <replace>bottomSheetBehavior.</replace>
@@ -5143,13 +5152,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_error.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -5190,8 +5192,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="188" column="40" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="40" />
+        <state relative-caret-position="303">
+          <caret line="224" column="44" selection-start-line="224" selection-start-column="44" selection-end-line="224" selection-end-column="44" />
           <folding>
             <element signature="e#10143#10157#0" expanded="true" />
             <element signature="e#12339#12354#0" expanded="true" />
@@ -5200,15 +5202,22 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="33" column="36" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="174" selection-start-line="174" selection-end-line="174" />
+        <state relative-caret-position="361">
+          <caret line="140" column="84" selection-start-line="140" selection-start-column="84" selection-end-line="140" selection-end-column="84" />
           <folding>
             <element signature="e#3177#3223#0" expanded="true" />
             <element signature="e#5912#5961#0" expanded="true" />
             <element signature="e#6110#6156#0" expanded="true" />
-            <element signature="e#6514#6563#0" expanded="true" />
+            <element signature="e#6599#6648#0" expanded="true" />
             <element signature="e#8262#8311#0" expanded="true" />
             <element signature="e#8460#8506#0" expanded="true" />
           </folding>
