@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -320,8 +321,14 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 {
                     if(CommonMethod.isNetworkAvailable(activity!!))
                     {
+                        val alertDialog = AlertDialog.Builder(activity!!)
+                        alertDialog.setTitle(resources.getString(R.string.app_name))
+                        alertDialog.setMessage(resources.getString(R.string.apply_exit_point))
+                        alertDialog.setPositiveButton("Yes") { _, _ -> investmentExitPoint(investmentList.investment_id.toString()) }
+                                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                        alertDialog.show()
 
-                        investmentExitPoint(investmentList.investment_id.toString())
+
                     }
                     else
                     {
@@ -332,8 +339,14 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 {
                   if(CommonMethod.isNetworkAvailable(activity!!))
                   {
+                      val alertDialog = AlertDialog.Builder(activity!!)
+                      alertDialog.setTitle(resources.getString(R.string.app_name))
+                      alertDialog.setMessage(resources.getString(R.string.apply_withdrawal))
+                      alertDialog.setPositiveButton("Yes") { _, _ -> investmentWithdrawal(investmentList.investment_id.toString()) }
+                              .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                      alertDialog.show()
 
-                     investmentWithdrawal(investmentList.investment_id.toString())
+
                   }
                   else
                   {
@@ -345,7 +358,12 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                     if(CommonMethod.isNetworkAvailable(activity!!))
                     {
 
-                        investmentReinvest(investmentList.investment_id.toString())
+                        val alertDialog = AlertDialog.Builder(activity!!)
+                        alertDialog.setTitle(resources.getString(R.string.app_name))
+                        alertDialog.setMessage(resources.getString(R.string.apply_reinvestment))
+                        alertDialog.setPositiveButton("Yes") { _, _ ->  investmentReinvest(investmentList.investment_id.toString()) }
+                                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                        alertDialog.show()
                     }
                     else
                     {

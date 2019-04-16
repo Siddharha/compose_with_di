@@ -259,10 +259,7 @@
     <string name="enter_token">Enter Token</string>
     <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
 
-    <!--Investment-->
-    <string name="investment_plan">Investment Plan</string>
-    <string name="investment_history">Investment History</string>
-    <string name="apply">Apply</string>
+
 
     <!--Contact Info-->
     <string name="street_physical_address">Street/Physical Address*</string>
@@ -341,7 +338,12 @@
     <string name="select_investment_plan">Select one investment plan</string>
     <string name="apply_an_investment_note">Your Investment with L-Pesa account has a generous annual interest rate starting from 8% up to 18% annually. You can invest and withdraw your interest funds with fixed \"monthly exit points\" on the investing amount. The longer you invest with L-Pesa, the better the benefits that you will experience. </string>
     <string name="automatically_add_interest_amount">Automatically add interest amount into L-Pesa wallet every month and enjoy steady  income status</string>
-
+    <string name="investment_plan">Investment Plan</string>
+    <string name="investment_history">Investment History</string>
+    <string name="apply">Apply</string>
+    <string name="apply_reinvestment">Do you want to apply Reinvestment?</string>
+    <string name="apply_withdrawal">Do you want to apply Withdrawal?</string>
+    <string name="apply_exit_point">Do you want to apply Exit Point?</string>
 
     <!--Token-->
     <string name="request_token">Request Token</string>

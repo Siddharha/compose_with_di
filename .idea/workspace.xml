@@ -14,11 +14,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,9 +63,9 @@
           <entry key="class" value="1" />
           <entry key="gradle" value="4" />
           <entry key="java" value="2" />
-          <entry key="kt" value="114" />
+          <entry key="kt" value="117" />
           <entry key="pro" value="2" />
-          <entry key="xml" value="102" />
+          <entry key="xml" value="103" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -69,27 +73,27 @@
           <entry key="CLASS" value="1" />
           <entry key="Groovy" value="4" />
           <entry key="JAVA" value="2" />
-          <entry key="Kotlin" value="114" />
+          <entry key="Kotlin" value="117" />
           <entry key="ProGuard File" value="2" />
-          <entry key="XML" value="102" />
+          <entry key="XML" value="103" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="31" />
-          <entry key="kt" value="2529" />
+          <entry key="kt" value="2541" />
           <entry key="pro" value="1" />
-          <entry key="xml" value="2676" />
+          <entry key="xml" value="2752" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="31" />
-          <entry key="Kotlin" value="2529" />
+          <entry key="Kotlin" value="2541" />
           <entry key="ProGuard File" value="1" />
-          <entry key="XML" value="2676" />
+          <entry key="XML" value="2752" />
         </counts>
       </usages-collector>
     </session>
@@ -97,33 +101,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="224" column="44" selection-start-line="224" selection-start-column="44" selection-end-line="224" selection-end-column="44" />
-              <folding>
-                <element signature="e#10143#10157#0" expanded="true" />
-                <element signature="e#12339#12354#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="33" column="36" selection-start-line="33" selection-start-column="30" selection-end-line="33" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="140" column="84" selection-start-line="140" selection-start-column="84" selection-end-line="140" selection-end-column="84" />
+            <state relative-caret-position="76">
+              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
               <folding>
                 <element signature="e#3177#3223#0" expanded="true" />
                 <element signature="e#5912#5961#0" expanded="true" />
@@ -132,6 +113,32 @@
                 <element signature="e#8262#8311#0" expanded="true" />
                 <element signature="e#8460#8506#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-532">
+              <caret line="325" column="92" selection-start-line="325" selection-start-column="92" selection-end-line="325" selection-end-column="92" />
+              <folding>
+                <element signature="e#40#1800#0" expanded="true" />
+                <element signature="e#11842#11880#1" expanded="true" />
+                <element signature="e#12785#12823#1" expanded="true" />
+                <element signature="e#12870#12916#1" expanded="true" />
+                <element signature="e#13805#13843#1" expanded="true" />
+                <element signature="e#13831#13879#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="369">
+              <caret line="345" column="34" selection-start-line="345" selection-start-column="18" selection-end-line="345" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -150,9 +157,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dismiss</find>
-      <find>(2</find>
-      <find>setCancellable</find>
       <find>adapter</find>
       <find>loan_interest_rate</find>
       <find>dismissPopup</find>
@@ -179,7 +183,10 @@
       <find>imageView5</find>
       <find>txtInterest</find>
       <find>imageView6</find>
+      <find>Alert</find>
       <find>txtWithdrawalStatus</find>
+      <find>AlertDialog</find>
+      <find>investment</find>
     </findStrings>
     <replaceStrings>
       <replace>bottomSheetBehavior.</replace>
@@ -4587,11 +4594,11 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WalletAddressFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_current_credit_score.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/model/ResInvestmentHistory.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" />
       </list>
     </option>
   </component>
@@ -4780,6 +4787,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" sideWeight="0.48067227" visible="true" weight="0.21638075" />
@@ -4846,20 +4854,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="51" column="39" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
@@ -5145,13 +5139,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="244" column="49" lean-forward="true" selection-start-line="244" selection-start-column="49" selection-end-line="244" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_error.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -5176,31 +5163,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="182" column="18" selection-start-line="182" selection-start-column="18" selection-end-line="182" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/model/ResInvestmentHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
           <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="224" column="44" selection-start-line="224" selection-start-column="44" selection-end-line="224" selection-end-column="44" />
-          <folding>
-            <element signature="e#10143#10157#0" expanded="true" />
-            <element signature="e#12339#12354#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -5209,10 +5177,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="174" column="8" selection-start-line="174" selection-start-column="8" selection-end-line="174" selection-end-column="8" />
+          <folding>
+            <element signature="e#10143#10157#0" expanded="true" />
+            <element signature="e#12339#12354#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="140" column="84" selection-start-line="140" selection-start-column="84" selection-end-line="140" selection-end-column="84" />
+        <state relative-caret-position="76">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
           <folding>
             <element signature="e#3177#3223#0" expanded="true" />
             <element signature="e#5912#5961#0" expanded="true" />
@@ -5220,6 +5200,48 @@
             <element signature="e#6599#6648#0" expanded="true" />
             <element signature="e#8262#8311#0" expanded="true" />
             <element signature="e#8460#8506#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanPaybackScheduledActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="96" column="23" selection-start-line="96" selection-start-column="12" selection-end-line="96" selection-end-column="23" />
+          <folding>
+            <element signature="e#41#1043#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="88" column="34" lean-forward="true" selection-start-line="83" selection-start-column="16" selection-end-line="88" selection-end-column="34" />
+          <folding>
+            <element signature="e#3113#3161#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="345" column="34" selection-start-line="345" selection-start-column="18" selection-end-line="345" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-532">
+          <caret line="325" column="92" selection-start-line="325" selection-start-column="92" selection-end-line="325" selection-end-column="92" />
+          <folding>
+            <element signature="e#40#1800#0" expanded="true" />
+            <element signature="e#11842#11880#1" expanded="true" />
+            <element signature="e#12785#12823#1" expanded="true" />
+            <element signature="e#12870#12916#1" expanded="true" />
+            <element signature="e#13805#13843#1" expanded="true" />
+            <element signature="e#13831#13879#1" expanded="true" />
           </folding>
         </state>
       </provider>
