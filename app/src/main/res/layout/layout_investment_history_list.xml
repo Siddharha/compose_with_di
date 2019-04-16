@@ -10,6 +10,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
         >
 
 
@@ -104,7 +105,7 @@
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_3sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:contentDescription="@string/app_name"
             app:layout_constraintBottom_toTopOf="@id/txtDetails"
@@ -136,6 +137,7 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@color/divider_color"
+            android:layout_marginEnd="@dimen/_15sdp"
             app:layout_constraintBottom_toTopOf="@+id/txtDetails"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +149,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/app_name"
-            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintBottom_toTopOf="@+id/imageView6"
             app:layout_constraintStart_toEndOf="@id/view4"
@@ -176,7 +178,7 @@
             android:id="@+id/imageView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:contentDescription="@string/app_name"
             android:layout_marginTop="@dimen/_2sdp"
             app:layout_constraintStart_toEndOf="@id/view4"
@@ -205,7 +207,7 @@
             android:id="@+id/imageView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:contentDescription="@string/app_name"
             android:layout_marginTop="@dimen/_2sdp"
             android:layout_marginBottom="@dimen/_5sdp"
@@ -235,14 +237,14 @@
             android:id="@+id/txtAppliedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_12sdp"
             android:textSize="@dimen/_11sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:drawableStart="@drawable/ic_calendar_icon"
             android:drawablePadding="@dimen/_2sdp"
             android:gravity="center|start"
             android:textColor="@color/textColors"
             app:layout_constraintBottom_toTopOf="@+id/view"
-            app:layout_constraintEnd_toEndOf="@+id/imgEdit"
+            app:layout_constraintEnd_toStartOf="@+id/imgEdit"
             app:layout_constraintStart_toEndOf="@+id/txtRef"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -250,17 +252,15 @@
             android:id="@+id/imgEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="@dimen/_3sdp"
             android:background="?attr/selectableItemBackground"
             android:contentDescription="@string/app_name"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias=".90"
-            app:layout_constraintStart_toEndOf="@+id/txtAppliedDate"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_edit_icon"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_3sdp"
-            />
+            app:srcCompat="@drawable/ic_edit_icon" />
 
 
 
