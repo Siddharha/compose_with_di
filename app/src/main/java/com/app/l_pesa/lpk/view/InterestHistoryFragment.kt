@@ -49,8 +49,8 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
         swipeRefresh()
 
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
-        bottomSheetBehavior!!.isHideable=true
-        bottomSheetBehavior!!.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.isHideable=true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
     }
 
@@ -106,7 +106,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
         imgCancel.setOnClickListener {
 
-            bottomSheetBehavior!!.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
 
         }
     }

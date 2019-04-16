@@ -30,10 +30,7 @@ class AdapterWindowInvestmentHistory(val context: Context) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: MyViewHolder, p1: Int) {
         val item = filerList[p1]
-        if(!filerList[p1].status)
-        {
-            holder.tvName.isEnabled=false
-        }
+        holder.tvName.isEnabled = filerList[p1].status
         holder.tvName.text = item.name
 
     }

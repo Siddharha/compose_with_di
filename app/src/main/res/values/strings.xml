@@ -63,8 +63,8 @@
     <string name="required_phone_email">Please enter a valid phone number / email address.</string>
     <string name="required_phone">Please enter valid phone number.</string>
     <string name="required_password">Please enter the password.</string>
-    <string name="required_pin_code">Required six digit Pincode.</string>
-    <string name="required_confirm_pin_code">Required six digit confirm Pincode.</string>
+    <string name="required_pin_code">Please enter a 6-digit pincode.</string>
+    <string name="required_confirm_pin_code">Please re-type your 6-digit pincode.</string>
     <string name="confirm_pin_code_not_match">Confirm pincode do not match.</string>
     <string name="enter_current_password">Please enter the current password.</string>
     <string name="enter_new_password">Please enter the new password.</string>
@@ -334,16 +334,16 @@
     <string name="deposit">Deposit</string>
     <string name="reinvestment">Reinvestment</string>
     <string name="exit_point">Exit Point</string>
-    <string name="required_investment_amount">Required investment amount</string>
+    <string name="required_investment_amount">Enter an amount to invest.</string>
     <string name="select_investment_plan">Select one investment plan</string>
     <string name="apply_an_investment_note">Your Investment with L-Pesa account has a generous annual interest rate starting from 8% up to 18% annually. You can invest and withdraw your interest funds with fixed \"monthly exit points\" on the investing amount. The longer you invest with L-Pesa, the better the benefits that you will experience. </string>
     <string name="automatically_add_interest_amount">Automatically add interest amount into L-Pesa wallet every month and enjoy steady  income status</string>
     <string name="investment_plan">Investment Plan</string>
     <string name="investment_history">Investment History</string>
     <string name="apply">Apply</string>
-    <string name="apply_reinvestment">Do you want to apply Reinvestment?</string>
-    <string name="apply_withdrawal">Do you want to apply Withdrawal?</string>
-    <string name="apply_exit_point">Do you want to apply Exit Point?</string>
+    <string name="apply_reinvestment">Are you sure you want to re-invest?</string>
+    <string name="apply_withdrawal">Are you sure you want to withdraw?</string>
+    <string name="apply_exit_point">Are you sure you want to exit?</string>
 
     <!--Token-->
     <string name="request_token">Request Token</string>
@@ -355,7 +355,7 @@
     <string name="tokens">Token</string>
     <string name="filter">Filter</string>
     <string name="actual_token_values">Actual Tokens Values</string>
-    <string name="required_token_amount">Required Token Amount</string>
+    <string name="required_token_amount">Please enter the number of tokens.</string>
     <string name="token_transfer">Token Transfer</string>
     <string name="transfer_history">Transfer History</string>
     <string name="interest_history">Interest History</string>
@@ -389,7 +389,7 @@
 
     <string name="required_filter_date">Please select date</string>
     <string name="reset">Reset</string>
-    <string name="required_wallet_address">Required wallet address</string>
+    <string name="required_wallet_address">Enter a valid ERC-20 wallet address.</string>
     <string name="required_valid_wallet_address">Ether Address is not match</string>
     <string name="ether_scan_url">Etherscan URL</string>
     <string name="lpk_withdrawal_text">Send us a request if you wish to withdraw LPK to your Ethereum wallet. We will process your request within 48 hours of application. View the status of your application in "Withdrawal History.</string>
@@ -400,7 +400,7 @@
     <string name="lpesa_wallet_balance">L-PESA WALLET BALANCE</string>
     <string name="commission_for_l_pesa">Commission for Lpesa</string>
     <string name="withdrawal_amount">Withdrawal Amount</string>
-    <string name="required_withdrawal_amount">Required Withdrawal Amount</string>
+    <string name="required_withdrawal_amount">Please enter the amount to withdraw.</string>
     <string name="wallet_history">L-Pesa Wallet History</string>
 
     <string name="all">All</string>

@@ -66,7 +66,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     private fun initData()
     {
         listTransferHistory= ArrayList()
-        adapterTransferHistory= AdapterTransferHistory(activity!!,listTransferHistory!!)
+        adapterTransferHistory= AdapterTransferHistory(activity!!,listTransferHistory)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
