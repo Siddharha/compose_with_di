@@ -101,24 +101,30 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView5.visibility=View.INVISIBLE
                 itemView.txtInterest.visibility=View.INVISIBLE
                 itemView.imageView6.visibility=View.INVISIBLE
-               // itemView.textView8.visibility=View.INVISIBLE
-               // itemView.txtMaturityDate.visibility=View.INVISIBLE
-                /*itemView.txtStatus.visibility=View.VISIBLE
-                itemView.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
-                itemView.txtStatus.text=investmentList.deposit_status_txt
-                itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_red,0,0,0)*/
+                itemView.imageView7.visibility=View.INVISIBLE
+                itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
+                itemView.txtMaturity.visibility=View.VISIBLE
+                itemView.txtDetails.visibility=View.GONE
+
+                itemView.txtMaturity.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
+                itemView.txtMaturity.text=investmentList.deposit_status_txt
+                itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_red,0,0,0)
+
             }
             else if(investmentList.deposit_status=="P")
             {
                 itemView.imageView5.visibility=View.INVISIBLE
                 itemView.txtInterest.visibility=View.INVISIBLE
                 itemView.imageView6.visibility=View.INVISIBLE
-                //itemView.textView8.visibility=View.INVISIBLE
-               // itemView.txtMaturityDate.visibility=View.INVISIBLE
-               /* itemView.txtStatus.visibility=View.VISIBLE
-                itemView.txtStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
-                itemView.txtStatus.text=investmentList.deposit_status_txt
-                itemView.txtStatus.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)*/
+                itemView.imageView7.visibility=View.INVISIBLE
+                itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
+                itemView.txtMaturity.visibility=View.VISIBLE
+                itemView.txtDetails.visibility=View.GONE
+
+                itemView.txtMaturity.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
+                itemView.txtMaturity.text=investmentList.deposit_status_txt
+                itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)
+
             }
             else if(investmentList.deposit_status=="C")
             {
@@ -155,7 +161,17 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtWithdrawalStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
 
             }
-            else{
+            else if(investmentList.deposit_status=="M")
+            {
+                itemView.txtDetails.visibility=View.GONE
+                itemView.imageView5.visibility=View.VISIBLE
+                itemView.txtInterest.visibility=View.VISIBLE
+                itemView.txtMaturity.visibility=View.VISIBLE
+                itemView.imageView7.visibility=View.INVISIBLE
+                itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
+
+                itemView.txtMaturity.text=fromHtml(context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
+                itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+investmentList.interest_amount.toString()+"</font>")
 
             }
 

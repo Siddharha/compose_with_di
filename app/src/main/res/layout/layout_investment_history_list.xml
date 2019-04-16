@@ -194,6 +194,7 @@
             android:gravity="start|center"
             android:textColor="@color/textColors"
             android:textSize="@dimen/_10sdp"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
