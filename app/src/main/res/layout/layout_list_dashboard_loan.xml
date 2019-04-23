@@ -75,7 +75,7 @@
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintRight"
-                android:layout_width="@dimen/_125sdp"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@+id/viewDividerOne"
                 app:layout_constraintBottom_toTopOf="@id/viewDividerTwo"
