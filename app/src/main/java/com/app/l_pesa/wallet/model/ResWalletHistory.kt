@@ -28,6 +28,9 @@ class ResWalletHistory {
         var user_id: Int,
 
         var interest_rate: Double,
+        var debit_amount: Double,
+        var credit_amount: Double,
+        var closing_amount: Double,
 
         var type_id: String,
         var type_ref_no: String,
@@ -35,9 +38,6 @@ class ResWalletHistory {
         var reference_number: String,
         var country_code: String,
         var narration: String,
-        var debit_amount: String,
-        var credit_amount: String,
-        var closing_amount: String,
         var currency_code: String,
         var created: String
 

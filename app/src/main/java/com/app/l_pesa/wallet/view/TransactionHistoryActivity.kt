@@ -173,7 +173,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         if(CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
         {
             val loadModel  = ResWalletHistory.SavingsHistory(0, 0, 0.0,
-                            "", "", "",
+                            0.0, 0.0, 0.0,
                             "", "", "", "", "", "", "","")
 
             listSavingsHistory.add(loadModel)
