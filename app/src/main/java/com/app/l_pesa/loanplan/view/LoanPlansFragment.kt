@@ -11,9 +11,12 @@ import android.support.design.widget.TabLayout
 import com.app.l_pesa.loanplan.model.LoanTabPager
 import android.graphics.Typeface
 import android.os.Handler
+import android.support.design.widget.AppBarLayout
 import android.widget.TextView
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import kotlinx.android.synthetic.main.app_bar_main.*
+
 
 
 /**
@@ -48,6 +51,7 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
     private fun initUI()
     {
         (activity as DashboardActivity).setTitle(resources.getString(R.string.nav_item_loan))
+
         tabLayout=activity!!.findViewById(R.id.tabLayout)
         viewPager=activity!!.findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.current_loan_plans)))

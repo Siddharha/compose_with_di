@@ -6,12 +6,19 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
+import com.app.l_pesa.lpk.model.ResInfoLPK
+import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
+import com.google.gson.Gson
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_lpk.*
 
-class LpkFragment: Fragment() {
+class LpkFragment: Fragment(), ICallBackInfoLPK {
+
+    private lateinit  var progressDialog: KProgressHUD
 
     companion object {
         fun newInstance(): Fragment {
@@ -27,7 +34,18 @@ class LpkFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initLoader()
         initData()
+
+    }
+
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
 
     }
 
@@ -37,8 +55,9 @@ class LpkFragment: Fragment() {
 
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
-                startActivity(Intent(activity, LPKWithdrawalActivity::class.java))
-                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                progressDialog.show()
+                val presenterInfoLPK=PresenterInfoLPK()
+                presenterInfoLPK.getInfoLPK(activity!!,this,"WITHDRAWAL")
             }
             else
             {
@@ -52,8 +71,10 @@ class LpkFragment: Fragment() {
 
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
-                startActivity(Intent(activity, LPKSavingsActivity::class.java))
-                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                progressDialog.show()
+                val presenterInfoLPK=PresenterInfoLPK()
+                presenterInfoLPK.getInfoLPK(activity!!,this,"SAVINGS")
+
             }
             else
             {
@@ -62,5 +83,39 @@ class LpkFragment: Fragment() {
 
 
         }
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
+
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.lpkInfo= json
+
+        if(type=="WITHDRAWAL")
+        {
+            startActivity(Intent(activity, LPKWithdrawalActivity::class.java))
+            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+        else
+        {
+            startActivity(Intent(activity, LPKSavingsActivity::class.java))
+            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+        dismiss()
+
+    }
+
+    override fun onErrorInfoLPK(message: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }

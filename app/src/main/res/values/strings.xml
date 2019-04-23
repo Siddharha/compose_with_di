@@ -362,6 +362,7 @@
     <string name="token_withdrawal">Token Withdrawal</string>
     <string name="withdrawal_history">Withdrawal History</string>
     <string name="wallet_address">Wallet Address</string>
+    <string name="erc_20_address">ERC 20 Address</string>
     <string name="narration">Narration</string>
     <string name="interest_amount">Interest Amount</string>
     <string name="lpk_savings">LPK Savings</string>

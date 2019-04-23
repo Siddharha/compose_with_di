@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -9,10 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.inter.ICallBackTokenWithdrawal
+import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterTokenWithdrawal
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_token_withdrawal.*
+import java.text.DecimalFormat
 
 
 class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
@@ -45,8 +50,18 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initData()
     {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val infoLPK = Gson().fromJson<ResInfoLPK.Data>(sharedPrefOBJ.lpkInfo, ResInfoLPK.Data::class.java)
+
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
+        txtLPK.text = format.format(infoLPK.lpkValue)+" LPK"
+        txtLockedVal.text = format.format(infoLPK.lpkLockedValue)+" LPK is in Deposit"
+
         buttonSubmit.setOnClickListener {
 
             if(TextUtils.isEmpty(etToken.text.toString()))

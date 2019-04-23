@@ -147,6 +147,9 @@ interface BaseService{
     @GET("lpesa_wallet/history")
     fun getWalletHistory(): Observable<ResWalletHistory>
 
+    @GET("user/lpk_info")
+    fun getInfoLPK(): Observable<ResInfoLPK>
+
     @POST("investment/steadyincomestatus")
     fun doInvestmentStatus(@Body request: JsonObject): Observable<ResInvestmentStatus>
 

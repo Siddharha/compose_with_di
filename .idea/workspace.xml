@@ -11,6 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4f3b935-f440-49f1-b643-7e5f2d89fc53" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/inter/ICallBackInfoLPK.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResInfoLPK.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterInfoLPK.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
@@ -21,10 +24,24 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/adapter/TransactionAllAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/adapter/TransactionAllAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletHistory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_wallet_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_wallet_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/NavDrawerItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/anim/left_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/anim/left_in.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/anim/left_out.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/anim/left_out.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/anim/right_in.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/anim/right_in.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/anim/right_out.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/anim/right_out.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_loan_payment_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_loan_payment_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_transaction_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_transaction_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_token_withdrawal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_token_withdrawal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,38 +82,38 @@
         <counts>
           <entry key="class" value="1" />
           <entry key="gradle" value="4" />
-          <entry key="java" value="2" />
-          <entry key="kt" value="136" />
+          <entry key="java" value="4" />
+          <entry key="kt" value="163" />
           <entry key="pro" value="2" />
-          <entry key="xml" value="124" />
+          <entry key="xml" value="139" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="1" />
           <entry key="Groovy" value="4" />
-          <entry key="JAVA" value="2" />
-          <entry key="Kotlin" value="136" />
+          <entry key="JAVA" value="4" />
+          <entry key="Kotlin" value="163" />
           <entry key="ProGuard File" value="2" />
-          <entry key="XML" value="124" />
+          <entry key="XML" value="139" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="7" />
-          <entry key="java" value="31" />
-          <entry key="kt" value="2777" />
+          <entry key="java" value="37" />
+          <entry key="kt" value="3213" />
           <entry key="pro" value="1" />
-          <entry key="xml" value="3502" />
+          <entry key="xml" value="3909" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="7" />
-          <entry key="JAVA" value="31" />
-          <entry key="Kotlin" value="2777" />
+          <entry key="JAVA" value="37" />
+          <entry key="Kotlin" value="3213" />
           <entry key="ProGuard File" value="1" />
-          <entry key="XML" value="3502" />
+          <entry key="XML" value="3909" />
         </counts>
       </usages-collector>
     </session>
@@ -104,32 +121,21 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_wallet_history.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
-              <folding>
-                <element signature="e#497#511#0" expanded="true" />
-                <element signature="e#641#655#0" expanded="true" />
-                <element signature="e#3842#3857#0" expanded="true" />
-                <element signature="e#4494#4509#0" expanded="true" />
-                <element signature="e#4441#4455#0" expanded="true" />
-                <element signature="e#4578#4592#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="361">
+              <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
             </state>
           </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/adapter/TransactionAllAdapter.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="103" column="92" selection-start-line="103" selection-start-column="92" selection-end-line="103" selection-end-column="92" />
+            <state relative-caret-position="270">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
               <folding>
-                <element signature="e#39#537#0" expanded="true" />
-                <element signature="e#3540#3570#0" expanded="true" />
-                <element signature="e#4024#4054#0" expanded="true" />
+                <element signature="e#38#641#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,27 +146,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="layoutResourceFile" />
-        <option value="Kotlin Interface" />
+        <option value="Class" />
         <option value="Kotlin Class" />
+        <option value="Kotlin Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Hash</find>
-      <find>val hashMapOLD</find>
-      <find>&lt;fon</find>
-      <find>dark</find>
-      <find>txtDepositAmount</find>
-      <find>txtRate</find>
-      <find>checkStatus</find>
-      <find>txtRef</find>
-      <find>txtDetails</find>
-      <find>setCompoundDrawablesWithIntrinsicBounds</find>
-      <find>belowMessage</find>
-      <find>txtDuration</find>
       <find>imageView5</find>
       <find>txtInterest</find>
       <find>imageView6</find>
@@ -179,9 +173,22 @@
       <find>adap</find>
       <find>wallet</find>
       <find>txtAmount</find>
+      <find>: String? = null</find>
+      <find>dismiss</find>
+      <find>Gson</find>
+      <find>Gson()</find>
+      <find>format.f</find>
+      <find>wallet ad</find>
+      <find>txtAmountFirst</find>
+      <find>txtAmountSecond</find>
+      <find>r.la</find>
+      <find>DashboardActivity</find>
+      <find>app:layout_scrollFlags=&quot;scroll|enterAlways|snap&quot;</find>
+      <find>dashb</find>
     </findStrings>
     <replaceStrings>
       <replace>bottomSheetBehavior.</replace>
+      <replace>: String = &quot;&quot;</replace>
     </replaceStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -4540,23 +4547,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_recyclerview.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionCreditFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionDebitFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/adapter/WalletTabAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletHistory.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/inter/ICallBackTransaction.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/presenter/PresenterTransactionAll.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionAllFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_transaction_history.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_recycler.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_transaction_history.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterWithdrawalHistory.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_lpk_savings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_tab_common.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_withdrawal_history.xml" />
@@ -4568,7 +4558,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/model/ResDashboard.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/inter/ICallBackInvestmentStatus.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResInvestmentStatus.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterInvestmentStatus.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WalletAddressFragment.kt" />
@@ -4576,7 +4565,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/model/ResInvestmentHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TransferHistoryFragment.kt" />
@@ -4588,9 +4576,28 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_withdrawal_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_wallet_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/adapter/TransactionAllAdapter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResInfoLPK.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/inter/ICallBackInfoLPK.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterInfoLPK.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/anim/right_in.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/anim/left_out.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/anim/left_in.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/anim/right_out.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_token_withdrawal.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResInfoLPK.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" />
       </list>
     </option>
   </component>
@@ -4645,7 +4652,7 @@
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="wallet" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
@@ -4654,13 +4661,87 @@
               <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="wallet" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
               <item name="adapter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="lpk" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="lpk" type="462c0819:PsiDirectoryNode" />
+              <item name="adapter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="lpk" type="462c0819:PsiDirectoryNode" />
+              <item name="inter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="lpk" type="462c0819:PsiDirectoryNode" />
+              <item name="presenter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="lpk" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="anim" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
@@ -4820,17 +4901,17 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4762684" visible="true" weight="0.21638075" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.7545008" visible="true" weight="0.21638075" />
       <window_info id="Structure" order="2" sideWeight="0.5016129" side_tool="true" weight="0.32982844" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Build Variants" order="4" sideWeight="0.5237316" side_tool="true" visible="true" weight="0.21638075" />
+      <window_info id="Build Variants" order="4" sideWeight="0.24549918" side_tool="true" visible="true" weight="0.21638075" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32972974" />
       <window_info active="true" anchor="bottom" id="Logcat" order="1" visible="true" weight="0.33945945" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3128371" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.31243244" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="5" weight="0.3416216" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
@@ -4843,7 +4924,7 @@
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info anchor="right" id="Preview" order="5" weight="0.26175982" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.31820697" />
     </layout>
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -4884,227 +4965,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/BusinessIdInfoFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="214" column="123" lean-forward="true" selection-start-line="214" selection-start-column="8" selection-end-line="214" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="68" column="15" lean-forward="true" selection-start-line="68" selection-start-column="15" selection-end-line="68" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="149" column="17" lean-forward="true" selection-start-line="149" selection-start-column="17" selection-end-line="149" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="40" column="52" selection-start-line="40" selection-start-column="52" selection-end-line="40" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet_address.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285" />
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterTokenTransfer.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="63" column="5" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="63" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_investment_history.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="35" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/inter/ICallBackInvestmentStatus.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletWithdrawal.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResInvestmentStatus.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="469">
-          <caret line="150" column="85" selection-start-line="150" selection-start-column="85" selection-end-line="150" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterInvestmentStatus.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="16" column="112" selection-start-line="16" selection-start-column="87" selection-end-line="16" selection-end-column="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="283" column="27" lean-forward="true" selection-start-line="283" selection-start-column="27" selection-end-line="283" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterWalletAddress.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WalletAddressFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="80" column="97" selection-start-line="80" selection-start-column="97" selection-end-line="80" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_calendar_icon.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_current_credit_score.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="27" lean-forward="true" selection-start-line="1" selection-start-column="27" selection-end-line="1" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlanDetailsActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="40" column="189" lean-forward="true" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="189" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/model/ResInvestmentHistory.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="61" column="28" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanPaybackScheduledActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="96" column="23" selection-start-line="96" selection-start-column="12" selection-end-line="96" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="88" column="34" lean-forward="true" selection-start-line="83" selection-start-column="16" selection-end-line="88" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_investment_history_list.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4564">
-          <caret line="276" column="49" selection-start-line="276" selection-start-column="49" selection-end-line="276" selection-end-column="49" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="34" column="55" selection-start-line="34" selection-start-column="55" selection-end-line="34" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="288" column="88" lean-forward="true" selection-start-line="288" selection-start-column="88" selection-end-line="288" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="269" column="36" selection-start-line="269" selection-start-column="36" selection-end-line="269" selection-end-column="36" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="203" column="48" selection-start-line="203" selection-start-column="48" selection-end-line="203" selection-end-column="48" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_interest_history.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="38" selection-end-line="51" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="108" column="31" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_tab_common.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_lpk_savings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_lpk_savings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="760">
@@ -5208,10 +5068,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="409" column="24" selection-start-line="409" selection-start-column="24" selection-end-line="409" selection-end-column="24" />
+        <state relative-caret-position="57">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -5231,21 +5091,257 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="34" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="34" />
+        <state relative-caret-position="323">
+          <caret line="149" column="25" lean-forward="true" selection-start-line="149" selection-start-column="25" selection-end-line="149" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterInterestHistory.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1610">
+          <caret line="118" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="118" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="42" column="26" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/inter/ICallBackInfoLPK.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/presenter/PresenterInfoLPK.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="31" column="48" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/right_in.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/left_in.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/right_out.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/anim/left_out.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/NavDrawerItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CommonMethod.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1349">
+          <caret line="133" column="47" selection-start-line="133" selection-start-column="47" selection-end-line="133" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/LockViewPager.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="283" column="42" lean-forward="true" selection-start-line="283" selection-start-column="7" selection-end-line="283" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/WithdrawalTabAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="97" column="49" lean-forward="true" selection-start-line="97" selection-start-column="8" selection-end-line="97" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/adapter/TransactionAllAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="103" column="92" selection-start-line="103" selection-start-column="92" selection-end-line="103" selection-end-column="92" />
+        <state relative-caret-position="479">
+          <caret line="92" column="80" selection-start-line="92" selection-start-column="66" selection-end-line="92" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_token_withdrawal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="54" column="45" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="45" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/model/ResInfoLPK.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="41" column="42" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="39" column="99" selection-start-line="39" selection-start-column="99" selection-end-line="39" selection-end-column="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="363" column="25" selection-start-line="363" selection-start-column="18" selection-end-line="363" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
           <folding>
-            <element signature="e#39#537#0" expanded="true" />
-            <element signature="e#3540#3570#0" expanded="true" />
-            <element signature="e#4024#4054#0" expanded="true" />
+            <element signature="e#33#729#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/model/ResDashboard.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="82" column="12" selection-start-line="82" selection-start-column="12" selection-end-line="82" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
+          <folding>
+            <element signature="e#364#378#0" expanded="true" />
+            <element signature="e#748#762#0" expanded="true" />
+            <element signature="e#867#882#0" expanded="true" />
+            <element signature="e#921#936#0" expanded="true" />
+            <element signature="e#2889#2903#0" expanded="true" />
+            <element signature="e#3543#3559#0" expanded="true" />
+            <element signature="e#4500#4514#0" expanded="true" />
+            <element signature="e#4804#4822#0" expanded="true" />
+            <element signature="e#5119#5133#0" expanded="true" />
+            <element signature="e#5739#5754#0" expanded="true" />
+            <element signature="e#6209#6223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="28" column="12" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="269" column="36" selection-start-line="269" selection-start-column="36" selection-end-line="269" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="85" column="39" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_dashboard.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="67" column="7" selection-start-line="67" selection-start-column="7" selection-end-line="67" selection-end-column="7" />
+          <folding>
+            <element signature="e#39#1015#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="8" />
+          <folding>
+            <element signature="e#38#641#0" expanded="true" />
           </folding>
         </state>
       </provider>

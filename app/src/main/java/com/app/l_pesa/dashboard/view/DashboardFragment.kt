@@ -20,6 +20,8 @@ import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.loanHistory.view.LoanPaybackScheduledActivity
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
+import android.support.design.widget.AppBarLayout
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
@@ -61,7 +63,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
         }
     }
 
-    private fun initData() {
+   private fun initData() {
+
         val sharedPrefOBJ = SharedPref(activity!!)
         val dashBoard = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 

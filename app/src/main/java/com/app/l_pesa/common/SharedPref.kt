@@ -130,6 +130,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var lpkInfo: String
+        get() = pref.getString(KEY_SET_LPK_INFO, "")!!
+        set(lpkInfo) {
+            editor.remove(KEY_SET_LPK_INFO)
+            editor.putString(KEY_SET_LPK_INFO, lpkInfo)
+            editor.commit()
+        }
+
     fun removeToken() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -163,6 +171,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_LOAN_TAB_PLAN     = "KEY_SET_LOAN_TAB_PLAN"
         private const val KEY_SET_PAY_FULL_AMOUNT   = "KEY_SET_PAY_FULL_AMOUNT"
         private const val KEY_SET_LOAN_PLAN_LIST    = "KEY_SET_LOAN_PLAN_LIST"
+        private const val KEY_SET_LPK_INFO          = "KEY_SET_LPK_INFO"
     }
 
 

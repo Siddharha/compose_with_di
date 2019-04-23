@@ -37,7 +37,7 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
         viewPager=findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.token_withdrawal)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.withdrawal_history)))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.wallet_address)))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.erc_20_address)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
         val adapter = WithdrawalTabAdapter(supportFragmentManager, tabLayout!!.tabCount)
