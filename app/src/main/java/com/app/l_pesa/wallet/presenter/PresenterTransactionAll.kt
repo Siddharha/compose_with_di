@@ -28,9 +28,9 @@ class PresenterTransactionAll {
                     try {
                        if (response.status!!.isSuccess)
                         {
-                            if(response.data!!.savingsHistory!!.size>0)
+                            if(response.data!!.savings_history!!.size>0)
                             {
-                                callBackOBJ.onSuccessTransaction(response.data!!.savingsHistory!!,response.data.cursors)
+                                callBackOBJ.onSuccessTransaction(response.data!!.savings_history!!,response.data.cursors)
                             }
                             else
                             {
@@ -80,9 +80,9 @@ class PresenterTransactionAll {
                     try {
                         if (response.status!!.isSuccess)
                         {
-                            if(response.data!!.savingsHistory!!.size>0)
+                            if(response.data!!.savings_history!!.size>0)
                             {
-                                callBackOBJ.onSuccessTransactionPaginate(response.data!!.savingsHistory!!,response.data.cursors)
+                                callBackOBJ.onSuccessTransactionPaginate(response.data!!.savings_history!!,response.data.cursors)
                             }
 
 

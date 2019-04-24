@@ -8,7 +8,7 @@ import java.util.ArrayList
 
     class ResWalletHistory(val status: CommonStatusModel, val data: Data) {
 
-    data class Data(var savingsHistory: ArrayList<SavingsHistory>, val cursors:Cursors)
+    data class Data(var savings_history: ArrayList<SavingsHistory>, val cursors:Cursors)
 
     data class Cursors(
 

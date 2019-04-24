@@ -98,7 +98,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
                         if (hasNext)
                         {
-                            loadMore()
+                           loadMore()
                         }
 
                     }
@@ -117,6 +117,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
             hasNext = cursors.hasNext
             after = cursors.after
+
             if (listSavingsHistory.size != 0) {
                 try {
 
@@ -224,7 +225,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         rlList.visibility=View.INVISIBLE
         cardView.visibility=View.INVISIBLE
-        swipeRefreshLayout.isRefreshing=true
+        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,message)
     }
 
