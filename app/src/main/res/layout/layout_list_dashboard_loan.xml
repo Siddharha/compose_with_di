@@ -186,9 +186,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:isb_show_indicator="rectangle"
-                    app:isb_track_background_color="#2bbd83"
+                    app:isb_track_background_color="#fc3026"
                     app:isb_track_background_size="@dimen/_7sdp"
-                    app:isb_track_progress_color="#fc3026"
+                    app:isb_track_progress_color="#2bbd83"
                     app:isb_track_progress_size="@dimen/_7sdp"
                     app:isb_thumb_color="#08a9ea"
 

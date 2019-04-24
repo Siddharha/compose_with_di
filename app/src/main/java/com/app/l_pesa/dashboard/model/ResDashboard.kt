@@ -80,7 +80,7 @@ class ResDashboard {
         var date: String = ""
         @SerializedName("amount")
 
-        var amount: String = ""
+        var amount: Double =0.0
         @SerializedName("left_days")
 
         var leftDays: Int = 0
@@ -90,20 +90,23 @@ class ResDashboard {
     }
 
     inner class Repay {
+
+        @SerializedName("currency")
+        var currency: String = ""
+
         @SerializedName("amount")
+        var amount: Double =0.0
 
-        var amount: String = ""
         @SerializedName("left")
-
         var left: Int = 0
+
         @SerializedName("done")
-
         var done: Int = 0
+
         @SerializedName("total")
-
         var total: Int = 0
-        @SerializedName("loan_id")
 
+        @SerializedName("loan_id")
         var loan_id: Int = 0
     }
 
@@ -123,6 +126,9 @@ class ResDashboard {
 
     inner class Data {
 
+        @SerializedName("currency_code")
+        @Expose
+        var currencyCode: String = ""
         @SerializedName("wallet_address")
         @Expose
         var walletAddress: String = ""
@@ -131,10 +137,10 @@ class ResDashboard {
         var savingInvestAutoStatus: Int = 0
         @SerializedName("fixed_deposit_amount")
         @Expose
-        var fixedDepositAmount: String = ""
+        var fixedDepositAmount: Double = 0.0
         @SerializedName("savings_amount")
         @Expose
-        var savingsAmount: String = ""
+        var savingsAmount: Double = 0.0
         @SerializedName("credit_score")
         @Expose
         var creditScore: Int = 0

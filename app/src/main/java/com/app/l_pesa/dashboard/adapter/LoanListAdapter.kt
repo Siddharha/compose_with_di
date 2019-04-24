@@ -22,14 +22,13 @@ import com.app.l_pesa.dashboard.model.ResDashboard
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.IndicatorStayLayout
 import android.view.MotionEvent
-import android.view.View.OnTouchListener
+import java.text.DecimalFormat
 
 
+class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,private var dashBoard: ResDashboard.Data,private val contextOBJ: Context?,val rootLayout:LinearLayout,private val callBackObj: ICallBackListOnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, private val contextOBJ: Context?,val rootLayout:LinearLayout,private val callBackObj: ICallBackListOnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
 
@@ -70,10 +69,11 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 }
                 else
                 {
+                    val format = DecimalFormat()
+                    format.isDecimalSeparatorAlwaysShown = false
 
                     viewHolder.txtLoanDetails.text                  =al_loadOBJ[position].nextRepay!!.leftDaysText
-                    viewHolder.txtAmountFirst.text                  =al_loadOBJ[position].repay!!.amount
-                    viewHolder.txtAmountSecond.text                 =al_loadOBJ[position].nextRepay!!.amount
+                    viewHolder.txtAmountFirst.text                  =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].repay!!.amount)
 
                     if(al_loadOBJ[position].nextRepay!!.leftDays<0)
                     {
@@ -88,7 +88,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     {
                         viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.visibility       =View.VISIBLE
-                        viewHolder.txtAmountSecond.text             =al_loadOBJ[position].nextRepay!!.amount
+                        viewHolder.txtAmountSecond.text             =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].nextRepay!!.amount)
 
                         viewHolder.buttonApplyLoan.text             = contextOBJ.resources.getString(R.string.pay_now)
                         if(al_loadOBJ[position].status=="Due" )
@@ -174,9 +174,11 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                 }
                 else
                 {
+                    val format = DecimalFormat()
+                    format.isDecimalSeparatorAlwaysShown = false
 
                     viewHolder.txtLoanDetails.text              =al_loadOBJ[position].nextRepay!!.leftDaysText
-                    viewHolder.txtAmountFirst.text              =al_loadOBJ[position].repay!!.amount
+                    viewHolder.txtAmountFirst.text              =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].repay!!.amount)
 
                     if(al_loadOBJ[position].nextRepay!!.leftDays<0)
                     {
@@ -192,7 +194,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>, priv
                     {
                         viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.visibility       =View.VISIBLE
-                        viewHolder.txtAmountSecond.text             =al_loadOBJ[position].nextRepay!!.amount
+                        viewHolder.txtAmountSecond.text             =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].nextRepay!!.amount)
 
                         viewHolder.buttonApplyLoan.text             = contextOBJ.resources.getString(R.string.pay_now)
                         if(al_loadOBJ[position].status=="Due" )

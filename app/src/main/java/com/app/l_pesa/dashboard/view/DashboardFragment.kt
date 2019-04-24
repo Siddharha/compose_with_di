@@ -1,5 +1,6 @@
 package com.app.l_pesa.dashboard.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -20,8 +21,7 @@ import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.loanHistory.view.LoanPaybackScheduledActivity
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
-import android.support.design.widget.AppBarLayout
-import kotlinx.android.synthetic.main.app_bar_main.*
+import java.text.DecimalFormat
 
 
 class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
@@ -102,10 +102,14 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
         swipeRefreshLayout.isRefreshing = false
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setData(dashBoard: ResDashboard.Data) {
 
-        left_header_txt.text = dashBoard.fixedDepositAmount
-        right_header_txt.text = dashBoard.savingsAmount
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
+        left_header_txt.text  = dashBoard.currencyCode+" "+format.format(dashBoard.fixedDepositAmount)
+        right_header_txt.text = dashBoard.currencyCode+" "+format.format(dashBoard.savingsAmount)
 
         txt_start.text          = dashBoard.minCreditScore.toString()
         txt_max.text            = dashBoard.maxCreditScore.toString()
@@ -119,7 +123,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
 
             if (dashBoard.loans!!.size > 0) {
                 loan_list.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-                val adapterDashBoard = LoanListAdapter(dashBoard.loans!!, activity, rootLayout, this)
+                val adapterDashBoard = LoanListAdapter(dashBoard.loans!!,dashBoard, activity, rootLayout, this)
                 loan_list.adapter = adapterDashBoard
                 adapterDashBoard.notifyDataSetChanged()
             }
