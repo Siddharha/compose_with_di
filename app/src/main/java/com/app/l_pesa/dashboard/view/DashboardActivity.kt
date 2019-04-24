@@ -43,10 +43,12 @@ import com.app.l_pesa.settings.view.SettingsFragment
 import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.kaopiz.kprogresshud.KProgressHUD
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
 
+    private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +59,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         initData()
         initMenu()
+        initLoader()
         initFragment()
         initToggle()
         nav_view.setNavigationItemSelectedListener(this)
@@ -108,6 +111,24 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     }
 
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(this@DashboardActivity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
 
     private fun initFragment()
     {
@@ -141,9 +162,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if(userData!=null)
         {
 
+
             if(!TextUtils.isEmpty(userData.user_personal_info.first_name))
             {
-                txtName.text            = userData.user_personal_info.first_name+" "+userData.user_personal_info.middle_name+" "+userData.user_personal_info.last_name
+                val firstName = userData.user_personal_info.first_name.substring(0, 1).toUpperCase() + userData.user_personal_info.first_name.substring(1)
+                txtName.text            = firstName+" "+userData.user_personal_info.middle_name+" "+userData.user_personal_info.last_name
             }
             if(!TextUtils.isEmpty(userData.user_info.credit_score.toString()))
             {
@@ -350,6 +373,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if(CommonMethod.isNetworkAvailable(this@DashboardActivity))
         {
 
+            progressDialog.show()
             val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
             val jsonObject  = JsonObject()
             jsonObject.addProperty("device_id",deviceId)
@@ -366,8 +390,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onSuccessLogout() {
 
+        dismiss()
         val sharedPrefOBJ= SharedPref(this@DashboardActivity)
-        sharedPrefOBJ.removeToken()
+        sharedPrefOBJ.removeShared()
         startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()
@@ -375,6 +400,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onErrorLogout(message: String) {
 
+        dismiss()
         CommonMethod.customSnackBarError(drawer_layout,this@DashboardActivity,message)
     }
 

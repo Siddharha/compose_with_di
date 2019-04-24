@@ -138,10 +138,12 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
-    fun removeToken() {
+    fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
         editor.remove("KEY_SET_LOGIN_REQUEST")
+        editor.remove("KEY_SET_PROFILE_INFO")
+        editor.remove("KEY_SET_LPK_INFO")
         editor.commit()
         editor.apply()
     }

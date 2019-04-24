@@ -347,7 +347,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     override fun onFailureDashboard(jsonMessage: String) {
 
         val sharedPrefOBJ= SharedPref(this@LoginActivity)
-        sharedPrefOBJ.removeToken()
+        sharedPrefOBJ.removeShared()
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
         CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)

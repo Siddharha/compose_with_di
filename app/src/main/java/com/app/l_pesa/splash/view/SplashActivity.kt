@@ -225,7 +225,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
     {
         Toast.makeText(this@SplashActivity, jsonMessage,Toast.LENGTH_SHORT).show()
         val sharedPrefOBJ= SharedPref(this@SplashActivity)
-        sharedPrefOBJ.removeToken()
+        sharedPrefOBJ.removeShared()
         progressBar.visibility = View.INVISIBLE
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
