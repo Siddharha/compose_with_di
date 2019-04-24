@@ -17,7 +17,6 @@ class PresenterUserInfo {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getUserInfo()
-
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->

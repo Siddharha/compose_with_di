@@ -82,18 +82,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditPersonalInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
-
-                if(profileData!=null)
-                {
                     startActivity(Intent(activity, ProfileEditPersonalActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    customSnackBarError(llRoot,resources.getString(R.string.something_went_wrong))
-                }
 
             }
             else
@@ -106,18 +98,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditContactInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
-
-                if(profileData!=null)
-                {
                     startActivity(Intent(activity, ProfileEditContactInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    customSnackBarError(llRoot,resources.getString(R.string.something_went_wrong))
-                }
 
             }
             else
@@ -130,17 +114,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditEmpInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
-                if(profileData!=null)
-                {
                     startActivity(Intent(activity, ProfileEditEmpInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    customSnackBarError(llRoot,resources.getString(R.string.something_went_wrong))
-                }
 
             }
             else
@@ -153,18 +130,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditEmpInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
-                if(profileData!=null)
-                {
                     startActivity(Intent(activity, ProfileEditEmpInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    customSnackBarError(llRoot,resources.getString(R.string.something_went_wrong))
-                }
-
             }
             else
             {
@@ -176,18 +145,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditBusinessInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
-                if(profileData!=null)
-                {
                     startActivity(Intent(activity, ProfileEditBusinessInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    customSnackBarError(llRoot,resources.getString(R.string.something_went_wrong))
-                }
-
             }
             else
             {
@@ -198,18 +159,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditIdInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
-                if(profileData!=null)
-                {
                     startActivity(Intent(activity, ProfileEditIdInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    customSnackBarError(llRoot,resources.getString(R.string.something_went_wrong))
-                }
-
             }
             else
             {
