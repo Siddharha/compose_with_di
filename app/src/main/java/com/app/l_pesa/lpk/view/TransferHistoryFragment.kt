@@ -197,6 +197,9 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?) {
 
+        cardView.visibility=View.INVISIBLE
+        rlList.visibility=View.VISIBLE
+
         swipeRefreshLayout.isRefreshing = false
         activity!!.runOnUiThread {
 
@@ -276,10 +279,15 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     override fun onEmptyTransferHistory() {
 
         swipeRefreshLayout.isRefreshing = false
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorTransferHistory(message: String) {
 
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }

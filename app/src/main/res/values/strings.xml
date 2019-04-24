@@ -341,7 +341,7 @@
     <string name="investment_plan">Investment Plan</string>
     <string name="investment_history">Investment History</string>
     <string name="apply">Apply</string>
-    <string name="apply_reinvestment">Are you sure you want to re-invest?</string>
+    <string name="apply_reinvestment">Are you sure you want to Reinvest?</string>
     <string name="apply_withdrawal">Are you sure you want to withdraw?</string>
     <string name="apply_exit_point">Are you sure you want to exit?</string>
 
