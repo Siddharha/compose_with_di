@@ -311,7 +311,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
             val seekBar           : IndicatorSeekBar                = itemView.findViewById(R.id.seekBar)
             val viewDividerTwo    : View                            = itemView.findViewById(R.id.viewDividerTwo)
 
-
         }
 
     }

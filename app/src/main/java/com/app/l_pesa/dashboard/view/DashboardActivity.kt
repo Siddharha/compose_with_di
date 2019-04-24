@@ -147,12 +147,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             if(!TextUtils.isEmpty(userData.user_info.credit_score.toString()))
             {
-                txtCreditScore.text     = resources.getString(R.string.credit_score)+userData.user_info.credit_score
+                txtCreditScore.text     = resources.getString(R.string.credit_score)+" "+userData.user_info.credit_score
             }
 
             val options = RequestOptions()
             options.centerCrop()
             options.error(R.drawable.ic_user_no_img_icon)
+            options.placeholder(R.drawable.ic_user_no_img_icon)
             Glide.with(this@DashboardActivity)
                     .load(resources.getString(R.string.profile_image_url)+userData.user_personal_info.profile_image)
                     .apply(options)
