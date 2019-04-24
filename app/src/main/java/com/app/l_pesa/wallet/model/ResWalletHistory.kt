@@ -1,26 +1,20 @@
 package com.app.l_pesa.wallet.model
 
+import com.app.l_pesa.common.CommonStatusModel
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 import java.util.ArrayList
 
-class ResWalletHistory {
+    class ResWalletHistory(val status: CommonStatusModel, val data: Data) {
 
-    @SerializedName("status")
-    @Expose
-    var status: Status? = null
-    @SerializedName("data")
-    @Expose
-    var data: Data? = null
+    data class Data(var savingsHistory: ArrayList<SavingsHistory>, val cursors:Cursors)
 
-    inner class Data {
+    data class Cursors(
 
-        @SerializedName("savings_history")
-        @Expose
-        var savingsHistory: ArrayList<SavingsHistory>? = null
-
-    }
+            val hasNext:Boolean,
+            val after:String
+    )
 
     data class SavingsHistory(
 
@@ -43,19 +37,6 @@ class ResWalletHistory {
 
     )
 
-    inner class Status {
-
-        @SerializedName("statusCode")
-        @Expose
-        var statusCode: Int = 0
-        @SerializedName("isSuccess")
-        @Expose
-        var isSuccess: Boolean = false
-        @SerializedName("message")
-        @Expose
-        var message: String = ""
-
-    }
 
 
 }

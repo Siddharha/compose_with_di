@@ -6,13 +6,10 @@ import android.app.DatePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -21,9 +18,8 @@ import com.app.l_pesa.wallet.inter.ICallBackTransaction
 import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
 import kotlinx.android.synthetic.main.activity_transaction_history.*
+import kotlinx.android.synthetic.main.content_transaction_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import kotlinx.android.synthetic.main.layout_recycler.*
-
 import java.util.*
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
@@ -32,6 +28,9 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     private lateinit var listSavingsHistory           : ArrayList<ResWalletHistory.SavingsHistory>
     private lateinit var adapterTransactionHistory    : TransactionAllAdapter
     private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
+
+    private var hasNext=false
+    private var after=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,13 +73,15 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
     }
 
-    override fun onSuccessTransaction(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>) {
+    override fun onSuccessTransaction(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors) {
 
+        cardView.visibility=View.INVISIBLE
+        rlList.visibility=View.VISIBLE
 
         runOnUiThread {
 
-           // hasNext = cursors!!.hasNext
-            //after = cursors.after
+            hasNext = cursors.hasNext
+            after = cursors.after
             swipeRefreshLayout.isRefreshing = false
             listSavingsHistory.clear()
             listSavingsHistory.addAll(savingsHistory)
@@ -95,15 +96,38 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
                     rlList.post {
 
-                        /*if (hasNext)
+                        if (hasNext)
                         {
                             loadMore()
-                        }*/
+                        }
 
                     }
 
                 }
             })
+        }
+    }
+
+    override fun onSuccessTransactionPaginate(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors) {
+
+        cardView.visibility=View.INVISIBLE
+        rlList.visibility=View.VISIBLE
+
+        runOnUiThread {
+
+            hasNext = cursors.hasNext
+            after = cursors.after
+            if (listSavingsHistory.size != 0) {
+                try {
+
+                    listSavingsHistory.removeAt(listSavingsHistory.size - 1)
+                    adapterTransactionHistory.notifyDataChanged()
+                    listSavingsHistory.addAll(savingsHistory)
+                    adapterTransactionHistory.notifyItemRangeInserted(0, listSavingsHistory.size)
+
+                } catch (e: Exception) {
+                }
+            }
         }
     }
 
@@ -142,7 +166,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         }
     }
 
-    private fun  resetFilter()
+    private fun resetFilter()
     {
         buttonReset.setOnClickListener {
 
@@ -179,8 +203,8 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
             listSavingsHistory.add(loadModel)
             adapterTransactionHistory.notifyItemInserted(listSavingsHistory.size-1)
 
-            //val presenterWithdrawalHistory= PresenterWithdrawalHistory()
-            //presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,this)
+            val presenterTransactionAll= PresenterTransactionAll()
+            presenterTransactionAll.getTransactionPaginate(this@TransactionHistoryActivity,after,this)
 
         }
         else{
@@ -192,10 +216,14 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     override fun onEmptyTransaction() {
 
         swipeRefreshLayout.isRefreshing=false
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorTransaction(message: String) {
 
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing=true
         CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,message)
     }

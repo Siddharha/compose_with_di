@@ -16,7 +16,7 @@ class PresenterTransactionAll {
     fun getTransactionAll(contextOBJ: Context, callBackOBJ: ICallBackTransaction) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory()
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory("")
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -30,11 +30,59 @@ class PresenterTransactionAll {
                         {
                             if(response.data!!.savingsHistory!!.size>0)
                             {
-                                callBackOBJ.onSuccessTransaction(response.data!!.savingsHistory!!)
+                                callBackOBJ.onSuccessTransaction(response.data!!.savingsHistory!!,response.data.cursors)
                             }
                             else
                             {
                                 callBackOBJ.onEmptyTransaction()
+                            }
+
+
+                        } else
+                        {
+                            callBackOBJ.onErrorTransaction(response.status!!.message)
+                        }
+                    } catch (e: Exception) {
+
+                    }
+                }, { error ->
+                    try {
+                        val errorVal = error as HttpException
+
+
+
+                        val jsonError   = JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonStatus  = jsonError.getJSONObject("status")
+                        val jsonMessage = jsonStatus.getString("message")
+                        callBackOBJ.onErrorTransaction(jsonMessage)
+
+
+                    } catch (exp: Exception) {
+                        val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
+                        callBackOBJ.onErrorTransaction(errorMessageOBJ)
+                    }
+
+                })
+    }
+
+    fun getTransactionPaginate(contextOBJ: Context, cursorAfter:String, callBackOBJ: ICallBackTransaction) {
+
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory(cursorAfter)
+
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+                }
+                .subscribe({ response ->
+
+                    try {
+                        if (response.status!!.isSuccess)
+                        {
+                            if(response.data!!.savingsHistory!!.size>0)
+                            {
+                                callBackOBJ.onSuccessTransactionPaginate(response.data!!.savingsHistory!!,response.data.cursors)
                             }
 
 
