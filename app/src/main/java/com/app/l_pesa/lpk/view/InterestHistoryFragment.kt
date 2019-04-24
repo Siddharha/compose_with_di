@@ -195,13 +195,15 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
     override fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?) {
 
+        cardView.visibility=View.INVISIBLE
+        rlList.visibility=View.VISIBLE
 
         activity!!.runOnUiThread {
 
             swipeRefreshLayout.isRefreshing = false
 
-            listInterestHistory!!.clear()
-            listInterestHistory!!.addAll(userInterestHistory!!)
+            listInterestHistory.clear()
+            listInterestHistory.addAll(userInterestHistory!!)
             adapterInterestHistory      = AdapterInterestHistory(activity!!, listInterestHistory)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
@@ -211,7 +213,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
             hasNext =cursors!!.hasNext
             after   =cursors.after
 
-            adapterInterestHistory!!.setLoadMoreListener(object : AdapterInterestHistory.OnLoadMoreListener {
+            adapterInterestHistory.setLoadMoreListener(object : AdapterInterestHistory.OnLoadMoreListener {
                 override fun onLoadMore() {
 
                     rlList.post {
@@ -234,14 +236,14 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
         hasNext =cursors!!.hasNext
         after   =cursors.after
-        if(listInterestHistory!!.size!=0)
+        if(listInterestHistory.size!=0)
         {
             try {
 
-                listInterestHistory!!.removeAt(listInterestHistory!!.size - 1)
-                adapterInterestHistory!!.notifyDataChanged()
-                listInterestHistory!!.addAll(userInterestHistory!!)
-                adapterInterestHistory!!.notifyItemRangeInserted(0, listInterestHistory!!.size)
+                listInterestHistory.removeAt(listInterestHistory.size - 1)
+                adapterInterestHistory.notifyDataChanged()
+                listInterestHistory.addAll(userInterestHistory!!)
+                adapterInterestHistory.notifyItemRangeInserted(0, listInterestHistory.size)
 
             }
             catch (e:Exception)
@@ -257,8 +259,8 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
                             "","","",
                             "","","","","","")
 
-            listInterestHistory!!.add(loadModel)
-            adapterInterestHistory!!.notifyItemInserted(listInterestHistory!!.size-1)
+            listInterestHistory.add(loadModel)
+            adapterInterestHistory.notifyItemInserted(listInterestHistory.size-1)
 
 
             val presenterInterestHistory = PresenterInterestHistory()
@@ -274,10 +276,15 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
     override fun onEmptyInterestHistory() {
 
         swipeRefreshLayout.isRefreshing = false
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorInterestHistory(message: String) {
 
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }
