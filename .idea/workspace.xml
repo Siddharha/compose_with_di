@@ -11,8 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4f3b935-f440-49f1-b643-7e5f2d89fc53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_interest_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_interest_history.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_withdrawal_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_withdrawal_history.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,9 +53,9 @@
           <entry key="class" value="1" />
           <entry key="gradle" value="4" />
           <entry key="java" value="4" />
-          <entry key="kt" value="174" />
+          <entry key="kt" value="176" />
           <entry key="pro" value="2" />
-          <entry key="xml" value="145" />
+          <entry key="xml" value="146" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -63,16 +63,16 @@
           <entry key="CLASS" value="1" />
           <entry key="Groovy" value="4" />
           <entry key="JAVA" value="4" />
-          <entry key="Kotlin" value="174" />
+          <entry key="Kotlin" value="176" />
           <entry key="ProGuard File" value="2" />
-          <entry key="XML" value="145" />
+          <entry key="XML" value="146" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="37" />
-          <entry key="kt" value="3272" />
+          <entry key="kt" value="3288" />
           <entry key="pro" value="1" />
           <entry key="xml" value="4049" />
         </counts>
@@ -81,7 +81,7 @@
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="37" />
-          <entry key="Kotlin" value="3272" />
+          <entry key="Kotlin" value="3288" />
           <entry key="ProGuard File" value="1" />
           <entry key="XML" value="4049" />
         </counts>
@@ -91,30 +91,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TransferHistoryFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="290" column="71" lean-forward="true" selection-start-line="287" selection-start-column="8" selection-end-line="290" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="283" column="71" selection-start-line="283" selection-start-column="71" selection-end-line="283" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_interest_history.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_withdrawal_history.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1235">
+            <state relative-caret-position="380">
               <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
               <folding>
+                <element signature="e#954#3609#0" />
                 <element signature="e#1353#1368#0" expanded="true" />
                 <element signature="e#1414#1429#0" expanded="true" />
                 <element signature="e#1475#1490#0" expanded="true" />
@@ -131,6 +114,24 @@
                 <element signature="e#2936#2972#0" expanded="true" />
                 <element signature="e#3427#3441#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="279" column="40" selection-start-line="277" selection-start-column="8" selection-end-line="279" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="223" column="40" selection-start-line="223" selection-start-column="40" selection-end-line="223" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -4541,8 +4542,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_lpkwithdrawal.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_investment_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/kprogresshud/src/main/java/com/kaopiz/kprogresshud/KProgressHUD.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt" />
@@ -4592,6 +4591,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TransferHistoryFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_interest_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_withdrawal_history.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt" />
       </list>
     </option>
   </component>
@@ -4874,20 +4875,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentHistoryAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="49" column="65" selection-start-line="49" selection-start-column="65" selection-end-line="49" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/AdapterWithdrawalHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2414">
@@ -5255,12 +5242,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TransferHistoryFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1291">
+          <caret line="200" column="38" selection-start-line="199" selection-start-column="8" selection-end-line="200" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_interest_history.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1235">
-          <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+        <state relative-caret-position="248">
+          <caret line="85" column="29" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="85" selection-end-column="29" />
           <folding>
+            <element signature="e#953#3608#0" />
             <element signature="e#1353#1368#0" expanded="true" />
             <element signature="e#1414#1429#0" expanded="true" />
             <element signature="e#1475#1490#0" expanded="true" />
@@ -5280,17 +5275,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TransferHistoryFragment.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_withdrawal_history.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="290" column="71" lean-forward="true" selection-start-line="287" selection-start-column="8" selection-end-line="290" selection-end-column="71" />
+        <state relative-caret-position="380">
+          <caret line="85" column="29" selection-start-line="85" selection-start-column="29" selection-end-line="85" selection-end-column="29" />
+          <folding>
+            <element signature="e#954#3609#0" />
+            <element signature="e#1353#1368#0" expanded="true" />
+            <element signature="e#1414#1429#0" expanded="true" />
+            <element signature="e#1475#1490#0" expanded="true" />
+            <element signature="e#1529#1543#0" expanded="true" />
+            <element signature="e#1863#1877#0" expanded="true" />
+            <element signature="e#2050#2065#0" expanded="true" />
+            <element signature="e#2116#2131#0" expanded="true" />
+            <element signature="e#2373#2391#0" expanded="true" />
+            <element signature="e#2445#2459#0" expanded="true" />
+            <element signature="e#2552#2567#0" expanded="true" />
+            <element signature="e#2621#2635#0" expanded="true" />
+            <element signature="e#2689#2704#0" expanded="true" />
+            <element signature="e#2879#2894#0" expanded="true" />
+            <element signature="e#2936#2972#0" expanded="true" />
+            <element signature="e#3427#3441#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="283" column="71" selection-start-line="283" selection-start-column="71" selection-end-line="283" selection-end-column="71" />
+        <state relative-caret-position="362">
+          <caret line="279" column="40" selection-start-line="277" selection-start-column="8" selection-end-line="279" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/WithdrawalHistory.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="223" column="40" selection-start-line="223" selection-start-column="40" selection-end-line="223" selection-end-column="40" />
         </state>
       </provider>
     </entry>

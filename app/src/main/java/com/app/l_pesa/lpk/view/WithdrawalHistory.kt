@@ -146,13 +146,16 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
     override fun onSuccessWithdrawalHistory(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?) {
 
+        cardView.visibility=View.INVISIBLE
+        rlList.visibility=View.VISIBLE
+
         activity!!.runOnUiThread {
 
             hasNext = cursors!!.hasNext
             after = cursors.after
             swipeRefreshLayout.isRefreshing = false
-            listWithdrawalHistory!!.clear()
-            listWithdrawalHistory!!.addAll(userWithdrawalHistory)
+            listWithdrawalHistory.clear()
+            listWithdrawalHistory.addAll(userWithdrawalHistory)
             adapterWithdrawalHistory = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
             val llmOBJ = LinearLayoutManager(activity)
             llmOBJ.orientation = LinearLayoutManager.VERTICAL
@@ -181,14 +184,14 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
         hasNext =cursors!!.hasNext
         after   =cursors.after
-        if(listWithdrawalHistory!!.size!=0)
+        if(listWithdrawalHistory.size!=0)
         {
             try {
 
-                listWithdrawalHistory!!.removeAt(listWithdrawalHistory!!.size - 1)
+                listWithdrawalHistory.removeAt(listWithdrawalHistory.size - 1)
                 adapterWithdrawalHistory.notifyDataChanged()
-                listWithdrawalHistory!!.addAll(userWithdrawalHistory)
-                adapterWithdrawalHistory.notifyItemRangeInserted(0, listWithdrawalHistory!!.size)
+                listWithdrawalHistory.addAll(userWithdrawalHistory)
+                adapterWithdrawalHistory.notifyItemRangeInserted(0, listWithdrawalHistory.size)
 
             }
             catch (e:Exception)
@@ -204,8 +207,8 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
                     "", "", "",
                     "", "", "", "", "","","")
 
-            listWithdrawalHistory!!.add(loadModel)
-            adapterWithdrawalHistory.notifyItemInserted(listWithdrawalHistory!!.size-1)
+            listWithdrawalHistory.add(loadModel)
+            adapterWithdrawalHistory.notifyItemInserted(listWithdrawalHistory.size-1)
 
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
             presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,this)
@@ -219,12 +222,17 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
     override fun onEmptyWithdrawalHistory() {
 
-        swipeRefreshLayout.isRefreshing=false
+        swipeRefreshLayout.isRefreshing = false
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorWithdrawalHistory(message: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.INVISIBLE
+        swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     @SuppressLint("SetTextI18n")
