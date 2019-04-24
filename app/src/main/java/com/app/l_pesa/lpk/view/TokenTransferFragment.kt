@@ -96,6 +96,7 @@ class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
 
         buttonTransfer.isClickable=true
         swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_transfer_successfully))
     }
 
     override fun onErrorTokenTransfer(message: String) {
