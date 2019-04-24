@@ -12,9 +12,10 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
+import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
 
-class AdapterTransferHistory (val context: Context, private val listTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterTransferHistory (val context: Context, private val listTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, private val callBack: ICallBackTransferHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false
@@ -40,7 +41,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         }
 
         if (getItemViewType(position) == 0) {
-            (holder as UserViewHolder).bindData(context, listTransferHistory[position])
+            (holder as UserViewHolder).bindData(context, listTransferHistory[position],callBack)
 
         }
     }
@@ -80,7 +81,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         var txtCreateDate   : CommonTextRegular     = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
-        fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory)
+        fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory, callBack: ICallBackTransferHistory)
         {
             txtToken.text = context.resources.getString(R.string.tokens)+": "+userTransferHistory.tokens
             txtRef.text = context.resources.getString(R.string.ref_no)+" "+userTransferHistory.identity_number
@@ -119,6 +120,10 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
                 if(!userTransferHistory.actionStatus.status)
                 {
                     Toast.makeText(context,userTransferHistory.actionStatus.message,Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    callBack.onSavingsUnlock(userTransferHistory.id.toString())
                 }
 
             }

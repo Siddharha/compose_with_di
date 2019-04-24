@@ -153,6 +153,9 @@ interface BaseService{
     @POST("investment/steadyincomestatus")
     fun doInvestmentStatus(@Body request: JsonObject): Observable<ResInvestmentStatus>
 
+    @POST("lpk_savings/unlock")
+    fun doSavingsUnlock(@Body request: JsonObject): Observable<ResSavingsUnlock>
+
 
 }
 

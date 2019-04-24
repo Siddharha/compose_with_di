@@ -9,13 +9,15 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterTransferHistory
 import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
+import com.app.l_pesa.lpk.presenter.PresenterSavingsUnlock
 import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
+import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_transfer_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
@@ -23,13 +25,13 @@ import java.util.*
 
 class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
+    private lateinit var progressDialog                : KProgressHUD
     private lateinit var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>
     private lateinit var adapterTransferHistory        : AdapterTransferHistory
     private lateinit var bottomSheetBehavior           : BottomSheetBehavior<*>
 
     private var hasNext=false
     private var after=""
-
 
 
     companion object {
@@ -47,6 +49,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         super.onViewCreated(view, savedInstanceState)
 
         initData()
+        initLoader()
         swipeRefresh()
 
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
@@ -66,7 +69,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     private fun initData()
     {
         listTransferHistory= ArrayList()
-        adapterTransferHistory= AdapterTransferHistory(activity!!,listTransferHistory)
+        adapterTransferHistory= AdapterTransferHistory(activity!!,listTransferHistory,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -207,7 +210,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
             listTransferHistory.clear()
             listTransferHistory.addAll(userTransferHistory)
-            adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory)
+            adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = LinearLayoutManager.VERTICAL
             rlList.layoutManager        = llmOBJ
@@ -288,6 +291,53 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         rlList.visibility=View.INVISIBLE
         cardView.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing = false
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSavingsUnlock(savings_id: String) {
+
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+            progressDialog.show()
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("history_id",savings_id)
+             val presenterSavingsUnlock= PresenterSavingsUnlock()
+            presenterSavingsUnlock.doSavingsUnlock(activity!!,jsonObject,this)
+
+        }
+        else{
+
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+        }
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    override fun onSuccessSavingsUnlock() {
+
+        dismiss()
+        initData()
+
+    }
+    override fun onErrorSavingsUnlock(message: String) {
+
+        dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }
