@@ -244,7 +244,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     override fun onErrorUserInfo(message: String) {
         shimmerLayout.stopShimmerAnimation()
-
         swipeRefreshLayout.isRefreshing=false
         Toast.makeText(activity,message,Toast.LENGTH_SHORT).show()
     }
@@ -258,13 +257,13 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         val profileData                   = gson.toJson(data)
         sharedPrefOBJ.profileInfo         = profileData
 
-
         /*Profile Information*/
 
         try {
 
             val options = RequestOptions()
             options.error(R.drawable.ic_user_no_img_icon)
+            options.placeholder(R.drawable.ic_user_no_img_icon)
             Glide.with(activity!!)
                     .load(resources.getString(R.string.profile_image_url)+data.userInfo!!.profileImage)
                     .apply(options)
