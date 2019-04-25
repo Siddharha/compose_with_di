@@ -13,22 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4f3b935-f440-49f1-b643-7e5f2d89fc53" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/inter/ICallBackWalletWithdrawalHistory.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletWithdrawalHistory.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/presenter/PresenterWithdrawalHistory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletHistory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletHistoryActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletHistoryActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_wallet_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_wallet_history.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +57,7 @@
           <entry key="java" value="7" />
           <entry key="kt" value="261" />
           <entry key="pro" value="3" />
-          <entry key="xml" value="176" />
+          <entry key="xml" value="179" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -81,80 +67,51 @@
           <entry key="JAVA" value="7" />
           <entry key="Kotlin" value="261" />
           <entry key="ProGuard File" value="3" />
-          <entry key="XML" value="176" />
+          <entry key="XML" value="179" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="46" />
-          <entry key="kt" value="4477" />
+          <entry key="kt" value="4569" />
           <entry key="pro" value="1" />
-          <entry key="xml" value="4606" />
+          <entry key="xml" value="4619" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="46" />
-          <entry key="Kotlin" value="4477" />
+          <entry key="Kotlin" value="4569" />
           <entry key="ProGuard File" value="1" />
-          <entry key="XML" value="4606" />
+          <entry key="XML" value="4619" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="71" column="9" selection-start-line="68" selection-start-column="7" selection-end-line="71" selection-end-column="9" />
+            <state relative-caret-position="342">
+              <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_transaction_history.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="41" column="37" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletHistoryActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+            <state relative-caret-position="282">
+              <caret line="75" column="9" lean-forward="true" selection-start-line="72" selection-start-column="8" selection-end-line="75" selection-end-column="9" />
               <folding>
                 <element signature="e#36#751#0" expanded="true" />
+                <element signature="e#2399#2440#1" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_history.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_wallet_history.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -4600,7 +4557,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/presenter/PresenterUserInfo.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/presenter/PresenterTransactionAll.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletHistoryActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletFragment.kt" />
@@ -4611,9 +4567,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/inter/ICallBackWalletWithdrawalHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/presenter/PresenterWithdrawalHistory.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletHistoryActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_wallet_history.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletHistoryActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt" />
       </list>
     </option>
   </component>
@@ -4888,7 +4845,7 @@
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32972974" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.26594594" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.31027028" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.31027028" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="5" weight="0.3416216" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
@@ -4901,7 +4858,7 @@
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
-      <window_info active="true" anchor="right" id="Preview" order="5" visible="true" weight="0.23021583" />
+      <window_info anchor="right" id="Preview" order="5" weight="0.23021583" />
     </layout>
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -5229,17 +5186,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="33" column="54" lean-forward="true" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
-          <folding>
-            <element signature="e#1340#1370#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/model/ResWalletHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
@@ -5325,38 +5271,47 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="71" column="9" selection-start-line="68" selection-start-column="7" selection-end-line="71" selection-end-column="9" />
+        <state relative-caret-position="250">
+          <caret line="33" column="54" lean-forward="true" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_wallet_history.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="35" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_history.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="37" column="38" lean-forward="true" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/WalletHistoryActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="29" column="49" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="49" />
+        <state relative-caret-position="282">
+          <caret line="75" column="9" lean-forward="true" selection-start-line="72" selection-start-column="8" selection-end-line="75" selection-end-column="9" />
           <folding>
             <element signature="e#36#751#0" expanded="true" />
+            <element signature="e#2399#2440#1" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_history.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/wallet/view/TransactionHistoryActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="38" column="44" selection-start-line="38" selection-start-column="44" selection-end-line="38" selection-end-column="44" />
+        <state relative-caret-position="342">
+          <caret line="69" column="9" selection-start-line="69" selection-start-column="9" selection-end-line="69" selection-end-column="9" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_wallet_history.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
   </component>
 </project>

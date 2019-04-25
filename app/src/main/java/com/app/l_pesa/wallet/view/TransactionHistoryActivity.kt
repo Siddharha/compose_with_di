@@ -61,9 +61,17 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         bottomSheetBehavior.isHideable=true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        swipeRefreshLayout.isRefreshing=true
-        val presenterTransactionAll= PresenterTransactionAll()
-        presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,this)
+        if(CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
+        {
+            swipeRefreshLayout.isRefreshing=true
+            val presenterTransactionAll= PresenterTransactionAll()
+            presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,this)
+        }
+
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,resources.getString(R.string.no_internet))
+        }
 
 
         imgFilter.setOnClickListener {

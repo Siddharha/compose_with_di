@@ -11,10 +11,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.wallet.inter.ICallBackWalletWithdrawalHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.activity_wallet_history.*
+import kotlinx.android.synthetic.main.content_wallet_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 
@@ -39,7 +41,10 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     private fun swipeRefresh()
     {
-
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+            initData()
+        }
     }
 
     private fun initLoad()
@@ -53,8 +58,22 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             doFilter()
         }
 
-        val presenterWithdrawalHistory=PresenterWithdrawalHistory()
-        presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,this)
+        initData()
+
+    }
+
+    private fun initData()
+    {
+        if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
+        {
+            swipeRefreshLayout.isRefreshing=true
+            val presenterWithdrawalHistory=PresenterWithdrawalHistory()
+            presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,this)
+        }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,resources.getString(R.string.no_internet))
+        }
 
     }
 
