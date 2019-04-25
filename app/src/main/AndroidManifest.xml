@@ -26,6 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".wallet.view.WalletHistoryActivity"
+            android:label="@string/title_wallet_history"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".wallet.view.TransactionHistoryActivity"
             android:label="@string/wallet_history"
             android:screenOrientation="portrait"

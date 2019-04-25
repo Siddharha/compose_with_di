@@ -260,7 +260,6 @@
     <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
 
 
-
     <!--Contact Info-->
     <string name="street_physical_address">Street/Physical Address*</string>
     <string name="postal_code_address">Postal Code Address*</string>
@@ -410,6 +409,7 @@
     <string name="debit">Debit</string>
     <string name="cr">Cr</string>
     <string name="db">Db</string>
+    <string name="title_wallet_history">Wallet History</string>
 
 
 </resources>

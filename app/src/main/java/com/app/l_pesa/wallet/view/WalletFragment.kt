@@ -82,9 +82,33 @@ class WalletFragment :Fragment(), ICallBackWallet {
 
         imgTransactionHistory.setOnClickListener {
 
-            val intent = Intent(activity, TransactionHistoryActivity::class.java)
-            startActivity(intent)
-            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                val intent = Intent(activity, TransactionHistoryActivity::class.java)
+                startActivity(intent)
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+
+
+
+        }
+
+        imgWithdrawalHistory.setOnClickListener {
+
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                val intent = Intent(activity, WalletHistoryActivity::class.java)
+                startActivity(intent)
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
 
         }
     }

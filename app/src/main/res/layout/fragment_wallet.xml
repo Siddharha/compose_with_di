@@ -19,11 +19,12 @@
             android:background="@drawable/ic_wallet_bg"
             android:padding="@dimen/_3sdp">
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/lpesa_wallet_balance"
                 android:textSize="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
@@ -31,7 +32,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,66 +40,67 @@
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:textSize="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_7sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-            <TextView
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginTop="@dimen/_22sdp"
+                android:text="TZS 2320"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_47sdp"
+                android:text="TZS 5000000"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/commission_for_l_pesa"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_10sdp"
-                android:padding="@dimen/_5sdp"
+                android:paddingTop="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/textView19"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:text="TZS 2320"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:text="TZS 5000000"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textView16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/textView21"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="  2%"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_10sdp"
-                android:padding="@dimen/_5sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+                />
+
 
         </android.support.constraint.ConstraintLayout>
 
@@ -153,12 +155,13 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintTop_toBottomOf="@+id/commonInputLayout5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginBottom="@dimen/_5sdp"/>
+                android:layout_marginBottom="@dimen/_2sdp"/>
 
         </android.support.constraint.ConstraintLayout>
 
