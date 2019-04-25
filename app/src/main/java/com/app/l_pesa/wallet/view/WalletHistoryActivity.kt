@@ -251,7 +251,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
                         if (hasNext)
                         {
-                            loadMore()
+                          //  loadMore()
                         }
 
                     }
@@ -266,8 +266,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
-            val loadModel  = ResWalletWithdrawalHistory.WithdrawalHistory(0, 0, 0.0,
-                    0.0, "", "", "", "")
+            val loadModel  = ResWalletWithdrawalHistory.WithdrawalHistory(0, 0, 0.0,0.0, "", "", "", "")
 
             listWithdrawalHistory.add(loadModel)
             adapterWalletHistory.notifyItemInserted(listWithdrawalHistory.size-1)
@@ -284,8 +283,6 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     override fun onSuccessWalletWithdrawalHistoryPaginate(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors) {
 
-        runOnUiThread {
-
             hasNext = cursors.hasNext
             after = cursors.after
 
@@ -300,7 +297,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
                 } catch (e: Exception) {
                 }
             }
-        }
+
     }
 
     override fun onErrorWalletWithdrawalHistory(message: String) {
