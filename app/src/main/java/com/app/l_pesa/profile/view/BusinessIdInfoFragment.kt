@@ -279,7 +279,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        filterPopup?.showAsDropDown(llRoot,150,-420)
+        filterPopup?.showAsDropDown(llRoot,165,-400)
     }
 
     private fun showAlertFilter(userIdsBusinessInfo:ResUserInfo.UserIdsBusinessInfo, pos: Int): PopupWindow {

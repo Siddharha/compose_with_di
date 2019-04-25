@@ -323,7 +323,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        filterPopup?.showAsDropDown(llRoot,150,-420)
+        filterPopup?.showAsDropDown(llRoot,165,-400)
 
     }
 
