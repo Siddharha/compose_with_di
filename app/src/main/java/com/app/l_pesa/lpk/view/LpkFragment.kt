@@ -99,7 +99,7 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
         val gson = Gson()
         val json = gson.toJson(data)
         sharedPrefOBJ.lpkInfo= json
-
+        dismiss()
         if(type=="WITHDRAWAL")
         {
             startActivity(Intent(activity, LPKWithdrawalActivity::class.java))
@@ -110,7 +110,7 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
             startActivity(Intent(activity, LPKSavingsActivity::class.java))
             activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
-        dismiss()
+
 
     }
 

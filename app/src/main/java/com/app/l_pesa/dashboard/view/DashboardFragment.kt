@@ -76,9 +76,11 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
     }
 
     private fun loadDashboard() {
-        if (CommonMethod.isNetworkAvailable(activity!!)) {
+        if (CommonMethod.isNetworkAvailable(activity!!))
+        {
             swipeRefreshLayout.isRefreshing = true
             val sharedPrefOBJ = SharedPref(activity!!)
+
             val presenterDashboard = PresenterDashboard()
             presenterDashboard.getDashboard(activity!!, sharedPrefOBJ.accessToken, this)
         } else {
