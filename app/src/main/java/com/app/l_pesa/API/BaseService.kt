@@ -22,6 +22,7 @@ import com.app.l_pesa.registration.model.ResRegistrationTwo
 import com.app.l_pesa.splash.model.ResModelCountry
 import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawal
+import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -155,6 +156,9 @@ interface BaseService{
 
     @POST("lpk_savings/unlock")
     fun doSavingsUnlock(@Body request: JsonObject): Observable<ResSavingsUnlock>
+
+    @GET("lpesa_wallet/withdrawal_history")
+    fun getWalletWithdrawalHistory(@Query("cursors") cursors:String): Observable<ResWalletWithdrawalHistory>
 
 
 }
