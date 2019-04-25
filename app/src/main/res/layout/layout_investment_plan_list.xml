@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_75sdp"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/_3sdp"
     android:elevation="@dimen/_1sdp"
     android:background="@drawable/bg_white_view">
@@ -30,7 +30,7 @@
                 android:layout_width="@dimen/_50sdp"
                 android:background="@drawable/bg_aquamarine_circle"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_10sdp"
                 android:gravity="center"
                 />
 
@@ -45,15 +45,15 @@
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtTitle"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/montserrat"
                 android:paddingStart="@dimen/_2sdp"
                 android:paddingEnd="@dimen/_2sdp"
-                android:textColor="@color/colorTextBlack"
-                android:maxLines="1"
-                android:ellipsize="end"
+                android:textColor="@color/dark_text_color"
+
                 />
 
             <com.app.l_pesa.common.CommonTextRegular
@@ -63,7 +63,7 @@
                 android:textSize="@dimen/_10sdp"
                 android:paddingStart="@dimen/_2sdp"
                 android:paddingEnd="@dimen/_2sdp"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlackLight"
                 android:maxLines="1"
                 android:ellipsize="end"
@@ -76,10 +76,10 @@
                 android:id="@+id/txtRate"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/montserrat"
                 android:textSize="@dimen/_10sdp"
                 android:paddingStart="@dimen/_2sdp"
                 android:paddingEnd="@dimen/_2sdp"
-                android:layout_marginTop="@dimen/_1sdp"
                 android:textColor="@color/colorTextBlackLight"
                 android:maxLines="1"
                 android:ellipsize="end"

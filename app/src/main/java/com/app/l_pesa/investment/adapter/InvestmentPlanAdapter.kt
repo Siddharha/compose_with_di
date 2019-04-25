@@ -2,8 +2,11 @@ package com.app.l_pesa.investment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.text.Html
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,12 +24,10 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
         val viewHolder = holder as SelectViewHolder
 
         viewHolder.txtInterest.text = investmentList[position].depositInterestRate.toString()+"%"
-        viewHolder.txtTitle.text = investmentList[position].planName
-        viewHolder.txtDuration.text = context.resources.getString(R.string.months)+"" +
-                ""+investmentList[position].depositMonth.toString()
 
-        viewHolder.txtRate.text = context.resources.getString(R.string.interest_rate)+"" +
-                ""+investmentList[position].depositInterestRate+"%"
+        viewHolder.txtTitle.text = investmentList[position].planName
+        viewHolder.txtDuration.text = fromHtml(context.resources.getString(R.string.months)+"<font color='#333333'>"+" "+investmentList[position].depositMonth+"</font>")
+        viewHolder.txtRate.text = fromHtml(context.resources.getString(R.string.interest_rate)+"<font color='#333333'>"+" "+investmentList[position].depositInterestRate+"%"+"</font>")
 
         viewHolder.rootLayout.setOnClickListener {
 
@@ -43,6 +44,14 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_investment_plan_list, parent, false)
         recyclerView = SelectViewHolder(itemView)
         return recyclerView
+    }
+
+    private fun fromHtml(source: String): Spanned {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            Html.fromHtml(source)
+        }
     }
 
     companion object {

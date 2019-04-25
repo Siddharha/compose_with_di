@@ -89,7 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/provide_amount"
-                        android:textColor="@color/light_text_color"
+                        android:textColor="@color/dark_text_color"
                         android:textSize="@dimen/_13sdp"
                         android:inputType="numberSigned" />
 
