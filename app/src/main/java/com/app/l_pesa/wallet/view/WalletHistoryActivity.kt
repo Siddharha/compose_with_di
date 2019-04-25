@@ -7,11 +7,13 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.wallet.adapter.WalletHistoryAdapter
 import com.app.l_pesa.wallet.inter.ICallBackWalletWithdrawalHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawalHistory
@@ -22,7 +24,9 @@ import java.util.*
 
 class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHistory {
 
-    private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
+    private lateinit var listWithdrawalHistory   : ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>
+    private lateinit var adapterWalletHistory    : WalletHistoryAdapter
+    private lateinit var bottomSheetBehavior     : BottomSheetBehavior<*>
 
     private var hasNext=false
     private var after=""
@@ -49,6 +53,9 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     private fun initLoad()
     {
+        listWithdrawalHistory           = ArrayList()
+        adapterWalletHistory            = WalletHistoryAdapter(this@WalletHistoryActivity, listWithdrawalHistory)
+
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -223,10 +230,75 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     override fun onSuccessWalletWithdrawalHistory(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors) {
 
+        runOnUiThread {
+            hasNext = cursors.hasNext
+            after   = cursors.after
+            swipeRefreshLayout.isRefreshing = false
+            listWithdrawalHistory.clear()
+            listWithdrawalHistory.addAll(withdrawal_history)
+            adapterWalletHistory        = WalletHistoryAdapter(this@WalletHistoryActivity, listWithdrawalHistory)
+            val llmOBJ                  = LinearLayoutManager(this@WalletHistoryActivity)
+            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            rlList.layoutManager        = llmOBJ
+            rlList.adapter              = adapterWalletHistory
+            adapterWalletHistory.notifyDataSetChanged()
+            adapterWalletHistory.setLoadMoreListener(object : WalletHistoryAdapter.OnLoadMoreListener {
+                override fun onLoadMore() {
+
+                    rlList.post {
+
+                        if (hasNext)
+                        {
+                            loadMore()
+                        }
+
+                    }
+
+                }
+            })
+        }
+
+    }
+
+    private fun loadMore()
+    {
+        if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
+        {
+            val loadModel  = ResWalletWithdrawalHistory.WithdrawalHistory(0, 0, 0.0,
+                    0.0, "", "", "", "")
+
+            listWithdrawalHistory.add(loadModel)
+            adapterWalletHistory.notifyItemInserted(listWithdrawalHistory.size-1)
+
+            val presenterWithdrawalHistory=PresenterWithdrawalHistory()
+            presenterWithdrawalHistory.getWithdrawalHistoryPaginate(this@WalletHistoryActivity,after,this)
+
+        }
+        else{
+            swipeRefreshLayout.isRefreshing = false
+            CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,resources.getString(R.string.no_internet))
+        }
     }
 
     override fun onSuccessWalletWithdrawalHistoryPaginate(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors) {
 
+        runOnUiThread {
+
+            hasNext = cursors.hasNext
+            after = cursors.after
+
+            if (listWithdrawalHistory.size != 0) {
+                try {
+
+                    listWithdrawalHistory.removeAt(listWithdrawalHistory.size - 1)
+                    adapterWalletHistory.notifyDataChanged()
+                    listWithdrawalHistory.addAll(withdrawal_history)
+                    adapterWalletHistory.notifyItemRangeInserted(0, listWithdrawalHistory.size)
+
+                } catch (e: Exception) {
+                }
+            }
+        }
     }
 
     override fun onErrorWalletWithdrawalHistory(message: String) {
