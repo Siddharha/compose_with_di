@@ -231,6 +231,8 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     override fun onSuccessWalletWithdrawalHistory(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors) {
 
         runOnUiThread {
+            cardView.visibility=View.INVISIBLE
+            rlList.visibility=View.VISIBLE
             hasNext = cursors.hasNext
             after   = cursors.after
             swipeRefreshLayout.isRefreshing = false
@@ -303,10 +305,17 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     override fun onErrorWalletWithdrawalHistory(message: String) {
 
+        swipeRefreshLayout.isRefreshing = false
+        cardView.visibility=View.INVISIBLE
+        rlList.visibility=View.INVISIBLE
+        CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,message)
     }
 
     override fun onEmptyWalletWithdrawalHistory() {
 
+        swipeRefreshLayout.isRefreshing = false
+        rlList.visibility=View.INVISIBLE
+        cardView.visibility=View.VISIBLE
     }
 
     private fun toolbarFont(context: Activity) {
