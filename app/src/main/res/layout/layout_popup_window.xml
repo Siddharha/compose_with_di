@@ -10,8 +10,8 @@
     <ImageView
         android:id="@+id/alert_filter_icon"
         android:layout_width="@dimen/_23sdp"
-        android:layout_height="@dimen/_23sdp"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginStart="@dimen/_7sdp"
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,12 +19,13 @@
 
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/alert_filter_name"
-        android:layout_width="@dimen/_125sdp"
+        android:layout_width="@dimen/_120sdp"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_3sdp"
         android:fontFamily="@font/montserrat"
         android:textSize="@dimen/_12sdp"
         android:gravity="center|start"
+        android:textColor="@color/dark_text_color"
         app:layout_constraintBottom_toBottomOf="@+id/alert_filter_icon"
         app:layout_constraintStart_toEndOf="@+id/alert_filter_icon"
         app:layout_constraintTop_toTopOf="parent" />
