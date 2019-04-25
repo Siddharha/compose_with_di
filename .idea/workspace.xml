@@ -13,7 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4f3b935-f440-49f1-b643-7e5f2d89fc53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +56,7 @@
           <entry key="class" value="1" />
           <entry key="gradle" value="4" />
           <entry key="java" value="7" />
-          <entry key="kt" value="279" />
+          <entry key="kt" value="280" />
           <entry key="pro" value="3" />
           <entry key="xml" value="197" />
         </counts>
@@ -64,7 +66,7 @@
           <entry key="CLASS" value="1" />
           <entry key="Groovy" value="4" />
           <entry key="JAVA" value="7" />
-          <entry key="Kotlin" value="279" />
+          <entry key="Kotlin" value="280" />
           <entry key="ProGuard File" value="3" />
           <entry key="XML" value="197" />
         </counts>
@@ -73,7 +75,7 @@
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="46" />
-          <entry key="kt" value="4936" />
+          <entry key="kt" value="4950" />
           <entry key="pro" value="1" />
           <entry key="xml" value="5082" />
         </counts>
@@ -82,7 +84,7 @@
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="46" />
-          <entry key="Kotlin" value="4936" />
+          <entry key="Kotlin" value="4950" />
           <entry key="ProGuard File" value="1" />
           <entry key="XML" value="5082" />
         </counts>
@@ -90,36 +92,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="98" column="123" selection-start-line="98" selection-start-column="123" selection-end-line="98" selection-end-column="123" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="46" column="62" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -133,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>stop</find>
       <find>shimmerLayout.stopShimmerAnimation()</find>
       <find>thre</find>
       <find>onErrorUserInfo</find>
@@ -163,6 +135,7 @@
       <find>(R.string.</find>
       <find>setProgress</find>
       <find>not</find>
+      <find>with</find>
     </findStrings>
     <replaceStrings>
       <replace>bottomSheetBehavior.</replace>
@@ -4525,8 +4498,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_token_transfer.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_transfer_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_interest_history.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/InterestHistoryFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_withdrawal_history.xml" />
@@ -4576,6 +4547,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt" />
       </list>
     </option>
   </component>
@@ -4732,7 +4705,7 @@
     <property name="android.project.structure.last.selected" value="kprogresshud" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="device.picker.selection" value="ZW222265FR" />
+    <property name="device.picker.selection" value="64d07d16" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/KEY/lpesa.jks" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="sync.plugin.last.upgrade.timestamp" value="1556111242920" />
@@ -4835,7 +4808,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.7476489" visible="true" weight="0.1925844" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.7476489" visible="true" weight="0.1925844" />
       <window_info id="Structure" order="2" sideWeight="0.5016129" side_tool="true" weight="0.32982844" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" sideWeight="0.2523511" side_tool="true" visible="true" weight="0.1925844" />
@@ -4845,7 +4818,7 @@
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32972974" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.26594594" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.31027028" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.31027028" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="5" weight="0.3416216" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
@@ -5288,20 +5261,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/adapter/WithdrawalTabAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -5316,18 +5275,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="98" column="123" selection-start-line="98" selection-start-column="123" selection-end-line="98" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="46" column="62" selection-start-line="46" selection-start-column="62" selection-end-line="46" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/TokenWithdrawalFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1254">
+          <caret line="98" column="123" selection-start-line="98" selection-start-column="123" selection-end-line="98" selection-end-column="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKWithdrawalActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="79" column="69" lean-forward="true" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LPKSavingsActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="92" column="65" selection-start-line="92" selection-start-column="65" selection-end-line="92" selection-end-column="65" />
         </state>
       </provider>
     </entry>

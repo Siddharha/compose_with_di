@@ -412,7 +412,6 @@
     <string name="debit">Debit</string>
     <string name="cr">Cr</string>
     <string name="db">Db</string>
-    <string name="title_wallet_history">Wallet History</string>
 
 
 </resources>
