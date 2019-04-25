@@ -391,6 +391,7 @@
 
     <string name="required_filter_date">Please select date</string>
     <string name="token_transfer_successfully">Token transfer successfully</string>
+    <string name="token_withdrawal_successfully">Token withdrawal successfully</string>
     <string name="reset">Reset</string>
     <string name="required_wallet_address">Enter a valid ERC-20 wallet address.</string>
     <string name="required_valid_wallet_address">Ether Address is not match</string>
