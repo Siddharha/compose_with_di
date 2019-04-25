@@ -351,6 +351,7 @@
     <string name="unlock">Unlock</string>
     <string name="locked">Locked</string>
     <string name="star_line">************************************************************</string>
+    <string name="dash_line">-------------------------------------</string>
     <string name="unlocked">Unlocked</string>
     <string name="tokens">Token</string>
     <string name="filter">Filter</string>

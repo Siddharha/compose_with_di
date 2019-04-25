@@ -268,7 +268,9 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             }
             else
             {
-
+                txtIdType.text=resources.getText(R.string.dash_line)
+                txtIdNumber.text=resources.getText(R.string.dash_line)
+                txtCreatedTime.text=resources.getText(R.string.dash_line)
             }
         }
 
