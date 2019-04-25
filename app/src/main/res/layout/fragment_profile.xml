@@ -692,15 +692,15 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:background="@color/colorGreyLight"
-                            app:layout_constraintBottom_toTopOf="@id/imgID"
+                            app:layout_constraintBottom_toTopOf="@id/imgInformation"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                         <ImageView
-                            android:id="@+id/imgID"
-                            android:layout_width="@dimen/_125sdp"
+                            android:id="@+id/imgInformation"
+                            android:layout_width="@dimen/_120sdp"
                             android:layout_height="@dimen/_85sdp"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_7sdp"
@@ -721,8 +721,8 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toTopOf="@+id/imageView13"
-                            app:layout_constraintStart_toEndOf="@+id/imgID"
-                            app:layout_constraintTop_toTopOf="@+id/imgID"
+                            app:layout_constraintStart_toEndOf="@+id/imgInformation"
+                            app:layout_constraintTop_toTopOf="@+id/imgInformation"
                             app:layout_constraintVertical_chainStyle="spread"
                             app:srcCompat="@drawable/ic_id_icon" />
 
@@ -734,6 +734,8 @@
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
+                            android:text="@string/star_line"
+                            android:maxLines="1"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@id/imageView12"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -750,7 +752,7 @@
                             android:layout_marginTop="@dimen/_4sdp"
                             android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toTopOf="@+id/imageView14"
-                            app:layout_constraintLeft_toRightOf="@+id/imgID"
+                            app:layout_constraintLeft_toRightOf="@+id/imgInformation"
                             app:layout_constraintTop_toBottomOf="@+id/imageView12"
                             app:srcCompat="@drawable/ic_id_no_icon" />
 
@@ -762,6 +764,8 @@
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
+                            android:text="@string/star_line"
+                            android:maxLines="1"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@id/imageView13"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -776,8 +780,8 @@
                             android:layout_marginTop="@dimen/_4sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:contentDescription="@string/app_name"
-                            app:layout_constraintBottom_toBottomOf="@+id/imgID"
-                            app:layout_constraintStart_toEndOf="@+id/imgID"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgInformation"
+                            app:layout_constraintStart_toEndOf="@+id/imgInformation"
                             app:layout_constraintTop_toBottomOf="@+id/imageView13"
                             app:srcCompat="@drawable/ic_calendar_icon" />
 
@@ -789,6 +793,8 @@
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
+                            android:text="@string/star_line"
+                            android:maxLines="1"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView14"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -1263,7 +1269,7 @@
                             app:srcCompat="@drawable/ic_id_no_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
-                            android:id="@+id/txtIDType"
+                            android:id="@+id/txtBusinessIdType"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"

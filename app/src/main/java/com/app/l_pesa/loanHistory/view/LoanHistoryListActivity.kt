@@ -38,7 +38,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
     {
         tabLayout=findViewById(R.id.tabLayout)
         viewPager=findViewById(R.id.viewPager)
-        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.current_loan_history)))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.personal_loan_history)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.business_loan_history)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
         tabLayout!!.tabMode = TabLayout.MODE_FIXED

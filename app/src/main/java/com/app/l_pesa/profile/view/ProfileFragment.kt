@@ -332,8 +332,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.idType))
         {
-            txtIDType.text=resources.getString(R.string.id_type)+" "+returnIdType(data.userBusinessInfo!!.idType)
+            txtBusinessIdType.text=resources.getString(R.string.id_type)+" "+returnIdType(data.userBusinessInfo!!.idType)
         }
+
+
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.idNumber))
         {
@@ -381,10 +383,11 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
+            options.placeholder(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
                     .load(resources.getString(R.string.upload_business_url)+userIdsPersonalInfo.fileName)
                     .apply(options)
-                    .into(imgID)
+                    .into(imgInformation)
 
         }
         catch (exception: Exception)
@@ -394,11 +397,20 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         if(!TextUtils.isEmpty(userIdsPersonalInfo.idTypeName))
         {
-            txtIdType.text      = userIdsPersonalInfo.idTypeName
+            txtIdType.text    = userIdsPersonalInfo.idTypeName
         }
+        else
+        {
+            txtIdType.text=resources.getString(R.string.star_line)
+        }
+
         if(!TextUtils.isEmpty(userIdsPersonalInfo.idNumber))
         {
             txtIdNumber.text    = userIdsPersonalInfo.idNumber
+        }
+        else
+        {
+            txtIdNumber.text=resources.getString(R.string.star_line)
         }
         if(!TextUtils.isEmpty(userIdsPersonalInfo.created))
         {
@@ -406,16 +418,18 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadIdInfoBusiness(userIdsPersonalInfo: ResUserInfo.UserIdsBusinessInfo)
     {
         try {
 
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
+            options.placeholder(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
                     .load(resources.getString(R.string.profile_image_url)+userIdsPersonalInfo.fileName)
                     .apply(options)
-                    .into(imgID)
+                    .into(imgInformation)
 
 
         }
@@ -426,15 +440,29 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         if(!TextUtils.isEmpty(userIdsPersonalInfo.idTypeName))
         {
-            txtIdType.text      = userIdsPersonalInfo.idTypeName
+            txtIdType.text = userIdsPersonalInfo.idTypeName
         }
+        else
+        {
+            txtIdType.text =resources.getString(R.string.star_line)
+        }
+
         if(!TextUtils.isEmpty(userIdsPersonalInfo.idNumber))
         {
             txtIdNumber.text    = userIdsPersonalInfo.idNumber
         }
+        else
+        {
+            txtIdNumber.text=resources.getString(R.string.star_line)
+        }
+
         if(!TextUtils.isEmpty(userIdsPersonalInfo.created))
         {
             txtCreatedTime.text = userIdsPersonalInfo.created
+        }
+        else
+        {
+            txtCreatedTime.text=resources.getString(R.string.star_line)
         }
     }
 

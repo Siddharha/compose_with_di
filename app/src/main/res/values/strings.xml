@@ -163,7 +163,6 @@
     <string name="choose_type_id">Choose Id Type</string>
     <string name="enter_id_number">Enter ID Number</string>
 
-
     <!--Dashboard-->
     <string name="your_credit_score">Your L-Pesa Credit Score</string>
     <string name="repayments">Repayments</string>
@@ -193,7 +192,7 @@
 
     <!--Loan History-->
     <string name="loan_historyCurrent">Loan History</string>
-    <string name="current_loan_history">Current Loan History</string>
+    <string name="personal_loan_history">Personal Loan History</string>
     <string name="business_loan_history">Business Loan History</string>
     <string name="loan_no">Loan No:</string>
     <string name="loan_amount">Loan Amount:</string>
