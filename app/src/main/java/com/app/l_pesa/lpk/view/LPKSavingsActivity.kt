@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.SavingsTabAdapter
 import kotlinx.android.synthetic.main.activity_lpk_savings.*
 
@@ -89,6 +90,7 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
         else
         {
             imgFilter.visibility= View.VISIBLE
+            CommonMethod.hideKeyboardView(this@LPKSavingsActivity)
         }
 
     }

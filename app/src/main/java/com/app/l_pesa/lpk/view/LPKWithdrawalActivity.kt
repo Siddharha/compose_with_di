@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.WithdrawalTabAdapter
 
 import kotlinx.android.synthetic.main.activity_lpkwithdrawal.*
@@ -76,6 +77,7 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
         if(p0.position==1)
         {
             imgFilter.visibility= View.VISIBLE
+            CommonMethod.hideKeyboardView(this@LPKWithdrawalActivity)
         }
         else
         {
