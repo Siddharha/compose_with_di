@@ -15,7 +15,6 @@
     <list default="true" id="a4f3b935-f440-49f1-b643-7e5f2d89fc53" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,18 +74,18 @@
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="46" />
-          <entry key="kt" value="5155" />
+          <entry key="kt" value="5189" />
           <entry key="pro" value="1" />
-          <entry key="xml" value="5771" />
+          <entry key="xml" value="5783" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="46" />
-          <entry key="Kotlin" value="5155" />
+          <entry key="Kotlin" value="5189" />
           <entry key="ProGuard File" value="1" />
-          <entry key="XML" value="5771" />
+          <entry key="XML" value="5783" />
         </counts>
       </usages-collector>
     </session>
@@ -96,18 +95,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="272" column="30" selection-start-line="272" selection-start-column="30" selection-end-line="272" selection-end-column="30" />
+            <state relative-caret-position="223">
+              <caret line="379" selection-start-line="379" selection-end-line="379" />
               <folding>
                 <element signature="e#8800#8837#0" expanded="true" />
-                <element signature="e#8869#8906#0" expanded="true" />
-                <element signature="e#8942#8979#0" expanded="true" />
-                <element signature="e#10988#11025#0" expanded="true" />
-                <element signature="e#12796#12835#0" expanded="true" />
-                <element signature="e#13038#13077#0" expanded="true" />
-                <element signature="e#14003#14042#0" expanded="true" />
-                <element signature="e#14250#14289#0" expanded="true" />
-                <element signature="e#14498#14537#0" expanded="true" />
+                <element signature="e#8871#8908#0" expanded="true" />
+                <element signature="e#8945#8982#0" expanded="true" />
+                <element signature="e#9373#9410#0" expanded="true" />
+                <element signature="e#9787#9824#0" expanded="true" />
+                <element signature="e#10106#10143#0" expanded="true" />
+                <element signature="e#10411#10448#0" expanded="true" />
+                <element signature="e#10718#10755#0" expanded="true" />
+                <element signature="e#11042#11079#0" expanded="true" />
+                <element signature="e#11333#11370#0" expanded="true" />
+                <element signature="e#11675#11712#0" expanded="true" />
+                <element signature="e#11960#11997#0" expanded="true" />
+                <element signature="e#12117#12154#0" expanded="true" />
+                <element signature="e#12272#12309#0" expanded="true" />
+                <element signature="e#12566#12603#0" expanded="true" />
+                <element signature="e#14144#14183#0" expanded="true" />
+                <element signature="e#14391#14430#0" expanded="true" />
+                <element signature="e#15370#15409#0" expanded="true" />
+                <element signature="e#15617#15656#0" expanded="true" />
+                <element signature="e#15865#15904#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +126,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="786" column="59" selection-start-line="786" selection-start-column="45" selection-end-line="786" selection-end-column="59" />
+            <state relative-caret-position="204">
+              <caret line="872" column="55" selection-start-line="872" selection-start-column="45" selection-end-line="872" selection-end-column="55" />
+              <folding>
+                <element signature="e#33828#33846#0" expanded="true" />
+              </folding>
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -4826,7 +4839,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.7476489" visible="true" weight="0.1925844" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.7476489" visible="true" weight="0.1925844" />
       <window_info id="Structure" order="2" sideWeight="0.5016129" side_tool="true" weight="0.32982844" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" sideWeight="0.2523511" side_tool="true" visible="true" weight="0.1925844" />
@@ -4836,7 +4849,7 @@
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32972974" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.26594594" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.31027028" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.31027028" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="5" weight="0.3416216" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
@@ -5320,26 +5333,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="786" column="59" selection-start-line="786" selection-start-column="45" selection-end-line="786" selection-end-column="59" />
+        <state relative-caret-position="204">
+          <caret line="872" column="55" selection-start-line="872" selection-start-column="45" selection-end-line="872" selection-end-column="55" />
+          <folding>
+            <element signature="e#33828#33846#0" expanded="true" />
+          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="272" column="30" selection-start-line="272" selection-start-column="30" selection-end-line="272" selection-end-column="30" />
+        <state relative-caret-position="223">
+          <caret line="379" selection-start-line="379" selection-end-line="379" />
           <folding>
             <element signature="e#8800#8837#0" expanded="true" />
-            <element signature="e#8869#8906#0" expanded="true" />
-            <element signature="e#8942#8979#0" expanded="true" />
-            <element signature="e#10988#11025#0" expanded="true" />
-            <element signature="e#12796#12835#0" expanded="true" />
-            <element signature="e#13038#13077#0" expanded="true" />
-            <element signature="e#14003#14042#0" expanded="true" />
-            <element signature="e#14250#14289#0" expanded="true" />
-            <element signature="e#14498#14537#0" expanded="true" />
+            <element signature="e#8871#8908#0" expanded="true" />
+            <element signature="e#8945#8982#0" expanded="true" />
+            <element signature="e#9373#9410#0" expanded="true" />
+            <element signature="e#9787#9824#0" expanded="true" />
+            <element signature="e#10106#10143#0" expanded="true" />
+            <element signature="e#10411#10448#0" expanded="true" />
+            <element signature="e#10718#10755#0" expanded="true" />
+            <element signature="e#11042#11079#0" expanded="true" />
+            <element signature="e#11333#11370#0" expanded="true" />
+            <element signature="e#11675#11712#0" expanded="true" />
+            <element signature="e#11960#11997#0" expanded="true" />
+            <element signature="e#12117#12154#0" expanded="true" />
+            <element signature="e#12272#12309#0" expanded="true" />
+            <element signature="e#12566#12603#0" expanded="true" />
+            <element signature="e#14144#14183#0" expanded="true" />
+            <element signature="e#14391#14430#0" expanded="true" />
+            <element signature="e#15370#15409#0" expanded="true" />
+            <element signature="e#15617#15656#0" expanded="true" />
+            <element signature="e#15865#15904#0" expanded="true" />
           </folding>
         </state>
       </provider>

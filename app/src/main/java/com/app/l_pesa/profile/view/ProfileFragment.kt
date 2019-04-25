@@ -56,8 +56,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     fun loadProfileInfo(shimmerStatus: Boolean)
     {
-        val sharedPrefOBJ= SharedPref(activity!!)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -281,6 +279,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
             txtAddress.text=data.userContactInfo!!.streetAddress+", "+data.userContactInfo!!.city+"- "+data.userContactInfo!!.postalAddress
         }
+        else
+        {
+            txtAddress.text=resources.getText(R.string.dash_line)
+        }
 
 
         txtContact.text=""+data.userContactInfo!!.phoneNumber
@@ -292,30 +294,54 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
             txtEmployeeType.text=resources.getString(R.string.type_of_employer)+" "+data.userEmploymentInfo!!.employerType
         }
+        else
+        {
+            txtEmployeeType.text=resources.getText(R.string.dash_line)
+        }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.employerName))
         {
             txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+data.userEmploymentInfo!!.employerName
+        }
+        else
+        {
+            txtEmployeeName.text=resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.department))
         {
             txtDepartment.text=resources.getString(R.string.department)+" "+data.userEmploymentInfo!!.department
         }
+        else
+        {
+            txtDepartment.text=resources.getText(R.string.dash_line)
+        }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.position))
         {
             txtOccupation.text = resources.getString(R.string.occupation) + " " + data.userEmploymentInfo!!.position
+        }
+        else
+        {
+            txtOccupation.text=resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.employeesIdNumber))
         {
             txtEmployeeID.text=resources.getString(R.string.employees_id_no)+" "+data.userEmploymentInfo!!.employeesIdNumber
         }
+        else
+        {
+            txtEmployeeID.text=resources.getText(R.string.dash_line)
+        }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.city))
         {
             txtEmployeeCity.text=resources.getString(R.string.city)+" "+data.userEmploymentInfo!!.city
+        }
+        else
+        {
+            txtEmployeeCity.text=resources.getText(R.string.dash_line)
         }
 
 
@@ -326,22 +352,36 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
             txtBusinessName.text=resources.getString(R.string.business_name)+" "+data.userBusinessInfo!!.businessName
         }
+        else
+        {
+            txtBusinessName.text=resources.getText(R.string.dash_line)
+        }
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.tinNumber))
         {
             txtTIN.text=resources.getString(R.string.tin_number)+" "+data.userBusinessInfo!!.tinNumber
+        }
+        else
+        {
+            txtTIN.text=resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.idType))
         {
             txtBusinessIdType.text=resources.getString(R.string.id_type)+" "+returnIdType(data.userBusinessInfo!!.idType)
         }
-
-
+        else
+        {
+            txtBusinessIdType.text=resources.getText(R.string.dash_line)
+        }
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.idNumber))
         {
             txtIdNo.text=resources.getString(R.string.id_number)+" "+data.userBusinessInfo!!.idNumber
+        }
+        else
+        {
+            txtIdNo.text=resources.getText(R.string.dash_line)
         }
 
 
@@ -403,7 +443,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtIdType.text=resources.getString(R.string.star_line)
+            txtIdType.text=resources.getString(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(userIdsPersonalInfo.idNumber))
@@ -412,11 +452,15 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtIdNumber.text=resources.getString(R.string.star_line)
+            txtIdNumber.text=resources.getString(R.string.dash_line)
         }
         if(!TextUtils.isEmpty(userIdsPersonalInfo.created))
         {
             txtCreatedTime.text = userIdsPersonalInfo.created
+        }
+        else
+        {
+            txtCreatedTime.text=resources.getString(R.string.dash_line)
         }
     }
 
@@ -446,7 +490,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtIdType.text =resources.getString(R.string.star_line)
+            txtIdType.text =resources.getString(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(userIdsPersonalInfo.idNumber))
@@ -455,7 +499,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtIdNumber.text=resources.getString(R.string.star_line)
+            txtIdNumber.text=resources.getString(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(userIdsPersonalInfo.created))
@@ -464,7 +508,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtCreatedTime.text=resources.getString(R.string.star_line)
+            txtCreatedTime.text=resources.getString(R.string.dash_line)
         }
     }
 
