@@ -26,7 +26,7 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
         {
-            UserViewHolder(inflater.inflate(R.layout.layout_list_wallet_history, parent, false))
+            UserViewHolder(inflater.inflate(R.layout.layout_list_transaction_history, parent, false))
         } else {
             LoadingViewHolder(inflater.inflate(R.layout.layout_load_more, parent, false))
         }

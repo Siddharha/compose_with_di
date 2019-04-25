@@ -2,7 +2,6 @@ package com.app.l_pesa.wallet.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import android.widget.ImageView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
+import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import java.text.DecimalFormat
 
@@ -74,20 +74,40 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private var txtRef                   : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
-        private var txtCreateDate            : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
-        private var txtAmount                : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
-        private var txtAmountStatus          : CommonTextRegular = itemView.findViewById(R.id.txtAmountStatus) as CommonTextRegular
-        private var imageStatus              : ImageView = itemView.findViewById(R.id.imageStatus) as ImageView
+        private var txtRef                   : CommonTextRegular    = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        private var txtCreateDate            : CommonTextRegular    = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
+        private var txtWithdrawalAmount      : CommonTextRegular    = itemView.findViewById(R.id.txtWithdrawalAmount) as CommonTextRegular
+        private var txtTransferAmount        : CommonTextRegular    = itemView.findViewById(R.id.txtTransferAmount) as CommonTextRegular
+        private var buttonStatus             : CustomButtonRegular  = itemView.findViewById(R.id.buttonStatus) as CustomButtonRegular
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, withdrawalHistory: ResWalletWithdrawalHistory.WithdrawalHistory)
         {
+
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
 
-            txtRef.text         = withdrawalHistory.identity_number
-           // txtCreateDate.text  = CommonMethod.dateConvert(savingsHistory.created)
+            txtWithdrawalAmount.text =  context.resources.getString(R.string.withdrawal_amount)+": "+withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.withdrawal_amount)
+            txtTransferAmount.text   =  withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.transfer_amount)
+            txtRef.text              =  context.resources.getString(R.string.ref_no)+" "+withdrawalHistory.identity_number
+            txtCreateDate.text       =  CommonMethod.dateConvert(withdrawalHistory.created)
+
+            if(withdrawalHistory.status==0)
+            {
+                buttonStatus.text = context.resources.getString(R.string.pending)
+                buttonStatus.setBackgroundResource(R.drawable.yellow_button)
+            }
+            else if(withdrawalHistory.status==1)
+            {
+                buttonStatus.text = context.resources.getString(R.string.success)
+                buttonStatus.setBackgroundResource(R.drawable.bg_button_green)
+            }
+            else
+            {
+                buttonStatus.text = context.resources.getString(R.string.failure)
+                buttonStatus.setBackgroundResource(R.drawable.bg_button_red)
+            }
+
 
         }
 
