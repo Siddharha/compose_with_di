@@ -246,11 +246,28 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtGender.text = resources.getString(R.string.gender)
+            txtGender.text = resources.getString(R.string.gender)+resources.getText(R.string.dash_line)
         }
 
-        txtMartialStatus.text = resources.getString(R.string.marital_status)+" "+data.userPersonalInfo!!.meritalStatus
-        txtMotherName.text = resources.getString(R.string.mother_maiden_name)+" "+data.userPersonalInfo!!.motherMaidenName
+        if(!TextUtils.isEmpty(data.userPersonalInfo!!.meritalStatus))
+        {
+            txtMartialStatus.text = resources.getString(R.string.marital_status)+" "+data.userPersonalInfo!!.meritalStatus
+        }
+        else
+        {
+            txtMartialStatus.text =resources.getText(R.string.dash_line)
+        }
+
+        if(!TextUtils.isEmpty(data.userPersonalInfo!!.motherMaidenName))
+        {
+            txtMotherName.text = resources.getString(R.string.mother_maiden_name)+" "+data.userPersonalInfo!!.motherMaidenName
+        }
+        else
+        {
+            txtMotherName.text =resources.getText(R.string.dash_line)
+        }
+
+
 
         /* ID Information*/
 
