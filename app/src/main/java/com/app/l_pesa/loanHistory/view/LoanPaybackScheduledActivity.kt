@@ -23,18 +23,11 @@ import com.app.l_pesa.loanHistory.presenter.PresenterPaybackSchedule
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_payback_scheduled.*
 import kotlinx.android.synthetic.main.content_loan_payback_scheduled.*
-import java.util.ArrayList
 
 
 class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedule {
 
     private var dataOBJ :ResPaybackSchedule.Data ?=null
-    private lateinit var listPaybackSchedule               : ArrayList<ResPaybackSchedule.Schedule>
-    private lateinit var adapterPaybackSchedule            : PaymentScheduleAdapter
-    private lateinit var loanInfo                          : ResPaybackSchedule.LoanInfo
-
-    private var hasNext=false
-    private var after=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +44,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     private fun swipeRefresh()
     {
+
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
@@ -60,6 +54,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
             }
             else
             {
+
                CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.no_internet))
 
             }
@@ -122,9 +117,6 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     private fun initLoad()
     {
-        listPaybackSchedule        = ArrayList()
-        adapterPaybackSchedule     = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity, listPaybackSchedule,loanInfo)
-
         swipeRefreshLayout.isRefreshing = true
         val bundle     = intent.extras
         val loanType   = bundle!!.getString("LOAN_TYPE")

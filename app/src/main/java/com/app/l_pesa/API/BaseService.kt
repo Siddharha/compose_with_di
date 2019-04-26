@@ -80,7 +80,7 @@ interface BaseService{
     fun doLoanHistoryBusiness(@Body request: JsonObject, @Query("cursors") cursors:String ): Observable<ResLoanHistoryBusiness>
 
     @POST("loan/paybackschedule")
-    fun doPaybackSchedule(@Body request: JsonObject): Observable<ResPaybackSchedule>
+    fun doPaybackSchedule(@Body request: JsonObject,@Query("cursors") cursors:String ): Observable<ResPaybackSchedule>
 
     @GET("investment/plans")
     fun getInvestmentPlan(): Observable<ResInvestmentPlan>

@@ -17,7 +17,7 @@ class PresenterPaybackSchedule {
     fun doPaybackSchedule(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackPaybackSchedule)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doPaybackSchedule(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doPaybackSchedule(jsonRequest,"")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -30,7 +30,6 @@ class PresenterPaybackSchedule {
 
                         if(response.status!!.isSuccess)
                         {
-
                            callBackOBJ.onSuccessPaybackSchedule(response.data!!)
 
                         }
@@ -64,5 +63,7 @@ class PresenterPaybackSchedule {
 
                 })
     }
+
+
 
 }
