@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
         else
         {
-            initCurrentLocation()
+            startLocationTrackerService()
         }
 
         buttonSignUp.setOnClickListener {
@@ -56,10 +56,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun initCurrentLocation()
-    {
-        startLocationTrackerService()
-    }
 
     private fun initUI()
     {
@@ -109,7 +105,7 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == permissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                initCurrentLocation()
+                startLocationTrackerService()
             } else
             {
 

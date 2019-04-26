@@ -1,10 +1,17 @@
 package com.app.l_pesa.loanplan.view
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -13,9 +20,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
-import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -24,14 +29,17 @@ import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
 import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
 
 
-
 class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply {
-
 
     private var loanPurpose=""
     private val listTitle = arrayListOf("For Transport","To Pay Bills","To Clear Debit","To Buy Foodstuff","Emergency Purposes","To Buy Medicine","Build Credit","Others")
@@ -52,7 +60,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val bundle       = intent.extras
         val productID    = bundle!!.getString("PRODUCT_ID")
         val loanType     = bundle.getString("LOAN_TYPE")
-
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
@@ -88,43 +95,80 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                         .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
 
-
             }
 
         }
 
-
     }
+
 
     private fun applyLoan(loan_type: String?, product_id: String?)
     {
         if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
                 {
-                    buttonSubmit.isClickable =false
-                    swipeRefreshLayout.isRefreshing = true
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("loan_type",loan_type)
-                    jsonObject.addProperty("product_id",product_id)
-                    if(loanPurpose=="Others")
+                    if(isLocationEnabled())
                     {
-                        jsonObject.addProperty("loan_purpose",etDescription.text.toString())
+                        val locationRequest                 = LocationRequest()
+                        val intervalLocation: Long          = 100
+                        locationRequest.interval            = intervalLocation
+                        val intervalLocationFastest: Long   = 50
+                        locationRequest.fastestInterval     = intervalLocationFastest
+                        locationRequest.priority            = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+                        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+                        val locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        if (locationPermission == PackageManager.PERMISSION_GRANTED) {
+
+                            fusedLocationProviderClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
+                                override fun onLocationResult(locationResult: LocationResult) {
+                                    val location = locationResult.lastLocation
+                                    if (location != null)
+                                    {
+                                       loanApply(loan_type,product_id,location)
+                                    }
+                                    fusedLocationProviderClient.removeLocationUpdates(this)
+
+                                }
+
+                            }, null)
+                        }
                     }
                     else
                     {
-                        jsonObject.addProperty("loan_purpose",loanPurpose)
-
+                        showAlert()
                     }
 
-                    jsonObject.addProperty("latitude","22.56")
-                    jsonObject.addProperty("longitude","88.36")
 
-                    val presenterLoanApply= PresenterLoanApply()
-                    presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)
                 }
                 else
                 {
                     CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.no_internet))
                 }
+    }
+
+    private fun loanApply(loan_type: String?, product_id: String?, location: Location)
+    {
+        buttonSubmit.isClickable =false
+        swipeRefreshLayout.isRefreshing = true
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("loan_type",loan_type)
+        jsonObject.addProperty("product_id",product_id)
+        if(loanPurpose=="Others")
+        {
+            jsonObject.addProperty("loan_purpose",etDescription.text.toString())
+        }
+        else
+        {
+            jsonObject.addProperty("loan_purpose",loanPurpose)
+
+        }
+
+        jsonObject.addProperty("latitude",location.latitude.toString())
+        jsonObject.addProperty("longitude",location.longitude.toString())
+
+        val presenterLoanApply= PresenterLoanApply()
+        presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)
+
     }
 
     private fun loadDescription()
@@ -134,7 +178,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
             showDescription()
         }
-
 
     }
 
@@ -185,9 +228,29 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     override fun onErrorLoanApply(message: String) {
+
         buttonSubmit.isClickable =true
         swipeRefreshLayout.isRefreshing = false
         CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,message)
+    }
+
+
+
+    private fun showAlert() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Enable Location")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
+                .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
+                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(myIntent)
+                }
+                .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> }
+        dialog.show()
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
 
