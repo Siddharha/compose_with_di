@@ -20,11 +20,18 @@ import android.widget.LinearLayout
 import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.loanHistory.view.LoanPaybackScheduledActivity
+import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
+import com.app.l_pesa.lpk.model.ResInfoLPK
+import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
+import com.app.l_pesa.lpk.view.LPKWithdrawalActivity
+import com.kaopiz.kprogresshud.KProgressHUD
 import java.text.DecimalFormat
 
 
-class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
+class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
+
+   private lateinit  var progressDialog: KProgressHUD
 
    companion object {
         fun newInstance(): Fragment {
@@ -64,7 +71,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
     }
 
    private fun initData() {
-
+        initLoader()
         val sharedPrefOBJ = SharedPref(activity!!)
         val dashBoard = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
@@ -72,6 +79,16 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
             setDashBoard(dashBoard)
         }
 
+
+    }
+
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
 
     }
 
@@ -137,12 +154,22 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
 
     }
 
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
     override fun onClickLoanList(type: String) {
 
         if(type=="LPK")
         {
-            startActivity(Intent(activity, LPKSavingsActivity::class.java))
-            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            progressDialog.show()
+            val presenterInfoLPK= PresenterInfoLPK()
+            presenterInfoLPK.getInfoLPK(activity!!,this,"SAVINGS")
+
         }
         else
         {
@@ -156,6 +183,24 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick{
         }
 
 
+    }
+
+    override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
+
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.lpkInfo= json
+        dismiss()
+        startActivity(Intent(activity, LPKSavingsActivity::class.java))
+        activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+
+    }
+
+    override fun onErrorInfoLPK(message: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     override fun onClickPay(type: String, loan_id: String) {
