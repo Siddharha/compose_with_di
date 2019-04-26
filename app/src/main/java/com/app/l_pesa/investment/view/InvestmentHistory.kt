@@ -39,13 +39,12 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_investment_history.*
 import java.util.ArrayList
 
-class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus {
+class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus,ICallBackPopUpWindow {
+
 
 
     private lateinit  var progressDialog: KProgressHUD
     private var popupWindow : PopupWindow? = null
-    private var selectedItem: Int = -1
-
     private lateinit var listInvestment               : ArrayList<ResInvestmentHistory.UserInvestment>
     private lateinit var adapterInvestmentHistory     : InvestmentHistoryAdapter
 
@@ -282,7 +281,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     @SuppressLint("InflateParams")
     private fun showAlertFilter(investmentList: ResInvestmentHistory.UserInvestment): PopupWindow {
 
-        val filterItemList = mutableListOf<ModelWindowHistory>()
+        val filterItemList = ArrayList<ModelWindowHistory>()
 
         if(investmentList.actionState.btnWithdrawalShow)
         {
@@ -304,75 +303,9 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
 
-        val adapter = AdapterWindowInvestmentHistory(activity!!)
-        adapter.addAlertFilter(filterItemList)
+        val adapter = AdapterWindowInvestmentHistory(activity!!,filterItemList,investmentList,this)
         recyclerView.adapter = adapter
-        adapter.selectedItem(selectedItem)
-
-        adapter.setOnClick(object : ICallBackPopUpWindow {
-            override fun onItemClick(view: View, position: Int, modelWindowHistory: String) {
-                selectedItem = position
-
-                if(investmentList.actionState.btnExitPointStatus=="disable" && modelWindowHistory==resources.getString(R.string.exit_point))
-                {
-                  Toast.makeText(activity,investmentList.actionState.btnExitPointStatusMessage,Toast.LENGTH_SHORT).show()
-                }
-                else if(investmentList.actionState.btnExitPointStatus=="enable" && modelWindowHistory==resources.getString(R.string.exit_point))
-                {
-                    if(CommonMethod.isNetworkAvailable(activity!!))
-                    {
-                        val alertDialog = AlertDialog.Builder(activity!!)
-                        alertDialog.setTitle(resources.getString(R.string.app_name))
-                        alertDialog.setMessage(resources.getString(R.string.apply_exit_point))
-                        alertDialog.setPositiveButton("Yes") { _, _ -> investmentExitPoint(investmentList.investment_id.toString()) }
-                                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
-                        alertDialog.show()
-
-
-                    }
-                    else
-                    {
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-                    }
-                }
-                else if(modelWindowHistory==resources.getString(R.string.withdrawal))
-                {
-                  if(CommonMethod.isNetworkAvailable(activity!!))
-                  {
-                      val alertDialog = AlertDialog.Builder(activity!!)
-                      alertDialog.setTitle(resources.getString(R.string.app_name))
-                      alertDialog.setMessage(resources.getString(R.string.apply_withdrawal))
-                      alertDialog.setPositiveButton("Yes") { _, _ -> investmentWithdrawal(investmentList.investment_id.toString()) }
-                              .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
-                      alertDialog.show()
-
-
-                  }
-                  else
-                  {
-                     CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-                  }
-                }
-                else if(modelWindowHistory==resources.getString(R.string.reinvestment))
-                {
-                    if(CommonMethod.isNetworkAvailable(activity!!))
-                    {
-
-                        val alertDialog = AlertDialog.Builder(activity!!)
-                        alertDialog.setTitle(resources.getString(R.string.app_name))
-                        alertDialog.setMessage(resources.getString(R.string.apply_reinvestment))
-                        alertDialog.setPositiveButton("Yes") { _, _ ->  investmentReinvest(investmentList.investment_id.toString()) }
-                                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
-                        alertDialog.show()
-                    }
-                    else
-                    {
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-                    }
-                }
-                dismissPopup()
-            }
-        })
+        adapter.notifyDataSetChanged()
 
         return PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
@@ -434,5 +367,68 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     override fun onErrorExitPoint(message: String) {
         swipeRefreshLayout.isRefreshing = false
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onItemClick(view: View, position: Int, modelWindowHistory: String, investmentList: ResInvestmentHistory.UserInvestment) {
+
+        if(investmentList.actionState.btnExitPointStatus=="disable" && modelWindowHistory==resources.getString(R.string.exit_point))
+        {
+            Toast.makeText(activity,investmentList.actionState.btnExitPointStatusMessage,Toast.LENGTH_SHORT).show()
+        }
+        else if(investmentList.actionState.btnExitPointStatus=="enable" && modelWindowHistory==resources.getString(R.string.exit_point))
+        {
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                val alertDialog = AlertDialog.Builder(activity!!)
+                alertDialog.setTitle(resources.getString(R.string.app_name))
+                alertDialog.setMessage(resources.getString(R.string.apply_exit_point))
+                alertDialog.setPositiveButton("Yes") { _, _ -> investmentExitPoint(investmentList.investment_id.toString()) }
+                        .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                alertDialog.show()
+
+
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+        }
+        else if(modelWindowHistory==resources.getString(R.string.withdrawal))
+        {
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                val alertDialog = AlertDialog.Builder(activity!!)
+                alertDialog.setTitle(resources.getString(R.string.app_name))
+                alertDialog.setMessage(resources.getString(R.string.apply_withdrawal))
+                alertDialog.setPositiveButton("Yes") { _, _ -> investmentWithdrawal(investmentList.investment_id.toString()) }
+                        .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                alertDialog.show()
+
+
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+        }
+        else if(modelWindowHistory==resources.getString(R.string.reinvestment))
+        {
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+
+                val alertDialog = AlertDialog.Builder(activity!!)
+                alertDialog.setTitle(resources.getString(R.string.app_name))
+                alertDialog.setMessage(resources.getString(R.string.apply_reinvestment))
+                alertDialog.setPositiveButton("Yes") { _, _ ->  investmentReinvest(investmentList.investment_id.toString()) }
+                        .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                alertDialog.show()
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+        }
+        dismissPopup()
+
     }
 }
