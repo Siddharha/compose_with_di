@@ -6,24 +6,13 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="JSON__" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4f3b935-f440-49f1-b643-7e5f2d89fc53" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/inter/ICallBackPopUpWindow.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/inter/ICallBackPopUpWindow.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,9 +53,9 @@
           <entry key="class" value="1" />
           <entry key="gradle" value="4" />
           <entry key="java" value="7" />
-          <entry key="kt" value="332" />
+          <entry key="kt" value="335" />
           <entry key="pro" value="3" />
-          <entry key="xml" value="229" />
+          <entry key="xml" value="230" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -74,16 +63,16 @@
           <entry key="CLASS" value="1" />
           <entry key="Groovy" value="4" />
           <entry key="JAVA" value="7" />
-          <entry key="Kotlin" value="332" />
+          <entry key="Kotlin" value="335" />
           <entry key="ProGuard File" value="3" />
-          <entry key="XML" value="229" />
+          <entry key="XML" value="230" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="7" />
           <entry key="java" value="46" />
-          <entry key="kt" value="5922" />
+          <entry key="kt" value="5938" />
           <entry key="pro" value="1" />
           <entry key="xml" value="6212" />
         </counts>
@@ -92,7 +81,7 @@
         <counts>
           <entry key="Groovy" value="7" />
           <entry key="JAVA" value="46" />
-          <entry key="Kotlin" value="5922" />
+          <entry key="Kotlin" value="5938" />
           <entry key="ProGuard File" value="1" />
           <entry key="XML" value="6212" />
         </counts>
@@ -102,46 +91,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="437" column="135" selection-start-line="437" selection-start-column="84" selection-end-line="437" selection-end-column="135" />
+            <state relative-caret-position="166">
+              <caret line="365" column="86" lean-forward="true" selection-start-line="365" selection-start-column="86" selection-end-line="365" selection-end-column="86" />
               <folding>
-                <element signature="e#16752#16792#0" expanded="true" />
-                <element signature="e#17025#17065#0" expanded="true" />
-                <element signature="e#17254#17292#1" expanded="true" />
-                <element signature="e#17333#17379#1" expanded="true" />
-                <element signature="e#17743#17784#1" expanded="true" />
-                <element signature="e#17846#17886#0" expanded="true" />
-                <element signature="e#18075#18113#1" expanded="true" />
-                <element signature="e#18154#18200#1" expanded="true" />
-                <element signature="e#18565#18606#1" expanded="true" />
-                <element signature="e#18668#18710#0" expanded="true" />
-                <element signature="e#18900#18938#1" expanded="true" />
-                <element signature="e#18979#19027#1" expanded="true" />
-                <element signature="e#19389#19430#1" expanded="true" />
+                <element signature="e#13586#13624#1" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="17" column="177" selection-start-line="17" selection-start-column="177" selection-end-line="17" selection-end-column="177" />
-              <folding>
-                <element signature="e#43#559#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1268">
+              <caret line="346" column="18" selection-start-line="346" selection-start-column="18" selection-end-line="346" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/inter/ICallBackPopUpWindow.kt">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="247">
+              <caret line="386" column="34" lean-forward="true" selection-start-line="381" selection-start-column="16" selection-end-line="386" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -160,7 +134,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>business lo</find>
       <find>current</find>
       <find>profile</find>
       <find>txtIdNumber</find>
@@ -176,7 +149,6 @@
       <find>imgEditIdInfo</find>
       <find>imgEdit</find>
       <find>onClickIdList</find>
-      <find>showAsDropDown</find>
       <find>AdapterPopupWindow</find>
       <find>personal_loan</find>
       <find>r.l</find>
@@ -190,6 +162,8 @@
       <find>JSON+++</find>
       <find>Item</find>
       <find>onItemClick</find>
+      <find>showAsDropDown</find>
+      <find>deletePersonalIdProof</find>
     </findStrings>
     <replaceStrings>
       <replace>bottomSheetBehavior.</replace>
@@ -4587,7 +4561,6 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_popup_window.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/BusinessIdInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" />
@@ -4601,8 +4574,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentPlan.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/InvestmentPlanAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/inter/ICallBackPopUpWindow.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" />
       </list>
     </option>
   </component>
@@ -4802,7 +4776,7 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="loanplan" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="l-pesa" type="b2602c69:ProjectViewProjectNode" />
@@ -4814,8 +4788,8 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="loanplan" type="462c0819:PsiDirectoryNode" />
-              <item name="adapter" type="462c0819:PsiDirectoryNode" />
+              <item name="profile" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -4932,19 +4906,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.74481326" visible="true" weight="0.1925844" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.74647886" visible="true" weight="0.1925844" />
       <window_info id="Structure" order="2" sideWeight="0.5016129" side_tool="true" weight="0.32982844" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info id="Build Variants" order="4" sideWeight="0.25518674" side_tool="true" visible="true" weight="0.1925844" />
+      <window_info id="Build Variants" order="4" sideWeight="0.2535211" side_tool="true" visible="true" weight="0.1925844" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32972974" />
-      <window_info anchor="bottom" id="Logcat" order="1" visible="true" weight="0.4789189" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.4789189" />
       <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3091892" />
+      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.3091892" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="5" weight="0.3416216" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
@@ -5279,13 +5254,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="327" column="5" lean-forward="true" selection-start-line="327" selection-start-column="5" selection-end-line="327" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -5349,13 +5317,6 @@
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="338" column="18" selection-start-line="338" selection-start-column="18" selection-end-line="338" selection-end-column="18" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_investment_apply.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -5463,35 +5424,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/view/InvestmentHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="437" column="135" selection-start-line="437" selection-start-column="84" selection-end-line="437" selection-end-column="135" />
+        <state relative-caret-position="247">
+          <caret line="386" column="34" lean-forward="true" selection-start-line="381" selection-start-column="16" selection-end-line="386" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="365" column="86" lean-forward="true" selection-start-line="365" selection-start-column="86" selection-end-line="365" selection-end-column="86" />
           <folding>
-            <element signature="e#16752#16792#0" expanded="true" />
-            <element signature="e#17025#17065#0" expanded="true" />
-            <element signature="e#17254#17292#1" expanded="true" />
-            <element signature="e#17333#17379#1" expanded="true" />
-            <element signature="e#17743#17784#1" expanded="true" />
-            <element signature="e#17846#17886#0" expanded="true" />
-            <element signature="e#18075#18113#1" expanded="true" />
-            <element signature="e#18154#18200#1" expanded="true" />
-            <element signature="e#18565#18606#1" expanded="true" />
-            <element signature="e#18668#18710#0" expanded="true" />
-            <element signature="e#18900#18938#1" expanded="true" />
-            <element signature="e#18979#19027#1" expanded="true" />
-            <element signature="e#19389#19430#1" expanded="true" />
+            <element signature="e#13586#13624#1" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/investment/adapter/AdapterWindowInvestmentHistory.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="17" column="177" selection-start-line="17" selection-start-column="177" selection-end-line="17" selection-end-column="177" />
-          <folding>
-            <element signature="e#43#559#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1268">
+          <caret line="346" column="18" selection-start-line="346" selection-start-column="18" selection-end-line="346" selection-end-column="18" />
         </state>
       </provider>
     </entry>

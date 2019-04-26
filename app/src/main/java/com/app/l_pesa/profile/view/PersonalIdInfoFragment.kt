@@ -361,10 +361,15 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                     if(CommonMethod.isNetworkAvailable(activity!!))
                     {
+                        val alertDialog = AlertDialog.Builder(activity!!)
+                        alertDialog.setTitle(resources.getString(R.string.app_name))
+                        alertDialog.setMessage(resources.getString(R.string.delete_this_item))
+                        alertDialog.setPositiveButton("Yes") { _, _ -> deletePersonalIdProof(userIdsPersonalInfo,pos) }
+                                .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                        alertDialog.show()
 
-                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                        swipeRefreshLayout.isRefreshing=true
-                        deletePersonalIdProof(userIdsPersonalInfo,pos)
+
+
                     }
                     else
                     {
@@ -403,6 +408,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun deletePersonalIdProof(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int)
     {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.isRefreshing=true
         val jsonObject = JsonObject()
         jsonObject.addProperty("user_type_id",userIdsPersonalInfo.id.toString())
 
