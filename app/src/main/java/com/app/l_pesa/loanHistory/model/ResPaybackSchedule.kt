@@ -22,8 +22,17 @@ class ResPaybackSchedule {
         @SerializedName("schedule")
         @Expose
         var schedule: ArrayList<Schedule>? = null
+        @SerializedName("cursors")
+        @Expose
+        var cursors: Cursors? = null
 
     }
+
+    data class Cursors(
+
+            val hasNext:Boolean,
+            val after:String
+    )
 
     inner class LoanInfo {
 
@@ -108,51 +117,29 @@ class ResPaybackSchedule {
 
     }
 
-    inner class Payfullamount {
 
-        @SerializedName("btnStatus")
-        @Expose
-        var btnStatus: Boolean = false
-        @SerializedName("loanAmount")
-        @Expose
-        var loanAmount: Double = 0.0
-        @SerializedName("btnText")
-        @Expose
-        var btnText: String = ""
-        @SerializedName("mgsText")
-        @Expose
-        var mgsText: String = ""
 
-    }
+    data class Schedule(
 
-    inner class Schedule {
+        val loan_history_id:Int,
+        val currency_code:String,
+        var paid_amount: Double,
+        var paid_by_user_amount: Int,
+        var sDate: String ,
+        val paid_status: String,
+        var paid_date: String,
+        var payanytime: Payanytime
 
-        @SerializedName("loan_history_id")
-        @Expose
-        var loanHistoryId: Int = 0
-        @SerializedName("currency_code")
-        @Expose
-        var currencyCode: String = ""
-        @SerializedName("paid_amount")
-        @Expose
-        var paidAmount: Double = 0.0
-        @SerializedName("paid_by_user_amount")
-        @Expose
-        var paidByUserAmount: Int = 0
-        @SerializedName("s_date")
-        @Expose
-        var sDate: String = ""
-        @SerializedName("paid_status")
-        @Expose
-        var paidStatus: String = ""
-        @SerializedName("paid_date")
-        @Expose
-        var paidDate: String = ""
-        @SerializedName("payanytime")
-        @Expose
-        var payanytime: Payanytime? = null
+    )
 
-    }
+    data class Payfullamount(
+
+        val btnStatus:Boolean,
+        val loanAmount: Double,
+        val btnText:String,
+        val mgsText:String
+
+    )
 
     inner class Status {
 
