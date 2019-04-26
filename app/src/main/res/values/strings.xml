@@ -168,7 +168,7 @@
     <string name="repayments">Repayments</string>
     <string name="apply_loan">Apply Loan</string>
     <string name="business_loan">Business Loan</string>
-    <string name="current_loan">Current Loan</string>
+    <string name="personal_loan">Personal Loan</string>
     <string name="you_do_not_have_business_loan">You don\'t have any business loan.</string>
     <string name="you_do_not_have_current_loan">You don\'t have any personal loan.</string>
     <string name="cash_out_lpk">Cash Out LPK</string>

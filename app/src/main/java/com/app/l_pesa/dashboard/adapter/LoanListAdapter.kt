@@ -38,7 +38,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
         {
             viewHolder.seekBar.setOnTouchListener { _, _ -> true }
 
-            if (al_loadOBJ[position].name =="Business Loan")
+            if (al_loadOBJ[position].type =="business_loan")
             {
                 viewHolder.imgLoan.setImageResource(R.drawable.ic_business_loan_icon)
                 viewHolder.txtLoanType.text = contextOBJ!!.resources.getString(R.string.business_loan)
@@ -142,11 +142,11 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
 
             }
 
-            else if (al_loadOBJ[position].name =="Current Loan")
+            else if (al_loadOBJ[position].type =="current_loan")
             {
 
                 viewHolder.imgLoan.setImageResource(R.drawable.ic_current_loan_icon)
-                viewHolder.txtLoanType.text = contextOBJ!!.resources.getString(R.string.current_loan)
+                viewHolder.txtLoanType.text = contextOBJ!!.resources.getString(R.string.personal_loan)
 
                 if (al_loadOBJ[position].status=="Apply Now")
                 {
@@ -245,7 +245,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
                 }
 
             }
-           else if (al_loadOBJ[position].name=="Bitcoin")
+           else if (al_loadOBJ[position].type=="lpesa_coin")
             {
 
                 viewHolder.imgLoan.setImageResource(R.drawable.menu_lpk_icon)

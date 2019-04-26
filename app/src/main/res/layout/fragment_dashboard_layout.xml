@@ -158,7 +158,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.65"
+            android:layout_weight="1.75"
             android:background="@color/semi_white"
             android:orientation="horizontal"
         >
@@ -238,7 +238,7 @@
         <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".15"/>
+        android:layout_weight=".20"/>
 
         <LinearLayout
         android:id="@+id/ll_banner"
@@ -267,7 +267,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.80"
+        android:layout_weight="4.65"
         android:descendantFocusability="blocksDescendants"
         android:focusable="false"
         android:focusableInTouchMode="false"
