@@ -138,6 +138,22 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var investRateMin: String
+        get() = pref.getString(KEY_SET_MIN_INVEST_INTEREST, "")!!
+        set(investRateMin) {
+            editor.remove(KEY_SET_MIN_INVEST_INTEREST)
+            editor.putString(KEY_SET_MIN_INVEST_INTEREST, investRateMin)
+            editor.commit()
+        }
+
+    var investRateMax: String
+        get() = pref.getString(KEY_SET_MAX_INVEST_INTEREST, "")!!
+        set(investRateMax) {
+            editor.remove(KEY_SET_MAX_INVEST_INTEREST)
+            editor.putString(KEY_SET_MAX_INVEST_INTEREST, investRateMax)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -159,21 +175,23 @@ constructor(context: Context) // Constructor
         private const val PREF_NAME = "L_PESA"
 
         // All Shared Preferences Keys Declare as #public
-        private const val KEY_SET_APP_VERSION       = "KEY_SET_APP_VERSION"
-        private const val KEY_SET_COUNTRY_LIST      = "KEY_SET_COUNTRY_LIST"
-        private const val KEY_SET_COUNTRY_CODE      = "KEY_SET_COUNTRY_CODE"
-        private const val KEY_SET_USER_INFO         = "KEY_SET_USER_INFO"
-        private const val KEY_SET_LOGIN_REQUEST     = "KEY_SET_LOGIN_REQUEST"
-        private const val KEY_SET_ACCESS_TOKEN      = "KEY_SET_ACCESS_TOKEN"
-        private const val KEY_SET_DASHBOARD         = "KEY_SET_DASHBOARD"
-        private const val KEY_SET_CREDIT_SCORE      = "KEY_SET_CREDIT_SCORE"
-        private const val KEY_SET_PROFILE_INFO      = "KEY_SET_PROFILE_INFO"
-        private const val KEY_SET_PROFILE_UPDATE    = "KEY_SET_PROFILE_UPDATE"
-        private const val KEY_SET_NAVIGATION_TAB    = "KEY_SET_NAVIGATION_TAB"
-        private const val KEY_SET_LOAN_TAB_PLAN     = "KEY_SET_LOAN_TAB_PLAN"
-        private const val KEY_SET_PAY_FULL_AMOUNT   = "KEY_SET_PAY_FULL_AMOUNT"
-        private const val KEY_SET_LOAN_PLAN_LIST    = "KEY_SET_LOAN_PLAN_LIST"
-        private const val KEY_SET_LPK_INFO          = "KEY_SET_LPK_INFO"
+        private const val KEY_SET_APP_VERSION           = "KEY_SET_APP_VERSION"
+        private const val KEY_SET_COUNTRY_LIST          = "KEY_SET_COUNTRY_LIST"
+        private const val KEY_SET_COUNTRY_CODE          = "KEY_SET_COUNTRY_CODE"
+        private const val KEY_SET_USER_INFO             = "KEY_SET_USER_INFO"
+        private const val KEY_SET_LOGIN_REQUEST         = "KEY_SET_LOGIN_REQUEST"
+        private const val KEY_SET_ACCESS_TOKEN          = "KEY_SET_ACCESS_TOKEN"
+        private const val KEY_SET_DASHBOARD             = "KEY_SET_DASHBOARD"
+        private const val KEY_SET_CREDIT_SCORE          = "KEY_SET_CREDIT_SCORE"
+        private const val KEY_SET_PROFILE_INFO          = "KEY_SET_PROFILE_INFO"
+        private const val KEY_SET_PROFILE_UPDATE        = "KEY_SET_PROFILE_UPDATE"
+        private const val KEY_SET_NAVIGATION_TAB        = "KEY_SET_NAVIGATION_TAB"
+        private const val KEY_SET_LOAN_TAB_PLAN         = "KEY_SET_LOAN_TAB_PLAN"
+        private const val KEY_SET_PAY_FULL_AMOUNT       = "KEY_SET_PAY_FULL_AMOUNT"
+        private const val KEY_SET_LOAN_PLAN_LIST        = "KEY_SET_LOAN_PLAN_LIST"
+        private const val KEY_SET_LPK_INFO              = "KEY_SET_LPK_INFO"
+        private const val KEY_SET_MIN_INVEST_INTEREST   = "KEY_SET_MIN_INVEST_INTEREST"
+        private const val KEY_SET_MAX_INVEST_INTEREST   = "KEY_SET_MAX_INVEST_INTEREST"
     }
 
 

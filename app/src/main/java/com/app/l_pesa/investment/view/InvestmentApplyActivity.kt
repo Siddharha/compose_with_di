@@ -1,5 +1,6 @@
 package com.app.l_pesa.investment.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.graphics.Typeface
@@ -46,6 +47,7 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun initData()
     {
         val globalInvestmentPlan= GlobalInvestmentPlanData.getInstance().modelData
@@ -89,6 +91,9 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
                 }
             }
         }
+
+        val sharedPrefOBJ= SharedPref(this@InvestmentApplyActivity)
+        txtContent.text=resources.getString(R.string.apply_an_investment_note_start)+" "+sharedPrefOBJ.investRateMin+"% up to "+sharedPrefOBJ.investRateMax+"% "+resources.getText(R.string.apply_an_investment_note_start)
     }
 
     override fun onSuccessApplyInvestment() {

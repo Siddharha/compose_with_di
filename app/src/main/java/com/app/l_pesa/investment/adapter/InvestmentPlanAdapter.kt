@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.investment.inter.ICallBackInvestmentPlan
 import com.app.l_pesa.investment.model.ResInvestmentPlan
+import java.text.DecimalFormat
 
 class InvestmentPlanAdapter (val context: Context, private val investmentList: ArrayList<ResInvestmentPlan.InvestmentPlan>, private val callBack: ICallBackInvestmentPlan) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -23,11 +24,14 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
 
         val viewHolder = holder as SelectViewHolder
 
-        viewHolder.txtInterest.text = investmentList[position].depositInterestRate.toString()+"%"
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
+        viewHolder.txtInterest.text = format.format(investmentList[position].depositInterestRate)+"%"
 
         viewHolder.txtTitle.text = investmentList[position].planName
         viewHolder.txtDuration.text = fromHtml(context.resources.getString(R.string.months)+"<font color='#333333'>"+" "+investmentList[position].depositMonth+"</font>")
-        viewHolder.txtRate.text = fromHtml(context.resources.getString(R.string.interest_rate)+"<font color='#333333'>"+" "+investmentList[position].depositInterestRate+"%"+"</font>")
+        viewHolder.txtRate.text = fromHtml(context.resources.getString(R.string.interest_rate)+"<font color='#333333'>"+" "+format.format(investmentList[position].depositInterestRate)+"%"+"</font>")
 
         viewHolder.rootLayout.setOnClickListener {
 

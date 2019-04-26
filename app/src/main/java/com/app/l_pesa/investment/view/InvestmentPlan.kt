@@ -18,6 +18,7 @@ import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterInvestmentPlan
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
+import java.text.DecimalFormat
 import java.util.ArrayList
 
 class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
@@ -74,6 +75,12 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
         val investmentPlanAdapter          = InvestmentPlanAdapter(activity!!, data.investmentPlans!!,this)
         rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                     = investmentPlanAdapter
+
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
+        sharedPrefOBJ.investRateMin=format.format(data.investmentPlans!![0].depositInterestRate)
+        sharedPrefOBJ.investRateMax=format.format(data.investmentPlans!![data.investmentPlans!!.size-1].depositInterestRate)
     }
 
     override fun onEmptyInvestmentPlan() {

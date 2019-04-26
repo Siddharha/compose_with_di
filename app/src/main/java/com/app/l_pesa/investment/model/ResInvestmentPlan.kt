@@ -34,7 +34,7 @@ class ResInvestmentPlan {
         var depositMonth: Int = 0
         @SerializedName("deposit_interest_rate")
         @Expose
-        var depositInterestRate: Int = 0
+        var depositInterestRate: Double = 0.0
         @SerializedName("minimum_credit_score")
         @Expose
         var minimumCreditScore: Int = 0

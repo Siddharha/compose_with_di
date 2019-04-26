@@ -130,7 +130,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/txtContent"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
@@ -138,7 +138,6 @@
                     android:layout_marginBottom="@dimen/_11sdp"
                     android:fontFamily="@font/montserrat"
                     android:lineSpacingExtra="@dimen/_2sdp"
-                    android:text="@string/apply_an_investment_note"
                     android:textColor="@color/light_text_color"
                     android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -154,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_11sdp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView12"
+                    app:layout_constraintEnd_toStartOf="@+id/txtContent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
