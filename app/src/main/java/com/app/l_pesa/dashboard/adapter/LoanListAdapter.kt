@@ -54,17 +54,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
                     viewHolder.txtAmountFirst.visibility            =View.GONE
                     viewHolder.txtAmountSecond.visibility           =View.GONE
 
-                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
-                        if (event.action == MotionEvent.ACTION_UP) {
-
-                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
-                                callBackObj.onClickLoanList("BUSINESS")
-                            } else {
-                                CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
-                            }
-                            true
-                        } else false
-                    }
 
                 }
                 else
@@ -116,28 +105,32 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
 
                         }
 
-
                     }
                     else
                     {
                        viewHolder.seekBarLayout.visibility=View.GONE
                     }
 
+                }
 
-                    viewHolder.buttonApplyLoan.setOnClickListener {
+                viewHolder.buttonApplyLoan.setOnClickListener {
 
-                        if(CommonMethod.isNetworkAvailable(contextOBJ))
-                        {
-                            callBackObj.onClickPay("business_loan",""+al_loadOBJ[position].repay!!.loan_id.toString())
-                        }
-                        else
-                        {
+                    if (al_loadOBJ[position].status=="Apply Now")
+                    {
+                        if(CommonMethod.isNetworkAvailable(contextOBJ)) {
+                            callBackObj.onClickLoanList("BUSINESS")
+                        } else {
                             CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
                         }
-
-
                     }
-
+                   else if(al_loadOBJ[position].status=="Active" || al_loadOBJ[position].status=="Due")
+                    {
+                        if(CommonMethod.isNetworkAvailable(contextOBJ)) {
+                            callBackObj.onClickPay("business_loan",""+al_loadOBJ[position].repay!!.loan_id.toString())
+                        } else {
+                            CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
+                        }
+                    }
                 }
 
             }
@@ -158,18 +151,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
 
                     viewHolder.txtAmountFirst.visibility               =View.GONE
                     viewHolder.txtAmountSecond.visibility              =View.GONE
-
-                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
-                        if (event.action == MotionEvent.ACTION_UP) {
-
-                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
-                                callBackObj.onClickLoanList("CURRENT")
-                            } else {
-                                CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
-                            }
-                            true
-                        } else false
-                    }
 
                 }
                 else
@@ -229,18 +210,25 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
                        viewHolder.seekBarLayout.visibility=View.GONE
                     }
 
-                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
-                        if (event.action == MotionEvent.ACTION_UP) {
+                }
 
-                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
-                                callBackObj.onClickPay("current_loan",""+al_loadOBJ[position].repay!!.loan_id.toString())
-                            } else {
-                                CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
-                            }
-                            true
-                        } else false
+                viewHolder.buttonApplyLoan.setOnClickListener {
+
+                    if (al_loadOBJ[position].status == "Apply Now") {
+                        if (CommonMethod.isNetworkAvailable(contextOBJ)) {
+                            callBackObj.onClickLoanList("CURRENT")
+                        } else {
+                            CommonMethod.customSnackBarError(rootLayout, contextOBJ, contextOBJ.resources.getString(R.string.no_internet))
+                        }
                     }
-
+                    else if(al_loadOBJ[position].status=="Active" || al_loadOBJ[position].status=="Due")
+                    {
+                        if(CommonMethod.isNetworkAvailable(contextOBJ)) {
+                            callBackObj.onClickPay("current_loan",""+al_loadOBJ[position].repay!!.loan_id.toString())
+                        } else {
+                            CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
+                        }
+                    }
 
                 }
 
@@ -261,19 +249,11 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
 
                 viewHolder.buttonApplyLoan.setOnClickListener {
 
-                    viewHolder.buttonApplyLoan.setOnTouchListener { _, event ->
-                        if (event.action == MotionEvent.ACTION_UP) {
-
-                            if(CommonMethod.isNetworkAvailable(contextOBJ)) {
-                                callBackObj.onClickLoanList("LPK")
-                            } else {
-                                CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
-                            }
-                            true
-                        } else false
+                    if(CommonMethod.isNetworkAvailable(contextOBJ)) {
+                        callBackObj.onClickLoanList("LPK")
+                    } else {
+                        CommonMethod.customSnackBarError(rootLayout,contextOBJ,contextOBJ.resources.getString(R.string.no_internet))
                     }
-
-
                 }
 
             }

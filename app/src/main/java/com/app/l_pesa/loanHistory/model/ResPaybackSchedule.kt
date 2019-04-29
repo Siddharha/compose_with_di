@@ -44,7 +44,7 @@ class ResPaybackSchedule {
         var loanStatus: String = ""
         @SerializedName("loan_amount")
         @Expose
-        var loanAmount: Int = 0
+        var loanAmount: Double = 0.0
         @SerializedName("full_interest_rate")
         @Expose
         var fullInterestRate: Int = 0
@@ -138,7 +138,7 @@ class ResPaybackSchedule {
         var paidAmount: Double = 0.0
         @SerializedName("paid_by_user_amount")
         @Expose
-        var paidByUserAmount: Int = 0
+        var paidByUserAmount: Double = 0.0
         @SerializedName("s_date")
         @Expose
         var sDate: String = ""
