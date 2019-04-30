@@ -93,6 +93,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
         buttonWalletAddress.isClickable=true
         swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_withdrawal_successfully))
     }
 
     override fun onErrorWalletAddress(message: String) {
