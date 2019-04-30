@@ -120,6 +120,7 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
+                CommonMethod.hideKeyboardView(this@LPKWithdrawalActivity)
                 onBackPressed()
                 overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 true
