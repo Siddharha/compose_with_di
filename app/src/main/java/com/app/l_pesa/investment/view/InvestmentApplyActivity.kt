@@ -148,6 +148,7 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
+                CommonMethod.hideKeyboardView(this@InvestmentApplyActivity)
                 onBackPressed()
                 overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 true

@@ -137,6 +137,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
                 }
                 else
                 {
+                    CommonMethod.hideKeyboardView(this@ChangePinActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 }
