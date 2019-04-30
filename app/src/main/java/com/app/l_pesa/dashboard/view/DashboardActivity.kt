@@ -26,6 +26,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
@@ -68,12 +69,33 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
    private fun initToggle()
     {
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close
-        )
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+
+         val drawerToggle:ActionBarDrawerToggle = object : ActionBarDrawerToggle(
+                this,
+                drawer_layout,
+                toolbar,
+                R.string.drawer_open,
+                R.string.drawer_close
+        ) {
+            override fun onDrawerClosed(view:View){
+                CommonMethod.hideKeyboardView(this@DashboardActivity)
+
+            }
+
+            override fun onDrawerOpened(drawerView: View){
+                CommonMethod.hideKeyboardView(this@DashboardActivity)
+            }
+
+            override fun onDrawerStateChanged(intState: Int){
+                CommonMethod.hideKeyboardView(this@DashboardActivity)
+
+            }
+        }
+
+        drawer_layout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
         toolbarFont(this@DashboardActivity)
+
     }
 
     private fun initMenu()
@@ -128,6 +150,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             progressDialog.dismiss()
         }
     }
+    /*CommonMethod.hideKeyboardView(this@LPKSavingsActivity)*/
 
 
     private fun initFragment()

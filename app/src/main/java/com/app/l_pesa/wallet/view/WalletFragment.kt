@@ -3,16 +3,21 @@ package com.app.l_pesa.wallet.view
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.wallet.inter.ICallBackWallet
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.fragment_wallet.*
 
 
@@ -37,6 +42,7 @@ class WalletFragment :Fragment(), ICallBackWallet {
         CommonMethod.hideKeyboardView(activity as AppCompatActivity)
         initLoader()
         initData()
+
 
     }
 
