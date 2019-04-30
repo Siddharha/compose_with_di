@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.profile.model.IdInformationTabPager
@@ -109,6 +110,7 @@ class ProfileEditIdInfoActivity : AppCompatActivity(),TabLayout.OnTabSelectedLis
                 }
                 else
                 {
+                    CommonMethod.hideKeyboardView(this@ProfileEditIdInfoActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 }

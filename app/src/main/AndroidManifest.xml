@@ -99,7 +99,8 @@
             android:name=".profile.view.ProfileEditEmpInfoActivity"
             android:label="@string/employment_info"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".profile.view.ProfileEditContactInfoActivity"
             android:label="@string/contact_info"

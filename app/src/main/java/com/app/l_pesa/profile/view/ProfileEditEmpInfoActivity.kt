@@ -261,6 +261,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
                 }
                 else
                 {
+                    CommonMethod.hideKeyboardView(this@ProfileEditEmpInfoActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
                }

@@ -278,6 +278,7 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
                 }
                 else
                 {
+                    CommonMethod.hideKeyboardView(this@ProfileEditBusinessInfoActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 }

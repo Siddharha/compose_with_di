@@ -234,6 +234,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
                 }
                 else
                 {
+                    CommonMethod.hideKeyboardView(this@ProfileEditContactInfoActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 }

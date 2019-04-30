@@ -672,6 +672,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDatePicker()
     {
         val c       = Calendar.getInstance()
@@ -794,6 +795,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 }
                 else
                 {
+                    CommonMethod.hideKeyboardView(this@ProfileEditPersonalActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 }
