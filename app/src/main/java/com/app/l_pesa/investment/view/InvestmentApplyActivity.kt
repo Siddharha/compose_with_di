@@ -94,7 +94,7 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         }
 
         val sharedPrefOBJ= SharedPref(this@InvestmentApplyActivity)
-        txtContent.text=resources.getString(R.string.apply_an_investment_note_start)+" "+sharedPrefOBJ.investRateMin+"% up to "+sharedPrefOBJ.investRateMax+"% "+resources.getText(R.string.apply_an_investment_note_start)
+        txtContent.text=resources.getString(R.string.apply_an_investment_note_start)+" "+sharedPrefOBJ.investRateMin+"% up to "+sharedPrefOBJ.investRateMax+"% "+resources.getText(R.string.apply_an_investment_note_end)
     }
 
     override fun onSuccessApplyInvestment() {
