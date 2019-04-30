@@ -147,6 +147,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loanApply(loan_type: String?, product_id: String?, location: Location)
     {
+        CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         buttonSubmit.isClickable =false
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()

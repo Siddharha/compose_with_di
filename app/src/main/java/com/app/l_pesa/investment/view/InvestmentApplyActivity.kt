@@ -61,6 +61,7 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
 
         buttonDeposit.setOnClickListener {
 
+            CommonMethod.hideKeyboardView(this@InvestmentApplyActivity)
             if(investmentPlanId==0)
             {
                 showPlan()
