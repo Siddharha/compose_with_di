@@ -1,16 +1,24 @@
-<LinearLayout
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/screenBackground"
+   >
+
+<LinearLayout
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/_10sdp"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_7sdp"
     android:orientation="vertical"
-    android:background="@color/screenBackground">
+    >
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_175sdp"
         >
 
         <android.support.constraint.ConstraintLayout
@@ -24,81 +32,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_7sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/lpesa_wallet_balance"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView15"
+                android:id="@+id/txtWalletBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TZS 2320"
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:layout_marginStart="@dimen/_7sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView19"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtCommission"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_17sdp"
-                android:layout_marginTop="@dimen/_22sdp"
-                android:text="TZS 2320"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_13sdp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_47sdp"
-                android:text="TZS 5000000"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_13sdp"
-                android:textStyle="bold"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView19"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:textColor="@color/colorWhite"
                 android:text="@string/commission_for_l_pesa"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_10sdp"
-                android:paddingTop="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView21"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="  2%"
-                app:layout_constraintStart_toEndOf="@+id/textView16"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_10sdp"
-
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
 
 
@@ -196,3 +164,4 @@
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>
