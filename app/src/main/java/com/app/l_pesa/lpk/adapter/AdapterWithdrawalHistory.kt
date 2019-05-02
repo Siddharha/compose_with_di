@@ -93,7 +93,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
 
-            txtReqToken.text = context.getString(R.string.requested)+": "+format.format(userWithdrawalHistory.token_value)+" LPK"
+            txtReqToken.text = context.getString(R.string.requested)+": "+format.format(userWithdrawalHistory.token_value.toDouble())+" LPK"
             txtCreateDate.text = CommonMethod.dateConvert(userWithdrawalHistory.created)
 
             when {
