@@ -8,7 +8,9 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
@@ -36,6 +39,9 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
     private var countryCode     ="+255"
     private var countryFound    = false
+
+    private var listCountry                 : ArrayList<ResModelCountryList>? = null
+    private lateinit var adapterCountry     : CountryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -205,11 +211,50 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
         val dialog= Dialog(this@ForgotPasswordActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
+        listCountry= ArrayList()
         val recyclerView    = dialog.findViewById(R.id.recycler_country) as RecyclerView?
-        val countryAdapter              = CountryListAdapter(this@ForgotPasswordActivity, countryList.countries_list,dialog,this)
+        val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
+        listCountry!!.addAll(countryList.countries_list)
+        adapterCountry                  = CountryListAdapter(this@ForgotPasswordActivity, listCountry!!,dialog,this)
         recyclerView?.layoutManager     = LinearLayoutManager(this@ForgotPasswordActivity, LinearLayoutManager.VERTICAL, false)
-        recyclerView?.adapter           = countryAdapter
+        recyclerView?.adapter           = adapterCountry
         dialog.show()
+
+        etCountry!!.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+
+                filterCountry(s.toString())
+
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
+
+
+    }
+
+    private fun filterCountry(countryName: String) {
+
+        val filteredCourseAry: ArrayList<ResModelCountryList> = ArrayList()
+
+
+        for (eachCourse in listCountry!!) {
+            if (eachCourse.country_name.toLowerCase().startsWith(countryName.toLowerCase())) {
+                filteredCourseAry.add(eachCourse)
+            }
+        }
+
+        adapterCountry.filterList(filteredCourseAry)
+
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
