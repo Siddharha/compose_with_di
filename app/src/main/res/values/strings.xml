@@ -351,7 +351,7 @@
     <string name="apply_exit_point">Are you sure you want to exit?</string>
 
     <!--Token-->
-    <string name="request_token">Request Token</string>
+    <string name="requested">Requested</string>
     <string name="transfer">Transfer</string>
     <string name="unlock">Unlock</string>
     <string name="locked">Locked</string>
@@ -397,7 +397,7 @@
     <string name="required_filter_date">Please select date</string>
     <string name="token_transfer_successfully">Token transfer successfully</string>
     <string name="token_withdrawal_successfully">Token withdrawal successfully</string>
-    <string name="token_update_successfully">Token update successfully</string>
+    <string name="token_update_successfully">Your ERC-20 address has been updated</string>
     <string name="reset">Reset</string>
     <string name="required_wallet_address">Enter a valid ERC-20 wallet address.</string>
     <string name="required_valid_wallet_address">Ether Address is not match</string>

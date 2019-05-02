@@ -14,10 +14,10 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.lpk.model.ResWithdrawalHistory
-import android.support.v4.content.ContextCompat.startActivity
 import android.content.Intent
 import android.net.Uri
 import java.lang.Exception
+import java.text.DecimalFormat
 
 
 class AdapterWithdrawalHistory (val context: Context, private val listWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -90,7 +90,10 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userWithdrawalHistory: ResWithdrawalHistory.UserWithdrawalHistory)
         {
-            txtReqToken.text = context.getString(R.string.request_token)+": "+userWithdrawalHistory.token_value
+            val format = DecimalFormat()
+            format.isDecimalSeparatorAlwaysShown = false
+
+            txtReqToken.text = context.getString(R.string.requested)+": "+format.format(userWithdrawalHistory.token_value)+" LPK"
             txtCreateDate.text = CommonMethod.dateConvert(userWithdrawalHistory.created)
 
             when {
