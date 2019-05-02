@@ -102,6 +102,7 @@
     <string name="required_id_type">Please select the type of ID.</string>
     <string name="required_otp">Please enter the OTP.</string>
     <string name="otp_not_match">You entered an incorrect OTP.</string>
+    <string name="search_country">Search country</string>
 
 
     <!--Navigation-->
@@ -187,6 +188,7 @@
     <string name="interest_day">Interest/Day:</string>
     <string name="rate">Rate</string>
     <string name="empty_loan_history_message">You have\'t applied for any loans yet from L-pesa. Start your journey to financial freedom with the first loan from L-pesa.</string>
+    <string name="empty_transfer_history_message">You haven\'t yet invested tokens in LPK Savings. Start your journey to financial freedom and earn weekly interests by investing.</string>
     <string name="empty_loan_plan_message">We are not offering loans in your country at the moment. We will send you SMS on your mobile number to notify you when service starts in your country. Stay tuned.</string>
 
 

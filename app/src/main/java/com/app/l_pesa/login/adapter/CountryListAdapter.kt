@@ -23,7 +23,7 @@ import com.bumptech.glide.request.RequestOptions
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class CountryListAdapter(val context: Context, private val countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CountryListAdapter(val context: Context,private var countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -60,12 +60,18 @@ class CountryListAdapter(val context: Context, private val countryList: ArrayLis
 
             var txtCountry: TextView        = itemView.findViewById(R.id.txt_country_name) as TextView
             var rlRootObj : RelativeLayout  = itemView.findViewById(R.id.rlRoot) as RelativeLayout
-            var imgFlag   : ImageView       =itemView.findViewById(R.id.img_flag)
+            var imgFlag   : ImageView       = itemView.findViewById(R.id.img_flag)
 
 
         }
 
 
+    }
+
+    // To get the data to search Category
+    fun filterList(filteredCourseList: ArrayList<ResModelCountryList>) {
+        this.countryList = filteredCourseList
+        notifyDataSetChanged()
     }
 
 }

@@ -113,7 +113,7 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
 
         val dialog= Dialog(this@ProfileEditBusinessInfoActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_country)
+        dialog.setContentView(R.layout.layout_list_single)
         val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
         val titleAdapter                = IdListAdapter(this@ProfileEditBusinessInfoActivity, listTitle,dialog,this)
         recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditBusinessInfoActivity, LinearLayoutManager.VERTICAL, false)
