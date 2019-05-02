@@ -20,6 +20,7 @@ import java.util.HashMap
 
 class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
+    private  val hashMapOLD = HashMap<String, String>()
 
     companion object {
         fun newInstance(): Fragment {
@@ -53,7 +54,6 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
         val sharedPrefOBJ=SharedPref(activity!!)
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
-        val hashMapOLD = HashMap<String, String>()
         hashMapOLD["wallet"]     = ""+userDashBoard.walletAddress
 
         if(!TextUtils.isEmpty(userDashBoard.walletAddress))
@@ -78,10 +78,9 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
                     val presenterWalletAddress= PresenterWalletAddress()
                     val jsonObject = JsonObject()
+
                     jsonObject.addProperty("ether_address",etWalletAddress.text.toString().trim())
-
                     presenterWalletAddress.doWalletAddress(activity!!,jsonObject,this)
-
 
                 }
             }
@@ -90,7 +89,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
 
     override fun onSuccessWalletAddress() {
-
+        hashMapOLD["wallet"]  = ""+etWalletAddress.text.toString().trim()
         buttonWalletAddress.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_update_successfully))
