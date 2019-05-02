@@ -4,18 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
@@ -23,6 +20,7 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
+import java.text.DecimalFormat
 
 
 class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<ResPaybackSchedule.Schedule>, var loanInfo: ResPaybackSchedule.LoanInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -33,11 +31,14 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
 
         val viewHolder = holder as SelectViewHolder
 
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
         if(alScheduleOBJ[position].paidStatus=="C")
         {
             viewHolder.llPayment.visibility     = View.GONE
             viewHolder.llPaid.visibility        = View.VISIBLE
-            viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
+            viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+format.format(alScheduleOBJ[position].paidAmount).toString()
             viewHolder.txtRepayDate.text        = CommonMethod.dateConvert((alScheduleOBJ[position].sDate))
             viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" 0"
             viewHolder.txtPaidDate.text         = fromHtml("<font color='#61666b'>"+" "+CommonMethod.dateTimeConvert((alScheduleOBJ[position].paidDate))+"</font>")
@@ -46,8 +47,8 @@ class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<
         {
             viewHolder.llPaid.visibility        = View.GONE
             viewHolder.llPayment.visibility     = View.VISIBLE
-            viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+alScheduleOBJ[position].paidAmount.toString()
-            viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" "+loanInfo.currentBalance.toString()
+            viewHolder.txtRepayAmount.text      = loanInfo.currencyCode+" "+format.format(alScheduleOBJ[position].paidAmount).toString()
+            viewHolder.txtCurrentBalance.text   = loanInfo.currencyCode+" "+format.format(loanInfo.currentBalance).toString()
             viewHolder.txtRepayDate.text        = CommonMethod.dateConvert((alScheduleOBJ[position].sDate))
             viewHolder.btnPayNow.text           = alScheduleOBJ[position].payanytime!!.btnText
             viewHolder.btnPayNow.setTextColor(Color.parseColor(alScheduleOBJ[position].payanytime!!.btnHexColor))

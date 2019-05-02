@@ -23,6 +23,7 @@ import com.app.l_pesa.loanHistory.presenter.PresenterPaybackSchedule
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_payback_scheduled.*
 import kotlinx.android.synthetic.main.content_loan_payback_scheduled.*
+import java.text.DecimalFormat
 
 
 class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedule {
@@ -54,7 +55,6 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
             }
             else
             {
-
                CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.no_internet))
 
             }
@@ -136,8 +136,10 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     override fun onSuccessPaybackSchedule(data: ResPaybackSchedule.Data) {
 
         dataOBJ=data
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
         swipeRefreshLayout.isRefreshing = false
-        txt_total_payback.text          = data.loanInfo!!.currencyCode+" "+data.loanInfo!!.totalPayback.toString()
+        txt_total_payback.text          = data.loanInfo!!.currencyCode+" "+format.format(data.loanInfo!!.totalPayback).toString()
 
         if(data.schedule!!.size>0)
         {

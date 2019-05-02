@@ -38,7 +38,7 @@ class ResPaybackSchedule {
         var currencyCode: String = ""
         @SerializedName("total_payback")
         @Expose
-        var totalPayback: Int = 0
+        var totalPayback: Double = 0.0
         @SerializedName("loan_status")
         @Expose
         var loanStatus: String = ""
