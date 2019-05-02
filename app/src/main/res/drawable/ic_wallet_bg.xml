@@ -8,6 +8,7 @@
             android:pathData="M83.663,72.664m-131.333,0.0a131.333,131.333,0,1,1,262.666,0.0a131.333,131.333,0,1,1,-262.666,0.0" android:strokeAlpha="0.4"/>
     </group>
     <group>
+
         <clip-path android:pathData="M656,382c0,4.418 -3.58,8 -8,8H8.001c-4.418,0 -8,-3.582 -8,-8V8c0,-4.418 3.582,-8 8,-8H648c4.42,0 8,3.582 8,8V382z M 0,0"/>
         <path android:fillAlpha="0.4" android:fillColor="#2FD3BD"
             android:pathData="M555.663,51.998m-163.333,0.0a163.333,163.333,0,1,1,326.666,0.0a163.333,163.333,0,1,1,-326.666,0.0" android:strokeAlpha="0.4"/>
