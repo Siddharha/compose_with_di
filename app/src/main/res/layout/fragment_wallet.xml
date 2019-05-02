@@ -2,7 +2,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/screenBackground"
@@ -42,9 +41,8 @@
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtWalletBal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TZS 2320"
                 android:textStyle="bold"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorWhite"
@@ -55,6 +53,34 @@
                 />
 
 
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtMinWithDrawl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtWalletBal"
+                android:layout_marginTop="@dimen/_60sdp"
+                android:layout_marginStart="@dimen/_35sdp"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/_14sdp"
+                android:drawableEnd="@drawable/ic_top_arrow"
+                android:text="" />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtMaxWithDrawl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:layout_below="@+id/txtWalletBal"
+                android:layout_alignEnd="@+id/txtMinWithDrawl"
+                android:layout_marginTop="@dimen/_60sdp"
+                android:layout_marginEnd="@dimen/_75sdp"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/_14sdp"
+                android:drawableEnd="@drawable/ic_top_arrow"
+                android:text="" />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCommission"
@@ -70,6 +96,7 @@
 
 
                 />
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
