@@ -3,13 +3,13 @@ package com.app.l_pesa.loanplan.view
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.CurrentLoanPlanAdapter
@@ -71,8 +71,9 @@ class CurrentLoan:Fragment(), ICallBackCurrentLoan {
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
-
-        (activity as DashboardActivity).isVisibleToolbarRight(true)
+        val sharedPref=SharedPref(activity!!)
+        sharedPref.currentLoanCount="1"
+        (activity as DashboardActivity).isVisibleToolbarRight()
         cardView.visibility   = View.GONE
         rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
@@ -82,8 +83,9 @@ class CurrentLoan:Fragment(), ICallBackCurrentLoan {
     }
 
     override fun onEmptyLoanPlans() {
-
-        (activity as DashboardActivity).isVisibleToolbarRight(false)
+        val sharedPref=SharedPref(activity!!)
+        sharedPref.currentLoanCount="0"
+        (activity as DashboardActivity).isVisibleToolbarRight()
         rvLoan.visibility   = View.GONE
         cardView.visibility = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
@@ -91,8 +93,9 @@ class CurrentLoan:Fragment(), ICallBackCurrentLoan {
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
-
-        (activity as DashboardActivity).isVisibleToolbarRight(false)
+        val sharedPref=SharedPref(activity!!)
+        sharedPref.currentLoanCount="0"
+        (activity as DashboardActivity).isVisibleToolbarRight()
         swipeRefreshLayout.isRefreshing = false
         CommonMethod.customSnackBarError(rootLayout,activity!!,jsonMessage)
     }

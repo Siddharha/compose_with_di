@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.view.LoanHistoryDetailsActivity
 import com.app.l_pesa.loanplan.adapter.BusinessLoanPlanAdapter
@@ -71,8 +72,9 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
-
-        (activity as DashboardActivity).isVisibleToolbarRight(true)
+        val sharedPref= SharedPref(activity!!)
+        sharedPref.businessLoanCount="1"
+        (activity as DashboardActivity).isVisibleToolbarRight()
         cardView.visibility   = View.GONE
         rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
@@ -82,16 +84,18 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onEmptyLoanPlans() {
-
-        (activity as DashboardActivity).isVisibleToolbarRight(false)
+        val sharedPref= SharedPref(activity!!)
+        sharedPref.businessLoanCount="0"
+        (activity as DashboardActivity).isVisibleToolbarRight()
         rvLoan.visibility   = View.GONE
         cardView.visibility = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
-
-        (activity as DashboardActivity).isVisibleToolbarRight(false)
+        val sharedPref= SharedPref(activity!!)
+        sharedPref.businessLoanCount="0"
+        (activity as DashboardActivity).isVisibleToolbarRight()
         swipeRefreshLayout.isRefreshing = false
     }
 

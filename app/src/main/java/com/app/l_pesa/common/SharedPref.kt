@@ -154,6 +154,22 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var currentLoanCount: String
+        get() = pref.getString(KEY_SET_CURRENT_LOAN_COUNT, "0")!!
+        set(currentLoanCount) {
+            editor.remove(KEY_SET_CURRENT_LOAN_COUNT)
+            editor.putString(KEY_SET_CURRENT_LOAN_COUNT, currentLoanCount)
+            editor.commit()
+        }
+
+    var businessLoanCount: String
+        get() = pref.getString(KEY_SET_BUSINESS_LOAN_COUNT, "0")!!
+        set(businessLoanCount) {
+            editor.remove(KEY_SET_BUSINESS_LOAN_COUNT)
+            editor.putString(KEY_SET_BUSINESS_LOAN_COUNT, businessLoanCount)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -192,6 +208,8 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_LPK_INFO              = "KEY_SET_LPK_INFO"
         private const val KEY_SET_MIN_INVEST_INTEREST   = "KEY_SET_MIN_INVEST_INTEREST"
         private const val KEY_SET_MAX_INVEST_INTEREST   = "KEY_SET_MAX_INVEST_INTEREST"
+        private const val KEY_SET_CURRENT_LOAN_COUNT    = "KEY_SET_CURRENT_LOAN_COUNT"
+        private const val KEY_SET_BUSINESS_LOAN_COUNT   = "KEY_SET_BUSINESS_LOAN_COUNT"
     }
 
 

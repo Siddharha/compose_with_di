@@ -150,7 +150,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             progressDialog.dismiss()
         }
     }
-    /*CommonMethod.hideKeyboardView(this@LPKSavingsActivity)*/
 
 
     private fun initFragment()
@@ -451,9 +450,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
 
 
-    fun isVisibleToolbarRight(isVisible:Boolean)
+    fun isVisibleToolbarRight()
     {
-        if(isVisible)
+        val sharedPref= SharedPref(this@DashboardActivity)
+        if(sharedPref.currentLoanCount=="1"|| sharedPref.businessLoanCount=="1")
         {
             buttonRight.visibility=View.VISIBLE
         }
