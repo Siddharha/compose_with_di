@@ -362,7 +362,6 @@
     <string name="unlocked">Unlocked</string>
     <string name="tokens">Token</string>
     <string name="filter">Filter</string>
-    <string name="deposits">Deposits</string>
     <string name="required_token_amount">Please enter the number of tokens.</string>
     <string name="token_transfer">Token Transfer</string>
     <string name="transfer_history">Transfer History</string>

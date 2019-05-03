@@ -14,6 +14,7 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
+import java.text.DecimalFormat
 
 class AdapterTransferHistory (val context: Context, private val listTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, private val callBack: ICallBackTransferHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -83,7 +84,10 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory, callBack: ICallBackTransferHistory)
         {
-            txtToken.text = context.resources.getString(R.string.tokens)+": "+userTransferHistory.tokens
+            val format = DecimalFormat()
+            format.isDecimalSeparatorAlwaysShown = false
+
+            txtToken.text = context.resources.getString(R.string.tokens)+": "+format.format(userTransferHistory.tokens.toDouble())+" LPK"
             txtRef.text = context.resources.getString(R.string.ref_no)+" "+userTransferHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userTransferHistory.created)
 

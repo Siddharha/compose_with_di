@@ -92,7 +92,7 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
                 txtAmount.text = userInterestHistory.currency_code+" "+userInterestHistory.amount
             }
 
-            txtTokenValue.text = context.getString(R.string.deposits)+": "+userInterestHistory.actual_tokens+" LPK"
+            txtTokenValue.text = context.getString(R.string.deposit)+": "+userInterestHistory.actual_tokens+" LPK"
             txtNarration.text = context.getString(R.string.narration)+": "+userInterestHistory.narration
             txtRef.text = context.getString(R.string.ref_no)+" "+userInterestHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userInterestHistory.created)
