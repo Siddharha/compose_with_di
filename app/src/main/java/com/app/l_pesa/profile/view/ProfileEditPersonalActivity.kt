@@ -643,7 +643,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_country)
+        dialog.setContentView(R.layout.layout_list_single)
         val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
         val titleAdapter                = MaritalListAdapter(this@ProfileEditPersonalActivity, listTitle,dialog,this)
         recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, LinearLayoutManager.VERTICAL, false)
@@ -721,7 +721,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_country)
+        dialog.setContentView(R.layout.layout_list_single)
         val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
         val titleAdapter                = TitleListAdapter(this@ProfileEditPersonalActivity, listTitle,listIcon,dialog,this)
         recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, LinearLayoutManager.VERTICAL, false)

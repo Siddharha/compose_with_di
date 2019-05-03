@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_error_grey" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/error_grey.svg" />
+                            <entry key="outputName" value="ic_top_arrow" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/arrow.svg" />
                           </map>
                         </option>
                       </PersistentState>
