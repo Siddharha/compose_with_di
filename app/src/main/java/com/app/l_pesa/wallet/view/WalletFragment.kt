@@ -66,7 +66,7 @@ class WalletFragment :Fragment(), ICallBackWallet {
         format.isDecimalSeparatorAlwaysShown = false
         if(userDashBoard!=null)
         {
-            txtWalletBal.text=format.format(userDashBoard.wallet_balance).toString()+" LPK"
+            txtWalletBal.text=format.format(userDashBoard.wallet_balance).toString()+" "+userDashBoard.currencyCode
             txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(userDashBoard.commission_eachtime).toString()+"%"
         }
 
