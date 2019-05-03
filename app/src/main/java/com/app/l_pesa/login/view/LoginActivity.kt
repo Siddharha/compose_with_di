@@ -344,7 +344,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
-
                filterCountry(s.toString())
 
 
@@ -366,10 +365,15 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         val filteredCourseAry: ArrayList<ResModelCountryList> = ArrayList()
 
-
         for (eachCourse in listCountry!!) {
             if (eachCourse.country_name.toLowerCase().startsWith(countryName.toLowerCase())) {
                 filteredCourseAry.add(eachCourse)
+            }
+            else
+            {
+                filteredCourseAry.clear()
+                val emptyList=ResModelCountryList(0,"Search result not found","","","","","","","","","","","")
+                filteredCourseAry.add(emptyList)
             }
         }
 

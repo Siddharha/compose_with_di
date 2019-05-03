@@ -246,10 +246,15 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
         val filteredCourseAry: ArrayList<ResModelCountryList> = ArrayList()
 
-
         for (eachCourse in listCountry!!) {
             if (eachCourse.country_name.toLowerCase().startsWith(countryName.toLowerCase())) {
                 filteredCourseAry.add(eachCourse)
+            }
+            else
+            {
+                filteredCourseAry.clear()
+                val emptyList=ResModelCountryList(0,"Search result not found","","","","","","","","","","","")
+                filteredCourseAry.add(emptyList)
             }
         }
 

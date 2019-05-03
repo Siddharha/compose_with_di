@@ -16,12 +16,13 @@
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingBottom="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:maxLines="1"
+            android:paddingTop="@dimen/_7sdp"
+            android:paddingBottom="@dimen/_7sdp"
             android:gravity="center|start"
             android:fontFamily="@font/montserrat"
             android:textSize="@dimen/_12sdp"
@@ -35,7 +36,7 @@
         android:layout_height="1px"
         android:layout_below="@+id/rlData"
         android:background="@color/colorApp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_7sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_2sdp"
         />
