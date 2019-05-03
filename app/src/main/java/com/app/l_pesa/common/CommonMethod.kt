@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Typeface
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -138,7 +139,8 @@ object CommonMethod {
     fun customSnackBarSuccess(view: View,context: Context,message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLight))
+        //snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.colorPrimaryLight))
+        snackBarOBJ.view.setBackgroundColor(Color.parseColor("#0d8f4f"))
         (snackBarOBJ.view as ViewGroup).removeAllViews()
         val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_success, null)
         (snackBarOBJ.view as ViewGroup).addView(customView)
