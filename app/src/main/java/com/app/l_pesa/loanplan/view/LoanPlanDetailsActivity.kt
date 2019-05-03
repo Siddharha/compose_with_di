@@ -16,6 +16,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import kotlinx.android.synthetic.main.activity_loan_plan_details.*
 import kotlinx.android.synthetic.main.content_loan_plan_details.*
+import java.text.DecimalFormat
 
 class LoanPlanDetailsActivity : AppCompatActivity() {
 
@@ -33,16 +34,18 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
         val globalLoanPlanModel= GlobalLoanPlanModel.getInstance().modelData
         val sharedPref= SharedPref(this@LoanPlanDetailsActivity)
 
-        txt_loan_product_price.text = " $"+globalLoanPlanModel!!.loanAmount.toString()
-        txt_interest_rate.text = " "+globalLoanPlanModel.loanInterestRate.toString()+"%"
+        txt_loan_product_price.text = fromHtml(resources.getString(R.string.loan_product)+"<font color='#333333'>"+" $"+globalLoanPlanModel!!.loanAmount.toString()+"</font>")
+        txt_interest_rate.text = fromHtml(resources.getString(R.string.interest_rate)+"<font color='#333333'>"+" "+globalLoanPlanModel.loanInterestRate.toString()+"%"+"</font>")
         txt_required_credit_score.text = fromHtml(resources.getString(R.string.required_credit_score)+"<font color='#333333'>"+ globalLoanPlanModel.requiredCreditScore.toString()+"</font>")
         txt_currency_conversion_rate.text = fromHtml(resources.getString(R.string.currency_conversion_rate)+"<font color='#333333'>"+" "+ globalLoanPlanModel.currencyCode+" "+globalLoanPlanModel.convertionDollarValue+"</font>")
         txt_loan_after_currency_conversion.text = fromHtml(resources.getString(R.string.loan_after_currency_conversion)+"<font color='#333333'>"+" "+ globalLoanPlanModel.currencyCode+" "+globalLoanPlanModel.convertionLoanAmount.toString()+"</font>")
         txt_credit_score.text = fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+sharedPref.userCreditScore+"</font>")
-        txt_loan_amount_value.text = globalLoanPlanModel.currencyCode+" "+globalLoanPlanModel.actualLoanAmount
+        txt_loan_amount_value.text = globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.actualLoanAmount)
         txt_loan_status.text = globalLoanPlanModel.btnText
         txt_conversion_charge.text =fromHtml(resources.getString(R.string.conversion_charge)+"<font color='#333333'>"+" "+ globalLoanPlanModel.conversionCharge.toString()+"% ("+globalLoanPlanModel.currencyCode+" "+globalLoanPlanModel.conversionChargeAmount.toString()+")"+"</font>")
         txt_processing_fee.text =fromHtml(resources.getString(R.string.processing_fee)+"<font color='#333333'>"+" "+ globalLoanPlanModel.processingFees.toString()+"% ("+globalLoanPlanModel.currencyCode+" "+globalLoanPlanModel.processingFeesAmount.toString()+")"+"</font>")

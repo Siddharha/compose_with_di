@@ -31,71 +31,38 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
-                        app:layout_constraintBottom_toTopOf="@+id/textView39"
+                        app:layout_constraintBottom_toTopOf="@+id/txt_loan_product_price"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_loan_amount_icon" />
 
-                    <com.app.l_pesa.common.CommonTextRegular
-                        android:id="@+id/textView39"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_100sdp"
-                        android:fontFamily="@font/montserrat"
-                        android:gravity="center"
-                        android:text="@string/loan_product"
-                        android:textSize="@dimen/_13sdp"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_loan_product_price"
-                        app:layout_constraintEnd_toStartOf="@+id/txt_loan_product_price"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/txt_loan_product_price" />
 
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_loan_product_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_2sdp"
+                        android:gravity="center"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:fontFamily="@font/montserrat"
-                        android:textColor="@color/dark_text_color"
                         android:textSize="@dimen/_12sdp"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/textView39"
                         app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
-                    <com.app.l_pesa.common.CommonTextRegular
-                        android:id="@+id/textView41"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_100sdp"
-                        android:fontFamily="@font/montserrat"
-                        android:gravity="center"
-                        android:text="@string/interest_rate"
-                        android:textSize="@dimen/_12sdp"
-                        app:layout_constraintBottom_toBottomOf="@+id/txt_interest_rate"
-                        app:layout_constraintEnd_toStartOf="@+id/txt_interest_rate"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintHorizontal_chainStyle="spread_inside"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/txt_interest_rate" />
 
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_interest_rate"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_2sdp"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:fontFamily="@font/montserrat"
-                        android:textColor="@color/dark_text_color"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_11sdp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/textView41"
                         app:layout_constraintTop_toBottomOf="@+id/txt_loan_product_price" />
 
                 </android.support.constraint.ConstraintLayout>
