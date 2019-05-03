@@ -238,7 +238,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
 
                 viewHolder.imgLoan.setImageResource(R.drawable.menu_lpk_icon)
                 viewHolder.txtLoanType.text                       = contextOBJ!!.resources.getString(R.string.cash_out_lpk)
-                viewHolder.txtLoanDetails.text                    ="You have 500 LPK"
+                viewHolder.txtLoanDetails.text                    ="You have "+al_loadOBJ[position].coins
                 viewHolder.buttonApplyLoan.visibility             =View.VISIBLE
                 viewHolder.buttonApplyLoan.text                    =contextOBJ.resources.getString(R.string.lets_do)
                 viewHolder.buttonApplyLoan.setBackgroundResource(R.drawable.ic_approve_button)

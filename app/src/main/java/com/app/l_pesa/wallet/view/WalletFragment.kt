@@ -1,24 +1,24 @@
 package com.app.l_pesa.wallet.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.wallet.inter.ICallBackWallet
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
-import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.fragment_wallet.*
+import java.text.DecimalFormat
 
 
 class WalletFragment :Fragment(), ICallBackWallet {
@@ -56,8 +56,19 @@ class WalletFragment :Fragment(), ICallBackWallet {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initData()
     {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+        if(userDashBoard!=null)
+        {
+            txtWalletBal.text=format.format(userDashBoard.wallet_balance).toString()+" LPK"
+            txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(userDashBoard.commission_eachtime).toString()+"%"
+        }
 
         buttonWithdraw.setOnClickListener {
 

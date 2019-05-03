@@ -38,7 +38,6 @@ class ResDashboard {
         @SerializedName("coin_cash")
         @Expose
         var coinCash: String = ""
-
         var repay: Repay? = null
         @SerializedName("next_repay")
 
@@ -150,6 +149,15 @@ class ResDashboard {
         @SerializedName("min_credit_score")
         @Expose
         var minCreditScore: Int = 0
+        @SerializedName("lpk_value")
+        @Expose
+        var lpk_value: Double = 0.0
+        @SerializedName("wallet_balance")
+        @Expose
+        var wallet_balance: Double = 0.0
+        @SerializedName("commission_eachtime")
+        @Expose
+        var commission_eachtime: Double = 0.0
         @SerializedName("loans")
         @Expose
         var loans: ArrayList<Loan>? = null

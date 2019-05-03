@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_top_arrow" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/arrow.svg" />
+                            <entry key="outputName" value="ic_wallet_bg" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/wallet_bga.svg" />
                           </map>
                         </option>
                       </PersistentState>

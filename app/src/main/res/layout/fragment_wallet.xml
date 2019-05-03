@@ -53,41 +53,13 @@
                 />
 
 
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txtMinWithDrawl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtWalletBal"
-                android:layout_marginTop="@dimen/_60sdp"
-                android:layout_marginStart="@dimen/_35sdp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_14sdp"
-                android:drawableEnd="@drawable/ic_top_arrow"
-                android:text="" />
-
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txtMaxWithDrawl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:gravity="center"
-                android:layout_below="@+id/txtWalletBal"
-                android:layout_alignEnd="@+id/txtMinWithDrawl"
-                android:layout_marginTop="@dimen/_60sdp"
-                android:layout_marginEnd="@dimen/_75sdp"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_14sdp"
-                android:drawableEnd="@drawable/ic_top_arrow"
-                android:text="" />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCommission"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 android:layout_marginBottom="@dimen/_3sdp"
                 android:textColor="@color/colorWhite"
                 android:text="@string/commission_for_l_pesa"
