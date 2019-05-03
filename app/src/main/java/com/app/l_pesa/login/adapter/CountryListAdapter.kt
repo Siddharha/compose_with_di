@@ -2,6 +2,7 @@ package com.app.l_pesa.login.adapter
 
 import android.app.Dialog
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -28,6 +29,15 @@ class CountryListAdapter(val context: Context,private var countryList: ArrayList
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
+        if(countryList[position].id==0)
+        {
+            viewHolder.txtCountry.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
+        }
+        else
+        {
+            viewHolder.txtCountry.setTextColor(ContextCompat.getColor(context,R.color.textColors))
+        }
+
         viewHolder.txtCountry.text = countryList[position].country_name
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()

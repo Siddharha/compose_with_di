@@ -252,10 +252,15 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
             }
             else
             {
-                filteredCourseAry.clear()
-                val emptyList=ResModelCountryList(0,"Search result not found","","","","","","","","","","","")
-                filteredCourseAry.add(emptyList)
+
             }
+        }
+
+        if(filteredCourseAry.size==0)
+        {
+            filteredCourseAry.clear()
+            val emptyList=ResModelCountryList(0,resources.getString(R.string.search_result_not_found),"","","","","","","","","","","")
+            filteredCourseAry.add(emptyList)
         }
 
         adapterCountry.filterList(filteredCourseAry)
