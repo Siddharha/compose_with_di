@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
@@ -42,11 +43,13 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         val loanType   = bundle!!.getString("LOAN_TYPE")
         val loanId     = bundle.getString("LOAN_ID")
 
+        //println("JSON"+loanType+"ID"+loanId)
+
         if(CommonMethod.isNetworkAvailable(this@LoanPaymentHistory))
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterPaymentHistory= PresenterPaymentHistory()
-            presenterPaymentHistory.getPaymentHistory(this@LoanPaymentHistory,loanType!!,this)
+            presenterPaymentHistory.getPaymentHistory(this@LoanPaymentHistory,loanType!!,loanId!!,this)
         }
         else
         {
@@ -65,6 +68,8 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
     override fun onSuccessPaymentHistory(paymentHistory: ArrayList<ResPaymentHistory.PaymentHistory>) {
 
         swipeRefreshLayout.isRefreshing =false
+        cardView.visibility=View.INVISIBLE
+        rlPaybackHistory.visibility=View.VISIBLE
 
         val adapterPaymentSchedule       = LoanPaymentHistoryAdapter(this@LoanPaymentHistory,paymentHistory)
         rlPaybackHistory.layoutManager   = LinearLayoutManager(this@LoanPaymentHistory, LinearLayoutManager.VERTICAL, false)
@@ -75,11 +80,16 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
     override fun onEmptyPaymentHistory() {
 
         swipeRefreshLayout.isRefreshing=false
+        rlPaybackHistory.visibility=View.INVISIBLE
+        cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorPaymentHistory(message: String) {
 
+        cardView.visibility=View.INVISIBLE
+        rlPaybackHistory.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing=false
+        CommonMethod.customSnackBarError(rootLayout,this@LoanPaymentHistory,message)
     }
 
     private fun toolbarFont(context: Activity) {

@@ -237,6 +237,7 @@
     <string name="paid_on">Paid on: </string>
     <string name="date">Date:</string>
     <string name="pay_now">Pay Now</string>
+    <string name="empty_payment_history_message">You haven\'t yet made any repayment. Please follow your payment schedule to avoid penalties and actions on your account.</string>
 
 
     <!--Edit Personal Information-->
@@ -396,9 +397,9 @@
     </string>
 
     <string name="required_filter_date">Please select date</string>
-    <string name="token_transfer_successfully">Token transfer successfully</string>
-    <string name="token_withdrawal_successfully">Token withdrawal successfully</string>
-    <string name="token_update_successfully">Your ERC-20 address has been updated</string>
+    <string name="token_transfer_successfully">Token transfer successfully.</string>
+    <string name="token_withdrawal_successfully">Token withdrawal successfully.</string>
+    <string name="token_update_successfully">Your ERC-20 address has been updated.</string>
     <string name="reset">Reset</string>
     <string name="required_wallet_address">Enter a valid ERC-20 wallet address.</string>
     <string name="required_valid_wallet_address">Ether Address is not match</string>

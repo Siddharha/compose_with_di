@@ -143,7 +143,7 @@ interface BaseService{
     fun doWalletWithdrawal(@Body request: JsonObject): Observable<ResWalletWithdrawal>
 
     @GET("user/payment_history")
-    fun getPaymentHistory(@Query("type_name") type_name:String): Observable<ResPaymentHistory>
+    fun getPaymentHistory(@Query("type_name") type_name:String,@Query("type_id") type_id:String): Observable<ResPaymentHistory>
 
     @GET("lpesa_wallet/history")
     fun getWalletHistory(@Query("cursors") cursors:String): Observable<ResWalletHistory>

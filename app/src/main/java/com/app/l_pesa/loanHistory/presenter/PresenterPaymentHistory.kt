@@ -13,10 +13,10 @@ import retrofit2.HttpException
 
 class PresenterPaymentHistory {
 
-    fun getPaymentHistory(contextOBJ: Context, type : String, callBackPaymentHistory: ICallBackPaymentHistory)
+    fun getPaymentHistory(contextOBJ: Context,type : String,id:String, callBackPaymentHistory: ICallBackPaymentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getPaymentHistory(type)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getPaymentHistory(type,id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
