@@ -22,7 +22,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.25"
+            android:layout_weight="1.15"
             >
 
             <FrameLayout
@@ -148,17 +148,13 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".15"/>
-
         <LinearLayout
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.75"
+            android:layout_weight="1.70"
             android:background="@color/semi_white"
             android:orientation="horizontal"
         >
@@ -235,27 +231,23 @@
 
     </LinearLayout>
 
-        <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".20"/>
 
-        <LinearLayout
+       <LinearLayout
         android:id="@+id/ll_banner"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
         android:background="@color/semi_white"
         android:orientation="horizontal">
 
-
         <ImageView
             android:contentDescription="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorApp"
+            android:background="@drawable/add_banner"
             />
 
 
@@ -267,10 +259,8 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4.65"
-        android:descendantFocusability="blocksDescendants"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
+        android:layout_weight="5.15"
+        android:layout_marginTop="@dimen/_5sdp"
 
         />
 
