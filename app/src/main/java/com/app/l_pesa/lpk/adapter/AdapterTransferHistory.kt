@@ -87,7 +87,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
 
-            txtToken.text = context.resources.getString(R.string.tokens)+": "+format.format(userTransferHistory.tokens.toDouble())+" LPK"
+            txtToken.text = format.format(userTransferHistory.tokens.toDouble())+" LPK"
             txtRef.text = context.resources.getString(R.string.ref_no)+" "+userTransferHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userTransferHistory.created)
 
