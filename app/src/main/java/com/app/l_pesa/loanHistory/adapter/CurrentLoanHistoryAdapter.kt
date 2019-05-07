@@ -12,6 +12,7 @@ import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
 import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import kotlinx.android.synthetic.main.layout_loan_history.view.*
+import java.text.DecimalFormat
 
 class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryCurrent.LoanHistory>, private val callBackCurrent: ICallBackCurrentLoanHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -79,9 +80,11 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, loanHistoryCurrent: ResLoanHistoryCurrent.LoanHistory, callBackCurrent: ICallBackCurrentLoanHistory)
         {
+            val format = DecimalFormat()
+            format.isDecimalSeparatorAlwaysShown = false
 
             itemView.txt_loan_no.text=loanHistoryCurrent.identity_number
-            itemView.txt_loan_amount.text="$"+loanHistoryCurrent.loan_amount
+            itemView.txt_loan_amount.text="$"+format.format(loanHistoryCurrent.loan_amount).toString()
             itemView.txt_interest_rate.text=loanHistoryCurrent.interest_rate
 
             when {

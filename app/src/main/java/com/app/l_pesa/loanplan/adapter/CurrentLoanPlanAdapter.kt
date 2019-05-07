@@ -15,6 +15,7 @@ import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.inter.ICallBackCurrentLoan
 import com.app.l_pesa.loanplan.model.ResLoanPlans
+import java.text.DecimalFormat
 
 
 /**
@@ -29,11 +30,13 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
 
         val viewHolder = holder as SelectViewHolder
 
         viewHolder.txtRequiredScore.text    = context.resources.getString(R.string.credit_score)+" "+loanPlanList[position].details!!.requiredCreditScore.toString()
-        viewHolder.txtLoanAmount.text       = "$"+loanPlanList[position].details!!.loanAmount.toString()
+        viewHolder.txtLoanAmount.text       = "$"+format.format(loanPlanList[position].details!!.loanAmount).toString()
 
         if(loanPlanList[position].details!!.loanPeriodType=="D")
         {
