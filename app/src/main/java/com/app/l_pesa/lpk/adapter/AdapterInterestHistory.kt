@@ -74,7 +74,6 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
 
         private var txtTokenValue          : CommonTextRegular = itemView.findViewById(R.id.txtTokenValue) as CommonTextRegular
         private var txtAmount              : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
-        private var txtNarration           : CommonTextRegular = itemView.findViewById(R.id.txtNarration) as CommonTextRegular
         private var txtRef                 : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
         private var txtCreateDate          : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
 
@@ -88,17 +87,13 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
             if(userInterestHistory.amount=="0.00")
             {
                 txtAmount.text = userInterestHistory.interest_token+" LPK"
-
             }
             else
             {
-
                 txtAmount.text = userInterestHistory.currency_code+" "+format.format(userInterestHistory.amount.toDouble()).toString()
             }
 
-
-            txtTokenValue.text = context.getString(R.string.deposit)+": "+format.format(userInterestHistory.actual_tokens.toDouble()).toString()+" LPK"
-            txtNarration.text = context.getString(R.string.narration)+": "+userInterestHistory.narration
+            txtTokenValue.text = format.format(userInterestHistory.actual_tokens.toDouble()).toString()+" LPK"
             txtRef.text = context.getString(R.string.ref_no)+" "+userInterestHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userInterestHistory.created)
 
