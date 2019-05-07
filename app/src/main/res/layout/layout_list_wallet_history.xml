@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/transfer_amount"
+                android:text="@string/amount"
                 android:textColor="@color/light_text_color"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@+id/txtTransferAmount"

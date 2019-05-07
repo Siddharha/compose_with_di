@@ -305,7 +305,7 @@
     <string name="ref_no">Ref. No:</string>
     <string name="reference_no">Reference No:</string>
     <string name="txt_id">TXN ID:</string>
-    <string name="transfer_amount">Transfer Amount:</string>
+    <string name="amount">Amount:</string>
     <string name="maturity_amount">Maturity Amount</string>
     <string name="maturity_on">Maturity On</string>
     <string name="want_to_apply_loan">Do you want to apply for this loan?</string>

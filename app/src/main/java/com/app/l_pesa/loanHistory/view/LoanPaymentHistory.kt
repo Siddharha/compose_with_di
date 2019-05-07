@@ -43,7 +43,7 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         val loanType   = bundle!!.getString("LOAN_TYPE")
         val loanId     = bundle.getString("LOAN_ID")
 
-        //println("JSON"+loanType+"ID"+loanId)
+        println("JSON"+loanType+"ID"+loanId)
 
         if(CommonMethod.isNetworkAvailable(this@LoanPaymentHistory))
         {

@@ -18,9 +18,13 @@ class LoanPaymentHistoryAdapter (val context: Context, private val loanPaymentLi
 
         val viewHolder = holder as SelectViewHolder
 
-        viewHolder.txtRef.text=loanPaymentList[position].ref_no
         viewHolder.txtTxnId.text=loanPaymentList[position].txn_id
         viewHolder.txtAmount.text=loanPaymentList[position].amount
+
+       /* if(loanPaymentList[position].status=="Pending")
+        {
+
+        }*/
 
 
     }
@@ -39,8 +43,7 @@ class LoanPaymentHistoryAdapter (val context: Context, private val loanPaymentLi
     companion object {
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-            var txtRef        : CommonTextRegular              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
-            var txtTxnId      : CommonTextRegular              = itemView.findViewById(R.id.txtTxnId) as CommonTextRegular
+            var txtTxnId      : CommonTextRegular              = itemView.findViewById(R.id.txnId) as CommonTextRegular
             var txtAmount     : CommonTextRegular              = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
 
 
