@@ -4,7 +4,9 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_3sdp"
+    android:layout_marginStart="@dimen/_4sdp"
+    android:layout_marginEnd="@dimen/_4sdp"
+    android:layout_marginBottom="@dimen/_7sdp"
     android:elevation="@dimen/_1sdp"
     android:background="@drawable/bg_white_view">
 
@@ -52,7 +54,7 @@
                 android:fontFamily="@font/montserrat"
                 android:paddingStart="@dimen/_2sdp"
                 android:paddingEnd="@dimen/_2sdp"
-                android:textColor="@color/dark_text_color"
+                android:textColor="@color/colorTextBlackLight"
 
                 />
 

@@ -19,7 +19,7 @@ import com.app.l_pesa.investment.presenter.PresenterInvestmentPlan
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.text.DecimalFormat
-import java.util.ArrayList
+
 
 class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
