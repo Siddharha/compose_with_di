@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -22,16 +21,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/rvLoan"
-            android:padding="@dimen/_7sdp"
+            android:padding="@dimen/_5sdp"
             android:background="@color/colorWhite"
+
             >
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtContent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/automatically_add_interest_amount"
-            android:textSize="@dimen/_11sdp"
+            android:text="@string/add_interest_amount"
+            android:textSize="@dimen/_10sdp"
+            android:gravity="center|start"
+            android:layout_centerInParent="true"
             android:textColor="@color/dark_text_color"
             android:fontFamily="@font/montserrat"
             android:layout_toStartOf="@+id/switchInvestment"
