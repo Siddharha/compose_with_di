@@ -26,11 +26,10 @@ class ResPaymentHistory {
 
         var id: Int,
         var txn_id: String,
-        var amount: String,
+        var payment_amount: Double,
         var status: String,
-        var currency: String,
-        var loan_type: String,
-        var ref_no: String
+        var currency_code: String,
+        var created: String
 
     )
 
