@@ -88,7 +88,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             format.isDecimalSeparatorAlwaysShown = false
 
             itemView.txtRate.text             = fromHtml(context.resources.getString(R.string.interest_rate)+"<font color='#3b3e42'>"+" "+ format.format(investmentList.deposit_interest_rate).toString()+"%"+"</font>")
-            itemView.txtRef.text              = context.resources.getString(R.string.ref_no)+" "+investmentList.identity_number
+            itemView.txtRef.text              = fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.ref_no)+"</font>"+" "+investmentList.identity_number)
             itemView.txtDuration.text         = fromHtml(context.resources.getString(R.string.duration)+"<font color='#3b3e42'>"+" "+investmentList.deposit_month.toString()+" Months"+"</font>")
             itemView.txtAppliedDate.text      = CommonMethod.dateConvert(investmentList.applied_date)
             itemView.txtAmount.text=fromHtml("<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.deposit_amount).toString()+"</font>")
@@ -136,11 +136,11 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView7.visibility=View.VISIBLE
                 itemView.imageView7.setImageResource(R.drawable.ic_calendar_icon)
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-                itemView.txtMaturity.text=fromHtml("<font color='#535559'>"+context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
-                itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
+                itemView.txtMaturity.text=fromHtml("<font color='#777b7e'>"+"</font>"+context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
+                itemView.txtInterest.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.interest)+"</font>"+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
                 itemView.txtDetails.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_grey,0,0,0)
                 itemView.txtDetails.text = investmentList.belowMessage
-                itemView.txtWithdrawalStatus.text=fromHtml("<font color='#535559'>"+context.resources.getString(R.string.withdraw_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.withdraw_date)+"</font>")
+                itemView.txtWithdrawalStatus.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.withdraw_on)+"</font>"+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.withdraw_date)+"</font>")
 
 
             }
@@ -158,7 +158,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.setTextColor(ContextCompat.getColor(context,R.color.textColors))
                 itemView.txtMaturity.text=fromHtml(context.resources.getString(R.string.maturity_on)+": "+CommonMethod.dateConvert(investmentList.maturity_date))
-                itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
+                itemView.txtInterest.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.interest)+"</font>"+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
                 itemView.txtWithdrawalStatus.text=context.getString(R.string.active)
                 itemView.txtWithdrawalStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
 
@@ -173,7 +173,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.text=fromHtml(context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
-                itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
+                itemView.txtInterest.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.interest)+"</font>"+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
 
             }
 
