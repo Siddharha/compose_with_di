@@ -113,7 +113,7 @@
             app:layout_constraintEnd_toStartOf="@id/txtRate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:srcCompat="@drawable/ic_current_credit_score" />
+            app:srcCompat="@drawable/ic_interest_rate_icon" />
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtRate"
@@ -136,7 +136,7 @@
             android:layout_width="@dimen/_1sdp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@color/divider_color"
             app:layout_constraintBottom_toTopOf="@+id/txtDetails"
@@ -208,6 +208,7 @@
 
         <ImageView
             android:id="@+id/imageView7"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -222,6 +223,7 @@
 
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtWithdrawalStatus"
+            android:visibility="invisible"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_2sdp"
@@ -245,7 +247,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="@dimen/_18sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:background="@android:color/transparent"
 
             />

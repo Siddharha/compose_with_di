@@ -188,7 +188,7 @@
     <string name="interest">Interest</string>
     <string name="interest_day">Interest/Day:</string>
     <string name="rate">Rate</string>
-    <string name="empty_loan_history_message">You have\'t applied for any loans yet from L-pesa. Start your journey to financial freedom with the first loan from L-pesa.</string>
+     <string name="empty_loan_history_message">You have\'t applied for any loans yet from L-pesa. Start your journey to financial freedom with the first loan from L-pesa.</string>
     <string name="empty_transfer_history_message">You haven\'t yet invested tokens in LPK Savings. Start your journey to financial freedom and earn weekly interests by investing.</string>
     <string name="empty_loan_plan_message">We are not offering loans in your country at the moment. We will send you SMS on your mobile number to notify you when service starts in your country. Stay tuned.</string>
 
@@ -308,6 +308,7 @@
     <string name="amount">Amount:</string>
     <string name="maturity_amount">Maturity Amount</string>
     <string name="maturity_on">Maturity On</string>
+    <string name="maturity">Maturity</string>
     <string name="want_to_apply_loan">Do you want to apply for this loan?</string>
     <string name="active">Active</string>
 

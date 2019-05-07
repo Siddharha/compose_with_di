@@ -68,7 +68,7 @@ object CommonMethod {
                 val inputFormat  = SimpleDateFormat("dd/MM/yyyy")
                 val date         = inputFormat.parse(inputDate)
 
-                val outputFormat = SimpleDateFormat("MMMM dd, yyyy")
+                val outputFormat = SimpleDateFormat("MMM dd, yyyy")
                 outputFormat.format(date)
             }
             else ""
@@ -85,7 +85,7 @@ object CommonMethod {
                 val inputFormat  = SimpleDateFormat("dd/MM/yyyy HH:mm:ss") //05/04/2019 06:46:13
                 val date         = inputFormat.parse(inputDate)
 
-                val outputFormat = SimpleDateFormat("MMMM dd, yyyy HH:mm:ss")
+                val outputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm:ss")
                 outputFormat.format(date)
             }
             else ""
