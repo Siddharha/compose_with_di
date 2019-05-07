@@ -106,7 +106,7 @@
             android:layout_width="match_parent"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/colorSemiBlack"
-            android:text="Pay full amount to 5% discount on interest"
+            android:text="Pay full amount to get 5% discount on interest"
             android:padding="@dimen/_1sdp"
             />
     </LinearLayout>

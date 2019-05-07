@@ -25,6 +25,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
+import java.text.DecimalFormat
 
 
 class LoanHistoryDetailsActivity : AppCompatActivity() {
@@ -44,20 +45,23 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
     {
         val shared= SharedPref(this@LoanHistoryDetailsActivity)
 
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
         val loanHistoryData= GlobalLoanHistoryModel.getInstance().modelData
 
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
         txt_loan_no_val.text = loanHistoryData.identity_number
         txt_interest_rate.text = loanHistoryData.interest_rate
-        txt_loan_amount_value.text = loanHistoryData.currency_code+" "+loanHistoryData.actual_loan_amount
+        txt_loan_amount_value.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.actual_loan_amount.toDouble()).toString()
         txt_request_date.text = loanHistoryData.applied_date
 
         txt_loan_duration.text = loanHistoryData.duration
-        txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_dollar_value
-        txt_currency_conversion.text = loanHistoryData.currency_code+" "+loanHistoryData.convertion_loan_amount
-        txt_processing_fee.text = loanHistoryData.processing_fees+" ("+loanHistoryData.currency_code+" "+loanHistoryData.processing_fees_amount+")"
+        txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.convertion_dollar_value.toDouble()).toString()
+        txt_currency_conversion.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.convertion_loan_amount.toDouble()).toString()
+        txt_processing_fee.text = loanHistoryData.processing_fees+" ("+loanHistoryData.currency_code+" "+format.format(loanHistoryData.processing_fees_amount.toDouble()).toString()+")"
         txt_purpose.text = loanHistoryData.loan_purpose_message
-        txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+" "+ loanHistoryData.conversion_charge_amount+")"
+        txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+" "+ format.format(loanHistoryData.conversion_charge_amount.toDouble()).toString()+")"
 
         txt_credit_score.text =  fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+shared.userCreditScore+"</font>")
         txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+loanHistoryData.cr_sc_when_requesting_loan+"</font>")

@@ -10,6 +10,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.lpk.model.ResInterestHistory
+import java.text.DecimalFormat
 
 class AdapterInterestHistory (val context: Context, private val listInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -81,6 +82,9 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userInterestHistory: ResInterestHistory.UserInterestHistory)
         {
+            val format = DecimalFormat()
+            format.isDecimalSeparatorAlwaysShown = false
+
             if(userInterestHistory.amount=="0.00")
             {
                 txtAmount.text = userInterestHistory.interest_token+" LPK"
@@ -89,10 +93,11 @@ class AdapterInterestHistory (val context: Context, private val listInterestHist
             else
             {
 
-                txtAmount.text = userInterestHistory.currency_code+" "+userInterestHistory.amount
+                txtAmount.text = userInterestHistory.currency_code+" "+format.format(userInterestHistory.amount.toDouble()).toString()
             }
 
-            txtTokenValue.text = context.getString(R.string.deposit)+": "+userInterestHistory.actual_tokens+" LPK"
+
+            txtTokenValue.text = context.getString(R.string.deposit)+": "+format.format(userInterestHistory.actual_tokens.toDouble()).toString()+" LPK"
             txtNarration.text = context.getString(R.string.narration)+": "+userInterestHistory.narration
             txtRef.text = context.getString(R.string.ref_no)+" "+userInterestHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userInterestHistory.created)
