@@ -172,6 +172,7 @@
             android:paddingEnd="@dimen/_1sdp"
             android:textColor="@color/dark_text_color"
             android:textSize="@dimen/_11sdp"
+            android:text="Paid on: Tigo"
             app:layout_constraintBottom_toBottomOf="@+id/imageView37"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imageView37"

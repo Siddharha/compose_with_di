@@ -10,7 +10,8 @@
     tools:context=".loanHistory.view.LoanPaybackScheduledActivity">
 
 
-   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   <LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,12 +26,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="1"
+        android:orientation="vertical"
         android:padding="@dimen/_7sdp"
         android:background="@color/colorWhite"
 
         >
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            >
 
         <ImageView
             android:contentDescription="@string/app_name"
@@ -90,6 +98,17 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+
+        <com.app.l_pesa.common.CommonTextRegular
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/colorSemiBlack"
+            android:text="Pay full amount to 5% discount on interest"
+            android:padding="@dimen/_1sdp"
+            />
     </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
