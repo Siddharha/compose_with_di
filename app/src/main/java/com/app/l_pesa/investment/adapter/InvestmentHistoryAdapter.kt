@@ -134,14 +134,14 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtMaturity.visibility     =View.VISIBLE
                 itemView.txtWithdrawalStatus.visibility=View.VISIBLE
                 itemView.imageView7.visibility=View.VISIBLE
-
+                itemView.imageView7.setImageResource(R.drawable.ic_calendar_icon)
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.text=fromHtml("<font color='#535559'>"+context.resources.getString(R.string.maturity_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
                 itemView.txtInterest.text=fromHtml(context.resources.getString(R.string.interest)+": "+"<font color='#3b3e42'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
                 itemView.txtDetails.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_grey,0,0,0)
                 itemView.txtDetails.text = investmentList.belowMessage
                 itemView.txtWithdrawalStatus.text=fromHtml("<font color='#535559'>"+context.resources.getString(R.string.withdraw_on)+": "+"<font color='#3b3e42'>"+ CommonMethod.dateConvert(investmentList.withdraw_date)+"</font>")
-                itemView.imageView7.setImageResource(R.drawable.ic_calendar_icon)
+
 
             }
 
@@ -153,6 +153,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtInterest.visibility=View.VISIBLE
                 itemView.txtMaturity.visibility=View.VISIBLE
                 itemView.imageView6.visibility=View.VISIBLE
+                itemView.imageView7.visibility=View.VISIBLE
                 itemView.imageView7.setImageResource(R.drawable.ic_approved_icon)
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.setTextColor(ContextCompat.getColor(context,R.color.textColors))
