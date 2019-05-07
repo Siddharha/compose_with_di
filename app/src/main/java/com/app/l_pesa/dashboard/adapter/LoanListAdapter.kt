@@ -21,7 +21,6 @@ import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.IndicatorStayLayout
-import android.view.MotionEvent
 import java.text.DecimalFormat
 
 
@@ -237,7 +236,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
             {
 
                 viewHolder.imgLoan.setImageResource(R.drawable.menu_lpk_icon)
-                viewHolder.txtLoanType.text                       = contextOBJ!!.resources.getString(R.string.cash_out_lpk)
+                viewHolder.txtLoanType.text                       = contextOBJ!!.resources.getString(R.string.save_your_lpk)
                 viewHolder.txtLoanDetails.text                    ="You have "+al_loadOBJ[position].coins
                 viewHolder.buttonApplyLoan.visibility             =View.VISIBLE
                 viewHolder.buttonApplyLoan.text                    =contextOBJ.resources.getString(R.string.lets_do)

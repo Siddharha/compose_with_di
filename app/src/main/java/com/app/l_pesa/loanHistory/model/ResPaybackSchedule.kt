@@ -47,13 +47,13 @@ class ResPaybackSchedule {
         var loanAmount: Double = 0.0
         @SerializedName("full_interest_rate")
         @Expose
-        var fullInterestRate: Int = 0
+        var fullInterestRate: Double = 0.0
         @SerializedName("discount_payanytime")
         @Expose
         var discountPayanytime: Int = 0
         @SerializedName("current_balance")
         @Expose
-        var currentBalance: Int = 0
+        var currentBalance: Double = 0.0
         @SerializedName("merchant_code")
         @Expose
         var merchantCode: Int = 0
