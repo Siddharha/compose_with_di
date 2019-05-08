@@ -84,6 +84,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     private fun loadTokenHistory(from_date:String,to_date:String)
     {
+       // println("FROM"+from_date+"TO"+to_date)
         swipeRefreshLayout.isRefreshing = true
         val presenterTransferHistory = PresenterTransferHistory()
         presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,this)
@@ -125,10 +126,9 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
-                    //bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
-
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     loadTokenHistory(fromDate!!,toDate!!)
                 }
                 else
@@ -242,7 +242,6 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         cardView.visibility=View.INVISIBLE
         rlList.visibility=View.VISIBLE
-
         swipeRefreshLayout.isRefreshing = false
         activity!!.runOnUiThread {
 

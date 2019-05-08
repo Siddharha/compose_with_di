@@ -97,6 +97,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/montserrat"
+                    android:inputType="text"
+                    android:maxLines="1"
                     android:hint="@string/erc_address"
                     android:textSize="@dimen/_11sdp" />
 
