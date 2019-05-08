@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -20,6 +21,7 @@ import com.app.l_pesa.wallet.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.activity_wallet_history.*
 import kotlinx.android.synthetic.main.content_wallet_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHistory {
@@ -30,6 +32,9 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     private var hasNext=false
     private var after=""
+
+    private var calFrom = Calendar.getInstance()
+    private var calTo   = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +52,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-            initData()
+            initData("","")
         }
     }
 
@@ -65,17 +70,17 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             doFilter()
         }
 
-        initData()
+        initData("","")
 
     }
 
-    private fun initData()
+    private fun initData(from_date: String, to_date: String)
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory=PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,this)
+            presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,from_date,to_date,this)
         }
         else
         {
@@ -91,7 +96,6 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         {
             bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
             resetFilter()
-            filterDate()
 
         }
         else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
@@ -112,9 +116,29 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
         }
 
+        buttonFilterSubmit.setOnClickListener {
+
+            if (TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString())) {
+                CommonMethod.customSnackBarError(rootLayout, this@WalletHistoryActivity, resources.getString(R.string.you_have_select_from_date_to_date))
+            } else {
+
+                    val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
+                    val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
+                    initData(fromDate!!,toDate!!)
+
+            }
+        }
+
         imgCancel.setOnClickListener {
 
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
+
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
 
         }
     }
@@ -122,80 +146,49 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
 
-        val dpd = DatePickerDialog(this@WalletHistoryActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+        // create an OnDateSetListener
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calFrom.set(Calendar.YEAR, year)
+            calFrom.set(Calendar.MONTH, monthOfYear)
+            calFrom.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("0$dayOfMonth-$month-$year")
-                }
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etFromDate!!.setText(sdf.format(calFrom.time))
+        }
 
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(this@WalletHistoryActivity,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calFrom.get(Calendar.YEAR),
+                calFrom.get(Calendar.MONTH),
+                calFrom.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
+
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calTo.set(Calendar.YEAR, year)
+            calTo.set(Calendar.MONTH, monthOfYear)
+            calTo.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        val dpd = DatePickerDialog(this@WalletHistoryActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etToDate!!.setText(sdf.format(calTo.time))
+        }
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(this@WalletHistoryActivity,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calTo.get(Calendar.YEAR),
+                calTo.get(Calendar.MONTH),
+                calTo.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
@@ -212,23 +205,8 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         }
     }
 
-    private fun filterDate()
-    {
-        buttonFilterSubmit.setOnClickListener {
 
-            /*if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_filter_date))
-            }
-            else
-            {
-
-            }*/
-        }
-
-    }
-
-    override fun onSuccessWalletWithdrawalHistory(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors) {
+    override fun onSuccessWalletWithdrawalHistory(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors, from_date: String, to_date: String) {
 
         runOnUiThread {
             cardView.visibility=View.INVISIBLE
@@ -262,7 +240,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     }
 
-    private fun loadMore()
+    private fun loadMore(from_date: String, to_date: String)
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
@@ -272,7 +250,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             adapterWalletHistory.notifyItemInserted(listWithdrawalHistory.size-1)
 
             val presenterWithdrawalHistory=PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getWithdrawalHistoryPaginate(this@WalletHistoryActivity,after,this)
+            presenterWithdrawalHistory.getWithdrawalHistoryPaginate(this@WalletHistoryActivity,after,from_date,to_date,this)
 
         }
         else{
@@ -281,7 +259,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         }
     }
 
-    override fun onSuccessWalletWithdrawalHistoryPaginate(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors) {
+    override fun onSuccessWalletWithdrawalHistoryPaginate(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors,from_date: String, to_date: String) {
 
             hasNext = cursors.hasNext
             after = cursors.after

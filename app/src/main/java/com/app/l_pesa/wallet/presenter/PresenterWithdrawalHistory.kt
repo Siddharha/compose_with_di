@@ -13,10 +13,10 @@ import retrofit2.HttpException
 
 class PresenterWithdrawalHistory {
 
-    fun getWithdrawalHistory(contextOBJ: Context, callBackOBJ: ICallBackWalletWithdrawalHistory) {
+    fun getWithdrawalHistory(contextOBJ: Context, from_date:String,to_date:String,callBackOBJ: ICallBackWalletWithdrawalHistory) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletWithdrawalHistory("")
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletWithdrawalHistory("",from_date,to_date)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -30,7 +30,7 @@ class PresenterWithdrawalHistory {
                         {
                             if(response.data.withdrawal_history.size>0)
                             {
-                                callBackOBJ.onSuccessWalletWithdrawalHistory(response.data.withdrawal_history,response.data.cursors)
+                                callBackOBJ.onSuccessWalletWithdrawalHistory(response.data.withdrawal_history,response.data.cursors,from_date,to_date)
                             }
                             else
                             {
@@ -64,10 +64,10 @@ class PresenterWithdrawalHistory {
                 })
     }
 
-    fun getWithdrawalHistoryPaginate(contextOBJ: Context, cursorAfter:String,callBackOBJ: ICallBackWalletWithdrawalHistory) {
+    fun getWithdrawalHistoryPaginate(contextOBJ: Context, cursorAfter:String,from_date:String,to_date:String,callBackOBJ: ICallBackWalletWithdrawalHistory) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletWithdrawalHistory(cursorAfter)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletWithdrawalHistory(cursorAfter,from_date,to_date)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -81,7 +81,7 @@ class PresenterWithdrawalHistory {
                         {
                             if(response.data.withdrawal_history!!.size>0)
                             {
-                                callBackOBJ.onSuccessWalletWithdrawalHistoryPaginate(response.data.withdrawal_history,response.data.cursors)
+                                callBackOBJ.onSuccessWalletWithdrawalHistoryPaginate(response.data.withdrawal_history,response.data.cursors,from_date,to_date)
                             }
 
 

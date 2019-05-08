@@ -158,7 +158,7 @@ interface BaseService{
     fun doSavingsUnlock(@Body request: JsonObject): Observable<ResSavingsUnlock>
 
     @GET("lpesa_wallet/withdrawal_history")
-    fun getWalletWithdrawalHistory(@Query("cursors") cursors:String): Observable<ResWalletWithdrawalHistory>
+    fun getWalletWithdrawalHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResWalletWithdrawalHistory>
 
 
 }
