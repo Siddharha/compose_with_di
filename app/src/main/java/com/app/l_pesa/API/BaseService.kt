@@ -146,7 +146,7 @@ interface BaseService{
     fun getPaymentHistory(@Query("type_name") type_name:String,@Query("type_id") type_id:String): Observable<ResPaymentHistory>
 
     @GET("lpesa_wallet/history")
-    fun getWalletHistory(@Query("cursors") cursors:String): Observable<ResWalletHistory>
+    fun getWalletHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResWalletHistory>
 
     @GET("user/lpk_info")
     fun getInfoLPK(): Observable<ResInfoLPK>

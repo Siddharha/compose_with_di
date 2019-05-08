@@ -13,10 +13,10 @@ import retrofit2.HttpException
 
 class PresenterTransactionAll {
 
-    fun getTransactionAll(contextOBJ: Context, callBackOBJ: ICallBackTransaction) {
+    fun getTransactionAll(contextOBJ: Context,from_date:String,to_date:String, callBackOBJ: ICallBackTransaction) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory("")
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory("",from_date,to_date)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -30,7 +30,7 @@ class PresenterTransactionAll {
                         {
                             if(response.data!!.savings_history!!.size>0)
                             {
-                                callBackOBJ.onSuccessTransaction(response.data!!.savings_history!!,response.data.cursors)
+                                callBackOBJ.onSuccessTransaction(response.data!!.savings_history!!,response.data.cursors,from_date,to_date)
                             }
                             else
                             {
@@ -65,10 +65,10 @@ class PresenterTransactionAll {
                 })
     }
 
-    fun getTransactionPaginate(contextOBJ: Context, cursorAfter:String, callBackOBJ: ICallBackTransaction) {
+    fun getTransactionPaginate(contextOBJ: Context, cursorAfter:String,from_date:String,to_date:String, callBackOBJ: ICallBackTransaction) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory(cursorAfter)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory(cursorAfter,from_date,to_date)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -82,7 +82,7 @@ class PresenterTransactionAll {
                         {
                             if(response.data!!.savings_history!!.size>0)
                             {
-                                callBackOBJ.onSuccessTransactionPaginate(response.data!!.savings_history!!,response.data.cursors)
+                                callBackOBJ.onSuccessTransactionPaginate(response.data!!.savings_history!!,response.data.cursors,from_date,to_date)
                             }
 
 

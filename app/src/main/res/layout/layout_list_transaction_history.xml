@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -9,7 +8,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_3sdp">
+        android:layout_marginStart="@dimen/_3sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_7sdp">
 
 
         <android.support.constraint.ConstraintLayout
@@ -51,7 +52,7 @@
                 android:textSize="@dimen/_11sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
-                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 app:layout_constraintBottom_toTopOf="@+id/txtCreateDate"
                 app:layout_constraintStart_toEndOf="@+id/imageStatus"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />

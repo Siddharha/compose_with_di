@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -20,6 +21,7 @@ import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
 import kotlinx.android.synthetic.main.activity_transaction_history.*
 import kotlinx.android.synthetic.main.content_transaction_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
@@ -32,6 +34,9 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     private var hasNext=false
     private var after=""
 
+    private var calFrom = Calendar.getInstance()
+    private var calTo   = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transaction_history)
@@ -40,7 +45,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         toolbarFont(this@TransactionHistoryActivity)
 
         swipeRefresh()
-        initData()
+        initData("","")
 
     }
 
@@ -48,16 +53,16 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-            initData()
+            initData("","")
         }
     }
 
-    private fun initData()
+    private fun initData(from_date: String, to_date: String)
     {
         listSavingsHistory           = ArrayList()
         adapterTransactionHistory    = TransactionAllAdapter(this@TransactionHistoryActivity, listSavingsHistory)
 
-        bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
+        bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
@@ -65,7 +70,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterTransactionAll= PresenterTransactionAll()
-            presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,this)
+            presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,from_date,to_date,this)
         }
 
         else
@@ -81,7 +86,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
     }
 
-    override fun onSuccessTransaction(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors) {
+    override fun onSuccessTransaction(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors, from_date: String, to_date: String) {
 
         cardView.visibility=View.INVISIBLE
         rlList.visibility=View.VISIBLE
@@ -106,7 +111,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
                         if (hasNext)
                         {
-                           loadMore()
+                           loadMore(from_date,to_date)
                         }
 
                     }
@@ -116,7 +121,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         }
     }
 
-    override fun onSuccessTransactionPaginate(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors) {
+    override fun onSuccessTransactionPaginate(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors,from_date: String, to_date: String) {
 
         cardView.visibility=View.INVISIBLE
         rlList.visibility=View.VISIBLE
@@ -147,7 +152,6 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         {
             bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
             resetFilter()
-            filterDate()
 
         }
         else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
@@ -168,9 +172,30 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         }
 
+        buttonFilterSubmit.setOnClickListener {
+
+            if (TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString())) {
+                CommonMethod.customSnackBarError(rootLayout, this@TransactionHistoryActivity, resources.getString(R.string.you_have_select_from_date_to_date))
+            } else {
+
+                val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
+                val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                initData(fromDate!!,toDate!!)
+
+            }
+        }
+
         imgCancel.setOnClickListener {
 
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
+
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
 
         }
     }
@@ -185,23 +210,8 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         }
     }
 
-    private fun filterDate()
-    {
-        buttonFilterSubmit.setOnClickListener {
 
-            /*if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_filter_date))
-            }
-            else
-            {
-
-            }*/
-        }
-
-    }
-
-    private fun loadMore()
+    private fun loadMore(from_date: String, to_date: String)
     {
         if(CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
         {
@@ -213,7 +223,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
             adapterTransactionHistory.notifyItemInserted(listSavingsHistory.size-1)
 
             val presenterTransactionAll= PresenterTransactionAll()
-            presenterTransactionAll.getTransactionPaginate(this@TransactionHistoryActivity,after,this)
+            presenterTransactionAll.getTransactionPaginate(this@TransactionHistoryActivity,after,from_date,to_date,this)
 
         }
         else{
@@ -240,39 +250,22 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calFrom.set(Calendar.YEAR, year)
+            calFrom.set(Calendar.MONTH, monthOfYear)
+            calFrom.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        val dpd = DatePickerDialog(this@TransactionHistoryActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etFromDate!!.setText(sdf.format(calFrom.time))
+        }
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(this@TransactionHistoryActivity,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calFrom.get(Calendar.YEAR),
+                calFrom.get(Calendar.MONTH),
+                calFrom.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
@@ -281,39 +274,22 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calTo.set(Calendar.YEAR, year)
+            calTo.set(Calendar.MONTH, monthOfYear)
+            calTo.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        val dpd = DatePickerDialog(this@TransactionHistoryActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etToDate!!.setText(sdf.format(calTo.time))
+        }
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(this@TransactionHistoryActivity,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calTo.get(Calendar.YEAR),
+                calTo.get(Calendar.MONTH),
+                calTo.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
