@@ -13,10 +13,10 @@ import retrofit2.HttpException
 
 class PresenterTransferHistory {
 
-    fun getTokenHistory(contextOBJ: Context, callBackOBJ: ICallBackTransferHistory)
+    fun getTokenHistory(contextOBJ: Context, from_date:String,to_date:String,callBackOBJ: ICallBackTransferHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory("")
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory("",from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -31,7 +31,7 @@ class PresenterTransferHistory {
                         {
                            if(response.data!!.userTransferHistory!!.size>0)
                            {
-                               callBackOBJ.onSuccessTransferHistory(response.data!!.userTransferHistory!!,response.data!!.cursors)
+                               callBackOBJ.onSuccessTransferHistory(response.data!!.userTransferHistory!!,response.data!!.cursors,from_date,to_date)
                            }
                            else
                            {
@@ -69,10 +69,10 @@ class PresenterTransferHistory {
                 })
     }
 
-    fun getTokenHistoryPaginate(contextOBJ: Context, cursor:String, callBackOBJ: ICallBackTransferHistory)
+    fun getTokenHistoryPaginate(contextOBJ: Context, cursor:String,from_date:String,to_date:String, callBackOBJ: ICallBackTransferHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory(cursor)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory(cursor,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -87,7 +87,7 @@ class PresenterTransferHistory {
                         {
                             if(response.data!!.userTransferHistory!!.size>0)
                             {
-                                callBackOBJ.onSuccessTransferHistoryPaginate(response.data!!.userTransferHistory!!, response.data!!.cursors!!)
+                                callBackOBJ.onSuccessTransferHistoryPaginate(response.data!!.userTransferHistory!!, response.data!!.cursors!!,from_date,to_date)
                             }
 
                         }

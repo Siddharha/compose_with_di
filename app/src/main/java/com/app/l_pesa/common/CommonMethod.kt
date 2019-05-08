@@ -78,6 +78,23 @@ object CommonMethod {
     }
 
     @SuppressLint("SimpleDateFormat")
+    fun dateConvertYMD(inputDate:String): String? {
+
+        return if(!TextUtils.isEmpty(inputDate))
+        {
+            val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+            val date         = inputFormat.parse(inputDate)
+
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+            outputFormat.format(date)
+        }
+        else ""
+
+
+
+    }
+
+    @SuppressLint("SimpleDateFormat")
     fun dateTimeConvert(inputDate:String): String? {
 
          return if(!TextUtils.isEmpty(inputDate))

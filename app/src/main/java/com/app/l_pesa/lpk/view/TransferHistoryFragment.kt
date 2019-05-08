@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,15 +73,20 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         adapterTransferHistory= AdapterTransferHistory(activity!!,listTransferHistory,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            swipeRefreshLayout.isRefreshing = true
-            val presenterTransferHistory = PresenterTransferHistory()
-            presenterTransferHistory.getTokenHistory(activity!!,this)
+            loadTokenHistory("","")
         }
         else
         {
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
         }
+    }
+
+    private fun loadTokenHistory(from_date:String,to_date:String)
+    {
+        swipeRefreshLayout.isRefreshing = true
+        val presenterTransferHistory = PresenterTransferHistory()
+        presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,this)
     }
 
     fun doFilter()
@@ -109,9 +115,43 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         }
 
+        buttonFilterSubmit.setOnClickListener {
+
+            if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.you_have_select_from_date_to_date))
+            }
+            else
+            {
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+                    //bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
+                    val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
+
+                    loadTokenHistory(fromDate!!,toDate!!)
+                }
+                else
+                {
+                    swipeRefreshLayout.isRefreshing = false
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                }
+
+            }
+
+
+        }
+
         imgCancel.setOnClickListener {
 
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        }
+
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
 
         }
     }
@@ -198,7 +238,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         dpd.datePicker.maxDate = System.currentTimeMillis()
     }
 
-    override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?) {
+    override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?,from_date:String,to_date:String) {
 
         cardView.visibility=View.INVISIBLE
         rlList.visibility=View.VISIBLE
@@ -226,7 +266,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
                         if(hasNext)
                         {
-                            loadMore()
+                            loadMore(from_date,to_date)
                         }
 
                     }
@@ -238,7 +278,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         }
     }
 
-    private fun loadMore()
+    private fun loadMore(from_date:String,to_date:String)
     {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
@@ -249,7 +289,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             adapterTransferHistory.notifyItemInserted(listTransferHistory.size-1)
 
             val presenterTransferHistory = PresenterTransferHistory()
-            presenterTransferHistory.getTokenHistoryPaginate(activity!!,after,this)
+            presenterTransferHistory.getTokenHistoryPaginate(activity!!,after,from_date,to_date,this)
 
         }
         else{
@@ -258,7 +298,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         }
     }
 
-    override fun onSuccessTransferHistoryPaginate(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors) {
+    override fun onSuccessTransferHistoryPaginate(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors,from_date:String,to_date:String) {
 
         swipeRefreshLayout.isRefreshing = false
 

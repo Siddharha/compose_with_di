@@ -128,7 +128,7 @@ interface BaseService{
     fun doTokenWithdrawal(@Body request: JsonObject): Observable<ResTokenWithdrawal>
 
     @GET("lpk_savings/token_user_history")
-    fun getTokenHistory(@Query("cursors") cursors:String): Observable<ResTransferHistory>
+    fun getTokenHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResTransferHistory>
 
     @GET("lpk_savings/interest_history")
     fun getInterestHistory(@Query("cursors") cursors:String): Observable<ResInterestHistory>
