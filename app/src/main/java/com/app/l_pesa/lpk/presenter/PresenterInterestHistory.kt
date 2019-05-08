@@ -13,10 +13,10 @@ import retrofit2.HttpException
 
 class PresenterInterestHistory {
 
-    fun getInterestHistory(contextOBJ: Context, callBackOBJ: ICallBackInterestHistory)
+    fun getInterestHistory(contextOBJ: Context, from_date:String,to_date:String,callBackOBJ: ICallBackInterestHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistory("")
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistory("",from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -31,7 +31,7 @@ class PresenterInterestHistory {
                         {
                             if(response.data!!.userInterestHistory!!.size>0)
                             {
-                                callBackOBJ.onSuccessInterestHistory(response.data!!.userInterestHistory,response.data!!.cursors)
+                                callBackOBJ.onSuccessInterestHistory(response.data!!.userInterestHistory,response.data!!.cursors,from_date,to_date)
                             }
                             else
                             {
@@ -69,10 +69,10 @@ class PresenterInterestHistory {
                 })
     }
 
-    fun getInterestHistoryPaginate(contextOBJ: Context,cursorData:String, callBackOBJ: ICallBackInterestHistory)
+    fun getInterestHistoryPaginate(contextOBJ: Context,cursorData:String,from_date:String,to_date:String, callBackOBJ: ICallBackInterestHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistory(cursorData)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistory(cursorData,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -87,7 +87,7 @@ class PresenterInterestHistory {
                         {
                             if(response.data!!.userInterestHistory!!.size>0)
                             {
-                                callBackOBJ.onSuccessInterestHistoryPaginate(response.data!!.userInterestHistory,response.data!!.cursors)
+                                callBackOBJ.onSuccessInterestHistoryPaginate(response.data!!.userInterestHistory,response.data!!.cursors,from_date,to_date)
                             }
 
                         }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ import com.app.l_pesa.lpk.model.ResInterestHistory
 import com.app.l_pesa.lpk.presenter.PresenterInterestHistory
 import kotlinx.android.synthetic.main.fragment_interest_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
@@ -29,7 +31,8 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
     private var hasNext=false
     private var after=""
 
-
+    private var calFrom = Calendar.getInstance()
+    private var calTo   = Calendar.getInstance()
 
     companion object {
         fun newInstance(): Fragment {
@@ -68,15 +71,20 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
         adapterInterestHistory= AdapterInterestHistory(activity!!,listInterestHistory)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            swipeRefreshLayout.isRefreshing = true
-            val presenterInterestHistory = PresenterInterestHistory()
-            presenterInterestHistory.getInterestHistory(activity!!,this)
+            loadInterestHistory("","")
         }
         else
         {
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
         }
+    }
+
+    private fun loadInterestHistory(from_date:String,to_date:String)
+    {
+        swipeRefreshLayout.isRefreshing = true
+        val presenterInterestHistory = PresenterInterestHistory()
+        presenterInterestHistory.getInterestHistory(activity!!,from_date,to_date,this)
     }
 
     fun doFilter()
@@ -104,9 +112,43 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
         }
 
+        buttonFilterSubmit.setOnClickListener {
+
+            if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.you_have_select_from_date_to_date))
+            }
+            else
+            {
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+                    val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
+                    val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
+                    etFromDate.text!!.clear()
+                    etToDate.text!!.clear()
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    loadInterestHistory(fromDate!!,toDate!!)
+                }
+                else
+                {
+                    swipeRefreshLayout.isRefreshing = false
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                }
+
+            }
+
+        }
+
         imgCancel.setOnClickListener {
 
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
+
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
 
         }
     }
@@ -114,39 +156,22 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calFrom.set(Calendar.YEAR, year)
+            calFrom.set(Calendar.MONTH, monthOfYear)
+            calFrom.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etFromDate!!.setText(sdf.format(calFrom.time))
+        }
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(activity!!,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calFrom.get(Calendar.YEAR),
+                calFrom.get(Calendar.MONTH),
+                calFrom.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
@@ -155,45 +180,28 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calTo.set(Calendar.YEAR, year)
+            calTo.set(Calendar.MONTH, monthOfYear)
+            calTo.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etToDate!!.setText(sdf.format(calTo.time))
+        }
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(activity!!,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calTo.get(Calendar.YEAR),
+                calTo.get(Calendar.MONTH),
+                calTo.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
     }
 
-    override fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?) {
+    override fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?, from_date: String, to_date: String) {
 
         cardView.visibility=View.INVISIBLE
         rlList.visibility=View.VISIBLE
@@ -220,7 +228,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
                         if(hasNext)
                         {
-                            loadMore()
+                            loadMore(from_date,to_date)
                         }
 
                     }
@@ -232,7 +240,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
         }
     }
 
-    override fun onSuccessInterestHistoryPaginate(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?) {
+    override fun onSuccessInterestHistoryPaginate(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?, from_date: String, to_date: String) {
 
         hasNext =cursors!!.hasNext
         after   =cursors.after
@@ -251,7 +259,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
         }
     }
 
-    private fun loadMore()
+    private fun loadMore(from_date: String, to_date: String)
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -264,7 +272,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
 
             val presenterInterestHistory = PresenterInterestHistory()
-            presenterInterestHistory.getInterestHistoryPaginate(activity!!,after,this)
+            presenterInterestHistory.getInterestHistoryPaginate(activity!!,after,from_date,to_date,this)
 
         }
         else{

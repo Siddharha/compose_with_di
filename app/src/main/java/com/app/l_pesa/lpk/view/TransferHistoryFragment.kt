@@ -37,8 +37,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     private var hasNext=false
     private var after=""
 
-    var calFrom = Calendar.getInstance()
-    var calTo   = Calendar.getInstance()
+    private var calFrom = Calendar.getInstance()
+    private var calTo   = Calendar.getInstance()
 
     companion object {
         fun newInstance(): Fragment {
@@ -135,6 +135,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
                 {
                     val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
+                    etFromDate.text!!.clear()
+                    etToDate.text!!.clear()
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     loadTokenHistory(fromDate!!,toDate!!)
                 }

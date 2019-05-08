@@ -131,7 +131,7 @@ interface BaseService{
     fun getTokenHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResTransferHistory>
 
     @GET("lpk_savings/interest_history")
-    fun getInterestHistory(@Query("cursors") cursors:String): Observable<ResInterestHistory>
+    fun getInterestHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResInterestHistory>
 
     @GET("lpk_withdrawal/user_history")
     fun getWithdrawalHistory(@Query("cursors") cursors:String): Observable<ResWithdrawalHistory>
