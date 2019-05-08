@@ -124,8 +124,6 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
                 {
                     val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
-                    etFromDate.text!!.clear()
-                    etToDate.text!!.clear()
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     loadInterestHistory(fromDate!!,toDate!!)
                 }
