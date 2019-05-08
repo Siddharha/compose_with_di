@@ -52,6 +52,8 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
             initData("","")
         }
     }
@@ -124,6 +126,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
                     val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                     initData(fromDate!!,toDate!!)
 
             }
