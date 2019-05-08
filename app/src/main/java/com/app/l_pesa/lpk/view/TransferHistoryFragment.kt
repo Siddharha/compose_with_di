@@ -10,6 +10,8 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterTransferHistory
@@ -21,6 +23,7 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_transfer_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -34,6 +37,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     private var hasNext=false
     private var after=""
 
+    var calFrom = Calendar.getInstance()
+    var calTo   = Calendar.getInstance()
 
     companion object {
         fun newInstance(): Fragment {
@@ -80,11 +85,13 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
         }
+
+
     }
 
     private fun loadTokenHistory(from_date:String,to_date:String)
     {
-       // println("FROM"+from_date+"TO"+to_date)
+        println("FROM"+from_date+"TO"+to_date)
         swipeRefreshLayout.isRefreshing = true
         val presenterTransferHistory = PresenterTransferHistory()
         presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,this)
@@ -159,80 +166,49 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
 
-        val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+        // create an OnDateSetListener
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calFrom.set(Calendar.YEAR, year)
+            calFrom.set(Calendar.MONTH, monthOfYear)
+            calFrom.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("0$dayOfMonth-$month-$year")
-                }
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etFromDate!!.setText(sdf.format(calFrom.time))
+        }
 
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(activity!!,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calFrom.get(Calendar.YEAR),
+                calFrom.get(Calendar.MONTH),
+                calFrom.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
-    }
+
+}
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calTo.set(Calendar.YEAR, year)
+            calTo.set(Calendar.MONTH, monthOfYear)
+            calTo.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            val myFormat = "dd-MM-yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            etToDate!!.setText(sdf.format(calTo.time))
+        }
 
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
+        val dpd =DatePickerDialog(activity!!,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calTo.get(Calendar.YEAR),
+                calTo.get(Calendar.MONTH),
+                calTo.get(Calendar.DAY_OF_MONTH))
 
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
