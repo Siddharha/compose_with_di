@@ -423,7 +423,7 @@
     <string name="credit">Credit</string>
     <string name="debit">Debit</string>
     <string name="cr">Cr</string>
-    <string name="db">Db</string>
+    <string name="dr">Dr</string>
     <string name="title_activity_loan_apply2">LoanApplyActivity2</string>
 
 

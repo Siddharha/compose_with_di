@@ -89,15 +89,15 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
 
             if(savingsHistory.credit_amount==0.0)
             {
-                imageStatus.setImageResource(R.drawable.ic_money_out)
+                imageStatus.setImageResource(R.drawable.ic_money_out_side)
                 txtAmount.text = savingsHistory.currency_code+" "+format.format(savingsHistory.debit_amount)
-                txtAmountStatus.text = context.getString(R.string.db)
-                txtAmount.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
-                txtAmountStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
+                txtAmountStatus.text = context.getString(R.string.dr)
+                txtAmount.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
+                txtAmountStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
             }
             else
             {
-                imageStatus.setImageResource(R.drawable.ic_money_in)
+                imageStatus.setImageResource(R.drawable.ic_money_in_side)
                 txtAmount.text = savingsHistory.currency_code+" "+format.format(savingsHistory.credit_amount)
                 txtAmountStatus.text = context.getString(R.string.cr)
                 txtAmount.setTextColor(ContextCompat.getColor(context,R.color.colorApp))

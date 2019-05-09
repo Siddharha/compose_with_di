@@ -96,6 +96,7 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
             {
                 buttonStatus.text = context.resources.getString(R.string.pending)
                 buttonStatus.setBackgroundResource(R.drawable.yellow_button)
+
             }
             else if(withdrawalHistory.status==1)
             {
