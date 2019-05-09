@@ -1,13 +1,17 @@
 package com.app.l_pesa.loanHistory.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
@@ -17,6 +21,7 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
+import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import kotlin.collections.ArrayList
 
 
@@ -25,6 +30,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     private var listLoanHistoryBusiness         : ArrayList<ResLoanHistoryBusiness.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : BusinessLoanHistoryAdapter
+    private lateinit var bottomSheetBehavior    : BottomSheetBehavior<*>
 
     private var hasNext=false
     private var after=""
@@ -61,6 +67,10 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     {
         listLoanHistoryBusiness      = ArrayList()
         adapterLoanHistory           = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
+        bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
+        bottomSheetBehavior.isHideable=true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
@@ -71,13 +81,12 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
         }
 
-
     }
 
     private fun swipeRefresh()
     {
 
-        swipeRefreshLayout.setColorSchemeResources(com.app.l_pesa.R.color.colorAccent)
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
             loadHistory("","")
@@ -118,7 +127,6 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
                 }
             })
-
 
         }
 
@@ -184,7 +192,80 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     fun doFilter()
     {
+        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
+        {
+            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            resetFilter()
 
+        }
+        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
+        {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        }
+
+        etFromDate.setOnClickListener {
+
+            showDatePickerFrom()
+
+        }
+
+        etToDate.setOnClickListener {
+
+            showDatePickerTo()
+
+        }
+
+        buttonFilterSubmit.setOnClickListener {
+
+            if (TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString())) {
+                CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.you_have_select_from_date_to_date))
+            } else {
+
+                val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
+                val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                loadHistory(fromDate!!,toDate!!)
+
+            }
+        }
+
+        imgCancel.setOnClickListener {
+
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
+
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showDatePickerFrom()
+    {
+        val commonClass= CommonClass()
+        commonClass.datePicker(activity!!,etFromDate)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showDatePickerTo()
+    {
+        val commonClass= CommonClass()
+        commonClass.datePicker(activity!!,etToDate)
+    }
+
+    private fun resetFilter()
+    {
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+
+        }
     }
 
     override fun onClickList() {
