@@ -87,8 +87,8 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     private fun initUI(from_date: String, to_date: String)
     {
-        listInvestment             = ArrayList()
-        adapterInvestmentHistory   = InvestmentHistoryAdapter(activity!!, listInvestment,this)
+        listInvestment               = ArrayList()
+        adapterInvestmentHistory     = InvestmentHistoryAdapter(activity!!, listInvestment,this)
         bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
