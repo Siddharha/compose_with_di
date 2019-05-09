@@ -303,7 +303,7 @@
     <string name="required_loan_purpose">Please select the purpose of application.</string>
     <string name="required_loan_purpose_description">Please describe why you need the loan.</string>
     <string name="max_500_words">Describe within 500 words.</string>
-    <string name="ref_no">Ref. No:</string>
+    <string name="ref_no">Ref.No:</string>
     <string name="reference_no">Reference No:</string>
     <string name="txt_id">TXN ID:</string>
     <string name="amount">Amount:</string>
@@ -417,7 +417,7 @@
     <string name="commission_for_l_pesa">Commission for L-Pesa for each withdrawal:</string>
     <string name="withdrawal_amount">Withdrawal Amount</string>
     <string name="required_withdrawal_amount">Please enter the amount to withdraw.</string>
-    <string name="wallet_history">L-Pesa Wallet History</string>
+    <string name="transaction_history">Transaction History</string>
 
     <string name="all">All</string>
     <string name="credit">Credit</string>

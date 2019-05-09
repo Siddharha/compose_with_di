@@ -27,76 +27,59 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_money_out_side" />
+                app:srcCompat="@drawable/ic_money_out_side"
 
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/ref_no"
-                android:gravity="start|center"
-                android:textColor="@color/light_text_color"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@+id/txtCreateDate"
-                app:layout_constraintStart_toEndOf="@+id/imageStatus"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside" />
+                />
 
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txtRef"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_1sdp"
-                android:textSize="@dimen/_11sdp"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorTextBlackLight"
-                android:layout_marginBottom="@dimen/_3sdp"
-                app:layout_constraintStart_toEndOf="@+id/textView15"
-                app:layout_constraintTop_toTopOf="parent"
-                 />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCreateDate"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_10sdp"
-                android:gravity="start|center"
                 android:drawableStart="@drawable/ic_calendar_icon"
-                android:drawablePadding="@dimen/_5sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:drawablePadding="@dimen/_3sdp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="start|center"
+                android:textColor="@color/colorTextBlackLight"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintEnd_toStartOf="@+id/txtAmount"
+                app:layout_constraintBottom_toTopOf="@+id/txtRef"
                 app:layout_constraintStart_toEndOf="@+id/imageStatus"
-                app:layout_constraintTop_toBottomOf="@+id/txtRef" />
-
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
-                android:textStyle="bold"
-                android:gravity="start|center"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/txtAmountStatus"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:gravity="end|center"
+                android:text=""
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtCreateDate"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCreateDate"
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txtAmountStatus"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtRef"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:textStyle="bold"
-                android:gravity="start|center"
+                android:layout_marginStart="@dimen/_6sdp"
                 android:textSize="@dimen/_10sdp"
-                android:paddingStart="@dimen/_4sdp"
-                android:paddingEnd="@dimen/_1sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorTextBlackLight"
+                android:gravity="start|center"
+                app:layout_constraintStart_toEndOf="@+id/imageStatus"
+                app:layout_constraintTop_toBottomOf="@+id/txtCreateDate"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="@dimen/_2sdp"
+
+                />
 
 
         </android.support.constraint.ConstraintLayout>

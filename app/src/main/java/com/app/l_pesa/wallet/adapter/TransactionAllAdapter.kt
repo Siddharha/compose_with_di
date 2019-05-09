@@ -78,7 +78,6 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
             private var txtRef                   : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
             private var txtCreateDate            : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
             private var txtAmount                : CommonTextRegular = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
-            private var txtAmountStatus          : CommonTextRegular = itemView.findViewById(R.id.txtAmountStatus) as CommonTextRegular
             private var imageStatus              : ImageView = itemView.findViewById(R.id.imageStatus) as ImageView
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
@@ -90,21 +89,19 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
             if(savingsHistory.credit_amount==0.0)
             {
                 imageStatus.setImageResource(R.drawable.ic_money_out_side)
-                txtAmount.text = savingsHistory.currency_code+" "+format.format(savingsHistory.debit_amount)
-                txtAmountStatus.text = context.getString(R.string.dr)
+                txtAmount.text = savingsHistory.currency_code+" "+format.format(savingsHistory.debit_amount)+" " +context.getString(R.string.dr)
                 txtAmount.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
-                txtAmountStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
+
             }
             else
             {
                 imageStatus.setImageResource(R.drawable.ic_money_in_side)
-                txtAmount.text = savingsHistory.currency_code+" "+format.format(savingsHistory.credit_amount)
-                txtAmountStatus.text = context.getString(R.string.cr)
+                txtAmount.text = savingsHistory.currency_code+" "+format.format(savingsHistory.credit_amount)+" "+context.getString(R.string.cr)
                 txtAmount.setTextColor(ContextCompat.getColor(context,R.color.colorApp))
-                txtAmountStatus.setTextColor(ContextCompat.getColor(context,R.color.colorApp))
+
             }
 
-            txtRef.text         = savingsHistory.reference_number
+            txtRef.text         = context.resources.getString(R.string.ref_no)+" "+savingsHistory.reference_number
             txtCreateDate.text  = CommonMethod.dateConvert(savingsHistory.created)
 
         }

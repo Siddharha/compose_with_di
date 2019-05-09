@@ -32,7 +32,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".wallet.view.TransactionHistoryActivity"
-            android:label="@string/wallet_history"
+            android:label="@string/transaction_history"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
