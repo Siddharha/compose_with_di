@@ -13,10 +13,10 @@ import retrofit2.HttpException
 
 class PresenterInvestmentHistory {
 
-    fun getInvestmentHistory(contextOBJ: Context, callBackOBJ: ICallBackInvestmentHistory)
+    fun getInvestmentHistory(contextOBJ: Context, from_date:String,to_date:String,callBackOBJ: ICallBackInvestmentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory("")
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory("",from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -31,7 +31,7 @@ class PresenterInvestmentHistory {
                         {
                             if(response.data!!.userInvestment!!.size>0)
                             {
-                                callBackOBJ.onSuccessInvestmentHistory(response.data!!.userInvestment!!,response.data!!.cursors)
+                                callBackOBJ.onSuccessInvestmentHistory(response.data!!.userInvestment!!,response.data!!.cursors,from_date,to_date)
                             }
                             else
                             {
@@ -66,10 +66,10 @@ class PresenterInvestmentHistory {
                 })
     }
 
-    fun getInvestmentHistoryPaginate(contextOBJ: Context,cursor:String, callBackOBJ: ICallBackInvestmentHistory)
+    fun getInvestmentHistoryPaginate(contextOBJ: Context,cursor:String, from_date:String,to_date:String,callBackOBJ: ICallBackInvestmentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory(cursor)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory(cursor,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -84,7 +84,7 @@ class PresenterInvestmentHistory {
                         {
                             if(response.data!!.userInvestment!!.size>0)
                             {
-                                callBackOBJ.onSuccessInvestmentHistoryPaginate(response.data!!.userInvestment!!,response.data!!.cursors)
+                                callBackOBJ.onSuccessInvestmentHistoryPaginate(response.data!!.userInvestment!!,response.data!!.cursors,from_date,to_date)
                             }
 
 

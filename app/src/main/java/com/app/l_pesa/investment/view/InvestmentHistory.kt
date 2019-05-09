@@ -5,11 +5,13 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,7 @@ import android.widget.ImageButton
 import android.widget.PopupWindow
 import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
@@ -37,16 +40,16 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_investment_history.*
+import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.ArrayList
 
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus,ICallBackPopUpWindow {
-
-
 
     private lateinit  var progressDialog: KProgressHUD
     private var popupWindow : PopupWindow? = null
     private lateinit var listInvestment               : ArrayList<ResInvestmentHistory.UserInvestment>
     private lateinit var adapterInvestmentHistory     : InvestmentHistoryAdapter
+    private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
 
     private var hasNext=false
     private var after=""
@@ -66,7 +69,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefresh()
-        initUI()
+        initUI("","")
         switchFunction()
 
     }
@@ -76,22 +79,27 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-
-            initUI()
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+            initUI("","")
         }
     }
 
-    private fun initUI()
+    private fun initUI(from_date: String, to_date: String)
     {
         listInvestment             = ArrayList()
         adapterInvestmentHistory   = InvestmentHistoryAdapter(activity!!, listInvestment,this)
+        bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
+        bottomSheetBehavior.isHideable=true
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
         initLoader()
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
             val presenterInvestmentHistory= PresenterInvestmentHistory()
-            presenterInvestmentHistory.getInvestmentHistory(activity!!,this)
+            presenterInvestmentHistory.getInvestmentHistory(activity!!,from_date,to_date,this)
         }
     }
 
@@ -181,7 +189,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     }
 
-    override fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?) {
+    override fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?, from_date: String, to_date: String) {
 
         activity!!.runOnUiThread {
             hasNext =cursors!!.hasNext
@@ -202,7 +210,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
                         if(hasNext)
                         {
-                            loadMore()
+                            loadMore(from_date,to_date)
                         }
 
                     }
@@ -215,7 +223,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     }
 
-    override fun onSuccessInvestmentHistoryPaginate(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?) {
+    override fun onSuccessInvestmentHistoryPaginate(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?,from_date: String, to_date: String) {
 
         swipeRefreshLayout.isRefreshing    = false
         hasNext =cursors!!.hasNext
@@ -235,7 +243,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         }
     }
 
-    private fun loadMore()
+    private fun loadMore(from_date: String, to_date: String)
     {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
@@ -248,7 +256,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             adapterInvestmentHistory.notifyItemInserted(listInvestment.size-1)
 
             val presenterInvestmentHistory= PresenterInvestmentHistory()
-            presenterInvestmentHistory.getInvestmentHistoryPaginate(activity!!,after,this)
+            presenterInvestmentHistory.getInvestmentHistoryPaginate(activity!!,after,from_date,to_date,this)
 
         }
 
@@ -342,7 +350,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     override fun onSuccessInvestmentWithdrawal() {
 
-        initUI()
+        initUI("","")
     }
 
     override fun onErrorInvestmentWithdrawal(message: String) {
@@ -352,7 +360,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     override fun onSuccessReinvestment() {
-        initUI()
+        initUI("","")
     }
 
     override fun onErrorReinvestment(message: String) {
@@ -361,7 +369,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     override fun onSuccessExitPoint() {
-        initUI()
+        initUI("","")
     }
 
     override fun onErrorExitPoint(message: String) {
@@ -435,5 +443,79 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     fun doFilter()
     {
 
+        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
+        {
+            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            resetFilter()
+
+        }
+        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
+        {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        }
+
+        etFromDate.setOnClickListener {
+
+            showDatePickerFrom()
+
+        }
+
+        etToDate.setOnClickListener {
+
+            showDatePickerTo()
+
+        }
+
+        buttonFilterSubmit.setOnClickListener {
+
+            if (TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString())) {
+                CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.you_have_select_from_date_to_date))
+            } else {
+
+                val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
+                val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                initUI(fromDate!!,toDate!!)
+
+            }
+        }
+
+        imgCancel.setOnClickListener {
+
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN)
+
+        }
+
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+
+        }
+    }
+
+    private fun resetFilter()
+    {
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showDatePickerFrom()
+    {
+        val commonClass= CommonClass()
+        commonClass.datePicker(activity,etFromDate)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showDatePickerTo()
+    {
+        val commonClass= CommonClass()
+        commonClass.datePicker(activity,etToDate)
     }
 }

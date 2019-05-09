@@ -77,7 +77,7 @@ interface BaseService{
     fun doLoanHistory(@Body request: JsonObject,@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String ): Observable<ResLoanHistoryCurrent>
 
     @POST("loan/history")
-    fun doLoanHistoryBusiness(@Body request: JsonObject, @Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String  ): Observable<ResLoanHistoryBusiness>
+    fun doLoanHistoryBusiness(@Body request: JsonObject, @Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResLoanHistoryBusiness>
 
     @POST("loan/paybackschedule")
     fun doPaybackSchedule(@Body request: JsonObject,@Query("cursors") cursors:String ): Observable<ResPaybackSchedule>
@@ -86,7 +86,7 @@ interface BaseService{
     fun getInvestmentPlan(): Observable<ResInvestmentPlan>
 
     @GET("investment/user_list")
-    fun getInvestmentHistory(@Query("cursors") cursors:String): Observable<ResInvestmentHistory>
+    fun getInvestmentHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResInvestmentHistory>
 
     @POST("user/personal_info")
     fun doChangePersonalInfo(@Body request: JsonObject): Observable<ResPersonalInfo>

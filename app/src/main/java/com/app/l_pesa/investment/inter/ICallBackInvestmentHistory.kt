@@ -5,8 +5,8 @@ import java.util.ArrayList
 
 interface ICallBackInvestmentHistory {
 
-    fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?)
-    fun onSuccessInvestmentHistoryPaginate(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?)
+    fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?, from_date: String, to_date: String)
+    fun onSuccessInvestmentHistoryPaginate(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?, from_date: String, to_date: String)
     fun onEmptyInvestmentHistory()
     fun onErrorInvestmentHistory(jsonMessage: String)
 
