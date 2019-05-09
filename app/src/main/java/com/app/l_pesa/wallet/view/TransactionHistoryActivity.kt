@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.wallet.adapter.TransactionAllAdapter
 import com.app.l_pesa.wallet.inter.ICallBackTransaction
@@ -26,7 +27,6 @@ import java.util.*
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
-
     private lateinit var listSavingsHistory           : ArrayList<ResWalletHistory.SavingsHistory>
     private lateinit var adapterTransactionHistory    : TransactionAllAdapter
     private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
@@ -34,8 +34,6 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     private var hasNext=false
     private var after=""
 
-    private var calFrom = Calendar.getInstance()
-    private var calTo   = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -250,51 +248,16 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            calFrom.set(Calendar.YEAR, year)
-            calFrom.set(Calendar.MONTH, monthOfYear)
-            calFrom.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            val myFormat = "dd-MM-yyyy" // mention the format you need
-            val sdf = SimpleDateFormat(myFormat, Locale.US)
-            etFromDate!!.setText(sdf.format(calFrom.time))
-        }
-
-        val dpd =DatePickerDialog(this@TransactionHistoryActivity,
-                dateSetListener,
-                // set DatePickerDialog to point to today's date when it loads up
-                calFrom.get(Calendar.YEAR),
-                calFrom.get(Calendar.MONTH),
-                calFrom.get(Calendar.DAY_OF_MONTH))
-
-        dpd.show()
-        dpd.datePicker.maxDate = System.currentTimeMillis()
+        val commonClass= CommonClass()
+        commonClass.datePicker(this@TransactionHistoryActivity,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            calTo.set(Calendar.YEAR, year)
-            calTo.set(Calendar.MONTH, monthOfYear)
-            calTo.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            val myFormat = "dd-MM-yyyy" // mention the format you need
-            val sdf = SimpleDateFormat(myFormat, Locale.US)
-            etToDate!!.setText(sdf.format(calTo.time))
-        }
-
-        val dpd =DatePickerDialog(this@TransactionHistoryActivity,
-                dateSetListener,
-                // set DatePickerDialog to point to today's date when it loads up
-                calTo.get(Calendar.YEAR),
-                calTo.get(Calendar.MONTH),
-                calTo.get(Calendar.DAY_OF_MONTH))
-
-        dpd.show()
-        dpd.datePicker.maxDate = System.currentTimeMillis()
+        val commonClass= CommonClass()
+        commonClass.datePicker(this@TransactionHistoryActivity,etToDate)
     }
-
 
 
     private fun toolbarFont(context: Activity) {
