@@ -5,8 +5,8 @@ import java.util.ArrayList
 
 interface ICallBackWithdrawalHistory {
 
-    fun onSuccessWithdrawalHistory(userWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?)
-    fun onSuccessWithdrawalHistoryPaginate(userWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?)
+    fun onSuccessWithdrawalHistory(userWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?, from_date: String, to_date: String)
+    fun onSuccessWithdrawalHistoryPaginate(userWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?, from_date: String, to_date: String)
     fun onEmptyWithdrawalHistory()
     fun onErrorWithdrawalHistory(message: String)
 }

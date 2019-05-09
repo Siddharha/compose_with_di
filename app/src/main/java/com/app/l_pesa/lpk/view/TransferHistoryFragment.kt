@@ -90,7 +90,6 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     private fun loadTokenHistory(from_date:String,to_date:String)
     {
-        println("FROM"+from_date+"TO"+to_date)
         swipeRefreshLayout.isRefreshing = true
         val presenterTransferHistory = PresenterTransferHistory()
         presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,this)

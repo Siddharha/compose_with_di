@@ -134,7 +134,7 @@ interface BaseService{
     fun getInterestHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResInterestHistory>
 
     @GET("lpk_withdrawal/user_history")
-    fun getWithdrawalHistory(@Query("cursors") cursors:String): Observable<ResWithdrawalHistory>
+    fun getWithdrawalHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResWithdrawalHistory>
 
     @POST("user/wallet_address")
     fun doWalletAddress(@Body request: JsonObject): Observable<ResWalletAddress>

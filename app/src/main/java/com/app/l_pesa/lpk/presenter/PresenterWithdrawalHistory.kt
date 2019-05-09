@@ -13,10 +13,10 @@ import retrofit2.HttpException
 
 class PresenterWithdrawalHistory {
 
-    fun getWithdrawalHistory(contextOBJ: Context, callBackOBJ: ICallBackWithdrawalHistory)
+    fun getWithdrawalHistory(contextOBJ: Context, from_date:String,to_date:String,callBackOBJ: ICallBackWithdrawalHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory("")
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory("",from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -31,7 +31,7 @@ class PresenterWithdrawalHistory {
                         {
                             if(response.data!!.userWithdrawalHistory!!.size>0)
                             {
-                                callBackOBJ.onSuccessWithdrawalHistory(response.data!!.userWithdrawalHistory!!,response.data!!.cursors)
+                                callBackOBJ.onSuccessWithdrawalHistory(response.data!!.userWithdrawalHistory!!,response.data!!.cursors,from_date,to_date)
                             }
                             else
                             {
@@ -69,10 +69,10 @@ class PresenterWithdrawalHistory {
                 })
     }
 
-    fun getWithdrawalHistoryPaginate(contextOBJ: Context,cursor:String, callBackOBJ: ICallBackWithdrawalHistory)
+    fun getWithdrawalHistoryPaginate(contextOBJ: Context,cursor:String, from_date:String,to_date:String,callBackOBJ: ICallBackWithdrawalHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory(cursor)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory(cursor,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -87,7 +87,7 @@ class PresenterWithdrawalHistory {
                         {
                             if(response.data!!.userWithdrawalHistory!!.size>0)
                             {
-                                callBackOBJ.onSuccessWithdrawalHistoryPaginate(response.data!!.userWithdrawalHistory!!,response.data!!.cursors)
+                                callBackOBJ.onSuccessWithdrawalHistoryPaginate(response.data!!.userWithdrawalHistory!!,response.data!!.cursors,from_date,to_date)
                             }
 
                         }

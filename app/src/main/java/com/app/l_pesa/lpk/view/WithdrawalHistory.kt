@@ -1,15 +1,16 @@
 package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterWithdrawalHistory
 import com.app.l_pesa.lpk.inter.ICallBackWithdrawalHistory
@@ -17,7 +18,6 @@ import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import com.app.l_pesa.lpk.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.fragment_withdrawal_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date_amount.*
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -45,7 +45,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefresh()
-        initData()
+        initData("","")
 
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
@@ -53,7 +53,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
     }
 
-    private fun initData()
+    private fun initData(from_date:String,to_date:String)
     {
         listWithdrawalHistory       = ArrayList()
         adapterWithdrawalHistory    = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
@@ -62,7 +62,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getWithdrawalHistory(activity!!,this)
+            presenterWithdrawalHistory.getWithdrawalHistory(activity!!,from_date,to_date,this)
         }
         else
         {
@@ -77,7 +77,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         swipeRefreshLayout.setOnRefreshListener {
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
-            initData()
+            initData("","")
 
         }
     }
@@ -88,7 +88,6 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
             resetFilter()
-            filterDate()
 
         }
         else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
@@ -109,15 +108,46 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
         }
 
+        buttonFilterSubmit.setOnClickListener {
+
+            if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.you_have_select_from_date_to_date))
+            }
+            else
+            {
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+                    val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
+                    val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                    initData(fromDate!!,toDate!!)
+                }
+                else
+                {
+                    swipeRefreshLayout.isRefreshing = false
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                }
+
+            }
+
+
+        }
+
         imgCancel.setOnClickListener {
 
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
+        }
+        buttonReset.setOnClickListener {
+
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
 
         }
     }
 
-    private fun  resetFilter()
+    private fun resetFilter()
     {
         buttonReset.setOnClickListener {
 
@@ -129,23 +159,8 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         }
     }
 
-    private fun filterDate()
-    {
-        buttonFilterSubmit.setOnClickListener {
 
-            /*if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_filter_date))
-            }
-            else
-            {
-
-            }*/
-        }
-
-    }
-
-    override fun onSuccessWithdrawalHistory(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?) {
+    override fun onSuccessWithdrawalHistory(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?, from_date: String, to_date: String) {
 
         cardView.visibility=View.INVISIBLE
         rlList.visibility=View.VISIBLE
@@ -171,7 +186,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
                         if (hasNext)
                         {
-                            loadMore()
+                            loadMore(from_date,to_date)
                         }
 
                     }
@@ -181,7 +196,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         }
     }
 
-    override fun onSuccessWithdrawalHistoryPaginate(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?) {
+    override fun onSuccessWithdrawalHistoryPaginate(userWithdrawalHistory: java.util.ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>, cursors: ResWithdrawalHistory.Cursors?,from_date:String,to_date:String) {
 
         hasNext =cursors!!.hasNext
         after   =cursors.after
@@ -200,7 +215,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
         }
     }
 
-    private fun loadMore()
+    private fun loadMore(from_date:String,to_date:String)
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -212,7 +227,7 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
             adapterWithdrawalHistory.notifyItemInserted(listWithdrawalHistory.size-1)
 
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,this)
+            presenterWithdrawalHistory.getWithdrawalHistoryPaginate(activity!!,after,from_date,to_date,this)
 
         }
         else{
@@ -239,82 +254,14 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
-
-        val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etFromDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etFromDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
-
-        dpd.show()
-        dpd.datePicker.maxDate = System.currentTimeMillis()
+        val commonClass= CommonClass()
+        commonClass.datePicker(activity,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
-
-        val dpd = DatePickerDialog(activity!!, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-
-            if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("0$dayOfMonth-$month-$year")
-                }
-
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    etToDate.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    etToDate.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }
-
-        }, year, month, day)
-
-        dpd.show()
-        dpd.datePicker.maxDate = System.currentTimeMillis()
+        val commonClass= CommonClass()
+        commonClass.datePicker(activity,etToDate)
     }
 }
