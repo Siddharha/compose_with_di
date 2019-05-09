@@ -21,6 +21,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -107,6 +108,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 {
                     if(isLocationEnabled())
                     {
+                        buttonSubmit.isClickable =false
                         val locationRequest                 = LocationRequest()
                         val intervalLocation: Long          = 100
                         locationRequest.interval            = intervalLocation
@@ -148,7 +150,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private fun loanApply(loan_type: String?, product_id: String?, location: Location)
     {
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
-        buttonSubmit.isClickable =false
         swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("loan_type",loan_type)
@@ -217,8 +218,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     override fun onSuccessLoanApply() {
+
+        Toast.makeText(this@LoanApplyActivity,resources.getString(R.string.loan_applied_successfully),Toast.LENGTH_SHORT).show()
         swipeRefreshLayout.isRefreshing = false
-        buttonSubmit.isClickable =true
         val sharedPref=SharedPref(this@LoanApplyActivity)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
         val intent = Intent(this@LoanApplyActivity, DashboardActivity::class.java)
@@ -228,7 +230,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     override fun onErrorLoanApply(message: String) {
-
         buttonSubmit.isClickable =true
         swipeRefreshLayout.isRefreshing = false
         CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,message)
