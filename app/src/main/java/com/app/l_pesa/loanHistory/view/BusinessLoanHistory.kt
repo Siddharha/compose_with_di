@@ -145,10 +145,6 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     }
 
-    override fun onEmptyPaginateLoanHistory() {
-
-
-    }
 
     override fun onEmptyLoanHistory() {
 
@@ -183,6 +179,11 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
             presenterLoanHistory.getLoanHistoryPaginateBusiness(activity!!,jsonObject,after,this)
 
         }
+
+    }
+
+    fun doFilter()
+    {
 
     }
 

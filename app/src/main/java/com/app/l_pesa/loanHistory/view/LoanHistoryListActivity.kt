@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
@@ -62,6 +63,30 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
                         sharedPref.openTabLoan="BUSINESS"
                     }
                 }, 100)
+
+
+        imgFilter.setOnClickListener {
+
+            if(viewPager!!.currentItem==0)
+            {
+                val fragment = adapter.instantiateItem(viewPager!!, 0) as Fragment
+                if (fragment is CurrentLoanHistory) {
+                    fragment.doFilter()
+
+                }
+            }
+            else
+            {
+                val fragment = adapter.instantiateItem(viewPager!!, 1) as Fragment
+                if (fragment is BusinessLoanHistory) {
+                    fragment.doFilter()
+
+                }
+            }
+
+
+            }
+
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {

@@ -84,6 +84,11 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         }
     }
 
+    fun doFilter()
+    {
+
+    }
+
     override fun onSuccessLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors, user_credit_score: Int) {
 
         cardView.visibility  = View.GONE
@@ -144,10 +149,6 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
     }
 
-    override fun onEmptyPaginateLoanHistory() {
-
-
-    }
 
     override fun onEmptyLoanHistory() {
 

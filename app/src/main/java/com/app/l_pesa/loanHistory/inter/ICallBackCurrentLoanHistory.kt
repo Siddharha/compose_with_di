@@ -8,7 +8,6 @@ interface ICallBackCurrentLoanHistory {
     fun onSuccessLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors, user_credit_score: Int)
     fun onSuccessPaginateLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors)
     fun onEmptyLoanHistory()
-    fun onEmptyPaginateLoanHistory()
     fun onFailureLoanHistory(jsonMessage: String)
     fun onClickList()
 }

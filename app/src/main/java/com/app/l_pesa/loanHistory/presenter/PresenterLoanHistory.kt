@@ -145,10 +145,7 @@ class PresenterLoanHistory {
                             {
                                 callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors)
                             }
-                            else
-                            {
-                                callBackCurrentOBJ.onEmptyPaginateLoanHistory()
-                            }
+
                         }
                         else
                         {
@@ -200,10 +197,7 @@ class PresenterLoanHistory {
                             {
                                 callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors)
                             }
-                            else
-                            {
-                                callBackCurrentOBJ.onEmptyPaginateLoanHistory()
-                            }
+
                         }
                         else
                         {
