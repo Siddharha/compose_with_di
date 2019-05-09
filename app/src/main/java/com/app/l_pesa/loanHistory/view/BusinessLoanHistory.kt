@@ -17,7 +17,7 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 
 class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
@@ -42,7 +42,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadHistory()
+        loadHistory("","")
         swipeRefresh()
         buttonApplyLoan.setOnClickListener {
 
@@ -57,7 +57,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     }
 
-    private fun loadHistory()
+    private fun loadHistory(from_date: String, to_date: String)
     {
         listLoanHistoryBusiness      = ArrayList()
         adapterLoanHistory           = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
@@ -67,7 +67,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,"",this)
+            presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,from_date,to_date,"",this)
 
         }
 
@@ -80,11 +80,11 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         swipeRefreshLayout.setColorSchemeResources(com.app.l_pesa.R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
-            loadHistory()
+            loadHistory("","")
         }
     }
 
-    override fun onSuccessLoanHistory(loan_historyBusiness: ArrayList<ResLoanHistoryBusiness.LoanHistory>, cursors: ResLoanHistoryBusiness.Cursors, user_credit_score: Int) {
+    override fun onSuccessLoanHistory(loan_historyBusiness: ArrayList<ResLoanHistoryBusiness.LoanHistory>, cursors: ResLoanHistoryBusiness.Cursors, user_credit_score: Int, from_date: String, to_date: String) {
 
 
         cardView.visibility  = View.GONE
@@ -111,7 +111,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
                         if(hasNext)
                         {
-                            loadMore()
+                            loadMore(from_date,to_date)
                         }
 
                     }
@@ -124,7 +124,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     }
 
-    override fun onSuccessPaginateLoanHistory(loan_historyBusiness: ArrayList<ResLoanHistoryBusiness.LoanHistory>, cursors: ResLoanHistoryBusiness.Cursors) {
+    override fun onSuccessPaginateLoanHistory(loan_historyBusiness: ArrayList<ResLoanHistoryBusiness.LoanHistory>, cursors: ResLoanHistoryBusiness.Cursors, from_date: String, to_date: String) {
 
         hasNext =cursors.hasNext
         after   =cursors.after
@@ -161,7 +161,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     }
 
 
-    private fun loadMore()
+    private fun loadMore(from_date: String, to_date: String)
     {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
@@ -176,7 +176,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryPaginateBusiness(activity!!,jsonObject,after,this)
+            presenterLoanHistory.getLoanHistoryPaginateBusiness(activity!!,jsonObject,from_date,to_date,after,this)
 
         }
 

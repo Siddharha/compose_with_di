@@ -15,10 +15,10 @@ import retrofit2.HttpException
 
 class PresenterLoanHistory {
 
-    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
+    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -33,7 +33,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score)
+                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score,from_date,to_date)
                             }
                             else
                             {
@@ -70,10 +70,10 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
+    fun getLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistoryBusiness(jsonRequest,cursors)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistoryBusiness(jsonRequest,cursors,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -88,7 +88,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score)
+                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score,from_date,to_date)
                             }
                             else
                             {
@@ -125,10 +125,10 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
+    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject,from_date:String,to_date:String, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -143,7 +143,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors)
+                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors,from_date,to_date)
                             }
 
                         }
@@ -177,10 +177,10 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryPaginateBusiness(contextOBJ: Context, jsonRequest : JsonObject, cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
+    fun getLoanHistoryPaginateBusiness(contextOBJ: Context, jsonRequest : JsonObject,from_date:String,to_date:String, cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistoryBusiness(jsonRequest,cursors)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistoryBusiness(jsonRequest,cursors,from_date,to_date)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -195,7 +195,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors)
+                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors,from_date,to_date)
                             }
 
                         }
