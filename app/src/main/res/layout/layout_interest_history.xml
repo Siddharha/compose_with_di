@@ -21,7 +21,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/dark_text_color"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintEnd_toStartOf="@+id/view41"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,6 +55,7 @@
 
             <View
                 android:id="@+id/view41"
+                android:visibility="invisible"
                 android:layout_width="@dimen/_1sdp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/_80sdp"
@@ -65,19 +66,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView69"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/earned_interest"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/dark_text_color"
-                android:layout_marginTop="@dimen/_17sdp"
-                app:layout_constraintBottom_toTopOf="@+id/txtAmount"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/view41"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtAmount"
@@ -85,13 +73,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="@dimen/_7sdp"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/view41"
-                app:layout_constraintTop_toBottomOf="@+id/textView69" />
+                 />
 
 
         </android.support.constraint.ConstraintLayout>

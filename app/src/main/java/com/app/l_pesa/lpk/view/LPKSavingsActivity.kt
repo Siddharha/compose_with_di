@@ -39,7 +39,7 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
         viewPager=findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.token_transfer)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.transfer_history)))
-        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.interest_history)))
+        tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.earned_interest)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
 
         val adapter = SavingsTabAdapter(supportFragmentManager, tabLayout!!.tabCount)
@@ -63,7 +63,7 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
             else if(viewPager!!.currentItem==2)
             {
                 val fragment = adapter.instantiateItem(viewPager!!, 2) as Fragment
-                if (fragment is InterestHistoryFragment) {
+                if (fragment is EarnedInterestFragment) {
                     fragment.doFilter()
 
                 }

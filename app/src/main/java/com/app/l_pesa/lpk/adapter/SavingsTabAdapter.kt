@@ -3,7 +3,7 @@ package com.app.l_pesa.lpk.adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.app.l_pesa.lpk.view.InterestHistoryFragment
+import com.app.l_pesa.lpk.view.EarnedInterestFragment
 import com.app.l_pesa.lpk.view.TokenTransferFragment
 import com.app.l_pesa.lpk.view.TransferHistoryFragment
 
@@ -20,7 +20,7 @@ class SavingsTabAdapter(fm: FragmentManager, private var tabCount: Int): Fragmen
                   TransferHistoryFragment()
             }
             2 -> {
-                  InterestHistoryFragment()
+                  EarnedInterestFragment()
                  }
 
             else -> null

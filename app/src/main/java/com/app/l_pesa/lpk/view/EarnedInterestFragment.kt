@@ -1,7 +1,6 @@
 package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
@@ -19,11 +18,9 @@ import com.app.l_pesa.lpk.model.ResInterestHistory
 import com.app.l_pesa.lpk.presenter.PresenterInterestHistory
 import kotlinx.android.synthetic.main.fragment_interest_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.text.SimpleDateFormat
 import java.util.*
 
-class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
-
+class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
     private lateinit var listInterestHistory           : ArrayList<ResInterestHistory.UserInterestHistory>
     private lateinit var adapterInterestHistory        : AdapterInterestHistory
@@ -34,7 +31,7 @@ class InterestHistoryFragment : Fragment(), ICallBackInterestHistory {
 
     companion object {
         fun newInstance(): Fragment {
-            return InterestHistoryFragment()
+            return EarnedInterestFragment()
         }
     }
 
