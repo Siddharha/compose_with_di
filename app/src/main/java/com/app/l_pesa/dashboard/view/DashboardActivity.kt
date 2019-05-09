@@ -29,6 +29,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
+import com.app.l_pesa.investment.view.InvestmentHistory
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
 import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.login.model.LoginData
@@ -157,14 +158,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val sharedPref=SharedPref(this@DashboardActivity)
         when {
             sharedPref.navigationTab==resources.getString(R.string.open_tab_loan) -> {
-                navigateToFragment(LoanPlansFragment.newInstance(),true)
+                navigateToFragment(LoanPlansFragment.newInstance(),true,false)
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
             sharedPref.navigationTab==resources.getString(R.string.open_tab_profile) -> {
-                navigateToFragment(ProfileFragment.newInstance(),false)
+                navigateToFragment(ProfileFragment.newInstance(),false,false)
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
-            else -> navigateToFragment(DashboardFragment.newInstance(),false)
+            else -> navigateToFragment(DashboardFragment.newInstance(),false,false)
         }
 
 
@@ -287,7 +288,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_dashboard)
-                    navigateToFragment(DashboardFragment.newInstance(),false)
+                    navigateToFragment(DashboardFragment.newInstance(),false,false)
                 }
 
             }
@@ -299,7 +300,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_profile)
-                    navigateToFragment(ProfileFragment.newInstance(),false)
+                    navigateToFragment(ProfileFragment.newInstance(),false,false)
                 }
 
             }
@@ -312,7 +313,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     val sharedPref= SharedPref(this@DashboardActivity)
                     sharedPref.openTabLoan="CURRENT"
                     toolbar.title =resources.getString(R.string.nav_item_loan)
-                    navigateToFragment(LoanPlansFragment.newInstance(),false)
+                    navigateToFragment(LoanPlansFragment.newInstance(),false,false)
                 }
 
             }
@@ -323,7 +324,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_points)
-                    navigateToFragment(PointsFragment.newInstance(),false)
+                    navigateToFragment(PointsFragment.newInstance(),false,false)
                 }
 
             }
@@ -334,7 +335,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_investment)
-                    navigateToFragment(InvestmentFragment.newInstance(),false)
+                    navigateToFragment(InvestmentFragment.newInstance(),false,true)
                 }
 
 
@@ -346,7 +347,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_lpk)
-                    navigateToFragment(LpkFragment.newInstance(),false)
+                    navigateToFragment(LpkFragment.newInstance(),false,false)
                 }
 
 
@@ -358,7 +359,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_wallet)
-                    navigateToFragment(WalletFragment.newInstance(),false)
+                    navigateToFragment(WalletFragment.newInstance(),false,false)
                 }
 
 
@@ -370,7 +371,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_settings)
-                    navigateToFragment(SettingsFragment.newInstance(),false)
+                    navigateToFragment(SettingsFragment.newInstance(),false,false)
                 }
 
             }
@@ -426,18 +427,33 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         CommonMethod.customSnackBarError(drawer_layout,this@DashboardActivity,message)
     }
 
-    private fun navigateToFragment(fragmentToNavigate: Fragment,isVisible:Boolean)
+    private fun navigateToFragment(fragmentToNavigate: Fragment,isVisible:Boolean,isVisibleFilter:Boolean)
     {
-        if(isVisible)
+        if(isVisible && !isVisibleFilter)
         {
             if(fragmentToNavigate is LoanPlansFragment)
             {
                 buttonRight.text = resources.getString(R.string.history)
             }
+            else if(fragmentToNavigate is InvestmentFragment)
+            {
+                buttonRight.setBackgroundResource(R.drawable.ic_filter)
+            }
+            imgFilter.visibility=View.GONE
             buttonRight.visibility=View.VISIBLE
+        }
+        if(!isVisible && isVisibleFilter)
+        {
+            /*if(fragmentToNavigate is InvestmentHistory)
+            {
+
+            }*/
+            buttonRight.visibility=View.GONE
+            imgFilter.visibility=View.INVISIBLE
         }
         else
         {
+            imgFilter.visibility=View.INVISIBLE
             buttonRight.visibility=View.INVISIBLE
         }
 
@@ -446,6 +462,19 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    fun visibleFilter(isVisible:Boolean)
+    {
+        if(isVisible)
+        {
+            imgFilter.visibility=View.VISIBLE
+        }
+        else
+        {
+            imgFilter.visibility=View.INVISIBLE
+        }
+
     }
 
 

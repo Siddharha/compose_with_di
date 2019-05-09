@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.investment.adapter.InvestmentTabPager
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
@@ -53,6 +55,7 @@ class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
 
     override fun onTabReselected(p0: TabLayout.Tab?) {
 
+
     }
 
     override fun onTabUnselected(p0: TabLayout.Tab?) {
@@ -61,6 +64,24 @@ class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         viewPager!!.currentItem = p0!!.position
+
+        if(viewPager!!.currentItem==1)
+        {
+            (activity as DashboardActivity).visibleFilter(true)
+            (activity as DashboardActivity).imgFilter.setOnClickListener {
+
+                val fragment = viewPager!!.adapter!!.instantiateItem(viewPager!!, 1) as Fragment
+                if (fragment is InvestmentHistory) {
+                    fragment.doFilter()
+
+                }
+
+            }
+        }
+        else
+        {
+            (activity as DashboardActivity).visibleFilter(false)
+        }
 
     }
 

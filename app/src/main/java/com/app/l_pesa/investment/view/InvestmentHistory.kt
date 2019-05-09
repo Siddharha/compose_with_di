@@ -431,4 +431,9 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         dismissPopup()
 
     }
+
+    fun doFilter()
+    {
+
+    }
 }
