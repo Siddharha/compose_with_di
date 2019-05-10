@@ -2,8 +2,11 @@ package com.app.l_pesa.wallet.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
+import android.text.Html
+import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,22 +100,30 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
 
             if(withdrawalHistory.status==0)
             {
-                txtStatus.text = context.resources.getString(R.string.pending)
-                txtStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
+                txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+context.resources.getString(R.string.pending)+"</font>")
+
             }
             else if(withdrawalHistory.status==1)
             {
-                txtStatus.text = context.resources.getString(R.string.success)
-                txtStatus.setTextColor(ContextCompat.getColor(context,R.color.colorAquaDeep))
+                txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+context.resources.getString(R.string.successful)+"</font>")
+
             }
             else
             {
-                txtStatus.text = context.resources.getString(R.string.failure)
-                txtStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
+                txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#ef3434'>"+" "+context.resources.getString(R.string.failure)+"</font>")
+
             }
 
 
 
+        }
+
+        private fun fromHtml(source: String): Spanned {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                Html.fromHtml(source)
+            }
         }
 
     }
