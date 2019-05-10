@@ -17,7 +17,7 @@ import com.app.l_pesa.lpk.inter.ICallBackWithdrawalHistory
 import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import com.app.l_pesa.lpk.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.fragment_withdrawal_history.*
-import kotlinx.android.synthetic.main.layout_filter_by_date_amount.*
+import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import kotlin.collections.ArrayList
 
 
@@ -153,8 +153,6 @@ class WithdrawalHistory:Fragment() , ICallBackWithdrawalHistory {
 
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
-            etFromAmount.text!!.clear()
-            etToAmount.text!!.clear()
 
         }
     }
