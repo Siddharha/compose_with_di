@@ -84,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:drawableStart="@drawable/ic_request_date"
+                android:drawableStart="@drawable/ic_commission"
                 android:gravity="center|start"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlackLight"
@@ -97,30 +97,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 
-            <View
-                android:id="@+id/viewDivider"
-                android:background="@color/divider_color"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@+id/txtCommission"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtRef"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:gravity="center|start"
+                android:paddingStart="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_1sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewDivider"
+                app:layout_constraintTop_toBottomOf="@+id/txtAmountTransfer"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 />
 
             <com.app.l_pesa.common.CommonTextRegular
@@ -128,16 +121,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_15sdp"
                 android:paddingStart="@dimen/_1sdp"
-                android:gravity="center|start|end"
+                android:textAlignment="viewEnd"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:fontFamily="@font/montserrat"
                 android:textSize="@dimen/_10sdp"
-                android:textAlignment="viewEnd"
                 app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/viewDivider"
+                app:layout_constraintTop_toBottomOf="@+id/txtCommission"
                 app:layout_constraintEnd_toEndOf="parent"
+
                 />
 
 
