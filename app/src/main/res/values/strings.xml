@@ -407,7 +407,7 @@
     <string name="reset">Reset</string>
     <string name="required_wallet_address">Enter a valid ERC-20 wallet address.</string>
     <string name="required_valid_wallet_address">Ether Address is not match</string>
-    <string name="ether_scan_address">Etherscan Address</string>
+    <string name="view_etherscan">View on Etherscan</string>
     <string name="erc_wallet_address_details">Your ERC-20 address must follow the checksum format. To put it simple, your ERC-20 address is case sensitive. Go to etherscan, type  https://etherscan.io/address/[YOUR_ADDRESS]. Then copy the address with valid checksum on the loaded page.</string>
     <string name="lpk_withdrawal_text">Send us a request if you wish to withdraw LPK to your Ethereum wallet. We will process your request within 48 hours of application. View the status of your application in "Withdrawal History.</string>
     <string name="lpk_saving_text">Earn interest every week for the LPK within your savings wallet. This helps to maintain a healthy ratio of supply and demand, will elevate LPK\'s value that you have while you receive benefits on top of the tokens.</string>

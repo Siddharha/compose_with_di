@@ -129,7 +129,8 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
                 }
-                userWithdrawalHistory.status=="C" -> {
+                userWithdrawalHistory.status=="C" ->
+                {
                     txtAddress.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
