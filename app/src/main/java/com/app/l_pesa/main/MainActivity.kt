@@ -71,10 +71,6 @@ class MainActivity : AppCompatActivity() {
     private fun startLocationTrackerService()
     {
         val locationRequest                 = LocationRequest()
-        val intervalLocation: Long          = 100
-        locationRequest.interval            = intervalLocation
-        val intervalLocationFastest: Long   = 50
-        locationRequest.fastestInterval     = intervalLocationFastest
         locationRequest.priority            = LocationRequest.PRIORITY_HIGH_ACCURACY
 
         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
