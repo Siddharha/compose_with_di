@@ -75,8 +75,8 @@
                         <ImageView
                             android:id="@+id/left_header"
                             android:contentDescription="@string/app_name"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
+                            android:layout_width="@dimen/_23sdp"
+                            android:layout_height="@dimen/_23sdp"
                             android:layout_centerInParent="true"
                             app:srcCompat="@drawable/ic_my_fixed_deposit"
                             android:scaleType="fitXY"
@@ -91,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/colorApp"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_11sdp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_1sdp"
                             />
@@ -119,8 +119,8 @@
                         <ImageView
                             android:id="@+id/right_header"
                             android:contentDescription="@string/app_name"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
+                            android:layout_width="@dimen/_23sdp"
+                            android:layout_height="@dimen/_23sdp"
                             app:srcCompat="@drawable/ic_my_savings_account"
                             android:layout_centerInParent="true"
                             android:scaleType="fitXY"
@@ -136,7 +136,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorApp"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_11sdp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_1sdp"
                             />

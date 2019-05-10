@@ -35,6 +35,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
 
@@ -43,6 +44,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private var loanPurpose=""
     private val listTitle = arrayListOf("For Transport","To Pay Bills","To Clear Debit","To Buy Foodstuff","Emergency Purposes","To Buy Medicine","Build Credit","Others")
+    private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,11 +63,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val productID    = bundle!!.getString("PRODUCT_ID")
         val loanType     = bundle.getString("LOAN_TYPE")
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing=false
-        }
-
+        initLoader()
         loadDescription()
 
         buttonCancel.setOnClickListener {
@@ -108,6 +106,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 {
                     if(isLocationEnabled())
                     {
+                        progressDialog.show()
                         buttonSubmit.isClickable =false
                         val locationRequest                 = LocationRequest()
                         val intervalLocation: Long          = 100
@@ -150,7 +149,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private fun loanApply(loan_type: String?, product_id: String?, location: Location)
     {
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
-        swipeRefreshLayout.isRefreshing = true
         val jsonObject = JsonObject()
         jsonObject.addProperty("loan_type",loan_type)
         jsonObject.addProperty("product_id",product_id)
@@ -220,7 +218,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     override fun onSuccessLoanApply() {
 
         Toast.makeText(this@LoanApplyActivity,resources.getString(R.string.loan_applied_successfully),Toast.LENGTH_SHORT).show()
-        swipeRefreshLayout.isRefreshing = false
+        dismiss()
         val sharedPref=SharedPref(this@LoanApplyActivity)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
         val intent = Intent(this@LoanApplyActivity, DashboardActivity::class.java)
@@ -230,8 +228,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     override fun onErrorLoanApply(message: String) {
+        dismiss()
         buttonSubmit.isClickable =true
-        swipeRefreshLayout.isRefreshing = false
         CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,message)
     }
 
@@ -252,6 +250,24 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private fun isLocationEnabled(): Boolean {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(this@LoanApplyActivity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
     }
 
 
