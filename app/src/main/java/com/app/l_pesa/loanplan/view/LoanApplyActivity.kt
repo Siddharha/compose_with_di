@@ -109,10 +109,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                         progressDialog.show()
                         buttonSubmit.isClickable =false
                         val locationRequest                 = LocationRequest()
-                        val intervalLocation: Long          = 100
-                        locationRequest.interval            = intervalLocation
-                        val intervalLocationFastest: Long   = 50
-                        locationRequest.fastestInterval     = intervalLocationFastest
                         locationRequest.priority            = LocationRequest.PRIORITY_HIGH_ACCURACY
 
                         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
@@ -236,9 +232,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
 
     private fun showAlert() {
-        val dialog = AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this@LoanApplyActivity)
         dialog.setTitle("Enable Location")
-                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use this app")
                 .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
