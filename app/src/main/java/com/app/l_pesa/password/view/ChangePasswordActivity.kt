@@ -149,7 +149,7 @@ class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
     private fun customSnackBarSuccess(view: View,message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.colorPrimaryLight))
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@ChangePasswordActivity,R.color.color_green_success))
         (snackBarOBJ.view as ViewGroup).removeAllViews()
         val customView = LayoutInflater.from(this).inflate(R.layout.snackbar_success, null)
         (snackBarOBJ.view as ViewGroup).addView(customView)
