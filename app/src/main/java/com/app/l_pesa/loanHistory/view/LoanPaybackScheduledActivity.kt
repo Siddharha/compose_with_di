@@ -66,10 +66,12 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         if(sharedPref.payFullAmount=="C" )
         {
             button_pay_all.visibility= View.INVISIBLE
+            txt_interest_discount.visibility= View.GONE
         }
         else
         {
             button_pay_all.visibility= View.VISIBLE
+            txt_interest_discount.visibility= View.VISIBLE
             button_pay_all.setOnClickListener {
 
                 if(swipeRefreshLayout.isRefreshing)

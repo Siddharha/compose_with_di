@@ -8,9 +8,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_3sdp"
-        android:layout_marginEnd="@dimen/_3sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_margin="@dimen/_4sdp"
         >
 
         <android.support.constraint.ConstraintLayout
@@ -21,8 +19,10 @@
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtToken"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:gravity="start|center"
+                android:paddingStart="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_1sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColors"
                 android:textSize="@dimen/_11sdp"
@@ -37,15 +37,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_request_date"
-                android:drawablePadding="@dimen/_3sdp"
                 android:fontFamily="@font/montserrat"
                 android:text=""
+                android:drawablePadding="@dimen/_3sdp"
                 android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
                 android:gravity="start|center"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_2sdp"
-                app:layout_constraintBottom_toTopOf="@+id/txtRef"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtToken"
                 app:layout_constraintTop_toTopOf="@+id/txtToken" />
@@ -54,7 +53,9 @@
                 android:id="@+id/txtRef"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:paddingStart="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_1sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/light_text_color"
                 android:textSize="@dimen/_10sdp"
@@ -64,9 +65,7 @@
                 android:text=""
                 />
 
-
         </android.support.constraint.ConstraintLayout>
-
 
     </android.support.v7.widget.CardView>
 

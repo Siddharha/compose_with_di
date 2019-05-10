@@ -279,7 +279,7 @@
                         android:layout_width="0dp"
                         android:textSize="@dimen/_10sdp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:layout_marginBottom="@dimen/_3sdp"
                         android:gravity="center|start"
@@ -393,7 +393,7 @@
 
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/Button_apply_loan"
-                android:layout_width="@dimen/_125sdp"
+                android:layout_width="@dimen/_137sdp"
                 android:layout_height="@dimen/_28sdp"
                 android:textSize="@dimen/_12sdp"
                 android:layout_gravity="center"
