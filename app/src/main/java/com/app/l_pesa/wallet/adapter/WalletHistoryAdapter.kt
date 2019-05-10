@@ -2,6 +2,7 @@ package com.app.l_pesa.wallet.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -74,11 +75,12 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private var txtRef                   : CommonTextRegular    = itemView.findViewById(R.id.txtRef) as CommonTextRegular
-        private var txtCreateDate            : CommonTextRegular    = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
-        private var txtWithdrawalAmount      : CommonTextRegular    = itemView.findViewById(R.id.txtWithdrawalAmount) as CommonTextRegular
-        private var txtTransferAmount        : CommonTextRegular    = itemView.findViewById(R.id.txtTransferAmount) as CommonTextRegular
-        private var buttonStatus             : CustomButtonRegular  = itemView.findViewById(R.id.buttonStatus) as CustomButtonRegular
+        private var txtCommission                   : CommonTextRegular    = itemView.findViewById(R.id.txtCommission) as CommonTextRegular
+        private var txtCreateDate                   : CommonTextRegular    = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
+        private var txtAmount                       : CommonTextRegular    = itemView.findViewById(R.id.txtAmount) as CommonTextRegular
+        private var txtAmountTransfer               : CommonTextRegular    = itemView.findViewById(R.id.txtAmountTransfer) as CommonTextRegular
+        private var txtRef                          : CommonTextRegular    = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        private var txtStatus                       : CommonTextRegular    = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, withdrawalHistory: ResWalletWithdrawalHistory.WithdrawalHistory)
@@ -87,27 +89,28 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
 
-            txtWithdrawalAmount.text =  context.resources.getString(R.string.withdrawal_amount)+": "+withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.withdrawal_amount)
-            txtTransferAmount.text   =  withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.transfer_amount)
-            txtRef.text              =  context.resources.getString(R.string.ref_no)+" "+withdrawalHistory.identity_number
-            txtCreateDate.text       =  CommonMethod.dateConvert(withdrawalHistory.created)
+            txtAmount.text              =  withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.withdrawal_amount)
+            txtAmountTransfer.text      =  context.resources.getString(R.string.transfer)+": "+ withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.transfer_amount)
+            txtCommission.text          =  context.resources.getString(R.string.commission)+": "+withdrawalHistory.commission_percentage+"%"
+            txtRef.text                 =  context.resources.getString(R.string.ref_no)+": "+CommonMethod.dateConvert(withdrawalHistory.identity_number)
+            txtCreateDate.text          =  CommonMethod.dateConvert(withdrawalHistory.created)
 
             if(withdrawalHistory.status==0)
             {
-                buttonStatus.text = context.resources.getString(R.string.pending)
-                buttonStatus.setBackgroundResource(R.drawable.yellow_button)
-
+                txtStatus.text = context.resources.getString(R.string.pending)
+                txtStatus.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
             }
             else if(withdrawalHistory.status==1)
             {
-                buttonStatus.text = context.resources.getString(R.string.success)
-                buttonStatus.setBackgroundResource(R.drawable.bg_button_green)
+                txtStatus.text = context.resources.getString(R.string.success)
+                txtStatus.setTextColor(ContextCompat.getColor(context,R.color.colorApp))
             }
             else
             {
-                buttonStatus.text = context.resources.getString(R.string.failure)
-                buttonStatus.setBackgroundResource(R.drawable.bg_button_red)
+                txtStatus.text = context.resources.getString(R.string.failure)
+                txtStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
             }
+
 
 
         }

@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.app.l_pesa.lpk.view.TokenWithdrawalFragment
 import com.app.l_pesa.lpk.view.WalletAddressFragment
-import com.app.l_pesa.lpk.view.WithdrawalHistory
+import com.app.l_pesa.lpk.view.WithdrawalHistoryFragment
 
 class WithdrawalTabAdapter (fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
@@ -17,7 +17,7 @@ class WithdrawalTabAdapter (fm: FragmentManager, private var tabCount: Int): Fra
                 TokenWithdrawalFragment()
             }
             1 -> {
-                WithdrawalHistory()
+                WithdrawalHistoryFragment()
             }
             2 -> {
                 WalletAddressFragment()

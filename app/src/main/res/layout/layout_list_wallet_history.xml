@@ -8,107 +8,137 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_3sdp">
+        android:layout_margin="@dimen/_4sdp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp">
 
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txtWithdrawalAmount"
+                android:id="@+id/txtAmount"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_22sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
                 android:textSize="@dimen/_11sdp"
-                app:layout_constraintEnd_toStartOf="@+id/view41"
+                android:maxLines="1"
+                android:text=""
+                android:gravity="center|start"
+                android:paddingStart="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCreateDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
                 android:drawableStart="@drawable/ic_request_date"
-                android:drawablePadding="@dimen/_3sdp"
-                android:fontFamily="@font/montserrat"
                 android:gravity="center|start"
-                android:textColor="@color/light_text_color"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/view41"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtRef" />
+                android:text=""
+                android:drawablePadding="@dimen/_3sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/txtCommission"
+                />
 
             <View
-                android:id="@+id/view41"
+                android:id="@+id/view"
                 android:layout_width="@dimen/_1sdp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/_85sdp"
-                android:background="@color/divider_color"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView69"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/txtAmountTransfer"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_22sdp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/amount"
-                android:textColor="@color/light_text_color"
+                android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@+id/txtTransferAmount"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/view41"
-                app:layout_constraintTop_toTopOf="@+id/txtWithdrawalAmount" />
+                android:maxLines="1"
+                android:text=""
+                android:gravity="center|start"
+                android:paddingStart="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_1sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtAmount"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                />
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/txtTransferAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_11sdp"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/view41"
-                app:layout_constraintTop_toBottomOf="@+id/textView69" />
-
-            <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/buttonStatus"
+                android:id="@+id/txtCommission"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_26sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textAllCaps="false"
-                android:text="@string/app_name"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_9sdp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:drawableStart="@drawable/ic_request_date"
+                android:gravity="center|start"
                 android:fontFamily="@font/montserrat"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/txtCreateDate"
+                android:textColor="@color/colorTextBlackLight"
+                android:textSize="@dimen/_10sdp"
+                android:text=""
+                android:drawablePadding="@dimen/_3sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/txtCreateDate"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/view41"
-                app:layout_constraintTop_toBottomOf="@+id/txtTransferAmount" />
+                />
+
+            <View
+                android:id="@+id/viewDivider"
+                android:background="@color/divider_color"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@+id/txtCommission"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtRef"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center|start"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/light_text_color"
+                android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@+id/txtCreateDate"
-                app:layout_constraintEnd_toStartOf="@+id/view41"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtWithdrawalAmount" />
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:paddingStart="@dimen/_1sdp"
+                android:gravity="center|start|end"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/_10sdp"
+                android:textAlignment="viewEnd"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
 
         </android.support.constraint.ConstraintLayout>

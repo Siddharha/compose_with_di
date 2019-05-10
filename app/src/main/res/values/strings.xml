@@ -419,6 +419,7 @@
     <string name="withdrawal_amount">Withdrawal Amount</string>
     <string name="required_withdrawal_amount">Please enter the amount to withdraw.</string>
     <string name="transaction_history">Transaction History</string>
+    <string name="commission">Commission</string>
 
     <string name="all">All</string>
     <string name="credit">Credit</string>
