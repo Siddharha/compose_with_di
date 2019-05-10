@@ -15,6 +15,7 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import android.content.Intent
+import android.graphics.Paint
 import android.net.Uri
 import java.lang.Exception
 import java.text.DecimalFormat
@@ -80,11 +81,11 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private var txtReqToken        : CommonTextRegular = itemView.findViewById(R.id.txtReqToken) as CommonTextRegular
-        private var txtStatus          : CommonTextRegular = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
-        private var txtCreateDate      : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
-        private var txtReason          : CommonTextRegular = itemView.findViewById(R.id.txtReason) as CommonTextRegular
-        private var buttonStatus       : CustomButtonRegular = itemView.findViewById(R.id.buttonStatus) as CustomButtonRegular
+        private var txtToken        : CommonTextRegular = itemView.findViewById(R.id.txtToken) as CommonTextRegular
+        private var txtCreateDate   : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
+        private var txtAddress      : CommonTextRegular = itemView.findViewById(R.id.txtAddress) as CommonTextRegular
+        private var txtStatus       : CommonTextRegular = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
+        private var txtReason       : CommonTextRegular = itemView.findViewById(R.id.txtReason) as CommonTextRegular
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
@@ -93,13 +94,13 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
 
-            txtReqToken.text = context.getString(R.string.requested)+": "+format.format(userWithdrawalHistory.token_value.toDouble())+" LPK"
-            txtCreateDate.text = CommonMethod.dateConvert(userWithdrawalHistory.created)
+            txtToken.text           = format.format(userWithdrawalHistory.token_value.toDouble())+" LPK"
+            txtCreateDate.text      = CommonMethod.dateConvert(userWithdrawalHistory.created)
 
             when {
                 userWithdrawalHistory.status=="R" -> {
 
-                    buttonStatus.visibility=View.INVISIBLE
+                    txtAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_down_arrow, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#D2322D'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
@@ -121,17 +122,17 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 }
                 userWithdrawalHistory.status=="P" -> {
-                    buttonStatus.visibility=View.INVISIBLE
+                    txtAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#4e6485'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
                 }
                 userWithdrawalHistory.status=="C" -> {
-                    buttonStatus.visibility=View.VISIBLE
+                    txtAddress.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00695c'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
-                    buttonStatus.setOnClickListener {
+                    txtAddress.setOnClickListener {
 
                         try {
                             val intent = Intent(Intent.ACTION_VIEW)
@@ -146,12 +147,12 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 userWithdrawalHistory.status=="F" -> {
 
-                    buttonStatus.visibility=View.VISIBLE
+                    txtAddress.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
 
-                    buttonStatus.setOnClickListener {
+                    txtAddress.setOnClickListener {
 
                         try {
                             val intent = Intent(Intent.ACTION_VIEW)
@@ -166,7 +167,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 userWithdrawalHistory.status=="N" -> {
 
-                    buttonStatus.visibility=View.INVISIBLE
+                    txtAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
