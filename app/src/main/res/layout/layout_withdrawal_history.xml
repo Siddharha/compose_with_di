@@ -13,13 +13,13 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp">
+            android:padding="@dimen/_7sdp">
 
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtToken"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_22sdp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
                 android:textSize="@dimen/_11sdp"
@@ -27,6 +27,7 @@
                 android:text=""
                 android:gravity="center|start"
                 android:paddingStart="@dimen/_3sdp"
+                android:paddingTop="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -71,7 +72,8 @@
                 android:maxLines="1"
                 android:drawablePadding="@dimen/_5sdp"
                 android:gravity="center|start"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:paddingStart="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,9 +85,7 @@
                 android:id="@+id/txtReason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:gravity="center|start"
                 android:paddingStart="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
@@ -104,7 +104,7 @@
                 android:id="@+id/txtAddress"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_27sdp"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@android:color/white"
@@ -113,6 +113,7 @@
                 android:text="@string/ether_scan_address"
                 android:layout_marginStart="@dimen/_18sdp"
                 android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/txtCreateDate"
                 app:layout_constraintEnd_toEndOf="parent"
