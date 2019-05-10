@@ -209,7 +209,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
-            val loadModel  = ResWalletWithdrawalHistory.WithdrawalHistory(0, 0, 0.0,0.0, "", "", "", "")
+            val loadModel  = ResWalletWithdrawalHistory.WithdrawalHistory(0, 0, 0.0,0.0, 0.0,"", "", "", "")
 
             listWithdrawalHistory.add(loadModel)
             adapterWalletHistory.notifyItemInserted(listWithdrawalHistory.size-1)

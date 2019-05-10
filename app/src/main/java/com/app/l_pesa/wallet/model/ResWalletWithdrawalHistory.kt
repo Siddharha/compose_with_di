@@ -20,6 +20,7 @@ class ResWalletWithdrawalHistory(val status: CommonStatusModel, val data: Data) 
 
             var withdrawal_amount: Double,
             var transfer_amount: Double,
+            var commission_percentage: Double,
 
             var identity_number: String,
             var txn_id: String,
