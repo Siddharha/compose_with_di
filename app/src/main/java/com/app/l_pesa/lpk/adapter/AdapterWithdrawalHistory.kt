@@ -86,6 +86,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         private var txtAddress      : CommonTextRegular = itemView.findViewById(R.id.txtAddress) as CommonTextRegular
         private var txtStatus       : CommonTextRegular = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
         private var txtReason       : CommonTextRegular = itemView.findViewById(R.id.txtReason) as CommonTextRegular
+        private var txtRef          : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
@@ -94,6 +95,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
 
+            txtRef.text             = context.resources.getString(R.string.ref_no)+" "+userWithdrawalHistory.identity_number
             txtToken.text           = format.format(userWithdrawalHistory.token_value.toDouble())+" LPK"
             txtCreateDate.text      = CommonMethod.dateConvert(userWithdrawalHistory.created)
 
@@ -103,7 +105,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                     txtAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_down_arrow, 0)
-                    txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#D2322D'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
+                    txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#ef3434'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
                     txtReason.text=userWithdrawalHistory.reject_reason
 
                     txtStatus.setOnClickListener {
@@ -125,7 +127,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                     txtAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-                    txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#4e6485'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
+                    txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
                 }
                 userWithdrawalHistory.status=="C" -> {
                     txtAddress.visibility=View.VISIBLE
