@@ -13,9 +13,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
+
             >
 
 
@@ -29,12 +27,13 @@
                 android:maxLines="1"
                 android:text=""
                 android:gravity="center|start"
-                android:paddingStart="@dimen/_3sdp"
+                android:paddingStart="@dimen/_7sdp"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/view"
+
                 />
 
             <com.app.l_pesa.common.CommonTextRegular
@@ -76,9 +75,10 @@
                 android:maxLines="1"
                 android:drawablePadding="@dimen/_5sdp"
                 android:gravity="center|start"
+                android:paddingStart="@dimen/_7sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_marginBottom="@dimen/_2sdp"
-                android:paddingStart="@dimen/_3sdp"
+                android:paddingBottom="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtToken"
@@ -91,7 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:gravity="center|start"
-                android:paddingStart="@dimen/_3sdp"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlackLight"
@@ -120,21 +121,35 @@
 
                 />
 
+            <RelativeLayout
+                android:id="@+id/rlAddress"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:background="#f7f9f9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtStatus"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_1sdp"
+                android:paddingBottom="@dimen/_5sdp"
+
+                 >
+
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtAddress"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_transparent_border_blue_view"
+                android:layout_height="match_parent"
+                android:background="@drawable/underline_blue"
                 android:fontFamily="@font/montserrat"
                 android:gravity="center|start"
                 android:text="@string/view_etherscan"
-                android:padding="@dimen/_6sdp"
                 android:textSize="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_7sdp"
                 android:textColor="@android:color/holo_blue_dark"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtStatus" />
+                 />
+
+            </RelativeLayout>
 
 
 

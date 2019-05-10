@@ -17,6 +17,7 @@ import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
+import android.widget.RelativeLayout
 import java.lang.Exception
 import java.text.DecimalFormat
 
@@ -87,6 +88,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         private var txtStatus       : CommonTextRegular = itemView.findViewById(R.id.txtStatus) as CommonTextRegular
         private var txtReason       : CommonTextRegular = itemView.findViewById(R.id.txtReason) as CommonTextRegular
         private var txtRef          : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        private var rlAddress       : RelativeLayout    = itemView.findViewById(R.id.rlAddress) as RelativeLayout
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
@@ -94,7 +96,6 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         {
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
-
             txtRef.text             = context.resources.getString(R.string.ref_no)+" "+userWithdrawalHistory.identity_number
             txtToken.text           = format.format(userWithdrawalHistory.token_value.toDouble())+" LPK"
             txtCreateDate.text      = CommonMethod.dateConvert(userWithdrawalHistory.created)
@@ -102,7 +103,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             when {
                 userWithdrawalHistory.status=="R" -> {
 
-                    txtAddress.visibility=View.GONE
+                    rlAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_down_arrow, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#ef3434'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
@@ -124,14 +125,14 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 }
                 userWithdrawalHistory.status=="P" -> {
-                    txtAddress.visibility=View.GONE
+                    rlAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
                 }
                 userWithdrawalHistory.status=="C" ->
                 {
-                    txtAddress.visibility=View.VISIBLE
+                    rlAddress.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00695c'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
@@ -150,7 +151,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 userWithdrawalHistory.status=="F" -> {
 
-                    txtAddress.visibility=View.VISIBLE
+                    rlAddress.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#de970e'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
@@ -170,7 +171,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 userWithdrawalHistory.status=="N" -> {
 
-                    txtAddress.visibility=View.GONE
+                    rlAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                     txtStatus.text=fromHtml(context.resources.getString(R.string.status)+"<font color='#00bfa5'>"+" "+userWithdrawalHistory.statusTxt+"</font>")
