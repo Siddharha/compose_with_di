@@ -8,7 +8,10 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_3sdp">
+        android:layout_marginStart="@dimen/_3sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
+        >
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -17,29 +20,34 @@
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtToken"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/dark_text_color"
-                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/colorTextBlackLight"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtCreateDate"
+                android:text=""
+                />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCreateDate"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_3sdp"
                 android:drawableStart="@drawable/ic_request_date"
                 android:drawablePadding="@dimen/_3sdp"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/light_text_color"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
-                android:gravity="center|start"
+
                 app:layout_constraintBottom_toTopOf="@+id/txtRef"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtToken" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtToken"
+                app:layout_constraintTop_toTopOf="@+id/txtToken" />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtRef"
@@ -51,19 +59,10 @@
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtCreateDate" />
+                app:layout_constraintTop_toBottomOf="@+id/txtCreateDate"
+                android:text=""
+                />
 
-            <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/buttonStatus"
-                android:layout_width="@dimen/_85sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:textAllCaps="false"
-                android:textSize="@dimen/_10sdp"
-                android:textColor="@color/colorWhite"
-                android:focusable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 

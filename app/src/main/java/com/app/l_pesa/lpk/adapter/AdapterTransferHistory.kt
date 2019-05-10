@@ -78,7 +78,6 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
 
         var txtRef          : TextView              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
         var txtToken        : TextView              = itemView.findViewById(R.id.txtToken) as CommonTextRegular
-        var buttonStatus    : CustomButtonRegular   = itemView.findViewById(R.id.buttonStatus) as CustomButtonRegular
         var txtCreateDate   : CommonTextRegular     = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
@@ -90,47 +89,6 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
             txtToken.text = format.format(userTransferHistory.tokens.toDouble())+" LPK"
             txtRef.text = context.resources.getString(R.string.ref_no)+" "+userTransferHistory.identity_number
             txtCreateDate.text = CommonMethod.dateConvert(userTransferHistory.created)
-
-            if(userTransferHistory.status=="L")
-            {
-                if(userTransferHistory.actionStatus.status)
-                {
-                    buttonStatus.text = context.resources.getString(R.string.unlock)
-                }
-                else
-                {
-                    buttonStatus.text = context.resources.getString(R.string.locked)
-                }
-
-            }
-            else
-            {
-                buttonStatus.text = context.resources.getString(R.string.unlocked)
-
-            }
-
-            if(!userTransferHistory.actionStatus.status)
-            {
-                buttonStatus.setBackgroundResource(R.drawable.bg_button_grey)
-            }
-            else
-            {
-                buttonStatus.setBackgroundResource(R.drawable.blue_button)
-            }
-
-
-            buttonStatus.setOnClickListener {
-
-                if(!userTransferHistory.actionStatus.status)
-                {
-                    Toast.makeText(context,userTransferHistory.actionStatus.message,Toast.LENGTH_SHORT).show()
-                }
-                else
-                {
-                    callBack.onSavingsUnlock(userTransferHistory.id.toString())
-                }
-
-            }
 
         }
 
