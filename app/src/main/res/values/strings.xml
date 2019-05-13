@@ -385,6 +385,7 @@
     <string name="from_amount">From Amount</string>
     <string name="to_amount">To Amount</string>
     <string name="search">Search</string>
+    <string name="apply_filter">Apply Filter</string>
     <string name="savings">Savings</string>
     <string name="withdrawal">Withdrawal</string>
     <string name="withdraw_on">Withdrawal on</string>
