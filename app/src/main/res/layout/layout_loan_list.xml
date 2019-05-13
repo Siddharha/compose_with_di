@@ -17,8 +17,8 @@
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtLoanAmount"
-                android:layout_height="@dimen/_47sdp"
-                android:layout_width="@dimen/_47sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_width="@dimen/_45sdp"
                 android:background="@drawable/bg_aquamarine_circle"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_10sdp"
@@ -72,7 +72,7 @@
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/buttonLoanStatus"
                 android:layout_height="@dimen/_27sdp"
-                android:layout_width="@dimen/_92sdp"
+                android:layout_width="@dimen/_95sdp"
                 android:textSize="@dimen/_9sdp"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginEnd="@dimen/_2sdp"
