@@ -84,23 +84,22 @@
 
             <TextView
                 android:id="@+id/txtFDate"
-                android:fontFamily="@font/montserrat"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:drawableStart="@drawable/ic_date_calender"
                 android:drawablePadding="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat"
                 android:gravity="center|start"
                 android:text="@string/from_date"
-                android:textSize="@dimen/_13sdp"
                 android:textColor="@color/colorBlack"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/etFromDate"
-                app:layout_constraintBottom_toTopOf="@+id/txtTDate"
+                android:textSize="@dimen/_13sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/etFromDate"
-
-                />
+                app:layout_constraintBottom_toTopOf="@+id/txtTDate"
+                app:layout_constraintEnd_toStartOf="@+id/etFromDate"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <com.app.l_pesa.common.CommonEditTextRegular
@@ -110,12 +109,11 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:drawablePadding="@dimen/_3sdp"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:hint="@string/from_date"
                 android:textColor="@color/textColors"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 app:fontFamily="@font/montserrat"
-                android:drawableEnd="@drawable/ic_date_calender"
                 android:cursorVisible="false"
                 android:longClickable="false"
                 android:inputType="date"
@@ -132,7 +130,6 @@
                 android:contentDescription="@string/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 app:srcCompat="@drawable/ic_black_white_cross"
                 app:layout_constraintStart_toEndOf="@+id/etFromDate"
@@ -146,6 +143,19 @@
 
 
 
+            <View
+                android:id="@+id/viewDivider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/etFromDate"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/divider_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                />
 
 
             <TextView
@@ -155,12 +165,12 @@
                 android:layout_height="@dimen/_25sdp"
                 android:drawableStart="@drawable/ic_date_calender"
                 android:drawablePadding="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center|start"
                 android:text="@string/to_date"
                 android:textSize="@dimen/_13sdp"
                 android:textColor="@color/colorBlack"
-                app:layout_constraintTop_toBottomOf="@+id/txtFDate"
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/etToDate"
                 app:layout_constraintBottom_toBottomOf="@+id/etToDate"
@@ -175,19 +185,18 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:drawablePadding="@dimen/_3sdp"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:hint="@string/to_date"
                 android:textColor="@color/textColors"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 app:fontFamily="@font/montserrat"
-                android:drawableEnd="@drawable/ic_date_calender"
                 android:cursorVisible="false"
                 android:longClickable="false"
                 android:inputType="date"
                 android:focusable="false"
                 app:layout_constraintStart_toEndOf="@+id/txtTDate"
                 app:layout_constraintEnd_toStartOf="@+id/imgCleanTo_date"
-                app:layout_constraintTop_toBottomOf="@+id/txtFDate"
+                app:layout_constraintTop_toBottomOf="@+id/viewDivider"
 
 
                 />
@@ -197,7 +206,6 @@
                 android:contentDescription="@string/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_3sdp"
                 app:srcCompat="@drawable/ic_black_white_cross"
                 app:layout_constraintStart_toEndOf="@+id/etToDate"
