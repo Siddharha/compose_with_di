@@ -1,25 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_4sdp"
-        >
+        android:layout_margin="@dimen/_4sdp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/_3sdp">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp">
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtToken"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_22sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:gravity="start|center"
                 android:paddingStart="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
@@ -29,13 +28,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/txtCreateDate"
+                app:layout_constraintBottom_toTopOf="@+id/txtRef"
                 android:text=""
                 />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCreateDate"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_20sdp"
                 android:drawableStart="@drawable/ic_request_date"
                 android:fontFamily="@font/montserrat"
                 android:text=""
@@ -47,13 +47,14 @@
                 android:paddingEnd="@dimen/_2sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtToken"
-                app:layout_constraintTop_toTopOf="@+id/txtToken" />
+                app:layout_constraintTop_toTopOf="@+id/txtToken"
+                app:layout_constraintBottom_toTopOf="@+id/txtRef"
+                />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtRef"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_20sdp"
                 android:paddingStart="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 android:fontFamily="@font/montserrat"
@@ -62,8 +63,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtCreateDate"
-                android:text=""
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="start|center"
+               />
 
         </android.support.constraint.ConstraintLayout>
 
