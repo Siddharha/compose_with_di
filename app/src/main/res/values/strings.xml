@@ -238,7 +238,7 @@
     <string name="repay_date">Repay Date:</string>
     <string name="paid">Paid</string>
     <string name="paid_on">Paid on: </string>
-    <string name="date">Date:</string>
+    <string name="date">Date</string>
     <string name="pay_now">Pay Now</string>
     <string name="empty_payment_history_message">You haven\'t yet made any repayment. Please follow your payment schedule to avoid penalties and actions on your account.</string>
 

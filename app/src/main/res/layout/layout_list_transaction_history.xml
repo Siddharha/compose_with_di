@@ -47,7 +47,7 @@
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtAmount"
-                android:layout_width="@dimen/_75sdp"
+                android:layout_width="@dimen/_85sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:fontFamily="@font/montserrat"
                 android:gravity="center|start"

@@ -64,7 +64,6 @@
             android:name=".profile.view.ActivityViewFile"
             android:label="@string/view_file"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
 
         <service
@@ -75,19 +74,16 @@
             android:name=".profile.view.ProfileEditIdInfoActivity"
             android:label="@string/id_information"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".loanplan.view.LoanApplyActivity"
             android:label="@string/description_of_loan_purpose"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".loanplan.view.LoanPlanDetailsActivity"
             android:label="@string/loan_plan_details"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".profile.view.ProfileEditBusinessInfoActivity"
@@ -99,36 +95,31 @@
             android:name=".profile.view.ProfileEditEmpInfoActivity"
             android:label="@string/employment_info"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".profile.view.ProfileEditContactInfoActivity"
             android:label="@string/contact_info"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".profile.view.ProfileEditPersonalActivity"
             android:label="@string/personal_info"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".loanHistory.view.LoanPaybackScheduledActivity"
             android:label="@string/payment_schedule"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            />
         <activity
             android:name=".loanHistory.view.LoanHistoryDetailsActivity"
             android:label="@string/loan_details"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".loanHistory.view.LoanHistoryListActivity"
             android:label="@string/loan_historyCurrent"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
 
         <provider
@@ -194,13 +185,11 @@
             android:name=".password.view.ChangePasswordActivity"
             android:label="@string/change_password"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".pin.view.ChangePinActivity"
             android:label="@string/change_pin"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
 
         <meta-data

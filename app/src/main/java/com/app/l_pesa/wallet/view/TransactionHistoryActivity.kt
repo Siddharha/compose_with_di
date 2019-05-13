@@ -22,7 +22,6 @@ import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
 import kotlinx.android.synthetic.main.activity_transaction_history.*
 import kotlinx.android.synthetic.main.content_transaction_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
@@ -148,11 +147,11 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
         {
-            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
+            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_EXPANDED)
             resetFilter()
 
         }
-        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
+        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
         {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
