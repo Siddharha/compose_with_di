@@ -108,27 +108,20 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
         {
             startActivity(Intent(activity, LPKWithdrawalActivity::class.java))
             activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-<<<<<<< HEAD
             dismiss()
-=======
-
->>>>>>> a0efaa433a2bf9c6c121e2515b494f3407b3adb4
         }
         else
         {
 
             startActivity(Intent(activity, LPKSavingsActivity::class.java))
             activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-<<<<<<< HEAD
+
             dismiss()
-=======
 
-
->>>>>>> a0efaa433a2bf9c6c121e2515b494f3407b3adb4
         }
 
         Handler().postDelayed(Runnable {
-            // Do something after 5s = 5000ms
+            // Do something after 1s = 1000ms
             constraintSavings.isClickable=true
             constraintWithdrawal.isClickable=true
         }, 1000)
