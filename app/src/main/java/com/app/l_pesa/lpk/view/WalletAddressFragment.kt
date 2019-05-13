@@ -1,9 +1,12 @@
 package com.app.l_pesa.lpk.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
+import android.support.v7.widget.AppCompatTextView
+import android.text.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +21,11 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_wallet_address.*
 import java.util.HashMap
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.widget.TextView
+import java.lang.Exception
+
 
 class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
@@ -37,18 +45,11 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipeRefresh()
         initData()
 
     }
 
-    private fun swipeRefresh()
-    {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing=false
-        }
-    }
+
 
     private fun initData()
     {
@@ -75,6 +76,37 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
             }
             handled
         }
+
+
+       txtEtherScan.makeLinks(Pair("Etherscan", View.OnClickListener {
+
+            try {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://etherscan.io/address/[address]")
+                context!!.startActivity(intent)
+            }
+            catch (exp: Exception)
+            {}
+
+        }))
+    }
+
+    private fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(resources.getString(R.string.view_etherscan))
+        for (link in links) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(view: View) {
+                    Selection.setSelection((view as AppCompatTextView).text as Spannable, 0)
+                    view.invalidate()
+                    link.second.onClick(view)
+                }
+            }
+            val startIndexOfLink = resources.getString(R.string.view_etherscan).indexOf(link.first)
+            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        this.movementMethod = LinkMovementMethod.getInstance() // without LinkMovementMethod, link can not click
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
     private fun loadWalletAddress()
@@ -89,9 +121,6 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
             TextUtils.isEmpty(etWalletAddress.text.toString()) -> CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_wallet_address))
             else -> {
                 buttonWalletAddress.isClickable=false
-                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                swipeRefreshLayout.isRefreshing=true
-
                 val presenterWalletAddress= PresenterWalletAddress()
                 val jsonObject = JsonObject()
 
@@ -106,7 +135,6 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
     override fun onSuccessWalletAddress() {
         hashMapOLD["wallet"]  = ""+etWalletAddress.text.toString().trim()
         buttonWalletAddress.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_update_successfully))
     }
 
@@ -114,7 +142,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
         buttonWalletAddress.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
+
     }
 
 
