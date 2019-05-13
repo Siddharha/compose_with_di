@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_3sdp"
-        android:elevation="@dimen/_1sdp"
-        android:background="@drawable/bg_white_view"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:padding="@dimen/_3sdp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="@dimen/_1sdp"
+    android:background="@drawable/bg_white_view"
+    android:orientation="horizontal"
+    android:weightSum="1"
+    android:padding="@dimen/_5sdp"
+    android:layout_margin="@dimen/_4sdp">
 
 
     <LinearLayout
@@ -19,6 +19,7 @@
         android:weightSum="1"
         android:orientation="vertical"
         tools:ignore="NestedWeights"
+
         >
 
         <LinearLayout
@@ -27,23 +28,22 @@
             android:layout_weight=".50"
             android:orientation="horizontal"
             android:weightSum="1"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_2sdp"
             >
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight=".22"
-                android:gravity="center|top"
-                android:paddingTop="@dimen/_4sdp"
+                android:gravity="center"
 
                 >
                 <ImageView
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_ref_no"
-                    android:layout_width="@dimen/_23sdp"
-                    android:layout_height="@dimen/_23sdp"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
 
                     />
 
@@ -52,27 +52,30 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight=".78"
-                android:gravity="center|top|start"
+                android:gravity="center|start"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/_5sdp"
+
 
                 >
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/repay_amount"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:gravity="center|start"
                     android:textColor="@color/color_gray_light"
+
 
                     />
 
                 <com.app.l_pesa.common.CommonTextRegular
                     android:id="@+id/txt_repay_amount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:gravity="center|start"
                     android:textColor="@color/colorSemiBlack"
 
                     />
@@ -86,23 +89,22 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight=".50"
+            android:paddingTop="@dimen/_5sdp"
             >
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight=".22"
-                android:gravity="center|top"
-                android:paddingTop="@dimen/_4sdp"
+                android:gravity="center"
+
 
                 >
                 <ImageView
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_request_date"
-                    android:layout_width="@dimen/_23sdp"
-                    android:layout_height="@dimen/_23sdp"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
 
                     />
 
@@ -111,27 +113,28 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight=".78"
-                android:gravity="center|top|start"
+                android:gravity="center|start"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+
 
                 >
                 <com.app.l_pesa.common.CommonTextRegular
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/repay_date"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/color_gray_light"
 
                     />
 
                 <com.app.l_pesa.common.CommonTextRegular
                     android:id="@+id/txt_repay_date"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/colorSemiBlack"
 
                     />
@@ -144,21 +147,16 @@
     </LinearLayout>
 
 
-    <View
-        android:layout_height="match_parent"
-        android:layout_width="1px"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        android:background="@color/divider_color"
-        />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight=".49"
+            android:layout_weight=".50"
             android:weightSum="1"
             android:orientation="vertical"
-            tools:ignore="NestedWeights">
+            tools:ignore="NestedWeights"
+
+            >
 
 
             <LinearLayout
@@ -167,23 +165,22 @@
                 android:layout_weight=".50"
                 android:orientation="horizontal"
                 android:weightSum="1"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_2sdp"
                 >
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".22"
-                    android:gravity="center|top"
-                    android:paddingTop="@dimen/_4sdp"
+                    android:gravity="center"
 
                     >
                     <ImageView
                         android:contentDescription="@string/app_name"
                         android:src="@drawable/ic_loan_no_icon"
-                        android:layout_width="@dimen/_23sdp"
-                        android:layout_height="@dimen/_23sdp"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
 
                         />
 
@@ -192,27 +189,29 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".78"
-                    android:gravity="center|top|start"
+                    android:gravity="center|start"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/_5sdp"
+
 
                     >
                     <com.app.l_pesa.common.CommonTextRegular
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/current_balance"
-                        android:textSize="@dimen/_11sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:gravity="center|start"
                         android:textColor="@color/color_gray_light"
 
                         />
 
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_current_balance"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:gravity="center|start"
                         android:textColor="@color/colorSemiBlack"
 
                         />
@@ -227,6 +226,7 @@
                 android:layout_height="0dp"
                 android:layout_weight=".50"
                 android:orientation="vertical"
+                android:paddingTop="@dimen/_5sdp"
                 >
 
                 <LinearLayout
@@ -249,30 +249,27 @@
                         android:textSize="@dimen/_10sdp"
                         android:text="@string/pay_now"
                         android:textAllCaps="false"
+
                         />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llPaid"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
               >
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".22"
-                    android:gravity="center|top"
-                    android:paddingTop="@dimen/_4sdp"
-
-                    >
+                    android:gravity="center"
+                   >
                     <ImageView
                         android:contentDescription="@string/app_name"
                         android:src="@drawable/ic_approved_icon"
-                        android:layout_width="@dimen/_23sdp"
-                        android:layout_height="@dimen/_23sdp"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
 
                         />
 
@@ -281,18 +278,20 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight=".78"
-                    android:gravity="center|top|start"
+                    android:gravity="center|start"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+
 
                     >
                     <com.app.l_pesa.common.CommonTextRegular
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/paid_on"
-                        android:textSize="@dimen/_11sdp"
+                        android:gravity="center|start"
+                        android:textSize="@dimen/_10sdp"
                         android:textColor="@color/color_deep_green"
 
                         />
@@ -301,7 +300,9 @@
                         android:id="@+id/txt_paid_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_9sdp"
+                        android:gravity="center|start"
+                        android:textSize="@dimen/_10sdp"
+
                      />
 
                 </LinearLayout>
