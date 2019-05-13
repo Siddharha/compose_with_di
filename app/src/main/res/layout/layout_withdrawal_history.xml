@@ -13,33 +13,33 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_5sdp">
 
-            >
 
-
-            <com.app.l_pesa.common.CommonTextRegular
+        <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtToken"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_22sdp"
+                android:layout_height="@dimen/_20sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
                 android:textSize="@dimen/_11sdp"
                 android:maxLines="1"
                 android:text=""
                 android:gravity="center|start"
-                android:paddingStart="@dimen/_7sdp"
+                android:paddingStart="@dimen/_5sdp"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/view"
+                app:layout_constraintBottom_toTopOf="@+id/txtStatus"
 
                 />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCreateDate"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_20sdp"
                 android:maxLines="1"
                 android:drawableStart="@drawable/ic_request_date"
                 android:gravity="center|start"
@@ -69,16 +69,14 @@
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtStatus"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_25sdp"
                 android:fontFamily="@font/montserrat"
                 android:textSize="@dimen/_10sdp"
                 android:maxLines="1"
+                android:drawableEnd="@drawable/ic_up_arrow"
                 android:drawablePadding="@dimen/_5sdp"
                 android:gravity="center|start"
-                android:paddingStart="@dimen/_7sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_2sdp"
-                android:paddingBottom="@dimen/_3sdp"
+                android:paddingStart="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtToken"
@@ -89,17 +87,18 @@
                 android:id="@+id/txtReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_2sdp"
                 android:gravity="center|start"
-                android:paddingStart="@dimen/_7sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                android:paddingEnd="@dimen/_1sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_3sdp"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtStatus"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
 
                 />
 
@@ -113,7 +112,7 @@
                 android:gravity="center|start"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_marginBottom="@dimen/_2sdp"
-                android:paddingStart="@dimen/_18sdp"
+                android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_1sdp"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
