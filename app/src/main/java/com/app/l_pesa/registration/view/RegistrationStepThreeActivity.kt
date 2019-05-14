@@ -1,16 +1,15 @@
 package com.app.l_pesa.registration.view
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -21,8 +20,11 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Window
+import android.widget.ImageView
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.profile.inter.ICallBackId
@@ -34,23 +36,20 @@ import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.content_registration_step_three.*
 import java.io.File
-import java.io.IOException
 import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {
 
 
     private val idList   = arrayListOf("1","2","3","4")
     private val nameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
-    private val PHOTO               = 1
-    private val GALLEY              = 2
-    private var captureFile: File?  = null
-    private var imageFilePath       = ""
-    private var imageSelectStatus   : Boolean = false
-
-    var typeId="0"
+    private var typeId="0"
+    private val Photo             = 16
+    private val Gallery           = 17
+    private var captureImageStatus : Boolean    = false
+    private var photoFile          : File?      = null
+    private var captureFilePath    : Uri?       = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +99,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
           showIdType()
           CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepThreeActivity,resources.getString(R.string.required_id_type))
       }
-      else if(!imageSelectStatus)
+      else if(!captureImageStatus)
       {
           CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepThreeActivity,resources.getString(R.string.required_id_image))
       }
@@ -117,7 +116,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
               swipeRefreshLayout.isRefreshing=true
 
               val presenterAWSProfile= PresenterAWSProfile()
-              presenterAWSProfile.uploadPersonalID(this@RegistrationStepThreeActivity,this,captureFile)
+              presenterAWSProfile.uploadPersonalID(this@RegistrationStepThreeActivity,this,photoFile)
           }
           else
           {
@@ -142,7 +141,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
         val jsonObject = JsonObject()
         jsonObject.addProperty("id_image",imageURL)
-        jsonObject.addProperty("type_id",typeId.toString())
+        jsonObject.addProperty("type_id",typeId)
         jsonObject.addProperty("id_number",etNo.text.toString())
 
         println("JSON"+jsonObject)
@@ -169,30 +168,27 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
     private fun cameraClick()
     {
-        try {
-            val imageFile = createImageFile()
-            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-            val authorities = "com.app.l_pesa.provider"
-            val imageUri = FileProvider.getUriForFile(this@RegistrationStepThreeActivity, authorities, imageFile)
-            callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-            startActivityForResult(callCameraIntent, PHOTO)
-
-        } catch (e: IOException) {
-            Toast.makeText(this@RegistrationStepThreeActivity,"Could not create file!", Toast.LENGTH_SHORT).show()
+        cacheDir.deleteRecursively()
+        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val imagePath = File(filesDir, "images")
+        photoFile = File(imagePath, "user.jpg")
+        if (photoFile!!.exists()) {
+            photoFile!!.delete()
+        } else {
+            photoFile!!.parentFile.mkdirs()
         }
-    }
+        captureFilePath = FileProvider.getUriForFile(this@RegistrationStepThreeActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
-    @SuppressLint("SimpleDateFormat")
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName: String = "a_personal" + timeStamp + "_"
-        val storageDir: File = this@RegistrationStepThreeActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        if (!storageDir.exists()) storageDir.mkdirs()
-        captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)
-        imageFilePath = captureFile!!.absolutePath
-        return captureFile!!
+        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        } else {
+            val clip = ClipData.newUri(this@RegistrationStepThreeActivity.contentResolver, "id photo", captureFilePath)
+            captureIntent.clipData = clip
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        }
+
+        startActivityForResult(captureIntent, Photo)
     }
 
     private fun galleryClick()
@@ -209,7 +205,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, GALLEY)
+        startActivityForResult(intent, Gallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -228,24 +224,13 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            PHOTO ->
+            Photo ->
 
-                if (resultCode == Activity.RESULT_OK) {
-                    imgPersonalType.setImageBitmap(scaleBitmap())
-                    CommonMethod.fileCompress(captureFile!!)
-                    imageSelectStatus=true
-                } else
+                if (resultCode == Activity.RESULT_OK)
                 {
-                    if(imageSelectStatus)
-                    {
-                    }
-                    else
-                    {
-                        imageSelectStatus=false
-                    }
-
+                    setImage()
                 }
-            GALLEY ->
+            Gallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -253,21 +238,38 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         }
     }
 
-    private fun scaleBitmap(): Bitmap
-    {
-        val imageViewWidth  = 500
-        val imageViewHeight = 500
+    private fun setImage() {
 
-        val bmOptions = BitmapFactory.Options()
-        bmOptions.inJustDecodeBounds = true
-        BitmapFactory.decodeFile(imageFilePath, bmOptions)
-        val bitmapWidth = bmOptions.outWidth
-        val bitmapHeight = bmOptions.outHeight
-        val scaleFactor = Math.min(bitmapWidth / imageViewWidth, bitmapHeight / imageViewHeight)
+        try {
+            val imgSize = File(captureFilePath.toString())
+            val length  = imgSize.length() / 1024
+            if(length>3000) // Max Size Under 3MB
+            {
+                captureImageStatus = false
+                Toast.makeText(this@RegistrationStepThreeActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val photoPath: Uri = captureFilePath ?: return
+                imgPersonalType.post {
+                    val pictureBitmap = BitmapResize.shrinkBitmap(
+                            this@RegistrationStepThreeActivity,
+                            photoPath,
+                            imgPersonalType.width,
+                            imgPersonalType.height
+                    )
+                    imgPersonalType.setImageBitmap(pictureBitmap)
+                    imgPersonalType.scaleType = ImageView.ScaleType.CENTER_CROP
+                    CommonMethod.fileCompress(photoFile!!)
+                }
 
-        bmOptions.inJustDecodeBounds = false
-        bmOptions.inSampleSize = scaleFactor
-        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+                captureImageStatus = true
+
+            }
+        }
+        catch (exp:Exception)
+        {
+
+        }
 
     }
 
@@ -323,21 +325,21 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
             val length  = imgSize.length() / 1024
             if(length>3000) // Max Size Under 3MB
             {
-                imageSelectStatus=false
+                captureImageStatus=false
                 Toast.makeText(this@RegistrationStepThreeActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else
             {
-                imageSelectStatus=true
+                captureImageStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgPersonalType.setImageBitmap(bitmap)
-                captureFile=imgSize
-                CommonMethod.fileCompress(captureFile!!)
+                photoFile=imgSize
+                CommonMethod.fileCompress(photoFile!!)
             }
 
         }
         else {
-            imageSelectStatus=false
+            captureImageStatus=false
             Toast.makeText(this@RegistrationStepThreeActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
     }

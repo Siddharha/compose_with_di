@@ -6,7 +6,6 @@
     <string name="already_using_lpesa">Already using L-Pesa?</string>
     <string name="get_started">Get Started</string>
     <string name="micro_loan">Micro loan for mobile banking customer</string>
-    <string name="dev_server_base_url">http://35.158.245.118/v2/</string>
     <string name="s3_bucket_url_profile_pic">https://s3.eu-central-1.amazonaws.com/s3.l-pesa.com/dev_server_imgs/</string>
     <string name="s3_bucket_url_id_proof_pic">https://s3.eu-central-1.amazonaws.com/s3.l-pesa.com/dev_server_id_imgs/</string>
     <string name="no_more_data">No more data to read</string>
