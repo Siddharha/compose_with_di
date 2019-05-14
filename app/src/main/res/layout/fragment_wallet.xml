@@ -110,12 +110,12 @@
 
             </com.app.l_pesa.common.CommonInputLayout>
 
-            <Button
+            <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/buttonWithdraw"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/ripple_green_button"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/withdraw"
