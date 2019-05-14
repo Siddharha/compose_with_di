@@ -192,16 +192,14 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     fun doFilter()
     {
-        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
-        {
-            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
-            resetFilter()
+        when {
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
+                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
+                resetFilter()
 
-        }
-        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
-        {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
+            }
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
         etFromDate.setOnClickListener {
@@ -239,6 +237,18 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         buttonReset.setOnClickListener {
 
             etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+
+        }
+
+        imgCleanFrom_date.setOnClickListener {
+
+            etFromDate.text!!.clear()
+
+        }
+
+        imgCleanTo_date.setOnClickListener {
+
             etToDate.text!!.clear()
 
         }

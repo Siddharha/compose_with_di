@@ -23,6 +23,8 @@ import kotlinx.android.synthetic.main.activity_transaction_history.*
 import kotlinx.android.synthetic.main.content_transaction_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
+import android.support.annotation.NonNull
+
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
@@ -62,6 +64,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
 
         if(CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
         {
@@ -145,16 +148,14 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     private fun doFilter()
     {
 
-        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
-        {
-            bottomSheetBehavior.state =(BottomSheetBehavior.STATE_EXPANDED)
-            resetFilter()
+        when {
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
+                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
+                resetFilter()
 
-        }
-        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED)
-        {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
+            }
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
         etFromDate.setOnClickListener {

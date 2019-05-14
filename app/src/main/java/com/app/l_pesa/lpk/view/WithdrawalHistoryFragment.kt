@@ -84,17 +84,16 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
 
     fun doFilter()
     {
-        if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN)
-        {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-            resetFilter()
+        when {
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
+                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
+                resetFilter()
 
+            }
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
-        else if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED)
-        {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        }
 
         etFromDate.setOnClickListener {
 
@@ -142,6 +141,17 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
         buttonReset.setOnClickListener {
 
             etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+
+        }
+        imgCleanFrom_date.setOnClickListener {
+
+            etFromDate.text!!.clear()
+
+        }
+
+        imgCleanTo_date.setOnClickListener {
+
             etToDate.text!!.clear()
 
         }

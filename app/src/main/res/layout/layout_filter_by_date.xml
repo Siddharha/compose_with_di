@@ -33,6 +33,7 @@
                     android:contentDescription="@string/app_name"
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

@@ -47,6 +47,7 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 
 
@@ -251,7 +252,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                 jsonObject.addProperty("country_code",countryCode)
                 jsonObject.addProperty("password",etPassword.text.toString())
                 jsonObject.addProperty("platform_type","A")
-                jsonObject.addProperty("device_token"," ")
+                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
