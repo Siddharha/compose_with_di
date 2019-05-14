@@ -29,6 +29,7 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 import android.app.DatePickerDialog
+import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -37,13 +38,17 @@ import android.graphics.BitmapFactory
 import android.media.ExifInterface
 import android.media.MediaScannerConnection
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
+import android.widget.ImageView
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
+import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
@@ -54,22 +59,20 @@ import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 
+
 class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackLogin , ICallBackUpload {
 
-    private val PHOTO               = 1
-    private val GALLEY              = 2
-    private var captureFile: File?  = null
-    private var imageFilePath       = ""
-    private var imageSelectStatus   : Boolean = false
+    private val Photo             = 10
+    private val Gallery           = 11
+    private var captureImageStatus : Boolean    = false
+    private var photoFile          : File?      = null
+    private var captureFilePath    : Uri?       = null
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -202,7 +205,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapNew["status"]    = txtMarital.text.toString()
             hashMapNew["motherM"]   = etMotherName.text.toString()
             hashMapNew["sex"]       = gender
-            hashMapNew["imgChange"] = imageSelectStatus.toString()
+            hashMapNew["imgChange"] = captureImageStatus.toString()
 
 
             if(hashMapOLD == hashMapNew)
@@ -243,10 +246,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                         swipeRefreshLayout.isRefreshing=true
                         buttonSubmit.isClickable=false
-                        if(imageSelectStatus)
+                        if(captureImageStatus)
                         {
                             val presenterAWSProfile= PresenterAWSProfile()
-                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity,this,captureFile)
+                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity,this,photoFile)
                         }
                         else
                         {
@@ -387,32 +390,30 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private fun cameraClick()
     {
-        try {
-            val imageFile = createImageFile()
-            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-            val authorities = "com.app.l_pesa.provider"
-            val imageUri = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, authorities, imageFile)
-            callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-            startActivityForResult(callCameraIntent, PHOTO)
-
-        } catch (e: IOException) {
-            Toast.makeText(this@ProfileEditPersonalActivity,"Could not create file!", Toast.LENGTH_SHORT).show()
+        cacheDir.deleteRecursively()
+        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val imagePath = File(filesDir, "images")
+        photoFile = File(imagePath, "user.jpg")
+        if (photoFile!!.exists()) {
+            photoFile!!.delete()
+        } else {
+            photoFile!!.parentFile.mkdirs()
         }
+        captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+
+        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        } else {
+            val clip = ClipData.newUri(contentResolver, "user photo", captureFilePath)
+            captureIntent.clipData = clip
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        }
+
+        startActivityForResult(captureIntent, Photo)
+
     }
 
-
-    @SuppressLint("SimpleDateFormat")
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName: String = "profile" + timeStamp + "_"
-        val storageDir: File = this@ProfileEditPersonalActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        if (!storageDir.exists()) storageDir.mkdirs()
-        captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)
-        imageFilePath = captureFile!!.absolutePath
-        return captureFile!!
-    }
 
     private fun galleryClick()
     {
@@ -428,7 +429,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, GALLEY)
+        startActivityForResult(intent, Gallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -447,27 +448,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            PHOTO ->
+            Photo ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
-
-                    imgProfile.setImageBitmap(scaleBitmap())
-                    CommonMethod.fileCompress(captureFile!!)
-                    imageSelectStatus=true
-                } else
-
-                {
-                    if(imageSelectStatus)
-                    {
-                    }
-                    else
-                    {
-                        imageSelectStatus=false
-                    }
-
+                    setImage()
                 }
-            GALLEY ->
+            Gallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -475,21 +462,39 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
-    private fun scaleBitmap(): Bitmap
-    {
-        val imageViewWidth  = 500
-        val imageViewHeight = 500
+    private fun setImage() {
 
-        val bmOptions = BitmapFactory.Options()
-        bmOptions.inJustDecodeBounds = true
-        BitmapFactory.decodeFile(imageFilePath, bmOptions)
-        val bitmapWidth = bmOptions.outWidth
-        val bitmapHeight = bmOptions.outHeight
-        val scaleFactor = Math.min(bitmapWidth / imageViewWidth, bitmapHeight / imageViewHeight)
+        try {
+            val imgSize = File(captureFilePath.toString())
+            val length  = imgSize.length() / 1024
+            if(length>3000) // Max Size Under 3MB
+            {
+                captureImageStatus = false
+                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val photoPath: Uri = captureFilePath ?: return
+                imgProfile.post {
+                    val pictureBitmap = BitmapResize.shrinkBitmapUser(
+                            this@ProfileEditPersonalActivity,
+                            photoPath,
+                            imgProfile.width,
+                            imgProfile.height
+                    )
+                    imgProfile.setImageBitmap(pictureBitmap)
+                    imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
+                    CommonMethod.fileCompress(photoFile!!)
+                }
 
-        bmOptions.inJustDecodeBounds = false
-        bmOptions.inSampleSize = scaleFactor
-        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+                captureImageStatus = true
+
+            }
+        }
+        catch (exp:Exception)
+        {
+
+        }
+
 
     }
 
@@ -526,6 +531,32 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
+    private fun displayImage(imagePath: String?){
+        if (imagePath != null) {
+
+            val imgSize = File(imagePath)
+            val length  = imgSize.length() / 1024
+            if(length>3000) // Max Size Under 3MB
+            {
+                captureImageStatus=false
+                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                captureImageStatus=true
+                val bitmap = BitmapFactory.decodeFile(imagePath)
+                imgProfile.setImageBitmap(bitmap)
+                photoFile=imgSize
+                CommonMethod.fileCompress(photoFile!!)
+            }
+
+        }
+        else {
+            captureImageStatus=false
+            Toast.makeText(this@ProfileEditPersonalActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun imagePath(uri: Uri?, selection: String?): String {
         var path: String? = null
         val cursor = contentResolver.query(uri!!, null, selection, null, null )
@@ -538,31 +569,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         return path!!
     }
 
-    private fun displayImage(imagePath: String?){
-        if (imagePath != null) {
 
-            val imgSize = File(imagePath)
-            val length  = imgSize.length() / 1024
-            if(length>3000) // Max Size Under 3MB
-            {
-                imageSelectStatus=false
-                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
-                imageSelectStatus=true
-                val bitmap = BitmapFactory.decodeFile(imagePath)
-                imgProfile.setImageBitmap(bitmap)
-                captureFile=imgSize
-                CommonMethod.fileCompress(captureFile!!)
-            }
 
-        }
-        else {
-            imageSelectStatus=false
-            Toast.makeText(this@ProfileEditPersonalActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     /*fun saveImage(myBitmap: Bitmap):String {
 

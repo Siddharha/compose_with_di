@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<paths>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <files-path name="l_pesa" path="images/"/>
+</paths>
+<!--<paths>
     <external-path
         name="my_images"
         path="Android/data/com.app.l_pesa/files/Pictures"/>
-</paths>
-<!--
-<?xml version="1.0" encoding="utf-8"?>
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-path name="my_images" path="." />
 </paths>-->
+
