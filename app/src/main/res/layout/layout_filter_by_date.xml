@@ -41,8 +41,8 @@
 
                 <TextView
                     android:id="@+id/txtFilter"
-                    android:layout_width="398dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_32sdp"
                     android:gravity="center"
                     android:text="@string/filter"
                     android:textColor="@color/colorBlack"
