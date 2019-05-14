@@ -4,31 +4,25 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.support.v7.app.AppCompatDelegate
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.inter.ICallBackDashboard
-import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.dashboard.presenter.PresenterDashboard
-import com.app.l_pesa.dashboard.view.DashboardActivity
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
-import com.app.l_pesa.login.presenter.PresenterLogin
+import com.app.l_pesa.logout.inter.ICallBackLogout
+import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.main.MainActivity
-import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.model.ResModelData
 import com.app.l_pesa.splash.presenter.PresenterCountry
 import kotlinx.android.synthetic.main.activity_splash.*
 import com.google.gson.Gson
-import com.google.gson.JsonParser
+import com.google.gson.JsonObject
 
 
-class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, ICallBackDashboard {
+class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,19 +71,12 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
         {
             if (CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
-                if(!TextUtils.isEmpty(sharedPrefOBJ.loginRequest))
-                {
+                val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+                val jsonObject  = JsonObject()
+                jsonObject.addProperty("device_id",deviceId)
 
-                    visibleInvisibleStatus(true)
-                    val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-                    val presenterLoginObj = PresenterLogin()
-                    presenterLoginObj.doLogin(this@SplashActivity, jsonObject, this)
-                }
-                else
-                {
-                    loadNext(sharedPrefOBJ)
-                }
-
+                val presenterLogoutObj= PresenterLogout()
+                presenterLogoutObj.doLogout(this@SplashActivity,jsonObject,this)
 
             }
             else
@@ -165,65 +152,19 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogin, IC
         CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  message)
     }
 
-    override fun onSuccessLogin(data: LoginData) {
 
-        val sharedPrefOBJ=SharedPref(this@SplashActivity)
-        sharedPrefOBJ.accessToken   =data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
+    override fun onSuccessLogout() {
 
-        val presenterDashboard= PresenterDashboard()
-        presenterDashboard.getDashboard(this@SplashActivity,data.access_token,this)
-
+        loadMain()
     }
 
-    override fun onErrorLogin(jsonMessage: String) {
+    override fun onErrorLogout(message: String) {
 
-        loadMain(jsonMessage)
+        loadMain()
     }
 
-    override fun onIncompleteLogin(message: String) {
-
-        Toast.makeText(this@SplashActivity,resources.getString(R.string.incomplete_reg_message),Toast.LENGTH_LONG).show()
-        progressBar.visibility = View.INVISIBLE
-        val intent = Intent(this@SplashActivity, RegistrationStepOneActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-
-
-    }
-
-    override fun onFailureLogin(jsonMessage: String) {
-
-        loadMain(jsonMessage)
-    }
-
-
-    override fun onSuccessDashboard(data: ResDashboard.Data) {
-
-        val sharedPrefOBJ=SharedPref(this@SplashActivity)
-        val gson                          = Gson()
-        val dashBoardData           = gson.toJson(data)
-        sharedPrefOBJ.userDashBoard       = dashBoardData
-
-        progressBar.visibility = View.INVISIBLE
-        val intent = Intent(this@SplashActivity, DashboardActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
-    }
-
-    override fun onFailureDashboard(jsonMessage: String) {
-
-        loadMain(jsonMessage)
-    }
-
-    private fun loadMain(jsonMessage:String)
+    private fun loadMain()
     {
-        Toast.makeText(this@SplashActivity, jsonMessage,Toast.LENGTH_SHORT).show()
         val sharedPrefOBJ= SharedPref(this@SplashActivity)
         sharedPrefOBJ.removeShared()
         progressBar.visibility = View.INVISIBLE

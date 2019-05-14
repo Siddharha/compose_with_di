@@ -16,7 +16,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.graphics.Typeface
 import android.provider.Settings
-import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -26,10 +25,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
-import com.app.l_pesa.investment.view.InvestmentHistory
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
 import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.login.model.LoginData
@@ -45,7 +42,6 @@ import com.app.l_pesa.settings.view.SettingsFragment
 import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.iid.FirebaseInstanceId
 import com.kaopiz.kprogresshud.KProgressHUD
 
 
