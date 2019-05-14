@@ -195,6 +195,18 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
             etToDate.text!!.clear()
 
         }
+
+        imgCleanFrom_date.setOnClickListener {
+
+            etFromDate.text!!.clear()
+
+        }
+
+        imgCleanTo_date.setOnClickListener {
+
+            etToDate.text!!.clear()
+
+        }
     }
 
     private fun resetFilter()
