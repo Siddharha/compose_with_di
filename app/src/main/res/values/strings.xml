@@ -195,6 +195,7 @@
     <string name="loan_applied_successfully">Loan Applied successfully.</string>
     <string name="empty_loan_history_message">You haven\'t applied for any loans yet from L-pesa. Start your journey to financial freedom with the first loan from L-pesa.</string>
     <string name="empty_transfer_history_message">You haven\'t yet invested tokens in LPK Savings. Start your journey to financial freedom and earn weekly interests by investing.</string>
+    <string name="empty_investment_message">You haven\'t yet invested. Start your journey to financial freedom and earn weekly interests by investing.</string>
     <string name="empty_loan_plan_message">We are not offering loans in your country at the moment. We will send you SMS on your mobile number to notify you when service starts in your country. Stay tuned.</string>
 
 

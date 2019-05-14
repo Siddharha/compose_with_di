@@ -7,7 +7,7 @@ interface ICallBackInvestmentHistory {
 
     fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?, from_date: String, to_date: String)
     fun onSuccessInvestmentHistoryPaginate(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?, from_date: String, to_date: String)
-    fun onEmptyInvestmentHistory()
+    fun onEmptyInvestmentHistory(type: String)
     fun onErrorInvestmentHistory(jsonMessage: String)
 
     fun onSuccessInvestmentWithdrawal()

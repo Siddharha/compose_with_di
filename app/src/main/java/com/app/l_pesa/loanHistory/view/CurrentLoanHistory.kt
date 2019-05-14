@@ -80,6 +80,10 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
             presenterLoanHistory.getLoanHistory(activity!!,jsonObject,from_date,to_date,type,"",this)
 
         }
+        else
+        {
+            swipeRefreshLayout.isRefreshing = false
+        }
 
 
     }

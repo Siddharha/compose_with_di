@@ -69,7 +69,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefresh()
-        initUI("","")
+        initData("","","DEFAULT")
         switchFunction()
 
     }
@@ -81,11 +81,11 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         swipeRefreshLayout.setOnRefreshListener {
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
-            initUI("","")
+            initData("","","DEFAULT")
         }
     }
 
-    private fun initUI(from_date: String, to_date: String)
+    private fun initData(from_date: String, to_date: String,type:String)
     {
         listInvestment               = ArrayList()
         adapterInvestmentHistory     = InvestmentHistoryAdapter(activity!!, listInvestment,this)
@@ -99,7 +99,11 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         {
             swipeRefreshLayout.isRefreshing = true
             val presenterInvestmentHistory= PresenterInvestmentHistory()
-            presenterInvestmentHistory.getInvestmentHistory(activity!!,from_date,to_date,this)
+            presenterInvestmentHistory.getInvestmentHistory(activity!!,from_date,to_date,type,this)
+        }
+        else
+        {
+            swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -192,6 +196,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     override fun onSuccessInvestmentHistory(userInvestment: ArrayList<ResInvestmentHistory.UserInvestment>, cursors: ResInvestmentHistory.Cursors?, from_date: String, to_date: String) {
 
         activity!!.runOnUiThread {
+
+            cardView.visibility=View.INVISIBLE
+            rvLoan.visibility=View.VISIBLE
+
             hasNext =cursors!!.hasNext
             after   =cursors.after
             swipeRefreshLayout.isRefreshing = false
@@ -263,14 +271,22 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
 
-    override fun onEmptyInvestmentHistory() {
+    override fun onEmptyInvestmentHistory(type: String) {
 
         swipeRefreshLayout.isRefreshing = false
+        rvLoan.visibility=View.INVISIBLE
+        if(type=="FILTER")
+        {
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
+        cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorInvestmentHistory(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing = false
+        rvLoan.visibility=View.INVISIBLE
+        cardView.visibility=View.INVISIBLE
         Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 
@@ -350,7 +366,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     override fun onSuccessInvestmentWithdrawal() {
 
-        initUI("","")
+        initData("","","DEFAULT")
     }
 
     override fun onErrorInvestmentWithdrawal(message: String) {
@@ -360,7 +376,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     override fun onSuccessReinvestment() {
-        initUI("","")
+        initData("","","DEFAULT")
     }
 
     override fun onErrorReinvestment(message: String) {
@@ -369,7 +385,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     }
 
     override fun onSuccessExitPoint() {
-        initUI("","")
+        initData("","","DEFAULT")
     }
 
     override fun onErrorExitPoint(message: String) {
@@ -475,7 +491,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
                 val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                initUI(fromDate!!,toDate!!)
+                initData(fromDate!!,toDate!!,"FILTER")
 
             }
         }
