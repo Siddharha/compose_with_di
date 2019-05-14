@@ -45,6 +45,7 @@ import com.app.l_pesa.settings.view.SettingsFragment
 import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.kaopiz.kprogresshud.KProgressHUD
 
 
@@ -65,6 +66,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         initFragment()
         initToggle()
         nav_view.setNavigationItemSelectedListener(this)
+
+
+        //println("NOTI++++++++++++++++++"+""+FirebaseInstanceId.getInstance().instanceId.toString())
+       // println("NOTI++++++++++++++++++"+""+FirebaseInstanceId.getInstance().token.toString())
 
     }
 

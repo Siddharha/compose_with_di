@@ -196,6 +196,29 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/lpesa_logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimaryDark" />
+
+        <service
+            android:name=".firebase.MessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".firebase.FirebaseMessagingIdService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
       <!--<meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/lpesa_logo" />
@@ -204,7 +227,7 @@
             android:resource="@color/colorPrimaryDark" />
 
         <service
-            android:name=".firebase.FirebaseMessagingService"
+            android:name=".firebase.FirebaseMessaging"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -213,7 +236,7 @@
         </service>
 
         <service
-            android:name=".firebase.FirebaseMessagingService"
+            android:name=".firebase.FirebaseMessaging"
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

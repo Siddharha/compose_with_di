@@ -30,7 +30,7 @@ import java.util.*
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class FirebaseMessagingService : FirebaseMessagingService() {
+class FirebaseMessagingIdService : FirebaseMessagingService() {
 
     private val NOTIFICATIONID              = "notificationId"
     private val IMAGE_URL_EXTRA             = "attachmentUrl"
