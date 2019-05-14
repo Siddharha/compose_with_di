@@ -44,7 +44,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         toolbarFont(this@TransactionHistoryActivity)
 
         swipeRefresh()
-        initData("","")
+        initData("","","DEFAULT")
 
     }
 
@@ -54,11 +54,11 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         swipeRefreshLayout.setOnRefreshListener {
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
-            initData("","")
+            initData("","","DEFAULT")
         }
     }
 
-    private fun initData(from_date: String, to_date: String)
+    private fun initData(from_date: String, to_date: String,type:String)
     {
         listSavingsHistory           = ArrayList()
         adapterTransactionHistory    = TransactionAllAdapter(this@TransactionHistoryActivity, listSavingsHistory)
@@ -72,7 +72,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterTransactionAll= PresenterTransactionAll()
-            presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,from_date,to_date,this)
+            presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,from_date,to_date,type,this)
         }
 
         else
@@ -179,7 +179,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
                 val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
                 val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                initData(fromDate!!,toDate!!)
+                initData(fromDate!!,toDate!!,"FILTER")
 
             }
         }
@@ -231,10 +231,14 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         }
     }
 
-    override fun onEmptyTransaction() {
+    override fun onEmptyTransaction(type:String) {
 
         swipeRefreshLayout.isRefreshing=false
         rlList.visibility=View.INVISIBLE
+        if(type=="FILTER")
+        {
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
         cardView.visibility=View.VISIBLE
     }
 

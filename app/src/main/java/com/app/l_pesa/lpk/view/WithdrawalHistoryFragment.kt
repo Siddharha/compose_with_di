@@ -45,7 +45,7 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
         super.onViewCreated(view, savedInstanceState)
 
         swipeRefresh()
-        initData("","")
+        initData("","","")
 
         bottomSheetBehavior = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
@@ -53,7 +53,7 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
 
     }
 
-    private fun initData(from_date:String,to_date:String)
+    private fun initData(from_date:String,to_date:String,type:String)
     {
         listWithdrawalHistory       = ArrayList()
         adapterWithdrawalHistory    = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
@@ -62,7 +62,7 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getWithdrawalHistory(activity!!,from_date,to_date,this)
+            presenterWithdrawalHistory.getWithdrawalHistory(activity!!,from_date,to_date,type,this)
         }
         else
         {
@@ -77,7 +77,7 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
         swipeRefreshLayout.setOnRefreshListener {
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
-            initData("","")
+            initData("","","DEFAULT")
 
         }
     }
@@ -120,7 +120,7 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
                     val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    initData(fromDate!!,toDate!!)
+                    initData(fromDate!!,toDate!!,"FILTER")
                 }
                 else
                 {
@@ -244,10 +244,14 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
         }
     }
 
-    override fun onEmptyWithdrawalHistory() {
+    override fun onEmptyWithdrawalHistory(type: String) {
 
         swipeRefreshLayout.isRefreshing = false
         rlList.visibility=View.INVISIBLE
+        if(type=="FILTER")
+        {
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
         cardView.visibility=View.VISIBLE
     }
 

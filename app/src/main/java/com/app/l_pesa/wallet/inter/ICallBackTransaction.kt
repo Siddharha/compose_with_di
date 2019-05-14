@@ -7,6 +7,6 @@ interface ICallBackTransaction {
 
     fun onSuccessTransaction(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors, from_date: String, to_date: String)
     fun onSuccessTransactionPaginate(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors, from_date: String, to_date: String)
-    fun onEmptyTransaction()
+    fun onEmptyTransaction(type: String)
     fun onErrorTransaction(message: String)
 }
