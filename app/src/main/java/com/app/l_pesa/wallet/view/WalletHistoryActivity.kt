@@ -50,10 +50,10 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-
-            initData("","")
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
+            initData("","")
+
         }
     }
 

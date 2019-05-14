@@ -56,6 +56,8 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
             initData()
         }
     }

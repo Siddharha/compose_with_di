@@ -67,6 +67,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
+           etFromDate.text!!.clear()
+           etToDate.text!!.clear()
            initData()
         }
     }
@@ -107,17 +109,14 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
         }
 
-
         etFromDate.setOnClickListener {
 
             showDatePickerFrom()
-
         }
 
         etToDate.setOnClickListener {
 
             showDatePickerTo()
-
         }
 
         buttonFilterSubmit.setOnClickListener {

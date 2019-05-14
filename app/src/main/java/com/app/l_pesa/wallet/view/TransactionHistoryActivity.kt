@@ -52,6 +52,8 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
             initData("","")
         }
     }

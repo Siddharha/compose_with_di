@@ -88,7 +88,8 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
             loadHistory("","")
         }
     }

@@ -86,12 +86,12 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
     {
         when {
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
-                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
+                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_EXPANDED)
                 resetFilter()
 
             }
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
         }
 
 
