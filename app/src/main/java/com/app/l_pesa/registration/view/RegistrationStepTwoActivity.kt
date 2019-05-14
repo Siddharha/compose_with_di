@@ -1,16 +1,15 @@
 package com.app.l_pesa.registration.view
 
-import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -18,8 +17,11 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import android.widget.ImageView
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
@@ -28,19 +30,18 @@ import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
-import java.io.IOException
 import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
-    private val PHOTO               = 1
-    private val GALLEY              = 2
-    private var captureFile: File?  = null
-    private var imageFilePath       = ""
+    private val Photo             = 14
+    private val Gallery           = 15
+    private var captureImageStatus : Boolean    = false
+    private var photoFile          : File?      = null
+    private var captureFilePath    : Uri?       = null
     private var mobileOtp           = ""
-    private var imageSelectStatus   : Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +66,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     private fun onSubmit()
     {
-        if(!imageSelectStatus)
+        if(!captureImageStatus)
         {
             CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_profile_image))
         }
@@ -90,7 +91,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 btnSubmit.isClickable=false
 
                 val presenterAWSProfile= PresenterAWSProfile()
-                presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,captureFile)
+                presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,photoFile)
 
             }
             else
@@ -162,34 +163,30 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private fun cameraClick()
     {
 
-        try {
-            val imageFile = createImageFile()
-            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-            val authorities = "com.app.l_pesa.provider"
-            val imageUri = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, authorities, imageFile)
-            callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-            startActivityForResult(callCameraIntent, PHOTO)
-
-        } catch (e: IOException) {
-            Toast.makeText(this@RegistrationStepTwoActivity,"Could not create file!",Toast.LENGTH_SHORT).show()
+        cacheDir.deleteRecursively()
+        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val imagePath = File(filesDir, "images")
+        photoFile = File(imagePath, "user.jpg")
+        if (photoFile!!.exists()) {
+            photoFile!!.delete()
+        } else {
+            photoFile!!.parentFile.mkdirs()
         }
+        captureFilePath = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+
+        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        } else {
+            val clip = ClipData.newUri(this@RegistrationStepTwoActivity.contentResolver, "user photo", captureFilePath)
+            captureIntent.clipData = clip
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        }
+
+        startActivityForResult(captureIntent, Photo)
     }
 
-    @SuppressLint("SimpleDateFormat")
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName: String = "profile_a_" + timeStamp + "_"
-        val storageDir: File = this@RegistrationStepTwoActivity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        if (!storageDir.exists()) storageDir.mkdirs()
-        captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)
-        imageFilePath = captureFile!!.absolutePath
-        return captureFile!!
-    }
-
-    private fun galleryClick()
+      private fun galleryClick()
     {
         val checkSelfPermission = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
@@ -203,7 +200,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, GALLEY)
+        startActivityForResult(intent, Gallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -222,24 +219,13 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            PHOTO ->
-               if (resultCode == Activity.RESULT_OK) {
-                    imgProfilePhoto.setImageBitmap(scaleBitmap())
-                    CommonMethod.fileCompress(captureFile!!)
-                    imageSelectStatus=true
-                } else
+            Photo ->
 
+                if (resultCode == Activity.RESULT_OK)
                 {
-                    if(imageSelectStatus)
-                    {
-                    }
-                    else
-                    {
-                        imageSelectStatus=false
-                    }
-
+                    setImage()
                 }
-            GALLEY ->
+            Gallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -247,21 +233,39 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         }
     }
 
-    private fun scaleBitmap(): Bitmap
-    {
-        val imageViewWidth = 500
-        val imageViewHeight = 500
 
-        val bmOptions = BitmapFactory.Options()
-        bmOptions.inJustDecodeBounds = true
-        BitmapFactory.decodeFile(imageFilePath, bmOptions)
-        val bitmapWidth = bmOptions.outWidth
-        val bitmapHeight = bmOptions.outHeight
-        val scaleFactor = Math.min(bitmapWidth / imageViewWidth, bitmapHeight / imageViewHeight)
+    private fun setImage() {
 
-        bmOptions.inJustDecodeBounds = false
-        bmOptions.inSampleSize = scaleFactor
-        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+        try {
+            val imgSize = File(captureFilePath.toString())
+            val length  = imgSize.length() / 1024
+            if(length>3000) // Max Size Under 3MB
+            {
+                captureImageStatus = false
+                Toast.makeText(this@RegistrationStepTwoActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val photoPath: Uri = captureFilePath ?: return
+                imgProfilePhoto.post {
+                    val pictureBitmap = BitmapResize.shrinkBitmap(
+                            this@RegistrationStepTwoActivity,
+                            photoPath,
+                            imgProfilePhoto.width,
+                            imgProfilePhoto.height
+                    )
+                    imgProfilePhoto.setImageBitmap(pictureBitmap)
+                    imgProfilePhoto.scaleType = ImageView.ScaleType.CENTER_CROP
+                    CommonMethod.fileCompress(photoFile!!)
+                }
+
+                captureImageStatus = true
+
+            }
+        }
+        catch (exp:Exception)
+        {
+
+        }
 
     }
 
@@ -320,11 +324,11 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             }
             else
             {
-                imageSelectStatus=true
+                captureImageStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfilePhoto?.setImageBitmap(bitmap)
-                captureFile=imgSize
-                CommonMethod.fileCompress(captureFile!!)
+                photoFile=imgSize
+                CommonMethod.fileCompress(photoFile!!)
             }
 
         }
@@ -337,10 +341,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     override fun onBackPressed() {
 
-       /* val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepOneActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)*/
+
     }
 
 
