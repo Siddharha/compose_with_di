@@ -105,6 +105,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val options = RequestOptions()
         options.error(R.drawable.ic_profile)
+        options.placeholder(R.drawable.ic_profile)
         Glide.with(this@ProfileEditPersonalActivity)
                 .load(resources.getString(R.string.profile_image_url)+profileData.userInfo!!.profileImage)
                 .apply(options)
