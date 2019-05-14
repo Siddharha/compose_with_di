@@ -33,13 +33,9 @@ import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.media.ExifInterface
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -462,7 +458,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
-    private fun setImage() {
+   private fun setImage() {
 
         try {
             val imgSize = File(captureFilePath.toString())
@@ -475,7 +471,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             else {
                 val photoPath: Uri = captureFilePath ?: return
                 imgProfile.post {
-                    val pictureBitmap = BitmapResize.shrinkBitmapUser(
+                    val pictureBitmap = BitmapResize.shrinkBitmap(
                             this@ProfileEditPersonalActivity,
                             photoPath,
                             imgProfile.width,

@@ -3,6 +3,7 @@ package com.app.l_pesa.profile.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.ClipData
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -29,9 +31,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
@@ -64,11 +69,11 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private var businessIdName=""
     private var businessId=0
 
-    private val PHOTO               = 1
-    private val GALLEY              = 2
-    private var captureFile: File?  = null
-    private var imageFilePath       = ""
-    private var imageSelectStatus   : Boolean = false
+    private val Photo             = 14
+    private val Gallery           = 15
+    private var captureImageStatus : Boolean    = false
+    private var photoFile          : File?      = null
+    private var captureFilePath    : Uri?       = null
 
     companion object {
         fun newInstance(): Fragment {
@@ -105,7 +110,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         buttonSubmit.setOnClickListener {
 
-            if(!imageSelectStatus)
+            if(!captureImageStatus)
             {
                 CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_image))
             }
@@ -128,7 +133,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                     {*/
                     val presenterAWSBusinessId= PresenterAWSBusinesslId()
                     // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                    presenterAWSBusinessId.uploadBusinessId(activity!!,this,captureFile)
+                    presenterAWSBusinessId.uploadBusinessId(activity!!,this,photoFile)
                     /*}
                     else
                     {
@@ -402,32 +407,30 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     private fun cameraClick()
     {
-        try {
-            val imageFile = createImageFile()
-            val callCameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-            val authorities = "com.app.l_pesa.provider"
-            val imageUri = FileProvider.getUriForFile(activity!!, authorities, imageFile)
-            callCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-            startActivityForResult(callCameraIntent, PHOTO)
-
-        } catch (e: IOException) {
-            Toast.makeText(activity!!,"Could not create file!", Toast.LENGTH_SHORT).show()
+        activity!!.cacheDir.deleteRecursively()
+        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val imagePath = File(activity!!.filesDir, "images")
+        photoFile = File(imagePath, "user.jpg")
+        if (photoFile!!.exists()) {
+            photoFile!!.delete()
+        } else {
+            photoFile!!.parentFile.mkdirs()
         }
+        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+
+        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        } else {
+            val clip = ClipData.newUri(activity!!.contentResolver, "business id photo", captureFilePath)
+            captureIntent.clipData = clip
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        }
+
+        startActivityForResult(captureIntent, Photo)
     }
 
 
-    @SuppressLint("SimpleDateFormat")
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val imageFileName: String = "personal_id" + timeStamp + "_"
-        val storageDir: File = activity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        if (!storageDir.exists()) storageDir.mkdirs()
-        captureFile = File.createTempFile(imageFileName, ".jpg", storageDir)
-        imageFilePath = captureFile!!.absolutePath
-        return captureFile!!
-    }
 
     private fun galleryClick()
     {
@@ -443,7 +446,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, GALLEY)
+        startActivityForResult(intent, Gallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -461,26 +464,13 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
-            PHOTO ->
+        when(requestCode) {
+            Photo ->
 
                 if (resultCode == Activity.RESULT_OK) {
-                    imgProfile.setImageBitmap(scaleBitmap())
-                    CommonMethod.fileCompress(captureFile!!)
-                    imageSelectStatus=true //captureFile
-                } else
-
-                {
-                    if(imageSelectStatus)
-                    {
-                    }
-                    else
-                    {
-                        imageSelectStatus=false
-                    }
-
+                    setImage()
                 }
-            GALLEY ->
+            Gallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -488,21 +478,38 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         }
     }
 
-    private fun scaleBitmap(): Bitmap
-    {
-        val imageViewWidth  = 500
-        val imageViewHeight = 500
+    private fun setImage() {
 
-        val bmOptions = BitmapFactory.Options()
-        bmOptions.inJustDecodeBounds = true
-        BitmapFactory.decodeFile(imageFilePath, bmOptions)
-        val bitmapWidth = bmOptions.outWidth
-        val bitmapHeight = bmOptions.outHeight
-        val scaleFactor = Math.min(bitmapWidth / imageViewWidth, bitmapHeight / imageViewHeight)
+        try {
+            val imgSize = File(captureFilePath.toString())
+            val length  = imgSize.length() / 1024
+            if(length>3000) // Max Size Under 3MB
+            {
+                captureImageStatus = false
+                Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val photoPath: Uri = captureFilePath ?: return
+                imgProfile.post {
+                    val pictureBitmap = BitmapResize.shrinkBitmap(
+                            activity!!,
+                            photoPath,
+                            imgProfile.width,
+                            imgProfile.height
+                    )
+                    imgProfile.setImageBitmap(pictureBitmap)
+                    imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
+                    CommonMethod.fileCompress(photoFile!!)
+                }
 
-        bmOptions.inJustDecodeBounds = false
-        bmOptions.inSampleSize = scaleFactor
-        return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+                captureImageStatus = true
+
+            }
+        }
+        catch (exp:Exception)
+        {
+
+        }
 
     }
 
@@ -558,21 +565,21 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
             val length  = imgSize.length() / 1024
             if(length>3000) // Max Size Under 3MB
             {
-                imageSelectStatus=false
+                captureImageStatus=false
                 Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else
             {
-                imageSelectStatus=true
+                captureImageStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfile.setImageBitmap(bitmap)
-                captureFile=imgSize
-                CommonMethod.fileCompress(captureFile!!)
+                photoFile=imgSize
+                CommonMethod.fileCompress(photoFile!!)
             }
 
         }
         else {
-            imageSelectStatus=false
+            captureImageStatus=false
             Toast.makeText(activity!!, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
     }

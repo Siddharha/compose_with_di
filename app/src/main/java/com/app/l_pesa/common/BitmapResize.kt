@@ -10,7 +10,7 @@ import java.io.*
 
 object BitmapResize {
 
-    fun shrinkBitmapUser(ctx: Context, uri: Uri, width: Int, height: Int): Bitmap {
+    fun shrinkBitmap(ctx: Context, uri: Uri, width: Int, height: Int): Bitmap {
         var input: InputStream
         try {
             input = ctx.contentResolver.openInputStream(uri)!!
