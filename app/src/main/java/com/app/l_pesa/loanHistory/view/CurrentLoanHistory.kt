@@ -98,12 +98,11 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     {
         when {
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
-                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
-                resetFilter()
+                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_EXPANDED)
 
             }
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
         }
 
 

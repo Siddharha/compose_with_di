@@ -150,14 +150,12 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         when {
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
-                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_HALF_EXPANDED)
-                resetFilter()
+                bottomSheetBehavior.state =(BottomSheetBehavior.STATE_EXPANDED)
 
             }
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-            bottomSheetBehavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        }
 
+        }
         etFromDate.setOnClickListener {
 
             showDatePickerFrom()
@@ -209,17 +207,6 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         }
     }
-
-    private fun resetFilter()
-    {
-        buttonReset.setOnClickListener {
-
-            etFromDate.text!!.clear()
-            etToDate.text!!.clear()
-
-        }
-    }
-
 
     private fun loadMore(from_date: String, to_date: String)
     {
