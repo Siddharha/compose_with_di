@@ -13,7 +13,7 @@ import retrofit2.HttpException
 
 class PresenterTransferHistory {
 
-    fun getTokenHistory(contextOBJ: Context, from_date:String,to_date:String,callBackOBJ: ICallBackTransferHistory)
+    fun getTokenHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackTransferHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory("",from_date,to_date)
@@ -35,7 +35,7 @@ class PresenterTransferHistory {
                            }
                            else
                            {
-                               callBackOBJ.onEmptyTransferHistory()
+                               callBackOBJ.onEmptyTransferHistory(type)
                            }
                         }
                         else

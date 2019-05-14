@@ -68,7 +68,7 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
         adapterInterestHistory= AdapterInterestHistory(activity!!,listInterestHistory)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            loadInterestHistory("","")
+            loadInterestHistory("","","DEFAULT")
         }
         else
         {
@@ -77,11 +77,11 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
         }
     }
 
-    private fun loadInterestHistory(from_date:String,to_date:String)
+    private fun loadInterestHistory(from_date:String,to_date:String,type:String)
     {
         swipeRefreshLayout.isRefreshing = true
         val presenterInterestHistory = PresenterInterestHistory()
-        presenterInterestHistory.getInterestHistory(activity!!,from_date,to_date,this)
+        presenterInterestHistory.getInterestHistory(activity!!,from_date,to_date,type,this)
     }
 
     fun doFilter()
@@ -120,7 +120,7 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
                     val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    loadInterestHistory(fromDate!!,toDate!!)
+                    loadInterestHistory(fromDate!!,toDate!!,"FILTER")
                 }
                 else
                 {
@@ -252,10 +252,14 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
         }
     }
 
-    override fun onEmptyInterestHistory() {
+    override fun onEmptyInterestHistory(type: String) {
 
         swipeRefreshLayout.isRefreshing = false
         rlList.visibility=View.INVISIBLE
+        if(type=="FILTER")
+        {
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
         cardView.visibility=View.VISIBLE
     }
 

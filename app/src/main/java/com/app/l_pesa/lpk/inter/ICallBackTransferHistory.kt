@@ -7,7 +7,7 @@ interface ICallBackTransferHistory {
 
     fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?,from_date:String,to_date:String)
     fun onSuccessTransferHistoryPaginate(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors,from_date:String,to_date:String)
-    fun onEmptyTransferHistory()
+    fun onEmptyTransferHistory(type: String)
     fun onErrorTransferHistory(message: String)
     fun onSavingsUnlock(savings_id: String)
     fun onSuccessSavingsUnlock()

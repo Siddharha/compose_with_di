@@ -79,7 +79,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         adapterTransferHistory= AdapterTransferHistory(activity!!,listTransferHistory,this)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            loadTokenHistory("","")
+            loadTokenHistory("","","DEFAULT")
         }
         else
         {
@@ -90,11 +90,11 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     }
 
-    private fun loadTokenHistory(from_date:String,to_date:String)
+    private fun loadTokenHistory(from_date:String,to_date:String, type:String)
     {
         swipeRefreshLayout.isRefreshing = true
         val presenterTransferHistory = PresenterTransferHistory()
-        presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,this)
+        presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,type,this)
     }
 
     fun doFilter()
@@ -132,7 +132,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
                     val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    loadTokenHistory(fromDate!!,toDate!!)
+                    loadTokenHistory(fromDate!!,toDate!!,"FILTER")
                 }
                 else
                 {
@@ -265,10 +265,14 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         }
     }
 
-    override fun onEmptyTransferHistory() {
+    override fun onEmptyTransferHistory(type:String) {
 
         swipeRefreshLayout.isRefreshing = false
         rlList.visibility=View.INVISIBLE
+        if(type=="FILTER")
+        {
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
         cardView.visibility=View.VISIBLE
     }
 
