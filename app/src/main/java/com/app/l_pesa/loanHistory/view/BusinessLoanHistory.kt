@@ -48,7 +48,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadHistory("","")
+        loadHistory("","","DEFAULT")
         swipeRefresh()
         buttonApplyLoan.setOnClickListener {
 
@@ -63,7 +63,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     }
 
-    private fun loadHistory(from_date: String, to_date: String)
+    private fun loadHistory(from_date: String, to_date: String,type:String)
     {
         listLoanHistoryBusiness      = ArrayList()
         adapterLoanHistory           = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
@@ -77,7 +77,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,from_date,to_date,"",this)
+            presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,from_date,to_date,type,"",this)
 
         }
 
@@ -90,7 +90,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         swipeRefreshLayout.setOnRefreshListener {
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
-            loadHistory("","")
+            loadHistory("","","DEFAULT")
         }
     }
 
@@ -155,10 +155,15 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     }
 
 
-    override fun onEmptyLoanHistory() {
+    override fun onEmptyLoanHistory(type: String) {
 
         swipeRefreshLayout.isRefreshing = false
         rvLoan.visibility  =View.GONE
+        if(type=="FILTER")
+        {
+            buttonApplyLoan.visibility=View.GONE
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
         cardView.visibility=View.VISIBLE
 
     }
@@ -168,7 +173,6 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         swipeRefreshLayout.isRefreshing = false
 
     }
-
 
     private fun loadMore(from_date: String, to_date: String)
     {
@@ -223,7 +227,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
                 val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
                 val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                loadHistory(fromDate!!,toDate!!)
+                loadHistory(fromDate!!,toDate!!,"FILTER")
 
             }
         }
@@ -268,15 +272,6 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         commonClass.datePicker(activity!!,etToDate)
     }
 
-    private fun resetFilter()
-    {
-        buttonReset.setOnClickListener {
-
-            etFromDate.text!!.clear()
-            etToDate.text!!.clear()
-
-        }
-    }
 
     override fun onClickList() {
         val bundle = Bundle()

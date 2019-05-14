@@ -15,7 +15,7 @@ import retrofit2.HttpException
 
 class PresenterLoanHistory {
 
-    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
+    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,type:String,cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors,from_date,to_date)
@@ -37,7 +37,7 @@ class PresenterLoanHistory {
                             }
                             else
                             {
-                                callBackCurrentOBJ.onEmptyLoanHistory()
+                                callBackCurrentOBJ.onEmptyLoanHistory(type)
                             }
                         }
                         else
@@ -70,7 +70,7 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
+    fun getLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,type:String,cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistoryBusiness(jsonRequest,cursors,from_date,to_date)
@@ -92,7 +92,7 @@ class PresenterLoanHistory {
                             }
                             else
                             {
-                                callBackCurrentOBJ.onEmptyLoanHistory()
+                                callBackCurrentOBJ.onEmptyLoanHistory(type)
                             }
                         }
                         else

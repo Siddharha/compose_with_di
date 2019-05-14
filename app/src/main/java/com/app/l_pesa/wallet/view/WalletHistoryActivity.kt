@@ -83,6 +83,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         }
         else
         {
+            swipeRefreshLayout.isRefreshing=false
             CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,resources.getString(R.string.no_internet))
         }
 

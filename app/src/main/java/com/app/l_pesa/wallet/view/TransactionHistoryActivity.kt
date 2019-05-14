@@ -77,6 +77,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         else
         {
+            swipeRefreshLayout.isRefreshing=false
             CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,resources.getString(R.string.no_internet))
         }
 

@@ -48,7 +48,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadHistory("","")
+        loadHistory("","","DEFAULT")
         swipeRefresh()
 
         buttonApplyLoan.setOnClickListener {
@@ -63,7 +63,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
     }
 
-    private fun loadHistory(from_date: String, to_date: String)
+    private fun loadHistory(from_date: String, to_date: String,type:String)
     {
         listLoanHistoryCurrent       = ArrayList()
         adapterLoanHistory           = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
@@ -77,7 +77,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,from_date,to_date,"",this)
+            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,from_date,to_date,type,"",this)
 
         }
 
@@ -90,7 +90,9 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
 
-            loadHistory("","")
+            etFromDate.text!!.clear()
+            etToDate.text!!.clear()
+            loadHistory("","","DEFAULT")
         }
     }
 
@@ -127,7 +129,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
                 val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
                 val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                loadHistory(fromDate!!,toDate!!)
+                loadHistory(fromDate!!,toDate!!,"FILTER")
 
             }
         }
@@ -172,15 +174,6 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         commonClass.datePicker(activity!!,etToDate)
     }
 
-    private fun resetFilter()
-    {
-        buttonReset.setOnClickListener {
-
-            etFromDate.text!!.clear()
-            etToDate.text!!.clear()
-
-        }
-    }
 
     override fun onSuccessLoanHistory(loan_historyCurrent: ArrayList<ResLoanHistoryCurrent.LoanHistory>, cursors: ResLoanHistoryCurrent.Cursors, user_credit_score: Int, from_date: String, to_date: String) {
 
@@ -243,10 +236,15 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     }
 
 
-    override fun onEmptyLoanHistory() {
+    override fun onEmptyLoanHistory(type: String) {
 
         swipeRefreshLayout.isRefreshing = false
         rvLoan.visibility  =View.GONE
+        if(type=="FILTER")
+        {
+            buttonApplyLoan.visibility=View.GONE
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
         cardView.visibility=View.VISIBLE
 
     }
