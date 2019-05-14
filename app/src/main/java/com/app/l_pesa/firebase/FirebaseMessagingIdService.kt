@@ -51,11 +51,11 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
             val pendingIntent= PendingIntent.getActivity(this,0 /* Request code */, notificationIntent,PendingIntent.FLAG_ONE_SHOT)
 
             val notificationId       = Random().nextInt(60000)
-            val bitmap           = getBitmap(remoteMessage!!.data["attachmentUrl"]!!)
+           // val bitmap           = getBitmap(remoteMessage!!.data["attachmentUrl"]!!)
             val likeIntent               = Intent(this, DashboardActivity::class.java)
 
             likeIntent.putExtra(NOTIFICATIONID, notificationId)
-            likeIntent.putExtra(IMAGE_URL_EXTRA, remoteMessage.data["attachmentUrl"])
+           // likeIntent.putExtra(IMAGE_URL_EXTRA, remoteMessage.data["attachmentUrl"])
 
             val likePendingIntent                           = PendingIntent.getService(this, notificationId + 1, likeIntent, PendingIntent.FLAG_ONE_SHOT)
             val defaultSoundUri                             = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
@@ -66,14 +66,14 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
             }
 
                 val notificationBuilder = NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
-                        .setLargeIcon(bitmap)
+                       /* .setLargeIcon(R.drawable.ic_address_icon)*/
                         .setColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
                         .setSmallIcon(R.drawable.lpesa_logo)
-                        .setContentTitle(remoteMessage.data["title"])
-                        .setStyle(NotificationCompat.BigPictureStyle()
+                        .setContentTitle(remoteMessage!!.data["title"])
+                        /*.setStyle(NotificationCompat.BigPictureStyle()
                                 .setSummaryText(remoteMessage.data["message"])
-                                .bigPicture(bitmap))/*Notification with Image*/
-                        .setContentText(remoteMessage.data["message"])
+                                .bigPicture(bitmap))*//*Notification with Image*/
+                        //.setContentText(remoteMessage.data["message"])
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .addAction(R.mipmap.ic_launcher_foreground,

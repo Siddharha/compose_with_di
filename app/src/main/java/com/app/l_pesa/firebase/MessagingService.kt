@@ -26,12 +26,12 @@ class MessagingService : FirebaseMessagingService() {
 
         runOnUiThread {
 
-            println("DATA_"+remoteMessage!!.data["title"])
+            println("Notification_"+remoteMessage!!.data["title"])
 
-            val intent = Intent("Notification")
+           /* val intent = Intent("Notification")
             intent.putExtra("title", remoteMessage.data["title"])
-            intent.putExtra("body", remoteMessage.data["body"])
-            broadcaster!!.sendBroadcast(intent)
+           // intent.putExtra("body", remoteMessage.data["body"])
+            broadcaster!!.sendBroadcast(intent)*/
         }
 
 

@@ -154,7 +154,7 @@
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.70"
+            android:layout_weight="1.85"
             android:background="@color/semi_white"
             android:orientation="horizontal"
         >
@@ -200,7 +200,6 @@
                 </com.warkiz.widget.IndicatorStayLayout>
 
 
-
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txt_max"
                 android:fontFamily="@font/montserrat"
@@ -209,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/seekBarLayout"
                 android:layout_marginTop="@dimen/_1sdp"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 android:textColor="@color/color_gray_text"
                 android:layout_marginEnd="@dimen/_5sdp"
 
@@ -222,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/seekBarLayout"
                 android:layout_marginTop="@dimen/_1sdp"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 android:textColor="@color/color_gray_text"
                 android:layout_marginStart="@dimen/_10sdp"
             />
@@ -259,7 +258,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5.15"
+        android:layout_weight="5"
         android:layout_marginTop="@dimen/_7sdp"
 
         />
