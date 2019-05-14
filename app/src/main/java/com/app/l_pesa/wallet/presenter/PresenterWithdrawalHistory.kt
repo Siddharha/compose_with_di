@@ -13,7 +13,7 @@ import retrofit2.HttpException
 
 class PresenterWithdrawalHistory {
 
-    fun getWithdrawalHistory(contextOBJ: Context, from_date:String,to_date:String,callBackOBJ: ICallBackWalletWithdrawalHistory) {
+    fun getWithdrawalHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackWalletWithdrawalHistory) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletWithdrawalHistory("",from_date,to_date)
@@ -34,7 +34,7 @@ class PresenterWithdrawalHistory {
                             }
                             else
                             {
-                                callBackOBJ.onEmptyWalletWithdrawalHistory()
+                                callBackOBJ.onEmptyWalletWithdrawalHistory(type)
                             }
 
                         } else

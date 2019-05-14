@@ -2,7 +2,6 @@ package com.app.l_pesa.wallet.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
@@ -22,7 +21,6 @@ import com.app.l_pesa.wallet.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.activity_wallet_history.*
 import kotlinx.android.synthetic.main.content_wallet_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHistory {
@@ -52,7 +50,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         swipeRefreshLayout.setOnRefreshListener {
             etFromDate.text!!.clear()
             etToDate.text!!.clear()
-            initData("","")
+            initData("","","DEFAULT")
 
         }
     }
@@ -71,17 +69,17 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             doFilter()
         }
 
-        initData("","")
+        initData("","","DEFAULT")
 
     }
 
-    private fun initData(from_date: String, to_date: String)
+    private fun initData(from_date: String, to_date: String,type:String)
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory=PresenterWithdrawalHistory()
-            presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,from_date,to_date,this)
+            presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,from_date,to_date,type,this)
         }
         else
         {
@@ -124,7 +122,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
                     val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-                    initData(fromDate!!,toDate!!)
+                    initData(fromDate!!,toDate!!,"FILTER")
 
             }
         }
@@ -261,10 +259,14 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,message)
     }
 
-    override fun onEmptyWalletWithdrawalHistory() {
+    override fun onEmptyWalletWithdrawalHistory(type: String) {
 
         swipeRefreshLayout.isRefreshing = false
         rlList.visibility=View.INVISIBLE
+        if(type=="FILTER")
+        {
+            txt_message.text = resources.getString(R.string.no_result_found)
+        }
         cardView.visibility=View.VISIBLE
     }
 
