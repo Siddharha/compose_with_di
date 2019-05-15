@@ -11,9 +11,12 @@
         android:layout_margin="@dimen/_4sdp">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/rootConstraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/_5sdp">
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            >
 
 
         <com.app.l_pesa.common.CommonTextRegular

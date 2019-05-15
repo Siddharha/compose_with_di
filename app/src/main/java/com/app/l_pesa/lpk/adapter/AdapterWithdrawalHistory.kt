@@ -17,6 +17,7 @@ import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
+import android.support.constraint.ConstraintLayout
 import android.widget.RelativeLayout
 import java.lang.Exception
 import java.text.DecimalFormat
@@ -89,6 +90,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         private var txtReason       : CommonTextRegular = itemView.findViewById(R.id.txtReason) as CommonTextRegular
         private var txtRef          : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
         private var rlAddress       : RelativeLayout    = itemView.findViewById(R.id.rlAddress) as RelativeLayout
+        private var rootConstraint  : ConstraintLayout = itemView.findViewById(R.id.rootConstraint) as ConstraintLayout
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
@@ -99,7 +101,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             txtRef.text             = context.resources.getString(R.string.ref_no)+" "+userWithdrawalHistory.identity_number
             txtToken.text           = format.format(userWithdrawalHistory.token_value.toDouble())+" LPK"
             txtCreateDate.text      = CommonMethod.dateConvert(userWithdrawalHistory.created)
-
+            val paddingSize=context.resources.getDimensionPixelSize(R.dimen._5sdp)
             when {
                 userWithdrawalHistory.status=="R" -> {
 
@@ -132,6 +134,8 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                 }
                 userWithdrawalHistory.status=="C" ->
                 {
+
+                    rootConstraint.setPadding(0,paddingSize,0,0)
                     rlAddress.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
@@ -151,6 +155,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 userWithdrawalHistory.status=="F" -> {
 
+                    rootConstraint.setPadding(0,paddingSize,0,0)
                     rlAddress.visibility=View.VISIBLE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
