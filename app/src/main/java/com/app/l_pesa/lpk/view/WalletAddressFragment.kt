@@ -29,6 +29,7 @@ import java.lang.Exception
 
 class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
+    private  var address=""
     private  val hashMapOLD = HashMap<String, String>()
 
     companion object {
@@ -57,6 +58,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
         hashMapOLD["wallet"]     = ""+userDashBoard.walletAddress
+        address=""+userDashBoard.walletAddress
 
         if(!TextUtils.isEmpty(userDashBoard.walletAddress))
         {
@@ -82,7 +84,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
             try {
                 val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse("https://etherscan.io/address/[address]")
+                intent.data = Uri.parse("https://etherscan.io/address/$address")
                 context!!.startActivity(intent)
             }
             catch (exp: Exception)
@@ -134,6 +136,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
     override fun onSuccessWalletAddress() {
         hashMapOLD["wallet"]  = ""+etWalletAddress.text.toString().trim()
+        address=""+etWalletAddress.text.toString().trim()
         buttonWalletAddress.isClickable=true
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_update_successfully))
     }
