@@ -78,7 +78,6 @@
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rlList"
-                    android:layout_margin="@dimen/_3sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
