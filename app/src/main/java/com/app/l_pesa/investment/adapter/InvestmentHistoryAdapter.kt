@@ -136,7 +136,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView7.visibility=View.INVISIBLE //Visible
                 itemView.imageView7.setImageResource(R.drawable.ic_calendar_icon)
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-                itemView.txtMaturity.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.maturity)+"</font>"+": "+"<font color='#777b7e'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
+                itemView.txtMaturity.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.maturity)+": "+"</font>"+"<font color='#777b7e'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
                 itemView.txtInterest.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.interest)+": "+"</font>"+"<font color='#777b7e'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
                 itemView.txtDetails.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_grey,0,0,0)
                 itemView.txtDetails.text = investmentList.belowMessage
