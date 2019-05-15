@@ -104,7 +104,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
             val paddingSize=context.resources.getDimensionPixelSize(R.dimen._5sdp)
             when {
                 userWithdrawalHistory.status=="R" -> {
-
+                    rootConstraint.setPadding(0,0,0,paddingSize)
                     rlAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_down_arrow, 0)
@@ -127,6 +127,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
                 }
                 userWithdrawalHistory.status=="P" -> {
+                    rootConstraint.setPadding(0,0,0,paddingSize)
                     rlAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
@@ -175,7 +176,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                 }
 
                 userWithdrawalHistory.status=="N" -> {
-
+                    rootConstraint.setPadding(0,0,0,paddingSize)
                     rlAddress.visibility=View.GONE
                     txtReason.visibility=View.GONE
                     txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
