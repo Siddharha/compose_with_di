@@ -8,7 +8,9 @@ import android.view.MenuItem
 import android.widget.TextView
 
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import kotlinx.android.synthetic.main.activity_notification.*
+import kotlinx.android.synthetic.main.content_notification.*
 
 class NotificationActivity : AppCompatActivity() {
 
@@ -20,6 +22,29 @@ class NotificationActivity : AppCompatActivity() {
         toolbarFont(this@NotificationActivity)
 
 
+        initData()
+        swipeRefresh()
+    }
+
+    private fun swipeRefresh()
+    {
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
+        swipeRefreshLayout.setOnRefreshListener {
+             initData()
+        }
+    }
+
+    private fun initData()
+    {
+        if(CommonMethod.isNetworkAvailable(this@NotificationActivity))
+        {
+
+        }
+        else
+        {
+            swipeRefreshLayout.isRefreshing = false
+            CommonMethod.customSnackBarError(rootLayout,this@NotificationActivity,resources.getString(R.string.no_internet))
+        }
     }
 
 

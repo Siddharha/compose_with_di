@@ -12,6 +12,7 @@ import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.*
+import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResChangePin
@@ -160,6 +161,8 @@ interface BaseService{
     @GET("lpesa_wallet/withdrawal_history")
     fun getWalletWithdrawalHistory(@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResWalletWithdrawalHistory>
 
+    @GET("user/notifications")
+    fun getNotification(@Query("cursors") cursors:String): Observable<ResNotification>
 
 }
 
