@@ -93,6 +93,7 @@
 #AWS Proguard ends here
 
 -keep class com.app.l_pesa.common.** { *; }
+-keep class com.app.l_pesa.API.** { *; }
 -keep class com.app.l_pesa.splash.** { *; }
 -keep class com.app.l_pesa.login.** { *; }
 -keep class com.app.l_pesa.registration.** { *; }
