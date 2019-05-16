@@ -10,4 +10,5 @@ import com.app.l_pesa.common.CommonStatusModel
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-data class ResForgetPassword(val status: CommonStatusModel)
+data class ResForgetPassword(val status: CommonStatusModel, val data:Data)
+data class Data(val type: String)

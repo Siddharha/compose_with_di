@@ -22,10 +22,11 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.password.inter.ICallBackPassword
 import com.app.l_pesa.password.presenter.PresenterPassword
+import com.app.l_pesa.settings.inter.ICallBackResetPassword
 import com.google.gson.JsonObject
 
 
-class ChangePasswordActivity : AppCompatActivity(), ICallBackPassword {
+class ChangePasswordActivity : AppCompatActivity(), ICallBackResetPassword {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

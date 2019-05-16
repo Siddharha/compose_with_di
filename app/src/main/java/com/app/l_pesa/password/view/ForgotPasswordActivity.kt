@@ -134,10 +134,18 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
     }
 
 
-    override fun onSuccessResetPassword(message: String) {
+    override fun onSuccessResetPassword(message: String, type: String) {
 
         progressBar.visibility= View.INVISIBLE
-        Toast.makeText(this@ForgotPasswordActivity,resources.getString(R.string.email_to_reset_password),Toast.LENGTH_SHORT).show()
+        if(type=="sms")
+        {
+            Toast.makeText(this@ForgotPasswordActivity,resources.getString(R.string.sms_to_reset_password),Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            Toast.makeText(this@ForgotPasswordActivity,resources.getString(R.string.email_to_reset_password),Toast.LENGTH_SHORT).show()
+        }
+
         startActivity(Intent(this@ForgotPasswordActivity, LoginActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }

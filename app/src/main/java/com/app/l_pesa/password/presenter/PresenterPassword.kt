@@ -7,6 +7,7 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.password.inter.ICallBackPassword
+import com.app.l_pesa.settings.inter.ICallBackResetPassword
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -35,7 +36,7 @@ class PresenterPassword {
 
                     try {
                         if (response.status.isSuccess) {
-                            callBackOBJ.onSuccessResetPassword(response.status.message)
+                            callBackOBJ.onSuccessResetPassword(response.status.message,response.data.type)
 
                         } else {
                             callBackOBJ.onErrorResetPassword(response.status.message)
@@ -60,7 +61,7 @@ class PresenterPassword {
                 })
     }
 
-    fun doResetPassword(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackPassword)
+    fun doResetPassword(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackResetPassword)
     {
 
         val sharedPrefOBJ= SharedPref(contextOBJ)
