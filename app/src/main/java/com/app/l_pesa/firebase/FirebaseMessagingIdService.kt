@@ -55,7 +55,7 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
 
             val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
             val notificationBuilder = NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.lpesa_logo)
+                    .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(message.data["title"])
                     .setContentText(message.data["body"])
                     .setAutoCancel(true)
