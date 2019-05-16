@@ -5,19 +5,12 @@
     <string name="sign_up">Sign Up</string>
     <string name="already_using_lpesa">Already using L-Pesa?</string>
     <string name="get_started">Get Started</string>
-    <string name="micro_loan">Micro loan for mobile banking customer</string>
-    <string name="s3_bucket_url_profile_pic">https://s3.eu-central-1.amazonaws.com/s3.l-pesa.com/dev_server_imgs/</string>
-    <string name="s3_bucket_url_id_proof_pic">https://s3.eu-central-1.amazonaws.com/s3.l-pesa.com/dev_server_id_imgs/</string>
-    <string name="no_more_data">No more data to read</string>
     <string name="no_country">/No country was listed.</string>
     <string name="phone_no">Mobile No.</string>
     <string name="email_address">Email Address*</string>
     <string name="login">Login</string>
     <string name="final_step">Final step</string>
-    <string name="register_now">Register Now</string>
-    <string name="or">Or</string>
     <string name="submit">Submit</string>
-    <string name="success">Success</string>
     <string name="successful">Successful</string>
     <string name="failure">Failure</string>
     <string name="cancel">Cancel</string>
@@ -43,7 +36,6 @@
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
-    <string name="current_pin">Current Pin</string>
     <string name="new_pin">New Pin</string>
     <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
@@ -86,7 +78,6 @@
     <string name="you_have_select_from_date_to_date">You should select From Date or To Date</string>
     <string name="please_wait">Please wait…</string>
     <string name="no_internet_details">You are not connected to internet, make sure Wi-Fi/Data is on, Airplane mode is off and try again.</string>
-    <string name="turn_on_location">To continue using our services, you need to turn on your GPS and use High Accuracy Mode. Do you want to turn it on?</string>
     <string name="retry">Retry</string>
     <string name="init">INIT</string>
     <string name="required_street_address">Please enter your street address.</string>
@@ -165,7 +156,6 @@
     <string name="tin_number">TIN Number:</string>
     <string name="id_type">ID Type:</string>
     <string name="id_number">ID Number:</string>
-    <string name="choose_id_type">Choose Id Type:</string>
     <string name="choose_type_id">Choose Id Type</string>
     <string name="enter_id_number">Enter ID Number</string>
 
@@ -233,15 +223,12 @@
     <string name="processing_fee">Processing Fee(%)</string>
     <string name="current_credit_score">Current Credit Score:</string>
     <string name="actual_loan_amount">Actual Loan Amount</string>
-    <string name="approx_loan_amount">Approx Loan Amount</string>
     <string name="total_payback">Total Payback:</string>
     <string name="pay_full_amount">Pay Full Amount</string>
     <string name="repay_amount">Repay Amount:</string>
     <string name="current_balance">Current Balance:</string>
     <string name="repay_date">Repay Date:</string>
-    <string name="paid">Paid</string>
     <string name="paid_on">Paid on: </string>
-    <string name="date">Date</string>
     <string name="pay_now">Pay Now</string>
     <string name="empty_payment_history_message">You haven\'t yet made any repayment. Please follow your payment schedule to avoid penalties and actions on your account.</string>
 
@@ -276,7 +263,6 @@
     <string name="postal_code_address">Postal Code Address*</string>
     <string name="city_town">City/Town*</string>
     <string name="second_mob_no">Secondary Mobile Number</string>
-    <string name="title_activity_profile_edit_emp_info">ProfileEditEmpInfo</string>
     <string name="earn_credit_coins_three">Earn 3 credit score points!</string>
 
     <!--Emp Info-->
@@ -304,16 +290,12 @@
     <string name="choose_loan_purpose_description">Choose Purpose:</string>
     <string name="choose_description">Select Purpose</string>
     <string name="loan_purpose_description">Describe Your Purpose:</string>
-    <string name="enter_purpose">Enter Purpose</string>
     <string name="required_loan_purpose">Please select the purpose of application.</string>
     <string name="required_loan_purpose_description">Please describe why you need the loan.</string>
     <string name="max_500_words">Describe within 500 words.</string>
     <string name="ref_no">Ref.No:</string>
-    <string name="reference_no">Reference No:</string>
     <string name="txt_id">TXN ID:</string>
     <string name="amount">Amount:</string>
-    <string name="maturity_amount">Maturity Amount</string>
-    <string name="maturity_on">Maturity On</string>
     <string name="maturity">Maturity</string>
     <string name="want_to_apply_loan">Do you want to apply for this loan?</string>
     <string name="active">Active</string>
@@ -322,7 +304,6 @@
     <string name="id_information">ID Information</string>
     <string name="personal_id_information">Personal ID Information</string>
     <string name="business_id_information">Business ID Information</string>
-    <string name="profile_image">Profile Image*</string>
     <string name="id_image">ID Image*</string>
     <string name="required_profile_image">Upload your profile avatar.</string>
     <string name="required_id_image">Upload a copy of your ID.</string>
@@ -340,7 +321,6 @@
 
     <!--Investment-->
     <string name="apply_an_investment">Apply an Investment</string>
-    <string name="investment_date">9/1/2019</string>
     <string name="save_with_lpesa">Save With L-Pesa</string>
     <string name="choose_a_plan">Choose a plan</string>
     <string name="provide_amount">Amount</string>
@@ -360,51 +340,27 @@
     <string name="apply_exit_point">Are you sure you want to exit?</string>
 
     <!--Token-->
-    <string name="requested">Requested</string>
     <string name="transfer">Transfer</string>
-    <string name="unlock">Unlock</string>
-    <string name="locked">Locked</string>
     <string name="star_line">************************************************************</string>
     <string name="dash_line">-------------------------------------</string>
-    <string name="unlocked">Unlocked</string>
-    <string name="tokens">Token</string>
     <string name="filter">Filter</string>
     <string name="required_token_amount">Please enter the number of tokens.</string>
     <string name="token_transfer">Token Transfer</string>
     <string name="transfer_history">Transfer History</string>
-    <string name="interest_history">Interest History</string>
     <string name="token_withdrawal">Token Withdrawal</string>
     <string name="withdrawal_history">Withdrawal History</string>
-    <string name="wallet_address">Wallet Address</string>
     <string name="erc_20_address">ERC 20 Address</string>
-    <string name="narration">Narration</string>
-    <string name="interest_amount">Interest Amount</string>
     <string name="earned_interest">Earned Interest</string>
     <string name="lpk_savings">LPK Savings</string>
     <string name="lpk_withdrawal">LPK Withdrawal</string>
     <string name="lpk">LPK</string>
     <string name="from_date">From Date</string>
     <string name="to_date">To Date</string>
-    <string name="from_amount">From Amount</string>
-    <string name="to_amount">To Amount</string>
-    <string name="search">Search</string>
     <string name="apply_filter">Apply Filter</string>
     <string name="savings">Savings</string>
     <string name="withdrawal">Withdrawal</string>
     <string name="withdraw_on">Withdrawal on</string>
-    <string name="token_transfer_text">This is how it is all coming together.
-        Once you have L-Pesa Kripton, also known as LPK,then you
-        are able to keep it stored within your LPK savings wallet.
-        To make this worthwhile for you,there is the possibility of earning interest every week for the LPK within your savings wallet.
-        This will elevate the value of the LPK that you have.
-        Every week you are automatically receive an interest on top of the tokens within your savings account.
-        You need to have a minimum credit score equaling to 30.
-        You should be able to deposit up to 1000 LPK into your savings wallet , but not less than 100 LPK. Once you have deposited,
-        they are locked up for a period of 30 days to help you avail the long-term benefit!\n\n
-        If you have been blacklisted or you are a loan defaulter, you are not entitled to get the benefits.
-    </string>
 
-    <string name="required_filter_date">Please select date</string>
     <string name="token_transfer_successfully">Token transfer successfully.</string>
     <string name="token_withdrawal_successfully">Token withdrawal successfully.</string>
     <string name="token_update_successfully">Your ERC-20 address has been updated.</string>
@@ -426,9 +382,6 @@
     <string name="transaction_history">Transaction History</string>
     <string name="commission">Commission</string>
 
-    <string name="all">All</string>
-    <string name="credit">Credit</string>
-    <string name="debit">Debit</string>
     <string name="cr">Cr</string>
     <string name="dr">Dr</string>
 

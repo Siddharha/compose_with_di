@@ -13,7 +13,6 @@
     <color name="colorTextBlackLight">#777b7e</color>
     <color name="colorSemiBlack">#61666b</color>
     <color name="colorMenuTab">#444546</color>
-    <color name="colorSemiLightBlack">#bcbfc2</color>
     <color name="colorSemiWhite">#f2f2f2</color>
     <color name="colorGrey">#bfbfbf</color>
     <color name="colorGreyDeep">#949ba6</color>
@@ -27,9 +26,7 @@
     <color name="semi_white">#FEFFFF</color>
     <color name="color_gray_light">#a4a4a4</color>
     <color name="color_gray_text">#727272</color>
-    <color name="color_bg">#F5F5F5</color>
     <color name="divider_color">#e6e6e6</color>
-    <color name="semi_light_black">#7d7d7d</color>
     <color name="mtrl_textinput_default_box_stroke_color">#949BA6</color>
     <color name="textColors">#535559</color>
     <color name="wallet_addr_link_color">#9caf01</color>

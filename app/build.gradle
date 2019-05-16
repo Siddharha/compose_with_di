@@ -34,10 +34,9 @@ android {
             signingConfig signingConfigs.config
             // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
             proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
-
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
             buildConfigField("String", 'AWS_BUCKET', '"lpesa-profile-identity-proof"')
-            //buildConfigField ("String", 'AWS_URL','"https://s3.ap-south-1.amazonaws.com/securnyx-sentinel/"')
+
         }
         build {
             // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -49,7 +48,7 @@ android {
             //proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
             buildConfigField("String", 'AWS_BUCKET', '"lpesa-profile-identity-proof"')
-            //buildConfigField ("String", 'AWS_URL','"https://s3.ap-south-1.amazonaws.com/securnyx-sentinel/"')
+
         }
     }
     productFlavors {
