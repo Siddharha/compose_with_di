@@ -4,19 +4,28 @@ import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.notification.adapter.AdapterNotification
 import com.app.l_pesa.notification.inter.ICallBackNotification
 import com.app.l_pesa.notification.model.ResNotification
+import com.app.l_pesa.notification.presenter.PresenterNotification
 import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.content_notification.*
 import java.util.ArrayList
 
 class NotificationActivity : AppCompatActivity(), ICallBackNotification {
 
+    private lateinit var listNotificationHistory        : ArrayList<ResNotification.NotificationHistory>
+    private lateinit var adapterNotification            : AdapterNotification
+
+    private var hasNext=false
+    private var after=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +49,14 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
 
     private fun initData()
     {
+        listNotificationHistory = ArrayList()
+        adapterNotification     = AdapterNotification(this@NotificationActivity, listNotificationHistory)
+
         if(CommonMethod.isNetworkAvailable(this@NotificationActivity))
         {
-
+            swipeRefreshLayout.isRefreshing = true
+            val presenterNotification= PresenterNotification()
+            presenterNotification.getNotification(this@NotificationActivity,this)
         }
         else
         {
@@ -53,18 +67,87 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
 
     override fun onSuccessNotification(notification_history: ArrayList<ResNotification.NotificationHistory>, cursors: ResNotification.Cursors) {
 
+        runOnUiThread {
+
+            hasNext =cursors.hasNext
+            after   =cursors.after
+            swipeRefreshLayout.isRefreshing = false
+            listNotificationHistory.clear()
+            listNotificationHistory.addAll(notification_history)
+            adapterNotification         = AdapterNotification(this@NotificationActivity, listNotificationHistory)
+            val llmOBJ                  = LinearLayoutManager(this@NotificationActivity)
+            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            rvList.layoutManager        = llmOBJ
+            rvList.adapter              = adapterNotification
+
+            adapterNotification.setLoadMoreListener(object : AdapterNotification.OnLoadMoreListener {
+                override fun onLoadMore() {
+
+                    rvList.post {
+
+                        if(hasNext)
+                        {
+                           loadMore(after)
+                        }
+
+                    }
+
+                }
+            })
+
+
+        }
     }
 
     override fun onSuccessNotificationPaginate(notification_history: ArrayList<ResNotification.NotificationHistory>, cursors: ResNotification.Cursors) {
 
+
+
+        hasNext =cursors.hasNext
+        after   =cursors.after
+        if(listNotificationHistory.size!=0)
+        {
+            try {
+
+                listNotificationHistory.removeAt(listNotificationHistory.size - 1)
+                adapterNotification.notifyDataChanged()
+                listNotificationHistory.addAll(notification_history)
+                adapterNotification.notifyItemRangeInserted(0, listNotificationHistory.size)
+
+            }
+            catch (e:Exception)
+            {}
+        }
     }
 
     override fun onEmptyNotification() {
 
+        swipeRefreshLayout.isRefreshing    = false
     }
 
     override fun onFailureNotification(message: String) {
 
+        swipeRefreshLayout.isRefreshing    = false
+        CommonMethod.customSnackBarError(rootLayout,this@NotificationActivity,message)
+    }
+
+    private fun loadMore(cursor:String)
+    {
+        if(CommonMethod.isNetworkAvailable(this@NotificationActivity))
+        {
+            val notificationModel  = ResNotification.NotificationHistory(0, "", "")
+            listNotificationHistory.add(notificationModel)
+            adapterNotification.notifyItemInserted(listNotificationHistory.size-1)
+
+            val presenterNotification= PresenterNotification()
+            presenterNotification.getNotificationPaginate(this@NotificationActivity,cursor,this)
+
+        }
+        else
+        {
+            swipeRefreshLayout.isRefreshing = false
+            CommonMethod.customSnackBarError(rootLayout,this@NotificationActivity,resources.getString(R.string.no_internet))
+        }
     }
 
 
