@@ -9,10 +9,14 @@ import android.widget.TextView
 
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.notification.inter.ICallBackNotification
+import com.app.l_pesa.notification.model.ResNotification
 import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.content_notification.*
+import java.util.ArrayList
 
-class NotificationActivity : AppCompatActivity() {
+class NotificationActivity : AppCompatActivity(), ICallBackNotification {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,22 @@ class NotificationActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,this@NotificationActivity,resources.getString(R.string.no_internet))
         }
+    }
+
+    override fun onSuccessNotification(notification_history: ArrayList<ResNotification.NotificationHistory>, cursors: ResNotification.Cursors) {
+
+    }
+
+    override fun onSuccessNotificationPaginate(notification_history: ArrayList<ResNotification.NotificationHistory>, cursors: ResNotification.Cursors) {
+
+    }
+
+    override fun onEmptyNotification() {
+
+    }
+
+    override fun onFailureNotification(message: String) {
+
     }
 
 
