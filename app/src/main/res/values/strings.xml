@@ -385,5 +385,8 @@
     <string name="cr">Cr</string>
     <string name="dr">Dr</string>
 
+    <!--Notification-->
+    <string name="notification">Notification</string>
+
 
 </resources>

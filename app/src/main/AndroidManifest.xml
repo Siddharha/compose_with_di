@@ -28,6 +28,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".notification.view.NotificationActivity"
+            android:label="@string/notification"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".wallet.view.WalletHistoryActivity"
             android:label="@string/withdrawal_history"
@@ -98,7 +104,7 @@
             android:name=".profile.view.ProfileEditEmpInfoActivity"
             android:label="@string/employment_info"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".profile.view.ProfileEditContactInfoActivity"
             android:label="@string/contact_info"
@@ -112,8 +118,7 @@
         <activity
             android:name=".loanHistory.view.LoanPaybackScheduledActivity"
             android:label="@string/payment_schedule"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".loanHistory.view.LoanHistoryDetailsActivity"
             android:label="@string/loan_details"
@@ -199,27 +204,20 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-
-        <service
-            android:name=".firebase.FirebaseMessagingIdService">
+        <service android:name=".firebase.FirebaseMessagingIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        <!--Optional-->
+        </service> <!-- Optional -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@drawable/ic_notification" />
-
-
-     </application>
+    </application>
 
 </manifest>

@@ -10,9 +10,10 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
+import com.app.l_pesa.notification.view.NotificationActivity
 import com.app.l_pesa.password.view.ChangePasswordActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
-import com.app.l_pesa.settings.adapter.RecyclerViewAdapter
+import com.app.l_pesa.settings.adapter.SettingsAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick
 import com.app.l_pesa.settings.model.SettingsItem
 import kotlinx.android.synthetic.main.fragment_settings.*
@@ -43,7 +44,7 @@ class SettingsFragment : Fragment(), ICallBackListClick {
         initData()
 
         rv_list.layoutManager = LinearLayoutManager(activity)
-        rv_list.adapter = RecyclerViewAdapter(activity!!, settingsList,this)
+        rv_list.adapter = SettingsAdapter(activity!!, settingsList,this)
     }
 
     private fun initData()
@@ -69,6 +70,11 @@ class SettingsFragment : Fragment(), ICallBackListClick {
        else if(position==1)
         {
             startActivity(Intent(activity, ChangePinActivity::class.java))
+            activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+        else if(position==3)
+        {
+            startActivity(Intent(activity, NotificationActivity::class.java))
             activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
 
