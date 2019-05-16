@@ -94,34 +94,52 @@
 
 -keep class com.app.l_pesa.common.** { *; }
 -keepclassmembers class com.app.l_pesa.common.** { *; }
+
 -keep class com.app.l_pesa.API.** { *; }
 -keepclassmembers class com.app.l_pesa.API.** { *; }
+
 -keep class com.app.l_pesa.splash.** { *; }
 -keepclassmembers class com.app.l_pesa.splash.** { *; }
+
 -keep class com.app.l_pesa.login.** { *; }
 -keepclassmembers class com.app.l_pesa.login.** { *; }
+
 -keep class com.app.l_pesa.registration.** { *; }
 -keepclassmembers class com.app.l_pesa.registration.** { *; }
+
 -keep class com.app.l_pesa.password.** { *; }
 -keepclassmembers class com.app.l_pesa.password.** { *; }
+
 -keep class com.app.l_pesa.pin.** { *; }
 -keepclassmembers class com.app.l_pesa.pin.** { *; }
+
 -keep class com.app.l_pesa.lpk.** { *; }
 -keepclassmembers class com.app.l_pesa.lpk.** { *; }
+
 -keep class com.app.l_pesa.dashboard.** { *; }
 -keepclassmembers class com.app.l_pesa.dashboard.** { *; }
+
 -keep class com.app.l_pesa.loanplan.** { *; }
 -keepclassmembers class com.app.l_pesa.loanplan.** { *; }
+
 -keep class com.app.l_pesa.loanHistory.** { *; }
 -keepclassmembers class com.app.l_pesa.loanHistory.** { *; }
+
 -keep class com.app.l_pesa.loanplan.** { *; }
 -keepclassmembers class com.app.l_pesa.loanplan.** { *; }
+
 -keep class com.app.l_pesa.wallet.** { *; }
 -keepclassmembers class com.app.l_pesa.wallet.** { *; }
+
 -keep class com.app.l_pesa.investment.** { *; }
 -keepclassmembers class com.app.l_pesa.investment.** { *; }
+
 -keep class com.app.l_pesa.profile.** { *; }
 -keepclassmembers class com.app.l_pesa.profile.** { *; }
+
+-keep class com.app.l_pesa.notification.** { *; }
+-keepclassmembers class com.app.l_pesa.notification.** { *; }
+
 -keep class com.app.l_pesa.logout.** { *; }
 -keepclassmembers class com.app.l_pesa.logout.** { *; }
 

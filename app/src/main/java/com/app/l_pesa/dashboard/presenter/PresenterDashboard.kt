@@ -38,7 +38,6 @@ class PresenterDashboard {
                             callBackOBJ.onSuccessDashboard(response.data!!)
                         }
 
-
                     }
                     catch (e: Exception)
                     {
@@ -48,11 +47,10 @@ class PresenterDashboard {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
-
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus=    jsonError.getJSONObject("status")
-                        val jsonMessage    =    jsonStatus.getString("message")
+                        val errorVal         = error as HttpException
+                        val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                        val  jsonStatus      =    jsonError.getJSONObject("status")
+                        val jsonMessage      =    jsonStatus.getString("message")
 
                         callBackOBJ.onFailureDashboard(jsonMessage)
                     }
