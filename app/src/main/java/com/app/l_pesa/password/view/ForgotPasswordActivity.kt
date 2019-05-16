@@ -51,7 +51,6 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
         forgetPassword()
     }
 
-
     private fun forgetPassword()
     {
 
