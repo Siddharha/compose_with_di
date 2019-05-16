@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/lpesa_logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/light_text_color"
+                app:layout_constraintBottom_toTopOf="@+id/txt_description"
+                app:layout_constraintStart_toEndOf="@+id/img_icon"
+                app:layout_constraintTop_toTopOf="@+id/img_icon" />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/dark_text_color"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/img_icon"
+                app:layout_constraintTop_toBottomOf="@+id/txtDate" />
+
+            <TextView
+                android:id="@+id/txt_status"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:text="@string/new_"
+                android:visibility="invisible"
+                android:textColor="@color/dark_text_color"
+                android:background="@drawable/bg_button_yellow"
+                android:paddingStart="@dimen/_7sdp"
+                android:paddingEnd="@dimen/_1sdp"
+                app:layout_constraintBottom_toTopOf="@+id/txt_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

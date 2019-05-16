@@ -387,6 +387,7 @@
 
     <!--Notification-->
     <string name="notification">Notification</string>
+    <string name="new_">New</string>
 
 
 </resources>
