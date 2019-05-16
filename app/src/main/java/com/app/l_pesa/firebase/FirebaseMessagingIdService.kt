@@ -25,97 +25,61 @@ import java.util.*
 
 
 /**
- * Created by Intellij Amiya on 07-08-2018.
+ * Created by Intellij Amiya on 16-05-2018.
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
 
 class FirebaseMessagingIdService : FirebaseMessagingService() {
 
-    private val NOTIFICATIONID              = "notificationId"
-    private val IMAGE_URL_EXTRA             = "attachmentUrl"
-    private val ADMIN_CHANNEL_ID            = "admin_channel"
-    private var notificationManager: NotificationManager? = null
+    private lateinit var notificationManager: NotificationManager
+    private val ADMIN_CHANNEL_ID = "l_pesa"
 
-    override fun onNewToken(s: String?) {
-
+    override fun onNewToken(token: String?) {
+        super.onNewToken(token)
 
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+        super.onMessageReceived(remoteMessage)
+        remoteMessage?.let { message ->
 
 
-            val notificationIntent = Intent(this, DashboardActivity::class.java)
-            notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            val pendingIntent= PendingIntent.getActivity(this,0 /* Request code */, notificationIntent,PendingIntent.FLAG_ONE_SHOT)
-
-            val notificationId       = Random().nextInt(60000)
-           // val bitmap           = getBitmap(remoteMessage!!.data["attachmentUrl"]!!)
-            val likeIntent               = Intent(this, DashboardActivity::class.java)
-
-            likeIntent.putExtra(NOTIFICATIONID, notificationId)
-           // likeIntent.putExtra(IMAGE_URL_EXTRA, remoteMessage.data["attachmentUrl"])
-
-            val likePendingIntent                           = PendingIntent.getService(this, notificationId + 1, likeIntent, PendingIntent.FLAG_ONE_SHOT)
-            val defaultSoundUri                             = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            notificationManager                             = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
+            //Setting up Notification channels for android O and above
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                setupChannels()
+                setupNotificationChannels()
             }
+            val notificationId = Random().nextInt(60000)
 
-                val notificationBuilder = NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
-                       /* .setLargeIcon(R.drawable.ic_address_icon)*/
-                        .setColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
-                        .setSmallIcon(R.drawable.lpesa_logo)
-                        .setContentTitle(remoteMessage!!.data["title"])
-                        /*.setStyle(NotificationCompat.BigPictureStyle()
-                                .setSummaryText(remoteMessage.data["message"])
-                                .bigPicture(bitmap))*//*Notification with Image*/
-                        //.setContentText(remoteMessage.data["message"])
-                        .setAutoCancel(true)
-                        .setSound(defaultSoundUri)
-                        .addAction(R.mipmap.ic_launcher_foreground,
-                                getString(R.string.app_name), likePendingIntent)
-                        .setContentIntent(pendingIntent)
+            val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val notificationBuilder = NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.lpesa_logo)
+                    .setContentTitle(message.data["title"])
+                    .setContentText(message.data["body"])
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
 
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-                notificationManager!!.notify(notificationId, notificationBuilder.build())
+            notificationManager.notify(notificationId /* ID of notification */, notificationBuilder.build())
 
-
-    }
-
-    private fun getBitmap(imageUrl: String): Bitmap? {
-        return try {
-            val url = URL(imageUrl)
-            val connection = url.openConnection() as HttpURLConnection
-            connection.doInput = true
-            connection.connect()
-            val input = connection.inputStream
-            BitmapFactory.decodeStream(input)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
         }
 
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private fun setupChannels() {
+    private fun setupNotificationChannels() {
         val adminChannelName = getString(R.string.app_name)
         val adminChannelDescription = getString(R.string.app_name)
 
         val adminChannel: NotificationChannel
-        adminChannel = NotificationChannel(ADMIN_CHANNEL_ID, adminChannelName, NotificationManager.IMPORTANCE_LOW)
+        adminChannel = NotificationChannel(ADMIN_CHANNEL_ID, adminChannelName, NotificationManager.IMPORTANCE_HIGH)
         adminChannel.description = adminChannelDescription
         adminChannel.enableLights(true)
         adminChannel.lightColor = Color.RED
         adminChannel.enableVibration(true)
-        if (notificationManager != null) {
-            notificationManager!!.createNotificationChannel(adminChannel)
-        }
+        notificationManager.createNotificationChannel(adminChannel)
     }
 }
-
