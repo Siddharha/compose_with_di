@@ -388,6 +388,7 @@
     <!--Notification-->
     <string name="notification">Notification</string>
     <string name="new_">New</string>
+    <string name="empty_notification">We could not find a push notification with that ID linked to your account.</string>
 
 
 </resources>

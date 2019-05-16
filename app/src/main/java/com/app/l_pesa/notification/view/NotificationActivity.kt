@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.notification.adapter.AdapterNotification
@@ -68,7 +67,8 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
     override fun onSuccessNotification(notification_history: ArrayList<ResNotification.NotificationHistory>, cursors: ResNotification.Cursors) {
 
         runOnUiThread {
-
+            cardView.visibility= View.INVISIBLE
+            rvList.visibility= View.VISIBLE
             hasNext =cursors.hasNext
             after   =cursors.after
             swipeRefreshLayout.isRefreshing = false
@@ -102,7 +102,6 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
     override fun onSuccessNotificationPaginate(notification_history: ArrayList<ResNotification.NotificationHistory>, cursors: ResNotification.Cursors) {
 
 
-
         hasNext =cursors.hasNext
         after   =cursors.after
         if(listNotificationHistory.size!=0)
@@ -123,10 +122,14 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
     override fun onEmptyNotification() {
 
         swipeRefreshLayout.isRefreshing    = false
+        rvList.visibility= View.INVISIBLE
+        cardView.visibility= View.VISIBLE
     }
 
     override fun onFailureNotification(message: String) {
 
+        rvList.visibility= View.INVISIBLE
+        cardView.visibility= View.INVISIBLE
         swipeRefreshLayout.isRefreshing    = false
         CommonMethod.customSnackBarError(rootLayout,this@NotificationActivity,message)
     }
