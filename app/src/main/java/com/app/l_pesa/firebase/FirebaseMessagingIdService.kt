@@ -5,22 +5,16 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
-import android.support.v4.content.ContextCompat
 import com.app.l_pesa.R
-import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.notification.view.NotificationActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import java.net.HttpURLConnection
-import java.net.URL
 import java.util.*
-
 
 
 
@@ -44,27 +38,29 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
         remoteMessage?.let { message ->
 
-
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            //Setting up Notification channels for android O and above
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 setupNotificationChannels()
             }
-            val notificationId = Random().nextInt(60000)
 
-            val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val notificationBuilder = NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
+            val notificationId = Random().nextInt(60000)
+            val intent = Intent(this, NotificationActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                    PendingIntent.FLAG_ONE_SHOT)
+
+            val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val notificationBuilder = NotificationCompat.Builder(this,ADMIN_CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notification)
                     .setContentTitle(message.data["title"])
                     .setContentText(message.data["body"])
                     .setAutoCancel(true)
-                    .setSound(defaultSoundUri)
+                    .setSound(soundUri)
+                    .setContentIntent(pendingIntent)
 
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            notificationManager.notify(notificationId /* ID of notification */, notificationBuilder.build())
-
+            notificationManager.notify(notificationId, notificationBuilder.build())
         }
 
     }
