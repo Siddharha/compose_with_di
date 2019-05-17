@@ -12,6 +12,9 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
+import com.app.l_pesa.lpk.model.ResInfoLPK
+import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.wallet.inter.ICallBackWallet
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
 import com.google.gson.Gson
@@ -21,7 +24,8 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
 
 
-class WalletFragment :Fragment(), ICallBackWallet {
+class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
+
 
     private lateinit  var progressDialog: KProgressHUD
 
@@ -129,10 +133,31 @@ class WalletFragment :Fragment(), ICallBackWallet {
         }
     }
 
-    override fun onSuccessWalletWithdrawal(message: String) {
+    @SuppressLint("SetTextI18n")
+    override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
         dismiss()
-        buttonWithdraw.isClickable=true
+
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        userDashBoard.commission_eachtime=data!!.commission_eachtime
+        userDashBoard.wallet_balance=data.wallet_balance
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
+        txtWalletBal.text=format.format(data.wallet_balance).toString()+" "+userDashBoard.currencyCode
+        txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
+
+    }
+
+    override fun onErrorInfoLPK(message: String) {
+        dismiss()
+    }
+
+    override fun onSuccessWalletWithdrawal(message: String) {
+
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,message)
+        val presenterInfoLPK= PresenterInfoLPK()
+        presenterInfoLPK.getInfoLPK(activity!!,this,"")
     }
 
     override fun onErrorWalletWithdrawal(message: String) {

@@ -40,6 +40,12 @@ class ResInfoLPK {
         @SerializedName("lpk_min_withdrawal")
         @Expose
         var lpkMinWithdrawal: Double = 0.0
+        @SerializedName("wallet_balance")
+        @Expose
+        var wallet_balance: Double = 0.0
+        @SerializedName("commission_eachtime")
+        @Expose
+        var commission_eachtime: Double = 0.0
 
     }
 
