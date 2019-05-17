@@ -256,6 +256,7 @@
     <string name="wallet_address_link">http://www.myetherwallet.com/</string>
     <string name="enter_token">Enter Token</string>
     <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
+    <string name="update_erc_address">Update your ERC-20 address on L-Pesa to withdraw LPK into your account..</string>
 
 
     <!--Contact Info-->

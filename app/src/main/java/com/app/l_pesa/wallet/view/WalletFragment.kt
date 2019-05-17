@@ -147,7 +147,6 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         }, 100)
 
 
-        Toast.makeText(activity,"",Toast.LENGTH_SHORT).show()
     }
 
     override fun onErrorInfoLPK(message: String) {

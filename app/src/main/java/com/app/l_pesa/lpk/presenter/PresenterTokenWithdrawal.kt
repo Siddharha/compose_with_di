@@ -34,7 +34,7 @@ class PresenterTokenWithdrawal {
                         }
                         else
                         {
-                            callBackOBJ.onErrorTokenWithdrawal(response.status!!.message)
+                            callBackOBJ.onErrorTokenWithdrawal(response.status!!.message,response.status.statusCode.toInt())
                         }
 
                     }
@@ -51,13 +51,14 @@ class PresenterTokenWithdrawal {
                         val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
+                        val jsonStatusCode        =    jsonStatus.getInt("statusCode")
 
-                        callBackOBJ.onErrorTokenWithdrawal(jsonMessage)
+                        callBackOBJ.onErrorTokenWithdrawal(jsonMessage, jsonStatusCode)
                     }
                     catch (exp: Exception)
                     {
                         val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
-                        callBackOBJ.onErrorTokenWithdrawal(errorMessageOBJ)
+                        callBackOBJ.onErrorTokenWithdrawal(errorMessageOBJ, 0)
                     }
 
                 })

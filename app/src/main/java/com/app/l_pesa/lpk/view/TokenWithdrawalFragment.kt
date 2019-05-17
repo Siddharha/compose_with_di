@@ -8,6 +8,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -99,7 +100,13 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_withdrawal_successfully))
     }
 
-    override fun onErrorTokenWithdrawal(message: String) {
+    override fun onErrorTokenWithdrawal(message: String, statusCode: Int) {
+
+        if(statusCode==10097)
+        {
+            Toast.makeText(activity,resources.getString(R.string.update_erc_address),Toast.LENGTH_SHORT).show()
+        }
+
         buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootLayout,activity as AppCompatActivity,message)
