@@ -141,7 +141,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     private fun loadCountry()
     {
 
-
        val sharedPrefOBJ=SharedPref(this@LoginActivity)
        val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 

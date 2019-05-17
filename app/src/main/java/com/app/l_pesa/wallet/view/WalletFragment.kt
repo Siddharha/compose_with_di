@@ -11,10 +11,9 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
-import com.app.l_pesa.lpk.model.ResInfoLPK
-import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
+import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.app.l_pesa.wallet.inter.ICallBackWallet
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
 import com.google.gson.Gson
@@ -24,7 +23,9 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
 
 
-class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
+
+class WalletFragment :Fragment(), ICallBackWallet, ICallBackDashboard {
+
 
 
     private lateinit  var progressDialog: KProgressHUD
@@ -134,42 +135,47 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
-        dismiss()
-
-        val sharedPrefOBJ= SharedPref(activity!!)
-        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
-
-        userDashBoard.commission_eachtime=data!!.commission_eachtime
-        userDashBoard.wallet_balance=data.wallet_balance
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userDashBoard= json
-
-        val format = DecimalFormat()
-        format.isDecimalSeparatorAlwaysShown = false
-
-        txtWalletBal.text=format.format(data.wallet_balance).toString()+" "+userDashBoard.currencyCode
-        txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
-
-    }
-
-    override fun onErrorInfoLPK(message: String) {
-        dismiss()
-    }
 
     override fun onSuccessWalletWithdrawal(message: String) {
 
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,message)
-        val presenterInfoLPK= PresenterInfoLPK()
-        presenterInfoLPK.getInfoLPK(activity!!,this,"")
+        val sharedPrefOBJ = SharedPref(activity!!)
+        val presenterDashboard= PresenterDashboard()
+        presenterDashboard.getDashboard(activity!!,sharedPrefOBJ.accessToken,this)
     }
 
     override fun onErrorWalletWithdrawal(message: String) {
         dismiss()
         buttonWithdraw.isClickable=true
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onSuccessDashboard(data: ResDashboard.Data) {
+
+        val sharedPrefOBJ = SharedPref(activity!!)
+        val gson = Gson()
+        val dashBoardData = gson.toJson(data)
+        sharedPrefOBJ.userDashBoard = dashBoardData
+
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
+        activity!!.runOnUiThread {
+
+            txtWalletBal.text=format.format(data.wallet_balance).toString()+" "+data.currencyCode
+            txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
+
+
+        }
+
+
+    }
+
+    override fun onFailureDashboard(jsonMessage: String) {
+        dismiss()
+        buttonWithdraw.isClickable=true
+        CommonMethod.customSnackBarError(rootLayout,activity!!,jsonMessage)
     }
 
     private fun dismiss()
