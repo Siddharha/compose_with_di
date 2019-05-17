@@ -10,20 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.inter.ICallBackDashboard
-import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.wallet.inter.ICallBackWallet
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
-import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
+import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread
+import com.app.l_pesa.dashboard.view.DashboardActivity
 
 
 class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
@@ -144,12 +141,13 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
-        activity!!.runOnUiThread {
+        (activity as DashboardActivity).runOnUiThread {
 
             txtWalletBal.text=format.format(data!!.wallet_balance).toString()+" "+data.currency_code
             txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
 
         }
+
     }
 
     override fun onErrorInfoLPK(message: String) {

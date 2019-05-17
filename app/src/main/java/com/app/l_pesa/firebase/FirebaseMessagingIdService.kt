@@ -11,6 +11,8 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
 import com.app.l_pesa.R
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -43,25 +45,34 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 setupNotificationChannels()
             }
+            val sharedPrefOBJ= SharedPref(this)
 
-            val notificationId = Random().nextInt(60000)
-            val intent = Intent(this, NotificationActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent,
-                    PendingIntent.FLAG_ONE_SHOT)
+                val notificationId = Random().nextInt(60000)
+                var intent=  Intent()
+                intent = if(sharedPrefOBJ.accessToken.length>10) {
+                Intent(this, NotificationActivity::class.java)
+                } else {
+                Intent(this, MainActivity::class.java)
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                val pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                        PendingIntent.FLAG_ONE_SHOT)
 
-            val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val notificationBuilder = NotificationCompat.Builder(this,ADMIN_CHANNEL_ID)
-                    .setSmallIcon(R.drawable.ic_notification)
-                    .setContentTitle(message.data["title"])
-                    .setContentText(message.data["body"])
-                    .setAutoCancel(true)
-                    .setSound(soundUri)
-                    .setContentIntent(pendingIntent)
+                val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                val notificationBuilder = NotificationCompat.Builder(this,ADMIN_CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_notification)
+                        .setContentTitle(message.data["title"])
+                        .setContentText(message.data["body"])
+                        .setAutoCancel(true)
+                        .setSound(soundUri)
+                        .setContentIntent(pendingIntent)
 
 
-            notificationManager.notify(notificationId, notificationBuilder.build())
-        }
+                notificationManager.notify(notificationId, notificationBuilder.build())
+            }
+
+
+
 
     }
 
