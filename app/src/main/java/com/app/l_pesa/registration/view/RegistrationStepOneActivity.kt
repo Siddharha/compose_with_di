@@ -29,12 +29,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 
 
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne {
 
-
+    private lateinit  var progressDialog: KProgressHUD
     private var countryCode     ="+255"
     private var countryFound    = false
 
@@ -45,8 +46,28 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_one)
 
+        initLoader()
         loadCountry()
         checkQualify()
+    }
+
+
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(this@RegistrationStepOneActivity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
     }
 
     private fun checkQualify()
@@ -81,10 +102,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         {
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
-                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                swipeRefreshLayout.isRefreshing=true
+                progressDialog.show()
                 txtQualify.isClickable=false
-
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
                 jsonObject.addProperty("country_code",countryCode)
@@ -234,8 +253,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onSuccessRegistrationOne(data: RegistrationData) {
 
+        dismiss()
         Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
-        swipeRefreshLayout.isRefreshing=false
         txtQualify.isClickable =true
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
         sharedPref.accessToken=data.access_token
@@ -250,7 +269,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onErrorRegistrationOne(jsonMessage: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         txtQualify.isClickable=true
         CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,jsonMessage)
     }
