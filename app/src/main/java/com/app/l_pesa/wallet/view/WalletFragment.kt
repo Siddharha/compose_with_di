@@ -141,13 +141,13 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
-        (activity as DashboardActivity).runOnUiThread {
-
-            txtWalletBal.text=format.format(data!!.wallet_balance).toString()+" "+data.currency_code
+        runOnUiThread {
+            txtWalletBal.text = format.format(data!!.wallet_balance).toString()+" "+data.currency_code
             txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
 
+            txtWalletBal.invalidate()
+            txtCommission.invalidate()
         }
-
     }
 
     override fun onErrorInfoLPK(message: String) {
