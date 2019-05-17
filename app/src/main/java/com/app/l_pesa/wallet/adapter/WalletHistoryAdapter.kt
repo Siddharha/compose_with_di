@@ -94,7 +94,7 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
 
             txtAmount.text              =  withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.withdrawal_amount)
             txtAmountTransfer.text      =  context.resources.getString(R.string.transfer)+": "+ withdrawalHistory.currency_code+" "+format.format(withdrawalHistory.transfer_amount)
-            txtCommission.text          =  context.resources.getString(R.string.commission)+": "+withdrawalHistory.commission_percentage+"%"
+            txtCommission.text          =  context.resources.getString(R.string.commission)+": "+format.format(withdrawalHistory.commission_percentage)+"%"
             txtRef.text                 =  context.resources.getString(R.string.ref_no)+" "+withdrawalHistory.identity_number
             txtCreateDate.text          =  CommonMethod.dateConvert(withdrawalHistory.created)
 
