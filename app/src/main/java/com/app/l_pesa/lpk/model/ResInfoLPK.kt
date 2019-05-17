@@ -31,6 +31,9 @@ class ResInfoLPK {
         @SerializedName("lpk_savings_text")
         @Expose
         var lpkSavingsText: String = ""
+        @SerializedName("currency_code")
+        @Expose
+        var currency_code: String = ""
         @SerializedName("lpk_value")
         @Expose
         var lpkValue: Double = 0.0
