@@ -78,6 +78,7 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
             if(etWithdrawalAmount.text.toString().isEmpty())
             {
+                CommonMethod.hideKeyboardView(activity as AppCompatActivity)
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_withdrawal_amount))
             }
             else
