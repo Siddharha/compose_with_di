@@ -71,6 +71,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     }
 
    private fun initData() {
+
         initLoader()
         val sharedPrefOBJ = SharedPref(activity!!)
         val dashBoard = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)

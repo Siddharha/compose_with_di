@@ -143,7 +143,9 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
         userDashBoard.commission_eachtime=data!!.commission_eachtime
         userDashBoard.wallet_balance=data.wallet_balance
-
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.userDashBoard= json
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
