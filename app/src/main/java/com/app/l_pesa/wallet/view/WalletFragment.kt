@@ -19,12 +19,10 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
-import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread
-import com.app.l_pesa.dashboard.view.DashboardActivity
+import android.widget.Toast
 
 
 class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
-
 
 
     private lateinit  var progressDialog: KProgressHUD
@@ -141,13 +139,15 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
-        runOnUiThread {
+        rootLayout.postDelayed(Runnable {
+
             txtWalletBal.text = format.format(data!!.wallet_balance).toString()+" "+data.currency_code
             txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
 
-            txtWalletBal.invalidate()
-            txtCommission.invalidate()
-        }
+        }, 100)
+
+
+        Toast.makeText(activity,"",Toast.LENGTH_SHORT).show()
     }
 
     override fun onErrorInfoLPK(message: String) {
