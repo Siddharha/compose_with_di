@@ -29,7 +29,7 @@ class PresenterWithdrawal {
                     try {
                         if (response.status.isSuccess)
                         {
-                            callBackOBJ.onSuccessWalletWithdrawal(response.status.message)
+                            callBackOBJ.onSuccessWalletWithdrawal(response.data.message)
 
                         } else
                         {

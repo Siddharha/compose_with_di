@@ -66,6 +66,7 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         val sharedPrefOBJ= SharedPref(activity!!)
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
+
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
         if(userDashBoard!=null)
@@ -139,8 +140,11 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
         val sharedPrefOBJ= SharedPref(activity!!)
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+
         userDashBoard.commission_eachtime=data!!.commission_eachtime
         userDashBoard.wallet_balance=data.wallet_balance
+
+
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
