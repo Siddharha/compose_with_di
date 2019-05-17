@@ -111,7 +111,6 @@ class WalletFragment :Fragment(), ICallBackWallet {
             }
 
 
-
         }
 
         imgWithdrawalHistory.setOnClickListener {
@@ -130,9 +129,10 @@ class WalletFragment :Fragment(), ICallBackWallet {
         }
     }
 
-    override fun onSuccessWalletWithdrawal() {
+    override fun onSuccessWalletWithdrawal(message: String) {
         dismiss()
         buttonWithdraw.isClickable=true
+        CommonMethod.customSnackBarSuccess(rootLayout,activity!!,message)
     }
 
     override fun onErrorWalletWithdrawal(message: String) {
