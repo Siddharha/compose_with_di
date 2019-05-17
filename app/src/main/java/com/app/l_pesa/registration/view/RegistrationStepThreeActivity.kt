@@ -34,6 +34,7 @@ import com.app.l_pesa.registration.adapter.PersonalIdListAdapter
 import com.app.l_pesa.registration.inter.ICallBackRegisterThree
 import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.content_registration_step_three.*
 import java.io.File
 import java.lang.Exception
@@ -41,7 +42,7 @@ import java.lang.Exception
 
 class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {
 
-
+    private lateinit              var progressDialog: KProgressHUD
     private val idList   = arrayListOf("1","2","3","4")
     private val nameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
     private var typeId="0"
@@ -55,6 +56,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_three)
 
+        initLoader()
         initUI()
 
     }
@@ -92,6 +94,25 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         }
     }
 
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(this@RegistrationStepThreeActivity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+
     private fun onSubmitData()
     {
       if(typeId=="0")
@@ -111,10 +132,8 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
       {
           if(CommonMethod.isNetworkAvailable(this@RegistrationStepThreeActivity))
           {
+              progressDialog.show()
               buttonSubmit.isClickable=false
-              swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-              swipeRefreshLayout.isRefreshing=true
-
               val presenterAWSProfile= PresenterAWSProfile()
               presenterAWSProfile.uploadPersonalID(this@RegistrationStepThreeActivity,this,photoFile)
           }
@@ -132,8 +151,9 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
     override fun onFailureUploadAWS(string: String) {
 
+        dismiss()
         buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=true
+
     }
 
     private fun uploadData(imageURL: String)
@@ -161,8 +181,8 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
     override fun onErrorRegistrationThree(jsonMessage: String) {
 
+        dismiss()
         buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepThreeActivity,jsonMessage)
     }
 

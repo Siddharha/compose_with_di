@@ -28,6 +28,7 @@ import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.registration.inter.ICallBackRegisterTwo
 import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
 import java.lang.Exception
@@ -35,22 +36,23 @@ import java.lang.Exception
 
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
-    private val Photo             = 14
-    private val Gallery           = 15
+    private lateinit              var progressDialog: KProgressHUD
     private var captureImageStatus : Boolean    = false
     private var photoFile          : File?      = null
     private var captureFilePath    : Uri?       = null
     private var mobileOtp           = ""
+    private val Photo               = 14
+    private val Gallery             = 15
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_two)
 
-
         val bundle      = intent.extras
         mobileOtp       = bundle!!.getString("OTP")!!
 
+        initLoader()
         imgEditPhoto.setOnClickListener {
 
             selectImage()
@@ -62,6 +64,24 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         }
 
 
+    }
+
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(this@RegistrationStepTwoActivity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(true)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
     }
 
     private fun onSubmit()
@@ -86,8 +106,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         {
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepTwoActivity))
             {
-                swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                swipeRefreshLayout.isRefreshing=true
+                progressDialog.show()
                 btnSubmit.isClickable=false
 
                 val presenterAWSProfile= PresenterAWSProfile()
@@ -108,7 +127,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     override fun onFailureUploadAWS(string: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         btnSubmit.isClickable=true
         Toast.makeText(this@RegistrationStepTwoActivity,string,Toast.LENGTH_SHORT).show()
     }
@@ -135,7 +154,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     override fun onErrorRegistrationTwo(jsonMessage: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         btnSubmit.isClickable=true
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,jsonMessage)
     }
