@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
@@ -83,14 +84,13 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
-                    progressDialog.show()
-                    buttonWithdraw.isClickable=false
-                    CommonMethod.hideKeyboardView(activity as AppCompatActivity)
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("amount",etWithdrawalAmount.text.toString().trim())
+                    val alertDialog = AlertDialog.Builder(activity!!)
+                    alertDialog.setTitle(resources.getString(R.string.app_name))
+                    alertDialog.setMessage(resources.getString(R.string.want_to_withdraw))
+                    alertDialog.setPositiveButton("Yes") { _, _ -> withdrawAmount() }
+                            .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                    alertDialog.show()
 
-                    val presenterWithdrawal= PresenterWithdrawal()
-                    presenterWithdrawal.doAddWithdrawal(activity!!,jsonObject,this)
                 }
                 else
                 {
@@ -132,6 +132,18 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         }
     }
 
+    private fun withdrawAmount()
+    {
+        progressDialog.show()
+        buttonWithdraw.isClickable=false
+        CommonMethod.hideKeyboardView(activity as AppCompatActivity)
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("amount",etWithdrawalAmount.text.toString().trim())
+
+        val presenterWithdrawal= PresenterWithdrawal()
+        presenterWithdrawal.doAddWithdrawal(activity!!,jsonObject,this)
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
 
@@ -159,7 +171,7 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
 
     override fun onSuccessWalletWithdrawal(message: String) {
-
+       etWithdrawalAmount.text!!.clear()
        buttonWithdraw.isClickable=true
        CommonMethod.customSnackBarSuccess(rootLayout,activity!!,message)
        val presenterInfoLPK= PresenterInfoLPK()

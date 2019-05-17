@@ -155,7 +155,8 @@ object CommonMethod {
 
     fun customSnackBarSuccess(view: View,context: Context,message:String) {
 
-        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
+        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_INDEFINITE)
+        snackBarOBJ.duration = 5000
         snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(context,R.color.color_green_success))
         (snackBarOBJ.view as ViewGroup).removeAllViews()
         val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_success, null)
