@@ -53,6 +53,14 @@ class ResInfoLPK {
         @Expose
         var commission_eachtime: Double = 0.0
 
+        @SerializedName("lpesa_min_withdrawal_wallet")
+        @Expose
+        var lpesa_min_withdrawal_wallet: Double = 0.0
+
+        @SerializedName("lpesa_max_withdrawal_wallet")
+        @Expose
+        var lpesa_max_withdrawal_wallet: Double = 0.0
+
     }
 
 

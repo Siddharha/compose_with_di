@@ -141,8 +141,8 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
         rootLayout.postDelayed(Runnable {
 
-            txt_min.text = format.format(data!!.lpkMinWithdrawal).toString()+" "+data.currency_code
-            txt_max.text = format.format(data.lpkMaxWithdrawal).toString()+" "+data.currency_code
+            txt_min.text = format.format(data!!.lpesa_min_withdrawal_wallet).toString()+" "+data.currency_code
+            txt_max.text = format.format(data.lpesa_max_withdrawal_wallet).toString()+" "+data.currency_code
             txtWalletBal.text = format.format(data.wallet_balance).toString()+" "+data.currency_code
             txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
 
