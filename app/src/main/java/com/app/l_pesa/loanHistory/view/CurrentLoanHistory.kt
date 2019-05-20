@@ -350,7 +350,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
                             progressDialog.show()
 
                             val jsonObject = JsonObject()
-                            jsonObject.addProperty("loan_type","current_type")
+                            jsonObject.addProperty("loan_type","current_loan")
                             jsonObject.addProperty("loan_id",loanHistoryCurrent.loan_id.toString())
                             jsonObject.addProperty("cancel_reason",taskEditText.text.toString())
 
