@@ -290,4 +290,9 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
+    override fun onRemoveLoan()
+    {
+
+    }
+
 }

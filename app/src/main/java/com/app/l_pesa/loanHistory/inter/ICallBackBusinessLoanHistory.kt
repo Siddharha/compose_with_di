@@ -9,4 +9,5 @@ interface ICallBackBusinessLoanHistory {
     fun onEmptyLoanHistory(type: String)
     fun onFailureLoanHistory(jsonMessage: String)
     fun onClickList()
+    fun onRemoveLoan()
 }

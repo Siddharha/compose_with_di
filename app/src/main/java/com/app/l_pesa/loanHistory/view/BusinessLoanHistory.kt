@@ -282,4 +282,9 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
+    override fun onRemoveLoan()
+    {
+
+    }
+
 }

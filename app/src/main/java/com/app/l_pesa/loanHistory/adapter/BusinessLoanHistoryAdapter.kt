@@ -95,6 +95,8 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                     itemView.txt_status.text = context.resources.getString(R.string.approved)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
                     itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
+
+                    itemView.img_delete.visibility=View.INVISIBLE
                 }
                 loanHistoryBusiness.loan_status=="C" -> {
                     itemView.txt_applied_on_date.text=loanHistoryBusiness.finished_date
@@ -103,6 +105,8 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_semi_deep_black))
                     itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
 
+                    itemView.img_delete.visibility=View.INVISIBLE
+
                 }
                 loanHistoryBusiness.loan_status=="P" -> {
                     itemView.txt_applied_on_date.text=loanHistoryBusiness.applied_date
@@ -110,6 +114,8 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                     itemView.txt_status.text = context.resources.getString(R.string.pending)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
                     itemView.img_status.setImageResource(R.drawable.ic_pending_icon)
+
+                    itemView.img_delete.visibility=View.VISIBLE
                 }
                 loanHistoryBusiness.loan_status=="DA" -> {
                     itemView.txt_applied_on_date.text=loanHistoryBusiness.disapprove_date
@@ -118,6 +124,8 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
                     itemView.img_status.setImageResource(R.drawable.ic_disapproved_icon)
 
+                    itemView.img_delete.visibility=View.INVISIBLE
+
                 }
                 else -> {
                     itemView.txt_applied_on_date.text=loanHistoryBusiness.applied_date
@@ -125,22 +133,38 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                     itemView.txt_status.text = context.resources.getString(R.string.due)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
                     itemView.img_status.setImageResource(R.drawable.ic_due_icon)
+
+                    itemView.img_delete.visibility=View.INVISIBLE
                 }
             }
 
 
-            itemView.rlRoot.setOnClickListener {
+            val modelData           = GlobalLoanHistoryModel.getInstance()
+            val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.interest_rate,
+                    loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
+                    loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
+                    loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
+                    loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
 
-                val modelData           = GlobalLoanHistoryModel.getInstance()
-                val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.interest_rate,
-                        loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
-                        loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
-                        loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
-                        loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
+            modelData.modelData=modelDataBusiness
 
-                 modelData.modelData=modelDataBusiness
+            itemView.ll_card_left.setOnClickListener {
+
+
                 callBackCurrent.onClickList()
             }
+
+            itemView.rl_card_right.setOnClickListener {
+
+                callBackCurrent.onClickList()
+
+            }
+
+            itemView.rl_approved_on.setOnClickListener {
+
+                callBackCurrent.onRemoveLoan()
+            }
+
 
 
         }

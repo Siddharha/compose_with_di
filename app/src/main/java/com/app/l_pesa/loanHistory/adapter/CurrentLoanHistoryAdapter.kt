@@ -94,6 +94,8 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
                     itemView.txt_status.text = context.resources.getString(R.string.approved)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_green))
                     itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
+
+                    itemView.img_delete.visibility=View.INVISIBLE
                 }
                 loanHistoryCurrent.loan_status=="C" -> {
                     itemView.txt_applied_on_date.text=loanHistoryCurrent.finished_date
@@ -102,6 +104,8 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_semi_deep_black))
                     itemView.img_status.setImageResource(R.drawable.ic_approved_icon)
 
+                    itemView.img_delete.visibility=View.INVISIBLE
+
                 }
                 loanHistoryCurrent.loan_status=="P" -> {
                     itemView.txt_applied_on_date.text=loanHistoryCurrent.applied_date
@@ -109,6 +113,8 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
                     itemView.txt_status.text = context.resources.getString(R.string.pending)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
                     itemView.img_status.setImageResource(R.drawable.ic_pending_icon)
+
+                    itemView.img_delete.visibility=View.VISIBLE
                 }
                 loanHistoryCurrent.loan_status=="DA" -> {
                     itemView.txt_applied_on_date.text=loanHistoryCurrent.disapprove_date
@@ -117,6 +123,8 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
                     itemView.img_status.setImageResource(R.drawable.ic_disapproved_icon)
 
+                    itemView.img_delete.visibility=View.INVISIBLE
+
                 }
                 else -> {
                     itemView.txt_applied_on_date.text=loanHistoryCurrent.applied_date
@@ -124,19 +132,35 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
                     itemView.txt_status.text = context.resources.getString(R.string.due)
                     itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
                     itemView.img_status.setImageResource(R.drawable.ic_due_icon)
+
+                    itemView.img_delete.visibility=View.INVISIBLE
                 }
             }
 
 
-            itemView.rlRoot.setOnClickListener {
+            val modelData=GlobalLoanHistoryModel.getInstance()
+            modelData.modelData=loanHistoryCurrent
+            itemView.ll_card_left.setOnClickListener {
 
-                val modelData=GlobalLoanHistoryModel.getInstance()
-                modelData.modelData=loanHistoryCurrent
+
                 callBackCurrent.onClickList()
+            }
+
+            itemView.rl_card_right.setOnClickListener {
+
+                callBackCurrent.onClickList()
+
+            }
+
+            itemView.rl_approved_on.setOnClickListener {
+
+                callBackCurrent.onRemoveLoan()
             }
 
 
         }
+
+
 
     }
 
