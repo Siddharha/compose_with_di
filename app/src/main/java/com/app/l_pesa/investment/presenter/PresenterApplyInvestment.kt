@@ -62,7 +62,7 @@ class PresenterApplyInvestment {
     }
 
 
-    fun removeInvestment(contextOBJ: Context, callBackOBJ: ICallBackInvestmentHistory, jsonRequest: JsonObject)
+    fun removeInvestment(contextOBJ: Context, callBackOBJ: ICallBackInvestmentHistory, jsonRequest: JsonObject,position: Int)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doInvestmentRemove(jsonRequest)
@@ -78,7 +78,7 @@ class PresenterApplyInvestment {
 
                         if(response.status!!.isSuccess)
                         {
-                            callBackOBJ.onSuccessRemoveInvestment()
+                            callBackOBJ.onSuccessRemoveInvestment(position)
 
                         }
 

@@ -465,7 +465,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 alertDialog.setMessage(resources.getString(R.string.delete_exit_loan))
                 alertDialog.setPositiveButton("Yes") { _, _ ->
 
-                    doRemoveInvest(investmentList.investment_id)
+                    doRemoveInvest(investmentList.investment_id,position)
                 }
                         .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
@@ -479,17 +479,19 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     }
 
-    private fun doRemoveInvest(investment_id: Int)
+    private fun doRemoveInvest(investment_id: Int, position: Int)
     {
         progressDialog.show()
         val jsonObject = JsonObject()
         jsonObject.addProperty("deposit_id",investment_id.toString())
         val presenterApplyInvestment= PresenterApplyInvestment()
-        presenterApplyInvestment.removeInvestment(activity!!,this,jsonObject)
+        presenterApplyInvestment.removeInvestment(activity!!,this,jsonObject,position)
     }
 
-    override fun onSuccessRemoveInvestment() {
+    override fun onSuccessRemoveInvestment(position: Int) {
         dismiss()
+        listInvestment.removeAt(position)
+        adapterInvestmentHistory.notifyItemRemoved(position)
     }
 
     override fun onErrorRemoveInvestment(message: String) {

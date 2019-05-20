@@ -19,6 +19,6 @@ interface ICallBackInvestmentHistory {
     fun onSuccessExitPoint()
     fun onErrorExitPoint(message: String)
 
-    fun onSuccessRemoveInvestment()
+    fun onSuccessRemoveInvestment(position:Int)
     fun onErrorRemoveInvestment(message: String)
 }
