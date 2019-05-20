@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
@@ -321,7 +322,9 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
         val dialog = AlertDialog.Builder(activity!!)
 
+        val font = ResourcesCompat.getFont(activity!!, R.font.montserrat)
         val taskEditText    = CommonEditTextRegular(activity)
+        taskEditText.typeface=font
         taskEditText.setTextColor(ContextCompat.getColor(activity!!,R.color.colorTextBlackLight))
         val textInputLayout = TextInputLayout(activity)
 
