@@ -120,13 +120,9 @@
 -keepclassmembers class com.app.l_pesa.dashboard.** { *; }
 
 -keep class com.app.l_pesa.loanplan.** { *; }
--keepclassmembers class com.app.l_pesa.loanplan.** { *; }
 
 -keep class com.app.l_pesa.loanHistory.** { *; }
 -keepclassmembers class com.app.l_pesa.loanHistory.** { *; }
-
--keep class com.app.l_pesa.loanplan.** { *; }
--keepclassmembers class com.app.l_pesa.loanplan.** { *; }
 
 -keep class com.app.l_pesa.wallet.** { *; }
 -keepclassmembers class com.app.l_pesa.wallet.** { *; }

@@ -98,7 +98,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             {
                 itemView.imageView5.visibility=View.INVISIBLE
                 itemView.txtInterest.visibility=View.INVISIBLE
-                itemView.imageView6.visibility=View.INVISIBLE
+                itemView.imageView6.visibility=View.VISIBLE
                 itemView.imageView7.visibility=View.INVISIBLE
                 itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
                 itemView.txtMaturity.visibility=View.VISIBLE
@@ -106,22 +106,22 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
 
                 itemView.txtMaturity.setTextColor(ContextCompat.getColor(context,R.color.colorRed))
                 itemView.txtMaturity.text=investmentList.deposit_status_txt
-                itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_red,0,0,0)
+                itemView.imageView6.setImageResource(R.drawable.ic_error_red)
 
             }
             else if(investmentList.deposit_status=="P")
             {
                 itemView.imageView5.visibility=View.INVISIBLE
                 itemView.txtInterest.visibility=View.INVISIBLE
-                itemView.imageView6.visibility=View.INVISIBLE
                 itemView.imageView7.visibility=View.INVISIBLE
                 itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
                 itemView.txtMaturity.visibility=View.VISIBLE
+                itemView.imageView6.visibility=View.VISIBLE
                 itemView.txtDetails.visibility=View.GONE
 
                 itemView.txtMaturity.setTextColor(ContextCompat.getColor(context,R.color.color_deep_gold))
                 itemView.txtMaturity.text=investmentList.deposit_status_txt
-                itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error_yellow,0,0,0)
+                itemView.imageView6.setImageResource(R.drawable.ic_error_yellow)
 
             }
             else if(investmentList.deposit_status=="C")
@@ -135,6 +135,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.txtWithdrawalStatus.visibility=View.INVISIBLE //Visible
                 itemView.imageView7.visibility=View.INVISIBLE //Visible
                 itemView.imageView7.setImageResource(R.drawable.ic_calendar_icon)
+                itemView.imageView6.setImageResource(R.drawable.ic_calendar_icon)
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.maturity)+": "+"</font>"+"<font color='#777b7e'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
                 itemView.txtInterest.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.interest)+": "+"</font>"+"<font color='#777b7e'>"+ investmentList.currency_code+" "+format.format(investmentList.interest_amount).toString()+"</font>")
@@ -155,6 +156,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
                 itemView.imageView6.visibility=View.VISIBLE
                 itemView.imageView7.visibility=View.VISIBLE
                 itemView.txtWithdrawalStatus.visibility=View.VISIBLE
+                itemView.imageView6.setImageResource(R.drawable.ic_calendar_icon)
                 itemView.imageView7.setImageResource(R.drawable.ic_approved_icon)
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.maturity)+": "+"</font>"+"<font color='#777b7e'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
@@ -177,7 +179,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
 
             }
 
-            if(!investmentList.actionState.btnWithdrawalShow && !investmentList.actionState.btnReinvestShow && !investmentList.actionState.btnExitPointShow)
+            if(!investmentList.actionState.btnWithdrawalShow && !investmentList.actionState.btnReinvestShow && !investmentList.actionState.btnExitPointShow && investmentList.deposit_status!="P")
             {
                 itemView.imgEdit.visibility=View.INVISIBLE
             }

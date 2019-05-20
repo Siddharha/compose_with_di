@@ -122,7 +122,11 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                                     {
                                        loanApply(loan_type,product_id,location)
                                     }
-                                    fusedLocationProviderClient.removeLocationUpdates(this)
+                                    else
+                                    {
+
+                                    }
+                                    //fusedLocationProviderClient.removeLocationUpdates(this)
 
                                 }
 
@@ -160,6 +164,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         jsonObject.addProperty("latitude",location.latitude.toString())
         jsonObject.addProperty("longitude",location.longitude.toString())
+
+        //println("JSON+++"+jsonObject.toString())
 
         val presenterLoanApply= PresenterLoanApply()
         presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)

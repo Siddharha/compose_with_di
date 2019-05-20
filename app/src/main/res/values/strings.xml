@@ -313,6 +313,7 @@
     <string name="edit_id_number">ID Number*</string>
     <string name="view_file">View File</string>
     <string name="delete">Delete</string>
+
     <string name="uploaded_on">Uploaded On:</string>
     <string name="delete_this_item">Are you sure to delete this item?</string>
 
@@ -339,6 +340,7 @@
     <string name="apply_reinvestment">Are you sure you want to Reinvest?</string>
     <string name="apply_withdrawal">Are you sure you want to withdraw?</string>
     <string name="apply_exit_point">Are you sure you want to exit?</string>
+    <string name="delete_exit_loan">Are you sure you want to Delete?</string>
 
     <!--Token-->
     <string name="transfer">Transfer</string>

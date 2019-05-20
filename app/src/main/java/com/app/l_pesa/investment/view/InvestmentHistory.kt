@@ -319,6 +319,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         {
             filterItemList.add(ModelWindowHistory(resources.getString(R.string.exit_point),investmentList.actionState.btnExitPointShow))
         }
+        if(investmentList.deposit_status=="P")
+        {
+            filterItemList.add(ModelWindowHistory(resources.getString(R.string.delete),true))
+        }
 
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -452,7 +456,33 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
             }
         }
+
+        else if(modelWindowHistory==resources.getString(R.string.delete))
+        {
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+
+                val alertDialog = AlertDialog.Builder(activity!!)
+                alertDialog.setTitle(resources.getString(R.string.app_name))
+                alertDialog.setMessage(resources.getString(R.string.delete_exit_loan))
+                alertDialog.setPositiveButton("Yes") { _, _ ->
+
+                    doRemoveInvest()
+                }
+                        .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                alertDialog.show()
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+        }
         dismissPopup()
+
+    }
+
+    private fun doRemoveInvest()
+    {
 
     }
 

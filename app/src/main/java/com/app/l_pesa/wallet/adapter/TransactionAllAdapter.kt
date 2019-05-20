@@ -101,7 +101,7 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
 
             }
 
-            txtRef.text         = context.resources.getString(R.string.ref_no)+" "+savingsHistory.reference_number
+            txtRef.text         = savingsHistory.reference_number
             txtCreateDate.text  = CommonMethod.dateConvert(savingsHistory.created)
 
         }
