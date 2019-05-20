@@ -30,10 +30,7 @@ import com.app.l_pesa.investment.inter.ICallBackInvestmentHistory
 import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
-import com.app.l_pesa.investment.presenter.PresenterInvestmentExitPoint
-import com.app.l_pesa.investment.presenter.PresenterInvestmentHistory
-import com.app.l_pesa.investment.presenter.PresenterInvestmentReinvestment
-import com.app.l_pesa.investment.presenter.PresenterInvestmentWithdrawal
+import com.app.l_pesa.investment.presenter.*
 import com.app.l_pesa.lpk.inter.ICallBackInvestmentStatus
 import com.app.l_pesa.lpk.presenter.PresenterInvestmentStatus
 import com.google.gson.Gson
@@ -44,6 +41,7 @@ import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.ArrayList
 
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus,ICallBackPopUpWindow {
+
 
     private lateinit  var progressDialog: KProgressHUD
     private var popupWindow : PopupWindow? = null
@@ -467,7 +465,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
                 alertDialog.setMessage(resources.getString(R.string.delete_exit_loan))
                 alertDialog.setPositiveButton("Yes") { _, _ ->
 
-                    doRemoveInvest()
+                    doRemoveInvest(investmentList.investment_id)
                 }
                         .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
@@ -481,9 +479,23 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     }
 
-    private fun doRemoveInvest()
+    private fun doRemoveInvest(investment_id: Int)
     {
+        progressDialog.show()
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("deposit_id",investment_id.toString())
+        val presenterApplyInvestment= PresenterApplyInvestment()
+        presenterApplyInvestment.removeInvestment(activity!!,this,jsonObject)
+    }
 
+    override fun onSuccessRemoveInvestment() {
+        dismiss()
+    }
+
+    override fun onErrorRemoveInvestment(message: String) {
+
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     fun doFilter()

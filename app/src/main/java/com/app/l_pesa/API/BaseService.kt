@@ -113,6 +113,9 @@ interface BaseService{
     @POST("investment/apply")
     fun doInvestmentApply(@Body request: JsonObject): Observable<ResApplyInvestment>
 
+    @POST("investment/delete")
+    fun doInvestmentRemove(@Body request: JsonObject): Observable<ResInvestmentDelete>
+
     @POST("investment/withdrawal")
     fun doInvestmentWithdrawal(@Body request: JsonObject): Observable<ResInvestmentWithdrawal>
 
