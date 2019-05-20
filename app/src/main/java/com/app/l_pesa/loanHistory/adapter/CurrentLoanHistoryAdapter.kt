@@ -41,7 +41,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
         }
 
         if (getItemViewType(position) == 0) {
-            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackCurrent)
+            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackCurrent,position)
 
         }
     }
@@ -78,7 +78,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
-        fun  bindData(context: Context, loanHistoryCurrent: ResLoanHistoryCurrent.LoanHistory, callBackCurrent: ICallBackCurrentLoanHistory)
+        fun  bindData(context: Context, loanHistoryCurrent: ResLoanHistoryCurrent.LoanHistory, callBackCurrent: ICallBackCurrentLoanHistory, position: Int)
         {
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
@@ -154,7 +154,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
 
             itemView.rl_approved_on.setOnClickListener {
 
-                callBackCurrent.onRemoveLoan()
+                callBackCurrent.onRemoveLoan(position,loanHistoryCurrent)
             }
 
 

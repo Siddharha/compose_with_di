@@ -284,6 +284,14 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     override fun onRemoveLoan()
     {
+        if(CommonMethod.isNetworkAvailable(activity!!))
+        {
+
+        }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+        }
 
     }
 

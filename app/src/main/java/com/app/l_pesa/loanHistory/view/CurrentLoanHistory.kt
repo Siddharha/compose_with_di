@@ -5,11 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
+import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -20,14 +24,17 @@ import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.ArrayList
 
 
+
 class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
 
 
+    private lateinit  var progressDialog: KProgressHUD
     private var listLoanHistoryCurrent          : ArrayList<ResLoanHistoryCurrent.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
     private lateinit var bottomSheetBehavior    : BottomSheetBehavior<*>
@@ -48,6 +55,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initLoader()
         loadHistory("","","DEFAULT")
         swipeRefresh()
 
@@ -60,6 +68,24 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
             startActivity(intent)
             activity?.overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
+
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismissDialog() {
+
+            if(progressDialog.isShowing){
+                progressDialog.dismiss()
+            }
 
     }
 
@@ -290,9 +316,58 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
-    override fun onRemoveLoan()
+    override fun onRemoveLoan(position: Int, loanHistoryCurrent: ResLoanHistoryCurrent.LoanHistory)
     {
 
+        val alertDialog = AlertDialog.Builder(activity!!).create()
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val inflater = LayoutInflater.from(activity)
+        val dialogView = inflater.inflate(R.layout.layout_cancel_loan, null)
+        alertDialog.setCancelable(false)
+        alertDialog.setView(dialogView)
+        val etMessage = dialogView.findViewById(R.id.etMessage) as AppCompatEditText
+        val btOk = dialogView.findViewById(R.id.btOk) as Button
+        val btCancel = dialogView.findViewById(R.id.btCancel) as Button
+
+        btOk.setOnClickListener(View.OnClickListener {
+
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                alertDialog.dismiss()
+                progressDialog.show()
+
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("loan_type","current_type")
+                jsonObject.addProperty("loan_id",loanHistoryCurrent.loan_id.toString())
+                jsonObject.addProperty("cancel_reason",etMessage.text.toString())
+
+                val presenterLoanHistory=PresenterLoanHistory()
+                presenterLoanHistory.cancelLoanHistory(activity!!,jsonObject,this,position)
+            }
+            else
+            {
+                alertDialog.dismiss()
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+
+        })
+
+        btCancel.setOnClickListener(View.OnClickListener {
+
+            alertDialog.dismiss()
+        })
+
+        alertDialog.show()
     }
 
+    override fun onSuccessRemoveLoan(position: Int) {
+        dismissDialog()
+        listLoanHistoryCurrent!!.removeAt(position)
+        adapterLoanHistory.notifyItemRemoved(position)
+    }
+
+    override fun onFailureRemoveLoan(message: String) {
+        dismissDialog()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
 }

@@ -14,6 +14,7 @@
     <string name="successful">Successful</string>
     <string name="failure">Failure</string>
     <string name="cancel">Cancel</string>
+    <string name="okay">Ok</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="change_password">Change Password</string>
     <string name="enter_name">Enter Name</string>
@@ -230,6 +231,7 @@
     <string name="repay_date">Repay Date:</string>
     <string name="paid_on">Paid on: </string>
     <string name="pay_now">Pay Now</string>
+    <string name="Reason_for_cancellation">Reason for cancellation</string>
     <string name="empty_payment_history_message">You haven\'t yet made any repayment. Please follow your payment schedule to avoid penalties and actions on your account.</string>
 
 

@@ -228,4 +228,52 @@ class PresenterLoanHistory {
 
                 })
     }
+
+    fun cancelLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, callBackCurrentOBJ: ICallBackCurrentLoanHistory,position:Int)
+    {
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doCancelLoan(jsonRequest)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+                }
+                .subscribe({ response ->
+
+                    try
+                    {
+
+                        if(response.status.isSuccess)
+                        {
+                           callBackCurrentOBJ.onSuccessRemoveLoan(position)
+                        }
+                        else
+                        {
+                            callBackCurrentOBJ.onFailureRemoveLoan(response.status.message)
+                        }
+                    }
+                    catch (e: Exception)
+                    {
+
+                    }
+                }, {
+                    error ->
+                    try
+                    {
+                        val errorVal            = error as HttpException
+
+                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
+                        val  jsonStatus         =    jsonError.getJSONObject("status")
+                        val jsonMessage         =    jsonStatus.getString("message")
+
+                        callBackCurrentOBJ.onFailureRemoveLoan(jsonMessage)
+                    }
+                    catch (exp: Exception)
+                    {
+                        val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
+                        callBackCurrentOBJ.onFailureRemoveLoan(errorMessageOBJ)
+                    }
+
+                })
+    }
 }

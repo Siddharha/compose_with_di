@@ -3,11 +3,8 @@ package com.app.l_pesa.API
 
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.investment.model.*
-import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
-import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
+import com.app.l_pesa.loanHistory.model.*
 import com.app.l_pesa.loanplan.model.ResLoanPlans
-import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
-import com.app.l_pesa.loanHistory.model.ResPaymentHistory
 import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
@@ -76,6 +73,9 @@ interface BaseService{
 
     @POST("loan/history")
     fun doLoanHistory(@Body request: JsonObject,@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String ): Observable<ResLoanHistoryCurrent>
+
+    @POST("loan/cancel")
+    fun doCancelLoan(@Body request: JsonObject): Observable<ResLoanCancel>
 
     @POST("loan/history")
     fun doLoanHistoryBusiness(@Body request: JsonObject, @Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String): Observable<ResLoanHistoryBusiness>
