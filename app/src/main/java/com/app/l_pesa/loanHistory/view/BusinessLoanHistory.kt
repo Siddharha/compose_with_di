@@ -4,14 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
+import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
@@ -20,6 +25,7 @@ import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import kotlin.collections.ArrayList
@@ -27,7 +33,7 @@ import kotlin.collections.ArrayList
 
 class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
-
+    private lateinit  var progressDialog: KProgressHUD
     private var listLoanHistoryBusiness         : ArrayList<ResLoanHistoryBusiness.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : BusinessLoanHistoryAdapter
     private lateinit var bottomSheetBehavior    : BottomSheetBehavior<*>
@@ -48,6 +54,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initLoader()
         loadHistory("","","DEFAULT")
         swipeRefresh()
         buttonApplyLoan.setOnClickListener {
@@ -60,6 +67,25 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
             activity?.overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
+
+    }
+
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismissDialog() {
+
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
 
     }
 
@@ -282,17 +308,71 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
-    override fun onRemoveLoan()
+    override fun onRemoveLoan(position: Int, loanHistoryBusiness: ResLoanHistoryBusiness.LoanHistory)
     {
-        if(CommonMethod.isNetworkAvailable(activity!!))
-        {
+        val dialog = AlertDialog.Builder(activity!!)
 
-        }
-        else
-        {
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-        }
+        val taskEditText    = CommonEditTextRegular(activity)
+        taskEditText.setTextColor(ContextCompat.getColor(activity!!,R.color.colorTextBlackLight))
+        val textInputLayout = TextInputLayout(activity)
 
+        val container =  FrameLayout(activity!!)
+        val  params   =  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        params.setMargins(resources.getDimensionPixelOffset(R.dimen._15sdp), 0, resources.getDimensionPixelOffset(R.dimen._15sdp), 0)
+        textInputLayout.layoutParams = params
+        textInputLayout.addView(taskEditText)
+        container.addView(textInputLayout)
+
+        dialog.setTitle(resources.getString(R.string.app_name))
+                .setMessage(resources.getString(R.string.Reason_for_cancellation))
+                .setView(container)
+                .setPositiveButton("Remove") { dialog, which ->
+
+                    if(TextUtils.isEmpty(taskEditText.text.toString()))
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_cancellation_reason))
+                    }
+                    else
+                    {
+                        if(CommonMethod.isNetworkAvailable(activity!!))
+                        {
+                            dialog.dismiss()
+                            progressDialog.show()
+
+                            val jsonObject = JsonObject()
+                            jsonObject.addProperty("loan_type","business_type")
+                            jsonObject.addProperty("loan_id",loanHistoryBusiness.loan_id.toString())
+                            jsonObject.addProperty("cancel_reason",taskEditText.text.toString())
+
+                            val presenterLoanHistory=PresenterLoanHistory()
+                            presenterLoanHistory.cancelLoanHistoryBusiness(activity!!,jsonObject,this,position)
+                        }
+                        else
+                        {
+                            dialog.dismiss()
+                            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                        }
+                    }
+
+
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+
+        dialog.show()
+
+    }
+
+    override fun onSuccessRemoveLoan(position: Int) {
+        dismissDialog()
+        listLoanHistoryBusiness!!.removeAt(position)
+        adapterLoanHistory.notifyItemRemoved(position)
+    }
+
+    override fun onFailureRemoveLoan(message: String) {
+        dismissDialog()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
 }

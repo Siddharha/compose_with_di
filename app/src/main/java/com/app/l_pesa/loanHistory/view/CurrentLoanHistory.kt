@@ -4,16 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.TextInputLayout
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
-import android.support.v7.widget.AppCompatEditText
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.Button
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -28,7 +27,8 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.ArrayList
-
+import android.widget.FrameLayout
+import com.app.l_pesa.common.CommonEditTextRegular
 
 
 class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
@@ -319,45 +319,58 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     override fun onRemoveLoan(position: Int, loanHistoryCurrent: ResLoanHistoryCurrent.LoanHistory)
     {
 
-        val alertDialog = AlertDialog.Builder(activity!!).create()
-        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val inflater = LayoutInflater.from(activity)
-        val dialogView = inflater.inflate(R.layout.layout_cancel_loan, null)
-        alertDialog.setCancelable(false)
-        alertDialog.setView(dialogView)
-        val etMessage = dialogView.findViewById(R.id.etMessage) as AppCompatEditText
-        val btOk = dialogView.findViewById(R.id.btOk) as Button
-        val btCancel = dialogView.findViewById(R.id.btCancel) as Button
+        val dialog = AlertDialog.Builder(activity!!)
 
-        btOk.setOnClickListener(View.OnClickListener {
+        val taskEditText    = CommonEditTextRegular(activity)
+        taskEditText.setTextColor(ContextCompat.getColor(activity!!,R.color.colorTextBlackLight))
+        val textInputLayout = TextInputLayout(activity)
 
-            if(CommonMethod.isNetworkAvailable(activity!!))
-            {
-                alertDialog.dismiss()
-                progressDialog.show()
+        val container =  FrameLayout(activity!!)
+        val  params   =  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-                val jsonObject = JsonObject()
-                jsonObject.addProperty("loan_type","current_type")
-                jsonObject.addProperty("loan_id",loanHistoryCurrent.loan_id.toString())
-                jsonObject.addProperty("cancel_reason",etMessage.text.toString())
+        params.setMargins(resources.getDimensionPixelOffset(R.dimen._15sdp), 0, resources.getDimensionPixelOffset(R.dimen._15sdp), 0)
+        textInputLayout.layoutParams = params
+        textInputLayout.addView(taskEditText)
+        container.addView(textInputLayout)
 
-                val presenterLoanHistory=PresenterLoanHistory()
-                presenterLoanHistory.cancelLoanHistory(activity!!,jsonObject,this,position)
-            }
-            else
-            {
-                alertDialog.dismiss()
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-            }
+        dialog.setTitle(resources.getString(R.string.app_name))
+                .setMessage(resources.getString(R.string.Reason_for_cancellation))
+                .setView(container)
+                .setPositiveButton("Remove") { dialog, which ->
 
-        })
+                    if(TextUtils.isEmpty(taskEditText.text.toString()))
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_cancellation_reason))
+                    }
+                    else
+                    {
+                        if(CommonMethod.isNetworkAvailable(activity!!))
+                        {
+                            dialog.dismiss()
+                            progressDialog.show()
 
-        btCancel.setOnClickListener(View.OnClickListener {
+                            val jsonObject = JsonObject()
+                            jsonObject.addProperty("loan_type","current_type")
+                            jsonObject.addProperty("loan_id",loanHistoryCurrent.loan_id.toString())
+                            jsonObject.addProperty("cancel_reason",taskEditText.text.toString())
 
-            alertDialog.dismiss()
-        })
+                            val presenterLoanHistory=PresenterLoanHistory()
+                            presenterLoanHistory.cancelLoanHistory(activity!!,jsonObject,this,position)
+                        }
+                        else
+                        {
+                            dialog.dismiss()
+                            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                        }
+                    }
 
-        alertDialog.show()
+
+                }
+                .setNegativeButton("Cancel", null)
+                .create()
+
+        dialog.show()
+
     }
 
     override fun onSuccessRemoveLoan(position: Int) {

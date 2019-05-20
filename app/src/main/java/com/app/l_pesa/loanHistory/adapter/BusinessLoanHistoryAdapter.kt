@@ -42,7 +42,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
         }
 
         if (getItemViewType(position) == 0) {
-            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackBusiness)
+            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackBusiness,position)
 
         }
     }
@@ -79,7 +79,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
-        fun  bindData(context: Context, loanHistoryBusiness: ResLoanHistoryBusiness.LoanHistory, callBackCurrent: ICallBackBusinessLoanHistory)
+        fun  bindData(context: Context, loanHistoryBusiness: ResLoanHistoryBusiness.LoanHistory, callBackCurrent: ICallBackBusinessLoanHistory,position: Int)
         {
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
@@ -162,8 +162,17 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
 
             itemView.rl_approved_on.setOnClickListener {
 
-                callBackCurrent.onRemoveLoan()
+                if(loanHistoryBusiness.loan_status=="P")
+                {
+                    callBackCurrent.onRemoveLoan(position,loanHistoryBusiness)
+                }
+                else
+                {
+                    callBackCurrent.onClickList()
+                }
+
             }
+
 
 
 

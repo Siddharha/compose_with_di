@@ -140,6 +140,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
 
             val modelData=GlobalLoanHistoryModel.getInstance()
             modelData.modelData=loanHistoryCurrent
+
             itemView.ll_card_left.setOnClickListener {
 
 
@@ -154,7 +155,15 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
 
             itemView.rl_approved_on.setOnClickListener {
 
-                callBackCurrent.onRemoveLoan(position,loanHistoryCurrent)
+                if(loanHistoryCurrent.loan_status=="P")
+                {
+                    callBackCurrent.onRemoveLoan(position,loanHistoryCurrent)
+                }
+                else
+                {
+                    callBackCurrent.onClickList()
+                }
+
             }
 
 
