@@ -170,6 +170,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var deviceInfo: String
+        get() = pref.getString(KEY_SET_DEVICE_INFO, "")!!
+        set(deviceInfo) {
+            editor.remove(KEY_SET_DEVICE_INFO)
+            editor.putString(KEY_SET_DEVICE_INFO, deviceInfo)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -210,6 +218,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_MAX_INVEST_INTEREST   = "KEY_SET_MAX_INVEST_INTEREST"
         private const val KEY_SET_CURRENT_LOAN_COUNT    = "KEY_SET_CURRENT_LOAN_COUNT"
         private const val KEY_SET_BUSINESS_LOAN_COUNT   = "KEY_SET_BUSINESS_LOAN_COUNT"
+        private const val KEY_SET_DEVICE_INFO           = "KEY_SET_DEVICE_INFO"
     }
 
 

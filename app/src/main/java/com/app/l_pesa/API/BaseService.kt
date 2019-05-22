@@ -13,6 +13,7 @@ import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResChangePin
+import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.registration.model.ResRegistrationThree
@@ -40,6 +41,9 @@ interface BaseService{
 
     @POST("user/login_pin_step1")
     fun doLogin(@Body request: JsonObject): Observable<ResLogin>
+
+    @POST("user/login_pin_step2")
+    fun doCheckPin(@Body request: JsonObject): Observable<ResSetPin>
 
     @GET("user/info")
     fun getUserInfo(): Observable<ResUserInfo>

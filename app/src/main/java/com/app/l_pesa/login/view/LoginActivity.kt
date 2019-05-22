@@ -274,6 +274,10 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         progressBar.visibility=View.INVISIBLE
         if(data.next_step=="next_otp")
         {
+            val sharedPrefOBJ=SharedPref(this@LoginActivity)
+            val gson = Gson()
+            val json = gson.toJson(data)
+            sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
