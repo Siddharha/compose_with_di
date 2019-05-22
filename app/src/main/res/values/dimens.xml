@@ -12,4 +12,12 @@
     <dimen name="digit_horizontal_padding">@dimen/_12sdp</dimen>
     <dimen name="key_pad_min_height">@dimen/_250sdp</dimen>
 
+
+        <dimen name="otp_view_item_size">48dp</dimen>
+        <dimen name="otp_view_item_radius">5dp</dimen>
+        <dimen name="otp_view_item_spacing">5dp</dimen>
+        <dimen name="otp_view_item_line_width">2dp</dimen>
+        <dimen name="otp_view_cursor_width">2dp</dimen>
+
+
 </resources>

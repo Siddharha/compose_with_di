@@ -56,7 +56,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     {
         progressDialog=KProgressHUD.create(this@RegistrationStepOneActivity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 

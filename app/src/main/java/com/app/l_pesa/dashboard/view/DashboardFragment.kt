@@ -87,7 +87,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     {
         progressDialog=KProgressHUD.create(activity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 

@@ -139,6 +139,9 @@
 -keep class com.app.l_pesa.pinview.** { *; }
 -keepclassmembers class com.app.l_pesa.pinview.** { *; }
 
+-keep class com.app.l_pesa.otpview.** { *; }
+-keepclassmembers class com.app.l_pesa.otpview.** { *; }
+
 -keep class com.app.l_pesa.logout.** { *; }
 -keepclassmembers class com.app.l_pesa.logout.** { *; }
 

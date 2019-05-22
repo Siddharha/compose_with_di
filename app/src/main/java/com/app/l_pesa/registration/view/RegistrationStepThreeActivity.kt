@@ -98,7 +98,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     {
         progressDialog=KProgressHUD.create(this@RegistrationStepThreeActivity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 

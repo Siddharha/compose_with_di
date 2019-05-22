@@ -398,5 +398,8 @@
     <string name="empty_notification">We could not find a push notification with that ID linked to your account.</string>
     <string name="title_activity_pin_set">PinSetActivity</string>
 
+    <!--OTP-->
+    <string name="otp">OTP</string>
+
 
 </resources>

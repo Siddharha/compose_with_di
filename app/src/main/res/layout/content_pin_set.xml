@@ -25,7 +25,7 @@
             app:digits="6"
             app:digit_size="@dimen/_27sdp"
             app:key_text_size="@dimen/_27sdp"
-            android:padding="@dimen/_22sdp"
+            android:padding="@dimen/_20sdp"
             app:empty_drawable="@drawable/empty_dot"
             app:filled_drawable="@drawable/filled_dot"
             />

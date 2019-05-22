@@ -39,6 +39,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_login.*
 import com.app.l_pesa.login.model.PinData
 import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.otpview.view.OTPActivity
 import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
@@ -278,21 +279,12 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             val gson = Gson()
             val json = gson.toJson(data)
             sharedPrefOBJ.deviceInfo      = json
-            val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
+            val intent = Intent(this@LoginActivity, OTPActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
-       /* val sharedPrefOBJ=SharedPref(this@LoginActivity)
-        sharedPrefOBJ.accessToken   =data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
-
-        val presenterDashboard= PresenterDashboard()
-        presenterDashboard.getDashboard(this@LoginActivity,data.access_token,this)*/
 
     }
 

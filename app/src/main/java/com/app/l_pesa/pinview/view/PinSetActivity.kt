@@ -27,13 +27,14 @@ class PinSetActivity : AppCompatActivity() {
         initLoader()
         initData()
 
+
     }
 
     private fun initLoader()
     {
         progressDialog=KProgressHUD.create(this@PinSetActivity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 

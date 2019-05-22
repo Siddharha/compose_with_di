@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by arjun on 8/2/16.
- */
+
 public class PassCodeView extends View {
     private boolean DEBUG = false;
     private final int KEYS_COUNT = 12;
