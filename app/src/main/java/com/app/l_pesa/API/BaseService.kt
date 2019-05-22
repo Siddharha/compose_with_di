@@ -10,6 +10,7 @@ import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.*
 import com.app.l_pesa.notification.model.ResNotification
+import com.app.l_pesa.otpview.model.ResSetOTP
 import com.app.l_pesa.password.model.ResChangePassword
 import com.app.l_pesa.password.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResChangePin
@@ -44,6 +45,9 @@ interface BaseService{
 
     @POST("user/login_pin_step2")
     fun doCheckPin(@Body request: JsonObject): Observable<ResSetPin>
+
+    @POST("user/login_otp_step2")
+    fun doCheckOTP(@Body request: JsonObject): Observable<ResSetOTP>
 
     @GET("user/info")
     fun getUserInfo(): Observable<ResUserInfo>

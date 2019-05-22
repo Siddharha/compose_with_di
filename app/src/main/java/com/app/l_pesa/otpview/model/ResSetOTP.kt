@@ -1,8 +1,8 @@
-package com.app.l_pesa.pinview.model
+package com.app.l_pesa.otpview.model
 
 import com.app.l_pesa.common.CommonStatusModel
 
-class ResSetPin(val status: CommonStatusModel, val data: PinData)
+class ResSetOTP(val status: CommonStatusModel, val data: PinData)
 
 data class PinData(val post_data:PostData, val access_phone:String,val next_step:String)
 

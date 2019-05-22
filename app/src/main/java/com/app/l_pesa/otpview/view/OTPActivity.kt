@@ -2,7 +2,6 @@ package com.app.l_pesa.otpview.view
 
 import android.app.Activity
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
@@ -11,18 +10,19 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.OnOtpCompletionListener
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.model.PinData
 import com.app.l_pesa.login.model.PostData
+import com.app.l_pesa.otpview.inter.ICallBackVerifyOTP
+import com.app.l_pesa.otpview.model.PinData
+import com.app.l_pesa.otpview.presenter.PresenterOTP
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.content_otp.*
-import com.google.gson.JsonParser
 
 
 
-class OTPActivity : AppCompatActivity(), OnOtpCompletionListener {
+class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerifyOTP {
 
     private lateinit  var progressDialog: KProgressHUD
 
@@ -88,12 +88,24 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener {
 
             println("JSON"+jsonObject)
 
+            val presenterOTP= PresenterOTP()
+            presenterOTP.doVerifyOTP(this@OTPActivity,jsonObject,this)
+
         }
         else
         {
             CommonMethod.customSnackBarError(rootLayout,this@OTPActivity,resources.getString(R.string.no_internet))
         }
 
+    }
+
+    override fun onSuccessVerifyOTP(data: PinData) {
+        dismiss()
+    }
+
+    override fun onErrorVerifyOTP(message: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,this@OTPActivity,message)
     }
 
     private fun initLoader()
