@@ -6,4 +6,10 @@
     <dimen name="design_navigation_icon_size" tools:override="true">@dimen/_24sdp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="key_text_size">@dimen/_22sdp</dimen>
+    <dimen name="drawableDimen">@dimen/_28sdp</dimen>
+    <dimen name="digit_vertical_padding">@dimen/_35sdp</dimen>
+    <dimen name="digit_horizontal_padding">@dimen/_12sdp</dimen>
+    <dimen name="key_pad_min_height">@dimen/_250sdp</dimen>
+
 </resources>

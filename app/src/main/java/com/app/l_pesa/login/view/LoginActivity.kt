@@ -39,6 +39,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_login.*
 import com.app.l_pesa.login.model.PinData
 import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
@@ -270,9 +271,13 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     override fun onSuccessLogin(data: PinData) {
 
+        progressBar.visibility=View.INVISIBLE
         if(data.next_step=="next_otp")
         {
-
+            val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
        /* val sharedPrefOBJ=SharedPref(this@LoginActivity)

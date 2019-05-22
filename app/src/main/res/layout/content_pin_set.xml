@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".pinview.view.PinSetActivity"
+    tools:showIn="@layout/activity_pin_set"
+    android:id="@+id/rootLayout"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+         <com.app.l_pesa.pinview.PassCodeView
+            android:id="@+id/pass_code_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:digits="6"
+            app:digit_size="@dimen/_27sdp"
+            app:key_text_size="@dimen/_27sdp"
+            android:padding="@dimen/_22sdp"
+            app:empty_drawable="@drawable/empty_dot"
+            app:filled_drawable="@drawable/filled_dot"
+            />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

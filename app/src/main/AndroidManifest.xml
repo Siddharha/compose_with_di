@@ -28,7 +28,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".pinview.view.PinSetActivity"
+            android:label="@string/title_activity_pin_set"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".notification.view.NotificationActivity"
             android:label="@string/notification"
@@ -204,12 +207,12 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service android:name=".firebase.FirebaseMessagingIdService"
-            >
+        <service android:name=".firebase.FirebaseMessagingIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorWhite" />
