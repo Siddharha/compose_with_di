@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".otpview.view.OTPActivity"
-    tools:showIn="@layout/activity_otp">
+    tools:showIn="@layout/activity_otp"
+    android:id="@+id/rootLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
