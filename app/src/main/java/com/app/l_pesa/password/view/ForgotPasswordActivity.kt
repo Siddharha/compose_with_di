@@ -54,14 +54,6 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
     private fun forgetPassword()
     {
 
-        etEmail.setOnEditorActionListener { _, actionId, _ ->
-            var handled = false
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                verifyField()
-                handled = true
-            }
-            handled
-        }
 
         txtSubmit.setOnClickListener {
             verifyField()
@@ -77,14 +69,11 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
     private fun verifyField()
     {
         CommonMethod.hideKeyboardView(this@ForgotPasswordActivity)
-        if(etPhone.text.toString().length<9 && !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+        if(etPhone.text.toString().length<9 )
         {
             customSnackBarError(ll_root,resources.getString(R.string.required_phone_email))
         }
-        else if(!TextUtils.isEmpty(etPhone.text.toString()) && !TextUtils.isEmpty(etEmail.text.toString()))
-        {
-            customSnackBarError(ll_root,resources.getString(R.string.required_phone_email))
-        }
+
         else
         {
             if(CommonMethod.isNetworkAvailable(this@ForgotPasswordActivity))
@@ -92,18 +81,9 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
                 txtSubmit.isClickable =false
                 progressBar.visibility= View.VISIBLE
                 val jsonObject = JsonObject()
-                if(!TextUtils.isEmpty(etPhone.text.toString()) && !TextUtils.isEmpty(etEmail.text.toString()))
-                {
-                    jsonObject.addProperty("phone_no",etPhone.text.toString())
-                }
-                else if(TextUtils.isEmpty(etPhone.text.toString()) && !TextUtils.isEmpty(etEmail.text.toString()))
-                {
-                    jsonObject.addProperty("phone_no",etEmail.text.toString())
-                }
-                else
-                {
-                    jsonObject.addProperty("phone_no",etPhone.text.toString())
-                }
+
+                jsonObject.addProperty("phone_no",etPhone.text.toString())
+
 
                 jsonObject.addProperty("country_code",countryCode)
                 val presenterForgetPassword=PresenterPassword()
