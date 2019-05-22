@@ -18,7 +18,6 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.inter.ICallBackEmpInfo
 import com.app.l_pesa.profile.model.ResUserInfo
@@ -29,7 +28,7 @@ import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_profile_edit_emp_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_emp_info.*
 
-class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallBackLogin {
+class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -178,7 +177,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
         val sharedPrefOBJ = SharedPref(this@ProfileEditEmpInfoActivity)
         val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
         val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditEmpInfoActivity, jsonObject, this)
+       // presenterLoginObj.doLogin(this@ProfileEditEmpInfoActivity, jsonObject, this)
     }
 
     override fun onFailureEmpInfo(message: String) {
@@ -187,7 +186,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
         swipeRefreshLayout.isRefreshing=false
     }
 
-    override fun onSuccessLogin(data: LoginData) {
+    /*override fun onSuccessLogin(data: LoginData) {
 
         val sharedPrefOBJ=SharedPref(this@ProfileEditEmpInfoActivity)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
@@ -219,7 +218,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfoActivity,jsonMessage)
     }
-
+*/
     private fun customSnackBarError(view: View, message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)

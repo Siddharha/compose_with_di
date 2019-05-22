@@ -5,7 +5,6 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.pin.inter.ICallBackPin
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -19,9 +18,9 @@ class PresenterPin {
     fun doChangePin(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackPin) {
 
         val sharedPrefOBJ= SharedPref(contextOBJ)
-        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+       // val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
 
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,userData.access_token).doChangePin(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java/*userData.access_token*/).doChangePin(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

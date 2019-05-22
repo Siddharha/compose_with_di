@@ -17,8 +17,6 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.adapter.IdListAdapter
 import com.app.l_pesa.profile.inter.ICallBackBusinessInfo
@@ -33,7 +31,7 @@ import kotlinx.android.synthetic.main.activity_profile_edit_business_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_business_info.*
 import java.util.HashMap
 
-class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallBackBusinessInfo, ICallBackLogin {
+class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallBackBusinessInfo {
 
     private var idType=""
 
@@ -197,7 +195,7 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         val sharedPrefOBJ = SharedPref(this@ProfileEditBusinessInfoActivity)
         val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
         val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditBusinessInfoActivity, jsonObject, this)
+       // presenterLoginObj.doLogin(this@ProfileEditBusinessInfoActivity, jsonObject, this)
     }
 
     override fun onFailureBusinessInfo(message: String) {
@@ -206,7 +204,7 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         customSnackBarError(llRoot,message)
     }
 
-    override fun onSuccessLogin(data: LoginData) {
+    /*override fun onSuccessLogin(data: LoginData) {
 
         val sharedPrefOBJ=SharedPref(this@ProfileEditBusinessInfoActivity)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
@@ -237,7 +235,7 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarError(llRoot,this@ProfileEditBusinessInfoActivity,jsonMessage)
     }
-
+*/
     private fun toolbarFont(context: Activity) {
 
         for (i in 0 until toolbar.childCount) {

@@ -45,8 +45,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.common.BitmapResize
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
 import com.app.l_pesa.profile.inter.ICallBackUpload
@@ -62,7 +60,7 @@ import java.util.*
 
 
 
-class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackLogin , ICallBackUpload {
+class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload {
 
     private val Photo             = 10
     private val Gallery           = 11
@@ -314,7 +312,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
         val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
         val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditPersonalActivity, jsonObject, this)
+       // presenterLoginObj.doLogin(this@ProfileEditPersonalActivity, jsonObject, this)
 
     }
 
@@ -325,7 +323,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
     }
 
-    override fun onSuccessLogin(data: LoginData) {
+   /* override fun onSuccessLogin(data: LoginData) {
 
         val sharedPrefOBJ=SharedPref(this@ProfileEditPersonalActivity)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
@@ -359,7 +357,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,jsonMessage)
     }
-
+*/
     private fun onChangeProfileImage()
     {
 

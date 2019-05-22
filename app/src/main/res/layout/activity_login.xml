@@ -91,62 +91,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/ll_password"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/bg_black_view"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_flag_section">
-
-        <ImageView
-            android:id="@+id/img_password"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_lock_icon" />
-
-        <View
-            android:id="@+id/viewPassword"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_26sdp"
-            android:background="@color/semi_white"
-            app:layout_constraintEnd_toStartOf="@+id/etPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_password"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etPassword"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/montserrat"
-            android:inputType="textPassword"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:hint="@string/password"
-            android:maxLength="14"
-            android:maxLines="1"
-            android:textColor="@color/colorSemiWhite"
-            android:textColorHint="@color/colorSemiWhite"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/viewPassword"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </android.support.constraint.ConstraintLayout>
-
 
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/txtLogin"
@@ -160,7 +104,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_password" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_flag_section" />
 
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/txtForgotPassword"

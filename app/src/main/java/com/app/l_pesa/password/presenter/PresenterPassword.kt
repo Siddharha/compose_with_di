@@ -5,7 +5,6 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.password.inter.ICallBackPassword
 import com.app.l_pesa.settings.inter.ICallBackResetPassword
 import com.google.gson.Gson
@@ -65,9 +64,9 @@ class PresenterPassword {
     {
 
         val sharedPrefOBJ= SharedPref(contextOBJ)
-        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        //val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
 
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,userData.access_token).doChangePassword(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java/*,userData.access_token*/).doChangePassword(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

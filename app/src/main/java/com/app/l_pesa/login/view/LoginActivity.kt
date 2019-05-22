@@ -18,11 +18,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.telephony.TelephonyManager
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.view.Window
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
@@ -31,7 +29,6 @@ import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.password.view.ForgotPasswordActivity
 import com.app.l_pesa.login.adapter.CountryListAdapter
@@ -40,7 +37,7 @@ import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_login.*
-import com.app.l_pesa.login.model.LoginData
+import com.app.l_pesa.login.model.PinData
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
@@ -52,7 +49,6 @@ import com.google.gson.Gson
 
 
 class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList, ICallBackDashboard {
-
 
     private var runTimePermission: RunTimePermission? = null
     private val permissionCode  = 200
@@ -187,14 +183,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     @SuppressLint("MissingPermission")
     private fun loginProcess()
     {
-        etPassword.setOnEditorActionListener { _, actionId, _ ->
-            var handled = false
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                verifyField()
-                handled = true
-            }
-            handled
-        }
         txtLogin.setOnClickListener {
 
             verifyField()
@@ -208,10 +196,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         if(etPhone.text.toString().length<8)
         {
             CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_phone))
-        }
-        else if(TextUtils.isEmpty(etPassword.text.toString()))
-        {
-            CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_password))
         }
         else
         {
@@ -249,7 +233,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
                 jsonObject.addProperty("country_code",countryCode)
-                jsonObject.addProperty("password",etPassword.text.toString())
                 jsonObject.addProperty("platform_type","A")
                 jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
@@ -285,9 +268,14 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         }
     }
 
-    override fun onSuccessLogin(data: LoginData) {
+    override fun onSuccessLogin(data: PinData) {
 
-        val sharedPrefOBJ=SharedPref(this@LoginActivity)
+        if(data.next_step=="next_otp")
+        {
+
+        }
+
+       /* val sharedPrefOBJ=SharedPref(this@LoginActivity)
         sharedPrefOBJ.accessToken   =data.access_token
         val gson = Gson()
         val json = gson.toJson(data)
@@ -295,15 +283,15 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
 
         val presenterDashboard= PresenterDashboard()
-        presenterDashboard.getDashboard(this@LoginActivity,data.access_token,this)
+        presenterDashboard.getDashboard(this@LoginActivity,data.access_token,this)*/
 
     }
 
     override fun onIncompleteLogin(message: String) {
 
+        Toast.makeText(this@LoginActivity,message,Toast.LENGTH_LONG).show()
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
-        Toast.makeText(this@LoginActivity,resources.getString(R.string.incomplete_reg_message),Toast.LENGTH_LONG).show()
         val intent = Intent(this@LoginActivity, RegistrationStepOneActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)

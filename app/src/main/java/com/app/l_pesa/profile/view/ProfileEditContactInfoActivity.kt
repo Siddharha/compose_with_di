@@ -17,8 +17,6 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.inter.ICallBackContactInfo
 import com.app.l_pesa.profile.model.ResUserInfo
@@ -29,7 +27,7 @@ import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_profile_edit_contact_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_contact_info.*
 
-class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo, ICallBackLogin {
+class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -150,7 +148,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         val sharedPrefOBJ = SharedPref(this@ProfileEditContactInfoActivity)
         val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
         val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditContactInfoActivity, jsonObject, this)
+        //presenterLoginObj.doLogin(this@ProfileEditContactInfoActivity, jsonObject, this)
     }
 
     override fun onFailureContactInfo(message: String) {
@@ -160,7 +158,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         customSnackBarError(llRoot,message)
     }
 
-    override fun onSuccessLogin(data: LoginData) {
+   /* override fun onSuccessLogin(data: LoginData) {
 
         val sharedPrefOBJ=SharedPref(this@ProfileEditContactInfoActivity)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
@@ -191,7 +189,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,jsonMessage)
     }
-
+*/
     private fun customSnackBarError(view: View, message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)

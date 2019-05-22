@@ -38,7 +38,7 @@ interface BaseService{
     @GET("countries_list?offset=0&limit=20")
     fun getCountryList(): Observable<ResModelCountry>
 
-    @POST("user/login")
+    @POST("user/login_pin_step1")
     fun doLogin(@Body request: JsonObject): Observable<ResLogin>
 
     @GET("user/info")
