@@ -1,9 +1,11 @@
 package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,7 @@ import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
+import com.app.l_pesa.main.MainActivity
 import com.kaopiz.kprogresshud.KProgressHUD
 import java.text.DecimalFormat
 
@@ -203,8 +206,27 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
-    override fun onSessionTimeOut() {
+
+   override fun onSessionTimeOut() {
+
         dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(resources.getString(R.string.session_time_out))
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
     }
 
     override fun onClickPay(type: String, loan_id: String) {

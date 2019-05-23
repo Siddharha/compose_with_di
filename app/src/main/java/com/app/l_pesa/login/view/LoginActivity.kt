@@ -335,6 +335,10 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
+    override fun onSessionTimeOut() {
+
+    }
+
     private fun countrySpinner(countryList: ResModelData)
     {
 
