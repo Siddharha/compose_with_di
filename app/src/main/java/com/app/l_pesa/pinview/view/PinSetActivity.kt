@@ -153,6 +153,10 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,jsonMessage)
     }
 
+    override fun onSessionTimeOut() {
+        dismiss()
+    }
+
     override fun onBackPressed() {
 
         val intent = Intent(this@PinSetActivity, LoginActivity::class.java)

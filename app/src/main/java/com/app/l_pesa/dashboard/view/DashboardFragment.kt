@@ -24,12 +24,12 @@ import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
-import com.app.l_pesa.lpk.view.LPKWithdrawalActivity
 import com.kaopiz.kprogresshud.KProgressHUD
 import java.text.DecimalFormat
 
 
 class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
+
 
    private lateinit  var progressDialog: KProgressHUD
 
@@ -202,6 +202,9 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     override fun onErrorInfoLPK(message: String) {
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+    override fun onSessionTimeOut() {
+        dismiss()
     }
 
     override fun onClickPay(type: String, loan_id: String) {
