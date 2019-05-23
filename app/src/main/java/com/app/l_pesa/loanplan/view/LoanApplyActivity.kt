@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
@@ -30,6 +31,7 @@ import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
 import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
+import com.app.l_pesa.main.MainActivity
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -235,6 +237,27 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,message)
     }
 
+    override fun onSessionTimeOut(jsonMessage: String) {
+
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity)
+        dialogBuilder.setMessage(jsonMessage)
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@LoanApplyActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@LoanApplyActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+    }
 
 
     private fun showAlert() {
