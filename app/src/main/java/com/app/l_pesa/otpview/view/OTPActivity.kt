@@ -1,6 +1,7 @@
 package com.app.l_pesa.otpview.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.app.l_pesa.login.model.PostData
 import com.app.l_pesa.otpview.inter.ICallBackVerifyOTP
 import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.otpview.presenter.PresenterOTP
+import com.app.l_pesa.pinview.view.PinSetActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -82,14 +84,15 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
             jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
 
             val jsonObject = JsonObject()
-            jsonObject.addProperty("phone_number",modelDevice.phone_no)
+            jsonObject.addProperty("phone_number",modelDevice.country_code+modelDevice.phone_no)
             jsonObject.addProperty("otp",otp)
             jsonObject.add("device_info",jsonObjectDeviceInfo)
 
-            println("JSON"+jsonObject)
+            println("JSON_"+jsonObject)
 
             val presenterOTP= PresenterOTP()
             presenterOTP.doVerifyOTP(this@OTPActivity,jsonObject,this)
+
 
         }
         else
@@ -101,10 +104,22 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
     override fun onSuccessVerifyOTP(data: PinData) {
         dismiss()
+        if(data.next_step=="next_pin")
+        {
+            val sharedPrefOBJ=SharedPref(this@OTPActivity)
+            val gson = Gson()
+            val json = gson.toJson(data.post_data)
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@OTPActivity, PinSetActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
     }
 
     override fun onErrorVerifyOTP(message: String) {
         dismiss()
+        otp_view.text!!.clear()
         CommonMethod.customSnackBarError(rootLayout,this@OTPActivity,message)
     }
 

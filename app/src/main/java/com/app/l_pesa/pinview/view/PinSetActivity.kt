@@ -7,16 +7,23 @@ import android.support.v7.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.model.PinData
+import com.app.l_pesa.dashboard.inter.ICallBackDashboard
+import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.dashboard.presenter.PresenterDashboard
+import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.login.model.PostData
 import com.app.l_pesa.login.view.LoginActivity
+import com.app.l_pesa.pinview.inter.ICallBackPinSet
+import com.app.l_pesa.pinview.model.LoginData
+import com.app.l_pesa.pinview.presenter.PresenterPinSet
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.content_pin_set.*
 
 
+class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard {
 
-class PinSetActivity : AppCompatActivity() {
 
     private lateinit  var progressDialog: KProgressHUD
 
@@ -39,6 +46,13 @@ class PinSetActivity : AppCompatActivity() {
                 .setDimAmount(0.5f)
 
     }
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
 
     private fun initData()
     {
@@ -46,7 +60,7 @@ class PinSetActivity : AppCompatActivity() {
         pass_code_view.setTypeFace(face)
 
         val sharedPrefOBJ= SharedPref(this@PinSetActivity)
-        val gsonData = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
+        val modelDevice = Gson().fromJson<PostData>(sharedPrefOBJ.deviceInfo, PostData::class.java)
 
 
         pass_code_view.setOnTextChangeListener { text ->
@@ -54,38 +68,39 @@ class PinSetActivity : AppCompatActivity() {
 
                 if(CommonMethod.isNetworkAvailable(this@PinSetActivity))
                 {
+                    val jsonObjectDeviceInfo = JsonObject()
+                    jsonObjectDeviceInfo.addProperty("phone_no", modelDevice.phone_no)
+                    jsonObjectDeviceInfo.addProperty("country_code", modelDevice.country_code)
+                    jsonObjectDeviceInfo.addProperty("platform_type", modelDevice.platform_type)
+                    jsonObjectDeviceInfo.addProperty("device_token", modelDevice.device_token)
+
+
+                    val jsonObjectDeviceData = JsonObject()
+                    jsonObjectDeviceData.addProperty("device_id", modelDevice.device_data.device_id)
+                    jsonObjectDeviceData.addProperty("sdk",modelDevice.device_data.sdk)
+                    jsonObjectDeviceData.addProperty("imei",modelDevice.device_data.imei)
+                    jsonObjectDeviceData.addProperty("imsi",modelDevice.device_data.imsi)
+                    jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.device_data.simSerial_no)
+                    jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.device_data.sim_operator_Name)
+                    jsonObjectDeviceData.addProperty("screen_height",modelDevice.device_data.screen_height)
+                    jsonObjectDeviceData.addProperty("screen_width",modelDevice.device_data.screen_width)
+                    jsonObjectDeviceData.addProperty("device", modelDevice.device_data.device)
+                    jsonObjectDeviceData.addProperty("model", modelDevice.device_data.model)
+                    jsonObjectDeviceData.addProperty("product", modelDevice.device_data.product)
+                    jsonObjectDeviceData.addProperty("manufacturer", modelDevice.device_data.manufacturer)
+
+                    jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
+
                     val jsonObject = JsonObject()
-                    jsonObject.addProperty("phone_number",gsonData.access_phone)
+                    jsonObject.addProperty("phone_number",modelDevice.country_code+modelDevice.phone_no)
                     jsonObject.addProperty("apps_pin",pass_code_view.passCodeText)
+                    jsonObject.add("device_info",jsonObjectDeviceInfo)
 
-                    val jsonObjectRequestChild = JsonObject()
-                    jsonObjectRequestChild.addProperty("phone_no", gsonData.post_data.phone_no)
-                    jsonObjectRequestChild.addProperty("country_code", gsonData.post_data.country_code)
-                    jsonObjectRequestChild.addProperty("platform_type", gsonData.post_data.platform_type)
-                    jsonObjectRequestChild.addProperty("device_token", gsonData.post_data.device_token)
+                     println("REQUEST"+jsonObject.toString())
 
-                    val jsonObjectRequestChildDevice = JsonObject()
-                    jsonObjectRequestChildDevice.addProperty("device_id", gsonData.post_data.device_data.device_id)
-                    jsonObjectRequestChildDevice.addProperty("sdk",gsonData.post_data.device_data.sdk)
-                    jsonObjectRequestChildDevice.addProperty("imei",gsonData.post_data.device_data.imei)
-                    jsonObjectRequestChildDevice.addProperty("imsi",gsonData.post_data.device_data.imsi)
-                    jsonObjectRequestChildDevice.addProperty("simSerial_no",gsonData.post_data.device_data.simSerial_no)
-                    jsonObjectRequestChildDevice.addProperty("sim_operator_Name",gsonData.post_data.device_data.sim_operator_Name)
-                    jsonObjectRequestChildDevice.addProperty("screen_height",gsonData.post_data.device_data.screen_height)
-                    jsonObjectRequestChildDevice.addProperty("screen_width",gsonData.post_data.device_data.screen_width)
-                    jsonObjectRequestChildDevice.addProperty("device", gsonData.post_data.device_data.device)
-                    jsonObjectRequestChildDevice.addProperty("model", gsonData.post_data.device_data.model)
-                    jsonObjectRequestChildDevice.addProperty("product", gsonData.post_data.device_data.product)
-                    jsonObjectRequestChildDevice.addProperty("manufacturer", gsonData.post_data.device_data.manufacturer)
-
-                    jsonObjectRequestChild.add("post_data",jsonObjectRequestChildDevice)
-                    jsonObjectRequestChild.add("device_info",jsonObjectRequestChildDevice)
-
-
-                    println("REQUEST"+jsonObject.toString())
-
-                   // progressDialog.show()
-                   // val presenterPinSet= PresenterPinSet()
+                     progressDialog.show()
+                     val presenterPinSet= PresenterPinSet()
+                     presenterPinSet.dosetPin(this@PinSetActivity,jsonObject,this)
                 }
                 else
                 {
@@ -94,6 +109,49 @@ class PinSetActivity : AppCompatActivity() {
 
             }
         }
+    }
+
+    override fun onSuccessPinSet(data: LoginData) {
+
+        val sharedPrefOBJ=SharedPref(this@PinSetActivity)
+        sharedPrefOBJ.accessToken   =data.access_token
+        val gson = Gson()
+        val json = gson.toJson(data)
+        sharedPrefOBJ.userInfo      = json
+        sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
+
+        val presenterDashboard= PresenterDashboard()
+        presenterDashboard.getDashboard(this@PinSetActivity,data.access_token,this)
+
+
+    }
+
+    override fun onErrorPinSet(message: String) {
+
+        pass_code_view.setError(true)
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,message)
+    }
+
+    override fun onSuccessDashboard(data: ResDashboard.Data) {
+
+        val sharedPrefOBJ=SharedPref(this@PinSetActivity)
+        val gson                          = Gson()
+        val dashBoardData                 = gson.toJson(data)
+        sharedPrefOBJ.userDashBoard       = dashBoardData
+
+        val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
+    }
+
+    override fun onFailureDashboard(jsonMessage: String) {
+
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,jsonMessage)
     }
 
     override fun onBackPressed() {

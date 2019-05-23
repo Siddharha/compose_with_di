@@ -272,6 +272,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     override fun onSuccessLogin(data: PinData) {
 
         progressBar.visibility=View.INVISIBLE
+        txtLogin.isClickable   = false
         if(data.next_step=="next_otp")
         {
             val sharedPrefOBJ=SharedPref(this@LoginActivity)

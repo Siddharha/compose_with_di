@@ -26,7 +26,7 @@ class PresenterPinSet {
 
                     try {
                         if (response.status.isSuccess) {
-                            callBackOBJ.onSuccessPinSet()
+                            callBackOBJ.onSuccessPinSet(response.data)
 
                         } else {
                             callBackOBJ.onErrorPinSet(response.status.message)
