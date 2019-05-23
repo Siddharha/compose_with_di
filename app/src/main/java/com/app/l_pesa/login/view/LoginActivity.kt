@@ -21,6 +21,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.Window
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
@@ -184,6 +185,15 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     @SuppressLint("MissingPermission")
     private fun loginProcess()
     {
+
+        etPhone.setOnEditorActionListener { _, actionId, _ ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                verifyField()
+                handled = true
+            }
+            handled
+        }
         txtLogin.setOnClickListener {
 
             verifyField()
