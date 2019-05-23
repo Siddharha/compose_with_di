@@ -38,6 +38,7 @@
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="new_pin">New Pin</string>
+    <string name="set_up_pin">Setup Pin</string>
     <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
     <string name="password_should">Password should have</string>
@@ -396,7 +397,7 @@
     <string name="notification">Notification</string>
     <string name="new_">New</string>
     <string name="empty_notification">We could not find a push notification with that ID linked to your account.</string>
-    <string name="title_activity_pin_set">PinSetActivity</string>
+
 
     <!--OTP-->
     <string name="otp">OTP</string>

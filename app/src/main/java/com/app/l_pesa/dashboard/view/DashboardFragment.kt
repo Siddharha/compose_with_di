@@ -209,6 +209,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
    override fun onSessionTimeOut(jsonMessage: String) {
 
+        swipeRefreshLayout.isRefreshing = false
         dismiss()
         val dialogBuilder = AlertDialog.Builder(activity!!)
         dialogBuilder.setMessage(jsonMessage)

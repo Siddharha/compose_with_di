@@ -1,11 +1,14 @@
 package com.app.l_pesa.pinview.view
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.Gravity
+import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -22,18 +25,19 @@ import com.app.l_pesa.pinview.presenter.PresenterPinSet
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.activity_pin_set.*
 import kotlinx.android.synthetic.main.content_pin_set.*
 
 
 class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard {
-
 
     private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin_set)
-
+        setSupportActionBar(toolbar)
+        toolbarFont(this@PinSetActivity)
         initLoader()
         initData()
 
@@ -176,6 +180,21 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
         alert.show()
+    }
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val tv = view
+                val titleFont =   Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (tv.text ==    toolbar.title) {
+                    tv.typeface = titleFont
+                    break
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
