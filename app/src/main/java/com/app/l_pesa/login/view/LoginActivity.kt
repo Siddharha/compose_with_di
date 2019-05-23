@@ -335,7 +335,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
-    override fun onSessionTimeOut() {
+    override fun onSessionTimeOut(jsonMessage: String) {
 
     }
 

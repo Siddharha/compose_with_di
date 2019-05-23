@@ -51,13 +51,13 @@ class PresenterDashboard {
                         if(errorVal.code()>=400)
                         {
                             val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
-                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonStatus       =    jsonError.getJSONObject("status")
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
                             if(jsonStatusCode==50002)
                             {
-                                callBackOBJ.onSessionTimeOut()
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
                             }
                             else
                             {

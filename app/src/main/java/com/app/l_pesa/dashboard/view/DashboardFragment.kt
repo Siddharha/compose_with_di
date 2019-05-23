@@ -207,11 +207,11 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
-   override fun onSessionTimeOut() {
+   override fun onSessionTimeOut(jsonMessage: String) {
 
         dismiss()
         val dialogBuilder = AlertDialog.Builder(activity!!)
-        dialogBuilder.setMessage(resources.getString(R.string.session_time_out))
+        dialogBuilder.setMessage(jsonMessage)
                 // if the dialog is cancelable
                 .setCancelable(false)
                 .setPositiveButton("Ok", DialogInterface.OnClickListener {

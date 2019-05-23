@@ -1,11 +1,13 @@
 package com.app.l_pesa.profile.view
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
@@ -197,6 +200,29 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         shimmerLayout.stopShimmerAnimation()
         swipeRefreshLayout.isRefreshing=false
         Toast.makeText(activity,message,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSessionTimeOut(jsonMessage: String) {
+
+        shimmerLayout.stopShimmerAnimation()
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(jsonMessage)
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
     }
 
     @SuppressLint("SetTextI18n")

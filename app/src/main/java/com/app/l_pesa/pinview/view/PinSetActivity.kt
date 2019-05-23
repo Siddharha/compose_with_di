@@ -133,6 +133,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
     override fun onErrorPinSet(message: String) {
 
         pass_code_view.setError(true)
+        pass_code_view.reset()
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,message)
     }
@@ -156,10 +157,10 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,jsonMessage)
     }
 
-    override fun onSessionTimeOut() {
+    override fun onSessionTimeOut(jsonMessage: String) {
         dismiss()
         val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
-        dialogBuilder.setMessage(resources.getString(R.string.session_time_out))
+        dialogBuilder.setMessage(jsonMessage)
                 // if the dialog is cancelable
                 .setCancelable(false)
                 .setPositiveButton("Ok", DialogInterface.OnClickListener {
