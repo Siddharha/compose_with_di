@@ -142,8 +142,6 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         sharedPrefOBJ.userDashBoard       = dashBoardData
 
         val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()

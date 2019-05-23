@@ -41,6 +41,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import com.app.l_pesa.login.model.PinData
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.otpview.view.OTPActivity
+import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
@@ -290,7 +291,16 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             val json = gson.toJson(data.post_data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, OTPActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
+        else
+        {
+            val sharedPrefOBJ=SharedPref(this@LoginActivity)
+            val gson = Gson()
+            val json = gson.toJson(data.post_data)
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
