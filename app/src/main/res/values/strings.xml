@@ -137,6 +137,7 @@
 
     <string name="credit_score">Credit Score: </string>
     <string name="change_pin">Change Pin</string>
+    <string name="your_security_pin">Your Security PIN</string>
 
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>

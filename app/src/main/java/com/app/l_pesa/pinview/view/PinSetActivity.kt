@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
@@ -37,6 +38,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pin_set)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@PinSetActivity)
         initLoader()
         initData()
@@ -63,8 +65,8 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
     private fun initData()
     {
-        val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
-        pass_code_view.setTypeFace(face)
+        val font = ResourcesCompat.getFont(this@PinSetActivity, R.font.montserrat)
+        pass_code_view.setTypeFace(font)
 
         val sharedPrefOBJ= SharedPref(this@PinSetActivity)
         val modelDevice = Gson().fromJson<PostData>(sharedPrefOBJ.deviceInfo, PostData::class.java)
