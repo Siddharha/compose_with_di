@@ -1,8 +1,10 @@
 package com.app.l_pesa.pinview.view
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -13,6 +15,7 @@ import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.login.model.PostData
 import com.app.l_pesa.login.view.LoginActivity
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.pinview.inter.ICallBackPinSet
 import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.pinview.presenter.PresenterPinSet
@@ -155,6 +158,23 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
     override fun onSessionTimeOut() {
         dismiss()
+        val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
+        dialogBuilder.setMessage(resources.getString(R.string.session_time_out))
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@PinSetActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@PinSetActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
     }
 
     override fun onBackPressed() {
