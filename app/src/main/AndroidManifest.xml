@@ -164,7 +164,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".login.view.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"
+            />
         <activity
             android:name=".registration.view.RegistrationStepOneActivity"
             android:screenOrientation="portrait"
@@ -185,7 +187,7 @@
         <activity
             android:name=".password.view.ForgotPasswordActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".dashboard.view.DashboardActivity"
             android:screenOrientation="portrait"

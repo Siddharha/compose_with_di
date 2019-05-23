@@ -32,8 +32,8 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="customInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxStrokeColor">@color/colorPrimaryLight</item>
-        <item name="boxStrokeWidth">@dimen/_1sdp</item>
+        <item name="boxStrokeColor">@color/colorAquaDeep</item>
+        <item name="boxStrokeWidth">1px</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
