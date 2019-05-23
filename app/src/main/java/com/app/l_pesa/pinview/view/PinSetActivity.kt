@@ -64,16 +64,16 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
 
         pass_code_view.setOnTextChangeListener { text ->
-            if (text.length == 6) {
+            if (text.length>5) {
 
                 if(CommonMethod.isNetworkAvailable(this@PinSetActivity))
                 {
+                    progressDialog.show()
                     val jsonObjectDeviceInfo = JsonObject()
                     jsonObjectDeviceInfo.addProperty("phone_no", modelDevice.phone_no)
                     jsonObjectDeviceInfo.addProperty("country_code", modelDevice.country_code)
                     jsonObjectDeviceInfo.addProperty("platform_type", modelDevice.platform_type)
                     jsonObjectDeviceInfo.addProperty("device_token", modelDevice.device_token)
-
 
                     val jsonObjectDeviceData = JsonObject()
                     jsonObjectDeviceData.addProperty("device_id", modelDevice.device_data.device_id)
@@ -98,13 +98,14 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
                      println("REQUEST"+jsonObject.toString())
 
-                     progressDialog.show()
+
                      val presenterPinSet= PresenterPinSet()
                      presenterPinSet.dosetPin(this@PinSetActivity,jsonObject,this)
                 }
                 else
                 {
                     CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,resources.getString(R.string.no_internet))
+                    pass_code_view.setError(true)
                 }
 
             }
