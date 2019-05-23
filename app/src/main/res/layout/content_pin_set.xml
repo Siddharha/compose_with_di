@@ -9,6 +9,7 @@
     tools:context=".pinview.view.PinSetActivity"
     tools:showIn="@layout/activity_pin_set"
     android:id="@+id/rootLayout"
+    android:background="@color/colorWhite"
     >
 
     <LinearLayout
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/your_security_pin"
-                android:textColor="@color/colorTextBlackLight"
+                android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -53,8 +54,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
-
-
 
 
         </android.support.constraint.ConstraintLayout>
