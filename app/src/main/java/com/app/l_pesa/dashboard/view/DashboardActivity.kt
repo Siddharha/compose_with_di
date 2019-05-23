@@ -33,6 +33,7 @@ import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.lpk.view.LpkFragment
 import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.points.view.PointsFragment
 import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
@@ -128,8 +129,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             applyFontToMenuItem(mi)
         }
 
-        /*val userData = Gson().fromJson<LoginData>(sharedPref.userInfo, LoginData::class.java)
-        nav_view.menu.findItem(R.id.action_investment).isVisible = userData.menu_services.service_status.savings != 0*/
+        val userData = Gson().fromJson<LoginData>(sharedPref.userInfo, LoginData::class.java)
+        nav_view.menu.findItem(R.id.action_investment).isVisible = userData.menu_services.service_status.savings != 0
 
 
     }
@@ -180,7 +181,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val txtCreditScore       = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
         val imgProfile           = header.findViewById<CircularImageView>(R.id.imgProfile)
 
-        /*val sharedPrefOBJ= SharedPref(this@DashboardActivity)
+        val sharedPrefOBJ= SharedPref(this@DashboardActivity)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
         if(userData!=null)
         {
@@ -208,7 +209,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
 
         }
-        */openHistory()
+        openHistory()
 
     }
 
