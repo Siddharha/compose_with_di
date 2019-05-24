@@ -146,7 +146,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
     override fun onSuccessContactInfo() {
 
         val sharedPrefOBJ = SharedPref(this@ProfileEditContactInfoActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+       // val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
         val presenterLoginObj = PresenterLogin()
         //presenterLoginObj.doLogin(this@ProfileEditContactInfoActivity, jsonObject, this)
     }

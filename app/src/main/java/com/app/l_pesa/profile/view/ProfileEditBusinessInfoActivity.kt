@@ -193,9 +193,9 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
     override fun onSuccessBusinessInfo() {
 
         val sharedPrefOBJ = SharedPref(this@ProfileEditBusinessInfoActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+       /* val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
         val presenterLoginObj = PresenterLogin()
-       // presenterLoginObj.doLogin(this@ProfileEditBusinessInfoActivity, jsonObject, this)
+       // presenterLoginObj.doLogin(this@ProfileEditBusinessInfoActivity, jsonObject, this)*/
     }
 
     override fun onFailureBusinessInfo(message: String) {

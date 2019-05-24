@@ -1,11 +1,16 @@
 package com.app.l_pesa.registration.view
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -27,9 +32,11 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
+
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 
 
@@ -87,6 +94,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun verifyField()
     {
         CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
@@ -104,12 +112,44 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             {
                 progressDialog.show()
                 txtQualify.isClickable=false
+
+                val displayMetrics = resources.displayMetrics
+                val width = displayMetrics.widthPixels
+                val height = displayMetrics.heightPixels
+
+                val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+
+                var imeiId=""
+                imeiId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    telephonyManager!!.imei
+                } else {
+                    telephonyManager!!.deviceId
+                }
+
+                val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
-                jsonObject.addProperty("country_code",countryCode)
                 jsonObject.addProperty("email_address",etEmail.text.toString())
-                jsonObject.addProperty("device_token"," ")
+                jsonObject.addProperty("country_code",countryCode)
                 jsonObject.addProperty("platform_type","A")
+                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+
+                val jsonObjectRequestChild = JsonObject()
+                jsonObjectRequestChild.addProperty("device_id", deviceId)
+                jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
+                jsonObjectRequestChild.addProperty("imei",imeiId)
+                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
+                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
+                jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
+                jsonObjectRequestChild.addProperty("screen_height",""+height)
+                jsonObjectRequestChild.addProperty("screen_width",""+width)
+                jsonObjectRequestChild.addProperty("device", Build.DEVICE)
+                jsonObjectRequestChild.addProperty("model", Build.MODEL)
+                jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
+                jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+
+                jsonObject.add("device_data",jsonObjectRequestChild)
 
                 println("JSON"+jsonObject)
 

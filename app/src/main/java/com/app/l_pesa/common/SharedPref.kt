@@ -27,14 +27,6 @@ constructor(context: Context) // Constructor
         }
 
 
-    var loginRequest: String
-        get() = pref.getString(KEY_SET_LOGIN_REQUEST, "")!!
-        set(loginRequest) {
-            editor.remove(KEY_SET_LOGIN_REQUEST)
-            editor.putString(KEY_SET_LOGIN_REQUEST, loginRequest)
-            editor.commit()
-        }
-
     var countryList: String
         get() = pref.getString(KEY_SET_COUNTRY_LIST, "")!!
         set(countryList) {
@@ -181,7 +173,6 @@ constructor(context: Context) // Constructor
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
-        editor.remove("KEY_SET_LOGIN_REQUEST")
         editor.remove("KEY_SET_PROFILE_INFO")
         editor.remove("KEY_SET_LPK_INFO")
         editor.commit()
@@ -203,7 +194,6 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_COUNTRY_LIST          = "KEY_SET_COUNTRY_LIST"
         private const val KEY_SET_COUNTRY_CODE          = "KEY_SET_COUNTRY_CODE"
         private const val KEY_SET_USER_INFO             = "KEY_SET_USER_INFO"
-        private const val KEY_SET_LOGIN_REQUEST         = "KEY_SET_LOGIN_REQUEST"
         private const val KEY_SET_ACCESS_TOKEN          = "KEY_SET_ACCESS_TOKEN"
         private const val KEY_SET_DASHBOARD             = "KEY_SET_DASHBOARD"
         private const val KEY_SET_CREDIT_SCORE          = "KEY_SET_CREDIT_SCORE"

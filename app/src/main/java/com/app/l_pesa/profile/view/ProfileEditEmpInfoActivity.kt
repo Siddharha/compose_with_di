@@ -175,7 +175,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
     override fun onSuccessEmpInfo() {
 
         val sharedPrefOBJ = SharedPref(this@ProfileEditEmpInfoActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+        //val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
         val presenterLoginObj = PresenterLogin()
        // presenterLoginObj.doLogin(this@ProfileEditEmpInfoActivity, jsonObject, this)
     }

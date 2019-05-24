@@ -264,11 +264,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
-                println("JSON"+jsonObject.toString())
-
-                val sharedPrefOBJ=SharedPref(this@LoginActivity)
-                sharedPrefOBJ.loginRequest=jsonObject.toString()
-
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 

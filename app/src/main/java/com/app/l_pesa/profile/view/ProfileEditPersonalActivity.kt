@@ -310,8 +310,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onSuccessPersonalInfo() {
 
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        val presenterLoginObj = PresenterLogin()
+      //  val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
+        // presenterLoginObj = PresenterLogin()
        // presenterLoginObj.doLogin(this@ProfileEditPersonalActivity, jsonObject, this)
 
     }
