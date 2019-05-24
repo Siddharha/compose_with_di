@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -67,6 +68,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
     {
         val font = ResourcesCompat.getFont(this@PinSetActivity, R.font.montserrat)
         pass_code_view.setTypeFace(font)
+        pass_code_view.setKeyTextColor(ContextCompat.getColor(this@PinSetActivity,R.color.colorApp))
 
         val sharedPrefOBJ= SharedPref(this@PinSetActivity)
         val modelDevice = Gson().fromJson<PostData>(sharedPrefOBJ.deviceInfo, PostData::class.java)
