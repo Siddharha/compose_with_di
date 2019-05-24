@@ -1,5 +1,6 @@
 package com.app.l_pesa.otpview.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,6 +14,7 @@ import retrofit2.HttpException
 
 class PresenterOTP {
 
+    @SuppressLint("CheckResult")
     fun doVerifyOTP(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackVerifyOTP) {
 
          RetrofitHelper.getRetrofit(BaseService::class.java).doCheckOTP(jsonRequest)
@@ -46,6 +48,45 @@ class PresenterOTP {
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
                         callBackOBJ.onErrorVerifyOTP(errorMessageOBJ)
+                    }
+
+                })
+    }
+
+    @SuppressLint("CheckResult")
+    fun doResendOTP(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackVerifyOTP) {
+
+        RetrofitHelper.getRetrofit(BaseService::class.java).doResendOTP(jsonRequest)
+
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+                }
+                .subscribe({ response ->
+
+                    try {
+                        if (response.status.isSuccess) {
+                            callBackOBJ.onSuccessResendOTP()
+
+                        } else {
+                            callBackOBJ.onErrorResendOTP(response.status.message)
+                        }
+                    } catch (e: Exception) {
+
+                    }
+                }, { error ->
+                    try {
+                        val errorVal = error as HttpException
+
+                        val jsonError = JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonStatus = jsonError.getJSONObject("status")
+                        val jsonMessage = jsonStatus.getString("message")
+
+                        callBackOBJ.onErrorResendOTP(jsonMessage)
+                    } catch (exp: Exception) {
+                        val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
+                        callBackOBJ.onErrorResendOTP(errorMessageOBJ)
                     }
 
                 })

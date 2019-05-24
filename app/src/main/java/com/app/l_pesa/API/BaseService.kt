@@ -49,6 +49,9 @@ interface BaseService{
     @POST("user/login_otp_step2")
     fun doCheckOTP(@Body request: JsonObject): Observable<ResSetOTP>
 
+    @POST("user/login_otp_resend")
+    fun doResendOTP(@Body request: JsonObject): Observable<ResSetOTP>
+
     @GET("user/info")
     fun getUserInfo(): Observable<ResUserInfo>
 

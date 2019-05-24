@@ -6,4 +6,7 @@ interface ICallBackVerifyOTP {
 
     fun onSuccessVerifyOTP(data: PinData)
     fun onErrorVerifyOTP(message: String)
+
+    fun onSuccessResendOTP()
+    fun onErrorResendOTP(message: String)
 }
