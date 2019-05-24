@@ -89,6 +89,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
             hashMapNew["mob"]              = etMob.text.toString()
 
 
+            CommonMethod.hideKeyboardView(this@ProfileEditContactInfoActivity)
             if(hashMapOLD == hashMapNew)
             {
                 CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,resources.getString(R.string.change_one_info))
@@ -122,7 +123,6 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
                         jsonObject.addProperty("city",etCity.text.toString())
                         jsonObject.addProperty("phone_number",etMob.text.toString())
 
-
                         val presenterContactInfo= PresenterContactInfo()
                         presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)
                     }
@@ -145,10 +145,11 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
 
     override fun onSuccessContactInfo() {
 
+        swipeRefreshLayout.isRefreshing=false
         val sharedPrefOBJ = SharedPref(this@ProfileEditContactInfoActivity)
-       // val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        val presenterLoginObj = PresenterLogin()
-        //presenterLoginObj.doLogin(this@ProfileEditContactInfoActivity, jsonObject, this)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onFailureContactInfo(message: String) {
@@ -158,38 +159,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         customSnackBarError(llRoot,message)
     }
 
-   /* override fun onSuccessLogin(data: LoginData) {
 
-        val sharedPrefOBJ=SharedPref(this@ProfileEditContactInfoActivity)
-        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
-        sharedPrefOBJ.accessToken   = data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
-    override fun onErrorLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        Toast.makeText(this@ProfileEditContactInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onIncompleteLogin(message: String) {
-
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-
-    }
-
-    override fun onFailureLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,jsonMessage)
-    }
-*/
     private fun customSnackBarError(view: View, message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
@@ -199,10 +169,8 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         (snackBarOBJ.view as ViewGroup).addView(customView)
         val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
         txtTitle.text = message
-
         snackBarOBJ.show()
     }
-
 
 
     private fun toolbarFont(context: Activity) {

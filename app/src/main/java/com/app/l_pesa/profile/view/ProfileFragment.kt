@@ -282,7 +282,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtGender.text = resources.getString(R.string.gender)+resources.getText(R.string.dash_line)
+            txtGender.text = resources.getString(R.string.gender)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userPersonalInfo!!.meritalStatus))

@@ -268,10 +268,12 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
     override fun onFailureUploadAWS(string: String) {
+
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,string)
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun uploadData(imageURL: String)
     {
         var gender="M"
@@ -297,10 +299,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         jsonObject.addProperty("sex",gender)
         jsonObject.addProperty("merital_status",txtMarital.text.toString())
         jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
-        jsonObject.addProperty("profile_image",""+imageURL)
-
-        println("JSON"+jsonObject)
-
+        jsonObject.addProperty("profile_image",imageURL)
 
         val presenterPersonalInfo= PresenterPersonalInfo()
         presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
@@ -309,10 +308,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     override fun onSuccessPersonalInfo() {
 
+        swipeRefreshLayout.isRefreshing=false
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
-      //  val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        // presenterLoginObj = PresenterLogin()
-       // presenterLoginObj.doLogin(this@ProfileEditPersonalActivity, jsonObject, this)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
     }
 
@@ -323,58 +323,23 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
     }
 
-   /* override fun onSuccessLogin(data: LoginData) {
-
-        val sharedPrefOBJ=SharedPref(this@ProfileEditPersonalActivity)
-        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
-        sharedPrefOBJ.accessToken   = data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-
-    }
-
-    override fun onIncompleteLogin(message: String) {
-
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-
-    }
-
-    override fun onErrorLogin(jsonMessage: String) {
-
-     swipeRefreshLayout.isRefreshing=false
-     Toast.makeText(this@ProfileEditPersonalActivity,jsonMessage,Toast.LENGTH_SHORT).show()
-
-    }
-
-    override fun onFailureLogin(jsonMessage: String) {
-
-        buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,jsonMessage)
-    }
-*/
     private fun onChangeProfileImage()
     {
 
         imgProfile.setOnClickListener {
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
+            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
             val dialogView = AlertDialog.Builder(this@ProfileEditPersonalActivity)
             dialogView.setTitle("Choose Options")
 
             dialogView.setItems(items) { dialog, item ->
 
                 when {
-                    items[item] == "Camera" -> // open camera
-                        cameraClick() // open default camera
-                    items[item] == "Gallery" -> // open gallery
-                        galleryClick() // open default gallery
-                    items[item] == "Cancel" -> // close dialog
+                    items[item] == "Camera" ->
+                        cameraClick()
+                    items[item] == "Gallery" ->
+                        galleryClick()
+                    items[item] == "Cancel" ->
                         dialog.dismiss()
                 }
             }

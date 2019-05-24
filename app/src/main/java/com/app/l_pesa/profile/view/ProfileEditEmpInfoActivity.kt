@@ -109,6 +109,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
             hashMapNew["id"]            = etId.text.toString()
             hashMapNew["city"]          = etCity.text.toString()
 
+            CommonMethod.hideKeyboardView(this@ProfileEditEmpInfoActivity)
             if(hashMapOLD == hashMapNew)
             {
                 CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfoActivity,resources.getString(R.string.change_one_info))
@@ -168,16 +169,16 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
             }
 
 
-
         }
     }
 
     override fun onSuccessEmpInfo() {
 
+        swipeRefreshLayout.isRefreshing=false
         val sharedPrefOBJ = SharedPref(this@ProfileEditEmpInfoActivity)
-        //val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        val presenterLoginObj = PresenterLogin()
-       // presenterLoginObj.doLogin(this@ProfileEditEmpInfoActivity, jsonObject, this)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onFailureEmpInfo(message: String) {
@@ -186,39 +187,6 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
         swipeRefreshLayout.isRefreshing=false
     }
 
-    /*override fun onSuccessLogin(data: LoginData) {
-
-        val sharedPrefOBJ=SharedPref(this@ProfileEditEmpInfoActivity)
-        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
-        sharedPrefOBJ.accessToken   = data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
-    override fun onErrorLogin(jsonMessage: String) {
-
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        Toast.makeText(this@ProfileEditEmpInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onIncompleteLogin(message: String) {
-
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-
-    }
-
-    override fun onFailureLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfoActivity,jsonMessage)
-    }
-*/
     private fun customSnackBarError(view: View, message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
