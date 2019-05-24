@@ -383,7 +383,7 @@
                             android:id="@+id/imageView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toTopOf="@+id/imageView17"
@@ -399,7 +399,9 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:textColor="@color/textColors"
-                            android:textSize="@dimen/_13sdp"
+                            android:textSize="@dimen/_11sdp"
+                            android:maxLines="1"
+                            android:text="1234567890"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@id/imageView2"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -411,11 +413,12 @@
                             android:id="@+id/imageView17"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:contentDescription="@string/app_name"
-                            app:layout_constraintBottom_toTopOf="@+id/imageView3"
                             app:layout_constraintStart_toEndOf="@+id/imgProfile"
                             app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                            app:layout_constraintEnd_toStartOf="@+id/txtEmail"
+                            app:layout_constraintBottom_toTopOf="@+id/imageView3"
                             app:srcCompat="@drawable/ic_mail_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -425,12 +428,12 @@
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:fontFamily="@font/montserrat"
-                            android:maxLines="2"
                             android:ellipsize="end"
                             android:textColor="@color/textColors"
-                            android:textSize="@dimen/_12sdp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+                            android:textSize="@dimen/_11sdp"
+                            app:layout_constraintTop_toBottomOf="@+id/txtPhone"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toTopOf="@+id/imageView3"
                             app:layout_constraintStart_toEndOf="@+id/imageView17"
                             app:layout_constraintTop_toTopOf="@+id/imageView17" />
 
@@ -439,13 +442,13 @@
                             android:id="@+id/imageView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintRight_toLeftOf="@+id/txtCreditScore"
                             app:layout_constraintStart_toEndOf="@+id/imgProfile"
-                            app:layout_constraintTop_toBottomOf="@+id/imageView17"
+                            app:layout_constraintTop_toBottomOf="@+id/txtEmail"
                             app:srcCompat="@drawable/ic_credit_score_icon" />
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -456,7 +459,7 @@
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:text="@string/credit_score"
                             android:textColor="@color/textColors"
-                            android:textSize="@dimen/_13sdp"
+                            android:textSize="@dimen/_11sdp"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -611,7 +614,9 @@
                             app:layout_constraintBottom_toBottomOf="@+id/imageView8"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView8"
-                            app:layout_constraintTop_toTopOf="@+id/imageView8" />
+                            app:layout_constraintTop_toTopOf="@+id/imageView8"
+                            app:layout_constraintBottom_toTopOf="@+id/imageView9"
+                            />
 
                         <ImageView
                             android:id="@+id/imageView9"
@@ -636,7 +641,8 @@
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
                             app:fontFamily="@font/montserrat"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+                            app:layout_constraintTop_toBottomOf="@+id/txtMartialStatus"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView9"
                             app:layout_constraintTop_toTopOf="@+id/imageView9" />

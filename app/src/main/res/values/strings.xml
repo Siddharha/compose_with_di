@@ -352,7 +352,7 @@
     <!--Token-->
     <string name="transfer">Transfer</string>
     <string name="star_line">************************************************************</string>
-    <string name="dash_line">------------------------------------</string>
+    <string name="dash_line">----</string>
     <string name="filter">Filter</string>
     <string name="required_token_amount">Please enter the number of tokens.</string>
     <string name="token_transfer">Token Transfer</string>
