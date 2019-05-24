@@ -108,6 +108,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         }
         else
         {
+            CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
                 progressDialog.show()

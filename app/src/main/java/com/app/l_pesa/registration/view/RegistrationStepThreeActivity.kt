@@ -115,6 +115,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
     private fun onSubmitData()
     {
+      CommonMethod.hideKeyboardView(this@RegistrationStepThreeActivity)
       if(typeId=="0")
       {
           showIdType()

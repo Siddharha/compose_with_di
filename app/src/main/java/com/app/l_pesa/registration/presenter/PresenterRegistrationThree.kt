@@ -17,7 +17,6 @@ class PresenterRegistrationThree {
     fun doRegistrationStepThree(contextOBJ: Context, jsonObject : JsonObject, callBackOBJ: ICallBackRegisterThree)
     {
         val sharedPref= SharedPref(contextOBJ)
-
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPref.accessToken).doRegisterThree(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

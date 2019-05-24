@@ -86,6 +86,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     private fun onSubmit()
     {
+        CommonMethod.hideKeyboardView(this@RegistrationStepTwoActivity)
         if(!captureImageStatus)
         {
             CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_profile_image))
