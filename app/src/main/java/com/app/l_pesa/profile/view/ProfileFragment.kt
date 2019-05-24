@@ -257,7 +257,17 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         txtPhone.text = data.userInfo!!.phoneNumber
         txtCreditScore.text = resources.getString(R.string.credit_score)+" "+data.userInfo!!.creditScore
-        txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo!!.dob
+
+
+        if(!TextUtils.isEmpty(data.userPersonalInfo!!.dob))
+        {
+            txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo!!.dob
+        }
+        else
+        {
+            txtDOB.text =resources.getString(R.string.date_of_birth)+" "+resources.getText(R.string.dash_line)
+        }
+
         if(!TextUtils.isEmpty(data.userPersonalInfo!!.sex))
         {
             if(data.userPersonalInfo!!.sex=="M")
@@ -281,7 +291,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtMartialStatus.text =resources.getText(R.string.dash_line)
+            txtMartialStatus.text =resources.getString(R.string.marital_status)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userPersonalInfo!!.motherMaidenName))
@@ -292,7 +302,6 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
             txtMotherName.text =resources.getString(R.string.mother_maiden_name)+" "+resources.getText(R.string.dash_line)
         }
-
 
 
         /* ID Information*/
