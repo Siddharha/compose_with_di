@@ -62,15 +62,11 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICall
     private fun forgetPassword()
     {
 
-        txtSubmit.setOnClickListener {
+        buttonSubmit.setOnClickListener {
             verifyField()
 
         }
 
-        txtCancel.setOnClickListener {
-            back()
-
-        }
     }
 
     @SuppressLint("MissingPermission")
@@ -86,7 +82,7 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICall
         {
             if(CommonMethod.isNetworkAvailable(this@ForgotPasswordActivity))
             {
-                txtSubmit.isClickable =false
+                buttonSubmit.isClickable =false
                 progressBar.visibility= View.VISIBLE
 
                 val displayMetrics = resources.displayMetrics
@@ -175,7 +171,7 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICall
     override fun onErrorResetPassword(message: String) {
 
         progressBar.visibility= View.INVISIBLE
-        txtSubmit.isClickable=true
+        buttonSubmit.isClickable=true
         customSnackBarError(ll_root,message)
     }
 

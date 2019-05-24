@@ -48,7 +48,7 @@
     <string name="password_rule_three">At least 1 lowercase letter.</string>
     <string name="password_rule_four">At least 1 uppercase letter.</string>
     <string name="password_rule_five">At least 1 special character (like !@#$%*?).</string>
-    <string name="enter_email_or_mobile">Enter email address or mobile number to reset password via your registered valid email address/registered mobile number.</string>
+    <string name="enter_email_or_mobile">Enter email address or mobile number to reset password via your registered valid email address or registered mobile number.</string>
 
     <!--Caution Message-->
     <string name="required_title">Please select the title.</string>
