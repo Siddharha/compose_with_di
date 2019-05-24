@@ -69,7 +69,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
         if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
         {
-            if (CommonMethod.isNetworkAvailable(this@SplashActivity))
+           if(CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
                 val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
                 val jsonObject  = JsonObject()
@@ -127,8 +127,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     override fun onSuccessCountry(countries_list: ResModelData) {
 
-        val gsonObj = Gson()
-        val json = gsonObj.toJson(countries_list)
+        val json = Gson().toJson(countries_list)
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
         sharedPrefOBJ.countryList = json
         progressBar.visibility = View.INVISIBLE

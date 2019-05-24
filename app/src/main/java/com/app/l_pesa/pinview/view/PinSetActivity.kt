@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -105,7 +104,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
                     jsonObject.addProperty("apps_pin",pass_code_view.passCodeText)
                     jsonObject.add("device_info",jsonObjectDeviceInfo)
 
-                     println("REQUEST"+jsonObject.toString())
+                     //println("REQUEST"+jsonObject.toString())
 
 
                      val presenterPinSet= PresenterPinSet()
@@ -125,8 +124,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
         val sharedPrefOBJ=SharedPref(this@PinSetActivity)
         sharedPrefOBJ.accessToken   =data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
+        val json =  Gson().toJson(data)
         sharedPrefOBJ.userInfo      = json
         sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
 
@@ -138,7 +136,6 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
     override fun onErrorPinSet(message: String) {
 
-        pass_code_view.setError(true)
         pass_code_view.reset()
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,message)
@@ -146,9 +143,9 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
 
+        dismiss()
         val sharedPrefOBJ=SharedPref(this@PinSetActivity)
-        val gson                          = Gson()
-        val dashBoardData                 = gson.toJson(data)
+        val dashBoardData                 = Gson().toJson(data)
         sharedPrefOBJ.userDashBoard       = dashBoardData
 
         val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)

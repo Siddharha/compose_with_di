@@ -26,7 +26,7 @@
     <string name="thank_you">Thank you!</string>
     <string name="dont_have_account">Don\'t have an account?</string>
     <string name="create_one"><u>Create one!</u></string>
-    <string name="upload_selfie_picture">Upload selfie picture and write your name</string>
+    <string name="upload_picture">Upload picture &amp; write your name</string>
     <string name="upload_id_picture">Upload your ID picture &amp; choose your ID type &amp; enter your ID number</string>
     <string name="continue_to_login">Continue to login</string>
     <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
