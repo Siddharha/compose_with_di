@@ -201,7 +201,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapNew["sex"]       = gender
             hashMapNew["imgChange"] = captureImageStatus.toString()
 
-
+            CommonMethod.hideKeyboardView(this@ProfileEditPersonalActivity)
             if(hashMapOLD == hashMapNew)
             {
                 CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.change_one_info))

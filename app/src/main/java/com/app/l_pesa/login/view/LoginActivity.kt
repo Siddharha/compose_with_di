@@ -287,7 +287,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, OTPActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
         else
         {
@@ -297,7 +297,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
 
 
