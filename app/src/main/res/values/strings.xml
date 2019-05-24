@@ -144,6 +144,7 @@
     <!--Pin section-->
     <string name="credit_score">Credit Score: </string>
     <string name="change_pin">Change Pin</string>
+    <string name="change_transactional_pin">Change Transactional PIN</string>
     <string name="current_pin">Current Pin</string>
     <string name="your_security_pin">Your Security PIN</string>
     <string name="your_otp_code">Your OTP code</string>

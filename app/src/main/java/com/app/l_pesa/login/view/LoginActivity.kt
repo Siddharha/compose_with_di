@@ -282,8 +282,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         if(data.next_step=="next_otp")
         {
             val sharedPrefOBJ=SharedPref(this@LoginActivity)
-            val gson = Gson()
-            val json = gson.toJson(data.post_data)
+            val json = Gson().toJson(data.post_data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, OTPActivity::class.java)
             startActivity(intent)
@@ -292,8 +291,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         else
         {
             val sharedPrefOBJ=SharedPref(this@LoginActivity)
-            val gson = Gson()
-            val json = gson.toJson(data.post_data)
+            val json = Gson().toJson(data.post_data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
             startActivity(intent)

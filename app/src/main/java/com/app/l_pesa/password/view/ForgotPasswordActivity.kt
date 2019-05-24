@@ -1,13 +1,18 @@
 package com.app.l_pesa.password.view
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -23,17 +28,22 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.view.LoginActivity
-import com.app.l_pesa.password.inter.ICallBackLoginPin
+import com.app.l_pesa.otpview.view.OTPActivity
+import com.app.l_pesa.password.inter.ICallBackPassword
+import com.app.l_pesa.password.model.PinData
 import com.app.l_pesa.password.presenter.PresenterPassword
+import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_forget_password.*
 
-class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList {
+class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackPassword {
+
 
     private var countryCode     ="+255"
     private var countryFound    = false
@@ -52,7 +62,6 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList {
     private fun forgetPassword()
     {
 
-
         txtSubmit.setOnClickListener {
             verifyField()
 
@@ -64,6 +73,7 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun verifyField()
     {
         CommonMethod.hideKeyboardView(this@ForgotPasswordActivity)
@@ -78,14 +88,46 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList {
             {
                 txtSubmit.isClickable =false
                 progressBar.visibility= View.VISIBLE
+
+                val displayMetrics = resources.displayMetrics
+                val width = displayMetrics.widthPixels
+                val height = displayMetrics.heightPixels
+
+                val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+
+                var imeiId=""
+                imeiId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    telephonyManager!!.imei
+                } else {
+                    telephonyManager!!.deviceId
+                }
+
+                val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
                 val jsonObject = JsonObject()
-
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
-
-
                 jsonObject.addProperty("country_code",countryCode)
+                jsonObject.addProperty("platform_type","A")
+                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+
+                val jsonObjectRequestChild = JsonObject()
+                jsonObjectRequestChild.addProperty("device_id", deviceId)
+                jsonObjectRequestChild.addProperty("sdk",""+ Build.VERSION.SDK_INT)
+                jsonObjectRequestChild.addProperty("imei",imeiId)
+                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
+                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
+                jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
+                jsonObjectRequestChild.addProperty("screen_height",""+height)
+                jsonObjectRequestChild.addProperty("screen_width",""+width)
+                jsonObjectRequestChild.addProperty("device", Build.DEVICE)
+                jsonObjectRequestChild.addProperty("model", Build.MODEL)
+                jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
+                jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+
+                jsonObject.add("device_data",jsonObjectRequestChild)
+
                 val presenterForgetPassword=PresenterPassword()
-               // presenterForgetPassword.doForgetPassword(this@ForgotPasswordActivity,jsonObject,this)
+                presenterForgetPassword.doForgetPassword(this@ForgotPasswordActivity,jsonObject,this)
             }
             else
             {
@@ -102,37 +144,43 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList {
         (snackBarOBJ.view as ViewGroup).removeAllViews()
         val customView = LayoutInflater.from(this).inflate(R.layout.snackbar_error, null)
         (snackBarOBJ.view as ViewGroup).addView(customView)
-
         val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
-
         txtTitle.text = message
 
         snackBarOBJ.show()
     }
 
-
-   /* override fun onSuccessResetPassword(message: String, type: String) {
-
+    override fun onSuccessResetPassword(data: PinData) {
         progressBar.visibility= View.INVISIBLE
-        if(type=="sms")
+        if(data.next_step=="next_otp")
         {
-            Toast.makeText(this@ForgotPasswordActivity,resources.getString(R.string.sms_to_reset_password),Toast.LENGTH_SHORT).show()
+            val sharedPrefOBJ=SharedPref(this@ForgotPasswordActivity)
+            val json = Gson().toJson(data.post_data)
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@ForgotPasswordActivity, OTPActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
         else
         {
-            Toast.makeText(this@ForgotPasswordActivity,resources.getString(R.string.email_to_reset_password),Toast.LENGTH_SHORT).show()
+            val sharedPrefOBJ=SharedPref(this@ForgotPasswordActivity)
+            val json = Gson().toJson(data.post_data)
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@ForgotPasswordActivity, PinSetActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
-
-        startActivity(Intent(this@ForgotPasswordActivity, LoginActivity::class.java))
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
-    override fun onErrorResetPassword(jsonMessage: String) {
+    override fun onErrorResetPassword(message: String) {
 
         progressBar.visibility= View.INVISIBLE
         txtSubmit.isClickable=true
-        customSnackBarError(ll_root,jsonMessage)
-    }*/
+        customSnackBarError(ll_root,message)
+    }
+
+
+
     private fun back()
     {
         val intent = Intent(this@ForgotPasswordActivity, LoginActivity::class.java)
