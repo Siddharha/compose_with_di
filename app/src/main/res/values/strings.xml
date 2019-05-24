@@ -17,6 +17,7 @@
     <string name="okay">Ok</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="change_password">Change Password</string>
+    <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_otp">Enter OTP</string>
     <string name="coming_soon">Coming soon</string>
@@ -63,6 +64,11 @@
     <string name="required_confirm_pin_code">Please re-type your 6-digit pincode.</string>
     <string name="confirm_pin_code_not_match">Confirm pincode do not match.</string>
     <string name="enter_current_password">Please enter the current password.</string>
+    <string name="required_current_pin">Required current PIN.</string>
+    <string name="required_new_pin">Required new PIN.</string>
+    <string name="required_confirm_pin">Required confirm PIN.</string>
+    <string name="confirm_pin_not_match">Confirm PIN not match.</string>
+    <string name="old_new_password_different">Old and New PIN should be different.</string>
     <string name="enter_new_password">Please enter the new password.</string>
     <string name="enter_confirm_password">Retype the new password to confirm.</string>
     <string name="confirm_password_not_match">New passwords do not match.</string>
@@ -72,7 +78,7 @@
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
-    <string name="password_change_success">Your password was changed.</string>
+    <string name="pin_change_success">Login PIN has been changed.</string>
     <string name="email_to_reset_password">Check your email to reset your password.</string>
     <string name="sms_to_reset_password">Check your sms to reset your password.</string>
     <string name="change_one_info">Nothing to save! You have not yet edited.</string>
@@ -120,8 +126,8 @@
     <string name="nav_item_logout">Logout</string>
 
     <string-array name="settings_item_name">
-        <item>Change Password</item>
-        <item>Change Pin</item>
+        <item>Change Login Pin</item>
+        <item>Change Transactional Pin</item>
         <item>Refer a Friend</item>
         <item>Notification</item>
         <item>Help &amp; Support</item>
@@ -135,8 +141,10 @@
         <item>@drawable/ic_help</item>
     </string-array>
 
+    <!--Pin section-->
     <string name="credit_score">Credit Score: </string>
     <string name="change_pin">Change Pin</string>
+    <string name="current_pin">Current Pin</string>
     <string name="your_security_pin">Your Security PIN</string>
     <string name="your_otp_code">Your OTP code</string>
     <string name="resend_otp">Resend OTP</string>

@@ -187,18 +187,6 @@ object CommonMethod {
 
     }
 
-    fun passwordRegex(password: String): Boolean {
-
-        val pattern: Pattern
-        val matcher: Matcher
-
-        val passwordPattern =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,16}\$"
-        pattern = Pattern.compile(passwordPattern)
-        matcher = pattern.matcher(password)
-        return matcher.matches()
-
-    }
-
 
     fun isValidEmailAddress(email: String): Boolean {
         val emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"

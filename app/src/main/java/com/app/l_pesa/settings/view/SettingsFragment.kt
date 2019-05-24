@@ -11,7 +11,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
 import com.app.l_pesa.notification.view.NotificationActivity
-import com.app.l_pesa.password.view.ChangePasswordActivity
+import com.app.l_pesa.password.view.ChangeLoginPinActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
 import com.app.l_pesa.settings.adapter.SettingsAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick
@@ -64,7 +64,7 @@ class SettingsFragment : Fragment(), ICallBackListClick {
 
         if(position==0)
         {
-            startActivity(Intent(activity, ChangePasswordActivity::class.java))
+            startActivity(Intent(activity, ChangeLoginPinActivity::class.java))
             activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
        else if(position==1)

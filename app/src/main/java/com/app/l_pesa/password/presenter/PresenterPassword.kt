@@ -1,13 +1,13 @@
 package com.app.l_pesa.password.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.password.inter.ICallBackPassword
+import com.app.l_pesa.password.inter.ICallBackLoginPin
 import com.app.l_pesa.settings.inter.ICallBackResetPassword
-import com.google.gson.Gson
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +23,7 @@ import retrofit2.HttpException
  */
 class PresenterPassword {
 
-    fun doForgetPassword(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackPassword) {
+    /*fun doForgetPassword(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackPassword) {
         RetrofitHelper.getRetrofit(BaseService::class.java).doForgetPassword(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
@@ -59,14 +59,12 @@ class PresenterPassword {
 
                 })
     }
-
-    fun doResetPassword(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackResetPassword)
+*/
+    @SuppressLint("CheckResult")
+    fun doChangeLoginPin(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackLoginPin)
     {
-
         val sharedPrefOBJ= SharedPref(contextOBJ)
-        //val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
-
-        RetrofitHelper.getRetrofitToken(BaseService::class.java/*,userData.access_token*/).doChangePassword(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doChangeLoginPin(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,10 +76,10 @@ class PresenterPassword {
                     try {
                         if (response.status.isSuccess)
                         {
-                            callBackOBJ.onSuccessResetPassword(response.status.message)
+                            callBackOBJ.onSuccessResetPin(response.status.message)
 
                         } else {
-                            callBackOBJ.onErrorResetPassword(response.status.message)
+                            callBackOBJ.onErrorResetPin(response.status.message)
                         }
                     } catch (e: Exception) {
 
@@ -94,10 +92,10 @@ class PresenterPassword {
                         val jsonStatus = jsonError.getJSONObject("status")
                         val jsonMessage = jsonStatus.getString("message")
 
-                        callBackOBJ.onErrorResetPassword(jsonMessage)
+                        callBackOBJ.onErrorResetPin(jsonMessage)
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
-                        callBackOBJ.onErrorResetPassword(errorMessageOBJ)
+                        callBackOBJ.onErrorResetPin(errorMessageOBJ)
                     }
 
                 })

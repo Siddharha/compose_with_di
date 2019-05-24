@@ -9,13 +9,11 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
@@ -25,7 +23,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.view.LoginActivity
-import com.app.l_pesa.password.inter.ICallBackPassword
+import com.app.l_pesa.password.inter.ICallBackLoginPin
 import com.app.l_pesa.password.presenter.PresenterPassword
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
@@ -35,7 +33,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_forget_password.*
 
-class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBackCountryList {
+class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList {
 
     private var countryCode     ="+255"
     private var countryFound    = false
@@ -87,7 +85,7 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
 
                 jsonObject.addProperty("country_code",countryCode)
                 val presenterForgetPassword=PresenterPassword()
-                presenterForgetPassword.doForgetPassword(this@ForgotPasswordActivity,jsonObject,this)
+               // presenterForgetPassword.doForgetPassword(this@ForgotPasswordActivity,jsonObject,this)
             }
             else
             {
@@ -113,7 +111,7 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
     }
 
 
-    override fun onSuccessResetPassword(message: String, type: String) {
+   /* override fun onSuccessResetPassword(message: String, type: String) {
 
         progressBar.visibility= View.INVISIBLE
         if(type=="sms")
@@ -134,7 +132,7 @@ class ForgotPasswordActivity : AppCompatActivity(), ICallBackPassword, ICallBack
         progressBar.visibility= View.INVISIBLE
         txtSubmit.isClickable=true
         customSnackBarError(ll_root,jsonMessage)
-    }
+    }*/
     private fun back()
     {
         val intent = Intent(this@ForgotPasswordActivity, LoginActivity::class.java)

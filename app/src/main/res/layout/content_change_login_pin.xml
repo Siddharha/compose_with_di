@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/_15sdp">
+
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/commonInputLayout14"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:passwordToggleEnabled="true">
+
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etCurrentPin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/current_pin"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:textSize="@dimen/_13sdp"
+                        app:autoSizeMaxTextSize="@dimen/_14sdp"
+                        app:autoSizeMinTextSize="@dimen/_10sdp"
+                        app:autoSizeStepGranularity="0.2sp"
+                        app:autoSizeTextType="uniform"
+                        android:textColorHint="@color/colorGreyDeep"
+                        android:longClickable="false"/>
+
+                </com.app.l_pesa.common.CommonInputLayout>
+
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/commonInputLayout15"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/commonInputLayout14"
+                    app:passwordToggleEnabled="true">
+
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etNewPin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/new_pin"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:textSize="@dimen/_13sdp"
+                        app:autoSizeMaxTextSize="@dimen/_14sdp"
+                        app:autoSizeMinTextSize="@dimen/_10sdp"
+                        app:autoSizeStepGranularity="0.2sp"
+                        app:autoSizeTextType="uniform"
+                        android:textColorHint="@color/colorGreyDeep"
+                        android:longClickable="false" />
+
+                </com.app.l_pesa.common.CommonInputLayout>
+
+                <com.app.l_pesa.common.CommonInputLayout
+                    android:id="@+id/commonInputLayout16"
+                    style="@style/customInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/commonInputLayout15"
+                    app:passwordToggleEnabled="true">
+
+                    <com.app.l_pesa.common.CommonEditTextRegular
+                        android:id="@+id/etConfirmNewPin"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/confirm_new_pin"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:textSize="@dimen/_13sdp"
+                        app:autoSizeMaxTextSize="@dimen/_14sdp"
+                        app:autoSizeMinTextSize="@dimen/_10sdp"
+                        app:autoSizeStepGranularity="0.2sp"
+                        app:autoSizeTextType="uniform"
+                        android:textColorHint="@color/colorGreyDeep"
+                        android:longClickable="false" />
+
+                </com.app.l_pesa.common.CommonInputLayout>
+
+                <com.app.l_pesa.common.CustomButtonRegular
+                    android:id="@+id/buttonSubmit"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:text="@string/submit"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/ripple_green_button"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonCancel"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/commonInputLayout16" />
+
+                <com.app.l_pesa.common.CustomButtonRegular
+                    android:id="@+id/buttonCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_27sdp"
+                    android:text="@string/cancel"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/bg_grey_view"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:textColor="@color/light_text_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/buttonSubmit"
+                    app:layout_constraintTop_toBottomOf="@+id/commonInputLayout16" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:visibility="invisible"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:indeterminateTint="@color/colorPrimary"/>
+
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
