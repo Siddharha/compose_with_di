@@ -26,8 +26,7 @@
     <string name="see_you_quality">See if you qualify</string>
     <string name="select">Select</string>
     <string name="thank_you">Thank you!</string>
-    <string name="dont_have_account">Don\'t have an account?</string>
-    <string name="create_one"><u>Create one!</u></string>
+    <string name="create_account">Don\'t have an account? Create one!</string>
     <string name="upload_picture">Upload picture &amp; write your name</string>
     <string name="upload_id_picture">Choose your ID type &amp; enter your ID number &amp; upload your ID picture </string>
     <string name="continue_to_register">Continue to Register</string>
@@ -40,7 +39,7 @@
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="new_pin">New Pin</string>
-    <string name="set_up_pin">Setup Pin</string>
+    <string name="pin">Pin</string>
     <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
     <string name="password_should">Password should have</string>

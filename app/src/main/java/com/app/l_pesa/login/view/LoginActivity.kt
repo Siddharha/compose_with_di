@@ -14,14 +14,17 @@ import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatDelegate
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.telephony.TelephonyManager
-import android.text.Editable
-import android.text.TextWatcher
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
@@ -74,7 +77,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         loadCountry()
         loginProcess()
-        register()
         forgetPassword()
     }
 
@@ -86,13 +88,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         }
     }
 
-    private fun register()
-    {
-        txtRegister.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, RegistrationStepOneActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        }
-    }
 
     private fun requestPermission() {
 
@@ -186,6 +181,17 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     @SuppressLint("MissingPermission")
     private fun loginProcess()
     {
+        txtRegister.makeLinks(Pair("Create one!", View.OnClickListener {
+
+            try {
+                startActivity(Intent(this@LoginActivity, RegistrationStepOneActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            catch (exp: Exception)
+            {}
+
+        }))
+
 
         etPhone.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
@@ -200,6 +206,26 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             verifyField()
 
         }
+
+
+    }
+
+    private fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(resources.getString(R.string.create_account))
+        for (link in links) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(view: View) {
+                    Selection.setSelection((view as AppCompatTextView).text as Spannable, 0)
+                    view.invalidate()
+                    link.second.onClick(view)
+                }
+            }
+            val startIndexOfLink = resources.getString(R.string.create_account).indexOf(link.first)
+            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        this.movementMethod = LinkMovementMethod.getInstance() // without LinkMovementMethod, link can not click
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
     private fun verifyField()
