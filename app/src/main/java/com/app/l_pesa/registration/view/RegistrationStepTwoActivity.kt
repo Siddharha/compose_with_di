@@ -41,8 +41,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private var photoFile          : File?      = null
     private var captureFilePath    : Uri?       = null
     private var mobileOtp           = ""
-    private val Photo               = 14
-    private val Gallery             = 15
+    private val requestPhoto        = 14
+    private val requestGallery      = 15
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +50,10 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         setContentView(R.layout.activity_registration_step_two)
 
         val bundle      = intent.extras
-        mobileOtp       = bundle!!.getString("OTP")!!
+       // mobileOtp       = bundle!!.getString("OTP")!!
 
         initLoader()
-        imgEditPhoto.setOnClickListener {
+        imgProfilePhoto.setOnClickListener {
 
             selectImage()
         }
@@ -203,7 +203,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
     }
 
       private fun galleryClick()
@@ -220,7 +220,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        startActivityForResult(intent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -239,13 +239,13 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
                 }
-            Gallery ->
+            requestGallery->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 

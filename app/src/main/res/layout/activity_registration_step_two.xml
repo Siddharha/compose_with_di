@@ -39,30 +39,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
-        <com.app.l_pesa.common.CircularImageView
+        <ImageView
             android:id="@+id/imgProfilePhoto"
+            android:contentDescription="@string/app_name"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
-            android:src="@drawable/ic_user_no_img_icon"
+            android:src="@drawable/ic_user"
+            android:adjustViewBounds="true"
             android:layout_marginTop="@dimen/_20sdp"
-            app:civ_border_color="@color/screenBackground"
-            app:civ_border_width="@dimen/_1sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView28"
 
             />
 
-        <com.app.l_pesa.common.CircularImageView
-            android:id="@+id/imgEditPhoto"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:src="@drawable/ic_upload_photo"
-            app:layout_constraintBottom_toBottomOf="@+id/imgProfilePhoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgProfilePhoto"
-           />
 
         <com.app.l_pesa.common.CommonEditTextRegular
             android:id="@+id/etName"
@@ -74,7 +64,7 @@
             android:hint="@string/enter_name"
             android:maxLines="1"
             android:layout_marginTop="@dimen/_25sdp"
-            android:inputType="textNoSuggestions|text|textPersonName"
+            android:inputType="text|textCapSentences"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/colorSemiWhite"
             android:textColorHint="@color/colorSemiWhite"
@@ -82,7 +72,7 @@
             app:layout_constraintBottom_toTopOf="@+id/etOTP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgEditPhoto" />
+            app:layout_constraintTop_toBottomOf="@+id/imgProfilePhoto" />
 
         <com.app.l_pesa.common.CommonEditTextRegular
             android:id="@+id/etOTP"
