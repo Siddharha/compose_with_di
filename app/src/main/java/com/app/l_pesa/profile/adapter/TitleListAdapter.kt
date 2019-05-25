@@ -35,7 +35,7 @@ class TitleListAdapter (val context: Context, private val titleText: ArrayList<S
 
         val recyclerView: RecyclerView.ViewHolder
 
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_title, parent, false)
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_text_icon, parent, false)
         recyclerView = SelectViewHolder(itemView)
 
         return recyclerView
