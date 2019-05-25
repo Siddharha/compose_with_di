@@ -32,6 +32,8 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_toEndOf="@+id/img_flag"
             android:gravity="center|start"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/colorTextBlack"
             android:textSize="@dimen/_13sdp" />
 
     </RelativeLayout>

@@ -18,6 +18,7 @@ import android.support.v4.content.FileProvider
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.text.TextUtils
+import android.view.View
 import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
@@ -53,7 +54,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         setContentView(R.layout.activity_registration_step_two)
 
         val bundle      = intent.extras
-       // mobileOtp       = bundle!!.getString("OTP")!!
+        mobileOtp       = bundle!!.getString("OTP")!!
 
         initLoader()
         imgProfilePhoto.setOnClickListener {
