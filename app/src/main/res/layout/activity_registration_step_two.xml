@@ -112,7 +112,7 @@
             android:layout_marginTop="@dimen/_25sdp"
             android:background="@drawable/yellow_button"
             android:text="@string/final_step"
-            android:textColor="@color/colorSemiWhite"
+            android:textColor="@color/colorWhite"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

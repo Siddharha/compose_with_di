@@ -24,6 +24,7 @@
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
+    <string name="select">Select</string>
     <string name="thank_you">Thank you!</string>
     <string name="dont_have_account">Don\'t have an account?</string>
     <string name="create_one"><u>Create one!</u></string>

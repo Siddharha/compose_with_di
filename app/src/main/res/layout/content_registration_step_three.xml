@@ -85,16 +85,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etIdType" />
 
+
+    <TextView
+        android:id="@+id/txt_uploadHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_10sdp"
+        android:text="@string/select"
+        android:textColor="@color/colorTextBlack"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNo"
+        app:layout_constraintBottom_toTopOf="@+id/imgPersonalType"
+        android:layout_marginTop="@dimen/_12sdp"
+        />
+
     <ImageView
         android:id="@+id/imgPersonalType"
         android:contentDescription="@string/app_name"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_125sdp"
+        android:layout_height="@dimen/_135sdp"
         android:src="@drawable/ic_id_card"
-        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintTop_toBottomOf="@+id/txt_uploadHeader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNo"
         app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
         />
 
