@@ -28,7 +28,7 @@
     <string name="dont_have_account">Don\'t have an account?</string>
     <string name="create_one"><u>Create one!</u></string>
     <string name="upload_picture">Upload picture &amp; write your name</string>
-    <string name="upload_id_picture">Upload your ID picture &amp; choose your ID type &amp; enter your ID number</string>
+    <string name="upload_id_picture">Choose your ID type &amp; enter your ID number &amp; Upload your ID picture </string>
     <string name="continue_to_register">Continue to Register</string>
     <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
     <string name="incomplete_reg_message">You have not completed your registration. Enter your phone number and email to continue.</string>
