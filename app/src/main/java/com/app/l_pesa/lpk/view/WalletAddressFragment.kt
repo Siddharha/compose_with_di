@@ -56,7 +56,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
         hashMapOLD["wallet"]     =userDashBoard.walletAddress
-        address=""+userDashBoard.walletAddress
+        address=userDashBoard.walletAddress
 
         if(!TextUtils.isEmpty(userDashBoard.walletAddress))
         {
@@ -65,7 +65,7 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
         }
         else
         {
-            etWalletAddress.visibility=View.INVISIBLE
+            txtEtherScan.visibility=View.INVISIBLE
         }
 
         buttonWalletAddress.setOnClickListener {
@@ -139,9 +139,9 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
     override fun onSuccessWalletAddress() {
 
-        etWalletAddress.visibility=View.VISIBLE
+        txtEtherScan.visibility=View.VISIBLE
         hashMapOLD["wallet"]  = ""+etWalletAddress.text.toString().trim()
-        address=""+etWalletAddress.text.toString().trim()
+        address=etWalletAddress.text.toString().trim()
         buttonWalletAddress.isClickable=true
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_update_successfully))
     }
