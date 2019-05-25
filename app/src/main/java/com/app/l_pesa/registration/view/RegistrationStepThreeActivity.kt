@@ -70,22 +70,22 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
         imgPersonalType.setOnClickListener {
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
-            val dialogView = AlertDialog.Builder(this@RegistrationStepThreeActivity)
-            dialogView.setTitle("Choose Options")
-
+            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
+            val dialogView = AlertDialog.Builder(this@RegistrationStepThreeActivity,R.style.MyAlertDialogTheme)
             dialogView.setItems(items) { dialog, item ->
 
                 when {
-                    items[item] == "Camera" -> // open camera
-                        cameraClick() // open default camera
-                    items[item] == "Gallery" -> // open gallery
-                        galleryClick() // open default gallery
-                    items[item] == "Cancel" -> // close dialog
+                    items[item] == "Camera" ->
+                        cameraClick()
+                    items[item] == "Gallery" ->
+                        galleryClick()
+                    items[item] == "Cancel" ->
                         dialog.dismiss()
                 }
             }
+
             dialogView.show()
+
         }
 
         buttonSubmit.setOnClickListener {

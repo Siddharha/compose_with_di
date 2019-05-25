@@ -327,9 +327,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         imgProfile.setOnClickListener {
 
             val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
-            val dialogView = AlertDialog.Builder(this@ProfileEditPersonalActivity)
-            dialogView.setTitle("Choose Options")
-
+            val dialogView = AlertDialog.Builder(this@ProfileEditPersonalActivity,R.style.MyAlertDialogTheme)
             dialogView.setItems(items) { dialog, item ->
 
                 when {
@@ -341,7 +339,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                         dialog.dismiss()
                 }
             }
+
             dialogView.show()
+
         }
     }
 
