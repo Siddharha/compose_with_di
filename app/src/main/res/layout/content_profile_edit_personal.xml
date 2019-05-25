@@ -71,6 +71,7 @@
                             android:hint="@string/title"
                             android:textSize="@dimen/_12sdp"
                             android:inputType="text"
+                            android:textColor="@color/textColors"
                             android:drawableEnd="@drawable/ic_dropdown"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>

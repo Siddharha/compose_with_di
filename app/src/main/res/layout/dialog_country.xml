@@ -9,7 +9,7 @@
             android:id="@+id/etCountry"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
-            android:textColor="@color/textColors"
+            android:textColor="@color/colorTextBlackLight"
             android:textSize="@dimen/_12sdp"
             android:maxLines="1"
             android:ellipsize="end"
@@ -21,7 +21,7 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_country"
+            android:id="@+id/recyclerView"
             android:layout_below="@+id/etCountry"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
