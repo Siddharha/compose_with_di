@@ -106,9 +106,13 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
         {
             Toast.makeText(activity,resources.getString(R.string.update_erc_address),Toast.LENGTH_SHORT).show()
         }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity as AppCompatActivity,message)
+        }
 
         buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(rootLayout,activity as AppCompatActivity,message)
+
     }
 }

@@ -50,19 +50,22 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
     }
 
-
-
     private fun initData()
     {
         val sharedPrefOBJ=SharedPref(activity!!)
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
-        hashMapOLD["wallet"]     = ""+userDashBoard.walletAddress
+        hashMapOLD["wallet"]     =userDashBoard.walletAddress
         address=""+userDashBoard.walletAddress
 
         if(!TextUtils.isEmpty(userDashBoard.walletAddress))
         {
+            etWalletAddress.visibility=View.VISIBLE
             etWalletAddress.setText(userDashBoard.walletAddress)
+        }
+        else
+        {
+            etWalletAddress.visibility=View.INVISIBLE
         }
 
         buttonWalletAddress.setOnClickListener {
@@ -135,6 +138,8 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
 
     override fun onSuccessWalletAddress() {
+
+        etWalletAddress.visibility=View.VISIBLE
         hashMapOLD["wallet"]  = ""+etWalletAddress.text.toString().trim()
         address=""+etWalletAddress.text.toString().trim()
         buttonWalletAddress.isClickable=true
