@@ -50,7 +50,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         setContentView(R.layout.activity_registration_step_two)
 
         val bundle      = intent.extras
-       // mobileOtp       = bundle!!.getString("OTP")!!
+        mobileOtp       = bundle!!.getString("OTP")!!
 
         initLoader()
         imgProfilePhoto.setOnClickListener {

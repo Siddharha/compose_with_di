@@ -198,17 +198,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
 
             val options = RequestOptions()
-            options.centerCrop()
-            options.error(R.drawable.ic_user)
-            options.placeholder(R.drawable.ic_user)
             Glide.with(this@DashboardActivity)
                     .load(resources.getString(R.string.profile_image_url)+userData.user_personal_info.profile_image)
                     .apply(options)
                     .into(imgProfile)
 
-
-
         }
+
         openHistory()
 
     }

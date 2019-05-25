@@ -46,8 +46,8 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     private val idList   = arrayListOf("1","2","3","4")
     private val nameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
     private var typeId="0"
-    private val Photo             = 16
-    private val Gallery           = 17
+    private val requestPhoto        = 16
+    private val requestGallery      = 17
     private var captureImageStatus : Boolean    = false
     private var photoFile          : File?      = null
     private var captureFilePath    : Uri?       = null
@@ -165,8 +165,6 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         jsonObject.addProperty("type_id",typeId)
         jsonObject.addProperty("id_number",etNo.text.toString())
 
-        println("JSON"+jsonObject)
-
         val presenterRegistrationThree= PresenterRegistrationThree()
         presenterRegistrationThree.doRegistrationStepThree(this@RegistrationStepThreeActivity,jsonObject,this)
 
@@ -209,7 +207,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
     }
 
     private fun galleryClick()
@@ -226,7 +224,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        startActivityForResult(intent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -245,13 +243,13 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
                 }
-            Gallery ->
+            requestGallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
