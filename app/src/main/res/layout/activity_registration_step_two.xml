@@ -28,7 +28,7 @@
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/textView28"
             android:layout_width="0dp"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/montserrat"
             android:text="@string/upload_picture"
@@ -39,13 +39,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
-        <ImageView
+        <com.app.l_pesa.common.CircularImageView
             android:id="@+id/imgProfilePhoto"
             android:contentDescription="@string/app_name"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
-            android:src="@drawable/ic_user"
-            android:adjustViewBounds="true"
+            android:background="@drawable/ic_user"
+            app:civ_border_width="0dp"
+            app:civ_background_color="@android:color/transparent"
+            app:civ_border_color="@android:color/transparent"
             android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

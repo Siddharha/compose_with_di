@@ -259,16 +259,18 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout10" />
 
 
-                    <ImageView
+                    <com.app.l_pesa.common.CircularImageView
                         android:id="@+id/imgProfile"
                         android:contentDescription="@string/app_name"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
-                        android:background="?selectableItemBackgroundBorderless"
+                        app:civ_border_width="0dp"
+                        app:civ_background_color="@android:color/transparent"
+                        app:civ_border_color="@android:color/transparent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView10"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView9"
-                        app:srcCompat="@drawable/ic_user" />
+                        android:background="@drawable/ic_user" />
 
 
                     <TextView

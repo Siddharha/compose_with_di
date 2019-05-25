@@ -64,10 +64,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         initToggle()
         nav_view.setNavigationItemSelectedListener(this)
 
-
-        //println("NOTI++++++++++++++++++"+""+FirebaseInstanceId.getInstance().instanceId.toString())
-       // println("NOTI++++++++++++++++++"+""+FirebaseInstanceId.getInstance().token.toString())
-
     }
 
    private fun initToggle()
@@ -180,7 +176,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val header               = navigationView.getHeaderView(0)
         val txtName              = header.findViewById<CommonTextRegular>(R.id.txtName)
         val txtCreditScore       = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
-        val imgProfile           = header.findViewById<ImageView>(R.id.imgProfile)
+        val imgProfile           = header.findViewById<CircularImageView>(R.id.imgProfile)
 
         val sharedPrefOBJ= SharedPref(this@DashboardActivity)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)

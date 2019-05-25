@@ -16,6 +16,7 @@
         app:tabIndicatorColor="@color/colorYellow"
         app:tabIndicatorHeight="@dimen/_2sdp"
         app:tabGravity="fill"
+        app:tabBackground="@drawable/tab_ripple"
         app:tabMode="scrollable"
         app:tabTextAppearance="@style/styleTabLayout"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
