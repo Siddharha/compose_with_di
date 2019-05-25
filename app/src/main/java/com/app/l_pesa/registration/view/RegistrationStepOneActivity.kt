@@ -88,7 +88,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             handled
         }
 
-        txtQualify.setOnClickListener {
+        btnSubmit.setOnClickListener {
 
             verifyField()
         }
@@ -112,7 +112,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
                 progressDialog.show()
-                txtQualify.isClickable=false
+                btnSubmit.isClickable=false
 
                 val displayMetrics = resources.displayMetrics
                 val width = displayMetrics.widthPixels
@@ -151,8 +151,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
-
-                println("JSON"+jsonObject)
 
                 val presenterRegistrationOneObj= PresenterRegistrationOne()
                 presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
@@ -228,9 +226,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
-
                 filterCountry(s.toString())
-
 
             }
 
@@ -296,7 +292,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         dismiss()
         Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
-        txtQualify.isClickable =true
+        btnSubmit.isClickable =true
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
         sharedPref.accessToken=data.access_token
 
@@ -311,7 +307,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     override fun onErrorRegistrationOne(jsonMessage: String) {
 
         dismiss()
-        txtQualify.isClickable=true
+        btnSubmit.isClickable=true
         CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,jsonMessage)
     }
 }
