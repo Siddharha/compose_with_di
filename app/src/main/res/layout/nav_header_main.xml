@@ -12,14 +12,13 @@
        android:background="@color/colorAccent"
        >
 
-      <com.app.l_pesa.common.CircularImageView
-          xmlns:app="http://schemas.android.com/apk/res-auto"
+      <ImageView
           android:id="@+id/imgProfile"
           android:layout_width="@dimen/_55sdp"
           android:layout_height="@dimen/_55sdp"
           android:src="@drawable/ic_user"
-          app:civ_border_color="@color/screenBackground"
-          app:civ_border_width="@dimen/_1sdp"
+          android:adjustViewBounds="true"
+          android:contentDescription="@string/app_name"
           android:layout_centerInParent="true"
           android:layout_alignParentStart="true"
           android:layout_marginStart="@dimen/_5sdp"/>
@@ -30,6 +29,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:maxLines="1"
+          android:fontFamily="@font/montserrat"
           android:ellipsize="end"
           android:textSize="@dimen/_12sdp"
           android:layout_marginTop="@dimen/_15sdp"
@@ -43,6 +43,7 @@
           android:layout_below="@+id/txtName"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
+          android:fontFamily="@font/montserrat"
           android:maxLines="1"
           android:ellipsize="end"
           android:textSize="@dimen/_11sdp"

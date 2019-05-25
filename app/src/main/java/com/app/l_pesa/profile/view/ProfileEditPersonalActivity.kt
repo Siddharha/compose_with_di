@@ -62,8 +62,8 @@ import java.util.*
 
 class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload {
 
-    private val Photo             = 10
-    private val Gallery           = 11
+    private val requestPhoto             = 10
+    private val requestGalley            = 11
     private var captureImageStatus : Boolean    = false
     private var photoFile          : File?      = null
     private var captureFilePath    : Uri?       = null
@@ -101,8 +101,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     {
 
         val options = RequestOptions()
-        options.error(R.drawable.ic_profile)
-        options.placeholder(R.drawable.ic_profile)
         Glide.with(this@ProfileEditPersonalActivity)
                 .load(resources.getString(R.string.profile_image_url)+profileData.userInfo!!.profileImage)
                 .apply(options)
@@ -369,7 +367,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
 
     }
 
@@ -388,7 +386,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        startActivityForResult(intent, requestGalley)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -407,13 +405,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
                 }
-            Gallery ->
+            requestGalley ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 

@@ -259,7 +259,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/commonInputLayout10" />
 
 
-                    <com.app.l_pesa.common.CircularImageView
+                    <ImageView
                         android:id="@+id/imgProfile"
                         android:contentDescription="@string/app_name"
                         android:layout_width="@dimen/_75sdp"
@@ -268,7 +268,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/imageView10"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView9"
-                        app:srcCompat="@drawable/ic_upload_photo" />
+                        app:srcCompat="@drawable/ic_user" />
 
 
                     <TextView

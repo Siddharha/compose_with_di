@@ -24,6 +24,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
@@ -179,7 +180,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val header               = navigationView.getHeaderView(0)
         val txtName              = header.findViewById<CommonTextRegular>(R.id.txtName)
         val txtCreditScore       = header.findViewById<CommonTextRegular>(R.id.txtCreditScore)
-        val imgProfile           = header.findViewById<CircularImageView>(R.id.imgProfile)
+        val imgProfile           = header.findViewById<ImageView>(R.id.imgProfile)
 
         val sharedPrefOBJ= SharedPref(this@DashboardActivity)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
