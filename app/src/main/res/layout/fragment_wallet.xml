@@ -13,10 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="@dimen/_15sdp"
-        card_view:contentPadding="@dimen/_10sdp"
         card_view:cardBackgroundColor="@color/colorWhite"
-        card_view:cardElevation="4dp"
-        card_view:cardMaxElevation="6dp"
+
         >
 
         <android.support.constraint.ConstraintLayout
@@ -181,8 +179,9 @@
                 android:text="@string/commission_for_l_pesa"
                 android:textSize="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorTextBlack"
+                android:textColor="@color/colorTextBlackLight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
