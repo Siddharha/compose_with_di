@@ -381,6 +381,8 @@
     <string name="transaction_history">Transaction History</string>
     <string name="commission">Commission</string>
     <string name="want_to_withdraw">Do you want to withdraw?</string>
+    <string name="min_withdrawal">Minimum withdrawal</string>
+    <string name="max_withdrawal">Maximum withdrawal</string>
 
     <string name="cr">Cr</string>
     <string name="dr">Dr</string>
