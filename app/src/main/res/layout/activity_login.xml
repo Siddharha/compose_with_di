@@ -124,16 +124,15 @@
         android:text="@string/login"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtForgotPassword"
+        app:layout_constraintBottom_toTopOf="@+id/txtForgotPin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_flag_section" />
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txtForgotPassword"
+        android:id="@+id/txtForgotPin"
         android:gravity="center"
         android:layout_width="0dp"
-        android:textSize="@dimen/_12sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
         android:padding="@dimen/_2sdp"
@@ -150,7 +149,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="@dimen/_12sdp"
         android:padding="@dimen/_2sdp"
         android:textColorHighlight="@android:color/white"
         android:textColorLink="@color/colorAppDeep"
@@ -161,7 +159,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtForgotPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/txtForgotPin" />
 
     <ProgressBar
         android:id="@+id/progressBar"

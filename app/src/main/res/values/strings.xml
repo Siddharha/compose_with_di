@@ -14,7 +14,7 @@
     <string name="successful">Successful</string>
     <string name="failure">Failure</string>
     <string name="cancel">Cancel</string>
-    <string name="forgot_pin">Forgot PIN</string>
+    <string name="forgot_pin">Forgot PIN?</string>
     <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_otp">Enter OTP</string>

@@ -77,15 +77,22 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         loadCountry()
         loginProcess()
-        forgetPassword()
+        forgotPin()
     }
 
-    private fun forgetPassword()
+    private fun forgotPin()
     {
-        txtForgotPassword.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, ForgotPinActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        }
+        txtForgotPin.makeLinksFPin(Pair("Forgot PIN?", View.OnClickListener {
+
+            try {
+                startActivity(Intent(this@LoginActivity, ForgotPinActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            catch (exp: Exception)
+            {}
+
+        }))
+
     }
 
 
@@ -149,7 +156,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                 {
                     countryFound=true
                     val options = RequestOptions()
-                    options.centerCrop()
                     Glide.with(this@LoginActivity)
                             .load(countryListCode.image)
                             .apply(options)
@@ -210,6 +216,25 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
+    private fun AppCompatTextView.makeLinksFPin(vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(resources.getString(R.string.forgot_pin))
+        for (link in links) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(view: View) {
+                    Selection.setSelection((view as AppCompatTextView).text as Spannable, 0)
+                    view.invalidate()
+                    link.second.onClick(view)
+                }
+            }
+            val startIndexOfLink = resources.getString(R.string.forgot_pin).indexOf(link.first)
+            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        this.movementMethod = LinkMovementMethod.getInstance()
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
+    }
+
+
     private fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
         val spannableString = SpannableString(resources.getString(R.string.create_account))
         for (link in links) {
@@ -224,7 +249,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
-        this.movementMethod = LinkMovementMethod.getInstance() // without LinkMovementMethod, link can not click
+        this.movementMethod = LinkMovementMethod.getInstance()
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
