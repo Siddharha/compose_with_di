@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     private fun forgotPin()
     {
-        txtForgotPin.makeLinksFPin(Pair("Forgot PIN?", View.OnClickListener {
+        txtForgotPin.makeLinks(resources.getString(R.string.forgot_pin),Pair(resources.getString(R.string.forgot_pin), View.OnClickListener {
 
             try {
                 startActivity(Intent(this@LoginActivity, ForgotPinActivity::class.java))
@@ -188,7 +188,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     @SuppressLint("MissingPermission")
     private fun loginProcess()
     {
-        txtRegister.makeLinks(Pair("Create one!", View.OnClickListener {
+        txtRegister.makeLinks(resources.getString(R.string.create_account),Pair("Create one!", View.OnClickListener {
 
             try {
                 startActivity(Intent(this@LoginActivity, RegistrationStepOneActivity::class.java))
@@ -217,8 +217,9 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
-    private fun AppCompatTextView.makeLinksFPin(vararg links: Pair<String, View.OnClickListener>) {
-        val spannableString = SpannableString(resources.getString(R.string.forgot_pin))
+
+    private fun AppCompatTextView.makeLinks(string:String,vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(string)
         for (link in links) {
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(view: View) {
@@ -227,26 +228,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                     link.second.onClick(view)
                 }
             }
-            val startIndexOfLink = resources.getString(R.string.forgot_pin).indexOf(link.first)
-            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
-        this.movementMethod = LinkMovementMethod.getInstance()
-        this.setText(spannableString, TextView.BufferType.SPANNABLE)
-    }
-
-
-    private fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
-        val spannableString = SpannableString(resources.getString(R.string.create_account))
-        for (link in links) {
-            val clickableSpan = object : ClickableSpan() {
-                override fun onClick(view: View) {
-                    Selection.setSelection((view as AppCompatTextView).text as Spannable, 0)
-                    view.invalidate()
-                    link.second.onClick(view)
-                }
-            }
-            val startIndexOfLink = resources.getString(R.string.create_account).indexOf(link.first)
+            val startIndexOfLink = string.indexOf(link.first)
             spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
