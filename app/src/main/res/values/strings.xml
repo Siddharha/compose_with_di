@@ -47,6 +47,7 @@
     <string name="required_mother_maiden_name">Please enter your mother\'s maiden name.</string>
     <string name="required_date_of_birth">Please enter the date of birth.</string>
     <string name="required_phone_email">Please enter a valid phone number.</string>
+    <string name="required_gender">Please select your Gender</string>
     <string name="required_phone">Please enter valid phone number.</string>
     <string name="required_password">Please enter the password.</string>
     <string name="required_pin_code">Please enter a 6-digit pincode.</string>

@@ -100,7 +100,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val options = RequestOptions()
         Glide.with(this@ProfileEditPersonalActivity)
-                .load(resources.getString(R.string.profile_image_url)+profileData.userInfo!!.profileImage)
+                .load(BuildConfig.PROFILE_IMAGE_URL+profileData.userInfo!!.profileImage)
                 .apply(options)
                 .into(imgProfile)
 
@@ -159,7 +159,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             } else {
                 "F"
             }
-
 
             val hashMapOLD = HashMap<String, String>()
             hashMapOLD["title"]     = ""+profileData.userPersonalInfo!!.title
@@ -226,6 +225,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_date_of_birth))
                 }
                 else if(TextUtils.isEmpty(etMotherName.text.toString()))
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
+                }
+                else if(!radioMale.isChecked && !radioFemale.isChecked)
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
                 }

@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -239,7 +240,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         try {
             val options = RequestOptions()
              Glide.with(activity!!)
-                    .load(resources.getString(R.string.profile_image_url)+data.userInfo!!.profileImage)
+                    .load(BuildConfig.PROFILE_IMAGE_URL+data.userInfo!!.profileImage)
                     .apply(options)
                     .into(imgProfile)
         }
@@ -482,7 +483,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(resources.getString(R.string.upload_business_url)+userIdsPersonalInfo.fileName)
+                    .load(BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgInformation)
 
@@ -528,7 +529,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(resources.getString(R.string.profile_image_url)+userIdsPersonalInfo.fileName)
+                    .load(BuildConfig.PROFILE_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgInformation)
 

@@ -26,6 +26,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
@@ -196,7 +197,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             val options = RequestOptions()
             Glide.with(this@DashboardActivity)
-                    .load(resources.getString(R.string.profile_image_url)+userData.user_personal_info.profile_image)
+                    .load(BuildConfig.PROFILE_IMAGE_URL+userData.user_personal_info.profile_image)
                     .apply(options)
                     .into(imgProfile)
 

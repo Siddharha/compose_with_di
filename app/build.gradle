@@ -36,18 +36,19 @@ android {
             proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
             buildConfigField("String", 'AWS_BUCKET', '"lpesa-profile-identity-proof"')
+            buildConfigField("String", 'PROFILE_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/"')
+            buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
 
         }
         build {
-            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
             signingConfig signingConfigs.config
-            // proguardFile 'E:/Amiyo/L_Pesa_Intellij/l-pesa/app/proguard-rules.pro'
-            //proguardFile '/home/amiyo/AndroidProject/Office/L_Pesa_Intellij/app/proguard-rules.pro'
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
             buildConfigField("String", 'AWS_BUCKET', '"lpesa-profile-identity-proof"')
+            buildConfigField("String", 'PROFILE_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/"')
+            buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
 
         }
 

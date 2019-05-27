@@ -340,7 +340,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                         if(CommonMethod.isNetworkAvailable(activity!!))
                         {
                             val bundle = Bundle()
-                            bundle.putString("FILE_NAME",resources.getString(R.string.upload_business_url)+userIdsBusinessInfo.fileName)
+                            bundle.putString("FILE_NAME",BuildConfig.BUSINESS_IMAGE_URL+userIdsBusinessInfo.fileName)
                             val intent = Intent(activity, ActivityViewFile::class.java)
                             intent.putExtras(bundle)
                             startActivity(intent,bundle)
