@@ -374,7 +374,7 @@
 
     <!--Wallet-->
     <string name="withdraw">Withdraw</string>
-    <string name="lpesa_wallet_balance">L-PESA WALLET BALANCE</string>
+    <string name="lpesa_wallet_balance">L-Pesa Wallet Balance</string>
     <string name="commission_for_l_pesa">Commission for L-Pesa for each withdrawal:</string>
     <string name="withdrawal_amount">Withdrawal Amount</string>
     <string name="required_withdrawal_amount">Please enter the amount to withdraw.</string>
