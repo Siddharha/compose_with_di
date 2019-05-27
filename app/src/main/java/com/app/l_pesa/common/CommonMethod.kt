@@ -133,7 +133,7 @@ object CommonMethod {
 
         fileOBJ.createNewFile()
         val outputStream = FileOutputStream(fileOBJ)
-        selectedBitmap?.compress(Bitmap.CompressFormat.JPEG, 85 , outputStream)
+        selectedBitmap?.compress(Bitmap.CompressFormat.JPEG, 65 , outputStream)
         return fileOBJ
 
     }
