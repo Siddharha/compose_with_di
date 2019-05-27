@@ -12,7 +12,9 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="@dimen/_10sdp"
+        card_view:cardCornerRadius="@dimen/_15sdp"
+        card_view:elevation="0dp"
+        app:contentPaddingBottom="@dimen/_10sdp"
         app:cardBackgroundColor="@color/colorWhite"
         >
 
@@ -29,9 +31,9 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:padding="@dimen/_2sdp"
                 android:text="@string/lpesa_wallet_balance"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorSemiBlack"
+                android:textColor="@color/colorTextBlackLight"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +45,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_13sdp"
                 android:padding="@dimen/_2sdp"
                 android:drawablePadding="@dimen/_1sdp"
                 android:drawableStart="@drawable/ic_wallet_icon"
@@ -95,8 +97,8 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorSemiBlack"
-                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/colorTextBlackLight"
+                android:textSize="@dimen/_10sdp"
                 android:text="@string/min_withdrawal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -111,7 +113,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:padding="@dimen/_2sdp"
                 app:layout_constraintTop_toBottomOf="@+id/txt_min"
                 app:layout_constraintStart_toStartOf="parent"
@@ -127,8 +129,8 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorSemiBlack"
-                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/colorTextBlackLight"
+                android:textSize="@dimen/_10sdp"
                 android:text="@string/max_withdrawal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -143,7 +145,7 @@
                 android:gravity="center"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="@dimen/_12sdp"
                 android:padding="@dimen/_2sdp"
                 app:layout_constraintTop_toBottomOf="@+id/txt_max"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -178,9 +180,8 @@
                 android:text="@string/commission_for_l_pesa"
                 android:textSize="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorSemiBlack"
+                android:textColor="@color/colorTextBlack"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -194,23 +195,16 @@
     </android.support.v7.widget.CardView>
 
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        card_view:cardCornerRadius="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/colorWhite"
-        >
-
-        <android.support.constraint.ConstraintLayout
+     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp">
 
             <com.app.l_pesa.common.CommonInputLayout
                 android:id="@+id/commonInputLayout5"
                 style="@style/customInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@+id/buttonWithdraw"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -220,7 +214,7 @@
                 <com.app.l_pesa.common.CommonEditTextRegular
                     android:id="@+id/etWithdrawalAmount"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
+                    android:layout_height="match_parent"
                     android:hint="@string/withdrawal_amount"
                     android:inputType="numberSigned"
                     android:textSize="@dimen/_12sdp"
@@ -252,8 +246,6 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
-
-    </android.support.v7.widget.CardView>
 
 
     <LinearLayout
