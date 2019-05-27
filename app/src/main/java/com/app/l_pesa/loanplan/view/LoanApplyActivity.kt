@@ -1,18 +1,13 @@
 package com.app.l_pesa.loanplan.view
 
-import android.Manifest
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.*
 import android.graphics.Typeface
-import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v4.content.ContextCompat
+import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -24,18 +19,13 @@ import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
 import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.MainActivity
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationServices
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_loan_apply.*
@@ -47,6 +37,10 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private var loanPurpose=""
     private val listTitle = arrayListOf("For Transport","To Pay Bills","To Clear Debit","To Buy Foodstuff","Emergency Purposes","To Buy Medicine","Build Credit","Others")
     private lateinit  var progressDialog: KProgressHUD
+
+    private var lat=""
+    private var long=""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +58,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val bundle       = intent.extras
         val productID    = bundle!!.getString("PRODUCT_ID")
         val loanType     = bundle.getString("LOAN_TYPE")
+
 
         initLoader()
         loadDescription()
@@ -99,56 +94,42 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         }
 
+        fetchLocation()
+
     }
 
 
     private fun applyLoan(loan_type: String?, product_id: String?)
     {
         if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
+        {
+            if(isLocationEnabled())
+            {
+                if(lat!="")
                 {
-                    if(isLocationEnabled())
-                    {
-                        progressDialog.show()
-                        buttonSubmit.isClickable =false
-                        val locationRequest                 = LocationRequest()
-                        locationRequest.priority            = LocationRequest.PRIORITY_HIGH_ACCURACY
-
-                        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-                        val locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                        if (locationPermission == PackageManager.PERMISSION_GRANTED) {
-
-                            fusedLocationProviderClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
-                                override fun onLocationResult(locationResult: LocationResult) {
-                                    val location = locationResult.lastLocation
-                                    if (location != null)
-                                    {
-                                       loanApply(loan_type,product_id,location)
-                                    }
-                                    else
-                                    {
-
-                                    }
-                                    //fusedLocationProviderClient.removeLocationUpdates(this)
-
-                                }
-
-                            }, null)
-                        }
-                    }
-                    else
-                    {
-                        showAlert()
-                    }
-
-
+                    progressDialog.show()
+                    buttonSubmit.isClickable =false
+                    loanApply(loan_type,product_id)
                 }
                 else
                 {
-                    CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.no_internet))
+                    CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.please_wait))
                 }
+
+            }
+            else
+            {
+                showAlert()
+            }
+
+        }
+        else
+        {
+           CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.no_internet))
+        }
     }
 
-    private fun loanApply(loan_type: String?, product_id: String?, location: Location)
+    private fun loanApply(loan_type: String?, product_id: String?)
     {
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()
@@ -164,10 +145,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         }
 
-        jsonObject.addProperty("latitude",location.latitude.toString())
-        jsonObject.addProperty("longitude",location.longitude.toString())
+        jsonObject.addProperty("latitude",lat)
+        jsonObject.addProperty("longitude",long)
 
-        //println("JSON+++"+jsonObject.toString())
 
         val presenterLoanApply= PresenterLoanApply()
         presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)
@@ -309,6 +289,35 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 }
             }
         }
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        fetchLocation()
+    }
+
+    private fun fetchLocation()
+    {
+        val intent = Intent(this, LocationBackgroundService::class.java)
+        startService(intent)
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                object : BroadcastReceiver() {
+                    override fun onReceive(context: Context, intent: Intent) {
+                        lat  = intent.getStringExtra(EXTRA_LATITUDE)
+                        long = intent.getStringExtra(EXTRA_LONGITUDE)
+
+
+                    }
+                }, IntentFilter(ACTION_LOCATION_BROADCAST)
+        )
+
+    }
+
+    public override fun onDestroy() {
+
+        stopService(Intent(this, LocationBackgroundService::class.java))
+        super.onDestroy()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

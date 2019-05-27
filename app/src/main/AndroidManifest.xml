@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-feature
         android:name="android.hardware.camera2"
@@ -101,7 +100,10 @@
             android:name=".loanplan.view.LoanApplyActivity"
             android:label="@string/description_of_loan_purpose"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+
+        </activity>
         <activity
             android:name=".loanplan.view.LoanPlanDetailsActivity"
             android:label="@string/loan_plan_details"
@@ -224,6 +226,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".common.LocationBackgroundService" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
