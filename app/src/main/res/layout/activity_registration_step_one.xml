@@ -7,32 +7,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <ImageView
-        android:id="@+id/imageView15"
+        android:id="@+id/imageView"
+        android:contentDescription="@string/app_name"
         android:layout_width="@dimen/_75sdp"
         android:layout_height="@dimen/_75sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/_25sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textView26"
-        app:srcCompat="@drawable/lpesa_logo" />
+        app:srcCompat="@drawable/ic_app_logo" />
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/textView26"
+        android:id="@+id/txtHeader"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:gravity="center"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/color_deep_gold"
+        android:text="@string/sign_up"
+        android:gravity="center"
+        android:textColor="@color/colorTextBlack"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
         android:padding="@dimen/_2sdp"
-        android:text="@string/sign_up"
-        app:layout_constraintBottom_toTopOf="@+id/ll_flag_section"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+        app:layout_constraintBottom_toTopOf="@+id/ll_flag_section"
+
+        />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ll_flag_section"
@@ -44,72 +46,76 @@
         android:paddingEnd="@dimen/_1sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26">
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+        >
 
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etPhone"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_2sdp"
-            android:cursorVisible="true"
-            android:focusable="true"
-            android:hint="@string/phone_no"
-            android:inputType="numberSigned"
-            android:maxLines="1"
-            android:maxLength="15"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorBlack"
-            android:textColorHint="@color/colorTextBlackLight"
-            android:textSize="@dimen/_12sdp"
-            android:textCursorDrawable="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view_1"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/img_country"
-            android:contentDescription="@string/app_name"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_18sdp"
-            android:paddingStart="@dimen/_3sdp"
             android:layout_marginStart="@dimen/_5sdp"
+            android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_3sdp"
             android:paddingEnd="@dimen/_1sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dropdown"
+            app:layout_constraintEnd_toStartOf="@+id/imageView33"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
-
-        <ImageView
-            android:id="@+id/dropdown"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:background="@drawable/ic_dropdown_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/view_1"
-            app:layout_constraintStart_toEndOf="@+id/img_country"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/view_1"
             android:layout_width="@dimen/_1sdp"
             android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:background="@color/color_gray_light"
+            app:layout_constraintEnd_toStartOf="@+id/etPhone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/etPhone"
-            app:layout_constraintStart_toEndOf="@+id/dropdown"
+            app:layout_constraintStart_toEndOf="@+id/imageView33"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.app.l_pesa.common.CommonEditTextRegular
+            android:id="@+id/etPhone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:inputType="numberSigned"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_2sdp"
+            android:hint="@string/phone_no"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:maxLines="1"
+            android:maxLength="15"
+            android:longClickable="false"
+            android:textIsSelectable="false"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/colorTextBlack"
+            android:textColorHint="@color/colorTextBlackLight"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView33"
+            android:contentDescription="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@+id/view_1"
+            app:layout_constraintBottom_toBottomOf="@+id/ll_flag_section"
+            app:layout_constraintStart_toEndOf="@+id/img_country"
+            app:layout_constraintTop_toTopOf="@+id/ll_flag_section"
+            app:srcCompat="@drawable/ic_dropdown_icon" />
+
+
     </android.support.constraint.ConstraintLayout>
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/llEmail"
@@ -129,9 +135,9 @@
             android:id="@+id/img_email"
             android:contentDescription="@string/app_name"
             android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_height="@dimen/_18sdp"
             android:paddingStart="@dimen/_3sdp"
-            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_18sdp"
             android:paddingEnd="@dimen/_1sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/view16"
@@ -162,6 +168,8 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:maxLength="35"
+            android:longClickable="false"
+            android:textIsSelectable="false"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:fontFamily="@font/montserrat"
@@ -180,8 +188,8 @@
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat"
         android:background="@drawable/yellow_button"
