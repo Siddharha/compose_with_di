@@ -11,11 +11,30 @@
         android:contentDescription="@string/app_name"
         android:layout_width="@dimen/_75sdp"
         android:layout_height="@dimen/_75sdp"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lpesa_logo" />
+        app:srcCompat="@drawable/ic_app_logo" />
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtHeader"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/sign_in"
+        android:gravity="center"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:padding="@dimen/_2sdp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ll_flag_section"
+
+        />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/ll_flag_section"
@@ -27,19 +46,20 @@
         android:paddingEnd="@dimen/_1sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+       >
 
         <ImageView
             android:id="@+id/img_country"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_18sdp"
-            android:paddingStart="@dimen/_3sdp"
             android:layout_marginStart="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_1sdp"
             android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_1sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView33"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +88,7 @@
             android:maxLines="1"
             android:maxLength="15"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextBlack"
             android:textColorHint="@color/colorTextBlackLight"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/_12sdp"
@@ -97,8 +117,8 @@
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/txtLogin"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/yellow_button"
         android:fontFamily="@font/montserrat"
         android:text="@string/login"
@@ -113,8 +133,10 @@
         android:id="@+id/txtForgotPassword"
         android:gravity="center"
         android:layout_width="0dp"
+        android:textSize="@dimen/_12sdp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
+        android:padding="@dimen/_2sdp"
         android:text="@string/forgot_pin"
         android:fontFamily="@font/montserrat"
         android:textColor="@color/colorSemiBlack"
@@ -128,12 +150,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="@dimen/_12sdp"
+        android:padding="@dimen/_2sdp"
         android:textColorHighlight="@android:color/white"
         android:textColorLink="@color/colorAppDeep"
         android:text="@string/create_account"
         android:textColor="@color/colorSemiBlack"
         android:fontFamily="@font/montserrat"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="parent"

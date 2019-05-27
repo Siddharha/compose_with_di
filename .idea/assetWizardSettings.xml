@@ -15,8 +15,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="opacityPercent" value="75" />
-                            <entry key="outputName" value="ic_id" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../Desktop/131036.svg" />
+                            <entry key="outputName" value="ic_app_logo" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/l-pesa_logo.svg" />
                           </map>
                         </option>
                       </PersistentState>

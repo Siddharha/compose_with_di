@@ -34,7 +34,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
-import com.app.l_pesa.pin.view.ForgotPasswordActivity
+import com.app.l_pesa.pin.view.ForgotPinActivity
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     private fun forgetPassword()
     {
         txtForgotPassword.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+            startActivity(Intent(this@LoginActivity, ForgotPinActivity::class.java))
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
     }
