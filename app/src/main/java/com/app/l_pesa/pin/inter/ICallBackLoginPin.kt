@@ -1,4 +1,4 @@
-package com.app.l_pesa.password.inter
+package com.app.l_pesa.pin.inter
 
 /**
  * Created by Intellij Amiya on 2/2/19.

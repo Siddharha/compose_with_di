@@ -1,4 +1,4 @@
-package com.app.l_pesa.password.view
+package com.app.l_pesa.pin.view
 
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -7,8 +7,6 @@ import com.app.l_pesa.R
 import kotlinx.android.synthetic.main.activity_change_login_pin.*
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.content_change_login_pin.*
-import android.text.Editable
-import android.text.TextWatcher
 import android.graphics.Typeface
 import android.widget.TextView
 import android.app.Activity
@@ -20,9 +18,8 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
-import com.app.l_pesa.password.inter.ICallBackLoginPin
-import com.app.l_pesa.password.presenter.PresenterPassword
-import com.app.l_pesa.settings.inter.ICallBackResetPassword
+import com.app.l_pesa.pin.inter.ICallBackLoginPin
+import com.app.l_pesa.pin.presenter.PresenterPassword
 import com.google.gson.JsonObject
 
 

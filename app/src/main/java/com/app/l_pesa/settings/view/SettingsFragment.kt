@@ -11,7 +11,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
 import com.app.l_pesa.notification.view.NotificationActivity
-import com.app.l_pesa.password.view.ChangeLoginPinActivity
+import com.app.l_pesa.pin.view.ChangeLoginPinActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
 import com.app.l_pesa.settings.adapter.SettingsAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick

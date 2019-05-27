@@ -1,4 +1,4 @@
-package com.app.l_pesa.password.view
+package com.app.l_pesa.pin.view
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -28,9 +28,9 @@ import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.otpview.view.OTPActivity
-import com.app.l_pesa.password.inter.ICallBackPassword
-import com.app.l_pesa.password.model.PinData
-import com.app.l_pesa.password.presenter.PresenterPassword
+import com.app.l_pesa.pin.inter.ICallBackChangePin
+import com.app.l_pesa.pin.model.PinData
+import com.app.l_pesa.pin.presenter.PresenterPassword
 import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
@@ -41,7 +41,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_forget_password.*
 
-class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackPassword {
+class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackChangePin {
 
 
     private var countryCode     ="+255"
@@ -121,7 +121,7 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICall
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
-                val presenterForgetPassword=PresenterPassword()
+                val presenterForgetPassword= PresenterPassword()
                 presenterForgetPassword.doForgetPassword(this@ForgotPasswordActivity,jsonObject,this)
             }
             else
@@ -145,7 +145,7 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICall
         snackBarOBJ.show()
     }
 
-    override fun onSuccessResetPassword(data: PinData) {
+    override fun onSuccessResetPin(data: PinData) {
         progressBar.visibility= View.INVISIBLE
         if(data.next_step=="next_otp")
         {
@@ -167,7 +167,7 @@ class ForgotPasswordActivity : AppCompatActivity(),  ICallBackCountryList, ICall
         }
     }
 
-    override fun onErrorResetPassword(message: String) {
+    override fun onErrorResetPin(message: String) {
 
         progressBar.visibility= View.INVISIBLE
         buttonSubmit.isClickable=true

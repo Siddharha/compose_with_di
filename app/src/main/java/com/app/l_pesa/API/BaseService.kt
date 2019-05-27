@@ -11,8 +11,8 @@ import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.*
 import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.otpview.model.ResSetOTP
-import com.app.l_pesa.password.model.ResChangeLoginPin
-import com.app.l_pesa.password.model.ResForgetPassword
+import com.app.l_pesa.pin.model.ResChangeLoginPin
+import com.app.l_pesa.pin.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResChangePin
 import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*

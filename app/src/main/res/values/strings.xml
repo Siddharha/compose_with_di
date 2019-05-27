@@ -14,9 +14,7 @@
     <string name="successful">Successful</string>
     <string name="failure">Failure</string>
     <string name="cancel">Cancel</string>
-    <string name="okay">Ok</string>
-    <string name="forgot_password">Forgot Password</string>
-    <string name="change_password">Change Password</string>
+    <string name="forgot_pin">Forgot PIN</string>
     <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_otp">Enter OTP</string>
@@ -31,23 +29,13 @@
     <string name="upload_id_picture">Choose your ID type &amp; enter your ID number &amp; upload your ID picture </string>
     <string name="continue_to_register">Continue to Register</string>
     <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
-    <string name="incomplete_reg_message">You have not completed your registration. Enter your phone number and email to continue.</string>
 
     <!--Password section-->
-    <string name="password">Password</string>
     <string name="current_password">Current Password</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_new_password">Confirm New Password</string>
     <string name="new_pin">New Pin</string>
     <string name="pin">Pin</string>
     <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
-    <string name="password_should">Password should have</string>
-    <string name="password_rule_one">Minimum 8 &amp; maximum 16 characters.</string>
-    <string name="password_rule_two">At least 1 digit.</string>
-    <string name="password_rule_three">At least 1 lowercase letter.</string>
-    <string name="password_rule_four">At least 1 uppercase letter.</string>
-    <string name="password_rule_five">At least 1 special character (like !@#$%*?).</string>
     <string name="enter_email_or_mobile">Enter mobile number to reset password via your registered valid email address or registered mobile number.</string>
 
     <!--Caution Message-->
@@ -63,24 +51,16 @@
     <string name="required_pin_code">Please enter a 6-digit pincode.</string>
     <string name="required_confirm_pin_code">Please re-type your 6-digit pincode.</string>
     <string name="confirm_pin_code_not_match">Confirm pincode do not match.</string>
-    <string name="enter_current_password">Please enter the current password.</string>
     <string name="required_current_pin">Required current PIN.</string>
     <string name="required_new_pin">Required new PIN.</string>
     <string name="required_confirm_pin">Required confirm PIN.</string>
     <string name="confirm_pin_not_match">Confirm PIN not match.</string>
     <string name="old_new_password_different">Old and New PIN should be different.</string>
-    <string name="enter_new_password">Please enter the new password.</string>
-    <string name="enter_confirm_password">Retype the new password to confirm.</string>
-    <string name="confirm_password_not_match">New passwords do not match.</string>
-    <string name="new_old_password_different">New and old password should be different.</string>
-    <string name="enter_password_rule">Password should follow mentioned rule.</string>
     <string name="required_email">Please enter a valid email address.</string>
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
     <string name="pin_change_success">Login PIN has been changed.</string>
-    <string name="email_to_reset_password">Check your email to reset your password.</string>
-    <string name="sms_to_reset_password">Check your sms to reset your password.</string>
     <string name="change_one_info">Nothing to save! You have not yet edited.</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="you_have_select_from_date_to_date">You should select From Date or To Date</string>
@@ -143,7 +123,6 @@
 
     <!--Pin section-->
     <string name="credit_score">Credit Score: </string>
-    <string name="change_pin">Change Pin</string>
     <string name="change_transactional_pin">Change Transactional PIN</string>
     <string name="current_pin">Current Pin</string>
     <string name="your_security_pin">Your Security PIN</string>

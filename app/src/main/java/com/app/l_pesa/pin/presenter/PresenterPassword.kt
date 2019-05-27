@@ -1,4 +1,4 @@
-package com.app.l_pesa.password.presenter
+package com.app.l_pesa.pin.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,8 +6,8 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.password.inter.ICallBackLoginPin
-import com.app.l_pesa.password.inter.ICallBackPassword
+import com.app.l_pesa.pin.inter.ICallBackLoginPin
+import com.app.l_pesa.pin.inter.ICallBackChangePin
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +23,7 @@ import retrofit2.HttpException
  */
 class PresenterPassword {
 
-    fun doForgetPassword(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackPassword) {
+    fun doForgetPassword(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackChangePin) {
 
         RetrofitHelper.getRetrofit(BaseService::class.java).doForgetPassword(jsonRequest)
 
@@ -36,10 +36,10 @@ class PresenterPassword {
 
                     try {
                         if (response.status.isSuccess) {
-                            callBackOBJ.onSuccessResetPassword(response.data)
+                            callBackOBJ.onSuccessResetPin(response.data)
 
                         } else {
-                            callBackOBJ.onErrorResetPassword(response.status.message)
+                            callBackOBJ.onErrorResetPin(response.status.message)
                         }
                     } catch (e: Exception) {
 
@@ -52,10 +52,10 @@ class PresenterPassword {
                         val jsonStatus = jsonError.getJSONObject("status")
                         val jsonMessage = jsonStatus.getString("message")
 
-                        callBackOBJ.onErrorResetPassword(jsonMessage)
+                        callBackOBJ.onErrorResetPin(jsonMessage)
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
-                        callBackOBJ.onErrorResetPassword(errorMessageOBJ)
+                        callBackOBJ.onErrorResetPin(errorMessageOBJ)
                     }
 
                 })
