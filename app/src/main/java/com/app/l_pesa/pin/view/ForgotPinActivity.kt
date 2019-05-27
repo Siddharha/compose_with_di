@@ -39,7 +39,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.activity_forget_password.*
+import kotlinx.android.synthetic.main.activity_forgot_pin.*
 
 class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackChangePin {
 
@@ -51,7 +51,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forget_password)
+        setContentView(R.layout.activity_forgot_pin)
 
         loadCountry()
         forgetPin()

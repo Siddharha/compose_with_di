@@ -87,6 +87,8 @@
             android:focusable="true"
             android:maxLines="1"
             android:maxLength="15"
+            android:longClickable="false"
+            android:textIsSelectable="false"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/colorTextBlack"
             android:textColorHint="@color/colorTextBlackLight"
