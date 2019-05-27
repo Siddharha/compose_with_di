@@ -10,25 +10,26 @@
         >
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/textView27"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:id="@+id/txtHeader"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:text="@string/thank_you"
             android:gravity="center"
-            android:textColor="@color/color_deep_gold"
+            android:textColor="@color/colorTextBlack"
             android:textSize="@dimen/_20sdp"
             android:textStyle="bold"
             android:padding="@dimen/_2sdp"
-            app:layout_constraintBottom_toTopOf="@+id/textView28"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txt_upload_tittle"
+
             />
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/textView28"
+            android:id="@+id/txt_upload_tittle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
@@ -41,7 +42,8 @@
             app:layout_constraintBottom_toTopOf="@+id/imgProfilePhoto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
+
 
         <com.app.l_pesa.common.CircularImageView
             android:id="@+id/imgProfilePhoto"
@@ -56,7 +58,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView28"
+            app:layout_constraintTop_toBottomOf="@+id/txt_upload_tittle"
             app:layout_constraintBottom_toTopOf="@+id/etName"
 
             />
@@ -76,7 +78,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:inputType="textCapWords"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextBlack"
             android:textColorHint="@color/colorTextBlackLight"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/etOTP"
@@ -97,7 +99,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:inputType="numberSigned"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorTextBlack"
             android:textColorHint="@color/colorTextBlackLight"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
@@ -108,8 +110,8 @@
         <com.app.l_pesa.common.CustomButtonRegular
             android:id="@+id/btnSubmit"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/yellow_button"
             android:text="@string/final_step"
             android:textColor="@color/colorWhite"
