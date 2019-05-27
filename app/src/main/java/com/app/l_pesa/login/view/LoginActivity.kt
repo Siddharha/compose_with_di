@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatDelegate
@@ -328,8 +329,12 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     override fun onSuccessLogin(data: PinData) {
 
+        Handler().postDelayed(Runnable {
+            txtLogin.isClickable   = true
+        }, 1000)
+
         progressBar.visibility=View.INVISIBLE
-        txtLogin.isClickable   = false
+
         if(data.next_step=="next_otp")
         {
             val sharedPrefOBJ=SharedPref(this@LoginActivity)
