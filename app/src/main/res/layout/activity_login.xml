@@ -137,6 +137,8 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:padding="@dimen/_2sdp"
         android:text="@string/forgot_pin"
+        android:textColorHighlight="@android:color/white"
+        android:textColorLink="@color/colorAppDeep"
         android:fontFamily="@font/montserrat"
         android:textColor="@color/colorSemiBlack"
         app:layout_constraintBottom_toTopOf="@+id/txtRegister"
