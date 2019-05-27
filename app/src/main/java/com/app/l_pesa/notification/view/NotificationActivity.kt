@@ -95,7 +95,6 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
                 }
             })
 
-
         }
     }
 

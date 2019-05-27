@@ -264,7 +264,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
     override fun onFailureUploadAWS(string: String) {
-
+        buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,string)
     }
@@ -305,6 +305,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onSuccessPersonalInfo() {
 
         swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
         onBackPressed()

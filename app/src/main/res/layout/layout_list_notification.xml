@@ -42,7 +42,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
                 android:textSize="@dimen/_12sdp"
-                android:textColor="@color/colorTextBlackLight"
+                android:textColor="@color/colorTextBlack"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"

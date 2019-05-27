@@ -46,7 +46,10 @@
             android:name=".notification.view.NotificationActivity"
             android:label="@string/notification"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+
+        </activity>
         <activity
             android:name=".wallet.view.WalletHistoryActivity"
             android:label="@string/withdrawal_history"
@@ -154,11 +157,11 @@
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait">
 
-          <!--  <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
 
         </activity>
 
@@ -188,12 +191,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
