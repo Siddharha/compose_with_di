@@ -13,9 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="@dimen/_15sdp"
-        card_view:elevation="0dp"
-        app:contentPaddingBottom="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/colorWhite"
+        card_view:contentPaddingBottom="@dimen/_10sdp"
+        card_view:cardBackgroundColor="@color/colorWhite"
         >
 
         <android.support.constraint.ConstraintLayout
