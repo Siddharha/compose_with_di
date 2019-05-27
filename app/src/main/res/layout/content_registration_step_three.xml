@@ -2,20 +2,16 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rootLayout"
     android:padding="@dimen/_40sdp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".registration.view.RegistrationStepThreeActivity"
-    tools:showIn="@layout/activity_registration_step_three">
+    >
 
     <TextView
         android:id="@+id/txtHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/thank_you"
         android:textColor="@color/colorTextBlack"
         android:textSize="@dimen/_20sdp"
@@ -23,13 +19,14 @@
         android:fontFamily="@font/montserrat"
         android:gravity="center"
         android:padding="@dimen/_2sdp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txt_title"
+        />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txt_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/upload_id_picture"
@@ -59,10 +56,9 @@
         android:paddingEnd="@dimen/_10sdp"
         android:drawableEnd="@drawable/ic_dropdown"
         android:focusable="false"
-        app:layout_constraintBottom_toTopOf="@+id/etNo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
 
         />
 
@@ -81,7 +77,6 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintBottom_toTopOf="@+id/imgPersonalType"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etIdType" />
