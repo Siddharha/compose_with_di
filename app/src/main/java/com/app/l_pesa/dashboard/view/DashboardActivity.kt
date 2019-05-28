@@ -196,6 +196,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
 
             val options = RequestOptions()
+            options.placeholder(R.drawable.ic_user)
             Glide.with(this@DashboardActivity)
                     .load(BuildConfig.PROFILE_IMAGE_URL+userData.user_personal_info.profile_image)
                     .apply(options)

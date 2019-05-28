@@ -61,6 +61,13 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     fun loadProfileInfo(shimmerStatus: Boolean)
     {
 
+        val options = RequestOptions()
+        options.placeholder(R.drawable.ic_user)
+        Glide.with(activity!!)
+                .load("")
+                .apply(options)
+                .into(imgProfile)
+
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             if(shimmerStatus)

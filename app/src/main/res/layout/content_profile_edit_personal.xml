@@ -273,7 +273,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/imageView10"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView9"
-                        android:background="@drawable/ic_user" />
+                       />
 
 
                     <TextView

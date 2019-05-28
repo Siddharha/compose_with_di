@@ -99,6 +99,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     {
 
         val options = RequestOptions()
+        options.placeholder(R.drawable.ic_user)
         Glide.with(this@ProfileEditPersonalActivity)
                 .load(BuildConfig.PROFILE_IMAGE_URL+profileData.userInfo!!.profileImage)
                 .apply(options)
