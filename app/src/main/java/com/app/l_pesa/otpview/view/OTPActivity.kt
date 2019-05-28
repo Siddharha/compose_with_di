@@ -172,8 +172,6 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
             jsonObject.addProperty("otp",otp)
             jsonObject.add("device_info",jsonObjectDeviceInfo)
 
-            println("JSON_"+jsonObject)
-
             val presenterOTP= PresenterOTP()
             presenterOTP.doVerifyOTP(this@OTPActivity,jsonObject,this)
 
@@ -191,13 +189,11 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
         if(data.next_step=="next_pin")
         {
             val sharedPrefOBJ=SharedPref(this@OTPActivity)
-            val gson = Gson()
-            val json = gson.toJson(data.post_data)
+            val json = Gson().toJson(data.post_data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@OTPActivity, PinSetActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
-            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
     }
 
