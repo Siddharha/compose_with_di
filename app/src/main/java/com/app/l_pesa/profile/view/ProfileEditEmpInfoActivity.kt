@@ -12,19 +12,15 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.inter.ICallBackEmpInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterEmpInfo
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_profile_edit_emp_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_emp_info.*
 
