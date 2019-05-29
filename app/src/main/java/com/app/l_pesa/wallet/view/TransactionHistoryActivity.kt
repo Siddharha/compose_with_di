@@ -240,6 +240,10 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         {
             txt_message.text = resources.getString(R.string.no_result_found)
         }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_transactional_history_message)
+        }
         cardView.visibility=View.VISIBLE
     }
 

@@ -252,6 +252,10 @@ class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {
         {
             txt_message.text = resources.getString(R.string.no_result_found)
         }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_loan_history_message)
+        }
         cardView.visibility=View.VISIBLE
     }
 

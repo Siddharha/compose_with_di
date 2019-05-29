@@ -275,6 +275,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         {
             txt_message.text = resources.getString(R.string.no_result_found)
         }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_investment_message)
+        }
         cardView.visibility=View.VISIBLE
     }
 
