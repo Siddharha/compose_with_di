@@ -47,7 +47,7 @@
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_13sdp"
                 android:padding="@dimen/_2sdp"
-                android:drawablePadding="@dimen/_1sdp"
+                android:drawablePadding="@dimen/_3sdp"
                 android:drawableStart="@drawable/ic_wallet_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
