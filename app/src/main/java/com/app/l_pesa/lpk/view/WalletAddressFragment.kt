@@ -144,6 +144,11 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
         address=etWalletAddress.text.toString().trim()
         buttonWalletAddress.isClickable=true
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_update_successfully))
+        val sharedPrefOBJ=SharedPref(activity!!)
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        userDashBoard.walletAddress=etWalletAddress.text.toString().trim()
+        val json = Gson().toJson(userDashBoard)
+        sharedPrefOBJ.userDashBoard      = json
     }
 
     override fun onErrorWalletAddress(message: String) {
