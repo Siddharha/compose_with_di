@@ -131,8 +131,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
-        left_header_txt.text  = dashBoard.currencyCode+" "+format.format(dashBoard.fixedDepositAmount)
-        right_header_txt.text = dashBoard.currencyCode+" "+format.format(dashBoard.savingsAmount)
+        left_header_txt.text  = dashBoard.currencyCode+" "+format.format(dashBoard.fixedDepositAmount)+" "+resources.getString(R.string.in_deposit)
+        right_header_txt.text = dashBoard.currencyCode+" "+format.format(dashBoard.savingsAmount)+" "+resources.getString(R.string.in_wallet)
 
         txt_start.text          = dashBoard.minCreditScore.toString()
         txt_max.text            = dashBoard.maxCreditScore.toString()

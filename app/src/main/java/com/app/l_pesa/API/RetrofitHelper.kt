@@ -1,6 +1,7 @@
 package com.app.l_pesa.API
 
 import com.app.l_pesa.BuildConfig
+import com.app.l_pesa.BuildConfig.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -15,9 +16,6 @@ import java.util.concurrent.TimeUnit
 class RetrofitHelper {
     companion object {
 
-        //  private val BASE_URL = "http://35.158.245.118/v2/" // OLD
-        private val BASE_URL = "http://api-dev.l-pesa.com/v2/" // Dev
-        //private val BASE_URL = "http://api-live.l-pesa.com/v2/" // Live
 
         private val APPLICATION_JSON = "application/json"
         private val CLIENT_TYPE = "A"

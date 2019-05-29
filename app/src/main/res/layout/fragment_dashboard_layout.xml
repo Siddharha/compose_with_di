@@ -91,7 +91,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/colorApp"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_10sdp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_1sdp"
                             />
@@ -136,7 +136,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorApp"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_10sdp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_1sdp"
                             />
