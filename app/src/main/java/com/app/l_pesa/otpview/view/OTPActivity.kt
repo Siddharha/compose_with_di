@@ -189,7 +189,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
         if(data.next_step=="next_pin")
         {
             val sharedPrefOBJ=SharedPref(this@OTPActivity)
-            val json = Gson().toJson(data.post_data)
+            val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@OTPActivity, PinSetActivity::class.java)
             startActivity(intent)
