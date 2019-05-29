@@ -37,7 +37,7 @@
     <string name="pin">Pin</string>
     <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
-    <string name="enter_email_or_mobile">Enter mobile number to reset PIN via your registered valid email address or registered mobile number.</string>
+    <string name="enter_email_or_mobile">Enter mobile number to reset PIN via your registered mobile number.</string>
 
     <!--Caution Message-->
     <string name="required_title">Please select the title.</string>
