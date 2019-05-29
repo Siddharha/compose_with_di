@@ -40,7 +40,7 @@
 
                 />
 
-            <com.app.l_pesa.pinview.PassCodeView
+            <com.app.l_pesa.pinview.view.PassCodeView
                 android:id="@+id/pass_code_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.app.l_pesa.pinview;
+package com.app.l_pesa.pinview.view;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
