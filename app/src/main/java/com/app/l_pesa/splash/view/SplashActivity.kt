@@ -157,6 +157,11 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         loadMain()
     }
 
+    override fun onSessionTimeOut() {
+
+        loadMain()
+    }
+
     override fun onErrorLogout(message: String) {
 
         loadMain()

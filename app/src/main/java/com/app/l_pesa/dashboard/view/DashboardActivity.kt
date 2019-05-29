@@ -49,6 +49,7 @@ import com.kaopiz.kprogresshud.KProgressHUD
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
 
+
     private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -409,18 +410,27 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onSuccessLogout() {
 
-        dismiss()
-        val sharedPrefOBJ= SharedPref(this@DashboardActivity)
-        sharedPrefOBJ.removeShared()
-        startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
+       logout()
     }
 
     override fun onErrorLogout(message: String) {
 
         dismiss()
         CommonMethod.customSnackBarError(drawer_layout,this@DashboardActivity,message)
+    }
+
+    override fun onSessionTimeOut() {
+        logout()
+    }
+
+    private fun logout()
+    {
+        dismiss()
+        val sharedPrefOBJ= SharedPref(this@DashboardActivity)
+        sharedPrefOBJ.removeShared()
+        startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
     }
 
     private fun navigateToFragment(fragmentToNavigate: Fragment,isVisible:Boolean,isVisibleFilter:Boolean)
