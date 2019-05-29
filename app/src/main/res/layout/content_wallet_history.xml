@@ -65,7 +65,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_12sdp"
-                            android:text="@string/empty_loan_history_message"
+                            android:text="@string/empty_withdrawal_history_message"
                             android:gravity="center"
                             android:textColor="@color/textColors"
                             android:fontFamily="@font/montserrat"
