@@ -149,7 +149,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         if(data.next_step=="next_otp")
         {
             val sharedPrefOBJ=SharedPref(this@ForgotPinActivity)
-            val json = Gson().toJson(data.post_data)
+            val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@ForgotPinActivity, OTPActivity::class.java)
             startActivity(intent)
@@ -158,7 +158,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         else
         {
             val sharedPrefOBJ=SharedPref(this@ForgotPinActivity)
-            val json = Gson().toJson(data.post_data)
+            val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@ForgotPinActivity, PinSetActivity::class.java)
             startActivity(intent)

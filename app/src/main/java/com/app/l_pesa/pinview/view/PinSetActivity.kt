@@ -21,6 +21,7 @@ import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.login.model.PostData
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.pinview.inter.ICallBackPinSet
 import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.pinview.presenter.PresenterPinSet
@@ -71,7 +72,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         pass_code_view.setKeyTextColor(ContextCompat.getColor(this@PinSetActivity,R.color.colorApp))
 
         val sharedPrefOBJ= SharedPref(this@PinSetActivity)
-        val modelDevice = Gson().fromJson<PostData>(sharedPrefOBJ.deviceInfo, PostData::class.java)
+        val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
 
 
         pass_code_view.setOnTextChangeListener { text ->
@@ -81,29 +82,29 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
                 {
                     progressDialog.show()
                     val jsonObjectDeviceInfo = JsonObject()
-                    jsonObjectDeviceInfo.addProperty("phone_no", modelDevice.phone_no)
-                    jsonObjectDeviceInfo.addProperty("country_code", modelDevice.country_code)
-                    jsonObjectDeviceInfo.addProperty("platform_type", modelDevice.platform_type)
-                    jsonObjectDeviceInfo.addProperty("device_token", modelDevice.device_token)
+                    jsonObjectDeviceInfo.addProperty("phone_no", modelDevice.post_data.phone_no)
+                    jsonObjectDeviceInfo.addProperty("country_code", modelDevice.post_data.country_code)
+                    jsonObjectDeviceInfo.addProperty("platform_type", modelDevice.post_data.platform_type)
+                    jsonObjectDeviceInfo.addProperty("device_token", modelDevice.post_data.device_token)
 
                     val jsonObjectDeviceData = JsonObject()
-                    jsonObjectDeviceData.addProperty("device_id", modelDevice.device_data.device_id)
-                    jsonObjectDeviceData.addProperty("sdk",modelDevice.device_data.sdk)
-                    jsonObjectDeviceData.addProperty("imei",modelDevice.device_data.imei)
-                    jsonObjectDeviceData.addProperty("imsi",modelDevice.device_data.imsi)
-                    jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.device_data.simSerial_no)
-                    jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.device_data.sim_operator_Name)
-                    jsonObjectDeviceData.addProperty("screen_height",modelDevice.device_data.screen_height)
-                    jsonObjectDeviceData.addProperty("screen_width",modelDevice.device_data.screen_width)
-                    jsonObjectDeviceData.addProperty("device", modelDevice.device_data.device)
-                    jsonObjectDeviceData.addProperty("model", modelDevice.device_data.model)
-                    jsonObjectDeviceData.addProperty("product", modelDevice.device_data.product)
-                    jsonObjectDeviceData.addProperty("manufacturer", modelDevice.device_data.manufacturer)
+                    jsonObjectDeviceData.addProperty("device_id", modelDevice.post_data.device_data.device_id)
+                    jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
+                    jsonObjectDeviceData.addProperty("imei",modelDevice.post_data.device_data.imei)
+                    jsonObjectDeviceData.addProperty("imsi",modelDevice.post_data.device_data.imsi)
+                    jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.post_data.device_data.simSerial_no)
+                    jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)
+                    jsonObjectDeviceData.addProperty("screen_height",modelDevice.post_data.device_data.screen_height)
+                    jsonObjectDeviceData.addProperty("screen_width",modelDevice.post_data.device_data.screen_width)
+                    jsonObjectDeviceData.addProperty("device", modelDevice.post_data.device_data.device)
+                    jsonObjectDeviceData.addProperty("model", modelDevice.post_data.device_data.model)
+                    jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
+                    jsonObjectDeviceData.addProperty("manufacturer", modelDevice.post_data.device_data.manufacturer)
 
                     jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
 
                     val jsonObject = JsonObject()
-                    jsonObject.addProperty("phone_number",modelDevice.country_code+modelDevice.phone_no)
+                    jsonObject.addProperty("phone_number",modelDevice.access_phone)
                     jsonObject.addProperty("apps_pin",pass_code_view.passCodeText)
                     jsonObject.add("device_info",jsonObjectDeviceInfo)
 
