@@ -135,12 +135,11 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         val presenterDashboard= PresenterDashboard()
         presenterDashboard.getDashboard(this@PinSetActivity,data.access_token,this)
 
-
     }
 
     override fun onErrorPinSet(message: String) {
 
-        pass_code_view.reset()
+        pass_code_view.setError(true)
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,message)
     }
