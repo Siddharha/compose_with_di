@@ -15,4 +15,4 @@ data class UserInfo(val id:Int,val profile_image:String,val phone_number:String,
 data class UserPersonalInfo(val title:String,val first_name:String,
                             val middle_name:String,val last_name:String,
                             val dob:String,val sex:String,val merital_status:String,
-                            val profile_image:String, val email_address:String)
+                            var profile_image:String, val email_address:String)

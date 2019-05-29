@@ -55,7 +55,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 
 
-class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList, ICallBackDashboard {
+class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList {
 
     private var runTimePermission: RunTimePermission? = null
     private val permissionCode  = 200
@@ -366,9 +366,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
-    override fun onSessionTimeOut(jsonMessage: String) {
-
-    }
 
     private fun countrySpinner(countryList: ResModelData)
     {
@@ -429,31 +426,6 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         adapterCountry.filterList(filteredCourseAry)
 
-    }
-
-    override fun onSuccessDashboard(data: ResDashboard.Data) {
-
-        val sharedPrefOBJ=SharedPref(this@LoginActivity)
-        val gson                          = Gson()
-        val dashBoardData                 = gson.toJson(data)
-        sharedPrefOBJ.userDashBoard       = dashBoardData
-
-        progressBar.visibility = View.INVISIBLE
-        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
-    }
-
-    override fun onFailureDashboard(jsonMessage: String) {
-
-        val sharedPrefOBJ= SharedPref(this@LoginActivity)
-        sharedPrefOBJ.removeShared()
-        progressBar.visibility = View.INVISIBLE
-        txtLogin.isClickable   = true
-        CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {

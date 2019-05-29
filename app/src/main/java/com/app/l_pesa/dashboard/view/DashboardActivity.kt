@@ -24,7 +24,6 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.common.*
@@ -184,7 +183,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
         if(userData!=null)
         {
-
 
             if(!TextUtils.isEmpty(userData.user_personal_info.first_name))
             {

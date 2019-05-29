@@ -45,6 +45,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.common.BitmapResize
+import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
@@ -264,7 +266,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     override fun onSuccessUploadAWS(url: String) {
 
+        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        userData.user_personal_info.profile_image=url
+        val json = Gson().toJson(userData)
+        sharedPrefOBJ.userInfo      = json
         uploadData(url)
+
     }
 
     override fun onFailureUploadAWS(string: String) {
@@ -312,8 +320,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         buttonSubmit.isClickable=true
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+
         onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+
 
     }
 

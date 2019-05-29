@@ -144,16 +144,14 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         if(switchInvestment.isChecked)
         {
             userDashBoard.savingInvestAutoStatus=1
-            val gson = Gson()
-            val json = gson.toJson(userDashBoard)
+            val json = Gson().toJson(userDashBoard)
             sharedPrefOBJ.userDashBoard      = json
 
         }
         else
         {
             userDashBoard.savingInvestAutoStatus=0
-            val gson = Gson()
-            val json = gson.toJson(userDashBoard)
+            val json = Gson().toJson(userDashBoard)
             sharedPrefOBJ.userDashBoard      = json
         }
 
