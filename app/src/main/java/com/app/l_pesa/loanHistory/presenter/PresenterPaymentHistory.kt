@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterPaymentHistory {
 
-    fun getPaymentHistory(contextOBJ: Context,type : String,id:String, callBackOBJ: ICallBackPaymentHistory)
+    @SuppressLint("CheckResult")
+    fun getPaymentHistory(contextOBJ: Context, type : String, id:String, callBackOBJ: ICallBackPaymentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getPaymentHistory(type,id)

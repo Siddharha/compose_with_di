@@ -1,5 +1,6 @@
 package com.app.l_pesa.wallet.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterTransactionAll {
 
-    fun getTransactionAll(contextOBJ: Context,from_date:String,to_date:String,type:String, callBackOBJ: ICallBackTransaction) {
+    @SuppressLint("CheckResult")
+    fun getTransactionAll(contextOBJ: Context, from_date:String, to_date:String, type:String, callBackOBJ: ICallBackTransaction) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory("",from_date,to_date)
@@ -26,11 +28,11 @@ class PresenterTransactionAll {
                 .subscribe({ response ->
 
                     try {
-                       if (response.status!!.isSuccess)
+                       if (response.status.isSuccess)
                         {
-                            if(response.data!!.savings_history!!.size>0)
+                            if(response.data.savings_history.size>0)
                             {
-                                callBackOBJ.onSuccessTransaction(response.data!!.savings_history!!,response.data.cursors,from_date,to_date)
+                                callBackOBJ.onSuccessTransaction(response.data.savings_history,response.data.cursors,from_date,to_date)
                             }
                             else
                             {
@@ -40,22 +42,32 @@ class PresenterTransactionAll {
 
                         } else
                         {
-                            callBackOBJ.onErrorTransaction(response.status!!.message)
+                            callBackOBJ.onErrorTransaction(response.status.message)
                         }
                     } catch (e: Exception) {
 
                     }
                 }, { error ->
                     try {
-                        val errorVal = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
+
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorTransaction(jsonMessage)
+                            }
 
 
-
-                        val jsonError   = JSONObject(errorVal.response().errorBody()?.string())
-                        val jsonStatus  = jsonError.getJSONObject("status")
-                        val jsonMessage = jsonStatus.getString("message")
-                        callBackOBJ.onErrorTransaction(jsonMessage)
-
+                        }
 
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
@@ -65,7 +77,8 @@ class PresenterTransactionAll {
                 })
     }
 
-    fun getTransactionPaginate(contextOBJ: Context, cursorAfter:String,from_date:String,to_date:String, callBackOBJ: ICallBackTransaction) {
+    @SuppressLint("CheckResult")
+    fun getTransactionPaginate(contextOBJ: Context, cursorAfter:String, from_date:String, to_date:String, callBackOBJ: ICallBackTransaction) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletHistory(cursorAfter,from_date,to_date)

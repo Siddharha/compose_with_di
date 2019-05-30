@@ -3,6 +3,8 @@ package com.app.l_pesa.wallet.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
@@ -24,6 +26,9 @@ import kotlinx.android.synthetic.main.content_transaction_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 import android.support.annotation.NonNull
+import android.support.v7.app.AlertDialog
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
@@ -267,6 +272,28 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     {
         val commonClass= CommonClass()
         commonClass.datePicker(this@TransactionHistoryActivity,etToDate)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(this@TransactionHistoryActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@TransactionHistoryActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@TransactionHistoryActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 
