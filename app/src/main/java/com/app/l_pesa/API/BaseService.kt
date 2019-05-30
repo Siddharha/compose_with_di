@@ -14,6 +14,7 @@ import com.app.l_pesa.otpview.model.ResSetOTP
 import com.app.l_pesa.pin.model.ResChangeLoginPin
 import com.app.l_pesa.pin.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResChangePin
+import com.app.l_pesa.pin.model.ResSetUpPin
 import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.ResRegistrationOne
@@ -63,6 +64,9 @@ interface BaseService{
 
     @POST("settings/change_pin")
     fun doChangePin(@Body request: JsonObject): Observable<ResChangePin>
+
+    @POST("settings/setup_pin")
+    fun doSetUpPin(@Body request: JsonObject): Observable<ResSetUpPin>
 
     @POST("settings/change_apps_pin")
     fun doChangeLoginPin(@Body request: JsonObject): Observable<ResChangeLoginPin>

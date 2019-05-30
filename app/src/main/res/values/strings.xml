@@ -36,6 +36,7 @@
     <string name="new_pin">New Pin</string>
     <string name="pin">Pin</string>
     <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
+    <string name="pin_create_successfully">Your Pin has been created successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
     <string name="enter_email_or_mobile">Enter mobile number to reset PIN via your registered mobile number.</string>
 

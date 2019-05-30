@@ -1,4 +1,5 @@
 package com.app.l_pesa.pin.model
 
-class ResSetUpPin {
-}
+import com.app.l_pesa.common.CommonStatusModel
+
+data class ResSetUpPin(val status: CommonStatusModel)

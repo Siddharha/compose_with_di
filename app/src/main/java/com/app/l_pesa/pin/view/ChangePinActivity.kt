@@ -130,6 +130,16 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
     }
 
+    private fun cancelButton()
+    {
+        buttonCancel.setOnClickListener {
+
+            onBackPressed()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+        }
+    }
+
     private fun toolbarFont(context: Activity) {
 
         for (i in 0 until toolbar.childCount) {
@@ -145,15 +155,6 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
         }
     }
 
-    private fun cancelButton()
-    {
-        buttonCancel.setOnClickListener {
-
-            onBackPressed()
-            overridePendingTransition(R.anim.left_in, R.anim.right_out)
-
-        }
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

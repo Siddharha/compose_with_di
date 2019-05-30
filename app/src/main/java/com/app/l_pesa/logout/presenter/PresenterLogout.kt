@@ -1,5 +1,6 @@
 package com.app.l_pesa.logout.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -23,6 +24,7 @@ import retrofit2.HttpException
 class PresenterLogout {
 
 
+    @SuppressLint("CheckResult")
     fun doLogout(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogout)
     {
         val sharedPrefOBJ=SharedPref(contextOBJ)
