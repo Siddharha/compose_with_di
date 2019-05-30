@@ -1,8 +1,11 @@
 package com.app.l_pesa.notification.view
 
 import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
@@ -10,6 +13,8 @@ import android.view.View
 import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.notification.adapter.AdapterNotification
 import com.app.l_pesa.notification.inter.ICallBackNotification
 import com.app.l_pesa.notification.model.ResNotification
@@ -150,6 +155,28 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,this@NotificationActivity,resources.getString(R.string.no_internet))
         }
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(this@NotificationActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@NotificationActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@NotificationActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 

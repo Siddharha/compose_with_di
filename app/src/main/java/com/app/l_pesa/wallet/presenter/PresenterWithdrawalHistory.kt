@@ -1,5 +1,6 @@
 package com.app.l_pesa.wallet.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterWithdrawalHistory {
 
-    fun getWithdrawalHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackWalletWithdrawalHistory) {
+    @SuppressLint("CheckResult")
+    fun getWithdrawalHistory(contextOBJ: Context, from_date:String, to_date:String, type:String, callBackOBJ: ICallBackWalletWithdrawalHistory) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletWithdrawalHistory("",from_date,to_date)
@@ -46,14 +48,26 @@ class PresenterWithdrawalHistory {
                     }
                 }, { error ->
                     try {
-                        val errorVal = error as HttpException
+
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
+
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorWalletWithdrawalHistory(jsonMessage)
+                            }
 
 
-
-                        val jsonError   = JSONObject(errorVal.response().errorBody()?.string())
-                        val jsonStatus  = jsonError.getJSONObject("status")
-                        val jsonMessage = jsonStatus.getString("message")
-                        callBackOBJ.onErrorWalletWithdrawalHistory(jsonMessage)
+                        }
 
 
                     } catch (exp: Exception) {
@@ -64,7 +78,8 @@ class PresenterWithdrawalHistory {
                 })
     }
 
-    fun getWithdrawalHistoryPaginate(contextOBJ: Context, cursorAfter:String,from_date:String,to_date:String,callBackOBJ: ICallBackWalletWithdrawalHistory) {
+    @SuppressLint("CheckResult")
+    fun getWithdrawalHistoryPaginate(contextOBJ: Context, cursorAfter:String, from_date:String, to_date:String, callBackOBJ: ICallBackWalletWithdrawalHistory) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWalletWithdrawalHistory(cursorAfter,from_date,to_date)

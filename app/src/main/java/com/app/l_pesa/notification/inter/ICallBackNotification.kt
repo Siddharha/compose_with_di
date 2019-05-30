@@ -9,4 +9,5 @@ interface ICallBackNotification {
     fun onSuccessNotificationPaginate(notification_history: ArrayList<ResNotification.NotificationHistory>, cursors: ResNotification.Cursors)
     fun onEmptyNotification()
     fun onFailureNotification(message: String)
+    fun onSessionTimeOut(message: String)
 }

@@ -2,9 +2,12 @@ package com.app.l_pesa.wallet.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
@@ -14,6 +17,8 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.wallet.adapter.WalletHistoryAdapter
 import com.app.l_pesa.wallet.inter.ICallBackWalletWithdrawalHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
@@ -273,6 +278,28 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             txt_message.text = resources.getString(R.string.empty_withdrawal_history_message)
         }
         cardView.visibility=View.VISIBLE
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(this@WalletHistoryActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@WalletHistoryActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@WalletHistoryActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun toolbarFont(context: Activity) {
