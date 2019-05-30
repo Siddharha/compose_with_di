@@ -52,13 +52,26 @@ class PresenterTransferHistory {
                     error ->
                     try
                     {
-                        val errorVal              = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                        val errorVal       = error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        callBackOBJ.onErrorTransferHistory(jsonMessage)
+                            callBackOBJ.onErrorTransferHistory(jsonMessage)
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorTransferHistory(jsonMessage)
+                            }
+                        }
                     }
                     catch (exp: Exception)
                     {

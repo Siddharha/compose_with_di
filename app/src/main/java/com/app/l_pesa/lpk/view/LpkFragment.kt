@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.view
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -16,6 +17,8 @@ import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_lpk.*
 import android.os.Handler
+import android.support.v7.app.AlertDialog
+import com.app.l_pesa.main.MainActivity
 
 
 class LpkFragment: Fragment(), ICallBackInfoLPK {
@@ -126,6 +129,28 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
             constraintWithdrawal.isClickable=true
         }, 1000)
 
+
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 

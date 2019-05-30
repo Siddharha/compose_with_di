@@ -2,6 +2,8 @@ package com.app.l_pesa.investment.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -33,6 +35,7 @@ import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.*
 import com.app.l_pesa.lpk.inter.ICallBackInvestmentStatus
 import com.app.l_pesa.lpk.presenter.PresenterInvestmentStatus
+import com.app.l_pesa.main.MainActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -160,6 +163,28 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     override fun onErrorInvestmentStatus(message: String) {
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun dismiss()
