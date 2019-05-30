@@ -19,7 +19,7 @@
     <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_otp">Enter OTP</string>
-    <string name="coming_soon">Coming soon</string>
+    <string name="coming_soon">Coming Soon</string>
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
@@ -27,7 +27,7 @@
     <string name="thank_you">Thank you!</string>
     <string name="create_account">Don\'t have an account? Create one!</string>
     <string name="upload_picture">Upload picture &amp; write your name</string>
-    <string name="upload_id_picture">Choose your ID type &amp; enter your ID number &amp; upload your ID picture </string>
+    <string name="upload_id_picture">Choose your ID type, enter your ID number &amp; upload a photocopy of the ID </string>
     <string name="continue_to_register">Continue to Register</string>
     <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
 
@@ -47,26 +47,26 @@
     <string name="required_mother_maiden_name">Please enter your mother\'s maiden name.</string>
     <string name="required_date_of_birth">Please enter the date of birth.</string>
     <string name="required_phone_email">Please enter a valid phone number.</string>
-    <string name="required_gender">Please select your Gender</string>
+    <string name="required_gender">Please select your gender.</string>
     <string name="required_phone">Please enter valid phone number.</string>
     <string name="required_password">Please enter the password.</string>
-    <string name="required_pin_code">Please enter a 6-digit pincode.</string>
-    <string name="required_confirm_pin_code">Please re-type your 6-digit pincode.</string>
-    <string name="confirm_pin_code_not_match">Confirm pincode do not match.</string>
-    <string name="required_current_pin">Required current PIN.</string>
-    <string name="required_new_pin">Required new PIN.</string>
-    <string name="required_confirm_pin">Required confirm PIN.</string>
-    <string name="confirm_pin_not_match">Confirm PIN not match.</string>
-    <string name="old_new_password_different">Old and New PIN should be different.</string>
+    <string name="required_pin_code">Please enter a new 6-digit transactional PIN.</string>
+    <string name="required_confirm_pin_code">Please re-type your 6-digit PIN.</string>
+    <string name="confirm_pin_code_not_match">The new and re-typed PIN does not match.</string>
+    <string name="required_current_pin">Please enter your current PIN.</string>
+    <string name="required_new_pin">Please enter a new PIN.</string>
+    <string name="required_confirm_pin">Please re-type your new PIN.</string>
+    <string name="confirm_pin_not_match">The new and re-typed PIN does not match.</string>
+    <string name="old_new_password_different">Old and new PIN should be different.</string>
     <string name="required_email">Please enter a valid email address.</string>
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
     <string name="pin_change_success">Login PIN has been changed.</string>
     <string name="change_one_info">Nothing to save! You have not yet edited.</string>
-    <string name="no_internet">No Internet Connection</string>
-    <string name="you_have_select_from_date_to_date">You should select From Date or To Date</string>
-    <string name="please_wait">Please wait..</string>
+    <string name="no_internet">You are not connected to the internet!</string>
+    <string name="you_have_select_from_date_to_date">Select at least one date to filter.</string>
+    <string name="please_wait">Please wait...</string>
     <string name="no_internet_details">You are not connected to internet, make sure Wi-Fi/Data is on, Airplane mode is off and try again.</string>
     <string name="retry">Retry</string>
     <string name="init">INIT</string>
@@ -86,9 +86,9 @@
     <string name="required_otp">Please enter the OTP.</string>
     <string name="otp_not_match">You entered an incorrect OTP.</string>
     <string name="search_country">Search country</string>
-    <string name="required_cancellation_reason">Required cancellation reason</string>
+    <string name="required_cancellation_reason">Write a reason for the cancellation.</string>
 
-    <string name="search_result_not_found">Search result not found</string>
+    <string name="search_result_not_found">We could not find a match!</string>
     <string name="no_result_found">We\'re sorry. We can\'t seem to find any result that match your search.</string>
 
 
@@ -180,7 +180,7 @@
     <string name="interest">Interest</string>
     <string name="interest_day">Interest/Day:</string>
     <string name="rate">Rate</string>
-    <string name="loan_applied_successfully">Loan Applied successfully.</string>
+    <string name="loan_applied_successfully">We have registered your application for the loan.</string>
     <string name="empty_transactional_history_message">You haven\'t yet made any transaction through L-Pesa wallet.</string>
     <string name="empty_withdrawal_history_message">You haven\'t yet withdrawn an amount from your wallet. Make sure that you have the balance in your wallet to withdraw.</string>
     <string name="empty_loan_history_message">You haven\'t applied for any loans yet from L-pesa. Start your journey to financial freedom with the first loan from L-pesa.</string>
@@ -330,17 +330,17 @@
     <string name="reinvestment">Reinvestment</string>
     <string name="exit_point">Exit Point</string>
     <string name="required_investment_amount">Enter an amount to invest.</string>
-    <string name="select_investment_plan">Select one investment plan</string>
+    <string name="select_investment_plan">Select an investment plan.</string>
     <string name="apply_an_investment_note_start">Your Investment with L-Pesa account has a generous annual interest rate starting from </string>
     <string name="apply_an_investment_note_end">annually. You can invest and withdraw your interest funds with fixed \"monthly exit points\" on the investing amount. The longer you invest with L-Pesa, the better the benefits that you will experience. </string>
     <string name="add_interest_amount">Let\'s add interest on wallet every month!</string>
     <string name="investment_plan">Investment Plan</string>
     <string name="investment_history">Investment History</string>
     <string name="apply">Apply</string>
-    <string name="apply_reinvestment">Are you sure you want to Reinvest?</string>
+    <string name="apply_reinvestment">Are you sure you want to reinvest?</string>
     <string name="apply_withdrawal">Are you sure you want to withdraw?</string>
     <string name="apply_exit_point">Are you sure you want to exit?</string>
-    <string name="delete_exit_loan">Are you sure you want to Delete?</string>
+    <string name="delete_exit_loan">Are you sure you want to delete?</string>
 
     <!--Token-->
     <string name="transfer">Transfer</string>
@@ -364,12 +364,12 @@
     <string name="withdrawal">Withdrawal</string>
     <string name="withdraw_on">Withdrawal on</string>
 
-    <string name="token_transfer_successfully">Token transfer successfully.</string>
-    <string name="token_withdrawal_successfully">Token withdrawal successfully.</string>
+    <string name="token_transfer_successfully">Nice! you just deposited your LPK for a long term saving.</string>
+    <string name="token_withdrawal_successfully">Your request was received. We are processing the transfer.</string>
     <string name="token_update_successfully">Your ERC-20 address has been updated.</string>
     <string name="reset">Reset</string>
     <string name="required_wallet_address">Enter a valid ERC-20 wallet address.</string>
-    <string name="required_valid_wallet_address">Ether Address is not match</string>
+    <string name="required_valid_wallet_address">You entered an invalid ERC-20 address.</string>
     <string name="view_etherscan">View on Etherscan</string>
     <string name="erc_wallet_address_details">Your ERC-20 address must follow the checksum format. To put it simple, your ERC-20 address is case sensitive. Go to etherscan, type  https://etherscan.io/address/[YOUR_ADDRESS]. Then copy the address with valid checksum on the loaded page.</string>
     <string name="lpk_withdrawal_text">Send us a request if you wish to withdraw LPK to your Ethereum wallet. We will process your request within 48 hours of application. View the status of your application in "Withdrawal History.</string>
@@ -384,7 +384,7 @@
     <string name="required_withdrawal_amount">Please enter the amount to withdraw.</string>
     <string name="transaction_history">Transaction History</string>
     <string name="commission">Commission</string>
-    <string name="want_to_withdraw">Do you want to withdraw?</string>
+    <string name="want_to_withdraw">Are you sure you want to withdraw?</string>
     <string name="min_withdrawal">Minimum withdrawal</string>
     <string name="max_withdrawal">Maximum withdrawal</string>
 
@@ -394,7 +394,7 @@
     <!--Notification-->
     <string name="notification">Notification</string>
     <string name="new_">New</string>
-    <string name="empty_notification">We could not find a push notification with that ID linked to your account.</string>
+    <string name="empty_notification">We could not find a push notification with the ID linked to your account.</string>
 
 
     <!--OTP-->
