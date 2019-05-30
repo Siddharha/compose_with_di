@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanplan.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -21,6 +22,7 @@ import retrofit2.HttpException
  */
 class PresenterLoanPlans {
 
+    @SuppressLint("CheckResult")
     fun doLoanPlans(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackCurrentLoan)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -57,13 +59,25 @@ class PresenterLoanPlans {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onFailureLoanPlans(jsonMessage)
+                            }
 
-                        callBackOBJ.onFailureLoanPlans(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {
@@ -75,6 +89,7 @@ class PresenterLoanPlans {
     }
 
 
+    @SuppressLint("CheckResult")
     fun doLoanPlansBusiness(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackBusinessLoan)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -110,14 +125,25 @@ class PresenterLoanPlans {
                 }, {
                     error ->
                     try
-                    {
-                        val errorVal     = error as HttpException
+                    { val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onFailureLoanPlans(jsonMessage)
+                            }
 
-                        callBackOBJ.onFailureLoanPlans(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {

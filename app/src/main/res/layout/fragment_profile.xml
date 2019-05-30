@@ -479,11 +479,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp">
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    >
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/_10sdp">
 
 
                         <com.app.l_pesa.common.CommonTextRegular
@@ -522,7 +524,7 @@
                             android:layout_height="1dp"
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
-                            android:layout_marginBottom="@dimen/_6sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:background="@color/colorGreyLight"
                             app:layout_constraintBottom_toTopOf="@+id/imageView6"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -535,7 +537,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:contentDescription="@string/app_name"
                             app:layout_constraintBottom_toTopOf="@+id/imageView7"
                             app:layout_constraintRight_toLeftOf="@+id/txtDOB"
@@ -547,13 +548,14 @@
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txtDOB"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:text="@string/date_of_birth"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_11sdp"
                             android:maxLines="1"
+                            android:gravity="center|start"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -567,6 +569,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             app:layout_constraintBottom_toTopOf="@+id/imageView8"
                             app:layout_constraintEnd_toStartOf="@+id/txtGender"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -578,24 +581,29 @@
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txtGender"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             android:text="@string/gender"
+                            android:gravity="center|start"
                             android:maxLines="1"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_11sdp"
                             app:fontFamily="@font/montserrat"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView7"
-                            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+                            app:layout_constraintTop_toTopOf="@+id/imageView7"
+                            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                             />
 
                         <ImageView
                             android:id="@+id/imageView8"
+                            android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             app:layout_constraintBottom_toTopOf="@+id/imageView9"
                             app:layout_constraintEnd_toStartOf="@+id/txtMartialStatus"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -606,13 +614,15 @@
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txtMartialStatus"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/_22sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             android:text="@string/marital_status"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_11sdp"
                             android:maxLines="1"
+                            android:gravity="center|start"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView8"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -627,6 +637,7 @@
                             android:layout_height="wrap_content"
                             android:contentDescription="@string/app_name"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             app:layout_constraintEnd_toStartOf="@+id/txtMotherName"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
@@ -636,12 +647,14 @@
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txtMotherName"
                             android:layout_width="0dp"
+                            android:layout_marginTop="@dimen/_4sdp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:text="@string/mother_maiden_name"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_11sdp"
+                            android:gravity="center|start"
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintTop_toBottomOf="@+id/txtMartialStatus"
                             app:layout_constraintBottom_toBottomOf="parent"

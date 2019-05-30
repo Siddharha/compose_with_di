@@ -1,8 +1,10 @@
 package com.app.l_pesa.loanplan.view
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import com.app.l_pesa.loanplan.inter.ICallBackBusinessLoan
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
+import com.app.l_pesa.main.MainActivity
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.ArrayList
@@ -119,5 +122,26 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
         intent.putExtras(bundle)
         startActivity(intent,bundle)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 }
