@@ -47,7 +47,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
             txtTitle.visibility     =View.VISIBLE
             txtHeader.visibility    =View.VISIBLE
             buttonRetry.visibility  =View.VISIBLE
-            progressBar.visibility  =View.INVISIBLE
+            progressBar.visibility  =View.VISIBLE
 
             buttonRetry.setOnClickListener {
 

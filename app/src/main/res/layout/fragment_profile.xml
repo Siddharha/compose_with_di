@@ -404,7 +404,7 @@
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_11sdp"
                             android:maxLines="1"
-                            android:text="1234567890"
+                            android:text=""
                             app:fontFamily="@font/montserrat"
                             app:layout_constraintBottom_toBottomOf="@id/imageView2"
                             app:layout_constraintEnd_toEndOf="parent"
