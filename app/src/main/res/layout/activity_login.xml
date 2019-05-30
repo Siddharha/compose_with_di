@@ -167,9 +167,10 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
         android:layout_width="@dimen/_32sdp"
         android:layout_height="@dimen/_32sdp"
+        android:theme="@style/Progressbar.Red"
+        android:indeterminateTintMode="src_in"
         android:indeterminateTint="@color/colorRed"
         android:padding="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_25sdp"

@@ -157,14 +157,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val sharedPref=SharedPref(this@DashboardActivity)
         when {
             sharedPref.navigationTab==resources.getString(R.string.open_tab_loan) -> {
-                navigateToFragment(LoanPlansFragment.newInstance(),true,false)
+                navigateToFragment(LoanPlansFragment.newInstance(),true, isVisibleFilter = false)
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
             sharedPref.navigationTab==resources.getString(R.string.open_tab_profile) -> {
-                navigateToFragment(ProfileFragment.newInstance(),false,false)
+                navigateToFragment(ProfileFragment.newInstance(),false, isVisibleFilter = false)
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
-            else -> navigateToFragment(DashboardFragment.newInstance(),false,false)
+            else -> navigateToFragment(DashboardFragment.newInstance(),false, isVisibleFilter = false)
         }
 
 
@@ -283,7 +283,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_dashboard)
-                    navigateToFragment(DashboardFragment.newInstance(),false,false)
+                    navigateToFragment(DashboardFragment.newInstance(),false,isVisibleFilter = false)
                 }
 
             }
@@ -295,7 +295,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_profile)
-                    navigateToFragment(ProfileFragment.newInstance(),false,false)
+                    navigateToFragment(ProfileFragment.newInstance(),false, isVisibleFilter = false)
                 }
 
             }
@@ -308,7 +308,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     val sharedPref= SharedPref(this@DashboardActivity)
                     sharedPref.openTabLoan="CURRENT"
                     toolbar.title =resources.getString(R.string.nav_item_loan)
-                    navigateToFragment(LoanPlansFragment.newInstance(),false,false)
+                    navigateToFragment(LoanPlansFragment.newInstance(),false, isVisibleFilter = false)
                 }
 
             }
@@ -319,7 +319,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_points)
-                    navigateToFragment(PointsFragment.newInstance(),false,false)
+                    navigateToFragment(PointsFragment.newInstance(),false, isVisibleFilter = false)
                 }
 
             }
@@ -330,7 +330,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_investment)
-                    navigateToFragment(InvestmentFragment.newInstance(),false,true)
+                    navigateToFragment(InvestmentFragment.newInstance(),false, isVisibleFilter = true)
                 }
 
 
@@ -342,7 +342,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_lpk)
-                    navigateToFragment(LpkFragment.newInstance(),false,false)
+                    navigateToFragment(LpkFragment.newInstance(),false, isVisibleFilter = false)
                 }
 
 
@@ -354,7 +354,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_wallet)
-                    navigateToFragment(WalletFragment.newInstance(),false,false)
+                    navigateToFragment(WalletFragment.newInstance(),false, isVisibleFilter = false)
                 }
 
 
@@ -366,7 +366,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_settings)
-                    navigateToFragment(SettingsFragment.newInstance(),false,false)
+                    navigateToFragment(SettingsFragment.newInstance(),false, isVisibleFilter = false)
                 }
 
             }

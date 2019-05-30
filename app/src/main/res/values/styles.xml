@@ -48,5 +48,9 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="Progressbar.Red" parent="AppTheme">
+        <item name="colorControlActivated">@color/colorRed</item>
+    </style>
+
 
 </resources>
