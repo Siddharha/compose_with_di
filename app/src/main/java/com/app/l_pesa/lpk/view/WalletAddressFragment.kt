@@ -1,9 +1,11 @@
 package com.app.l_pesa.lpk.view
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.text.*
@@ -24,6 +26,7 @@ import java.util.HashMap
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.widget.TextView
+import com.app.l_pesa.main.MainActivity
 import java.lang.Exception
 
 
@@ -155,6 +158,27 @@ class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
 
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
         buttonWalletAddress.isClickable=true
+
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 
