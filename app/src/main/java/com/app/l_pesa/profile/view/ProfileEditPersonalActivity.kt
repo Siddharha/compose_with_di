@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 import android.app.DatePickerDialog
 import android.content.ClipData
 import android.content.ContentUris
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -46,6 +47,7 @@ import android.widget.Toast
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
 import com.app.l_pesa.profile.inter.ICallBackUpload
@@ -324,8 +326,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
-
-
     }
 
     override fun onFailurePersonalInfo(message: String) {
@@ -333,6 +333,28 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditPersonalActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ProfileEditPersonalActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun onChangeProfileImage()

@@ -169,10 +169,9 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         dismiss()
         val dialogBuilder = AlertDialog.Builder(activity!!)
         dialogBuilder.setMessage(message)
-                // if the dialog is cancelable
                 .setCancelable(false)
                 .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, id ->
+                    dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(activity!!)
                     sharedPrefOBJ.removeShared()

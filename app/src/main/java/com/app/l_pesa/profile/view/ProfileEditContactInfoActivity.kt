@@ -1,10 +1,13 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -16,6 +19,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackContactInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterContactInfo
@@ -154,6 +158,28 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true
         customSnackBarError(llRoot,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        swipeRefreshLayout.isRefreshing=false
+
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditContactInfoActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ProfileEditContactInfoActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ProfileEditContactInfoActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 

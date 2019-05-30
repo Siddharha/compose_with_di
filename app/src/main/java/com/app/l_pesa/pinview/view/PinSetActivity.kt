@@ -167,7 +167,6 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         dismiss()
         val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
         dialogBuilder.setMessage(jsonMessage)
-                // if the dialog is cancelable
                 .setCancelable(false)
                 .setPositiveButton("Ok", DialogInterface.OnClickListener {
                     dialog, id ->

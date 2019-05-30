@@ -177,7 +177,6 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         dismiss()
         val dialogBuilder = AlertDialog.Builder(activity!!)
         dialogBuilder.setMessage(message)
-                // if the dialog is cancelable
                 .setCancelable(false)
                 .setPositiveButton("Ok", DialogInterface.OnClickListener {
                     dialog, _ ->
