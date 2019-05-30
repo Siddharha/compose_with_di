@@ -4,4 +4,5 @@ interface ICallBackEmpInfo {
 
     fun onSuccessEmpInfo()
     fun onFailureEmpInfo(message: String)
+    fun onSessionTimeOut(message: String)
 }

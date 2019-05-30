@@ -39,15 +39,27 @@ class PresenterEmpInfo {
 
                     }
                 }, { error ->
-                    try {
-                        val errorVal = error as HttpException
+                    try
+                    {
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
+
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onFailureEmpInfo(jsonMessage)
+                            }
 
 
-
-                        val jsonError   = JSONObject(errorVal.response().errorBody()?.string())
-                        val jsonStatus  = jsonError.getJSONObject("status")
-                        val jsonMessage = jsonStatus.getString("message")
-                        callBackOBJ.onFailureEmpInfo(jsonMessage)
+                        }
 
 
                     } catch (exp: Exception) {
