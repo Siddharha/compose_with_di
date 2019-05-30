@@ -584,7 +584,6 @@
                             android:layout_height="@dimen/_22sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_4sdp"
                             android:text="@string/gender"
                             android:gravity="center|start"
                             android:maxLines="1"
@@ -617,7 +616,6 @@
                             android:layout_height="@dimen/_22sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_4sdp"
                             android:text="@string/marital_status"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_11sdp"
@@ -647,7 +645,6 @@
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/txtMotherName"
                             android:layout_width="0dp"
-                            android:layout_marginTop="@dimen/_4sdp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginEnd="@dimen/_5sdp"
