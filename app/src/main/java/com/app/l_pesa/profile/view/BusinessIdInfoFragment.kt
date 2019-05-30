@@ -1,21 +1,15 @@
 package com.app.l_pesa.profile.view
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.content.ClipData
-import android.content.ContentUris
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
@@ -41,6 +35,7 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.BusinessIdAdapter
 import com.app.l_pesa.profile.adapter.BusinessIdListAdapter
@@ -54,9 +49,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
-import java.io.IOException
 import java.lang.Exception
-import java.text.SimpleDateFormat
 import java.util.*
 
 class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
@@ -203,6 +196,28 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarError(llRoot,activity!!,string)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun swipeRefresh()

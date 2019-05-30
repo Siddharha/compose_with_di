@@ -2,10 +2,7 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.ClipData
-import android.content.ContentUris
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -36,6 +33,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
@@ -185,9 +183,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         }
 
-
     }
-
 
 
     override fun onSuccessUploadAWS(url: String) {
@@ -217,6 +213,28 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarError(llRoot,activity!!,string)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun swipeRefresh()

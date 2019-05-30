@@ -1,6 +1,7 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
@@ -30,6 +31,7 @@ import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.ArrayList
 import android.widget.FrameLayout
 import com.app.l_pesa.common.CommonEditTextRegular
+import com.app.l_pesa.main.MainActivity
 
 
 class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
@@ -385,5 +387,26 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     override fun onFailureRemoveLoan(message: String) {
         dismissDialog()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismissDialog()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 }

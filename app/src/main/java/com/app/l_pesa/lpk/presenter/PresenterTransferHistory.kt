@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterTransferHistory {
 
-    fun getTokenHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackTransferHistory)
+    @SuppressLint("CheckResult")
+    fun getTokenHistory(contextOBJ: Context, from_date:String, to_date:String, type:String, callBackOBJ: ICallBackTransferHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory("",from_date,to_date)

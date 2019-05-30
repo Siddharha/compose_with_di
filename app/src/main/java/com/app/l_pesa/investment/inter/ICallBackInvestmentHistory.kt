@@ -13,6 +13,8 @@ interface ICallBackInvestmentHistory {
     fun onSuccessInvestmentWithdrawal()
     fun onErrorInvestmentWithdrawal(message: String)
 
+    fun onSessionTimeOut(message: String)
+
     fun onSuccessReinvestment()
     fun onErrorReinvestment(message: String)
 

@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -15,7 +16,8 @@ import retrofit2.HttpException
 
 class PresenterLoanHistory {
 
-    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,type:String,cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
+    @SuppressLint("CheckResult")
+    fun getLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, from_date:String, to_date:String, type:String, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors,from_date,to_date)
@@ -53,13 +55,25 @@ class PresenterLoanHistory {
                     error ->
                     try
                     {
-                        val errorVal            = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus         =    jsonError.getJSONObject("status")
-                        val jsonMessage         =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackCurrentOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackCurrentOBJ.onFailureLoanHistory(jsonMessage)
+                            }
 
-                        callBackCurrentOBJ.onFailureLoanHistory(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {
@@ -70,7 +84,8 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, from_date:String,to_date:String,type:String,cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
+    @SuppressLint("CheckResult")
+    fun getLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, from_date:String, to_date:String, type:String, cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistoryBusiness(jsonRequest,cursors,from_date,to_date)
@@ -125,7 +140,8 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject,from_date:String,to_date:String, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
+    @SuppressLint("CheckResult")
+    fun getLoanHistoryPaginate(contextOBJ: Context, jsonRequest : JsonObject, from_date:String, to_date:String, cursors:String, callBackCurrentOBJ: ICallBackCurrentLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistory(jsonRequest,cursors,from_date,to_date)
@@ -177,7 +193,8 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun getLoanHistoryPaginateBusiness(contextOBJ: Context, jsonRequest : JsonObject,from_date:String,to_date:String, cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
+    @SuppressLint("CheckResult")
+    fun getLoanHistoryPaginateBusiness(contextOBJ: Context, jsonRequest : JsonObject, from_date:String, to_date:String, cursors:String, callBackCurrentOBJ: ICallBackBusinessLoanHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLoanHistoryBusiness(jsonRequest,cursors,from_date,to_date)
@@ -229,7 +246,8 @@ class PresenterLoanHistory {
                 })
     }
 
-    fun cancelLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, callBackCurrentOBJ: ICallBackCurrentLoanHistory,position:Int)
+    @SuppressLint("CheckResult")
+    fun cancelLoanHistory(contextOBJ: Context, jsonRequest : JsonObject, callBackCurrentOBJ: ICallBackCurrentLoanHistory, position:Int)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doCancelLoan(jsonRequest)
@@ -260,13 +278,26 @@ class PresenterLoanHistory {
                     error ->
                     try
                     {
-                        val errorVal            = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus         =    jsonError.getJSONObject("status")
-                        val jsonMessage         =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackCurrentOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackCurrentOBJ.onFailureRemoveLoan(jsonMessage)
+                            }
 
-                        callBackCurrentOBJ.onFailureRemoveLoan(jsonMessage)
+
+                        }
+
                     }
                     catch (exp: Exception)
                     {
@@ -278,7 +309,8 @@ class PresenterLoanHistory {
     }
 
 
-    fun cancelLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, callBackCurrentOBJ: ICallBackBusinessLoanHistory,position:Int)
+    @SuppressLint("CheckResult")
+    fun cancelLoanHistoryBusiness(contextOBJ: Context, jsonRequest : JsonObject, callBackCurrentOBJ: ICallBackBusinessLoanHistory, position:Int)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doCancelLoan(jsonRequest)

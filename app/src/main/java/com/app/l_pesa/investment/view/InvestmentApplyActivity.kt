@@ -3,8 +3,11 @@ package com.app.l_pesa.investment.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -19,6 +22,7 @@ import com.app.l_pesa.investment.adapter.LoanPlanListAdapter
 import com.app.l_pesa.investment.inter.ICallBackLoanPlanList
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterApplyInvestment
+import com.app.l_pesa.main.MainActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_investment_apply.*
@@ -128,6 +132,27 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         recyclerView?.layoutManager     = LinearLayoutManager(this@InvestmentApplyActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = loanPlanAdapter
         dialog.show()
+
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@InvestmentApplyActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@InvestmentApplyActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@InvestmentApplyActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 

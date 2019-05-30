@@ -15,4 +15,6 @@ interface ICallBackCurrentLoanHistory {
 
     fun onSuccessRemoveLoan(position: Int)
     fun onFailureRemoveLoan(message: String)
+
+    fun onSessionTimeOut(message: String)
 }

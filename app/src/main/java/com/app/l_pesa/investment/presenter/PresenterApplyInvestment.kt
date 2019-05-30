@@ -1,5 +1,6 @@
 package com.app.l_pesa.investment.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -15,6 +16,7 @@ import retrofit2.HttpException
 
 class PresenterApplyInvestment {
 
+    @SuppressLint("CheckResult")
     fun applyInvestment(contextOBJ: Context, callBackOBJ: ICallBackLoanPlanList, jsonRequest: JsonObject)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -29,7 +31,7 @@ class PresenterApplyInvestment {
                     try
                     {
 
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                             callBackOBJ.onSuccessApplyInvestment()
 
@@ -44,13 +46,25 @@ class PresenterApplyInvestment {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorApplyInvestment(jsonMessage)
+                            }
 
-                        callBackOBJ.onErrorApplyInvestment(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {
@@ -62,7 +76,8 @@ class PresenterApplyInvestment {
     }
 
 
-    fun removeInvestment(contextOBJ: Context, callBackOBJ: ICallBackInvestmentHistory, jsonRequest: JsonObject,position: Int)
+    @SuppressLint("CheckResult")
+    fun removeInvestment(contextOBJ: Context, callBackOBJ: ICallBackInvestmentHistory, jsonRequest: JsonObject, position: Int)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doInvestmentRemove(jsonRequest)
@@ -76,7 +91,7 @@ class PresenterApplyInvestment {
                     try
                     {
 
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                             callBackOBJ.onSuccessRemoveInvestment(position)
 
@@ -91,13 +106,26 @@ class PresenterApplyInvestment {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorRemoveInvestment(jsonMessage)
+                            }
 
-                        callBackOBJ.onErrorRemoveInvestment(jsonMessage)
+
+                        }
+
                     }
                     catch (exp: Exception)
                     {

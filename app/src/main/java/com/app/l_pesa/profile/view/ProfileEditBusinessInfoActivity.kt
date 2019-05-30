@@ -2,10 +2,13 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -16,6 +19,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.adapter.IdListAdapter
 import com.app.l_pesa.profile.inter.ICallBackBusinessInfo
 import com.app.l_pesa.profile.inter.ICallBackId
@@ -200,6 +204,29 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true
         customSnackBarError(llRoot,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditBusinessInfoActivity)
+        dialogBuilder.setMessage(message)
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ProfileEditBusinessInfoActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ProfileEditBusinessInfoActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun toolbarFont(context: Activity) {

@@ -1,5 +1,6 @@
 package com.app.l_pesa.investment.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterInvestmentHistory {
 
-    fun getInvestmentHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackInvestmentHistory)
+    @SuppressLint("CheckResult")
+    fun getInvestmentHistory(contextOBJ: Context, from_date:String, to_date:String, type:String, callBackOBJ: ICallBackInvestmentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory("",from_date,to_date)
@@ -49,13 +51,25 @@ class PresenterInvestmentHistory {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorInvestmentHistory(jsonMessage)
+                            }
 
-                        callBackOBJ.onErrorInvestmentHistory(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {
@@ -66,7 +80,8 @@ class PresenterInvestmentHistory {
                 })
     }
 
-    fun getInvestmentHistoryPaginate(contextOBJ: Context,cursor:String, from_date:String,to_date:String,callBackOBJ: ICallBackInvestmentHistory)
+    @SuppressLint("CheckResult")
+    fun getInvestmentHistoryPaginate(contextOBJ: Context, cursor:String, from_date:String, to_date:String, callBackOBJ: ICallBackInvestmentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentHistory(cursor,from_date,to_date)
