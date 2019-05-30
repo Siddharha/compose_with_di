@@ -59,7 +59,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/commonInputLayout14"
-                    app:passwordToggleEnabled="true">
+                    >
 
                     <com.app.l_pesa.common.CommonEditTextRegular
                         android:id="@+id/etNewPin"

@@ -5,10 +5,10 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
+import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
@@ -136,8 +136,6 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
     }
 
 
-
-
     private fun cancelButton()
     {
         buttonCancel.setOnClickListener {
@@ -160,6 +158,25 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
                     break
                 }
             }
+        }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                if(swipeRefreshLayout.isRefreshing)
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@SetUpPinActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    CommonMethod.hideKeyboardView(this@SetUpPinActivity)
+                    onBackPressed()
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                }
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

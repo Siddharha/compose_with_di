@@ -66,7 +66,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/commonInputLayout11"
-                app:passwordToggleEnabled="true">
+                >
 
                 <com.app.l_pesa.common.CommonEditTextRegular
                     android:id="@+id/etNewPin"
@@ -97,6 +97,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/commonInputLayout12"
+                app:passwordToggleEnabled="true"
                 >
 
                 <com.app.l_pesa.common.CommonEditTextRegular
