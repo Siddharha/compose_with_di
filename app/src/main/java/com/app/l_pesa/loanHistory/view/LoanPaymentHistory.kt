@@ -1,8 +1,11 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
@@ -11,10 +14,12 @@ import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.adapter.LoanPaymentHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaymentHistory
 import com.app.l_pesa.loanHistory.model.ResPaymentHistory
 import com.app.l_pesa.loanHistory.presenter.PresenterPaymentHistory
+import com.app.l_pesa.main.MainActivity
 
 import kotlinx.android.synthetic.main.activity_loan_payment_history.*
 import kotlinx.android.synthetic.main.content_loan_payment_history.*
@@ -42,8 +47,6 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         val bundle     = intent.extras
         val loanType   = bundle!!.getString("LOAN_TYPE")
         val loanId     = bundle.getString("LOAN_ID")
-
-        println("JSON"+loanType+"ID"+loanId)
 
         if(CommonMethod.isNetworkAvailable(this@LoanPaymentHistory))
         {
@@ -90,6 +93,28 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         rlPaybackHistory.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootLayout,this@LoanPaymentHistory,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(this@LoanPaymentHistory)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@LoanPaymentHistory)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@LoanPaymentHistory, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun toolbarFont(context: Activity) {

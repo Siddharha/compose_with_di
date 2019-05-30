@@ -8,4 +8,5 @@ interface ICallBackPaymentHistory {
     fun onSuccessPaymentHistory(paymentHistory: ArrayList<ResPaymentHistory.PaymentHistory>)
     fun onEmptyPaymentHistory()
     fun onErrorPaymentHistory(message: String)
+    fun onSessionTimeOut(message: String)
 }
