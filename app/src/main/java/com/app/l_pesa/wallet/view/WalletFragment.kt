@@ -1,6 +1,7 @@
 package com.app.l_pesa.wallet.view
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -21,6 +22,8 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
 import android.widget.Toast
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 
 
 class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
@@ -168,6 +171,28 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                // if the dialog is cancelable
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, id ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 
