@@ -277,7 +277,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
                 // if the dialog is cancelable
                 .setCancelable(false)
                 .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, id ->
+                    dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(activity!!)
                     sharedPrefOBJ.removeShared()

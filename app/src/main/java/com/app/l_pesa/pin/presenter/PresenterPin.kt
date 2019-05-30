@@ -1,5 +1,6 @@
 package com.app.l_pesa.pin.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -15,13 +16,11 @@ import retrofit2.HttpException
 
 class PresenterPin {
 
+    @SuppressLint("CheckResult")
     fun doChangePin(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackPin) {
 
         val sharedPrefOBJ= SharedPref(contextOBJ)
-       // val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
-
-        RetrofitHelper.getRetrofitToken(BaseService::class.java/*userData.access_token*/).doChangePin(jsonRequest)
-
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doChangePin(jsonRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -42,13 +41,25 @@ class PresenterPin {
                     }
                 }, { error ->
                     try {
-                        val errorVal = error as HttpException
 
-                        val jsonError = JSONObject(errorVal.response().errorBody()?.string())
-                        val jsonStatus = jsonError.getJSONObject("status")
-                        val jsonMessage = jsonStatus.getString("message")
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        callBackOBJ.onFailureChangePin(jsonMessage)
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onFailureChangePin(jsonMessage)
+                            }
+
+                        }
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
                         callBackOBJ.onFailureChangePin(errorMessageOBJ)

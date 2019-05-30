@@ -1,8 +1,11 @@
 package com.app.l_pesa.pin.view
 
 import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
@@ -10,6 +13,8 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.hideKeyboardView
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackPin
 import com.app.l_pesa.pin.presenter.PresenterPin
 import com.google.gson.JsonObject
@@ -101,6 +106,28 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
         buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        swipeRefreshLayout.isRefreshing=false
+
+        val dialogBuilder = AlertDialog.Builder(this@ChangePinActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ChangePinActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ChangePinActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun toolbarFont(context: Activity) {
