@@ -28,27 +28,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-
+        <activity
+            android:name=".pin.view.SetUpPinActivity"
+            android:label="@string/set_up_pin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".otpview.view.OTPActivity"
             android:label="@string/otp"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"
-            />
-
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".pinview.view.PinSetActivity"
             android:label="@string/pin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".notification.view.NotificationActivity"
             android:label="@string/notification"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".wallet.view.WalletHistoryActivity"
             android:label="@string/withdrawal_history"
@@ -80,7 +79,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden" />
-
         <activity
             android:name=".profile.view.ActivityViewFile"
             android:label="@string/view_file"
@@ -100,10 +98,7 @@
             android:name=".loanplan.view.LoanApplyActivity"
             android:label="@string/description_of_loan_purpose"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".loanplan.view.LoanPlanDetailsActivity"
             android:label="@string/loan_plan_details"
@@ -158,25 +153,20 @@
         <activity
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".main.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".login.view.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"
-            />
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".registration.view.RegistrationStepOneActivity"
             android:screenOrientation="portrait"
@@ -184,18 +174,11 @@
         <activity
             android:name=".registration.view.RegistrationStepTwoActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible">
-
-        </activity>
-
+            android:windowSoftInputMode="stateVisible"/>
         <activity
             android:name=".registration.view.RegistrationStepThreeActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-
-
-        </activity>
-
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".pin.view.ForgotPinActivity"
             android:screenOrientation="portrait"
@@ -203,9 +186,7 @@
         <activity
             android:name=".dashboard.view.DashboardActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-         </activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".pin.view.ChangeLoginPinActivity"
             android:label="@string/change_login_pin"
@@ -226,7 +207,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".common.LocationBackgroundService" />
 
         <meta-data

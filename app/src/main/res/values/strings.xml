@@ -107,7 +107,7 @@
     <string name="nav_item_settings">Settings</string>
     <string name="nav_item_logout">Logout</string>
 
-    <string-array name="settings_item_name">
+    <string-array name="settings_item_name_pin">
         <item>Change Login Pin</item>
         <item>Change Transactional Pin</item>
         <item>Refer a Friend</item>
@@ -115,12 +115,28 @@
         <item>Help &amp; Support</item>
     </string-array>
 
-    <string-array name="settings_item_icon">
+    <string-array name="settings_item_icon_pin">
         <item>@drawable/ic_change_password</item>
         <item>@drawable/ic_change_pin</item>
         <item>@drawable/ic_refer_friend</item>
         <item>@drawable/ic_notifications</item>
         <item>@drawable/ic_help</item>
+    </string-array>
+
+    <string-array name="settings_item_icon">
+        <item>@drawable/ic_change_password</item>
+        <item>@drawable/ic_set_up_pin</item>
+        <item>@drawable/ic_refer_friend</item>
+        <item>@drawable/ic_notifications</item>
+        <item>@drawable/ic_help</item>
+    </string-array>
+
+    <string-array name="settings_item_name">
+        <item>Change Login Pin</item>
+        <item>Setup Transactional Pin</item>
+        <item>Refer a Friend</item>
+        <item>Notification</item>
+        <item>Help &amp; Support</item>
     </string-array>
 
     <!--Pin section-->
@@ -130,6 +146,7 @@
     <string name="your_security_pin">Your Security PIN</string>
     <string name="your_otp_code">Your OTP code</string>
     <string name="resend_otp">Resend OTP</string>
+    <string name="set_up_pin">Setup PIN</string>
 
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>
@@ -399,6 +416,7 @@
 
     <!--OTP-->
     <string name="otp">OTP</string>
+
 
 
 </resources>

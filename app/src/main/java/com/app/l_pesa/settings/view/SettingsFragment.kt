@@ -8,14 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
+import com.app.l_pesa.R.array.settings_item_icon_pin
+import com.app.l_pesa.R.array.settings_item_name_pin
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.app.l_pesa.pin.view.ChangeLoginPinActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
+import com.app.l_pesa.pin.view.SetUpPinActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.settings.adapter.SettingsAdapter
 import com.app.l_pesa.settings.inter.ICallBackListClick
 import com.app.l_pesa.settings.model.SettingsItem
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -49,34 +55,79 @@ class SettingsFragment : Fragment(), ICallBackListClick {
 
     private fun initData()
     {
-        val settingsName = resources.getStringArray(settings_item_name)
-        val settingsIcon   = resources.obtainTypedArray(settings_item_icon)
-        settingsList.clear()
-        for (i in settingsName.indices){
-            settingsList.add(SettingsItem(settingsName[i],
-                    settingsIcon.getResourceId(i, 0)))
+       val sharedPrefOBJ= SharedPref(activity!!)
+       val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+
+        if(userData.user_info.mpin_password)
+        {
+            val settingsName = resources.getStringArray(settings_item_name_pin)
+            val settingsIcon   = resources.obtainTypedArray(settings_item_icon_pin)
+
+            settingsList.clear()
+            for (i in settingsName.indices){
+                settingsList.add(SettingsItem(settingsName[i],
+                        settingsIcon.getResourceId(i, 0)))
+            }
+
+            settingsIcon.recycle()
+        }
+        else
+        {
+            val settingsName = resources.getStringArray(settings_item_name)
+            val settingsIcon   = resources.obtainTypedArray(settings_item_icon)
+
+            settingsList.clear()
+            for (i in settingsName.indices){
+                settingsList.add(SettingsItem(settingsName[i],
+                        settingsIcon.getResourceId(i, 0)))
+            }
+
+            settingsIcon.recycle()
         }
 
-        settingsIcon.recycle()
+
     }
 
     override fun onClickListItem(position: Int?) {
 
-        if(position==0)
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        if(userData.user_info.mpin_password)
         {
-            startActivity(Intent(activity, ChangeLoginPinActivity::class.java))
-            activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            if(position==0)
+            {
+                startActivity(Intent(activity, ChangeLoginPinActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else if(position==1)
+            {
+                startActivity(Intent(activity, ChangePinActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else if(position==3)
+            {
+                startActivity(Intent(activity, NotificationActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
         }
-       else if(position==1)
-        {
-            startActivity(Intent(activity, ChangePinActivity::class.java))
-            activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        else{
+            if(position==0)
+            {
+                startActivity(Intent(activity, ChangeLoginPinActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else if(position==1)
+            {
+                startActivity(Intent(activity, SetUpPinActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else if(position==3)
+            {
+                startActivity(Intent(activity, NotificationActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
         }
-        else if(position==3)
-        {
-            startActivity(Intent(activity, NotificationActivity::class.java))
-            activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        }
+
 
     }
 }
