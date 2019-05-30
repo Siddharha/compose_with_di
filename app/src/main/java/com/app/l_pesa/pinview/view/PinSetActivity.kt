@@ -74,10 +74,10 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         val sharedPrefOBJ= SharedPref(this@PinSetActivity)
         val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
 
+        pass_code_view.setOnTextChangeListener {
 
-        pass_code_view.setOnTextChangeListener { text ->
-            if (text.length>5) {
-
+            if(pass_code_view.passCodeText.length>5)
+            {
                 if(CommonMethod.isNetworkAvailable(this@PinSetActivity))
                 {
                     progressDialog.show()
@@ -104,15 +104,13 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
                     jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
 
                     val jsonObject = JsonObject()
+
                     jsonObject.addProperty("phone_number",modelDevice.access_phone)
                     jsonObject.addProperty("apps_pin",pass_code_view.passCodeText)
                     jsonObject.add("device_info",jsonObjectDeviceInfo)
 
-                     //println("REQUEST"+jsonObject.toString())
-
-
-                     val presenterPinSet= PresenterPinSet()
-                     presenterPinSet.dosetPin(this@PinSetActivity,jsonObject,this)
+                    val presenterPinSet= PresenterPinSet()
+                    presenterPinSet.dosetPin(this@PinSetActivity,jsonObject,this)
                 }
                 else
                 {
@@ -121,7 +119,11 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
                 }
 
             }
+
+
         }
+
+
     }
 
     override fun onSuccessPinSet(data: LoginData) {

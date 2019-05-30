@@ -1,5 +1,6 @@
 package com.app.l_pesa.pinview.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,6 +14,7 @@ import retrofit2.HttpException
 
 class PresenterPinSet {
 
+    @SuppressLint("CheckResult")
     fun dosetPin(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackPinSet) {
 
         RetrofitHelper.getRetrofit(BaseService::class.java).doCheckPin(jsonRequest)
