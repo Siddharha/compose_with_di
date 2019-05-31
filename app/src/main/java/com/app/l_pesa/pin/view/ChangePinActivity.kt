@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.hideKeyboardView
@@ -98,7 +99,8 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     override fun onSuccessChangePin() {
         swipeRefreshLayout.isRefreshing=false
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarSuccess(rootLayout,this@ChangePinActivity,resources.getString(R.string.pin_change_successfully))
+        Toast.makeText(this@ChangePinActivity,resources.getString(R.string.pin_change_successfully),Toast.LENGTH_SHORT).show()
+        onBackPressed()
 
     }
 

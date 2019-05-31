@@ -19,6 +19,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
@@ -139,19 +140,6 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
         snackBarOBJ.show()
     }
 
-    private fun customSnackBarSuccess(view: View,message:String) {
-
-        val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(this@ChangeLoginPinActivity,R.color.color_green_success))
-        (snackBarOBJ.view as ViewGroup).removeAllViews()
-        val customView = LayoutInflater.from(this).inflate(R.layout.snackbar_success, null)
-        (snackBarOBJ.view as ViewGroup).addView(customView)
-
-        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
-        txtTitle.text = message
-        snackBarOBJ.show()
-    }
-
 
     override fun onSuccessResetPin(message: String) {
 
@@ -160,7 +148,8 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
         etConfirmNewPin.text!!.clear()
         buttonSubmit.isClickable = true
         progressBar.visibility   = View.INVISIBLE
-        customSnackBarSuccess(rootLayout,resources.getString(R.string.pin_change_success))
+        Toast.makeText(this@ChangeLoginPinActivity,resources.getString(R.string.pin_change_success),Toast.LENGTH_SHORT).show()
+        onBackPressed()
 
     }
 

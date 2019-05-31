@@ -92,34 +92,22 @@ class SettingsFragment : Fragment(), ICallBackListClick {
 
         val sharedPrefOBJ= SharedPref(activity!!)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
-        if(userData.user_info.mpin_password)
-        {
+
             if(position==0)
             {
                 startActivity(Intent(activity, ChangeLoginPinActivity::class.java))
                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
             }
-            else if(position==1)
-            {
-                startActivity(Intent(activity, ChangePinActivity::class.java))
-                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-            }
-            else if(position==3)
-            {
-                startActivity(Intent(activity, NotificationActivity::class.java))
-                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-            }
-        }
-        else{
-            if(position==0)
-            {
-                startActivity(Intent(activity, ChangeLoginPinActivity::class.java))
-                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-            }
-            else if(position==1)
-            {
-                startActivity(Intent(activity, SetUpPinActivity::class.java))
-                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+            else if(position==1) {
+                if (userData.user_info.mpin_password) {
+
+                    startActivity(Intent(activity, ChangePinActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                } else {
+                    startActivity(Intent(activity, SetUpPinActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                }
             }
             else if(position==3)
             {
@@ -128,6 +116,4 @@ class SettingsFragment : Fragment(), ICallBackListClick {
             }
         }
 
-
-    }
 }

@@ -73,7 +73,6 @@ class PresenterPin {
     fun doSetUpPin(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackSetPin) {
 
         val sharedPrefOBJ= SharedPref(contextOBJ)
-        println("Hii"+sharedPrefOBJ.accessToken)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doSetUpPin(jsonRequest)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
