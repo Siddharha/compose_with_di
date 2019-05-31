@@ -57,7 +57,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/txtResend"
                 />
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtResend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

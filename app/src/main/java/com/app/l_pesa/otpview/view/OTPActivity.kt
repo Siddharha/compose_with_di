@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
@@ -23,8 +24,16 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.content_otp.*
 import android.os.CountDownTimer
+import android.support.v7.widget.AppCompatTextView
+import android.text.Selection
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.Toast
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 
@@ -55,18 +64,13 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
         }
     }
 
-    private fun loadResend()
-    {
-        if(resendClickCount>3)
-        {
-            txtResend.visibility=View.INVISIBLE
-        }
-        else
-        {
-            txtResend.visibility=View.VISIBLE
+    private fun loadResend() {
+        if (resendClickCount > 3) {
+            txtResend.visibility = View.INVISIBLE
+        } else {
+            txtResend.visibility = View.VISIBLE
 
-            txtResend.setOnClickListener {
-
+            txtResend.makeLinks(Pair(resources.getString(R.string.resend_otp), View.OnClickListener {
 
                 if(CommonMethod.isNetworkAvailable(this@OTPActivity))
                 {
@@ -108,9 +112,29 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
                     CommonMethod.customSnackBarError(rootLayout,this@OTPActivity,resources.getString(R.string.no_internet))
                 }
 
-            }
+
+        }))
+
 
         }
+    }
+
+    fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(resources.getString(R.string.resend_otp))
+        for (link in links) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(view: View) {
+                    Selection.setSelection((view as AppCompatTextView).text as Spannable, 0)
+                    view.invalidate()
+                    link.second.onClick(view)
+                }
+            }
+            val startIndexOfLink = resources.getString(R.string.resend_otp).indexOf(link.first)
+            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        this.movementMethod = LinkMovementMethod.getInstance() // without LinkMovementMethod, link can not click
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
     override fun onSuccessResendOTP() {
