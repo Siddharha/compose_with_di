@@ -37,6 +37,7 @@ import java.util.concurrent.TimeUnit
 class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerifyOTP {
 
 
+    private var clickCount=0
     private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +63,15 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
     private fun loadResend() {
 
+        txtResend.visibility = View.VISIBLE
+        if(clickCount>1)
+        {
+            txtResend.visibility = View.INVISIBLE
+        }
+        else
+        {
             txtResend.visibility = View.VISIBLE
+        }
 
             txtResend.makeLinks(Pair(resources.getString(R.string.resend_otp), View.OnClickListener {
 
@@ -131,9 +140,17 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
     }
 
     override fun onSuccessResendOTP() {
-
+        clickCount++
         progressDialog.dismiss()
-        loadTimer()
+        if(clickCount>3)
+        {
+            txtResend.visibility = View.INVISIBLE
+        }
+        else
+        {
+            loadTimer()
+        }
+
     }
 
     override fun onErrorResendOTP(message: String) {
@@ -146,7 +163,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
     {
         txtResend.visibility= View.INVISIBLE
         txtTimer.visibility= View.VISIBLE
-        val noOfMinutes = 60 * 1000
+        val noOfMinutes = 60 * 3000
         object : CountDownTimer(noOfMinutes.toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 @SuppressLint("DefaultLocale") val hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilFinished)), TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)))
