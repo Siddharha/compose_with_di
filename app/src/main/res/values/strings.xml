@@ -148,6 +148,7 @@
     <string name="your_otp_code">Your OTP code</string>
     <string name="resend_otp">Resend OTP</string>
     <string name="set_up_pin">Setup PIN</string>
+    <string name="current_login_pin">Current Login PIN</string>
 
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>

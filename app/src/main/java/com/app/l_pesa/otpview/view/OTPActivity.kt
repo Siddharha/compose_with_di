@@ -115,7 +115,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
     {
         txtResend.visibility= View.INVISIBLE
         txtTimer.visibility= View.VISIBLE
-        val noOfMinutes = 60 * 3000
+        val noOfMinutes = 60 * 1000
         object : CountDownTimer(noOfMinutes.toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 @SuppressLint("DefaultLocale") val hms = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millisUntilFinished)), TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)))

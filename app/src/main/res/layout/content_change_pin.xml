@@ -41,7 +41,7 @@
                     android:id="@+id/etCurrentPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/current_password"
+                    android:hint="@string/current_login_pin"
                     android:inputType="textPassword"
                     android:maxLength="14"
                     android:maxLines="1"
