@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
@@ -13,7 +12,6 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.OnOtpCompletionListener
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.model.PostData
 import com.app.l_pesa.otpview.inter.ICallBackVerifyOTP
 import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.otpview.presenter.PresenterOTP
@@ -33,14 +31,12 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.Toast
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 
 class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerifyOTP {
 
 
-    private var      resendClickCount=0
     private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +61,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
     }
 
     private fun loadResend() {
-        if (resendClickCount > 3) {
-            txtResend.visibility = View.INVISIBLE
-        } else {
+
             txtResend.visibility = View.VISIBLE
 
             txtResend.makeLinks(Pair(resources.getString(R.string.resend_otp), View.OnClickListener {
@@ -116,7 +110,6 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
         }))
 
 
-        }
     }
 
     fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
@@ -133,13 +126,12 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
             spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
-        this.movementMethod = LinkMovementMethod.getInstance() // without LinkMovementMethod, link can not click
+        this.movementMethod = LinkMovementMethod.getInstance()
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
     override fun onSuccessResendOTP() {
 
-        resendClickCount++
         progressDialog.dismiss()
         loadTimer()
     }
@@ -147,7 +139,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
     override fun onErrorResendOTP(message: String) {
 
         progressDialog.dismiss()
-        CommonMethod.customSnackBarError(rootLayout,this@OTPActivity,message)
+        Toast.makeText(this@OTPActivity,message,Toast.LENGTH_SHORT).show()
     }
 
     private fun loadTimer()
