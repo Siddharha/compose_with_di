@@ -24,12 +24,14 @@ import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.content_otp.*
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.Toast
 import java.util.concurrent.TimeUnit
 
 
 class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerifyOTP {
 
 
+    private var      resendClickCount=0
     private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,52 +57,65 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
     private fun loadResend()
     {
-        txtResend.setOnClickListener {
+        if(resendClickCount>3)
+        {
+            txtResend.visibility=View.INVISIBLE
+        }
+        else
+        {
+            txtResend.visibility=View.VISIBLE
 
-            if(CommonMethod.isNetworkAvailable(this@OTPActivity))
-            {
-                progressDialog.show()
-                val sharedPrefOBJ= SharedPref(this@OTPActivity)
-                val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
+            txtResend.setOnClickListener {
 
-                val jsonObjectDeviceInfo = JsonObject()
-                jsonObjectDeviceInfo.addProperty("phone_no", modelDevice.post_data.phone_no)
-                jsonObjectDeviceInfo.addProperty("country_code", modelDevice.post_data.country_code)
-                jsonObjectDeviceInfo.addProperty("platform_type", modelDevice.post_data.platform_type)
-                jsonObjectDeviceInfo.addProperty("device_token", modelDevice.post_data.device_token)
 
-                val jsonObjectDeviceData = JsonObject()
-                jsonObjectDeviceData.addProperty("device_id", modelDevice.post_data.device_data.device_id)
-                jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
-                jsonObjectDeviceData.addProperty("imei",modelDevice.post_data.device_data.imei)
-                jsonObjectDeviceData.addProperty("imsi",modelDevice.post_data.device_data.imsi)
-                jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.post_data.device_data.simSerial_no)
-                jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)
-                jsonObjectDeviceData.addProperty("screen_height",modelDevice.post_data.device_data.screen_height)
-                jsonObjectDeviceData.addProperty("screen_width",modelDevice.post_data.device_data.screen_width)
-                jsonObjectDeviceData.addProperty("device", modelDevice.post_data.device_data.device)
-                jsonObjectDeviceData.addProperty("model", modelDevice.post_data.device_data.model)
-                jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
-                jsonObjectDeviceData.addProperty("manufacturer", modelDevice.post_data.device_data.manufacturer)
+                if(CommonMethod.isNetworkAvailable(this@OTPActivity))
+                {
+                    progressDialog.show()
+                    val sharedPrefOBJ= SharedPref(this@OTPActivity)
+                    val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
 
-                jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
+                    val jsonObjectDeviceInfo = JsonObject()
+                    jsonObjectDeviceInfo.addProperty("phone_no", modelDevice.post_data.phone_no)
+                    jsonObjectDeviceInfo.addProperty("country_code", modelDevice.post_data.country_code)
+                    jsonObjectDeviceInfo.addProperty("platform_type", modelDevice.post_data.platform_type)
+                    jsonObjectDeviceInfo.addProperty("device_token", modelDevice.post_data.device_token)
 
-                val jsonObject = JsonObject()
-                jsonObject.addProperty("phone_number",modelDevice.access_phone)
-                jsonObject.add("device_info",jsonObjectDeviceInfo)
+                    val jsonObjectDeviceData = JsonObject()
+                    jsonObjectDeviceData.addProperty("device_id", modelDevice.post_data.device_data.device_id)
+                    jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
+                    jsonObjectDeviceData.addProperty("imei",modelDevice.post_data.device_data.imei)
+                    jsonObjectDeviceData.addProperty("imsi",modelDevice.post_data.device_data.imsi)
+                    jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.post_data.device_data.simSerial_no)
+                    jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)
+                    jsonObjectDeviceData.addProperty("screen_height",modelDevice.post_data.device_data.screen_height)
+                    jsonObjectDeviceData.addProperty("screen_width",modelDevice.post_data.device_data.screen_width)
+                    jsonObjectDeviceData.addProperty("device", modelDevice.post_data.device_data.device)
+                    jsonObjectDeviceData.addProperty("model", modelDevice.post_data.device_data.model)
+                    jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
+                    jsonObjectDeviceData.addProperty("manufacturer", modelDevice.post_data.device_data.manufacturer)
 
-                val presenterOTP=PresenterOTP()
-                presenterOTP.doResendOTP(this@OTPActivity,jsonObject,this)
+                    jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
+
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("phone_number",modelDevice.access_phone)
+                    jsonObject.add("device_info",jsonObjectDeviceInfo)
+
+                    val presenterOTP=PresenterOTP()
+                    presenterOTP.doResendOTP(this@OTPActivity,jsonObject,this)
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@OTPActivity,resources.getString(R.string.no_internet))
+                }
+
             }
-            else
-            {
-                CommonMethod.customSnackBarError(rootLayout,this@OTPActivity,resources.getString(R.string.no_internet))
-            }
+
         }
     }
 
     override fun onSuccessResendOTP() {
 
+        resendClickCount++
         progressDialog.dismiss()
         loadTimer()
     }
