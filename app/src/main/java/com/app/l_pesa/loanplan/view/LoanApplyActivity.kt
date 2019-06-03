@@ -148,6 +148,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         jsonObject.addProperty("latitude",lat)
         jsonObject.addProperty("longitude",long)
 
+        //println("REQUEST"+jsonObject.toString())
 
         val presenterLoanApply= PresenterLoanApply()
         presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)

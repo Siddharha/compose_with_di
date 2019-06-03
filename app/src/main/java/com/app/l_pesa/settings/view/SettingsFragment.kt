@@ -7,12 +7,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.R.array.settings_item_icon_pin
 import com.app.l_pesa.R.array.settings_item_name_pin
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.help.view.HelpActivity
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.app.l_pesa.pin.view.ChangeLoginPinActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
@@ -113,6 +115,15 @@ class SettingsFragment : Fragment(), ICallBackListClick {
             {
                 startActivity(Intent(activity, NotificationActivity::class.java))
                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else if(position==4)
+            {
+                startActivity(Intent(activity, HelpActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+          else{
+
+                Toast.makeText(activity,resources.getString(R.string.coming_soon),Toast.LENGTH_SHORT).show()
             }
         }
 

@@ -419,6 +419,8 @@
     <!--OTP-->
     <string name="otp">OTP</string>
 
+    <!--Help-->
+    <string name="help_support">Help &amp; Support</string>
 
 
 </resources>
