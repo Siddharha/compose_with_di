@@ -52,7 +52,7 @@ class RetrofitHelper {
 
         fun <T> getRetrofit(service: Class<T>): T {
             val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL_DEV)
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
@@ -61,7 +61,7 @@ class RetrofitHelper {
 
         fun <T> getRetrofitToken(service: Class<T>, accessToken: String = ""): T {
             val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL_DEV)
+                    .baseUrl(BASE_URL)
                     .client(getOkHttpClient(accessToken))
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

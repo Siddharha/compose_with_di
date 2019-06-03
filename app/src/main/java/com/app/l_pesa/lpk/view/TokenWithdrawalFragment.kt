@@ -17,13 +17,14 @@ import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterTokenWithdrawal
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_token_withdrawal.*
 import java.text.DecimalFormat
 
 
 class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
 
-
+    private lateinit  var progressDialog: KProgressHUD
     companion object {
         fun newInstance(): Fragment {
             return TokenWithdrawalFragment()
@@ -39,6 +40,7 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
         super.onViewCreated(view, savedInstanceState)
 
         initData()
+        initLoader()
         swipeRefresh()
 
     }
@@ -74,9 +76,8 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
+                    progressDialog.show()
                     buttonSubmit.isClickable=false
-                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                    swipeRefreshLayout.isRefreshing=true
                     CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)
                     val jsonObject = JsonObject()
                     jsonObject.addProperty("token_value",etToken.text.toString())
@@ -94,7 +95,25 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
 
     }
 
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
     override fun onSuccessTokenWithdrawal() {
+        dismiss()
         buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_withdrawal_successfully))
@@ -102,6 +121,7 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
 
     override fun onErrorTokenWithdrawal(message: String, statusCode: Int) {
 
+        dismiss()
         if(statusCode==10097)
         {
             Toast.makeText(activity,resources.getString(R.string.update_erc_address),Toast.LENGTH_SHORT).show()

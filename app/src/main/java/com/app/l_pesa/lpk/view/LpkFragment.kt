@@ -103,8 +103,7 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
     override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
 
         val sharedPrefOBJ= SharedPref(activity!!)
-        val gson = Gson()
-        val json = gson.toJson(data)
+        val json = Gson().toJson(data)
         sharedPrefOBJ.lpkInfo= json
 
         if(type=="WITHDRAWAL")

@@ -32,7 +32,7 @@
             android:name=".help.view.HelpActivity"
             android:label="@string/help_support"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"/>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".pin.view.SetUpPinActivity"
             android:label="@string/set_up_pin"
