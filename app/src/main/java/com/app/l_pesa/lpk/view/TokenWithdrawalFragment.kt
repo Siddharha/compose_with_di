@@ -41,17 +41,9 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
 
         initData()
         initLoader()
-        swipeRefresh()
 
     }
 
-    private fun swipeRefresh()
-    {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing=false
-        }
-    }
 
     @SuppressLint("SetTextI18n")
     private fun initData()
@@ -115,7 +107,6 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
     override fun onSuccessTokenWithdrawal() {
         dismiss()
         buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_withdrawal_successfully))
     }
 
@@ -132,7 +123,6 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
         }
 
         buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
 
     }
 }

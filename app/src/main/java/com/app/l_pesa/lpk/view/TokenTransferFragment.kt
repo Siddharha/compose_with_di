@@ -16,12 +16,13 @@ import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterTokenTransfer
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_token_transfer.*
 import java.text.DecimalFormat
 
 class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
 
-
+    private lateinit  var progressDialog: KProgressHUD
     companion object {
         fun newInstance(): Fragment {
             return TokenTransferFragment()
@@ -36,18 +37,12 @@ class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initLoader()
         initData()
-        swipeRefresh()
 
     }
 
-    private fun swipeRefresh()
-    {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing=false
-        }
-    }
+
 
     @SuppressLint("SetTextI18n")
     private fun initData()
@@ -74,8 +69,8 @@ class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
+                    progressDialog.show()
                     buttonTransfer.isClickable=false
-                    swipeRefreshLayout.isRefreshing=true
                     CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)
                     val jsonObject = JsonObject()
                     jsonObject.addProperty("token_value",etToken.text.toString())
@@ -92,17 +87,32 @@ class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
         }
     }
 
-    override fun onSuccessTokenTransfer() {
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
 
+    }
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    override fun onSuccessTokenTransfer() {
+        dismiss()
         buttonTransfer.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_transfer_successfully))
     }
 
     override fun onErrorTokenTransfer(message: String) {
-
+        dismiss()
         buttonTransfer.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 }

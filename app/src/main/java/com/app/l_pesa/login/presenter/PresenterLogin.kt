@@ -1,5 +1,6 @@
 package com.app.l_pesa.login.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -20,6 +21,7 @@ import retrofit2.HttpException
 
 class PresenterLogin {
 
+    @SuppressLint("CheckResult")
     fun doLogin(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogin)
     {
         RetrofitHelper.getRetrofit(BaseService::class.java).doLogin(jsonRequest)
