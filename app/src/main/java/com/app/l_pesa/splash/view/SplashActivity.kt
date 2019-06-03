@@ -32,25 +32,6 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     }
 
-    private fun visibleInvisibleStatus(connectivity:Boolean)
-    {
-        if(connectivity)
-        {
-            txtTitle.visibility     =View.INVISIBLE
-            txtHeader.visibility    =View.INVISIBLE
-            buttonRetry.visibility  =View.INVISIBLE
-            progressBar.visibility  =View.VISIBLE
-        }
-        else
-        {
-            txtTitle.visibility     =View.VISIBLE
-            txtHeader.visibility    =View.VISIBLE
-            buttonRetry.visibility  =View.VISIBLE
-            progressBar.visibility  =View.VISIBLE
-
-
-        }
-    }
 
     private fun initUI()
     {
@@ -59,65 +40,100 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         {
             if(CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
-                val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-                val jsonObject  = JsonObject()
-                jsonObject.addProperty("device_id",deviceId)
-
-                val presenterLogoutObj= PresenterLogout()
-                presenterLogoutObj.doLogout(this@SplashActivity,jsonObject,this)
+               progressBar.visibility = View.VISIBLE
+               logoutProcess()
 
             }
-            else
-            {
-                visibleInvisibleStatus(false)
+            else {
+                buttonRetry.visibility = View.VISIBLE
+                progressBar.visibility = View.INVISIBLE
 
+                buttonRetry.setOnClickListener {
+
+                    if (CommonMethod.isNetworkAvailable(this@SplashActivity))
+                    {
+                        logoutProcess()
+                    } else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
+                    }
+
+                }
             }
 
-
-        } else
+        }
+        else
         {
             loadNext()
         }
 
-        buttonRetry.setOnClickListener {
 
-            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-            {
-                initUI()
-                visibleInvisibleStatus(true)
-            }
-            else
-            {
-                visibleInvisibleStatus(false)
-            }
-        }
+    }
+
+    private fun logoutProcess()
+    {
+        buttonRetry.visibility = View.INVISIBLE
+        val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        val jsonObject  = JsonObject()
+        jsonObject.addProperty("device_id",deviceId)
+
+        val presenterLogoutObj= PresenterLogout()
+        presenterLogoutObj.doLogout(this@SplashActivity,jsonObject,this)
     }
 
     private fun loadNext()
     {
 
-        if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+        val sharedPrefOBJ = SharedPref(this@SplashActivity)
+        if (sharedPrefOBJ.countryList==resources.getString(R.string.init))
         {
-            visibleInvisibleStatus(true)
-            loadCountry()
-        } else
+            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+            {
+                loadCountry()
+            }
+            else {
+                txtTitle.visibility = View.VISIBLE
+                txtHeader.visibility = View.VISIBLE
+                buttonRetry.visibility = View.VISIBLE
+                progressBar.visibility = View.INVISIBLE
+
+                buttonRetry.setOnClickListener {
+
+                    if (CommonMethod.isNetworkAvailable(this@SplashActivity))
+                    {
+                        loadCountry()
+                    } else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
+                    }
+
+                }
+            }
+
+        }
+        else
         {
-            visibleInvisibleStatus(false)
+            progressBar.visibility = View.VISIBLE
             splashLoading()
         }
+
 
     }
 
     private fun splashLoading() {
         Handler().postDelayed({
-            progressBar.visibility = View.INVISIBLE
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
             finish()
-        }, 1000)
+        }, 2000)
     }
 
     private fun loadCountry() {
+
+        txtTitle.visibility = View.INVISIBLE
+        txtHeader.visibility = View.INVISIBLE
+        buttonRetry.visibility = View.INVISIBLE
+        progressBar.visibility = View.VISIBLE
         val presenterCountry = PresenterCountry()
         presenterCountry.getCountry(this@SplashActivity, this)
     }
