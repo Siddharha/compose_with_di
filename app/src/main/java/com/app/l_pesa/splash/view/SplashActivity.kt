@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.support.v7.app.AppCompatDelegate
+import android.text.TextUtils
 import android.view.View
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -29,6 +30,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+
         initUI()
 
     }
@@ -38,40 +40,60 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     {
 
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
-        if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
+        if (sharedPrefOBJ.countryList=="" || TextUtils.isEmpty(sharedPrefOBJ.countryList))
         {
            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
-                val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-                val jsonObject  = JsonObject()
-                jsonObject.addProperty("device_id",deviceId)
 
-                val presenterLogoutObj= PresenterLogout()
-                presenterLogoutObj.doLogout(this@SplashActivity,jsonObject,this)
+                val presenterCountry = PresenterCountry()
+                presenterCountry.getCountry(this@SplashActivity, this)
 
             }
             else
             {
-                splashLoading()
+                //
 
             }
 
-        } else
+        }
+        else
         {
-            loadNext()
+            if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
+            {
+                if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
+                    val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("device_id", deviceId)
+
+                    val presenterLogoutObj = PresenterLogout()
+                    presenterLogoutObj.doLogout(this@SplashActivity, jsonObject, this)
+
+                }
+            }
+            else
+            {
+
+            }
+
         }
     }
 
     private fun loadNext()
     {
 
-       if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-         {
-            loadCountry()
-         } else
-         {
-             splashLoading()
-         }
+           val sharedPrefOBJ=SharedPref(this@SplashActivity)
+           if(sharedPrefOBJ.countryList!="")
+           {
+               splashLoading()
+           }
+           else
+           {
+                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+                {
+                    loadCountry()
+                }
+
+           }
 
     }
 
