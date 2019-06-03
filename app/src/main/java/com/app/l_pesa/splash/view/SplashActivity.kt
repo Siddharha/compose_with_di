@@ -48,18 +48,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
             buttonRetry.visibility  =View.VISIBLE
             progressBar.visibility  =View.VISIBLE
 
-            buttonRetry.setOnClickListener {
 
-                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-                {
-                    initUI()
-                    visibleInvisibleStatus(true)
-                }
-                else
-                {
-                    visibleInvisibleStatus(false)
-                }
-            }
         }
     }
 
@@ -88,6 +77,19 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         } else
         {
             loadNext()
+        }
+
+        buttonRetry.setOnClickListener {
+
+            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+            {
+                initUI()
+                visibleInvisibleStatus(true)
+            }
+            else
+            {
+                visibleInvisibleStatus(false)
+            }
         }
     }
 
@@ -134,12 +136,14 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     override fun onEmptyCountry() {
         showSnackBar(resources.getString(R.string.no_country))
-        splashLoading()
+        buttonRetry.visibility  =View.VISIBLE
+        progressBar.visibility  =View.INVISIBLE
     }
 
     override fun onFailureCountry(jsonMessage: String) {
         showSnackBar(jsonMessage)
-        splashLoading()
+        buttonRetry.visibility  =View.VISIBLE
+        progressBar.visibility  =View.INVISIBLE
 
     }
 
