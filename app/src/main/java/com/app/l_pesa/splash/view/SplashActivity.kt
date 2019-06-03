@@ -32,6 +32,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         initUI()
+        clickEvent()
 
     }
 
@@ -40,10 +41,14 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     {
 
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
-        if (sharedPrefOBJ.countryList=="" || TextUtils.isEmpty(sharedPrefOBJ.countryList))
+        if (sharedPrefOBJ.countryList=="INIT")
         {
            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
+                txtTitle.visibility=View.INVISIBLE
+                txtHeader.visibility=View.INVISIBLE
+                buttonRetry.visibility=View.INVISIBLE
+                progressBar.visibility=View.VISIBLE
 
                 val presenterCountry = PresenterCountry()
                 presenterCountry.getCountry(this@SplashActivity, this)
@@ -51,51 +56,61 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
             }
             else
             {
-                //
+                txtTitle.visibility=View.VISIBLE
+                txtHeader.visibility=View.VISIBLE
+                buttonRetry.visibility=View.VISIBLE
+                progressBar.visibility=View.INVISIBLE
 
             }
 
         }
         else
         {
-            if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
-            {
-                if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
-                    val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("device_id", deviceId)
-
-                    val presenterLogoutObj = PresenterLogout()
-                    presenterLogoutObj.doLogout(this@SplashActivity, jsonObject, this)
-
-                }
-            }
-            else
-            {
-
-            }
+           accessToken()
 
         }
     }
 
-    private fun loadNext()
+    private fun clickEvent()
     {
+        buttonRetry.setOnClickListener {
 
-           val sharedPrefOBJ=SharedPref(this@SplashActivity)
-           if(sharedPrefOBJ.countryList!="")
-           {
-               splashLoading()
-           }
-           else
-           {
-                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-                {
-                    loadCountry()
-                }
+            initUI()
 
-           }
-
+        }
     }
+
+    private fun accessToken()
+    {
+        val sharedPrefOBJ = SharedPref(this@SplashActivity)
+        if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
+        {
+            if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
+
+                txtTitle.visibility=View.INVISIBLE
+                txtHeader.visibility=View.INVISIBLE
+                buttonRetry.visibility=View.INVISIBLE
+                progressBar.visibility=View.VISIBLE
+
+                val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("device_id", deviceId)
+
+                val presenterLogoutObj = PresenterLogout()
+                presenterLogoutObj.doLogout(this@SplashActivity, jsonObject, this)
+
+            }
+        }
+        else
+        {
+            txtTitle.visibility=View.VISIBLE
+            txtHeader.visibility=View.VISIBLE
+            buttonRetry.visibility=View.VISIBLE
+            progressBar.visibility=View.INVISIBLE
+
+        }
+    }
+
 
     private fun splashLoading() {
         Handler().postDelayed({
@@ -106,10 +121,6 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         }, 1000)
     }
 
-    private fun loadCountry() {
-        val presenterCountry = PresenterCountry()
-        presenterCountry.getCountry(this@SplashActivity, this)
-    }
 
     override fun onSuccessCountry(countries_list: ResModelData) {
 
