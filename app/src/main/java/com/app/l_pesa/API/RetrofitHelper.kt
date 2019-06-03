@@ -2,6 +2,7 @@ package com.app.l_pesa.API
 
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.BuildConfig.BASE_URL
+import com.app.l_pesa.BuildConfig.BASE_URL_DEV
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -51,7 +52,7 @@ class RetrofitHelper {
 
         fun <T> getRetrofit(service: Class<T>): T {
             val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BASE_URL_DEV)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
@@ -60,7 +61,7 @@ class RetrofitHelper {
 
         fun <T> getRetrofitToken(service: Class<T>, accessToken: String = ""): T {
             val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BASE_URL_DEV)
                     .client(getOkHttpClient(accessToken))
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -446,12 +446,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             imgFilter.visibility=View.GONE
             buttonRight.visibility=View.VISIBLE
         }
-        if(!isVisible && isVisibleFilter)
+        else if(!isVisible && isVisibleFilter)
         {
-            /*if(fragmentToNavigate is InvestmentHistory)
-            {
-
-            }*/
             buttonRight.visibility=View.GONE
             imgFilter.visibility=View.INVISIBLE
         }
