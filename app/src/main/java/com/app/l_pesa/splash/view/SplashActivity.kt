@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.support.v7.app.AppCompatDelegate
-import android.text.TextUtils
 import android.view.View
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -22,6 +21,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 
 
+
 class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
 
@@ -33,39 +33,10 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     }
 
-    private fun visibleInvisibleStatus(connectivity:Boolean)
-    {
-        if(connectivity)
-        {
-            txtTitle.visibility     =View.INVISIBLE
-            txtHeader.visibility    =View.INVISIBLE
-            buttonRetry.visibility  =View.INVISIBLE
-            progressBar.visibility  =View.VISIBLE
-        }
-        else
-        {
-            txtTitle.visibility     =View.VISIBLE
-            txtHeader.visibility    =View.VISIBLE
-            buttonRetry.visibility  =View.VISIBLE
-            progressBar.visibility  =View.VISIBLE
-
-            buttonRetry.setOnClickListener {
-
-                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-                {
-                    initUI()
-                    visibleInvisibleStatus(true)
-                }
-                else
-                {
-                    visibleInvisibleStatus(false)
-                }
-            }
-        }
-    }
 
     private fun initUI()
     {
+
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
         if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
         {
@@ -81,34 +52,27 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
             }
             else
             {
-                visibleInvisibleStatus(false)
+                splashLoading()
 
             }
 
-
         } else
         {
-            loadNext(sharedPrefOBJ)
+            loadNext()
         }
     }
 
-    private fun loadNext(sharedPrefOBJ: SharedPref)
+    private fun loadNext()
     {
-        if (TextUtils.isEmpty(sharedPrefOBJ.countryList))
-        {
-            if (CommonMethod.isNetworkAvailable(this@SplashActivity))
-            {
-                visibleInvisibleStatus(true)
-                loadCountry()
-            } else
-            {
-                visibleInvisibleStatus(false)
-            }
-        } else
-        {
-            visibleInvisibleStatus(true)
-            splashLoading()
-        }
+
+       if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+         {
+            loadCountry()
+         } else
+         {
+             splashLoading()
+         }
+
     }
 
     private fun splashLoading() {
@@ -139,10 +103,12 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     override fun onEmptyCountry() {
         showSnackBar(resources.getString(R.string.no_country))
+        splashLoading()
     }
 
     override fun onFailureCountry(jsonMessage: String) {
         showSnackBar(jsonMessage)
+        splashLoading()
 
     }
 

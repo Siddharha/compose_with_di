@@ -9,6 +9,7 @@ import com.app.l_pesa.R
 import android.support.v4.content.ContextCompat
 import android.content.Intent
 import android.location.*
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity
@@ -42,8 +43,16 @@ class MainActivity : AppCompatActivity() {
 
         buttonSignUp.setOnClickListener {
 
-            startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            if(CommonMethod.isNetworkAvailable(this@MainActivity))
+            {
+                startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(ll_root,this@MainActivity,resources.getString(R.string.no_internet))
+            }
+
 
         }
     }
@@ -61,9 +70,17 @@ class MainActivity : AppCompatActivity() {
     {
         buttonLogin.setOnClickListener {
 
-            val intent = Intent(this@MainActivity, LoginActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            if(CommonMethod.isNetworkAvailable(this@MainActivity))
+            {
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                startActivity(intent)
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(ll_root,this@MainActivity,resources.getString(R.string.no_internet))
+            }
+
 
         }
     }

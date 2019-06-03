@@ -28,7 +28,7 @@ constructor(context: Context) // Constructor
 
 
     var countryList: String
-        get() = pref.getString(KEY_SET_COUNTRY_LIST, "")!!
+        get() = pref.getString(KEY_SET_COUNTRY_LIST, "INIT")!!
         set(countryList) {
             editor.remove(KEY_SET_COUNTRY_LIST)
             editor.putString(KEY_SET_COUNTRY_LIST, countryList)
