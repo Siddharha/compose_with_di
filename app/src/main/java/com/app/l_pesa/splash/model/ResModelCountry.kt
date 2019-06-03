@@ -1,6 +1,6 @@
 package com.app.l_pesa.splash.model
 
-import android.support.annotation.Keep
+
 import com.app.l_pesa.common.CommonStatusModel
 
 

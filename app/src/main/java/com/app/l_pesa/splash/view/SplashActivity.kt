@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.support.v7.app.AppCompatDelegate
-import android.text.TextUtils
 import android.view.View
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -22,7 +21,6 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 
 
-
 class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
 
@@ -30,87 +28,83 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-
         initUI()
-        clickEvent()
 
     }
 
-
-    private fun initUI()
+    private fun visibleInvisibleStatus(connectivity:Boolean)
     {
-
-        val sharedPrefOBJ = SharedPref(this@SplashActivity)
-        if (sharedPrefOBJ.countryList=="INIT")
+        if(connectivity)
         {
-           if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-            {
-                txtTitle.visibility=View.INVISIBLE
-                txtHeader.visibility=View.INVISIBLE
-                buttonRetry.visibility=View.INVISIBLE
-                progressBar.visibility=View.VISIBLE
-
-                val presenterCountry = PresenterCountry()
-                presenterCountry.getCountry(this@SplashActivity, this)
-
-            }
-            else
-            {
-                txtTitle.visibility=View.VISIBLE
-                txtHeader.visibility=View.VISIBLE
-                buttonRetry.visibility=View.VISIBLE
-                progressBar.visibility=View.INVISIBLE
-
-            }
-
+            txtTitle.visibility     =View.INVISIBLE
+            txtHeader.visibility    =View.INVISIBLE
+            buttonRetry.visibility  =View.INVISIBLE
+            progressBar.visibility  =View.VISIBLE
         }
         else
         {
-           accessToken()
+            txtTitle.visibility     =View.VISIBLE
+            txtHeader.visibility    =View.VISIBLE
+            buttonRetry.visibility  =View.VISIBLE
+            progressBar.visibility  =View.VISIBLE
 
+            buttonRetry.setOnClickListener {
+
+                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+                {
+                    initUI()
+                    visibleInvisibleStatus(true)
+                }
+                else
+                {
+                    visibleInvisibleStatus(false)
+                }
+            }
         }
     }
 
-    private fun clickEvent()
-    {
-        buttonRetry.setOnClickListener {
-
-            initUI()
-
-        }
-    }
-
-    private fun accessToken()
+    private fun initUI()
     {
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
         if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
         {
-            if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
+            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+            {
+                val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+                val jsonObject  = JsonObject()
+                jsonObject.addProperty("device_id",deviceId)
 
-                txtTitle.visibility=View.INVISIBLE
-                txtHeader.visibility=View.INVISIBLE
-                buttonRetry.visibility=View.INVISIBLE
-                progressBar.visibility=View.VISIBLE
-
-                val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-                val jsonObject = JsonObject()
-                jsonObject.addProperty("device_id", deviceId)
-
-                val presenterLogoutObj = PresenterLogout()
-                presenterLogoutObj.doLogout(this@SplashActivity, jsonObject, this)
+                val presenterLogoutObj= PresenterLogout()
+                presenterLogoutObj.doLogout(this@SplashActivity,jsonObject,this)
 
             }
-        }
-        else
-        {
-            txtTitle.visibility=View.VISIBLE
-            txtHeader.visibility=View.VISIBLE
-            buttonRetry.visibility=View.VISIBLE
-            progressBar.visibility=View.INVISIBLE
+            else
+            {
+                visibleInvisibleStatus(false)
 
+            }
+
+
+        } else
+        {
+            loadNext()
         }
     }
 
+    private fun loadNext()
+    {
+
+        if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+        {
+            visibleInvisibleStatus(true)
+            loadCountry()
+        } else
+        {
+            visibleInvisibleStatus(false)
+            splashLoading()
+        }
+
+    }
 
     private fun splashLoading() {
         Handler().postDelayed({
@@ -121,6 +115,10 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         }, 1000)
     }
 
+    private fun loadCountry() {
+        val presenterCountry = PresenterCountry()
+        presenterCountry.getCountry(this@SplashActivity, this)
+    }
 
     override fun onSuccessCountry(countries_list: ResModelData) {
 
