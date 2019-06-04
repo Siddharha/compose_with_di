@@ -1,5 +1,6 @@
 package com.app.l_pesa.help.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
@@ -8,8 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
 import android.widget.TextView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.SharedPref
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import kotlinx.android.synthetic.main.activity_help.*
+import kotlinx.android.synthetic.main.content_help.*
 
 class HelpActivity : AppCompatActivity() {
 
@@ -20,6 +25,21 @@ class HelpActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@HelpActivity)
 
+        initData()
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initData()
+    {
+        val sharedPrefOBJ= SharedPref(this@HelpActivity)
+        txtCountry.text = ""+sharedPrefOBJ.countryName
+
+        val options = RequestOptions()
+        Glide.with(this@HelpActivity)
+                .load(sharedPrefOBJ.countryFlag)
+                .apply(options)
+                .into(imgCountry)
     }
 
 

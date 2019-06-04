@@ -82,6 +82,22 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var countryName: String
+        get() = pref.getString(KEY_SET_COUNTRY_NAME, "")!!
+        set(countryName) {
+            editor.remove(KEY_SET_COUNTRY_NAME)
+            editor.putString(KEY_SET_COUNTRY_NAME, countryName)
+            editor.commit()
+        }
+
+    var countryFlag: String
+        get() = pref.getString(KEY_SET_COUNTRY_FLAG, "")!!
+        set(countryFlag) {
+            editor.remove(KEY_SET_COUNTRY_FLAG)
+            editor.putString(KEY_SET_COUNTRY_FLAG, countryFlag)
+            editor.commit()
+        }
+
     var profileUpdate: String
         get() = pref.getString(KEY_SET_PROFILE_UPDATE, "FALSE")!!
         set(profileUpdate) {
@@ -209,6 +225,8 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_CURRENT_LOAN_COUNT    = "KEY_SET_CURRENT_LOAN_COUNT"
         private const val KEY_SET_BUSINESS_LOAN_COUNT   = "KEY_SET_BUSINESS_LOAN_COUNT"
         private const val KEY_SET_DEVICE_INFO           = "KEY_SET_DEVICE_INFO"
+        private const val KEY_SET_COUNTRY_NAME          = "KEY_SET_COUNTRY_NAME"
+        private const val KEY_SET_COUNTRY_FLAG          = "KEY_SET_COUNTRY_FLAG"
     }
 
 

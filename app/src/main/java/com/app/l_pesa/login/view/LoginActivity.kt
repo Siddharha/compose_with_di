@@ -149,7 +149,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
        val sharedPrefOBJ=SharedPref(this@LoginActivity)
        val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
-        if(countryData.countries_list.size>0)
+       if(countryData.countries_list.size>0)
         {
             val totalSize = 0 until countryData.countries_list.size
 
@@ -164,7 +164,10 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                             .load(countryListCode.image)
                             .apply(options)
                             .into(img_country)
+
                     countryCode=countryListCode.country_code
+                    sharedPrefOBJ.countryName  =countryListCode.country_name
+                    sharedPrefOBJ.countryFlag  =countryListCode.image
                     break
 
                 }
@@ -178,6 +181,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                         .apply(options)
                         .into(img_country)
                 countryCode="+255"
+                sharedPrefOBJ.countryName  =countryData.countries_list[0].country_name
+                sharedPrefOBJ.countryFlag  =countryData.countries_list[0].image
             }
         }
 
@@ -436,6 +441,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         val sharedPref          =SharedPref(this@LoginActivity)
         sharedPref.countryCode  =resModelCountryList.code
         countryCode             =resModelCountryList.country_code
+        sharedPref.countryName  =resModelCountryList.country_name
+        sharedPref.countryFlag  =resModelCountryList.image
         val options = RequestOptions()
             options.centerCrop()
             Glide.with(this@LoginActivity)

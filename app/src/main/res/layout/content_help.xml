@@ -24,13 +24,24 @@
 
        >
 
-        <com.app.l_pesa.common.HexagonMaskView
-            android:id="@+id/imgCountry"
+        <ImageView
+            android:id="@+id/imgShade"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
+            android:contentDescription="@string/app_name"
             android:layout_gravity="center"
-            android:background="@color/colorWhite"
+            android:background="@drawable/ic_hexagonal_bg"
             android:padding="@dimen/_20sdp"
+
+            />
+
+        <ImageView
+            android:id="@+id/imgCountry"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center"
+
 
             />
 
