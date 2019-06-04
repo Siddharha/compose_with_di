@@ -119,7 +119,7 @@ object CommonMethod {
         var inputStream = FileInputStream(fileOBJ)
         BitmapFactory.decodeStream(inputStream, null, bitOptionOBJ)
         inputStream.close()
-        val requiredSize = 85
+        val requiredSize = 75
         var scale = 1
         while (bitOptionOBJ.outWidth / scale / 2 >= requiredSize && bitOptionOBJ.outHeight / scale / 2 >= requiredSize) {
             scale *= 2
