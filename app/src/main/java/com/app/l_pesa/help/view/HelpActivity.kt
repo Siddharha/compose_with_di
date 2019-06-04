@@ -2,21 +2,32 @@ package com.app.l_pesa.help.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.help.inter.ICallBackHelp
+import com.app.l_pesa.help.model.HelpData
+import com.app.l_pesa.help.presenter.PresenterHelp
+import com.app.l_pesa.main.MainActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.kaopiz.kprogresshud.KProgressHUD
 
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
 
-class HelpActivity : AppCompatActivity() {
+class HelpActivity : AppCompatActivity(), ICallBackHelp {
+
+    private lateinit var progressDialog                : KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +36,7 @@ class HelpActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@HelpActivity)
 
+        initLoader()
         initData()
 
     }
@@ -40,6 +52,65 @@ class HelpActivity : AppCompatActivity() {
                 .load(sharedPrefOBJ.countryFlag)
                 .apply(options)
                 .into(imgCountry)
+
+        progressDialog.show()
+        val presenterHelp= PresenterHelp()
+        presenterHelp.getHelp(this@HelpActivity,this)
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(this@HelpActivity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+
+    override fun onSuccessHelp(data: HelpData) {
+
+        txtPhone.text = data.support_contact_no
+        txtEmail.text = data.support_email
+
+        dismiss()
+    }
+
+    override fun onErrorHelp(message: String) {
+
+        dismiss()
+        Toast.makeText(this@HelpActivity,message,Toast.LENGTH_LONG).show()
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(this@HelpActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok", DialogInterface.OnClickListener {
+                    dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@HelpActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@HelpActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                })
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 

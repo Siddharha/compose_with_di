@@ -43,15 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         buttonSignUp.setOnClickListener {
 
-            if(CommonMethod.isNetworkAvailable(this@MainActivity))
-            {
-                startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
-                overridePendingTransition(R.anim.right_in, R.anim.left_out)
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(ll_root,this@MainActivity,resources.getString(R.string.no_internet))
-            }
+
+             startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
+             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
 
 
         }
@@ -70,16 +65,10 @@ class MainActivity : AppCompatActivity() {
     {
         buttonLogin.setOnClickListener {
 
-            if(CommonMethod.isNetworkAvailable(this@MainActivity))
-            {
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.anim.right_in, R.anim.left_out)
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(ll_root,this@MainActivity,resources.getString(R.string.no_internet))
-            }
+
 
 
         }

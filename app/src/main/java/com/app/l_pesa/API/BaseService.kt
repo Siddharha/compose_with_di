@@ -2,6 +2,7 @@ package com.app.l_pesa.API
 
 
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.help.model.ResHelp
 import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
 import com.app.l_pesa.loanplan.model.ResLoanPlans
@@ -181,6 +182,9 @@ interface BaseService{
 
     @GET("user/notifications")
     fun getNotification(@Query("cursors") cursors:String): Observable<ResNotification>
+
+    @POST("settings/help")
+    fun getHelp(): Observable<ResHelp>
 
 }
 

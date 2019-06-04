@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,6 +15,7 @@ import retrofit2.HttpException
 
 class PresenterInvestmentStatus {
 
+    @SuppressLint("CheckResult")
     fun doInvestmentStatus(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackInvestmentStatus)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -55,7 +57,6 @@ class PresenterInvestmentStatus {
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                            callBackOBJ.onErrorInvestmentStatus(jsonMessage)
                             if(jsonStatusCode==50002)
                             {
                                 callBackOBJ.onSessionTimeOut(jsonMessage)

@@ -13,6 +13,7 @@ import com.app.l_pesa.R.array.settings_item_icon_pin
 import com.app.l_pesa.R.array.settings_item_name_pin
 import com.app.l_pesa.R.array.settings_item_icon
 import com.app.l_pesa.R.array.settings_item_name
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.help.view.HelpActivity
 import com.app.l_pesa.notification.view.NotificationActivity
@@ -118,8 +119,16 @@ class SettingsFragment : Fragment(), ICallBackListClick {
             }
             else if(position==4)
             {
-                startActivity(Intent(activity, HelpActivity::class.java))
-                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+                    startActivity(Intent(activity, HelpActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                }
+
             }
           else{
 

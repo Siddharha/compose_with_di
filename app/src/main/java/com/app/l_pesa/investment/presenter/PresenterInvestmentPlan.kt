@@ -1,5 +1,6 @@
 package com.app.l_pesa.investment.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,6 +14,7 @@ import retrofit2.HttpException
 
 class PresenterInvestmentPlan {
 
+    @SuppressLint("CheckResult")
     fun getInvestmentPlan(contextOBJ: Context, callBackOBJ: ICallBackInvestmentPlan)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
