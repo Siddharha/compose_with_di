@@ -438,13 +438,22 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             if(fragmentToNavigate is LoanPlansFragment)
             {
                 buttonRight.text = resources.getString(R.string.history)
+                imgFilter.visibility=View.GONE
+                buttonRight.visibility=View.VISIBLE
             }
             else if(fragmentToNavigate is InvestmentFragment)
             {
                 buttonRight.setBackgroundResource(R.drawable.ic_filter)
+                imgFilter.visibility=View.GONE
+                buttonRight.visibility=View.VISIBLE
             }
-            imgFilter.visibility=View.GONE
-            buttonRight.visibility=View.VISIBLE
+            else
+            {
+                imgFilter.visibility=View.INVISIBLE
+                buttonRight.visibility=View.INVISIBLE
+
+            }
+
         }
         else if(!isVisible && isVisibleFilter)
         {
