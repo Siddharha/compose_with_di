@@ -47,6 +47,7 @@ import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
 import java.lang.Exception
@@ -62,11 +63,13 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private var businessIdName=""
     private var businessId=0
 
-    private val Photo             = 14
-    private val Gallery           = 15
+    private val requestPhoto      = 14
+    private val requestGallery    = 15
     private var captureImageStatus : Boolean    = false
     private var photoFile          : File?      = null
     private var captureFilePath    : Uri?       = null
+
+    private lateinit  var progressDialog: KProgressHUD
 
     companion object {
         fun newInstance(): Fragment {
@@ -81,7 +84,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipeRefresh()
+        initLoader()
         initData()
 
     }
@@ -105,11 +108,11 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
             if(!captureImageStatus)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_image))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_image))
             }
             else if(businessId==0)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
             }
 
@@ -118,8 +121,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
 
-                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                    swipeRefreshLayout.isRefreshing=true
+                    progressDialog.show()
                     buttonSubmit.isClickable=false
 
                     /*if(idTypeExists=="TRUE")
@@ -138,7 +140,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                 }
                 else
                 {
-                    CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                 }
             }
         }
@@ -176,6 +178,24 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     }
 
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
 
     override fun onSuccessUploadAWS(url: String) {
 
@@ -193,14 +213,14 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     override fun onFailureUploadAWS(string: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,activity!!,string)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,string)
     }
 
     override fun onSessionTimeOut(message: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         val dialogBuilder = AlertDialog.Builder(activity!!)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
@@ -220,13 +240,6 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     }
 
-    private fun swipeRefresh()
-    {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing=false
-        }
-    }
 
     private fun showDialogIdType(sharedPrefOBJ: SharedPref)
     {
@@ -297,7 +310,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        filterPopup?.showAsDropDown(llRoot,165,-400)
+        filterPopup?.showAsDropDown(rootLayout,165,-400)
     }
 
     private fun showAlertFilter(userIdsBusinessInfo:ResUserInfo.UserIdsBusinessInfo, pos: Int): PopupWindow {
@@ -344,7 +357,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                     }
                     else
                     {
-                        CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                     }
                 }
                 else
@@ -363,7 +376,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                         }
                         else
                         {
-                            CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                         }
 
                     }
@@ -378,9 +391,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     private fun deletePersonalIdProof(userIdsBusinessInfo: ResUserInfo.UserIdsBusinessInfo, pos: Int)
     {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.isRefreshing=true
-
+        dismiss()
         val jsonObject = JsonObject()
         jsonObject.addProperty("user_type_id",userIdsBusinessInfo.id.toString())
 
@@ -389,7 +400,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     }
 
     override fun onSuccessAddProof() {
-
+        dismiss()
         val sharedPref= SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
         val intent = Intent(activity!!, DashboardActivity::class.java)
@@ -399,14 +410,13 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     }
 
     override fun onFailureAddProof(message: String) {
-
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     override fun onSuccessDeleteProof(position: Int) {
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         listBusinessId!!.removeAt(position)
         businessIdAdapter!!.notifyDataSetChanged()
         val sharedPrefOBJ= SharedPref(activity!!)
@@ -414,8 +424,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     }
 
     override fun onFailureDeleteProof(message: String) {
-        swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(llRoot,activity!!,message)
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     private fun cameraClick()
@@ -440,7 +450,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
     }
 
 
@@ -459,7 +469,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        startActivityForResult(intent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -478,12 +488,12 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode) {
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK) {
                     setImage()
                 }
-            Gallery ->
+            requestGallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 

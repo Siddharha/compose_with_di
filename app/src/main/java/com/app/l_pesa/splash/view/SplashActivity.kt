@@ -160,6 +160,17 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         showSnackBar(jsonMessage)
         buttonRetry.visibility  =View.VISIBLE
         progressBar.visibility  =View.INVISIBLE
+        buttonRetry.setOnClickListener {
+
+            if (CommonMethod.isNetworkAvailable(this@SplashActivity))
+            {
+                loadCountry()
+            } else
+            {
+                CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
+            }
+
+        }
 
     }
 

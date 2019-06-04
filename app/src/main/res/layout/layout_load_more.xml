@@ -15,7 +15,7 @@
         android:layout_height="@dimen/_20sdp"
         android:layout_gravity="center_horizontal"
         android:indeterminate="true"
-        android:indeterminateTint="@color/colorRed"
+        android:indeterminateTint="@color/colorAppDeep"
 
         />
 </LinearLayout>
