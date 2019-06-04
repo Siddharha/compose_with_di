@@ -19,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -148,6 +149,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         progressBar.visibility= View.INVISIBLE
         if(data.next_step=="next_otp")
         {
+            Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_otp_via_sms),Toast.LENGTH_SHORT).show()
             val sharedPrefOBJ=SharedPref(this@ForgotPinActivity)
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
@@ -157,6 +159,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         }
         else
         {
+            Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_SHORT).show()
             val sharedPrefOBJ=SharedPref(this@ForgotPinActivity)
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
