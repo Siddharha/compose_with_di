@@ -5,10 +5,12 @@ import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -83,6 +85,16 @@ class HelpActivity : AppCompatActivity(), ICallBackHelp {
         txtEmail.text = data.support_email
 
         dismiss()
+
+        txtPhone.setOnClickListener {
+            if(!TextUtils.isEmpty(data.support_contact_no))
+            {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:"+data.support_contact_no)
+                startActivity(intent)
+            }
+
+        }
     }
 
     override fun onErrorHelp(message: String) {
