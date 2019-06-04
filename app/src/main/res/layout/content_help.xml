@@ -6,6 +6,51 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".help.view.HelpActivity"
-    tools:showIn="@layout/activity_help">
+    tools:showIn="@layout/activity_help"
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
+
+
+    <FrameLayout
+        android:id="@+id/frameHead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtCountry"
+        android:layout_marginTop="@dimen/_20sdp"
+
+       >
+
+        <com.app.l_pesa.common.HexagonMaskView
+            android:id="@+id/imgCountry"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_gravity="center"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/_20sdp"
+
+            />
+
+
+    </FrameLayout>
+
+   <TextView
+        android:id="@+id/txtCountry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/_17sdp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/dark_text_color"
+        android:gravity="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameHead" />
+
+
 
 </android.support.constraint.ConstraintLayout>

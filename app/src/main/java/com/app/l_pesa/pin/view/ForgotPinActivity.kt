@@ -149,7 +149,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         progressBar.visibility= View.INVISIBLE
         if(data.next_step=="next_otp")
         {
-            Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_otp_via_sms),Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_otp_via_sms),Toast.LENGTH_LONG).show()
             val sharedPrefOBJ=SharedPref(this@ForgotPinActivity)
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
@@ -159,7 +159,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         }
         else
         {
-            Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_LONG).show()
             val sharedPrefOBJ=SharedPref(this@ForgotPinActivity)
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
