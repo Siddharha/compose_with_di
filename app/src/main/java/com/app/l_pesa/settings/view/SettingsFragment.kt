@@ -119,8 +119,8 @@ class SettingsFragment : Fragment(), ICallBackListClick {
             }
             else if(position==4)
             {
-                 startActivity(Intent(activity, HelpActivity::class.java))
-                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                /* startActivity(Intent(activity, HelpActivity::class.java))
+                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)*/
             }
           else{
 
