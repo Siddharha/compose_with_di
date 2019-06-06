@@ -85,10 +85,9 @@ class ProfileEditIdInfoActivity : AppCompatActivity(),TabLayout.OnTabSelectedLis
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }

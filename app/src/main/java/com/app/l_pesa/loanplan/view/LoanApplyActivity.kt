@@ -224,15 +224,14 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, _ ->
+                .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(this@LoanApplyActivity)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(this@LoanApplyActivity, MainActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                     finish()
-                })
+                }
 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
@@ -281,10 +280,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }

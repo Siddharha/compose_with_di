@@ -1,7 +1,6 @@
 package com.app.l_pesa.pinview.view
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -22,7 +21,6 @@ import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.help.inter.ICallBackHelp
 import com.app.l_pesa.help.model.HelpData
 import com.app.l_pesa.help.presenter.PresenterHelp
-import com.app.l_pesa.login.model.PostData
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.otpview.model.PinData
@@ -173,15 +171,14 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
         val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, id ->
+                .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(this@PinSetActivity)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(this@PinSetActivity, MainActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                     finish()
-                })
+                }
 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
@@ -211,10 +208,9 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont =   Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text ==    toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text ==    toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }

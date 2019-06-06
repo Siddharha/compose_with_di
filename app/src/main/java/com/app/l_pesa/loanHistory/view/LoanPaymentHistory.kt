@@ -1,7 +1,6 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -101,15 +99,14 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         val dialogBuilder = AlertDialog.Builder(this@LoanPaymentHistory)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, _ ->
+                .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(this@LoanPaymentHistory)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(this@LoanPaymentHistory, MainActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                     finish()
-                })
+                }
 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
@@ -122,10 +119,9 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }

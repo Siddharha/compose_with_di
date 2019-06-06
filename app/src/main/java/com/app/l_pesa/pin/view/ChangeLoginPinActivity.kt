@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.content_change_login_pin.*
 import android.graphics.Typeface
 import android.widget.TextView
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.text.TextUtils
 import android.view.ViewGroup
@@ -165,15 +164,14 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
         val dialogBuilder = AlertDialog.Builder(this@ChangeLoginPinActivity)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, _ ->
+                .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(this@ChangeLoginPinActivity)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(this@ChangeLoginPinActivity, MainActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                     finish()
-                })
+                }
 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
@@ -187,10 +185,9 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }

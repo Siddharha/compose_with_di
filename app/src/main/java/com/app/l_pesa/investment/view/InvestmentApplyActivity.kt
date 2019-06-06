@@ -3,7 +3,6 @@ package com.app.l_pesa.investment.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -140,15 +139,14 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         val dialogBuilder = AlertDialog.Builder(this@InvestmentApplyActivity)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, _ ->
+                .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(this@InvestmentApplyActivity)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(this@InvestmentApplyActivity, MainActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                     finish()
-                })
+                }
 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
@@ -161,10 +159,9 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }

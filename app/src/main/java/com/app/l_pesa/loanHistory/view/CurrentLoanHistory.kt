@@ -394,15 +394,14 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         val dialogBuilder = AlertDialog.Builder(activity!!)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, _ ->
+                .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(activity!!)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(activity!!, MainActivity::class.java))
                     activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
                     activity!!.finish()
-                })
+                }
 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))

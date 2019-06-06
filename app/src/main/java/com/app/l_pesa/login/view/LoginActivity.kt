@@ -8,15 +8,12 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
@@ -35,16 +32,14 @@ import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.pin.view.ForgotPinActivity
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.presenter.PresenterLogin
-import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.activity_login.*
 import com.app.l_pesa.login.model.PinData
+import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.otpview.view.OTPActivity
+import com.app.l_pesa.pin.view.ForgotPinActivity
 import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
@@ -53,6 +48,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList {
@@ -316,7 +313,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
     override fun onSuccessLogin(data: PinData) {
 
-        Handler().postDelayed(Runnable {
+        Handler().postDelayed({
             txtLogin.isClickable   = true
         }, 1000)
 

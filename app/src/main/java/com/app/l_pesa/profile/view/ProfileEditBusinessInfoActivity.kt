@@ -2,7 +2,6 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -211,17 +210,15 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         swipeRefreshLayout.isRefreshing=false
         val dialogBuilder = AlertDialog.Builder(this@ProfileEditBusinessInfoActivity)
         dialogBuilder.setMessage(message)
-                // if the dialog is cancelable
                 .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, id ->
+                .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
                     val sharedPrefOBJ= SharedPref(this@ProfileEditBusinessInfoActivity)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(this@ProfileEditBusinessInfoActivity, MainActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                     finish()
-                })
+                }
 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
@@ -234,10 +231,9 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
