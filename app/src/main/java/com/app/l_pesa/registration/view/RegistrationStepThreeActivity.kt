@@ -172,7 +172,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     }
 
     override fun onSuccessRegistrationThree() {
-
+        Toast.makeText(this@RegistrationStepThreeActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_LONG).show()
         startActivity(Intent(this@RegistrationStepThreeActivity, LoginActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
