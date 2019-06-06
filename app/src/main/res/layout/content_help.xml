@@ -66,12 +66,11 @@
         android:id="@+id/txtCountry"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         android:textSize="@dimen/_16sdp"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/textColors"
+        android:textColor="@color/colorTextBlack"
         android:gravity="center"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameHead"
@@ -82,7 +81,7 @@
         android:id="@+id/viewDivider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_3sdp"
         android:background="@color/divider_color"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
@@ -111,7 +110,7 @@
     <TextView
         android:id="@+id/txtPhone"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_37sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:textSize="@dimen/_11sdp"
         android:fontFamily="@font/montserrat"
@@ -130,7 +129,7 @@
     <TextView
         android:id="@+id/txtEmail"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_37sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:textSize="@dimen/_11sdp"
         android:fontFamily="@font/montserrat"
@@ -148,19 +147,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-        <View
-            android:id="@+id/viewDividerThree"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/divider_color"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCountry"
-            app:layout_constraintBottom_toTopOf="@+id/viewDividerTwo"
-
-            />
 
     </LinearLayout>
 
@@ -177,7 +163,7 @@
         <TextView
             android:id="@+id/txtTelegram"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
             android:layout_marginTop="@dimen/_2sdp"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/montserrat"
@@ -190,6 +176,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/viewDividerFour"
             android:background="@color/colorSemiWhite"
 
             />
@@ -204,13 +191,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTelegram"
+            app:layout_constraintBottom_toTopOf="@+id/txtWhatsApp"
 
             />
 
         <TextView
             android:id="@+id/txtWhatsApp"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/montserrat"
             android:textColor="@color/colorTextBlack"
