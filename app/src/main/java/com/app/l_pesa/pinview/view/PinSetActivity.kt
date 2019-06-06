@@ -196,7 +196,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
         dismiss()
         val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
         startActivity(intent)
-       // overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
     }
 
