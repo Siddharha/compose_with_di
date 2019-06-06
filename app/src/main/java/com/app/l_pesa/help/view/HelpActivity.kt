@@ -2,31 +2,26 @@ package com.app.l_pesa.help.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.help.inter.ICallBackHelp
 import com.app.l_pesa.help.model.HelpData
-import com.app.l_pesa.help.presenter.PresenterHelp
-import com.app.l_pesa.main.MainActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
-import com.kaopiz.kprogresshud.KProgressHUD
-
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
+import android.content.pm.PackageManager
+
+
 
 class HelpActivity : AppCompatActivity() {
 
@@ -45,7 +40,7 @@ class HelpActivity : AppCompatActivity() {
     private fun initData()
     {
         val sharedPrefOBJ= SharedPref(this@HelpActivity)
-        txtCountry.text = ""+sharedPrefOBJ.countryName
+        txtCountry.text = sharedPrefOBJ.countryName
 
 
         val options = RequestOptions()
@@ -57,8 +52,38 @@ class HelpActivity : AppCompatActivity() {
 
         val helpData = Gson().fromJson<HelpData>(sharedPrefOBJ.helpSupport, HelpData::class.java)
 
-        txtPhone.text = helpData.support_contact_no
-        txtEmail.text = helpData.support_email
+
+        if(!TextUtils.isEmpty(helpData.support_contact_no))
+        {
+            txtPhone.text = helpData.support_contact_no
+        }
+        else{
+            txtPhone.text = resources.getString(R.string.not_available)
+        }
+
+        if(!TextUtils.isEmpty(helpData.support_email))
+        {
+            txtEmail.text = helpData.support_email
+        }
+        else{
+            txtEmail.text = resources.getString(R.string.not_available)
+        }
+
+        if(!TextUtils.isEmpty(helpData.support_telegram_url))
+        {
+            txtTelegram.text = resources.getString(R.string.telegram)
+        }
+        else{
+            txtTelegram.text = resources.getString(R.string.telegram)+" "+resources.getString(R.string.not_available)
+        }
+
+        if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
+        {
+            txtWhatsApp.text = resources.getString(R.string.whats_app)
+        }
+        else{
+            txtWhatsApp.text = resources.getString(R.string.whats_app)+" "+resources.getString(R.string.not_available)
+        }
 
         txtPhone.setOnClickListener {
             if(!TextUtils.isEmpty(helpData.support_contact_no))
@@ -66,6 +91,40 @@ class HelpActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_DIAL)
                 intent.data = Uri.parse("tel:"+helpData.support_contact_no)
                 startActivity(intent)
+            }
+
+        }
+
+        txtWhatsApp.setOnClickListener {
+            if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
+            {
+                try {
+                    val url = "https://api.whatsapp.com/send?phone=$"+helpData.support_whatsapp_no
+                    val pm = packageManager
+                    pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)
+                    val i = Intent(Intent.ACTION_VIEW)
+                    i.data = Uri.parse(url)
+                    startActivity(i)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    Toast.makeText(this@HelpActivity, "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
+                }
+
+            }
+
+        }
+
+        txtTelegram.setOnClickListener {
+            if(!TextUtils.isEmpty(helpData.support_telegram_url))
+            {
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(helpData.support_telegram_url))
+                    startActivity(intent)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    Toast.makeText(this@HelpActivity, "Telegram app not installed in your phone", Toast.LENGTH_SHORT).show()
+                    e.printStackTrace()
+                }
+
             }
 
         }

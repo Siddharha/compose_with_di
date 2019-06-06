@@ -367,6 +367,7 @@
     <string name="transfer">Transfer</string>
     <string name="star_line">************************************************************</string>
     <string name="dash_line">----</string>
+    <string name="not_available">Not Available</string>
     <string name="filter">Filter</string>
     <string name="required_token_amount">Please enter the number of tokens.</string>
     <string name="token_transfer">Token Transfer</string>
@@ -423,6 +424,8 @@
 
     <!--Help-->
     <string name="help_support">Help &amp; Support</string>
+    <string name="telegram">Telegram</string>
+    <string name="whats_app">WhatsApp</string>
 
 
 </resources>
