@@ -119,16 +119,8 @@ class SettingsFragment : Fragment(), ICallBackListClick {
             }
             else if(position==4)
             {
-                if(CommonMethod.isNetworkAvailable(activity!!))
-                {
-                    startActivity(Intent(activity, HelpActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-                }
-
+                 startActivity(Intent(activity, HelpActivity::class.java))
+                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
             }
           else{
 

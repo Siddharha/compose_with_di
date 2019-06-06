@@ -186,6 +186,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var helpSupport: String
+        get() = pref.getString(KEY_SET_HELP_SUPPORT, "")!!
+        set(helpSupport) {
+            editor.remove(KEY_SET_HELP_SUPPORT)
+            editor.putString(KEY_SET_HELP_SUPPORT, helpSupport)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -227,6 +235,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_DEVICE_INFO           = "KEY_SET_DEVICE_INFO"
         private const val KEY_SET_COUNTRY_NAME          = "KEY_SET_COUNTRY_NAME"
         private const val KEY_SET_COUNTRY_FLAG          = "KEY_SET_COUNTRY_FLAG"
+        private const val KEY_SET_HELP_SUPPORT          = "KEY_SET_HELP_SUPPORT"
     }
 
 

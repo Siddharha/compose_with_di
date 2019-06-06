@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -18,6 +19,9 @@ import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.presenter.PresenterDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.help.inter.ICallBackHelp
+import com.app.l_pesa.help.model.HelpData
+import com.app.l_pesa.help.presenter.PresenterHelp
 import com.app.l_pesa.login.model.PostData
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.main.MainActivity
@@ -32,7 +36,8 @@ import kotlinx.android.synthetic.main.activity_pin_set.*
 import kotlinx.android.synthetic.main.content_pin_set.*
 
 
-class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard {
+class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard, ICallBackHelp {
+
 
     private lateinit  var progressDialog: KProgressHUD
 
@@ -148,15 +153,13 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
 
-        dismiss()
         val sharedPrefOBJ=SharedPref(this@PinSetActivity)
         val dashBoardData                 = Gson().toJson(data)
         sharedPrefOBJ.userDashBoard       = dashBoardData
 
-        val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
+        val presenterHelp= PresenterHelp()
+        presenterHelp.getHelp(this@PinSetActivity,this)
+
     }
 
     override fun onFailureDashboard(jsonMessage: String) {
@@ -183,6 +186,24 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard 
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
         alert.show()
+    }
+
+    override fun onSuccessHelp(data: HelpData) {
+
+        val sharedPrefOBJ=SharedPref(this@PinSetActivity)
+        val helpSupportData             = Gson().toJson(data)
+        sharedPrefOBJ.helpSupport       = helpSupportData
+        dismiss()
+        val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
+    }
+
+    override fun onErrorHelp(message: String) {
+        dismiss()
+        pass_code_view.setError(true)
+        Toast.makeText(this@PinSetActivity,message,Toast.LENGTH_SHORT).show()
     }
 
     private fun toolbarFont(context: Activity) {

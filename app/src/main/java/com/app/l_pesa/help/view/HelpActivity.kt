@@ -22,14 +22,13 @@ import com.app.l_pesa.help.presenter.PresenterHelp
 import com.app.l_pesa.main.MainActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
 
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
 
-class HelpActivity : AppCompatActivity(), ICallBackHelp {
-
-    private lateinit var progressDialog                : KProgressHUD
+class HelpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +37,6 @@ class HelpActivity : AppCompatActivity(), ICallBackHelp {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@HelpActivity)
 
-        initLoader()
         initData()
 
     }
@@ -49,79 +47,28 @@ class HelpActivity : AppCompatActivity(), ICallBackHelp {
         val sharedPrefOBJ= SharedPref(this@HelpActivity)
         txtCountry.text = ""+sharedPrefOBJ.countryName
 
+
         val options = RequestOptions()
         Glide.with(this@HelpActivity)
                 .load(sharedPrefOBJ.countryFlag)
                 .apply(options)
                 .into(imgCountry)
 
-        progressDialog.show()
-        val presenterHelp= PresenterHelp()
-        presenterHelp.getHelp(this@HelpActivity,this)
-    }
 
-    private fun initLoader()
-    {
-        progressDialog= KProgressHUD.create(this@HelpActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        val helpData = Gson().fromJson<HelpData>(sharedPrefOBJ.helpSupport, HelpData::class.java)
 
-    }
-
-    private fun dismiss()
-    {
-        if(progressDialog.isShowing)
-        {
-            progressDialog.dismiss()
-        }
-    }
-
-
-    override fun onSuccessHelp(data: HelpData) {
-
-        txtPhone.text = data.support_contact_no
-        txtEmail.text = data.support_email
-
-        dismiss()
+        txtPhone.text = helpData.support_contact_no
+        txtEmail.text = helpData.support_email
 
         txtPhone.setOnClickListener {
-            if(!TextUtils.isEmpty(data.support_contact_no))
+            if(!TextUtils.isEmpty(helpData.support_contact_no))
             {
                 val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:"+data.support_contact_no)
+                intent.data = Uri.parse("tel:"+helpData.support_contact_no)
                 startActivity(intent)
             }
 
         }
-    }
-
-    override fun onErrorHelp(message: String) {
-
-        dismiss()
-        Toast.makeText(this@HelpActivity,message,Toast.LENGTH_LONG).show()
-    }
-
-    override fun onSessionTimeOut(message: String) {
-
-        dismiss()
-        val dialogBuilder = AlertDialog.Builder(this@HelpActivity)
-        dialogBuilder.setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("Ok", DialogInterface.OnClickListener {
-                    dialog, _ ->
-                    dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(this@HelpActivity)
-                    sharedPrefOBJ.removeShared()
-                    startActivity(Intent(this@HelpActivity, MainActivity::class.java))
-                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    finish()
-                })
-
-        val alert = dialogBuilder.create()
-        alert.setTitle(resources.getString(R.string.app_name))
-        alert.show()
 
     }
 
