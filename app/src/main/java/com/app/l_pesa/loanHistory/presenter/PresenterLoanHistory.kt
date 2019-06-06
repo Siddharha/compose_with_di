@@ -35,7 +35,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score,from_date,to_date)
+                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history, response.data.cursors,response.data.user_credit_score,from_date,to_date)
                             }
                             else
                             {
@@ -103,7 +103,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history,response.data!!.cursors,response.data.user_credit_score,from_date,to_date)
+                                callBackCurrentOBJ.onSuccessLoanHistory(response.data.loan_history, response.data.cursors,response.data.user_credit_score,from_date,to_date)
                             }
                             else
                             {
@@ -159,7 +159,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors,from_date,to_date)
+                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history, response.data.cursors,from_date,to_date)
                             }
 
                         }
@@ -212,7 +212,7 @@ class PresenterLoanHistory {
                         {
                             if(response.data.loan_history.size>0)
                             {
-                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history,response.data!!.cursors,from_date,to_date)
+                                callBackCurrentOBJ.onSuccessPaginateLoanHistory(response.data.loan_history, response.data.cursors,from_date,to_date)
                             }
 
                         }

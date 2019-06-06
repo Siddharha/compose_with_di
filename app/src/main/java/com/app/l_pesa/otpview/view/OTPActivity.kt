@@ -5,7 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
 import com.app.l_pesa.R
@@ -121,7 +121,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
     }
 
-    fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
+    private fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
         val spannableString = SpannableString(resources.getString(R.string.resend_otp))
         for (link in links) {
             val clickableSpan = object : ClickableSpan() {

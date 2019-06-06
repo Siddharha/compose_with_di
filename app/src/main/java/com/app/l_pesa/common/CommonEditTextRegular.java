@@ -8,11 +8,6 @@ import android.text.Spanned;
 import android.util.AttributeSet;
 
 
-/**
- * Created by Intellij Amiyo on 07-02-2018.
- */
-
-
 public class CommonEditTextRegular extends AppCompatEditText
 {
     public CommonEditTextRegular(Context context) {

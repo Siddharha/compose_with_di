@@ -374,14 +374,14 @@ public class KProgressHUD {
         }
 
         private void initViews() {
-            mBackgroundLayout = (BackgroundLayout) findViewById(R.id.background);
+            mBackgroundLayout = findViewById(R.id.background);
             mBackgroundLayout.setBaseColor(mWindowColor);
             mBackgroundLayout.setCornerRadius(mCornerRadius);
             if (mWidth != 0) {
                 updateBackgroundSize();
             }
 
-            mCustomViewContainer = (FrameLayout) findViewById(R.id.container);
+            mCustomViewContainer = findViewById(R.id.container);
             addViewToFrame(mView);
 
             if (mDeterminateView != null) {
@@ -391,9 +391,9 @@ public class KProgressHUD {
                 mIndeterminateView.setAnimationSpeed(mAnimateSpeed);
             }
 
-            mLabelText = (TextView) findViewById(com.kaopiz.kprogresshud.R.id.label);
+            mLabelText = findViewById(R.id.label);
             setLabel(mLabel, mLabelColor);
-            mDetailsText = (TextView) findViewById(com.kaopiz.kprogresshud.R.id.details_label);
+            mDetailsText = findViewById(R.id.details_label);
             setDetailsLabel(mDetailsLabel, mDetailColor);
         }
 

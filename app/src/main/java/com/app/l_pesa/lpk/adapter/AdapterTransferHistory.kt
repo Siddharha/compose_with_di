@@ -76,9 +76,9 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var txtRef          : TextView              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
-        var txtToken        : TextView              = itemView.findViewById(R.id.txtToken) as CommonTextRegular
-        var txtCreateDate   : CommonTextRegular     = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
+        private var txtRef          : TextView              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        private var txtToken        : TextView              = itemView.findViewById(R.id.txtToken) as CommonTextRegular
+        private var txtCreateDate   : CommonTextRegular     = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory, callBack: ICallBackTransferHistory)

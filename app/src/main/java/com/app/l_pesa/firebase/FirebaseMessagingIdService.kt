@@ -33,11 +33,6 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
     private lateinit var notificationManager: NotificationManager
     private val ADMIN_CHANNEL_ID = "l_pesa"
 
-    override fun onNewToken(token: String?) {
-        super.onNewToken(token)
-
-    }
-
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
         remoteMessage?.let { message ->

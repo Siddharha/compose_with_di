@@ -54,7 +54,7 @@ class AdapterPopupWindow(val context: Context) : RecyclerView.Adapter<AdapterPop
 
         var tvName      :TextView   = itemView.findViewById(R.id.alert_filter_name)
         var imgIcon     : ImageView = itemView.findViewById(R.id.alert_filter_icon)
-        var filterLayout:ConstraintLayout = itemView.findViewById(R.id.alert_filter_item_layout)
+        private var filterLayout:ConstraintLayout = itemView.findViewById(R.id.alert_filter_item_layout)
 
         init {
             setClickListener(filterLayout)

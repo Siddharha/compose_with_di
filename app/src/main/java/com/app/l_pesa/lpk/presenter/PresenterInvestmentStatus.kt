@@ -30,13 +30,13 @@ class PresenterInvestmentStatus {
                     try
                     {
 
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                             callBackOBJ.onSuccessInvestmentStatus()
                         }
                         else
                         {
-                            callBackOBJ.onErrorInvestmentStatus(response.status!!.message)
+                            callBackOBJ.onErrorInvestmentStatus(response.status.message)
                         }
 
                     }

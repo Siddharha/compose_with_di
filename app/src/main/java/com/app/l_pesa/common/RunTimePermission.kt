@@ -47,7 +47,7 @@ class RunTimePermission(internal var activity: Activity) {
     }
 
     companion object {
-        val CAMERA_PERMISSION_REQUEST_CODE = 1
+        const val CAMERA_PERMISSION_REQUEST_CODE = 1
     }
 
 

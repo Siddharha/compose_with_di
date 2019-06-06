@@ -28,13 +28,13 @@ class PresenterSavingsUnlock {
                     try
                     {
 
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                             callBackOBJ.onSuccessSavingsUnlock()
                         }
                         else
                         {
-                            callBackOBJ.onErrorSavingsUnlock(response.status!!.message)
+                            callBackOBJ.onErrorSavingsUnlock(response.status.message)
                         }
 
                     }

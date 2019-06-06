@@ -28,13 +28,13 @@ class PresenterInvestmentReinvestment {
                     try
                     {
 
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                             callBackOBJ.onSuccessReinvestment()
                         }
                         else
                         {
-                            callBackOBJ.onErrorReinvestment(response.status!!.message)
+                            callBackOBJ.onErrorReinvestment(response.status.message)
                         }
 
                     }

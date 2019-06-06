@@ -94,7 +94,7 @@ class PresenterWithdrawalHistory {
                     try {
                         if (response.status.isSuccess)
                         {
-                            if(response.data.withdrawal_history!!.size>0)
+                            if(response.data.withdrawal_history.size>0)
                             {
                                 callBackOBJ.onSuccessWalletWithdrawalHistoryPaginate(response.data.withdrawal_history,response.data.cursors,from_date,to_date)
                             }

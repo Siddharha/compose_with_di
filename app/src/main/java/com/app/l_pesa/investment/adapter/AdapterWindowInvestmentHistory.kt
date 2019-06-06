@@ -14,7 +14,7 @@ import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import java.util.ArrayList
 
-class AdapterWindowInvestmentHistory (val context: Context, private val listInvestmentHistory: ArrayList<ModelWindowHistory>, val investmentList: ResInvestmentHistory.UserInvestment, private val callBack:ICallBackPopUpWindow) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterWindowInvestmentHistory (val context: Context, private val listInvestmentHistory: ArrayList<ModelWindowHistory>, private val investmentList: ResInvestmentHistory.UserInvestment, private val callBack:ICallBackPopUpWindow) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

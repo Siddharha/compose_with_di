@@ -28,13 +28,13 @@ class PresenterTokenTransfer {
                     try
                     {
 
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                             callBackOBJ.onSuccessTokenTransfer()
                         }
                         else
                         {
-                            callBackOBJ.onErrorTokenTransfer(response.status!!.message)
+                            callBackOBJ.onErrorTokenTransfer(response.status.message)
                         }
 
                     }

@@ -91,17 +91,17 @@ class PresenterTransactionAll {
                 .subscribe({ response ->
 
                     try {
-                        if (response.status!!.isSuccess)
+                        if (response.status.isSuccess)
                         {
-                            if(response.data!!.savings_history!!.size>0)
+                            if(response.data.savings_history.size>0)
                             {
-                                callBackOBJ.onSuccessTransactionPaginate(response.data!!.savings_history!!,response.data.cursors,from_date,to_date)
+                                callBackOBJ.onSuccessTransactionPaginate(response.data.savings_history,response.data.cursors,from_date,to_date)
                             }
 
 
                         } else
                         {
-                            callBackOBJ.onErrorTransaction(response.status!!.message)
+                            callBackOBJ.onErrorTransaction(response.status.message)
                         }
                     } catch (e: Exception) {
 

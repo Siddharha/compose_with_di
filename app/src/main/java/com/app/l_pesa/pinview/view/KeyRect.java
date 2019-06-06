@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.animation.CycleInterpolator;
 
 
-public class KeyRect {
+class KeyRect {
 
     private final View view;
     public Rect rect;
@@ -80,14 +80,14 @@ public class KeyRect {
      *
      * @param value - Value to be set for this key
      */
-    public void setValue(String value) {
+    void setValue(String value) {
         this.value = value;
     }
 
     /**
      * Show animation indicated invalid pincode
      */
-    public void setError() {
+    void setError() {
         ValueAnimator goLeftAnimator = ValueAnimator.ofInt(0, 5);
         goLeftAnimator.setInterpolator(new CycleInterpolator(2));
         goLeftAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -104,21 +104,23 @@ public class KeyRect {
         void onValueUpdated();
     }
 
-    public void setOnValueUpdateListener(InterpolatedValueListener listener) {
+     void setOnValueUpdateListener(InterpolatedValueListener listener) {
         this.interpolatedValueListener = listener;
     }
 
 
-    public void playRippleAnim(RippleAnimListener listener) {
+     void playRippleAnim(RippleAnimListener listener) {
         this.rippleAnimListener = listener;
         setOnValueUpdateListener(new KeyRect.InterpolatedValueListener() {
             @Override public void onValueUpdated() {
-                view.invalidate(rect);
+                //view.invalidate(rect);
+                view.invalidate();
             }
         });
         rippleAnimListener.onStart();
         animator.start();
     }
+
 
     /**
      * Interface to get notified on ripple animation status

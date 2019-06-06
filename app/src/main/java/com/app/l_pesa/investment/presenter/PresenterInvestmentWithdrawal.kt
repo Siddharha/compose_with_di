@@ -28,13 +28,13 @@ class PresenterInvestmentWithdrawal {
                     try
                     {
 
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                             callBackOBJ.onSuccessInvestmentWithdrawal()
                         }
                         else
                         {
-                            callBackOBJ.onErrorInvestmentWithdrawal(response.status!!.message)
+                            callBackOBJ.onErrorInvestmentWithdrawal(response.status.message)
                         }
 
                     }
