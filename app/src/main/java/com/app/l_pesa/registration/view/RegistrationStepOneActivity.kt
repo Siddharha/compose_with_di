@@ -5,9 +5,9 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.telephony.TelephonyManager
@@ -17,7 +17,6 @@ import android.text.TextWatcher
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -36,7 +35,6 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
-
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 
 

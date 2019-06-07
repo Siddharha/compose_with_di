@@ -2,7 +2,10 @@ package com.app.l_pesa.loanplan.view
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Typeface
 import android.location.LocationManager
 import android.os.Bundle

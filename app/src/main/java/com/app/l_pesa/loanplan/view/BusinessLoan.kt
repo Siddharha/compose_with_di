@@ -1,6 +1,5 @@
 package com.app.l_pesa.loanplan.view
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -22,7 +21,7 @@ import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.app.l_pesa.main.MainActivity
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Intellij Amiya on 21/2/19.

@@ -8,20 +8,16 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
-import android.view.View
-import android.view.Window
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
@@ -35,7 +31,6 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
-import java.lang.Exception
 
 
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {

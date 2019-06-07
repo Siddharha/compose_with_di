@@ -8,12 +8,12 @@ import android.location.Location
 import android.os.Bundle
 import android.os.IBinder
 import android.support.v4.app.ActivityCompat
+import android.support.v4.content.LocalBroadcastManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationListener
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import android.support.v4.content.LocalBroadcastManager
 
 
 const val ACTION_LOCATION_BROADCAST = "LocationBroadcast"

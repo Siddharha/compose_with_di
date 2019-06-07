@@ -1,7 +1,6 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
@@ -15,8 +14,10 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
+import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
@@ -24,14 +25,12 @@ import com.app.l_pesa.loanHistory.adapter.CurrentLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
+import com.app.l_pesa.main.MainActivity
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.util.ArrayList
-import android.widget.FrameLayout
-import com.app.l_pesa.common.CommonEditTextRegular
-import com.app.l_pesa.main.MainActivity
+import java.util.*
 
 
 class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {

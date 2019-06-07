@@ -1,8 +1,6 @@
 package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
@@ -13,8 +11,6 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -29,7 +25,6 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_transfer_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 

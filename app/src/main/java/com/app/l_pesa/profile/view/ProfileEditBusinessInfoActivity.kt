@@ -26,10 +26,9 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterBusinessInfo
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-
 import kotlinx.android.synthetic.main.activity_profile_edit_business_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_business_info.*
-import java.util.HashMap
+import java.util.*
 
 class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallBackBusinessInfo {
 

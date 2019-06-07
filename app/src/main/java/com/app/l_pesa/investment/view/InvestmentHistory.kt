@@ -2,7 +2,6 @@ package com.app.l_pesa.investment.view
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -41,7 +40,7 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_investment_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.util.ArrayList
+import java.util.*
 
 class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus,ICallBackPopUpWindow {
 

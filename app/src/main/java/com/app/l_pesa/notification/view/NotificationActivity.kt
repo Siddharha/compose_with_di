@@ -20,7 +20,7 @@ import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.notification.presenter.PresenterNotification
 import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.content_notification.*
-import java.util.ArrayList
+import java.util.*
 
 class NotificationActivity : AppCompatActivity(), ICallBackNotification {
 

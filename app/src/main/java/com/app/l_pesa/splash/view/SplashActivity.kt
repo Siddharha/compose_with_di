@@ -1,10 +1,10 @@
 package com.app.l_pesa.splash.view
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.View
 import com.app.l_pesa.R
@@ -16,9 +16,9 @@ import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.model.ResModelData
 import com.app.l_pesa.splash.presenter.PresenterCountry
-import kotlinx.android.synthetic.main.activity_splash.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_splash.*
 
 
 class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {

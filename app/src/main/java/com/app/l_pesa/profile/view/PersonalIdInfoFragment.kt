@@ -2,7 +2,10 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.*
+import android.content.ClipData
+import android.content.ContentUris
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -21,7 +24,10 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
@@ -34,23 +40,22 @@ import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.main.MainActivity
-import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
-import com.app.l_pesa.profile.model.ResUserInfo
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
+import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.inter.ICallBackProof
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ModelWindowPopUp
+import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import java.io.File
-import java.lang.Exception
 import java.util.*
 
 

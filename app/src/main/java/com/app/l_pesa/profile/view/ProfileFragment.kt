@@ -1,7 +1,6 @@
 package com.app.l_pesa.profile.view
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -26,8 +25,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.*
-import java.lang.Exception
-import java.util.ArrayList
+import java.util.*
 
 
 class ProfileFragment: Fragment(), ICallBackUserInfo {

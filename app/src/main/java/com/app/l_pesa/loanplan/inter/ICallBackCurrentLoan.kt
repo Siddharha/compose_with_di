@@ -1,7 +1,7 @@
 package com.app.l_pesa.loanplan.inter
 
 import com.app.l_pesa.loanplan.model.ResLoanPlans
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Intellij Amiya on 21/2/19.

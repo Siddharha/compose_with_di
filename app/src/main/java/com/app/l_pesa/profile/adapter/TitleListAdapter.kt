@@ -24,9 +24,6 @@ class TitleListAdapter (val context: Context, private val titleText: ArrayList<S
             callBack.onChangeTitle(titleText[position])
         }
 
-
-
-
     }
 
     override fun getItemCount(): Int = titleText.size

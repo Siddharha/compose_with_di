@@ -1,6 +1,5 @@
 package com.app.l_pesa.lpk.view
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -9,25 +8,24 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.lpk.inter.ICallBackWalletAddress
 import com.app.l_pesa.lpk.presenter.PresenterWalletAddress
+import com.app.l_pesa.main.MainActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_wallet_address.*
-import java.util.HashMap
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.widget.TextView
-import com.app.l_pesa.main.MainActivity
-import java.lang.Exception
+import java.util.*
 
 
 class WalletAddressFragment : Fragment(), ICallBackWalletAddress {

@@ -2,10 +2,23 @@ package com.app.l_pesa.profile.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.ClipData
+import android.content.ContentUris
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.graphics.Typeface
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.DocumentsContract
+import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.FileProvider
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -14,50 +27,34 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.adapter.MaritalListAdapter
 import com.app.l_pesa.profile.adapter.TitleListAdapter
 import com.app.l_pesa.profile.inter.ICallBackMarital
-import com.app.l_pesa.profile.inter.ICallBackTitle
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.google.gson.Gson
-
-import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
-import kotlinx.android.synthetic.main.content_profile_edit_personal.*
-import android.app.DatePickerDialog
-import android.content.ClipData
-import android.content.ContentUris
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.os.Build
-import android.provider.DocumentsContract
-import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.widget.ImageView
-import android.widget.Toast
-import com.app.l_pesa.BuildConfig
-import com.app.l_pesa.common.BitmapResize
-import com.app.l_pesa.main.MainActivity
-import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
+import com.app.l_pesa.profile.inter.ICallBackTitle
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
+import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 import java.io.File
-import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 
 class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload {

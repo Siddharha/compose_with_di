@@ -1,7 +1,7 @@
 package com.app.l_pesa.notification.model
 
 import com.app.l_pesa.common.CommonStatusModel
-import java.util.ArrayList
+import java.util.*
 
 class ResNotification(val status: CommonStatusModel, val data: Data) {
 

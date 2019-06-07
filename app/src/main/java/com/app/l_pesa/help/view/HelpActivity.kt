@@ -3,9 +3,11 @@ package com.app.l_pesa.help.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
@@ -14,20 +16,16 @@ import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.help.model.HelpData
+import com.app.l_pesa.main.MainActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
-import android.content.pm.PackageManager
-import android.os.CountDownTimer
-import android.support.v7.app.AlertDialog
-import com.app.l_pesa.main.MainActivity
 
 
 class HelpActivity : AppCompatActivity() {
 
-    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,29 +38,6 @@ class HelpActivity : AppCompatActivity() {
 
     }
 
-    private fun initTimer() {
-
-        countDownTimer= object : CountDownTimer(300000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-
-            }
-            override fun onFinish() {
-
-                onSessionTimeOut(resources.getString(R.string.session_time_out))
-                countDownTimer.cancel()
-
-            }}
-        countDownTimer.start()
-
-    }
-
-
-    override fun onUserInteraction() {
-        super.onUserInteraction()
-
-        countDownTimer.cancel()
-        countDownTimer.start()
-    }
 
     fun onSessionTimeOut(message: String) {
 
@@ -213,8 +188,7 @@ class HelpActivity : AppCompatActivity() {
     }
 
     public override fun onDestroy() {
-        countDownTimer.cancel()
-        super.onDestroy()
+       super.onDestroy()
     }
 
 }

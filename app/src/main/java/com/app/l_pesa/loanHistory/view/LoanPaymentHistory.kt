@@ -18,10 +18,9 @@ import com.app.l_pesa.loanHistory.inter.ICallBackPaymentHistory
 import com.app.l_pesa.loanHistory.model.ResPaymentHistory
 import com.app.l_pesa.loanHistory.presenter.PresenterPaymentHistory
 import com.app.l_pesa.main.MainActivity
-
 import kotlinx.android.synthetic.main.activity_loan_payment_history.*
 import kotlinx.android.synthetic.main.content_loan_payment_history.*
-import java.util.ArrayList
+import java.util.*
 
 class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
 

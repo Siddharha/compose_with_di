@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
@@ -15,6 +16,8 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.wallet.adapter.TransactionAllAdapter
 import com.app.l_pesa.wallet.inter.ICallBackTransaction
 import com.app.l_pesa.wallet.model.ResWalletHistory
@@ -23,9 +26,6 @@ import kotlinx.android.synthetic.main.activity_transaction_history.*
 import kotlinx.android.synthetic.main.content_transaction_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
-import android.support.v7.app.AlertDialog
-import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.main.MainActivity
 
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {

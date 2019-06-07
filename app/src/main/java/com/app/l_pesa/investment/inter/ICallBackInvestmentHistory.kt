@@ -1,7 +1,7 @@
 package com.app.l_pesa.investment.inter
 
 import com.app.l_pesa.investment.model.ResInvestmentHistory
-import java.util.ArrayList
+import java.util.*
 
 interface ICallBackInvestmentHistory {
 

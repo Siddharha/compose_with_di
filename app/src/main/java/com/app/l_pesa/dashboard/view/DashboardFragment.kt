@@ -1,33 +1,32 @@
 package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 import com.app.l_pesa.dashboard.inter.ICallBackDashboard
+import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.presenter.PresenterDashboard
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.LinearLayout
-import com.app.l_pesa.dashboard.adapter.LoanListAdapter
-import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.loanHistory.view.LoanPaybackScheduledActivity
 import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
 import com.app.l_pesa.main.MainActivity
+import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import java.text.DecimalFormat
 
 

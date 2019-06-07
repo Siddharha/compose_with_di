@@ -1,7 +1,6 @@
 package com.app.l_pesa.profile.adapter
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,7 +12,7 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackClickBusinessId
 import com.app.l_pesa.profile.model.ResUserInfo
-import java.util.ArrayList
+import java.util.*
 
 class BusinessIdAdapter(val context: Context, private val userIdsBusinessInfo: ArrayList<ResUserInfo.UserIdsBusinessInfo>, private val callBack: ICallBackClickBusinessId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

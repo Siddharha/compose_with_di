@@ -1,24 +1,22 @@
 package com.app.l_pesa.pin.view
 
-import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import com.app.l_pesa.R
-import kotlinx.android.synthetic.main.activity_change_login_pin.*
-import android.view.MenuItem
-import kotlinx.android.synthetic.main.content_change_login_pin.*
-import android.graphics.Typeface
-import android.widget.TextView
 import android.app.Activity
 import android.content.Intent
-import android.text.TextUtils
-import android.view.ViewGroup
-import android.view.LayoutInflater
+import android.graphics.Typeface
+import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
+import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
+import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
@@ -26,6 +24,8 @@ import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackLoginPin
 import com.app.l_pesa.pin.presenter.PresenterPassword
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_change_login_pin.*
+import kotlinx.android.synthetic.main.content_change_login_pin.*
 
 
 class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {

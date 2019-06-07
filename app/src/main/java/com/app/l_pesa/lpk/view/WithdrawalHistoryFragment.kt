@@ -18,7 +18,6 @@ import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import com.app.l_pesa.lpk.presenter.PresenterWithdrawalHistory
 import kotlinx.android.synthetic.main.fragment_withdrawal_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import kotlin.collections.ArrayList
 
 
 class WithdrawalHistoryFragment:Fragment() , ICallBackWithdrawalHistory {

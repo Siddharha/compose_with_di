@@ -8,7 +8,6 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.pin.inter.ICallBackPin
 import com.app.l_pesa.pin.inter.ICallBackSetPin
-import com.google.gson.Gson
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

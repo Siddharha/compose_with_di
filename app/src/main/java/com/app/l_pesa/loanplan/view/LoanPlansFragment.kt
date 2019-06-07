@@ -1,19 +1,19 @@
 package com.app.l_pesa.loanplan.view
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.app.l_pesa.R
-import android.support.v4.view.ViewPager
-import android.support.design.widget.TabLayout
-import com.app.l_pesa.loanplan.model.LoanTabPager
-import android.graphics.Typeface
-import android.os.Handler
 import android.widget.TextView
+import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.loanplan.model.LoanTabPager
 
 
 /**

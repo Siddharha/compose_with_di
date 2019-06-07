@@ -1,7 +1,7 @@
 package com.app.l_pesa.wallet.inter
 
 import com.app.l_pesa.wallet.model.ResWalletHistory
-import java.util.ArrayList
+import java.util.*
 
 interface ICallBackTransaction {
 

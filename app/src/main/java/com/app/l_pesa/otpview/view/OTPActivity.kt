@@ -5,9 +5,19 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatTextView
+import android.text.Selection
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.OnOtpCompletionListener
@@ -21,16 +31,6 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.content_otp.*
-import android.os.CountDownTimer
-import android.support.v7.widget.AppCompatTextView
-import android.text.Selection
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.view.View
-import android.widget.Toast
 import java.util.concurrent.TimeUnit
 
 

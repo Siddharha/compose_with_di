@@ -1,9 +1,10 @@
 package com.app.l_pesa.lpk.view
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +14,10 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
+import com.app.l_pesa.main.MainActivity
 import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_lpk.*
-import android.os.Handler
-import android.support.v7.app.AlertDialog
-import com.app.l_pesa.main.MainActivity
 
 
 class LpkFragment: Fragment(), ICallBackInfoLPK {

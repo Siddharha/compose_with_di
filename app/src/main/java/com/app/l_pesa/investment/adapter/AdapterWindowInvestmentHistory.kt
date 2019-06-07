@@ -12,7 +12,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
-import java.util.ArrayList
+import java.util.*
 
 class AdapterWindowInvestmentHistory (val context: Context, private val listInvestmentHistory: ArrayList<ModelWindowHistory>, private val investmentList: ResInvestmentHistory.UserInvestment, private val callBack:ICallBackPopUpWindow) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

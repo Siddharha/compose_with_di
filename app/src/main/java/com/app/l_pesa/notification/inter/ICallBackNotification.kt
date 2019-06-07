@@ -1,7 +1,7 @@
 package com.app.l_pesa.notification.inter
 
 import com.app.l_pesa.notification.model.ResNotification
-import java.util.ArrayList
+import java.util.*
 
 interface ICallBackNotification {
 

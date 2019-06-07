@@ -37,7 +37,6 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.content_registration_step_three.*
 import java.io.File
-import java.lang.Exception
 
 
 class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {

@@ -10,16 +10,11 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationCompat
-import android.widget.Toast
 import com.app.l_pesa.R
-import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import java.util.*
-import android.os.Looper
-import android.os.Handler
 
 
 /**
@@ -39,11 +34,10 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
 
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 setupNotificationChannels()
             }
-                val sharedPrefOBJ= SharedPref(this)
-               val notificationId = Random().nextInt(60000)
+                val notificationId = Random().nextInt(60000)
                 val intent=Intent(this, NotificationActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 val pendingIntent = PendingIntent.getActivity(this, 0, intent,

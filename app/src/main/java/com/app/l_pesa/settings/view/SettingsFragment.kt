@@ -9,13 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.app.l_pesa.R
-import com.app.l_pesa.R.array.settings_item_icon_pin
-import com.app.l_pesa.R.array.settings_item_name_pin
-import com.app.l_pesa.R.array.settings_item_icon
-import com.app.l_pesa.R.array.settings_item_name
-import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.R.array.*
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.help.view.HelpActivity
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.app.l_pesa.pin.view.ChangeLoginPinActivity
 import com.app.l_pesa.pin.view.ChangePinActivity

@@ -2,7 +2,10 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.*
+import android.content.ClipData
+import android.content.ContentUris
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -39,7 +42,10 @@ import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.BusinessIdAdapter
 import com.app.l_pesa.profile.adapter.BusinessIdListAdapter
-import com.app.l_pesa.profile.inter.*
+import com.app.l_pesa.profile.inter.ICallBackClickBusinessId
+import com.app.l_pesa.profile.inter.ICallBackProof
+import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
+import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ModelWindowPopUp
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSBusinesslId
@@ -50,7 +56,6 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
-import java.lang.Exception
 import java.util.*
 
 class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
