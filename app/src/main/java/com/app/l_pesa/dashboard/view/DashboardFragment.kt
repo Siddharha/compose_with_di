@@ -55,6 +55,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     }
 
     private fun initUI() {
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
         initSeekBar()
     }
 

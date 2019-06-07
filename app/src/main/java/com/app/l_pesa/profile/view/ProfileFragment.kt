@@ -17,6 +17,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
@@ -58,6 +59,9 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     fun loadProfileInfo(shimmerStatus: Boolean)
     {
+
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
 
         val options = RequestOptions()
         options.placeholder(R.drawable.ic_user)

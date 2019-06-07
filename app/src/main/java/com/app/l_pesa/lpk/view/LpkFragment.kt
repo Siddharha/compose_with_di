@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
@@ -55,6 +56,9 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
     private fun initData()
     {
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
+
         constraintWithdrawal.setOnClickListener {
 
             if(CommonMethod.isNetworkAvailable(activity!!))

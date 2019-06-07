@@ -40,6 +40,9 @@ class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
 
     private fun initUI()
     {
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
+
         tabLayout=activity!!.findViewById(R.id.tabLayout)
         viewPager=activity!!.findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.investment_plan)))

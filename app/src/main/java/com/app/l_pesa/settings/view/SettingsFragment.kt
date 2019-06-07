@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.R.array.*
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.app.l_pesa.pin.view.ChangeLoginPinActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
@@ -53,6 +54,8 @@ class SettingsFragment : Fragment(), ICallBackListClick {
 
     private fun initData()
     {
+       (activity as DashboardActivity).visibleFilter(false)
+       (activity as DashboardActivity).visibleButton(false)
        val sharedPrefOBJ= SharedPref(activity!!)
        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
 

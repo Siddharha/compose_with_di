@@ -481,26 +481,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun navigateToFragment(fragmentToNavigate: Fragment)
     {
-            if(fragmentToNavigate is LoanPlansFragment)
-            {
-                buttonRight.text = resources.getString(R.string.history)
-                imgFilter.visibility=View.GONE
-                buttonRight.visibility=View.VISIBLE
-            }
-            else if(fragmentToNavigate is InvestmentFragment)
-            {
-                buttonRight.visibility=View.GONE
-                imgFilter.visibility=View.GONE
-
-            }
-            else
-            {
-                imgFilter.visibility=View.INVISIBLE
-                buttonRight.visibility=View.INVISIBLE
-
-            }
-
-
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
@@ -516,10 +496,25 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
         else
         {
-            imgFilter.visibility=View.INVISIBLE
+            imgFilter.visibility=View.GONE
         }
 
     }
+
+
+    fun visibleButton(isVisible:Boolean)
+    {
+        if(isVisible)
+        {
+            buttonRight.visibility=View.VISIBLE
+        }
+        else
+        {
+            buttonRight.visibility=View.GONE
+        }
+
+    }
+
 
 
 
