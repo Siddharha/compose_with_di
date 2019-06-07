@@ -92,6 +92,8 @@
 
 #AWS Proguard ends here
 
+-keepattributes Exceptions, Signature, InnerClasses
+
 -keep class com.app.l_pesa.common.** { *; }
 -keepclassmembers class com.app.l_pesa.common.** { *; }
 
