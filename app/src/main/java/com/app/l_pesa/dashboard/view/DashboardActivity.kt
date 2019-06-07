@@ -15,16 +15,21 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import android.text.Spannable
 import android.text.SpannableString
 import android.graphics.Typeface
+import android.os.CountDownTimer
+import android.os.Handler
 import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
@@ -44,18 +49,21 @@ import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.content_otp.*
+import java.util.concurrent.TimeUnit
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
 
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit var progressDialog: KProgressHUD
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        toolbar.title =resources.getString(R.string.nav_item_dashboard)
+        toolbar.title = resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
 
         initData()
@@ -64,8 +72,54 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         initFragment()
         initToggle()
         nav_view.setNavigationItemSelectedListener(this)
+        initTimer()
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(10000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
 
     }
+
+
+    override fun onUserInteraction() {
+    super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@DashboardActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@DashboardActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
+    }
+
 
    private fun initToggle()
     {
@@ -517,5 +571,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         }
 
+    }
+
+    public override fun onDestroy() {
+      countDownTimer.cancel()
+        super.onDestroy()
     }
 }

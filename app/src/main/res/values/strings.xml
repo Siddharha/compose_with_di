@@ -91,7 +91,7 @@
 
     <string name="search_result_not_found">We could not find a match!</string>
     <string name="no_result_found">We\'re sorry. We can\'t seem to find any result that match your search.</string>
-
+    <string name="session_time_out"> Your session has timed out, sign-in again to continue.</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
