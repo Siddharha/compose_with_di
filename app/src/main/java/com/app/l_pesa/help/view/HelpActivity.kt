@@ -20,10 +20,14 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
 import android.content.pm.PackageManager
-
+import android.os.CountDownTimer
+import android.support.v7.app.AlertDialog
+import com.app.l_pesa.main.MainActivity
 
 
 class HelpActivity : AppCompatActivity() {
+
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +37,50 @@ class HelpActivity : AppCompatActivity() {
         toolbarFont(this@HelpActivity)
 
         initData()
+
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+    fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@HelpActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@HelpActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@HelpActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 
@@ -162,6 +210,11 @@ class HelpActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onDestroy() {
+        countDownTimer.cancel()
+        super.onDestroy()
     }
 
 }
