@@ -105,6 +105,7 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
     }
 
     override fun onSuccessTokenWithdrawal() {
+        etToken.text!!.clear()
         dismiss()
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarSuccess(rootLayout,activity!!,resources.getString(R.string.token_withdrawal_successfully))

@@ -121,6 +121,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                 txtReason.visibility = View.GONE
                 txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                 txtStatus.text = fromHtml(context.resources.getString(R.string.status) + "<font color='#de970e'>" + " " + userWithdrawalHistory.statusTxt + "</font>")
+                txtStatus.isClickable=false
             }
             else if (userWithdrawalHistory.status == "C") {
 
