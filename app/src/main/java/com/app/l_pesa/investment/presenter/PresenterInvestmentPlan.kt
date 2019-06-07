@@ -51,13 +51,25 @@ class PresenterInvestmentPlan {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorInvestmentPlan(jsonMessage)
+                            }
 
-                        callBackOBJ.onErrorInvestmentPlan(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {

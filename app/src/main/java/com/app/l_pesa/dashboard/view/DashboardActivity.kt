@@ -206,14 +206,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val sharedPref=SharedPref(this@DashboardActivity)
         when {
             sharedPref.navigationTab==resources.getString(R.string.open_tab_loan) -> {
-                navigateToFragment(LoanPlansFragment.newInstance(),true, isVisibleFilter = false)
+                navigateToFragment(LoanPlansFragment.newInstance())
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
             sharedPref.navigationTab==resources.getString(R.string.open_tab_profile) -> {
-                navigateToFragment(ProfileFragment.newInstance(),false, isVisibleFilter = false)
+                navigateToFragment(ProfileFragment.newInstance())
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
-            else -> navigateToFragment(DashboardFragment.newInstance(),false, isVisibleFilter = false)
+            else -> navigateToFragment(DashboardFragment.newInstance())
         }
 
 
@@ -331,7 +331,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_dashboard)
-                    navigateToFragment(DashboardFragment.newInstance(),false,isVisibleFilter = false)
+                    navigateToFragment(DashboardFragment.newInstance())
                 }
 
             }
@@ -343,7 +343,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_profile)
-                    navigateToFragment(ProfileFragment.newInstance(),false, isVisibleFilter = false)
+                    navigateToFragment(ProfileFragment.newInstance())
                 }
 
             }
@@ -356,7 +356,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     val sharedPref= SharedPref(this@DashboardActivity)
                     sharedPref.openTabLoan="CURRENT"
                     toolbar.title =resources.getString(R.string.nav_item_loan)
-                    navigateToFragment(LoanPlansFragment.newInstance(),false, isVisibleFilter = false)
+                    navigateToFragment(LoanPlansFragment.newInstance())
                 }
 
             }
@@ -367,7 +367,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_points)
-                    navigateToFragment(PointsFragment.newInstance(),false, isVisibleFilter = false)
+                    navigateToFragment(PointsFragment.newInstance())
                 }
 
             }
@@ -378,7 +378,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_investment)
-                    navigateToFragment(InvestmentFragment.newInstance(),false, isVisibleFilter = true)
+                    navigateToFragment(InvestmentFragment.newInstance())
                 }
 
 
@@ -390,7 +390,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_lpk)
-                    navigateToFragment(LpkFragment.newInstance(),false, isVisibleFilter = false)
+                    navigateToFragment(LpkFragment.newInstance())
                 }
 
 
@@ -402,7 +402,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_wallet)
-                    navigateToFragment(WalletFragment.newInstance(),false, isVisibleFilter = false)
+                    navigateToFragment(WalletFragment.newInstance())
                 }
 
 
@@ -414,7 +414,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_settings)
-                    navigateToFragment(SettingsFragment.newInstance(),false, isVisibleFilter = false)
+                    navigateToFragment(SettingsFragment.newInstance())
                 }
 
             }
@@ -479,10 +479,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         finish()
     }
 
-    private fun navigateToFragment(fragmentToNavigate: Fragment,isVisible:Boolean,isVisibleFilter:Boolean)
+    private fun navigateToFragment(fragmentToNavigate: Fragment)
     {
-        if(isVisible && !isVisibleFilter)
-        {
             if(fragmentToNavigate is LoanPlansFragment)
             {
                 buttonRight.text = resources.getString(R.string.history)
@@ -491,9 +489,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
             else if(fragmentToNavigate is InvestmentFragment)
             {
-                buttonRight.setBackgroundResource(R.drawable.ic_filter)
+                buttonRight.visibility=View.GONE
                 imgFilter.visibility=View.GONE
-                buttonRight.visibility=View.VISIBLE
+
             }
             else
             {
@@ -502,17 +500,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             }
 
-        }
-        else if(!isVisible && isVisibleFilter)
-        {
-            buttonRight.visibility=View.GONE
-            imgFilter.visibility=View.INVISIBLE
-        }
-        else
-        {
-            imgFilter.visibility=View.INVISIBLE
-            buttonRight.visibility=View.INVISIBLE
-        }
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
