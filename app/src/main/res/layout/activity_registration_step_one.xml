@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_40sdp"
     android:id="@+id/ll_root"
+    android:background="@color/colorWhite"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <ImageView

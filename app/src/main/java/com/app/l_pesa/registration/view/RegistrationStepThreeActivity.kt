@@ -41,7 +41,7 @@ import java.io.File
 
 class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {
 
-    private lateinit              var progressDialog: KProgressHUD
+    private lateinit     var progressDialog: KProgressHUD
     private val idList   = arrayListOf("1","2","3","4")
     private val nameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
     private var typeId="0"

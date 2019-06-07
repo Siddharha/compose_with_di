@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/rootLayout"
     android:padding="@dimen/_40sdp"
+    android:background="@color/colorWhite"
     >
 
     <TextView

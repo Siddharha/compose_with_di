@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:id="@+id/ll_root"
     android:layout_height="match_parent"
-    android:padding="@dimen/_40sdp">
+    android:padding="@dimen/_40sdp"
+    android:background="@color/colorWhite">
 
     <ImageView
         android:id="@+id/imageView"
