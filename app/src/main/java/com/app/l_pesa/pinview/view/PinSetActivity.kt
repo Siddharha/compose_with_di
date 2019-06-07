@@ -79,7 +79,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
         pass_code_view.setOnTextChangeListener {
 
-            if(pass_code_view.passCodeText.length>5)
+            if(it.length==6)
             {
                 if(CommonMethod.isNetworkAvailable(this@PinSetActivity))
                 {
@@ -114,7 +114,8 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
                     val presenterPinSet= PresenterPinSet()
                     presenterPinSet.dosetPin(this@PinSetActivity,jsonObject,this)
-                }
+
+                 }
                 else
                 {
                     CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,resources.getString(R.string.no_internet))
@@ -144,9 +145,9 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
     override fun onErrorPinSet(message: String) {
 
-        pass_code_view.setError(true)
         dismiss()
-        CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,message)
+        pass_code_view.setError(true)
+        Toast.makeText(this@PinSetActivity,message,Toast.LENGTH_SHORT).show()
     }
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
@@ -194,6 +195,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
         val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
 
     }
 
