@@ -49,10 +49,10 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     {
         buttonSubmit.setOnClickListener {
 
-            if(TextUtils.isEmpty(etCurrentPassword.text.toString()))
+            if(TextUtils.isEmpty(etCurrentPin.text.toString()))
             {
                hideKeyboardView(this@ChangePinActivity)
-               CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,resources.getString(R.string.required_password))
+               CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,resources.getString(R.string.required_pin_code))
             }
             else if(etNewPin.text.toString().length!=6)
             {
@@ -77,7 +77,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
                     hideKeyboardView(this@ChangePinActivity)
                     swipeRefreshLayout.isRefreshing=true
                     val jsonObject = JsonObject()
-                    jsonObject.addProperty("old_password",etCurrentPassword.text.toString())
+                    jsonObject.addProperty("old_password",etCurrentPin.text.toString())
                     jsonObject.addProperty("new_pin",etNewPin.text.toString())
                     jsonObject.addProperty("new_c_pin",etConfirmNewPin.text.toString())
 

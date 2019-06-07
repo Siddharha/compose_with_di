@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screenBackground"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    >
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -38,12 +38,12 @@
                 app:passwordToggleEnabled="true">
 
                 <com.app.l_pesa.common.CommonEditTextRegular
-                    android:id="@+id/etCurrentPassword"
+                    android:id="@+id/etCurrentPin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/current_login_pin"
-                    android:inputType="textPassword"
-                    android:maxLength="14"
+                    android:inputType="numberSigned"
+                    android:maxLength="6"
                     android:maxLines="1"
                     android:textSize="@dimen/_13sdp"
                     app:autoSizeMaxTextSize="@dimen/_14sdp"
