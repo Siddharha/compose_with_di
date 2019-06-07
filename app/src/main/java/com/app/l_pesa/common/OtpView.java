@@ -127,7 +127,7 @@ public class OtpView extends AppCompatEditText {
         setTextIsSelectable(false);
     }
 
-    @Override
+   /* @Override
     public void setTypeface(Typeface tf, int style) {
         super.setTypeface(tf, style);
     }
@@ -136,7 +136,7 @@ public class OtpView extends AppCompatEditText {
     public void setTypeface(Typeface tf) {
         super.setTypeface(tf);
         animatorTextPaint.set(getPaint());
-    }
+    }*/
 
     private void setMaxLength(int maxLength) {
         setFilters(
