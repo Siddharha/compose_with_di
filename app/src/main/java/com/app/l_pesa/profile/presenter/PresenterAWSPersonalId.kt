@@ -62,8 +62,7 @@ class PresenterAWSPersonalId {
             override fun onStateChanged(id: Int, state: TransferState) {
                 if (TransferState.COMPLETED == state)
                 {
-                    val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
-                    println("AWS_URL"+url)
+                   // val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
                     callBack.onSuccessUploadAWS(uploadObserver.key)
                 }
 

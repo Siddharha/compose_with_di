@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support:support-core-utils:28.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8037e3b6b7c117ebaa4ce287ace15fb/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8037e3b6b7c117ebaa4ce287ace15fb/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/89755c4eadbf5c28b2c25c569d23f771/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/89755c4eadbf5c28b2c25c569d23f771/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

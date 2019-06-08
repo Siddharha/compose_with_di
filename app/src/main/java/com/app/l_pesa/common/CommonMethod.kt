@@ -39,21 +39,6 @@ object CommonMethod {
 
     @SuppressLint("SimpleDateFormat")
     fun dateConvert(inputDate:String): String? {
-
-       /* if(inputDate.contentEquals(":")) // Have Date Time
-        {
-            return if(!TextUtils.isEmpty(inputDate))
-            {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy HH:mm:ss") //05/04/2019 06:46:13
-                val date         = inputFormat.parse(inputDate)
-
-                val outputFormat = SimpleDateFormat("MMMM dd, yyyy HH:mm:ss")
-                outputFormat.format(date)
-            }
-            else ""
-        }
-        else
-        {*/
             return if(!TextUtils.isEmpty(inputDate))
             {
                 val inputFormat  = SimpleDateFormat("dd/MM/yyyy")
@@ -63,8 +48,6 @@ object CommonMethod {
                 outputFormat.format(date)
             }
             else ""
-
-
 
     }
 
@@ -80,24 +63,6 @@ object CommonMethod {
             outputFormat.format(date)
         }
         else ""
-
-
-
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun dateTimeConvert(inputDate:String): String? {
-
-         return if(!TextUtils.isEmpty(inputDate))
-            {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy HH:mm:ss") //05/04/2019 06:46:13
-                val date         = inputFormat.parse(inputDate)
-
-                val outputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm:ss")
-                outputFormat.format(date)
-            }
-            else ""
-
 
     }
 
@@ -196,34 +161,5 @@ object CommonMethod {
         }
 
     }
-
-    fun countNumeric(number: String): Int {
-        var flag = 0
-        for (i in 0 until number.length) {
-            if (Character.isDigit(number[i])) {
-                flag++
-            }
-        }
-        return flag
-    }
-
-    fun hasSymbol(data: CharSequence): Boolean {
-        val password = data.toString()
-        return !password.matches("[A-Za-z0-9 ]*".toRegex())
-    }
-
-    fun hasUpperCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toLowerCase()
-    }
-
-    fun hasLowerCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toUpperCase()
-    }
-
-
-
-
 
 }

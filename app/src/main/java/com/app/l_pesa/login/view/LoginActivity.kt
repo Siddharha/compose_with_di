@@ -303,6 +303,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
+               // println("JSON"+jsonObject)
+
             }
             else
             {

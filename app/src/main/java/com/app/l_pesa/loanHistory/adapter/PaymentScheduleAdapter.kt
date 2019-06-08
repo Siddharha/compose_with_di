@@ -23,7 +23,7 @@ import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import java.text.DecimalFormat
 
 
-class PaymentScheduleAdapter(val context: Context, var alScheduleOBJ: ArrayList<ResPaybackSchedule.Schedule>, var loanInfo: ResPaybackSchedule.LoanInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: ArrayList<ResPaybackSchedule.Schedule>, private var loanInfo: ResPaybackSchedule.LoanInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")

@@ -218,7 +218,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     }
 
-    private fun loadMore(from_date: String, to_date: String)
+   /* private fun loadMore(from_date: String, to_date: String)
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
@@ -235,7 +235,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,resources.getString(R.string.no_internet))
         }
-    }
+    }*/
 
     override fun onSuccessWalletWithdrawalHistoryPaginate(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors,from_date: String, to_date: String) {
 
