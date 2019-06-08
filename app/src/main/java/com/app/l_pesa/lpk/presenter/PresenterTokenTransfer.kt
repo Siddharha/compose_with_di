@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,6 +15,7 @@ import retrofit2.HttpException
 
 class PresenterTokenTransfer {
 
+    @SuppressLint("CheckResult")
     fun doTokenTransfer(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackTokenTransfer)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -48,7 +50,7 @@ class PresenterTokenTransfer {
                     {
                         val errorVal              = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
 

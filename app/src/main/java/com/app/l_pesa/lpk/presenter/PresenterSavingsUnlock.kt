@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,6 +15,7 @@ import retrofit2.HttpException
 
 class PresenterSavingsUnlock {
 
+    @SuppressLint("CheckResult")
     fun doSavingsUnlock(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackTransferHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -49,7 +51,7 @@ class PresenterSavingsUnlock {
                         val errorVal       = error as HttpException
                         if(errorVal.code()>=400)
                         {
-                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
                             val  jsonStatus      =    jsonError.getJSONObject("status")
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")

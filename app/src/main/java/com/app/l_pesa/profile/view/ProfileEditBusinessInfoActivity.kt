@@ -9,8 +9,6 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.*
 import android.widget.TextView
@@ -18,7 +16,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.adapter.IdListAdapter
 import com.app.l_pesa.profile.inter.ICallBackBusinessInfo
 import com.app.l_pesa.profile.inter.ICallBackId

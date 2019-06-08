@@ -3,9 +3,7 @@ package com.app.l_pesa.investment.view
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,7 @@ import com.app.l_pesa.investment.adapter.InvestmentPlanAdapter
 import com.app.l_pesa.investment.inter.ICallBackInvestmentPlan
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterInvestmentPlan
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.text.DecimalFormat

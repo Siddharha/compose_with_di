@@ -8,7 +8,6 @@ import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
@@ -17,7 +16,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.wallet.adapter.WalletHistoryAdapter
 import com.app.l_pesa.wallet.inter.ICallBackWalletWithdrawalHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory

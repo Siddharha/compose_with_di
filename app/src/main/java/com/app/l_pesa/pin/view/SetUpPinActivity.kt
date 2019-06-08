@@ -15,7 +15,7 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.hideKeyboardView
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackSetPin
 import com.app.l_pesa.pin.presenter.PresenterPin
 import com.app.l_pesa.pinview.model.LoginData

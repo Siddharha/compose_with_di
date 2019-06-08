@@ -22,11 +22,11 @@ import kotlinx.android.synthetic.main.fragment_token_withdrawal.*
 import java.text.DecimalFormat
 
 
-class TokenWithdrawalFragment: androidx.fragment.app.Fragment(), ICallBackTokenWithdrawal {
+class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
 
     private lateinit  var progressDialog: KProgressHUD
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return TokenWithdrawalFragment()
         }
     }

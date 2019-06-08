@@ -58,7 +58,7 @@ class PresenterLoanHistory {
                         val errorVal         =    error as HttpException
                         if(errorVal.code()>=400)
                         {
-                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
                             val  jsonStatus      =    jsonError.getJSONObject("status")
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")
@@ -125,7 +125,7 @@ class PresenterLoanHistory {
                     {
                         val errorVal            = error as HttpException
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus         =    jsonError.getJSONObject("status")
                         val jsonMessage         =    jsonStatus.getString("message")
 
@@ -178,7 +178,7 @@ class PresenterLoanHistory {
                     {
                         val errorVal            = error as HttpException
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus         =    jsonError.getJSONObject("status")
                         val jsonMessage         =    jsonStatus.getString("message")
 
@@ -231,7 +231,7 @@ class PresenterLoanHistory {
                     {
                         val errorVal            = error as HttpException
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus         =    jsonError.getJSONObject("status")
                         val jsonMessage         =    jsonStatus.getString("message")
 
@@ -281,7 +281,7 @@ class PresenterLoanHistory {
                         val errorVal         =    error as HttpException
                         if(errorVal.code()>=400)
                         {
-                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
                             val  jsonStatus      =    jsonError.getJSONObject("status")
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")
@@ -341,13 +341,25 @@ class PresenterLoanHistory {
                     error ->
                     try
                     {
-                        val errorVal            = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus         =    jsonError.getJSONObject("status")
-                        val jsonMessage         =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackCurrentOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackCurrentOBJ.onFailureRemoveLoan(jsonMessage)
+                            }
 
-                        callBackCurrentOBJ.onFailureRemoveLoan(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {

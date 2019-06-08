@@ -16,8 +16,6 @@ import androidx.core.app.ActivityCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.telephony.TelephonyManager
 import android.text.*
 import android.text.method.LinkMovementMethod
@@ -37,7 +35,7 @@ import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.login.model.PinData
 import com.app.l_pesa.login.presenter.PresenterLogin
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.otpview.view.OTPActivity
 import com.app.l_pesa.pin.view.ForgotPinActivity
 import com.app.l_pesa.pinview.view.PinSetActivity

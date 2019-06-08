@@ -24,7 +24,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.method.MovementMethod;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -603,8 +602,8 @@ public class OtpView extends AppCompatEditText {
     }
 
     @Override
-    protected MovementMethod getDefaultMovementMethod() {
-        return DefaultMovementMethod.getInstance();
+    protected android.text.method.MovementMethod getDefaultMovementMethod() {
+        return MovementMethod.getInstance();
     }
 
     /**

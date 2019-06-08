@@ -1,5 +1,6 @@
 package com.app.l_pesa.profile.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,6 +15,7 @@ import retrofit2.HttpException
 
 class PresenterBusinessInfo {
 
+    @SuppressLint("CheckResult")
     fun doChangeBusinessInfo(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackBusinessInfo) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -44,7 +46,7 @@ class PresenterBusinessInfo {
                         val errorVal         =    error as HttpException
                         if(errorVal.code()>=400)
                         {
-                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
                             val  jsonStatus      =    jsonError.getJSONObject("status")
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")

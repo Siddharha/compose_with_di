@@ -8,8 +8,6 @@ import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.Window
@@ -21,7 +19,7 @@ import com.app.l_pesa.investment.adapter.LoanPlanListAdapter
 import com.app.l_pesa.investment.inter.ICallBackLoanPlanList
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterApplyInvestment
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_investment_apply.*

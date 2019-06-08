@@ -9,7 +9,6 @@ import android.os.CountDownTimer
 import android.provider.Settings
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
@@ -33,7 +32,7 @@ import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.lpk.view.LpkFragment
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.points.view.PointsFragment
 import com.app.l_pesa.profile.view.ProfileFragment

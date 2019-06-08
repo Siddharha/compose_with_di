@@ -22,14 +22,14 @@ import com.app.l_pesa.loanplan.model.LoanTabPager
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class LoanPlansFragment : androidx.fragment.app.Fragment(), TabLayout.OnTabSelectedListener {
+class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: androidx.viewpager.widget.ViewPager? = null
+    private var viewPager: ViewPager? = null
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return LoanPlansFragment()
         }
     }

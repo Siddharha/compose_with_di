@@ -2,12 +2,11 @@ package com.app.l_pesa.loanplan.view
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -18,7 +17,7 @@ import com.app.l_pesa.loanplan.inter.ICallBackCurrentLoan
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.*
@@ -80,7 +79,6 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
         rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
         val currentLoanAdapter = CurrentLoanPlanAdapter(activity!!, item, appliedProduct!!, this)
-        rvLoan.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter = currentLoanAdapter
     }
 

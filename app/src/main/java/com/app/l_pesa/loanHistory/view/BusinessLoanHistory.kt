@@ -24,6 +24,7 @@ import com.app.l_pesa.loanHistory.adapter.BusinessLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
+import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
@@ -41,7 +42,7 @@ class BusinessLoanHistory: androidx.fragment.app.Fragment(), ICallBackBusinessLo
     private var after=""
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return BusinessLoanHistory()
         }
     }
@@ -134,8 +135,7 @@ class BusinessLoanHistory: androidx.fragment.app.Fragment(), ICallBackBusinessLo
             listLoanHistoryBusiness!!.clear()
             listLoanHistoryBusiness!!.addAll(loan_historyBusiness)
             adapterLoanHistory          = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
-            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
-            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ                  = LinearLayoutManager(activity)
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterLoanHistory
 
@@ -373,6 +373,26 @@ class BusinessLoanHistory: androidx.fragment.app.Fragment(), ICallBackBusinessLo
     override fun onFailureRemoveLoan(message: String) {
         dismissDialog()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 }

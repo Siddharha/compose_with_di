@@ -1,4 +1,4 @@
-package com.app.l_pesa.main
+package com.app.l_pesa.main.view
 
 import android.Manifest
 import android.content.Intent

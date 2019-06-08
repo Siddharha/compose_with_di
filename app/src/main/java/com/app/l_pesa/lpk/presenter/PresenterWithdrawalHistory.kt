@@ -56,7 +56,7 @@ class PresenterWithdrawalHistory {
                     {
                         val errorVal              = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
 

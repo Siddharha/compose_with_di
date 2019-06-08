@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_withdrawal_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 
 
-class WithdrawalHistoryFragment: androidx.fragment.app.Fragment() , ICallBackWithdrawalHistory {
+class WithdrawalHistoryFragment: Fragment() , ICallBackWithdrawalHistory {
 
 
     private lateinit var listWithdrawalHistory                      : ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>
@@ -30,7 +30,7 @@ class WithdrawalHistoryFragment: androidx.fragment.app.Fragment() , ICallBackWit
     private var after=""
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return WithdrawalHistoryFragment()
         }
     }
@@ -180,8 +180,7 @@ class WithdrawalHistoryFragment: androidx.fragment.app.Fragment() , ICallBackWit
             listWithdrawalHistory.clear()
             listWithdrawalHistory.addAll(userWithdrawalHistory)
             adapterWithdrawalHistory = AdapterWithdrawalHistory(activity!!, listWithdrawalHistory)
-            val llmOBJ = androidx.recyclerview.widget.LinearLayoutManager(activity)
-            llmOBJ.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ = LinearLayoutManager(activity)
             rlList.layoutManager = llmOBJ
             rlList.adapter = adapterWithdrawalHistory
 

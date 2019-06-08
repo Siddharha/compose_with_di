@@ -14,7 +14,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.hideKeyboardView
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackPin
 import com.app.l_pesa.pin.presenter.PresenterPin
 import com.google.gson.JsonObject

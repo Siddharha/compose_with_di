@@ -129,7 +129,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="true"
         android:background="@android:color/white"
-        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <include
 

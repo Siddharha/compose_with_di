@@ -22,7 +22,7 @@ import com.app.l_pesa.help.inter.ICallBackHelp
 import com.app.l_pesa.help.model.HelpData
 import com.app.l_pesa.help.presenter.PresenterHelp
 import com.app.l_pesa.login.view.LoginActivity
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.pinview.inter.ICallBackPinSet
 import com.app.l_pesa.pinview.model.LoginData

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
@@ -17,11 +16,10 @@ import com.app.l_pesa.lpk.adapter.SavingsTabAdapter
 import kotlinx.android.synthetic.main.activity_lpk_savings.*
 
 
-
 class LPKSavingsActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: androidx.viewpager.widget.ViewPager? = null
+    private var viewPager: ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

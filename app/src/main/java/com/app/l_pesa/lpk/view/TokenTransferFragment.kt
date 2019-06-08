@@ -20,11 +20,11 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_token_transfer.*
 import java.text.DecimalFormat
 
-class TokenTransferFragment : androidx.fragment.app.Fragment(), ICallBackTokenTransfer {
+class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
 
     private lateinit  var progressDialog: KProgressHUD
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return TokenTransferFragment()
         }
     }

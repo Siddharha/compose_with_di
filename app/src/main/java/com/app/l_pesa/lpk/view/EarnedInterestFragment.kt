@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_interest_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 
-class EarnedInterestFragment : androidx.fragment.app.Fragment(), ICallBackInterestHistory {
+class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
     private lateinit var listInterestHistory           : ArrayList<ResInterestHistory.UserInterestHistory>
     private lateinit var adapterInterestHistory        : AdapterInterestHistory
@@ -30,7 +30,7 @@ class EarnedInterestFragment : androidx.fragment.app.Fragment(), ICallBackIntere
     private var after=""
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return EarnedInterestFragment()
         }
     }
@@ -184,8 +184,7 @@ class EarnedInterestFragment : androidx.fragment.app.Fragment(), ICallBackIntere
             listInterestHistory.clear()
             listInterestHistory.addAll(userInterestHistory!!)
             adapterInterestHistory      = AdapterInterestHistory(activity!!, listInterestHistory)
-            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
-            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ                  = LinearLayoutManager(activity)
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterInterestHistory
 

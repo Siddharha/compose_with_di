@@ -49,7 +49,7 @@ class PresenterApplyInvestment {
                         val errorVal         =    error as HttpException
                         if(errorVal.code()>=400)
                         {
-                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
                             val  jsonStatus      =    jsonError.getJSONObject("status")
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")
@@ -109,7 +109,7 @@ class PresenterApplyInvestment {
                         val errorVal         =    error as HttpException
                         if(errorVal.code()>=400)
                         {
-                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
                             val  jsonStatus      =    jsonError.getJSONObject("status")
                             val jsonMessage      =    jsonStatus.getString("message")
                             val jsonStatusCode   =    jsonStatus.getInt("statusCode")
