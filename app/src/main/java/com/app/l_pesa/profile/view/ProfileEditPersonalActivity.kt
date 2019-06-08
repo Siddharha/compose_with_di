@@ -388,7 +388,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
         captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
-        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {

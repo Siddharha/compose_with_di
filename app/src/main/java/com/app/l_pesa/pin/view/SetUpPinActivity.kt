@@ -166,7 +166,7 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
                 }
                 else
                 {
-                    CommonMethod.hideKeyboardView(this@SetUpPinActivity)
+                    hideKeyboardView(this@SetUpPinActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 }
