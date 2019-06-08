@@ -3,9 +3,9 @@ package com.app.l_pesa.investment.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,11 +23,11 @@ import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.text.DecimalFormat
 
 
-class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
+class InvestmentPlan: androidx.fragment.app.Fragment(), ICallBackInvestmentPlan {
 
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return InvestmentPlan()
         }
     }
@@ -75,7 +75,7 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
         swipeRefreshLayout.isRefreshing    = false
         val investmentPlanAdapter          = InvestmentPlanAdapter(activity!!, data.investmentPlans!!,this)
-        rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        rvLoan.layoutManager               = androidx.recyclerview.widget.LinearLayoutManager(activity!!, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter                     = investmentPlanAdapter
 
         val format = DecimalFormat()

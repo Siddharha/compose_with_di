@@ -2,9 +2,9 @@ package com.app.l_pesa.investment.view
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,14 +15,14 @@ import com.app.l_pesa.investment.adapter.InvestmentTabPager
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
+class InvestmentFragment : androidx.fragment.app.Fragment(), TabLayout.OnTabSelectedListener {
 
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+    private var viewPager: androidx.viewpager.widget.ViewPager? = null
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return InvestmentFragment()
         }
     }
@@ -73,7 +73,7 @@ class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
             (activity as DashboardActivity).visibleFilter(true)
             (activity as DashboardActivity).imgFilter.setOnClickListener {
 
-                val fragment = viewPager!!.adapter!!.instantiateItem(viewPager!!, 1) as Fragment
+                val fragment = viewPager!!.adapter!!.instantiateItem(viewPager!!, 1) as androidx.fragment.app.Fragment
                 if (fragment is InvestmentHistory) {
                     fragment.doFilter()
 

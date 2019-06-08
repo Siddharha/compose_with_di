@@ -2,9 +2,9 @@ package com.app.l_pesa.loanplan.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +29,10 @@ import java.util.*
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class BusinessLoan:Fragment(), ICallBackBusinessLoan {
+class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return BusinessLoan()
         }
     }
@@ -81,7 +81,7 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
         rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
         val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, item,appliedProduct!!,this)
-        rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        rvLoan.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(activity!!, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         rvLoan.adapter           = businessLoanAdapter
     }
 

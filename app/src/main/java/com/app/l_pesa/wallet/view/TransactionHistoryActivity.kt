@@ -5,10 +5,10 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
@@ -104,8 +104,8 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
             listSavingsHistory.clear()
             listSavingsHistory.addAll(savingsHistory)
             adapterTransactionHistory   = TransactionAllAdapter(this@TransactionHistoryActivity, listSavingsHistory)
-            val llmOBJ                  = LinearLayoutManager(this@TransactionHistoryActivity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(this@TransactionHistoryActivity)
+            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterTransactionHistory
             adapterTransactionHistory.notifyDataSetChanged()

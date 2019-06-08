@@ -2,8 +2,8 @@ package com.app.l_pesa.investment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +14,10 @@ import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
 import java.util.*
 
-class AdapterWindowInvestmentHistory (val context: Context, private val listInvestmentHistory: ArrayList<ModelWindowHistory>, private val investmentList: ResInvestmentHistory.UserInvestment, private val callBack:ICallBackPopUpWindow) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterWindowInvestmentHistory (val context: Context, private val listInvestmentHistory: ArrayList<ModelWindowHistory>, private val investmentList: ResInvestmentHistory.UserInvestment, private val callBack:ICallBackPopUpWindow) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
 
         val viewHolder = holder as SelectViewHolder
@@ -32,9 +32,9 @@ class AdapterWindowInvestmentHistory (val context: Context, private val listInve
 
     override fun getItemCount(): Int = listInvestmentHistory.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_popup_window_investment, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -42,10 +42,10 @@ class AdapterWindowInvestmentHistory (val context: Context, private val listInve
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
             var tvName      : TextView          = itemView.findViewById(R.id.txtData)
-            var rootLayout  : ConstraintLayout  = itemView.findViewById(R.id.rootLayout)
+            var rootLayout  : ConstraintLayout = itemView.findViewById(R.id.rootLayout)
 
         }
 

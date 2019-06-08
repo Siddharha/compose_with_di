@@ -3,13 +3,13 @@ package com.app.l_pesa.loanHistory.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.TextInputLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.textfield.TextInputLayout
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +33,7 @@ import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 
 
-class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
+class CurrentLoanHistory: androidx.fragment.app.Fragment(), ICallBackCurrentLoanHistory {
 
 
     private lateinit  var progressDialog: KProgressHUD
@@ -45,7 +45,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     private var after=""
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return CurrentLoanHistory()
         }
     }
@@ -221,8 +221,8 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
             listLoanHistoryCurrent!!.clear()
             listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
             adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
-            val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
+            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterLoanHistory
 

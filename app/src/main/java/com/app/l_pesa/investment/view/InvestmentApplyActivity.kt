@@ -6,10 +6,10 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.Window
@@ -126,9 +126,9 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         val dialog= Dialog(this@InvestmentApplyActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_id_type)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
         val loanPlanAdapter             = LoanPlanListAdapter(this@InvestmentApplyActivity, loanPlanData.investmentPlans!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@InvestmentApplyActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@InvestmentApplyActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = loanPlanAdapter
         dialog.show()
 

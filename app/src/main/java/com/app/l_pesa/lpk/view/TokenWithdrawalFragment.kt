@@ -2,8 +2,8 @@ package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +22,11 @@ import kotlinx.android.synthetic.main.fragment_token_withdrawal.*
 import java.text.DecimalFormat
 
 
-class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
+class TokenWithdrawalFragment: androidx.fragment.app.Fragment(), ICallBackTokenWithdrawal {
 
     private lateinit  var progressDialog: KProgressHUD
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return TokenWithdrawalFragment()
         }
     }

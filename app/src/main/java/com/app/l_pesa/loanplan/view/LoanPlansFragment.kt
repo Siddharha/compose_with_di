@@ -3,9 +3,9 @@ package com.app.l_pesa.loanplan.view
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,14 +22,14 @@ import com.app.l_pesa.loanplan.model.LoanTabPager
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
+class LoanPlansFragment : androidx.fragment.app.Fragment(), TabLayout.OnTabSelectedListener {
 
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+    private var viewPager: androidx.viewpager.widget.ViewPager? = null
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return LoanPlansFragment()
         }
     }
@@ -54,7 +54,7 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.personal_loan_plans)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.business_loan_plans)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-        tabLayout!!.tabMode=TabLayout.MODE_FIXED
+        tabLayout!!.tabMode= TabLayout.MODE_FIXED
 
         val adapter = LoanTabPager(childFragmentManager, tabLayout!!.tabCount)
         viewPager!!.adapter = adapter

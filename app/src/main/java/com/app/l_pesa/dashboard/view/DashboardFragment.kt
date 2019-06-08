@@ -3,9 +3,9 @@ package com.app.l_pesa.dashboard.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,13 +30,13 @@ import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import java.text.DecimalFormat
 
 
-class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
+class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
 
 
    private lateinit  var progressDialog: KProgressHUD
 
    companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return DashboardFragment()
         }
     }
@@ -146,7 +146,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         }
 
             if (dashBoard.loans!!.size > 0) {
-                loan_list.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+                loan_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
                 val adapterDashBoard = LoanListAdapter(dashBoard.loans!!,dashBoard, activity, rootLayout, this)
                 loan_list.adapter = adapterDashBoard
                 adapterDashBoard.notifyDataSetChanged()

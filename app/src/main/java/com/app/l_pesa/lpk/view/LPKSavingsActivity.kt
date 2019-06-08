@@ -3,10 +3,10 @@ package com.app.l_pesa.lpk.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +18,10 @@ import kotlinx.android.synthetic.main.activity_lpk_savings.*
 
 
 
-class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
+class LPKSavingsActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+    private var viewPager: androidx.viewpager.widget.ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +53,7 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
 
             if(viewPager!!.currentItem==1)
             {
-                val fragment = adapter.instantiateItem(viewPager!!, 1) as Fragment
+                val fragment = adapter.instantiateItem(viewPager!!, 1) as androidx.fragment.app.Fragment
                 if (fragment is TransferHistoryFragment) {
                     fragment.doFilter()
 
@@ -62,7 +62,7 @@ class LPKSavingsActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
 
             else if(viewPager!!.currentItem==2)
             {
-                val fragment = adapter.instantiateItem(viewPager!!, 2) as Fragment
+                val fragment = adapter.instantiateItem(viewPager!!, 2) as androidx.fragment.app.Fragment
                 if (fragment is EarnedInterestFragment) {
                     fragment.doFilter()
 

@@ -3,10 +3,10 @@ package com.app.l_pesa.lpk.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatTextView
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -28,13 +28,13 @@ import kotlinx.android.synthetic.main.fragment_wallet_address.*
 import java.util.*
 
 
-class WalletAddressFragment : Fragment(), ICallBackWalletAddress {
+class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletAddress {
 
     private  var address=""
     private  val hashMapOLD = HashMap<String, String>()
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return WalletAddressFragment()
         }
     }

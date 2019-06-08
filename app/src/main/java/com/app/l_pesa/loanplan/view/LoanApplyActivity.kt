@@ -10,11 +10,11 @@ import android.graphics.Typeface
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
@@ -174,9 +174,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val dialog= Dialog(this@LoanApplyActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
         val titleAdapter                = DescriptionAdapter(this@LoanApplyActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanApplyActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@LoanApplyActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }
@@ -302,7 +302,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val intent = Intent(this, LocationBackgroundService::class.java)
         startService(intent)
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this).registerReceiver(
                 object : BroadcastReceiver() {
                     override fun onReceive(context: Context, intent: Intent) {
                         lat  = intent.getStringExtra(EXTRA_LATITUDE)

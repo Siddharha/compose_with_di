@@ -12,13 +12,13 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
@@ -368,9 +368,9 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         val dialog= Dialog(this@RegistrationStepThreeActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
         val titleAdapter                = PersonalIdListAdapter(this@RegistrationStepThreeActivity, idList,nameList,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepThreeActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@RegistrationStepThreeActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }

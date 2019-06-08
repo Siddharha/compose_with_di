@@ -2,8 +2,8 @@ package com.app.l_pesa.settings.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +29,10 @@ import kotlinx.android.synthetic.main.fragment_settings.*
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class SettingsFragment : Fragment(), ICallBackListClick {
+class SettingsFragment : androidx.fragment.app.Fragment(), ICallBackListClick {
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return SettingsFragment()
         }
     }
@@ -48,7 +48,7 @@ class SettingsFragment : Fragment(), ICallBackListClick {
 
         initData()
 
-        rv_list.layoutManager = LinearLayoutManager(activity)
+        rv_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
         rv_list.adapter = SettingsAdapter(activity!!, settingsList,this)
     }
 

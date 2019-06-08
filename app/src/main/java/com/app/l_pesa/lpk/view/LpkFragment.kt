@@ -3,8 +3,8 @@ package com.app.l_pesa.lpk.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,12 +21,12 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_lpk.*
 
 
-class LpkFragment: Fragment(), ICallBackInfoLPK {
+class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
 
     private lateinit  var progressDialog: KProgressHUD
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return LpkFragment()
         }
     }

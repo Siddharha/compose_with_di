@@ -9,7 +9,7 @@ package com.app.l_pesa.dashboard.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +26,11 @@ import com.warkiz.widget.IndicatorStayLayout
 import java.text.DecimalFormat
 
 
-class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,private var dashBoard: ResDashboard.Data,private val contextOBJ: Context?,val rootLayout:LinearLayout,private val callBackObj: ICallBackListOnClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,private var dashBoard: ResDashboard.Data,private val contextOBJ: Context?,val rootLayout:LinearLayout,private val callBackObj: ICallBackListOnClick) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
 
     @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int)
     {
 
         val viewHolder = holder as SelectViewHolder
@@ -267,10 +267,10 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
     override fun getItemCount(): Int
             = al_loadOBJ.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder
     {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_dashboard_loan, parent, false)
         recyclerView = SelectViewHolder(itemView)
 
@@ -279,7 +279,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
 
     companion object
     {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
         {
 
             val imgLoan           : ImageView                       = itemView.findViewById(R.id.imgLoan)

@@ -1,8 +1,8 @@
 package com.app.l_pesa.loanplan.model
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 
 import com.app.l_pesa.loanplan.view.BusinessLoan
 import com.app.l_pesa.loanplan.view.CurrentLoan
@@ -13,10 +13,10 @@ import com.app.l_pesa.loanplan.view.CurrentLoan
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class LoanTabPager(fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
+class LoanTabPager(fm: androidx.fragment.app.FragmentManager, private var tabCount: Int): androidx.fragment.app.FragmentStatePagerAdapter(fm) {
 
     //Overriding method getItem
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment? {
         //Returning the current tabs
         return when (position) {
             0 -> {

@@ -2,7 +2,7 @@ package com.app.l_pesa.loanplan.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +14,10 @@ import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.model.ResUserInfo
 import java.util.*
 
-class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: ArrayList<ResUserInfo.UserIdsPersonalInfo>, private val callBack: ICallBackClickPersonalId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: ArrayList<ResUserInfo.UserIdsPersonalInfo>, private val callBack: ICallBackClickPersonalId) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
 
         val viewHolder = holder as SelectViewHolder
@@ -56,9 +56,9 @@ class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: A
 
     override fun getItemCount(): Int = userIdsPersonalInfo.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_id_information, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -66,7 +66,7 @@ class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: A
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
             var txtIdNumber          : TextView     = itemView.findViewById(R.id.txtIdNumber) as TextView
             var txtIdType            : TextView     = itemView.findViewById(R.id.txtIdType) as TextView

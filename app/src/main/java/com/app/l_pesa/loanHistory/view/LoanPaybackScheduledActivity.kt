@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -147,7 +147,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         {
 
             val adapterPaymentSchedule         = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.schedule!!,data.loanInfo!!)
-            rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, LinearLayoutManager.VERTICAL, false)
+            rlPayback.layoutManager            = androidx.recyclerview.widget.LinearLayoutManager(this@LoanPaybackScheduledActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
             rlPayback.adapter                  = adapterPaymentSchedule
         }
     }

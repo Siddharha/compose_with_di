@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
 import android.view.LayoutInflater
@@ -20,13 +20,13 @@ import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import java.text.DecimalFormat
 
 
-class AdapterWithdrawalHistory (val context: Context, private val listWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterWithdrawalHistory (val context: Context, private val listWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>?) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     private lateinit var loadMoreListener: OnLoadMoreListener
     private var isLoading = false
     private var isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0) {
@@ -36,7 +36,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading) {
             isLoading = true
@@ -75,7 +75,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         private var txtToken: CommonTextRegular = itemView.findViewById(R.id.txtToken) as CommonTextRegular
         private var txtCreateDate: CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
@@ -188,5 +188,5 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
 
 
-    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
 

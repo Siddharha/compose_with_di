@@ -7,8 +7,8 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.IBinder
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.LocalBroadcastManager
+import androidx.core.app.ActivityCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationListener
@@ -80,7 +80,7 @@ class LocationBackgroundService : Service(),
         val intent = Intent(ACTION_LOCATION_BROADCAST)
         intent.putExtra(EXTRA_LATITUDE, lat)
         intent.putExtra(EXTRA_LONGITUDE, lng)
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
 
     }
 

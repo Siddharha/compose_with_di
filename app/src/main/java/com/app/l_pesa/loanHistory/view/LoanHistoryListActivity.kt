@@ -4,10 +4,10 @@ import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
@@ -17,10 +17,10 @@ import com.app.l_pesa.loanHistory.model.LoanHistoryTabPager
 
 import kotlinx.android.synthetic.main.activity_loan_list_history.*
 
-class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener{
+class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener{
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+    private var viewPager: androidx.viewpager.widget.ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +69,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
 
             if(viewPager!!.currentItem==0)
             {
-                val fragment = adapter.instantiateItem(viewPager!!, 0) as Fragment
+                val fragment = adapter.instantiateItem(viewPager!!, 0) as androidx.fragment.app.Fragment
                 if (fragment is CurrentLoanHistory) {
                     fragment.doFilter()
 
@@ -77,7 +77,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
             }
             else
             {
-                val fragment = adapter.instantiateItem(viewPager!!, 1) as Fragment
+                val fragment = adapter.instantiateItem(viewPager!!, 1) as androidx.fragment.app.Fragment
                 if (fragment is BusinessLoanHistory) {
                     fragment.doFilter()
 

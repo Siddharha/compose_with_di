@@ -2,8 +2,8 @@ package com.app.l_pesa.login.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,9 +23,9 @@ import com.bumptech.glide.request.RequestOptions
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class CountryListAdapter(val context: Context,private var countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CountryListAdapter(val context: Context,private var countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
         if(countryList[position].id==0)
@@ -54,9 +54,9 @@ class CountryListAdapter(val context: Context,private var countryList: ArrayList
 
     override fun getItemCount(): Int = countryList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_country, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -65,7 +65,7 @@ class CountryListAdapter(val context: Context,private var countryList: ArrayList
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
             var txtCountry: TextView        = itemView.findViewById(R.id.txt_country_name) as TextView
             var rlRootObj : RelativeLayout  = itemView.findViewById(R.id.rlRoot) as RelativeLayout

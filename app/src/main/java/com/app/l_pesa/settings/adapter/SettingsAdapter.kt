@@ -1,7 +1,7 @@
 package com.app.l_pesa.settings.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.layout_settings_item.view.*
 
 class SettingsAdapter(private val context: Context, private val items: List<SettingsItem>, private val callBack: ICallBackListClick)
 
-    : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
+    : androidx.recyclerview.widget.RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(items[position],position,callBack)
@@ -31,7 +31,7 @@ class SettingsAdapter(private val context: Context, private val items: List<Sett
 
     override fun getItemCount(): Int = items.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         fun bindItem(items: SettingsItem,position: Int, callBack: ICallBackListClick){
             itemView.txtSetting.text = items.name
             Glide.with(itemView.context)

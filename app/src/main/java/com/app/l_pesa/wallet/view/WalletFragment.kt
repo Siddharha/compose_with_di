@@ -3,9 +3,9 @@ package com.app.l_pesa.wallet.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,13 +25,13 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
 
 
-class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
+class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
 
     private lateinit  var progressDialog: KProgressHUD
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return WalletFragment()
         }
     }

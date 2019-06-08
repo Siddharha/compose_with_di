@@ -2,8 +2,8 @@ package com.app.l_pesa.loanHistory.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +14,14 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import kotlinx.android.synthetic.main.layout_loan_history.view.*
 import java.text.DecimalFormat
 
-class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryCurrent.LoanHistory>, private val callBackCurrent: ICallBackCurrentLoanHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryCurrent.LoanHistory>, private val callBackCurrent: ICallBackCurrentLoanHistory) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -32,7 +32,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
         {
@@ -73,7 +73,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
 
 
@@ -177,6 +177,6 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
 
     }
 
-    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
 
 }

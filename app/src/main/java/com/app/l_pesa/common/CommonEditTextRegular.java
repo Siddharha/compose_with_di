@@ -2,7 +2,7 @@ package com.app.l_pesa.common;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.AttributeSet;

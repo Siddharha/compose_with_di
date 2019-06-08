@@ -7,9 +7,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextUtils
@@ -212,11 +212,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@RegistrationStepOneActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 

@@ -1,17 +1,17 @@
 package com.app.l_pesa.points.view
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.view.DashboardActivity
 
-class PointsFragment:Fragment() {
+class PointsFragment: androidx.fragment.app.Fragment() {
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return PointsFragment()
         }
     }

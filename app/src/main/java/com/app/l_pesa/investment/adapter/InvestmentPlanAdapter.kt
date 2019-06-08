@@ -3,8 +3,8 @@ package com.app.l_pesa.investment.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
 import android.view.LayoutInflater
@@ -16,10 +16,10 @@ import com.app.l_pesa.investment.inter.ICallBackInvestmentPlan
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import java.text.DecimalFormat
 
-class InvestmentPlanAdapter (val context: Context, private val investmentList: ArrayList<ResInvestmentPlan.InvestmentPlan>, private val callBack: ICallBackInvestmentPlan) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class InvestmentPlanAdapter (val context: Context, private val investmentList: ArrayList<ResInvestmentPlan.InvestmentPlan>, private val callBack: ICallBackInvestmentPlan) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
 
         val viewHolder = holder as SelectViewHolder
@@ -41,9 +41,9 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
 
     override fun getItemCount(): Int = investmentList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_investment_plan_list, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -59,13 +59,13 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
             var txtInterest          : TextView              = itemView.findViewById(R.id.txtInterest) as TextView
             var txtTitle             : TextView              = itemView.findViewById(R.id.txtTitle) as TextView
             var txtDuration          : TextView              = itemView.findViewById(R.id.txtDuration) as TextView
             var txtRate              : TextView              = itemView.findViewById(R.id.txtRate) as TextView
-            var rootLayout           : CardView              = itemView.findViewById(R.id.rootLayout) as CardView
+            var rootLayout           : androidx.cardview.widget.CardView = itemView.findViewById(R.id.rootLayout) as androidx.cardview.widget.CardView
 
 
 

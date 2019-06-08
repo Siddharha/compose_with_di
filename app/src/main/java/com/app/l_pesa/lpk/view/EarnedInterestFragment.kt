@@ -2,9 +2,9 @@ package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_interest_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 
-class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
+class EarnedInterestFragment : androidx.fragment.app.Fragment(), ICallBackInterestHistory {
 
     private lateinit var listInterestHistory           : ArrayList<ResInterestHistory.UserInterestHistory>
     private lateinit var adapterInterestHistory        : AdapterInterestHistory
@@ -30,7 +30,7 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
     private var after=""
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return EarnedInterestFragment()
         }
     }
@@ -184,8 +184,8 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
             listInterestHistory.clear()
             listInterestHistory.addAll(userInterestHistory!!)
             adapterInterestHistory      = AdapterInterestHistory(activity!!, listInterestHistory)
-            val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
+            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterInterestHistory
 

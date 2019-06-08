@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/screenBackground">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_13sdp"
@@ -15,7 +15,7 @@
         android:layout_marginRight="@dimen/_13sdp"
         app:cardCornerRadius="@dimen/_4sdp">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -136,16 +136,16 @@
 
                 />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-       <android.support.v7.widget.CardView
+       <androidx.cardview.widget.CardView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_margin="@dimen/_10sdp">
 
-           <android.support.constraint.ConstraintLayout
+           <androidx.constraintlayout.widget.ConstraintLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent">
 
@@ -188,8 +188,8 @@
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
-           </android.support.constraint.ConstraintLayout>
+           </androidx.constraintlayout.widget.ConstraintLayout>
 
-       </android.support.v7.widget.CardView>
+       </androidx.cardview.widget.CardView>
 
 </LinearLayout>

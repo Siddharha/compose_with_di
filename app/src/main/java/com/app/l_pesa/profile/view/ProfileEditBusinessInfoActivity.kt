@@ -5,12 +5,12 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.*
 import android.widget.TextView
@@ -111,9 +111,9 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         val dialog= Dialog(this@ProfileEditBusinessInfoActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
         val titleAdapter                = IdListAdapter(this@ProfileEditBusinessInfoActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditBusinessInfoActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ProfileEditBusinessInfoActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
 

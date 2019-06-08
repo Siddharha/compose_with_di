@@ -3,10 +3,10 @@ package com.app.l_pesa.lpk.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 
 
-class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
+class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTransferHistory {
 
     private lateinit var progressDialog                : KProgressHUD
     private lateinit var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>
@@ -40,7 +40,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return TransferHistoryFragment()
         }
     }
@@ -197,8 +197,8 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             listTransferHistory.clear()
             listTransferHistory.addAll(userTransferHistory)
             adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory,this)
-            val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
+            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterTransferHistory
 

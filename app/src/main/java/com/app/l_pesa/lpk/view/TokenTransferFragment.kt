@@ -2,8 +2,8 @@ package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -20,11 +20,11 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_token_transfer.*
 import java.text.DecimalFormat
 
-class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
+class TokenTransferFragment : androidx.fragment.app.Fragment(), ICallBackTokenTransfer {
 
     private lateinit  var progressDialog: KProgressHUD
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return TokenTransferFragment()
         }
     }

@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
 import android.view.LayoutInflater
@@ -23,11 +23,11 @@ import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import java.text.DecimalFormat
 
 
-class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: ArrayList<ResPaybackSchedule.Schedule>, private var loanInfo: ResPaybackSchedule.LoanInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: ArrayList<ResPaybackSchedule.Schedule>, private var loanInfo: ResPaybackSchedule.LoanInfo) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
 
@@ -130,9 +130,9 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
         return alScheduleOBJ.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
         val itemView: View = LayoutInflater.from(context).inflate(R.layout.layout_payment_schedule, parent, false)
         recyclerView = SelectViewHolder(itemView)
 
@@ -140,7 +140,7 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
 
            var  txtRepayAmount:TextView        =itemView.findViewById(R.id.txt_repay_amount) as TextView

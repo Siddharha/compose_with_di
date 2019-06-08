@@ -15,14 +15,14 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -58,7 +58,7 @@ import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
 import java.util.*
 
-class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
+class BusinessIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
@@ -77,7 +77,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private lateinit  var progressDialog: KProgressHUD
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return BusinessIdInfoFragment()
         }
     }
@@ -105,7 +105,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         {
             listBusinessId!!.addAll(profileInfo.userIdsBusinessInfo!!)
             businessIdAdapter                 = BusinessIdAdapter(activity!!,listBusinessId!!,this)
-            rvBusinessId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+            rvBusinessId.layoutManager        = androidx.recyclerview.widget.LinearLayoutManager(activity!!, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
             rvBusinessId.adapter              = businessIdAdapter
         }
 
@@ -253,9 +253,9 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
             val dialog= Dialog(activity!!)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_id_type)
-            val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+            val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
             val businessIdAdapter           = BusinessIdListAdapter(activity!!, userDashBoard.businessIdTypes!!,dialog,this)
-            recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(activity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
             recyclerView?.adapter           = businessIdAdapter
             dialog.show()
         }
@@ -333,9 +333,9 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_recyclerview, null)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
+        val recyclerView = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        recyclerView.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(recyclerView.context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
 
         val adapter = AdapterPopupWindow(activity!!)
         adapter.addAlertFilter(filterItemList)

@@ -7,11 +7,11 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextWatcher
@@ -241,11 +241,11 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@ForgotPinActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@ForgotPinActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ForgotPinActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 

@@ -6,8 +6,8 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatTextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import android.text.Selection
 import android.text.Spannable
 import android.text.SpannableString

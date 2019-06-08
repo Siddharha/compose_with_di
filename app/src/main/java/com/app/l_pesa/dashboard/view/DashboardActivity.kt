@@ -7,15 +7,15 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
-import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
@@ -479,7 +479,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         finish()
     }
 
-    private fun navigateToFragment(fragmentToNavigate: Fragment)
+    private fun navigateToFragment(fragmentToNavigate: androidx.fragment.app.Fragment)
     {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragmentToNavigate)

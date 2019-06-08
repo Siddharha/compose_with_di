@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
@@ -19,10 +19,10 @@ import com.app.l_pesa.profile.model.IdInformationTabPager
 
 import kotlinx.android.synthetic.main.activity_profile_edit_id_info.*
 
-class ProfileEditIdInfoActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener {
+class ProfileEditIdInfoActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: ViewPager? = null
+    private var viewPager: androidx.viewpager.widget.ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

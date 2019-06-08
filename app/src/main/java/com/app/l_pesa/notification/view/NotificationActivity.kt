@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -79,8 +79,8 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
             listNotificationHistory.clear()
             listNotificationHistory.addAll(notification_history)
             adapterNotification         = AdapterNotification(this@NotificationActivity, listNotificationHistory)
-            val llmOBJ                  = LinearLayoutManager(this@NotificationActivity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(this@NotificationActivity)
+            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
             rvList.layoutManager        = llmOBJ
             rvList.adapter              = adapterNotification
 

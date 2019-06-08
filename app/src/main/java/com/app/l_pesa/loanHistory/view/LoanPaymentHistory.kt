@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -72,7 +72,7 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         rlPaybackHistory.visibility=View.VISIBLE
 
         val adapterPaymentSchedule       = LoanPaymentHistoryAdapter(this@LoanPaymentHistory,paymentHistory)
-        rlPaybackHistory.layoutManager   = LinearLayoutManager(this@LoanPaymentHistory, LinearLayoutManager.VERTICAL, false)
+        rlPaybackHistory.layoutManager   = androidx.recyclerview.widget.LinearLayoutManager(this@LoanPaymentHistory, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         rlPaybackHistory.adapter         = adapterPaymentSchedule
 
     }

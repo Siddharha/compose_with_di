@@ -12,12 +12,12 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
-import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.app.ActivityCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.telephony.TelephonyManager
 import android.text.*
 import android.text.method.LinkMovementMethod
@@ -378,11 +378,11 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@LoginActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@LoginActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@LoginActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 

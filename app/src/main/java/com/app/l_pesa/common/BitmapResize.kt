@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
-import android.support.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import java.io.*
 
 object BitmapResize {
@@ -63,21 +63,21 @@ object BitmapResize {
         val imagePath = File(ctx.filesDir, "images")
         val imgFile = File(imagePath, "user.jpg")
 
-        var exif: ExifInterface? = null
+        var exif: androidx.exifinterface.media.ExifInterface? = null
         try {
 
-            exif = ExifInterface(imgFile.absolutePath)
+            exif = androidx.exifinterface.media.ExifInterface(imgFile.absolutePath)
         } catch (e: IOException) {
             e.printStackTrace()
         }
 
-        when (exif!!.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)) {
+        when (exif!!.getAttributeInt(androidx.exifinterface.media.ExifInterface.TAG_ORIENTATION, androidx.exifinterface.media.ExifInterface.ORIENTATION_UNDEFINED)) {
 
-            ExifInterface.ORIENTATION_ROTATE_90 -> bitmap = rotateImage(bitmap, 90f)
+            androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_90 -> bitmap = rotateImage(bitmap, 90f)
 
-            ExifInterface.ORIENTATION_ROTATE_180 -> bitmap = rotateImage(bitmap, 180f)
+            androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_180 -> bitmap = rotateImage(bitmap, 180f)
 
-            ExifInterface.ORIENTATION_ROTATE_270 -> bitmap = rotateImage(bitmap, 270f)
+            androidx.exifinterface.media.ExifInterface.ORIENTATION_ROTATE_270 -> bitmap = rotateImage(bitmap, 270f)
 
             else -> println("No rotation required")
         }
