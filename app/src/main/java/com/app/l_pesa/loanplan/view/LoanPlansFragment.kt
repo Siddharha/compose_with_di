@@ -48,6 +48,8 @@ class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
     private fun initUI()
     {
         (activity as DashboardActivity).setTitle(resources.getString(R.string.nav_item_loan))
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(true)
 
         tabLayout=activity!!.findViewById(R.id.tabLayout)
         viewPager=activity!!.findViewById(R.id.viewPager)
