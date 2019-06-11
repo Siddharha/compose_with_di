@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.telephony.TelephonyManager
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -71,14 +72,31 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     @SuppressLint("MissingPermission")
     private fun verifyField()
     {
+        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+
+        var getIMEI=""
+        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            telephonyManager!!.imei
+        } else {
+            telephonyManager!!.deviceId
+        }
+
+        val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
         CommonMethod.hideKeyboardView(this@ForgotPinActivity)
+
         if(etPhone.text.toString().length<9 )
         {
             customSnackBarError(ll_root,resources.getString(R.string.required_phone_email))
         }
+        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        {
+            CommonMethod.customSnackBarError(ll_root,this@ForgotPinActivity,resources.getString(R.string.required_sim))
+        }
 
         else
         {
+
             if(CommonMethod.isNetworkAvailable(this@ForgotPinActivity))
             {
                 buttonSubmit.isClickable =false
@@ -87,17 +105,6 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
                 val displayMetrics = resources.displayMetrics
                 val width = displayMetrics.widthPixels
                 val height = displayMetrics.heightPixels
-
-                val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
-
-                var imeiId=""
-                imeiId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    telephonyManager!!.imei
-                } else {
-                    telephonyManager!!.deviceId
-                }
-
-                val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
@@ -108,7 +115,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
                 jsonObjectRequestChild.addProperty("sdk",""+ Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",imeiId)
+                jsonObjectRequestChild.addProperty("imei",getIMEI)
                 jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
                 jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
                 jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
@@ -241,11 +248,11 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@ForgotPinActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ForgotPinActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ForgotPinActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 

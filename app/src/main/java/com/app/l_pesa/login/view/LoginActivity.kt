@@ -25,6 +25,7 @@ import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -238,13 +239,33 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
     private fun verifyField()
     {
+        val displayMetrics = resources.displayMetrics
+        val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
+
+        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+
+        var getIMEI=""
+        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            telephonyManager!!.imei
+        } else {
+            telephonyManager!!.deviceId
+        }
+
+        val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
         CommonMethod.hideKeyboardView(this@LoginActivity)
         if(etPhone.text.toString().length<8)
         {
             CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_phone))
         }
+        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        {
+            CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_sim))
+        }
         else
         {
+
 
             if(CommonMethod.isNetworkAvailable(this@LoginActivity))
             {
@@ -261,20 +282,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                     }
                 }
 
-                val displayMetrics = resources.displayMetrics
-                val width = displayMetrics.widthPixels
-                val height = displayMetrics.heightPixels
 
-                val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
-
-                var imeiId=""
-                imeiId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    telephonyManager!!.imei
-                } else {
-                    telephonyManager!!.deviceId
-                }
-
-                val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
@@ -285,7 +293,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
                 jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",imeiId)
+                jsonObjectRequestChild.addProperty("imei",getIMEI)
                 jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
                 jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
                 jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
@@ -301,7 +309,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
-               // println("JSON"+jsonObject)
+                println("JSON"+jsonObject)
 
             }
             else
@@ -376,11 +384,11 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@LoginActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@LoginActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@LoginActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 

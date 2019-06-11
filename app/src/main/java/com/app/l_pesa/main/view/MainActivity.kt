@@ -72,8 +72,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
-
-
         }
     }
 

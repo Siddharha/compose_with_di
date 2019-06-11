@@ -95,6 +95,17 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     @SuppressLint("MissingPermission")
     private fun verifyField()
     {
+        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+
+        var getIMEI=""
+        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            telephonyManager!!.imei
+        } else {
+            telephonyManager!!.deviceId
+        }
+
+        val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
         CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
         if((etPhone.text.toString().length<9))
         {
@@ -103,6 +114,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         else if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
             CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
+        }
+        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        {
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_sim))
         }
         else
         {
@@ -116,17 +131,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 val width = displayMetrics.widthPixels
                 val height = displayMetrics.heightPixels
 
-                val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
-
-                var imeiId=""
-                imeiId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    telephonyManager!!.imei
-                } else {
-                    telephonyManager!!.deviceId
-                }
-
-                val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
                 jsonObject.addProperty("email_address",etEmail.text.toString())
@@ -137,7 +141,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
                 jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",imeiId)
+                jsonObjectRequestChild.addProperty("imei",getIMEI)
                 jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
                 jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
                 jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
@@ -212,11 +216,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@RegistrationStepOneActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 
