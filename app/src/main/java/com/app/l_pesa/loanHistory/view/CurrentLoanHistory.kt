@@ -13,6 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonEditTextRegular
@@ -31,10 +34,10 @@ import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 
 
-class CurrentLoanHistory: androidx.fragment.app.Fragment(), ICallBackCurrentLoanHistory {
+class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
 
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog        : KProgressHUD
     private var listLoanHistoryCurrent          : ArrayList<ResLoanHistoryCurrent.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
     private lateinit var bottomSheetBehavior    : BottomSheetBehavior<*>
@@ -43,7 +46,7 @@ class CurrentLoanHistory: androidx.fragment.app.Fragment(), ICallBackCurrentLoan
     private var after=""
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return CurrentLoanHistory()
         }
     }
@@ -219,8 +222,8 @@ class CurrentLoanHistory: androidx.fragment.app.Fragment(), ICallBackCurrentLoan
             listLoanHistoryCurrent!!.clear()
             listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
             adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
-            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
-            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ                  = LinearLayoutManager(activity)
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterLoanHistory
 
@@ -338,7 +341,7 @@ class CurrentLoanHistory: androidx.fragment.app.Fragment(), ICallBackCurrentLoan
         dialog.setTitle(resources.getString(R.string.app_name))
                 .setMessage(resources.getString(R.string.Reason_for_cancellation))
                 .setView(container)
-                .setPositiveButton("Remove") { dialog, which ->
+                .setPositiveButton("Remove") { dialog, _ ->
 
                     if(TextUtils.isEmpty(taskEditText.text.toString()))
                     {

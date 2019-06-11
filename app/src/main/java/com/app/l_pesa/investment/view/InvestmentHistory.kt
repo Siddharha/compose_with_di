@@ -15,6 +15,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -220,8 +222,8 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
             listInvestment.clear()
             listInvestment.addAll(userInvestment)
             adapterInvestmentHistory    = InvestmentHistoryAdapter(activity!!, listInvestment,this)
-            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
-            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ                  = LinearLayoutManager(activity)
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterInvestmentHistory
 

@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonEditTextRegular
@@ -31,7 +32,7 @@ import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 
 
-class BusinessLoanHistory: androidx.fragment.app.Fragment(), ICallBackBusinessLoanHistory {
+class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
     private lateinit  var progressDialog: KProgressHUD
     private var listLoanHistoryBusiness         : ArrayList<ResLoanHistoryBusiness.LoanHistory>? = null
@@ -136,6 +137,7 @@ class BusinessLoanHistory: androidx.fragment.app.Fragment(), ICallBackBusinessLo
             listLoanHistoryBusiness!!.addAll(loan_historyBusiness)
             adapterLoanHistory          = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterLoanHistory
 

@@ -15,14 +15,14 @@ import com.app.l_pesa.investment.adapter.InvestmentTabPager
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-class InvestmentFragment : androidx.fragment.app.Fragment(), TabLayout.OnTabSelectedListener {
+class InvestmentFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: androidx.viewpager.widget.ViewPager? = null
+    private var viewPager: ViewPager? = null
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return InvestmentFragment()
         }
     }

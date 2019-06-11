@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -78,7 +79,8 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
         cardView.visibility   = View.GONE
         rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
-        val currentLoanAdapter = CurrentLoanPlanAdapter(activity!!, item, appliedProduct!!, this)
+        val currentLoanAdapter   = CurrentLoanPlanAdapter(activity!!, item, appliedProduct!!, this)
+        rvLoan.layoutManager     = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
         rvLoan.adapter = currentLoanAdapter
     }
 

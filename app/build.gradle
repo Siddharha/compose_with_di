@@ -8,8 +8,8 @@ android {
         config {
             keyAlias 'android'
             keyPassword 'android'
-            //storeFile file('/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/KEY/lpesa.jks')
-            storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
+            storeFile file('/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/KEY/lpesa.jks')
+            //storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
             storePassword 'android'
         }
     }
