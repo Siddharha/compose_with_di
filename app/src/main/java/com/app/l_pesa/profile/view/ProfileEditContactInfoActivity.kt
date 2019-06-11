@@ -214,7 +214,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         return when (item.itemId) {
             android.R.id.home -> {
 
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditContactInfoActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,resources.getString(R.string.please_wait))
                 }

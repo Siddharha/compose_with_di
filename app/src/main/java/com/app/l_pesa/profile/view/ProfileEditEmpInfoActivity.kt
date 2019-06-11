@@ -241,7 +241,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
         return when (item.itemId) {
             android.R.id.home -> {
 
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditEmpInfoActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfoActivity,resources.getString(R.string.please_wait))
                 }

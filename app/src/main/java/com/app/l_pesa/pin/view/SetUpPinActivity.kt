@@ -168,7 +168,7 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
                 {
                     hideKeyboardView(this@SetUpPinActivity)
                     onBackPressed()
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
                 }
                 true
             }
@@ -178,16 +178,9 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
     }
 
     override fun onBackPressed() {
-        if(swipeRefreshLayout.isRefreshing)
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@SetUpPinActivity,resources.getString(R.string.please_wait))
-        }
-        else
-        {
             super.onBackPressed()
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
     }
 
-}

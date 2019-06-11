@@ -185,7 +185,6 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
                 else
                 {
                     onBackPressed()
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
                 }
                 true
@@ -198,15 +197,8 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     override fun onBackPressed() {
 
-        if(swipeRefreshLayout.isRefreshing)
-        {
-            CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
-        }
-        else
-        {
-            super.onBackPressed()
-            overridePendingTransition(R.anim.left_in, R.anim.right_out)
-        }
+       super.onBackPressed()
+       overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
     }
 

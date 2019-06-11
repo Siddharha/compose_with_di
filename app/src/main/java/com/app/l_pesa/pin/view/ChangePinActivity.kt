@@ -176,7 +176,8 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     }
 
     override fun onBackPressed() {
-        if(swipeRefreshLayout.isRefreshing)
+
+        if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ChangePinActivity))
         {
             CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,resources.getString(R.string.please_wait))
         }
