@@ -28,6 +28,8 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -599,9 +601,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = MaritalListAdapter(this@ProfileEditPersonalActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ProfileEditPersonalActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ProfileEditPersonalActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }
@@ -677,9 +679,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = TitleListAdapter(this@ProfileEditPersonalActivity, listTitle,listIcon,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ProfileEditPersonalActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }

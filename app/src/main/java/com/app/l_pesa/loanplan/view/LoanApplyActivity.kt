@@ -18,6 +18,8 @@ import android.view.View
 import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.*
 import com.app.l_pesa.dashboard.view.DashboardActivity
@@ -171,9 +173,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val dialog= Dialog(this@LoanApplyActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = DescriptionAdapter(this@LoanApplyActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@LoanApplyActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanApplyActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }

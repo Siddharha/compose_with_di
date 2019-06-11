@@ -9,6 +9,8 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -195,8 +197,8 @@ class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTrans
             listTransferHistory.clear()
             listTransferHistory.addAll(userTransferHistory)
             adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory,this)
-            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(activity)
-            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ                  = LinearLayoutManager(activity)
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterTransferHistory
 

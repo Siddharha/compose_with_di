@@ -12,6 +12,8 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.Window
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -124,9 +126,9 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         val dialog= Dialog(this@InvestmentApplyActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_id_type)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val loanPlanAdapter             = LoanPlanListAdapter(this@InvestmentApplyActivity, loanPlanData.investmentPlans!!,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@InvestmentApplyActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@InvestmentApplyActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = loanPlanAdapter
         dialog.show()
 

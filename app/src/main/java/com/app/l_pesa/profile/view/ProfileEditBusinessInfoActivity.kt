@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.*
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -109,9 +111,9 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         val dialog= Dialog(this@ProfileEditBusinessInfoActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = IdListAdapter(this@ProfileEditBusinessInfoActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ProfileEditBusinessInfoActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditBusinessInfoActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
 
@@ -256,7 +258,7 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         return when (item.itemId) {
             android.R.id.home -> {
 
-               if(swipeRefreshLayout.isRefreshing)
+               if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditBusinessInfoActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@ProfileEditBusinessInfoActivity,resources.getString(R.string.please_wait))
                 }

@@ -27,6 +27,10 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -54,7 +58,7 @@ import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
 import java.util.*
 
-class BusinessIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
+class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
 
     private var filterPopup : PopupWindow? = null
     private var selectedItem: Int = -1
@@ -73,7 +77,7 @@ class BusinessIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickB
     private lateinit  var progressDialog: KProgressHUD
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return BusinessIdInfoFragment()
         }
     }
@@ -101,7 +105,7 @@ class BusinessIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickB
         {
             listBusinessId!!.addAll(profileInfo.userIdsBusinessInfo!!)
             businessIdAdapter                 = BusinessIdAdapter(activity!!,listBusinessId!!,this)
-            rvBusinessId.layoutManager        = androidx.recyclerview.widget.LinearLayoutManager(activity!!, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            rvBusinessId.layoutManager        = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
             rvBusinessId.adapter              = businessIdAdapter
         }
 
@@ -249,9 +253,9 @@ class BusinessIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickB
             val dialog= Dialog(activity!!)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_id_type)
-            val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+            val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
             val businessIdAdapter           = BusinessIdListAdapter(activity!!, userDashBoard.businessIdTypes!!,dialog,this)
-            recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(activity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            recyclerView?.layoutManager     = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             recyclerView?.adapter           = businessIdAdapter
             dialog.show()
         }

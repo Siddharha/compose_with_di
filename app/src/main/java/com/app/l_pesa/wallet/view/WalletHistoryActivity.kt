@@ -12,6 +12,8 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -194,8 +196,8 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             listWithdrawalHistory.clear()
             listWithdrawalHistory.addAll(withdrawal_history)
             adapterWalletHistory        = WalletHistoryAdapter(this@WalletHistoryActivity, listWithdrawalHistory)
-            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(this@WalletHistoryActivity)
-            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ                  = LinearLayoutManager(this@WalletHistoryActivity)
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterWalletHistory
             adapterWalletHistory.notifyDataSetChanged()

@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -71,7 +73,7 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         rlPaybackHistory.visibility=View.VISIBLE
 
         val adapterPaymentSchedule       = LoanPaymentHistoryAdapter(this@LoanPaymentHistory,paymentHistory)
-        rlPaybackHistory.layoutManager   = androidx.recyclerview.widget.LinearLayoutManager(this@LoanPaymentHistory, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        rlPaybackHistory.layoutManager   = LinearLayoutManager(this@LoanPaymentHistory, RecyclerView.VERTICAL, false)
         rlPaybackHistory.adapter         = adapterPaymentSchedule
 
     }

@@ -27,6 +27,8 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -105,7 +107,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
         {
             listPersonalId!!.addAll(profileInfo.userIdsPersonalInfo!!)
             personalIdAdapter                 = PersonalIdAdapter(activity!!,listPersonalId!!,this)
-            rvPersonalId.layoutManager        = androidx.recyclerview.widget.LinearLayoutManager(activity!!, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
             rvPersonalId.adapter              = personalIdAdapter
         }
 
@@ -264,9 +266,9 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
             val dialog= Dialog(activity!!)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_id_type)
-            val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+            val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
             val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
-            recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(activity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            recyclerView?.layoutManager     = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             recyclerView?.adapter           = personalIdAdapter
             dialog.show()
         }

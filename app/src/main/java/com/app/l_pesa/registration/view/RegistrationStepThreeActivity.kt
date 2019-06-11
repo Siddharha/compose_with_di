@@ -368,9 +368,9 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         val dialog= Dialog(this@RegistrationStepThreeActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = PersonalIdListAdapter(this@RegistrationStepThreeActivity, idList,nameList,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@RegistrationStepThreeActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepThreeActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }

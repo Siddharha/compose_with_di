@@ -125,12 +125,20 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
             hashMapOLD==hashMapNew -> CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.change_one_info))
             TextUtils.isEmpty(etWalletAddress.text.toString()) -> CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_wallet_address))
             else -> {
-                buttonWalletAddress.isClickable=false
-                val presenterWalletAddress= PresenterWalletAddress()
-                val jsonObject = JsonObject()
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+                    buttonWalletAddress.isClickable=false
+                    val presenterWalletAddress= PresenterWalletAddress()
+                    val jsonObject = JsonObject()
 
-                jsonObject.addProperty("ether_address",etWalletAddress.text.toString().trim())
-                presenterWalletAddress.doWalletAddress(activity!!,jsonObject,this)
+                    jsonObject.addProperty("ether_address",etWalletAddress.text.toString().trim())
+                    presenterWalletAddress.doWalletAddress(activity!!,jsonObject,this)
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                }
+
 
             }
         }

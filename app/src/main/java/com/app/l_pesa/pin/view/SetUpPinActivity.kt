@@ -160,7 +160,7 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@SetUpPinActivity))
                 {
                     CommonMethod.customSnackBarError(rootLayout,this@SetUpPinActivity,resources.getString(R.string.please_wait))
                 }

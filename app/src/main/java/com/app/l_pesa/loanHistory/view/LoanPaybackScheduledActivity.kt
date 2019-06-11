@@ -6,12 +6,13 @@ import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -147,7 +148,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         {
 
             val adapterPaymentSchedule         = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.schedule!!,data.loanInfo!!)
-            rlPayback.layoutManager            = androidx.recyclerview.widget.LinearLayoutManager(this@LoanPaybackScheduledActivity, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+            rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, RecyclerView.VERTICAL, false)
             rlPayback.adapter                  = adapterPaymentSchedule
         }
     }
@@ -177,7 +178,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@LoanPaybackScheduledActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
                 }

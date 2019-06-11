@@ -26,7 +26,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
     private var isLoading = false
     private var isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0) {
@@ -36,7 +36,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         }
     }
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading) {
             isLoading = true
@@ -75,7 +75,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var txtToken: CommonTextRegular = itemView.findViewById(R.id.txtToken) as CommonTextRegular
         private var txtCreateDate: CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
@@ -130,6 +130,7 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
                 txtReason.visibility = View.GONE
                 txtStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
                 txtStatus.text = fromHtml(context.resources.getString(R.string.status) + "<font color='#00695c'>" + " " + userWithdrawalHistory.statusTxt + "</font>")
+                txtStatus.isClickable=false
                 txtAddress.setOnClickListener {
 
                     try {

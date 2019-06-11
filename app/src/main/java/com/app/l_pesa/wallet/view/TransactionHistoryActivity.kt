@@ -12,6 +12,8 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -103,8 +105,8 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
             listSavingsHistory.clear()
             listSavingsHistory.addAll(savingsHistory)
             adapterTransactionHistory   = TransactionAllAdapter(this@TransactionHistoryActivity, listSavingsHistory)
-            val llmOBJ                  = androidx.recyclerview.widget.LinearLayoutManager(this@TransactionHistoryActivity)
-            llmOBJ.orientation          = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+            val llmOBJ                  = LinearLayoutManager(this@TransactionHistoryActivity)
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterTransactionHistory
             adapterTransactionHistory.notifyDataSetChanged()
