@@ -202,12 +202,12 @@
             android:name=".pin.view.ChangeLoginPinActivity"
             android:label="@string/change_login_pin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".pin.view.ChangePinActivity"
             android:label="@string/change_transactional_pin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible" />
 
         <meta-data
             android:name="preloaded_fonts"
