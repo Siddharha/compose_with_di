@@ -12,6 +12,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.R.array.*
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.help.view.HelpActivity
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.app.l_pesa.pin.view.ChangeLoginPinActivity
 import com.app.l_pesa.pin.view.ChangePinActivity
@@ -29,10 +30,10 @@ import kotlinx.android.synthetic.main.fragment_settings.*
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class SettingsFragment : androidx.fragment.app.Fragment(), ICallBackListClick {
+class SettingsFragment :Fragment(), ICallBackListClick {
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return SettingsFragment()
         }
     }
@@ -48,7 +49,7 @@ class SettingsFragment : androidx.fragment.app.Fragment(), ICallBackListClick {
 
         initData()
 
-        rv_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        rv_list.layoutManager = LinearLayoutManager(activity)
         rv_list.adapter = SettingsAdapter(activity!!, settingsList,this)
     }
 
@@ -117,8 +118,8 @@ class SettingsFragment : androidx.fragment.app.Fragment(), ICallBackListClick {
             }
             else if(position==4)
             {
-                /* startActivity(Intent(activity, HelpActivity::class.java))
-                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)*/
+                 startActivity(Intent(activity, HelpActivity::class.java))
+                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
             }
           else{
 

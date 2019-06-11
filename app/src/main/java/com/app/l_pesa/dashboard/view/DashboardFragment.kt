@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -144,7 +146,7 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         }
 
             if (dashBoard.loans!!.size > 0) {
-                loan_list.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+                loan_list.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
                 val adapterDashBoard = LoanListAdapter(dashBoard.loans!!,dashBoard, activity, rootLayout, this)
                 loan_list.adapter = adapterDashBoard
                 adapterDashBoard.notifyDataSetChanged()
