@@ -451,7 +451,7 @@ public class PassCodeView extends View {
      * redraw based on the new value and notify the
      * attached listener of the change
      */
-    private void invalidateAndNotifyListener() {
+    public void invalidateAndNotifyListener() {
         setFilledCount(passCodeText.length());
         Log.i("New text", passCodeText);
         if (textChangeListener != null) {
@@ -459,7 +459,7 @@ public class PassCodeView extends View {
         }
     }
 
-    private void notifyListener() {
+    public void notifyListener() {
         if (textChangeListener != null) {
             textChangeListener.onTextChanged(passCodeText);
         }

@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.appcompat.app.AlertDialog
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -34,15 +37,15 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_pin_set.*
 import kotlinx.android.synthetic.main.content_pin_set.*
 
+class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard, ICallBackHelp  {
 
-class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard, ICallBackHelp {
 
 
     private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pin_set)
+        setContentView(com.app.l_pesa.R.layout.activity_pin_set)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -71,18 +74,17 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
     private fun initData()
     {
-        val font = ResourcesCompat.getFont(this@PinSetActivity, R.font.montserrat)
+        val font = ResourcesCompat.getFont(this@PinSetActivity,R.font.montserrat)
         pass_code_view.setTypeFace(font)
-        pass_code_view.setKeyTextColor(ContextCompat.getColor(this@PinSetActivity,R.color.colorApp))
+        pass_code_view.setKeyTextColor(ContextCompat.getColor(this@PinSetActivity, R.color.colorApp))
 
-        val sharedPrefOBJ= SharedPref(this@PinSetActivity)
-        val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
+        pass_code_view.setOnTextChangeListener(PassCodeView.TextChangeListener { text ->
+            if (text.length == 6) {
 
-        pass_code_view.setOnTextChangeListener {
+                val sharedPrefOBJ= SharedPref(this@PinSetActivity)
+                val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
 
-            if(it.length==6)
-            {
-                if(CommonMethod.isNetworkAvailable(this@PinSetActivity))
+                if (CommonMethod.isNetworkAvailable(this@PinSetActivity))
                 {
                     progressDialog.show()
                     val jsonObjectDeviceInfo = JsonObject()
@@ -93,13 +95,13 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
                     val jsonObjectDeviceData = JsonObject()
                     jsonObjectDeviceData.addProperty("device_id", modelDevice.post_data.device_data.device_id)
-                    jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
-                    jsonObjectDeviceData.addProperty("imei",modelDevice.post_data.device_data.imei)
-                    jsonObjectDeviceData.addProperty("imsi",modelDevice.post_data.device_data.imsi)
-                    jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.post_data.device_data.simSerial_no)
-                    jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)
-                    jsonObjectDeviceData.addProperty("screen_height",modelDevice.post_data.device_data.screen_height)
-                    jsonObjectDeviceData.addProperty("screen_width",modelDevice.post_data.device_data.screen_width)
+                    jsonObjectDeviceData.addProperty("sdk", modelDevice.post_data.device_data.sdk)
+                    jsonObjectDeviceData.addProperty("imei", modelDevice.post_data.device_data.imei)
+                    jsonObjectDeviceData.addProperty("imsi", modelDevice.post_data.device_data.imsi)
+                    jsonObjectDeviceData.addProperty("simSerial_no", modelDevice.post_data.device_data.simSerial_no)
+                    jsonObjectDeviceData.addProperty("sim_operator_Name", modelDevice.post_data.device_data.sim_operator_Name)
+                    jsonObjectDeviceData.addProperty("screen_height", modelDevice.post_data.device_data.screen_height)
+                    jsonObjectDeviceData.addProperty("screen_width", modelDevice.post_data.device_data.screen_width)
                     jsonObjectDeviceData.addProperty("device", modelDevice.post_data.device_data.device)
                     jsonObjectDeviceData.addProperty("model", modelDevice.post_data.device_data.model)
                     jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
@@ -107,31 +109,29 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
                     jsonObjectDeviceData.addProperty("app_version", BuildConfig.VERSION_NAME)
                     jsonObjectDeviceData.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
 
-                    jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
+                    jsonObjectDeviceInfo.add("device_data", jsonObjectDeviceData)
 
                     val jsonObject = JsonObject()
 
-                    jsonObject.addProperty("phone_number",modelDevice.access_phone)
-                    jsonObject.addProperty("apps_pin",pass_code_view.passCodeText)
-                    jsonObject.add("device_info",jsonObjectDeviceInfo)
+                    jsonObject.addProperty("phone_number", modelDevice.access_phone)
+                    jsonObject.addProperty("apps_pin", pass_code_view.passCodeText.toString())
+                    jsonObject.add("device_info", jsonObjectDeviceInfo)
 
-                    val presenterPinSet= PresenterPinSet()
-                    presenterPinSet.dosetPin(this@PinSetActivity,jsonObject,this)
+                    pass_code_view.reset()
+                    val presenterPinSet = PresenterPinSet()
+                    presenterPinSet.dosetPin(this@PinSetActivity, jsonObject, this)
 
-                 }
-                else
+                } else
                 {
-                    CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,resources.getString(R.string.no_internet))
+                    CommonMethod.customSnackBarError(rootLayout, this@PinSetActivity, resources.getString(R.string.no_internet))
                     pass_code_view.setError(true)
                 }
-
             }
-
-
-        }
-
+        })
 
     }
+
+
 
     override fun onSuccessPinSet(data: LoginData) {
 
@@ -153,92 +153,93 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
         Toast.makeText(this@PinSetActivity,message,Toast.LENGTH_SHORT).show()
     }
 
-    override fun onSuccessDashboard(data: ResDashboard.Data) {
+override fun onSuccessDashboard(data: ResDashboard.Data) {
 
-        val sharedPrefOBJ=SharedPref(this@PinSetActivity)
-        val dashBoardData                 = Gson().toJson(data)
-        sharedPrefOBJ.userDashBoard       = dashBoardData
+val sharedPrefOBJ=SharedPref(this@PinSetActivity)
+val dashBoardData                 = Gson().toJson(data)
+sharedPrefOBJ.userDashBoard       = dashBoardData
 
-        val presenterHelp= PresenterHelp()
-        presenterHelp.getHelp(this@PinSetActivity,this)
+val presenterHelp= PresenterHelp()
+presenterHelp.getHelp(this@PinSetActivity,this)
 
-    }
+}
 
-    override fun onFailureDashboard(jsonMessage: String) {
+override fun onFailureDashboard(jsonMessage: String) {
 
-        dismiss()
-        CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,jsonMessage)
-    }
+dismiss()
+CommonMethod.customSnackBarError(rootLayout,this@PinSetActivity,jsonMessage)
+}
 
-    override fun onSessionTimeOut(jsonMessage: String) {
-        dismiss()
-        val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
-        dialogBuilder.setMessage(jsonMessage)
-                .setCancelable(false)
-                .setPositiveButton("Ok") { dialog, _ ->
-                    dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(this@PinSetActivity)
-                    sharedPrefOBJ.removeShared()
-                    startActivity(Intent(this@PinSetActivity, MainActivity::class.java))
-                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    finish()
-                }
-
-        val alert = dialogBuilder.create()
-        alert.setTitle(resources.getString(R.string.app_name))
-        alert.show()
-    }
-
-    override fun onSuccessHelp(data: HelpData) {
-
-        val sharedPrefOBJ=SharedPref(this@PinSetActivity)
-        val helpSupportData             = Gson().toJson(data)
-        sharedPrefOBJ.helpSupport       = helpSupportData
-        dismiss()
-        val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+override fun onSessionTimeOut(jsonMessage: String) {
+dismiss()
+val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
+dialogBuilder.setMessage(jsonMessage)
+    .setCancelable(false)
+    .setPositiveButton("Ok") { dialog, _ ->
+        dialog.dismiss()
+        val sharedPrefOBJ= SharedPref(this@PinSetActivity)
+        sharedPrefOBJ.removeShared()
+        startActivity(Intent(this@PinSetActivity, MainActivity::class.java))
+        overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
         finish()
-
     }
 
-    override fun onErrorHelp(message: String) {
-        dismiss()
-        pass_code_view.setError(true)
-        Toast.makeText(this@PinSetActivity,message,Toast.LENGTH_SHORT).show()
-    }
+val alert = dialogBuilder.create()
+alert.setTitle(resources.getString(com.app.l_pesa.R.string.app_name))
+alert.show()
+}
 
-    private fun toolbarFont(context: Activity) {
+override fun onSuccessHelp(data: HelpData) {
 
-        for (i in 0 until toolbar.childCount) {
-            val view = toolbar.getChildAt(i)
-            if (view is TextView) {
-                val titleFont =   Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (view.text ==    toolbar.title) {
-                    view.typeface = titleFont
-                    break
-                }
-            }
-        }
-    }
+val sharedPrefOBJ=SharedPref(this@PinSetActivity)
+val helpSupportData             = Gson().toJson(data)
+sharedPrefOBJ.helpSupport       = helpSupportData
+dismiss()
+val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)
+startActivity(intent)
+overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
+finish()
 
-    override fun onBackPressed() {
+}
 
-        val intent = Intent(this@PinSetActivity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
+override fun onErrorHelp(message: String) {
+dismiss()
+pass_code_view.setError(true)
+Toast.makeText(this@PinSetActivity,message,Toast.LENGTH_SHORT).show()
+}
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
-                true
-            }
+private fun toolbarFont(context: Activity) {
 
-            else -> super.onOptionsItemSelected(item)
-        }
+for (i in 0 until toolbar.childCount) {
+val view = toolbar.getChildAt(i)
+if (view is TextView) {
+    val titleFont =   Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+    if (view.text ==    toolbar.title) {
+        view.typeface = titleFont
+        break
     }
 }
+}
+}
+
+override fun onBackPressed() {
+
+val intent = Intent(this@PinSetActivity, LoginActivity::class.java)
+intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+startActivity(intent)
+overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
+}
+
+override fun onOptionsItemSelected(item: MenuItem): Boolean {
+return when (item.itemId) {
+android.R.id.home -> {
+    onBackPressed()
+    overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
+    true
+}
+
+else -> super.onOptionsItemSelected(item)
+}
+}
+}
+
