@@ -305,6 +305,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
                 jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
                 jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
+                jsonObjectRequestChild.addProperty("app_code", BuildConfig.VERSION_CODE)
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
