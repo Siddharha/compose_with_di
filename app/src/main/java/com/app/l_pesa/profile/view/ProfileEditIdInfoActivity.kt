@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_profile_edit_id_info.*
 class ProfileEditIdInfoActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {
 
     private var tabLayout: TabLayout? = null
-    private var viewPager: androidx.viewpager.widget.ViewPager? = null
+    private var viewPager: ViewPager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,6 +137,5 @@ class ProfileEditIdInfoActivity : AppCompatActivity(), TabLayout.OnTabSelectedLi
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
     }
-
 
 }

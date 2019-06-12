@@ -14,7 +14,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
 
 
-class LockViewPager : androidx.viewpager.widget.ViewPager {
+class LockViewPager : ViewPager {
 
     constructor(context: Context) : super(context) {
         setMyScroller()

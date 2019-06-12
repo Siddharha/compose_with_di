@@ -13,7 +13,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.model.ModelWindowPopUp
 
-class AdapterPopupWindow(val context: Context) : androidx.recyclerview.widget.RecyclerView.Adapter<AdapterPopupWindow.MyViewHolder>() {
+class AdapterPopupWindow(val context: Context) : RecyclerView.Adapter<AdapterPopupWindow.MyViewHolder>() {
 
     var filerList : List<ModelWindowPopUp> = mutableListOf()
     var callback: ICallBackRecyclerCallbacks<ModelWindowPopUp>? = null
@@ -50,7 +50,7 @@ class AdapterPopupWindow(val context: Context) : androidx.recyclerview.widget.Re
         return filerList.size
     }
 
-    inner class MyViewHolder(item: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(item) {
+    inner class MyViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
         var tvName      :TextView   = itemView.findViewById(R.id.alert_filter_name)
         var imgIcon     : ImageView = itemView.findViewById(R.id.alert_filter_icon)

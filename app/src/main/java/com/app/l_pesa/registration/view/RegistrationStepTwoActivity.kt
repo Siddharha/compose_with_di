@@ -189,7 +189,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         if (photoFile!!.exists()) {
             photoFile!!.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile!!.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 

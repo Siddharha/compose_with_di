@@ -12,10 +12,10 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.loanHistory.model.ResPaymentHistory
 import java.text.DecimalFormat
 
-class LoanPaymentHistoryAdapter (val context: Context, private val loanPaymentList: ArrayList<ResPaymentHistory.PaymentHistory>) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class LoanPaymentHistoryAdapter (val context: Context, private val loanPaymentList: ArrayList<ResPaymentHistory.PaymentHistory>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder:RecyclerView.ViewHolder, position: Int) {
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
@@ -36,9 +36,9 @@ class LoanPaymentHistoryAdapter (val context: Context, private val loanPaymentLi
 
     override fun getItemCount(): Int = loanPaymentList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
+        val recyclerView: RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_payment_history_list, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -46,7 +46,7 @@ class LoanPaymentHistoryAdapter (val context: Context, private val loanPaymentLi
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var txtCreateDate : CommonTextRegular              = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
             var txtTxnId      : CommonTextRegular              = itemView.findViewById(R.id.txnId) as CommonTextRegular

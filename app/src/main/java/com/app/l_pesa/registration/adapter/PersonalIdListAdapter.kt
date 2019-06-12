@@ -11,9 +11,9 @@ import android.widget.TextView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackId
 
-class PersonalIdListAdapter (val context: Context, private val idText: ArrayList<String>,private val nameText: ArrayList<String>, private val dialogOBJ: Dialog, private val callBack: ICallBackId) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class PersonalIdListAdapter (val context: Context, private val idText: ArrayList<String>,private val nameText: ArrayList<String>, private val dialogOBJ: Dialog, private val callBack: ICallBackId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
         viewHolder.titleText.text = nameText[position]
@@ -26,9 +26,9 @@ class PersonalIdListAdapter (val context: Context, private val idText: ArrayList
 
     override fun getItemCount(): Int = idText.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder {
 
-        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
+        val recyclerView: RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_title, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -37,7 +37,7 @@ class PersonalIdListAdapter (val context: Context, private val idText: ArrayList
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var titleText : TextView = itemView.findViewById(R.id.txt_country_name) as TextView
             var rlRootObj : RelativeLayout = itemView.findViewById(R.id.rlRoot) as RelativeLayout

@@ -27,6 +27,7 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -374,9 +375,9 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_recyclerview, null)
-        val recyclerView = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
-        recyclerView.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(recyclerView.context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
 
         val adapter = AdapterPopupWindow(activity!!)
         adapter.addAlertFilter(filterItemList)
@@ -486,7 +487,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
         if (photoFile!!.exists()) {
             photoFile!!.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile!!.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 

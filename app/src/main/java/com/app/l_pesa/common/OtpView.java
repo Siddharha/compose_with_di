@@ -855,7 +855,7 @@ public class OtpView extends AppCompatEditText {
      * @param background The Drawable to use as the item background, or null to remove the
      * item background
      */
-    public void setItemBackground(Drawable background) {
+    private void setItemBackground(Drawable background) {
         itemBackgroundResource = 0;
         itemBackground = background;
         invalidate();

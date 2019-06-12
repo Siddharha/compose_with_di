@@ -23,6 +23,7 @@ import com.app.l_pesa.lpk.presenter.PresenterWalletAddress
 import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_wallet_address.*
 import java.util.*
 
@@ -31,6 +32,7 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
 
     private  var address=""
     private  val hashMapOLD = HashMap<String, String>()
+    private lateinit  var progressDialog: KProgressHUD
 
     companion object {
         fun newInstance(): androidx.fragment.app.Fragment {
@@ -52,6 +54,8 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
 
     private fun initData()
     {
+        initLoader()
+
         val sharedPrefOBJ=SharedPref(activity!!)
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
@@ -127,6 +131,7 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
             else -> {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
+                    progressDialog.show()
                     buttonWalletAddress.isClickable=false
                     val presenterWalletAddress= PresenterWalletAddress()
                     val jsonObject = JsonObject()
@@ -144,9 +149,28 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
         }
     }
 
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
 
     override fun onSuccessWalletAddress() {
 
+        dismiss()
         txtEtherScan.visibility=View.VISIBLE
         hashMapOLD["wallet"]  = ""+etWalletAddress.text.toString().trim()
         address=etWalletAddress.text.toString().trim()
@@ -161,6 +185,7 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
 
     override fun onErrorWalletAddress(message: String) {
 
+        dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
         buttonWalletAddress.isClickable=true
 

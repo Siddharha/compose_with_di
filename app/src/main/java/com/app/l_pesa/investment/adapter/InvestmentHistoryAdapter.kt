@@ -17,13 +17,13 @@ import com.app.l_pesa.investment.model.ResInvestmentHistory
 import kotlinx.android.synthetic.main.layout_investment_history_list.view.*
 import java.text.DecimalFormat
 
-class InvestmentHistoryAdapter (val context: Context, private val investmentHistoryList: ArrayList<ResInvestmentHistory.UserInvestment>, private val callBack:ICallBackEditHistory) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class InvestmentHistoryAdapter (val context: Context, private val investmentHistoryList: ArrayList<ResInvestmentHistory.UserInvestment>, private val callBack:ICallBackEditHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -34,7 +34,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
         }
     }
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
         {
@@ -204,5 +204,5 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
 
     }
 
-    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }

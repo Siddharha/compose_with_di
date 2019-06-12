@@ -12,14 +12,14 @@ import com.app.l_pesa.notification.model.ResNotification
 import kotlinx.android.synthetic.main.layout_list_notification.view.*
 
 
-class AdapterNotification(val context: Context, private val notificationList: ArrayList<ResNotification.NotificationHistory>) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class AdapterNotification(val context: Context, private val notificationList: ArrayList<ResNotification.NotificationHistory>) : RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -30,7 +30,7 @@ class AdapterNotification(val context: Context, private val notificationList: Ar
         }
     }
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
         {
@@ -71,7 +71,7 @@ class AdapterNotification(val context: Context, private val notificationList: Ar
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
@@ -85,6 +85,6 @@ class AdapterNotification(val context: Context, private val notificationList: Ar
 
     }
 
-    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }

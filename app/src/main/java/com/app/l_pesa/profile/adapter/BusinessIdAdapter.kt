@@ -14,10 +14,10 @@ import com.app.l_pesa.profile.inter.ICallBackClickBusinessId
 import com.app.l_pesa.profile.model.ResUserInfo
 import java.util.*
 
-class BusinessIdAdapter(val context: Context, private val userIdsBusinessInfo: ArrayList<ResUserInfo.UserIdsBusinessInfo>, private val callBack: ICallBackClickBusinessId) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class BusinessIdAdapter(val context: Context, private val userIdsBusinessInfo: ArrayList<ResUserInfo.UserIdsBusinessInfo>, private val callBack: ICallBackClickBusinessId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
 
         val viewHolder = holder as SelectViewHolder
@@ -56,9 +56,9 @@ class BusinessIdAdapter(val context: Context, private val userIdsBusinessInfo: A
 
     override fun getItemCount(): Int = userIdsBusinessInfo.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
+        val recyclerView: RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_id_information, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -66,13 +66,13 @@ class BusinessIdAdapter(val context: Context, private val userIdsBusinessInfo: A
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var txtIdNumber          : TextView     = itemView.findViewById(R.id.txtIdNumber) as TextView
             var txtIdType            : TextView     = itemView.findViewById(R.id.txtIdType) as TextView
             var txtUploadTime        : TextView     = itemView.findViewById(R.id.txtUploadTime) as TextView
-            var imgVerifiedStatus    : ImageView = itemView.findViewById(R.id.imgVerifiedStatus) as ImageView
-            var imgEdit              : ImageButton = itemView.findViewById(R.id.imgEdit) as ImageButton
+            var imgVerifiedStatus    : ImageView    = itemView.findViewById(R.id.imgVerifiedStatus) as ImageView
+            var imgEdit              : ImageButton  = itemView.findViewById(R.id.imgEdit) as ImageButton
 
         }
 

@@ -20,7 +20,7 @@ import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import java.text.DecimalFormat
 
 
-class AdapterWithdrawalHistory (val context: Context, private val listWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>?) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class AdapterWithdrawalHistory (val context: Context, private val listWithdrawalHistory: ArrayList<ResWithdrawalHistory.UserWithdrawalHistory>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var loadMoreListener: OnLoadMoreListener
     private var isLoading = false

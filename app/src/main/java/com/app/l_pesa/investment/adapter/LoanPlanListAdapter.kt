@@ -12,9 +12,9 @@ import com.app.l_pesa.R
 import com.app.l_pesa.investment.inter.ICallBackLoanPlanList
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 
-class LoanPlanListAdapter (val context: Context, private val titleText: ArrayList<ResInvestmentPlan.InvestmentPlan>, private val dialogOBJ: Dialog, private val callBack: ICallBackLoanPlanList) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class LoanPlanListAdapter (val context: Context, private val titleText: ArrayList<ResInvestmentPlan.InvestmentPlan>, private val dialogOBJ: Dialog, private val callBack: ICallBackLoanPlanList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
         viewHolder.titleText.text = titleText[position].planName
@@ -28,9 +28,9 @@ class LoanPlanListAdapter (val context: Context, private val titleText: ArrayLis
 
     override fun getItemCount(): Int = titleText.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
+        val recyclerView: RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_marital, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -39,11 +39,10 @@ class LoanPlanListAdapter (val context: Context, private val titleText: ArrayLis
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var titleText : TextView = itemView.findViewById(R.id.txtTitle) as TextView
             var rlRootObj : RelativeLayout = itemView.findViewById(R.id.rlRoot) as RelativeLayout
-
 
         }
 

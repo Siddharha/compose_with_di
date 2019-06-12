@@ -347,8 +347,8 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
 
         val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_recyclerview, null)
-        val recyclerView = view.findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(recyclerView.context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
 
         val adapter = AdapterWindowInvestmentHistory(activity!!,filterItemList,investmentList,this)

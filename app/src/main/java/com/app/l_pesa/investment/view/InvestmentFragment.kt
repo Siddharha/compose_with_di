@@ -73,7 +73,7 @@ class InvestmentFragment : Fragment(), TabLayout.OnTabSelectedListener {
             (activity as DashboardActivity).visibleFilter(true)
             (activity as DashboardActivity).imgFilter.setOnClickListener {
 
-                val fragment = viewPager!!.adapter!!.instantiateItem(viewPager!!, 1) as androidx.fragment.app.Fragment
+                val fragment = viewPager!!.adapter!!.instantiateItem(viewPager!!, 1) as Fragment
                 if (fragment is InvestmentHistory) {
                     fragment.doFilter()
 

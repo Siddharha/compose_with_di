@@ -21,7 +21,7 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -32,7 +32,7 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
         }
     }
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
         {
@@ -73,7 +73,7 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var txtCommission                   : CommonTextRegular    = itemView.findViewById(R.id.txtCommission) as CommonTextRegular
         private var txtCreateDate                   : CommonTextRegular    = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
@@ -125,6 +125,6 @@ class WalletHistoryAdapter(val context: Context, private val listWithdrawalHisto
 
     }
 
-    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }

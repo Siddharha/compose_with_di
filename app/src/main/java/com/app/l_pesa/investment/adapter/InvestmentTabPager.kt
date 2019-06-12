@@ -7,10 +7,10 @@ import com.app.l_pesa.investment.view.InvestmentHistory
 import com.app.l_pesa.investment.view.InvestmentPlan
 
 
-class InvestmentTabPager(fm: androidx.fragment.app.FragmentManager, private var tabCount: Int): androidx.fragment.app.FragmentStatePagerAdapter(fm) {
+class InvestmentTabPager(fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
     //Overriding method getItem
-    override fun getItem(position: Int): androidx.fragment.app.Fragment? {
+    override fun getItem(position: Int): Fragment? {
         //Returning the current tabs
         return when (position) {
             0 -> {

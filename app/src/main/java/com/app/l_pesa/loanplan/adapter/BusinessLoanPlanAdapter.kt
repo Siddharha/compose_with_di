@@ -23,10 +23,10 @@ import java.text.DecimalFormat
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>,private val appliedProduct: ResLoanPlans.AppliedProduct, private val callBackObj: ICallBackBusinessLoan) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>,private val appliedProduct: ResLoanPlans.AppliedProduct, private val callBackObj: ICallBackBusinessLoan) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
@@ -98,9 +98,9 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
 
     override fun getItemCount(): Int = loanPlanList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
+        val recyclerView: RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_loan_list, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -108,7 +108,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var txtLoanAmount        : TextView              = itemView.findViewById(R.id.txtLoanAmount) as TextView
             var txtRequiredScore     : TextView              = itemView.findViewById(R.id.txtRequiredScore) as TextView

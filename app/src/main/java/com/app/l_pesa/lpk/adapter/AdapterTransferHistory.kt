@@ -14,13 +14,13 @@ import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
 import java.text.DecimalFormat
 
-class AdapterTransferHistory (val context: Context, private val listTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, private val callBack: ICallBackTransferHistory) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class AdapterTransferHistory (val context: Context, private val listTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, private val callBack: ICallBackTransferHistory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -31,7 +31,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         }
     }
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
         {
@@ -72,7 +72,7 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var txtRef          : TextView              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
         private var txtToken        : TextView              = itemView.findViewById(R.id.txtToken) as CommonTextRegular
@@ -92,6 +92,6 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
 
     }
 
-    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }

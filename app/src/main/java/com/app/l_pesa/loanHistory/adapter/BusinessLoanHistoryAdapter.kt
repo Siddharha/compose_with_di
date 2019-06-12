@@ -15,14 +15,14 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import kotlinx.android.synthetic.main.layout_loan_history.view.*
 import java.text.DecimalFormat
 
-class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryBusiness.LoanHistory>, private val callBackBusiness: ICallBackBusinessLoanHistory) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryBusiness.LoanHistory>, private val callBackBusiness: ICallBackBusinessLoanHistory) :RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -33,7 +33,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
         }
     }
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder:RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
         {
@@ -74,7 +74,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
 
@@ -188,12 +188,10 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
             }
 
 
-
-
         }
 
     }
 
-    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) :RecyclerView.ViewHolder(view)
 
 }

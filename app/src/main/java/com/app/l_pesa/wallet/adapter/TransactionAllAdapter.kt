@@ -15,13 +15,13 @@ import com.app.l_pesa.wallet.model.ResWalletHistory
 import java.text.DecimalFormat
 
 
-class TransactionAllAdapter (val context: Context, private val listTransaction: ArrayList<ResWalletHistory.SavingsHistory>?) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class TransactionAllAdapter (val context: Context, private val listTransaction: ArrayList<ResWalletHistory.SavingsHistory>?) :RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -32,7 +32,7 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
         }
     }
 
-    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (position >= itemCount - 1 && isMoreDataAvailable && !isLoading)
         {

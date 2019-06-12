@@ -16,7 +16,7 @@ class KeyRect {
     public int rippleRadius = 0;
     public int requiredRadius;
     public int circleAlpha;
-    private final Rect tempRect;
+    //private final Rect tempRect;
     public boolean hasRippleEffect = false;
     public ValueAnimator animator;
     private final int MAX_RIPPLE_ALPHA = 180;
@@ -29,7 +29,7 @@ class KeyRect {
     public KeyRect(View view, Rect rect, String value) {
         this.view = view;
         this.rect = rect;
-        this.tempRect = new Rect(rect);
+        //this.tempRect = new Rect(rect);
         this.value = value;
         requiredRadius = (this.rect.right - this.rect.left) / 4;
         setUpAnimator();

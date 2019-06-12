@@ -384,7 +384,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         if (photoFile!!.exists()) {
             photoFile!!.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile!!.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
@@ -603,7 +603,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         dialog.setContentView(R.layout.layout_list_single)
         val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = MaritalListAdapter(this@ProfileEditPersonalActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@ProfileEditPersonalActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }

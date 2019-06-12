@@ -1,22 +1,5 @@
-/*
- *    Copyright 2015 Kaopiz Software Co., Ltd.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
 package com.kaopiz.kprogresshud;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 
 public class KProgressHUD {
 
@@ -54,7 +38,7 @@ public class KProgressHUD {
     private Handler mGraceTimer;
     private boolean mFinished;
 
-    public KProgressHUD(Context context) {
+    private KProgressHUD(Context context) {
         mContext = context;
         mProgressDialog = new ProgressDialog(context);
         mDimAmount = 0;
@@ -350,7 +334,7 @@ public class KProgressHUD {
         private int mLabelColor = Color.WHITE;
         private int mDetailColor = Color.WHITE;
 		
-        public ProgressDialog(Context context) {
+        private ProgressDialog(Context context) {
             super(context);
         }
 
@@ -411,7 +395,7 @@ public class KProgressHUD {
             mBackgroundLayout.setLayoutParams(params);
         }
 
-        public void setProgress(int progress) {
+        private void setProgress(int progress) {
             if (mDeterminateView != null) {
                 mDeterminateView.setProgress(progress);
                 if (mIsAutoDismiss && progress >= mMaxProgress) {
@@ -436,7 +420,7 @@ public class KProgressHUD {
             }
         }
 
-        public void setLabel(String label) {
+        private void setLabel(String label) {
             mLabel = label;
             if (mLabelText != null) {
                 if (label != null) {
@@ -448,7 +432,7 @@ public class KProgressHUD {
             }
         }
 
-        public void setDetailsLabel(String detailsLabel) {
+        private void setDetailsLabel(String detailsLabel) {
             mDetailsLabel = detailsLabel;
             if (mDetailsText != null) {
                 if (detailsLabel != null) {
@@ -460,7 +444,7 @@ public class KProgressHUD {
             }
         }
 
-        public void setLabel(String label, int color) {
+        private void setLabel(String label, int color) {
             mLabel = label;
             mLabelColor = color;
             if (mLabelText != null) {
@@ -474,7 +458,7 @@ public class KProgressHUD {
             }
         }
 
-        public void setDetailsLabel(String detailsLabel, int color) {
+        private void setDetailsLabel(String detailsLabel, int color) {
             mDetailsLabel = detailsLabel;
             mDetailColor = color;
             if (mDetailsText != null) {
@@ -488,7 +472,7 @@ public class KProgressHUD {
             }
         }
 
-        public void setSize(int width, int height) {
+        private void setSize(int width, int height) {
             mWidth = width;
             mHeight = height;
             if (mBackgroundLayout != null) {

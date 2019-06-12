@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.view.DashboardActivity
 
-class PointsFragment: androidx.fragment.app.Fragment() {
+class PointsFragment: Fragment() {
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return PointsFragment()
         }
     }

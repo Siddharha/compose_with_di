@@ -95,13 +95,13 @@ public class CircularImageView extends AppCompatImageView {
     //endregion
 
     //region Set Attr Method
-    public void setBorderWidth(float borderWidth) {
+    private void setBorderWidth(float borderWidth) {
         this.borderWidth = borderWidth;
         requestLayout();
         invalidate();
     }
 
-    public void setBorderColor(int borderColor) {
+    private void setBorderColor(int borderColor) {
         if (paintBorder != null)
             paintBorder.setColor(borderColor);
         invalidate();
@@ -147,7 +147,7 @@ public class CircularImageView extends AppCompatImageView {
     @Override
     public ScaleType getScaleType() {
         ScaleType currentScaleType = super.getScaleType();
-        return currentScaleType == null || currentScaleType != CENTER_INSIDE ? CENTER_CROP : currentScaleType;
+        return currentScaleType != CENTER_INSIDE ? CENTER_CROP : currentScaleType;
     }
 
     @Override
@@ -172,7 +172,7 @@ public class CircularImageView extends AppCompatImageView {
             return;
 
         if (!isInEditMode()) {
-            canvasSize = Math.min(canvas.getWidth(), canvas.getHeight());
+            canvasSize = Math.min(getWidth(), getHeight());
         }
 
         // circleCenter is the x or y of the view's center
@@ -360,7 +360,7 @@ public class CircularImageView extends AppCompatImageView {
         START,
         END;
 
-        public int getValue() {
+        private int getValue() {
             switch (this) {
                 case CENTER:
                     return 1;
@@ -376,7 +376,7 @@ public class CircularImageView extends AppCompatImageView {
             throw new IllegalArgumentException("Not value available for this ShadowGravity: " + this);
         }
 
-        public static ShadowGravity fromValue(int value) {
+        private static ShadowGravity fromValue(int value) {
             switch (value) {
                 case 1:
                     return CENTER;

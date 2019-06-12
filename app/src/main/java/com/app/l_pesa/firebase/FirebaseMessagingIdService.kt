@@ -26,7 +26,7 @@ import java.util.*
 class FirebaseMessagingIdService : FirebaseMessagingService() {
 
     private lateinit var notificationManager: NotificationManager
-    private val ADMIN_CHANNEL_ID = "l_pesa"
+    private val CHANNELID = "l_pesa"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
@@ -44,7 +44,7 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
                         PendingIntent.FLAG_ONE_SHOT)
 
                 val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-                val notificationBuilder = NotificationCompat.Builder(this,ADMIN_CHANNEL_ID)
+                val notificationBuilder = NotificationCompat.Builder(this,CHANNELID)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(message.data["title"])
                         .setContentText(message.data["body"])
@@ -57,8 +57,6 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
             }
 
 
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -67,7 +65,7 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
         val adminChannelDescription = getString(R.string.app_name)
 
         val adminChannel: NotificationChannel
-        adminChannel = NotificationChannel(ADMIN_CHANNEL_ID, adminChannelName, NotificationManager.IMPORTANCE_HIGH)
+        adminChannel = NotificationChannel(CHANNELID, adminChannelName, NotificationManager.IMPORTANCE_HIGH)
         adminChannel.description = adminChannelDescription
         adminChannel.enableLights(true)
         adminChannel.lightColor = Color.RED

@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.layout_settings_item.view.*
 
 class SettingsAdapter(private val context: Context, private val items: List<SettingsItem>, private val callBack: ICallBackListClick)
 
-    : androidx.recyclerview.widget.RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
+    : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(items[position],position,callBack)
@@ -31,7 +31,7 @@ class SettingsAdapter(private val context: Context, private val items: List<Sett
 
     override fun getItemCount(): Int = items.size
 
-    class ViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bindItem(items: SettingsItem,position: Int, callBack: ICallBackListClick){
             itemView.txtSetting.text = items.name
             Glide.with(itemView.context)

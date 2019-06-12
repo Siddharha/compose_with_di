@@ -193,7 +193,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         if (photoFile!!.exists()) {
             photoFile!!.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile!!.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@RegistrationStepThreeActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
