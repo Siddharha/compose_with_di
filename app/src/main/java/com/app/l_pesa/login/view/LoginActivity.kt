@@ -26,6 +26,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -303,13 +304,14 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 jsonObjectRequestChild.addProperty("model", Build.MODEL)
                 jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
                 jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
-                println("JSON"+jsonObject)
+                //println("JSON"+jsonObject)
 
             }
             else

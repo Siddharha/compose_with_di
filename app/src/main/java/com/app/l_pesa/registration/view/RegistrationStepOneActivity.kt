@@ -17,6 +17,7 @@ import android.text.TextWatcher
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -151,6 +152,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 jsonObjectRequestChild.addProperty("model", Build.MODEL)
                 jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
                 jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 

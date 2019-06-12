@@ -18,6 +18,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.OnOtpCompletionListener
@@ -100,6 +101,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
                     jsonObjectDeviceData.addProperty("model", modelDevice.post_data.device_data.model)
                     jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
                     jsonObjectDeviceData.addProperty("manufacturer", modelDevice.post_data.device_data.manufacturer)
+                    jsonObjectDeviceData.addProperty("app_version", BuildConfig.VERSION_NAME)
 
                     jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
 
@@ -212,6 +214,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
             jsonObjectDeviceData.addProperty("model", modelDevice.post_data.device_data.model)
             jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
             jsonObjectDeviceData.addProperty("manufacturer", modelDevice.post_data.device_data.manufacturer)
+            jsonObjectDeviceData.addProperty("app_version", BuildConfig.VERSION_NAME)
 
             jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
 

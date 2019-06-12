@@ -21,6 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -125,6 +126,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
                 jsonObjectRequestChild.addProperty("model", Build.MODEL)
                 jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
                 jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
