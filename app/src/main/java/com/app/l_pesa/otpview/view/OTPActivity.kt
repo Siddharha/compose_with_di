@@ -102,7 +102,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
                     jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
                     jsonObjectDeviceData.addProperty("manufacturer", modelDevice.post_data.device_data.manufacturer)
                     jsonObjectDeviceData.addProperty("app_version", BuildConfig.VERSION_NAME)
-                    jsonObjectDeviceData.addProperty("app_code", BuildConfig.VERSION_CODE)
+                    jsonObjectDeviceData.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
 
                     jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
 
@@ -216,7 +216,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
             jsonObjectDeviceData.addProperty("product", modelDevice.post_data.device_data.product)
             jsonObjectDeviceData.addProperty("manufacturer", modelDevice.post_data.device_data.manufacturer)
             jsonObjectDeviceData.addProperty("app_version", BuildConfig.VERSION_NAME)
-            jsonObjectDeviceData.addProperty("app_code", BuildConfig.VERSION_CODE)
+            jsonObjectDeviceData.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
 
             jsonObjectDeviceInfo.add("device_data",jsonObjectDeviceData)
 
