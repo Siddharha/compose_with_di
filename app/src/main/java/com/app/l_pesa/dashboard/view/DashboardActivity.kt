@@ -23,6 +23,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.*
@@ -76,7 +77,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             }
             override fun onFinish() {
-
                 onSessionTimeOut(resources.getString(R.string.session_time_out))
                 countDownTimer.cancel()
 
@@ -550,7 +550,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
     public override fun onDestroy() {
-      countDownTimer.cancel()
-        super.onDestroy()
+    super.onDestroy()
+     countDownTimer.cancel()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 }
