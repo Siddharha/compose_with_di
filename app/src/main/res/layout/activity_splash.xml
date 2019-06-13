@@ -64,7 +64,7 @@
 
 
 
-        <ProgressBar
+        <!--<ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="@dimen/_32sdp"
@@ -75,7 +75,28 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:visibility="invisible"
 
-            />
+            />-->
+
+
+        <FrameLayout
+            android:id="@+id/frameProgress"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:background="#55ffffff"
+            android:padding="@dimen/_3sdp">
+
+                <View
+                    android:id="@+id/view_progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorWhite" />
+        </FrameLayout>
 
 
 
