@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/lpesa_logo" />
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/textView4"
+        android:id="@+id/textView1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/starter_loan"
@@ -48,10 +48,11 @@
         android:textStyle="bold"
         android:layout_marginTop="@dimen/_15sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"/>
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/textView24"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorSemiWhite"
@@ -61,19 +62,21 @@
         android:text="@string/already_using_lpesa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        />
 
     <com.app.l_pesa.common.CustomButtonRegular
+        android:id="@+id/buttonLogin"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/bg_black_view"
         android:text="@string/sign_in"
         android:fontFamily="@font/montserrat"
-        android:id="@+id/buttonLogin"
         android:textColor="@color/colorSemiWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
