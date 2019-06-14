@@ -69,7 +69,7 @@
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                app:layout_constraintBottom_toTopOf="@+id/textView34"
+                app:layout_constraintBottom_toTopOf="@+id/txt_min_lpk_amount"
                 app:layout_constraintTop_toBottomOf="@+id/txtLockedVal">
 
                 <com.app.l_pesa.common.CommonEditTextRegular
@@ -85,7 +85,7 @@
             </com.app.l_pesa.common.CommonInputLayout>
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView34"
+                android:id="@+id/txt_min_lpk_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
@@ -94,7 +94,6 @@
                 android:drawableStart="@drawable/ic_info_icon"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/minimum_withdrawal_amount"
                 android:textColor="@color/colorSemiBlack"
                 android:textSize="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
@@ -119,7 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_min_lpk_amount" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
