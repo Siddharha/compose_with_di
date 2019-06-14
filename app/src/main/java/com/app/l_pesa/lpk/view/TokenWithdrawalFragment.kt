@@ -50,7 +50,7 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
     {
         val sharedPrefOBJ= SharedPref(activity!!)
         val infoLPK = Gson().fromJson<ResInfoLPK.Data>(sharedPrefOBJ.lpkInfo, ResInfoLPK.Data::class.java)
-        txt_min_lpk_amount.text = "Minimum withdrawal amount is "+infoLPK.lpkMinWithdrawal.toString()+" LPK"
+        txt_min_lpk_amount.text = resources.getString(R.string.minimum_withdrawal_amount)+" "+infoLPK.lpkMinWithdrawal.toString()+" LPK"
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
@@ -68,7 +68,7 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
             else if(infoLPK.lpkMinWithdrawal.toInt()>etToken.text.toString().toInt())
             {
                 CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)
-                CommonMethod.customSnackBarError(rootLayout,activity!!,"Minimum withdrawal amount is "+infoLPK.lpkMinWithdrawal.toInt().toString()+" LPK")
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.minimum_withdrawal_amount)+" "+infoLPK.lpkMinWithdrawal.toInt().toString()+" LPK")
             }
             else
             {
