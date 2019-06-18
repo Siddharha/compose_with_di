@@ -70,11 +70,6 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
                 CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.minimum_withdrawal_amount)+" "+infoLPK.lpkMinWithdrawal.toInt().toString()+" LPK")
             }
-            else if(infoLPK.lpkMaxWithdrawal.toInt()<etToken.text.toString().toInt())
-            {
-                CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.maximum_withdrawal_amount)+" "+infoLPK.lpkMaxWithdrawal.toInt().toString()+" LPK")
-            }
             else
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
