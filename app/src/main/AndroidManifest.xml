@@ -213,7 +213,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service android:name=".firebase.FirebaseMessagingIdService">
+        <service android:name=".firebase.FirebaseMessagingIdService"
+            >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

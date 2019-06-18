@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.graphics.Typeface
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -42,7 +43,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private var lat=""
     private var long=""
-
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +62,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val productID    = bundle!!.getString("PRODUCT_ID")
         val loanType     = bundle.getString("LOAN_TYPE")
 
-
+        initTimer()
         initLoader()
         loadDescription()
 
@@ -99,6 +100,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         fetchLocation()
 
     }
+
 
 
     private fun applyLoan(loan_type: String?, product_id: String?)
@@ -318,6 +320,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         stopService(Intent(this, LocationBackgroundService::class.java))
         super.onDestroy()
+        countDownTimer.cancel()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -335,6 +338,36 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 
 

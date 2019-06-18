@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
@@ -18,11 +19,14 @@ import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackPin
 import com.app.l_pesa.pin.presenter.PresenterPin
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_change_pin.*
 import kotlinx.android.synthetic.main.content_change_pin.*
 
 class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
+    private lateinit var countDownTimer: CountDownTimer
+    private lateinit  var progressDialog: KProgressHUD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,16 +36,26 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@ChangePinActivity)
 
-        swipeRefresh()
         cancelButton()
         submitButton()
+        initTimer()
+        initLoader()
+    }
+    private fun initLoader()
+    {
+        progressDialog=KProgressHUD.create(this@ChangePinActivity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
     }
 
-    private fun swipeRefresh()
+    private fun dismiss()
     {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-        swipeRefreshLayout.isRefreshing=false
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
         }
     }
 
@@ -73,9 +87,9 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
             {
                 if(CommonMethod.isNetworkAvailable(this@ChangePinActivity))
                 {
+                    progressDialog.show()
                     buttonSubmit.isClickable=false
                     hideKeyboardView(this@ChangePinActivity)
-                    swipeRefreshLayout.isRefreshing=true
                     val jsonObject = JsonObject()
                     jsonObject.addProperty("old_password",etCurrentPin.text.toString())
                     jsonObject.addProperty("new_pin",etNewPin.text.toString())
@@ -96,7 +110,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
 
     override fun onSuccessChangePin() {
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
         Toast.makeText(this@ChangePinActivity,resources.getString(R.string.pin_change_successfully),Toast.LENGTH_SHORT).show()
         onBackPressed()
@@ -104,14 +118,14 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     }
 
     override fun onFailureChangePin(message: String) {
+        dismiss()
         buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,message)
     }
 
     override fun onSessionTimeOut(message: String) {
-        swipeRefreshLayout.isRefreshing=false
 
+        dismiss()
         val dialogBuilder = AlertDialog.Builder(this@ChangePinActivity)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
@@ -140,6 +154,11 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
     private fun toolbarFont(context: Activity) {
 
         for (i in 0 until toolbar.childCount) {
@@ -158,34 +177,45 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ChangePinActivity))
-                {
-                    CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,resources.getString(R.string.please_wait))
-                }
-                else
-                {
-                    hideKeyboardView(this@ChangePinActivity)
-                    onBackPressed()
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
-                }
-                true
+
+                hideKeyboardView(this@ChangePinActivity)
+                onBackPressed()
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+            true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    override fun onBackPressed() {
 
-        if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ChangePinActivity))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,resources.getString(R.string.please_wait))
-        }
-        else
-        {
-            super.onBackPressed()
-            overridePendingTransition(R.anim.left_in, R.anim.right_out)
-        }
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
 
     }
 
