@@ -1,8 +1,10 @@
 package com.app.l_pesa.lpk.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
@@ -10,9 +12,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.adapter.SavingsTabAdapter
+import com.app.l_pesa.main.view.MainActivity
 import kotlinx.android.synthetic.main.activity_lpk_savings.*
 
 
@@ -20,6 +25,7 @@ class LPKSavingsActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener 
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +35,7 @@ class LPKSavingsActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener 
         toolbarFont(this@LPKSavingsActivity)
 
         initUI()
+        initTimer()
     }
 
     private fun initUI()
@@ -139,6 +146,57 @@ class LPKSavingsActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener 
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
+    }
+
+
+    fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@LPKSavingsActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@LPKSavingsActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@LPKSavingsActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 }

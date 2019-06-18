@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
@@ -25,6 +26,7 @@ import java.util.*
 
 class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
 
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
 
         initData()
         swipeRefresh()
+        initTimer()
 
     }
 
@@ -93,6 +96,36 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
         CommonMethod.customSnackBarError(rootLayout,this@LoanPaymentHistory,message)
     }
 
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
+    }
+
     override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
@@ -131,10 +164,16 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@LoanPaymentHistory))
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@LoanPaymentHistory,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                }
                 true
+
             }
 
             else -> super.onOptionsItemSelected(item)

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
@@ -26,6 +27,7 @@ import kotlinx.android.synthetic.main.content_help.*
 
 class HelpActivity : AppCompatActivity() {
 
+    private lateinit var countDownTimer          : CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class HelpActivity : AppCompatActivity() {
         toolbarFont(this@HelpActivity)
 
         initData()
+        initTimer()
 
     }
 
@@ -189,6 +192,36 @@ class HelpActivity : AppCompatActivity() {
 
     public override fun onDestroy() {
        super.onDestroy()
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 
 }

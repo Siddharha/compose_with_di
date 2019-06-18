@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     private lateinit var listSavingsHistory           : ArrayList<ResWalletHistory.SavingsHistory>
     private lateinit var adapterTransactionHistory    : TransactionAllAdapter
     private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
+    private lateinit var countDownTimer               : CountDownTimer
 
     private var hasNext=false
     private var after=""
@@ -48,6 +50,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         swipeRefresh()
         initData("","","DEFAULT")
+        initTimer()
 
     }
 
@@ -311,9 +314,16 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                }
                 true
+
             }
 
             else -> super.onOptionsItemSelected(item)
@@ -323,6 +333,36 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 
 
