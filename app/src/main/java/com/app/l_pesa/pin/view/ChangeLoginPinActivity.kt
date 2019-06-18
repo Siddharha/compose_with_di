@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +31,9 @@ import kotlinx.android.synthetic.main.content_change_login_pin.*
 
 class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
 
+    private lateinit var countDownTimer: CountDownTimer
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_login_pin)
@@ -38,6 +42,7 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
 
         toolbarFont(this@ChangeLoginPinActivity)
         initUI()
+        initTimer()
 
     }
 
@@ -200,8 +205,16 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
         return when (item.itemId) {
             android.R.id.home -> {
                 CommonMethod.hideKeyboardView(this@ChangeLoginPinActivity)
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                if(progressBar.visibility==View.VISIBLE && CommonMethod.isNetworkAvailable(this@ChangeLoginPinActivity))
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@ChangeLoginPinActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                }
+
                 true
             }
 
@@ -214,6 +227,36 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.content_change_pin.*
 class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
     private lateinit var countDownTimer: CountDownTimer
-    private lateinit  var progressDialog: KProgressHUD
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,24 +40,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
         cancelButton()
         submitButton()
         initTimer()
-        initLoader()
-    }
-    private fun initLoader()
-    {
-        progressDialog=KProgressHUD.create(this@ChangePinActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
 
-    }
-
-    private fun dismiss()
-    {
-        if(progressDialog.isShowing)
-        {
-            progressDialog.dismiss()
-        }
     }
 
     private fun submitButton()
@@ -87,7 +71,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
             {
                 if(CommonMethod.isNetworkAvailable(this@ChangePinActivity))
                 {
-                    progressDialog.show()
+                    progressBar.visibility=View.VISIBLE
                     buttonSubmit.isClickable=false
                     hideKeyboardView(this@ChangePinActivity)
                     val jsonObject = JsonObject()
@@ -110,7 +94,8 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
 
     override fun onSuccessChangePin() {
-        dismiss()
+
+        progressBar.visibility=View.INVISIBLE
         buttonSubmit.isClickable=true
         Toast.makeText(this@ChangePinActivity,resources.getString(R.string.pin_change_successfully),Toast.LENGTH_SHORT).show()
         onBackPressed()
@@ -118,14 +103,15 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     }
 
     override fun onFailureChangePin(message: String) {
-        dismiss()
+
+        progressBar.visibility=View.INVISIBLE
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,message)
     }
 
     override fun onSessionTimeOut(message: String) {
 
-        dismiss()
+        progressBar.visibility=View.INVISIBLE
         val dialogBuilder = AlertDialog.Builder(this@ChangePinActivity)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
@@ -177,10 +163,17 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-
                 hideKeyboardView(this@ChangePinActivity)
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                if(progressBar.visibility==View.VISIBLE && CommonMethod.isNetworkAvailable(this@ChangePinActivity))
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@ChangePinActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                }
+
             true
             }
 
