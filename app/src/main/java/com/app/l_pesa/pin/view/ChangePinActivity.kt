@@ -184,7 +184,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
 
     private fun initTimer() {
 
-        countDownTimer= object : CountDownTimer(300000, 1000) {
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
             }

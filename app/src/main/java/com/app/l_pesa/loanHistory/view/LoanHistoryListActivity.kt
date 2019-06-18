@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.LoanHistoryTabPager
 import com.app.l_pesa.main.view.MainActivity
@@ -188,7 +189,7 @@ class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedList
 
     private fun initTimer() {
 
-        countDownTimer= object : CountDownTimer(300000, 1000) {
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
             }

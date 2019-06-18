@@ -27,6 +27,10 @@ import java.util.regex.Pattern
  */
 object CommonMethod {
 
+    fun sessionTime(): Int {
+        return 300000
+    }
+
     fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 

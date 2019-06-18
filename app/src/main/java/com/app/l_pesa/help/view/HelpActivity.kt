@@ -15,6 +15,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.help.model.HelpData
 import com.app.l_pesa.main.view.MainActivity
@@ -196,7 +197,7 @@ class HelpActivity : AppCompatActivity() {
 
     private fun initTimer() {
 
-        countDownTimer= object : CountDownTimer(300000, 1000) {
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
             }
