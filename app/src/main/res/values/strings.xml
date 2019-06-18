@@ -363,6 +363,8 @@
     <string name="apply_withdrawal">Are you sure you want to withdraw?</string>
     <string name="apply_exit_point">Are you sure you want to exit?</string>
     <string name="delete_exit_loan">Are you sure you want to delete?</string>
+    <string name="minimum_investment_amount">Minimum investment amount is </string>
+    <string name="maximum_investment_amount">Maximum invest up to </string>
 
     <!--Token-->
     <string name="transfer">Transfer</string>

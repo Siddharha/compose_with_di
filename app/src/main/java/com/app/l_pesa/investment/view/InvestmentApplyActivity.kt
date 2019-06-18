@@ -74,6 +74,14 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
             {
                 CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.required_investment_amount))
             }
+            else if(globalInvestmentPlan.minimumInvestAmount>etAmount.text.toString().toInt())
+            {
+                CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.minimum_investment_amount)+" "+globalInvestmentPlan.minimumInvestAmount)
+            }
+            else if(globalInvestmentPlan.maximumInvestAmount<etAmount.text.toString().toInt())
+            {
+                CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.maximum_investment_amount)+" "+globalInvestmentPlan.maximumInvestAmount)
+            }
             else
             {
                 if(CommonMethod.isNetworkAvailable(this@InvestmentApplyActivity))

@@ -89,9 +89,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/provide_amount"
+                        android:maxLength="10"
+                        android:digits="0123456789"
                         android:textColor="@color/dark_text_color"
                         android:textSize="@dimen/_13sdp"
-                        android:inputType="numberSigned" />
+                        android:inputType="number" />
 
                 </com.app.l_pesa.common.CommonInputLayout>
 
