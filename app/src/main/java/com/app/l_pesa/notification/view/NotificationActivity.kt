@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
@@ -25,6 +26,7 @@ import java.util.*
 
 class NotificationActivity : AppCompatActivity(), ICallBackNotification {
 
+    private lateinit var countDownTimer: CountDownTimer
     private lateinit var listNotificationHistory        : ArrayList<ResNotification.NotificationHistory>
     private lateinit var adapterNotification            : AdapterNotification
 
@@ -40,6 +42,7 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
 
 
         initData()
+        initTimer()
         swipeRefresh()
     }
 
@@ -196,8 +199,17 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                CommonMethod.hideKeyboardView(this@NotificationActivity)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@NotificationActivity))
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@NotificationActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                }
+
                 true
             }
 
@@ -208,6 +220,36 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 
 
