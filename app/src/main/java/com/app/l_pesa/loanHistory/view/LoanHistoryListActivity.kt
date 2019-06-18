@@ -1,8 +1,10 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
@@ -10,16 +12,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.LoanHistoryTabPager
-
+import com.app.l_pesa.main.view.MainActivity
 import kotlinx.android.synthetic.main.activity_loan_list_history.*
+
 
 class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener{
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,7 @@ class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedList
         toolbarFont(this@LoanHistoryListActivity)
 
         initUI()
+        initTimer()
 
 
     }
@@ -157,6 +163,57 @@ class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedList
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+     fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@LoanHistoryListActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@LoanHistoryListActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@LoanHistoryListActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
+    }
+
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(300000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 
 }
