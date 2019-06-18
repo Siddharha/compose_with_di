@@ -168,9 +168,11 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             {
                 itemView.txtDetails.visibility=View.GONE
                 itemView.imageView5.visibility=View.VISIBLE
+                itemView.imageView6.visibility=View.VISIBLE
                 itemView.txtInterest.visibility=View.VISIBLE
                 itemView.txtMaturity.visibility=View.VISIBLE
                 itemView.imageView7.visibility=View.INVISIBLE
+                itemView.imageView6.setImageResource(R.drawable.ic_calendar_icon)
                 itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.maturity)+": "+"</font>"+"<font color='#777b7e'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")
