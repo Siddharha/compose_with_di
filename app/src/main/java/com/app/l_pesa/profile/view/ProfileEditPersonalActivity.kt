@@ -178,7 +178,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 val date         = inputFormat.parse(txtDOB.text.toString())
 
                 val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-                outputFormat.format(date)
+                outputFormat.format(date!!)
             } else {
                 ""
             }
@@ -292,7 +292,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val date         = inputFormat.parse(txtDOB.text.toString())
 
         val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-        val dateRequest  = outputFormat.format(date)
+        val dateRequest  = outputFormat.format(date!!)
 
         val jsonObject = JsonObject()
         jsonObject.addProperty("title",txtTitle.text.toString())
@@ -618,7 +618,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             val date = inputFormat.parse(profileData.userPersonalInfo!!.dob)
 
             val outputFormat = SimpleDateFormat("dd-MM-yyyy")
-            txtDOB.setText(outputFormat.format(date))
+            txtDOB.setText(outputFormat.format(date!!))
         }
 
         txtDOB.isFocusable=false

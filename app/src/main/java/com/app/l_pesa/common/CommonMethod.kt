@@ -5,6 +5,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import com.google.android.material.snackbar.Snackbar
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IntRange
 import com.app.l_pesa.R
 import java.io.File
 import java.io.FileInputStream
@@ -31,14 +34,33 @@ object CommonMethod {
         return 300000
     }
 
+
+    //@IntRange(from = 0, to = 2)
     fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-            var isConnected = false
-            val activeNetwork = connectivityManager.activeNetworkInfo
-            isConnected = activeNetwork != null && activeNetwork.isConnected
-
-        return isConnected
+        var result = false //var result = 0. Returns connection type. 0: none; 1: mobile data; 2: wifi
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            cm?.run {
+                cm.getNetworkCapabilities(cm.activeNetwork)?.run {
+                    if (hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = true //2
+                    } else if (hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = true  //1
+                    }
+                }
+            }
+        } else {
+            cm?.run {
+                cm.activeNetworkInfo?.run {
+                    if (type == ConnectivityManager.TYPE_WIFI) {
+                        result = true //2
+                    } else if (type == ConnectivityManager.TYPE_MOBILE) {
+                        result = true //1
+                    }
+                }
+            }
+        }
+        return result
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -49,7 +71,7 @@ object CommonMethod {
                 val date         = inputFormat.parse(inputDate)
 
                 val outputFormat = SimpleDateFormat("MMM dd, yyyy")
-                outputFormat.format(date)
+                outputFormat.format(date!!)
             }
             else ""
 
@@ -64,7 +86,7 @@ object CommonMethod {
             val date         = inputFormat.parse(inputDate)
 
             val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-            outputFormat.format(date)
+            outputFormat.format(date!!)
         }
         else ""
 
