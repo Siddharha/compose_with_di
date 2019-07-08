@@ -431,5 +431,9 @@
     <string name="telegram">Telegram</string>
     <string name="whats_app">WhatsApp</string>
 
+    <!--Loan Calculator-->
+    <string name="loan_type">Loan Type</string>
+    <string name="product_name">Product Name</string>
+
 
 </resources>
