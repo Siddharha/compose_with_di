@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -28,11 +29,11 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
 
-class ProfileFragment: androidx.fragment.app.Fragment(), ICallBackUserInfo {
+class ProfileFragment: Fragment(), ICallBackUserInfo {
 
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return ProfileFragment()
         }
     }

@@ -13,6 +13,12 @@
             android:id="@+id/action_profile"
             android:icon="@drawable/ic_my_profile"
             android:title="@string/nav_item_profile" />
+
+        <item
+            android:id="@+id/action_loan_calculator"
+            android:icon="@drawable/ic_loan_calculator"
+            android:title="@string/nav_item_loan_calculator" />
+
         <item
             android:id="@+id/action_loan"
             android:icon="@drawable/ic_loan_purpose"

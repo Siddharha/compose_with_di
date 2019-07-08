@@ -101,6 +101,7 @@
     <!--MENU-->
     <string name="nav_item_dashboard">Dashboard</string>
     <string name="nav_item_profile">My Profile</string>
+    <string name="nav_item_loan_calculator">Loan Calculator</string>
     <string name="nav_item_loan">Loan</string>
     <string name="nav_item_points">Buy Points</string>
     <string name="nav_item_investment">Investment</string>

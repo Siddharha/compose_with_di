@@ -26,6 +26,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.calculator.view.LoanCalculatorFragment
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
@@ -343,6 +344,18 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 {
                     toolbar.title =resources.getString(R.string.nav_item_profile)
                     navigateToFragment(ProfileFragment.newInstance())
+                }
+
+            }
+
+            R.id.action_loan_calculator -> {
+                if(currentFragment is LoanCalculatorFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_loan_calculator)
+                    navigateToFragment(LoanCalculatorFragment.newInstance())
                 }
 
             }
