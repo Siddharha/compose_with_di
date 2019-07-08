@@ -433,7 +433,10 @@
 
     <!--Loan Calculator-->
     <string name="loan_type">Loan Type</string>
+    <string name="choose_loan_type">Choose Loan Type</string>
     <string name="product_name">Product Name</string>
+    <string name="choose_option">Choose Option</string>
+    <string name="calculate_your_loan">Calculate Your Loan</string>
 
 
 </resources>
