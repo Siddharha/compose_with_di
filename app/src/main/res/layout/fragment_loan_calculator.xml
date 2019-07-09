@@ -264,9 +264,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/view_divider"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_75sdp"
-                app:progressBackgroundWidth="@dimen/_15sdp"
+                app:progressBackgroundWidth="@dimen/_10sdp"
                 app:maxProgress="100"
-                app:progressWidth="@dimen/_15sdp"
+                app:progressWidth="@dimen/_12sdp"
                 app:roundEdges="true"/>
 
             <TextView

@@ -14,7 +14,7 @@ import com.app.l_pesa.common.CustomTypeFaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
 import androidx.core.content.ContextCompat
-
+import android.animation.ValueAnimator
 
 
 class LoanCalculatorFragment:Fragment() {
@@ -64,11 +64,9 @@ class LoanCalculatorFragment:Fragment() {
         }
 
 
-       /* progress.setProgressGradient(Color.RED, Color.YELLOW, Color.GREEN)
-        progress.setProgressBackgroundGradient(Color.RED, Color.YELLOW, Color.GREEN)*/
         seekBar.progress=50
 
-        seekBar.setOnTouchListener(View.OnTouchListener { view, motionEvent -> true })
+        seekBar.setOnTouchListener { _, _ -> true }
     }
 
     private fun applyFontToMenuItem(mi: MenuItem) {
