@@ -15,8 +15,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="opacityPercent" value="75" />
-                            <entry key="outputName" value="ic_loan_calculator" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../Desktop/1674822.svg" />
+                            <entry key="outputName" value="ic_dropdown_default" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/dropdown.svg" />
                           </map>
                         </option>
                       </PersistentState>

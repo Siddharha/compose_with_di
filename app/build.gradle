@@ -95,4 +95,5 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.13.5'*/
 
     implementation project(':kprogresshud')
+
 }

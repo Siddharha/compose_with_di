@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screenBackground"
-    >
+    android:background="@color/screenBackground">
 
 
 
@@ -164,7 +164,7 @@
                     android:textColor="@color/textColors"
                     android:textColorHint="@color/textColors"
                     android:textSize="@dimen/_11sdp"
-                    android:drawableEnd="@drawable/ic_down_arrow"
+                    android:drawableEnd="@drawable/ic_dropdown_default"
                     />
             </com.app.l_pesa.common.CommonInputLayout>
 
@@ -205,7 +205,7 @@
                     android:textColor="@color/textColors"
                     android:textColorHint="@color/textColors"
                     android:textSize="@dimen/_11sdp"
-                    android:drawableEnd="@drawable/ic_down_arrow"
+                    android:drawableEnd="@drawable/ic_dropdown_default"
                     />
             </com.app.l_pesa.common.CommonInputLayout>
 
@@ -228,7 +228,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_loan_type"
-            app:layout_constraintBottom_toTopOf="@+id/view_divider"
+
 
             />
 
@@ -239,21 +239,72 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@color/divider_color"
             app:layout_constraintTop_toBottomOf="@+id/buttonCalculateLoan"
-            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
             />
 
 
+        <FrameLayout
+            android:id="@+id/frameSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_85sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/scrollView"
+            app:layout_constraintTop_toBottomOf="@+id/view_divider"
+            android:layout_centerInParent="true"
+
+            >
+
+
+           <com.app.l_pesa.arcseekbar.ArcSeekBar
+                android:id="@+id/seekBar"
+                app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+                app:layout_constraintTop_toBottomOf="@+id/view_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_75sdp"
+                app:progressBackgroundWidth="@dimen/_15sdp"
+                app:maxProgress="100"
+                app:progressWidth="@dimen/_15sdp"
+                app:roundEdges="true"/>
+
+            <TextView
+                android:id="@+id/txt_credit_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/credit_score_calculator"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+
+                />
+
+
+
+      </FrameLayout>
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@+id/frameSeekBar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
         <TableLayout
             android:id="@+id/tableLayout"
-            app:layout_constraintTop_toBottomOf="@+id/view_divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             >
 
 
@@ -512,7 +563,11 @@
 
             </TableRow>
 
+
         </TableLayout>
+
+        </ScrollView>
+
 
 
 

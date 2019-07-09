@@ -1,6 +1,5 @@
 package com.app.l_pesa.calculator.view
 
-import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import android.text.Spannable
@@ -16,7 +14,7 @@ import com.app.l_pesa.common.CustomTypeFaceSpan
 import android.text.SpannableString
 import android.graphics.Typeface
 import androidx.core.content.ContextCompat
-import com.app.l_pesa.R
+
 
 
 class LoanCalculatorFragment:Fragment() {
@@ -45,7 +43,7 @@ class LoanCalculatorFragment:Fragment() {
         ti_loan_type.setOnClickListener {
 
             val popupMenuOBJ = PopupMenu(activity!!, ti_loan_type)
-            popupMenuOBJ.menuInflater.inflate(R.menu.menu_loan_type, popupMenuOBJ.menu)
+            popupMenuOBJ.menuInflater.inflate(com.app.l_pesa.R.menu.menu_loan_type, popupMenuOBJ.menu)
 
             popupMenuOBJ.setOnMenuItemClickListener { item: MenuItem? ->
 
@@ -64,6 +62,13 @@ class LoanCalculatorFragment:Fragment() {
 
             popupMenuOBJ.show()
         }
+
+
+       /* progress.setProgressGradient(Color.RED, Color.YELLOW, Color.GREEN)
+        progress.setProgressBackgroundGradient(Color.RED, Color.YELLOW, Color.GREEN)*/
+        seekBar.progress=50
+
+        seekBar.setOnTouchListener(View.OnTouchListener { view, motionEvent -> true })
     }
 
     private fun applyFontToMenuItem(mi: MenuItem) {
