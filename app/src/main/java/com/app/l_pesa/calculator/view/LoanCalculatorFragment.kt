@@ -41,6 +41,7 @@ class LoanCalculatorFragment:Fragment() {
     private fun initData()
     {
 
+        ti_loan_type.typeface=Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf");
         ti_loan_type.setOnClickListener {
 
             val popupMenuOBJ = PopupMenu(activity!!, ti_loan_type)
