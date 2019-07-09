@@ -263,7 +263,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/tableLayout"
                 app:layout_constraintTop_toBottomOf="@+id/view_divider"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_75sdp"
+                android:layout_height="@dimen/_85sdp"
                 app:progressBackgroundWidth="@dimen/_10sdp"
                 app:maxProgress="100"
                 app:progressWidth="@dimen/_12sdp"
