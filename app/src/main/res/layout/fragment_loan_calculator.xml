@@ -156,7 +156,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ti_loan_type"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="@dimen/_42sdp"
                     android:hint="@string/choose_loan_type"
                     android:focusable="false"
                     android:inputType="none"
@@ -195,7 +195,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ti_product_name"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="@dimen/_42sdp"
                     android:focusable="false"
                     android:inputType="none"
                     android:cursorVisible="false"
@@ -263,7 +263,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_85sdp"
                 app:progressBackgroundWidth="@dimen/_10sdp"
-                app:maxProgress="100"
                 app:progressWidth="@dimen/_12sdp"
                 app:roundEdges="true"/>
 
