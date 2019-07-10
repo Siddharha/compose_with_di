@@ -240,6 +240,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         val sharedPrefOBJ=SharedPref(activity!!)
         val currentProductList                        = Gson().toJson(data)
         sharedPrefOBJ.currentLoanProduct              = currentProductList
+        val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
+        dialogProduct(currentProduct)
 
     }
 
@@ -258,6 +260,9 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         val sharedPrefOBJ=SharedPref(activity!!)
         val businessProductList                        = Gson().toJson(data)
         sharedPrefOBJ.businessLoanProduct              = businessProductList
+
+        val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
+        dialogProduct(businessProduct)
     }
 
     override fun onEmptyBusinessLoan() {

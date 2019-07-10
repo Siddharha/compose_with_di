@@ -215,6 +215,8 @@ constructor(context: Context) // Constructor
         editor.remove("KEY_SET_ACCESS_TOKEN")
         editor.remove("KEY_SET_PROFILE_INFO")
         editor.remove("KEY_SET_LPK_INFO")
+        editor.remove("KEY_SET_CURRENT_LOAN_PRODUCT")
+        editor.remove("KEY_SET_BUSINESS_LOAN_PRODUCT")
         editor.commit()
         editor.apply()
     }
