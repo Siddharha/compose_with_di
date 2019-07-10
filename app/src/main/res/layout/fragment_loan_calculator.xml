@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -274,12 +274,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/credit_score_calculator"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorTextBlack"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:textStyle="bold"
 
                 />
 
@@ -342,7 +343,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="1"
+                    android:text="@string/dash_line"
                     android:gravity="center|start"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_11sdp"
@@ -385,7 +386,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="1"
+                    android:text="@string/dash_line"
                     android:gravity="center|start"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_11sdp"
@@ -427,7 +428,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="1"
+                    android:text="@string/dash_line"
                     android:gravity="center|start"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_11sdp"
@@ -469,7 +470,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="1"
+                    android:text="@string/dash_line"
                     android:gravity="center|start"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_11sdp"
@@ -512,7 +513,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="1"
+                    android:text="@string/dash_line"
                     android:gravity="center|start"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_11sdp"
@@ -553,7 +554,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
-                    android:text="1"
+                    android:text="@string/dash_line"
                     android:gravity="center|start"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_11sdp"
@@ -569,10 +570,7 @@
         </ScrollView>
 
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </LinearLayout>

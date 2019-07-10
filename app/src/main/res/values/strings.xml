@@ -444,6 +444,7 @@
     <string name="first_weekly_subscription">First Weekly Subscription</string>
     <string name="mid_weekly_subscription">Mid Weekly Subscription</string>
     <string name="last_weekly_subscription">Last Weekly Subscription</string>
+    <string name="select_loan_type">Select Loan Type</string>
 
 
 </resources>
