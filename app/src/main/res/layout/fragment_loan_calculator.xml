@@ -246,55 +246,12 @@
             />
 
 
-        <FrameLayout
-            android:id="@+id/frameSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_85sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/scrollView"
-            app:layout_constraintTop_toBottomOf="@+id/view_divider"
-            android:layout_centerInParent="true"
-
-            >
-
-
-           <com.app.l_pesa.arcseekbar.ArcSeekBar
-                android:id="@+id/seekBar"
-                app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-                app:layout_constraintTop_toBottomOf="@+id/view_divider"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_85sdp"
-                app:progressBackgroundWidth="@dimen/_10sdp"
-                app:progressWidth="@dimen/_12sdp"
-                app:roundEdges="true"/>
-
-            <TextView
-                android:id="@+id/txt_credit_score"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/credit_score_calculator"
-                android:textColor="@color/colorTextBlack"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:fontFamily="@font/montserrat"
-                android:textSize="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_7sdp"
-                android:textStyle="bold"
-
-                />
-
-
-
-      </FrameLayout>
-
-
-        <ScrollView
+    <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            app:layout_constraintTop_toBottomOf="@+id/frameSeekBar"
+            app:layout_constraintTop_toBottomOf="@+id/view_divider"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_15sdp"

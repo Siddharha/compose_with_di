@@ -14,7 +14,6 @@ import android.graphics.Typeface
 import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.view.*
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -24,7 +23,6 @@ import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.calculator.presenter.PresenterCalculator
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.model.ResDashboard
 import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
 import java.text.DecimalFormat
@@ -58,18 +56,12 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         initLoader()
 
         val sharedPrefOBJ= SharedPref(activity!!)
-        val dashBoard = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
-
         ti_loan_type.typeface=Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         ti_loan_type.setOnClickListener {
 
            popupLoanType()
         }
 
-
-        seekBar.maxProgress=dashBoard.maxCreditScore
-
-        seekBar.setOnTouchListener { _, _ -> true }
 
         buttonCalculateLoan.setOnClickListener {
 
