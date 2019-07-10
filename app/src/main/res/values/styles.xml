@@ -34,6 +34,7 @@
     <style name="customInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/colorAquaDeep</item>
         <item name="boxStrokeWidth">1px</item>
+        <item name="android:textColor">@color/textColors</item>
     </style>
 
     <style name="OtpWidget.OtpView" parent="Widget.AppCompat.EditText">

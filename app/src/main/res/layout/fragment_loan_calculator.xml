@@ -184,6 +184,7 @@
             >
 
             <com.app.l_pesa.common.CommonInputLayout
+                android:id="@+id/testId"
                 style="@style/customInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -206,6 +207,8 @@
                     android:drawableEnd="@drawable/ic_dropdown_default"
                     />
             </com.app.l_pesa.common.CommonInputLayout>
+
+
 
 
         </LinearLayout>

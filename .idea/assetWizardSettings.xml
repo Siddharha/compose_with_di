@@ -15,7 +15,7 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="opacityPercent" value="75" />
-                            <entry key="outputName" value="ic_dropdown_default" />
+                            <entry key="outputName" value="ic_dropdown_" />
                             <entry key="sourceFile" value="$PROJECT_DIR$/../../../snap/skype/common/dropdown.svg" />
                           </map>
                         </option>

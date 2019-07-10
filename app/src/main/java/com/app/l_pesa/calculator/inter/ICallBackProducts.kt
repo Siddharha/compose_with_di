@@ -13,4 +13,6 @@ interface ICallBackProducts {
     fun onErrorBusinessLoan(errorMessageOBJ: String)
 
     fun onSessionTimeOut(jsonMessage: String)
+
+    fun onClickProduct(productList: ResProducts.ProductList)
 }
