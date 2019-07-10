@@ -17,16 +17,23 @@ import android.graphics.Typeface
 import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import com.app.l_pesa.R
+import com.app.l_pesa.calculator.inter.ICallBackProducts
+import com.app.l_pesa.calculator.model.ResProducts
+import com.app.l_pesa.calculator.presenter.PresenterCalculator
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.pinview.model.LoginData
 import com.google.gson.Gson
+import com.kaopiz.kprogresshud.KProgressHUD
+import java.util.ArrayList
 
 
-class LoanCalculatorFragment:Fragment() {
+class LoanCalculatorFragment:Fragment(), ICallBackProducts {
+
 
     private var isLoanTypeEnable    = false
+    private lateinit  var progressDialog: KProgressHUD
 
     companion object {
         fun newInstance(): Fragment {
@@ -48,14 +55,10 @@ class LoanCalculatorFragment:Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
-
+        initLoader()
 
         val sharedPrefOBJ= SharedPref(activity!!)
         val dashBoard = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
-        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
-
-        txt_credit_score.text = resources.getString(R.string.credit_score_calculator) +"\n"+ userData.user_info.credit_score
-
 
         ti_loan_type.typeface=Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         ti_loan_type.setOnClickListener {
@@ -76,13 +79,32 @@ class LoanCalculatorFragment:Fragment() {
 
 
         seekBar.maxProgress=dashBoard.maxCreditScore
-        seekBar.progress=userData.user_info.credit_score
 
         seekBar.setOnTouchListener { _, _ -> true }
 
         buttonCalculateLoan.setOnClickListener {
 
             calculateLoan()
+        }
+
+
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
         }
     }
 
@@ -96,6 +118,51 @@ class LoanCalculatorFragment:Fragment() {
             ti_loan_type.setText(item!!.title)
             ti_loan_type.setBackgroundColor(Color.TRANSPARENT)
             ti_loan_type.backgroundTintList=(ContextCompat.getColorStateList(activity!!, android.R.color.transparent))
+
+            val sharedPrefOBJ= SharedPref(activity!!)
+
+
+            if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
+            {
+                if(sharedPrefOBJ.currentLoanProduct=="INIT")
+                {
+                    if(CommonMethod.isNetworkAvailable(activity!!))
+                    {
+                        progressDialog.show()
+                        val presenterCalculatorOBJ=PresenterCalculator()
+                        presenterCalculatorOBJ.getLoanProducts(activity!!,sharedPrefOBJ.countryCode,"current_loan",this)
+                    }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                    }
+                }
+                else
+                {
+                    val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
+                }
+            }
+            else
+            {
+                if(sharedPrefOBJ.businessLoanProduct=="INIT")
+                {
+                    if(CommonMethod.isNetworkAvailable(activity!!))
+                    {
+                        progressDialog.show()
+                        val presenterCalculatorOBJ=PresenterCalculator()
+                        presenterCalculatorOBJ.getLoanProducts(activity!!,sharedPrefOBJ.countryCode,"business_loan",this)
+                    }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                    }
+                }
+                else
+                {
+                    val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
+                }
+            }
+
 
             true
         }
@@ -111,7 +178,6 @@ class LoanCalculatorFragment:Fragment() {
 
     private fun calculateLoan()
     {
-
 
         if(TextUtils.isEmpty(ti_loan_type.text.toString()))
         {
@@ -136,6 +202,44 @@ class LoanCalculatorFragment:Fragment() {
         val mNewTitle = SpannableString(mi.title)
         mNewTitle.setSpan(CustomTypeFaceSpan("", font, Color.parseColor("#535559")), 0, mNewTitle.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         mi.title = mNewTitle
+    }
+
+    override fun onSuccessCurrentLoan(data: ResProducts.Data) {
+
+        dismiss()
+        val sharedPrefOBJ=SharedPref(activity!!)
+        val currentProductList                        = Gson().toJson(data)
+        sharedPrefOBJ.currentLoanProduct              = currentProductList
+
+    }
+
+    override fun onEmptyCurrentLoan() {
+
+    }
+
+    override fun onErrorCurrentLoan(errorMessageOBJ: String) {
+       dismiss()
+    }
+
+    override fun onSuccessBusinessLoan(data: ResProducts.Data) {
+
+        dismiss()
+        val sharedPrefOBJ=SharedPref(activity!!)
+        val businessProductList                        = Gson().toJson(data)
+        sharedPrefOBJ.businessLoanProduct              = businessProductList
+    }
+
+    override fun onEmptyBusinessLoan() {
+
+    }
+
+    override fun onErrorBusinessLoan(errorMessageOBJ: String) {
+        dismiss()
+    }
+
+    override fun onSessionTimeOut(jsonMessage: String) {
+
+        dismiss()
     }
 
 }

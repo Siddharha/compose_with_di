@@ -194,6 +194,22 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var currentLoanProduct: String
+        get() = pref.getString(KEY_SET_CURRENT_LOAN_PRODUCT, "INIT")!!
+        set(currentLoanProduct) {
+            editor.remove(KEY_SET_CURRENT_LOAN_PRODUCT)
+            editor.putString(KEY_SET_CURRENT_LOAN_PRODUCT, currentLoanProduct)
+            editor.commit()
+        }
+
+    var businessLoanProduct: String
+        get() = pref.getString(KEY_SET_BUSINESS_LOAN_PRODUCT, "INIT")!!
+        set(businessLoanProduct) {
+            editor.remove(KEY_SET_BUSINESS_LOAN_PRODUCT)
+            editor.putString(KEY_SET_BUSINESS_LOAN_PRODUCT, businessLoanProduct)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -236,6 +252,8 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_COUNTRY_NAME          = "KEY_SET_COUNTRY_NAME"
         private const val KEY_SET_COUNTRY_FLAG          = "KEY_SET_COUNTRY_FLAG"
         private const val KEY_SET_HELP_SUPPORT          = "KEY_SET_HELP_SUPPORT"
+        private const val KEY_SET_CURRENT_LOAN_PRODUCT  = "KEY_SET_CURRENT_LOAN_PRODUCT"
+        private const val KEY_SET_BUSINESS_LOAN_PRODUCT = "KEY_SET_BUSINESS_LOAN_PRODUCT"
     }
 
 

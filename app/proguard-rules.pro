@@ -144,6 +144,9 @@
 -keep class com.app.l_pesa.help.** { *; }
 -keepclassmembers class com.app.l_pesa.help.** { *; }
 
+-keep class com.app.l_pesa.calculator.** { *; }
+-keepclassmembers class com.app.l_pesa.calculator.** { *; }
+
 -keep class com.app.l_pesa.logout.** { *; }
 -keepclassmembers class com.app.l_pesa.logout.** { *; }
 

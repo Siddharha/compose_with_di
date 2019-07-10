@@ -169,11 +169,11 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
     }
 
-    override fun onSessionTimeOut(jsonMessage: String) {
+    override fun onSessionTimeOut(message: String) {
 
         dismiss()
         val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
-        dialogBuilder.setMessage(jsonMessage)
+        dialogBuilder.setMessage(message)
             .setCancelable(false)
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()

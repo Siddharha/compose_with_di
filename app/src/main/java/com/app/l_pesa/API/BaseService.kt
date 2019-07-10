@@ -1,6 +1,7 @@
 package com.app.l_pesa.API
 
 
+import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.help.model.ResHelp
 import com.app.l_pesa.investment.model.*
@@ -185,6 +186,9 @@ interface BaseService{
 
     @POST("settings/help")
     fun getHelp(): Observable<ResHelp>
+
+    @GET("loan_cal_load_products")
+    fun getLoanProducts(@Query("country_code") country_code:String,@Query("loan_type") loan_type:String): Observable<ResProducts>
 
 }
 
