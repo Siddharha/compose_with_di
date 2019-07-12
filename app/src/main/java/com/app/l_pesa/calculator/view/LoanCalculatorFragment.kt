@@ -28,6 +28,9 @@ import com.kaopiz.kprogresshud.KProgressHUD
 import java.text.DecimalFormat
 
 
+
+
+
 class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private lateinit  var progressDialog: KProgressHUD
@@ -40,7 +43,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_loan_calculator, container,false)
+        return inflater.inflate(com.app.l_pesa.R.layout.fragment_loan_calculator, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,17 +75,17 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         ti_product_name.setOnClickListener {
 
             when {
-                ti_loan_type.text.toString() == resources.getString(R.string.personal_loan) -> {
+                ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.personal_loan) -> {
                     val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
                     dialogProduct(currentProduct)
                 }
-                ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
+                ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.business_loan) -> {
                     val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
                     dialogProduct(businessProduct)
                 }
                 else -> {
                     popupLoanType()
-                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.select_loan_type))
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.select_loan_type))
                 }
             }
         }
@@ -111,7 +114,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     private fun popupLoanType()
     {
         val popupMenuOBJ = PopupMenu(activity!!, ti_loan_type)
-        popupMenuOBJ.menuInflater.inflate(R.menu.menu_loan_type, popupMenuOBJ.menu)
+        popupMenuOBJ.menuInflater.inflate(com.app.l_pesa.R.menu.menu_loan_type, popupMenuOBJ.menu)
 
 
         popupMenuOBJ.setOnMenuItemClickListener { item: MenuItem? ->
@@ -123,7 +126,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             val sharedPrefOBJ= SharedPref(activity!!)
 
 
-            if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
+            if(ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.personal_loan))
             {
                 if(sharedPrefOBJ.currentLoanProduct=="INIT")
                 {
@@ -135,7 +138,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                     }
                     else
                     {
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
                     }
                 }
                 else
@@ -181,7 +184,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             }
             else
             {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
             }
         }
         else
@@ -215,7 +218,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         }
         else if(TextUtils.isEmpty(ti_product_name.text.toString()))
         {
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.select_loan_type))
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.select_loan_type))
         }
         else
         {
@@ -225,9 +228,10 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private fun clearTextValues()
     {
-        txt_credit_score.text = resources.getText(R.string.dash_line)
-        txt_usd_values.text = resources.getText(R.string.dash_line)
-        txt_loan_amount.text = resources.getText(R.string.dash_line)
+        txt_credit_score.text  = resources.getText(R.string.dash_line)
+        txt_usd_values.text    = resources.getText(R.string.dash_line)
+        txt_loan_amount.text   = resources.getText(R.string.dash_line)
+        txt_total_payback.text = resources.getText(R.string.dash_line)
     }
 
     @SuppressLint("SetTextI18n")
@@ -243,20 +247,32 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         txt_usd_values.text=usdValue +" "+loanProduct.currencyCode
         txt_loan_amount.text= (loanProduct.loanAmount*usdValue.toDouble()).toString()+" "+loanProduct.currencyCode
 
+        var loopCounter=1
+        loopCounter = if(loanProduct.loanPeriodType=="W")
+        {
+            7
+        }
+        else
+        {
+            1
+        }
 
-      /*  val totalSize = 1 until loanProduct.loanPeriod.toInt()
-        for (i in totalSize) {
+        var totalPayback=0.0
+        val principalAmount  = loanProduct.loanAmount*usdValue.toDouble()/loanProduct.loanPeriod
 
-            //   $curAmount = $loan_amount - ($eachPrinAmount * ($d - 1));
-            //Each Principal Amount = round of 2 decimal place ‘Loan Amount’ / ‘loan_period’
-            //      $total_pay_back += $eachPrinAmount + $InsCal;
-            val principalAmount=loanProduct.loanAmount/loanProduct.loanPeriod
-            val curAmount= loanProduct.loanAmount-principalAmount
-            val totalPayback= principalAmount+loanProduct.insuranceCoverage
 
-            println("TAKA"+totalPayback)
-        }*/
+        var i = 1
+        while (i <= loanProduct.loanPeriod.toInt()) {
 
+
+            val curAmount        = loanProduct.loanAmount*usdValue.toDouble()-(principalAmount* (i-1))
+            val insCal           = (curAmount * loanProduct.loanInterestRate!!.toDouble() *i*loopCounter)/100
+            totalPayback+=(principalAmount+insCal)
+            i++
+        }
+
+
+        txt_total_payback.text= Math.round(totalPayback).toString()
 
 
     }
@@ -325,7 +341,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
         ti_product_name.setText(format.format(productList.loanAmount)+" $")
-        ti_product_name.setTextColor(ContextCompat.getColor(activity!!, R.color.textColors))
+        ti_product_name.setTextColor(ContextCompat.getColor(activity!!, com.app.l_pesa.R.color.textColors))
     }
 
 }
