@@ -1,10 +1,8 @@
 package com.app.l_pesa.main.view
 
 import android.Manifest
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -16,7 +14,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
-import com.app.l_pesa.calculator.view.LoanCalculatorActivity
 import com.app.l_pesa.common.*
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
@@ -25,7 +22,6 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.io.IOException
 import java.util.*
 
@@ -54,8 +50,16 @@ class MainActivity : AppCompatActivity() {
         buttonSignUp.setOnClickListener {
 
 
-             startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
-             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            if(isLocationEnabled())
+            {
+                startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                showAlert()
+            }
+
 
         }
 
@@ -74,11 +78,36 @@ class MainActivity : AppCompatActivity() {
     {
         buttonLogin.setOnClickListener {
 
+            if(isLocationEnabled())
+            {
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                showAlert()
+            }
+
 
         }
+    }
+
+    private fun showAlert() {
+        val dialog = AlertDialog.Builder(this@MainActivity)
+        dialog.setTitle("Enable Location")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use this app")
+                .setPositiveButton("Location Settings") { _, _ ->
+                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(myIntent)
+                }
+                .setNegativeButton("Cancel") { _, _ -> }
+        dialog.show()
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
     private fun startLocationTrackerService()
