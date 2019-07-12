@@ -227,8 +227,10 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     {
         txt_credit_score.text = resources.getText(R.string.dash_line)
         txt_usd_values.text = resources.getText(R.string.dash_line)
+        txt_loan_amount.text = resources.getText(R.string.dash_line)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun doCalculate()
     {
         val sharedPrefOBJ= SharedPref(activity!!)
@@ -238,7 +240,24 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         format.isDecimalSeparatorAlwaysShown = false
 
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
-        txt_usd_values.text=usdValue
+        txt_usd_values.text=usdValue +" "+loanProduct.currencyCode
+        txt_loan_amount.text= (loanProduct.loanAmount*usdValue.toDouble()).toString()+" "+loanProduct.currencyCode
+
+
+      /*  val totalSize = 1 until loanProduct.loanPeriod.toInt()
+        for (i in totalSize) {
+
+            //   $curAmount = $loan_amount - ($eachPrinAmount * ($d - 1));
+            //Each Principal Amount = round of 2 decimal place ‘Loan Amount’ / ‘loan_period’
+            //      $total_pay_back += $eachPrinAmount + $InsCal;
+            val principalAmount=loanProduct.loanAmount/loanProduct.loanPeriod
+            val curAmount= loanProduct.loanAmount-principalAmount
+            val totalPayback= principalAmount+loanProduct.insuranceCoverage
+
+            println("TAKA"+totalPayback)
+        }*/
+
+
 
     }
 
