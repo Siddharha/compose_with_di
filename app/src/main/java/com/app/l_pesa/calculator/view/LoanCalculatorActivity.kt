@@ -129,7 +129,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
                     }
                     else
                     {
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
                     }
                 }
                 else
@@ -227,7 +227,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         txt_subscriptionM.text = resources.getText(R.string.dash_line)
         txt_subscriptionL.text = resources.getText(R.string.dash_line)
         txt_interest_rate.text = resources.getText(R.string.dash_line)
-        txt_loan_period.text = resources.getText(R.string.dash_line)
+        txt_loan_period.text   = resources.getText(R.string.dash_line)
     }
 
     @SuppressLint("SetTextI18n")
@@ -241,7 +241,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
         txt_usd_values.text=usdValue +" "+loanProduct.currencyCode
-        txt_loan_amount.text= (loanProduct.loanAmount*usdValue.toDouble()).toString()+" "+loanProduct.currencyCode
+        txt_loan_amount.text= loanProduct.currencyCode+" "+(loanProduct.loanAmount*usdValue.toDouble()).toString()
 
         var loopCounter=1
         if(loanProduct.loanPeriodType=="W")
@@ -295,16 +295,14 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
                 }
             }
 
-
-
             i++
         }
 
 
-        txt_total_payback.text= Math.round(totalPayback).toString()+" "+loanProduct.currencyCode
-        txt_subscriptionF.text= Math.round(paymentF).toString()+" "+loanProduct.currencyCode
-        txt_subscriptionM.text= Math.round(paymentM).toString()+" "+loanProduct.currencyCode
-        txt_subscriptionL.text= Math.round(paymentL).toString()+" "+loanProduct.currencyCode
+        txt_total_payback.text= loanProduct.currencyCode+" "+Math.round(totalPayback)
+        txt_subscriptionF.text= loanProduct.currencyCode+" "+Math.round(paymentF).toString()
+        txt_subscriptionM.text= loanProduct.currencyCode+" "+Math.round(paymentM).toString()
+        txt_subscriptionL.text= loanProduct.currencyCode+" "+Math.round(paymentL).toString()
         txt_interest_rate.text= loanProduct.loanInterestRate.toString()+" %"
 
 
