@@ -162,9 +162,26 @@
         android:fontFamily="@font/montserrat"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintBottom_toTopOf="@+id/txtLoanCalculator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtForgotPin" />
+
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtLoanCalculator"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:padding="@dimen/_2sdp"
+        android:text="@string/calculate_your_loan"
+        android:textColorHighlight="@android:color/white"
+        android:textColorLink="@color/colorAppDeep"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/colorSemiBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegister" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -178,7 +195,7 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLoanCalculator" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

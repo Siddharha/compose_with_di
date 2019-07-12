@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-         />
+        />
 
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/buttonSignUp"
@@ -78,19 +78,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
-    <com.app.l_pesa.common.CustomButtonRegular
-        android:id="@+id/buttonCalculateLoan"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/yellow_button"
-        android:text="@string/calculate_your_loan"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/colorSemiWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

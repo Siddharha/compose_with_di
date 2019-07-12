@@ -1,18 +1,23 @@
 package com.app.l_pesa.main.view
 
 import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.calculator.view.LoanCalculatorActivity
-import com.app.l_pesa.common.RunTimePermission
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.google.android.gms.location.LocationCallback
@@ -20,6 +25,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.io.IOException
 import java.util.*
 
@@ -53,13 +59,8 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        buttonCalculateLoan.setOnClickListener {
-
-             startActivity(Intent(this@MainActivity, LoanCalculatorActivity::class.java))
-             overridePendingTransition(R.anim.right_in, R.anim.left_out)
-
-        }
     }
+
 
     private fun requestPermission() {
 
@@ -67,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_PHONE_STATE,Manifest.permission.ACCESS_FINE_LOCATION), permissionCode)
 
     }
-
 
 
     private fun initUI()
@@ -156,6 +156,25 @@ class MainActivity : AppCompatActivity() {
         homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(homeIntent)
     }
+
+    public override fun onResume() {
+        super.onResume()
+        fetchLocation()
+    }
+
+    private fun fetchLocation() {
+        val intent = Intent(this, LocationBackgroundService::class.java)
+        startService(intent)
+    }
+
+    public override fun onDestroy() {
+
+        stopService(Intent(this, LocationBackgroundService::class.java))
+        super.onDestroy()
+
+    }
+
+
 
 
 }

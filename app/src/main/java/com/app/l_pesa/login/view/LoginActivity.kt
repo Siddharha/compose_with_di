@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -28,10 +29,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonEditTextRegular
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.RunTimePermission
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.calculator.view.LoanCalculatorActivity
+import com.app.l_pesa.common.*
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
@@ -76,6 +75,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         loadCountry()
         loginProcess()
         forgotPin()
+        doCalculateLoan()
     }
 
     private fun forgotPin()
@@ -91,6 +91,45 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
         }))
 
+    }
+
+    private fun doCalculateLoan()
+    {
+        txtLoanCalculator.makeLinks(resources.getString(R.string.calculate_your_loan),Pair(resources.getString(R.string.calculate_your_loan), View.OnClickListener {
+
+            try {
+                if(isLocationEnabled())
+                {
+                    startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                }
+                else
+                {
+                    showAlert()
+                }
+
+            }
+            catch (exp: Exception)
+            {}
+
+        }))
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private fun showAlert() {
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(this@LoginActivity)
+        dialog.setTitle("Enable Location")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use this app")
+                .setPositiveButton("Location Settings") { _, _ ->
+                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(myIntent)
+                }
+                .setNegativeButton("Cancel") { _, _ -> }
+        dialog.show()
     }
 
 
@@ -465,6 +504,23 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         startActivity(intent)
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
+
+    public override fun onResume() {
+        super.onResume()
+        fetchLocation()
+    }
+
+    private fun fetchLocation() {
+        val intent = Intent(this, LocationBackgroundService::class.java)
+        startService(intent)
+    }
+
+    public override fun onDestroy() {
+        stopService(Intent(this, LocationBackgroundService::class.java))
+        super.onDestroy()
+
+    }
+
 
 
 }

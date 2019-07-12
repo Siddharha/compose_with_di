@@ -247,11 +247,11 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val dialog = AlertDialog.Builder(this@LoanApplyActivity)
         dialog.setTitle("Enable Location")
                 .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use this app")
-                .setPositiveButton("Location Settings") { paramDialogInterface, paramInt ->
+                .setPositiveButton("Location Settings") { _, _ ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
                 }
-                .setNegativeButton("Cancel") { paramDialogInterface, paramInt -> }
+                .setNegativeButton("Cancel") { _, _ -> }
         dialog.show()
     }
 
@@ -306,8 +306,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this).registerReceiver(
                 object : BroadcastReceiver() {
                     override fun onReceive(context: Context, intent: Intent) {
-                        lat  = intent.getStringExtra(EXTRA_LATITUDE)
-                        long = intent.getStringExtra(EXTRA_LONGITUDE)
+                        lat  = intent.getStringExtra(EXTRA_LATITUDE)!!
+                        long = intent.getStringExtra(EXTRA_LONGITUDE)!!
 
 
                     }
