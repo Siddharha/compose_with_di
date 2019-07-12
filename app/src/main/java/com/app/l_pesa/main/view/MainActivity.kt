@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
+import com.app.l_pesa.calculator.view.LoanCalculatorActivity
 import com.app.l_pesa.common.RunTimePermission
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity
@@ -50,7 +51,12 @@ class MainActivity : AppCompatActivity() {
              startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
              overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
+        }
 
+        buttonCalculateLoan.setOnClickListener {
+
+             startActivity(Intent(this@MainActivity, LoanCalculatorActivity::class.java))
+             overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
         }
     }

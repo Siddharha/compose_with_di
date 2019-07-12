@@ -43,7 +43,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(com.app.l_pesa.R.layout.fragment_loan_calculator, container,false)
+        return inflater.inflate(R.layout.fragment_loan_calculator, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
