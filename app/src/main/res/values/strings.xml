@@ -445,6 +445,8 @@
     <string name="mid_weekly_subscription">Mid Weekly Subscription</string>
     <string name="last_weekly_subscription">Last Weekly Subscription</string>
     <string name="select_loan_type">Select Loan Type</string>
+    <string name="interest_rate_calculator">Daily Interest Rate</string>
+    <string name="loan_period">Loan Period</string>
 
 
 </resources>

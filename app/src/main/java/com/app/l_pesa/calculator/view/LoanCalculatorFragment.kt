@@ -232,6 +232,11 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         txt_usd_values.text    = resources.getText(R.string.dash_line)
         txt_loan_amount.text   = resources.getText(R.string.dash_line)
         txt_total_payback.text = resources.getText(R.string.dash_line)
+        txt_subscriptionF.text = resources.getText(R.string.dash_line)
+        txt_subscriptionM.text = resources.getText(R.string.dash_line)
+        txt_subscriptionL.text = resources.getText(R.string.dash_line)
+        txt_interest_rate.text = resources.getText(R.string.dash_line)
+        txt_loan_period.text = resources.getText(R.string.dash_line)
     }
 
     @SuppressLint("SetTextI18n")
@@ -248,31 +253,69 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         txt_loan_amount.text= (loanProduct.loanAmount*usdValue.toDouble()).toString()+" "+loanProduct.currencyCode
 
         var loopCounter=1
-        loopCounter = if(loanProduct.loanPeriodType=="W")
+        if(loanProduct.loanPeriodType=="W")
         {
-            7
+            loopCounter=7
+            txt_loan_period.text= loanProduct.loanPeriod.toString() +" Weeks"
         }
         else
         {
-            1
+            loopCounter=1
+            txt_loan_period.text= loanProduct.loanPeriod.toString() +" Days"
         }
 
-        var totalPayback=0.0
+        var totalPayback     = 0.00
         val principalAmount  = loanProduct.loanAmount*usdValue.toDouble()/loanProduct.loanPeriod
-
+        var paymentF         = 0.0
+        var paymentM         = 0.0
+        var paymentL         = 0.0
 
         var i = 1
-        while (i <= loanProduct.loanPeriod.toInt()) {
-
+        while (i <= loanProduct.loanPeriod) {
 
             val curAmount        = loanProduct.loanAmount*usdValue.toDouble()-(principalAmount* (i-1))
             val insCal           = (curAmount * loanProduct.loanInterestRate!!.toDouble() *i*loopCounter)/100
             totalPayback+=(principalAmount+insCal)
+
+            if(i==1)
+            {
+                paymentF=principalAmount+insCal
+            }
+            if(i==loanProduct.loanPeriod)
+            {
+                paymentL=principalAmount+insCal
+            }
+
+            if(loanProduct.loanPeriod %2==0) {
+                val checkM = (loanProduct.loanPeriod / 2) + 1
+
+                if (i == checkM) {
+                    paymentM = principalAmount + insCal
+
+                }
+            }
+            else
+                {
+                    val checkLoanPeriodM=(loanProduct.loanPeriod/2)
+                    if(i==checkLoanPeriodM)
+                    {
+                        paymentM=principalAmount+insCal
+
+                    }
+                }
+
+
+
             i++
         }
 
 
-        txt_total_payback.text= Math.round(totalPayback).toString()
+        txt_total_payback.text= Math.round(totalPayback).toString()+" "+loanProduct.currencyCode
+        txt_subscriptionF.text= Math.round(paymentF).toString()+" "+loanProduct.currencyCode
+        txt_subscriptionM.text= Math.round(paymentM).toString()+" "+loanProduct.currencyCode
+        txt_subscriptionL.text= Math.round(paymentL).toString()+" "+loanProduct.currencyCode
+        txt_interest_rate.text= loanProduct.loanInterestRate.toString()+" %"
+
 
 
     }

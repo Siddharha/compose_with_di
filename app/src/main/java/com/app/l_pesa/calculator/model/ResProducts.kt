@@ -69,7 +69,7 @@ class ResProducts {
         var loanPeriodType: String = ""
         @SerializedName("loan_period")
         @Expose
-        var loanPeriod: Double = 0.0
+        var loanPeriod: Int =0
         @SerializedName("processing_fees")
         @Expose
         var processingFees: Double? = null
