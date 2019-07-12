@@ -240,8 +240,8 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         format.isDecimalSeparatorAlwaysShown = false
 
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
-        txt_usd_values.text=usdValue +" "+loanProduct.currencyCode
-        txt_loan_amount.text= loanProduct.currencyCode+" "+(loanProduct.loanAmount*usdValue.toDouble()).toString()
+        txt_usd_values.text =loanProduct.currencyCode  +" "+usdValue
+        txt_loan_amount.text= loanProduct.currencyCode+" "+Math.round(loanProduct.loanAmount*usdValue.toDouble()).toString()
 
         var loopCounter=1
         if(loanProduct.loanPeriodType=="W")
