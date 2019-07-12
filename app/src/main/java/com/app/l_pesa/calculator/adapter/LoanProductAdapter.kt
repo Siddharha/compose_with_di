@@ -15,7 +15,7 @@ import com.app.l_pesa.calculator.model.ResProducts
 import java.text.DecimalFormat
 
 
-class LoanProductAdapter(val context: Context, private val listData: ArrayList<ResProducts.ProductList>, private val dialogOBJ: Dialog, private val callBack: ICallBackProducts) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LoanProductAdapter(val context: Context, private val listData: ArrayList<ResProducts.ProductList>,private val product: ResProducts.Data, private val dialogOBJ: Dialog, private val callBack: ICallBackProducts) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -26,7 +26,7 @@ class LoanProductAdapter(val context: Context, private val listData: ArrayList<R
         viewHolder.titleText.text = format.format(listData[position].loanAmount)+" $"
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()
-            callBack.onClickProduct(listData[position])
+            callBack.onClickProduct(listData[position],product)
         }
 
 

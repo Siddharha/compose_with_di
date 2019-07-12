@@ -14,5 +14,5 @@ interface ICallBackProducts {
 
     fun onSessionTimeOut(jsonMessage: String)
 
-    fun onClickProduct(productList: ResProducts.ProductList)
+    fun onClickProduct(productList: ResProducts.ProductList, product: ResProducts.Data)
 }

@@ -266,9 +266,51 @@
             >
 
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/_35sdp"
+                android:weightSum="2"
+                android:background="@drawable/table_divider_top_left_right"
+                android:gravity="center"
+
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.35"
+                    android:text="@string/required_credit_score"
+                    android:gravity="center|start"
+                    android:padding="@dimen/_5sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/textColors"
+                    />
+
+                <View
+                    android:layout_height="match_parent"
+                    android:background="#AAAAAA"
+                    android:layout_width="@dimen/_1sdp"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_credit_score"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".65"
+                    android:text="@string/dash_line"
+                    android:gravity="center|start"
+                    android:padding="@dimen/_5sdp"
+                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/textColors"
+                    />
+
+            </TableRow>
+
 
             <TableRow
-                android:id="@+id/tableRow1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_35sdp"
@@ -297,6 +339,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/txt_usd_values"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".65"
@@ -313,7 +356,6 @@
 
 
             <TableRow
-                android:id="@+id/tableRow2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_35sdp"
@@ -355,7 +397,6 @@
 
 
             <TableRow
-                android:id="@+id/tableRow3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_35sdp"
@@ -398,7 +439,6 @@
 
 
             <TableRow
-                android:id="@+id/tableRow4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_35sdp"
@@ -438,9 +478,7 @@
             </TableRow>
 
 
-
             <TableRow
-                android:id="@+id/tableRow5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_35sdp"
@@ -481,7 +519,7 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow6"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/_35sdp"

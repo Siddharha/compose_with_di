@@ -31,7 +31,7 @@ import java.text.DecimalFormat
 class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private lateinit  var progressDialog: KProgressHUD
-
+    private var usdValue=""
 
     companion object {
         fun newInstance(): Fragment {
@@ -71,20 +71,19 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         ti_product_name.typeface=Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         ti_product_name.setOnClickListener {
 
-            if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
-            {
-                val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
-                dialogProduct(currentProduct)
-            }
-            else if(ti_loan_type.text.toString() == resources.getString(R.string.business_loan))
-            {
-                val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
-                dialogProduct(businessProduct)
-            }
-            else
-            {
-                popupLoanType()
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.select_loan_type))
+            when {
+                ti_loan_type.text.toString() == resources.getString(R.string.personal_loan) -> {
+                    val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
+                    dialogProduct(currentProduct)
+                }
+                ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
+                    val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
+                    dialogProduct(businessProduct)
+                }
+                else -> {
+                    popupLoanType()
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.select_loan_type))
+                }
             }
         }
 
@@ -148,28 +147,11 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             }
             else
             {
-                if(sharedPrefOBJ.businessLoanProduct=="INIT")
-                {
-                    if(CommonMethod.isNetworkAvailable(activity!!))
-                    {
-                        progressDialog.show()
-                        val presenterCalculatorOBJ=PresenterCalculator()
-                        presenterCalculatorOBJ.getLoanProducts(activity!!,sharedPrefOBJ.countryCode,"business_loan",this)
-                    }
-                    else
-                    {
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-                    }
-                }
-                else
-                {
-
-                    val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
-                    dialogProduct(businessProduct)
-
-                }
+                getBusinessLoanProduct()
             }
 
+
+            clearTextValues()
 
             true
         }
@@ -185,6 +167,32 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     }
 
+
+    private fun getBusinessLoanProduct()
+    {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        if(sharedPrefOBJ.businessLoanProduct=="INIT")
+        {
+            if(CommonMethod.isNetworkAvailable(activity!!))
+            {
+                progressDialog.show()
+                val presenterCalculatorOBJ=PresenterCalculator()
+                presenterCalculatorOBJ.getLoanProducts(activity!!,sharedPrefOBJ.countryCode,"business_loan",this)
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            }
+        }
+        else
+        {
+
+            val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
+            dialogProduct(businessProduct)
+
+        }
+    }
+
     private fun dialogProduct(product: ResProducts.Data)
     {
         ti_product_name.text!!.clear()
@@ -192,7 +200,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_id_type)
         val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-        val loanProductAdapter          = LoanProductAdapter(activity!!, product.productList!!,dialog,this)
+        val loanProductAdapter          = LoanProductAdapter(activity!!, product.productList!!,product,dialog,this)
         recyclerView?.layoutManager     = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = loanProductAdapter
         dialog.show()
@@ -205,17 +213,33 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         {
             popupLoanType()
         }
+        else if(TextUtils.isEmpty(ti_product_name.text.toString()))
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.select_loan_type))
+        }
         else
         {
-            if(CommonMethod.isNetworkAvailable(activity!!))
-            {
-
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
-            }
+            doCalculate()
         }
+    }
+
+    private fun clearTextValues()
+    {
+        txt_credit_score.text = resources.getText(R.string.dash_line)
+        txt_usd_values.text = resources.getText(R.string.dash_line)
+    }
+
+    private fun doCalculate()
+    {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val loanProduct = Gson().fromJson<ResProducts.ProductList>(sharedPrefOBJ.loanProduct, ResProducts.ProductList::class.java)
+
+        val format = DecimalFormat()
+        format.isDecimalSeparatorAlwaysShown = false
+
+        txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
+        txt_usd_values.text=usdValue
+
     }
 
     private fun applyFontToMenuItem(mi: MenuItem) {
@@ -272,8 +296,12 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onClickProduct(productList: ResProducts.ProductList)
+    override fun onClickProduct(productList: ResProducts.ProductList, product: ResProducts.Data)
     {
+        usdValue=product.usdValue
+        val sharedPrefOBJ=SharedPref(activity!!)
+        val productOBJ                        = Gson().toJson(productList)
+        sharedPrefOBJ.loanProduct             = productOBJ
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false

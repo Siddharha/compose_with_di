@@ -210,6 +210,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var loanProduct: String
+        get() = pref.getString(KEY_SET_LOAN_PRODUCT, "INIT")!!
+        set(loanProduct) {
+            editor.remove(KEY_SET_LOAN_PRODUCT)
+            editor.putString(KEY_SET_LOAN_PRODUCT, loanProduct)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -217,6 +225,7 @@ constructor(context: Context) // Constructor
         editor.remove("KEY_SET_LPK_INFO")
         editor.remove("KEY_SET_CURRENT_LOAN_PRODUCT")
         editor.remove("KEY_SET_BUSINESS_LOAN_PRODUCT")
+        editor.remove("KEY_SET_LOAN_PRODUCT")
         editor.commit()
         editor.apply()
     }
@@ -256,6 +265,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_HELP_SUPPORT          = "KEY_SET_HELP_SUPPORT"
         private const val KEY_SET_CURRENT_LOAN_PRODUCT  = "KEY_SET_CURRENT_LOAN_PRODUCT"
         private const val KEY_SET_BUSINESS_LOAN_PRODUCT = "KEY_SET_BUSINESS_LOAN_PRODUCT"
+        private const val KEY_SET_LOAN_PRODUCT          = "KEY_SET_LOAN_PRODUCT"
     }
 
 
