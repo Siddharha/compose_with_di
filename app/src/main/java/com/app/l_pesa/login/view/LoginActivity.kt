@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
     private fun doCalculateLoan()
     {
-        txtLoanCalculator.makeLinks(resources.getString(R.string.calculate_your_loan),Pair(resources.getString(R.string.calculate_your_loan), View.OnClickListener {
+        txtLoanCalculator.setOnClickListener {
 
             try {
                 if(isLocationEnabled())
@@ -112,7 +112,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
             catch (exp: Exception)
             {}
 
-        }))
+        }
     }
 
     private fun isLocationEnabled(): Boolean {
