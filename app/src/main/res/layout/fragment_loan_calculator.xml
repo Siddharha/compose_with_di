@@ -282,7 +282,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.35"
-                    android:text="@string/required_credit_score"
+                    android:text="@string/required_credit_score_calculator"
                     android:gravity="center|start"
                     android:padding="@dimen/_5sdp"
                     android:textSize="@dimen/_11sdp"
