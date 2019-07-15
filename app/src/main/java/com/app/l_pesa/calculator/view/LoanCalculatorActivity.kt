@@ -67,12 +67,30 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
             when {
                 ti_loan_type.text.toString() == resources.getString(R.string.personal_loan) -> {
-                    val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
-                    dialogProduct(currentProduct)
+                    if(sharedPrefOBJ.currentLoanProduct=="INIT")
+                    {
+                        ti_product_name.text!!.clear()
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
+                    }
+                    else
+                    {
+                        val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
+                        dialogProduct(currentProduct)
+                    }
+
                 }
                 ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
-                    val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
-                    dialogProduct(businessProduct)
+                    if(sharedPrefOBJ.businessLoanProduct=="INIT")
+                    {
+                        ti_product_name.text!!.clear()
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
+                    }
+                    else
+                    {
+                        val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
+                        dialogProduct(businessProduct)
+                    }
+
                 }
                 else -> {
                     popupLoanType()
