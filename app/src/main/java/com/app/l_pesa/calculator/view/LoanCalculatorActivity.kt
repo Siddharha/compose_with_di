@@ -392,7 +392,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
-        ti_product_name.setText(format.format(productList.loanAmount)+" $")
+        ti_product_name.setText("$ "+format.format(productList.loanAmount))
         ti_product_name.setTextColor(ContextCompat.getColor(this@LoanCalculatorActivity, R.color.textColors))
     }
 

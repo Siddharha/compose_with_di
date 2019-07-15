@@ -88,7 +88,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                         dialogProduct(currentProduct)
                     }
                 }
-                ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.business_loan) -> {
+                ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
                     if(sharedPrefOBJ.businessLoanProduct=="INIT")
                     {
                         ti_product_name.text!!.clear()
@@ -404,8 +404,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
-        ti_product_name.setText(format.format(productList.loanAmount)+" $")
-        ti_product_name.setTextColor(ContextCompat.getColor(activity!!, com.app.l_pesa.R.color.textColors))
+        ti_product_name.setText("$ "+format.format(productList.loanAmount))
+        ti_product_name.setTextColor(ContextCompat.getColor(activity!!, R.color.textColors))
     }
 
 }
