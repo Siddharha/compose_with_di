@@ -23,11 +23,10 @@ import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.calculator.presenter.PresenterCalculator
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
 import java.text.DecimalFormat
-
-
 
 
 
@@ -49,6 +48,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
 
         initData()
     }
