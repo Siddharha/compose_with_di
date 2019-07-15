@@ -62,6 +62,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         initLoader()
 
         val sharedPrefOBJ= SharedPref(activity!!)
+        sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
+        sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
         ti_loan_type.typeface=Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         ti_loan_type.setOnClickListener {
 
