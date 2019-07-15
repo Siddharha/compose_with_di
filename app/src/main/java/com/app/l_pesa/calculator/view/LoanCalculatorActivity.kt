@@ -363,12 +363,14 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     override fun onEmptyCurrentLoan() {
         personalLoanStatus=resources.getString(R.string.status_false)
+        ti_product_name.text!!.clear()
         CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorCurrentLoan(errorMessageOBJ: String) {
         personalLoanStatus=resources.getString(R.string.status_error)
+        ti_product_name.text!!.clear()
         CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
@@ -386,12 +388,14 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     override fun onEmptyBusinessLoan() {
         businessLoanStatus=resources.getString(R.string.status_false)
+        ti_product_name.text!!.clear()
         CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorBusinessLoan(errorMessageOBJ: String) {
         businessLoanStatus=resources.getString(R.string.status_error)
+        ti_product_name.text!!.clear()
         CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
