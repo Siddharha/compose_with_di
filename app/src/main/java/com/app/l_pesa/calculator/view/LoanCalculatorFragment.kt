@@ -65,7 +65,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         ti_loan_type.typeface=Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         ti_loan_type.setOnClickListener {
 
-           popupLoanType()
+            popupLoanType()
         }
 
 
@@ -78,7 +78,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         ti_product_name.setOnClickListener {
 
             when {
-                ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.personal_loan) -> {
+                ti_loan_type.text.toString() == resources.getString(R.string.personal_loan) -> {
+
                     if(personalLoanStatus==resources.getString(R.string.status_false))
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
@@ -87,13 +88,15 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.something_went_wrong))
                     }
-                    else
-                    {
+                    else {
                         val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
                         dialogProduct(currentProduct)
                     }
+
+
                 }
                 ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
+
                     if(businessLoanStatus==resources.getString(R.string.status_false))
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
@@ -107,11 +110,10 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                         val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
                         dialogProduct(businessProduct)
                     }
+
+
                 }
-                else -> {
-                    popupLoanType()
-                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.select_loan_type))
-                }
+
             }
         }
 
@@ -120,7 +122,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
+        progressDialog= KProgressHUD.create(activity!!)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setCancellable(false)
                 .setAnimationSpeed(2)
@@ -148,8 +150,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             ti_loan_type.setBackgroundColor(Color.TRANSPARENT)
             ti_loan_type.backgroundTintList=(ContextCompat.getColorStateList(activity!!, android.R.color.transparent))
 
-            getLoanValue()
 
+            getLoanValue()
             clearTextValues()
 
             true
@@ -169,18 +171,19 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private fun getBusinessLoanProduct()
     {
+
         val sharedPrefOBJ= SharedPref(activity!!)
         if(sharedPrefOBJ.businessLoanProduct=="INIT")
         {
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
                 progressDialog.show()
-                val presenterCalculatorOBJ=PresenterCalculator()
+                val presenterCalculatorOBJ= PresenterCalculator()
                 presenterCalculatorOBJ.getLoanProducts(activity!!,sharedPrefOBJ.countryCode,"business_loan",this)
             }
             else
             {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
             }
         }
         else
@@ -190,37 +193,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             dialogProduct(businessProduct)
 
         }
-    }
 
-    private fun dialogProduct(product: ResProducts.Data)
-    {
-        ti_product_name.text!!.clear()
-        val dialog= Dialog(activity!!)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_id_type)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-        val loanProductAdapter          = LoanProductAdapter(activity!!, product.productList!!,product,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        recyclerView?.adapter           = loanProductAdapter
-        dialog.show()
-    }
 
-    private fun calculateLoan()
-    {
-
-        if(TextUtils.isEmpty(ti_loan_type.text.toString()))
-        {
-            popupLoanType()
-        }
-        else if(TextUtils.isEmpty(ti_product_name.text.toString()))
-        {
-
-            getLoanValue()
-        }
-        else
-        {
-            doCalculate()
-        }
     }
 
     private fun getLoanValue()
@@ -248,9 +222,40 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
             }
         }
+
         else
         {
             getBusinessLoanProduct()
+        }
+    }
+
+    private fun dialogProduct(product: ResProducts.Data)
+    {
+        ti_product_name.text!!.clear()
+        val dialog= Dialog(activity!!)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_id_type)
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val loanProductAdapter          = LoanProductAdapter(activity!!, product.productList!!,product,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
+        recyclerView?.adapter           = loanProductAdapter
+        dialog.show()
+    }
+
+    private fun calculateLoan()
+    {
+
+        if(TextUtils.isEmpty(ti_loan_type.text.toString()))
+        {
+            popupLoanType()
+        }
+        else if(TextUtils.isEmpty(ti_product_name.text.toString()))
+        {
+            getLoanValue()
+        }
+        else
+        {
+            doCalculate()
         }
     }
 
@@ -264,7 +269,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         txt_subscriptionM.text = resources.getText(R.string.dash_line)
         txt_subscriptionL.text = resources.getText(R.string.dash_line)
         txt_interest_rate.text = resources.getText(R.string.dash_line)
-        txt_loan_period.text = resources.getText(R.string.dash_line)
+        txt_loan_period.text   = resources.getText(R.string.dash_line)
     }
 
     @SuppressLint("SetTextI18n")
@@ -277,9 +282,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         format.isDecimalSeparatorAlwaysShown = false
 
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
-        txt_usd_values.text=loanProduct.currencyCode  +" "+usdValue
+        txt_usd_values.text =loanProduct.currencyCode  +" "+usdValue
         txt_loan_amount.text= loanProduct.currencyCode+" "+Math.round(loanProduct.loanAmount*usdValue.toDouble()).toString()
-
 
         var loopCounter=1
         if(loanProduct.loanPeriodType=="W")
@@ -324,20 +328,17 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                 }
             }
             else
+            {
+                val checkLoanPeriodM=(loanProduct.loanPeriod/2)
+                if(i==checkLoanPeriodM)
                 {
-                    val checkLoanPeriodM=(loanProduct.loanPeriod/2)
-                    if(i==checkLoanPeriodM)
-                    {
-                        paymentM=principalAmount+insCal
+                    paymentM=principalAmount+insCal
 
-                    }
                 }
-
-
+            }
 
             i++
         }
-
 
 
         txt_total_payback.text= loanProduct.currencyCode+" "+Math.round(totalPayback)
@@ -358,9 +359,10 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     }
 
     override fun onSuccessCurrentLoan(data: ResProducts.Data) {
+
         personalLoanStatus=resources.getString(R.string.status_true)
         dismiss()
-        val sharedPrefOBJ=SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(activity!!)
         val currentProductList                        = Gson().toJson(data)
         sharedPrefOBJ.currentLoanProduct              = currentProductList
         val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
@@ -370,18 +372,20 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     override fun onEmptyCurrentLoan() {
         personalLoanStatus=resources.getString(R.string.status_false)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorCurrentLoan(errorMessageOBJ: String) {
-       personalLoanStatus=resources.getString(R.string.status_error)
-       dismiss()
+        personalLoanStatus=resources.getString(R.string.status_error)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
+        dismiss()
     }
 
     override fun onSuccessBusinessLoan(data: ResProducts.Data) {
         businessLoanStatus=resources.getString(R.string.status_true)
         dismiss()
-        val sharedPrefOBJ=SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(activity!!)
         val businessProductList                        = Gson().toJson(data)
         sharedPrefOBJ.businessLoanProduct              = businessProductList
 
@@ -391,11 +395,13 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     override fun onEmptyBusinessLoan() {
         businessLoanStatus=resources.getString(R.string.status_false)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorBusinessLoan(errorMessageOBJ: String) {
         businessLoanStatus=resources.getString(R.string.status_error)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
@@ -408,7 +414,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     override fun onClickProduct(productList: ResProducts.ProductList, product: ResProducts.Data)
     {
         usdValue=product.usdValue
-        val sharedPrefOBJ=SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(activity!!)
         val productOBJ                        = Gson().toJson(productList)
         sharedPrefOBJ.loanProduct             = productOBJ
 
@@ -417,5 +423,10 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         ti_product_name.setText("$ "+format.format(productList.loanAmount))
         ti_product_name.setTextColor(ContextCompat.getColor(activity!!, R.color.textColors))
     }
+
+
+    
+
+
 
 }

@@ -189,18 +189,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/output.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/shared.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/shared.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -238,8 +229,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="393" column="69" selection-start-line="393" selection-start-column="7" selection-end-line="393" selection-end-column="69" />
+            <state relative-caret-position="466">
+              <caret line="451" column="1" selection-start-line="49" selection-start-column="4" selection-end-line="451" selection-end-column="1" />
               <folding>
                 <element signature="e#40#1150#0" expanded="true" />
                 <element signature="e#2414#2457#0" expanded="true" />
@@ -282,23 +273,42 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="397" column="69" selection-start-line="397" selection-start-column="69" selection-end-line="397" selection-end-column="69" />
+            <state relative-caret-position="107">
+              <caret line="199" column="16" selection-start-line="199" selection-start-column="16" selection-end-line="199" selection-end-column="16" />
               <folding>
-                <element signature="e#2723#2765#0" expanded="true" />
-                <element signature="e#2868#2919#1" expanded="true" />
-                <element signature="e#2991#3033#0" expanded="true" />
-                <element signature="e#3136#3186#1" expanded="true" />
-                <element signature="e#3634#3676#0" expanded="true" />
-                <element signature="e#3779#3830#1" expanded="true" />
-                <element signature="e#3902#3944#0" expanded="true" />
-                <element signature="e#4047#4097#1" expanded="true" />
-                <element signature="e#12656#12697#0" expanded="true" />
-                <element signature="e#13156#13198#0" expanded="true" />
-                <element signature="e#13313#13355#0" expanded="true" />
-                <element signature="e#13472#13513#0" expanded="true" />
-                <element signature="e#13979#14021#0" expanded="true" />
-                <element signature="e#14138#14180#0" expanded="true" />
+                <element signature="e#40#1136#0" expanded="true" />
+                <element signature="e#2676#2719#0" expanded="true" />
+                <element signature="e#2769#2811#0" expanded="true" />
+                <element signature="e#2914#2965#1" expanded="true" />
+                <element signature="e#3037#3079#0" expanded="true" />
+                <element signature="e#3182#3232#1" expanded="true" />
+                <element signature="e#3570#3613#0" expanded="true" />
+                <element signature="e#3663#3705#0" expanded="true" />
+                <element signature="e#3808#3859#1" expanded="true" />
+                <element signature="e#3931#3973#0" expanded="true" />
+                <element signature="e#4076#4126#1" expanded="true" />
+                <element signature="e#6227#6268#1" expanded="true" />
+                <element signature="e#6594#6637#0" expanded="true" />
+                <element signature="e#7216#7257#1" expanded="true" />
+                <element signature="e#8672#8709#0" expanded="true" />
+                <element signature="e#8743#8780#0" expanded="true" />
+                <element signature="e#8814#8851#0" expanded="true" />
+                <element signature="e#8885#8922#0" expanded="true" />
+                <element signature="e#8956#8993#0" expanded="true" />
+                <element signature="e#9027#9064#0" expanded="true" />
+                <element signature="e#9098#9135#0" expanded="true" />
+                <element signature="e#9169#9206#0" expanded="true" />
+                <element signature="e#9240#9277#0" expanded="true" />
+                <element signature="e#12435#12476#0" expanded="true" />
+                <element signature="e#12936#12978#0" expanded="true" />
+                <element signature="e#13042#13093#1" expanded="true" />
+                <element signature="e#13210#13252#0" expanded="true" />
+                <element signature="e#13316#13367#1" expanded="true" />
+                <element signature="e#13486#13527#0" expanded="true" />
+                <element signature="e#13994#14036#0" expanded="true" />
+                <element signature="e#14100#14151#1" expanded="true" />
+                <element signature="e#14269#14311#0" expanded="true" />
+                <element signature="e#14375#14426#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -781,7 +791,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.6826446" visible="true" weight="0.2717211" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.6826446" visible="true" weight="0.2717211" />
       <window_info id="Structure" order="2" sideWeight="0.11598746" side_tool="true" weight="0.17985612" />
       <window_info id="Favorites" order="3" sideWeight="0.07210031" side_tool="true" weight="0.17985612" />
       <window_info id="Build Variants" order="4" sideWeight="0.31735536" side_tool="true" visible="true" weight="0.2717211" />
@@ -793,7 +803,7 @@
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.3736501" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32937366" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32829374" />
-      <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.34665227" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.34665227" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5002767" side_tool="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32937366" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4997233" weight="0.43196544" />
@@ -1193,8 +1203,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="393" column="69" selection-start-line="393" selection-start-column="7" selection-end-line="393" selection-end-column="69" />
+        <state relative-caret-position="466">
+          <caret line="451" column="1" selection-start-line="49" selection-start-column="4" selection-end-line="451" selection-end-column="1" />
           <folding>
             <element signature="e#40#1150#0" expanded="true" />
             <element signature="e#2414#2457#0" expanded="true" />
@@ -1235,23 +1245,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="397" column="69" selection-start-line="397" selection-start-column="69" selection-end-line="397" selection-end-column="69" />
+        <state relative-caret-position="107">
+          <caret line="199" column="16" selection-start-line="199" selection-start-column="16" selection-end-line="199" selection-end-column="16" />
           <folding>
-            <element signature="e#2723#2765#0" expanded="true" />
-            <element signature="e#2868#2919#1" expanded="true" />
-            <element signature="e#2991#3033#0" expanded="true" />
-            <element signature="e#3136#3186#1" expanded="true" />
-            <element signature="e#3634#3676#0" expanded="true" />
-            <element signature="e#3779#3830#1" expanded="true" />
-            <element signature="e#3902#3944#0" expanded="true" />
-            <element signature="e#4047#4097#1" expanded="true" />
-            <element signature="e#12656#12697#0" expanded="true" />
-            <element signature="e#13156#13198#0" expanded="true" />
-            <element signature="e#13313#13355#0" expanded="true" />
-            <element signature="e#13472#13513#0" expanded="true" />
-            <element signature="e#13979#14021#0" expanded="true" />
-            <element signature="e#14138#14180#0" expanded="true" />
+            <element signature="e#40#1136#0" expanded="true" />
+            <element signature="e#2676#2719#0" expanded="true" />
+            <element signature="e#2769#2811#0" expanded="true" />
+            <element signature="e#2914#2965#1" expanded="true" />
+            <element signature="e#3037#3079#0" expanded="true" />
+            <element signature="e#3182#3232#1" expanded="true" />
+            <element signature="e#3570#3613#0" expanded="true" />
+            <element signature="e#3663#3705#0" expanded="true" />
+            <element signature="e#3808#3859#1" expanded="true" />
+            <element signature="e#3931#3973#0" expanded="true" />
+            <element signature="e#4076#4126#1" expanded="true" />
+            <element signature="e#6227#6268#1" expanded="true" />
+            <element signature="e#6594#6637#0" expanded="true" />
+            <element signature="e#7216#7257#1" expanded="true" />
+            <element signature="e#8672#8709#0" expanded="true" />
+            <element signature="e#8743#8780#0" expanded="true" />
+            <element signature="e#8814#8851#0" expanded="true" />
+            <element signature="e#8885#8922#0" expanded="true" />
+            <element signature="e#8956#8993#0" expanded="true" />
+            <element signature="e#9027#9064#0" expanded="true" />
+            <element signature="e#9098#9135#0" expanded="true" />
+            <element signature="e#9169#9206#0" expanded="true" />
+            <element signature="e#9240#9277#0" expanded="true" />
+            <element signature="e#12435#12476#0" expanded="true" />
+            <element signature="e#12936#12978#0" expanded="true" />
+            <element signature="e#13042#13093#1" expanded="true" />
+            <element signature="e#13210#13252#0" expanded="true" />
+            <element signature="e#13316#13367#1" expanded="true" />
+            <element signature="e#13486#13527#0" expanded="true" />
+            <element signature="e#13994#14036#0" expanded="true" />
+            <element signature="e#14100#14151#1" expanded="true" />
+            <element signature="e#14269#14311#0" expanded="true" />
+            <element signature="e#14375#14426#1" expanded="true" />
           </folding>
         </state>
       </provider>
