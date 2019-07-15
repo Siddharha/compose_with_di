@@ -115,7 +115,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     private fun popupLoanType()
     {
         val popupMenuOBJ = PopupMenu(activity!!, ti_loan_type)
-        popupMenuOBJ.menuInflater.inflate(com.app.l_pesa.R.menu.menu_loan_type, popupMenuOBJ.menu)
+        popupMenuOBJ.menuInflater.inflate(R.menu.menu_loan_type, popupMenuOBJ.menu)
 
 
         popupMenuOBJ.setOnMenuItemClickListener { item: MenuItem? ->
@@ -124,36 +124,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             ti_loan_type.setBackgroundColor(Color.TRANSPARENT)
             ti_loan_type.backgroundTintList=(ContextCompat.getColorStateList(activity!!, android.R.color.transparent))
 
-            val sharedPrefOBJ= SharedPref(activity!!)
-
-
-            if(ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.personal_loan))
-            {
-                if(sharedPrefOBJ.currentLoanProduct=="INIT")
-                {
-                    if(CommonMethod.isNetworkAvailable(activity!!))
-                    {
-                        progressDialog.show()
-                        val presenterCalculatorOBJ=PresenterCalculator()
-                        presenterCalculatorOBJ.getLoanProducts(activity!!,sharedPrefOBJ.countryCode,"current_loan",this)
-                    }
-                    else
-                    {
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
-                    }
-                }
-                else
-                {
-                    val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
-                    dialogProduct(currentProduct)
-
-                }
-            }
-            else
-            {
-                getBusinessLoanProduct()
-            }
-
+            getLoanValue()
 
             clearTextValues()
 
@@ -219,11 +190,43 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         }
         else if(TextUtils.isEmpty(ti_product_name.text.toString()))
         {
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.select_loan_type))
+
+            getLoanValue()
         }
         else
         {
             doCalculate()
+        }
+    }
+
+    private fun getLoanValue()
+    {
+        if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
+        {
+            val sharedPrefOBJ= SharedPref(activity!!)
+            if(sharedPrefOBJ.currentLoanProduct=="INIT")
+            {
+                if(CommonMethod.isNetworkAvailable(activity!!))
+                {
+                    progressDialog.show()
+                    val presenterCalculatorOBJ=PresenterCalculator()
+                    presenterCalculatorOBJ.getLoanProducts(activity!!,sharedPrefOBJ.countryCode,"current_loan",this)
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                }
+            }
+            else
+            {
+                val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
+                dialogProduct(currentProduct)
+
+            }
+        }
+        else
+        {
+            getBusinessLoanProduct()
         }
     }
 

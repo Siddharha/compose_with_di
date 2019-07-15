@@ -114,37 +114,8 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
             ti_loan_type.setBackgroundColor(Color.TRANSPARENT)
             ti_loan_type.backgroundTintList=(ContextCompat.getColorStateList(this@LoanCalculatorActivity, android.R.color.transparent))
 
-            val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
 
-
-            if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
-            {
-                if(sharedPrefOBJ.currentLoanProduct=="INIT")
-                {
-                    if(CommonMethod.isNetworkAvailable(this@LoanCalculatorActivity))
-                    {
-                        progressDialog.show()
-                        val presenterCalculatorOBJ= PresenterCalculator()
-                        presenterCalculatorOBJ.getLoanProducts(this@LoanCalculatorActivity,sharedPrefOBJ.countryCode,"current_loan",this)
-                    }
-                    else
-                    {
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
-                    }
-                }
-                else
-                {
-                    val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
-                    dialogProduct(currentProduct)
-
-                }
-            }
-            else
-            {
-                getBusinessLoanProduct()
-            }
-
-
+            getLoanValue()
             clearTextValues()
 
             true
@@ -187,6 +158,37 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         }
     }
 
+    private fun getLoanValue()
+    {
+        if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
+        {
+            val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
+            if(sharedPrefOBJ.currentLoanProduct=="INIT")
+            {
+                if(CommonMethod.isNetworkAvailable(this@LoanCalculatorActivity))
+                {
+                    progressDialog.show()
+                    val presenterCalculatorOBJ=PresenterCalculator()
+                    presenterCalculatorOBJ.getLoanProducts(this@LoanCalculatorActivity,sharedPrefOBJ.countryCode,"current_loan",this)
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
+                }
+            }
+            else
+            {
+                val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
+                dialogProduct(currentProduct)
+
+            }
+        }
+        else
+        {
+            getBusinessLoanProduct()
+        }
+    }
+
     private fun dialogProduct(product: ResProducts.Data)
     {
         ti_product_name.text!!.clear()
@@ -209,7 +211,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         }
         else if(TextUtils.isEmpty(ti_product_name.text.toString()))
         {
-            CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.select_loan_type))
+            getLoanValue()
         }
         else
         {
