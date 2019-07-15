@@ -34,6 +34,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private lateinit  var progressDialog: KProgressHUD
     private var usdValue=""
+    private var personalLoanStatus="FALSE"
+    private var businessLoanStatus="FALSE"
 
     companion object {
         fun newInstance(): Fragment {
@@ -77,10 +79,13 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
             when {
                 ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.personal_loan) -> {
-                    if(sharedPrefOBJ.currentLoanProduct=="INIT")
+                    if(personalLoanStatus==resources.getString(R.string.status_false))
                     {
-                        ti_product_name.text!!.clear()
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
+                    }
+                    else if(personalLoanStatus==resources.getString(R.string.status_error))
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.something_went_wrong))
                     }
                     else
                     {
@@ -89,10 +94,13 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                     }
                 }
                 ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
-                    if(sharedPrefOBJ.businessLoanProduct=="INIT")
+                    if(businessLoanStatus==resources.getString(R.string.status_false))
                     {
-                        ti_product_name.text!!.clear()
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
+                    }
+                    else if(businessLoanStatus==resources.getString(R.string.status_error))
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.something_went_wrong))
                     }
                     else
                     {
@@ -350,7 +358,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     }
 
     override fun onSuccessCurrentLoan(data: ResProducts.Data) {
-
+        personalLoanStatus=resources.getString(R.string.status_true)
         dismiss()
         val sharedPrefOBJ=SharedPref(activity!!)
         val currentProductList                        = Gson().toJson(data)
@@ -361,16 +369,17 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     }
 
     override fun onEmptyCurrentLoan() {
-
+        personalLoanStatus=resources.getString(R.string.status_false)
         dismiss()
     }
 
     override fun onErrorCurrentLoan(errorMessageOBJ: String) {
+       personalLoanStatus=resources.getString(R.string.status_error)
        dismiss()
     }
 
     override fun onSuccessBusinessLoan(data: ResProducts.Data) {
-
+        businessLoanStatus=resources.getString(R.string.status_true)
         dismiss()
         val sharedPrefOBJ=SharedPref(activity!!)
         val businessProductList                        = Gson().toJson(data)
@@ -381,11 +390,12 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     }
 
     override fun onEmptyBusinessLoan() {
-
+        businessLoanStatus=resources.getString(R.string.status_false)
         dismiss()
     }
 
     override fun onErrorBusinessLoan(errorMessageOBJ: String) {
+        businessLoanStatus=resources.getString(R.string.status_error)
         dismiss()
     }
 

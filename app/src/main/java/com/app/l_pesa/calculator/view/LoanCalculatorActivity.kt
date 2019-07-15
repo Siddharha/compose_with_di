@@ -33,6 +33,9 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     private lateinit  var progressDialog: KProgressHUD
     private var usdValue=""
+    private var personalLoanStatus="FALSE"
+    private var businessLoanStatus="FALSE"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,23 +70,31 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
             when {
                 ti_loan_type.text.toString() == resources.getString(R.string.personal_loan) -> {
-                    if(sharedPrefOBJ.currentLoanProduct=="INIT")
+
+                    if(personalLoanStatus==resources.getString(R.string.status_false))
                     {
-                        ti_product_name.text!!.clear()
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
                     }
-                    else
+                    else if(personalLoanStatus==resources.getString(R.string.status_error))
                     {
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.something_went_wrong))
+                    }
+                    else {
                         val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
                         dialogProduct(currentProduct)
                     }
 
+
                 }
                 ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
-                    if(sharedPrefOBJ.businessLoanProduct=="INIT")
+
+                    if(businessLoanStatus==resources.getString(R.string.status_false))
                     {
-                        ti_product_name.text!!.clear()
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
+                    }
+                    else if(businessLoanStatus==resources.getString(R.string.status_error))
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.something_went_wrong))
                     }
                     else
                     {
@@ -91,11 +102,9 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
                         dialogProduct(businessProduct)
                     }
 
+
                 }
-                else -> {
-                    popupLoanType()
-                    CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.select_loan_type))
-                }
+
             }
         }
 
@@ -153,41 +162,15 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     private fun getBusinessLoanProduct()
     {
-        val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
-        if(sharedPrefOBJ.businessLoanProduct=="INIT")
-        {
-            if(CommonMethod.isNetworkAvailable(this@LoanCalculatorActivity))
-            {
-                progressDialog.show()
-                val presenterCalculatorOBJ= PresenterCalculator()
-                presenterCalculatorOBJ.getLoanProducts(this@LoanCalculatorActivity,sharedPrefOBJ.countryCode,"business_loan",this)
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
-            }
-        }
-        else
-        {
 
-            val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
-            dialogProduct(businessProduct)
-
-        }
-    }
-
-    private fun getLoanValue()
-    {
-        if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
-        {
             val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
-            if(sharedPrefOBJ.currentLoanProduct=="INIT")
+            if(sharedPrefOBJ.businessLoanProduct=="INIT")
             {
                 if(CommonMethod.isNetworkAvailable(this@LoanCalculatorActivity))
                 {
                     progressDialog.show()
-                    val presenterCalculatorOBJ=PresenterCalculator()
-                    presenterCalculatorOBJ.getLoanProducts(this@LoanCalculatorActivity,sharedPrefOBJ.countryCode,"current_loan",this)
+                    val presenterCalculatorOBJ= PresenterCalculator()
+                    presenterCalculatorOBJ.getLoanProducts(this@LoanCalculatorActivity,sharedPrefOBJ.countryCode,"business_loan",this)
                 }
                 else
                 {
@@ -196,11 +179,41 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
             }
             else
             {
-                val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
-                dialogProduct(currentProduct)
+
+                val businessProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.businessLoanProduct, ResProducts.Data::class.java)
+                dialogProduct(businessProduct)
 
             }
-        }
+
+
+    }
+
+    private fun getLoanValue()
+    {
+        if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
+        {
+               val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
+                if(sharedPrefOBJ.currentLoanProduct=="INIT")
+                {
+                    if(CommonMethod.isNetworkAvailable(this@LoanCalculatorActivity))
+                    {
+                        progressDialog.show()
+                        val presenterCalculatorOBJ=PresenterCalculator()
+                        presenterCalculatorOBJ.getLoanProducts(this@LoanCalculatorActivity,sharedPrefOBJ.countryCode,"current_loan",this)
+                    }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
+                    }
+                }
+                else
+                {
+                    val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
+                    dialogProduct(currentProduct)
+
+                }
+            }
+
         else
         {
             getBusinessLoanProduct()
@@ -326,7 +339,6 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         txt_interest_rate.text= loanProduct.loanInterestRate.toString()+" %"
 
 
-
     }
 
     private fun applyFontToMenuItem(mi: MenuItem) {
@@ -339,6 +351,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     override fun onSuccessCurrentLoan(data: ResProducts.Data) {
 
+        personalLoanStatus=resources.getString(R.string.status_true)
         dismiss()
         val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
         val currentProductList                        = Gson().toJson(data)
@@ -349,16 +362,19 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
     }
 
     override fun onEmptyCurrentLoan() {
-
+        personalLoanStatus=resources.getString(R.string.status_false)
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorCurrentLoan(errorMessageOBJ: String) {
+        personalLoanStatus=resources.getString(R.string.status_error)
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onSuccessBusinessLoan(data: ResProducts.Data) {
-
+        businessLoanStatus=resources.getString(R.string.status_true)
         dismiss()
         val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
         val businessProductList                        = Gson().toJson(data)
@@ -369,11 +385,14 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
     }
 
     override fun onEmptyBusinessLoan() {
-
+        businessLoanStatus=resources.getString(R.string.status_false)
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorBusinessLoan(errorMessageOBJ: String) {
+        businessLoanStatus=resources.getString(R.string.status_error)
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 

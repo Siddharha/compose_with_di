@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AvailableLibraryUpdateStorage">
@@ -186,16 +186,21 @@
     <list default="true" id="332b5284-1a8d-4138-b104-5290cb485099" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/release/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/release/output.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/shared.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/shared.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/sessions/kotlin-compiler-4901073795656138401.salive" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -233,13 +238,42 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="394" column="37" selection-start-line="394" selection-start-column="32" selection-end-line="394" selection-end-column="37" />
+            <state relative-caret-position="285">
+              <caret line="393" column="69" selection-start-line="393" selection-start-column="7" selection-end-line="393" selection-end-column="69" />
               <folding>
                 <element signature="e#40#1150#0" expanded="true" />
-                <element signature="e#2615#2656#1" expanded="true" />
-                <element signature="e#3244#3285#1" expanded="true" />
-                <element signature="e#6087#6130#0" expanded="true" />
+                <element signature="e#2414#2457#0" expanded="true" />
+                <element signature="e#2507#2549#0" expanded="true" />
+                <element signature="e#2669#2720#1" expanded="true" />
+                <element signature="e#2793#2835#0" expanded="true" />
+                <element signature="e#2955#3005#1" expanded="true" />
+                <element signature="e#3363#3406#0" expanded="true" />
+                <element signature="e#3456#3498#0" expanded="true" />
+                <element signature="e#3618#3669#1" expanded="true" />
+                <element signature="e#3741#3783#0" expanded="true" />
+                <element signature="e#3903#3953#1" expanded="true" />
+                <element signature="e#6259#6300#1" expanded="true" />
+                <element signature="e#6654#6697#0" expanded="true" />
+                <element signature="e#7391#7432#1" expanded="true" />
+                <element signature="e#8930#8967#0" expanded="true" />
+                <element signature="e#9001#9038#0" expanded="true" />
+                <element signature="e#9072#9109#0" expanded="true" />
+                <element signature="e#9143#9180#0" expanded="true" />
+                <element signature="e#9214#9251#0" expanded="true" />
+                <element signature="e#9285#9322#0" expanded="true" />
+                <element signature="e#9356#9393#0" expanded="true" />
+                <element signature="e#9427#9464#0" expanded="true" />
+                <element signature="e#9498#9535#0" expanded="true" />
+                <element signature="e#12727#12768#0" expanded="true" />
+                <element signature="e#13245#13287#0" expanded="true" />
+                <element signature="e#13368#13419#1" expanded="true" />
+                <element signature="e#13536#13578#0" expanded="true" />
+                <element signature="e#13659#13710#1" expanded="true" />
+                <element signature="e#13829#13870#0" expanded="true" />
+                <element signature="e#14354#14396#0" expanded="true" />
+                <element signature="e#14477#14528#1" expanded="true" />
+                <element signature="e#14646#14688#0" expanded="true" />
+                <element signature="e#14769#14820#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -248,10 +282,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="406" column="74" selection-start-line="406" selection-start-column="74" selection-end-line="406" selection-end-column="74" />
+            <state relative-caret-position="440">
+              <caret line="397" column="69" selection-start-line="397" selection-start-column="69" selection-end-line="397" selection-end-column="69" />
               <folding>
-                <element signature="e#3212#3270#0" expanded="true" />
+                <element signature="e#2723#2765#0" expanded="true" />
+                <element signature="e#2868#2919#1" expanded="true" />
+                <element signature="e#2991#3033#0" expanded="true" />
+                <element signature="e#3136#3186#1" expanded="true" />
+                <element signature="e#3634#3676#0" expanded="true" />
+                <element signature="e#3779#3830#1" expanded="true" />
+                <element signature="e#3902#3944#0" expanded="true" />
+                <element signature="e#4047#4097#1" expanded="true" />
+                <element signature="e#12656#12697#0" expanded="true" />
+                <element signature="e#13156#13198#0" expanded="true" />
+                <element signature="e#13313#13355#0" expanded="true" />
+                <element signature="e#13472#13513#0" expanded="true" />
+                <element signature="e#13979#14021#0" expanded="true" />
+                <element signature="e#14138#14180#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -273,17 +320,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&quot;tz&quot;</find>
-      <find>LAUNCHER</find>
-      <find>logina</find>
-      <find>: AppCompatActivity() {</find>
-      <find>android:theme=&quot;@style/AppTheme.AppBarOverlay&quot;</find>
-      <find>loana</find>
       <find>activity!!</find>
       <find>countryCode</find>
       <find>onDestroy</find>
       <find>serv</find>
-      <find>LoanCalculatorActivity</find>
       <find>login</find>
       <find>service an</find>
       <find>country</find>
@@ -303,6 +343,13 @@
       <find>select loan</find>
       <find>format.format(</find>
       <find>$</find>
+      <find>product_name.setOnClick</find>
+      <find>boolean</find>
+      <find>!emptyPersonalLoan</find>
+      <find>personal</find>
+      <find>LoanCalculatorActivity</find>
+      <find>ti_product_name.setOnClickL</find>
+      <find>onSuccessCurrentLoan</find>
     </findStrings>
     <replaceStrings>
       <replace>: Double = 0.0</replace>
@@ -329,7 +376,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_loan_calculator.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_loan_type.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CustomTypeFaceSpan.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/table_divider_bottom.xml" />
@@ -372,12 +418,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_calculator.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/yellow_button.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/adapter/LoanProductAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/shared.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" />
       </list>
@@ -390,86 +437,11 @@
     <option name="height" value="1000" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="calculator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="com" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
-              <item name="calculator" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
-            </path>
-            <path>
-              <item name="l-pesa" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
@@ -552,6 +524,31 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
               <item name="API" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="l-pesa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="calculator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="l-pesa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="l-pesa" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="l_pesa" type="462c0819:PsiDirectoryNode" />
+              <item name="calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="l-pesa" type="b2602c69:ProjectViewProjectNode" />
@@ -771,23 +768,32 @@
     <option name="localTasksCounter" value="10" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.6823899" visible="true" weight="0.2717211" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.6826446" visible="true" weight="0.2717211" />
       <window_info id="Structure" order="2" sideWeight="0.11598746" side_tool="true" weight="0.17985612" />
       <window_info id="Favorites" order="3" sideWeight="0.07210031" side_tool="true" weight="0.17985612" />
-      <window_info id="Build Variants" order="4" sideWeight="0.31761006" side_tool="true" visible="true" weight="0.2717211" />
+      <window_info id="Build Variants" order="4" sideWeight="0.31735536" side_tool="true" visible="true" weight="0.2717211" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Resources Explorer" order="8" />
       <window_info anchor="bottom" id="Run" order="0" weight="0.0" />
-      <window_info anchor="bottom" id="Logcat" order="1" weight="0.4287257" />
-      <window_info anchor="bottom" id="TODO" order="2" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.3736501" />
+      <window_info anchor="bottom" id="TODO" order="2" weight="0.32937366" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32829374" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.31317493" />
+      <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.34665227" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5002767" side_tool="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32937366" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4997233" weight="0.43196544" />
@@ -823,10 +829,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="Implements 'Token Withdrawal' card of 'LPK Withdrawal'" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_dropdown_.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_dropdown.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/bg_dropdown_spinner.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/custom_spinner_background.xml" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_dropdown_default.xml">
@@ -1109,20 +1111,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-722">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="207" column="55" selection-start-line="207" selection-start-column="26" selection-end-line="207" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_loan_calculator.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -1138,13 +1126,6 @@
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="510" column="5" lean-forward="true" selection-start-line="510" selection-start-column="5" selection-end-line="510" selection-end-column="5" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1164,32 +1145,113 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="447" column="56" selection-start-line="447" selection-start-column="56" selection-end-line="447" selection-end-column="56" />
+        <state relative-caret-position="370">
+          <caret line="449" column="39" selection-start-line="449" selection-start-column="18" selection-end-line="449" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="212" column="8" selection-start-line="212" selection-start-column="8" selection-end-line="212" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/CommonMethod.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="122" column="8" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="115" column="34" lean-forward="true" selection-start-line="115" selection-start-column="34" selection-end-line="115" selection-end-column="34" />
+          <folding>
+            <element signature="e#3708#3742#0" expanded="true" />
+            <element signature="e#3797#3831#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/shared.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="394" column="37" selection-start-line="394" selection-start-column="32" selection-end-line="394" selection-end-column="37" />
+        <state relative-caret-position="285">
+          <caret line="393" column="69" selection-start-line="393" selection-start-column="7" selection-end-line="393" selection-end-column="69" />
           <folding>
             <element signature="e#40#1150#0" expanded="true" />
-            <element signature="e#2615#2656#1" expanded="true" />
-            <element signature="e#3244#3285#1" expanded="true" />
-            <element signature="e#6087#6130#0" expanded="true" />
+            <element signature="e#2414#2457#0" expanded="true" />
+            <element signature="e#2507#2549#0" expanded="true" />
+            <element signature="e#2669#2720#1" expanded="true" />
+            <element signature="e#2793#2835#0" expanded="true" />
+            <element signature="e#2955#3005#1" expanded="true" />
+            <element signature="e#3363#3406#0" expanded="true" />
+            <element signature="e#3456#3498#0" expanded="true" />
+            <element signature="e#3618#3669#1" expanded="true" />
+            <element signature="e#3741#3783#0" expanded="true" />
+            <element signature="e#3903#3953#1" expanded="true" />
+            <element signature="e#6259#6300#1" expanded="true" />
+            <element signature="e#6654#6697#0" expanded="true" />
+            <element signature="e#7391#7432#1" expanded="true" />
+            <element signature="e#8930#8967#0" expanded="true" />
+            <element signature="e#9001#9038#0" expanded="true" />
+            <element signature="e#9072#9109#0" expanded="true" />
+            <element signature="e#9143#9180#0" expanded="true" />
+            <element signature="e#9214#9251#0" expanded="true" />
+            <element signature="e#9285#9322#0" expanded="true" />
+            <element signature="e#9356#9393#0" expanded="true" />
+            <element signature="e#9427#9464#0" expanded="true" />
+            <element signature="e#9498#9535#0" expanded="true" />
+            <element signature="e#12727#12768#0" expanded="true" />
+            <element signature="e#13245#13287#0" expanded="true" />
+            <element signature="e#13368#13419#1" expanded="true" />
+            <element signature="e#13536#13578#0" expanded="true" />
+            <element signature="e#13659#13710#1" expanded="true" />
+            <element signature="e#13829#13870#0" expanded="true" />
+            <element signature="e#14354#14396#0" expanded="true" />
+            <element signature="e#14477#14528#1" expanded="true" />
+            <element signature="e#14646#14688#0" expanded="true" />
+            <element signature="e#14769#14820#1" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="406" column="74" selection-start-line="406" selection-start-column="74" selection-end-line="406" selection-end-column="74" />
+        <state relative-caret-position="440">
+          <caret line="397" column="69" selection-start-line="397" selection-start-column="69" selection-end-line="397" selection-end-column="69" />
           <folding>
-            <element signature="e#3212#3270#0" expanded="true" />
+            <element signature="e#2723#2765#0" expanded="true" />
+            <element signature="e#2868#2919#1" expanded="true" />
+            <element signature="e#2991#3033#0" expanded="true" />
+            <element signature="e#3136#3186#1" expanded="true" />
+            <element signature="e#3634#3676#0" expanded="true" />
+            <element signature="e#3779#3830#1" expanded="true" />
+            <element signature="e#3902#3944#0" expanded="true" />
+            <element signature="e#4047#4097#1" expanded="true" />
+            <element signature="e#12656#12697#0" expanded="true" />
+            <element signature="e#13156#13198#0" expanded="true" />
+            <element signature="e#13313#13355#0" expanded="true" />
+            <element signature="e#13472#13513#0" expanded="true" />
+            <element signature="e#13979#14021#0" expanded="true" />
+            <element signature="e#14138#14180#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -26,6 +26,7 @@ import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
@@ -100,6 +101,9 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
             try {
                 if(isLocationEnabled())
                 {
+                    val sharedPrefOBJ= SharedPref(this@LoginActivity)
+                    sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
+                    sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
                     startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                 }
@@ -430,7 +434,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@LoginActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = androidx.recyclerview.widget.LinearLayoutManager(this@LoginActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@LoginActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 

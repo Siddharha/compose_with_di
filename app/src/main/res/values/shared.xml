@@ -3,6 +3,7 @@
 
     <string name="status_true">TRUE</string>
     <string name="status_false">FALSE</string>
+    <string name="status_error">ERROR</string>
 
     <string name="address_prof">Address Proof</string>
 

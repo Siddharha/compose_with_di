@@ -447,6 +447,7 @@
     <string name="select_loan_type">Please select loan type.</string>
     <string name="interest_rate_calculator">Daily Interest Rate</string>
     <string name="loan_period">Loan Period</string>
+    <string name="service_not_available">The service is not available in your country.</string>
     <string name="required_credit_score_calculator">Required Credit Score</string>
 
 
