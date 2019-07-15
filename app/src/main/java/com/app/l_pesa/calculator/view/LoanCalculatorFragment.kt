@@ -62,8 +62,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         initLoader()
 
         val sharedPrefOBJ= SharedPref(activity!!)
-        sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
-        sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
+        /*sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
+        sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)*/
         ti_loan_type.typeface=Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         ti_loan_type.setOnClickListener {
 
@@ -82,11 +82,11 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             when {
                 ti_loan_type.text.toString() == resources.getString(R.string.personal_loan) -> {
 
-                    if(personalLoanStatus==resources.getString(R.string.status_false))
+                    if(personalLoanStatus==resources.getString(R.string.status_false) && sharedPrefOBJ.currentLoanProduct==resources.getString(R.string.init))
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
                     }
-                    else if(personalLoanStatus==resources.getString(R.string.status_error))
+                    else if(personalLoanStatus==resources.getString(R.string.status_error) && sharedPrefOBJ.currentLoanProduct==resources.getString(R.string.init))
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.something_went_wrong))
                     }
@@ -99,11 +99,11 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                 }
                 ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
 
-                    if(businessLoanStatus==resources.getString(R.string.status_false))
+                    if(businessLoanStatus==resources.getString(R.string.status_false) && sharedPrefOBJ.businessLoanProduct==resources.getString(R.string.init))
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.service_not_available))
                     }
-                    else if(businessLoanStatus==resources.getString(R.string.status_error))
+                    else if(businessLoanStatus==resources.getString(R.string.status_error) && sharedPrefOBJ.businessLoanProduct==resources.getString(R.string.init))
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.something_went_wrong))
                     }

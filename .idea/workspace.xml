@@ -186,13 +186,11 @@
     <list default="true" id="332b5284-1a8d-4138-b104-5290cb485099" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/kotlin/sessions/kotlin-compiler-2234145263499413939.salive" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -231,7 +229,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="133">
-              <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+              <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
               <folding>
                 <element signature="e#40#1150#0" expanded="true" />
               </folding>
@@ -239,20 +237,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="105" column="88" lean-forward="true" selection-start-line="104" selection-start-column="20" selection-end-line="105" selection-end-column="88" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="65" column="76" selection-start-line="65" selection-start-column="76" selection-end-line="65" selection-end-column="76" />
+            <state relative-caret-position="193">
+              <caret line="84" column="156" selection-start-line="84" selection-start-column="156" selection-end-line="84" selection-end-column="156" />
               <folding>
                 <element signature="e#40#1136#0" expanded="true" />
                 <element signature="e#2158#2192#0" expanded="true" />
@@ -260,16 +249,6 @@
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_calculator.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="197" column="52" selection-start-line="197" selection-start-column="37" selection-end-line="197" selection-end-column="52" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -553,7 +532,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="device.picker.selection" value="64d07d16" />
+    <property name="device.picker.selection" value="ZW222265FR" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Downloads/GaugeSeekBar-master/gaugeseekbar" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
@@ -747,9 +726,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.6826446" visible="true" weight="0.2717211" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.6826446" visible="true" weight="0.2717211" />
       <window_info id="Structure" order="2" sideWeight="0.11598746" side_tool="true" weight="0.17985612" />
       <window_info id="Favorites" order="3" sideWeight="0.07210031" side_tool="true" weight="0.17985612" />
       <window_info id="Build Variants" order="4" sideWeight="0.31735536" side_tool="true" visible="true" weight="0.2717211" />
@@ -761,7 +741,7 @@
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.3736501" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32937366" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32829374" />
-      <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.34665227" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" sideWeight="0.4997233" visible="true" weight="0.34665227" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5002767" side_tool="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32937366" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.4997233" weight="0.43196544" />
@@ -1133,13 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="196" column="18" selection-start-line="196" selection-start-column="18" selection-end-line="196" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_calculator.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
@@ -1151,7 +1124,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="31" column="19" lean-forward="true" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
           <folding>
             <element signature="e#40#1150#0" expanded="true" />
           </folding>
@@ -1161,14 +1134,21 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
-          <caret line="105" column="88" lean-forward="true" selection-start-line="104" selection-start-column="20" selection-end-line="105" selection-end-column="88" />
+          <caret line="105" column="88" selection-start-line="104" selection-start-column="20" selection-end-line="105" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="196" column="8" selection-start-line="196" selection-start-column="8" selection-end-line="196" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="65" column="76" selection-start-line="65" selection-start-column="76" selection-end-line="65" selection-end-column="76" />
+        <state relative-caret-position="193">
+          <caret line="84" column="156" selection-start-line="84" selection-start-column="156" selection-end-line="84" selection-end-column="156" />
           <folding>
             <element signature="e#40#1136#0" expanded="true" />
             <element signature="e#2158#2192#0" expanded="true" />
