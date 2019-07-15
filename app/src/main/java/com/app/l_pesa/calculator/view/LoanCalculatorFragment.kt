@@ -249,8 +249,9 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         format.isDecimalSeparatorAlwaysShown = false
 
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
-        txt_usd_values.text=usdValue +" "+loanProduct.currencyCode
-        txt_loan_amount.text= (loanProduct.loanAmount*usdValue.toDouble()).toString()+" "+loanProduct.currencyCode
+        txt_usd_values.text=loanProduct.currencyCode  +" "+usdValue
+        txt_loan_amount.text= loanProduct.currencyCode+" "+Math.round(loanProduct.loanAmount*usdValue.toDouble()).toString()
+
 
         var loopCounter=1
         if(loanProduct.loanPeriodType=="W")
@@ -310,12 +311,12 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         }
 
 
-        txt_total_payback.text= Math.round(totalPayback).toString()+" "+loanProduct.currencyCode
-        txt_subscriptionF.text= Math.round(paymentF).toString()+" "+loanProduct.currencyCode
-        txt_subscriptionM.text= Math.round(paymentM).toString()+" "+loanProduct.currencyCode
-        txt_subscriptionL.text= Math.round(paymentL).toString()+" "+loanProduct.currencyCode
-        txt_interest_rate.text= loanProduct.loanInterestRate.toString()+" %"
 
+        txt_total_payback.text= loanProduct.currencyCode+" "+Math.round(totalPayback)
+        txt_subscriptionF.text= loanProduct.currencyCode+" "+Math.round(paymentF).toString()
+        txt_subscriptionM.text= loanProduct.currencyCode+" "+Math.round(paymentM).toString()
+        txt_subscriptionL.text= loanProduct.currencyCode+" "+Math.round(paymentL).toString()
+        txt_interest_rate.text= loanProduct.loanInterestRate.toString()+" %"
 
 
     }
