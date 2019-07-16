@@ -278,7 +278,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         val loanAmount=Math.round(loanProduct.loanAmount*usdValue)
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
         txt_usd_values.text =loanProduct.currencyCode  +" "+usdValue
-        txt_loan_amount.text= loanProduct.currencyCode+" "+loanAmount.toString()
+        txt_loan_amount.text= loanProduct.currencyCode+" "+format.format(loanAmount)
 
         var loopCounter=1
         if(loanProduct.loanPeriodType=="W")
@@ -342,10 +342,10 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         }
 
         val df = DecimalFormat("#.##")
-        txt_total_payback.text= loanProduct.currencyCode+" "+ Math.round(totalPayback)
-        txt_subscriptionF.text= loanProduct.currencyCode+" "+ Math.round(paymentF).toString()
-        txt_subscriptionM.text= loanProduct.currencyCode+" "+ Math.round(paymentM).toString()
-        txt_subscriptionL.text= loanProduct.currencyCode+" "+ Math.round(paymentL).toString()
+        txt_total_payback.text= loanProduct.currencyCode+" "+ format.format(Math.round(totalPayback))
+        txt_subscriptionF.text= loanProduct.currencyCode+" "+ format.format(Math.round(paymentF))
+        txt_subscriptionM.text= loanProduct.currencyCode+" "+ format.format(Math.round(paymentM))
+        txt_subscriptionL.text= loanProduct.currencyCode+" "+ format.format(Math.round(paymentL))
         txt_interest_rate.text= df.format(loanProduct.loanInterestRate).toString()+" %"
 
 
