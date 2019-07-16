@@ -57,7 +57,7 @@ class ResProducts {
         var loanAmountUnit: String = ""
         @SerializedName("loan_interest_rate")
         @Expose
-        var loanInterestRate: Double? = null
+        var loanInterestRate: Double=0.0
         @SerializedName("loan_interest_rate_for_min_amount")
         @Expose
         var loanInterestRateForMinAmount: Double? = null

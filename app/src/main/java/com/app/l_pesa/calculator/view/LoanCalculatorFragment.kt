@@ -33,7 +33,7 @@ import java.text.DecimalFormat
 class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private lateinit  var progressDialog: KProgressHUD
-    private var usdValue=""
+    private var usdValue=0.0
     private var personalLoanStatus="FALSE"
     private var businessLoanStatus="FALSE"
 
@@ -283,10 +283,10 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
+        val loanAmount=Math.round(loanProduct.loanAmount*usdValue)
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
         txt_usd_values.text =loanProduct.currencyCode  +" "+usdValue
-        txt_loan_amount.text= loanProduct.currencyCode+" "+Math.round(loanProduct.loanAmount*usdValue.toDouble()).toString()
-
+        txt_loan_amount.text= loanProduct.currencyCode+" "+loanAmount.toString()
         var loopCounter=1
         if(loanProduct.loanPeriodType=="W")
         {
@@ -300,46 +300,47 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         }
 
         var totalPayback     = 0.00
-        val principalAmount  = loanProduct.loanAmount*usdValue.toDouble()/loanProduct.loanPeriod
+        val principalAmount  = Math.round((loanAmount/loanProduct.loanPeriod).toDouble())
         var paymentF         = 0.0
         var paymentM         = 0.0
         var paymentL         = 0.0
 
-        var i = 1
-        while (i <= loanProduct.loanPeriod) {
-
-            val curAmount        = loanProduct.loanAmount*usdValue.toDouble()-(principalAmount* (i-1))
-            val insCal           = (curAmount * loanProduct.loanInterestRate!!.toDouble() *i*loopCounter)/100
+        for(i in 1..loanProduct.loanPeriod)
+        {
+            val curAmount        = loanAmount-(principalAmount* (i-1))
+            val insCal           = Math.round((curAmount * loanProduct.loanInterestRate*i*loopCounter)/100)
             totalPayback+=(principalAmount+insCal)
 
             if(i==1)
             {
-                paymentF=principalAmount+insCal
+                paymentF=Math.round((principalAmount+insCal).toDouble()).toDouble()
             }
             if(i==loanProduct.loanPeriod)
             {
-                paymentL=principalAmount+insCal
+                paymentL=Math.round((principalAmount+insCal).toDouble()).toDouble()
             }
 
-            if(loanProduct.loanPeriod %2==0) {
-                val checkM = (loanProduct.loanPeriod / 2) + 1
-
-                if (i == checkM) {
-                    paymentM = principalAmount + insCal
+            if(loanProduct.loanPeriod%2==0)
+            {
+                val checkM = (loanProduct.loanPeriod.toDouble()/2.00)+1
+                val midNo=Math.round(checkM)
+                if (i == midNo.toInt())
+                {
+                    paymentM = Math.round((principalAmount + insCal).toDouble()).toDouble()
 
                 }
             }
             else
             {
-                val checkLoanPeriodM=(loanProduct.loanPeriod/2)
-                if(i==checkLoanPeriodM)
+                val checkLoanPeriodM=(loanProduct.loanPeriod.toDouble()/2.00)
+                val midNo=Math.round(checkLoanPeriodM)
+                if(i==midNo.toInt())
                 {
-                    paymentM=principalAmount+insCal
+                    paymentM=Math.round((principalAmount + insCal).toDouble()).toDouble()
 
                 }
             }
 
-            i++
         }
 
 
@@ -419,7 +420,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     @SuppressLint("SetTextI18n")
     override fun onClickProduct(productList: ResProducts.ProductList, product: ResProducts.Data)
     {
-        usdValue=product.usdValue
+        usdValue=product.usdValue.toDouble()
         val sharedPrefOBJ= SharedPref(activity!!)
         val productOBJ                        = Gson().toJson(productList)
         sharedPrefOBJ.loanProduct             = productOBJ
