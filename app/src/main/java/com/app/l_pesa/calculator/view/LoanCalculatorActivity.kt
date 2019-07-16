@@ -31,6 +31,7 @@ import java.text.DecimalFormat
 
 
 
+
 class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     private lateinit  var progressDialog: KProgressHUD
@@ -134,7 +135,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
     private fun popupLoanType()
     {
         val popupMenuOBJ = PopupMenu(this@LoanCalculatorActivity, ti_loan_type)
-        popupMenuOBJ.menuInflater.inflate(com.app.l_pesa.R.menu.menu_loan_type, popupMenuOBJ.menu)
+        popupMenuOBJ.menuInflater.inflate(R.menu.menu_loan_type, popupMenuOBJ.menu)
 
 
         popupMenuOBJ.setOnMenuItemClickListener { item: MenuItem? ->
@@ -227,10 +228,10 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         ti_product_name.text!!.clear()
         val dialog= Dialog(this@LoanCalculatorActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(com.app.l_pesa.R.layout.dialog_id_type)
-        val recyclerView                = dialog.findViewById(com.app.l_pesa.R.id.recyclerView) as RecyclerView?
+        dialog.setContentView(R.layout.dialog_id_type)
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val loanProductAdapter          = LoanProductAdapter(this@LoanCalculatorActivity, product.productList!!,product,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanCalculatorActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanCalculatorActivity, RecyclerView.VERTICAL, false) as RecyclerView.LayoutManager?
         recyclerView?.adapter           = loanProductAdapter
         dialog.show()
     }
@@ -291,17 +292,20 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
             txt_loan_period.text= loanProduct.loanPeriod.toString() +" Days"
         }
 
+
         var totalPayback     = 0.00
-        val principalAmount  = Math.round((loanAmount/loanProduct.loanPeriod).toDouble())
+        val principalAmount  = Math.round(loanAmount.toDouble()/loanProduct.loanPeriod.toDouble())
         var paymentF         = 0.0
         var paymentM         = 0.0
         var paymentL         = 0.0
 
 
+
+
         for(i in 1..loanProduct.loanPeriod)
         {
             val curAmount        = loanAmount-(principalAmount* (i-1))
-            val insCal           = Math.round((curAmount * loanProduct.loanInterestRate*i*loopCounter)/100)
+            val insCal           = Math.round((curAmount.toDouble()) * loanProduct.loanInterestRate*i*loopCounter/100)
             totalPayback+=(principalAmount+insCal)
 
             if(i==1)
@@ -337,13 +341,12 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
         }
 
-
-
+        val df = DecimalFormat("#.##")
         txt_total_payback.text= loanProduct.currencyCode+" "+ Math.round(totalPayback)
         txt_subscriptionF.text= loanProduct.currencyCode+" "+ Math.round(paymentF).toString()
         txt_subscriptionM.text= loanProduct.currencyCode+" "+ Math.round(paymentM).toString()
         txt_subscriptionL.text= loanProduct.currencyCode+" "+ Math.round(paymentL).toString()
-        txt_interest_rate.text= loanProduct.loanInterestRate.toString()+" %"
+        txt_interest_rate.text= df.format(loanProduct.loanInterestRate).toString()+" %"
 
 
     }

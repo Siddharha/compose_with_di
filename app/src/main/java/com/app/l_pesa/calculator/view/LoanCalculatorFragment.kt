@@ -287,6 +287,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         txt_credit_score.text=format.format(loanProduct.requiredCreditScore)
         txt_usd_values.text =loanProduct.currencyCode  +" "+usdValue
         txt_loan_amount.text= loanProduct.currencyCode+" "+loanAmount.toString()
+
         var loopCounter=1
         if(loanProduct.loanPeriodType=="W")
         {
@@ -299,16 +300,20 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
             txt_loan_period.text= loanProduct.loanPeriod.toString() +" Days"
         }
 
+
         var totalPayback     = 0.00
-        val principalAmount  = Math.round((loanAmount/loanProduct.loanPeriod).toDouble())
+        val principalAmount  = Math.round(loanAmount.toDouble()/loanProduct.loanPeriod.toDouble())
         var paymentF         = 0.0
         var paymentM         = 0.0
         var paymentL         = 0.0
 
+
+
+
         for(i in 1..loanProduct.loanPeriod)
         {
             val curAmount        = loanAmount-(principalAmount* (i-1))
-            val insCal           = Math.round((curAmount * loanProduct.loanInterestRate*i*loopCounter)/100)
+            val insCal           = Math.round((curAmount.toDouble()) * loanProduct.loanInterestRate*i*loopCounter/100)
             totalPayback+=(principalAmount+insCal)
 
             if(i==1)
@@ -341,14 +346,15 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                 }
             }
 
+
         }
 
-
-        txt_total_payback.text= loanProduct.currencyCode+" "+Math.round(totalPayback)
-        txt_subscriptionF.text= loanProduct.currencyCode+" "+Math.round(paymentF).toString()
-        txt_subscriptionM.text= loanProduct.currencyCode+" "+Math.round(paymentM).toString()
-        txt_subscriptionL.text= loanProduct.currencyCode+" "+Math.round(paymentL).toString()
-        txt_interest_rate.text= loanProduct.loanInterestRate.toString()+" %"
+        val df = DecimalFormat("#.##")
+        txt_total_payback.text= loanProduct.currencyCode+" "+ Math.round(totalPayback)
+        txt_subscriptionF.text= loanProduct.currencyCode+" "+ Math.round(paymentF).toString()
+        txt_subscriptionM.text= loanProduct.currencyCode+" "+ Math.round(paymentM).toString()
+        txt_subscriptionL.text= loanProduct.currencyCode+" "+ Math.round(paymentL).toString()
+        txt_interest_rate.text= df.format(loanProduct.loanInterestRate).toString()+" %"
 
 
     }
