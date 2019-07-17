@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/starter_loan"
-        android:textColor="@color/colorYellow"
+        android:textColor="@color/colorWhite"
         android:textSize="@dimen/_20sdp"
         android:gravity="center"
         android:textStyle="bold"
