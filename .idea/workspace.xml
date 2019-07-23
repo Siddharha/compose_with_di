@@ -184,13 +184,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="332b5284-1a8d-4138-b104-5290cb485099" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -229,26 +222,30 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
+            <state relative-caret-position="190">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
+                <element signature="e#316#330#0" expanded="true" />
                 <element signature="e#705#719#0" expanded="true" />
                 <element signature="e#937#951#0" expanded="true" />
                 <element signature="e#1538#1553#0" expanded="true" />
                 <element signature="e#1645#1659#0" expanded="true" />
                 <element signature="e#2108#2122#0" expanded="true" />
+                <element signature="e#2161#2176#0" expanded="true" />
                 <element signature="e#2366#2381#0" expanded="true" />
                 <element signature="e#3450#3465#0" expanded="true" />
-                <element signature="e#4702#4716#0" expanded="true" />
-                <element signature="e#5040#5054#0" expanded="true" />
-                <element signature="e#5204#5222#0" expanded="true" />
-                <element signature="e#5326#5341#0" expanded="true" />
-                <element signature="e#5393#5407#0" expanded="true" />
-                <element signature="e#5667#5682#0" expanded="true" />
-                <element signature="e#5730#5744#0" expanded="true" />
-                <element signature="e#5823#5837#0" expanded="true" />
-                <element signature="e#6369#6383#0" expanded="true" />
-                <element signature="e#8846#8860#0" expanded="true" />
+                <element signature="e#4714#4729#0" expanded="true" />
+                <element signature="e#4706#4720#0" expanded="true" />
+                <element signature="e#5039#5053#0" expanded="true" />
+                <element signature="e#5100#5115#0" expanded="true" />
+                <element signature="e#5270#5288#0" expanded="true" />
+                <element signature="e#5392#5407#0" expanded="true" />
+                <element signature="e#5459#5473#0" expanded="true" />
+                <element signature="e#5729#5744#0" expanded="true" />
+                <element signature="e#5796#5810#0" expanded="true" />
+                <element signature="e#5860#5874#0" expanded="true" />
+                <element signature="e#6325#6339#0" expanded="true" />
+                <element signature="e#8912#8926#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -385,8 +382,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/pin/presenter/PresenterPin.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/presenter/PresenterUserInfo.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/adapter/LoanListAdapter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml" />
       </list>
     </option>
   </component>
@@ -1238,26 +1235,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_dashboard_loan.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="35" column="53" selection-start-line="35" selection-start-column="53" selection-end-line="35" selection-end-column="53" />
+        <state relative-caret-position="190">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
+            <element signature="e#316#330#0" expanded="true" />
             <element signature="e#705#719#0" expanded="true" />
             <element signature="e#937#951#0" expanded="true" />
             <element signature="e#1538#1553#0" expanded="true" />
             <element signature="e#1645#1659#0" expanded="true" />
             <element signature="e#2108#2122#0" expanded="true" />
+            <element signature="e#2161#2176#0" expanded="true" />
             <element signature="e#2366#2381#0" expanded="true" />
             <element signature="e#3450#3465#0" expanded="true" />
-            <element signature="e#4702#4716#0" expanded="true" />
-            <element signature="e#5040#5054#0" expanded="true" />
-            <element signature="e#5204#5222#0" expanded="true" />
-            <element signature="e#5326#5341#0" expanded="true" />
-            <element signature="e#5393#5407#0" expanded="true" />
-            <element signature="e#5667#5682#0" expanded="true" />
-            <element signature="e#5730#5744#0" expanded="true" />
-            <element signature="e#5823#5837#0" expanded="true" />
-            <element signature="e#6369#6383#0" expanded="true" />
-            <element signature="e#8846#8860#0" expanded="true" />
+            <element signature="e#4714#4729#0" expanded="true" />
+            <element signature="e#4706#4720#0" expanded="true" />
+            <element signature="e#5039#5053#0" expanded="true" />
+            <element signature="e#5100#5115#0" expanded="true" />
+            <element signature="e#5270#5288#0" expanded="true" />
+            <element signature="e#5392#5407#0" expanded="true" />
+            <element signature="e#5459#5473#0" expanded="true" />
+            <element signature="e#5729#5744#0" expanded="true" />
+            <element signature="e#5796#5810#0" expanded="true" />
+            <element signature="e#5860#5874#0" expanded="true" />
+            <element signature="e#6325#6339#0" expanded="true" />
+            <element signature="e#8912#8926#0" expanded="true" />
           </folding>
         </state>
       </provider>
