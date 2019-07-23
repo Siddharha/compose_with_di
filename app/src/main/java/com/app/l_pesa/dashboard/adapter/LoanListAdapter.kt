@@ -63,7 +63,6 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
                     format.isDecimalSeparatorAlwaysShown = false
 
                     viewHolder.txtLoanDetails.text                  =al_loadOBJ[position].nextRepay!!.leftDaysText
-                    viewHolder.txtAmountFirst.text                  =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].repay!!.amount)
 
                     if(al_loadOBJ[position].nextRepay!!.leftDays<0)
                     {
@@ -73,9 +72,12 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
                     {
                         viewHolder.buttonApplyLoan.visibility       =View.INVISIBLE
                         viewHolder.txtAmountSecond.visibility       =View.GONE
+                        viewHolder.txtAmountFirst.text              =al_loadOBJ[position].repay!!.currency+" "+format.format(al_loadOBJ[position].repay!!.amount)
+
                     }
                     else
                     {
+                        viewHolder.txtAmountFirst.text                  =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].repay!!.amount)
                         viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.text             =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].nextRepay!!.amount)
@@ -161,7 +163,7 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
                     format.isDecimalSeparatorAlwaysShown = false
 
                     viewHolder.txtLoanDetails.text              =al_loadOBJ[position].nextRepay!!.leftDaysText
-                    viewHolder.txtAmountFirst.text              =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].repay!!.amount)
+
 
                     if(al_loadOBJ[position].nextRepay!!.leftDays<0)
                     {
@@ -172,9 +174,11 @@ class LoanListAdapter(private var al_loadOBJ: ArrayList<ResDashboard.Loan>,priva
                     {
                         viewHolder.buttonApplyLoan.visibility       =View.INVISIBLE
                         viewHolder.txtAmountSecond.visibility       =View.GONE
+                        viewHolder.txtAmountFirst.text              =al_loadOBJ[position].repay!!.currency+" "+format.format(al_loadOBJ[position].repay!!.amount)
                     }
                     else
                     {
+                        viewHolder.txtAmountFirst.text              =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].repay!!.amount)
                         viewHolder.buttonApplyLoan.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.visibility       =View.VISIBLE
                         viewHolder.txtAmountSecond.text             =dashBoard.currencyCode+" "+format.format(al_loadOBJ[position].nextRepay!!.amount)
