@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">L-Pesa</string>
-    <string name="starter_loan">Starter Loan</string>
+    <string name="starter_loan"> $1 Starter Loan</string>
+    <string name="l_pesa_risk_free">The L-Pesa Risk Free</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_using_lpesa">Already using L-Pesa?</string>
     <string name="get_started">Get Started</string>
-    <string name="no_country">/No country was listed.</string>
+    <string name="no_country">No country was listed.</string>
     <string name="phone_no">Mobile No.</string>
     <string name="email_address">Email Address*</string>
     <string name="login">Login</string>
