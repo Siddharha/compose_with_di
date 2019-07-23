@@ -23,8 +23,7 @@
                 android:id="@+id/imgLoan"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_2sdp"
                 android:contentDescription="@string/app_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -36,9 +35,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="@dimen/_12sdp"
                 android:text="@string/app_name"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_3sdp"
                 app:layout_constraintEnd_toStartOf="@+id/viewDividerOne"
                 app:layout_constraintStart_toEndOf="@+id/imgLoan"
                 app:layout_constraintTop_toTopOf="@+id/imgLoan" />
@@ -52,7 +51,7 @@
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/textColors"
                 android:text="@string/app_name"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_10sdp"
                 app:layout_constraintStart_toEndOf="@+id/imgLoan"
                 app:layout_constraintStart_toStartOf="@+id/txt_loan_type"
                 app:layout_constraintTop_toBottomOf="@+id/txt_loan_type"
@@ -74,10 +73,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintRight"
-                android:layout_width="@dimen/_100sdp"
+                android:layout_width="@dimen/_95sdp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@+id/viewDividerOne"
-                app:layout_constraintBottom_toTopOf="@id/viewDividerTwo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -85,10 +83,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+
 
                     >
 
@@ -96,12 +94,12 @@
                         android:id="@+id/txtAmountFirst"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/montserrat"
-                        android:gravity="center"
+                        android:gravity="center|start"
                         android:text="@string/app_name"
-                        android:textColor="@color/textColors"
+                        android:textColor="@color/dark_text_color"
                         android:textSize="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
 
                         />
 
@@ -109,25 +107,26 @@
                         android:id="@+id/txtAmountSecond"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:fontFamily="@font/montserrat"
-                        android:gravity="center"
+                        android:gravity="center|start"
                         android:text="@string/app_name"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_2sdp"
 
                         />
 
                     <com.app.l_pesa.common.CustomButtonRegular
                         android:id="@+id/btn_apply_loan"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_29sdp"
+                        android:layout_height="@dimen/_28sdp"
                         android:layout_marginStart="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:fontFamily="@font/montserrat"
                         android:gravity="center"
-                        android:layout_gravity="center"
+                        android:layout_gravity="center|start"
                         android:text="@string/repayments"
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite"
@@ -186,11 +185,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:isb_show_indicator="rectangle"
-                    app:isb_track_background_color="#fc3026"
-                    app:isb_track_background_size="@dimen/_5sdp"
+                    app:isb_track_background_color="@color/colorRedLight"
+                    app:isb_track_background_size="@dimen/_3sdp"
                     app:isb_track_progress_color="#2bbd83"
                     app:isb_track_progress_size="@dimen/_5sdp"
                     app:isb_thumb_color="#08a9ea"
+                    app:isb_indicator_color="@color/colorRedLight"
 
                     />
 
