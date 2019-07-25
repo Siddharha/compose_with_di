@@ -5,13 +5,13 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.hideKeyboardView
@@ -20,7 +20,6 @@ import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackPin
 import com.app.l_pesa.pin.presenter.PresenterPin
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_change_pin.*
 import kotlinx.android.synthetic.main.content_change_pin.*
 

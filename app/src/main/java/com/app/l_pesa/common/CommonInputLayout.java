@@ -2,8 +2,9 @@ package com.app.l_pesa.common;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import com.google.android.material.textfield.TextInputLayout;
 import android.util.AttributeSet;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 /**
  * Created by Intellij Amiya on 06-02-2019.

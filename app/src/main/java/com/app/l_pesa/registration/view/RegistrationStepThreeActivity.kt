@@ -12,16 +12,16 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -48,8 +48,8 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     private val requestPhoto        = 16
     private val requestGallery      = 17
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -190,10 +190,10 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile!!.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@RegistrationStepThreeActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
@@ -267,7 +267,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                 Toast.makeText(this@RegistrationStepThreeActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgPersonalType.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             this@RegistrationStepThreeActivity,
@@ -277,7 +277,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                     )
                     imgPersonalType.setImageBitmap(pictureBitmap)
                     imgPersonalType.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -352,7 +352,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgPersonalType.setImageBitmap(bitmap)
                 photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                CommonMethod.fileCompress(photoFile)
             }
 
         }

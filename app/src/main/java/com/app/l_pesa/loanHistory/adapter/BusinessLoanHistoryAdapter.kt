@@ -2,11 +2,11 @@ package com.app.l_pesa.loanHistory.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel

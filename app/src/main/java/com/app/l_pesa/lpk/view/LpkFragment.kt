@@ -3,10 +3,10 @@ package com.app.l_pesa.lpk.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref

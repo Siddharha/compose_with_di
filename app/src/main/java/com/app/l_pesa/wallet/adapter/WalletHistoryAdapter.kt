@@ -3,12 +3,12 @@ package com.app.l_pesa.wallet.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular

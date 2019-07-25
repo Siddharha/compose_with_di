@@ -2,12 +2,12 @@ package com.app.l_pesa.investment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory

@@ -1,22 +1,21 @@
 package com.app.l_pesa.profile.view
 
+
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.profile.model.IdInformationTabPager
-
-
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_profile_edit_id_info.*
 
 class ProfileEditIdInfoActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener {

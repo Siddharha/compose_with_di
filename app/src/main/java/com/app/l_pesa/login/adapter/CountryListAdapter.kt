@@ -2,14 +2,14 @@ package com.app.l_pesa.login.adapter
 
 import android.app.Dialog
 import android.content.Context
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.splash.model.ResModelCountryList

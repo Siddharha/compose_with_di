@@ -3,17 +3,15 @@ package com.app.l_pesa.calculator.view
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
-import android.os.Bundle
-import android.widget.PopupMenu
-import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_loan_calculator.*
-import android.text.Spannable
-import com.app.l_pesa.common.CustomTypeFaceSpan
-import android.text.SpannableString
 import android.graphics.Typeface
-import androidx.core.content.ContextCompat
+import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
 import android.view.*
+import android.widget.PopupMenu
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -22,12 +20,13 @@ import com.app.l_pesa.calculator.inter.ICallBackProducts
 import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.calculator.presenter.PresenterCalculator
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.text.DecimalFormat
-
 
 
 class LoanCalculatorFragment:Fragment(), ICallBackProducts{

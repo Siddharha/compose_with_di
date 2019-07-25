@@ -2,13 +2,12 @@ package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
@@ -16,6 +15,7 @@ import com.app.l_pesa.lpk.adapter.AdapterInterestHistory
 import com.app.l_pesa.lpk.inter.ICallBackInterestHistory
 import com.app.l_pesa.lpk.model.ResInterestHistory
 import com.app.l_pesa.lpk.presenter.PresenterInterestHistory
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_interest_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*

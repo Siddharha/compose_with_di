@@ -14,13 +14,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.Px;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.view.ViewCompat;
-import androidx.appcompat.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -28,6 +21,14 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.EditorInfo;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.Px;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.ViewCompat;
 
 import com.app.l_pesa.R;
 

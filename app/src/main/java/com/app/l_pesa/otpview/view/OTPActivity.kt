@@ -6,8 +6,6 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatTextView
 import android.text.Selection
 import android.text.Spannable
 import android.text.SpannableString
@@ -18,6 +16,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod

@@ -4,12 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.hideKeyboardView
@@ -21,7 +21,6 @@ import com.app.l_pesa.pin.presenter.PresenterPin
 import com.app.l_pesa.pinview.model.LoginData
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-
 import kotlinx.android.synthetic.main.activity_set_up_pin.*
 import kotlinx.android.synthetic.main.content_set_up_pin.*
 

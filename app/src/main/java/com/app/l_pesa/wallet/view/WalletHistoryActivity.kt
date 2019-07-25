@@ -6,13 +6,12 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -24,6 +23,7 @@ import com.app.l_pesa.wallet.adapter.WalletHistoryAdapter
 import com.app.l_pesa.wallet.inter.ICallBackWalletWithdrawalHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawalHistory
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_wallet_history.*
 import kotlinx.android.synthetic.main.content_wallet_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*

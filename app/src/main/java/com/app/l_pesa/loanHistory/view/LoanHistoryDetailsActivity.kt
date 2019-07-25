@@ -7,9 +7,6 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Html
 import android.text.Spanned
 import android.view.LayoutInflater
@@ -17,11 +14,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_loan_history_details.*
 import kotlinx.android.synthetic.main.content_loan_history_details.*
 import java.text.DecimalFormat

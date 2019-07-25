@@ -15,10 +15,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.appcompat.app.AlertDialog
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +23,10 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -72,8 +71,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private val requestPhoto      = 14
     private val requestGallery    = 15
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var  photoFile          : File
+    private lateinit  var captureFilePath    : Uri
 
     private lateinit  var progressDialog: KProgressHUD
 
@@ -439,12 +438,12 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(activity!!.filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile!!.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile)
 
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -517,7 +516,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                 Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgProfile.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             activity!!,
@@ -527,7 +526,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -602,7 +601,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfile.setImageBitmap(bitmap)
                 photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                CommonMethod.fileCompress(photoFile)
             }
 
         }

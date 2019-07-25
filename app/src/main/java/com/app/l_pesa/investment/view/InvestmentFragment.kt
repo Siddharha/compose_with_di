@@ -2,16 +2,16 @@ package com.app.l_pesa.investment.view
 
 import android.graphics.Typeface
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
-import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.investment.adapter.InvestmentTabPager
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 

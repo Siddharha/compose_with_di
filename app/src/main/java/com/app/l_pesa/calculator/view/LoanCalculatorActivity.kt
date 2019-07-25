@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -14,6 +13,7 @@ import android.view.MenuItem
 import android.view.Window
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,14 +22,14 @@ import com.app.l_pesa.calculator.adapter.LoanProductAdapter
 import com.app.l_pesa.calculator.inter.ICallBackProducts
 import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.calculator.presenter.PresenterCalculator
-import com.app.l_pesa.common.*
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypeFaceSpan
+import com.app.l_pesa.common.SharedPref
 import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_loan_calculator.*
 import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.text.DecimalFormat
-
-
 
 
 class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {

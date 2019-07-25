@@ -15,11 +15,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -28,6 +23,11 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -62,8 +62,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     private val requestPhoto             = 10
     private val requestGalley            = 11
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +82,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         buttonEvent(profileData)
 
     }
-
 
 
     private fun swipeRefresh()
@@ -381,10 +380,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile!!.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
@@ -460,7 +459,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgProfile.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             this@ProfileEditPersonalActivity,
@@ -470,7 +469,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true

@@ -11,14 +11,14 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -37,8 +37,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     private lateinit              var progressDialog: KProgressHUD
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
     private var mobileOtp           = ""
     private val requestPhoto        = 14
     private val requestGallery      = 15
@@ -186,10 +186,10 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile!!.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
@@ -264,7 +264,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 Toast.makeText(this@RegistrationStepTwoActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgProfilePhoto.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             this@RegistrationStepTwoActivity,
@@ -274,7 +274,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                     )
                     imgProfilePhoto.setImageBitmap(pictureBitmap)
                     imgProfilePhoto.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -347,7 +347,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfilePhoto?.setImageBitmap(bitmap)
                 photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                CommonMethod.fileCompress(photoFile)
             }
 
         }

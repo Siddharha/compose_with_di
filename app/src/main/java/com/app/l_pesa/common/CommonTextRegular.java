@@ -2,8 +2,9 @@ package com.app.l_pesa.common;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 
 /**

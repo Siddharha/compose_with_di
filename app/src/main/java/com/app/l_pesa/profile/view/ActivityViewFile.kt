@@ -3,13 +3,12 @@ package com.app.l_pesa.profile.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-
 import kotlinx.android.synthetic.main.activity_view_file.*
 import kotlinx.android.synthetic.main.content_activity_view_file.*
 

@@ -34,7 +34,8 @@ android {
             buildConfigField("String", 'AWS_BUCKET', '"lpesa-profile-identity-proof"')
             buildConfigField("String", 'PROFILE_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/"')
             buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
-            buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
+           /* buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')*/
+            buildConfigField("String", 'BASE_URL', '"http://20.36.32.60/v2/"')
             buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')
 
         }
@@ -47,7 +48,8 @@ android {
             buildConfigField("String", 'AWS_BUCKET', '"lpesa-profile-identity-proof"')
             buildConfigField("String", 'PROFILE_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/"')
             buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
-            buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
+            //buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
+            buildConfigField("String", 'BASE_URL', '"http://20.36.32.60/v2/"')
             buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')
 
         }

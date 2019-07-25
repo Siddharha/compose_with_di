@@ -5,13 +5,12 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.*
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -24,6 +23,7 @@ import com.app.l_pesa.profile.inter.ICallBackBusinessInfo
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterBusinessInfo
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_profile_edit_business_info.*

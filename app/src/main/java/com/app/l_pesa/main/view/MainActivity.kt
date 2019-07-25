@@ -10,11 +10,13 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
-import com.app.l_pesa.common.*
+import com.app.l_pesa.common.LocationBackgroundService
+import com.app.l_pesa.common.RunTimePermission
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.google.android.gms.location.LocationCallback

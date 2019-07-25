@@ -2,8 +2,7 @@ package com.app.l_pesa.calculator.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
-import java.util.ArrayList
+import java.util.*
 
 
 class ResProducts {

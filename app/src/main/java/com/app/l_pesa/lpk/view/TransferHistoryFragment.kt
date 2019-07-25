@@ -3,12 +3,11 @@ package com.app.l_pesa.lpk.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.appcompat.app.AlertDialog
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -21,6 +20,7 @@ import com.app.l_pesa.lpk.model.ResTransferHistory
 import com.app.l_pesa.lpk.presenter.PresenterSavingsUnlock
 import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
 import com.app.l_pesa.main.view.MainActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_transfer_history.*

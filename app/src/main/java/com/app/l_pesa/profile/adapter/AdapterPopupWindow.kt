@@ -1,14 +1,14 @@
 package com.app.l_pesa.profile.adapter
 
 import android.content.Context
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.model.ModelWindowPopUp

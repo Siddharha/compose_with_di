@@ -15,10 +15,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
-import androidx.appcompat.app.AlertDialog
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +23,10 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -72,8 +72,8 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
     private val requestPhoto      = 12
     private val requestGallery    = 13
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
     private var idTypeExists        = "FALSE"
     private var imgFileAddress      = ""
 
@@ -562,7 +562,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
                 Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgProfile.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             activity!!,
@@ -572,7 +572,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true

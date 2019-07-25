@@ -1,10 +1,10 @@
 package com.app.l_pesa.points.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.view.DashboardActivity
 

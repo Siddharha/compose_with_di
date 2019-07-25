@@ -7,11 +7,11 @@ package com.app.l_pesa.common
  * Kindly follow https://source.android.com/setup/code-style
  */
 import android.content.Context
-import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
+import androidx.viewpager.widget.ViewPager
 
 
 class LockViewPager : ViewPager {

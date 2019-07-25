@@ -5,10 +5,6 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -17,6 +13,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -24,6 +23,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackLoginPin
 import com.app.l_pesa.pin.presenter.PresenterPassword
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_change_login_pin.*
 import kotlinx.android.synthetic.main.content_change_login_pin.*

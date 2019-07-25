@@ -1,13 +1,12 @@
 package com.app.l_pesa.splash.view
 
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import android.view.View
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref

@@ -1,10 +1,10 @@
 package com.app.l_pesa.settings.adapter
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.settings.inter.ICallBackListClick
 import com.app.l_pesa.settings.model.SettingsItem
