@@ -71,6 +71,11 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
             val presenterLoanPlans= PresenterLoanPlans()
             presenterLoanPlans.doLoanPlansBusiness(activity!!,jsonObject,this)
         }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            swipeRefreshLayout.isRefreshing = false
+        }
 
     }
 

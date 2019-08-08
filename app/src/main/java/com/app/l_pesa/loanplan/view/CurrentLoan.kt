@@ -59,6 +59,11 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
             val presenterLoanPlans= PresenterLoanPlans()
             presenterLoanPlans.doLoanPlans(activity!!,jsonObject,this)
         }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            swipeRefreshLayout.isRefreshing = false
+        }
 
     }
 
