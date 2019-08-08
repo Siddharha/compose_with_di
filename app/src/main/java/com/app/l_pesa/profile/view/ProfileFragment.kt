@@ -18,6 +18,7 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
@@ -234,13 +235,15 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setData(data: ResUserInfo.Data)
+    fun setData(data: ResUserInfo.Data)
     {
 
         val sharedPrefOBJ= SharedPref(activity!!)
         val gson                          = Gson()
         val profileData                   = gson.toJson(data)
         sharedPrefOBJ.profileInfo         = profileData
+
+        getProfileInfo(data)
 
         /*Profile Information*/
 
@@ -448,6 +451,21 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
 
 
+    }
+
+    fun getProfileInfo(data: ResUserInfo.Data)
+    {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        userData.user_personal_info.first_name      =data.userPersonalInfo!!.firstName
+        userData.user_personal_info.middle_name     =data.userPersonalInfo!!.middleName
+        userData.user_personal_info.last_name       =data.userPersonalInfo!!.lastName
+        userData.user_personal_info.profile_image   =data.userPersonalInfo!!.profileImage
+        userData.user_info.credit_score             =data.userInfo!!.creditScore
+        val json = Gson().toJson(userData)
+        sharedPrefOBJ.userInfo = json
+
+        (activity!! as DashboardActivity).initData()
     }
 
     private fun returnIdType(idType:String): String {

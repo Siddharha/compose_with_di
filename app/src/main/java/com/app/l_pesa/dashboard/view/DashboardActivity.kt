@@ -554,12 +554,15 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             {
                 currentFragment.loadProfileInfo(false)
                 sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
-                initData()
+
+
             }
 
         }
 
     }
+
+
 
     public override fun onDestroy() {
     super.onDestroy()
