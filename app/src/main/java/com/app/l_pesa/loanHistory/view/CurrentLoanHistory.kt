@@ -111,7 +111,9 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
         }
         else
         {
-            swipeRefreshLayout.isRefreshing = false
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                swipeRefreshLayout.isRefreshing = false
+
         }
 
 

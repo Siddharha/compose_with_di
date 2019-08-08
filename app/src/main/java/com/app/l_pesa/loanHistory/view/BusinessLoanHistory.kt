@@ -107,6 +107,13 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
             presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,from_date,to_date,type,"",this)
 
         }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            swipeRefreshLayout.isRefreshing = false
+
+        }
+
 
     }
 
