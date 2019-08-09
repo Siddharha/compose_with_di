@@ -533,7 +533,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfile.setImageBitmap(bitmap)
                 photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                CommonMethod.fileCompress(photoFile)
             }
 
         }

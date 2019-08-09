@@ -213,7 +213,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     {
         val checkSelfPermission = ContextCompat.checkSelfPermission(this@RegistrationStepThreeActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this@RegistrationStepThreeActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            ActivityCompat.requestPermissions(this@RegistrationStepThreeActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), requestGallery)
         }
         else{
             openAlbum()
