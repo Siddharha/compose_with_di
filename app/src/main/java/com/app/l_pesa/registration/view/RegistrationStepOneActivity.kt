@@ -299,7 +299,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
         btnSubmit.isClickable =true
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
-        sharedPref.accessToken=data.access_token
+        sharedPref.accessToken=""+data.access_token
 
         val bundle = Bundle()
         bundle.putString("OTP",data.otp)
