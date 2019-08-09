@@ -652,6 +652,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
             MediaScannerConnection.scanFile(activity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
+            CommonMethod.fileCompress(photoFile)
 
             return file.absolutePath
         }

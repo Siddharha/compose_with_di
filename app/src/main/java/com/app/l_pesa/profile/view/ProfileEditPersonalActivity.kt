@@ -522,6 +522,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             MediaScannerConnection.scanFile(this@ProfileEditPersonalActivity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
+            CommonMethod.fileCompress(photoFile)
 
             return file.absolutePath
         }

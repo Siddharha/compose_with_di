@@ -360,6 +360,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
             MediaScannerConnection.scanFile(this@RegistrationStepThreeActivity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
+            CommonMethod.fileCompress(photoFile)
 
             return file.absolutePath
         }
