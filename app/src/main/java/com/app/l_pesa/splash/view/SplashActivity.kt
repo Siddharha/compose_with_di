@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -13,6 +14,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.model.ResModelData
 import com.app.l_pesa.splash.presenter.PresenterCountry
@@ -37,36 +39,46 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     private fun initUI()
     {
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
-        if (sharedPrefOBJ.accessToken != resources.getString(com.app.l_pesa.R.string.init))
-        {
-            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+
+            if (sharedPrefOBJ.accessToken != resources.getString(com.app.l_pesa.R.string.init))
             {
-                progressBar.visibility = View.VISIBLE
-                logoutProcess()
-
-            }
-            else {
-                buttonRetry.visibility = View.VISIBLE
-                progressBar.visibility = View.INVISIBLE
-
-                buttonRetry.setOnClickListener {
-
-                    if (CommonMethod.isNetworkAvailable(this@SplashActivity))
-                    {
-                        logoutProcess()
-                    } else
-                    {
-                        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(com.app.l_pesa.R.string.no_internet))
+                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
+                {
+                    progressBar.visibility = View.VISIBLE
+                    /*val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+                    if(userData.access_token==null)
+                    {splashLoading()
                     }
+                    else
+                    {*/
+                        logoutProcess()
+                    //}
+
 
                 }
+                else {
+                    buttonRetry.visibility = View.VISIBLE
+                    progressBar.visibility = View.INVISIBLE
+
+                    buttonRetry.setOnClickListener {
+
+                        if (CommonMethod.isNetworkAvailable(this@SplashActivity))
+                        {
+                            logoutProcess()
+                        } else
+                        {
+                            CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(com.app.l_pesa.R.string.no_internet))
+                        }
+
+                    }
+                }
+
+            }
+            else
+            {
+                loadNext()
             }
 
-        }
-        else
-        {
-            loadNext()
-        }
 
 
     }

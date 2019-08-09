@@ -4,7 +4,7 @@ import com.app.l_pesa.common.CommonStatusModel
 
 class ResSetPin(val status: CommonStatusModel, val data: LoginData)
 
-data class LoginData(val user_info:UserInfo,val user_personal_info:UserPersonalInfo, val menu_services:MenuServices, val access_token:String)
+data class LoginData(val user_info:UserInfo,val user_personal_info:UserPersonalInfo, val menu_services:MenuServices, var access_token:String)
 
 data class MenuServices(val service_status:MenuServicesStatus)
 
