@@ -218,6 +218,21 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var currentLat: String
+        get() = pref.getString(KEY_SET_CURRENT_LAT, "")!!
+        set(currentLat) {
+            editor.remove(KEY_SET_CURRENT_LAT)
+            editor.putString(KEY_SET_CURRENT_LAT, currentLat)
+            editor.commit()
+        }
+    var currentLng: String
+        get() = pref.getString(KEY_SET_CURRENT_LNG, "")!!
+        set(currentLng) {
+            editor.remove(KEY_SET_CURRENT_LNG)
+            editor.putString(KEY_SET_CURRENT_LNG, currentLng)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
@@ -226,6 +241,8 @@ constructor(context: Context) // Constructor
         editor.remove("KEY_SET_CURRENT_LOAN_PRODUCT")
         editor.remove("KEY_SET_BUSINESS_LOAN_PRODUCT")
         editor.remove("KEY_SET_LOAN_PRODUCT")
+        editor.remove("KEY_SET_CURRENT_LAT")
+        editor.remove("KEY_SET_CURRENT_LNG")
         editor.commit()
         editor.apply()
     }
@@ -266,6 +283,8 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_CURRENT_LOAN_PRODUCT  = "KEY_SET_CURRENT_LOAN_PRODUCT"
         private const val KEY_SET_BUSINESS_LOAN_PRODUCT = "KEY_SET_BUSINESS_LOAN_PRODUCT"
         private const val KEY_SET_LOAN_PRODUCT          = "KEY_SET_LOAN_PRODUCT"
+        private const val KEY_SET_CURRENT_LAT           = "KEY_SET_CURRENT_LAT"
+        private const val KEY_SET_CURRENT_LNG           = "KEY_SET_CURRENT_LNG"
     }
 
 

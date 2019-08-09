@@ -40,9 +40,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private var loanPurpose=""
     private val listTitle = arrayListOf("For Transport","To Pay Bills","To Clear Debit","To Buy Foodstuff","Emergency Purposes","To Buy Medicine","Build Credit","Others")
     private lateinit  var progressDialog: KProgressHUD
-
-    private var lat=""
-    private var long=""
     private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,7 +106,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         {
             if(isLocationEnabled())
             {
-                if(lat!="")
+                val shared=SharedPref(this@LoanApplyActivity)
+                if(shared.currentLat!="")
                 {
                     progressDialog.show()
                     buttonSubmit.isClickable =false
@@ -135,6 +133,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loanApply(loan_type: String?, product_id: String?)
     {
+        val shared=SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()
         jsonObject.addProperty("loan_type",loan_type)
@@ -149,8 +148,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         }
 
-        jsonObject.addProperty("latitude",lat)
-        jsonObject.addProperty("longitude",long)
+        jsonObject.addProperty("latitude",shared.currentLat)
+        jsonObject.addProperty("longitude",shared.currentLng)
 
         //println("REQUEST"+jsonObject.toString())
 
@@ -303,12 +302,14 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val intent = Intent(this, LocationBackgroundService::class.java)
         startService(intent)
 
+        val sharedPref=SharedPref(this@LoanApplyActivity)
+
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this).registerReceiver(
                 object : BroadcastReceiver() {
                     override fun onReceive(context: Context, intent: Intent) {
-                        lat  = intent.getStringExtra(EXTRA_LATITUDE)!!
-                        long = intent.getStringExtra(EXTRA_LONGITUDE)!!
 
+                        sharedPref.currentLat  = intent.getStringExtra(EXTRA_LATITUDE)!!
+                        sharedPref.currentLng = intent.getStringExtra(EXTRA_LONGITUDE)!!
 
                     }
                 }, IntentFilter(ACTION_LOCATION_BROADCAST)
