@@ -3,15 +3,17 @@ package com.app.l_pesa.investment.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.Window
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -19,6 +21,7 @@ import com.app.l_pesa.investment.adapter.LoanPlanListAdapter
 import com.app.l_pesa.investment.inter.ICallBackLoanPlanList
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterApplyInvestment
+import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_investment_apply.*
@@ -70,6 +73,14 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
             else if(TextUtils.isEmpty(etAmount.text.toString()))
             {
                 CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.required_investment_amount))
+            }
+            else if(globalInvestmentPlan.minimumInvestAmount>etAmount.text.toString().toInt())
+            {
+                CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.minimum_investment_amount)+" "+globalInvestmentPlan.minimumInvestAmount)
+            }
+            else if(globalInvestmentPlan.maximumInvestAmount<etAmount.text.toString().toInt())
+            {
+                CommonMethod.customSnackBarError(rootLayout,this@InvestmentApplyActivity,resources.getString(R.string.maximum_investment_amount)+" "+globalInvestmentPlan.maximumInvestAmount)
             }
             else
             {
@@ -125,9 +136,29 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         dialog.setContentView(R.layout.dialog_id_type)
         val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val loanPlanAdapter             = LoanPlanListAdapter(this@InvestmentApplyActivity, loanPlanData.investmentPlans!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@InvestmentApplyActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@InvestmentApplyActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = loanPlanAdapter
         dialog.show()
+
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@InvestmentApplyActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@InvestmentApplyActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@InvestmentApplyActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 
@@ -136,10 +167,9 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }

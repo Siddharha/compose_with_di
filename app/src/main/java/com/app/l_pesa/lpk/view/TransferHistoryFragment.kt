@@ -1,34 +1,34 @@
 package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.adapter.AdapterTransferHistory
 import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
 import com.app.l_pesa.lpk.presenter.PresenterSavingsUnlock
 import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
+import com.app.l_pesa.main.view.MainActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_transfer_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
+class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTransferHistory {
 
     private lateinit var progressDialog                : KProgressHUD
     private lateinit var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>
@@ -40,7 +40,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return TransferHistoryFragment()
         }
     }
@@ -198,7 +198,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             listTransferHistory.addAll(userTransferHistory)
             adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory,this)
             val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterTransferHistory
 
@@ -265,6 +265,26 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         }
     }
 
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
+    }
+
     override fun onEmptyTransferHistory(type:String) {
 
         swipeRefreshLayout.isRefreshing = false
@@ -272,6 +292,10 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         if(type=="FILTER")
         {
             txt_message.text = resources.getString(R.string.no_result_found)
+        }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_transfer_history_message)
         }
         cardView.visibility=View.VISIBLE
     }

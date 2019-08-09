@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_bg"
-    android:padding="@dimen/_40sdp"
+    android:paddingStart="@dimen/_40sdp"
+    android:paddingEnd="@dimen/_40sdp"
+    android:paddingTop="@dimen/_15sdp"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <ImageView
         android:id="@+id/imageView"
+        android:contentDescription="@string/app_name"
         android:layout_width="@dimen/_75sdp"
         android:layout_height="@dimen/_75sdp"
-        android:layout_marginTop="@dimen/_60sdp"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread"
         app:srcCompat="@drawable/lpesa_logo" />
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/starter_loan"
-        android:textColor="@color/colorYellow"
-        android:textSize="@dimen/_22sdp"
-        android:textStyle="bold"
-        android:shadowColor="#000000"
-        android:shadowDx="2.7"
-        android:shadowDy="2.7"
-        android:shadowRadius="1"
+        android:text="@string/l_pesa_risk_free"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_15sdp"
+        android:gravity="center"
+        android:padding="@dimen/_2sdp"
+        android:textAllCaps="true"
         android:fontFamily="@font/montserrat"
-        android:layout_marginTop="@dimen/_70sdp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSignUp"
+        android:layout_marginTop="@dimen/_3sdp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="252dp" />
+        />
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/starter_loan"
+        android:textColor="@color/colorYellow"
+        android:textSize="@dimen/_18sdp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
 
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/buttonSignUp"
@@ -48,50 +61,43 @@
         android:background="@drawable/yellow_button"
         android:text="@string/get_started"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/colorSemiWhite"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+
+        />
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/colorSemiWhite"
-        android:layout_marginTop="@dimen/_10sdp"
         android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="@dimen/_12sdp"
         android:fontFamily="@font/montserrat"
         android:text="@string/already_using_lpesa"
+        android:layout_marginBottom="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        />
 
     <com.app.l_pesa.common.CustomButtonRegular
+        android:id="@+id/buttonLogin"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_25sdp"
         android:background="@drawable/bg_black_view"
         android:text="@string/sign_in"
         android:fontFamily="@font/montserrat"
-        android:id="@+id/buttonLogin"
         android:textColor="@color/colorSemiWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/colorWhite"
-        android:padding="@dimen/_5sdp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+         />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

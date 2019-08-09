@@ -6,19 +6,25 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.os.CountDownTimer
 import android.text.Html
 import android.text.Spanned
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
+import com.app.l_pesa.main.view.MainActivity
 import kotlinx.android.synthetic.main.activity_loan_plan_details.*
 import kotlinx.android.synthetic.main.content_loan_plan_details.*
 import java.text.DecimalFormat
 
 class LoanPlanDetailsActivity : AppCompatActivity() {
+
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +34,7 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         toolbarFont(this@LoanPlanDetailsActivity)
 
         initData()
+        initTimer()
 
     }
 
@@ -78,10 +85,9 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -103,6 +109,55 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    fun onSessionTimeOut(jsonMessage: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@LoanPlanDetailsActivity)
+        dialogBuilder.setMessage(jsonMessage)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@LoanPlanDetailsActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@LoanPlanDetailsActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
     }
 
 

@@ -2,17 +2,17 @@ package com.app.l_pesa.profile.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.profile.inter.ICallBackClickBusinessId
 
-class BusinessIdListAdapter (val context: Context, private val listIdType: ArrayList<ResDashboard.BusinessIdType>, private val dialogOBJ: Dialog,private val callBack: ICallBackClickBusinessId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BusinessIdListAdapter (val context: Context, private val listIdType: ArrayList<ResDashboard.BusinessIdType>, private val dialogOBJ: Dialog,private val callBack: ICallBackClickBusinessId) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 

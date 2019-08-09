@@ -11,16 +11,21 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <uses-feature
-        android:name="android.hardware.camera2"
-        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -29,6 +34,36 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
+        <!--android:usesCleartextTraffic="true"-->
+
+        <!-- android:networkSecurityConfig="@xml/network_security_config"-->
+
+        <activity android:name=".calculator.view.LoanCalculatorActivity"
+            android:label="@string/calculate_your_loan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+
+            />
+        <activity
+            android:name=".help.view.HelpActivity"
+            android:label="@string/help_support"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".pin.view.SetUpPinActivity"
+            android:label="@string/set_up_pin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".otpview.view.OTPActivity"
+            android:label="@string/otp"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".pinview.view.PinSetActivity"
+            android:label="@string/pin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".notification.view.NotificationActivity"
             android:label="@string/notification"
@@ -64,10 +99,6 @@
             android:label="@string/apply_an_investment"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".registration.view.RegistrationStepThreeActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".profile.view.ActivityViewFile"
@@ -131,7 +162,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -142,74 +173,72 @@
 
         <activity
             android:name=".splash.view.SplashActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+           <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".main.MainActivity"
-            android:screenOrientation="portrait" />
+            android:name=".main.view.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".login.view.LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".registration.view.RegistrationStepOneActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".registration.view.RegistrationStepTwoActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
+            android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".password.view.ForgotPasswordActivity"
+            android:name=".registration.view.RegistrationStepThreeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".pin.view.ForgotPinActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".dashboard.view.DashboardActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
 
-            <!--
-            <intent-filter>
+     <!--       <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
+            </intent-filter>-->
+
         </activity>
         <activity
-            android:name=".password.view.ChangePasswordActivity"
-            android:label="@string/change_password"
+            android:name=".pin.view.ChangeLoginPinActivity"
+            android:label="@string/change_login_pin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".pin.view.ChangePinActivity"
-            android:label="@string/change_pin"
+            android:label="@string/change_transactional_pin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service android:name=".firebase.FirebaseMessagingIdService"
-            >
+        <service android:name=".firebase.FirebaseMessagingIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".common.LocationBackgroundService" />
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorWhite" />

@@ -3,33 +3,34 @@ package com.app.l_pesa.wallet.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.wallet.inter.ICallBackWallet
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
-import android.widget.Toast
 
 
-class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
+class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
 
     private lateinit  var progressDialog: KProgressHUD
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return WalletFragment()
         }
     }
@@ -53,7 +54,7 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
     {
         progressDialog=KProgressHUD.create(activity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 
@@ -62,6 +63,8 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             progressDialog.show()
@@ -152,10 +155,10 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
-        rootLayout.postDelayed(Runnable {
+        rootLayout.postDelayed({
 
-            txt_min.text = format.format(data!!.lpesa_min_withdrawal_wallet).toString()+" "+data.currency_code
-            txt_max.text = format.format(data.lpesa_max_withdrawal_wallet).toString()+" "+data.currency_code
+            txt_min_val.text = format.format(data!!.lpesa_min_withdrawal_wallet).toString()+" "+data.currency_code
+            txt_max_val.text = format.format(data.lpesa_max_withdrawal_wallet).toString()+" "+data.currency_code
             txtWalletBal.text = format.format(data.wallet_balance).toString()+" "+data.currency_code
             txtCommission.text=resources.getString(R.string.commission_for_l_pesa)+" "+format.format(data.commission_eachtime).toString()+"%"
 
@@ -168,6 +171,26 @@ class WalletFragment :Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 

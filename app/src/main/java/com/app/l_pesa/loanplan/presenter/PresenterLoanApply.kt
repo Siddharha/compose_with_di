@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanplan.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,6 +15,7 @@ import retrofit2.HttpException
 
 class PresenterLoanApply {
 
+    @SuppressLint("CheckResult")
     fun doLoanApply(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLoanApply)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -27,14 +29,13 @@ class PresenterLoanApply {
 
                     try
                     {
-
-                        if(response.status!!.isSuccess)
+                        if(response.status.isSuccess)
                         {
                            callBackOBJ.onSuccessLoanApply()
                         }
                         else
                         {
-                            callBackOBJ.onErrorLoanApply(response.status!!.message)
+                            callBackOBJ.onErrorLoanApply(response.status.message)
                         }
 
                     }
@@ -46,13 +47,25 @@ class PresenterLoanApply {
                     error ->
                     try
                     {
-                        val errorVal     = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorLoanApply(jsonMessage)
+                            }
 
-                        callBackOBJ.onErrorLoanApply(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {

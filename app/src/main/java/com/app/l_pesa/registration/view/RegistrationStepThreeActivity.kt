@@ -6,22 +6,25 @@ import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.Window
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -36,21 +39,24 @@ import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.content_registration_step_three.*
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.lang.Exception
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 
 
 class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {
 
-    private lateinit              var progressDialog: KProgressHUD
+    private lateinit     var progressDialog: KProgressHUD
     private val idList   = arrayListOf("1","2","3","4")
     private val nameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
     private var typeId="0"
-    private val Photo             = 16
-    private val Gallery           = 17
+    private val requestPhoto        = 16
+    private val requestGallery      = 17
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,22 +76,22 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
         imgPersonalType.setOnClickListener {
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
-            val dialogView = AlertDialog.Builder(this@RegistrationStepThreeActivity)
-            dialogView.setTitle("Choose Options")
-
+            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
+            val dialogView = AlertDialog.Builder(this@RegistrationStepThreeActivity,R.style.MyAlertDialogTheme)
             dialogView.setItems(items) { dialog, item ->
 
                 when {
-                    items[item] == "Camera" -> // open camera
-                        cameraClick() // open default camera
-                    items[item] == "Gallery" -> // open gallery
-                        galleryClick() // open default gallery
-                    items[item] == "Cancel" -> // close dialog
+                    items[item] == "Camera" ->
+                        cameraClick()
+                    items[item] == "Gallery" ->
+                        galleryClick()
+                    items[item] == "Cancel" ->
                         dialog.dismiss()
                 }
             }
+
             dialogView.show()
+
         }
 
         buttonSubmit.setOnClickListener {
@@ -98,7 +104,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     {
         progressDialog=KProgressHUD.create(this@RegistrationStepThreeActivity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 
@@ -115,6 +121,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
     private fun onSubmitData()
     {
+      CommonMethod.hideKeyboardView(this@RegistrationStepThreeActivity)
       if(typeId=="0")
       {
           showIdType()
@@ -164,8 +171,6 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         jsonObject.addProperty("type_id",typeId)
         jsonObject.addProperty("id_number",etNo.text.toString())
 
-        println("JSON"+jsonObject)
-
         val presenterRegistrationThree= PresenterRegistrationThree()
         presenterRegistrationThree.doRegistrationStepThree(this@RegistrationStepThreeActivity,jsonObject,this)
 
@@ -173,7 +178,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     }
 
     override fun onSuccessRegistrationThree() {
-
+        Toast.makeText(this@RegistrationStepThreeActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_LONG).show()
         startActivity(Intent(this@RegistrationStepThreeActivity, LoginActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
@@ -192,14 +197,14 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@RegistrationStepThreeActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
-        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
@@ -208,14 +213,14 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
     }
 
     private fun galleryClick()
     {
         val checkSelfPermission = ContextCompat.checkSelfPermission(this@RegistrationStepThreeActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this@RegistrationStepThreeActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            ActivityCompat.requestPermissions(this@RegistrationStepThreeActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), requestGallery)
         }
         else{
             openAlbum()
@@ -225,7 +230,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        startActivityForResult(intent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -244,13 +249,13 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
                 }
-            Gallery ->
+            requestGallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -269,7 +274,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                 Toast.makeText(this@RegistrationStepThreeActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgPersonalType.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             this@RegistrationStepThreeActivity,
@@ -279,7 +284,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                     )
                     imgPersonalType.setImageBitmap(pictureBitmap)
                     imgPersonalType.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -294,7 +299,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     }
 
     private fun handleImage(data: Intent?) {
-        var imagePath=""
+        /*var imagePath=""
         try
         {
             val uri = data!!.data
@@ -323,10 +328,48 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         catch (exp: Exception)
         {
 
+        }*/
+        if (data != null)
+        {
+            val contentURI = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(this@RegistrationStepThreeActivity.contentResolver, contentURI)
+            imgPersonalType?.setImageBitmap(bitmap)
+            saveImage(bitmap)
+
         }
     }
 
-    private fun imagePath(uri: Uri?, selection: String?): String {
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this@RegistrationStepThreeActivity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
+    }
+
+   /* private fun imagePath(uri: Uri?, selection: String?): String {
         var path: String? = null
         val cursor = contentResolver.query(uri!!, null, selection, null, null )
         if (cursor != null){
@@ -354,7 +397,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgPersonalType.setImageBitmap(bitmap)
                 photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                CommonMethod.fileCompress(photoFile)
             }
 
         }
@@ -362,7 +405,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
             captureImageStatus=false
             Toast.makeText(this@RegistrationStepThreeActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
 
     private fun showIdType()
@@ -370,9 +413,9 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         val dialog= Dialog(this@RegistrationStepThreeActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = PersonalIdListAdapter(this@RegistrationStepThreeActivity, idList,nameList,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepThreeActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepThreeActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }

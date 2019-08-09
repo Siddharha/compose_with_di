@@ -1,18 +1,23 @@
 package com.app.l_pesa.API
 
 
+import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.help.model.ResHelp
 import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
-import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.model.ResLoanApply
+import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.*
 import com.app.l_pesa.notification.model.ResNotification
-import com.app.l_pesa.password.model.ResChangePassword
-import com.app.l_pesa.password.model.ResForgetPassword
+import com.app.l_pesa.otpview.model.ResSetOTP
+import com.app.l_pesa.pin.model.ResChangeLoginPin
 import com.app.l_pesa.pin.model.ResChangePin
+import com.app.l_pesa.pin.model.ResForgetPassword
+import com.app.l_pesa.pin.model.ResSetUpPin
+import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.registration.model.ResRegistrationThree
@@ -38,8 +43,17 @@ interface BaseService{
     @GET("countries_list?offset=0&limit=20")
     fun getCountryList(): Observable<ResModelCountry>
 
-    @POST("user/login")
+    @POST("user/login_pin_step1")
     fun doLogin(@Body request: JsonObject): Observable<ResLogin>
+
+    @POST("user/login_pin_step2")
+    fun doCheckPin(@Body request: JsonObject): Observable<ResSetPin>
+
+    @POST("user/login_otp_step2")
+    fun doCheckOTP(@Body request: JsonObject): Observable<ResSetOTP>
+
+    @POST("user/login_otp_resend")
+    fun doResendOTP(@Body request: JsonObject): Observable<ResSetOTP>
 
     @GET("user/info")
     fun getUserInfo(): Observable<ResUserInfo>
@@ -53,8 +67,11 @@ interface BaseService{
     @POST("settings/change_pin")
     fun doChangePin(@Body request: JsonObject): Observable<ResChangePin>
 
-    @POST("settings/change_password")
-    fun doChangePassword(@Body request: JsonObject): Observable<ResChangePassword>
+    @POST("settings/setup_pin")
+    fun doSetUpPin(@Body request: JsonObject): Observable<ResSetUpPin>
+
+    @POST("settings/change_apps_pin")
+    fun doChangeLoginPin(@Body request: JsonObject): Observable<ResChangeLoginPin>
 
     @POST("user/register")
     fun doRegister(@Body request: JsonObject): Observable<ResRegistrationOne>
@@ -166,6 +183,12 @@ interface BaseService{
 
     @GET("user/notifications")
     fun getNotification(@Query("cursors") cursors:String): Observable<ResNotification>
+
+    @POST("settings/help")
+    fun getHelp(): Observable<ResHelp>
+
+    @GET("loan_cal_load_products")
+    fun getLoanProducts(@Query("country_code") country_code:String,@Query("loan_type") loan_type:String): Observable<ResProducts>
 
 }
 

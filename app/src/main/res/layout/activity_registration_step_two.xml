@@ -1,94 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_bg"
         android:padding="@dimen/_40sdp"
+        android:background="@android:color/white"
         >
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/textView27"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtHeader"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat"
             android:text="@string/thank_you"
-            android:textColor="@color/colorYellow"
-            android:textSize="@dimen/_17sdp"
+            android:gravity="center"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_20sdp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView28"
+            android:padding="@dimen/_2sdp"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintBottom_toTopOf="@+id/txt_upload_tittle"
+
+            />
 
         <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/textView28"
-            android:layout_width="wrap_content"
+            android:id="@+id/txt_upload_tittle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/montserrat"
-            android:text="@string/upload_selfie_picture"
-            android:textColor="@color/colorSemiWhite"
+            android:text="@string/upload_picture"
+            android:textColor="@color/colorTextBlackLight"
+            android:textSize="@dimen/_11sdp"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
             app:layout_constraintBottom_toTopOf="@+id/imgProfilePhoto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
 
-        <com.app.l_pesa.common.CircularImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        <com.app.l_pesa.common.CircularImageView
             android:id="@+id/imgProfilePhoto"
+            android:contentDescription="@string/app_name"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
-            android:layout_marginTop="@dimen/_60sdp"
-            android:src="@drawable/ic_profile"
-            app:civ_border_color="@color/screenBackground"
-            app:civ_border_width="@dimen/_1sdp"
+            android:background="@drawable/ic_user"
+            app:civ_border_width="0dp"
+            app:civ_background_color="@android:color/white"
+            app:civ_border_color="@android:color/white"
+            app:civ_shadow="false"
+            android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_upload_tittle"
+            app:layout_constraintBottom_toTopOf="@+id/etName"
 
-        <com.app.l_pesa.common.CircularImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imgEditPhoto"
-            android:layout_width="@dimen/_23sdp"
-            android:layout_height="@dimen/_23sdp"
-            android:src="@drawable/ic_profile"
-            app:layout_constraintBottom_toBottomOf="@+id/imgProfilePhoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgProfilePhoto" />
+            />
+
 
         <com.app.l_pesa.common.CommonEditTextRegular
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/bg_black_view"
-            android:paddingStart="@dimen/_10sdp"
+            android:background="@drawable/et_bg_white_border_black"
+            android:paddingStart="@dimen/_15sdp"
             android:paddingEnd="@dimen/_2sdp"
             android:hint="@string/enter_name"
+            android:maxLines="1"
+            android:textIsSelectable="false"
+            android:longClickable="false"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:inputType="textCapWords"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorSemiWhite"
-            android:textColorHint="@color/colorSemiWhite"
+            android:textColor="@color/colorTextBlack"
+            android:textColorHint="@color/colorTextBlackLight"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/etOTP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgEditPhoto" />
+            app:layout_constraintTop_toBottomOf="@+id/imgProfilePhoto" />
 
         <com.app.l_pesa.common.CommonEditTextRegular
             android:id="@+id/etOTP"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/bg_black_view"
-            android:paddingStart="@dimen/_10sdp"
+            android:background="@drawable/et_bg_white_border_black"
+            android:paddingStart="@dimen/_15sdp"
             android:paddingEnd="@dimen/_2sdp"
             android:hint="@string/enter_otp"
+            android:maxLines="1"
+            android:maxLength="6"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:inputType="numberSigned"
             android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorSemiWhite"
-            android:textColorHint="@color/colorSemiWhite"
+            android:textColor="@color/colorTextBlack"
+            android:textColorHint="@color/colorTextBlackLight"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -98,18 +109,16 @@
         <com.app.l_pesa.common.CustomButtonRegular
             android:id="@+id/btnSubmit"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/yellow_button"
             android:text="@string/final_step"
-            android:textColor="@color/colorSemiWhite"
+            android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etOTP" />
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 

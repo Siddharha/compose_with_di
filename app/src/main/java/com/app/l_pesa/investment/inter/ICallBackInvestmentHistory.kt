@@ -1,7 +1,7 @@
 package com.app.l_pesa.investment.inter
 
 import com.app.l_pesa.investment.model.ResInvestmentHistory
-import java.util.ArrayList
+import java.util.*
 
 interface ICallBackInvestmentHistory {
 
@@ -12,6 +12,8 @@ interface ICallBackInvestmentHistory {
 
     fun onSuccessInvestmentWithdrawal()
     fun onErrorInvestmentWithdrawal(message: String)
+
+    fun onSessionTimeOut(message: String)
 
     fun onSuccessReinvestment()
     fun onErrorReinvestment(message: String)

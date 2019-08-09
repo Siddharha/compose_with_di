@@ -1,7 +1,7 @@
 package com.app.l_pesa.loanplan.inter
 
 import com.app.l_pesa.loanplan.model.ResLoanPlans
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Intellij Amiya on 21/2/19.
@@ -14,6 +14,7 @@ interface ICallBackCurrentLoan {
     fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?)
     fun onEmptyLoanPlans()
     fun onFailureLoanPlans(jsonMessage: String)
+    fun onSessionTimeOut(message: String)
     fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?)
     fun onSuccessLoanHistory()
 }

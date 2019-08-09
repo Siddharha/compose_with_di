@@ -1,102 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
     android:padding="@dimen/_10sdp"
     android:orientation="vertical"
-    android:background="@color/screenBackground">
+    android:background="@color/colorSemiWhite">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_170sdp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        card_view:cardBackgroundColor="@color/colorWhite"
+
+
         >
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/ic_wallet_bg">
+            >
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtHeader"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_margin="@dimen/_10sdp"
+                android:padding="@dimen/_2sdp"
                 android:text="@string/lpesa_wallet_balance"
                 android:textSize="@dimen/_10sdp"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorTextBlackLight"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtWalletBal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:gravity="center"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_17sdp"
-                android:layout_marginStart="@dimen/_20sdp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_13sdp"
+                android:padding="@dimen/_2sdp"
+                android:drawablePadding="@dimen/_3sdp"
+                android:drawableStart="@drawable/ic_wallet_icon"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
-            <TextView
-                android:id="@+id/txtCommission"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/txt_min"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtCommission"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtWalletBal" />
-
-            <TextView
-                android:id="@+id/txt_max"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_50sdp"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/txtCommission"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtWalletBal" />
+                app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+                app:layout_constraintBottom_toTopOf="@+id/dividerOne"
+                />
+
+           <View
+               android:id="@+id/dividerOne"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/_1sdp"
+               android:background="@color/divider_color"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/txtWalletBal"
+               app:layout_constraintBottom_toTopOf="@+id/layoutBal"
+               android:layout_marginStart="@dimen/_15sdp"
+               android:layout_marginEnd="@dimen/_15sdp"
+               android:layout_marginTop="@dimen/_10sdp"
+               />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutBal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dividerOne"
+            >
+
+            <View
+                android:id="@+id/dividerTwo"
+                android:layout_width="@dimen/_1sdp"
+                android:layout_height="0dp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+               />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_min"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorTextBlackLight"
+                android:textSize="@dimen/_10sdp"
+                android:text="@string/min_withdrawal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dividerTwo"
+                app:layout_constraintBottom_toTopOf="@+id/txt_min_val"
+                />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_min_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_12sdp"
+                android:padding="@dimen/_2sdp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_min"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/dividerTwo"
+
+                />
+
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_max"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorTextBlackLight"
+                android:textSize="@dimen/_10sdp"
+                android:text="@string/max_withdrawal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dividerTwo"
+                app:layout_constraintBottom_toTopOf="@+id/txt_max_val"
+                />
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txt_max_val"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/_12sdp"
+                android:padding="@dimen/_2sdp"
+                app:layout_constraintTop_toBottomOf="@+id/txt_max"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dividerTwo"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <View
+                android:id="@+id/dividerThree"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/divider_color"
+                app:layout_constraintBottom_toTopOf="@+id/txtCommission"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutBal"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                />
+
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtCommission"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/commission_for_l_pesa"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorTextBlackLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dividerThree" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-        </android.support.constraint.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-    </android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:cardCornerRadius="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        card_view:cardBackgroundColor="@color/colorWhite"
+
         >
 
-        <android.support.constraint.ConstraintLayout
+     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+
+         >
 
             <com.app.l_pesa.common.CommonInputLayout
                 android:id="@+id/commonInputLayout5"
@@ -106,7 +219,6 @@
                 android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@+id/buttonWithdraw"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -115,9 +227,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/withdrawal_amount"
-                    android:textColor="@color/dark_text_color"
                     android:inputType="numberSigned"
                     android:textSize="@dimen/_12sdp"
+                    android:longClickable="false"
+                    android:textIsSelectable="false"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/colorTextBlack"
+                    android:textColorHint="@color/colorTextBlackLight"
                     android:maxLength="6" />
 
 
@@ -127,7 +243,7 @@
                 android:id="@+id/buttonWithdraw"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/ripple_green_button"
                 android:fontFamily="@font/montserrat"
@@ -140,15 +256,16 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:weightSum="1"

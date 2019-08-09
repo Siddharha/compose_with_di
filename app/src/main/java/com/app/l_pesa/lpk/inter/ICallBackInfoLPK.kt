@@ -6,4 +6,5 @@ interface ICallBackInfoLPK {
 
     fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String)
     fun onErrorInfoLPK(message: String)
+    fun onSessionTimeOut(message: String)
 }

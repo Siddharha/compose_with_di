@@ -92,6 +92,8 @@
 
 #AWS Proguard ends here
 
+-keepattributes Exceptions, Signature, InnerClasses
+
 -keep class com.app.l_pesa.common.** { *; }
 -keepclassmembers class com.app.l_pesa.common.** { *; }
 
@@ -106,9 +108,6 @@
 
 -keep class com.app.l_pesa.registration.** { *; }
 -keepclassmembers class com.app.l_pesa.registration.** { *; }
-
--keep class com.app.l_pesa.password.** { *; }
--keepclassmembers class com.app.l_pesa.password.** { *; }
 
 -keep class com.app.l_pesa.pin.** { *; }
 -keepclassmembers class com.app.l_pesa.pin.** { *; }
@@ -135,6 +134,18 @@
 
 -keep class com.app.l_pesa.notification.** { *; }
 -keepclassmembers class com.app.l_pesa.notification.** { *; }
+
+-keep class com.app.l_pesa.pinview.** { *; }
+-keepclassmembers class com.app.l_pesa.pinview.** { *; }
+
+-keep class com.app.l_pesa.otpview.** { *; }
+-keepclassmembers class com.app.l_pesa.otpview.** { *; }
+
+-keep class com.app.l_pesa.help.** { *; }
+-keepclassmembers class com.app.l_pesa.help.** { *; }
+
+-keep class com.app.l_pesa.calculator.** { *; }
+-keepclassmembers class com.app.l_pesa.calculator.** { *; }
 
 -keep class com.app.l_pesa.logout.** { *; }
 -keepclassmembers class com.app.l_pesa.logout.** { *; }

@@ -1,117 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg"
     android:id="@+id/rootLayout"
     android:padding="@dimen/_40sdp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".registration.view.RegistrationStepThreeActivity"
-    tools:showIn="@layout/activity_registration_step_three">
+    android:background="@color/colorWhite"
+    >
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtHeader"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/thank_you"
-        android:textColor="@color/colorYellow"
-        android:textSize="@dimen/_19sdp"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:padding="@dimen/_2sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txt_title"
+        />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txt_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/upload_id_picture"
-        android:textSize="@dimen/_12sdp"
-        android:textColor="@color/colorSemiWhite"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/colorTextBlackLight"
         android:fontFamily="@font/montserrat"
         android:gravity="center"
+        android:padding="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@+id/etIdType"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
 
-    <EditText
+    <com.app.l_pesa.common.CommonEditTextRegular
         android:id="@+id/etIdType"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
-        android:background="@drawable/bg_black_view"
+        android:background="@drawable/et_bg_white_border_black"
         android:hint="@string/choose_type_id"
-        android:textColorHint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorTextBlack"
+        android:textColorHint="@color/colorTextBlackLight"
         android:layout_marginTop="@dimen/_20sdp"
         android:textSize="@dimen/_12sdp"
         android:fontFamily="@font/montserrat"
-        android:paddingStart="@dimen/_10sdp"
+        android:paddingStart="@dimen/_15sdp"
         android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintBottom_toTopOf="@+id/imgPersonalType"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
         android:drawableEnd="@drawable/ic_dropdown"
-        android:focusable="false"/>
+        android:focusable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+
+        />
+
+    <com.app.l_pesa.common.CommonEditTextRegular
+        android:id="@+id/etNo"
+        android:textSize="@dimen/_12sdp"
+        android:hint="@string/enter_id_number"
+        android:textColor="@color/colorTextBlack"
+        android:textColorHint="@color/colorTextBlackLight"
+        android:layout_width="0dp"
+        android:maxLines="1"
+        android:fontFamily="@font/montserrat"
+        android:inputType="text"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@drawable/et_bg_white_border_black"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etIdType" />
+
+
+    <TextView
+        android:id="@+id/txt_uploadHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12sdp"
+        android:padding="@dimen/_2sdp"
+        android:text="@string/select"
+        android:textColor="@color/colorTextBlack"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNo"
+        app:layout_constraintBottom_toTopOf="@+id/imgPersonalType"
+        android:layout_marginTop="@dimen/_10sdp"
+        />
 
     <ImageView
         android:id="@+id/imgPersonalType"
         android:contentDescription="@string/app_name"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_125sdp"
-        android:background="@drawable/bg_black_view_multiline"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:gravity="top"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/etNo"
+        android:layout_height="@dimen/_135sdp"
+        android:src="@drawable/ic_id_card"
+        app:layout_constraintTop_toBottomOf="@+id/txt_uploadHeader"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etIdType"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
         />
 
-    <EditText
-        android:id="@+id/etNo"
-        android:textSize="@dimen/_13sdp"
-        android:hint="@string/enter_id_number"
-        android:textColorHint="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-        android:layout_width="0dp"
-        android:maxLines="1"
-        android:inputType="text"
-        android:layout_height="@dimen/_35sdp"
-        android:background="@drawable/bg_black_view"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPersonalType" />
 
     <Button
         android:id="@+id/buttonSubmit"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_32sdp"
         android:background="@drawable/yellow_button"
-        android:text="@string/continue_to_login"
-        android:textSize="@dimen/_13sdp"
+        android:text="@string/continue_to_register"
+        android:textStyle="bold"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/colorSemiWhite"
+        android:textColor="@color/colorWhite"
         android:layout_marginTop="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNo" />
+        app:layout_constraintTop_toBottomOf="@+id/imgPersonalType" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

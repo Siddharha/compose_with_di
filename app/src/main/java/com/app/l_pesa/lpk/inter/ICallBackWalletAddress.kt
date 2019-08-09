@@ -4,4 +4,5 @@ interface ICallBackWalletAddress {
 
     fun onSuccessWalletAddress()
     fun onErrorWalletAddress(message: String)
+    fun onSessionTimeOut(message: String)
 }

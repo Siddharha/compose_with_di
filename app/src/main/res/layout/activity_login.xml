@@ -1,43 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:id="@+id/ll_root"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg"
-    android:padding="@dimen/_40sdp">
+    android:padding="@dimen/_40sdp"
+    android:background="@color/colorWhite">
 
     <ImageView
         android:id="@+id/imageView"
         android:contentDescription="@string/app_name"
         android:layout_width="@dimen/_75sdp"
         android:layout_height="@dimen/_75sdp"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lpesa_logo" />
+        app:srcCompat="@drawable/ic_app_logo" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/ll_flag_section"
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtHeader"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:background="@drawable/bg_black_view"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/sign_in"
+        android:gravity="center"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        android:padding="@dimen/_2sdp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintBottom_toTopOf="@+id/ll_flag_section"
+
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_flag_section"
+        android:layout_width="0dp"
+        android:background="@drawable/et_bg_white_border_black"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:paddingStart="@dimen/_1sdp"
+        android:paddingEnd="@dimen/_1sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+       >
 
         <ImageView
             android:id="@+id/img_country"
-            android:layout_width="@dimen/_18sdp"
+            android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:contentDescription="@string/app_name"
+            android:paddingStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_1sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView33"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,8 +68,8 @@
             android:id="@+id/view_1"
             android:layout_width="@dimen/_1sdp"
             android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:background="@color/semi_white"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@color/color_gray_light"
             app:layout_constraintEnd_toStartOf="@+id/etPhone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView33"
@@ -57,18 +80,20 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/montserrat"
             android:inputType="numberSigned"
             android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textColor="@color/colorSemiWhite"
+            android:paddingEnd="@dimen/_2sdp"
             android:hint="@string/phone_no"
             android:cursorVisible="true"
-            android:textCursorDrawable="@null"
             android:focusable="true"
             android:maxLines="1"
             android:maxLength="15"
-            android:textColorHint="@color/colorSemiWhite"
+            android:longClickable="false"
+            android:textIsSelectable="false"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/colorTextBlack"
+            android:textColorHint="@color/colorTextBlackLight"
+            android:textCursorDrawable="@null"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,128 +114,86 @@
             app:srcCompat="@drawable/ic_dropdown_icon" />
 
 
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/ll_password"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/bg_black_view"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_flag_section">
-
-        <ImageView
-            android:id="@+id/img_password"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_lock_icon" />
-
-        <View
-            android:id="@+id/viewPassword"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_26sdp"
-            android:background="@color/semi_white"
-            app:layout_constraintEnd_toStartOf="@+id/etPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_password"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etPassword"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/montserrat"
-            android:inputType="textPassword"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:hint="@string/password"
-            android:maxLength="14"
-            android:maxLines="1"
-            android:textColor="@color/colorSemiWhite"
-            android:textColorHint="@color/colorSemiWhite"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/viewPassword"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/txtLogin"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_height="@dimen/_32sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/yellow_button"
         android:fontFamily="@font/montserrat"
         android:text="@string/login"
-        android:textColor="@color/semi_white"
+        android:textColor="@color/colorWhite"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtForgotPin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_password" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_flag_section" />
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txtForgotPassword"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtForgotPin"
+        android:gravity="center"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:text="@string/forgot_password"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:padding="@dimen/_2sdp"
+        android:text="@string/forgot_pin"
+        android:textColorHighlight="@android:color/white"
+        android:textColorLink="@color/colorAppDeep"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/colorAquaDeep"
+        android:textColor="@color/colorSemiBlack"
+        app:layout_constraintBottom_toTopOf="@+id/txtRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
 
     <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/dont_have_account"
-        android:textColor="@color/semi_white"
-        android:fontFamily="@font/montserrat"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
-        app:layout_constraintEnd_toStartOf="@+id/txtRegister"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtForgotPassword" />
-
-    <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/txtRegister"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:text="@string/create_one"
+        android:gravity="center"
+        android:padding="@dimen/_2sdp"
+        android:textColorHighlight="@android:color/white"
+        android:textColorLink="@color/colorAppDeep"
+        android:text="@string/create_account"
+        android:textColor="@color/colorSemiBlack"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/color_aqua"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/txtForgotPassword" />
+        app:layout_constraintBottom_toTopOf="@+id/txtLoanCalculator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtForgotPin" />
+
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtLoanCalculator"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:textSize="@dimen/_11sdp"
+        android:text="@string/calculate_your_loan"
+        android:background="@drawable/bg_transparent_border_light_green_view"
+        android:textColor="@color/colorAppDeep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegister" />
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
         android:layout_width="@dimen/_32sdp"
         android:layout_height="@dimen/_32sdp"
-        android:indeterminateTint="@color/colorWhite"
+        android:theme="@style/Progressbar.Red"
+        android:indeterminateTintMode="src_in"
+        android:indeterminateTint="@color/colorRed"
         android:padding="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_25sdp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/txtLoanCalculator" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

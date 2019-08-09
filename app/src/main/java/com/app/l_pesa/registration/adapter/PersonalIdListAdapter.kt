@@ -2,12 +2,12 @@ package com.app.l_pesa.registration.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackId
 
@@ -26,7 +26,7 @@ class PersonalIdListAdapter (val context: Context, private val idText: ArrayList
 
     override fun getItemCount(): Int = idText.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder {
 
         val recyclerView: RecyclerView.ViewHolder
 

@@ -3,14 +3,13 @@ package com.app.l_pesa.investment.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.investment.inter.ICallBackEditHistory
@@ -24,7 +23,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
     private var                 isLoading           = false
     private var                 isMoreDataAvailable = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder {
 
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
@@ -77,7 +76,7 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
 
 
@@ -169,9 +168,11 @@ class InvestmentHistoryAdapter (val context: Context, private val investmentHist
             {
                 itemView.txtDetails.visibility=View.GONE
                 itemView.imageView5.visibility=View.VISIBLE
+                itemView.imageView6.visibility=View.VISIBLE
                 itemView.txtInterest.visibility=View.VISIBLE
                 itemView.txtMaturity.visibility=View.VISIBLE
                 itemView.imageView7.visibility=View.INVISIBLE
+                itemView.imageView6.setImageResource(R.drawable.ic_calendar_icon)
                 itemView.txtWithdrawalStatus.visibility=View.INVISIBLE
                 itemView.txtMaturity.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 itemView.txtMaturity.text=fromHtml("<font color='#777b7e'>"+context.resources.getString(R.string.maturity)+": "+"</font>"+"<font color='#777b7e'>"+ CommonMethod.dateConvert(investmentList.maturity_date)+"</font>")

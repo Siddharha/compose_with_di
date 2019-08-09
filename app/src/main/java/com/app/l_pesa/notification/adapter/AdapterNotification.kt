@@ -2,17 +2,17 @@ package com.app.l_pesa.notification.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.notification.model.ResNotification
 import kotlinx.android.synthetic.main.layout_list_notification.view.*
 
 
-class AdapterNotification(val context: Context, private val notificationList: ArrayList<ResNotification.NotificationHistory>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterNotification(val context: Context, private val notificationList: ArrayList<ResNotification.NotificationHistory>) : RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener

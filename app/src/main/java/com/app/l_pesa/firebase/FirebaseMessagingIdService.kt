@@ -8,18 +8,13 @@ import android.content.Intent
 import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.v4.app.NotificationCompat
-import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
 import com.app.l_pesa.R
-import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.main.MainActivity
 import com.app.l_pesa.notification.view.NotificationActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import java.util.*
-import android.os.Looper
-import android.os.Handler
 
 
 /**
@@ -31,12 +26,7 @@ import android.os.Handler
 class FirebaseMessagingIdService : FirebaseMessagingService() {
 
     private lateinit var notificationManager: NotificationManager
-    private val ADMIN_CHANNEL_ID = "l_pesa"
-
-    override fun onNewToken(token: String?) {
-        super.onNewToken(token)
-
-    }
+    private val CHANNELID = "l_pesa"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
@@ -44,18 +34,17 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
 
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 setupNotificationChannels()
             }
-                val sharedPrefOBJ= SharedPref(this)
-               val notificationId = Random().nextInt(60000)
+                val notificationId = Random().nextInt(60000)
                 val intent=Intent(this, NotificationActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 val pendingIntent = PendingIntent.getActivity(this, 0, intent,
                         PendingIntent.FLAG_ONE_SHOT)
 
                 val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-                val notificationBuilder = NotificationCompat.Builder(this,ADMIN_CHANNEL_ID)
+                val notificationBuilder = NotificationCompat.Builder(this,CHANNELID)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(message.data["title"])
                         .setContentText(message.data["body"])
@@ -68,8 +57,6 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
             }
 
 
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -78,7 +65,7 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
         val adminChannelDescription = getString(R.string.app_name)
 
         val adminChannel: NotificationChannel
-        adminChannel = NotificationChannel(ADMIN_CHANNEL_ID, adminChannelName, NotificationManager.IMPORTANCE_HIGH)
+        adminChannel = NotificationChannel(CHANNELID, adminChannelName, NotificationManager.IMPORTANCE_HIGH)
         adminChannel.description = adminChannelDescription
         adminChannel.enableLights(true)
         adminChannel.lightColor = Color.RED

@@ -3,57 +3,62 @@ package com.app.l_pesa.dashboard.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.view.MenuItem
-import com.app.l_pesa.R
-import kotlinx.android.synthetic.main.activity_dashboard.*
-import kotlinx.android.synthetic.main.app_bar_main.*
+import android.os.CountDownTimer
+import android.provider.Settings
 import android.text.Spannable
 import android.text.SpannableString
-import android.graphics.Typeface
-import android.provider.Settings
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.GravityCompat
+import com.app.l_pesa.BuildConfig
+import com.app.l_pesa.R
+import com.app.l_pesa.calculator.view.LoanCalculatorFragment
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
 import com.app.l_pesa.loanplan.view.LoanPlansFragment
-import com.app.l_pesa.login.model.LoginData
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.lpk.view.LpkFragment
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.points.view.PointsFragment
 import com.app.l_pesa.profile.view.ProfileFragment
-import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.app.l_pesa.settings.view.SettingsFragment
 import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
 
-    private lateinit  var progressDialog: KProgressHUD
+
+    private lateinit var progressDialog: KProgressHUD
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        toolbar.title =resources.getString(R.string.nav_item_dashboard)
+        toolbar.title = resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
 
         initData()
@@ -62,12 +67,53 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         initFragment()
         initToggle()
         nav_view.setNavigationItemSelectedListener(this)
+        initTimer()
+    }
 
+    private fun initTimer() {
 
-        //println("NOTI++++++++++++++++++"+""+FirebaseInstanceId.getInstance().instanceId.toString())
-       // println("NOTI++++++++++++++++++"+""+FirebaseInstanceId.getInstance().token.toString())
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
 
     }
+
+
+    override fun onUserInteraction() {
+    super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@DashboardActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@DashboardActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
+    }
+
 
    private fun initToggle()
     {
@@ -139,7 +185,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         progressDialog=KProgressHUD.create(this@DashboardActivity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 
@@ -159,14 +205,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val sharedPref=SharedPref(this@DashboardActivity)
         when {
             sharedPref.navigationTab==resources.getString(R.string.open_tab_loan) -> {
-                navigateToFragment(LoanPlansFragment.newInstance(),true,false)
+                navigateToFragment(LoanPlansFragment.newInstance())
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
             sharedPref.navigationTab==resources.getString(R.string.open_tab_profile) -> {
-                navigateToFragment(ProfileFragment.newInstance(),false,false)
+                navigateToFragment(ProfileFragment.newInstance())
                 sharedPref.navigationTab=resources.getString(R.string.open_tab_default)
             }
-            else -> navigateToFragment(DashboardFragment.newInstance(),false,false)
+            else -> navigateToFragment(DashboardFragment.newInstance())
         }
 
 
@@ -186,7 +232,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if(userData!=null)
         {
 
-
             if(!TextUtils.isEmpty(userData.user_personal_info.first_name))
             {
                 val firstName = userData.user_personal_info.first_name.substring(0, 1).toUpperCase() + userData.user_personal_info.first_name.substring(1)
@@ -198,17 +243,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
 
             val options = RequestOptions()
-            options.centerCrop()
-            options.error(R.drawable.ic_user_no_img_icon)
-            options.placeholder(R.drawable.ic_user_no_img_icon)
+            options.placeholder(R.drawable.ic_user)
             Glide.with(this@DashboardActivity)
-                    .load(resources.getString(R.string.profile_image_url)+userData.user_personal_info.profile_image)
+                    .load(BuildConfig.PROFILE_IMAGE_URL+userData.user_personal_info.profile_image)
                     .apply(options)
                     .into(imgProfile)
 
-
-
         }
+
         openHistory()
 
     }
@@ -258,10 +300,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -289,7 +330,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_dashboard)
-                    navigateToFragment(DashboardFragment.newInstance(),false,false)
+                    navigateToFragment(DashboardFragment.newInstance())
                 }
 
             }
@@ -301,7 +342,19 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_profile)
-                    navigateToFragment(ProfileFragment.newInstance(),false,false)
+                    navigateToFragment(ProfileFragment.newInstance())
+                }
+
+            }
+
+            R.id.action_loan_calculator -> {
+                if(currentFragment is LoanCalculatorFragment)
+                {
+                }
+                else
+                {
+                    toolbar.title =resources.getString(R.string.nav_item_loan_calculator)
+                    navigateToFragment(LoanCalculatorFragment.newInstance())
                 }
 
             }
@@ -314,7 +367,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     val sharedPref= SharedPref(this@DashboardActivity)
                     sharedPref.openTabLoan="CURRENT"
                     toolbar.title =resources.getString(R.string.nav_item_loan)
-                    navigateToFragment(LoanPlansFragment.newInstance(),false,false)
+                    navigateToFragment(LoanPlansFragment.newInstance())
                 }
 
             }
@@ -325,7 +378,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_points)
-                    navigateToFragment(PointsFragment.newInstance(),false,false)
+                    navigateToFragment(PointsFragment.newInstance())
                 }
 
             }
@@ -336,7 +389,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_investment)
-                    navigateToFragment(InvestmentFragment.newInstance(),false,true)
+                    navigateToFragment(InvestmentFragment.newInstance())
                 }
 
 
@@ -348,7 +401,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_lpk)
-                    navigateToFragment(LpkFragment.newInstance(),false,false)
+                    navigateToFragment(LpkFragment.newInstance())
                 }
 
 
@@ -360,7 +413,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_wallet)
-                    navigateToFragment(WalletFragment.newInstance(),false,false)
+                    navigateToFragment(WalletFragment.newInstance())
                 }
 
 
@@ -372,7 +425,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 else
                 {
                     toolbar.title =resources.getString(R.string.nav_item_settings)
-                    navigateToFragment(SettingsFragment.newInstance(),false,false)
+                    navigateToFragment(SettingsFragment.newInstance())
                 }
 
             }
@@ -414,12 +467,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     override fun onSuccessLogout() {
 
-        dismiss()
-        val sharedPrefOBJ= SharedPref(this@DashboardActivity)
-        sharedPrefOBJ.removeShared()
-        startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
+       logout()
     }
 
     override fun onErrorLogout(message: String) {
@@ -428,36 +476,22 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         CommonMethod.customSnackBarError(drawer_layout,this@DashboardActivity,message)
     }
 
-    private fun navigateToFragment(fragmentToNavigate: Fragment,isVisible:Boolean,isVisibleFilter:Boolean)
+    override fun onSessionTimeOut() {
+        logout()
+    }
+
+    private fun logout()
     {
-        if(isVisible && !isVisibleFilter)
-        {
-            if(fragmentToNavigate is LoanPlansFragment)
-            {
-                buttonRight.text = resources.getString(R.string.history)
-            }
-            else if(fragmentToNavigate is InvestmentFragment)
-            {
-                buttonRight.setBackgroundResource(R.drawable.ic_filter)
-            }
-            imgFilter.visibility=View.GONE
-            buttonRight.visibility=View.VISIBLE
-        }
-        if(!isVisible && isVisibleFilter)
-        {
-            /*if(fragmentToNavigate is InvestmentHistory)
-            {
+        dismiss()
+        val sharedPrefOBJ= SharedPref(this@DashboardActivity)
+        sharedPrefOBJ.removeShared()
+        startActivity(Intent(this@DashboardActivity, MainActivity::class.java))
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        finish()
+    }
 
-            }*/
-            buttonRight.visibility=View.GONE
-            imgFilter.visibility=View.INVISIBLE
-        }
-        else
-        {
-            imgFilter.visibility=View.INVISIBLE
-            buttonRight.visibility=View.INVISIBLE
-        }
-
+    private fun navigateToFragment(fragmentToNavigate: androidx.fragment.app.Fragment)
+    {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
@@ -473,10 +507,25 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         }
         else
         {
-            imgFilter.visibility=View.INVISIBLE
+            imgFilter.visibility=View.GONE
         }
 
     }
+
+
+    fun visibleButton(isVisible:Boolean)
+    {
+        if(isVisible)
+        {
+            buttonRight.visibility=View.VISIBLE
+        }
+        else
+        {
+            buttonRight.visibility=View.GONE
+        }
+
+    }
+
 
 
 
@@ -505,10 +554,25 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             {
                 currentFragment.loadProfileInfo(false)
                 sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
-                initData()
+
+
             }
 
         }
+
+    }
+
+
+
+    public override fun onDestroy() {
+    super.onDestroy()
+     countDownTimer.cancel()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
 
     }
 }

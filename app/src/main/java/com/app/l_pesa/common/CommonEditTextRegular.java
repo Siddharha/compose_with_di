@@ -2,15 +2,11 @@ package com.app.l_pesa.common;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.v7.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.AttributeSet;
 
-
-/**
- * Created by Intellij Amiyo on 07-02-2018.
- */
+import androidx.appcompat.widget.AppCompatEditText;
 
 
 public class CommonEditTextRegular extends AppCompatEditText

@@ -8,40 +8,39 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
-import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AppCompatDelegate
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.telephony.TelephonyManager
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonEditTextRegular
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.RunTimePermission
-import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.inter.ICallBackDashboard
-import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.dashboard.presenter.PresenterDashboard
-import com.app.l_pesa.dashboard.view.DashboardActivity
-import com.app.l_pesa.password.view.ForgotPasswordActivity
+import com.app.l_pesa.calculator.view.LoanCalculatorActivity
+import com.app.l_pesa.common.*
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
+import com.app.l_pesa.login.model.PinData
 import com.app.l_pesa.login.presenter.PresenterLogin
-import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.activity_login.*
-import com.app.l_pesa.login.model.LoginData
-import com.app.l_pesa.main.MainActivity
+import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.otpview.view.OTPActivity
+import com.app.l_pesa.pin.view.ForgotPinActivity
+import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
@@ -49,10 +48,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_login.*
 
 
-class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList, ICallBackDashboard {
-
+class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList {
 
     private var runTimePermission: RunTimePermission? = null
     private val permissionCode  = 200
@@ -75,25 +75,67 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
         loadCountry()
         loginProcess()
-        register()
-        forgetPassword()
+        forgotPin()
+        doCalculateLoan()
     }
 
-    private fun forgetPassword()
+    private fun forgotPin()
     {
-        txtForgotPassword.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        txtForgotPin.makeLinks(resources.getString(R.string.forgot_pin),Pair(resources.getString(R.string.forgot_pin), View.OnClickListener {
+
+            try {
+                startActivity(Intent(this@LoginActivity, ForgotPinActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            catch (exp: Exception)
+            {}
+
+        }))
+
+    }
+
+    private fun doCalculateLoan()
+    {
+        txtLoanCalculator.setOnClickListener {
+
+            try {
+                if(isLocationEnabled())
+                {
+                    val sharedPrefOBJ= SharedPref(this@LoginActivity)
+                    sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
+                    sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
+                    startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                }
+                else
+                {
+                    showAlert()
+                }
+
+            }
+            catch (exp: Exception)
+            {}
+
         }
     }
 
-    private fun register()
-    {
-        txtRegister.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, RegistrationStepOneActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        }
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
+
+    private fun showAlert() {
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(this@LoginActivity)
+        dialog.setTitle("Enable Location")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use this app")
+                .setPositiveButton("Location Settings") { _, _ ->
+                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(myIntent)
+                }
+                .setNegativeButton("Cancel") { _, _ -> }
+        dialog.show()
+    }
+
 
     private fun requestPermission() {
 
@@ -144,7 +186,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
        val sharedPrefOBJ=SharedPref(this@LoginActivity)
        val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
-        if(countryData.countries_list.size>0)
+       if(countryData.countries_list.size>0)
         {
             val totalSize = 0 until countryData.countries_list.size
 
@@ -155,12 +197,14 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                 {
                     countryFound=true
                     val options = RequestOptions()
-                    options.centerCrop()
                     Glide.with(this@LoginActivity)
                             .load(countryListCode.image)
                             .apply(options)
                             .into(img_country)
+
                     countryCode=countryListCode.country_code
+                    sharedPrefOBJ.countryName  =countryListCode.country_name
+                    sharedPrefOBJ.countryFlag  =countryListCode.image
                     break
 
                 }
@@ -174,6 +218,8 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                         .apply(options)
                         .into(img_country)
                 countryCode="+255"
+                sharedPrefOBJ.countryName  =countryData.countries_list[0].country_name
+                sharedPrefOBJ.countryFlag  =countryData.countries_list[0].image
             }
         }
 
@@ -187,7 +233,19 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
     @SuppressLint("MissingPermission")
     private fun loginProcess()
     {
-        etPassword.setOnEditorActionListener { _, actionId, _ ->
+        txtRegister.makeLinks(resources.getString(R.string.create_account),Pair("Create one!", View.OnClickListener {
+
+            try {
+                startActivity(Intent(this@LoginActivity, RegistrationStepOneActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            catch (exp: Exception)
+            {}
+
+        }))
+
+
+        etPhone.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 verifyField()
@@ -200,21 +258,58 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
             verifyField()
 
         }
+
+
+    }
+
+
+    private fun AppCompatTextView.makeLinks(string:String,vararg links: Pair<String, View.OnClickListener>) {
+        val spannableString = SpannableString(string)
+        for (link in links) {
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(view: View) {
+                    Selection.setSelection((view as AppCompatTextView).text as Spannable, 0)
+                    view.invalidate()
+                    link.second.onClick(view)
+                }
+            }
+            val startIndexOfLink = string.indexOf(link.first)
+            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        this.movementMethod = LinkMovementMethod.getInstance()
+        this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
     private fun verifyField()
     {
+        val displayMetrics = resources.displayMetrics
+        val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
+
+        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+
+        var getIMEI=""
+        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            telephonyManager!!.imei
+        } else {
+            telephonyManager!!.deviceId
+        }
+
+        val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
         CommonMethod.hideKeyboardView(this@LoginActivity)
         if(etPhone.text.toString().length<8)
         {
             CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_phone))
         }
-        else if(TextUtils.isEmpty(etPassword.text.toString()))
+        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
         {
-            CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_password))
+            CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_sim))
         }
         else
         {
+
 
             if(CommonMethod.isNetworkAvailable(this@LoginActivity))
             {
@@ -231,32 +326,18 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                     }
                 }
 
-                val displayMetrics = resources.displayMetrics
-                val width = displayMetrics.widthPixels
-                val height = displayMetrics.heightPixels
 
-                val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
-
-                var imeiId=""
-                imeiId = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    telephonyManager!!.imei
-                } else {
-                    telephonyManager!!.deviceId
-                }
-
-                val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
                 jsonObject.addProperty("country_code",countryCode)
-                jsonObject.addProperty("password",etPassword.text.toString())
                 jsonObject.addProperty("platform_type","A")
                 jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
                 jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",imeiId)
+                jsonObjectRequestChild.addProperty("imei",getIMEI)
                 jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
                 jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
                 jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
@@ -266,16 +347,15 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
                 jsonObjectRequestChild.addProperty("model", Build.MODEL)
                 jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
                 jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
+                jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
-                println("JSON"+jsonObject.toString())
-
-                val sharedPrefOBJ=SharedPref(this@LoginActivity)
-                sharedPrefOBJ.loginRequest=jsonObject.toString()
-
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
+
+                //println("JSON"+jsonObject)
 
             }
             else
@@ -285,25 +365,41 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         }
     }
 
-    override fun onSuccessLogin(data: LoginData) {
+    override fun onSuccessLogin(data: PinData) {
 
-        val sharedPrefOBJ=SharedPref(this@LoginActivity)
-        sharedPrefOBJ.accessToken   =data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
+        Handler().postDelayed({
+            txtLogin.isClickable   = true
+        }, 1000)
 
-        val presenterDashboard= PresenterDashboard()
-        presenterDashboard.getDashboard(this@LoginActivity,data.access_token,this)
+        progressBar.visibility=View.INVISIBLE
+
+        if(data.next_step=="next_otp")
+        {
+            val sharedPrefOBJ=SharedPref(this@LoginActivity)
+            val json = Gson().toJson(data)
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@LoginActivity, OTPActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+        else
+        {
+            val sharedPrefOBJ=SharedPref(this@LoginActivity)
+            val json = Gson().toJson(data)
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+
 
     }
 
     override fun onIncompleteLogin(message: String) {
 
+        Toast.makeText(this@LoginActivity,message,Toast.LENGTH_LONG).show()
         progressBar.visibility = View.INVISIBLE
         txtLogin.isClickable   = true
-        Toast.makeText(this@LoginActivity,resources.getString(R.string.incomplete_reg_message),Toast.LENGTH_LONG).show()
         val intent = Intent(this@LoginActivity, RegistrationStepOneActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -326,6 +422,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
+
     private fun countrySpinner(countryList: ResModelData)
     {
 
@@ -333,11 +430,11 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@LoginActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@LoginActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@LoginActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 
@@ -387,36 +484,13 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
 
     }
 
-    override fun onSuccessDashboard(data: ResDashboard.Data) {
-
-        val sharedPrefOBJ=SharedPref(this@LoginActivity)
-        val gson                          = Gson()
-        val dashBoardData                 = gson.toJson(data)
-        sharedPrefOBJ.userDashBoard       = dashBoardData
-
-        progressBar.visibility = View.INVISIBLE
-        val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        finish()
-    }
-
-    override fun onFailureDashboard(jsonMessage: String) {
-
-        val sharedPrefOBJ= SharedPref(this@LoginActivity)
-        sharedPrefOBJ.removeShared()
-        progressBar.visibility = View.INVISIBLE
-        txtLogin.isClickable   = true
-        CommonMethod.customSnackBarError(ll_root,this@LoginActivity,jsonMessage)
-    }
-
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
         val sharedPref          =SharedPref(this@LoginActivity)
         sharedPref.countryCode  =resModelCountryList.code
         countryCode             =resModelCountryList.country_code
+        sharedPref.countryName  =resModelCountryList.country_name
+        sharedPref.countryFlag  =resModelCountryList.image
         val options = RequestOptions()
             options.centerCrop()
             Glide.with(this@LoginActivity)
@@ -434,6 +508,23 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList,
         startActivity(intent)
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
+
+    public override fun onResume() {
+        super.onResume()
+        fetchLocation()
+    }
+
+    private fun fetchLocation() {
+        val intent = Intent(this, LocationBackgroundService::class.java)
+        startService(intent)
+    }
+
+    public override fun onDestroy() {
+        stopService(Intent(this, LocationBackgroundService::class.java))
+        super.onDestroy()
+
+    }
+
 
 
 }

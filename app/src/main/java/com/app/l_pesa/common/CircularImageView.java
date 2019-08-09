@@ -1,10 +1,5 @@
 package com.app.l_pesa.common;
 
-/**
- * Created by Intellij Amiya on 05-02-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -18,13 +13,15 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.app.l_pesa.R;
 
 import static android.widget.ImageView.ScaleType.CENTER_CROP;
 import static android.widget.ImageView.ScaleType.CENTER_INSIDE;
+
 
 
 public class CircularImageView extends AppCompatImageView {
@@ -80,10 +77,10 @@ public class CircularImageView extends AppCompatImageView {
         if (attributes.getBoolean(R.styleable.CircularImageView_civ_border, true)) {
             float defaultBorderSize = DEFAULT_BORDER_WIDTH * getContext().getResources().getDisplayMetrics().density;
             setBorderWidth(attributes.getDimension(R.styleable.CircularImageView_civ_border_width, defaultBorderSize));
-            setBorderColor(attributes.getColor(R.styleable.CircularImageView_civ_border_color, Color.WHITE));
+            setBorderColor(attributes.getColor(R.styleable.CircularImageView_civ_border_color, Color.TRANSPARENT));
         }
 
-        setBackgroundColor(attributes.getColor(R.styleable.CircularImageView_civ_background_color, Color.WHITE));
+        setBackgroundColor(attributes.getColor(R.styleable.CircularImageView_civ_background_color, Color.TRANSPARENT));
 
         // Init Shadow
         if (attributes.getBoolean(R.styleable.CircularImageView_civ_shadow, false)) {
@@ -99,13 +96,13 @@ public class CircularImageView extends AppCompatImageView {
     //endregion
 
     //region Set Attr Method
-    public void setBorderWidth(float borderWidth) {
+    private void setBorderWidth(float borderWidth) {
         this.borderWidth = borderWidth;
         requestLayout();
         invalidate();
     }
 
-    public void setBorderColor(int borderColor) {
+    private void setBorderColor(int borderColor) {
         if (paintBorder != null)
             paintBorder.setColor(borderColor);
         invalidate();
@@ -151,7 +148,7 @@ public class CircularImageView extends AppCompatImageView {
     @Override
     public ScaleType getScaleType() {
         ScaleType currentScaleType = super.getScaleType();
-        return currentScaleType == null || currentScaleType != CENTER_INSIDE ? CENTER_CROP : currentScaleType;
+        return currentScaleType != CENTER_INSIDE ? CENTER_CROP : currentScaleType;
     }
 
     @Override
@@ -176,7 +173,7 @@ public class CircularImageView extends AppCompatImageView {
             return;
 
         if (!isInEditMode()) {
-            canvasSize = Math.min(canvas.getWidth(), canvas.getHeight());
+            canvasSize = Math.min(getWidth(), getHeight());
         }
 
         // circleCenter is the x or y of the view's center
@@ -364,7 +361,7 @@ public class CircularImageView extends AppCompatImageView {
         START,
         END;
 
-        public int getValue() {
+        private int getValue() {
             switch (this) {
                 case CENTER:
                     return 1;
@@ -380,7 +377,7 @@ public class CircularImageView extends AppCompatImageView {
             throw new IllegalArgumentException("Not value available for this ShadowGravity: " + this);
         }
 
-        public static ShadowGravity fromValue(int value) {
+        private static ShadowGravity fromValue(int value) {
             switch (value) {
                 case 1:
                     return CENTER;

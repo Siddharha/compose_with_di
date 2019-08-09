@@ -1,7 +1,7 @@
 package com.app.l_pesa.wallet.inter
 
 import com.app.l_pesa.wallet.model.ResWalletHistory
-import java.util.ArrayList
+import java.util.*
 
 interface ICallBackTransaction {
 
@@ -9,4 +9,5 @@ interface ICallBackTransaction {
     fun onSuccessTransactionPaginate(savingsHistory: ArrayList<ResWalletHistory.SavingsHistory>, cursors: ResWalletHistory.Cursors, from_date: String, to_date: String)
     fun onEmptyTransaction(type: String)
     fun onErrorTransaction(message: String)
+    fun onSessionTimeOut(message: String)
 }

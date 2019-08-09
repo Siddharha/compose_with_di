@@ -1,5 +1,6 @@
 package com.app.l_pesa.registration.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,10 +15,10 @@ import retrofit2.HttpException
 
 class PresenterRegistrationThree {
 
+    @SuppressLint("CheckResult")
     fun doRegistrationStepThree(contextOBJ: Context, jsonObject : JsonObject, callBackOBJ: ICallBackRegisterThree)
     {
         val sharedPref= SharedPref(contextOBJ)
-
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPref.accessToken).doRegisterThree(jsonObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -47,7 +48,7 @@ class PresenterRegistrationThree {
                     try
                     {
                         val errorVal       =    error as HttpException
-                        val jsonError      =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError      =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus    =    jsonError.getJSONObject("status")
                         val jsonMessage    =    jsonStatus.getString("message")
 

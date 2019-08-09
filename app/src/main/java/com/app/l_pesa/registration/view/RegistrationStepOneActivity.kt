@@ -1,18 +1,23 @@
 package com.app.l_pesa.registration.view
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.provider.Settings
+import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -27,6 +32,7 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
@@ -56,7 +62,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     {
         progressDialog=KProgressHUD.create(this@RegistrationStepOneActivity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 
@@ -81,14 +87,26 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             handled
         }
 
-        txtQualify.setOnClickListener {
+        btnSubmit.setOnClickListener {
 
             verifyField()
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun verifyField()
     {
+        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+
+        var getIMEI=""
+        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            telephonyManager!!.imei
+        } else {
+            telephonyManager!!.deviceId
+        }
+
+        val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
         CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
         if((etPhone.text.toString().length<9))
         {
@@ -98,20 +116,46 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         {
             CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
         }
+        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        {
+            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_sim))
+        }
         else
         {
+            CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
                 progressDialog.show()
-                txtQualify.isClickable=false
+                btnSubmit.isClickable=false
+
+                val displayMetrics = resources.displayMetrics
+                val width = displayMetrics.widthPixels
+                val height = displayMetrics.heightPixels
+
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
-                jsonObject.addProperty("country_code",countryCode)
                 jsonObject.addProperty("email_address",etEmail.text.toString())
-                jsonObject.addProperty("device_token"," ")
+                jsonObject.addProperty("country_code",countryCode)
                 jsonObject.addProperty("platform_type","A")
+                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
-                println("JSON"+jsonObject)
+                val jsonObjectRequestChild = JsonObject()
+                jsonObjectRequestChild.addProperty("device_id", deviceId)
+                jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
+                jsonObjectRequestChild.addProperty("imei",getIMEI)
+                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
+                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
+                jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
+                jsonObjectRequestChild.addProperty("screen_height",""+height)
+                jsonObjectRequestChild.addProperty("screen_width",""+width)
+                jsonObjectRequestChild.addProperty("device", Build.DEVICE)
+                jsonObjectRequestChild.addProperty("model", Build.MODEL)
+                jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
+                jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
+                jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
+
+                jsonObject.add("device_data",jsonObjectRequestChild)
 
                 val presenterRegistrationOneObj= PresenterRegistrationOne()
                 presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
@@ -175,11 +219,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
         listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         listCountry!!.addAll(countryList.countries_list)
         adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = adapterCountry
         dialog.show()
 
@@ -187,9 +231,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
-
                 filterCountry(s.toString())
-
 
             }
 
@@ -255,9 +297,9 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         dismiss()
         Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
-        txtQualify.isClickable =true
+        btnSubmit.isClickable =true
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
-        sharedPref.accessToken=data.access_token
+        sharedPref.accessToken=""+data.access_token
 
         val bundle = Bundle()
         bundle.putString("OTP",data.otp)
@@ -270,7 +312,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     override fun onErrorRegistrationOne(jsonMessage: String) {
 
         dismiss()
-        txtQualify.isClickable=true
+        btnSubmit.isClickable=true
         CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,jsonMessage)
     }
 }

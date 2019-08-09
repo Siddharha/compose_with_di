@@ -25,4 +25,42 @@
             </attr>
         </declare-styleable>
 
+    <declare-styleable name="PassCodeView">
+        <attr name="digits" format="integer"/>
+        <attr name="filled_drawable" format="reference"/>
+        <attr name="empty_drawable" format="reference"/>
+        <attr name="digit_size" format="dimension"/>
+        <attr name="key_text_size" format="dimension"/>
+        <attr name="divider_visible" format="boolean"/>
+        <attr name="digit_spacing" format="dimension"/>
+        <attr name="digit_vertical_padding" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="OtpViewTheme">
+        <attr format="reference" name="otpViewStyle"/>
+    </declare-styleable>
+
+    <declare-styleable name="OtpView">
+        <attr format="integer" name="itemCount"/>
+        <attr format="dimension" name="itemWidth"/>
+        <attr format="dimension" name="itemHeight"/>
+        <attr format="dimension" name="itemRadius"/>
+        <attr format="dimension" name="itemSpacing"/>
+        <attr format="dimension" name="lineWidth"/>
+        <attr format="reference|color" name="lineColor"/>
+        <attr format="enum" name="viewType">
+            <enum name="rectangle" value="0"/>
+            <enum name="line" value="1"/>
+            <enum name="none" value="2"/>
+        </attr>
+        <attr name="android:cursorVisible"/>
+        <attr format="dimension" name="cursorWidth"/>
+        <attr format="reference|color" name="cursorColor"/>
+        <attr name="android:itemBackground"/>
+        <attr format="boolean" name="hideLineWhenFilled"/>
+        <attr format="boolean" name="state_filled"/>
+        <attr format="boolean" name="rtlTextDirection"/>
+    </declare-styleable>
+
+
 </resources>

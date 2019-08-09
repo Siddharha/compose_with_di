@@ -54,8 +54,8 @@ class PresenterCountry{
                     {
                         val errorVal     = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus=    jsonError.getJSONObject("status")
+                        val jsonError      =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                        val  jsonStatus    =    jsonError.getJSONObject("status")
                         val jsonMessage    =    jsonStatus.getString("message")
 
                         callBackOBJ.onFailureCountry(jsonMessage)

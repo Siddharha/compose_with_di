@@ -2,8 +2,7 @@ package com.app.l_pesa.loanplan.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Intellij Amiya on 21/2/19.

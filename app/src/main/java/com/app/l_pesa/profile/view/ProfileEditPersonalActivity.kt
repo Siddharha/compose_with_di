@@ -2,73 +2,74 @@ package com.app.l_pesa.profile.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.ClipData
+import android.content.ContentUris
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Typeface
+import android.media.MediaScannerConnection
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.os.Environment
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.adapter.MaritalListAdapter
 import com.app.l_pesa.profile.adapter.TitleListAdapter
 import com.app.l_pesa.profile.inter.ICallBackMarital
-import com.app.l_pesa.profile.inter.ICallBackTitle
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.google.gson.Gson
-
-import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
-import kotlinx.android.synthetic.main.content_profile_edit_personal.*
-import android.app.DatePickerDialog
-import android.content.ClipData
-import android.content.ContentUris
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
-import android.net.Uri
-import android.os.Build
-import android.provider.DocumentsContract
-import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.widget.ImageView
-import android.widget.Toast
-import com.app.l_pesa.BuildConfig
-import com.app.l_pesa.common.BitmapResize
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
-import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.profile.inter.ICallBackPersonalInfo
+import com.app.l_pesa.profile.inter.ICallBackTitle
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.google.gson.JsonParser
+import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
+import kotlinx.android.synthetic.main.content_profile_edit_personal.*
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.lang.Exception
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
+class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload {
 
-class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackLogin , ICallBackUpload {
-
-    private val Photo             = 10
-    private val Gallery           = 11
+    private val requestPhoto             = 10
+    private val requestGalley            = 11
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +90,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
 
-
     private fun swipeRefresh()
     {
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
@@ -103,10 +103,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     {
 
         val options = RequestOptions()
-        options.error(R.drawable.ic_profile)
-        options.placeholder(R.drawable.ic_profile)
+        options.placeholder(R.drawable.ic_user)
         Glide.with(this@ProfileEditPersonalActivity)
-                .load(resources.getString(R.string.profile_image_url)+profileData.userInfo!!.profileImage)
+                .load(BuildConfig.PROFILE_IMAGE_URL+profileData.userInfo!!.profileImage)
                 .apply(options)
                 .into(imgProfile)
 
@@ -166,7 +165,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 "F"
             }
 
-
             val hashMapOLD = HashMap<String, String>()
             hashMapOLD["title"]     = ""+profileData.userPersonalInfo!!.title
             hashMapOLD["nameF"]     = ""+profileData.userPersonalInfo!!.firstName
@@ -185,7 +183,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 val date         = inputFormat.parse(txtDOB.text.toString())
 
                 val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-                outputFormat.format(date)
+                outputFormat.format(date!!)
             } else {
                 ""
             }
@@ -203,7 +201,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapNew["sex"]       = gender
             hashMapNew["imgChange"] = captureImageStatus.toString()
 
-
+            CommonMethod.hideKeyboardView(this@ProfileEditPersonalActivity)
             if(hashMapOLD == hashMapNew)
             {
                 CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.change_one_info))
@@ -232,6 +230,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_date_of_birth))
                 }
                 else if(TextUtils.isEmpty(etMotherName.text.toString()))
+                {
+                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
+                }
+                else if(!radioMale.isChecked && !radioFemale.isChecked)
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
                 }
@@ -266,14 +268,22 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     override fun onSuccessUploadAWS(url: String) {
 
+        val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        userData.user_personal_info.profile_image=url
+        val json = Gson().toJson(userData)
+        sharedPrefOBJ.userInfo      = json
         uploadData(url)
+
     }
 
     override fun onFailureUploadAWS(string: String) {
+        buttonSubmit.isClickable=true
         swipeRefreshLayout.isRefreshing=false
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,string)
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun uploadData(imageURL: String)
     {
         var gender="M"
@@ -287,7 +297,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val date         = inputFormat.parse(txtDOB.text.toString())
 
         val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-        val dateRequest  = outputFormat.format(date)
+        val dateRequest  = outputFormat.format(date!!)
 
         val jsonObject = JsonObject()
         jsonObject.addProperty("title",txtTitle.text.toString())
@@ -299,10 +309,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         jsonObject.addProperty("sex",gender)
         jsonObject.addProperty("merital_status",txtMarital.text.toString())
         jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
-        jsonObject.addProperty("profile_image",""+imageURL)
-
-        println("JSON"+jsonObject)
-
+        jsonObject.addProperty("profile_image",imageURL)
 
         val presenterPersonalInfo= PresenterPersonalInfo()
         presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)
@@ -311,10 +318,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     override fun onSuccessPersonalInfo() {
 
+        swipeRefreshLayout.isRefreshing=false
+        buttonSubmit.isClickable=true
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditPersonalActivity, jsonObject, this)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
     }
 
@@ -325,39 +335,25 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
     }
 
-    override fun onSuccessLogin(data: LoginData) {
-
-        val sharedPrefOBJ=SharedPref(this@ProfileEditPersonalActivity)
-        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
-        sharedPrefOBJ.accessToken   = data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-
-    }
-
-    override fun onIncompleteLogin(message: String) {
+    override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditPersonalActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ProfileEditPersonalActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
 
-    }
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
-    override fun onErrorLogin(jsonMessage: String) {
-
-     swipeRefreshLayout.isRefreshing=false
-     Toast.makeText(this@ProfileEditPersonalActivity,jsonMessage,Toast.LENGTH_SHORT).show()
-
-    }
-
-    override fun onFailureLogin(jsonMessage: String) {
-
-        buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,jsonMessage)
     }
 
     private fun onChangeProfileImage()
@@ -365,22 +361,22 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         imgProfile.setOnClickListener {
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
-            val dialogView = AlertDialog.Builder(this@ProfileEditPersonalActivity)
-            dialogView.setTitle("Choose Options")
-
+            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
+            val dialogView = AlertDialog.Builder(this@ProfileEditPersonalActivity,R.style.MyAlertDialogTheme)
             dialogView.setItems(items) { dialog, item ->
 
                 when {
-                    items[item] == "Camera" -> // open camera
-                        cameraClick() // open default camera
-                    items[item] == "Gallery" -> // open gallery
-                        galleryClick() // open default gallery
-                    items[item] == "Cancel" -> // close dialog
+                    items[item] == "Camera" ->
+                        cameraClick()
+                    items[item] == "Gallery" ->
+                        galleryClick()
+                    items[item] == "Cancel" ->
                         dialog.dismiss()
                 }
             }
+
             dialogView.show()
+
         }
     }
 
@@ -390,14 +386,14 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
-        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
@@ -406,7 +402,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
 
     }
 
@@ -415,7 +411,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     {
         val checkSelfPermission = ContextCompat.checkSelfPermission(this@ProfileEditPersonalActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this@ProfileEditPersonalActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            ActivityCompat.requestPermissions(this@ProfileEditPersonalActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), requestGalley)
         }
         else{
             openAlbum()
@@ -425,7 +421,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        startActivityForResult(intent, requestGalley)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -444,13 +440,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
                 }
-            Gallery ->
+            requestGalley ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -469,7 +465,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgProfile.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             this@ProfileEditPersonalActivity,
@@ -479,7 +475,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -495,39 +491,47 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
    private fun handleImage(data: Intent?) {
-        var imagePath=""
-        try
-        {
-            val uri = data!!.data
-            when {
-                DocumentsContract.isDocumentUri(this, uri) -> try {
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    if ("com.android.providers.media.documents" == uri!!.authority){
-                        val id = docId.split(":")[1]
-                        val section = MediaStore.Images.Media._ID + "=" + id
-                        imagePath = imagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, section)
-                    } else if ("com.android.providers.downloads.documents" == uri.authority){
-                        val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
-                        imagePath = imagePath(contentUri, null)
-                    }
+       if (data != null)
+       {
+           val contentURI = data.data
 
-                }
-                catch (exp: Exception)
-                {
+           val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileEditPersonalActivity.contentResolver, contentURI)
+           imgProfile?.setImageBitmap(bitmap)
+           saveImage(bitmap)
 
-                }
-                "content".equals(uri!!.scheme, ignoreCase = true) -> imagePath = imagePath(uri, null)
-                "file".equals(uri.scheme, ignoreCase = true) -> imagePath = uri.path!!
-            }
-            displayImage(imagePath)
-        }
-        catch (exp: Exception)
-        {
-
-        }
+       }
     }
 
-    private fun displayImage(imagePath: String?){
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this@ProfileEditPersonalActivity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
+    }
+
+   /* private fun displayImage(imagePath: String?){
         if (imagePath != null) {
 
             val imgSize = File(imagePath)
@@ -543,7 +547,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfile.setImageBitmap(bitmap)
                 photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                CommonMethod.fileCompress(photoFile)
             }
 
         }
@@ -563,47 +567,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             cursor.close()
         }
         return path!!
-    }
-
-
-
-
-    /*fun saveImage(myBitmap: Bitmap):String {
-
-        val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
-        val wallpaperDirectory = File(
-                (Environment.getExternalStorageDirectory()).toString() +"/lpesa_app")
-        // have the object build the directory structure, if needed.
-
-        if (!wallpaperDirectory.exists())
-        {
-
-            wallpaperDirectory.mkdirs()
-        }
-
-        try
-        {
-            val f = File(wallpaperDirectory, ((Calendar.getInstance()
-                    .timeInMillis).toString() + ".jpg"))
-            f.createNewFile()
-            captureFile=f
-            val fo = FileOutputStream(f)
-            fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(this@ProfileEditPersonalActivity,
-                    arrayOf(f.path),
-                    arrayOf("image/jpeg"), null)
-            fo.close()
-
-
-            return f.getAbsolutePath()
-        }
-        catch (e1: IOException) {
-            e1.printStackTrace()
-        }
-
-        return ""
     }*/
+
 
 
     override fun onChangeTitle(s: String)
@@ -649,9 +614,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = MaritalListAdapter(this@ProfileEditPersonalActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }
@@ -666,7 +631,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             val date = inputFormat.parse(profileData.userPersonalInfo!!.dob)
 
             val outputFormat = SimpleDateFormat("dd-MM-yyyy")
-            txtDOB.setText(outputFormat.format(date))
+            txtDOB.setText(outputFormat.format(date!!))
         }
 
         txtDOB.isFocusable=false
@@ -727,9 +692,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val dialog= Dialog(this@ProfileEditPersonalActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = TitleListAdapter(this@ProfileEditPersonalActivity, listTitle,listIcon,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditPersonalActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
     }
@@ -779,10 +744,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -794,7 +758,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.please_wait))
                 }

@@ -4,4 +4,5 @@ interface ICallBackInvestmentStatus {
 
     fun onSuccessInvestmentStatus()
     fun onErrorInvestmentStatus(message: String)
+    fun onSessionTimeOut(message: String)
 }

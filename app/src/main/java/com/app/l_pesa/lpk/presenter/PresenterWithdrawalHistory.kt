@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterWithdrawalHistory {
 
-    fun getWithdrawalHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackWithdrawalHistory)
+    @SuppressLint("CheckResult")
+    fun getWithdrawalHistory(contextOBJ: Context, from_date:String, to_date:String, type:String, callBackOBJ: ICallBackWithdrawalHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory("",from_date,to_date)
@@ -54,7 +56,7 @@ class PresenterWithdrawalHistory {
                     {
                         val errorVal              = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
 
@@ -69,7 +71,8 @@ class PresenterWithdrawalHistory {
                 })
     }
 
-    fun getWithdrawalHistoryPaginate(contextOBJ: Context,cursor:String, from_date:String,to_date:String,callBackOBJ: ICallBackWithdrawalHistory)
+    @SuppressLint("CheckResult")
+    fun getWithdrawalHistoryPaginate(contextOBJ: Context, cursor:String, from_date:String, to_date:String, callBackOBJ: ICallBackWithdrawalHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getWithdrawalHistory(cursor,from_date,to_date)

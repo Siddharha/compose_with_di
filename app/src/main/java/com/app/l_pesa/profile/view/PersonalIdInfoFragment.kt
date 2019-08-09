@@ -3,31 +3,34 @@ package com.app.l_pesa.profile.view
 import android.app.Activity
 import android.app.Dialog
 import android.content.ClipData
-import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.DocumentsContract
+import android.os.Environment
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -36,26 +39,30 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
-import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
-import com.app.l_pesa.profile.model.ResUserInfo
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
+import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.inter.ICallBackProof
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ModelWindowPopUp
+import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
+import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.lang.Exception
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 
-class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload {
+class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload {
 
 
     private var filterPopup : PopupWindow? = null
@@ -66,16 +73,18 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var personalIdName=""
     private var personalId=0
 
-    private val Photo             = 12
-    private val Gallery           = 13
+    private val requestPhoto      = 12
+    private val requestGallery    = 13
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
     private var idTypeExists        = "FALSE"
     private var imgFileAddress      = ""
 
-   companion object {
-        fun newInstance(): Fragment {
+    private lateinit  var progressDialog: KProgressHUD
+
+    companion object {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return PersonalIdInfoFragment()
         }
     }
@@ -87,7 +96,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipeRefresh()
+        initLoader()
         initData()
 
     }
@@ -103,7 +112,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         {
             listPersonalId!!.addAll(profileInfo.userIdsPersonalInfo!!)
             personalIdAdapter                 = PersonalIdAdapter(activity!!,listPersonalId!!,this)
-            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
             rvPersonalId.adapter              = personalIdAdapter
         }
 
@@ -111,31 +120,29 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
             if(!captureImageStatus)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_image))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_image))
             }
             else if(personalId==0)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
             }
             else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString()))
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_number))
             }
             else
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
-
-                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                    swipeRefreshLayout.isRefreshing=true
+                    progressDialog.show()
                     buttonSubmit.isClickable=false
 
                     /*if(idTypeExists=="TRUE")
                     {*/
-                        val presenterAWSPersonalId= PresenterAWSPersonalId()
-                       // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                        presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
+                    val presenterAWSPersonalId= PresenterAWSPersonalId()
+                    // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
+                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
                     /*}
                     else
                     {
@@ -147,7 +154,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 }
                 else
                 {
-                    CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                 }
             }
         }
@@ -166,28 +173,44 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         imgProfile.setOnClickListener {
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
-            val dialogView = AlertDialog.Builder(activity!!)
-            dialogView.setTitle("Choose Options")
-
+            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
+            val dialogView = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
             dialogView.setItems(items) { dialog, item ->
 
                 when {
-                    items[item] == "Camera" -> // open camera
-                        cameraClick() // open default camera
-                    items[item] == "Gallery" -> // open gallery
-                        galleryClick() // open default gallery
-                    items[item] == "Cancel" -> // close dialog
+                    items[item] == "Camera" ->
+                        cameraClick()
+                    items[item] == "Gallery" ->
+                        galleryClick()
+                    items[item] == "Cancel" ->
                         dialog.dismiss()
                 }
             }
+
             dialogView.show()
+
 
         }
 
-
     }
 
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    private fun initLoader()
+    {
+        progressDialog= KProgressHUD.create(activity)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setCancellable(false)
+                .setAnimationSpeed(2)
+                .setDimAmount(0.5f)
+
+    }
 
 
     override fun onSuccessUploadAWS(url: String) {
@@ -214,17 +237,30 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onFailureUploadAWS(string: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,activity!!,string)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,string)
     }
 
-    private fun swipeRefresh()
-    {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-        swipeRefreshLayout.isRefreshing=false
-        }
+    override fun onSessionTimeOut(message: String) {
+
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun showDialogIdType(sharedPrefOBJ: SharedPref)
@@ -237,7 +273,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             dialog.setContentView(R.layout.dialog_id_type)
             val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
             val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
-            recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            recyclerView?.layoutManager     = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             recyclerView?.adapter           = personalIdAdapter
             dialog.show()
         }
@@ -291,27 +327,27 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
 
         else
+        {
+            if (name == resources.getString(R.string.address_prof))
             {
-                if (name == resources.getString(R.string.address_prof))
-                {
-                    ilIdNumber.visibility = View.INVISIBLE
-                    personalIdName = name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType = type
-                    personalId = id
-
-                }
-
-                else
-                {
-                    ilIdNumber.visibility = View.VISIBLE
-                    personalIdName = name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType = type
-                    personalId = id
-                }
+                ilIdNumber.visibility = View.INVISIBLE
+                personalIdName = name
+                etPersonalId.setText(personalIdName)
+                personalIdType = type
+                personalId = id
 
             }
+
+            else
+            {
+                ilIdNumber.visibility = View.VISIBLE
+                personalIdName = name
+                etPersonalId.setText(personalIdName)
+                personalIdType = type
+                personalId = id
+            }
+
+        }
 
     }
 
@@ -323,7 +359,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        filterPopup?.showAsDropDown(llRoot,165,-400)
+        filterPopup?.showAsDropDown(rootLayout,165,-400)
 
     }
 
@@ -371,7 +407,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     }
                     else
                     {
-                        CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                     }
                 }
                 else
@@ -382,7 +418,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         if(CommonMethod.isNetworkAvailable(activity!!))
                         {
                             val bundle = Bundle()
-                            bundle.putString("FILE_NAME",resources.getString(R.string.upload_business_url)+userIdsPersonalInfo.fileName)
+                            bundle.putString("FILE_NAME",BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                             val intent = Intent(activity, ActivityViewFile::class.java)
                             intent.putExtras(bundle)
                             startActivity(intent,bundle)
@@ -390,7 +426,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         }
                         else
                         {
-                            CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                         }
 
                     }
@@ -406,8 +442,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun deletePersonalIdProof(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int)
     {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.isRefreshing=true
+        progressDialog.show()
         val jsonObject = JsonObject()
         jsonObject.addProperty("user_type_id",userIdsPersonalInfo.id.toString())
 
@@ -417,6 +452,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onSuccessAddProof() {
 
+        dismiss()
         val sharedPref=SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
         val intent = Intent(activity!!, DashboardActivity::class.java)
@@ -427,13 +463,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onFailureAddProof(message: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     override fun onSuccessDeleteProof(position: Int) {
-        swipeRefreshLayout.isRefreshing=false
+
+        dismiss()
         listPersonalId!!.removeAt(position)
         personalIdAdapter!!.notifyDataSetChanged()
         val sharedPrefOBJ= SharedPref(activity!!)
@@ -441,8 +478,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     override fun onFailureDeleteProof(message: String) {
-        swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(llRoot,activity!!,message)
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     private fun cameraClick()
@@ -451,14 +488,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(activity!!.filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile)
 
-        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
@@ -467,7 +504,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
     }
 
 
@@ -483,9 +520,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     private fun openAlbum(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -504,13 +540,13 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
                 }
-            Gallery ->
+            requestGallery ->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -529,7 +565,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgProfile.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             activity!!,
@@ -539,7 +575,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -554,7 +590,17 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     private fun handleImage(data: Intent?) {
-        var imagePath=""
+
+        if (data != null)
+        {
+            val contentURI = data.data
+
+                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, contentURI)
+                imgProfile?.setImageBitmap(bitmap)
+                saveImage(bitmap)
+
+        }
+        /*var imagePath=""
         try
         {
             val uri = data!!.data
@@ -583,10 +629,39 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         catch (exp: Exception)
         {
 
-        }
+        }*/
     }
 
-    private fun imagePath(uri: Uri?, selection: String?): String {
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(activity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
+    }
+
+    /*private fun getImagePath(uri: Uri?, selection: String?): String {
         var path: String? = null
         val cursor = activity!!.contentResolver.query(uri!!, null, selection, null, null )
         if (cursor != null){
@@ -601,8 +676,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private fun displayImage(imagePath: String?){
         if (imagePath != null) {
 
-            val imgSize = File(imagePath)
-            val length  = imgSize.length() / 1024
+            val imgFile = File(imagePath)
+            val length  = imgFile.length() / 1024
             if(length>3000) // Max Size Under 3MB
             {
                 captureImageStatus=false
@@ -610,11 +685,11 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             }
             else
             {
-                captureImageStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
-                imgProfile.setImageBitmap(bitmap)
-                photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                imgProfile?.setImageBitmap(bitmap)
+                captureImageStatus=true
+                photoFile=imgFile
+                CommonMethod.fileCompress(photoFile)
             }
 
         }
@@ -622,7 +697,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             captureImageStatus=false
             Toast.makeText(activity!!, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
 
 }

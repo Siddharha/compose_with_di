@@ -3,38 +3,39 @@ package com.app.l_pesa.dashboard.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.adapter.LoanListAdapter
 import com.app.l_pesa.dashboard.inter.ICallBackDashboard
+import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.presenter.PresenterDashboard
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.LinearLayout
-import com.app.l_pesa.dashboard.adapter.LoanListAdapter
-import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.loanHistory.view.LoanPaybackScheduledActivity
 import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
-import com.app.l_pesa.lpk.view.LPKWithdrawalActivity
+import com.app.l_pesa.main.view.MainActivity
+import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
+import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import java.text.DecimalFormat
 
 
-class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
+class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
+
 
    private lateinit  var progressDialog: KProgressHUD
 
    companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return DashboardFragment()
         }
     }
@@ -53,6 +54,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     }
 
     private fun initUI() {
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
         initSeekBar()
     }
 
@@ -87,7 +90,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     {
         progressDialog=KProgressHUD.create(activity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 
@@ -128,8 +131,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
-        left_header_txt.text  = dashBoard.currencyCode+" "+format.format(dashBoard.fixedDepositAmount)
-        right_header_txt.text = dashBoard.currencyCode+" "+format.format(dashBoard.savingsAmount)
+        left_header_txt.text  = dashBoard.currencyCode+" "+format.format(dashBoard.fixedDepositAmount)+" "+resources.getString(R.string.in_deposit)
+        right_header_txt.text = dashBoard.currencyCode+" "+format.format(dashBoard.savingsAmount)+" "+resources.getString(R.string.in_wallet)
 
         txt_start.text          = dashBoard.minCreditScore.toString()
         txt_max.text            = dashBoard.maxCreditScore.toString()
@@ -142,7 +145,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         }
 
             if (dashBoard.loans!!.size > 0) {
-                loan_list.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+                loan_list.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
                 val adapterDashBoard = LoanListAdapter(dashBoard.loans!!,dashBoard, activity, rootLayout, this)
                 loan_list.adapter = adapterDashBoard
                 adapterDashBoard.notifyDataSetChanged()
@@ -202,6 +205,27 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     override fun onErrorInfoLPK(message: String) {
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+   override fun onSessionTimeOut(jsonMessage: String) {
+
+        swipeRefreshLayout.isRefreshing = false
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(jsonMessage)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+       val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
     }
 
     override fun onClickPay(type: String, loan_id: String) {

@@ -2,16 +2,14 @@ package com.app.l_pesa.lpk.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
-import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
 import java.text.DecimalFormat
@@ -76,9 +74,9 @@ class AdapterTransferHistory (val context: Context, private val listTransferHist
 
     class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var txtRef          : TextView              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
-        var txtToken        : TextView              = itemView.findViewById(R.id.txtToken) as CommonTextRegular
-        var txtCreateDate   : CommonTextRegular     = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
+        private var txtRef          : TextView              = itemView.findViewById(R.id.txtRef) as CommonTextRegular
+        private var txtToken        : TextView              = itemView.findViewById(R.id.txtToken) as CommonTextRegular
+        private var txtCreateDate   : CommonTextRegular     = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
         fun  bindData(context: Context, userTransferHistory: ResTransferHistory.UserTransferHistory, callBack: ICallBackTransferHistory)

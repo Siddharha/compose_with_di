@@ -17,13 +17,12 @@ android:gravity="center|start"
             <ImageView
                 android:id="@+id/img_flag"
                 android:contentDescription="@string/app_name"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:adjustViewBounds="true"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_centerInParent="true"
                 android:layout_alignParentStart="true"
-                android:scaleType="centerCrop" />
+                />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txt_country_name"
@@ -33,7 +32,7 @@ android:gravity="center|start"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_toEndOf="@+id/img_flag"
                 android:gravity="center|start"
-                android:textColor="@color/textColors"
+                android:textColor="@color/colorTextBlackLight"
                 android:textSize="@dimen/_12sdp" />
 
     </RelativeLayout>

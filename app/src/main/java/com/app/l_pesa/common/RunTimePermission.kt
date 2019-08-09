@@ -3,8 +3,8 @@ package com.app.l_pesa.common
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 /*Beginning in Android 6.0 (API level 23), users grant permissions to apps while the app is running, not when they install the app.
     *  This approach streamlines the app install process, since the user does not need to grant permissions when they install or update the app.
@@ -47,7 +47,7 @@ class RunTimePermission(internal var activity: Activity) {
     }
 
     companion object {
-        val CAMERA_PERMISSION_REQUEST_CODE = 1
+        const val CAMERA_PERMISSION_REQUEST_CODE = 1
     }
 
 

@@ -4,6 +4,19 @@
     <dimen name="design_navigation_separator_vertical_padding" tools:override="true">0dp</dimen>
     <dimen name="design_navigation_padding_bottom" tools:override="true">0dp</dimen>
     <dimen name="design_navigation_icon_size" tools:override="true">@dimen/_24sdp</dimen>
+
+    <dimen name="key_text_size">@dimen/_22sdp</dimen>
+    <dimen name="drawableDimen">@dimen/_28sdp</dimen>
+    <dimen name="digit_vertical_padding">@dimen/_35sdp</dimen>
+    <dimen name="digit_horizontal_padding">@dimen/_12sdp</dimen>
+    <dimen name="key_pad_min_height">@dimen/_250sdp</dimen>
+
+
+    <dimen name="otp_view_item_size">48dp</dimen>
+    <dimen name="otp_view_item_spacing">5dp</dimen>
+    <dimen name="otp_view_item_line_width">2dp</dimen>
+    <dimen name="otp_view_cursor_width">2dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
 
 </resources>

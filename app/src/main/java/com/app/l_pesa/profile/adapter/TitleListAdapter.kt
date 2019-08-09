@@ -2,13 +2,13 @@ package com.app.l_pesa.profile.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackTitle
 
@@ -24,9 +24,6 @@ class TitleListAdapter (val context: Context, private val titleText: ArrayList<S
             callBack.onChangeTitle(titleText[position])
         }
 
-
-
-
     }
 
     override fun getItemCount(): Int = titleText.size
@@ -35,7 +32,7 @@ class TitleListAdapter (val context: Context, private val titleText: ArrayList<S
 
         val recyclerView: RecyclerView.ViewHolder
 
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_title, parent, false)
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_text_icon, parent, false)
         recyclerView = SelectViewHolder(itemView)
 
         return recyclerView

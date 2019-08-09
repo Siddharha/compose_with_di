@@ -1,5 +1,6 @@
 package com.app.l_pesa.registration.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -19,6 +20,7 @@ import retrofit2.HttpException
  */
 class PresenterRegistrationOne {
 
+    @SuppressLint("CheckResult")
     fun doRegistration(contextOBJ: Context, jsonObject : JsonObject, callBackOBJ: ICallBackRegisterOne)
     {
         RetrofitHelper.getRetrofit(BaseService::class.java).doRegister(jsonObject)
@@ -51,7 +53,7 @@ class PresenterRegistrationOne {
                     {
                         val errorVal     = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus=    jsonError.getJSONObject("status")
                         val jsonMessage    =    jsonStatus.getString("message")
 

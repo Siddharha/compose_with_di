@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterPaymentHistory {
 
-    fun getPaymentHistory(contextOBJ: Context,type : String,id:String, callBackPaymentHistory: ICallBackPaymentHistory)
+    @SuppressLint("CheckResult")
+    fun getPaymentHistory(contextOBJ: Context, type : String, id:String, callBackOBJ: ICallBackPaymentHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getPaymentHistory(type,id)
@@ -31,16 +33,16 @@ class PresenterPaymentHistory {
                         {
                             if(response.data!!.paymentHistory!!.size>0)
                             {
-                                callBackPaymentHistory.onSuccessPaymentHistory(response.data!!.paymentHistory!!)
+                                callBackOBJ.onSuccessPaymentHistory(response.data!!.paymentHistory!!)
                             }
                             else
                             {
-                                callBackPaymentHistory.onEmptyPaymentHistory()
+                                callBackOBJ.onEmptyPaymentHistory()
                             }
                         }
                         else
                         {
-                            callBackPaymentHistory.onErrorPaymentHistory(response.status!!.message)
+                            callBackOBJ.onErrorPaymentHistory(response.status!!.message)
                         }
                     }
                     catch (e: Exception)
@@ -51,18 +53,30 @@ class PresenterPaymentHistory {
                     error ->
                     try
                     {
-                        val errorVal            = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus         =    jsonError.getJSONObject("status")
-                        val jsonMessage         =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorPaymentHistory(jsonMessage)
+                            }
 
-                        callBackPaymentHistory.onErrorPaymentHistory(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {
                         val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
-                        callBackPaymentHistory.onErrorPaymentHistory(errorMessageOBJ)
+                        callBackOBJ.onErrorPaymentHistory(errorMessageOBJ)
                     }
 
                 })

@@ -2,12 +2,12 @@ package com.app.l_pesa.profile.adapter
 
 import android.app.Dialog
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackMarital
 
@@ -38,7 +38,7 @@ class MaritalListAdapter (val context: Context, private val titleText: ArrayList
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView) {
 
             var titleText : TextView = itemView.findViewById(R.id.txtTitle) as TextView
             var rlRootObj : RelativeLayout = itemView.findViewById(R.id.rlRoot) as RelativeLayout

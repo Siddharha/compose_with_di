@@ -2,11 +2,13 @@ package com.app.l_pesa.loanplan.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -17,9 +19,10 @@ import com.app.l_pesa.loanplan.inter.ICallBackBusinessLoan
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
+import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Intellij Amiya on 21/2/19.
@@ -27,7 +30,7 @@ import java.util.ArrayList
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class BusinessLoan:Fragment(), ICallBackBusinessLoan {
+class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
 
     companion object {
         fun newInstance(): Fragment {
@@ -68,6 +71,11 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
             val presenterLoanPlans= PresenterLoanPlans()
             presenterLoanPlans.doLoanPlansBusiness(activity!!,jsonObject,this)
         }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            swipeRefreshLayout.isRefreshing = false
+        }
 
     }
 
@@ -79,7 +87,7 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
         rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
         val businessLoanAdapter  = BusinessLoanPlanAdapter(activity!!, item,appliedProduct!!,this)
-        rvLoan.layoutManager     = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+        rvLoan.layoutManager     = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
         rvLoan.adapter           = businessLoanAdapter
     }
 
@@ -119,5 +127,25 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
         intent.putExtras(bundle)
         startActivity(intent,bundle)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 }

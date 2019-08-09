@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
   <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootLayout"
     android:background="@color/screenBackground"
     android:orientation="vertical"
@@ -91,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat"
                             android:textColor="@color/colorApp"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_10sdp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_1sdp"
                             />
@@ -136,7 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorApp"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_10sdp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/_1sdp"
                             />
@@ -175,7 +173,7 @@
                 android:text="@string/your_credit_score"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:textColor="@color/color_gray_text"/>
+                android:textColor="@color/dark_text_color"/>
 
 
                 <com.warkiz.widget.IndicatorStayLayout
@@ -190,10 +188,11 @@
                         android:layout_height="wrap_content"
                         app:isb_show_indicator="rectangle"
                         app:isb_track_background_color="@color/colorRedLight"
-                        app:isb_track_background_size="@dimen/_5sdp"
+                        app:isb_track_background_size="@dimen/_3sdp"
                         app:isb_track_progress_color="#2bbd83"
                         app:isb_track_progress_size="@dimen/_5sdp"
                         app:isb_thumb_color="#08a9ea"
+                        app:isb_indicator_color="@color/colorRedLight"
 
                     />
 
@@ -252,7 +251,7 @@
 
     </LinearLayout>
 
-     <android.support.v7.widget.RecyclerView
+     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/loan_list"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
@@ -265,7 +264,7 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 

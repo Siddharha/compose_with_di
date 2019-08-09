@@ -1,19 +1,19 @@
 package com.app.l_pesa.loanplan.view
 
+import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.app.l_pesa.R
-import android.support.v4.view.ViewPager
-import android.support.design.widget.TabLayout
-import com.app.l_pesa.loanplan.model.LoanTabPager
-import android.graphics.Typeface
-import android.os.Handler
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.loanplan.model.LoanTabPager
+import com.google.android.material.tabs.TabLayout
 
 
 /**
@@ -22,7 +22,7 @@ import com.app.l_pesa.dashboard.view.DashboardActivity
  * A good programmer is someone who looks both ways before crossing a One-way street.
  * Kindly follow https://source.android.com/setup/code-style
  */
-class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
+class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
 
     private var tabLayout: TabLayout? = null
@@ -48,13 +48,15 @@ class LoanPlansFragment : Fragment(),TabLayout.OnTabSelectedListener {
     private fun initUI()
     {
         (activity as DashboardActivity).setTitle(resources.getString(R.string.nav_item_loan))
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(true)
 
         tabLayout=activity!!.findViewById(R.id.tabLayout)
         viewPager=activity!!.findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.personal_loan_plans)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.business_loan_plans)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
-        tabLayout!!.tabMode=TabLayout.MODE_FIXED
+        tabLayout!!.tabMode= TabLayout.MODE_FIXED
 
         val adapter = LoanTabPager(childFragmentManager, tabLayout!!.tabCount)
         viewPager!!.adapter = adapter

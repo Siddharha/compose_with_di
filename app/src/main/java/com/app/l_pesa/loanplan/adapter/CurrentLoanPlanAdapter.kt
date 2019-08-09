@@ -3,7 +3,6 @@ package com.app.l_pesa.loanplan.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,10 +24,10 @@ import java.text.DecimalFormat
  * Kindly follow https://source.android.com/setup/code-style
  */
 
-class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>,private val appliedProduct: ResLoanPlans.AppliedProduct, private val callBackObj: ICallBackCurrentLoan) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>,private val appliedProduct: ResLoanPlans.AppliedProduct, private val callBackObj: ICallBackCurrentLoan) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
@@ -99,9 +98,9 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
     override fun getItemCount(): Int = loanPlanList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView: androidx.recyclerview.widget.RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_loan_list, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -109,7 +108,7 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
     }
 
     companion object {
-        private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private class SelectViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
            var txtLoanAmount        : TextView              = itemView.findViewById(R.id.txtLoanAmount) as TextView
            var txtRequiredScore     : TextView              = itemView.findViewById(R.id.txtRequiredScore) as TextView

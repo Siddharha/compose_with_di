@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterInterestHistory {
 
-    fun getInterestHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackInterestHistory)
+    @SuppressLint("CheckResult")
+    fun getInterestHistory(contextOBJ: Context, from_date:String, to_date:String, type:String, callBackOBJ: ICallBackInterestHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistory("",from_date,to_date)
@@ -54,7 +56,7 @@ class PresenterInterestHistory {
                     {
                         val errorVal              = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
 
@@ -69,7 +71,8 @@ class PresenterInterestHistory {
                 })
     }
 
-    fun getInterestHistoryPaginate(contextOBJ: Context,cursorData:String,from_date:String,to_date:String, callBackOBJ: ICallBackInterestHistory)
+    @SuppressLint("CheckResult")
+    fun getInterestHistoryPaginate(contextOBJ: Context, cursorData:String, from_date:String, to_date:String, callBackOBJ: ICallBackInterestHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInterestHistory(cursorData,from_date,to_date)
@@ -103,7 +106,7 @@ class PresenterInterestHistory {
                     {
                         val errorVal              = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
 

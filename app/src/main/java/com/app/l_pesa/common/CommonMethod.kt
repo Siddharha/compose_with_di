@@ -4,29 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Typeface
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.text.TextUtils
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
-import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
-import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 /**
@@ -36,44 +29,50 @@ import java.util.regex.Pattern
  */
 object CommonMethod {
 
+    fun sessionTime(): Int {
+        return 300000
+    }
+
+
+    //@IntRange(from = 0, to = 2)
     fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-            var isConnected = false
-            val activeNetwork = connectivityManager.activeNetworkInfo
-            isConnected = activeNetwork != null && activeNetwork.isConnected
-
-        return isConnected
+        var result = false //var result = 0. Returns connection type. 0: none; 1: mobile data; 2: wifi
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            cm?.run {
+                cm.getNetworkCapabilities(cm.activeNetwork)?.run {
+                    if (hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = true //2
+                    } else if (hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = true  //1
+                    }
+                }
+            }
+        } else {
+            cm?.run {
+                cm.activeNetworkInfo?.run {
+                    if (type == ConnectivityManager.TYPE_WIFI) {
+                        result = true //2
+                    } else if (type == ConnectivityManager.TYPE_MOBILE) {
+                        result = true //1
+                    }
+                }
+            }
+        }
+        return result
     }
 
     @SuppressLint("SimpleDateFormat")
     fun dateConvert(inputDate:String): String? {
-
-       /* if(inputDate.contentEquals(":")) // Have Date Time
-        {
-            return if(!TextUtils.isEmpty(inputDate))
-            {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy HH:mm:ss") //05/04/2019 06:46:13
-                val date         = inputFormat.parse(inputDate)
-
-                val outputFormat = SimpleDateFormat("MMMM dd, yyyy HH:mm:ss")
-                outputFormat.format(date)
-            }
-            else ""
-        }
-        else
-        {*/
             return if(!TextUtils.isEmpty(inputDate))
             {
                 val inputFormat  = SimpleDateFormat("dd/MM/yyyy")
                 val date         = inputFormat.parse(inputDate)
 
                 val outputFormat = SimpleDateFormat("MMM dd, yyyy")
-                outputFormat.format(date)
+                outputFormat.format(date!!)
             }
             else ""
-
-
 
     }
 
@@ -86,27 +85,9 @@ object CommonMethod {
             val date         = inputFormat.parse(inputDate)
 
             val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-            outputFormat.format(date)
+            outputFormat.format(date!!)
         }
         else ""
-
-
-
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    fun dateTimeConvert(inputDate:String): String? {
-
-         return if(!TextUtils.isEmpty(inputDate))
-            {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy HH:mm:ss") //05/04/2019 06:46:13
-                val date         = inputFormat.parse(inputDate)
-
-                val outputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm:ss")
-                outputFormat.format(date)
-            }
-            else ""
-
 
     }
 
@@ -119,7 +100,7 @@ object CommonMethod {
         var inputStream = FileInputStream(fileOBJ)
         BitmapFactory.decodeStream(inputStream, null, bitOptionOBJ)
         inputStream.close()
-        val requiredSize = 85
+        val requiredSize = 75
         var scale = 1
         while (bitOptionOBJ.outWidth / scale / 2 >= requiredSize && bitOptionOBJ.outHeight / scale / 2 >= requiredSize) {
             scale *= 2
@@ -133,7 +114,7 @@ object CommonMethod {
 
         fileOBJ.createNewFile()
         val outputStream = FileOutputStream(fileOBJ)
-        selectedBitmap?.compress(Bitmap.CompressFormat.JPEG, 85 , outputStream)
+        selectedBitmap?.compress(Bitmap.CompressFormat.JPEG, 65 , outputStream)
         return fileOBJ
 
     }
@@ -187,18 +168,6 @@ object CommonMethod {
 
     }
 
-    fun passwordRegex(password: String): Boolean {
-
-        val pattern: Pattern
-        val matcher: Matcher
-
-        val passwordPattern =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,16}\$"
-        pattern = Pattern.compile(passwordPattern)
-        matcher = pattern.matcher(password)
-        return matcher.matches()
-
-    }
-
 
     fun isValidEmailAddress(email: String): Boolean {
         val emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
@@ -217,34 +186,5 @@ object CommonMethod {
         }
 
     }
-
-    fun countNumeric(number: String): Int {
-        var flag = 0
-        for (i in 0 until number.length) {
-            if (Character.isDigit(number[i])) {
-                flag++
-            }
-        }
-        return flag
-    }
-
-    fun hasSymbol(data: CharSequence): Boolean {
-        val password = data.toString()
-        return !password.matches("[A-Za-z0-9 ]*".toRegex())
-    }
-
-    fun hasUpperCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toLowerCase()
-    }
-
-    fun hasLowerCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toUpperCase()
-    }
-
-
-
-
 
 }

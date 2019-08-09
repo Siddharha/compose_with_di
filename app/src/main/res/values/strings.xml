@@ -1,11 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">L-Pesa</string>
-    <string name="starter_loan">$ Starter Loan</string>
+    <string name="starter_loan"> $1 Starter Loan</string>
+    <string name="l_pesa_risk_free">The L-Pesa Risk Free</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_using_lpesa">Already using L-Pesa?</string>
     <string name="get_started">Get Started</string>
-    <string name="no_country">/No country was listed.</string>
+    <string name="no_country">No country was listed.</string>
     <string name="phone_no">Mobile No.</string>
     <string name="email_address">Email Address*</string>
     <string name="login">Login</string>
@@ -14,39 +15,31 @@
     <string name="successful">Successful</string>
     <string name="failure">Failure</string>
     <string name="cancel">Cancel</string>
-    <string name="okay">Ok</string>
-    <string name="forgot_password">Forgot Password</string>
-    <string name="change_password">Change Password</string>
+    <string name="forgot_pin">Forgot PIN?</string>
+    <string name="forgot_pin_title">Forgot PIN</string>
+    <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_otp">Enter OTP</string>
-    <string name="coming_soon">Coming soon</string>
+    <string name="coming_soon">Coming Soon</string>
 
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
+    <string name="select">Select</string>
     <string name="thank_you">Thank you!</string>
-    <string name="dont_have_account">Don\'t have an account?</string>
-    <string name="create_one"><u>Create one!</u></string>
-    <string name="upload_selfie_picture">Upload selfie picture and write your name</string>
-    <string name="upload_id_picture">Upload your ID picture &amp; choose your ID type &amp; enter your ID number</string>
-    <string name="continue_to_login">Continue to login</string>
+    <string name="create_account">Don\'t have an account? Create one!</string>
+    <string name="upload_picture">Upload picture &amp; write your name</string>
+    <string name="upload_id_picture">Choose your ID type, enter your ID number &amp; upload a photocopy of the ID </string>
+    <string name="continue_to_register">Continue to Register</string>
     <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
-    <string name="incomplete_reg_message">You have not completed your registration. Enter your phone number and email to continue.</string>
 
     <!--Password section-->
-    <string name="password">Password</string>
     <string name="current_password">Current Password</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_new_password">Confirm New Password</string>
     <string name="new_pin">New Pin</string>
+    <string name="pin">Pin</string>
     <string name="pin_change_successfully">Your Pin has been changed successfully.</string>
+    <string name="pin_create_successfully">Your Pin has been created successfully.</string>
     <string name="confirm_new_pin">Confirm New Pin</string>
-    <string name="password_should">Password should have</string>
-    <string name="password_rule_one">Minimum 8 &amp; maximum 16 characters.</string>
-    <string name="password_rule_two">At least 1 digit.</string>
-    <string name="password_rule_three">At least 1 lowercase letter.</string>
-    <string name="password_rule_four">At least 1 uppercase letter.</string>
-    <string name="password_rule_five">At least 1 special character (like !@#$%*?).</string>
-    <string name="enter_email_or_mobile">Enter email address or mobile number to reset password via your registered valid email address/registered mobile number.</string>
+    <string name="enter_email_or_mobile">Enter mobile number to reset PIN via your registered mobile number.</string>
 
     <!--Caution Message-->
     <string name="required_title">Please select the title.</string>
@@ -55,29 +48,28 @@
     <string name="required_name_l">Please enter your last name.</string>
     <string name="required_mother_maiden_name">Please enter your mother\'s maiden name.</string>
     <string name="required_date_of_birth">Please enter the date of birth.</string>
-    <string name="required_phone_email">Please enter a valid phone number / email address.</string>
+    <string name="required_phone_email">Please enter a valid phone number.</string>
+    <string name="required_gender">Please select your gender.</string>
     <string name="required_phone">Please enter valid phone number.</string>
+    <string name="required_sim">No SIM card is detected!</string>
     <string name="required_password">Please enter the password.</string>
-    <string name="required_pin_code">Please enter a 6-digit pincode.</string>
-    <string name="required_confirm_pin_code">Please re-type your 6-digit pincode.</string>
-    <string name="confirm_pin_code_not_match">Confirm pincode do not match.</string>
-    <string name="enter_current_password">Please enter the current password.</string>
-    <string name="enter_new_password">Please enter the new password.</string>
-    <string name="enter_confirm_password">Retype the new password to confirm.</string>
-    <string name="confirm_password_not_match">New passwords do not match.</string>
-    <string name="new_old_password_different">New and old password should be different.</string>
-    <string name="enter_password_rule">Password should follow mentioned rule.</string>
+    <string name="required_pin_code">Please enter a new 6-digit transactional PIN.</string>
+    <string name="required_confirm_pin_code">Please re-type your 6-digit PIN.</string>
+    <string name="confirm_pin_code_not_match">The new and re-typed PIN does not match.</string>
+    <string name="required_current_pin">Please enter your current PIN.</string>
+    <string name="required_new_pin">Please enter a new PIN.</string>
+    <string name="required_confirm_pin">Please re-type your new PIN.</string>
+    <string name="confirm_pin_not_match">The new and re-typed PIN does not match.</string>
+    <string name="old_new_password_different">Old and new PIN should be different.</string>
     <string name="required_email">Please enter a valid email address.</string>
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>
     <string name="server_issue">The server didn\'t respond, please try after sometime!</string>
-    <string name="password_change_success">Your password was changed.</string>
-    <string name="email_to_reset_password">Check your email to reset your password.</string>
-    <string name="sms_to_reset_password">Check your sms to reset your password.</string>
+    <string name="pin_change_success">Login PIN has been changed.</string>
     <string name="change_one_info">Nothing to save! You have not yet edited.</string>
-    <string name="no_internet">No Internet Connection</string>
-    <string name="you_have_select_from_date_to_date">You should select From Date or To Date</string>
-    <string name="please_wait">Please wait…</string>
+    <string name="no_internet">You are not connected to the internet!</string>
+    <string name="you_have_select_from_date_to_date">Select at least one date to filter.</string>
+    <string name="please_wait">Please wait...</string>
     <string name="no_internet_details">You are not connected to internet, make sure Wi-Fi/Data is on, Airplane mode is off and try again.</string>
     <string name="retry">Retry</string>
     <string name="init">INIT</string>
@@ -97,11 +89,11 @@
     <string name="required_otp">Please enter the OTP.</string>
     <string name="otp_not_match">You entered an incorrect OTP.</string>
     <string name="search_country">Search country</string>
-    <string name="required_cancellation_reason">Required cancellation reason</string>
+    <string name="required_cancellation_reason">Write a reason for the cancellation.</string>
 
-    <string name="search_result_not_found">Search result not found</string>
+    <string name="search_result_not_found">We could not find a match!</string>
     <string name="no_result_found">We\'re sorry. We can\'t seem to find any result that match your search.</string>
-
+    <string name="session_time_out"> Your session has timed out, sign-in again to continue.</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
@@ -110,6 +102,7 @@
     <!--MENU-->
     <string name="nav_item_dashboard">Dashboard</string>
     <string name="nav_item_profile">My Profile</string>
+    <string name="nav_item_loan_calculator">Loan Calculator</string>
     <string name="nav_item_loan">Loan</string>
     <string name="nav_item_points">Buy Points</string>
     <string name="nav_item_investment">Investment</string>
@@ -118,15 +111,15 @@
     <string name="nav_item_settings">Settings</string>
     <string name="nav_item_logout">Logout</string>
 
-    <string-array name="settings_item_name">
-        <item>Change Password</item>
-        <item>Change Pin</item>
+    <string-array name="settings_item_name_pin">
+        <item>Change Login Pin</item>
+        <item>Change Transactional Pin</item>
         <item>Refer a Friend</item>
         <item>Notification</item>
         <item>Help &amp; Support</item>
     </string-array>
 
-    <string-array name="settings_item_icon">
+    <string-array name="settings_item_icon_pin">
         <item>@drawable/ic_change_password</item>
         <item>@drawable/ic_change_pin</item>
         <item>@drawable/ic_refer_friend</item>
@@ -134,8 +127,33 @@
         <item>@drawable/ic_help</item>
     </string-array>
 
+    <string-array name="settings_item_icon">
+        <item>@drawable/ic_change_password</item>
+        <item>@drawable/ic_set_up_pin</item>
+        <item>@drawable/ic_refer_friend</item>
+        <item>@drawable/ic_notifications</item>
+        <item>@drawable/ic_help</item>
+    </string-array>
+
+    <string-array name="settings_item_name">
+        <item>Change Login Pin</item>
+        <item>Setup Transactional Pin</item>
+        <item>Refer a Friend</item>
+        <item>Notification</item>
+        <item>Help &amp; Support</item>
+    </string-array>
+
+    <!--Pin section-->
     <string name="credit_score">Credit Score: </string>
-    <string name="change_pin">Change Pin</string>
+    <string name="change_transactional_pin">Change Transactional PIN</string>
+    <string name="current_pin">Current Pin</string>
+    <string name="your_security_pin">Your Security PIN</string>
+    <string name="your_otp_code">Your OTP code</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="set_up_pin">Setup PIN</string>
+    <string name="current_login_pin">Current Login PIN</string>
+    <string name="sent_pin_via_sms">We sent a SMS with the PIN to your registered mobile number.</string>
+    <string name="sent_otp_via_sms">We sent a SMS with the OTP to your registered mobile number.</string>
 
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>
@@ -172,6 +190,8 @@
     <string name="save_your_lpk">Save your LPK</string>
     <string name="lets_do">Let\'s Do</string>
     <string name="history">History</string>
+    <string name="in_deposit">in Deposit</string>
+    <string name="in_wallet">in Wallet</string>
 
 
     <!--Loan Plans-->
@@ -184,7 +204,9 @@
     <string name="interest">Interest</string>
     <string name="interest_day">Interest/Day:</string>
     <string name="rate">Rate</string>
-    <string name="loan_applied_successfully">Loan Applied successfully.</string>
+    <string name="loan_applied_successfully">We have registered your application for the loan.</string>
+    <string name="empty_transactional_history_message">You haven\'t yet made any transaction through L-Pesa wallet.</string>
+    <string name="empty_withdrawal_history_message">You haven\'t yet withdrawn an amount from your wallet. Make sure that you have the balance in your wallet to withdraw.</string>
     <string name="empty_loan_history_message">You haven\'t applied for any loans yet from L-pesa. Start your journey to financial freedom with the first loan from L-pesa.</string>
     <string name="empty_transfer_history_message">You haven\'t yet invested tokens in LPK Savings. Start your journey to financial freedom and earn weekly interests by investing.</string>
     <string name="empty_investment_message">You haven\'t yet invested. Start your journey to financial freedom and earn weekly interests by investing.</string>
@@ -247,7 +269,6 @@
     <string name="edit_mother_maiden_name">Mother\'s Maiden Name*</string>
     <string name="upload_profile_image">Upload Profile Image*</string>
     <string name="edit_gender">Gender</string>
-    <string name="make_inquiries">Make inquiries from CreditInfo Tanzania or any mentioned referee to confirm any information provided by the customer.</string>
     <string name="earn_credit_coins">Earn 2 credit score points!</string>
 
 
@@ -258,8 +279,8 @@
     <string name="update">Update</string>
     <string name="wallet_address_link">http://www.myetherwallet.com/</string>
     <string name="enter_token">Enter Token</string>
-    <string name="minimum_withdrawal_amount">Minimum withdrawal amount is 50 LPK.</string>
-    <string name="update_erc_address">Update your ERC-20 address on L-Pesa to withdraw LPK into your account..</string>
+    <string name="minimum_withdrawal_amount">Minimum withdrawal amount is </string>
+    <string name="update_erc_address">Update your ERC-20 address on L-Pesa to withdraw LPK into your account.</string>
 
 
     <!--Contact Info-->
@@ -333,22 +354,25 @@
     <string name="reinvestment">Reinvestment</string>
     <string name="exit_point">Exit Point</string>
     <string name="required_investment_amount">Enter an amount to invest.</string>
-    <string name="select_investment_plan">Select one investment plan</string>
+    <string name="select_investment_plan">Select an investment plan.</string>
     <string name="apply_an_investment_note_start">Your Investment with L-Pesa account has a generous annual interest rate starting from </string>
     <string name="apply_an_investment_note_end">annually. You can invest and withdraw your interest funds with fixed \"monthly exit points\" on the investing amount. The longer you invest with L-Pesa, the better the benefits that you will experience. </string>
     <string name="add_interest_amount">Let\'s add interest on wallet every month!</string>
     <string name="investment_plan">Investment Plan</string>
     <string name="investment_history">Investment History</string>
     <string name="apply">Apply</string>
-    <string name="apply_reinvestment">Are you sure you want to Reinvest?</string>
+    <string name="apply_reinvestment">Are you sure you want to reinvest?</string>
     <string name="apply_withdrawal">Are you sure you want to withdraw?</string>
     <string name="apply_exit_point">Are you sure you want to exit?</string>
-    <string name="delete_exit_loan">Are you sure you want to Delete?</string>
+    <string name="delete_exit_loan">Are you sure you want to delete?</string>
+    <string name="minimum_investment_amount">Minimum investment amount is </string>
+    <string name="maximum_investment_amount">Maximum invest up to </string>
 
     <!--Token-->
     <string name="transfer">Transfer</string>
     <string name="star_line">************************************************************</string>
-    <string name="dash_line">-------------------------------------</string>
+    <string name="dash_line">----</string>
+    <string name="not_available">Not Available</string>
     <string name="filter">Filter</string>
     <string name="required_token_amount">Please enter the number of tokens.</string>
     <string name="token_transfer">Token Transfer</string>
@@ -367,12 +391,12 @@
     <string name="withdrawal">Withdrawal</string>
     <string name="withdraw_on">Withdrawal on</string>
 
-    <string name="token_transfer_successfully">Token transfer successfully.</string>
-    <string name="token_withdrawal_successfully">Token withdrawal successfully.</string>
+    <string name="token_transfer_successfully">Nice! you just deposited your LPK for a long term saving.</string>
+    <string name="token_withdrawal_successfully">Your request was received. We are processing the transfer.</string>
     <string name="token_update_successfully">Your ERC-20 address has been updated.</string>
     <string name="reset">Reset</string>
     <string name="required_wallet_address">Enter a valid ERC-20 wallet address.</string>
-    <string name="required_valid_wallet_address">Ether Address is not match</string>
+    <string name="required_valid_wallet_address">You entered an invalid ERC-20 address.</string>
     <string name="view_etherscan">View on Etherscan</string>
     <string name="erc_wallet_address_details">Your ERC-20 address must follow the checksum format. To put it simple, your ERC-20 address is case sensitive. Go to etherscan, type  https://etherscan.io/address/[YOUR_ADDRESS]. Then copy the address with valid checksum on the loaded page.</string>
     <string name="lpk_withdrawal_text">Send us a request if you wish to withdraw LPK to your Ethereum wallet. We will process your request within 48 hours of application. View the status of your application in "Withdrawal History.</string>
@@ -381,13 +405,15 @@
 
     <!--Wallet-->
     <string name="withdraw">Withdraw</string>
-    <string name="lpesa_wallet_balance">L-PESA WALLET BALANCE</string>
+    <string name="lpesa_wallet_balance">L-Pesa Wallet Balance</string>
     <string name="commission_for_l_pesa">Commission for L-Pesa for each withdrawal:</string>
     <string name="withdrawal_amount">Withdrawal Amount</string>
     <string name="required_withdrawal_amount">Please enter the amount to withdraw.</string>
     <string name="transaction_history">Transaction History</string>
     <string name="commission">Commission</string>
-    <string name="want_to_withdraw">Do you want to withdraw?</string>
+    <string name="want_to_withdraw">Are you sure you want to withdraw?</string>
+    <string name="min_withdrawal">Minimum withdrawal</string>
+    <string name="max_withdrawal">Maximum withdrawal</string>
 
     <string name="cr">Cr</string>
     <string name="dr">Dr</string>
@@ -395,7 +421,35 @@
     <!--Notification-->
     <string name="notification">Notification</string>
     <string name="new_">New</string>
-    <string name="empty_notification">We could not find a push notification with that ID linked to your account.</string>
+    <string name="empty_notification">We could not find a push notification with the ID linked to your account.</string>
+
+
+    <!--OTP-->
+    <string name="otp">OTP</string>
+
+    <!--Help-->
+    <string name="help_support">Help &amp; Support</string>
+    <string name="telegram">Telegram</string>
+    <string name="whats_app">WhatsApp</string>
+
+    <!--Loan Calculator-->
+    <string name="loan_type">Loan Type</string>
+    <string name="choose_loan_type">Choose Loan Type</string>
+    <string name="product_name">Product Name</string>
+    <string name="choose_option">Choose Option</string>
+    <string name="calculate_your_loan">Calculate Your Loan</string>
+    <string name="one_usd_equal">1 USD =</string>
+    <string name="loan_amount_calculator">Loan Amount</string>
+    <string name="credit_score_calculator">Credit Score</string>
+    <string name="total_payback_calculator">Total Payback</string>
+    <string name="first_weekly_subscription">First Weekly Subscription</string>
+    <string name="mid_weekly_subscription">Mid Weekly Subscription</string>
+    <string name="last_weekly_subscription">Last Weekly Subscription</string>
+    <string name="select_loan_type">Please select loan type.</string>
+    <string name="interest_rate_calculator">Daily Interest Rate</string>
+    <string name="loan_period">Loan Period</string>
+    <string name="service_not_available">The service is not available in your country.</string>
+    <string name="required_credit_score_calculator">Required Credit Score</string>
 
 
 </resources>

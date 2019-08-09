@@ -2,28 +2,30 @@ package com.app.l_pesa.lpk.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
+import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_lpk.*
-import android.os.Handler
 
 
-class LpkFragment: Fragment(), ICallBackInfoLPK {
+class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
 
     private lateinit  var progressDialog: KProgressHUD
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return LpkFragment()
         }
     }
@@ -45,7 +47,7 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
     {
         progressDialog=KProgressHUD.create(activity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 
@@ -53,6 +55,9 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
     private fun initData()
     {
+        (activity as DashboardActivity).visibleFilter(false)
+        (activity as DashboardActivity).visibleButton(false)
+
         constraintWithdrawal.setOnClickListener {
 
             if(CommonMethod.isNetworkAvailable(activity!!))
@@ -100,8 +105,7 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
     override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
 
         val sharedPrefOBJ= SharedPref(activity!!)
-        val gson = Gson()
-        val json = gson.toJson(data)
+        val json = Gson().toJson(data)
         sharedPrefOBJ.lpkInfo= json
 
         if(type=="WITHDRAWAL")
@@ -120,12 +124,32 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
         }
 
-        Handler().postDelayed(Runnable {
+        Handler().postDelayed({
             // Do something after 1s = 1000ms
             constraintSavings.isClickable=true
             constraintWithdrawal.isClickable=true
         }, 1000)
 
+
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 

@@ -2,20 +2,19 @@ package com.app.l_pesa.loanplan.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.model.ResUserInfo
-import java.util.ArrayList
+import java.util.*
 
-class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: ArrayList<ResUserInfo.UserIdsPersonalInfo>, private val callBack: ICallBackClickPersonalId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PersonalIdAdapter (val context: Context,private val userIdsPersonalInfo: ArrayList<ResUserInfo.UserIdsPersonalInfo>, private val callBack: ICallBackClickPersonalId) :RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

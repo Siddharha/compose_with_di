@@ -5,20 +5,23 @@ import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
 import android.text.TextUtils
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
@@ -30,19 +33,22 @@ import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
+import java.io.ByteArrayOutputStream
 import java.io.File
-import java.lang.Exception
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 
 
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
     private lateinit              var progressDialog: KProgressHUD
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
     private var mobileOtp           = ""
-    private val Photo               = 14
-    private val Gallery             = 15
+    private val requestPhoto        = 14
+    private val requestGallery      = 15
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +59,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         mobileOtp       = bundle!!.getString("OTP")!!
 
         initLoader()
-        imgEditPhoto.setOnClickListener {
+        imgProfilePhoto.setOnClickListener {
 
             selectImage()
         }
@@ -70,7 +76,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     {
         progressDialog=KProgressHUD.create(this@RegistrationStepTwoActivity)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(true)
+                .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
 
@@ -86,6 +92,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     private fun onSubmit()
     {
+        CommonMethod.hideKeyboardView(this@RegistrationStepTwoActivity)
         if(!captureImageStatus)
         {
             CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_profile_image))
@@ -161,22 +168,22 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     private fun selectImage() {
 
-        val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
-        val dialogView = AlertDialog.Builder(this@RegistrationStepTwoActivity)
-        dialogView.setTitle("Choose Options")
-
+        val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
+        val dialogView = AlertDialog.Builder(this@RegistrationStepTwoActivity,R.style.MyAlertDialogTheme)
         dialogView.setItems(items) { dialog, item ->
 
             when {
-                items[item] == "Camera" -> // open camera
-                    cameraClick() // open default camera
-                items[item] == "Gallery" -> // open gallery
-                    galleryClick() // open default gallery
-                items[item] == "Cancel" -> // close dialog
+                items[item] == "Camera" ->
+                    cameraClick()
+                items[item] == "Gallery" ->
+                    galleryClick()
+                items[item] == "Cancel" ->
                     dialog.dismiss()
             }
         }
+
         dialogView.show()
+
     }
 
     private fun cameraClick()
@@ -186,14 +193,14 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
         captureFilePath = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
 
-        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
@@ -202,14 +209,14 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
     }
 
       private fun galleryClick()
     {
         val checkSelfPermission = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this@RegistrationStepTwoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            ActivityCompat.requestPermissions(this@RegistrationStepTwoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), requestGallery)
         }
         else{
             openAlbum()
@@ -219,13 +226,13 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private fun openAlbum(){
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
+        startActivityForResult(intent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
-            1 ->
+            requestGallery ->
                 if (grantResults.isNotEmpty() && grantResults[0] ==PackageManager.PERMISSION_GRANTED){
                     openAlbum()
                 }
@@ -238,13 +245,13 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
                 }
-            Gallery ->
+            requestGallery->
                 if (resultCode == Activity.RESULT_OK) {
                     handleImage(data)
 
@@ -264,7 +271,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 Toast.makeText(this@RegistrationStepTwoActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else {
-                val photoPath: Uri = captureFilePath ?: return
+                val photoPath: Uri = captureFilePath
                 imgProfilePhoto.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
                             this@RegistrationStepTwoActivity,
@@ -274,7 +281,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                     )
                     imgProfilePhoto.setImageBitmap(pictureBitmap)
                     imgProfilePhoto.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
+                    CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -289,7 +296,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     }
 
     private fun handleImage(data: Intent?) {
-        var imagePath=""
+        /*var imagePath=""
         try
         {
             val uri = data!!.data
@@ -318,7 +325,45 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         catch (exp: Exception)
         {
 
+        }*/
+        if (data != null)
+        {
+            val contentURI = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(this@RegistrationStepTwoActivity.contentResolver, contentURI)
+            imgProfilePhoto?.setImageBitmap(bitmap)
+            saveImage(bitmap)
+
         }
+    }
+
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this@RegistrationStepTwoActivity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
     }
 
     private fun imagePath(uri: Uri?, selection: String?): String {
@@ -347,7 +392,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 val bitmap = BitmapFactory.decodeFile(imagePath)
                 imgProfilePhoto?.setImageBitmap(bitmap)
                 photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                CommonMethod.fileCompress(photoFile)
             }
 
         }

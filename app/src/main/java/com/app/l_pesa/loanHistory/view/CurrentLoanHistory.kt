@@ -3,19 +3,20 @@ package com.app.l_pesa.loanHistory.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.TextInputLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonClass
+import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
@@ -23,19 +24,20 @@ import com.app.l_pesa.loanHistory.adapter.CurrentLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
+import com.app.l_pesa.main.view.MainActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.util.ArrayList
-import android.widget.FrameLayout
-import com.app.l_pesa.common.CommonEditTextRegular
+import java.util.*
 
 
-class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
+class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
 
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog        : KProgressHUD
     private var listLoanHistoryCurrent          : ArrayList<ResLoanHistoryCurrent.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : CurrentLoanHistoryAdapter
     private lateinit var bottomSheetBehavior    : BottomSheetBehavior<*>
@@ -109,7 +111,9 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         }
         else
         {
-            swipeRefreshLayout.isRefreshing = false
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                swipeRefreshLayout.isRefreshing = false
+
         }
 
 
@@ -221,7 +225,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
             listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
             adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterLoanHistory
 
@@ -339,7 +343,7 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
         dialog.setTitle(resources.getString(R.string.app_name))
                 .setMessage(resources.getString(R.string.Reason_for_cancellation))
                 .setView(container)
-                .setPositiveButton("Remove") { dialog, which ->
+                .setPositiveButton("Remove") { dialog, _ ->
 
                     if(TextUtils.isEmpty(taskEditText.text.toString()))
                     {
@@ -385,5 +389,25 @@ class CurrentLoanHistory:Fragment(), ICallBackCurrentLoanHistory {
     override fun onFailureRemoveLoan(message: String) {
         dismissDialog()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismissDialog()
+        val dialogBuilder = AlertDialog.Builder(activity!!)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 }

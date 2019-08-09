@@ -1,35 +1,33 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
-import com.app.l_pesa.login.presenter.PresenterLogin
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackEmpInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterEmpInfo
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_profile_edit_emp_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_emp_info.*
 
-class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallBackLogin {
+class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +108,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
             hashMapNew["id"]            = etId.text.toString()
             hashMapNew["city"]          = etCity.text.toString()
 
+            CommonMethod.hideKeyboardView(this@ProfileEditEmpInfoActivity)
             if(hashMapOLD == hashMapNew)
             {
                 CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfoActivity,resources.getString(R.string.change_one_info))
@@ -169,16 +168,16 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
             }
 
 
-
         }
     }
 
     override fun onSuccessEmpInfo() {
 
+        swipeRefreshLayout.isRefreshing=false
         val sharedPrefOBJ = SharedPref(this@ProfileEditEmpInfoActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditEmpInfoActivity, jsonObject, this)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onFailureEmpInfo(message: String) {
@@ -187,37 +186,25 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
         swipeRefreshLayout.isRefreshing=false
     }
 
-    override fun onSuccessLogin(data: LoginData) {
-
-        val sharedPrefOBJ=SharedPref(this@ProfileEditEmpInfoActivity)
-        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
-        sharedPrefOBJ.accessToken   = data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
-    override fun onErrorLogin(jsonMessage: String) {
+    override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        Toast.makeText(this@ProfileEditEmpInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
-    }
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditEmpInfoActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ProfileEditEmpInfoActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ProfileEditEmpInfoActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
 
-    override fun onIncompleteLogin(message: String) {
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-
-    }
-
-    override fun onFailureLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfoActivity,jsonMessage)
     }
 
     private fun customSnackBarError(view: View, message:String) {
@@ -239,10 +226,9 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -255,7 +241,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo, ICallB
         return when (item.itemId) {
             android.R.id.home -> {
 
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditEmpInfoActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@ProfileEditEmpInfoActivity,resources.getString(R.string.please_wait))
                 }

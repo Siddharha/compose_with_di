@@ -1,12 +1,9 @@
 package com.app.l_pesa.wallet.model
 
 import com.app.l_pesa.common.CommonStatusModel
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+import java.util.*
 
-import java.util.ArrayList
-
- class ResWalletHistory(val status: CommonStatusModel, val data: Data) {
+class ResWalletHistory(val status: CommonStatusModel, val data: Data) {
 
     data class Data(var savings_history: ArrayList<SavingsHistory>, val cursors:Cursors)
 

@@ -3,8 +3,7 @@ package com.app.l_pesa.dashboard.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by Intellij Amiya on 20-02-2019.
