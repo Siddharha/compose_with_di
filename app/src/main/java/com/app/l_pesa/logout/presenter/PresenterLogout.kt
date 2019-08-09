@@ -28,9 +28,9 @@ class PresenterLogout {
     fun doLogout(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogout)
     {
         val sharedPrefOBJ=SharedPref(contextOBJ)
-        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        //val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
 
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,userData.access_token).doLogout(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doLogout(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
