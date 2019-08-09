@@ -3,17 +3,18 @@ package com.app.l_pesa.profile.view
 import android.app.Activity
 import android.app.Dialog
 import android.content.ClipData
-import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.DocumentsContract
+import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -54,7 +55,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 
@@ -79,7 +83,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
     private lateinit  var progressDialog: KProgressHUD
 
-   companion object {
+    companion object {
         fun newInstance(): androidx.fragment.app.Fragment {
             return PersonalIdInfoFragment()
         }
@@ -136,9 +140,9 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
                     /*if(idTypeExists=="TRUE")
                     {*/
-                        val presenterAWSPersonalId= PresenterAWSPersonalId()
-                       // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                        presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
+                    val presenterAWSPersonalId= PresenterAWSPersonalId()
+                    // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
+                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
                     /*}
                     else
                     {
@@ -323,27 +327,27 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
         }
 
         else
+        {
+            if (name == resources.getString(R.string.address_prof))
             {
-                if (name == resources.getString(R.string.address_prof))
-                {
-                    ilIdNumber.visibility = View.INVISIBLE
-                    personalIdName = name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType = type
-                    personalId = id
-
-                }
-
-                else
-                {
-                    ilIdNumber.visibility = View.VISIBLE
-                    personalIdName = name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType = type
-                    personalId = id
-                }
+                ilIdNumber.visibility = View.INVISIBLE
+                personalIdName = name
+                etPersonalId.setText(personalIdName)
+                personalIdType = type
+                personalId = id
 
             }
+
+            else
+            {
+                ilIdNumber.visibility = View.VISIBLE
+                personalIdName = name
+                etPersonalId.setText(personalIdName)
+                personalIdType = type
+                personalId = id
+            }
+
+        }
 
     }
 
@@ -484,12 +488,12 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(activity!!.filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile!!.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile)
 
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -516,9 +520,8 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
     }
 
     private fun openAlbum(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.type = "image/*"
-        startActivityForResult(intent, requestGallery)
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -587,7 +590,17 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
     }
 
     private fun handleImage(data: Intent?) {
-        var imagePath=""
+
+        if (data != null)
+        {
+            val contentURI = data.data
+
+                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, contentURI)
+                imgProfile?.setImageBitmap(bitmap)
+                saveImage(bitmap)
+
+        }
+        /*var imagePath=""
         try
         {
             val uri = data!!.data
@@ -616,10 +629,39 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
         catch (exp: Exception)
         {
 
-        }
+        }*/
     }
 
-    private fun imagePath(uri: Uri?, selection: String?): String {
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(activity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
+    }
+
+    /*private fun getImagePath(uri: Uri?, selection: String?): String {
         var path: String? = null
         val cursor = activity!!.contentResolver.query(uri!!, null, selection, null, null )
         if (cursor != null){
@@ -634,8 +676,8 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
     private fun displayImage(imagePath: String?){
         if (imagePath != null) {
 
-            val imgSize = File(imagePath)
-            val length  = imgSize.length() / 1024
+            val imgFile = File(imagePath)
+            val length  = imgFile.length() / 1024
             if(length>3000) // Max Size Under 3MB
             {
                 captureImageStatus=false
@@ -643,11 +685,11 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
             }
             else
             {
-                captureImageStatus=true
                 val bitmap = BitmapFactory.decodeFile(imagePath)
-                imgProfile.setImageBitmap(bitmap)
-                photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                imgProfile?.setImageBitmap(bitmap)
+                captureImageStatus=true
+                photoFile=imgFile
+                CommonMethod.fileCompress(photoFile)
             }
 
         }
@@ -655,7 +697,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
             captureImageStatus=false
             Toast.makeText(activity!!, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
 
 }

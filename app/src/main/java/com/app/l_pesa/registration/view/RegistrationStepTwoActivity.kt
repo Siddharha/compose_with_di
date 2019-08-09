@@ -5,10 +5,13 @@ import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.TextUtils
@@ -30,7 +33,11 @@ import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 
 
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
@@ -209,7 +216,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     {
         val checkSelfPermission = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this@RegistrationStepTwoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            ActivityCompat.requestPermissions(this@RegistrationStepTwoActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), requestGallery)
         }
         else{
             openAlbum()
@@ -225,7 +232,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
-            1 ->
+            requestGallery ->
                 if (grantResults.isNotEmpty() && grantResults[0] ==PackageManager.PERMISSION_GRANTED){
                     openAlbum()
                 }
@@ -289,7 +296,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     }
 
     private fun handleImage(data: Intent?) {
-        var imagePath=""
+        /*var imagePath=""
         try
         {
             val uri = data!!.data
@@ -318,7 +325,45 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         catch (exp: Exception)
         {
 
+        }*/
+        if (data != null)
+        {
+            val contentURI = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(this@RegistrationStepTwoActivity.contentResolver, contentURI)
+            imgProfilePhoto?.setImageBitmap(bitmap)
+            saveImage(bitmap)
+
         }
+    }
+
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this@RegistrationStepTwoActivity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
     }
 
     private fun imagePath(uri: Uri?, selection: String?): String {

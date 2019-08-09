@@ -6,10 +6,13 @@ import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.view.Window
@@ -36,7 +39,11 @@ import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.content_registration_step_three.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
 
 
 class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {
@@ -292,7 +299,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     }
 
     private fun handleImage(data: Intent?) {
-        var imagePath=""
+        /*var imagePath=""
         try
         {
             val uri = data!!.data
@@ -321,10 +328,48 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         catch (exp: Exception)
         {
 
+        }*/
+        if (data != null)
+        {
+            val contentURI = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(this@RegistrationStepThreeActivity.contentResolver, contentURI)
+            imgPersonalType?.setImageBitmap(bitmap)
+            saveImage(bitmap)
+
         }
     }
 
-    private fun imagePath(uri: Uri?, selection: String?): String {
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this@RegistrationStepThreeActivity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
+    }
+
+   /* private fun imagePath(uri: Uri?, selection: String?): String {
         var path: String? = null
         val cursor = contentResolver.query(uri!!, null, selection, null, null )
         if (cursor != null){
@@ -360,7 +405,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
             captureImageStatus=false
             Toast.makeText(this@RegistrationStepThreeActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
 
     private fun showIdType()

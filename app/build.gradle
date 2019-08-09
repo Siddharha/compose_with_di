@@ -18,8 +18,8 @@ android {
         applicationId "com.app.l_pesa"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 8
-        versionName "1.0.0.8"
+        versionCode 9
+        versionName "1.0.9"
 
     }
     buildTypes {

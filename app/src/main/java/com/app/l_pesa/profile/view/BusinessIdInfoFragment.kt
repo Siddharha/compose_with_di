@@ -7,12 +7,15 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.TextUtils
@@ -55,7 +58,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
@@ -471,9 +477,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     }
 
     private fun openAlbum(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.type = "image/*"
-        startActivityForResult(intent, requestGallery)
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -541,7 +546,17 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     }
 
     private fun handleImage(data: Intent?) {
-        var imagePath=""
+
+        if (data != null)
+        {
+            val contentURI = data.data
+
+            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, contentURI)
+            imgProfile?.setImageBitmap(bitmap)
+            saveImage(bitmap)
+
+        }
+       /* var imagePath=""
         try
         {
             val uri = data!!.data
@@ -570,10 +585,40 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         catch (exp: Exception)
         {
 
-        }
+        }*/
     }
 
-    private fun imagePath(uri: Uri?, selection: String?): String {
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(activity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
+    }
+
+
+  /*  private fun imagePath(uri: Uri?, selection: String?): String {
         var path: String? = null
         val cursor = activity!!.contentResolver.query(uri!!, null, selection, null, null )
         if (cursor != null){
@@ -609,5 +654,5 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
             captureImageStatus=false
             Toast.makeText(activity!!, "Failed to get image", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 }

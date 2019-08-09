@@ -8,11 +8,14 @@ import android.content.ClipData
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
+import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.Editable
@@ -52,7 +55,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -485,39 +491,47 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
    private fun handleImage(data: Intent?) {
-        var imagePath=""
-        try
-        {
-            val uri = data!!.data
-            when {
-                DocumentsContract.isDocumentUri(this, uri) -> try {
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    if ("com.android.providers.media.documents" == uri!!.authority){
-                        val id = docId.split(":")[1]
-                        val section = MediaStore.Images.Media._ID + "=" + id
-                        imagePath = imagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, section)
-                    } else if ("com.android.providers.downloads.documents" == uri.authority){
-                        val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
-                        imagePath = imagePath(contentUri, null)
-                    }
+       if (data != null)
+       {
+           val contentURI = data.data
 
-                }
-                catch (exp: Exception)
-                {
+           val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileEditPersonalActivity.contentResolver, contentURI)
+           imgProfile?.setImageBitmap(bitmap)
+           saveImage(bitmap)
 
-                }
-                "content".equals(uri!!.scheme, ignoreCase = true) -> imagePath = imagePath(uri, null)
-                "file".equals(uri.scheme, ignoreCase = true) -> imagePath = uri.path!!
-            }
-            displayImage(imagePath)
-        }
-        catch (exp: Exception)
-        {
-
-        }
+       }
     }
 
-    private fun displayImage(imagePath: String?){
+    private fun saveImage(myBitmap: Bitmap):String {
+
+        val bytes = ByteArrayOutputStream()
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        val wallpaperDirectory = File (
+                (Environment.getExternalStorageDirectory()).toString())
+        if (!wallpaperDirectory.exists())
+        {
+            wallpaperDirectory.mkdirs()
+        }
+        try
+        {
+            captureImageStatus=true
+            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            file.createNewFile()
+            val fo = FileOutputStream(file)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(this@ProfileEditPersonalActivity, arrayOf(file.path), arrayOf("image/png"), null)
+            fo.close()
+            photoFile=file
+
+            return file.absolutePath
+        }
+        catch (e1: IOException){
+            e1.printStackTrace()
+        }
+        return ""
+    }
+
+   /* private fun displayImage(imagePath: String?){
         if (imagePath != null) {
 
             val imgSize = File(imagePath)
@@ -553,7 +567,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             cursor.close()
         }
         return path!!
-    }
+    }*/
 
 
 
