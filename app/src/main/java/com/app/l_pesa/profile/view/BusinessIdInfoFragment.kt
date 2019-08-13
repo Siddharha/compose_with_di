@@ -134,12 +134,13 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
                     progressDialog.show()
                     buttonSubmit.isClickable=false
+                    val imgFile=CommonMethod.fileCompress(photoFile)
 
                     /*if(idTypeExists=="TRUE")
                     {*/
                     val presenterAWSBusinessId= PresenterAWSBusinesslId()
                     // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                    presenterAWSBusinessId.uploadBusinessId(activity!!,this,photoFile)
+                    presenterAWSBusinessId.uploadBusinessId(activity!!,this,imgFile)
                     /*}
                     else
                     {
@@ -531,7 +532,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile)
+
                 }
 
                 captureImageStatus = true
@@ -549,12 +550,21 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         if (data != null)
         {
-            val contentURI = data.data
 
-            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, contentURI)
-            imgProfile?.setImageBitmap(bitmap)
-            saveImage(bitmap)
+            try {
+                val contentURI = data.data
+                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, contentURI)
+                imgProfile.setImageBitmap(bitmap)
+                saveImage(bitmap)
+            }
+            catch (exp:Exception){
+                Toast.makeText(activity!!,exp.message,Toast.LENGTH_SHORT).show()
+            }
 
+        }
+        else
+        {
+            Toast.makeText(activity!!,"Failed",Toast.LENGTH_SHORT).show()
         }
        /* var imagePath=""
         try
@@ -592,24 +602,22 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val wallpaperDirectory = File (
+        val imgDirectory = File (
                 (Environment.getExternalStorageDirectory()).toString())
-        if (!wallpaperDirectory.exists())
+        if (!imgDirectory.exists())
         {
-            wallpaperDirectory.mkdirs()
+            imgDirectory.mkdirs()
         }
         try
         {
             captureImageStatus=true
-            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            val file = File(imgDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
             file.createNewFile()
             val fo = FileOutputStream(file)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(activity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
-            CommonMethod.fileCompress(photoFile)
-
             return file.absolutePath
         }
         catch (e1: IOException){

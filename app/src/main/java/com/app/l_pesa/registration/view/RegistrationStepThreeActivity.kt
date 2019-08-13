@@ -141,8 +141,9 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
           {
               progressDialog.show()
               buttonSubmit.isClickable=false
+              val imgFile=CommonMethod.fileCompress(photoFile)
               val presenterAWSProfile= PresenterAWSProfile()
-              presenterAWSProfile.uploadPersonalID(this@RegistrationStepThreeActivity,this,photoFile)
+              presenterAWSProfile.uploadPersonalID(this@RegistrationStepThreeActivity,this,imgFile)
           }
           else
           {
@@ -202,7 +203,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         } else {
             photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(this@RegistrationStepThreeActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+        captureFilePath = FileProvider.getUriForFile(this@RegistrationStepThreeActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
 
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -228,9 +229,8 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     }
 
     private fun openAlbum(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.type = "image/*"
-        startActivityForResult(intent, requestGallery)
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -284,7 +284,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
                     )
                     imgPersonalType.setImageBitmap(pictureBitmap)
                     imgPersonalType.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile)
+
                 }
 
                 captureImageStatus = true
@@ -329,7 +329,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         {
 
         }*/
-        if (data != null)
+       /* if (data != null)
         {
             val contentURI = data.data
 
@@ -337,6 +337,25 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
             imgPersonalType?.setImageBitmap(bitmap)
             saveImage(bitmap)
 
+        }*/
+
+        if (data != null)
+        {
+
+            try {
+                val contentURI = data.data
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentURI)
+                imgPersonalType.setImageBitmap(bitmap)
+                saveImage(bitmap)
+            }
+            catch (exp:Exception){
+                Toast.makeText(this@RegistrationStepThreeActivity,exp.message,Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        else
+        {
+            Toast.makeText(this@RegistrationStepThreeActivity,"Failed",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -344,24 +363,22 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val wallpaperDirectory = File (
+        val imgDirectory = File (
                 (Environment.getExternalStorageDirectory()).toString())
-        if (!wallpaperDirectory.exists())
+        if (!imgDirectory.exists())
         {
-            wallpaperDirectory.mkdirs()
+            imgDirectory.mkdirs()
         }
         try
         {
             captureImageStatus=true
-            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            val file = File(imgDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
             file.createNewFile()
             val fo = FileOutputStream(file)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(this@RegistrationStepThreeActivity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
-            CommonMethod.fileCompress(photoFile)
-
             return file.absolutePath
         }
         catch (e1: IOException){

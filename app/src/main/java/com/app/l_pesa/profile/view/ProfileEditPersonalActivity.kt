@@ -31,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toFile
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -247,7 +248,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                         if(captureImageStatus)
                         {
                             val presenterAWSProfile= PresenterAWSProfile()
-                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity,this,photoFile)
+                            val imgFile=CommonMethod.fileCompress(photoFile)
+                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity,this,imgFile)
                         }
                         else
                         {
@@ -419,9 +421,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
     private fun openAlbum(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.type = "image/*"
-        startActivityForResult(intent, requestGalley)
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, requestGalley)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -475,7 +476,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile)
+
                 }
 
                 captureImageStatus = true
@@ -493,12 +494,21 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
    private fun handleImage(data: Intent?) {
        if (data != null)
        {
-           val contentURI = data.data
 
-           val bitmap = MediaStore.Images.Media.getBitmap(this@ProfileEditPersonalActivity.contentResolver, contentURI)
-           imgProfile?.setImageBitmap(bitmap)
-           saveImage(bitmap)
+           try {
+                 val contentURI = data.data
+                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentURI)
+                 imgProfile.setImageBitmap(bitmap)
+                 saveImage(bitmap)
+               }
+           catch (exp:Exception){
+               Toast.makeText(this@ProfileEditPersonalActivity,exp.message,Toast.LENGTH_SHORT).show()
+           }
 
+       }
+       else
+       {
+           Toast.makeText(this@ProfileEditPersonalActivity,"Failed",Toast.LENGTH_SHORT).show()
        }
     }
 
@@ -506,24 +516,22 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val wallpaperDirectory = File (
+        val imgDirectory = File (
                 (Environment.getExternalStorageDirectory()).toString())
-        if (!wallpaperDirectory.exists())
+        if (!imgDirectory.exists())
         {
-            wallpaperDirectory.mkdirs()
+            imgDirectory.mkdirs()
         }
         try
         {
             captureImageStatus=true
-            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            val file = File(imgDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
             file.createNewFile()
             val fo = FileOutputStream(file)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(this@ProfileEditPersonalActivity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
-            CommonMethod.fileCompress(photoFile)
-
             return file.absolutePath
         }
         catch (e1: IOException){

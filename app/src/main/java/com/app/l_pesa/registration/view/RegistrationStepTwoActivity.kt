@@ -117,7 +117,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 btnSubmit.isClickable=false
 
                 val presenterAWSProfile= PresenterAWSProfile()
-                presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,photoFile)
+                val imgFile=CommonMethod.fileCompress(photoFile)
+                presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,imgFile)
 
             }
             else
@@ -224,9 +225,8 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     }
 
     private fun openAlbum(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.type = "image/*"
-        startActivityForResult(intent, requestGallery)
+        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, requestGallery)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -281,7 +281,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                     )
                     imgProfilePhoto.setImageBitmap(pictureBitmap)
                     imgProfilePhoto.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile)
+
                 }
 
                 captureImageStatus = true
@@ -326,14 +326,24 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         {
 
         }*/
+
         if (data != null)
         {
-            val contentURI = data.data
 
-            val bitmap = MediaStore.Images.Media.getBitmap(this@RegistrationStepTwoActivity.contentResolver, contentURI)
-            imgProfilePhoto?.setImageBitmap(bitmap)
-            saveImage(bitmap)
+            try {
+                val contentURI = data.data
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentURI)
+                imgProfilePhoto.setImageBitmap(bitmap)
+                saveImage(bitmap)
+            }
+            catch (exp:Exception){
+                Toast.makeText(this@RegistrationStepTwoActivity,exp.message,Toast.LENGTH_SHORT).show()
+            }
 
+        }
+        else
+        {
+            Toast.makeText(this@RegistrationStepTwoActivity,"Failed",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -341,24 +351,22 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val wallpaperDirectory = File (
+        val imgDirectory = File (
                 (Environment.getExternalStorageDirectory()).toString())
-        if (!wallpaperDirectory.exists())
+        if (!imgDirectory.exists())
         {
-            wallpaperDirectory.mkdirs()
+            imgDirectory.mkdirs()
         }
         try
         {
             captureImageStatus=true
-            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            val file = File(imgDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
             file.createNewFile()
             val fo = FileOutputStream(file)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(this@RegistrationStepTwoActivity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
-            CommonMethod.fileCompress(photoFile)
-
             return file.absolutePath
         }
         catch (e1: IOException){

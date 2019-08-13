@@ -138,11 +138,13 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
                     progressDialog.show()
                     buttonSubmit.isClickable=false
 
+                    val imgFile= CommonMethod.fileCompress(photoFile)
+
                     /*if(idTypeExists=="TRUE")
                     {*/
                     val presenterAWSPersonalId= PresenterAWSPersonalId()
                     // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
+                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,imgFile)
                     /*}
                     else
                     {
@@ -575,7 +577,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
                     )
                     imgProfile.setImageBitmap(pictureBitmap)
                     imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile)
+                    //CommonMethod.fileCompress(photoFile)
                 }
 
                 captureImageStatus = true
@@ -593,12 +595,21 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
         if (data != null)
         {
-            val contentURI = data.data
 
+            try {
+                val contentURI = data.data
                 val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, contentURI)
-                imgProfile?.setImageBitmap(bitmap)
+                imgProfile.setImageBitmap(bitmap)
                 saveImage(bitmap)
+            }
+            catch (exp:Exception){
+                Toast.makeText(activity!!,exp.message,Toast.LENGTH_SHORT).show()
+            }
 
+        }
+        else
+        {
+            Toast.makeText(activity!!,"Failed",Toast.LENGTH_SHORT).show()
         }
         /*var imagePath=""
         try
@@ -652,7 +663,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
             MediaScannerConnection.scanFile(activity, arrayOf(file.path), arrayOf("image/png"), null)
             fo.close()
             photoFile=file
-            CommonMethod.fileCompress(photoFile)
+           // CommonMethod.fileCompress(photoFile)
 
             return file.absolutePath
         }
