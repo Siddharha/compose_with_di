@@ -92,7 +92,7 @@
             android:background="@drawable/et_bg_white_border_black"
             android:paddingStart="@dimen/_15sdp"
             android:paddingEnd="@dimen/_2sdp"
-            android:hint="@string/enter_otp"
+            android:hint="@string/verification_code"
             android:maxLines="1"
             android:maxLength="6"
             android:layout_marginTop="@dimen/_10sdp"

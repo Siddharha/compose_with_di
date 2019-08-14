@@ -157,6 +157,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
 
     override fun onSuccessResetPin(data: PinData) {
         progressBar.visibility= View.INVISIBLE
+        buttonSubmit.isClickable=true
         if(data.next_step=="next_otp")
         {
             Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_otp_via_sms),Toast.LENGTH_LONG).show()

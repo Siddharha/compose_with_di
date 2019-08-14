@@ -19,7 +19,7 @@
     <string name="forgot_pin_title">Forgot PIN</string>
     <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
-    <string name="enter_otp">Enter OTP</string>
+    <string name="verification_code">Verification Code</string>
     <string name="coming_soon">Coming Soon</string>
 
     <!--Registration Message-->
@@ -149,8 +149,8 @@
     <string name="change_transactional_pin">Change Transactional PIN</string>
     <string name="current_pin">Current Pin</string>
     <string name="your_security_pin">Your Security PIN</string>
-    <string name="your_otp_code">Your OTP code</string>
-    <string name="resend_otp">Resend OTP</string>
+    <string name="your_otp_code">You are signing on a different device. To ensure that you own this device, enter the verification code sent on your registered mobile number.</string>
+    <string name="resend_verification">Resend Verification Code</string>
     <string name="set_up_pin">Setup PIN</string>
     <string name="current_login_pin">Current Login PIN</string>
     <string name="sent_pin_via_sms">We sent a SMS with the PIN to your registered mobile number.</string>
