@@ -515,8 +515,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val imgDirectory = File (
-                (Environment.getExternalStorageDirectory()).toString())
+       // val imgDirectory = File ((Environment.getExternalStorageDirectory()).toString())
+        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
         if (!imgDirectory.exists())
         {
             imgDirectory.mkdirs()

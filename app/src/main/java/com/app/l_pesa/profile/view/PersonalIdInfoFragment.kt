@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaScannerConnection
@@ -647,16 +646,16 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val wallpaperDirectory = File (
-                (Environment.getExternalStorageDirectory()).toString())
-        if (!wallpaperDirectory.exists())
+        //val wallpaperDirectory = File ((Environment.getExternalStorageDirectory()).toString())
+        val imgDirectory = File ((activity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
+        if (!imgDirectory.exists())
         {
-            wallpaperDirectory.mkdirs()
+            imgDirectory.mkdirs()
         }
         try
         {
             captureImageStatus=true
-            val file = File(wallpaperDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
+            val file = File(imgDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
             file.createNewFile()
             val fo = FileOutputStream(file)
             fo.write(bytes.toByteArray())

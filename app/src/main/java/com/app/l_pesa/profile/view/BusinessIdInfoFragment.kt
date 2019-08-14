@@ -3,12 +3,10 @@ package com.app.l_pesa.profile.view
 import android.app.Activity
 import android.app.Dialog
 import android.content.ClipData
-import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaScannerConnection
@@ -16,7 +14,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -602,8 +599,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        val imgDirectory = File (
-                (Environment.getExternalStorageDirectory()).toString())
+        // val imgDirectory = File ((Environment.getExternalStorageDirectory()).toString())
+        val imgDirectory = File ((activity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
         if (!imgDirectory.exists())
         {
             imgDirectory.mkdirs()
