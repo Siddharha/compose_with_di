@@ -198,7 +198,22 @@
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/llEmail"
+        app:layout_constraintBottom_toTopOf="@+id/txtInfo"
+        />
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="@string/email_verification"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/colorTextBlackLight"
+        android:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

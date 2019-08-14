@@ -8,7 +8,7 @@
     <string name="get_started">Get Started</string>
     <string name="no_country">No country was listed.</string>
     <string name="phone_no">Mobile No.</string>
-    <string name="email_address">Email Address*</string>
+    <string name="email_address">Email Address</string>
     <string name="login">Login</string>
     <string name="final_step">Final step</string>
     <string name="submit">Submit</string>
@@ -31,6 +31,7 @@
     <string name="upload_id_picture">Choose your ID type, enter your ID number &amp; upload a photocopy of the ID </string>
     <string name="continue_to_register">Continue to Register</string>
     <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
+    <string name="email_verification">Enter your mobile number, email address and submit. You will receive an OTP in your email. Confirm that the email address belongs to you by entering the OTP in the next step.</string>
 
     <!--Password section-->
     <string name="current_password">Current Password</string>
