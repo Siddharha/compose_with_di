@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rootLayout"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootLayout"
+    tools:context=".registration.view.RegistrationStepTwoActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+
+            <ImageView
+                android:id="@+id/imgRotate"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_filter"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:focusable="true"
+
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_40sdp"
         android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-        <com.app.l_pesa.common.CommonTextRegular
+
+
+         <com.app.l_pesa.common.AutoFitTextureView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mySurfaceView"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintBottom_toTopOf="@+id/btnSubmit"/>
+
+
+        <ImageButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp"
+            android:src="@drawable/yellow_button"
+            android:text="@string/final_step"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mySurfaceView" />
+
+
+       <!-- <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,22 +101,17 @@
             android:textSize="@dimen/_11sdp"
             android:gravity="center"
             android:padding="@dimen/_2sdp"
-            app:layout_constraintBottom_toTopOf="@+id/imgProfilePhoto"
+            app:layout_constraintBottom_toTopOf="@+id/textureView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
 
 
-        <com.app.l_pesa.common.CircularImageView
-            android:id="@+id/imgProfilePhoto"
+        <SurfaceView
+            android:id="@+id/textureView"
             android:contentDescription="@string/app_name"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
-            android:background="@drawable/ic_user"
-            app:civ_border_width="0dp"
-            app:civ_background_color="@android:color/white"
-            app:civ_border_color="@android:color/white"
-            app:civ_shadow="false"
             android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +141,7 @@
             app:layout_constraintBottom_toTopOf="@+id/etOTP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgProfilePhoto" />
+            app:layout_constraintTop_toBottomOf="@+id/textureView" />
 
         <com.app.l_pesa.common.CommonEditTextRegular
             android:id="@+id/etOTP"
@@ -117,8 +175,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etOTP" />
+            app:layout_constraintTop_toBottomOf="@+id/etOTP" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

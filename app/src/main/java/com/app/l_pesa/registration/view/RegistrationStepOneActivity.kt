@@ -98,12 +98,12 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     {
         val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
-        var getIMEI=""
+       /* var getIMEI=""
         getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             telephonyManager!!.imei
         } else {
             telephonyManager!!.deviceId
-        }
+        }*/
 
         val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
@@ -116,10 +116,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         {
             CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
         }
-        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        /*else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
         {
             CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_sim))
-        }
+        }*/
         else
         {
             CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
@@ -142,10 +142,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
                 jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",getIMEI)
-                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
-                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
-                jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
+                jsonObjectRequestChild.addProperty("imei","311477629513071")
+                jsonObjectRequestChild.addProperty("imsi","311477629513071")
+                jsonObjectRequestChild.addProperty("simSerial_no","311477629513071")
+                jsonObjectRequestChild.addProperty("sim_operator_Name","")
                 jsonObjectRequestChild.addProperty("screen_height",""+height)
                 jsonObjectRequestChild.addProperty("screen_width",""+width)
                 jsonObjectRequestChild.addProperty("device", Build.DEVICE)
@@ -159,6 +159,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
                 val presenterRegistrationOneObj= PresenterRegistrationOne()
                 presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
+
+                /* jsonObjectRequestChild.addProperty("imei",getIMEI)
+                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
+                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
+                jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)*/
             }
             else
             {

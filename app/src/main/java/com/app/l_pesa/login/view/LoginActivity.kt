@@ -54,8 +54,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList {
 
-    private var runTimePermission: RunTimePermission? = null
-    private val permissionCode  = 200
+   /* private var runTimePermission: RunTimePermission? = null
+    private val permissionCode  = 200*/
     private var countryCode     ="+255"
     private var countryFound    = false
 
@@ -67,11 +67,11 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-        runTimePermission       =  RunTimePermission(this@LoginActivity)
+      /*  runTimePermission       =  RunTimePermission(this@LoginActivity)
         if (!runTimePermission!!.checkPermissionForPhoneState())
         {
             requestPermission()
-        }
+        }*/
 
         loadCountry()
         loginProcess()
@@ -137,7 +137,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
     }
 
 
-    private fun requestPermission() {
+    /*private fun requestPermission() {
 
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_PHONE_STATE), permissionCode)
 
@@ -179,7 +179,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 .setPositiveButton("OK", okListener)
                 .create()
                 .show()
-    }
+    }*/
     private fun loadCountry()
     {
 
@@ -281,20 +281,26 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         this.setText(spannableString, TextView.BufferType.SPANNABLE)
     }
 
+    @SuppressLint("MissingPermission")
     private fun verifyField()
     {
         val displayMetrics = resources.displayMetrics
         val width = displayMetrics.widthPixels
         val height = displayMetrics.heightPixels
 
-        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
-        var getIMEI=""
-        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+       /* var simIMEI=""
+        simIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             telephonyManager!!.imei
         } else {
             telephonyManager!!.deviceId
-        }
+        }*/
+        /*getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            telephonyManager!!.imei
+        } else {
+            telephonyManager!!.deviceId
+        }*/
 
         val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
@@ -303,10 +309,10 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
         {
             CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_phone))
         }
-        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        /*else if(TextUtils.isEmpty(telephonyManager!!.simSerialNumber))
         {
             CommonMethod.customSnackBarError(ll_root,this@LoginActivity,resources.getString(R.string.required_sim))
-        }
+        }*/
         else
         {
 
@@ -316,7 +322,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                progressBar.visibility = View.VISIBLE
                txtLogin.isClickable   = false
 
-               if (ActivityCompat.checkSelfPermission(this@LoginActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+               /*if (ActivityCompat.checkSelfPermission(this@LoginActivity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale((this@LoginActivity),
                                     Manifest.permission.CALL_PHONE)) {
                     } else {
@@ -324,7 +330,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                                 arrayOf(Manifest.permission.CALL_PHONE),
                                 200)
                     }
-                }
+                }*/
 
 
 
@@ -336,11 +342,11 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
-                jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",getIMEI)
-                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
-                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
-                jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)
+                jsonObjectRequestChild.addProperty("sdk",Build.VERSION.SDK_INT)
+                jsonObjectRequestChild.addProperty("imei","")
+                jsonObjectRequestChild.addProperty("imsi","")
+                jsonObjectRequestChild.addProperty("simSerial_no","")
+                jsonObjectRequestChild.addProperty("sim_operator_Name","")//telephonyManager.simOperatorName
                 jsonObjectRequestChild.addProperty("screen_height",""+height)
                 jsonObjectRequestChild.addProperty("screen_width",""+width)
                 jsonObjectRequestChild.addProperty("device", Build.DEVICE)
@@ -355,7 +361,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
-                //println("JSON"+jsonObject)
+                println("JSON"+jsonObject)
 
             }
             else
@@ -511,7 +517,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
 
     public override fun onResume() {
         super.onResume()
-        fetchLocation()
+       // fetchLocation()
     }
 
     private fun fetchLocation() {
@@ -520,7 +526,7 @@ class LoginActivity : AppCompatActivity(), ICallBackLogin, ICallBackCountryList 
     }
 
     public override fun onDestroy() {
-        stopService(Intent(this, LocationBackgroundService::class.java))
+       // stopService(Intent(this, LocationBackgroundService::class.java))
         super.onDestroy()
 
     }
