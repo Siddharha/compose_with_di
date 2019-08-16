@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.LocationBackgroundService
 import com.app.l_pesa.common.RunTimePermission
@@ -30,8 +32,8 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var runTimePermission: RunTimePermission? = null
-    private val permissionCode = 200
+    /*private var runTimePermission: RunTimePermission? = null
+    private val permissionCode = 200*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 
         initUI()
-        runTimePermission       =  RunTimePermission(this@MainActivity)
+        /*runTimePermission       =  RunTimePermission(this@MainActivity)
         if (!runTimePermission!!.checkPermissionForPhoneState() && !runTimePermission!!.checkPermissionForAccessFineLocation())
         {
             requestPermission()
@@ -47,50 +49,50 @@ class MainActivity : AppCompatActivity() {
         else
         {
             startLocationTrackerService()
-        }
+        }*/
 
         buttonSignUp.setOnClickListener {
 
 
-            if(isLocationEnabled())
-            {
-                startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
-                overridePendingTransition(R.anim.right_in, R.anim.left_out)
-            }
+            /*if(isLocationEnabled())
+            {*/
+            startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            /*}
             else
             {
                 showAlert()
             }
-
+*/
 
         }
 
     }
 
 
-    private fun requestPermission() {
+    /*private fun requestPermission() {
 
 
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_PHONE_STATE,Manifest.permission.ACCESS_FINE_LOCATION), permissionCode)
 
     }
-
+*/
 
     private fun initUI()
     {
         buttonLogin.setOnClickListener {
 
-            if(isLocationEnabled())
-            {
-                val intent = Intent(this@MainActivity, LoginActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(R.anim.right_in, R.anim.left_out)
-            }
-            else
-            {
-                showAlert()
-            }
-
+            /*if(isLocationEnabled())
+            {*/
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            /* }
+             else
+             {
+                 showAlert()
+             }
+ */
 
         }
     }
@@ -112,49 +114,49 @@ class MainActivity : AppCompatActivity() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
-    private fun startLocationTrackerService()
-    {
-        val locationRequest                 = LocationRequest()
-        locationRequest.priority            = LocationRequest.PRIORITY_HIGH_ACCURACY
+    /* private fun startLocationTrackerService()
+     {
+         val locationRequest                 = LocationRequest()
+         locationRequest.priority            = LocationRequest.PRIORITY_HIGH_ACCURACY
 
-        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        val locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-        if (locationPermission == PackageManager.PERMISSION_GRANTED) {
+         val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+         val locationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+         if (locationPermission == PackageManager.PERMISSION_GRANTED) {
 
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
-                override fun onLocationResult(locationResult: LocationResult) {
-                    val location = locationResult.lastLocation
-                    if (location != null)
-                    {
-                        geoCoderCountry(location.latitude,location.longitude)
+             fusedLocationProviderClient.requestLocationUpdates(locationRequest, object : LocationCallback() {
+                 override fun onLocationResult(locationResult: LocationResult) {
+                     val location = locationResult.lastLocation
+                     if (location != null)
+                     {
+                         geoCoderCountry(location.latitude,location.longitude)
 
-                    } else
-                    {
-                        // Set Default
-                    }
-                    fusedLocationProviderClient.removeLocationUpdates(this)
+                     } else
+                     {
+                         // Set Default
+                     }
+                     fusedLocationProviderClient.removeLocationUpdates(this)
 
 
-                }
+                 }
 
-            }, null)
-        }
-    }
+             }, null)
+         }
+     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == permissionCode) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                startLocationTrackerService()
-            } else
-            {
+     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+         if (requestCode == permissionCode) {
+             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                 startLocationTrackerService()
+             } else
+             {
 
-            }
-               // Log.e(LOG_TAG, "grantResults does not match:" + grantResults.size)
-        } else
-        {}
-           // Log.e(LOG_TAG, "requestCode does not match:$requestCode")
-    }
+             }
+                // Log.e(LOG_TAG, "grantResults does not match:" + grantResults.size)
+         } else
+         {}
+            // Log.e(LOG_TAG, "requestCode does not match:$requestCode")
+     }*/
 
 
     private fun geoCoderCountry( lat:Double, lng:Double)
@@ -190,7 +192,7 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onResume() {
         super.onResume()
-        fetchLocation()
+       // fetchLocation()
     }
 
     private fun fetchLocation() {
@@ -200,11 +202,10 @@ class MainActivity : AppCompatActivity() {
 
     public override fun onDestroy() {
 
-        stopService(Intent(this, LocationBackgroundService::class.java))
+       // stopService(Intent(this, LocationBackgroundService::class.java))
         super.onDestroy()
 
     }
-
 
 
 
