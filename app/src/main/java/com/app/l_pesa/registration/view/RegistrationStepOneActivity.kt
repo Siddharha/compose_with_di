@@ -3,6 +3,7 @@ package com.app.l_pesa.registration.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
@@ -45,14 +46,15 @@ import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 
 
-class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*/ICallBackRegisterOne {
+class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne {
 
-    private lateinit  var progressDialog: KProgressHUD
+
+    private lateinit var  progressDialog  : ProgressDialog
     private var countryCode     ="+255"
     private var countryFound    = false
 
-    private var listCountry                 : ArrayList<ResModelCountryList>? = null
-    private lateinit var adapterCountry     : CountryListAdapter
+    private lateinit var alCountry        : ArrayList<ResModelCountryList>
+    private lateinit var adapterCountry   : CountryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,11 +62,20 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
         setContentView(R.layout.activity_registration_step_one)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         toolbarFont(this@RegistrationStepOneActivity)
+
         initLoader()
-       // loadCountry()
+        initData()
+        loadCountry()
         checkQualify()
+    }
+
+    private fun initData()
+    {
+        imgCountry.setOnClickListener {
+
+            loadCountry()
+        }
     }
 
     private fun toolbarFont(context: Activity) {
@@ -97,11 +108,12 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
 
     private fun initLoader()
     {
-        progressDialog=KProgressHUD.create(this@RegistrationStepOneActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(this@RegistrationStepOneActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
@@ -159,10 +171,23 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
         }*/
         else
         {
-            CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
+            //CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
                 progressDialog.show()
+                //btnSubmit.isClickable=false
+
+                val sharedPref = SharedPref(this@RegistrationStepOneActivity)
+                sharedPref.accessToken="121212"
+
+                val bundle = Bundle()
+                bundle.putString("OTP","123456")
+                dismiss()
+                val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent,bundle)
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                /*progressDialog.show()
                 btnSubmit.isClickable=false
 
                 val displayMetrics = resources.displayMetrics
@@ -196,7 +221,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
 
                 val presenterRegistrationOneObj= PresenterRegistrationOne()
                 presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
-
+*/
                 /* jsonObjectRequestChild.addProperty("imei",getIMEI)
                 jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
                 jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
@@ -209,51 +234,58 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
         }
     }
 
-   /* private fun loadCountry()
+    private fun loadCountry()
     {
         val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
         val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
-        if(countryData.countries_list.size>0)
-        {
-            val totalSize = 0 until countryData.countries_list.size
+        val dialog= Dialog(this@RegistrationStepOneActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_country)
+        alCountry= ArrayList()
 
-            for(i in totalSize)
-            {
-                val countryListCode=countryData.countries_list[i]
-                if(countryListCode.code==sharedPrefOBJ.countryCode)
-                {
-                    countryFound=true
-                    val options = RequestOptions()
-                    options.centerCrop()
-                    Glide.with(this@RegistrationStepOneActivity)
-                            .load(countryListCode.image)
-                            .apply(options)
-                            .into(img_country)
-                    countryCode=countryListCode.country_code
-                    break
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
+        alCountry.addAll(countryData.countries_list)
 
-                }
+        adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, alCountry,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.adapter           = adapterCountry
+        dialog.show()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        etCountry!!.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+                filterCountry(s.toString())
 
             }
-            if(!countryFound)
-            {
-                val options = RequestOptions()
-                options.centerCrop()
-                Glide.with(this@RegistrationStepOneActivity)
-                        .load(countryData.countries_list[0].image)
-                        .apply(options)
-                        .into(img_country)
-                countryCode="+255"
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
+
             }
-        }
 
+            override fun afterTextChanged(s: Editable) {
 
-        ll_flag_section.setOnClickListener {
-            val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
-            countrySpinner(countryData)
-        }
-    }*/
+            }
+        })
+
+    }
+
+    override fun onClickCountry(resModelCountryList: ResModelCountryList) {
+
+         countryCode=resModelCountryList.country_code
+         if(TextUtils.isEmpty(etPhone.text.toString()))
+         {
+             etPhone.requestFocus()
+         }
+         else if(TextUtils.isEmpty(etEmail.text.toString()))
+         {
+             etEmail.requestFocus()
+         }
+
+    }
 
     /*private fun countrySpinner(countryList: ResModelData)
     {
@@ -289,13 +321,13 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
 
     }*/
 
-    /*private fun filterCountry(countryName: String) {
+    private fun filterCountry(countryName: String) {
 
-        val filteredCourseAry: ArrayList<ResModelCountryList> = ArrayList()
+        val filteredCountry: ArrayList<ResModelCountryList> = ArrayList()
 
-        for (eachCourse in listCountry!!) {
-            if (eachCourse.country_name.toLowerCase().startsWith(countryName.toLowerCase())) {
-                filteredCourseAry.add(eachCourse)
+        for (country in alCountry) {
+            if (country.country_name.toLowerCase().startsWith(countryName.toLowerCase())) {
+                filteredCountry.add(country)
             }
             else
             {
@@ -303,35 +335,21 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
             }
         }
 
-        if(filteredCourseAry.size==0)
+        if(filteredCountry.size==0)
         {
-            filteredCourseAry.clear()
+            filteredCountry.clear()
             val emptyList=ResModelCountryList(0,resources.getString(R.string.search_result_not_found),"","","","","","","","","","","")
-            filteredCourseAry.add(emptyList)
+            filteredCountry.add(emptyList)
         }
 
-        adapterCountry.filterList(filteredCourseAry)
+        adapterCountry.filterList(filteredCountry)
 
-    }*/
-
-   /* override fun onClickCountry(resModelCountryList: ResModelCountryList) {
-
-        val options = RequestOptions()
-        options.centerCrop()
-        Glide.with(this@RegistrationStepOneActivity)
-                .load(resModelCountryList.image)
-                .apply(options)
-                .into(img_country)
-        countryCode=resModelCountryList.country_code
-    }*/
-
+    }
 
 
     override fun onBackPressed() {
 
-        val intent = Intent(this@RegistrationStepOneActivity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
@@ -341,7 +359,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*
         Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
         btnSubmit.isClickable =true
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
-        sharedPref.accessToken=""+data.access_token
+        sharedPref.accessToken=data.access_token
 
         val bundle = Bundle()
         bundle.putString("OTP",data.otp)

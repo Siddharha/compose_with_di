@@ -157,7 +157,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         progressBar.visibility = View.INVISIBLE
 
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-        overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()
     }
 

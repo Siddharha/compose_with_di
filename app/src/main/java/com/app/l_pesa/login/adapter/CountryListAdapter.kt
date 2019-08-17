@@ -43,12 +43,6 @@ class CountryListAdapter(val context: Context,private var countryList: ArrayList
             callBackOBJ.onClickCountry(countryList[position])
         }
 
-       val options = RequestOptions()
-       Glide.with(context)
-                .load(countryList[position].image)
-                .apply(options)
-                .into(holder.imgFlag)
-
 
     }
 
@@ -69,7 +63,6 @@ class CountryListAdapter(val context: Context,private var countryList: ArrayList
 
             var txtCountry: TextView        = itemView.findViewById(R.id.txt_country_name) as TextView
             var rlRootObj : RelativeLayout  = itemView.findViewById(R.id.rlRoot) as RelativeLayout
-            var imgFlag   : ImageView       = itemView.findViewById(R.id.img_flag)
 
         }
 
