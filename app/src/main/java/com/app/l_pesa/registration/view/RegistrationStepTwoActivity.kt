@@ -58,15 +58,11 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     val PERMISION_WRITE_STORAGE = 1000
     val PERMISION_READ_STORAGE  = 1001
 
-    /**
-     * 各レイアウトオブジェクト変数を生成
-     */
+
     private lateinit var previewView   : TextureView
     private lateinit var imageReader   : ImageReader
 
-    /**
-     * 各種変数初期化
-     */
+
     private lateinit var previewRequestBuilder : CaptureRequest.Builder
     private lateinit var previewRequest        : CaptureRequest
     private var backgroundHandler              : Handler?                = null

@@ -26,12 +26,14 @@
     <string name="see_you_quality">See if you qualify</string>
     <string name="select">Select</string>
     <string name="thank_you">Thank you!</string>
+    <string name="next">Next</string>
+    <string name="continue_">Continue</string>
     <string name="create_account">Don\'t have an account? Create one!</string>
     <string name="upload_picture">Upload picture &amp; write your name</string>
     <string name="upload_id_picture">Choose your ID type, enter your ID number &amp; upload a photocopy of the ID </string>
     <string name="continue_to_register">Continue to Register</string>
-    <string name="refer_to_otp">You should receive an email with an OTP. Please enter the OTP to verify.</string>
-    <string name="email_verification">Enter your mobile number, email address and submit. You will receive an OTP in your email. Confirm that the email address belongs to you by entering the OTP in the next step.</string>
+    <string name="refer_to_otp">You should receive an email with Verification Code. Please enter the Verification Code to verify.</string>
+    <string name="email_verification">Enter your mobile number, email address and submit. You will receive Verification Code in your email. Confirm the email address belongs to you by entering the Verification Code in the next step.</string>
 
     <!--Password section-->
     <string name="current_password">Current Password</string>

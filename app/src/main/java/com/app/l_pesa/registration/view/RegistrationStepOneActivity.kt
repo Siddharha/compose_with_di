@@ -1,9 +1,11 @@
 package com.app.l_pesa.registration.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -11,8 +13,11 @@ import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.view.MenuItem
+import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,9 +42,10 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
+import kotlinx.android.synthetic.main.layout_registration_step_one.*
 
 
-class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne {
+class RegistrationStepOneActivity : AppCompatActivity(), /*ICallBackCountryList*/ICallBackRegisterOne {
 
     private lateinit  var progressDialog: KProgressHUD
     private var countryCode     ="+255"
@@ -50,11 +56,42 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration_step_one)
 
+        setContentView(R.layout.activity_registration_step_one)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        toolbarFont(this@RegistrationStepOneActivity)
         initLoader()
-        loadCountry()
+       // loadCountry()
         checkQualify()
+    }
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
+                    break
+                }
+            }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                    onBackPressed()
+                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 
@@ -110,11 +147,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
         if((etPhone.text.toString().length<9))
         {
-            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
         }
         else if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
-            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
         }
         /*else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
         {
@@ -167,12 +204,12 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             }
             else
             {
-                CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.no_internet))
             }
         }
     }
 
-    private fun loadCountry()
+   /* private fun loadCountry()
     {
         val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
         val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
@@ -216,9 +253,9 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
             countrySpinner(countryData)
         }
-    }
+    }*/
 
-    private fun countrySpinner(countryList: ResModelData)
+    /*private fun countrySpinner(countryList: ResModelData)
     {
         val dialog= Dialog(this@RegistrationStepOneActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -250,9 +287,9 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         })
 
 
-    }
+    }*/
 
-    private fun filterCountry(countryName: String) {
+    /*private fun filterCountry(countryName: String) {
 
         val filteredCourseAry: ArrayList<ResModelCountryList> = ArrayList()
 
@@ -275,9 +312,9 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         adapterCountry.filterList(filteredCourseAry)
 
-    }
+    }*/
 
-    override fun onClickCountry(resModelCountryList: ResModelCountryList) {
+   /* override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
         val options = RequestOptions()
         options.centerCrop()
@@ -286,7 +323,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 .apply(options)
                 .into(img_country)
         countryCode=resModelCountryList.country_code
-    }
+    }*/
 
 
 
@@ -318,6 +355,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         dismiss()
         btnSubmit.isClickable=true
-        CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,jsonMessage)
+        CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,jsonMessage)
     }
 }

@@ -37,7 +37,7 @@
         <item name="boxStrokeColor">@color/colorAquaDeep</item>
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="fontFamily">@font/montserrat</item>
-        <item name="boxStrokeWidth">1px</item>
+        <item name="boxStrokeWidth">1pt</item>
         <item name="android:textColor">@color/textColors</item>
         <item name="hintTextAppearance">@style/TextInputLayoutHintText</item>
     </style>
