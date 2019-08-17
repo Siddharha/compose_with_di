@@ -39,6 +39,13 @@ import com.app.l_pesa.registration.inter.ICallBackRegisterTwo
 import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
+import io.fotoapparat.Fotoapparat
+import io.fotoapparat.log.logcat
+import io.fotoapparat.log.loggers
+import io.fotoapparat.parameter.ScaleType
+import io.fotoapparat.selector.back
+import io.fotoapparat.selector.front
+import io.fotoapparat.view.CameraView
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.*
 import java.util.*
@@ -54,7 +61,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private val requestPhoto        = 14
     private val requestGallery      = 15
 
-    val PERMISION_CAMERA        = 200
+    /*val PERMISION_CAMERA        = 200
     val PERMISION_WRITE_STORAGE = 1000
     val PERMISION_READ_STORAGE  = 1001
 
@@ -68,14 +75,23 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private var backgroundHandler              : Handler?                = null
     private var backgroundThread               : HandlerThread?          = null
     private var cameraDevice                   : CameraDevice?           = null
-    private lateinit var captureSession        : CameraCaptureSession
+    private lateinit var captureSession        : CameraCaptureSession*/
 
+    var fotoapparat: Fotoapparat? = null
+    val filename = "test.png"
+    val sd = Environment.getExternalStorageDirectory()
+    val dest = File(sd, filename)
+    var fotoapparatState : FotoapparatState? = null
+    var cameraStatus : CameraState? = null
+    var flashState: FlashState? = null
+
+    val permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_two)
 
-        val bundle = intent.extras
+       // val bundle = intent.extras
         //mobileOtp       = bundle!!.getString("OTP")!!
 
         initLoader()
@@ -89,265 +105,122 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             onSubmit()
         }*/
 
+        createFotoapparat()
 
-        val writePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        val readPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-
-        if ((writePermission != PackageManager.PERMISSION_GRANTED) || (readPermission != PackageManager.PERMISSION_GRANTED)) {
-            requestStoragePermission()
-        }
-
-        previewView = findViewById(R.id.mySurfaceView)
-        previewView.surfaceTextureListener = surfaceTextureListener
-        startBackgroundThread()
-
+        cameraStatus = CameraState.BACK
+        flashState = FlashState.OFF
+        fotoapparatState = FotoapparatState.OFF
 
         btnSubmit.setOnClickListener {
 
-            val appDir = File(Environment.getExternalStorageDirectory(), "Camera2Sample")
+            takePhoto()
+        }
 
-            if (!appDir.exists()) {
-                appDir.mkdirs()
-            }
+    }
 
-            try {
-                val filename = "picture.jpg"
-                var savefile: File? = null
+    private fun createFotoapparat(){
+        //val cameraView = findViewById<CameraView>(R.id.camera_view)
 
-
-                captureSession.stopRepeating()
-                if (previewView.isAvailable) {
-
-                    savefile = File(appDir, filename)
-                    val fos = FileOutputStream(savefile)
-                    val bitmap: Bitmap = previewView.bitmap
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos)
-                    fos.close()
+        fotoapparat = Fotoapparat(
+                context = this,
+                view = camera_view,
+                scaleType = ScaleType.CenterCrop,
+                lensPosition = front(),
+                logger = loggers(
+                        logcat()
+                ),
+                cameraErrorCallback = { error ->
+                    println("Recorder errors: $error")
                 }
-
-                if (savefile != null) {
-
-                    Toast.makeText(this, "Saved: $savefile", Toast.LENGTH_SHORT).show()
-                }
-
-            } catch (e: CameraAccessException) {
-
-            } catch (e: FileNotFoundException) {
-
-            } catch (e: IOException) {
-
-            }
-
-            captureSession.setRepeatingRequest(previewRequest, null, null)
-        }
-
-        imgRotate.setOnClickListener {
-
-
-        }
+        )
     }
 
-    private fun startBackgroundThread() {
-        backgroundThread = HandlerThread("CameraBackground").also { it.start() }
-        backgroundHandler = Handler(backgroundThread!!.looper)
+    enum class CameraState{
+        FRONT, BACK
     }
 
-    private val surfaceTextureListener = object : TextureView.SurfaceTextureListener
-    {
-        // TextureViewが有効になった
-        override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int)
-        {
-            imageReader = ImageReader.newInstance(width, height, ImageFormat.JPEG,2)
-            openCamera()
-        }
-
-        // TextureViewのサイズが変わった
-        override fun onSurfaceTextureSizeChanged(p0: SurfaceTexture?, p1: Int, p2: Int) { }
-
-        // TextureViewが更新された
-        override fun onSurfaceTextureUpdated(p0: SurfaceTexture?) { }
-
-        // TextureViewが破棄された
-        override fun onSurfaceTextureDestroyed(p0: SurfaceTexture?): Boolean
-        {
-            return false
-        }
+    enum class FlashState{
+        TORCH, OFF
     }
 
-
-    private fun openCamera() {
-
-        val manager: CameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
-
-        try {
-
-            val camerId: String = manager.cameraIdList[1]
-
-
-            val permission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-                requestCameraPermission()
-                return
-            }
-
-
-            manager.openCamera(camerId, stateCallback, null)
-
-
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    enum class FotoapparatState{
+        ON, OFF
     }
 
+    private fun takePhoto() {
+        if (hasNoPermissions()) {
 
-    private fun requestCameraPermission() {
-        if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)
-                } else {
-                    TODO("VERSION.SDK_INT < M")
-                }) {
-            AlertDialog.Builder(baseContext)
-                    .setMessage("Permission Check")
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            requestPermissions(arrayOf(Manifest.permission.CAMERA), PERMISION_CAMERA)
-                        }
+            val permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            ActivityCompat.requestPermissions(this, permissions,0)
+        }else{
+            println("Has all permissions!")
+            /*fotoapparat = Fotoapparat(
+                    context = this,
+                    view = camera_view,
+                    scaleType = ScaleType.CenterCrop,
+                    lensPosition = front(),
+                    logger = loggers(
+                            logcat()
+                    ),
+                    cameraErrorCallback = { error ->
+                        println("Recorder errors: $error")
                     }
-                    .setNegativeButton(android.R.string.cancel) { _, _ ->
-                        finish()
-                    }
-                    .show()
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(arrayOf(Manifest.permission.CAMERA), PERMISION_CAMERA)
-            }
+            )*/
+
+            fotoapparat
+                    ?.takePicture()
+                    ?.saveToFile(dest)
         }
     }
 
-    /**
-     * カメラ状態取得コールバック関数
-     */
-    private val stateCallback = object : CameraDevice.StateCallback() {
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onStart() {
+        super.onStart()
 
-        /**
-         * カメラ接続完了
-         */
-        override fun onOpened(cameraDevice: CameraDevice) {
-            this@RegistrationStepTwoActivity.cameraDevice = cameraDevice
-            createCameraPreviewSession()
+        println("Onstart")
+
+        if (hasNoPermissions()) {
+            requestPermission()
+        }else{
+            fotoapparat?.start()
+            fotoapparatState = FotoapparatState.ON
+
         }
+    }
 
-        /**
-         * カメラ切断
-         */
-        override fun onDisconnected(cameraDevice: CameraDevice) {
-            cameraDevice.close()
-            this@RegistrationStepTwoActivity.cameraDevice = null
-        }
+    private fun hasNoPermissions(): Boolean{
+        return ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+    }
 
-        /**
-         * カメラエラー
-         */
-        override fun onError(cameraDevice: CameraDevice, error: Int) {
-            onDisconnected(cameraDevice)
+    fun requestPermission(){
+        ActivityCompat.requestPermissions(this, permissions,0)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        fotoapparat?.stop()
+        FotoapparatState.OFF
+    }
+
+    override fun onPause() {
+        super.onPause()
+        println("OnPause")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("OnResume")
+
+        println(fotoapparatState)
+
+       /* if(!hasNoPermissions() && fotoapparatState == FotoapparatState.OFF){
+            val intent = Intent(baseContext, RegistrationStepTwoActivity::class.java)
+            startActivity(intent)
             finish()
-        }
-    }
-
-    /**
-     * カメラ画像生成許可取得ダイアログを表示
-     */
-    private fun createCameraPreviewSession()
-    {
-        try
-        {
-            val texture = previewView.surfaceTexture
-            texture.setDefaultBufferSize(previewView.width, previewView.height)
-
-            val surface = Surface(texture)
-            previewRequestBuilder = cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
-            previewRequestBuilder.addTarget(surface)
-
-            cameraDevice?.createCaptureSession(Arrays.asList(surface, imageReader.surface),
-                    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-                    object : CameraCaptureSession.StateCallback()
-                    {
-                        override fun onConfigured(cameraCaptureSession: CameraCaptureSession)
-                        {
-                            if (cameraDevice == null) return
-                            try
-                            {
-                                captureSession = cameraCaptureSession
-                                previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE)
-                                previewRequest = previewRequestBuilder.build()
-                                cameraCaptureSession.setRepeatingRequest(previewRequest, null, Handler(backgroundThread?.looper))
-                            } catch (e: CameraAccessException) {
-
-                            }
-
-                        }
-
-                        override fun onConfigureFailed(session: CameraCaptureSession) {
-                            //Tools.makeToast(baseContext, "Failed")
-                        }
-                    }, null)
-        } catch (e: CameraAccessException) {
-
-        }
-    }
-
-    private fun requestStoragePermission() {
-        /**
-         * 書き込み権限
-         */
-        if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                } else {
-                    TODO("VERSION.SDK_INT < M")
-                }) {
-            AlertDialog.Builder(baseContext)
-                    .setMessage("Permission Here")
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISION_WRITE_STORAGE)
-                        }
-                    }
-                    .setNegativeButton(android.R.string.cancel) { _, _ ->
-                        finish()
-                    }
-                    .create()
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISION_WRITE_STORAGE)
-            }
-        }
-
-        /**
-         * 読み込み権限
-         */
-        if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)
-                } else {
-                    TODO("VERSION.SDK_INT < M")
-                }) {
-            AlertDialog.Builder(baseContext)
-                    .setMessage("Permission Here")
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISION_READ_STORAGE)
-                        }
-                    }
-                    .setNegativeButton(android.R.string.cancel) { _, _ ->
-                        finish()
-                    }
-                    .create()
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), PERMISION_READ_STORAGE)
-            }
-        }
+        }*/
     }
 
 
@@ -417,7 +290,6 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onFailureUploadAWS(string: String) {
 
         dismiss()
-        btnSubmit.isClickable=true
         Toast.makeText(this@RegistrationStepTwoActivity,string,Toast.LENGTH_SHORT).show()
     }
 
@@ -444,7 +316,6 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onErrorRegistrationTwo(jsonMessage: String) {
 
         dismiss()
-        btnSubmit.isClickable=true
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,jsonMessage)
     }
 
