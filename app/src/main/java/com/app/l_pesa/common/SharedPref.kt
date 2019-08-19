@@ -232,6 +232,13 @@ constructor(context: Context) // Constructor
             editor.putString(KEY_SET_CURRENT_LNG, currentLng)
             editor.commit()
         }
+    var imagePath: String
+        get() = pref.getString(KEY_SET_IMAGE_PATH, "")!!
+        set(imagePath) {
+            editor.remove(KEY_SET_IMAGE_PATH)
+            editor.putString(KEY_SET_IMAGE_PATH, imagePath)
+            editor.commit()
+        }
 
     fun removeShared() {
 
@@ -285,6 +292,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_LOAN_PRODUCT          = "KEY_SET_LOAN_PRODUCT"
         private const val KEY_SET_CURRENT_LAT           = "KEY_SET_CURRENT_LAT"
         private const val KEY_SET_CURRENT_LNG           = "KEY_SET_CURRENT_LNG"
+        private const val KEY_SET_IMAGE_PATH            = "KEY_SET_IMAGE_PATH"
     }
 
 

@@ -30,8 +30,8 @@
     <ImageView
         android:id="@+id/imageView"
         android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_65sdp"
-        android:layout_height="@dimen/_65sdp"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_75sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

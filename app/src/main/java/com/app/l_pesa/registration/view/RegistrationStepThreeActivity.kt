@@ -6,6 +6,8 @@ import android.content.ClipData
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
@@ -20,12 +22,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.profile.inter.ICallBackUpload
@@ -36,6 +40,7 @@ import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.content_registration_step_three.*
+import kotlinx.android.synthetic.main.layout_registration_step_three.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -43,7 +48,7 @@ import java.io.IOException
 import java.util.*
 
 
-class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBackUpload, ICallBackRegisterThree {
+class RegistrationStepThreeActivity : AppCompatActivity() {
 
     private lateinit     var progressDialog: KProgressHUD
     private val idList   = arrayListOf("1","2","3","4")
@@ -60,11 +65,78 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         setContentView(R.layout.activity_registration_step_three)
 
         initLoader()
-        initUI()
+        initData()
+        //initUI()
 
     }
 
-    private fun initUI()
+    private fun initData()
+    {
+
+        val sharedPref=SharedPref(this@RegistrationStepThreeActivity)
+        println("PATH++++1"+sharedPref.imagePath)
+        handleRotation(sharedPref.imagePath)
+        //val file=File(sharedPref.imagePath)
+
+       // val imagePath = BitmapFactory.decodeFile(file.absolutePath)
+        imageView.setImageURI(Uri.parse(sharedPref.imagePath))
+        //imageView.setImageResource(R.drawable.ic_id_card)
+        //imageView.setImageBitmap(imagePath)
+    }
+
+    private fun handleRotation(imgPath: String) {
+        BitmapFactory.decodeFile(imgPath)?.let { origin ->
+            try {
+                ExifInterface(imgPath).apply {
+                    getAttributeInt(
+                            ExifInterface.TAG_ORIENTATION,
+                            ExifInterface.ORIENTATION_UNDEFINED
+                    ).let { orientation ->
+                        println("ORIEN"+orientation)
+                        when (orientation) {
+                            ExifInterface.ORIENTATION_ROTATE_90 -> origin.rotate(90f)
+                            ExifInterface.ORIENTATION_ROTATE_180 -> origin.rotate(180f)
+                            ExifInterface.ORIENTATION_ROTATE_270 -> origin.rotate(270f)
+                            ExifInterface.ORIENTATION_NORMAL -> origin
+                            else -> origin.rotate(270f)
+                        }.also { bitmap ->
+                            //Update the input file with the new bytes.
+                            try {
+                                FileOutputStream(imgPath).use { fos ->
+                                    bitmap.compress(
+                                            Bitmap.CompressFormat.JPEG,
+                                            100,
+                                            fos
+                                    )
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun Bitmap.rotate(degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        val scaledBitmap = Bitmap.createScaledBitmap(this, width, height, true)
+        return Bitmap.createBitmap(
+                scaledBitmap,
+                0,
+                0,
+                scaledBitmap.width,
+                scaledBitmap.height,
+                matrix,
+                true
+        )
+    }
+
+   /* private fun initUI()
     {
         etIdType.setOnClickListener {
 
@@ -91,11 +163,11 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
         }
 
-        buttonSubmit.setOnClickListener {
+       *//* buttonSubmit.setOnClickListener {
 
             onSubmitData()
-        }
-    }
+        }*//*
+    }*/
 
     private fun initLoader()
     {
@@ -116,7 +188,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
     }
 
 
-    private fun onSubmitData()
+    /*private fun onSubmitData()
     {
       CommonMethod.hideKeyboardView(this@RegistrationStepThreeActivity)
       if(typeId=="0")
@@ -188,7 +260,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
         buttonSubmit.isClickable=true
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepThreeActivity,jsonMessage)
     }
-
+*/
     private fun cameraClick()
     {
         cacheDir.deleteRecursively()
@@ -425,22 +497,22 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackId, ICallBac
 
     private fun showIdType()
     {
-        val dialog= Dialog(this@RegistrationStepThreeActivity)
+        /*val dialog= Dialog(this@RegistrationStepThreeActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
         val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = PersonalIdListAdapter(this@RegistrationStepThreeActivity, idList,nameList,dialog,this)
         recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepThreeActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
-        dialog.show()
+        dialog.show()*/
     }
 
 
-    override fun onClickIdType(position: Int, type: String) {
+   /* override fun onClickIdType(position: Int, type: String) {
 
         etIdType.setText(nameList[position])
         typeId=idList[position]
-    }
+    }*/
 
     override fun onBackPressed() {
 

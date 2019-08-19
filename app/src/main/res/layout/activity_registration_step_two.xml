@@ -23,19 +23,6 @@
             app:titleTextAppearance="@style/Toolbar.TitleText">
 
 
-            <ImageView
-                android:id="@+id/imgRotate"
-                android:contentDescription="@string/app_name"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_filter"
-                android:layout_marginEnd="@dimen/_12sdp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:focusable="true"
-
-                />
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -47,161 +34,57 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtInfo"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_65sdp"
+            android:text="@string/email_verification"
+            android:textSize="@dimen/_11sdp"
+            android:padding="@dimen/_3sdp"
+            android:textColor="@color/dark_text_color"
+            android:fontFamily="@font/montserrat"
+            android:background="@color/screenBackground"
+            android:justificationMode="inter_word"
+            app:layout_constraintBottom_toTopOf="@+id/camera_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
         <io.fotoapparat.view.CameraView
             android:id="@+id/camera_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtInfo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"/>
+            app:layout_constraintBottom_toTopOf="@+id/layoutBottom"/>
 
-        <Button
-            android:id="@+id/btnSubmit"
+        <LinearLayout
+            android:id="@+id/layoutBottom"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@drawable/yellow_button"
-            android:text="@string/final_step"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
+            android:layout_height="@dimen/_75sdp"
+            android:background="@android:color/darker_gray"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/camera_view"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            >
 
-
-        <!-- <com.app.l_pesa.common.AutoFitTextureView
+        <ImageView
+            android:id="@+id/imageSave"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/mySurfaceView"
-             app:layout_constraintTop_toTopOf="parent"
-             app:layout_constraintEnd_toEndOf="parent"
-             app:layout_constraintStart_toStartOf="parent"
-             app:layout_constraintBottom_toTopOf="@+id/btnSubmit"/>
-
-
-        <ImageButton
-            android:id="@+id/btnSubmit"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:src="@drawable/yellow_button"
-            android:text="@string/final_step"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mySurfaceView" />
--->
-
-       <!-- <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/txtHeader"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/thank_you"
-            android:gravity="center"
-            android:textColor="@color/colorTextBlack"
-            android:textSize="@dimen/_20sdp"
-            android:textStyle="bold"
-            android:padding="@dimen/_2sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/txt_upload_tittle"
-
-            />
-
-        <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/txt_upload_tittle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:fontFamily="@font/montserrat"
-            android:text="@string/upload_picture"
-            android:textColor="@color/colorTextBlackLight"
-            android:textSize="@dimen/_11sdp"
-            android:gravity="center"
-            android:padding="@dimen/_2sdp"
-            app:layout_constraintBottom_toTopOf="@+id/textureView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
-
-
-        <SurfaceView
-            android:id="@+id/textureView"
+            android:layout_height="match_parent"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="@dimen/_75sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_upload_tittle"
-            app:layout_constraintBottom_toTopOf="@+id/etName"
+            android:layout_gravity="center"
+            android:padding="@dimen/_10sdp"
+            app:srcCompat="@drawable/ic_app_logo"
 
             />
 
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:background="@drawable/et_bg_white_border_black"
-            android:paddingStart="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_2sdp"
-            android:hint="@string/enter_name"
-            android:maxLines="1"
-            android:textIsSelectable="false"
-            android:longClickable="false"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:inputType="textCapWords"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorTextBlack"
-            android:textColorHint="@color/colorTextBlackLight"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toTopOf="@+id/etOTP"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textureView" />
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etOTP"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
-            android:background="@drawable/et_bg_white_border_black"
-            android:paddingStart="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_2sdp"
-            android:hint="@string/verification_code"
-            android:maxLines="1"
-            android:maxLength="6"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:inputType="numberSigned"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorTextBlack"
-            android:textColorHint="@color/colorTextBlackLight"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etName" />
-
-        <com.app.l_pesa.common.CustomButtonRegular
-            android:id="@+id/btnSubmit"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/yellow_button"
-            android:text="@string/final_step"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etOTP" />-->
-
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
