@@ -94,12 +94,6 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     private fun initCamera(){
 
-        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-        if (!imgDirectory.exists())
-        {
-            imgDirectory.mkdirs()
-        }
-        imageFile= File(imgDirectory,  "selfie.png")
 
         fotoapparat = Fotoapparat(
                 context = this,
@@ -113,6 +107,13 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
                 }
         )
+
+        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
+        if (!imgDirectory.exists())
+        {
+            imgDirectory.mkdirs()
+        }
+        imageFile= File(imgDirectory,  "selfie.png")
     }
 
     enum class CameraState{
@@ -178,7 +179,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
 
     override fun onStop() {
         super.onStop()
-        //fotoapparat!!.stop()
+        fotoapparat.stop()
         PhotoState.OFF
     }
 
@@ -293,8 +294,6 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,jsonMessage)
     }
-
-
 
 
     override fun onBackPressed() {

@@ -1,21 +1,16 @@
 package com.app.l_pesa.registration.view
 
-import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.os.Handler
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import io.fotoapparat.Fotoapparat
@@ -58,7 +53,6 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
         photoState      = PhotoState.OFF
 
 
-
         buttonComplete.setOnClickListener {
 
             takePhoto()
@@ -67,12 +61,6 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
 
     private fun initCamera(){
 
-        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-        if (!imgDirectory.exists())
-        {
-            imgDirectory.mkdirs()
-        }
-        imageFile= File(imgDirectory,  "personal.png")
 
         fotoapparat = Fotoapparat(
                 context = this,
@@ -86,6 +74,13 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
 
                 }
         )
+
+        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
+        if (!imgDirectory.exists())
+        {
+            imgDirectory.mkdirs()
+        }
+        imageFile= File(imgDirectory,  "personal.png")
     }
 
 
@@ -105,19 +100,13 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
 
     private fun takePhoto() {
 
-        val photoResult = fotoapparat
+       val photoResult = fotoapparat
                 .autoFocus()
                 .takePicture()
-        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-        if (!imgDirectory.exists())
-        {
-            imgDirectory.mkdirs()
-        }
 
-        imageFile= File(imgDirectory,  "personal.png")
+
+
         photoResult.saveToFile(imageFile)
-        val sharedPref= SharedPref(this@RegistrationStepFiveActivity)
-        sharedPref.imagePathPersonal=imageFile.absolutePath
         photoResult
                 .toBitmap(scaled(scaleFactor = 0.25f))
                 .whenAvailable { photo ->
@@ -143,7 +132,7 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        //fotoapparat!!.stop()
+       // fotoapparat.stop()
         PhotoState.OFF
     }
 
@@ -155,8 +144,8 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        /* if(!hasNoPermissions() && fotoapparatState == FotoapparatState.OFF){
-             val intent = Intent(baseContext, RegistrationStepTwoActivity::class.java)
+        /*if(photoState == PhotoState.OFF){
+             val intent = Intent(baseContext, RegistrationStepFiveActivity::class.java)
              startActivity(intent)
              finish()
          }*/
