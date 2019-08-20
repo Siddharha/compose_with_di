@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -21,6 +22,7 @@ import io.fotoapparat.Fotoapparat
 import io.fotoapparat.log.logcat
 import io.fotoapparat.log.loggers
 import io.fotoapparat.parameter.ScaleType
+import io.fotoapparat.result.transformer.scaled
 import io.fotoapparat.selector.back
 import kotlinx.android.synthetic.main.activity_registration_step_five.*
 import kotlinx.android.synthetic.main.layout_registration_step_five.*
@@ -35,7 +37,7 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
     private lateinit var imageFile      : File
     private lateinit var progressDialog : ProgressDialog
 
-    private var permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,28 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
     private fun initData()
     {
         initLoader()
+        initCamera()
 
+        cameraStatus    = CameraState.BACK
+        flashState      = FlashState.OFF
+        photoState      = PhotoState.OFF
+
+
+
+        buttonComplete.setOnClickListener {
+
+            takePhoto()
+        }
+    }
+
+    private fun initCamera(){
+
+        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
+        if (!imgDirectory.exists())
+        {
+            imgDirectory.mkdirs()
+        }
+        imageFile= File(imgDirectory,  "personal.png")
 
         fotoapparat = Fotoapparat(
                 context = this,
@@ -63,16 +86,8 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
 
                 }
         )
-
-        cameraStatus    = CameraState.BACK
-        flashState      = FlashState.OFF
-        photoState      = PhotoState.OFF
-
-        imageSave.setOnClickListener {
-
-            takePhoto()
-        }
     }
+
 
     enum class CameraState{
         FRONT, BACK
@@ -89,59 +104,42 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
 
 
     private fun takePhoto() {
-        if (hasNoPermissions()) {
 
-            val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-            ActivityCompat.requestPermissions(this, permissions,0)
-        }else{
-
-            val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-            if (!imgDirectory.exists())
-            {
-                imgDirectory.mkdirs()
-            }
-
-            imageFile= File(imgDirectory,  "personal.png")
-            progressDialog.show()
-            fotoapparat.takePicture().saveToFile(imageFile)
-
-            Handler().postDelayed({
-                val sharedPref= SharedPref(this@RegistrationStepFiveActivity)
-                sharedPref.imagePathPersonal=imageFile.absolutePath
-                startActivity(Intent(this@RegistrationStepFiveActivity, RegistrationStepFourActivity::class.java))
-                dismiss()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
-
-            }, 5000)
-
-
+        val photoResult = fotoapparat
+                .autoFocus()
+                .takePicture()
+        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
+        if (!imgDirectory.exists())
+        {
+            imgDirectory.mkdirs()
         }
+
+        imageFile= File(imgDirectory,  "personal.png")
+        photoResult.saveToFile(imageFile)
+        val sharedPref= SharedPref(this@RegistrationStepFiveActivity)
+        sharedPref.imagePathPersonal=imageFile.absolutePath
+        photoResult
+                .toBitmap(scaled(scaleFactor = 0.25f))
+                .whenAvailable { photo ->
+                    photo
+                            ?.let {
+
+                                Toast.makeText(this@RegistrationStepFiveActivity,"Success",Toast.LENGTH_SHORT).show()
+                            }
+
+                }
     }
+
 
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onStart() {
         super.onStart()
-
-        if (hasNoPermissions()) {
-            requestPermission()
-        }else{
             fotoapparat.start()
             photoState = PhotoState.ON
 
-        }
     }
 
-    private fun hasNoPermissions(): Boolean{
-        return ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED  && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-    }
-
-    fun requestPermission(){
-        ActivityCompat.requestPermissions(this, permissions,0)
-    }
 
     override fun onStop() {
         super.onStop()

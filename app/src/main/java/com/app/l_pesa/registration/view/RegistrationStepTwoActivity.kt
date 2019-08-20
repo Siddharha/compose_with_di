@@ -100,7 +100,6 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             imgDirectory.mkdirs()
         }
         imageFile= File(imgDirectory,  "selfie.png")
-        imageFile.deleteOnExit()
 
         fotoapparat = Fotoapparat(
                 context = this,
@@ -138,16 +137,15 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         }else{
 
             progressDialog.show()
-            fotoapparat!!.takePicture().saveToFile(imageFile!!)
-            PhotoState.OFF
+            fotoapparat.takePicture().saveToFile(imageFile)
 
             Handler().postDelayed({
                 val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
-                sharedPref.imagePath=imageFile!!.absolutePath
+                sharedPref.imagePath=imageFile.absolutePath
                 dismiss()
                 startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
                 overridePendingTransition(R.anim.right_in, R.anim.left_out)
-               }, 5000)
+               }, 3000)
 
 
         }
@@ -161,7 +159,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         if (hasNoPermissions()) {
             requestPermission()
         }else{
-            fotoapparat!!.start()
+            fotoapparat.start()
             photoState = PhotoState.ON
 
         }

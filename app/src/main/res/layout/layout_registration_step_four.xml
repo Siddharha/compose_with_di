@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilIdType"
-        app:layout_constraintBottom_toTopOf="@+id/imageCard"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
@@ -116,21 +116,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <ImageView
-        android:id="@+id/imageCard"
-        android:contentDescription="@string/app_name"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_125sdp"
-
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/tilNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-        />
-
 
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/btnSubmit"
@@ -149,7 +134,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageCard"
+        app:layout_constraintTop_toBottomOf="@+id/tilNumber"
 
 
         />

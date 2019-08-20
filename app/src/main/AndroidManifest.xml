@@ -32,6 +32,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:largeHeap="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <!-- android:usesCleartextTraffic="true" -->
@@ -173,13 +174,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
 
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
+
         </activity>
         <activity
             android:name=".main.view.MainActivity"
@@ -213,16 +213,13 @@
             android:name=".registration.view.RegistrationStepFourActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
 
         <activity android:name=".registration.view.RegistrationStepFiveActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
+
 
         </activity>
         <activity

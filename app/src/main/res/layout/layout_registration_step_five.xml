@@ -37,15 +37,35 @@
         <LinearLayout
             android:id="@+id/layoutBottom"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_75sdp"
-            android:background="@android:color/darker_gray"
+            android:layout_height="@dimen/_65sdp"
+            android:background="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/camera_view"
             app:layout_constraintBottom_toBottomOf="parent"
             >
 
-            <ImageView
+            <com.app.l_pesa.common.CustomButtonRegular
+                android:id="@+id/buttonComplete"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:fontFamily="@font/montserrat"
+                android:background="@drawable/bg_button_app"
+                android:text="@string/complete"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:letterSpacing=".10"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_gravity="center"
+
+
+
+                />
+
+           <!-- <ImageView
                 android:id="@+id/imageSave"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -54,7 +74,7 @@
                 android:padding="@dimen/_10sdp"
                 app:srcCompat="@drawable/ic_app_logo"
 
-                />
+                />-->
 
         </LinearLayout>
 
