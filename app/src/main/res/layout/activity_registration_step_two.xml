@@ -64,7 +64,8 @@
             android:id="@+id/layoutBottom"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_75sdp"
-            android:background="@android:color/darker_gray"
+            android:background="@android:color/white"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/camera_view"
@@ -73,8 +74,8 @@
 
         <ImageView
             android:id="@+id/imageSave"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/_65sdp"
+            android:layout_height="@dimen/_65sdp"
             android:contentDescription="@string/app_name"
             android:layout_gravity="center"
             android:padding="@dimen/_10sdp"
