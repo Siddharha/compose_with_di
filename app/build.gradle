@@ -27,7 +27,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles 'proguard-rules.pro'
-           /* debuggable true*/
+            /* debuggable true*/
             signingConfig signingConfigs.config
             proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
@@ -35,7 +35,7 @@ android {
             buildConfigField("String", 'PROFILE_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/"')
             buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
             buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
-           /* buildConfigField("String", 'BASE_URL', '"http://40.76.68.66/v2/"') //http://20.36.32.60*/
+            /* buildConfigField("String", 'BASE_URL', '"http://40.76.68.66/v2/"') //http://20.36.32.60*/
             buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')
 
         }

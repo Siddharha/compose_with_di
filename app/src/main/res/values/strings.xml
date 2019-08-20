@@ -28,6 +28,8 @@
     <string name="thank_you">Thank you!</string>
     <string name="next">Next</string>
     <string name="continue_">Continue</string>
+    <string name="done">Done</string>
+    <string name="complete">Complete</string>
     <string name="create_account">Don\'t have an account? Create one!</string>
     <string name="upload_picture">Upload picture &amp; write your name</string>
     <string name="upload_id_picture">Choose your ID type, enter your ID number &amp; upload a photocopy of the ID </string>
@@ -46,6 +48,7 @@
 
     <!--Caution Message-->
     <string name="loading">Loading</string>
+    <string name="saving">Saving</string>
     <string name="required_title">Please select the title.</string>
     <string name="required_name">Please enter your name.</string>
     <string name="required_name_f">Please enter your first name.</string>

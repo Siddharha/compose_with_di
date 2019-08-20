@@ -1,20 +1,27 @@
 package com.app.l_pesa.registration.view
 
 import android.Manifest
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.graphics.Typeface
 import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
+import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -31,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 
@@ -39,26 +47,17 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private lateinit  var progressDialog  : ProgressDialog
 
     var fotoapparat: Fotoapparat? = null
-    /*val filename = "test.png"
-    val sd = Environment.getExternalStorageDirectory()
-    val dest = File(sd, filename)*/
     var photoState : PhotoState? = null
     var cameraStatus : CameraState? = null
     var flashState: FlashState? = null
-
-    /*val filename = "test.png"
-    val sd = Environment.getExternalStorageDirectory()
-    val dest = File(sd, filename)*/
-
-    /*val filename = "test.png"
-    val sd = Environment.getExternalStorageDirectory()
-    val dest = File(sd, filename)*/
     var imageFile : File?=null
     val permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_two)
+        setSupportActionBar(toolbar)
+        toolbarFont(this@RegistrationStepTwoActivity)
 
        // val bundle = intent.extras
         //mobileOtp       = bundle!!.getString("OTP")!!
@@ -83,6 +82,20 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             takePhoto()
         }
 
+    }
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
+                    break
+                }
+            }
+        }
     }
 
     private fun initCamera(){
@@ -118,36 +131,26 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private fun takePhoto() {
         if (hasNoPermissions()) {
 
-            val permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(this, permissions,0)
         }else{
 
-            /*fotoapparat = Fotoapparat(
-                    context = this,
-                    view = camera_view,
-                    scaleType = ScaleType.CenterCrop,
-                    lensPosition = front(),
-                    logger = loggers(
-                            logcat()
-                    ),
-                    cameraErrorCallback = { error ->
-                        println("Recorder errors: $error")
-                    }
-            )*/
             progressDialog.show()
             fotoapparat!!.takePicture().saveToFile(imageFile!!)
+            PhotoState.OFF
+
             Handler().postDelayed({
                 val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
                 sharedPref.imagePath=imageFile!!.absolutePath
                 dismiss()
                 startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
                 overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                finish()
-            }, 3000)
+               }, 5000)
 
 
         }
     }
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onStart() {
@@ -201,7 +204,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     {
         progressDialog = ProgressDialog(this@RegistrationStepTwoActivity,R.style.MyAlertDialogStyle)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setMessage(resources.getString(R.string.saving))
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)
