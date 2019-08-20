@@ -44,14 +44,15 @@ import java.util.*
 
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
-    private lateinit  var progressDialog  : ProgressDialog
+    private lateinit var progressDialog  : ProgressDialog
 
-    var fotoapparat: Fotoapparat? = null
-    var photoState : PhotoState? = null
-    var cameraStatus : CameraState? = null
-    var flashState: FlashState? = null
-    var imageFile : File?=null
-    val permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+    private lateinit var fotoapparat    : Fotoapparat
+    private lateinit var photoState     : PhotoState
+    private lateinit var cameraStatus   : CameraState
+    private lateinit var flashState     : FlashState
+    private lateinit var imageFile      : File
+
+    private var permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,13 +63,6 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
        // val bundle = intent.extras
         //mobileOtp       = bundle!!.getString("OTP")!!
 
-        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-        if (!imgDirectory.exists())
-        {
-            imgDirectory.mkdirs()
-        }
-        imageFile= File(imgDirectory,  "selfie.png")
-        imageFile!!.deleteOnExit()
 
         initLoader()
         initCamera()
@@ -99,6 +93,14 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     }
 
     private fun initCamera(){
+
+        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
+        if (!imgDirectory.exists())
+        {
+            imgDirectory.mkdirs()
+        }
+        imageFile= File(imgDirectory,  "selfie.png")
+        imageFile.deleteOnExit()
 
         fotoapparat = Fotoapparat(
                 context = this,
