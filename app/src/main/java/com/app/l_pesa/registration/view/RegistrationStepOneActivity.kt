@@ -7,6 +7,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.TelephonyManager
@@ -21,6 +22,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -29,9 +31,12 @@ import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.registration.inter.ICallBackRegisterOne
 import com.app.l_pesa.registration.model.RegistrationData
+import com.app.l_pesa.registration.presenter.PresenterRegistrationOne
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 
@@ -102,17 +107,17 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         }
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission", "HardwareIds")
     private fun verifyField()
     {
         val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
-       /* var getIMEI=""
+        var getIMEI=""
         getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             telephonyManager!!.imei
         } else {
             telephonyManager!!.deviceId
-        }*/
+        }
 
         val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
@@ -125,27 +130,21 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         {
             CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
         }
-        /*else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
         {
-            CommonMethod.customSnackBarError(ll_root,this@RegistrationStepOneActivity,resources.getString(R.string.required_sim))
-        }*/
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_sim))
+        }
         else
         {
-            //CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
+            try {
+                CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
+            }
+            catch (exp:Exception)
+            {}
+
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
                 progressDialog.show()
-                //btnSubmit.isClickable=false
-
-                val sharedPref = SharedPref(this@RegistrationStepOneActivity)
-                sharedPref.verificationCode="1234"
-
-                dismiss()
-                val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                /*progressDialog.show()
-                btnSubmit.isClickable=false
 
                 val displayMetrics = resources.displayMetrics
                 val width = displayMetrics.widthPixels
@@ -161,10 +160,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
                 jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei","311477629513071")
-                jsonObjectRequestChild.addProperty("imsi","311477629513071")
-                jsonObjectRequestChild.addProperty("simSerial_no","311477629513071")
-                jsonObjectRequestChild.addProperty("sim_operator_Name","")
+                jsonObjectRequestChild.addProperty("imei",getIMEI)
+                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
+                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
+                jsonObjectRequestChild.addProperty("sim_operator_Name",""+telephonyManager.simOperatorName)
                 jsonObjectRequestChild.addProperty("screen_height",""+height)
                 jsonObjectRequestChild.addProperty("screen_width",""+width)
                 jsonObjectRequestChild.addProperty("device", Build.DEVICE)
@@ -178,11 +177,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
                 val presenterRegistrationOneObj= PresenterRegistrationOne()
                 presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
-*/
-                /* jsonObjectRequestChild.addProperty("imei",getIMEI)
-                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
-                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
-                jsonObjectRequestChild.addProperty("sim_operator_Name",telephonyManager.simOperatorName)*/
+
             }
             else
             {
@@ -276,15 +271,13 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         dismiss()
         Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
-        btnSubmit.isClickable =true
-        val sharedPref = SharedPref(this@RegistrationStepOneActivity)
-        sharedPref.accessToken=data.access_token
+        btnSubmit.isClickable       =true
+        val sharedPref              =SharedPref(this@RegistrationStepOneActivity)
+        sharedPref.accessToken      =data.access_token
+        sharedPref.verificationCode =data.otp
 
-        val bundle = Bundle()
-        bundle.putString("OTP",data.otp)
         val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
-        intent.putExtras(bundle)
-        startActivity(intent,bundle)
+        startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
     }
 
