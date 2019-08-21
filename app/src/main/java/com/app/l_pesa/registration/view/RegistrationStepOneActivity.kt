@@ -92,19 +92,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                    onBackPressed()
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
-
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
 
     private fun initLoader()
     {
@@ -179,13 +166,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
                 val sharedPref = SharedPref(this@RegistrationStepOneActivity)
                 sharedPref.accessToken="121212"
+                sharedPref.verificationCode="1234"
 
-                val bundle = Bundle()
-                bundle.putString("OTP","123456")
                 dismiss()
                 val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
-                intent.putExtras(bundle)
-                startActivity(intent,bundle)
+                startActivity(intent)
                 overridePendingTransition(R.anim.right_in, R.anim.left_out)
                 /*progressDialog.show()
                 btnSubmit.isClickable=false
@@ -347,12 +332,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     }
 
 
-    override fun onBackPressed() {
-
-        super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
     override fun onSuccessRegistrationOne(data: RegistrationData) {
 
         dismiss()
@@ -374,5 +353,23 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         dismiss()
         btnSubmit.isClickable=true
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,jsonMessage)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 }

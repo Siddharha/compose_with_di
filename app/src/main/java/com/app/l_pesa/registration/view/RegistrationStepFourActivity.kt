@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.Window
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_four)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepFourActivity)
 
         initUI()
@@ -84,6 +86,22 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
             }
         }
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
 
 
 }

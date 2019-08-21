@@ -240,11 +240,11 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
-    var imagePathPersonal: String
-        get() = pref.getString(KEY_SET_IMAGE_PATH_PERSONAL, "")!!
-        set(imagePathPersonal) {
-            editor.remove(KEY_SET_IMAGE_PATH_PERSONAL)
-            editor.putString(KEY_SET_IMAGE_PATH_PERSONAL, imagePathPersonal)
+    var verificationCode: String
+        get() = pref.getString(KEY_SET_VERIFICATION_CODE, "")!!
+        set(verificationCode) {
+            editor.remove(KEY_SET_VERIFICATION_CODE)
+            editor.putString(KEY_SET_VERIFICATION_CODE, verificationCode)
             editor.commit()
         }
 
@@ -301,7 +301,8 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_CURRENT_LAT           = "KEY_SET_CURRENT_LAT"
         private const val KEY_SET_CURRENT_LNG           = "KEY_SET_CURRENT_LNG"
         private const val KEY_SET_IMAGE_PATH            = "KEY_SET_IMAGE_PATH"
-        private const val KEY_SET_IMAGE_PATH_PERSONAL   = "KEY_SET_IMAGE_PATH_PERSONAL"
+        private const val KEY_SET_VERIFICATION_CODE     = "KEY_SET_VERIFICATION_CODE"
+
     }
 
 

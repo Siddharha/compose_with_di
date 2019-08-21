@@ -14,6 +14,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
+import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -45,24 +46,20 @@ import java.util.*
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
     private lateinit var progressDialog  : ProgressDialog
-
     private lateinit var fotoapparat    : Fotoapparat
     private lateinit var photoState     : PhotoState
     private lateinit var cameraStatus   : CameraState
     private lateinit var flashState     : FlashState
     private lateinit var imageFile      : File
 
-    private var permissions = arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+    private var permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_two)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepTwoActivity)
-
-       // val bundle = intent.extras
-        //mobileOtp       = bundle!!.getString("OTP")!!
-
 
         initLoader()
         initCamera()
@@ -71,37 +68,24 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         flashState      = FlashState.OFF
         photoState      = PhotoState.OFF
 
-        imageSave.setOnClickListener {
+        buttonContinue.setOnClickListener {
 
             takePhoto()
         }
 
     }
 
-    private fun toolbarFont(context: Activity) {
-
-        for (i in 0 until toolbar.childCount) {
-            val view = toolbar.getChildAt(i)
-            if (view is TextView) {
-                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (view.text == toolbar.title) {
-                    view.typeface = titleFont
-                    break
-                }
-            }
-        }
-    }
 
     private fun initCamera(){
 
 
         fotoapparat = Fotoapparat(
-                context = this,
-                view = camera_view,
-                scaleType = ScaleType.CenterCrop,
-                lensPosition = front(),
-                logger = loggers(
-                        logcat()
+                context         = this,
+                view            = cameraView,
+                scaleType       = ScaleType.CenterCrop,
+                lensPosition    = front(),
+                logger          = loggers(
+                                logcat()
                 ),
                 cameraErrorCallback = {
 
@@ -295,10 +279,35 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,jsonMessage)
     }
 
+    private fun toolbarFont(context: Activity) {
 
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
+                    break
+                }
+            }
+        }
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
     override fun onBackPressed() {
-
-
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
 

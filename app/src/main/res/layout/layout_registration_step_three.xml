@@ -44,8 +44,8 @@
     <FrameLayout
         android:id="@+id/frameImage"
         android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_125sdp"
-        android:layout_height="@dimen/_125sdp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +55,8 @@
     <com.app.l_pesa.common.CircularImageView
         android:id="@+id/imageView"
         android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_125sdp"
-        android:layout_height="@dimen/_125sdp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         android:scaleType="centerCrop"
         app:civ_border_width="0dp"
         app:srcCompat="@drawable/ic_user"
@@ -69,8 +69,8 @@
         <ImageView
             android:id="@+id/imageEdit"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_app_logo"
             android:layout_gravity="top|end"
