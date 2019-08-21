@@ -6,14 +6,10 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.ClipData
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Typeface
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
@@ -22,10 +18,8 @@ import android.view.MenuItem
 import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,10 +46,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -359,21 +350,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         imgProfile.setOnClickListener {
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
-            val dialogView = AlertDialog.Builder(this@ProfileEditPersonalActivity,R.style.MyAlertDialogTheme)
-            dialogView.setItems(items) { dialog, item ->
-
-                when {
-                    items[item] == "Camera" ->
-                        cameraClick()
-                    items[item] == "Gallery" ->
-                        galleryClick()
-                    items[item] == "Cancel" ->
-                        dialog.dismiss()
-                }
-            }
-
-            dialogView.show()
+            cameraClick()
 
         }
     }
@@ -405,35 +382,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
 
-    private fun galleryClick()
-    {
-        val checkSelfPermission = ContextCompat.checkSelfPermission(this@ProfileEditPersonalActivity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this@ProfileEditPersonalActivity, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), requestGalley)
-        }
-        else{
-            openAlbum()
-        }
-    }
-
-    private fun openAlbum(){
-        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, requestGalley)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
-            1 ->
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    openAlbum()
-                }
-                else {
-                    Toast.makeText(this@ProfileEditPersonalActivity, "You denied the permission", Toast.LENGTH_SHORT).show()
-                }
-        }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
@@ -443,25 +391,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 {
                     setImage()
                 }
-            requestGalley ->
-                if (resultCode == Activity.RESULT_OK) {
-                    handleImage(data)
 
-                }
         }
     }
 
    private fun setImage() {
 
         try {
-            val imgSize = File(captureFilePath.toString())
-            val length  = imgSize.length() / 1024
-            if(length>3000) // Max Size Under 3MB
-            {
-                captureImageStatus = false
-                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
-            }
-            else {
                 val photoPath: Uri = captureFilePath
                 imgProfile.post {
                     val pictureBitmap = BitmapResize.shrinkBitmap(
@@ -477,7 +413,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
                 captureImageStatus = true
 
-            }
         }
         catch (exp:Exception)
         {
@@ -486,94 +421,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
 
     }
-
-   private fun handleImage(data: Intent?) {
-       if (data != null)
-       {
-
-           try {
-                 val contentURI = data.data
-                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, contentURI)
-                 imgProfile.setImageBitmap(bitmap)
-                 saveImage(bitmap)
-               }
-           catch (exp:Exception){
-               Toast.makeText(this@ProfileEditPersonalActivity,exp.message,Toast.LENGTH_SHORT).show()
-           }
-
-       }
-       else
-       {
-           Toast.makeText(this@ProfileEditPersonalActivity,"Failed",Toast.LENGTH_SHORT).show()
-       }
-    }
-
-    private fun saveImage(myBitmap: Bitmap):String {
-
-        val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-       // val imgDirectory = File ((Environment.getExternalStorageDirectory()).toString())
-        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-        if (!imgDirectory.exists())
-        {
-            imgDirectory.mkdirs()
-        }
-        try
-        {
-            captureImageStatus=true
-            val file = File(imgDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
-            file.createNewFile()
-            val fo = FileOutputStream(file)
-            fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(this@ProfileEditPersonalActivity, arrayOf(file.path), arrayOf("image/png"), null)
-            fo.close()
-            photoFile=file
-            return file.absolutePath
-        }
-        catch (e1: IOException){
-            e1.printStackTrace()
-        }
-        return ""
-    }
-
-   /* private fun displayImage(imagePath: String?){
-        if (imagePath != null) {
-
-            val imgSize = File(imagePath)
-            val length  = imgSize.length() / 1024
-            if(length>3000) // Max Size Under 3MB
-            {
-                captureImageStatus=false
-                Toast.makeText(this@ProfileEditPersonalActivity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
-                captureImageStatus=true
-                val bitmap = BitmapFactory.decodeFile(imagePath)
-                imgProfile.setImageBitmap(bitmap)
-                photoFile=imgSize
-                CommonMethod.fileCompress(photoFile)
-            }
-
-        }
-        else {
-            captureImageStatus=false
-            Toast.makeText(this@ProfileEditPersonalActivity, "Failed to get image", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun imagePath(uri: Uri?, selection: String?): String {
-        var path: String? = null
-        val cursor = contentResolver.query(uri!!, null, selection, null, null )
-        if (cursor != null){
-            if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
-            }
-            cursor.close()
-        }
-        return path!!
-    }*/
-
 
 
     override fun onChangeTitle(s: String)

@@ -23,7 +23,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
 
     private val idList     = arrayListOf("1","2","3","4")
     private val idNameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
-    private var typeId="0"
+    private lateinit var typeId:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

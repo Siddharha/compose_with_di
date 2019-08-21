@@ -5,15 +5,11 @@ import android.app.Dialog
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -24,8 +20,6 @@ import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -55,10 +49,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 import java.util.*
 
 class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
@@ -167,22 +158,8 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         }
 
         imgProfile.setOnClickListener {
+            cameraClick()
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel")
-            val dialogView = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
-            dialogView.setItems(items) { dialog, item ->
-
-                when {
-                    items[item] == "Camera" ->
-                        cameraClick()
-                    items[item] == "Gallery" ->
-                        galleryClick()
-                    items[item] == "Cancel" ->
-                        dialog.dismiss()
-                }
-            }
-
-            dialogView.show()
         }
 
     }
@@ -462,36 +439,6 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     }
 
 
-
-    private fun galleryClick()
-    {
-        val checkSelfPermission = ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-        }
-        else{
-            openAlbum()
-        }
-    }
-
-    private fun openAlbum(){
-        val galleryIntent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(galleryIntent, requestGallery)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
-            1 ->
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    openAlbum()
-                }
-                else {
-                    Toast.makeText(activity!!, "You denied the permission", Toast.LENGTH_SHORT).show()
-                }
-        }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode) {
@@ -500,41 +447,28 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                 if (resultCode == Activity.RESULT_OK) {
                     setImage()
                 }
-            requestGallery ->
-                if (resultCode == Activity.RESULT_OK) {
-                    handleImage(data)
 
-                }
         }
     }
 
     private fun setImage() {
 
         try {
-            val imgSize = File(captureFilePath.toString())
-            val length  = imgSize.length() / 1024
-            if(length>3000) // Max Size Under 3MB
-            {
-                captureImageStatus = false
-                Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                val photoPath: Uri = captureFilePath
-                imgProfile.post {
-                    val pictureBitmap = BitmapResize.shrinkBitmap(
-                            activity!!,
-                            photoPath,
-                            imgProfile.width,
-                            imgProfile.height
-                    )
-                    imgProfile.setImageBitmap(pictureBitmap)
-                    imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-
-                }
-
-                captureImageStatus = true
+           val photoPath: Uri = captureFilePath
+            imgProfile.post {
+                val pictureBitmap = BitmapResize.shrinkBitmap(
+                        activity!!,
+                        photoPath,
+                        imgProfile.width,
+                        imgProfile.height
+                )
+                imgProfile.setImageBitmap(pictureBitmap)
+                imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
 
             }
+
+        captureImageStatus = true
+
         }
         catch (exp:Exception)
         {
@@ -543,122 +477,6 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     }
 
-    private fun handleImage(data: Intent?) {
-
-        if (data != null)
-        {
-
-            try {
-                val contentURI = data.data
-                val bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, contentURI)
-                imgProfile.setImageBitmap(bitmap)
-                saveImage(bitmap)
-            }
-            catch (exp:Exception){
-                Toast.makeText(activity!!,exp.message,Toast.LENGTH_SHORT).show()
-            }
-
-        }
-        else
-        {
-            Toast.makeText(activity!!,"Failed",Toast.LENGTH_SHORT).show()
-        }
-       /* var imagePath=""
-        try
-        {
-            val uri = data!!.data
-            when {
-                DocumentsContract.isDocumentUri(activity, uri) -> try {
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    if ("com.android.providers.media.documents" == uri!!.authority){
-                        val id = docId.split(":")[1]
-                        val section = MediaStore.Images.Media._ID + "=" + id
-                        imagePath = imagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, section)
-                    } else if ("com.android.providers.downloads.documents" == uri.authority){
-                        val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
-                        imagePath = imagePath(contentUri, null)
-                    }
-
-                }
-                catch (exp: Exception)
-                {
-
-                }
-                "content".equals(uri!!.scheme, ignoreCase = true) -> imagePath = imagePath(uri, null)
-                "file".equals(uri.scheme, ignoreCase = true) -> imagePath = uri.path!!
-            }
-            displayImage(imagePath)
-        }
-        catch (exp: Exception)
-        {
-
-        }*/
-    }
-
-    private fun saveImage(myBitmap: Bitmap):String {
-
-        val bytes = ByteArrayOutputStream()
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-        // val imgDirectory = File ((Environment.getExternalStorageDirectory()).toString())
-        val imgDirectory = File ((activity!!.getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-        if (!imgDirectory.exists())
-        {
-            imgDirectory.mkdirs()
-        }
-        try
-        {
-            captureImageStatus=true
-            val file = File(imgDirectory, ((Calendar.getInstance().timeInMillis).toString() + ".png"))
-            file.createNewFile()
-            val fo = FileOutputStream(file)
-            fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(activity, arrayOf(file.path), arrayOf("image/png"), null)
-            fo.close()
-            photoFile=file
-            return file.absolutePath
-        }
-        catch (e1: IOException){
-            e1.printStackTrace()
-        }
-        return ""
-    }
 
 
-  /*  private fun imagePath(uri: Uri?, selection: String?): String {
-        var path: String? = null
-        val cursor = activity!!.contentResolver.query(uri!!, null, selection, null, null )
-        if (cursor != null){
-            if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
-            }
-            cursor.close()
-        }
-        return path!!
-    }
-
-    private fun displayImage(imagePath: String?){
-        if (imagePath != null) {
-
-            val imgSize = File(imagePath)
-            val length  = imgSize.length() / 1024
-            if(length>3000) // Max Size Under 3MB
-            {
-                captureImageStatus=false
-                Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
-                captureImageStatus=true
-                val bitmap = BitmapFactory.decodeFile(imagePath)
-                imgProfile.setImageBitmap(bitmap)
-                photoFile=imgSize
-                CommonMethod.fileCompress(photoFile)
-            }
-
-        }
-        else {
-            captureImageStatus=false
-            Toast.makeText(activity!!, "Failed to get image", Toast.LENGTH_SHORT).show()
-        }
-    }*/
 }
