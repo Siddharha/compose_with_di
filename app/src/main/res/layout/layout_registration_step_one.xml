@@ -13,20 +13,19 @@
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/txtInfo"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_65sdp"
+        android:layout_height="@dimen/_85sdp"
         android:text="@string/email_verification"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_12sdp"
         android:padding="@dimen/_3sdp"
         android:textColor="@color/dark_text_color"
-        android:fontFamily="@font/montserrat"
         android:background="@color/screenBackground"
+        android:gravity="center|start"
         android:justificationMode="inter_word"
         app:layout_constraintBottom_toTopOf="@+id/tilPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
        />
-
 
 
     <androidx.core.widget.NestedScrollView
