@@ -138,7 +138,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 //btnSubmit.isClickable=false
 
                 val sharedPref = SharedPref(this@RegistrationStepOneActivity)
-                sharedPref.accessToken="121212"
                 sharedPref.verificationCode="1234"
 
                 dismiss()
@@ -233,8 +232,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
-         countryCode=resModelCountryList.country_code
-         etPhone.tag=countryCode
+         countryCode = resModelCountryList.country_code
+         etPhone.tag = countryCode
          if(TextUtils.isEmpty(etPhone.text.toString()))
          {
              etPhone.requestFocus()
@@ -246,39 +245,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     }
 
-    /*private fun countrySpinner(countryList: ResModelData)
-    {
-        val dialog= Dialog(this@RegistrationStepOneActivity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_country)
-        listCountry= ArrayList()
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-        val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
-        listCountry!!.addAll(countryList.countries_list)
-        adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, listCountry!!,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
-        recyclerView?.adapter           = adapterCountry
-        dialog.show()
-
-        etCountry!!.addTextChangedListener(object : TextWatcher {
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-                filterCountry(s.toString())
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable) {
-
-            }
-        })
-
-
-    }*/
 
     private fun filterCountry(countryName: String) {
 
