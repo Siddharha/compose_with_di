@@ -34,6 +34,7 @@ import io.fotoapparat.Fotoapparat
 import io.fotoapparat.log.logcat
 import io.fotoapparat.log.loggers
 import io.fotoapparat.parameter.ScaleType
+import io.fotoapparat.result.transformer.scaled
 import io.fotoapparat.selector.front
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.ByteArrayOutputStream
@@ -120,8 +121,26 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
             val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(this, permissions,0)
         }else{
-
             progressDialog.show()
+            val photoResult = fotoapparat
+                    .autoFocus()
+                    .takePicture()
+
+            photoResult.saveToFile(imageFile)
+            photoResult
+                    .toBitmap(scaled(scaleFactor = 0.25f))
+                    .whenAvailable { photo ->
+                        photo
+                                ?.let {
+                                    val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
+                                    sharedPref.imagePath=imageFile.absolutePath
+                                    startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
+                                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                                    dismiss()
+                                }
+
+                    }
+           /* progressDialog.show()
             fotoapparat.takePicture().saveToFile(imageFile)
 
             Handler().postDelayed({
@@ -130,7 +149,7 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
                 dismiss()
                 startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
                 overridePendingTransition(R.anim.right_in, R.anim.left_out)
-               }, 3000)
+               }, 3000)*/
 
 
         }

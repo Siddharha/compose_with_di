@@ -106,8 +106,6 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
                 .autoFocus()
                 .takePicture()
 
-
-
         photoResult.saveToFile(imageFile)
         photoResult
                 .toBitmap(scaled(scaleFactor = 0.25f))

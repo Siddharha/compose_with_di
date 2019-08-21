@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.Typeface
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.exifinterface.media.ExifInterface
@@ -28,6 +29,7 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_three)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepThreeActivity)
 
         initLoader()
@@ -153,9 +155,20 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                true
+            }
 
+            else -> super.onOptionsItemSelected(item)
+        }
     }
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
 
 }
