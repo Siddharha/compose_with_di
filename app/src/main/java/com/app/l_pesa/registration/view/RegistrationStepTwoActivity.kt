@@ -5,15 +5,10 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.graphics.Typeface
-import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.os.Handler
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -21,15 +16,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.registration.inter.ICallBackRegisterTwo
-import com.kaopiz.kprogresshud.KProgressHUD
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.log.logcat
 import io.fotoapparat.log.loggers
@@ -37,16 +28,12 @@ import io.fotoapparat.parameter.ScaleType
 import io.fotoapparat.result.transformer.scaled
 import io.fotoapparat.selector.front
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
-import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.util.*
 
 
 class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
-    private lateinit var progressDialog  : ProgressDialog
+    private lateinit var progressDialog : ProgressDialog
     private lateinit var fotoapparat    : Fotoapparat
     private lateinit var photoState     : PhotoState
     private lateinit var cameraStatus   : CameraState

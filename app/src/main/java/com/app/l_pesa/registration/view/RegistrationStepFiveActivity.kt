@@ -2,7 +2,6 @@ package com.app.l_pesa.registration.view
 
 import android.app.Activity
 import android.app.ProgressDialog
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -13,7 +12,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
-import com.app.l_pesa.common.SharedPref
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.log.logcat
 import io.fotoapparat.log.loggers

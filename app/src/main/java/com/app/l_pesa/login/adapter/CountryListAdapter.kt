@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -13,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.splash.model.ResModelCountryList
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 
 /**

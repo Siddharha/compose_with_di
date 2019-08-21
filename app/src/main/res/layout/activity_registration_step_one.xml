@@ -23,7 +23,7 @@
             app:titleTextAppearance="@style/Toolbar.TitleText">
 
 
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/imgCountry"
                 android:contentDescription="@string/app_name"
                 android:layout_width="@dimen/_25sdp"
@@ -34,7 +34,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:focusable="true"
 
-                />
+                />-->
 
         </androidx.appcompat.widget.Toolbar>
 

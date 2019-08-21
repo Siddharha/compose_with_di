@@ -91,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="@string/enter_id_number"
-                android:inputType="numberDecimal"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:textColorHint="@color/color_gray_text"

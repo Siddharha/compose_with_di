@@ -7,7 +7,6 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.TelephonyManager
@@ -15,7 +14,6 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.MenuItem
-import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -23,25 +21,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
-import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.inter.ICallBackRegisterOne
 import com.app.l_pesa.registration.model.RegistrationData
-import com.app.l_pesa.registration.presenter.PresenterRegistrationOne
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 
@@ -49,12 +39,10 @@ import kotlinx.android.synthetic.main.layout_registration_step_one.*
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne {
 
 
-    private lateinit var  progressDialog  : ProgressDialog
-    private var countryCode     ="+255"
-    private var countryFound    = false
-
-    private lateinit var alCountry        : ArrayList<ResModelCountryList>
-    private lateinit var adapterCountry   : CountryListAdapter
+    private lateinit var  progressDialog   : ProgressDialog
+    private lateinit var  countryCode      : String
+    private lateinit var  alCountry        : ArrayList<ResModelCountryList>
+    private lateinit var  adapterCountry   : CountryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,33 +52,18 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepOneActivity)
 
-        initLoader()
         initData()
-        loadCountry()
-        checkQualify()
+
     }
 
     private fun initData()
     {
-        imgCountry.setOnClickListener {
-
-            loadCountry()
-        }
+        initLoader()
+        loadCountry()
+        checkQualify()
+        etPhone.tag="+XXX"
     }
 
-    private fun toolbarFont(context: Activity) {
-
-        for (i in 0 until toolbar.childCount) {
-            val view = toolbar.getChildAt(i)
-            if (view is TextView) {
-                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (view.text == toolbar.title) {
-                    view.typeface = titleFont
-                    break
-                }
-            }
-        }
-    }
 
 
     private fun initLoader()
@@ -261,6 +234,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
          countryCode=resModelCountryList.country_code
+         etPhone.tag=countryCode
          if(TextUtils.isEmpty(etPhone.text.toString()))
          {
              etPhone.requestFocus()
@@ -372,4 +346,19 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
+                    break
+                }
+            }
+        }
+    }
+
 }

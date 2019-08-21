@@ -16,7 +16,6 @@ import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import kotlinx.android.synthetic.main.activity_registration_step_three.*
 import kotlinx.android.synthetic.main.layout_registration_step_three.*
 import java.io.File
@@ -84,7 +83,15 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
                         val presenterAWSProfile= PresenterAWSProfile()
                         val imgFile=CommonMethod.fileCompress(photoFile)
                         presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,imgFile)*/
-                        doContinue()
+                        if(imageFile.exists())
+                        {
+                            doContinue()
+                        }
+                        else
+                        {
+                            CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.image_not_found))
+                        }
+
 
                     } else {
                         CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.no_internet))

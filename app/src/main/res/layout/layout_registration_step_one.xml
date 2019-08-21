@@ -61,13 +61,12 @@
 
             >
 
-            <com.app.l_pesa.common.CommonEditTextRegular
+            <com.app.l_pesa.common.PrefixEditText
                 android:id="@+id/etPhone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:hint="@string/phone_no"
-                android:inputType="numberDecimal"
+                android:inputType="phone"
                 android:maxLength="15"
                 android:maxLines="1"
                 android:textColorHint="@color/color_gray_text"

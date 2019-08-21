@@ -1,13 +1,9 @@
 package com.app.l_pesa.login.view
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
@@ -25,13 +21,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.calculator.view.LoanCalculatorActivity
-import com.app.l_pesa.common.*
+import com.app.l_pesa.common.CommonEditTextRegular
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.LocationBackgroundService
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
