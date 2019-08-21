@@ -26,12 +26,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         initUI()
 
-
     }
-
 
 
     private fun initUI()
@@ -44,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
-
 
         }
 

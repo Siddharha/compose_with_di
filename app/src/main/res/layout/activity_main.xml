@@ -93,6 +93,7 @@
         android:layout_marginBottom="@dimen/_25sdp"
         android:background="@drawable/bg_black_view"
         android:text="@string/sign_in"
+        android:textStyle="bold"
         android:fontFamily="@font/montserrat"
         android:textColor="@color/colorSemiWhite"
         app:layout_constraintBottom_toBottomOf="parent"
