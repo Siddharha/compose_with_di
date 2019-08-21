@@ -1,12 +1,16 @@
 package com.app.l_pesa.registration.view
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -19,7 +23,10 @@ import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -39,6 +46,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
+import java.util.HashMap
 
 
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne {
@@ -109,6 +117,42 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     @SuppressLint("MissingPermission", "HardwareIds")
     private fun verifyField()
     {
+        hideKeyboard()
+
+        if((etPhone.text.toString().length<9))
+        {
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
+        }
+        else if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+        {
+            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
+        }
+
+        else
+        {
+
+            if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
+            {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    checkAndRequestPermissions()
+                }
+                else
+                {
+                    registrationProcess()
+                }
+
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.no_internet))
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission", "HardwareIds")
+    private fun registrationProcess()
+    {
+
         val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
         var getIMEI=""
@@ -120,65 +164,46 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-        hideKeyboard()
-
-        if((etPhone.text.toString().length<9))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
-        }
-        else if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
-        }
-        else if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
+        if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
         {
             CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_sim))
         }
         else
         {
+            progressDialog.show()
+            val displayMetrics = resources.displayMetrics
+            val width = displayMetrics.widthPixels
+            val height = displayMetrics.heightPixels
 
-            if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
-            {
-                progressDialog.show()
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("phone_no",etPhone.text.toString())
+            jsonObject.addProperty("email_address",etEmail.text.toString())
+            jsonObject.addProperty("country_code",countryCode)
+            jsonObject.addProperty("platform_type","A")
+            jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
-                val displayMetrics = resources.displayMetrics
-                val width = displayMetrics.widthPixels
-                val height = displayMetrics.heightPixels
+            val jsonObjectRequestChild = JsonObject()
+            jsonObjectRequestChild.addProperty("device_id", deviceId)
+            jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
+            jsonObjectRequestChild.addProperty("imei",getIMEI)
+            jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
+            jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
+            jsonObjectRequestChild.addProperty("sim_operator_Name",""+telephonyManager.simOperatorName)
+            jsonObjectRequestChild.addProperty("screen_height",""+height)
+            jsonObjectRequestChild.addProperty("screen_width",""+width)
+            jsonObjectRequestChild.addProperty("device", Build.DEVICE)
+            jsonObjectRequestChild.addProperty("model", Build.MODEL)
+            jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
+            jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+            jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
+            jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
 
-                val jsonObject = JsonObject()
-                jsonObject.addProperty("phone_no",etPhone.text.toString())
-                jsonObject.addProperty("email_address",etEmail.text.toString())
-                jsonObject.addProperty("country_code",countryCode)
-                jsonObject.addProperty("platform_type","A")
-                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+            jsonObject.add("device_data",jsonObjectRequestChild)
 
-                val jsonObjectRequestChild = JsonObject()
-                jsonObjectRequestChild.addProperty("device_id", deviceId)
-                jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",getIMEI)
-                jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
-                jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
-                jsonObjectRequestChild.addProperty("sim_operator_Name",""+telephonyManager.simOperatorName)
-                jsonObjectRequestChild.addProperty("screen_height",""+height)
-                jsonObjectRequestChild.addProperty("screen_width",""+width)
-                jsonObjectRequestChild.addProperty("device", Build.DEVICE)
-                jsonObjectRequestChild.addProperty("model", Build.MODEL)
-                jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
-                jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
-                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
-                jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
-
-                jsonObject.add("device_data",jsonObjectRequestChild)
-
-                val presenterRegistrationOneObj= PresenterRegistrationOne()
-                presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
-
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.no_internet))
-            }
+            val presenterRegistrationOneObj= PresenterRegistrationOne()
+            presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
         }
+
     }
 
     private fun hideKeyboard()
@@ -275,7 +300,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         dismiss()
         Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
-        btnSubmit.isClickable       =true
         val sharedPref              =SharedPref(this@RegistrationStepOneActivity)
         sharedPref.accessToken      =data.access_token
         sharedPref.verificationCode =data.otp
@@ -288,8 +312,93 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     override fun onErrorRegistrationOne(jsonMessage: String) {
 
         dismiss()
-        btnSubmit.isClickable=true
         CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,jsonMessage)
+    }
+
+    private fun checkAndRequestPermissions(): Boolean {
+
+        val permissionPhoneState    = ContextCompat.checkSelfPermission(this@RegistrationStepOneActivity, Manifest.permission.READ_PHONE_STATE)
+
+        val listPermissionsNeeded = ArrayList<String>()
+
+        if (permissionPhoneState != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE)
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
+            return false
+        }
+        else
+        {
+            registrationProcess()
+        }
+        return true
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+
+        when (requestCode) {
+            REQUEST_ID_PERMISSIONS -> {
+
+                val perms = HashMap<String, Int>()
+                // Initialize the map with both permissions
+                perms[Manifest.permission.READ_PHONE_STATE]         = PackageManager.PERMISSION_GRANTED
+                // Fill with actual results from user
+                if (grantResults.isNotEmpty()) {
+                    for (i in permissions.indices)
+                        perms[permissions[i]] = grantResults[i]
+                    // Check for both permissions
+                    if (perms[Manifest.permission.READ_PHONE_STATE]  == PackageManager.PERMISSION_GRANTED) {
+
+                        registrationProcess()
+                        //else any one or both the permissions are not granted
+                    } else {
+
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this@RegistrationStepOneActivity, Manifest.permission.READ_PHONE_STATE)) {
+                            showDialogOK("Permissions are required for this app",
+                                    DialogInterface.OnClickListener { _, which ->
+                                        when (which) {
+                                            DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
+                                            DialogInterface.BUTTON_NEGATIVE ->
+
+                                                finish()
+                                        }
+                                    })
+                        } else {
+                            permissionDialog("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show()
+    }
+
+    private fun permissionDialog(msg: String) {
+        val dialog = AlertDialog.Builder(this@RegistrationStepOneActivity)
+        dialog.setMessage(msg)
+                .setPositiveButton("Yes") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
+                }
+                .setNegativeButton("Cancel") { _, _ -> finish() }
+        dialog.show()
+    }
+
+    companion object {
+
+        private const  val REQUEST_ID_PERMISSIONS = 1
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
