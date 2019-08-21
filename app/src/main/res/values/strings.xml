@@ -93,7 +93,7 @@
     <string name="required_tin_number">Please enter TIN number.</string>
     <string name="required_id_number">Please enter valid ID number.</string>
     <string name="required_id_type">Please select the type of ID.</string>
-    <string name="required_otp">Please enter the OTP.</string>
+    <string name="required_verification_code">Please enter the Verification Code.</string>
     <string name="otp_not_match">You entered an incorrect OTP.</string>
     <string name="select_your_country">Select your country</string>
     <string name="search_country">Search country</string>

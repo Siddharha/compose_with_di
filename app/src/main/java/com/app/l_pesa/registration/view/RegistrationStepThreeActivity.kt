@@ -8,12 +8,15 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import kotlinx.android.synthetic.main.activity_registration_step_three.*
 import kotlinx.android.synthetic.main.layout_registration_step_three.*
 import java.io.File
@@ -57,7 +60,36 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
 
         btnSubmit.setOnClickListener {
 
-            doContinue()
+            try {
+                CommonMethod.hideKeyboardView(this@RegistrationStepThreeActivity)
+            } catch (exp: Exception) {
+
+            }
+
+            if (TextUtils.isEmpty(etName.text.toString()))
+            {
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.required_name))
+            } else if (TextUtils.isEmpty(etCode.text.toString()))
+            {
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.required_verification_code))
+            } else if (etCode.text.toString() != sharedPref.verificationCode)
+            {
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.otp_not_match))
+            } else
+            {
+                    if (CommonMethod.isNetworkAvailable(this@RegistrationStepThreeActivity)) {
+                        /*progressDialog.show()
+                        btnSubmit.isClickable=false
+
+                        val presenterAWSProfile= PresenterAWSProfile()
+                        val imgFile=CommonMethod.fileCompress(photoFile)
+                        presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,imgFile)*/
+                        doContinue()
+
+                    } else {
+                        CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.no_internet))
+                    }
+            }
         }
 
     }

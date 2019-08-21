@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.MenuItem
 import android.view.Window
 import android.widget.TextView
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.registration.adapter.PersonalIdListAdapter
 import kotlinx.android.synthetic.main.activity_registration_step_four.*
@@ -53,15 +55,35 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
         showId()
 
         etIdType.setOnClickListener {
+
             showId()
         }
 
         btnSubmit.setOnClickListener {
 
-            startActivity(Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        }
+            try {
+                CommonMethod.hideKeyboardView(this@RegistrationStepFourActivity)
+            } catch (exp: Exception) {
 
+            }
+
+            if(TextUtils.isEmpty(etIdNumber.text.toString()))
+            {
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepFourActivity, resources.getString(R.string.required_id_number))
+            }
+            else
+            {
+                if (CommonMethod.isNetworkAvailable(this@RegistrationStepFourActivity)) {
+
+                    startActivity(Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                }
+                else{
+                    CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepFourActivity, resources.getString(R.string.no_internet))
+                }
+            }
+
+        }
 
     }
 
@@ -89,7 +111,6 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
     override fun onBackPressed() {
 
     }
-
 
 
 }
