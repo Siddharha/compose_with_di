@@ -25,6 +25,10 @@
     <!--Registration Message-->
     <string name="see_you_quality">See if you qualify</string>
     <string name="select">Select</string>
+    <string name="registration_step_one">Registration Step One</string>
+    <string name="registration_step_two">Registration Step Two</string>
+    <string name="registration_step_three">Registration Step Three</string>
+    <string name="registration_step_four">Registration Step Four</string>
     <string name="thank_you">Thank you!</string>
     <string name="next">Next</string>
     <string name="continue_">Continue</string>

@@ -191,33 +191,33 @@
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".registration.view.RegistrationStepOneActivity"
-            android:label="@string/continue_to_register"
+            android:label="@string/registration_step_one"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".registration.view.RegistrationStepTwoActivity"
-            android:label="@string/app_name"
+            android:label="@string/registration_step_two"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
 
         </activity>
         <activity
             android:name=".registration.view.RegistrationStepThreeActivity"
+            android:label="@string/registration_step_three"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".registration.view.RegistrationStepFourActivity"
+            android:label="@string/registration_step_four"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
 
         </activity>
 
         <activity android:name=".registration.view.RegistrationStepFiveActivity"
-            android:label="@string/app_name"
+            android:label="@string/continue_to_register"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
-
-
 
         </activity>
         <activity
@@ -228,14 +228,6 @@
             android:name=".dashboard.view.DashboardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
-
-            <!--
-                <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
 
         </activity>
         <activity

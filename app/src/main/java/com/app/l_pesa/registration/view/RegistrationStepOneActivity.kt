@@ -70,7 +70,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     }
 
 
-
     private fun initLoader()
     {
         progressDialog = ProgressDialog(this@RegistrationStepOneActivity,R.style.MyAlertDialogStyle)
@@ -121,7 +120,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-        CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
+        hideKeyboard()
+
         if((etPhone.text.toString().length<9))
         {
             CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
@@ -136,11 +136,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         }
         else
         {
-            try {
-                CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
-            }
-            catch (exp:Exception)
-            {}
 
             if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
             {
@@ -184,6 +179,15 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.no_internet))
             }
         }
+    }
+
+    private fun hideKeyboard()
+    {
+        try {
+            CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
+        }
+        catch (exp:Exception)
+        {}
     }
 
     private fun loadCountry()
@@ -291,9 +295,9 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
+                hideKeyboard()
                 onBackPressed()
                 overridePendingTransition(R.anim.left_in, R.anim.right_out)
-
                 true
             }
 
