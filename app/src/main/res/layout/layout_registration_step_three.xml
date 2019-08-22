@@ -28,19 +28,6 @@
         />
 
 
-    <!--<ImageView
-        android:id="@+id/imageView"
-        android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_75sdp"
-        android:layout_height="@dimen/_75sdp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInfo"
-        app:layout_constraintBottom_toTopOf="@+id/tilName"
-
-        />-->
-
     <FrameLayout
         android:id="@+id/frameImage"
         android:contentDescription="@string/app_name"

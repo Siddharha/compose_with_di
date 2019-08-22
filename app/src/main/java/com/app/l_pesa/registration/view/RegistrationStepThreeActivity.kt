@@ -16,6 +16,12 @@ import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.inter.ICallBackUpload
+import com.app.l_pesa.profile.presenter.PresenterAWSProfile
+import com.app.l_pesa.registration.inter.ICallBackRegisterTwo
+import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
+import com.google.gson.JsonObject
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_registration_step_three.*
 import kotlinx.android.synthetic.main.layout_registration_step_three.*
 import java.io.File
@@ -23,9 +29,11 @@ import java.io.FileOutputStream
 import java.io.IOException
 
 
-class RegistrationStepThreeActivity : AppCompatActivity() {
+class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
 
-    private lateinit  var progressDialog: ProgressDialog
+
+    private lateinit  var progressDialog    : ProgressDialog
+    private lateinit  var imageFile         :File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +53,11 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
 
         val sharedPref=SharedPref(this@RegistrationStepThreeActivity)
         handleRotation(sharedPref.imagePath)
-        val imageFile=File(sharedPref.imagePath)
+        imageFile   = File(sharedPref.imagePath)
+        imageFile   = Compressor(this@RegistrationStepThreeActivity).compressToFile(imageFile)
+
         val imagePath = BitmapFactory.decodeFile(imageFile.absolutePath)
         imageView.setImageBitmap(imagePath)
-
 
         imageEdit.setOnClickListener {
 
@@ -59,12 +68,7 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
 
         btnSubmit.setOnClickListener {
 
-            try {
-                CommonMethod.hideKeyboardView(this@RegistrationStepThreeActivity)
-            } catch (exp: Exception) {
-
-            }
-
+            hideKeyboard()
             if (TextUtils.isEmpty(etName.text.toString()))
             {
                 CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.required_name))
@@ -76,27 +80,35 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
                 CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.otp_not_match))
             } else
             {
-                    if (CommonMethod.isNetworkAvailable(this@RegistrationStepThreeActivity)) {
-                        /*progressDialog.show()
-                        btnSubmit.isClickable=false
+                if (CommonMethod.isNetworkAvailable(this@RegistrationStepThreeActivity)) {
 
+                    if(imageFile.exists())
+                    {
+                        progressDialog.show()
                         val presenterAWSProfile= PresenterAWSProfile()
-                        val imgFile=CommonMethod.fileCompress(photoFile)
-                        presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,imgFile)*/
-                        if(imageFile.exists())
-                        {
-                            doContinue()
-                        }
-                        else
-                        {
-                            CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.image_not_found))
-                        }
-
-
-                    } else {
-                        CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.no_internet))
+                        presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepThreeActivity,this,imageFile)
                     }
+                    else
+                    {
+                        CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.image_not_found))
+                    }
+
+
+                } else {
+                    CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.no_internet))
+                }
             }
+        }
+
+    }
+
+    private fun hideKeyboard()
+    {
+
+        try {
+            CommonMethod.hideKeyboardView(this@RegistrationStepThreeActivity)
+        } catch (exp: Exception) {
+
         }
 
     }
@@ -162,6 +174,37 @@ class RegistrationStepThreeActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)
 
+    }
+
+    override fun onSuccessUploadAWS(url: String) {
+
+        uploadInformation(url)
+    }
+
+    override fun onFailureUploadAWS(string: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, string)
+    }
+
+    private fun uploadInformation(url: String)
+    {
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("name",etName.text.toString())
+        jsonObject.addProperty("image",url)
+        jsonObject.addProperty("otp",etCode.text.toString())
+
+        val presenterRegistrationTwo= PresenterRegistrationTwo()
+        presenterRegistrationTwo.doRegistrationStepTwo(this@RegistrationStepThreeActivity,jsonObject,this)
+    }
+
+    override fun onSuccessRegistrationTwo() {
+        dismiss()
+        doContinue()
+    }
+
+    override fun onErrorRegistrationTwo(jsonMessage: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, jsonMessage)
     }
 
     private fun dismiss()
