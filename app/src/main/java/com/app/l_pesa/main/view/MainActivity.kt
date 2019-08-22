@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI()
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             checkAndRequestPermissions()
-          }
+          }*/
 
         buttonLogin.setOnClickListener {
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
+/*
     private fun checkAndRequestPermissions(): Boolean {
         val permissionCamera        = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.CAMERA)
         val permissionStorage       = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
 
         private const  val REQUEST_ID_MULTIPLE_PERMISSIONS = 1
 
-    }
+    }*/
 
     override fun onBackPressed() {
         val homeIntent = Intent(Intent.ACTION_MAIN)

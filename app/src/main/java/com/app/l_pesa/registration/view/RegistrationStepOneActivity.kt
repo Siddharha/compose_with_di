@@ -258,6 +258,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
          countryCode = resModelCountryList.country_code
          etPhone.tag = countryCode
+
          if(TextUtils.isEmpty(etPhone.text.toString()))
          {
              etPhone.requestFocus()
