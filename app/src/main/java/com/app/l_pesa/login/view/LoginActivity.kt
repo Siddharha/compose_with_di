@@ -342,7 +342,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
         txtCountry.visibility=View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
-        etPhone.tag = resModelCountryList.country_code+" "
+        etPhone.tag = resModelCountryList.country_code+"   "
         val sharedPrefOBJ= SharedPref(this@LoginActivity)
         sharedPrefOBJ.countryCode=resModelCountryList.code
         sharedPrefOBJ.countryName=resModelCountryList.country_name
@@ -380,14 +380,14 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         val sharedPrefOBJ= SharedPref(this@LoginActivity)
         if(TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode))
         {
-            etPhone.tag="+000 "
+            etPhone.tag="+000   "
             showCountry()
         }
         else
         {
             txtCountry.visibility=View.VISIBLE
             txtCountry.text = sharedPrefOBJ.countryName
-            etPhone.tag=sharedPrefOBJ.countryIsdCode+" "
+            etPhone.tag=sharedPrefOBJ.countryIsdCode+"   "
         }
 
         txtCountry.setOnClickListener {

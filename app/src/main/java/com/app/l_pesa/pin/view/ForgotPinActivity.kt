@@ -268,14 +268,14 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         val sharedPrefOBJ= SharedPref(this@ForgotPinActivity)
         if(TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode))
         {
-            etPhone.tag="+000 "
+            etPhone.tag="+000   "
             showCountry()
         }
         else
         {
             txtCountry.visibility=View.VISIBLE
             txtCountry.text = sharedPrefOBJ.countryName
-            etPhone.tag=sharedPrefOBJ.countryIsdCode+" "
+            etPhone.tag=sharedPrefOBJ.countryIsdCode+"   "
         }
 
         txtCountry.setOnClickListener {
@@ -438,7 +438,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
 
         txtCountry.visibility=View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
-        etPhone.tag = resModelCountryList.country_code+" "
+        etPhone.tag = resModelCountryList.country_code+"   "
         val sharedPrefOBJ= SharedPref(this@ForgotPinActivity)
         sharedPrefOBJ.countryCode=resModelCountryList.code
         sharedPrefOBJ.countryName=resModelCountryList.country_name
