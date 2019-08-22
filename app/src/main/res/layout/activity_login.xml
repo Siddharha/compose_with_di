@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:id="@+id/ll_root"
+    android:id="@+id/rootLayout"
     android:layout_height="match_parent"
-    android:padding="@dimen/_40sdp"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
 
     <ImageView
         android:id="@+id/imageView"
@@ -33,104 +35,72 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/ll_flag_section"
+        app:layout_constraintBottom_toTopOf="@+id/tilPhone"
 
         />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_flag_section"
-        android:layout_width="0dp"
-        android:background="@drawable/et_bg_white_border_black"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:paddingStart="@dimen/_1sdp"
-        android:paddingEnd="@dimen/_1sdp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/tilPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHeader"
-       >
+        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        >
+        <com.app.l_pesa.common.CommonInputLayout
 
-        <ImageView
-            android:id="@+id/img_country"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_18sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:contentDescription="@string/app_name"
-            android:paddingStart="@dimen/_3sdp"
-            android:paddingEnd="@dimen/_1sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView33"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view_1"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:background="@color/color_gray_light"
-            app:layout_constraintEnd_toStartOf="@+id/etPhone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView33"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etPhone"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:inputType="numberSigned"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_2sdp"
-            android:hint="@string/phone_no"
-            android:cursorVisible="true"
-            android:focusable="true"
-            android:maxLines="1"
-            android:maxLength="15"
-            android:longClickable="false"
-            android:textIsSelectable="false"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorTextBlack"
-            android:textColorHint="@color/colorTextBlackLight"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view_1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView33"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
+            style="@style/customInputLayoutStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/view_1"
-            app:layout_constraintBottom_toBottomOf="@+id/ll_flag_section"
-            app:layout_constraintStart_toEndOf="@+id/img_country"
-            app:layout_constraintTop_toTopOf="@+id/ll_flag_section"
-            app:srcCompat="@drawable/ic_dropdown_icon" />
 
+            >
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.app.l_pesa.common.PrefixEditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:inputType="numberSigned"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_2sdp"
+                android:hint="@string/phone_no"
+                android:cursorVisible="true"
+                android:focusable="true"
+                android:longClickable="false"
+                android:textIsSelectable="false"
+                android:textColorHint="@color/color_gray_text"
+                android:textColor="@color/textColors"
+                android:textSize="@dimen/_12sdp" />
 
+        </com.app.l_pesa.common.CommonInputLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.app.l_pesa.common.CustomButtonRegular
-        android:id="@+id/txtLogin"
+        android:id="@+id/buttonLogin"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_32sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:background="@drawable/yellow_button"
+        android:background="@drawable/bg_button_app"
         android:fontFamily="@font/montserrat"
         android:text="@string/login"
+        android:textAllCaps="true"
+        android:letterSpacing=".10"
+        android:textSize="@dimen/_12sdp"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintBottom_toTopOf="@+id/txtForgotPin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_flag_section" />
+        app:layout_constraintTop_toBottomOf="@+id/tilPhone" />
 
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/txtForgotPin"
@@ -140,6 +110,7 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:padding="@dimen/_2sdp"
         android:text="@string/forgot_pin"
+        android:textSize="@dimen/_12sdp"
         android:textColorHighlight="@android:color/white"
         android:textColorLink="@color/colorAppDeep"
         android:fontFamily="@font/montserrat"
@@ -147,7 +118,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txtRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/txtRegister"
@@ -155,6 +126,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/_2sdp"
+        android:textSize="@dimen/_12sdp"
         android:textColorHighlight="@android:color/white"
         android:textColorLink="@color/colorAppDeep"
         android:text="@string/create_account"
@@ -162,21 +134,26 @@
         android:fontFamily="@font/montserrat"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/txtLoanCalculator"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLoanCalculator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtForgotPin" />
 
-
-    <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txtLoanCalculator"
+    <com.app.l_pesa.common.CustomButtonRegular
+        android:id="@+id/buttonLoanCalculator"
         android:gravity="center"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_32sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:textSize="@dimen/_11sdp"
         android:text="@string/calculate_your_loan"
-        android:background="@drawable/bg_transparent_border_light_green_view"
-        android:textColor="@color/colorAppDeep"
+        android:background="@drawable/bg_button_app"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/montserrat"
+        android:textAllCaps="true"
+        android:letterSpacing=".10"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtRegister" />
@@ -193,7 +170,6 @@
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLoanCalculator" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoanCalculator" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

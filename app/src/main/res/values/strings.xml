@@ -451,7 +451,7 @@
     <string name="choose_loan_type">Choose Loan Type</string>
     <string name="product_name">Product Name</string>
     <string name="choose_option">Choose Option</string>
-    <string name="calculate_your_loan">Calculate Your Loan</string>
+    <string name="calculate_your_loan">Loan Calculator</string>
     <string name="one_usd_equal">1 USD =</string>
     <string name="loan_amount_calculator">Loan Amount</string>
     <string name="credit_score_calculator">Credit Score</string>
