@@ -23,7 +23,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
 
     private val idList     = arrayListOf("1","2","3","4")
     private val idNameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
-    private lateinit var typeId:String
+    private var typeId     =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,8 +74,8 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
             {
                 if (CommonMethod.isNetworkAvailable(this@RegistrationStepFourActivity)) {
 
-                    val bundle     = intent.extras
-                    bundle!!.putString("id_type",typeId)
+                    val bundle     = Bundle()
+                    bundle.putString("id_type",typeId)
                     bundle.putString("id_number",etIdNumber.text.toString())
                     val intent = Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java)
                     intent.putExtras(bundle)
