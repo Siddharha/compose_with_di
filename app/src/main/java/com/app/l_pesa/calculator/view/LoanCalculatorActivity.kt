@@ -3,6 +3,7 @@ package com.app.l_pesa.calculator.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -34,7 +35,7 @@ import java.text.DecimalFormat
 
 class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit var  progressDialog   : ProgressDialog
     private var usdValue=0.0
     private var personalLoanStatus="FALSE"
     private var businessLoanStatus="FALSE"
@@ -116,11 +117,12 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(this@LoanCalculatorActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(this@LoanCalculatorActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
@@ -159,7 +161,6 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
         popupMenuOBJ.show()
 
-
     }
 
 
@@ -187,7 +188,6 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
                 dialogProduct(businessProduct)
 
             }
-
 
     }
 
@@ -300,8 +300,6 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         var paymentL         = 0.0
 
 
-
-
         for(i in 1..loanProduct.loanPeriod)
         {
             val curAmount        = loanAmount-(principalAmount* (i-1))
@@ -337,7 +335,6 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
                 }
             }
-
 
         }
 
@@ -426,7 +423,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
         ti_product_name.setText("$ "+format.format(productList.loanAmount))
-        ti_product_name.setTextColor(ContextCompat.getColor(this@LoanCalculatorActivity, com.app.l_pesa.R.color.textColors))
+        ti_product_name.setTextColor(ContextCompat.getColor(this@LoanCalculatorActivity, R.color.textColors))
     }
 
 
@@ -448,7 +445,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         return when (item.itemId) {
             android.R.id.home -> {
                 onBackPressed()
-                overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 true
             }
 
@@ -458,9 +455,8 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
-
 
 
 }

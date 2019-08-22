@@ -27,10 +27,13 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.calculator.view.LoanCalculatorActivity
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -95,23 +98,11 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     {
         buttonLoanCalculator.setOnClickListener {
 
-           /* try {
-                if(isLocationEnabled())
-                {
-                    val sharedPrefOBJ= SharedPref(this@LoginActivity)
-                    sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
-                    sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
-                    startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
-                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                }
-                else
-                {
-                    showAlert()
-                }
-
-            }
-            catch (exp: Exception)
-            {}*/
+            val sharedPrefOBJ= SharedPref(this@LoginActivity)
+            sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
+            sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
+            startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
         }
     }
@@ -259,7 +250,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
-                println("JSON"+jsonObject)
+                //println("JSON"+jsonObject)
 
             }
             else
@@ -330,7 +321,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         countryCode = resModelCountryList.country_code
         etPhone.tag = countryCode
-
+        val sharedPrefOBJ= SharedPref(this@LoginActivity)
+        sharedPrefOBJ.countryCode=resModelCountryList.code
     }
 
 
@@ -496,7 +488,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     public override fun onResume() {
         super.onResume()
-       // fetchLocation()
+
     }
 
 
