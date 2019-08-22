@@ -17,8 +17,7 @@
     <list default="true" id="6460da4f-f699-4773-842d-24fe866b30f5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,21 +39,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="180" column="31" lean-forward="true" selection-start-line="176" selection-start-column="10" selection-end-line="180" selection-end-column="31" />
-            </state>
-          </provider>
-          <provider editor-type-id="android-manifest" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+            <state relative-caret-position="186">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1786">
+              <caret line="135" column="40" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/BusinessLoanHistory.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="213">
+              <caret line="311" column="17" selection-start-line="311" selection-start-column="17" selection-end-line="311" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -82,8 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>onres</find>
-      <find>LAUNCHER</find>
       <find>CenterCrop</find>
       <find>takePhoto</find>
       <find>five</find>
@@ -112,6 +117,8 @@
       <find>registrationProcess</find>
       <find>comp</find>
       <find>category.LAUNCHE</find>
+      <find>val bundle</find>
+      <find>ategory.LAUNCH</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -176,9 +183,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepThreeActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_registration_step_five.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" />
       </list>
     </option>
   </component>
@@ -355,7 +362,7 @@
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.47868854" visible="true" weight="0.2728279" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.47868854" visible="true" weight="0.2728279" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" sideWeight="0.52131146" side_tool="true" visible="true" weight="0.2728279" />
@@ -364,7 +371,7 @@
       <window_info id="Resources Explorer" order="7" weight="0.32982844" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" />
-      <window_info anchor="bottom" id="Logcat" order="1" visible="true" weight="0.3412527" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="1" visible="true" weight="0.3412527" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32937366" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.31641468" />
@@ -393,7 +400,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.fotoapparat/fotoapparat/2.6.1/e2a1f460aa9d2f1d79b409d07eff0ad92d7ea2d8/fotoapparat-2.6.1-sources.jar!/io/fotoapparat/selector/LensPositionSelectors.kt" />
     <entry file="file://$PROJECT_DIR$/kprogresshud/build.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -711,17 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-950">
-          <caret line="192" column="62" selection-start-line="192" selection-start-column="62" selection-end-line="192" selection-end-column="62" />
-          <folding>
-            <element signature="e#4767#4808#1" expanded="true" />
-            <element signature="e#5785#5831#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepTwoActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="402">
@@ -745,20 +740,34 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/BusinessLoanHistory.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+        <state relative-caret-position="213">
+          <caret line="311" column="17" selection-start-line="311" selection-start-column="17" selection-end-line="311" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="180" column="31" lean-forward="true" selection-start-line="176" selection-start-column="10" selection-end-line="180" selection-end-column="31" />
+        <state relative-caret-position="224">
+          <caret line="182" column="19" selection-start-line="182" selection-start-column="19" selection-end-line="182" selection-end-column="19" />
         </state>
       </provider>
       <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1786">
+          <caret line="135" column="40" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="40" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

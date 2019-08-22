@@ -134,7 +134,6 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
                 .takePicture()
 
         photoResult.saveToFile(imageFile)
-        imageFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(imageFile)
         photoResult
                 .toBitmap(scaled(scaleFactor = 0.25f))
                 .whenAvailable { photo ->
@@ -149,7 +148,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
     private fun doContinue()
     {
-
+        imageFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(imageFile)
         if(CommonMethod.isNetworkAvailable(this@RegistrationStepFiveActivity))
         {
             progressDialog.show()
