@@ -3,24 +3,23 @@ package com.app.l_pesa.registration.view
 import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
 import android.view.MenuItem
 import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.profile.inter.ICallBackUpload
-import com.app.l_pesa.registration.inter.ICallBackRegisterTwo
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.log.logcat
 import io.fotoapparat.log.loggers
@@ -29,9 +28,12 @@ import io.fotoapparat.result.transformer.scaled
 import io.fotoapparat.selector.front
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
+import java.util.HashMap
+import kotlin.collections.ArrayList
+import kotlin.collections.set
 
 
-class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {
+class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private lateinit var progressDialog : ProgressDialog
     private lateinit var fotoapparat    : Fotoapparat
@@ -40,7 +42,6 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private lateinit var flashState     : FlashState
     private lateinit var imageFile      : File
 
-    private var permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +51,13 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         toolbarFont(this@RegistrationStepTwoActivity)
 
         initLoader()
-        initCamera()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            checkAndRequestPermissions()
+        }
+        else{
+            initCamera()
+        }
+
 
         cameraStatus    = CameraState.BACK
         flashState      = FlashState.OFF
@@ -67,18 +74,21 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     private fun initCamera(){
 
 
-        fotoapparat = Fotoapparat(
-                context         = this,
+     fotoapparat = Fotoapparat(
+                context         = this@RegistrationStepTwoActivity,
                 view            = cameraView,
                 scaleType       = ScaleType.CenterCrop,
                 lensPosition    = front(),
                 logger          = loggers(
-                                logcat()
+                                  logcat()
                 ),
                 cameraErrorCallback = {
 
                 }
         )
+
+        fotoapparat.start()
+        photoState = PhotoState.ON
 
         val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
         if (!imgDirectory.exists())
@@ -101,94 +111,36 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     }
 
 
-
     private fun takePhoto() {
-        if (hasNoPermissions()) {
 
-            val permissions = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-            ActivityCompat.requestPermissions(this, permissions,0)
-        }else{
-            progressDialog.show()
-            val photoResult = fotoapparat
-                    .autoFocus()
-                    .takePicture()
+        progressDialog.show()
+        val photoResult = fotoapparat
+                .autoFocus()
+                .takePicture()
 
-            photoResult.saveToFile(imageFile)
-            photoResult
-                    .toBitmap(scaled(scaleFactor = 0.25f))
-                    .whenAvailable { photo ->
-                        photo
-                                ?.let {
-                                    val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
-                                    sharedPref.imagePath=imageFile.absolutePath
-                                    startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
-                                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                                    dismiss()
-                                }
+        photoResult.saveToFile(imageFile)
+        photoResult
+                .toBitmap(scaled(scaleFactor = 0.25f))
+                .whenAvailable { photo ->
+                    photo?.let {
+                            val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
+                            sharedPref.imagePath=imageFile.absolutePath
+                            startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
+                            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                            dismiss()
 
-                    }
-           /* progressDialog.show()
-            fotoapparat.takePicture().saveToFile(imageFile)
+                            }
 
-            Handler().postDelayed({
-                val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
-                sharedPref.imagePath=imageFile.absolutePath
-                dismiss()
-                startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
-                overridePendingTransition(R.anim.right_in, R.anim.left_out)
-               }, 3000)*/
+                }
 
-
-        }
     }
 
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    override fun onStart() {
-        super.onStart()
-
-        if (hasNoPermissions()) {
-            requestPermission()
-        }else{
-            fotoapparat.start()
-            photoState = PhotoState.ON
-
-        }
-    }
-
-    private fun hasNoPermissions(): Boolean{
-        return ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED  && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
-    }
-
-    fun requestPermission(){
-        ActivityCompat.requestPermissions(this, permissions,0)
-    }
 
     override fun onStop() {
         super.onStop()
         fotoapparat.stop()
         PhotoState.OFF
     }
-
-    override fun onPause() {
-        super.onPause()
-        println("OnPause")
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-       /* if(!hasNoPermissions() && fotoapparatState == FotoapparatState.OFF){
-            val intent = Intent(baseContext, RegistrationStepTwoActivity::class.java)
-            startActivity(intent)
-            finish()
-        }*/
-    }
-
-
 
 
     private fun initLoader()
@@ -210,80 +162,97 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
         }
     }
 
-  /*  private fun onSubmit()
-    {
-        CommonMethod.hideKeyboardView(this@RegistrationStepTwoActivity)
-        if(!captureImageStatus)
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_profile_image))
+    private fun checkAndRequestPermissions(): Boolean {
+
+        val permissionCamera        = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, Manifest.permission.CAMERA)
+        val permissionStorage       = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        val listPermissionsNeeded = ArrayList<String>()
+
+        if (permissionCamera != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA)
         }
-        else if(TextUtils.isEmpty(etName.text.toString()))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_name))
+        if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
-        else if (TextUtils.isEmpty(etOTP.text.toString()))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.required_otp))
-        }
-        else if(etOTP.text.toString()!=mobileOtp)
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.otp_not_match))
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
+            return false
         }
         else
         {
-            if(CommonMethod.isNetworkAvailable(this@RegistrationStepTwoActivity))
-            {
-                progressDialog.show()
-                btnSubmit.isClickable=false
+            initCamera()
+        }
+        return true
+    }
 
-                val presenterAWSProfile= PresenterAWSProfile()
-                val imgFile=CommonMethod.fileCompress(photoFile)
-                presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepTwoActivity,this,imgFile)
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
 
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,resources.getString(R.string.no_internet))
+        when (requestCode) {
+            REQUEST_ID_PERMISSIONS -> {
+
+                val perms = HashMap<String, Int>()
+                perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]   = PackageManager.PERMISSION_GRANTED
+
+                if (grantResults.isNotEmpty()) {
+                    for (i in permissions.indices)
+                        perms[permissions[i]] = grantResults[i]
+                        if (perms[Manifest.permission.CAMERA]                       == PackageManager.PERMISSION_GRANTED
+                            && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]    == PackageManager.PERMISSION_GRANTED) {
+
+                        initCamera()
+                    } else {
+
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this@RegistrationStepTwoActivity, Manifest.permission.CAMERA)
+                                || ActivityCompat.shouldShowRequestPermissionRationale(this@RegistrationStepTwoActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            showDialogOK("Permissions are required for this app",
+                                    DialogInterface.OnClickListener { _, which ->
+                                        when (which) {
+                                            DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
+                                            DialogInterface.BUTTON_NEGATIVE ->
+
+                                                finish()
+                                        }
+                                    })
+                        } else {
+                            permissionDialog("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
+
+                        }
+                    }
+                }
             }
         }
-    }*/
-
-    override fun onSuccessUploadAWS(url: String) {
-
-        uploadData(url)
-    }
-
-    override fun onFailureUploadAWS(string: String) {
-
-        dismiss()
-        Toast.makeText(this@RegistrationStepTwoActivity,string,Toast.LENGTH_SHORT).show()
-    }
-
-    private fun uploadData(imageURL: String)
-    {
-
-        /*val jsonObject = JsonObject()
-        jsonObject.addProperty("name",etName.text.toString())
-        jsonObject.addProperty("image",imageURL)
-        jsonObject.addProperty("otp",mobileOtp)
-
-        val presenterRegistrationTwo= PresenterRegistrationTwo()
-        presenterRegistrationTwo.doRegistrationStepTwo(this@RegistrationStepTwoActivity,jsonObject,this)*/
-
 
     }
 
-    override fun onSuccessRegistrationTwo() {
-
-        startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+    private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show()
     }
 
-    override fun onErrorRegistrationTwo(jsonMessage: String) {
-
-        dismiss()
-        CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepTwoActivity,jsonMessage)
+    private fun permissionDialog(msg: String) {
+        val dialog = AlertDialog.Builder(this@RegistrationStepTwoActivity)
+        dialog.setMessage(msg)
+                .setPositiveButton("Yes") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
+                }
+                .setNegativeButton("Cancel") { _, _ -> finish() }
+        dialog.show()
     }
+
+    companion object {
+
+        private const  val REQUEST_ID_PERMISSIONS = 1
+
+    }
+
+
 
     private fun toolbarFont(context: Activity) {
 
@@ -314,6 +283,16 @@ class RegistrationStepTwoActivity : AppCompatActivity(), ICallBackUpload, ICallB
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            checkAndRequestPermissions()
+        }
+        else{
+            initCamera()
+        }
     }
 
 

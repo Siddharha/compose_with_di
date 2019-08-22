@@ -72,9 +72,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     private fun initData()
     {
         initLoader()
+        etPhone.tag="+000"
         loadCountry()
         checkQualify()
-        etPhone.tag="+XXX"
+
     }
 
 
@@ -200,6 +201,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
             jsonObject.add("device_data",jsonObjectRequestChild)
 
+            //println("Json"+jsonObject.toString())
+
             val presenterRegistrationOneObj= PresenterRegistrationOne()
             presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
         }
@@ -300,7 +303,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     override fun onSuccessRegistrationOne(data: RegistrationData) {
 
         dismiss()
-        Toast.makeText(this@RegistrationStepOneActivity,resources.getString(R.string.refer_to_otp), Toast.LENGTH_LONG).show()
         val sharedPref              =SharedPref(this@RegistrationStepOneActivity)
         sharedPref.accessToken      =data.access_token
         sharedPref.verificationCode =data.otp
