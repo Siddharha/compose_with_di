@@ -82,6 +82,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var countryIsdCode: String
+        get() = pref.getString(KEY_SET_COUNTRY_ISD_CODE, "")!!
+        set(countryIsdCode) {
+            editor.remove(KEY_SET_COUNTRY_ISD_CODE)
+            editor.putString(KEY_SET_COUNTRY_ISD_CODE, countryIsdCode)
+            editor.commit()
+        }
+
     var countryName: String
         get() = pref.getString(KEY_SET_COUNTRY_NAME, "")!!
         set(countryName) {
@@ -302,6 +310,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_CURRENT_LNG           = "KEY_SET_CURRENT_LNG"
         private const val KEY_SET_IMAGE_PATH            = "KEY_SET_IMAGE_PATH"
         private const val KEY_SET_VERIFICATION_CODE     = "KEY_SET_VERIFICATION_CODE"
+        private const val KEY_SET_COUNTRY_ISD_CODE      = "KEY_SET_COUNTRY_ISD_CODE"
 
     }
 

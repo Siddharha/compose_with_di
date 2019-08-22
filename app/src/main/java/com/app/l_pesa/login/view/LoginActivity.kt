@@ -2,11 +2,14 @@ package com.app.l_pesa.login.view
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -27,8 +30,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -63,8 +64,7 @@ import kotlin.collections.toTypedArray
 
 class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
-
-    private lateinit var  countryCode      : String
+    private lateinit var  progressDialog   : ProgressDialog
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
 
@@ -72,11 +72,34 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbarFont(this@LoginActivity)
 
+        initLoader()
         loadCountry()
         loginProcess()
         forgotPin()
         doCalculateLoan()
+    }
+
+    private fun initLoader()
+    {
+        progressDialog = ProgressDialog(this@LoginActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
     }
 
     private fun forgotPin()
@@ -108,11 +131,10 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     }
 
 
-
     @SuppressLint("MissingPermission")
     private fun loginProcess()
     {
-        etPhone.tag="+000"
+
         txtRegister.makeLinks(resources.getString(R.string.create_account),Pair("Create one!", View.OnClickListener {
 
             try {
@@ -216,7 +238,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         {
             if(CommonMethod.isNetworkAvailable(this@LoginActivity))
             {
-                progressBar.visibility    = View.VISIBLE
+                progressDialog.show()
+                val sharedPrefOBJ= SharedPref(this@LoginActivity)
                 buttonLogin.isClickable   = false
 
                 val displayMetrics = resources.displayMetrics
@@ -225,13 +248,13 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("phone_no",etPhone.text.toString())
-                jsonObject.addProperty("country_code",countryCode)
+                jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
                 jsonObject.addProperty("platform_type","A")
                 jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
-                jsonObjectRequestChild.addProperty("sdk",Build.VERSION.SDK_INT)
+                jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
                 jsonObjectRequestChild.addProperty("imei",getIMEI)
                 jsonObjectRequestChild.addProperty("imsi","" + telephonyManager.subscriberId)
                 jsonObjectRequestChild.addProperty("simSerial_no","" + telephonyManager.simSerialNumber)
@@ -250,7 +273,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
 
-                //println("JSON"+jsonObject)
+
 
             }
             else
@@ -268,7 +291,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             buttonLogin.isClickable   = true
         }, 1000)
 
-        progressBar.visibility=View.INVISIBLE
+        dismiss()
         val sharedPrefOBJ=SharedPref(this@LoginActivity)
 
         if(data.next_step=="next_otp")
@@ -292,8 +315,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     override fun onIncompleteLogin(message: String) {
 
+        dismiss()
         Toast.makeText(this@LoginActivity,message,Toast.LENGTH_LONG).show()
-        progressBar.visibility = View.INVISIBLE
         buttonLogin.isClickable   = true
         val intent = Intent(this@LoginActivity, RegistrationStepOneActivity::class.java)
         startActivity(intent)
@@ -303,7 +326,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     override fun onErrorLogin(jsonMessage: String) {
 
-        progressBar.visibility = View.INVISIBLE
+        dismiss()
         buttonLogin.isClickable   = true
         CommonMethod.customSnackBarError(rootLayout,this@LoginActivity,jsonMessage)
 
@@ -311,18 +334,20 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     override fun onFailureLogin(jsonMessage: String) {
 
-        progressBar.visibility = View.INVISIBLE
+        dismiss()
         buttonLogin.isClickable   = true
         CommonMethod.customSnackBarError(rootLayout,this@LoginActivity,jsonMessage)
 
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
-
-        countryCode = resModelCountryList.country_code
-        etPhone.tag = countryCode
+        txtCountry.visibility=View.VISIBLE
+        txtCountry.text = resModelCountryList.country_name
+        etPhone.tag = resModelCountryList.country_code+" "
         val sharedPrefOBJ= SharedPref(this@LoginActivity)
         sharedPrefOBJ.countryCode=resModelCountryList.code
+        sharedPrefOBJ.countryName=resModelCountryList.country_name
+        sharedPrefOBJ.countryIsdCode=resModelCountryList.country_code
     }
 
 
@@ -352,6 +377,29 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     }
 
     private fun loadCountry()
+    {
+        val sharedPrefOBJ= SharedPref(this@LoginActivity)
+        if(TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode))
+        {
+            etPhone.tag="+000 "
+            showCountry()
+        }
+        else
+        {
+            txtCountry.visibility=View.VISIBLE
+            txtCountry.text = sharedPrefOBJ.countryName
+            etPhone.tag=sharedPrefOBJ.countryIsdCode+" "
+        }
+
+        txtCountry.setOnClickListener {
+
+            showCountry()
+
+        }
+
+    }
+
+    private fun showCountry()
     {
         val sharedPrefOBJ= SharedPref(this@LoginActivity)
         val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
@@ -387,7 +435,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
             }
         })
-
     }
 
 
@@ -491,8 +538,19 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     }
 
+    private fun toolbarFont(context: Activity) {
 
-
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
+                    break
+                }
+            }
+        }
+    }
 
 
 }
