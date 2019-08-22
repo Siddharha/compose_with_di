@@ -74,7 +74,12 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
             {
                 if (CommonMethod.isNetworkAvailable(this@RegistrationStepFourActivity)) {
 
-                    startActivity(Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java))
+                    val bundle     = intent.extras
+                    bundle!!.putString("id_type",typeId)
+                    bundle.putString("id_number",etIdNumber.text.toString())
+                    val intent = Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent,bundle)
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                 }
                 else{

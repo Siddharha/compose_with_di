@@ -111,10 +111,17 @@ class RegistrationStepFiveActivity : AppCompatActivity() {
                     photo
                             ?.let {
 
-                                Toast.makeText(this@RegistrationStepFiveActivity,"Success",Toast.LENGTH_SHORT).show()
+                               doContinue()
                             }
 
                 }
+    }
+
+    private fun doContinue()
+    {
+        val bundle     = intent.extras
+        val id_type    = bundle!!.getString("id_type")
+        val id_number  = bundle.getString("id_number")
     }
 
 
