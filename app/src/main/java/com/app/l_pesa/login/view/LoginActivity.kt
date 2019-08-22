@@ -74,7 +74,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbarFont(this@LoginActivity)
 
         initLoader()
         loadCountry()
@@ -536,20 +535,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     public override fun onResume() {
         super.onResume()
 
-    }
-
-    private fun toolbarFont(context: Activity) {
-
-        for (i in 0 until toolbar.childCount) {
-            val view = toolbar.getChildAt(i)
-            if (view is TextView) {
-                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (view.text == toolbar.title) {
-                    view.typeface = titleFont
-                    break
-                }
-            }
-        }
     }
 
 

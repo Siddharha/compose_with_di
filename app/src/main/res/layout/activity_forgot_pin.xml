@@ -1,167 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll_root"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    android:padding="@dimen/_40sdp">
+    tools:context=".login.view.LoginActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_75sdp"
-        android:layout_height="@dimen/_75sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_app_logo" />
-
-
-
-    <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txtHeader"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_width="0dp"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/forgot_pin_title"
-        android:gravity="center"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold"
-        android:padding="@dimen/_2sdp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/ll_flag_section"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
 
-        />
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
+
+
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtCountry"
+                android:visibility="invisible"
+                android:contentDescription="@string/app_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textColor="@color/colorWhite"
+                android:focusable="true"
+                android:textSize="@dimen/_12sdp"
+                android:textAllCaps="true"
+                android:drawableEnd="@drawable/ic_dropdown_icon"
+                android:drawablePadding="@dimen/_3sdp"
+                android:textStyle="bold"
+
+                />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_flag_section"
-        android:layout_width="0dp"
-        android:background="@drawable/et_bg_white_border_black"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:paddingStart="@dimen/_1sdp"
-        android:paddingEnd="@dimen/_1sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+        android:layout_width="match_parent"
+        android:id="@+id/rootLayout"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
         <ImageView
-            android:id="@+id/img_country"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_18sdp"
-            android:layout_marginStart="@dimen/_5sdp"
+            android:id="@+id/imageView"
             android:contentDescription="@string/app_name"
-            android:paddingStart="@dimen/_3sdp"
-            android:paddingEnd="@dimen/_1sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView33"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view_1"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:background="@color/color_gray_light"
-            app:layout_constraintEnd_toStartOf="@+id/etPhone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView33"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etPhone"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:inputType="numberSigned"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_2sdp"
-            android:hint="@string/phone_no"
-            android:cursorVisible="true"
-            android:focusable="true"
-            android:maxLines="1"
-            android:maxLength="15"
-            android:longClickable="false"
-            android:textIsSelectable="false"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorTextBlack"
-            android:textColorHint="@color/colorTextBlackLight"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view_1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_app_logo" />
 
-        <ImageView
-            android:id="@+id/imageView33"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtHeader"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/view_1"
-            app:layout_constraintBottom_toBottomOf="@+id/ll_flag_section"
-            app:layout_constraintStart_toEndOf="@+id/img_country"
-            app:layout_constraintTop_toTopOf="@+id/ll_flag_section"
-            app:srcCompat="@drawable/ic_dropdown_icon" />
+            android:fontFamily="@font/montserrat"
+            android:text="@string/forgot_pin"
+            android:gravity="center"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:padding="@dimen/_2sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tilPhone"
+
+            />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/tilPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+            app:layout_constraintBottom_toTopOf="@+id/buttonRecoverPin"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            >
+            <com.app.l_pesa.common.CommonInputLayout
+
+                style="@style/customInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+                <com.app.l_pesa.common.PrefixEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:inputType="numberSigned"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_2sdp"
+                    android:hint="@string/phone_no"
+                    android:cursorVisible="true"
+                    android:focusable="true"
+                    android:longClickable="false"
+                    android:textIsSelectable="false"
+                    android:textColorHint="@color/color_gray_text"
+                    android:textColor="@color/textColors"
+                    android:textSize="@dimen/_12sdp" />
+
+            </com.app.l_pesa.common.CommonInputLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.app.l_pesa.common.CustomButtonRegular
+            android:id="@+id/buttonRecoverPin"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/bg_button_app"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/submit"
+            android:textAllCaps="true"
+            android:letterSpacing=".10"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilPhone" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.app.l_pesa.common.CustomButtonRegular
-        android:id="@+id/buttonSubmit"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:background="@drawable/yellow_button"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:text="@string/submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_flag_section" />
-
-
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_info_icon"
-        android:text="@string/enter_email_or_mobile"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:fontFamily="@font/montserrat"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="@dimen/_10sdp"
-        android:drawablePadding="@dimen/_10sdp"
-        android:lineSpacingExtra="@dimen/_2sdp"
-        android:textColor="@color/colorTextBlackLight"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSubmit" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:theme="@style/Progressbar.Red"
-        android:indeterminateTintMode="src_in"
-        android:layout_width="@dimen/_32sdp"
-        android:layout_height="@dimen/_32sdp"
-        android:indeterminateTint="@color/colorRed"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
