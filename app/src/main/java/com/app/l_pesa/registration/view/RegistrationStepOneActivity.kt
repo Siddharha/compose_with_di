@@ -27,6 +27,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -131,9 +133,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         else
         {
-
-            if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
-            {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     checkAndRequestPermissions()
                 }
@@ -142,11 +141,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                     registrationProcess()
                 }
 
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.no_internet))
-            }
+
         }
     }
 
@@ -154,58 +149,65 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
     private fun registrationProcess()
     {
 
-        val telephonyManager    = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+            val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
-        var getIMEI=""
-        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            telephonyManager!!.imei
-        } else {
-            telephonyManager!!.deviceId
+            var getIMEI = ""
+            getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                telephonyManager!!.imei
+            } else {
+                telephonyManager!!.deviceId
+            }
+
+            val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
+            if (TextUtils.isEmpty(telephonyManager.simSerialNumber))
+            {
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, resources.getString(R.string.required_sim))
+            }else
+            {
+                if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
+                 {
+
+                    progressDialog.show()
+                    val displayMetrics = resources.displayMetrics
+                    val width = displayMetrics.widthPixels
+                    val height = displayMetrics.heightPixels
+
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("phone_no", etPhone.text.toString())
+                    jsonObject.addProperty("email_address", etEmail.text.toString())
+                    jsonObject.addProperty("country_code", countryCode)
+                    jsonObject.addProperty("platform_type", "A")
+                    jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+
+                    val jsonObjectRequestChild = JsonObject()
+                    jsonObjectRequestChild.addProperty("device_id", deviceId)
+                    jsonObjectRequestChild.addProperty("sdk", "" + Build.VERSION.SDK_INT)
+                    jsonObjectRequestChild.addProperty("imei", getIMEI)
+                    jsonObjectRequestChild.addProperty("imsi", "" + telephonyManager.subscriberId)
+                    jsonObjectRequestChild.addProperty("simSerial_no", "" + telephonyManager.simSerialNumber)
+                    jsonObjectRequestChild.addProperty("sim_operator_Name", "" + telephonyManager.simOperatorName)
+                    jsonObjectRequestChild.addProperty("screen_height", "" + height)
+                    jsonObjectRequestChild.addProperty("screen_width", "" + width)
+                    jsonObjectRequestChild.addProperty("device", Build.DEVICE)
+                    jsonObjectRequestChild.addProperty("model", Build.MODEL)
+                    jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
+                    jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+                    jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
+                    jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
+
+                    jsonObject.add("device_data", jsonObjectRequestChild)
+
+                    val presenterRegistrationOneObj = PresenterRegistrationOne()
+                    presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity, jsonObject, this)
+
+                }
+                else
+                {
+                    CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, resources.getString(R.string.no_internet))
+                }
         }
 
-        val deviceId= Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-
-        if(TextUtils.isEmpty(telephonyManager.simSerialNumber))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_sim))
-        }
-        else
-        {
-            progressDialog.show()
-            val displayMetrics = resources.displayMetrics
-            val width = displayMetrics.widthPixels
-            val height = displayMetrics.heightPixels
-
-            val jsonObject = JsonObject()
-            jsonObject.addProperty("phone_no",etPhone.text.toString())
-            jsonObject.addProperty("email_address",etEmail.text.toString())
-            jsonObject.addProperty("country_code",countryCode)
-            jsonObject.addProperty("platform_type","A")
-            jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
-
-            val jsonObjectRequestChild = JsonObject()
-            jsonObjectRequestChild.addProperty("device_id", deviceId)
-            jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-            jsonObjectRequestChild.addProperty("imei",getIMEI)
-            jsonObjectRequestChild.addProperty("imsi",""+telephonyManager.subscriberId)
-            jsonObjectRequestChild.addProperty("simSerial_no",""+telephonyManager.simSerialNumber)
-            jsonObjectRequestChild.addProperty("sim_operator_Name",""+telephonyManager.simOperatorName)
-            jsonObjectRequestChild.addProperty("screen_height",""+height)
-            jsonObjectRequestChild.addProperty("screen_width",""+width)
-            jsonObjectRequestChild.addProperty("device", Build.DEVICE)
-            jsonObjectRequestChild.addProperty("model", Build.MODEL)
-            jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
-            jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
-            jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
-            jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
-
-            jsonObject.add("device_data",jsonObjectRequestChild)
-
-            //println("Json"+jsonObject.toString())
-
-            val presenterRegistrationOneObj= PresenterRegistrationOne()
-            presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity,jsonObject,this)
-        }
 
     }
 
