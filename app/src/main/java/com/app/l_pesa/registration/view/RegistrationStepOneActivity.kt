@@ -55,7 +55,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
 
     private lateinit var  progressDialog   : ProgressDialog
-    private lateinit var  countryCode      : String
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
 
@@ -165,7 +164,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
             {
                 if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
                  {
-
+                    val sharedPref= SharedPref(this@RegistrationStepOneActivity)
                     progressDialog.show()
                     val displayMetrics = resources.displayMetrics
                     val width = displayMetrics.widthPixels
@@ -174,7 +173,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                     val jsonObject = JsonObject()
                     jsonObject.addProperty("phone_no", etPhone.text.toString())
                     jsonObject.addProperty("email_address", etEmail.text.toString())
-                    jsonObject.addProperty("country_code", countryCode)
+                    jsonObject.addProperty("country_code", sharedPref.countryIsdCode)
                     jsonObject.addProperty("platform_type", "A")
                     jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
@@ -269,12 +268,12 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
-         countryCode = resModelCountryList.country_code
-         etPhone.tag = "$countryCode   "
+
         val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
         sharedPrefOBJ.countryCode=resModelCountryList.code
         sharedPrefOBJ.countryName=resModelCountryList.country_name
         sharedPrefOBJ.countryIsdCode=resModelCountryList.country_code
+        etPhone.tag = sharedPrefOBJ.countryIsdCode+"   "
 
          if(TextUtils.isEmpty(etPhone.text.toString()))
          {

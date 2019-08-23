@@ -1,6 +1,7 @@
 package com.app.l_pesa.pinview.view
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -37,7 +38,7 @@ import kotlinx.android.synthetic.main.content_pin_set.*
 class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard, ICallBackHelp  {
 
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit var  progressDialog   : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +54,12 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
     private fun initLoader()
     {
-        progressDialog=KProgressHUD.create(this@PinSetActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(this@PinSetActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
     private fun dismiss()
@@ -167,11 +169,11 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
     }
 
-    override fun onSessionTimeOut(message: String) {
+    override fun onSessionTimeOut(jsonMessage: String) {
 
         dismiss()
         val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
-        dialogBuilder.setMessage(message)
+        dialogBuilder.setMessage(jsonMessage)
             .setCancelable(false)
             .setPositiveButton("Ok") { dialog, _ ->
                 dialog.dismiss()

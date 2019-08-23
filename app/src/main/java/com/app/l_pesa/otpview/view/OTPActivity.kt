@@ -2,6 +2,7 @@ package com.app.l_pesa.otpview.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -29,7 +30,6 @@ import com.app.l_pesa.otpview.presenter.PresenterOTP
 import com.app.l_pesa.pinview.view.PinSetActivity
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_otp.*
 import kotlinx.android.synthetic.main.content_otp.*
 import java.util.concurrent.TimeUnit
@@ -39,7 +39,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
 
     private var clickCount=0
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit var  progressDialog   : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -258,11 +258,12 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
     private fun initLoader()
     {
-        progressDialog=KProgressHUD.create(this@OTPActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(this@OTPActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
