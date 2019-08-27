@@ -138,7 +138,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        fotoapparat.stop()
+        //fotoapparat.stop()
         PhotoState.OFF
     }
 

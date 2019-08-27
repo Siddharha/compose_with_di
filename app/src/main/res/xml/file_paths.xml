@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<paths >
+<paths >
     <files-path name="l_pesa" path="images/"/>
-</paths>-->
-<paths>
+</paths>
+<!--<paths>
     <external-path
         name="my_images"
         path="Android/data/com.app.l_pesa/files/Pictures"/>
-</paths>
+</paths>-->
 
