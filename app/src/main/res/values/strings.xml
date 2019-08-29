@@ -52,6 +52,8 @@
 
     <!--Caution Message-->
     <string name="loading">Loading</string>
+    <string name="processing">Processing</string>
+    <string name="logging_out">Logging out</string>
     <string name="saving">Saving</string>
     <string name="required_title">Please select the title.</string>
     <string name="required_name">Please enter your name.</string>

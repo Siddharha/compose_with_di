@@ -2,6 +2,7 @@ package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -51,7 +52,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
 
 
-    private lateinit var progressDialog: KProgressHUD
+    private lateinit var progressDialog: ProgressDialog
     private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -183,11 +184,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     private fun initLoader()
     {
-        progressDialog=KProgressHUD.create(this@DashboardActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(this@DashboardActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.logging_out))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
