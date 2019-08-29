@@ -56,7 +56,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
 
         imageEdit.setOnClickListener {
 
-            startActivity(Intent(this@RegistrationStepThreeActivity, RegistrationStepTwoActivity::class.java))
+            onBackPressed()
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
         }

@@ -51,7 +51,7 @@ class RetrofitHelper {
 
 
         fun <T> getRetrofit(service: Class<T>): T {
-            if(BuildConfig.DEBUG)
+           /* if(BuildConfig.DEBUG)
             {
                 val retrofit = Retrofit.Builder()
                         .baseUrl(BASE_URL_DEV)
@@ -61,20 +61,20 @@ class RetrofitHelper {
                 return retrofit.create(service)
             }
             else
-            {
+            {*/
                 val retrofit = Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(BASE_URL)//BASE_URL_DEV
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .build()
                 return retrofit.create(service)
-            }
+           // }
 
         }
 
         fun <T> getRetrofitToken(service: Class<T>, accessToken: String = ""): T {
 
-            if(BuildConfig.DEBUG)
+           /* if(BuildConfig.DEBUG)
             {
                 val retrofit = Retrofit.Builder()
                         .baseUrl(BASE_URL_DEV)
@@ -86,14 +86,14 @@ class RetrofitHelper {
             }
             else
             {
-                val retrofit = Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+              */  val retrofit = Retrofit.Builder()
+                        .baseUrl(BASE_URL) //BASE_URL_DEV
                         .client(getOkHttpClient(accessToken))
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .build()
                 return retrofit.create(service)
-            }
+            //}
 
         }
 

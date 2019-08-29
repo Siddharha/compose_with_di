@@ -49,7 +49,6 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     private var  captureImageStatus         : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
-    private lateinit var imageFile      : File
     private lateinit var progressDialog : ProgressDialog
 
 
@@ -103,7 +102,6 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
     private fun initCamera(){
 
-
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "personal.jpg")
@@ -153,6 +151,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
                     imageCard.setImageURI(photoPath)
                     imageCard.scaleType=ImageView.ScaleType.FIT_XY
                     captureImageStatus       = true
+                    photoFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(photoFile)
                 }, 2000)
 
             }
@@ -173,12 +172,12 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
     private fun doContinue()
     {
-        imageFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(imageFile)
+
         if(CommonMethod.isNetworkAvailable(this@RegistrationStepFiveActivity))
         {
             progressDialog.show()
             val presenterAWSProfile= PresenterAWSProfile()
-            presenterAWSProfile.uploadPersonalID(this@RegistrationStepFiveActivity,this,imageFile)
+            presenterAWSProfile.uploadPersonalID(this@RegistrationStepFiveActivity,this,photoFile)
         }
         else
         {

@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_change_login_pin.*
 import kotlinx.android.synthetic.main.content_change_login_pin.*
 
 
+
 class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
 
     private lateinit var countDownTimer: CountDownTimer
@@ -104,6 +105,10 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
 
             customSnackBarError(rootLayout,resources.getString(R.string.old_new_password_different))
         }
+        else if(etConfirmNewPin.text.toString().length!=6)
+        {
+            customSnackBarError(rootLayout,resources.getString(R.string.six_digit_new_pin_required))
+        }
         else
         {
 
@@ -128,7 +133,12 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
 
     private fun hideKeyBoard()
     {
-        CommonMethod.hideKeyboardView(this@ChangeLoginPinActivity)
+        try {
+            CommonMethod.hideKeyboardView(this@ChangeLoginPinActivity)
+        }
+        catch (exp:Exception)
+        {}
+
     }
 
     private fun customSnackBarError(view: View,message:String) {
