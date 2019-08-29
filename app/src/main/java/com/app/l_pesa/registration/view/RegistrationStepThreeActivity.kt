@@ -33,7 +33,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
 
 
     private lateinit  var progressDialog    : ProgressDialog
-    private lateinit  var imageFile         :File
+    private lateinit  var imageFile         : File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
     {
 
         val sharedPref=SharedPref(this@RegistrationStepThreeActivity)
-        handleRotation(sharedPref.imagePath)
+       // handleRotation(sharedPref.imagePath)
         imageFile   = File(sharedPref.imagePath)
         imageFile   = Compressor(this@RegistrationStepThreeActivity).compressToFile(imageFile)
 
@@ -113,7 +113,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
 
     }
 
-    private fun handleRotation(imgPath: String) {
+   /* private fun handleRotation(imgPath: String) {
         BitmapFactory.decodeFile(imgPath)?.let { origin ->
             try {
                 ExifInterface(imgPath).apply {
@@ -162,7 +162,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
                 matrix,
                 true
         )
-    }
+    }*/
 
 
     private fun initLoader()

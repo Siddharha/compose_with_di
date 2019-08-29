@@ -3,6 +3,7 @@ package com.app.l_pesa.registration.view
 import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.ClipData
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,15 +12,24 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
+import android.provider.MediaStore
 import android.provider.Settings
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.BitmapResize
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import id.zelory.compressor.Compressor
 import io.fotoapparat.Fotoapparat
 import io.fotoapparat.log.logcat
 import io.fotoapparat.log.loggers
@@ -36,12 +46,15 @@ import kotlin.collections.set
 class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private lateinit var progressDialog : ProgressDialog
-    private lateinit var fotoapparat    : Fotoapparat
+   /* private lateinit var fotoapparat    : Fotoapparat
     private lateinit var photoState     : PhotoState
     private lateinit var cameraStatus   : CameraState
-    private lateinit var flashState     : FlashState
-    private lateinit var imageFile      : File
-
+    private lateinit var flashState     : FlashState*/
+    //private lateinit var imageFile      : File
+    private val  requestPhoto               = 12
+    private var  captureImageStatus         : Boolean    = false
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,21 +64,40 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         toolbarFont(this@RegistrationStepTwoActivity)
 
         initLoader()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            checkAndRequestPermissions()
-        }
-        else{
-            initCamera()
-        }
+        imageProfile.setOnClickListener {
 
-
-        cameraStatus    = CameraState.BACK
-        flashState      = FlashState.OFF
-        photoState      = PhotoState.OFF
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if(checkAndRequestPermissions())
+                {
+                    initCamera()
+                }
+                else
+                {
+                    checkAndRequestPermissions()
+                }
+            }
+            else{
+                initCamera()
+            }
+        }
 
         buttonContinue.setOnClickListener {
 
-            takePhoto()
+           if(captureImageStatus)
+           {
+               progressDialog.show()
+               Handler().postDelayed({
+                   dismiss()
+                   val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java)
+                   startActivity(intent)
+                   overridePendingTransition(R.anim.right_in, R.anim.left_out)
+               }, 2000)
+
+           }
+            else
+           {
+               CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepTwoActivity, resources.getString(R.string.required_profile_image))
+           }
         }
 
     }
@@ -73,73 +105,64 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private fun initCamera(){
 
-
-     fotoapparat = Fotoapparat(
-                context         = this@RegistrationStepTwoActivity,
-                view            = cameraView,
-                scaleType       = ScaleType.CenterCrop,
-                lensPosition    = front(),
-                logger          = loggers(
-                                  logcat()
-                ),
-                cameraErrorCallback = {
-
-                }
-        )
-
-        fotoapparat.start()
-        photoState = PhotoState.ON
-
-        val imgDirectory = File ((getExternalFilesDir(Environment.DIRECTORY_PICTURES)).toString())
-        if (!imgDirectory.exists())
-        {
-            imgDirectory.mkdirs()
+        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val imagePath = File(filesDir, "images")
+        photoFile = File(imagePath, "user.jpg")
+        if (photoFile.exists()) {
+            photoFile.delete()
+        } else {
+            photoFile.parentFile!!.mkdirs()
         }
-        imageFile= File(imgDirectory,  "selfie.png")
+        captureFilePath = FileProvider.getUriForFile(this@RegistrationStepTwoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
+
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        } else {
+            val clip = ClipData.newUri(this@RegistrationStepTwoActivity.contentResolver, "user photo", captureFilePath)
+            captureIntent.clipData = clip
+            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        }
+
+        startActivityForResult(captureIntent, requestPhoto)
+
     }
 
-    enum class CameraState{
-        FRONT, BACK
-    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            requestPhoto ->
 
-    enum class FlashState{
-        TORCH, OFF
-    }
-
-    enum class PhotoState{
-        ON, OFF
-    }
-
-
-    private fun takePhoto() {
-
-        progressDialog.show()
-        val photoResult = fotoapparat
-                .autoFocus()
-                .takePicture()
-
-        photoResult.saveToFile(imageFile)
-        photoResult
-                .toBitmap(scaled(scaleFactor = 0.25f))
-                .whenAvailable { photo ->
-                    photo?.let {
-                            val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
-                            sharedPref.imagePath=imageFile.absolutePath
-                            startActivity(Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java))
-                            overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                            dismiss()
-
-                            }
-
+                if (resultCode == Activity.RESULT_OK)
+                {
+                    setImage()
                 }
 
+        }
     }
 
+    private fun setImage() {
 
-    override fun onStop() {
-        super.onStop()
-        //fotoapparat.stop()
-        PhotoState.OFF
+        val photoPath: Uri  = captureFilePath
+        try {
+            if(photoPath!=Uri.EMPTY)
+            {
+                imageProfile.setImageURI(photoPath)
+                captureImageStatus       = true
+                val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
+                sharedPref.imagePath=photoFile.absolutePath
+            }
+            else
+            {
+                Toast.makeText(this@RegistrationStepTwoActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        catch (exp:Exception)
+        {
+            Toast.makeText(this@RegistrationStepTwoActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
 
@@ -179,10 +202,8 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
             return false
         }
-        else
-        {
-            initCamera()
-        }
+
+
         return true
     }
 
@@ -283,16 +304,6 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            checkAndRequestPermissions()
-        }
-        else{
-            initCamera()
-        }
     }
 
 

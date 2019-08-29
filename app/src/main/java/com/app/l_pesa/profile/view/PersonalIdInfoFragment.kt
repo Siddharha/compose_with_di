@@ -462,10 +462,10 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
     private fun cameraClick()
     {
-        activity!!.cacheDir.deleteRecursively()
+        //activity!!.cacheDir.deleteRecursively()
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(activity!!.filesDir, "images")
-        photoFile = File(imagePath, "user.jpg")
+        photoFile = File(imagePath, "personal.jpg")
         if (photoFile.exists()) {
             photoFile.delete()
         } else {
