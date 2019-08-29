@@ -440,7 +440,7 @@
 
 
     <!--OTP-->
-    <string name="otp">OTP</string>
+    <string name="otp">Verification Code</string>
 
     <!--Help-->
     <string name="help_support">Help &amp; Support</string>

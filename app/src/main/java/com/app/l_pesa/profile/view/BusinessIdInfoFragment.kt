@@ -5,7 +5,10 @@ import android.app.Dialog
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
@@ -21,6 +24,7 @@ import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,6 +54,8 @@ import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackProof, ICallBackUpload {
@@ -455,6 +461,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         try {
            val photoPath: Uri = captureFilePath
+            handleRotation(photoFile.absolutePath)
             imgProfile.post {
                 val pictureBitmap = BitmapResize.shrinkBitmap(
                         activity!!,
@@ -475,6 +482,57 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
         }
 
+    }
+
+    private fun handleRotation(imgPath: String) {
+        BitmapFactory.decodeFile(imgPath)?.let { origin ->
+            try {
+                ExifInterface(imgPath).apply {
+                    getAttributeInt(
+                            ExifInterface.TAG_ORIENTATION,
+                            ExifInterface.ORIENTATION_UNDEFINED
+                    ).let { orientation ->
+                        when (orientation) {
+                            ExifInterface.ORIENTATION_ROTATE_90 -> origin.rotate(90f)
+                            ExifInterface.ORIENTATION_ROTATE_180 -> origin.rotate(180f)
+                            ExifInterface.ORIENTATION_ROTATE_270 -> origin.rotate(270f)
+                            ExifInterface.ORIENTATION_NORMAL -> origin
+                            else ->origin     //origin.rotate(270f)
+                        }.also { bitmap ->
+                            //Update the input file with the new bytes.
+                            try {
+                                FileOutputStream(imgPath).use { fos ->
+                                    bitmap.compress(
+                                            Bitmap.CompressFormat.JPEG,
+                                            100,
+                                            fos
+                                    )
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun Bitmap.rotate(degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        val scaledBitmap = Bitmap.createScaledBitmap(this, width, height, true)
+        return Bitmap.createBitmap(
+                scaledBitmap,
+                0,
+                0,
+                scaledBitmap.width,
+                scaledBitmap.height,
+                matrix,
+                true
+        )
     }
 
 
