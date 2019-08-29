@@ -1,13 +1,17 @@
 package com.app.l_pesa.loanplan.view
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.app.ProgressDialog
+import android.content.*
+import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.location.Location
 import android.location.LocationManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
@@ -19,6 +23,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -29,18 +35,34 @@ import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationListener
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import com.google.gson.JsonObject
 import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
+import java.util.HashMap
 
 
-class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply {
+class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply, LocationListener {
+
 
     private var loanPurpose=""
     private val listTitle = arrayListOf("For Transport","To Pay Bills","To Clear Debit","To Buy Foodstuff","Emergency Purposes","To Buy Medicine","Build Credit","Others")
-    private lateinit  var progressDialog: KProgressHUD
-    private lateinit var countDownTimer: CountDownTimer
+    private lateinit var  progressDialog   : ProgressDialog
+    private lateinit var  countDownTimer   : CountDownTimer
+
+    private var REQUEST_LOCATION_CODE = 101
+    private var mGoogleApiClient: GoogleApiClient? = null
+    private var mLocation: Location? = null
+    private var mLocationRequest: LocationRequest? = null
+    private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
+    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
+
+    private var loanType=""
+    private var productId=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,15 +71,16 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanApplyActivity)
 
+        buildGoogleApiClient()
         initData()
 
     }
 
     private fun initData()
     {
-        val bundle       = intent.extras
-        val productID    = bundle!!.getString("PRODUCT_ID")
-        val loanType     = bundle.getString("LOAN_TYPE")
+         val bundle  = intent.extras
+         productId   = bundle!!.getString("PRODUCT_ID")!!
+         loanType    = bundle.getString("LOAN_TYPE")!!
 
         initTimer()
         initLoader()
@@ -86,7 +109,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 val alertDialog = AlertDialog.Builder(this@LoanApplyActivity)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.want_to_apply_loan))
-                alertDialog.setPositiveButton("Yes") { _, _ -> applyLoan(loanType,productID) }
+                alertDialog.setPositiveButton("Yes") { _, _ -> applyLoan() }
                         .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
                 alertDialog.show()
 
@@ -94,13 +117,57 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         }
 
-        fetchLocation()
 
     }
 
+    private fun startLocationUpdates() {
+        // Create the location request
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL)
+                .setFastestInterval(FASTEST_INTERVAL)
 
+        if (ActivityCompat.checkSelfPermission(this@LoanApplyActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this)
+    }
 
-    private fun applyLoan(loan_type: String?, product_id: String?)
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+        mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
+
+        if (mLocation == null) {
+            startLocationUpdates()
+        }
+        if (mLocation != null) {
+            val sharedPrefObj=SharedPref(this@LoanApplyActivity)
+            sharedPrefObj.currentLat = mLocation!!.latitude.toString()
+            sharedPrefObj.currentLng = mLocation!!.longitude.toString()
+            doApplyLoan()
+        } else {
+            Toast.makeText(this, "Location not Detected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private fun applyLoan()
+    {
+        if (!checkGPSEnabled()) {
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                 getLocation()
+            } else {
+                 checkLocationPermission()
+            }
+        } else {
+            getLocation()
+        }
+
+    }
+
+    private fun doApplyLoan()
     {
         if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
         {
@@ -111,11 +178,11 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 {
                     progressDialog.show()
                     buttonSubmit.isClickable =false
-                    loanApply(loan_type,product_id)
+                    loanApply()
                 }
                 else
                 {
-                    CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.please_wait))
+                     CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.please_wait))
                 }
 
             }
@@ -127,17 +194,17 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
         else
         {
-           CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.no_internet))
         }
     }
 
-    private fun loanApply(loan_type: String?, product_id: String?)
+    private fun loanApply()
     {
         val shared=SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()
-        jsonObject.addProperty("loan_type",loan_type)
-        jsonObject.addProperty("product_id",product_id)
+        jsonObject.addProperty("loan_type",loanType)
+        jsonObject.addProperty("product_id",productId)
         if(loanPurpose=="Others")
         {
             jsonObject.addProperty("loan_purpose",etDescription.text.toString())
@@ -151,7 +218,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         jsonObject.addProperty("latitude",shared.currentLat)
         jsonObject.addProperty("longitude",shared.currentLng)
 
-        //println("REQUEST"+jsonObject.toString())
 
         val presenterLoanApply= PresenterLoanApply()
         presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)
@@ -242,10 +308,52 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
 
+
+    private fun initLoader()
+    {
+        progressDialog = ProgressDialog(this@LoanApplyActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
+
+    }
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    override fun onLocationChanged(location: Location?) {
+
+        val sharedPrefObj=SharedPref(this@LoanApplyActivity)
+        sharedPrefObj.currentLat = location!!.latitude.toString()
+        sharedPrefObj.currentLng = location.longitude.toString()
+    }
+
+    @Synchronized
+    private fun buildGoogleApiClient() {
+        mGoogleApiClient = GoogleApiClient.Builder(this)
+                .addApi(LocationServices.API)
+                .build()
+
+        mGoogleApiClient!!.connect()
+    }
+
+    private fun checkGPSEnabled(): Boolean {
+        if (!isLocationEnabled())
+            showAlert()
+        return isLocationEnabled()
+    }
+
     private fun showAlert() {
         val dialog = AlertDialog.Builder(this@LoanApplyActivity)
         dialog.setTitle("Enable Location")
-                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use this app")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use L-Pesa")
                 .setPositiveButton("Location Settings") { _, _ ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
@@ -259,21 +367,37 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
-    private fun initLoader()
-    {
-        progressDialog= KProgressHUD.create(this@LoanApplyActivity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+    private fun checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                AlertDialog.Builder(this)
+                        .setTitle("Location Permission Needed")
+                        .setMessage("This app needs the Location permission, please accept to use location functionality")
+                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_CODE)
+                        })
+                        .create()
+                        .show()
 
+            } else ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_CODE)
+        }
     }
 
-    private fun dismiss()
-    {
-        if(progressDialog.isShowing)
-        {
-            progressDialog.dismiss()
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            REQUEST_LOCATION_CODE -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        doApplyLoan()
+                    }
+                } else {
+                    // permission denied, boo! Disable the functionality that depends on this permission.
+                    Toast.makeText(this, "You need to add Location Permission", Toast.LENGTH_LONG).show()
+                }
+                return
+            }
         }
     }
 
@@ -294,32 +418,11 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     public override fun onResume() {
         super.onResume()
-        fetchLocation()
-    }
-
-    private fun fetchLocation()
-    {
-        val intent = Intent(this, LocationBackgroundService::class.java)
-        startService(intent)
-
-        val sharedPref=SharedPref(this@LoanApplyActivity)
-
-        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this).registerReceiver(
-                object : BroadcastReceiver() {
-                    override fun onReceive(context: Context, intent: Intent) {
-
-                        sharedPref.currentLat  = intent.getStringExtra(EXTRA_LATITUDE)!!
-                        sharedPref.currentLng = intent.getStringExtra(EXTRA_LONGITUDE)!!
-
-                    }
-                }, IntentFilter(ACTION_LOCATION_BROADCAST)
-        )
 
     }
 
     public override fun onDestroy() {
 
-        stopService(Intent(this, LocationBackgroundService::class.java))
         super.onDestroy()
         countDownTimer.cancel()
     }
@@ -368,7 +471,15 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     public override fun onStop() {
         super.onStop()
         countDownTimer.cancel()
+        if (mGoogleApiClient!!.isConnected) {
+            mGoogleApiClient!!.disconnect()
+        }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mGoogleApiClient?.connect()
     }
 
 
