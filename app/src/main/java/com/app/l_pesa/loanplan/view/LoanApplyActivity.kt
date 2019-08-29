@@ -353,7 +353,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private fun showAlert() {
         val dialog = AlertDialog.Builder(this@LoanApplyActivity)
         dialog.setTitle("Enable Location")
-                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to use L-Pesa")
+                .setMessage("Your Locations Settings is set to OFF.Please Enable Location to use L-Pesa")
                 .setPositiveButton("Location Settings") { _, _ ->
                     val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                     startActivity(myIntent)
