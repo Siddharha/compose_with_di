@@ -1,11 +1,14 @@
 package com.app.l_pesa.profile.view
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.ClipData
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -14,6 +17,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -23,6 +27,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
@@ -357,14 +362,25 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         imgProfile.setOnClickListener {
 
-            cameraClick()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if(checkAndRequestPermissions())
+                {
+                    cameraClick()
+                }
+                else
+                {
+                    checkAndRequestPermissions()
+                }
+            }
+            else{
+                cameraClick()
+            }
 
         }
     }
 
     private fun cameraClick()
     {
-        cacheDir.deleteRecursively()
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
@@ -592,6 +608,94 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         dpd.show()
         dpd.datePicker.maxDate = System.currentTimeMillis()
     }
+
+    private fun checkAndRequestPermissions(): Boolean {
+
+        val permissionCamera        = ContextCompat.checkSelfPermission(this@ProfileEditPersonalActivity, Manifest.permission.CAMERA)
+        val permissionStorage       = ContextCompat.checkSelfPermission(this@ProfileEditPersonalActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        val listPermissionsNeeded = ArrayList<String>()
+
+        if (permissionCamera != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA)
+        }
+        if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
+            return false
+        }
+
+        return true
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+
+        when (requestCode) {
+            REQUEST_ID_PERMISSIONS -> {
+
+                val perms = HashMap<String, Int>()
+                perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]   = PackageManager.PERMISSION_GRANTED
+
+                if (grantResults.isNotEmpty()) {
+                    for (i in permissions.indices)
+                        perms[permissions[i]] = grantResults[i]
+                    if (perms[Manifest.permission.CAMERA]                           == PackageManager.PERMISSION_GRANTED
+                            && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]    == PackageManager.PERMISSION_GRANTED) {
+
+                        cameraClick()
+                    } else {
+
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this@ProfileEditPersonalActivity, Manifest.permission.CAMERA)
+                                || ActivityCompat.shouldShowRequestPermissionRationale(this@ProfileEditPersonalActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            showDialogOK("Permissions are required for this app",
+                                    DialogInterface.OnClickListener { _, which ->
+                                        when (which) {
+                                            DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
+                                            DialogInterface.BUTTON_NEGATIVE ->
+
+                                                finish()
+                                        }
+                                    })
+                        } else {
+                            permissionDialog("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show()
+    }
+
+    private fun permissionDialog(msg: String) {
+        val dialog = AlertDialog.Builder(this@ProfileEditPersonalActivity)
+        dialog.setMessage(msg)
+                .setPositiveButton("Yes") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
+                }
+                .setNegativeButton("Cancel") { _, _ -> finish() }
+        dialog.show()
+    }
+
+    companion object {
+
+        private const  val REQUEST_ID_PERMISSIONS = 1
+
+    }
+
 
 
     private fun showTitle()

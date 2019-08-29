@@ -1,10 +1,13 @@
 package com.app.l_pesa.profile.view
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.ClipData
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -14,6 +17,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +27,8 @@ import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
@@ -75,6 +81,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private lateinit  var captureFilePath    : Uri
 
     private lateinit  var progressDialog: KProgressHUD
+    private  val REQUEST_ID_PERMISSIONS = 1
 
     companion object {
         fun newInstance(): Fragment {
@@ -164,11 +171,105 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         }
 
         imgProfile.setOnClickListener {
-            cameraClick()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if(checkAndRequestPermissions())
+                {
+                    cameraClick()
+                }
+                else
+                {
+                    checkAndRequestPermissions()
+                }
+            }
+            else{
+                cameraClick()
+            }
 
         }
 
     }
+
+    private fun checkAndRequestPermissions(): Boolean {
+
+        val permissionCamera        = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA)
+        val permissionStorage       = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        val listPermissionsNeeded = ArrayList<String>()
+
+        if (permissionCamera != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA)
+        }
+        if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
+            return false
+        }
+
+        return true
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+
+        when (requestCode) {
+            REQUEST_ID_PERMISSIONS -> {
+
+                val perms = HashMap<String, Int>()
+                perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]   = PackageManager.PERMISSION_GRANTED
+
+                if (grantResults.isNotEmpty()) {
+                    for (i in permissions.indices)
+                        perms[permissions[i]] = grantResults[i]
+                    if (perms[Manifest.permission.CAMERA]                           == PackageManager.PERMISSION_GRANTED
+                            && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]    == PackageManager.PERMISSION_GRANTED) {
+
+                        cameraClick()
+                    } else {
+
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)
+                                || ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            showDialogOK("Permissions are required for this app",
+                                    DialogInterface.OnClickListener { _, which ->
+                                        when (which) {
+                                            DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
+                                            DialogInterface.BUTTON_NEGATIVE ->
+
+                                                activity!!.finish()
+                                        }
+                                    })
+                        } else {
+                            permissionDialog("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
+
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(activity!!)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show()
+    }
+
+    private fun permissionDialog(msg: String) {
+        val dialog = AlertDialog.Builder(activity!!)
+        dialog.setMessage(msg)
+                .setPositiveButton("Yes") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
+                }
+                .setNegativeButton("Cancel") { _, _ -> activity!!.finish() }
+        dialog.show()
+    }
+
 
     private fun dismiss()
     {
