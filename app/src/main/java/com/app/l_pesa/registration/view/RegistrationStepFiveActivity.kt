@@ -15,6 +15,7 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -66,7 +67,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     {
         initLoader()
 
-        rlImage.setOnClickListener {
+        imageCard.setOnClickListener {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if(checkAndRequestPermissions())
@@ -150,6 +151,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
                     dismiss()
                     imageCard.setImageURI(null)
                     imageCard.setImageURI(photoPath)
+                    imageCard.scaleType=ImageView.ScaleType.FIT_XY
                     captureImageStatus       = true
                 }, 2000)
 

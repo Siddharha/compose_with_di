@@ -15,6 +15,7 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -27,6 +28,8 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
+import kotlinx.android.synthetic.main.activity_registration_step_two.rootLayout
+import kotlinx.android.synthetic.main.layout_registration_step_five.*
 import java.io.File
 import java.util.HashMap
 import kotlin.collections.ArrayList
@@ -137,10 +140,15 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         try {
             if(photoPath!=Uri.EMPTY)
             {
-                imageProfile.setImageURI(photoPath)
-                captureImageStatus       = true
-                val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
-                sharedPref.imagePath=photoFile.absolutePath
+                    progressDialog.show()
+                    Handler().postDelayed({
+                    dismiss()
+                    imageProfile.setImageURI(null)
+                    imageProfile.setImageURI(photoPath)
+                    captureImageStatus       = true
+                    val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
+                    sharedPref.imagePath=photoFile.absolutePath
+                }, 2000)
             }
             else
             {
