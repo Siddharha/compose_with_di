@@ -3,16 +3,13 @@ package com.app.l_pesa.registration.view
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -25,8 +22,6 @@ import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_registration_step_three.*
 import kotlinx.android.synthetic.main.layout_registration_step_three.*
 import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 
 class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterTwo {

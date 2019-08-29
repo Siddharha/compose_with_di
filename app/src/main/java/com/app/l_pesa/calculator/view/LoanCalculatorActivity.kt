@@ -27,7 +27,6 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.google.gson.Gson
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_loan_calculator.*
 import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.text.DecimalFormat

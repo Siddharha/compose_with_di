@@ -31,7 +31,6 @@ import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.pinview.presenter.PresenterPinSet
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.activity_pin_set.*
 import kotlinx.android.synthetic.main.content_pin_set.*
 

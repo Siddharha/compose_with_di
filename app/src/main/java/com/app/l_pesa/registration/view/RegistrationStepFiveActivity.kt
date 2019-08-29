@@ -11,13 +11,12 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -33,19 +32,15 @@ import com.app.l_pesa.registration.inter.ICallBackRegisterThree
 import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
-import io.fotoapparat.Fotoapparat
-import io.fotoapparat.log.logcat
-import io.fotoapparat.log.loggers
-import io.fotoapparat.parameter.ScaleType
-import io.fotoapparat.result.transformer.scaled
-import io.fotoapparat.selector.back
 import kotlinx.android.synthetic.main.activity_registration_step_five.*
-import kotlinx.android.synthetic.main.content_activity_view_file.*
-import kotlinx.android.synthetic.main.content_registration_step_three.*
 import kotlinx.android.synthetic.main.layout_registration_step_five.*
-import kotlinx.android.synthetic.main.layout_registration_step_five.rootLayout
 import java.io.File
 import java.util.HashMap
+import kotlin.collections.ArrayList
+import kotlin.collections.indices
+import kotlin.collections.isNotEmpty
+import kotlin.collections.set
+import kotlin.collections.toTypedArray
 
 class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterThree {
 
@@ -71,7 +66,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     {
         initLoader()
 
-        imageCard.setOnClickListener {
+        rlImage.setOnClickListener {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if(checkAndRequestPermissions())
@@ -103,8 +98,6 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         }
 
 
-
-
     }
 
     private fun initCamera(){
@@ -132,6 +125,47 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         startActivityForResult(captureIntent, requestPhoto)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            requestPhoto ->
+
+                if (resultCode == Activity.RESULT_OK)
+                {
+                    setImage()
+                }
+
+        }
+    }
+
+    private fun setImage() {
+
+        val photoPath: Uri  = captureFilePath
+        try {
+            if(photoPath!=Uri.EMPTY)
+            {
+                progressDialog.show()
+
+                Handler().postDelayed({
+                    dismiss()
+                    imageCard.setImageURI(null)
+                    imageCard.setImageURI(photoPath)
+                    captureImageStatus       = true
+                }, 2000)
+
+            }
+            else
+            {
+                Toast.makeText(this@RegistrationStepFiveActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        catch (exp:Exception)
+        {
+            Toast.makeText(this@RegistrationStepFiveActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+        }
+
+    }
 
 
 

@@ -2,14 +2,12 @@ package com.app.l_pesa.login.view
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -56,10 +54,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_login.*
 import java.util.HashMap
 import kotlin.collections.ArrayList
-import kotlin.collections.indices
-import kotlin.collections.isNotEmpty
 import kotlin.collections.set
-import kotlin.collections.toTypedArray
 
 
 class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {

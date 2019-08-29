@@ -36,7 +36,6 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
-import com.app.l_pesa.login.presenter.PresenterLogin
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.otpview.view.OTPActivity
 import com.app.l_pesa.pin.inter.ICallBackChangePin
@@ -50,13 +49,9 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_forgot_pin.*
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.HashMap
 import kotlin.collections.ArrayList
-import kotlin.collections.indices
-import kotlin.collections.isNotEmpty
 import kotlin.collections.set
-import kotlin.collections.toTypedArray
 
 class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackChangePin {
 

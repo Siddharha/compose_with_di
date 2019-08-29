@@ -22,13 +22,10 @@ import android.view.MenuItem
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -49,6 +46,11 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 import java.util.HashMap
+import kotlin.collections.ArrayList
+import kotlin.collections.indices
+import kotlin.collections.isNotEmpty
+import kotlin.collections.set
+import kotlin.collections.toTypedArray
 
 
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne {
