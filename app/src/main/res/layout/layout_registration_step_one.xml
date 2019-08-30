@@ -17,6 +17,7 @@
         android:text="@string/email_verification"
         android:textSize="@dimen/_12sdp"
         android:padding="@dimen/_3sdp"
+        android:fontFamily="@font/montserrat"
         android:textColor="@color/dark_text_color"
         android:background="@color/screenBackground"
         android:gravity="center|start"

@@ -12,10 +12,11 @@
         <com.app.l_pesa.common.CommonTextRegular
             android:id="@+id/txtInfo"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_65sdp"
+            android:layout_height="@dimen/_85sdp"
             android:text="@string/email_verification"
-            android:textSize="@dimen/_11sdp"
+            android:textSize="@dimen/_12sdp"
             android:padding="@dimen/_3sdp"
+            android:gravity="center|start"
             android:textColor="@color/dark_text_color"
             android:fontFamily="@font/montserrat"
             android:background="@color/screenBackground"
@@ -43,8 +44,9 @@
             android:contentDescription="@string/app_name"
             android:layout_centerInParent="true"
             android:layout_width="@dimen/_250sdp"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="@dimen/_225sdp"
             app:srcCompat="@drawable/ic_id_card"
+            android:adjustViewBounds="true"
 
             />
 
