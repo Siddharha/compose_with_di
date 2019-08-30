@@ -152,7 +152,6 @@
         android:text="@string/continue_"
         android:textAllCaps="true"
         android:textStyle="bold"
-        android:letterSpacing=".10"
         android:textSize="@dimen/_12sdp"
         android:textColor="@color/colorWhite"
         android:layout_marginStart="@dimen/_10sdp"
