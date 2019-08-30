@@ -197,6 +197,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
                     jsonObject.add("device_data", jsonObjectRequestChild)
 
+                    // println("JSON"+jsonObject.toString())
+
                     val presenterRegistrationOneObj = PresenterRegistrationOne()
                     presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity, jsonObject, this)
 
@@ -319,12 +321,23 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
         dismiss()
         val sharedPref              =SharedPref(this@RegistrationStepOneActivity)
-        sharedPref.accessToken      =data.access_token
-        sharedPref.verificationCode =data.otp
+        if(data.next=="step3")
+        {
+            sharedPref.accessToken      =data.access_token
+            val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepFourActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+        else
+        {
+            sharedPref.accessToken      =data.access_token
+            sharedPref.verificationCode =data.otp
+            val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
 
-        val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
     }
 
     override fun onErrorRegistrationOne(jsonMessage: String) {

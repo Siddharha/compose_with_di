@@ -55,7 +55,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     private var  captureImageStatus         : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
-    private lateinit var progressDialog : ProgressDialog
+    private lateinit var progressDialog     : ProgressDialog
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -155,7 +155,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
                     dismiss()
                     imageCard.setImageURI(null)
                     imageCard.setImageURI(photoPath)
-                    imageCard.scaleType=ImageView.ScaleType.FIT_XY
+                    imageCard.scaleType=ImageView.ScaleType.FIT_CENTER
                     captureImageStatus       = true
                     photoFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(photoFile)
                 }, 2000)

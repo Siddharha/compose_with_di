@@ -138,7 +138,6 @@
             android:fontFamily="@font/montserrat"
             android:text="@string/submit"
             android:textAllCaps="true"
-            android:letterSpacing=".10"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"

@@ -1,6 +1,7 @@
 package com.app.l_pesa.investment.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -35,7 +36,6 @@ import com.app.l_pesa.main.view.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_investment_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
@@ -43,7 +43,7 @@ import java.util.*
 class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus,ICallBackPopUpWindow {
 
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog: ProgressDialog
     private var popupWindow : PopupWindow? = null
     private lateinit var listInvestment               : ArrayList<ResInvestmentHistory.UserInvestment>
     private lateinit var adapterInvestmentHistory     : InvestmentHistoryAdapter
@@ -192,11 +192,12 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 

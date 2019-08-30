@@ -1,21 +1,48 @@
 package com.app.l_pesa.main.view
 
+import android.app.Activity
 import android.content.Intent
+import android.content.IntentSender
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallState
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
 
+    private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
+    private val appUpdatedListener: InstallStateUpdatedListener by lazy {
+        object : InstallStateUpdatedListener {
+            override fun onStateUpdate(installState: InstallState) {
+                when {
+                    installState.installStatus() == InstallStatus.DOWNLOADED -> popupSnackbarForCompleteUpdate()
+                    installState.installStatus() == InstallStatus.INSTALLED -> appUpdateManager.unregisterListener(this)
+
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        checkForAppUpdate()
         initUI()
 
     }
@@ -23,9 +50,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI()
     {
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            checkAndRequestPermissions()
-          }*/
 
         buttonLogin.setOnClickListener {
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
@@ -42,110 +66,88 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkForAppUpdate() {
+        // Returns an intent object that you use to check for an update.
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
-/*
-    private fun checkAndRequestPermissions(): Boolean {
-        val permissionCamera        = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.CAMERA)
-        val permissionStorage       = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        val permissionLocation      = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.ACCESS_FINE_LOCATION)
-        val permissionPhoneState    = ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.READ_PHONE_STATE)
-
-
-        val listPermissionsNeeded = ArrayList<String>()
-
-        if (permissionCamera != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.CAMERA)
-        }
-        if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
-        if (permissionLocation != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
-        if (permissionPhoneState != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE)
-        }
-        if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_MULTIPLE_PERMISSIONS)
-            return false
-        }
-        return true
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
-
-        when (requestCode) {
-            REQUEST_ID_MULTIPLE_PERMISSIONS -> {
-
-                val perms = HashMap<String, Int>()
-                // Initialize the map with both permissions
-                perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
-                perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]   = PackageManager.PERMISSION_GRANTED
-                perms[Manifest.permission.ACCESS_FINE_LOCATION]     = PackageManager.PERMISSION_GRANTED
-                perms[Manifest.permission.READ_PHONE_STATE]         = PackageManager.PERMISSION_GRANTED
-                // Fill with actual results from user
-                if (grantResults.isNotEmpty()) {
-                    for (i in permissions.indices)
-                        perms[permissions[i]] = grantResults[i]
-                    // Check for both permissions
-                    if (perms[Manifest.permission.CAMERA]                           == PackageManager.PERMISSION_GRANTED
-                            && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]    == PackageManager.PERMISSION_GRANTED
-                            && perms[Manifest.permission.ACCESS_FINE_LOCATION]      == PackageManager.PERMISSION_GRANTED
-                            && perms[Manifest.permission.READ_PHONE_STATE]          == PackageManager.PERMISSION_GRANTED) {
-
-
-                        //else any one or both the permissions are not granted
-                    } else {
-
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)
-                                || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                                || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_PHONE_STATE)) {
-                            showDialogOK("Permissions are required for this app",
-                                    DialogInterface.OnClickListener { _, which ->
-                                        when (which) {
-                                            DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
-                                            DialogInterface.BUTTON_NEGATIVE ->
-
-                                                finish()
-                                        }
-                                    })
-                        } else {
-                            permissionDialog("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
-
-                        }
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                // Request the update.
+                try {
+                    val installType = when {
+                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> AppUpdateType.FLEXIBLE
+                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE) -> AppUpdateType.IMMEDIATE
+                        else -> null
                     }
+                    if (installType == AppUpdateType.FLEXIBLE) appUpdateManager.registerListener(appUpdatedListener)
+
+                    appUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo,
+                            installType!!,
+                            this,
+                            APP_UPDATE_REQUEST_CODE)
+                } catch (e: IntentSender.SendIntentException) {
+                    e.printStackTrace()
                 }
             }
         }
-
     }
 
-    private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(this)
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", okListener)
-                .create()
-                .show()
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == APP_UPDATE_REQUEST_CODE) {
+            if (resultCode != Activity.RESULT_OK) {
+                Toast.makeText(this@MainActivity,
+                        "App Update failed, please try again on the next app launch.",
+                        Toast.LENGTH_SHORT)
+                        .show()
+            }
+        }
     }
 
-    private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(this@MainActivity)
-        dialog.setMessage(msg)
-                .setPositiveButton("Yes") { _, _ ->
-                   startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
+    private fun popupSnackbarForCompleteUpdate() {
+        val snackbar = Snackbar.make(
+                findViewById(R.id.drawer_layout),
+                "An update has just been downloaded.",
+                Snackbar.LENGTH_INDEFINITE)
+        snackbar.setAction("RESTART") { appUpdateManager.completeUpdate() }
+        snackbar.setActionTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorApp))
+        snackbar.show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        appUpdateManager
+                .appUpdateInfo
+                .addOnSuccessListener { appUpdateInfo ->
+
+                    // If the update is downloaded but not installed,
+                    // notify the user to complete the update.
+                    if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                        popupSnackbarForCompleteUpdate()
+                    }
+
+                    //Check if Immediate update is required
+                    try {
+                        if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                            // If an in-app update is already running, resume the update.
+                            appUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo,
+                                    AppUpdateType.IMMEDIATE,
+                                    this,
+                                    APP_UPDATE_REQUEST_CODE)
+                        }
+                    } catch (e: IntentSender.SendIntentException) {
+                        e.printStackTrace()
+                    }
                 }
-                .setNegativeButton("Cancel") { _, _ -> finish() }
-        dialog.show()
     }
 
     companion object {
-
-        private const  val REQUEST_ID_MULTIPLE_PERMISSIONS = 1
-
-    }*/
+        private const val APP_UPDATE_REQUEST_CODE = 1991
+    }
 
     override fun onBackPressed() {
         val homeIntent = Intent(Intent.ACTION_MAIN)

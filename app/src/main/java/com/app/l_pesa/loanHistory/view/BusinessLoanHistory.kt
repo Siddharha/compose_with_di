@@ -1,6 +1,7 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -27,14 +28,13 @@ import com.app.l_pesa.main.view.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 
 
 class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog        : ProgressDialog
     private var listLoanHistoryBusiness         : ArrayList<ResLoanHistoryBusiness.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : BusinessLoanHistoryAdapter
     private lateinit var bottomSheetBehavior    : BottomSheetBehavior<*>
@@ -74,11 +74,12 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 

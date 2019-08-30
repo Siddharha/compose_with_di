@@ -3,6 +3,7 @@ package com.app.l_pesa.profile.view
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.ClipData
 import android.content.Context
 import android.content.DialogInterface
@@ -16,6 +17,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.TextUtils
@@ -57,8 +59,8 @@ import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
+import kotlinx.android.synthetic.main.fragment_business_id_layout.rootLayout
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -80,7 +82,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private lateinit var  photoFile          : File
     private lateinit  var captureFilePath    : Uri
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog: ProgressDialog
     private  val REQUEST_ID_PERMISSIONS = 1
 
     companion object {
@@ -281,11 +283,12 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
@@ -560,7 +563,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     private fun setImage() {
 
-        try {
+        /*try {
            val photoPath: Uri = captureFilePath
             handleRotation(photoFile.absolutePath)
             imgProfile.post {
@@ -581,7 +584,33 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         catch (exp:Exception)
         {
 
+        }*/
+
+        val photoPath: Uri = captureFilePath
+        try {
+            if(photoPath!=Uri.EMPTY)
+            {
+                progressDialog.show()
+                handleRotation(photoFile.absolutePath)
+                Handler().postDelayed({
+                    dismiss()
+                    imgProfile.setImageURI(null)
+                    imgProfile.setImageURI(photoPath)
+                    captureImageStatus       = true
+
+                }, 1000)
+            }
+            else
+            {
+                Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+            }
+
         }
+        catch (exp:Exception)
+        {
+            Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+        }
+
 
     }
 

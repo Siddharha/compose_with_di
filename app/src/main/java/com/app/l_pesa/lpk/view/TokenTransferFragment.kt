@@ -1,6 +1,7 @@
 package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -16,13 +17,12 @@ import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterTokenTransfer
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_token_transfer.*
 import java.text.DecimalFormat
 
 class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog: ProgressDialog
     companion object {
         fun newInstance(): Fragment {
             return TokenTransferFragment()
@@ -89,11 +89,12 @@ class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
 
     private fun initLoader()
     {
-        progressDialog=KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
     private fun dismiss()

@@ -177,7 +177,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapOLD["sex"]       = ""+profileData.userPersonalInfo!!.sex
             hashMapOLD["imgChange"] = "false"
 
-            var dateRequest=""
+           /* var dateRequest=""
             dateRequest = if(!TextUtils.isEmpty(txtDOB.text.toString())) {
                 val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
                 val date         = inputFormat.parse(txtDOB.text.toString())
@@ -186,7 +186,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 outputFormat.format(date!!)
             } else {
                 ""
-            }
+            }*/
 
 
             val hashMapNew = HashMap<String, String>()
@@ -195,7 +195,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapNew["nameM"]     = etNameM.text.toString()
             hashMapNew["nameL"]     = etNameL.text.toString()
             hashMapNew["email"]     = etEmail.text.toString()
-            hashMapNew["dob"]       = dateRequest
+            hashMapNew["dob"]       = txtDOB.text.toString()
             hashMapNew["status"]    = txtMarital.text.toString()
             hashMapNew["motherM"]   = etMotherName.text.toString()
             hashMapNew["sex"]       = gender
@@ -294,8 +294,9 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             "F"
         }
 
-        val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
-        val date         = inputFormat.parse(txtDOB.text.toString())
+
+        val format      = SimpleDateFormat("yyyy-MM-dd")
+        val date        = format.parse(txtDOB.text.toString())
 
         val outputFormat = SimpleDateFormat("yyyy-MM-dd")
         val dateRequest  = outputFormat.format(date!!)
@@ -553,11 +554,12 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.dob))
         {
-            val inputFormat =  SimpleDateFormat("yyyy-MM-dd")
+            /*val inputFormat =  SimpleDateFormat("yyyy-MM-dd")
             val date = inputFormat.parse(profileData.userPersonalInfo!!.dob)
 
-            val outputFormat = SimpleDateFormat("dd-MM-yyyy")
-            txtDOB.setText(outputFormat.format(date!!))
+            val outputFormat = SimpleDateFormat("dd-MM-yyyy")*/
+            //txtDOB.setText(outputFormat.format(date!!))
+            txtDOB.setText(profileData.userPersonalInfo!!.dob)
         }
 
         txtDOB.isFocusable=false
@@ -571,15 +573,16 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     @SuppressLint("SetTextI18n")
     private fun showDatePicker()
     {
-        val c       = Calendar.getInstance()
-        val year    = c.get(Calendar.YEAR)
-        val month   = c.get(Calendar.MONTH)+1
-        val day     = c.get(Calendar.DAY_OF_MONTH)
+        val c          = Calendar.getInstance()
+        val yearOBJ    = c.get(Calendar.YEAR)
+        val monthOBJ   = c.get(Calendar.MONTH)+1
+        val dayOBJ     = c.get(Calendar.DAY_OF_MONTH)
 
         val dpd = DatePickerDialog(this@ProfileEditPersonalActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
 
-            txtDOB.setText("$year-$monthOfYear-$dayOfMonth")
-        }, year, month, day)
+            val month=monthOfYear+1
+            txtDOB.setText("$year-$month-$dayOfMonth")
+        }, yearOBJ, monthOBJ, dayOBJ)
             /*if(dayOfMonth.toString().length==1)
             {
                 if(monthOfYear.toString().length==1)
