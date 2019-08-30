@@ -17,6 +17,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.TextUtils
@@ -59,6 +60,7 @@ import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
+import kotlinx.android.synthetic.main.fragment_business_id_layout.rootLayout
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -561,7 +563,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     private fun setImage() {
 
-        try {
+        /*try {
            val photoPath: Uri = captureFilePath
             handleRotation(photoFile.absolutePath)
             imgProfile.post {
@@ -582,7 +584,33 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         catch (exp:Exception)
         {
 
+        }*/
+
+        val photoPath: Uri = captureFilePath
+        try {
+            if(photoPath!=Uri.EMPTY)
+            {
+                progressDialog.show()
+                handleRotation(photoFile.absolutePath)
+                Handler().postDelayed({
+                    dismiss()
+                    imgProfile.setImageURI(null)
+                    imgProfile.setImageURI(photoPath)
+                    captureImageStatus       = true
+
+                }, 1000)
+            }
+            else
+            {
+                Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+            }
+
         }
+        catch (exp:Exception)
+        {
+            Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+        }
+
 
     }
 

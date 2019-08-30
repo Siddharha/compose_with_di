@@ -17,6 +17,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.TextUtils
@@ -32,6 +33,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,13 +60,14 @@ import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import kotlinx.android.synthetic.main.fragment_personal_id_layout.rootLayout
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
 
-class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload {
+class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload {
 
 
     private var filterPopup : PopupWindow? = null
@@ -87,7 +90,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
     private  val REQUEST_ID_PERMISSIONS = 1
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return PersonalIdInfoFragment()
         }
     }
@@ -610,27 +613,30 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
     private fun setImage() {
 
+
+        val photoPath: Uri = captureFilePath
         try {
-                val photoPath: Uri = captureFilePath
+            if(photoPath!=Uri.EMPTY)
+            {
+                progressDialog.show()
                 handleRotation(photoFile.absolutePath)
-                imgProfile.post {
-                    val pictureBitmap = BitmapResize.shrinkBitmap(
-                            activity!!,
-                            photoPath,
-                            imgProfile.width,
-                            imgProfile.height
-                    )
-                    imgProfile.setImageBitmap(pictureBitmap)
-                    imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
+                Handler().postDelayed({
+                    dismiss()
+                    imgProfile.setImageURI(null)
+                    imgProfile.setImageURI(photoPath)
+                    captureImageStatus       = true
 
-
-                captureImageStatus = true
-
+                }, 1000)
             }
+            else
+            {
+                Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+            }
+
         }
         catch (exp:Exception)
         {
-
+            Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
         }
 
     }
