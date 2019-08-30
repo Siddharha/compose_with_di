@@ -3,6 +3,7 @@ package com.app.l_pesa.profile.view
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.ClipData
 import android.content.Context
 import android.content.DialogInterface
@@ -56,7 +57,6 @@ import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import java.io.File
 import java.io.FileOutputStream
@@ -83,7 +83,7 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
     private var idTypeExists        = "FALSE"
     private var imgFileAddress      = ""
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog: ProgressDialog
     private  val REQUEST_ID_PERMISSIONS = 1
 
     companion object {
@@ -290,11 +290,12 @@ class PersonalIdInfoFragment : androidx.fragment.app.Fragment(), ICallBackClickP
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 

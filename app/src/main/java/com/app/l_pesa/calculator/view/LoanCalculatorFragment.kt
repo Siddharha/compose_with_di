@@ -2,6 +2,7 @@ package com.app.l_pesa.calculator.view
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -24,14 +25,13 @@ import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.google.gson.Gson
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.text.DecimalFormat
 
 
 class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog: ProgressDialog
     private var usdValue=0.0
     private var personalLoanStatus="FALSE"
     private var businessLoanStatus="FALSE"
@@ -123,11 +123,12 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity!!)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 

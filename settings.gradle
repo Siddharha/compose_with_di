@@ -1,1 +1,1 @@
-include ':app', ':kprogresshud'
+include ':app'

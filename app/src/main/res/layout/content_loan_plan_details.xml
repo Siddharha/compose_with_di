@@ -393,17 +393,21 @@
 
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/Button_apply_loan"
-                android:layout_width="@dimen/_137sdp"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
                 android:textSize="@dimen/_12sdp"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/blue_button"
                 android:fontFamily="@font/montserrat"
-                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/apply_loan"
-                android:textAllCaps="false"
-                android:textColor="@color/colorSemiWhite" />
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+
+                />
 
         </LinearLayout>
     </ScrollView>

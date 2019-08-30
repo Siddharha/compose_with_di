@@ -1,6 +1,7 @@
 package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -22,7 +23,6 @@ import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
 import com.app.l_pesa.main.view.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_transfer_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
@@ -30,7 +30,7 @@ import java.util.*
 
 class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTransferHistory {
 
-    private lateinit var progressDialog                : KProgressHUD
+    private lateinit var progressDialog                : ProgressDialog
     private lateinit var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>
     private lateinit var adapterTransferHistory        : AdapterTransferHistory
     private lateinit var bottomSheetBehavior           : BottomSheetBehavior<*>
@@ -327,11 +327,12 @@ class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTrans
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
