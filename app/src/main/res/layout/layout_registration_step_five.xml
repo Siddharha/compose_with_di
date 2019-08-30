@@ -44,9 +44,9 @@
             android:id="@+id/imageCard"
             android:contentDescription="@string/app_name"
             android:layout_centerInParent="true"
-            android:layout_width="@dimen/_175sdp"
-            android:layout_height="@dimen/_175sdp"
-            app:srcCompat="@drawable/ic_id_card"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:background="@drawable/ic_upload_id"
             android:adjustViewBounds="true"
 
             />
