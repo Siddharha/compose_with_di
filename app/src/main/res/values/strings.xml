@@ -39,7 +39,11 @@
     <string name="upload_id_picture">Choose your ID type, enter your ID number &amp; upload a photocopy of the ID </string>
     <string name="continue_to_register">Continue to Register</string>
     <string name="refer_to_otp">You should receive an email with Verification Code. Please enter the Verification Code to verify.</string>
-    <string name="email_verification">Enter your mobile number, email address &amp; Continue. You will receive Verification Code in your email. Confirm the email address belongs to you by entering the Verification Code in the next step.</string>
+    <string name="email_verification">Enter your mobile number, email address &amp; Continue. You will receive Verification Code in your email. Confirm the email address belongs to you by entering the Verification Code in next step.</string>
+    <string name="selfie_verification">A selfie - take a photograph of yourself and make sure that your face is clearly visible.</string>
+    <string name="email_selfie_verification">We sent you a Verification Code in your email in the previous step. You can edit your selfie and enter your name and the verification code to continue.</string>
+    <string name="identity_verification">To complete your registration with L-Pesa, kindly select an ID proof below and enter the ID number. Please have your selected ID card ready to take a photograph of it in the next step.</string>
+    <string name="identity_photo_verification">Take a photograph of your ID and make sure that your personal details are clear and easy to read.</string>
     <string name="no_location_detected">
         No location detected. Make sure location is enabled on the device.
     </string>
