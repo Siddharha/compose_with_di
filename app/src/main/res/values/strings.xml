@@ -40,7 +40,14 @@
     <string name="continue_to_register">Continue to Register</string>
     <string name="refer_to_otp">You should receive an email with Verification Code. Please enter the Verification Code to verify.</string>
     <string name="email_verification">Enter your mobile number, email address &amp; Continue. You will receive Verification Code in your email. Confirm the email address belongs to you by entering the Verification Code in the next step.</string>
+    <string name="no_location_detected">
+        No location detected. Make sure location is enabled on the device.
+    </string>
 
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="settings">Settings</string>
     <!--Password section-->
     <string name="current_password">Current Password</string>
     <string name="new_pin">New Pin</string>

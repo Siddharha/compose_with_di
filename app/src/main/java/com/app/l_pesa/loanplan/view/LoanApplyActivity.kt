@@ -58,7 +58,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private var mGoogleApiClient: GoogleApiClient? = null
     private var mLocation: Location? = null
     private var mLocationRequest: LocationRequest? = null
-    private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
+    private val UPDATE_INTERVAL = (4000).toLong()  /* 4 secs */
     private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
 
     private var loanType=""
@@ -97,12 +97,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             if(TextUtils.isEmpty(loanPurpose))
             {
                 showDescription()
-                CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose))
+                CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose))
             }
             else if(loanPurpose=="Others" && TextUtils.isEmpty(etDescription.text.toString()))
             {
                 etDescription.requestFocus()
-                CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose_description))
+                CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose_description))
             }
             else
             {
@@ -146,7 +146,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             sharedPrefObj.currentLng = mLocation!!.longitude.toString()
             doApplyLoan()
         } else {
-            Toast.makeText(this, "Location not Detected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Current Location Not Detected", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -182,7 +182,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 }
                 else
                 {
-                     CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.please_wait))
+                     CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.please_wait))
                 }
 
             }
@@ -194,7 +194,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
         else
         {
-            CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.no_internet))
         }
     }
 
@@ -226,6 +226,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loadDescription()
     {
+        showDescription()
         etChooseDescription.isFocusable =false
         etChooseDescription.setOnClickListener {
 
@@ -284,7 +285,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     override fun onErrorLoanApply(message: String) {
         dismiss()
         buttonSubmit.isClickable =true
-        CommonMethod.customSnackBarError(llRoot,this@LoanApplyActivity,message)
+        CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,message)
     }
 
     override fun onSessionTimeOut(jsonMessage: String) {

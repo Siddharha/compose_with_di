@@ -151,8 +151,7 @@
 -keepclassmembers class com.app.l_pesa.logout.** { *; }
 
 
-
-
+-keep class com.google.android.gms.internal.** { *; }
 
 
 
