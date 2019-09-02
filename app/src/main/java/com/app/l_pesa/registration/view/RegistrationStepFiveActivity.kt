@@ -150,7 +150,6 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
                     imageCard.setBackgroundColor(Color.TRANSPARENT)
                     imageCard.setImageURI(null)
                     imageCard.setImageURI(photoPath)
-                    imageCard.scaleType=ImageView.ScaleType.FIT_CENTER
                     captureImageStatus       = true
                     photoFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(photoFile)
                 }, 2000)
