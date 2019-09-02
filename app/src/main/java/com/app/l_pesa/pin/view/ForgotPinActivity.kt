@@ -438,6 +438,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         sharedPrefOBJ.countryCode=resModelCountryList.code
         sharedPrefOBJ.countryName=resModelCountryList.country_name
         sharedPrefOBJ.countryIsdCode=resModelCountryList.country_code
+        sharedPrefOBJ.countryFlag=resModelCountryList.image
 
     }
 }

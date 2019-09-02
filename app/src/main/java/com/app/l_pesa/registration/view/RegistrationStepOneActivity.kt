@@ -287,6 +287,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         sharedPrefOBJ.countryCode       =resModelCountryList.code
         sharedPrefOBJ.countryName       =resModelCountryList.country_name
         sharedPrefOBJ.countryIsdCode    =resModelCountryList.country_code
+        sharedPrefOBJ.countryFlag       =resModelCountryList.image
         txtCountry.visibility           =View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
         etPhone.tag = sharedPrefOBJ.countryIsdCode+"   "
