@@ -434,9 +434,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
        try {
            if(photoPath!=Uri.EMPTY)
            {
-
+               progressDialog.show()
                handleRotation(photoFile.absolutePath)
                Handler().postDelayed({
+                   dismiss()
                    imgProfile.setBackgroundColor(Color.TRANSPARENT)
                    imgProfile.setImageURI(null)
                    imgProfile.setImageURI(photoPath)
