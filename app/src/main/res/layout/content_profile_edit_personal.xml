@@ -10,12 +10,6 @@
     tools:showIn="@layout/activity_profile_edit_personal"
     android:id="@+id/rootConstraint">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -364,8 +358,6 @@
         </LinearLayout>
 
     </ScrollView>
-
- </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

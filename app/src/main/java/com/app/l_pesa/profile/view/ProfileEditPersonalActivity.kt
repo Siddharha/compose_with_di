@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.ClipData
 import android.content.DialogInterface
 import android.content.Intent
@@ -67,6 +68,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     private var captureImageStatus : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
+    private lateinit var  progressDialog   : ProgressDialog
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +79,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
         val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
-        swipeRefresh()
+        initLoader()
         initData(profileData)
         loadTitle(profileData)
         loadMarital(profileData)
@@ -87,12 +89,15 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
 
-    private fun swipeRefresh()
+    private fun initLoader()
     {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing=false
-        }
+        progressDialog = ProgressDialog(this@ProfileEditPersonalActivity,R.style.MyAlertDialogStyle)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -238,8 +243,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                 {
                     if(CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity))
                     {
-                        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                        swipeRefreshLayout.isRefreshing=true
+                        progressDialog.show()
                         buttonSubmit.isClickable=false
                         if(captureImageStatus)
                         {
@@ -264,6 +268,14 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
     override fun onSuccessUploadAWS(url: String) {
 
         val sharedPrefOBJ= SharedPref(this@ProfileEditPersonalActivity)
@@ -277,7 +289,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     override fun onFailureUploadAWS(string: String) {
         buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,string)
     }
 
@@ -317,7 +329,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     override fun onSuccessPersonalInfo() {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
@@ -330,13 +342,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onFailurePersonalInfo(message: String) {
 
         buttonSubmit.isClickable=true
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,message)
     }
 
     override fun onSessionTimeOut(message: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         val dialogBuilder = AlertDialog.Builder(this@ProfileEditPersonalActivity)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
@@ -774,22 +786,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity))
-                {
-                    CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.please_wait))
-                }
-                else
-                {
                     CommonMethod.hideKeyboardView(this@ProfileEditPersonalActivity)
                     onBackPressed()
                     overridePendingTransition(R.anim.left_in, R.anim.right_out)
-                }
-
-                true
+                    true
             }
 
             else -> super.onOptionsItemSelected(item)
