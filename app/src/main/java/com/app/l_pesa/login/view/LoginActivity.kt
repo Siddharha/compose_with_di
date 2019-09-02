@@ -115,15 +115,19 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     {
         buttonLoanCalculator.setOnClickListener {
 
+            buttonLoanCalculator.isClickable   = false
             val sharedPrefOBJ= SharedPref(this@LoginActivity)
             sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
             sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
             startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
+            Handler().postDelayed({
+                buttonLoanCalculator.isClickable   = true
+            }, 1000)
+
         }
     }
-
 
     @SuppressLint("MissingPermission")
     private fun loginProcess()

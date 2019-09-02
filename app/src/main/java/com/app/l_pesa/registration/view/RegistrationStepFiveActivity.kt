@@ -44,10 +44,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.HashMap
 import kotlin.collections.ArrayList
-import kotlin.collections.indices
-import kotlin.collections.isNotEmpty
 import kotlin.collections.set
-import kotlin.collections.toTypedArray
 
 class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterThree {
 

@@ -48,10 +48,7 @@ import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 import java.util.HashMap
 import kotlin.collections.ArrayList
-import kotlin.collections.indices
-import kotlin.collections.isNotEmpty
 import kotlin.collections.set
-import kotlin.collections.toTypedArray
 
 
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne {
