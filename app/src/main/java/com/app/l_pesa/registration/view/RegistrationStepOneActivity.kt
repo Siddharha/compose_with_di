@@ -19,6 +19,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.MenuItem
+import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -221,62 +222,76 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         {}
     }
 
+
     private fun loadCountry()
     {
         val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
         if(TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode))
         {
             etPhone.tag="+000   "
-            val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
-
-            val dialog= Dialog(this@RegistrationStepOneActivity)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.dialog_country)
-            alCountry= ArrayList()
-
-            val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-            val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
-            alCountry.addAll(countryData.countries_list)
-
-            adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, alCountry,dialog,this)
-            recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
-            recyclerView?.adapter           = adapterCountry
-            dialog.show()
-            dialog.setCancelable(false)
-            dialog.setCanceledOnTouchOutside(false)
-            etCountry!!.addTextChangedListener(object : TextWatcher {
-
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-
-                    filterCountry(s.toString())
-
-                }
-
-                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
-
-                }
-
-                override fun afterTextChanged(s: Editable) {
-
-                }
-            })
-
+            showCountry()
         }
         else
         {
+            txtCountry.visibility=View.VISIBLE
+            txtCountry.text = sharedPrefOBJ.countryName
             etPhone.tag=sharedPrefOBJ.countryIsdCode+"   "
         }
 
+        txtCountry.setOnClickListener {
 
+            showCountry()
+
+        }
+
+    }
+
+    private fun showCountry()
+    {
+        val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
+        val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
+
+        val dialog= Dialog(this@RegistrationStepOneActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_country)
+        alCountry= ArrayList()
+
+        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
+        alCountry.addAll(countryData.countries_list)
+
+        adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, alCountry,dialog,this)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.adapter           = adapterCountry
+        dialog.show()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        etCountry!!.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+                filterCountry(s.toString())
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
-
         val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
-        sharedPrefOBJ.countryCode=resModelCountryList.code
-        sharedPrefOBJ.countryName=resModelCountryList.country_name
-        sharedPrefOBJ.countryIsdCode=resModelCountryList.country_code
+        sharedPrefOBJ.countryCode       =resModelCountryList.code
+        sharedPrefOBJ.countryName       =resModelCountryList.country_name
+        sharedPrefOBJ.countryIsdCode    =resModelCountryList.country_code
+        txtCountry.visibility           =View.VISIBLE
+        txtCountry.text = resModelCountryList.country_name
         etPhone.tag = sharedPrefOBJ.countryIsdCode+"   "
 
          if(TextUtils.isEmpty(etPhone.text.toString()))
