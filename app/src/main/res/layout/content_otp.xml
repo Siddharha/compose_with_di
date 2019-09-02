@@ -24,12 +24,13 @@
                 android:id="@+id/txtHeader"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_85sdp"
-                android:fontFamily="@font/montserrat"
                 android:text="@string/your_otp_code"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 android:padding="@dimen/_3sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat"
                 android:textColor="@color/dark_text_color"
-                android:background="@color/screenBackground"
                 android:gravity="center|start"
                 android:justificationMode="inter_word"
                 app:layout_constraintBottom_toTopOf="@+id/otp_view"
@@ -37,6 +38,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
+
 
             <com.app.l_pesa.common.OtpView
                 android:id="@+id/otp_view"
