@@ -15,7 +15,6 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.MenuItem
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog

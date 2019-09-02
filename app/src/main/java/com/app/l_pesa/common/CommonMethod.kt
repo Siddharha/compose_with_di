@@ -2,8 +2,6 @@ package com.app.l_pesa.common
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -16,9 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.google.android.material.snackbar.Snackbar
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.regex.Pattern
 
@@ -91,33 +86,6 @@ object CommonMethod {
 
     }
 
-    fun fileCompress(fileOBJ: File): File
-    {
-        val bitOptionOBJ    = BitmapFactory.Options()
-        bitOptionOBJ.inJustDecodeBounds      = true
-        bitOptionOBJ.inSampleSize            = 6
-
-        var inputStream = FileInputStream(fileOBJ)
-        BitmapFactory.decodeStream(inputStream, null, bitOptionOBJ)
-        inputStream.close()
-        val requiredSize = 75
-        var scale = 1
-        while (bitOptionOBJ.outWidth / scale / 2 >= requiredSize && bitOptionOBJ.outHeight / scale / 2 >= requiredSize) {
-            scale *= 2
-        }
-
-        val bitOptionNewOBJ        = BitmapFactory.Options()
-        bitOptionNewOBJ.inSampleSize                = scale
-        inputStream                                 = FileInputStream(fileOBJ)
-        val selectedBitmap                  = BitmapFactory.decodeStream(inputStream, null, bitOptionNewOBJ)
-        inputStream.close()
-
-        fileOBJ.createNewFile()
-        val outputStream = FileOutputStream(fileOBJ)
-        selectedBitmap?.compress(Bitmap.CompressFormat.JPEG, 65 , outputStream)
-        return fileOBJ
-
-    }
 
     fun customSnackBarError(view: View,context: Context,message:String) {
 

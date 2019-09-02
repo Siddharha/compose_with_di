@@ -65,10 +65,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
     private val requestPhoto             = 10
     private val requestGalley            = 11
-    private var captureImageStatus : Boolean    = false
+    private var captureImageStatus          : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
-    private lateinit var  progressDialog   : ProgressDialog
+    private lateinit var  progressDialog    : ProgressDialog
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -248,8 +248,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                         if(captureImageStatus)
                         {
                             val presenterAWSProfile= PresenterAWSProfile()
-                            val imgFile=CommonMethod.fileCompress(photoFile)
-                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity,this,imgFile)
+                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity,this,photoFile)
                         }
                         else
                         {

@@ -57,6 +57,7 @@ import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import java.io.File
 import java.io.FileOutputStream
@@ -141,13 +142,11 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     progressDialog.show()
                     buttonSubmit.isClickable=false
 
-                    val imgFile= CommonMethod.fileCompress(photoFile)
-
                     /*if(idTypeExists=="TRUE")
                     {*/
                     val presenterAWSPersonalId= PresenterAWSPersonalId()
                     // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,imgFile)
+                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
                     /*}
                     else
                     {
@@ -622,8 +621,10 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     imgProfile.setImageURI(null)
                     imgProfile.setImageURI(photoPath)
                     captureImageStatus       = true
-
+                    photoFile   = Compressor(activity).compressToFile(photoFile)
                 }, 1000)
+
+
             }
             else
             {

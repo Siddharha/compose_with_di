@@ -57,6 +57,7 @@ import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.fragment_business_id_layout.*
 import java.io.File
 import java.io.FileOutputStream
@@ -134,13 +135,11 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
                     progressDialog.show()
                     buttonSubmit.isClickable=false
-                    val imgFile=CommonMethod.fileCompress(photoFile)
-
                     /*if(idTypeExists=="TRUE")
                     {*/
                     val presenterAWSBusinessId= PresenterAWSBusinesslId()
                     // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                    presenterAWSBusinessId.uploadBusinessId(activity!!,this,imgFile)
+                    presenterAWSBusinessId.uploadBusinessId(activity!!,this,photoFile)
                     /*}
                     else
                     {
@@ -560,29 +559,6 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
 
     private fun setImage() {
 
-        /*try {
-           val photoPath: Uri = captureFilePath
-            handleRotation(photoFile.absolutePath)
-            imgProfile.post {
-                val pictureBitmap = BitmapResize.shrinkBitmap(
-                        activity!!,
-                        photoPath,
-                        imgProfile.width,
-                        imgProfile.height
-                )
-                imgProfile.setImageBitmap(pictureBitmap)
-                imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-
-            }
-
-        captureImageStatus = true
-
-        }
-        catch (exp:Exception)
-        {
-
-        }*/
-
         val photoPath: Uri = captureFilePath
         try {
             if(photoPath!=Uri.EMPTY)
@@ -594,6 +570,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                     imgProfile.setImageURI(null)
                     imgProfile.setImageURI(photoPath)
                     captureImageStatus       = true
+                    photoFile   = Compressor(activity).compressToFile(photoFile)
 
                 }, 1000)
             }
