@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -52,16 +52,28 @@ class MainActivity : AppCompatActivity() {
     {
 
         buttonLogin.setOnClickListener {
+
+            buttonLogin.isClickable       = false
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+            Handler().postDelayed({
+                buttonLogin.isClickable   = true
+            }, 1000)
+
 
         }
 
         buttonSignUp.setOnClickListener {
 
+            buttonSignUp.isClickable       = false
             startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            Handler().postDelayed({
+                buttonSignUp.isClickable   = true
+            }, 1000)
+
 
         }
     }
