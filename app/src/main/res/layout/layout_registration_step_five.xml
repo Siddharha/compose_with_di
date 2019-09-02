@@ -45,7 +45,7 @@
             android:contentDescription="@string/app_name"
             android:layout_centerInParent="true"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_165sdp"
             android:background="@drawable/ic_upload_id"
             android:adjustViewBounds="true"
 

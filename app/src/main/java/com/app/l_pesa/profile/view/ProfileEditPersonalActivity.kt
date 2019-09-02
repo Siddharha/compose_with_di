@@ -9,13 +9,11 @@ import android.content.ClipData
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.graphics.Typeface
+import android.graphics.*
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.Editable
@@ -23,8 +21,8 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.Window
-import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -35,7 +33,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
@@ -53,6 +50,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
 import java.io.File
@@ -420,28 +418,34 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
    private fun setImage() {
 
-        try {
-                val photoPath: Uri = captureFilePath
-                handleRotation(photoFile.absolutePath)
-                imgProfile.post {
-                    val pictureBitmap = BitmapResize.shrinkBitmap(
-                            this@ProfileEditPersonalActivity,
-                            photoPath,
-                            imgProfile.width,
-                            imgProfile.height
-                    )
-                    imgProfile.setImageBitmap(pictureBitmap)
-                    imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
+       val photoPath: Uri = captureFilePath
+       try {
+           if(photoPath!=Uri.EMPTY)
+           {
 
-                }
+               handleRotation(photoFile.absolutePath)
+               Handler().postDelayed({
+                   imgProfile.setBackgroundColor(Color.TRANSPARENT)
+                   imgProfile.setImageURI(null)
+                   imgProfile.setImageURI(photoPath)
 
-                captureImageStatus = true
+                   captureImageStatus       = true
+                   photoFile   = Compressor(this@ProfileEditPersonalActivity).compressToFile(photoFile)
+               }, 1500)
 
-        }
-        catch (exp:Exception)
-        {
+           }
+           else
+           {
+               Toast.makeText(this@ProfileEditPersonalActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+           }
 
-        }
+       }
+       catch (exp:Exception)
+       {
+           Toast.makeText(this@ProfileEditPersonalActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+       }
+
+
 
     }
 
