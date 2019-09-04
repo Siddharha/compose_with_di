@@ -66,14 +66,14 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         val sharedPref= SharedPref(this@LoanPaybackScheduledActivity)
         if(sharedPref.payFullAmount=="C" )
         {
-            button_pay_all.visibility= View.INVISIBLE
+            buttonFullAmount.visibility= View.INVISIBLE
             txt_interest_discount.visibility= View.GONE
         }
         else
         {
-            button_pay_all.visibility= View.VISIBLE
+            buttonFullAmount.visibility= View.VISIBLE
             txt_interest_discount.visibility= View.VISIBLE
-            button_pay_all.setOnClickListener {
+            buttonFullAmount.setOnClickListener {
 
                 if(swipeRefreshLayout.isRefreshing)
                 {
@@ -84,7 +84,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
                     if(dataOBJ!!.loanInfo!!.loanId!=0)
                     {
-                        payAll(dataOBJ!!)
+                        doPayAll(dataOBJ!!)
                     }
                 }
 
@@ -95,7 +95,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     }
 
     @SuppressLint("SetTextI18n")
-    private fun payAll(dataOBJ: ResPaybackSchedule.Data)
+    private fun doPayAll(dataOBJ: ResPaybackSchedule.Data)
     {
         val alertDialog         = AlertDialog.Builder(this@LoanPaybackScheduledActivity).create()
         val inflater            = LayoutInflater.from(this@LoanPaybackScheduledActivity)

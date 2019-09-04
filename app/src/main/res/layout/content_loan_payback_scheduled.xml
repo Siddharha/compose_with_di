@@ -85,7 +85,7 @@
             >
 
             <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/button_pay_all"
+                android:id="@+id/buttonFullAmount"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:text="@string/pay_full_amount"
