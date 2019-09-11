@@ -5,7 +5,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
 import android.text.TextUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -50,7 +49,7 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
     private fun verifyField()
     {
         hideKeyboard()
-        btnSubmit.isClickable   = false
+       // btnSubmit.isClickable   = false
         if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
             CommonMethod.customSnackBarError(rootLayout,this@EmailRequiredActivity,resources.getString(R.string.required_email))
@@ -74,9 +73,9 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
             }
         }
 
-        Handler().postDelayed({
+       /* Handler().postDelayed({
             btnSubmit.isClickable   = true
-        }, 1000)
+        }, 1000)*/
     }
 
     private fun hideKeyboard()

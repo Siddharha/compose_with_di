@@ -20,6 +20,7 @@
     <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
     <string name="verification_code">Verification Code</string>
+    <string name="verify">Verify</string>
     <string name="coming_soon">Coming Soon</string>
 
     <!--Registration Message-->
@@ -86,6 +87,7 @@
     <string name="confirm_pin_not_match">The new and re-typed PIN does not match.</string>
     <string name="old_new_password_different">Old and new PIN should be different.</string>
     <string name="six_digit_new_pin_required">6 digit new PIN required.</string>
+    <string name="six_digit_verification_code_required">6 digit Verification Code required.</string>
     <string name="required_email">Please enter a valid email address.</string>
     <string name="poor_internet">Poor internet connection!</string>
     <string name="something_went_wrong">Something went wrong, please try after sometime!</string>

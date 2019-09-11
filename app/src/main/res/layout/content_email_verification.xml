@@ -75,7 +75,7 @@
         android:layout_height="@dimen/_40sdp"
         android:fontFamily="@font/montserrat"
         android:background="@drawable/bg_button_app"
-        android:text="@string/continue_"
+        android:text="@string/verify"
         android:textAllCaps="true"
         android:textStyle="bold"
         android:textSize="@dimen/_12sdp"
