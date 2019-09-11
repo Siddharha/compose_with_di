@@ -8,6 +8,7 @@ import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
 import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.loanplan.model.ResLoanPlans
+import com.app.l_pesa.login.model.ResCodeResend
 import com.app.l_pesa.login.model.ResEmailRequired
 import com.app.l_pesa.login.model.ResEmailVerification
 import com.app.l_pesa.login.model.ResLogin
@@ -197,6 +198,9 @@ interface BaseService{
 
     @POST("user/verify_email")
     fun doVerifyEmail(@Body request: JsonObject): Observable<ResEmailVerification>
+
+    @POST("user/resend_otp_email")
+    fun doResendCodeEmail(): Observable<ResCodeResend>
 }
 
 

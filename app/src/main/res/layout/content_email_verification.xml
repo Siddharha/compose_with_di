@@ -90,5 +90,22 @@
 
         />
 
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtResend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:text="@string/resend_verification"
+        android:textColor="@color/colorTextBlack"
+        android:textSize="@dimen/_12sdp"
+        android:gravity="center|end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubmit"
+
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

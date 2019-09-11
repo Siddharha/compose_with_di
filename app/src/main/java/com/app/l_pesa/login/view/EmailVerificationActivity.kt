@@ -23,6 +23,7 @@ import com.app.l_pesa.help.inter.ICallBackHelp
 import com.app.l_pesa.help.model.HelpData
 import com.app.l_pesa.help.presenter.PresenterHelp
 import com.app.l_pesa.login.inter.ICallBackCode
+import com.app.l_pesa.login.inter.ICallBackResend
 import com.app.l_pesa.login.presenter.PresenterEmail
 import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
@@ -32,7 +33,7 @@ import kotlinx.android.synthetic.main.content_email_verification.*
 import kotlinx.android.synthetic.main.content_email_verification.rootLayout
 import kotlinx.android.synthetic.main.content_pin_set.*
 
-class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackDashboard, ICallBackHelp {
+class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackDashboard, ICallBackHelp, ICallBackResend {
 
 
     private lateinit var  progressDialog   : ProgressDialog
@@ -57,6 +58,19 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
                 handled = true
             }
             handled
+        }
+
+        txtResend.setOnClickListener {
+
+            if(CommonMethod.isNetworkAvailable(this@EmailVerificationActivity)) {
+                progressDialog.show()
+                val presenterEmailOBJ= PresenterEmail()
+                presenterEmailOBJ.doResendCode(this@EmailVerificationActivity,this)
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout, this@EmailVerificationActivity, resources.getString(R.string.no_internet))
+            }
         }
     }
 
@@ -88,6 +102,17 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
         }
 
     }
+
+    override fun onSuccessResend() {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,this@EmailVerificationActivity,resources.getString(R.string.sent_otp_via_sms))
+    }
+
+    override fun onErrorResend(errorMessageOBJ: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,this@EmailVerificationActivity,errorMessageOBJ)
+    }
+
 
     private fun verifyField()
     {
