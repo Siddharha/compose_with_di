@@ -489,6 +489,7 @@
 
     <string name="title_email_verification">Email Verification</string>
     <string name="title_close_account">Close Account</string>
+    <string name="close_account_prompt">Do you want to Close L-Pesa Account?</string>
 
 
 </resources>

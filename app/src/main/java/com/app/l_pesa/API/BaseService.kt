@@ -25,6 +25,7 @@ import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.registration.model.ResRegistrationThree
 import com.app.l_pesa.registration.model.ResRegistrationTwo
+import com.app.l_pesa.settings.model.ResCloseAccount
 import com.app.l_pesa.splash.model.ResModelCountry
 import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawal
@@ -201,6 +202,9 @@ interface BaseService{
 
     @POST("user/resend_otp_email")
     fun doResendCodeEmail(): Observable<ResCodeResend>
+
+    @POST("settings/close_account")
+    fun doCloseAccount(@Body request: JsonObject): Observable<ResCloseAccount>
 }
 
 
