@@ -182,7 +182,7 @@
     <string name="set_up_pin">Setup PIN</string>
     <string name="current_login_pin">Current Login PIN</string>
     <string name="sent_pin_via_sms">We sent a SMS with the PIN to your registered mobile number and email address.</string>
-    <string name="sent_otp_via_sms">We sent a SMS with the Verification Code to your registered mobile number.</string>
+    <string name="sent_otp_via_sms">We sent a SMS with verification code to your registered mobile number.</string>
 
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>

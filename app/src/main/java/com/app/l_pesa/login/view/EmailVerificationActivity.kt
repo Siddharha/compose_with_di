@@ -3,6 +3,7 @@ package com.app.l_pesa.login.view
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Paint
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -60,6 +61,7 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
             handled
         }
 
+        txtResend.paintFlags = txtResend.paintFlags or  Paint.UNDERLINE_TEXT_FLAG
         txtResend.setOnClickListener {
 
             if(CommonMethod.isNetworkAvailable(this@EmailVerificationActivity)) {
