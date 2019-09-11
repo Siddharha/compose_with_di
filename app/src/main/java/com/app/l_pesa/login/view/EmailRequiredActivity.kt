@@ -46,6 +46,7 @@ class EmailRequiredActivity : AppCompatActivity() {
 
     private fun verifyField()
     {
+        hideKeyboard()
         if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
             CommonMethod.customSnackBarError(rootLayout,this@EmailRequiredActivity,resources.getString(R.string.required_email))
@@ -54,6 +55,7 @@ class EmailRequiredActivity : AppCompatActivity() {
         {
             if(CommonMethod.isNetworkAvailable(this@EmailRequiredActivity))
             {
+                progressDialog.show()
 
             }
             else
@@ -63,6 +65,16 @@ class EmailRequiredActivity : AppCompatActivity() {
         }
     }
 
+    private fun hideKeyboard()
+    {
+
+        try {
+            CommonMethod.hideKeyboardView(this@EmailRequiredActivity)
+        } catch (exp: Exception) {
+
+        }
+
+    }
     private fun initLoader()
     {
         progressDialog = ProgressDialog(this@EmailRequiredActivity,R.style.MyAlertDialogStyle)
