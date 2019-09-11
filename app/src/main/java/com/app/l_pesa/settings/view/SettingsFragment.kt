@@ -121,6 +121,11 @@ class SettingsFragment :Fragment(), ICallBackListClick {
                  startActivity(Intent(activity, HelpActivity::class.java))
                  activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
             }
+            else if(position==5)
+            {
+                startActivity(Intent(activity, CloseAccountActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
           else{
 
                 Toast.makeText(activity,resources.getString(R.string.coming_soon),Toast.LENGTH_SHORT).show()

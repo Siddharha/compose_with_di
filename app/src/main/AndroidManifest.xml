@@ -35,10 +35,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".login.view.EmailVerificationActivity"
+        <activity android:name=".settings.view.CloseAccountActivity"
+            android:label="@string/title_close_account"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".login.view.EmailVerificationActivity"
             android:label="@string/title_email_verification"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".login.view.EmailRequiredActivity"
             android:label="@string/title_email_verification"

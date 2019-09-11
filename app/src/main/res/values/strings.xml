@@ -20,6 +20,7 @@
     <string name="change_login_pin">Change Login PIN</string>
     <string name="enter_name">Enter Name</string>
     <string name="verification_code">Verification Code</string>
+    <string name="reason_for_account_close">Reason for account close</string>
     <string name="verify">Verify</string>
     <string name="coming_soon">Coming Soon</string>
 
@@ -146,6 +147,7 @@
         <item>Refer a Friend</item>
         <item>Notification</item>
         <item>Help &amp; Support</item>
+        <item>Close Account</item>
     </string-array>
 
     <string-array name="settings_item_icon_pin">
@@ -154,6 +156,7 @@
         <item>@drawable/ic_refer_friend</item>
         <item>@drawable/ic_notifications</item>
         <item>@drawable/ic_help</item>
+        <item>@drawable/ic_close_account</item>
     </string-array>
 
     <string-array name="settings_item_icon">
@@ -162,6 +165,7 @@
         <item>@drawable/ic_refer_friend</item>
         <item>@drawable/ic_notifications</item>
         <item>@drawable/ic_help</item>
+        <item>@drawable/ic_close_account</item>
     </string-array>
 
     <string-array name="settings_item_name">
@@ -170,6 +174,7 @@
         <item>Refer a Friend</item>
         <item>Notification</item>
         <item>Help &amp; Support</item>
+        <item>Close Account</item>
     </string-array>
 
     <!--Pin section-->
@@ -483,6 +488,7 @@
     <string name="required_credit_score_calculator">Required Credit Score</string>
 
     <string name="title_email_verification">Email Verification</string>
+    <string name="title_close_account">Close Account</string>
 
 
 </resources>
