@@ -6,5 +6,5 @@ interface ICallBackHelp {
 
     fun onSuccessHelp(data: HelpData)
     fun onErrorHelp(message: String)
-    fun onSessionTimeOut(message: String)
+    fun onSessionTimeOut(jsonMessage: String)
 }

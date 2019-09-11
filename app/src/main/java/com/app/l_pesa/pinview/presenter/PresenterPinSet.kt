@@ -2,6 +2,7 @@ package com.app.l_pesa.pinview.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.TextUtils
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
@@ -28,7 +29,23 @@ class PresenterPinSet {
 
                     try {
                         if (response.status.isSuccess) {
-                            callBackOBJ.onSuccessPinSet(response.data)
+                            if(response.data.email.verified==0)
+                            {
+
+                                if(TextUtils.isEmpty(response.data.email.address))
+                                {
+                                    callBackOBJ.onRequiredEmail(response.data)
+                                }
+                                else
+                                {
+                                    callBackOBJ.onVerifyEmail(response.data)
+                                }
+                            }
+                            else
+                            {
+                                callBackOBJ.onSuccessPinSet(response.data)
+                            }
+
 
                         } else {
                             callBackOBJ.onErrorPinSet(response.status.message)

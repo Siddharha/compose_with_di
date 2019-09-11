@@ -23,6 +23,8 @@ import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.help.inter.ICallBackHelp
 import com.app.l_pesa.help.model.HelpData
 import com.app.l_pesa.help.presenter.PresenterHelp
+import com.app.l_pesa.login.view.EmailRequiredActivity
+import com.app.l_pesa.login.view.EmailVerificationActivity
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.otpview.model.PinData
@@ -115,8 +117,12 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
                     jsonObject.add("device_info", jsonObjectDeviceInfo)
 
                     pass_code_view.reset()
+
+                    println("JSON"+jsonObject)
+
                     val presenterPinSet = PresenterPinSet()
                     presenterPinSet.dosetPin(this@PinSetActivity, jsonObject, this)
+
 
                 } else
                 {
@@ -150,10 +156,27 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
         Toast.makeText(this@PinSetActivity,message,Toast.LENGTH_SHORT).show()
     }
 
+    override fun onRequiredEmail(data: LoginData) {
+
+        dismiss()
+        startActivity(Intent(this@PinSetActivity, EmailRequiredActivity::class.java))
+        overridePendingTransition(R.anim.right_in,R.anim.left_out)
+        finish()
+
+    }
+    override fun onVerifyEmail(data: LoginData) {
+
+        dismiss()
+        startActivity(Intent(this@PinSetActivity, EmailVerificationActivity::class.java))
+        overridePendingTransition(R.anim.right_in,R.anim.left_out)
+        finish()
+
+    }
+
     override fun onSuccessDashboard(data: ResDashboard.Data) {
 
         val sharedPrefOBJ=SharedPref(this@PinSetActivity)
-        val dashBoardData                 = Gson().toJson(data)
+        val dashBoardData          = Gson().toJson(data)
         sharedPrefOBJ.userDashBoard       = dashBoardData
 
         val presenterHelp= PresenterHelp()

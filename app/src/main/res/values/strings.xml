@@ -480,5 +480,7 @@
     <string name="service_not_available">The service is not available in your country.</string>
     <string name="required_credit_score_calculator">Required Credit Score</string>
 
+    <string name="title_email_verification">Email Verification</string>
+
 
 </resources>

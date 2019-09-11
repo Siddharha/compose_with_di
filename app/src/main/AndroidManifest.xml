@@ -28,15 +28,22 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:largeHeap="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <!-- android:usesCleartextTraffic="true" -->
-        <!-- android:networkSecurityConfig="@xml/network_security_config" -->
+        <activity android:name=".login.view.EmailVerificationActivity"
+            android:label="@string/title_email_verification"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".login.view.EmailRequiredActivity"
+            android:label="@string/title_email_verification"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".calculator.view.LoanCalculatorActivity"
             android:label="@string/calculate_your_loan"
@@ -173,13 +180,11 @@
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".main.view.MainActivity"
@@ -198,9 +203,7 @@
             android:name=".registration.view.RegistrationStepTwoActivity"
             android:label="@string/registration_step_two"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".registration.view.RegistrationStepThreeActivity"
             android:label="@string/registration_step_three"
@@ -210,16 +213,12 @@
             android:name=".registration.view.RegistrationStepFourActivity"
             android:label="@string/registration_step_four"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-
-        </activity>
-
-        <activity android:name=".registration.view.RegistrationStepFiveActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".registration.view.RegistrationStepFiveActivity"
             android:label="@string/continue_to_register"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".pin.view.ForgotPinActivity"
             android:screenOrientation="portrait"
@@ -227,9 +226,7 @@
         <activity
             android:name=".dashboard.view.DashboardActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".pin.view.ChangeLoginPinActivity"
             android:label="@string/change_login_pin"
