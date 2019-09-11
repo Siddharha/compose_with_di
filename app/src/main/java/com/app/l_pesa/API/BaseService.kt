@@ -8,6 +8,7 @@ import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
 import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.loanplan.model.ResLoanPlans
+import com.app.l_pesa.login.model.ResEmailRequired
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.*
@@ -190,6 +191,8 @@ interface BaseService{
     @GET("loan_cal_load_products")
     fun getLoanProducts(@Query("country_code") country_code:String,@Query("loan_type") loan_type:String): Observable<ResProducts>
 
+    @POST("user/add_edit_email")
+    fun doAddEditEmail(@Body request: JsonObject): Observable<ResEmailRequired>
 }
 
 

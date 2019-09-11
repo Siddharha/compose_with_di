@@ -23,8 +23,8 @@ class RetrofitHelper {
 
         private fun getOkHttpClient(accessToken: String): OkHttpClient {
             val okHttpClient = OkHttpClient.Builder()
-            okHttpClient.readTimeout(60, TimeUnit.SECONDS)
-            okHttpClient.connectTimeout(60, TimeUnit.SECONDS)
+            okHttpClient.readTimeout(120, TimeUnit.SECONDS)
+            okHttpClient.connectTimeout(120, TimeUnit.SECONDS)
 
             okHttpClient.addInterceptor { chain ->
                 val original = chain.request()
