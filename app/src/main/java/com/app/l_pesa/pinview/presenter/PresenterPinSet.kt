@@ -29,7 +29,7 @@ class PresenterPinSet {
 
                     try {
                         if (response.status.isSuccess) {
-                            if(response.data.email.verified==0)
+                            if(response.data.email.verify==0)
                             {
 
                                 if(TextUtils.isEmpty(response.data.email.address))

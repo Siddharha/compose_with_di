@@ -17,4 +17,4 @@ data class UserPersonalInfo(val title:String,var first_name:String,
                             val dob:String,val sex:String,val merital_status:String,
                             var profile_image:String, val email_address:String)
 
-data class Email(val verified:Int,val address:String)
+data class Email(val verify:Int,val address:String)
