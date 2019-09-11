@@ -159,8 +159,11 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
     override fun onRequiredEmail(data: LoginData) {
 
         dismiss()
-        val shared=SharedPref(this@PinSetActivity)
-        shared.accessToken=data.access_token
+        val sharedPrefOBJ=SharedPref(this@PinSetActivity)
+        sharedPrefOBJ.accessToken   =data.access_token
+        val json =  Gson().toJson(data)
+        sharedPrefOBJ.userInfo      = json
+        sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
         startActivity(Intent(this@PinSetActivity, EmailRequiredActivity::class.java))
         overridePendingTransition(R.anim.right_in,R.anim.left_out)
         finish()
@@ -169,8 +172,11 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
     override fun onVerifyEmail(data: LoginData) {
 
         dismiss()
-        val shared=SharedPref(this@PinSetActivity)
-        shared.accessToken=data.access_token
+        val sharedPrefOBJ=SharedPref(this@PinSetActivity)
+        sharedPrefOBJ.accessToken   =data.access_token
+        val json =  Gson().toJson(data)
+        sharedPrefOBJ.userInfo      = json
+        sharedPrefOBJ.userCreditScore=data.user_info.credit_score.toString()
         startActivity(Intent(this@PinSetActivity, EmailVerificationActivity::class.java))
         overridePendingTransition(R.anim.right_in,R.anim.left_out)
         finish()
