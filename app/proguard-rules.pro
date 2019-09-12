@@ -155,6 +155,7 @@
 
 
 -keep class com.google.android.gms.internal.** { *; }
+-keepnames class com.facebook.FacebookActivity
 
 
 
