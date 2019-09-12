@@ -217,7 +217,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         shimmerLayout.stopShimmerAnimation()
         swipeRefreshLayout.isRefreshing=false
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
@@ -239,8 +239,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     {
 
         val sharedPrefOBJ= SharedPref(activity!!)
-        val gson                          = Gson()
-        val profileData                   = gson.toJson(data)
+        val profileData            = Gson().toJson(data)
         sharedPrefOBJ.profileInfo         = profileData
 
         getProfileInfo(data)

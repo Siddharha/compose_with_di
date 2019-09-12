@@ -144,7 +144,7 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
 
     override fun onSessionTimeOut(message: String) {
 
-        val dialogBuilder = AlertDialog.Builder(this@InvestmentApplyActivity)
+        val dialogBuilder = AlertDialog.Builder(this@InvestmentApplyActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

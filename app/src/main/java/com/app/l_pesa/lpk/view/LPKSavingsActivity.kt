@@ -181,7 +181,7 @@ class LPKSavingsActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener 
 
     fun onSessionTimeOut(message: String) {
 
-        val dialogBuilder = AlertDialog.Builder(this@LPKSavingsActivity)
+        val dialogBuilder = AlertDialog.Builder(this@LPKSavingsActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

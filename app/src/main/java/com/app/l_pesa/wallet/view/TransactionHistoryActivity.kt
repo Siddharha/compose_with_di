@@ -278,7 +278,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        val dialogBuilder = AlertDialog.Builder(this@TransactionHistoryActivity)
+        val dialogBuilder = AlertDialog.Builder(this@TransactionHistoryActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

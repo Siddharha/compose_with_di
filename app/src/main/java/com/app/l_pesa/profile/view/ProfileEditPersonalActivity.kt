@@ -348,7 +348,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     override fun onSessionTimeOut(message: String) {
 
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(this@ProfileEditPersonalActivity)
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditPersonalActivity, R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
@@ -690,7 +690,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this@ProfileEditPersonalActivity, R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -699,7 +699,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(this@ProfileEditPersonalActivity)
+        val dialog = AlertDialog.Builder(this@ProfileEditPersonalActivity, R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))

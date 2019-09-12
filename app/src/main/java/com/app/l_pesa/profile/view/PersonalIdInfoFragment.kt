@@ -259,7 +259,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(activity!!)
+        AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -268,7 +268,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(activity!!)
+        val dialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
@@ -331,7 +331,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     override fun onSessionTimeOut(message: String) {
 
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
@@ -483,7 +483,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                     if(CommonMethod.isNetworkAvailable(activity!!))
                     {
-                        val alertDialog = AlertDialog.Builder(activity!!)
+                        val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                         alertDialog.setTitle(resources.getString(R.string.app_name))
                         alertDialog.setMessage(resources.getString(R.string.delete_this_item))
                         alertDialog.setPositiveButton("Yes") { _, _ -> deletePersonalIdProof(userIdsPersonalInfo,pos) }

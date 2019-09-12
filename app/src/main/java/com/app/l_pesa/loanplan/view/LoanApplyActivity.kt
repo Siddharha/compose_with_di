@@ -106,7 +106,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             }
             else
             {
-                val alertDialog = AlertDialog.Builder(this@LoanApplyActivity)
+                val alertDialog = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.want_to_apply_loan))
                 alertDialog.setPositiveButton("Yes") { _, _ -> applyLoan() }
@@ -291,7 +291,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     override fun onSessionTimeOut(jsonMessage: String) {
 
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity)
+        val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
@@ -352,7 +352,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     private fun showAlert() {
-        val dialog = AlertDialog.Builder(this@LoanApplyActivity)
+        val dialog = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
         dialog.setTitle("Enable Location")
                 .setMessage("Your Locations Settings is set to OFF.Please Enable Location to use L-Pesa")
                 .setPositiveButton("Location Settings") { _, _ ->
@@ -369,9 +369,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     private fun checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this@LoanApplyActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                AlertDialog.Builder(this)
+                AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
                         .setTitle("Location Permission Needed")
                         .setMessage("This app needs the Location permission, please accept to use location functionality")
                         .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->

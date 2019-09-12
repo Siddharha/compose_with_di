@@ -163,7 +163,7 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
     override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing = false
-        val dialogBuilder = AlertDialog.Builder(this@NotificationActivity)
+        val dialogBuilder = AlertDialog.Builder(this@NotificationActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

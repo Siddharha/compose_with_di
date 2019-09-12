@@ -406,7 +406,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this@ForgotPinActivity,R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -415,7 +415,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(this@ForgotPinActivity)
+        val dialog = AlertDialog.Builder(this@ForgotPinActivity,R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))

@@ -114,7 +114,7 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
     override fun onSessionTimeOut(message: String) {
         swipeRefreshLayout.isRefreshing=false
 
-        val dialogBuilder = AlertDialog.Builder(this@SetUpPinActivity)
+        val dialogBuilder = AlertDialog.Builder(this@SetUpPinActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

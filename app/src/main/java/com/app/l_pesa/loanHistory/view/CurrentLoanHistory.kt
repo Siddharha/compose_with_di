@@ -394,7 +394,7 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
 
     override fun onSessionTimeOut(message: String) {
         dismissDialog()
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!, R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

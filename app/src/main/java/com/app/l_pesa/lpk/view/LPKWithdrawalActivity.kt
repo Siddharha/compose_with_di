@@ -172,7 +172,7 @@ class LPKWithdrawalActivity : AppCompatActivity(), TabLayout.OnTabSelectedListen
 
     fun onSessionTimeOut(message: String) {
 
-        val dialogBuilder = AlertDialog.Builder(this@LPKWithdrawalActivity)
+        val dialogBuilder = AlertDialog.Builder(this@LPKWithdrawalActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

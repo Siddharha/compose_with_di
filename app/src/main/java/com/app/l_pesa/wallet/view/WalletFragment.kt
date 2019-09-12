@@ -88,7 +88,7 @@ class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallB
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
-                    val alertDialog = AlertDialog.Builder(activity!!)
+                    val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                     alertDialog.setTitle(resources.getString(R.string.app_name))
                     alertDialog.setMessage(resources.getString(R.string.want_to_withdraw))
                     alertDialog.setPositiveButton("Yes") { _, _ -> withdrawAmount() }
@@ -175,7 +175,7 @@ class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallB
 
     override fun onSessionTimeOut(message: String) {
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

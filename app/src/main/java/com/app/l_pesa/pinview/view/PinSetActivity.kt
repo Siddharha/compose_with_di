@@ -204,7 +204,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
     override fun onSessionTimeOut(jsonMessage: String) {
 
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(this@PinSetActivity)
+        val dialogBuilder = AlertDialog.Builder(this@PinSetActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
             .setCancelable(false)
             .setPositiveButton("Ok") { dialog, _ ->
@@ -224,7 +224,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
     override fun onSuccessHelp(data: HelpData) {
 
         val sharedPrefOBJ=SharedPref(this@PinSetActivity)
-        val helpSupportData             = Gson().toJson(data)
+        val helpSupportData      = Gson().toJson(data)
         sharedPrefOBJ.helpSupport       = helpSupportData
         dismiss()
         val intent = Intent(this@PinSetActivity, DashboardActivity::class.java)

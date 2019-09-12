@@ -111,7 +111,7 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
     override fun onSessionTimeOut(message: String) {
 
         progressBar.visibility=View.INVISIBLE
-        val dialogBuilder = AlertDialog.Builder(this@ChangePinActivity)
+        val dialogBuilder = AlertDialog.Builder(this@ChangePinActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

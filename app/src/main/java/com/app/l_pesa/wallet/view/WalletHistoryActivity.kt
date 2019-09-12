@@ -286,7 +286,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing = false
-        val dialogBuilder = AlertDialog.Builder(this@WalletHistoryActivity)
+        val dialogBuilder = AlertDialog.Builder(this@WalletHistoryActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

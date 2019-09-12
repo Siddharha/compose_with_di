@@ -119,7 +119,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     fun onSessionTimeOut(message: String) {
 
-        val dialogBuilder = AlertDialog.Builder(this@DashboardActivity)
+        val dialogBuilder = AlertDialog.Builder(this@DashboardActivity, R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

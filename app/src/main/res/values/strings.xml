@@ -121,6 +121,7 @@
     <string name="select_your_country">Select your country</string>
     <string name="search_country">Search country</string>
     <string name="required_cancellation_reason">Write a reason for the cancellation.</string>
+    <string name="required_reason_for_close_account">Required your valid reason.</string>
 
     <string name="search_result_not_found">We could not find a match!</string>
     <string name="no_result_found">We\'re sorry. We can\'t seem to find any result that match your search.</string>

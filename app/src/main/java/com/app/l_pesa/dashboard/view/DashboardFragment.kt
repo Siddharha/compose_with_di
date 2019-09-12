@@ -212,7 +212,7 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
 
         swipeRefreshLayout.isRefreshing = false
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!, R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

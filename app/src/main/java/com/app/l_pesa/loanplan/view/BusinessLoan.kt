@@ -131,7 +131,7 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
 
     override fun onSessionTimeOut(message: String) {
         swipeRefreshLayout.isRefreshing = false
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

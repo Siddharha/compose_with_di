@@ -164,7 +164,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
 
     override fun onSessionTimeOut(message: String) {
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
@@ -428,7 +428,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
         {
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.apply_exit_point))
                 alertDialog.setPositiveButton("Yes") { _, _ -> investmentExitPoint(investmentList.investment_id.toString()) }
@@ -446,7 +446,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
         {
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.apply_withdrawal))
                 alertDialog.setPositiveButton("Yes") { _, _ -> investmentWithdrawal(investmentList.investment_id.toString()) }
@@ -465,7 +465,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
 
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.apply_reinvestment))
                 alertDialog.setPositiveButton("Yes") { _, _ ->  investmentReinvest(investmentList.investment_id.toString()) }
@@ -483,7 +483,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
 
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.delete_exit_loan))
                 alertDialog.setPositiveButton("Yes") { _, _ ->

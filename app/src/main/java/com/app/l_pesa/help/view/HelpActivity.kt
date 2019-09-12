@@ -45,7 +45,7 @@ class HelpActivity : AppCompatActivity() {
 
     fun onSessionTimeOut(message: String) {
 
-        val dialogBuilder = AlertDialog.Builder(this@HelpActivity)
+        val dialogBuilder = AlertDialog.Builder(this@HelpActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

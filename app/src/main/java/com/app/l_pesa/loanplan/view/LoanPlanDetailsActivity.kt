@@ -113,7 +113,7 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
 
     fun onSessionTimeOut(jsonMessage: String) {
 
-        val dialogBuilder = AlertDialog.Builder(this@LoanPlanDetailsActivity)
+        val dialogBuilder = AlertDialog.Builder(this@LoanPlanDetailsActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

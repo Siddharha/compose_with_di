@@ -162,7 +162,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
     override fun onSessionTimeOut(message: String) {
         swipeRefreshLayout.isRefreshing=false
 
-        val dialogBuilder = AlertDialog.Builder(this@ProfileEditContactInfoActivity)
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditContactInfoActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

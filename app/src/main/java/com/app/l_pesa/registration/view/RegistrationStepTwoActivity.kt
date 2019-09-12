@@ -302,7 +302,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this@RegistrationStepTwoActivity,R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -311,7 +311,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(this@RegistrationStepTwoActivity)
+        val dialog = AlertDialog.Builder(this@RegistrationStepTwoActivity,R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))

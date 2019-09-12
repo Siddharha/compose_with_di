@@ -267,7 +267,7 @@ class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTrans
 
     override fun onSessionTimeOut(message: String) {
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

@@ -129,7 +129,7 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
     override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        val dialogBuilder = AlertDialog.Builder(this@LoanPaymentHistory)
+        val dialogBuilder = AlertDialog.Builder(this@LoanPaymentHistory,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

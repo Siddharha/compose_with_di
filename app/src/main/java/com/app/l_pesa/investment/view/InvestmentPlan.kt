@@ -109,7 +109,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
     override fun onSessionTimeOut(jsonMessage: String) {
         swipeRefreshLayout.isRefreshing = false
-        val dialogBuilder = AlertDialog.Builder(activity!!)
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

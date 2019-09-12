@@ -189,7 +189,7 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
     override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        val dialogBuilder = AlertDialog.Builder(this@ProfileEditEmpInfoActivity)
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditEmpInfoActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

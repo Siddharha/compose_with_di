@@ -168,7 +168,7 @@ class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedList
 
      fun onSessionTimeOut(message: String) {
 
-        val dialogBuilder = AlertDialog.Builder(this@LoanHistoryListActivity)
+        val dialogBuilder = AlertDialog.Builder(this@LoanHistoryListActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

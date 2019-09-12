@@ -173,7 +173,7 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
     override fun onSessionTimeOut(jsonMessage: String) {
 
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(this@EmailVerificationActivity)
+        val dialogBuilder = AlertDialog.Builder(this@EmailVerificationActivity,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->

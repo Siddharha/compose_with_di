@@ -354,7 +354,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this@RegistrationStepFiveActivity,R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -363,7 +363,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(this@RegistrationStepFiveActivity)
+        val dialog = AlertDialog.Builder(this@RegistrationStepFiveActivity,R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
