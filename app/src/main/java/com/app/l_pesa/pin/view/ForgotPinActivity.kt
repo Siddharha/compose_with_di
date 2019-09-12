@@ -433,6 +433,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
 
         txtCountry.visibility=View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
+        etPhone.requestFocus()
         etPhone.tag = resModelCountryList.country_code+"   "
         val sharedPrefOBJ= SharedPref(this@ForgotPinActivity)
         sharedPrefOBJ.countryCode=resModelCountryList.code

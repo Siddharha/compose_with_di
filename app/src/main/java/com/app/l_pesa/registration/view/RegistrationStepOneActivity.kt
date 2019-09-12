@@ -283,6 +283,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
+        etPhone.requestFocus()
         val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
         sharedPrefOBJ.countryCode       =resModelCountryList.code
         sharedPrefOBJ.countryName       =resModelCountryList.country_name
@@ -291,15 +292,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         txtCountry.visibility           =View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
         etPhone.tag = sharedPrefOBJ.countryIsdCode+"   "
-
-         if(TextUtils.isEmpty(etPhone.text.toString()))
-         {
-             etPhone.requestFocus()
-         }
-         else if(TextUtils.isEmpty(etEmail.text.toString()))
-         {
-             etEmail.requestFocus()
-         }
 
     }
 

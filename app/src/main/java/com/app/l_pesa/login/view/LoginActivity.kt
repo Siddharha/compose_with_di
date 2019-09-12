@@ -339,6 +339,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
+
+        etPhone.requestFocus()
         txtCountry.visibility=View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
         etPhone.tag = resModelCountryList.country_code+"   "
