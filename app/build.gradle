@@ -98,7 +98,7 @@ dependencies {
     }
     implementation 'io.fotoapparat:fotoapparat:2.7.0'
     implementation 'id.zelory:compressor:2.1.0'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation('com.amazonaws:aws-android-sdk-mobile-client:2.6.7@aar') { transitive = true }
     implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
