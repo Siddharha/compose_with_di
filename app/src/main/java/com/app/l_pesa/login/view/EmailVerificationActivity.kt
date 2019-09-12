@@ -107,7 +107,7 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
 
     override fun onSuccessResend() {
         dismiss()
-        CommonMethod.customSnackBarError(rootLayout,this@EmailVerificationActivity,resources.getString(R.string.sent_otp_via_sms))
+        CommonMethod.customSnackBarError(rootLayout,this@EmailVerificationActivity,resources.getString(R.string.sent_otp_via_email))
     }
 
     override fun onErrorResend(errorMessageOBJ: String) {

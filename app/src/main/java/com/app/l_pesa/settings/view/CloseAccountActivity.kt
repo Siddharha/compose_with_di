@@ -10,6 +10,7 @@ import android.provider.Settings
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -65,7 +66,9 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
             jsonObject.addProperty("device_id",deviceId)
             jsonObject.addProperty("reason",etReason.text.toString())
 
-            //println("JSON"+jsonObject)
+            println("JSON"+jsonObject)
+            val sharedPrefOBJ = SharedPref(this@CloseAccountActivity)
+            println("TOKEN+"+sharedPrefOBJ.accessToken)
             val presenterAccountOBJ= PresenterAccount()
             presenterAccountOBJ.doCloseAccount(this@CloseAccountActivity,jsonObject,this)
 
@@ -105,8 +108,9 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     }
 
-    override fun onSuccessCloseAccount() {
+    override fun onSuccessCloseAccount(message: String) {
         dismiss()
+        Toast.makeText(this@CloseAccountActivity,message,Toast.LENGTH_LONG).show()
         val sharedPrefOBJ= SharedPref(this@CloseAccountActivity)
         sharedPrefOBJ.removeShared()
         startActivity(Intent(this@CloseAccountActivity, MainActivity::class.java))

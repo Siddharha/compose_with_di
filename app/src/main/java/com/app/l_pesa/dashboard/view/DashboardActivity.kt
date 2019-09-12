@@ -401,7 +401,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                 }
                 else
                 {
-                    toolbar.title =resources.getString(R.string.nav_item_points)
+                    toolbar.title =resources.getString(R.string.nav_item_airtime_credit)
                     navigateToFragment(PointsFragment.newInstance())
                 }
 

@@ -134,7 +134,7 @@
     <string name="nav_item_profile">My Profile</string>
     <string name="nav_item_loan_calculator">Loan Calculator</string>
     <string name="nav_item_loan">Loan</string>
-    <string name="nav_item_points">Buy Points</string>
+    <string name="nav_item_airtime_credit">Airtime Credit</string>
     <string name="nav_item_investment">Investment</string>
     <string name="nav_item_lpk">LPK (Kripton)</string>
     <string name="nav_item_wallet">Wallet</string>
@@ -188,6 +188,7 @@
     <string name="current_login_pin">Current Login PIN</string>
     <string name="sent_pin_via_sms">We sent a SMS with the PIN to your registered mobile number and email address.</string>
     <string name="sent_otp_via_sms">We sent a SMS with verification code to your registered mobile number.</string>
+    <string name="sent_otp_via_email">We sent verification code to your registered email address.</string>
 
     <!--Profile Section-->
     <string name="profile_information">Profile Information</string>

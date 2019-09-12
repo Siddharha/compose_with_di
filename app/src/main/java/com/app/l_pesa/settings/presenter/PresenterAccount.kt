@@ -19,9 +19,7 @@ class PresenterAccount {
     fun doCloseAccount(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackCloseAccount) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-       // println("TOKEN+"+sharedPrefOBJ.accessToken)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doCloseAccount(jsonRequest)
-
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
@@ -32,7 +30,7 @@ class PresenterAccount {
                     try {
                         if (response.status.isSuccess)
                         {
-                            callBackOBJ.onSuccessCloseAccount()
+                            callBackOBJ.onSuccessCloseAccount(response.status.message)
 
                         } else
                         {
