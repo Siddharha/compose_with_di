@@ -61,7 +61,7 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
             handled
         }
 
-        txtResend.paintFlags = txtResend.paintFlags or  Paint.UNDERLINE_TEXT_FLAG
+        //txtResend.paintFlags = txtResend.paintFlags or  Paint.UNDERLINE_TEXT_FLAG
         txtResend.setOnClickListener {
 
             if(CommonMethod.isNetworkAvailable(this@EmailVerificationActivity)) {

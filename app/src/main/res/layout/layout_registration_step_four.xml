@@ -57,7 +57,7 @@
                 android:hint="@string/choose_type_id"
                 android:maxLines="1"
                 android:focusable="false"
-                android:drawableEnd="@drawable/ic_dropdown_icon"
+                android:drawableEnd="@drawable/ic_dropdown_white_icon"
                 android:textColorHint="@color/color_gray_text"
                 android:textColor="@color/textColors"
                 android:textSize="@dimen/_12sdp" />

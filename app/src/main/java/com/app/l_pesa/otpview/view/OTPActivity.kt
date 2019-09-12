@@ -74,7 +74,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
             txtResend.visibility = View.VISIBLE
         }
 
-            txtResend.makeLinks(Pair(resources.getString(R.string.resend_verification), View.OnClickListener {
+            txtResend.setOnClickListener {
 
                 if(CommonMethod.isNetworkAvailable(this@OTPActivity))
                 {
@@ -119,28 +119,11 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
                 }
 
 
-        }))
-
-
-    }
-
-    private fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
-        val spannableString = SpannableString(resources.getString(R.string.resend_verification))
-        for (link in links) {
-            val clickableSpan = object : ClickableSpan() {
-                override fun onClick(view: View) {
-                    Selection.setSelection((view as AppCompatTextView).text as Spannable, 0)
-                    view.invalidate()
-                    link.second.onClick(view)
-                }
-            }
-            val startIndexOfLink = resources.getString(R.string.resend_verification).indexOf(link.first)
-            spannableString.setSpan(clickableSpan, startIndexOfLink, startIndexOfLink + link.first.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
-        this.movementMethod = LinkMovementMethod.getInstance()
-        this.setText(spannableString, TextView.BufferType.SPANNABLE)
+
+
     }
+
 
     override fun onSuccessResendOTP() {
         clickCount++

@@ -36,7 +36,7 @@
                 android:focusable="true"
                 android:textSize="@dimen/_12sdp"
                 android:textAllCaps="true"
-                android:drawableEnd="@drawable/ic_dropdown_icon"
+                android:drawableEnd="@drawable/ic_dropdown_white_icon"
                 android:drawablePadding="@dimen/_3sdp"
                 android:textStyle="bold"
 
