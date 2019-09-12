@@ -150,6 +150,9 @@
 -keep class com.app.l_pesa.logout.** { *; }
 -keepclassmembers class com.app.l_pesa.logout.** { *; }
 
+-keep class com.app.l_pesa.settings.** { *; }
+-keepclassmembers class com.app.l_pesa.settings.** { *; }
+
 
 -keep class com.google.android.gms.internal.** { *; }
 

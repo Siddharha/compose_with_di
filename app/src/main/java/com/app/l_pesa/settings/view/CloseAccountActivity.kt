@@ -66,9 +66,6 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
             jsonObject.addProperty("device_id",deviceId)
             jsonObject.addProperty("reason",etReason.text.toString())
 
-            println("JSON"+jsonObject)
-            val sharedPrefOBJ = SharedPref(this@CloseAccountActivity)
-            println("TOKEN+"+sharedPrefOBJ.accessToken)
             val presenterAccountOBJ= PresenterAccount()
             presenterAccountOBJ.doCloseAccount(this@CloseAccountActivity,jsonObject,this)
 
