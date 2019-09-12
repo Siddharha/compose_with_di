@@ -230,7 +230,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         dialog.setContentView(R.layout.dialog_id_type)
         val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val loanProductAdapter          = LoanProductAdapter(this@LoanCalculatorActivity, product.productList!!,product,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanCalculatorActivity, RecyclerView.VERTICAL, false) as RecyclerView.LayoutManager?
+        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanCalculatorActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = loanProductAdapter
         dialog.show()
     }

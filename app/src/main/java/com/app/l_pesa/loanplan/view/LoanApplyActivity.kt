@@ -146,7 +146,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             sharedPrefObj.currentLng = mLocation!!.longitude.toString()
             doApplyLoan()
         } else {
-            Toast.makeText(this, "Current Location Not Detected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Current Location Not Detected", Toast.LENGTH_SHORT).show()
         }
     }
 
