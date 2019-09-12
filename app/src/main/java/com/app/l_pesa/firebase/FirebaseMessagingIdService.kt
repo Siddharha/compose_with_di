@@ -29,8 +29,8 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
     private val CHANNELID = "l_pesa"
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        super.onMessageReceived(remoteMessage)
-        remoteMessage?.let { message ->
+        super.onMessageReceived(remoteMessage!!)
+        remoteMessage.let { message ->
 
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
