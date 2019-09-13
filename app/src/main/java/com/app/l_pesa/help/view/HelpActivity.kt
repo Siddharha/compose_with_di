@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.content_help.*
 
 class HelpActivity : AppCompatActivity() {
 
-    private lateinit var countDownTimer          : CountDownTimer
+    private lateinit var countDownTimer     : CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,6 +112,7 @@ class HelpActivity : AppCompatActivity() {
             txtWhatsApp.text = resources.getString(R.string.whats_app)+" "+resources.getString(R.string.not_available)
         }
 
+
         txtPhone.setOnClickListener {
             if(!TextUtils.isEmpty(helpData.support_contact_no))
             {
@@ -123,10 +124,10 @@ class HelpActivity : AppCompatActivity() {
         }
 
         txtWhatsApp.setOnClickListener {
-            if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
+           if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
             {
                 try {
-                    val url = "https://api.whatsapp.com/send?phone=$"+helpData.support_whatsapp_no
+                    val url = "https://api.whatsapp.com/send?phone="+helpData.support_whatsapp_no
                     val pm = packageManager
                     pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES)
                     val i = Intent(Intent.ACTION_VIEW)

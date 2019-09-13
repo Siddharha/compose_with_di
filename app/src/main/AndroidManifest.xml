@@ -38,7 +38,15 @@
         <activity android:name=".settings.view.CloseAccountActivity"
             android:label="@string/title_close_account"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <activity
             android:name=".login.view.EmailVerificationActivity"
@@ -192,11 +200,11 @@
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
-            <intent-filter>
+           <!-- <intent-filter>
                  <action android:name="android.intent.action.MAIN" />
 
                  <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+             </intent-filter>-->
         </activity>
         <activity
             android:name=".main.view.MainActivity"
