@@ -69,6 +69,7 @@
     <string name="processing">Processing</string>
     <string name="logging_out">Logging out</string>
     <string name="saving">Saving</string>
+    <string name="press_again_to_exit">Press back one more time to exit.</string>
     <string name="required_title">Please select the title.</string>
     <string name="required_name">Please enter your name.</string>
     <string name="required_name_f">Please enter your first name.</string>

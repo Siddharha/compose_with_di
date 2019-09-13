@@ -8,6 +8,7 @@ import android.content.IntentSender
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.provider.Settings
 import android.text.Spannable
 import android.text.SpannableString
@@ -60,6 +61,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
 
 
+    private var doubleBackStatus = false
     private lateinit var progressDialog: ProgressDialog
     private lateinit var countDownTimer: CountDownTimer
 
@@ -315,7 +317,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            this@DashboardActivity.moveTaskToBack(true)
+            if(doubleBackStatus)
+            {
+                this@DashboardActivity.moveTaskToBack(true)
+            }
+            this.doubleBackStatus = true
+            CommonMethod.customSnackBarError(drawer_layout, this@DashboardActivity, resources.getString(R.string.press_again_to_exit))
+            Handler().postDelayed( { doubleBackStatus = false }, 2000)
+
         }
     }
 
