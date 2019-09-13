@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -101,15 +102,17 @@ class HelpActivity : AppCompatActivity() {
             txtTelegram.text = resources.getString(R.string.telegram)
         }
         else{
-            txtTelegram.text = resources.getString(R.string.telegram)+" "+resources.getString(R.string.not_available)
+            txtTelegram.setTextColor(ContextCompat.getColor(this@HelpActivity,R.color.light_text_color))
+            txtTelegram.text = resources.getString(R.string.telegram)+": "+resources.getString(R.string.not_available)
         }
 
-        if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
+       if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
         {
             txtWhatsApp.text = resources.getString(R.string.whats_app)
         }
         else{
-            txtWhatsApp.text = resources.getString(R.string.whats_app)+" "+resources.getString(R.string.not_available)
+            txtWhatsApp.setTextColor(ContextCompat.getColor(this@HelpActivity,R.color.light_text_color))
+            txtWhatsApp.text = resources.getString(R.string.whats_app)+": "+resources.getString(R.string.not_available)
         }
 
 
@@ -123,7 +126,7 @@ class HelpActivity : AppCompatActivity() {
 
         }
 
-        txtWhatsApp.setOnClickListener {
+        /*txtWhatsApp.setOnClickListener {
            if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
             {
                 try {
@@ -140,7 +143,7 @@ class HelpActivity : AppCompatActivity() {
 
             }
 
-        }
+        }*/
 
         txtTelegram.setOnClickListener {
             if(!TextUtils.isEmpty(helpData.support_telegram_url))

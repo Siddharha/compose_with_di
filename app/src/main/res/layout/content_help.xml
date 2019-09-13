@@ -147,85 +147,93 @@
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutContact"
+    <LinearLayout
+        android:id="@+id/llContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llHeader"
-
         >
 
-        <TextView
-            android:id="@+id/txtTelegram"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_42sdp"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:textSize="@dimen/_12sdp"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorTextBlack"
-            android:gravity="center|start"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_1sdp"
-            android:drawablePadding="@dimen/_5sdp"
-            android:drawableStart="@drawable/ic_telegram"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/viewDividerFour"
-            android:background="@color/colorSemiWhite"
-
-            />
-
-        <View
-            android:id="@+id/viewDividerFour"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/divider_color"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTelegram"
-            app:layout_constraintBottom_toTopOf="@+id/txtWhatsApp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_view"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
 
-            />
 
-        <TextView
-            android:id="@+id/txtWhatsApp"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_42sdp"
-            android:textSize="@dimen/_12sdp"
-            android:fontFamily="@font/montserrat"
-            android:textColor="@color/colorTextBlack"
-            android:background="@color/colorSemiWhite"
-            android:gravity="center|start"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_1sdp"
-            android:drawablePadding="@dimen/_5sdp"
-            android:drawableStart="@drawable/ic_whats_app"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewDividerFour"
+            >
 
-            />
 
-        <View
-            android:id="@+id/viewDividerFive"
+            <TextView
+                android:id="@+id/txtTelegram"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/dark_text_color"
+                android:gravity="center|start"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_1sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableStart="@drawable/ic_telegram"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/divider_color"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtWhatsApp"
-
-            />
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_view"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            >
+
+
+            <TextView
+                android:id="@+id/txtWhatsApp"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/dark_text_color"
+                android:gravity="center|start"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_1sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableStart="@drawable/ic_whats_app"
+                android:drawableEnd="@drawable/ic_right_arrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+
+
 
 
 
