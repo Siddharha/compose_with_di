@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
@@ -22,6 +21,12 @@ import com.app.l_pesa.settings.presenter.PresenterAccount
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_close_account.*
 import kotlinx.android.synthetic.main.content_close_account.*
+import com.amazonaws.mobile.auth.core.signin.ui.DisplayUtils.dp
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.BulletSpan
+import android.text.SpannableString
+
 
 
 
@@ -31,12 +36,13 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_close_account)
+        setContentView(com.app.l_pesa.R.layout.activity_close_account)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@CloseAccountActivity)
 
         initLoader()
+        initData()
         btnSubmit.setOnClickListener {
 
             hideKeyboard()
@@ -47,7 +53,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
             else
             {
 
-                val alertDialog = AlertDialog.Builder(this@CloseAccountActivity,R.style.MyAlertDialogTheme)
+                val alertDialog = AlertDialog.Builder(this@CloseAccountActivity, com.app.l_pesa.R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(com.app.l_pesa.R.string.app_name))
                 alertDialog.setMessage(resources.getString(com.app.l_pesa.R.string.close_account_prompt))
                 alertDialog.setPositiveButton("Yes") { _, _ -> closeAccount() }
@@ -60,6 +66,27 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
             }
         }
+    }
+
+    private fun initData()
+    {
+
+        val strDeclaration = "Once you close your account, you will be unable to benefit from the fantastic annual interest rates that are amongst the best in the finance industry.\n\n  Without your L-Pesa account, you cannot enjoy the innovative micro-loan services, which enable you to get access to credit within minutes.\n\n Get in touch with one of our customer support representatives to resolve any issues that you may be facing with your account. L-Pesa appreciates every customer, and we are consistently introducing added value features to improve your experience with our services."
+        val arr = strDeclaration.split("\n")
+        val bulletGap = dp(10)
+        val ssb = SpannableStringBuilder()
+        for (i in 0 until arr.size) {
+            val line = arr[i]
+            val ss = SpannableString(line)
+            ss.setSpan(BulletSpan(bulletGap), 0, line.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            ssb.append(ss)
+
+            if (i + 1 < arr.size)
+                ssb.append("\n")
+
+        }
+
+        txt_bullet_one.text = ssb
     }
 
     private fun closeAccount()
@@ -118,7 +145,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
         val sharedPrefOBJ= SharedPref(this@CloseAccountActivity)
         sharedPrefOBJ.removeShared()
         startActivity(Intent(this@CloseAccountActivity, MainActivity::class.java))
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
         finish()
     }
 
@@ -132,7 +159,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
             android.R.id.home -> {
                 hideKeyboard()
                 onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
                 true
             }
 
@@ -157,6 +184,6 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
     }
 }

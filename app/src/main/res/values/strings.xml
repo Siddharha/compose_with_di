@@ -127,6 +127,10 @@
     <string name="search_result_not_found">We could not find a match!</string>
     <string name="no_result_found">We\'re sorry. We can\'t seem to find any result that match your search.</string>
     <string name="session_time_out"> Your session has timed out, sign-in again to continue.</string>
+    <string name="txt_account_close_header"> Wait! Before you close your L-Pesa account, here are some important facts you should note.</string>
+    <string name="txt_account_close_one">Closing your L-Pesa account will affect your credit score, taking away all your accumulated credit points. When you choose to re-open your account, you will lose the privileges that come with having an excellent credit score and start from scratch.</string>
+    <string name="txt_account_close_two">Once you consider all these points, should you still wish to close your account, click on the “close account” button below. Unfortunately, once you do, you will no longer be able to access the L-Pesa services.</string>
+    <string name="txt_account_close_three">If you change your mind, you can re-register for L-Pesa services, and start an account as a new user.</string>
 
     <!--Navigation-->
     <string name="drawer_open">Open</string>
