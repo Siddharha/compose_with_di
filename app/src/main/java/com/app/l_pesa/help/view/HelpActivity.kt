@@ -25,6 +25,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
+import kotlinx.android.synthetic.main.content_help.txtEmail
 
 
 class HelpActivity : AppCompatActivity() {
@@ -70,7 +71,6 @@ class HelpActivity : AppCompatActivity() {
         val sharedPrefOBJ= SharedPref(this@HelpActivity)
         txtCountry.text = sharedPrefOBJ.countryName
 
-
         val options = RequestOptions()
         Glide.with(this@HelpActivity)
                 .load(sharedPrefOBJ.countryFlag)
@@ -78,7 +78,7 @@ class HelpActivity : AppCompatActivity() {
                 .into(imgCountry)
 
 
-        val helpData = Gson().fromJson<HelpData>(sharedPrefOBJ.helpSupport, HelpData::class.java)
+      val helpData = Gson().fromJson<HelpData>(sharedPrefOBJ.helpSupport, HelpData::class.java)
 
 
         if(!TextUtils.isEmpty(helpData.support_contact_no))
@@ -91,15 +91,16 @@ class HelpActivity : AppCompatActivity() {
 
         if(!TextUtils.isEmpty(helpData.support_email))
         {
-            txtEmail.text = helpData.support_email
+            txtEmail.text = resources.getString(R.string.email_)+": "+helpData.support_email
         }
         else{
-            txtEmail.text = resources.getString(R.string.not_available)
+            txtEmail.setTextColor(ContextCompat.getColor(this@HelpActivity,R.color.light_text_color))
+            txtEmail.text = resources.getString(R.string.email_)+": "+resources.getString(R.string.not_available)
         }
 
         if(!TextUtils.isEmpty(helpData.support_telegram_url))
         {
-            txtTelegram.text = resources.getString(R.string.telegram)
+            txtTelegram.text = resources.getString(R.string.telegram)+": "+resources.getString(R.string.telegram)
         }
         else{
             txtTelegram.setTextColor(ContextCompat.getColor(this@HelpActivity,R.color.light_text_color))
@@ -108,7 +109,7 @@ class HelpActivity : AppCompatActivity() {
 
        if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
         {
-            txtWhatsApp.text = resources.getString(R.string.whats_app)
+            txtWhatsApp.text = resources.getString(R.string.whats_app)+": "+resources.getString(R.string.whats_app)
         }
         else{
             txtWhatsApp.setTextColor(ContextCompat.getColor(this@HelpActivity,R.color.light_text_color))
@@ -126,7 +127,7 @@ class HelpActivity : AppCompatActivity() {
 
         }
 
-        /*txtWhatsApp.setOnClickListener {
+        txtWhatsApp.setOnClickListener {
            if(!TextUtils.isEmpty(helpData.support_whatsapp_no))
             {
                 try {
@@ -143,7 +144,7 @@ class HelpActivity : AppCompatActivity() {
 
             }
 
-        }*/
+        }
 
         txtTelegram.setOnClickListener {
             if(!TextUtils.isEmpty(helpData.support_telegram_url))
@@ -154,6 +155,27 @@ class HelpActivity : AppCompatActivity() {
                 } catch (e: PackageManager.NameNotFoundException) {
                     Toast.makeText(this@HelpActivity, "Telegram app not installed in your phone", Toast.LENGTH_SHORT).show()
                     e.printStackTrace()
+                }
+
+            }
+
+        }
+
+        txtEmail.setOnClickListener {
+            if(!TextUtils.isEmpty(helpData.support_email))
+            {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    data = Uri.parse("mailto:")
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_EMAIL, helpData.support_email)
+                    putExtra(Intent.EXTRA_SUBJECT, "Subject of Email")
+                }
+                if (intent.resolveActivity(packageManager) != null) {
+                    intent.setPackage("com.google.android.gm")
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this@HelpActivity, "No app available to send email.", Toast.LENGTH_SHORT).show()
                 }
 
             }
