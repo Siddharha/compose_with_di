@@ -57,12 +57,12 @@
                 <ImageView
                     android:id="@+id/imgCountry"
                     android:contentDescription="@string/app_name"
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_28sdp"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_32sdp"
                     android:padding="@dimen/_5sdp"
                     android:layout_gravity="center"
-                    android:scaleType="fitXY"
-
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
 
                     />
 
