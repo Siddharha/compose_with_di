@@ -110,7 +110,7 @@
                         android:inputType="text|textNoSuggestions"
                         android:maxLength="15"
                         android:maxLines="1"
-                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textSize="@dimen/_12sdp" />
                 </com.app.l_pesa.common.CommonInputLayout>
 
