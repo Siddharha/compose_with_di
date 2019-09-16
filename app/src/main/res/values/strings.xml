@@ -308,7 +308,7 @@
     <string name="last_name">Last Name*</string>
     <string name="email">Email*</string>
     <string name="email_">Email</string>
-    <string name="edit_dob">Date of Birth</string>
+    <string name="edit_dob">Date of Birth*</string>
     <string name="edit_marital_status">Marital Status</string>
     <string name="edit_mother_maiden_name">Mother\'s Maiden Name*</string>
     <string name="upload_profile_image">Upload Profile Image*</string>
@@ -337,7 +337,7 @@
     <!--Emp Info-->
     <string name="earn_credit_coins_ten">Earn 10 credit score points!</string>
     <string name="type_of_emp">Employer Type*</string>
-    <string name="name_of_emp">Employer*</string>
+    <string name="name_of_emp">Employer Name*</string>
     <string name="emp_department">Department*</string>
     <string name="emp_position">Designation*</string>
     <string name="emp_id">Employee ID*</string>
