@@ -115,27 +115,27 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
             }
             else
             {
-                if(TextUtils.isEmpty(etTypeEmp.text.toString()))
+                if(TextUtils.isEmpty(etTypeEmp.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_emp_type))
                 }
-                else if(TextUtils.isEmpty(etNameEmp.text.toString()))
+                else if(TextUtils.isEmpty(etNameEmp.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_emp_name))
                 }
-                else if(TextUtils.isEmpty(etDepartment.text.toString()))
+                else if(TextUtils.isEmpty(etDepartment.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_emp_department))
                 }
-                else if(TextUtils.isEmpty(etPosition.text.toString()))
+                else if(TextUtils.isEmpty(etPosition.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_emp_occupation))
                 }
-                else if(TextUtils.isEmpty(etId.text.toString()))
+                else if(TextUtils.isEmpty(etId.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_emp_id))
                 }
-                else if(TextUtils.isEmpty(etCity.text.toString()))
+                else if(TextUtils.isEmpty(etCity.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_emp_city))
                 }

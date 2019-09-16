@@ -85,7 +85,7 @@
                         android:hint="@string/postal_code_address"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:maxLength="20"
+                        android:maxLength="10"
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 

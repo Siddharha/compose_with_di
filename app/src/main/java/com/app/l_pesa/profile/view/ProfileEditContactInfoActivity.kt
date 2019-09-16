@@ -96,15 +96,15 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
             }
             else
             {
-                if(TextUtils.isEmpty(etAddress.text.toString()))
+                if(TextUtils.isEmpty(etAddress.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_street_address))
                 }
-                else if(TextUtils.isEmpty(etPostalAddress.text.toString()))
+                else if(TextUtils.isEmpty(etPostalAddress.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_postal_code))
                 }
-                else if(TextUtils.isEmpty(etCity.text.toString()))
+                else if(TextUtils.isEmpty(etCity.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_city))
                 }
