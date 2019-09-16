@@ -5,30 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rootLayout"
-    android:background="@color/colorWhite"
+    android:background="@color/screenBackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
     >
+
 
     <ScrollView
         android:id="@+id/scroller"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/_10sdp"
         app:layout_constraintBottom_toTopOf="@+id/tilCloseAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@drawable/bg_white_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:srcCompat="@drawable/ic_account_close"
+                    />
 
                 <com.app.l_pesa.common.CommonTextRegular
                     android:layout_width="match_parent"
@@ -36,8 +52,9 @@
                     android:text="@string/txt_account_close_header"
                     android:textSize="@dimen/_11sdp"
                     android:padding="@dimen/_3sdp"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:textColor="@color/colorRed"
                     android:gravity="center|start"
                     android:justificationMode="inter_word"
@@ -47,7 +64,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
 
                     />
-
                 <com.app.l_pesa.common.CommonTextRegular
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,7 +71,7 @@
                     android:text="@string/txt_account_close_one"
                     android:textSize="@dimen/_10sdp"
                     android:padding="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:textColor="@color/textColors"
@@ -127,6 +143,7 @@
 
             </LinearLayout>
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -144,6 +161,7 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/bg_white_view"
 
         >
         <androidx.core.widget.NestedScrollView
@@ -159,6 +177,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_margin="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

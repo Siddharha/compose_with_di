@@ -29,7 +29,6 @@ import android.text.SpannableString
 
 
 
-
 class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     private lateinit var  progressDialog   : ProgressDialog
@@ -56,8 +55,11 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
                 val alertDialog = AlertDialog.Builder(this@CloseAccountActivity, com.app.l_pesa.R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(com.app.l_pesa.R.string.app_name))
                 alertDialog.setMessage(resources.getString(com.app.l_pesa.R.string.close_account_prompt))
-                alertDialog.setPositiveButton("Yes") { _, _ -> closeAccount() }
-                        .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+                alertDialog.setPositiveButton("YES") { _, _ -> closeAccount() }
+                        .setNegativeButton("CANCEL") { dialog, _ ->
+                            dialog.dismiss()
+                            onBackPressed()
+                        }
 
 
                 alertDialog.show()
