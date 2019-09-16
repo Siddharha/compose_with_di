@@ -149,15 +149,15 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
             }
             else
             {
-                if(TextUtils.isEmpty(etBusinessName.text.toString()))
+                if(TextUtils.isEmpty(etBusinessName.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_business_name))
                 }
-                else if(TextUtils.isEmpty(etBusinessTinNo.text.toString()))
+                else if(TextUtils.isEmpty(etBusinessTinNo.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_tin_number))
                 }
-                else if(TextUtils.isEmpty(etBusinessIdNumber.text.toString()))
+                else if(TextUtils.isEmpty(etBusinessIdNumber.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_id_number))
                 }

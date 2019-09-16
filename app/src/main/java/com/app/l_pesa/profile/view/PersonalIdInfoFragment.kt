@@ -131,7 +131,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
             }
-            else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString()))
+            else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim()))
             {
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_number))
             }
@@ -236,15 +236,15 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         cameraClick()
                     } else {
 
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)
-                                || ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale( activity!!, Manifest.permission.CAMERA)
+                                || ActivityCompat.shouldShowRequestPermissionRationale( activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                             showDialogOK("Permissions are required for this app",
                                     DialogInterface.OnClickListener { _, which ->
                                         when (which) {
                                             DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
                                             DialogInterface.BUTTON_NEGATIVE ->
 
-                                                activity!!.finish()
+                                              activity!!.finish()
                                         }
                                     })
                         } else {
@@ -579,13 +579,13 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         } else {
             photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile)
+        captureFilePath = FileProvider.getUriForFile(activity!! as ProfileEditIdInfoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
 
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
-            val clip = ClipData.newUri(activity!!.contentResolver, "personal id photo", captureFilePath)
+            val clip = ClipData.newUri(activity!!.contentResolver, "id photo", captureFilePath)
             captureIntent.clipData = clip
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }

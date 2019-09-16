@@ -437,13 +437,12 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                handleRotation(photoFile.absolutePath)
                Handler().postDelayed({
                    dismiss()
-                   imgProfile.setBackgroundColor(Color.TRANSPARENT)
                    imgProfile.setImageURI(null)
                    imgProfile.setImageURI(photoPath)
 
                    captureImageStatus       = true
                    photoFile   = Compressor(this@ProfileEditPersonalActivity).compressToFile(photoFile)
-               }, 1500)
+               }, 1000)
 
            }
            else
@@ -668,7 +667,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     } else {
 
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this@ProfileEditPersonalActivity, Manifest.permission.CAMERA)
-                                || ActivityCompat.shouldShowRequestPermissionRationale(this@ProfileEditPersonalActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                                && ActivityCompat.shouldShowRequestPermissionRationale(this@ProfileEditPersonalActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                             showDialogOK("Permissions are required for this app",
                                     DialogInterface.OnClickListener { _, which ->
                                         when (which) {
