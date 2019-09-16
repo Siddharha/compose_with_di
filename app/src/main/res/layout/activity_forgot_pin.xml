@@ -113,6 +113,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:maxLength="15"
                     android:maxLines="1"
+                    android:digits="0123456789"
                     android:inputType="numberSigned"
                     android:paddingStart="@dimen/_10sdp"
                     android:paddingEnd="@dimen/_2sdp"

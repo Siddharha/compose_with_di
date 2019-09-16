@@ -117,6 +117,7 @@
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_2sdp"
                 android:hint="@string/phone_no"
+                android:digits="0123456789"
                 android:cursorVisible="true"
                 android:focusable="true"
                 android:longClickable="false"

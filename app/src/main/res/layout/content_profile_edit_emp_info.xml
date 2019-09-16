@@ -59,7 +59,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -83,7 +83,7 @@
                         android:inputType="text"
                         android:maxLength="25"
                         android:maxLines="1"
-                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -107,7 +107,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -131,7 +131,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -155,7 +155,7 @@
                         android:inputType="text"
                         android:maxLength="15"
                         android:maxLines="1"
-                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -179,7 +179,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 

@@ -58,6 +58,7 @@
                 android:inputType="numberSigned"
                 android:maxLength="15"
                 android:maxLines="1"
+                android:digits="0123456789"
                 android:hint="@string/phone_no"
                 android:textColorHint="@color/color_gray_text"
                 android:textColor="@color/textColors"
