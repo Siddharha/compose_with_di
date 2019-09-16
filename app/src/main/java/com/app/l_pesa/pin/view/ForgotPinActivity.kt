@@ -2,12 +2,14 @@ package com.app.l_pesa.pin.view
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -16,10 +18,8 @@ import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -64,7 +64,8 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         setContentView(R.layout.activity_forgot_pin)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbarFont(this@ForgotPinActivity)
 
         initLoader()
         loadCountry()
@@ -245,18 +246,6 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
 
 
 
-    private fun back()
-    {
-        val intent = Intent(this@ForgotPinActivity, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
-    override fun onBackPressed() {
-
-        back()
-    }
 
     private fun loadCountry()
     {
@@ -440,6 +429,44 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         sharedPrefOBJ.countryName=resModelCountryList.country_name
         sharedPrefOBJ.countryIsdCode=resModelCountryList.country_code
         sharedPrefOBJ.countryFlag=resModelCountryList.image
+
+    }
+
+    private fun toolbarFont(context: Activity) {
+
+        for (i in 0 until toolbar.childCount) {
+            val view = toolbar.getChildAt(i)
+            if (view is TextView) {
+                val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
+                    break
+                }
+            }
+        }
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                CommonMethod.hideKeyboardView(this@ForgotPinActivity)
+                onBackPressed()
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@ForgotPinActivity, LoginActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
     }
 }

@@ -247,6 +247,7 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".pin.view.ForgotPinActivity"
+            android:label="@string/forgot_pin_title"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
         <activity
