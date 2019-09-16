@@ -346,7 +346,7 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
                 .setView(container)
                 .setPositiveButton("Remove") { dialog, _ ->
 
-                    if(TextUtils.isEmpty(taskEditText.text.toString()))
+                    if(TextUtils.isEmpty(taskEditText.text.toString().trim()))
                     {
                         CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_cancellation_reason))
                     }

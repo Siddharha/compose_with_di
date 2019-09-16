@@ -61,6 +61,7 @@
                         android:inputType="text"
                         android:maxLines="1"
                         android:maxLength="35"
+                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -85,7 +86,8 @@
                         android:hint="@string/postal_code_address"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:maxLength="10"
+                        android:maxLength="15"
+                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm- "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -109,6 +111,7 @@
                         android:layout_height="match_parent"
                         android:hint="@string/city_town"
                         android:inputType="text"
+                        android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -145,7 +148,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_27sdp"
                     android:layout_marginTop="@dimen/_13sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@drawable/ripple_green_button"
                     android:text="@string/submit"

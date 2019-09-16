@@ -210,19 +210,19 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             }
             else
             {
-                if(TextUtils.isEmpty(txtTitle.text.toString()))
+                if(TextUtils.isEmpty(txtTitle.text.toString().trim()))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_title))
                 }
-                else if(TextUtils.isEmpty(etNameF.text.toString()))
+                else if(TextUtils.isEmpty(etNameF.text.toString().trim()))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_f))
                 }
-                else if(TextUtils.isEmpty(etNameL.text.toString()))
+                else if(TextUtils.isEmpty(etNameL.text.toString().trim()))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_name_l))
                 }
-                else if(TextUtils.isEmpty(etEmail.text.toString()))
+                else if(TextUtils.isEmpty(etEmail.text.toString().trim()))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_email))
                 }
@@ -231,7 +231,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
                     showDatePicker()
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_date_of_birth))
                 }
-                else if(TextUtils.isEmpty(etMotherName.text.toString()))
+                else if(TextUtils.isEmpty(etMotherName.text.toString().trim()))
                 {
                     CommonMethod.customSnackBarError(rootConstraint,this@ProfileEditPersonalActivity,resources.getString(R.string.required_mother_maiden_name))
                 }

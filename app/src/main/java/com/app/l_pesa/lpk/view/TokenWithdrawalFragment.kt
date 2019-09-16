@@ -60,7 +60,7 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
 
         buttonSubmit.setOnClickListener {
 
-            if(TextUtils.isEmpty(etToken.text.toString()))
+            if(TextUtils.isEmpty(etToken.text.toString().trim()))
             {
                 CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)
                 CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_token_amount))

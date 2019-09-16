@@ -45,7 +45,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
         btnSubmit.setOnClickListener {
 
             hideKeyboard()
-            if(TextUtils.isEmpty(etReason.text.toString()))
+            if(TextUtils.isEmpty(etReason.text.toString().trim()))
             {
                 CommonMethod.customSnackBarError(rootLayout,this@CloseAccountActivity,resources.getString(com.app.l_pesa.R.string.required_reason_for_close_account))
             }

@@ -87,6 +87,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:maxLength="25"
                             android:maxLines="1"
+                            android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
                             android:textColor="@color/textColors"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>
@@ -112,6 +113,7 @@
                             android:inputType="text"
                             android:maxLength="25"
                             android:maxLines="1"
+                            android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp" />
 
@@ -138,6 +140,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:maxLength="25"
                             android:maxLines="1"
+                            android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
                             android:textColor="@color/textColors"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>
@@ -161,6 +164,7 @@
                             android:hint="@string/email"
                             android:maxLength="35"
                             android:maxLines="1"
+                            android:digits="0123456789qwertzuiopasdfghjklyxcvbnm@ "
                             android:inputType="textEmailAddress"
                             android:textSize="@dimen/_12sdp"
                             android:textColor="@color/textColors"/>
@@ -234,6 +238,7 @@
                             android:textSize="@dimen/_12sdp"
                             android:maxLength="25"
                             android:maxLines="1"
+                            android:digits="0123456789qwertzuiopasdfghjklyxcvbnm "
                             android:textColor="@color/textColors"/>
 
                     </com.app.l_pesa.common.CommonInputLayout>
