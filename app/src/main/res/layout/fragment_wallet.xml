@@ -229,6 +229,7 @@
                     android:hint="@string/withdrawal_amount"
                     android:inputType="numberSigned"
                     android:textSize="@dimen/_12sdp"
+                    android:digits="0123456789"
                     android:longClickable="false"
                     android:textIsSelectable="false"
                     android:fontFamily="@font/montserrat"

@@ -60,6 +60,7 @@
                 android:inputType="numberSigned"
                 android:maxLength="6"
                 android:maxLines="1"
+                android:digits="0123456789"
                 android:textColorHint="@color/color_gray_text"
                 android:textColor="@color/textColors"
                 android:textSize="@dimen/_12sdp" />

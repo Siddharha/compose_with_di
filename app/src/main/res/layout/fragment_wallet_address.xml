@@ -93,6 +93,7 @@
                     android:fontFamily="@font/montserrat"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.@/ "
                     android:hint="@string/erc_address"
                     android:textSize="@dimen/_11sdp" />
 
