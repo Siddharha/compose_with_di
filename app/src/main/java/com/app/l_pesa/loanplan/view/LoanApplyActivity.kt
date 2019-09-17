@@ -10,9 +10,10 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.location.Criteria
 import android.location.Location
 import android.location.LocationManager
-import android.os.Build
+import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
@@ -25,7 +26,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -37,10 +37,8 @@ import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.LocationListener
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
+import android.location.LocationListener
+import androidx.core.accessibilityservice.AccessibilityServiceInfoCompat.loadDescription
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
@@ -54,12 +52,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private lateinit var  progressDialog   : ProgressDialog
     private lateinit var  countDownTimer   : CountDownTimer
 
-    private var REQUEST_LOCATION_CODE = 101
-    private var mGoogleApiClient: GoogleApiClient? = null
-    private var mLocation: Location? = null
-    private var mLocationRequest: LocationRequest? = null
-    private val UPDATE_INTERVAL = (4000).toLong()  /* 4 secs */
-    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
+    lateinit var locationManager: LocationManager
+    internal var provider: String? = null
 
     private var loanType=""
     private var productId=""
@@ -71,9 +65,70 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanApplyActivity)
 
-        buildGoogleApiClient()
+        locationWork()
         initData()
 
+    }
+
+    private fun locationWork()
+    {
+        if (ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    0)
+        }
+        // Getting LocationManager object
+        locationCheck()
+
+        locationManager = getSystemService(
+                Context.LOCATION_SERVICE) as LocationManager
+
+        // Creating an empty criteria object
+        val criteria = Criteria()
+
+        // Getting the name of the provider that meets the criteria
+        provider = locationManager.getBestProvider(criteria, false)
+
+        if (provider != null && provider != "") {
+            if (!provider!!.contains("gps")) { // if gps is disabled
+                val poke = Intent()
+                poke.setClassName("com.android.settings",
+                        "com.android.settings.widget.SettingsAppWidgetProvider")
+                poke.addCategory(Intent.CATEGORY_ALTERNATIVE)
+                poke.data = Uri.parse("3")
+                sendBroadcast(poke)
+            }
+            // Get the location from the given provider
+            var location = locationManager
+                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+
+            locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER, 500, 0f, this)
+
+            if (location != null)
+                onLocationChanged(location)
+            else
+                location = locationManager.getLastKnownLocation(provider!!)
+            if (location != null)
+                onLocationChanged(location)
+
+
+        } else {
+            Toast.makeText(baseContext, "No Provider Found",
+                    Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun locationCheck() {
+        val manager = getSystemService(
+                Context.LOCATION_SERVICE) as LocationManager
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps()
+
+        }
     }
 
     private fun initData()
@@ -81,6 +136,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
          val bundle  = intent.extras
          productId   = bundle!!.getString("PRODUCT_ID")!!
          loanType    = bundle.getString("LOAN_TYPE")!!
+
 
         initTimer()
         initLoader()
@@ -120,58 +176,16 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     }
 
-    private fun startLocationUpdates() {
-        // Create the location request
-        mLocationRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL)
-                .setFastestInterval(FASTEST_INTERVAL)
 
-        if (ActivityCompat.checkSelfPermission(this@LoanApplyActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this)
-    }
-
-    @SuppressLint("MissingPermission")
-    private fun getLocation() {
-        mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient)
-
-        if (mLocation == null) {
-            startLocationUpdates()
-        }
-        if (mLocation != null) {
-            val sharedPrefObj=SharedPref(this@LoanApplyActivity)
-            sharedPrefObj.currentLat = mLocation!!.latitude.toString()
-            sharedPrefObj.currentLng = mLocation!!.longitude.toString()
-            doApplyLoan()
-        } else {
-            Toast.makeText(this, "Current Location Not Detected", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     private fun applyLoan()
     {
-        if (!checkGPSEnabled()) {
-            return
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                 getLocation()
-            } else {
-                 checkLocationPermission()
-            }
-        } else {
-            getLocation()
-        }
-
-    }
-
-    private fun doApplyLoan()
-    {
         if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
         {
-            if(isLocationEnabled())
+            val manager = getSystemService(
+                    Context.LOCATION_SERVICE) as LocationManager
+
+            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
             {
                 val shared=SharedPref(this@LoanApplyActivity)
                 if(shared.currentLat!="")
@@ -188,7 +202,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             }
             else
             {
-                showAlert()
+                buildAlertMessageNoGps()
             }
 
         }
@@ -329,77 +343,45 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
     }
 
-    override fun onLocationChanged(location: Location?) {
-
-        val sharedPrefObj=SharedPref(this@LoanApplyActivity)
-        sharedPrefObj.currentLat = location!!.latitude.toString()
-        sharedPrefObj.currentLng = location.longitude.toString()
-    }
-
-    @Synchronized
-    private fun buildGoogleApiClient() {
-        mGoogleApiClient = GoogleApiClient.Builder(this)
-                .addApi(LocationServices.API)
-                .build()
-
-        mGoogleApiClient!!.connect()
-    }
-
-    private fun checkGPSEnabled(): Boolean {
-        if (!isLocationEnabled())
-            showAlert()
-        return isLocationEnabled()
-    }
-
-    private fun showAlert() {
-        val dialog = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
-        dialog.setTitle("Enable Location")
-                .setMessage("Your Locations Settings is set to OFF.Please Enable Location to use L-Pesa")
-                .setPositiveButton("Location Settings") { _, _ ->
-                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                    startActivity(myIntent)
+    private fun buildAlertMessageNoGps() {
+        val builder = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
+        builder.setMessage(
+                "Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false).setPositiveButton("Yes"
+                ) { dialog, id ->
+                    startActivity(Intent(
+                            Settings.ACTION_LOCATION_SOURCE_SETTINGS))
                 }
-                .setNegativeButton("Cancel") { _, _ -> }
-        dialog.show()
+                .setNegativeButton("No") { dialog, id -> dialog.cancel() }
+        val alert = builder.create()
+        alert.show()
     }
 
-    private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    override fun onLocationChanged(location: Location) {
+
+        val sharedPref=SharedPref(this@LoanApplyActivity)
+        sharedPref.currentLat=location.latitude.toString()
+        sharedPref.currentLng=location.longitude.toString()
+
     }
 
-    private fun checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this@LoanApplyActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
-                        .setTitle("Location Permission Needed")
-                        .setMessage("This app needs the Location permission, please accept to use location functionality")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
-                            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_CODE)
-                        })
-                        .create()
-                        .show()
+    override fun onProviderDisabled(provider: String) {
 
-            } else ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_CODE)
+        if (ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    0)
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            REQUEST_LOCATION_CODE -> {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    override fun onProviderEnabled(provider: String) {
 
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        doApplyLoan()
-                    }
-                } else {
-                    // permission denied, boo! Disable the functionality that depends on this permission.
-                    Toast.makeText(this, "You need to add Location Permission", Toast.LENGTH_LONG).show()
-                }
-                return
-            }
-        }
+    }
+
+    override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {
+
     }
 
 
@@ -472,15 +454,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     public override fun onStop() {
         super.onStop()
         countDownTimer.cancel()
-        if (mGoogleApiClient!!.isConnected) {
-            mGoogleApiClient!!.disconnect()
-        }
 
-    }
 
-    override fun onStart() {
-        super.onStart()
-        mGoogleApiClient?.connect()
     }
 
 

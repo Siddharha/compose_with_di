@@ -36,33 +36,31 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".settings.view.CloseAccountActivity"
+        <activity
+            android:name=".settings.view.CloseAccountActivity"
             android:label="@string/title_close_account"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
 
-       <!--  <intent-filter>
+            <!--
+         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-         </intent-filter>-->
+         </intent-filter>
+            -->
 
         </activity>
-
         <activity
             android:name=".login.view.EmailVerificationActivity"
             android:label="@string/title_email_verification"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".login.view.EmailRequiredActivity"
             android:label="@string/title_email_verification"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".calculator.view.LoanCalculatorActivity"
             android:label="@string/calculate_your_loan"
@@ -72,11 +70,7 @@
             android:name=".help.view.HelpActivity"
             android:label="@string/help_support"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-
-
-
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".pin.view.SetUpPinActivity"
             android:label="@string/set_up_pin"
@@ -86,9 +80,7 @@
             android:name=".otpview.view.OTPActivity"
             android:label="@string/otp"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible" >
-
-        </activity>
+            android:windowSoftInputMode="stateVisible"></activity>
         <activity
             android:name=".pinview.view.PinSetActivity"
             android:label="@string/pin"
@@ -210,7 +202,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".main.view.MainActivity"
@@ -284,8 +275,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@drawable/ic_notification" />
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 </manifest>
