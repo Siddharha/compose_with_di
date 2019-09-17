@@ -42,25 +42,17 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
 
-            <!--
-         <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-         </intent-filter>
-            -->
-
         </activity>
         <activity
             android:name=".login.view.EmailVerificationActivity"
             android:label="@string/title_email_verification"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".login.view.EmailRequiredActivity"
             android:label="@string/title_email_verification"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".calculator.view.LoanCalculatorActivity"
             android:label="@string/calculate_your_loan"
@@ -70,7 +62,7 @@
             android:name=".help.view.HelpActivity"
             android:label="@string/help_support"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".pin.view.SetUpPinActivity"
             android:label="@string/set_up_pin"
@@ -80,7 +72,7 @@
             android:name=".otpview.view.OTPActivity"
             android:label="@string/otp"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"></activity>
+            android:windowSoftInputMode="stateVisible"/>
         <activity
             android:name=".pinview.view.PinSetActivity"
             android:label="@string/pin"
@@ -167,7 +159,10 @@
             android:name=".profile.view.ProfileEditPersonalActivity"
             android:label="@string/personal_info"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+
+        </activity>
         <activity
             android:name=".loanHistory.view.LoanPaybackScheduledActivity"
             android:label="@string/payment_schedule"
@@ -197,7 +192,7 @@
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
-           <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -584,46 +584,39 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
     }
 
+    fun Int.length() = when(this) {
+        0 -> 1
+        else -> Math.log10(Math.abs(toDouble())).toInt() + 1
+    }
+
+    private fun addZero(number: Int): String {
+        return if (number <= 9) "0$number" else number.toString()
+    }
+
+
     @SuppressLint("SetTextI18n")
     private fun showDatePicker()
     {
-        val c          = Calendar.getInstance()
-        val yearOBJ    = c.get(Calendar.YEAR)
+        val c      = Calendar.getInstance()
+        val yearOBJ    = c.get(Calendar.YEAR)-18
         val monthOBJ   = c.get(Calendar.MONTH)+1
         val dayOBJ     = c.get(Calendar.DAY_OF_MONTH)
 
         val dpd = DatePickerDialog(this@ProfileEditPersonalActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
 
             val month=monthOfYear+1
-            txtDOB.setText("$year-$month-$dayOfMonth")
+            val finalMonth=addZero(month)
+            val finalDay=addZero(dayOfMonth)
+            txtDOB.setText("$year-$finalMonth-$finalDay")
+
+
         }, yearOBJ, monthOBJ, dayOBJ)
-            /*if(dayOfMonth.toString().length==1)
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    txtDOB.setText("0$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    txtDOB.setText("0$dayOfMonth-$month-$year")
-                }
 
-            }
-            else
-            {
-                if(monthOfYear.toString().length==1)
-                {
-                    txtDOB.setText("$dayOfMonth-0$month-$year")
-                }
-                else
-                {
-                    txtDOB.setText("$dayOfMonth-$monthOfYear-$year")
-                }
-
-            }*/
 
         dpd.show()
-        dpd.datePicker.maxDate = System.currentTimeMillis()
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.YEAR, -18)
+        dpd.datePicker.maxDate = calendar.timeInMillis
     }
 
     private fun checkAndRequestPermissions(): Boolean {
