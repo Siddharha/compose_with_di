@@ -80,10 +80,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                     0)
         }
         // Getting LocationManager object
-        locationCheck()
 
-        locationManager = getSystemService(
-                Context.LOCATION_SERVICE) as LocationManager
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
         // Creating an empty criteria object
         val criteria = Criteria()
@@ -104,8 +102,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             var location = locationManager
                     .getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 
-            locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, 500, 0f, this)
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0f, this)
 
             if (location != null)
                 onLocationChanged(location)
@@ -116,18 +113,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
 
         } else {
-            Toast.makeText(baseContext, "No Provider Found",
-                    Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun locationCheck() {
-        val manager = getSystemService(
-                Context.LOCATION_SERVICE) as LocationManager
-
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            buildAlertMessageNoGps()
-
+            Toast.makeText(baseContext, "No Provider Found",Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -182,28 +168,25 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     {
         if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
         {
-            val manager = getSystemService(
-                    Context.LOCATION_SERVICE) as LocationManager
+            val manager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-            {
-                val shared=SharedPref(this@LoanApplyActivity)
-                if(shared.currentLat!="")
-                {
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+                alertMessageNoGps()
+            }
+            else {
+
+                val shared = SharedPref(this@LoanApplyActivity)
+                if (shared.currentLat != "") {
                     progressDialog.show()
-                    buttonSubmit.isClickable =false
+                    buttonSubmit.isClickable = false
                     loanApply()
-                }
-                else
-                {
-                     CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.please_wait))
+                } else {
+                    CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.please_wait))
                 }
 
             }
-            else
-            {
-                buildAlertMessageNoGps()
-            }
+
 
         }
         else
@@ -343,7 +326,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
     }
 
-    private fun buildAlertMessageNoGps() {
+    private fun alertMessageNoGps() {
         val builder = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
         builder.setMessage(
                 "Your GPS seems to be disabled, do you want to enable it?")
@@ -354,6 +337,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 }
                 .setNegativeButton("No") { dialog, id -> dialog.cancel() }
         val alert = builder.create()
+        alert.setCancelable(false)
         alert.show()
     }
 
@@ -399,10 +383,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
     }
 
-    public override fun onResume() {
-        super.onResume()
-
-    }
 
     public override fun onDestroy() {
 
@@ -455,6 +435,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         super.onStop()
         countDownTimer.cancel()
 
+
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        locationWork()
 
     }
 
