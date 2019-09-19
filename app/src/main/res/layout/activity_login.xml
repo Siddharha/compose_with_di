@@ -113,7 +113,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="15"
                 android:maxLines="1"
-                android:inputType="numberSigned"
+                android:inputType="numberPassword"
                 android:paddingStart="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_2sdp"
                 android:hint="@string/phone_no"

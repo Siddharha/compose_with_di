@@ -16,6 +16,7 @@ import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.text.*
 import android.text.method.LinkMovementMethod
+import android.text.method.SingleLineTransformationMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.view.Window
@@ -144,7 +145,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         }))
 
-
+        etPhone.transformationMethod = SingleLineTransformationMethod.getInstance()
         etPhone.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {

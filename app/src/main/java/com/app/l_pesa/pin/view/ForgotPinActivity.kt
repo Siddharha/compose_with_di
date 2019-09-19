@@ -18,7 +18,9 @@ import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.text.method.SingleLineTransformationMethod
 import android.view.*
+import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -93,6 +95,16 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
 
     private fun forgetPin()
     {
+
+        etPhone.transformationMethod = SingleLineTransformationMethod.getInstance()
+        etPhone.setOnEditorActionListener { _, actionId, _ ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                verifyField()
+                handled = true
+            }
+            handled
+        }
 
         buttonRecoverPin.setOnClickListener {
             verifyField()
