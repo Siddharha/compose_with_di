@@ -643,6 +643,11 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             }
 
         }
+        else if(currentFragment is DashboardFragment)
+        {
+            visibleButton(false)
+            visibleFilter(false)
+        }
 
         appUpdateManager
                 .appUpdateInfo
