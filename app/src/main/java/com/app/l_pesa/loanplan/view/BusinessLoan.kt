@@ -60,6 +60,7 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
+            shimmerLayout.startShimmerAnimation()
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanPlans= PresenterLoanPlans()
@@ -67,6 +68,8 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
         }
         else
         {
+            shimmerLayout.stopShimmerAnimation()
+            shimmerLayout.visibility=View.INVISIBLE
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
             swipeRefreshLayout.isRefreshing = false
         }
@@ -74,6 +77,8 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         val sharedPref= SharedPref(activity!!)
         sharedPref.businessLoanCount="1"
         (activity as DashboardActivity).isVisibleToolbarRight()
@@ -86,6 +91,8 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onEmptyLoanPlans() {
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         val sharedPref= SharedPref(activity!!)
         sharedPref.businessLoanCount="0"
         (activity as DashboardActivity).isVisibleToolbarRight()
@@ -95,6 +102,8 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         val sharedPref= SharedPref(activity!!)
         sharedPref.businessLoanCount="0"
         (activity as DashboardActivity).isVisibleToolbarRight()

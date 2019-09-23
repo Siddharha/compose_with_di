@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -21,13 +22,16 @@ import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
+import kotlinx.android.synthetic.main.fragment_loan_plan_list.shimmerLayout
+import kotlinx.android.synthetic.main.fragment_loan_plan_list.swipeRefreshLayout
+import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
-class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
+class CurrentLoan: Fragment(), ICallBackCurrentLoan {
 
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return CurrentLoan()
         }
     }
@@ -48,6 +52,7 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             swipeRefreshLayout.isRefreshing = true
+            shimmerLayout.startShimmerAnimation()
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanPlans= PresenterLoanPlans()
@@ -55,6 +60,8 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
         }
         else
         {
+            shimmerLayout.stopShimmerAnimation()
+            shimmerLayout.visibility=View.INVISIBLE
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
             swipeRefreshLayout.isRefreshing = false
         }
@@ -72,6 +79,9 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
+
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         val sharedPref=SharedPref(activity!!)
         sharedPref.currentLoanCount="1"
         (activity as DashboardActivity).isVisibleToolbarRight()
@@ -84,6 +94,8 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
     }
 
     override fun onEmptyLoanPlans() {
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         val sharedPref=SharedPref(activity!!)
         sharedPref.currentLoanCount="0"
         (activity as DashboardActivity).isVisibleToolbarRight()
@@ -94,6 +106,8 @@ class CurrentLoan: androidx.fragment.app.Fragment(), ICallBackCurrentLoan {
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         val sharedPref=SharedPref(activity!!)
         sharedPref.currentLoanCount="0"
         (activity as DashboardActivity).isVisibleToolbarRight()

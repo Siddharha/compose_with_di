@@ -6,7 +6,6 @@
 
     <RelativeLayout
         android:id="@+id/rootLayout"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/screenBackground">
@@ -60,12 +59,36 @@
 
         </androidx.cardview.widget.CardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLoan"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_3sdp"
-        />
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/layout_list_placeholder" />
+                <include layout="@layout/layout_list_placeholder" />
+                <include layout="@layout/layout_list_placeholder" />
+                <include layout="@layout/layout_list_placeholder" />
+                <include layout="@layout/layout_list_placeholder" />
+                <include layout="@layout/layout_list_placeholder" />
+                <include layout="@layout/layout_list_placeholder" />
+            </LinearLayout>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLoan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_3sdp"
+            />
 
 </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
