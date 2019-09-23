@@ -18,6 +18,7 @@ import android.telephony.TelephonyManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.text.method.SingleLineTransformationMethod
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
@@ -99,6 +100,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
 
     private fun checkQualify()
     {
+        etPhone.transformationMethod = SingleLineTransformationMethod.getInstance()
         etEmail.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {

@@ -59,7 +59,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789- "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -107,7 +107,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,- "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -131,7 +131,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,- "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 
@@ -179,7 +179,7 @@
                         android:inputType="text"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-, "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 

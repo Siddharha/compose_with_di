@@ -203,7 +203,7 @@
                         app:autoSizeStepGranularity="0.2sp"
                         app:autoSizeTextType="uniform"
                         android:textSize="@dimen/_12sdp"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789- "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-,.' "
 
                         />
 
