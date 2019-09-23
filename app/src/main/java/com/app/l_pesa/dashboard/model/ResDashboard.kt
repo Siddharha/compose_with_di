@@ -5,11 +5,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-/**
- * Created by Intellij Amiya on 20-02-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 
 class ResDashboard {
 

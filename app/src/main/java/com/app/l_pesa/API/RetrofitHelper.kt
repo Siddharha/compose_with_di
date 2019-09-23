@@ -9,11 +9,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
+
 class RetrofitHelper {
     companion object {
 

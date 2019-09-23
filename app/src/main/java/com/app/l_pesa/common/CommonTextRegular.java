@@ -7,12 +7,6 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatTextView;
 
 
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
-
 public class CommonTextRegular extends AppCompatTextView {
 
     public CommonTextRegular(Context context) {

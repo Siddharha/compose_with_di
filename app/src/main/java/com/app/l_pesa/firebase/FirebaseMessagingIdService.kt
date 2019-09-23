@@ -17,12 +17,6 @@ import com.google.firebase.messaging.RemoteMessage
 import java.util.*
 
 
-/**
- * Created by Intellij Amiya on 16-05-2018.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
-
 class FirebaseMessagingIdService : FirebaseMessagingService() {
 
     private lateinit var notificationManager: NotificationManager

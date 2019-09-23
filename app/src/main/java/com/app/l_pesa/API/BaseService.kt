@@ -37,11 +37,6 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 interface BaseService{
 
     @GET("countries_list?offset=0&limit=20")

@@ -17,13 +17,6 @@ import com.app.l_pesa.loanplan.model.ResLoanPlans
 import java.text.DecimalFormat
 
 
-/**
- * Created by Intellij Amiya on 21/2/19.
- *  Who Am I- https://stackoverflow.com/users/3395198/
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
-
 class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: ArrayList<ResLoanPlans.Item>,private val appliedProduct: ResLoanPlans.AppliedProduct, private val callBackObj: ICallBackCurrentLoan) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")

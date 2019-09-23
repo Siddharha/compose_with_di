@@ -12,12 +12,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.layout_settings_item.view.*
 
 
-/**
- * Created by Intellij Amiya on 04-02-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
-
 class SettingsAdapter(private val context: Context, private val items: List<SettingsItem>, private val callBack: ICallBackListClick)
 
     : RecyclerView.Adapter<SettingsAdapter.ViewHolder>() {

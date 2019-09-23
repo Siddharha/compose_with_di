@@ -14,12 +14,6 @@ import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.splash.model.ResModelCountryList
 
 
-/**
- * Created by Intellij Amiya on 29-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
-
 class CountryListAdapter(val context: Context,private var countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

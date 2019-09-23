@@ -17,11 +17,6 @@ import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.regex.Pattern
 
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 object CommonMethod {
 
     fun sessionTime(): Int {

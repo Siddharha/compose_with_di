@@ -1,11 +1,5 @@
 package com.app.l_pesa.dashboard.adapter
 
-
-/**
- * Created by Intellij Amiya on 20-02-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color

@@ -6,11 +6,6 @@ import android.util.AttributeSet;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-/**
- * Created by Intellij Amiya on 06-02-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 public class CommonInputLayout extends TextInputLayout {
 
     public CommonInputLayout(Context context) {

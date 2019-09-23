@@ -3,13 +3,6 @@ package com.app.l_pesa.login.model
 import com.app.l_pesa.common.CommonStatusModel
 
 
-/**
- * Created by Intellij Amiya on 29-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
-
-
 class ResLogin(val status: CommonStatusModel, val data: PinData)
 
 data class PinData(val post_data:PostData, val access_phone:String,val next_step:String)

@@ -14,12 +14,6 @@ import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 import retrofit2.HttpException
 
-/**
- * Created by Intellij Amiya on 21/2/19.
- *  Who Am I- https://stackoverflow.com/users/3395198/
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 class PresenterLoanPlans {
 
     @SuppressLint("CheckResult")

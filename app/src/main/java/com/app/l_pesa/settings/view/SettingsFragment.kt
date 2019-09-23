@@ -25,11 +25,7 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
-/**
- * Created by Intellij Amiya on 04-02-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
+
 class SettingsFragment :Fragment(), ICallBackListClick {
 
     companion object {
