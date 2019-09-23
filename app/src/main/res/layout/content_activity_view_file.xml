@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,11 +9,29 @@
     tools:showIn="@layout/activity_view_file"
     android:gravity="center">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:theme="@style/Progressbar.Red"
+        android:indeterminateTintMode="src_in"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorAppDeep"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
     <ImageView
         android:id="@+id/imgFile"
         android:contentDescription="@string/app_name"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_250sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

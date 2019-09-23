@@ -1,17 +1,16 @@
 package com.app.l_pesa.loanplan.view
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.location.Criteria
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
@@ -37,8 +36,6 @@ import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
-import android.location.LocationListener
-import androidx.core.accessibilityservice.AccessibilityServiceInfoCompat.loadDescription
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*

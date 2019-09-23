@@ -4,15 +4,19 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.TextUtils
+import android.text.style.BulletSpan
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.amazonaws.mobile.auth.core.signin.ui.DisplayUtils.dp
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
@@ -21,12 +25,6 @@ import com.app.l_pesa.settings.presenter.PresenterAccount
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_close_account.*
 import kotlinx.android.synthetic.main.content_close_account.*
-import com.amazonaws.mobile.auth.core.signin.ui.DisplayUtils.dp
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.BulletSpan
-import android.text.SpannableString
-
 
 
 class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {

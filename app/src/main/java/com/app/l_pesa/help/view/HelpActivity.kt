@@ -25,7 +25,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
-import kotlinx.android.synthetic.main.content_help.txtEmail
 
 
 class HelpActivity : AppCompatActivity() {

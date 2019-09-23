@@ -3,16 +3,13 @@ package com.app.l_pesa.login.view
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Paint
 import android.graphics.Typeface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.text.TextUtils
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -31,8 +28,6 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_email_verification.*
 import kotlinx.android.synthetic.main.content_email_verification.*
-import kotlinx.android.synthetic.main.content_email_verification.rootLayout
-import kotlinx.android.synthetic.main.content_pin_set.*
 
 class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackDashboard, ICallBackHelp, ICallBackResend {
 

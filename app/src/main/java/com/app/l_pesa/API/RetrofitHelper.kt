@@ -1,7 +1,6 @@
 package com.app.l_pesa.API
 
 import com.app.l_pesa.BuildConfig
-import com.app.l_pesa.BuildConfig.BASE_URL
 import com.app.l_pesa.BuildConfig.BASE_URL_DEV
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
