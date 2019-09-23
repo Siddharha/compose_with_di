@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,8 +64,11 @@ class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallB
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
-        (activity as DashboardActivity).visibleFilter(false)
-        (activity as DashboardActivity).visibleButton(false)
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 200)
+
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             progressDialog.show()

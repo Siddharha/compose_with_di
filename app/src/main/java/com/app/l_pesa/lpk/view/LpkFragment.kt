@@ -56,8 +56,11 @@ class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
 
     private fun initData()
     {
-        (activity as DashboardActivity).visibleFilter(false)
-        (activity as DashboardActivity).visibleButton(false)
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 200)
+
 
         constraintWithdrawal.setOnClickListener {
 

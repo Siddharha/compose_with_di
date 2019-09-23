@@ -2,6 +2,7 @@ package com.app.l_pesa.settings.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,9 +52,12 @@ class SettingsFragment :Fragment(), ICallBackListClick {
 
     private fun initData()
     {
-       (activity as DashboardActivity).visibleFilter(false)
-       (activity as DashboardActivity).visibleButton(false)
-       val sharedPrefOBJ= SharedPref(activity!!)
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 200)
+
+        val sharedPrefOBJ= SharedPref(activity!!)
        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
 
         if(userData.user_info.mpin_password)

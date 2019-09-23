@@ -6,6 +6,7 @@ import android.app.ProgressDialog
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
@@ -49,8 +50,11 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as DashboardActivity).visibleFilter(false)
-        (activity as DashboardActivity).visibleButton(false)
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 200)
+
 
         initData()
     }

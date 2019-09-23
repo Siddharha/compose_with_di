@@ -1,6 +1,7 @@
 package com.app.l_pesa.points.view
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +25,11 @@ class PointsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as DashboardActivity).visibleFilter(false)
-        (activity as DashboardActivity).visibleButton(false)
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 200)
+
     }
 
 }
