@@ -93,14 +93,13 @@
 
                 <Button
                     android:id="@+id/buttonTransfer"
-                    android:layout_width="@dimen/_120sdp"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_32sdp"
                     android:layout_margin="@dimen/_10sdp"
                     android:background="@drawable/ripple_green_button"
                     android:text="@string/transfer"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
