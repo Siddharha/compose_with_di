@@ -3,6 +3,7 @@ package com.app.l_pesa.profile.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -60,9 +61,11 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     fun loadProfileInfo(shimmerStatus: Boolean)
     {
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 500)
 
-        (activity as DashboardActivity).visibleFilter(false)
-        (activity as DashboardActivity).visibleButton(false)
 
         val options = RequestOptions()
         options.placeholder(R.drawable.ic_user)
