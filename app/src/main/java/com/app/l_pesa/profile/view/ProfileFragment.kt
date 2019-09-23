@@ -64,7 +64,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         Handler().postDelayed({
             (activity as DashboardActivity).visibleFilter(false)
             (activity as DashboardActivity).visibleButton(false)
-        }, 500)
+        }, 200)
 
 
         val options = RequestOptions()
