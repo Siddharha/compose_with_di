@@ -14,6 +14,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
 import android.provider.Settings
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.RelativeSizeSpan
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -26,6 +29,7 @@ import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
@@ -275,8 +279,12 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     private fun initLoader()
     {
         progressDialog = ProgressDialog(this@RegistrationStepFiveActivity,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.saving))
+        val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage(resources.getString(R.string.saving))
+        progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)

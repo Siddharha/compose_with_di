@@ -16,7 +16,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
+import android.text.style.RelativeSizeSpan
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
@@ -29,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
@@ -307,8 +311,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private fun initLoader()
     {
         progressDialog = ProgressDialog(this@LoanApplyActivity,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)

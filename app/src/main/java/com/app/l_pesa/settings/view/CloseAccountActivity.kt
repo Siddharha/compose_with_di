@@ -6,18 +6,18 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.provider.Settings
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.TextUtils
+import android.text.*
 import android.text.style.BulletSpan
+import android.text.style.RelativeSizeSpan
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.amazonaws.mobile.auth.core.signin.ui.DisplayUtils.dp
+import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.settings.inter.ICallBackCloseAccount
@@ -112,9 +112,13 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(this@CloseAccountActivity, com.app.l_pesa.R.style.MyAlertDialogStyle)
+        progressDialog = ProgressDialog(this@CloseAccountActivity, R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage(resources.getString(com.app.l_pesa.R.string.loading))
+        progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)

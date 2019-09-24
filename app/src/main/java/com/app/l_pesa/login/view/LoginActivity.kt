@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,6 +19,8 @@ import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.ClickableSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.TypefaceSpan
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
@@ -36,6 +39,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.calculator.view.LoanCalculatorActivity
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
@@ -81,8 +85,12 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     private fun initLoader()
     {
         progressDialog = ProgressDialog(this@LoginActivity,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)

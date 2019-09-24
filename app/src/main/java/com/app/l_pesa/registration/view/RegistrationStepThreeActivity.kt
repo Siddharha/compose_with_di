@@ -6,12 +6,16 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
+import android.text.style.RelativeSizeSpan
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
@@ -47,7 +51,6 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
     {
 
         val sharedPref=SharedPref(this@RegistrationStepThreeActivity)
-       // handleRotation(sharedPref.imagePath)
         imageFile   = File(sharedPref.imagePath)
         imageFile   = Compressor(this@RegistrationStepThreeActivity).compressToFile(imageFile)
 
@@ -108,63 +111,15 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
 
     }
 
-   /* private fun handleRotation(imgPath: String) {
-        BitmapFactory.decodeFile(imgPath)?.let { origin ->
-            try {
-                ExifInterface(imgPath).apply {
-                    getAttributeInt(
-                            ExifInterface.TAG_ORIENTATION,
-                            ExifInterface.ORIENTATION_UNDEFINED
-                    ).let { orientation ->
-                            when (orientation) {
-                            ExifInterface.ORIENTATION_ROTATE_90 -> origin.rotate(90f)
-                            ExifInterface.ORIENTATION_ROTATE_180 -> origin.rotate(180f)
-                            ExifInterface.ORIENTATION_ROTATE_270 -> origin.rotate(270f)
-                            ExifInterface.ORIENTATION_NORMAL -> origin
-                            else -> origin.rotate(270f)
-                        }.also { bitmap ->
-                            //Update the input file with the new bytes.
-                            try {
-                                FileOutputStream(imgPath).use { fos ->
-                                    bitmap.compress(
-                                            Bitmap.CompressFormat.JPEG,
-                                            100,
-                                            fos
-                                    )
-                                }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-                        }
-                    }
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        }
-    }
-
-    private fun Bitmap.rotate(degrees: Float): Bitmap {
-        val matrix = Matrix()
-        matrix.postRotate(degrees)
-        val scaledBitmap = Bitmap.createScaledBitmap(this, width, height, true)
-        return Bitmap.createBitmap(
-                scaledBitmap,
-                0,
-                0,
-                scaledBitmap.width,
-                scaledBitmap.height,
-                matrix,
-                true
-        )
-    }*/
-
-
     private fun initLoader()
     {
         progressDialog = ProgressDialog(this@RegistrationStepThreeActivity,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)

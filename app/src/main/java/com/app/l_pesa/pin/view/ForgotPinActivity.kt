@@ -15,10 +15,9 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.TelephonyManager
-import android.text.Editable
-import android.text.TextUtils
-import android.text.TextWatcher
+import android.text.*
 import android.text.method.SingleLineTransformationMethod
+import android.text.style.RelativeSizeSpan
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -32,10 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonEditTextRegular
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CommonTextRegular
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.view.LoginActivity
@@ -77,8 +73,12 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     private fun initLoader()
     {
         progressDialog = ProgressDialog(this@ForgotPinActivity,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
-        progressDialog.setMessage(resources.getString(R.string.loading))
+        progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)
