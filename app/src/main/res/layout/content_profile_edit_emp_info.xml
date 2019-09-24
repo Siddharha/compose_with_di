@@ -81,7 +81,7 @@
                         android:layout_height="match_parent"
                         android:hint="@string/name_of_emp"
                         android:inputType="text"
-                        android:maxLength="25"
+                        android:maxLength="50"
                         android:maxLines="1"
                         android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                         android:textColor="@color/textColors"
