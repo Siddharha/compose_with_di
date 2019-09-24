@@ -51,7 +51,6 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            swipeRefreshLayout.isRefreshing = true
             shimmerLayout.startShimmerAnimation()
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
@@ -73,7 +72,7 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-
+           swipeRefreshLayout.isRefreshing = true
            loadLoan()
         }
     }

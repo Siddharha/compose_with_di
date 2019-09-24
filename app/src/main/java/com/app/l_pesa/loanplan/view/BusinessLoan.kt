@@ -24,7 +24,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.*
 
-class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
+class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
     companion object {
         fun newInstance(): Fragment {
@@ -59,7 +59,6 @@ class BusinessLoan: androidx.fragment.app.Fragment(), ICallBackBusinessLoan {
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            swipeRefreshLayout.isRefreshing = true
             shimmerLayout.startShimmerAnimation()
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
