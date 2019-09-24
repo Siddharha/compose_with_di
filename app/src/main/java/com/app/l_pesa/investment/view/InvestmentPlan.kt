@@ -20,7 +20,7 @@ import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterInvestmentPlan
 import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
+import kotlinx.android.synthetic.main.fragment_investment_plan_list.*
 import java.text.DecimalFormat
 
 
@@ -34,7 +34,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_loan_plan_list, container,false)
+        return inflater.inflate(R.layout.fragment_investment_plan_list, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-
+            swipeRefreshLayout.isRefreshing = true
             investmentPlan()
         }
     }
@@ -59,25 +59,32 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            swipeRefreshLayout.isRefreshing = true
+            shimmerLayout.startShimmerAnimation()
             val presenterLoanPlans= PresenterInvestmentPlan()
             presenterLoanPlans.getInvestmentPlan(activity!!,this)
+        }
+        else
+        {
+            shimmerLayout.stopShimmerAnimation()
+            shimmerLayout.visibility=View.INVISIBLE
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            swipeRefreshLayout.isRefreshing = false
         }
 
     }
 
     override fun onSuccessInvestmentPlan(data: ResInvestmentPlan.Data) {
 
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         val sharedPrefOBJ= SharedPref(activity!!)
-
-        val gSonData = Gson()
-        val json = gSonData.toJson(data)
+        val json = Gson().toJson(data)
         sharedPrefOBJ.loanPlanList  =json
 
         swipeRefreshLayout.isRefreshing    = false
         val investmentPlanAdapter          = InvestmentPlanAdapter(activity!!, data.investmentPlans!!,this)
-        rvLoan.layoutManager               = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
-        rvLoan.adapter                     = investmentPlanAdapter
+        rvInvestment.layoutManager               = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
+        rvInvestment.adapter                     = investmentPlanAdapter
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
@@ -88,11 +95,15 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
     override fun onEmptyInvestmentPlan() {
 
+       shimmerLayout.stopShimmerAnimation()
+       shimmerLayout.visibility=View.INVISIBLE
        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onErrorInvestmentPlan(jsonMessage: String) {
 
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing = false
         Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
