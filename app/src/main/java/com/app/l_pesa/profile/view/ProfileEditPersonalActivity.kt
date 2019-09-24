@@ -624,6 +624,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.YEAR, -18)
         dpd.datePicker.maxDate = calendar.timeInMillis
+
+        val calendarMin = Calendar.getInstance()
+        calendarMin.add(Calendar.YEAR, -79)
+        dpd.datePicker.minDate = calendarMin.timeInMillis
     }
 
     private fun checkAndRequestPermissions(): Boolean {
