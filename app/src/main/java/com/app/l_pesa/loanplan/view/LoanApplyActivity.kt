@@ -76,9 +76,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         if (ActivityCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Check Permissions Now
-            ActivityCompat.requestPermissions(this,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    0)
+            ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),0)
         }
         // Getting LocationManager object
 
@@ -86,20 +84,17 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         // Creating an empty criteria object
         val criteria = Criteria()
-
-        // Getting the name of the provider that meets the criteria
-        provider = locationManager.getBestProvider(criteria, false)
+         provider = locationManager.getBestProvider(criteria, false)
 
         if (provider != null && provider != "") {
-            if (!provider!!.contains("gps")) { // if gps is disabled
+            if (!provider!!.contains("gps")) {
                 val poke = Intent()
-                poke.setClassName("com.android.settings",
-                        "com.android.settings.widget.SettingsAppWidgetProvider")
+                poke.setClassName("com.android.settings","com.android.settings.widget.SettingsAppWidgetProvider")
                 poke.addCategory(Intent.CATEGORY_ALTERNATIVE)
                 poke.data = Uri.parse("3")
                 sendBroadcast(poke)
             }
-            // Get the location from the given provider
+
             var location = locationManager
                     .getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 

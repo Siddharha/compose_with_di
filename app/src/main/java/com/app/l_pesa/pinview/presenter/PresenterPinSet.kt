@@ -32,14 +32,15 @@ class PresenterPinSet {
                             if(response.data.email.verify==0)
                             {
 
-                                if(TextUtils.isEmpty(response.data.email.address))
+                                callBackOBJ.onRequiredEmail(response.data)
+                                /*if(TextUtils.isEmpty(response.data.email.address))
                                 {
                                     callBackOBJ.onRequiredEmail(response.data)
                                 }
                                 else
                                 {
                                     callBackOBJ.onVerifyEmail(response.data)
-                                }
+                                }*/
                             }
                             else
                             {

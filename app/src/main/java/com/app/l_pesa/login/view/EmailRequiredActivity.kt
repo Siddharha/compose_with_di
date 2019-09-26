@@ -1,5 +1,6 @@
 package com.app.l_pesa.login.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
@@ -15,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.inter.ICallBackEmail
 import com.app.l_pesa.login.presenter.PresenterEmail
+import com.app.l_pesa.pinview.model.LoginData
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_email_required.*
 import kotlinx.android.synthetic.main.content_email_required.*
@@ -26,6 +30,7 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
 
     private lateinit var  progressDialog   : ProgressDialog
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_email_required)
@@ -39,6 +44,9 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
             verifyField()
         }
 
+        val sharedPrefOBJ= SharedPref(this@EmailRequiredActivity)
+        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        etEmail.setText(""+userData.user_personal_info.email_address)
         etEmail.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -53,7 +61,6 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
     private fun verifyField()
     {
         hideKeyboard()
-       // btnSubmit.isClickable   = false
         if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
         {
             CommonMethod.customSnackBarError(rootLayout,this@EmailRequiredActivity,resources.getString(R.string.required_email))
@@ -77,9 +84,6 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
             }
         }
 
-       /* Handler().postDelayed({
-            btnSubmit.isClickable   = true
-        }, 1000)*/
     }
 
     private fun hideKeyboard()
@@ -143,7 +147,6 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
 
 
     override fun onBackPressed() {
-        /*super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)*/
+
     }
 }

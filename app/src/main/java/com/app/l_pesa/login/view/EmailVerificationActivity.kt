@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
+import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
@@ -42,6 +43,7 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_email_verification)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@EmailVerificationActivity)
 
         initLoader()
@@ -231,9 +233,20 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
             }
         }
     }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onBackPressed() {
-        /*super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)*/
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 }
