@@ -325,7 +325,7 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
         val dialog = AlertDialog.Builder(activity!!)
 
         val font = ResourcesCompat.getFont(activity!!, R.font.montserrat)
-        val taskEditText    = CommonEditTextRegular(activity)
+        val taskEditText    = CommonEditTextRegular(activity!!)
         taskEditText.typeface=font
         val textInputLayout = TextInputLayout(activity)
 

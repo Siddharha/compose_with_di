@@ -20,10 +20,6 @@ val foregroundColor: Int) : TypefaceSpan(family) {
         applyCustomTypeFace(paint, newType)
     }
 
-    override fun getSpanTypeId(): Int {
-        return super.getSpanTypeId()
-    }
-
 
     private fun applyCustomTypeFace(paint: Paint, tf: Typeface) {
         val oldStyle: Int

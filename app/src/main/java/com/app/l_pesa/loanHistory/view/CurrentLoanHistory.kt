@@ -331,7 +331,7 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
         val dialog = AlertDialog.Builder(activity!!)
 
         val font = ResourcesCompat.getFont(activity!!, R.font.montserrat)
-        val taskEditText    = CommonEditTextRegular(activity)
+        val taskEditText    = CommonEditTextRegular(activity!!)
         taskEditText.typeface=font
         taskEditText.setTextColor(ContextCompat.getColor(activity!!,R.color.colorTextBlackLight))
         val textInputLayout = TextInputLayout(activity)

@@ -604,7 +604,7 @@ public class OtpView extends AppCompatEditText {
 
     @Override
     protected android.text.method.MovementMethod getDefaultMovementMethod() {
-        return MovementMethod.getInstance();
+        return MovementMethod.Companion.getInstance();
     }
 
     /**
