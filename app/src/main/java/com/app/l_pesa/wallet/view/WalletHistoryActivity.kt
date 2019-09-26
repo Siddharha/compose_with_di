@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
@@ -166,15 +165,13 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     private fun showDatePickerFrom()
     {
 
-       val commonClass= CommonClass()
-       commonClass.datePicker(this@WalletHistoryActivity,etFromDate)
+       CommonMethod.datePicker(this@WalletHistoryActivity,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(this@WalletHistoryActivity,etToDate)
+        CommonMethod.datePicker(this@WalletHistoryActivity,etToDate)
     }
 
     private fun resetFilter()

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterInterestHistory
 import com.app.l_pesa.lpk.inter.ICallBackInterestHistory
@@ -161,15 +160,13 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etFromDate)
+       CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etToDate)
+       CommonMethod.datePicker(activity!!,etToDate)
     }
 
     override fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?, from_date: String, to_date: String) {

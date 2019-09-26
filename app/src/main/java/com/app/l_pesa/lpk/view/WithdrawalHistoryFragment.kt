@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterWithdrawalHistory
 import com.app.l_pesa.lpk.inter.ICallBackWithdrawalHistory
@@ -268,14 +267,12 @@ class WithdrawalHistoryFragment: Fragment() , ICallBackWithdrawalHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etFromDate)
+        CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etToDate)
+        CommonMethod.datePicker(activity!!,etToDate)
     }
 }

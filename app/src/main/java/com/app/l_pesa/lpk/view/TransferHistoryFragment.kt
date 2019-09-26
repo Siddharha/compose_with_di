@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
@@ -179,15 +178,13 @@ class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTrans
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etFromDate)
+        CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etToDate)
+        CommonMethod.datePicker(activity!!,etToDate)
     }
 
     override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?,from_date:String,to_date:String) {

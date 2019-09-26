@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
@@ -264,15 +263,13 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(this@TransactionHistoryActivity,etFromDate)
+         CommonMethod.datePicker(this@TransactionHistoryActivity,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(this@TransactionHistoryActivity,etToDate)
+        CommonMethod.datePicker(this@TransactionHistoryActivity,etToDate)
     }
 
     override fun onSessionTimeOut(message: String) {

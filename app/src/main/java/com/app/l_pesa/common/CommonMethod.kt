@@ -1,6 +1,7 @@
 package com.app.l_pesa.common
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 object CommonMethod {
@@ -149,5 +151,21 @@ object CommonMethod {
         }
 
     }
+
+    fun datePicker(ctx: Context, editText: CommonEditTextRegular) {
+
+        val newCalendar = Calendar.getInstance()
+        val fromDatePickerDialog = DatePickerDialog(ctx, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val newDate = Calendar.getInstance()
+            newDate.set(year, monthOfYear, dayOfMonth)
+            val myFormat = "dd-MM-yyyy"
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            editText.setText(sdf.format(newDate.time))
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH))
+
+        fromDatePickerDialog.show()
+        fromDatePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+    }
+
 
 }

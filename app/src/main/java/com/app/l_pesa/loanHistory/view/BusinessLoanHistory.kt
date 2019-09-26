@@ -301,15 +301,13 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity!!,etFromDate)
+        CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity!!,etToDate)
+        CommonMethod.datePicker(activity!!,etToDate)
     }
 
 
