@@ -62,7 +62,7 @@
                     android:layout_height="@dimen/_27sdp"
                     android:background="@drawable/bg_transparent_border_black_view"
                     android:text="@string/reset"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textSize="@dimen/_12sdp"
                     android:textColor="@color/colorBlack"
                     app:layout_constraintBottom_toBottomOf="parent"

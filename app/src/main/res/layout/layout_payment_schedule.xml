@@ -249,7 +249,7 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/_10sdp"
                         android:text="@string/pay_now"
-                        android:textAllCaps="false"
+                        android:textAllCaps="true"
 
                         />
             </LinearLayout>
