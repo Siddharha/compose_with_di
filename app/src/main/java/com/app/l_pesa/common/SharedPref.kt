@@ -12,15 +12,6 @@ constructor(context: Context) // Constructor
     private val pref: SharedPreferences
     private val editor: SharedPreferences.Editor
 
-    //Default value
-    var appVersion: String
-        get() = pref.getString(KEY_SET_APP_VERSION, "1.0.0")!!
-        set(appVersion) {
-            editor.remove(KEY_SET_APP_VERSION)
-            editor.putString(KEY_SET_APP_VERSION, appVersion)
-            editor.commit()
-        }
-
 
     var countryList: String
         get() = pref.getString(KEY_SET_COUNTRY_LIST, "INIT")!!
@@ -276,7 +267,7 @@ constructor(context: Context) // Constructor
         private const val PREF_NAME = "L_PESA"
 
         // All Shared Preferences Keys Declare as #public
-        private const val KEY_SET_APP_VERSION           = "KEY_SET_APP_VERSION"
+
         private const val KEY_SET_COUNTRY_LIST          = "KEY_SET_COUNTRY_LIST"
         private const val KEY_SET_COUNTRY_CODE          = "KEY_SET_COUNTRY_CODE"
         private const val KEY_SET_USER_INFO             = "KEY_SET_USER_INFO"

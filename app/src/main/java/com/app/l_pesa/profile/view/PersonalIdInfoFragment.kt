@@ -78,7 +78,6 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var personalId=0
 
     private val requestPhoto      = 12
-    private val requestGallery    = 13
     private var captureImageStatus : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
@@ -86,7 +85,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var imgFileAddress      = ""
 
     private lateinit  var progressDialog: ProgressDialog
-    private  val REQUEST_ID_PERMISSIONS = 1
+    private  val RequestPermission = 1
 
     companion object {
         fun newInstance(): Fragment {
@@ -211,7 +210,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
         if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
+            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), RequestPermission)
             return false
         }
 
@@ -222,7 +221,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                                             permissions: Array<String>, grantResults: IntArray) {
 
         when (requestCode) {
-            REQUEST_ID_PERMISSIONS -> {
+            RequestPermission -> {
 
                 val perms = HashMap<String, Int>()
                 perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
@@ -293,7 +292,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
-        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)

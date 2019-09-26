@@ -67,7 +67,6 @@ import java.util.*
 class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload {
 
     private val requestPhoto             = 10
-    private val requestGalley            = 11
     private var captureImageStatus          : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
@@ -97,7 +96,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         progressDialog = ProgressDialog(this@ProfileEditPersonalActivity,R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
-        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
@@ -185,18 +184,6 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
             hashMapOLD["motherM"]   = ""+profileData.userPersonalInfo!!.motherMaidenName
             hashMapOLD["sex"]       = ""+profileData.userPersonalInfo!!.sex
             hashMapOLD["imgChange"] = "false"
-
-           /* var dateRequest=""
-            dateRequest = if(!TextUtils.isEmpty(txtDOB.text.toString())) {
-                val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
-                val date         = inputFormat.parse(txtDOB.text.toString())
-
-                val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-                outputFormat.format(date!!)
-            } else {
-                ""
-            }*/
-
 
             val hashMapNew = HashMap<String, String>()
             hashMapNew["title"]     = txtTitle.text.toString()
@@ -310,8 +297,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
 
 
-        val format      = SimpleDateFormat("yyyy-MM-dd")
-        val date        = format.parse(txtDOB.text.toString())
+        val format        = SimpleDateFormat("yyyy-MM-dd")
+        val date    = format.parse(txtDOB.text.toString())
 
         val outputFormat = SimpleDateFormat("yyyy-MM-dd")
         val dateRequest  = outputFormat.format(date!!)

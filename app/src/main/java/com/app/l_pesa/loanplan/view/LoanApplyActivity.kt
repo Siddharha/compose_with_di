@@ -53,7 +53,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private lateinit var  progressDialog   : ProgressDialog
     private lateinit var  countDownTimer   : CountDownTimer
 
-    lateinit var locationManager: LocationManager
+    private lateinit var locationManager: LocationManager
     internal var provider: String? = null
 
     private var loanType=""
@@ -308,7 +308,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         progressDialog = ProgressDialog(this@LoanApplyActivity,R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
-        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)

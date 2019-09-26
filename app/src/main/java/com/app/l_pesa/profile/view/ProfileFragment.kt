@@ -455,7 +455,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     }
 
-    fun getProfileInfo(data: ResUserInfo.Data)
+    private fun getProfileInfo(data: ResUserInfo.Data)
     {
         val sharedPrefOBJ= SharedPref(activity!!)
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)

@@ -82,7 +82,7 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
         progressDialog = ProgressDialog(this@EmailVerificationActivity,R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
-        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
