@@ -68,7 +68,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
 
         val options = RequestOptions()
-        options.placeholder(R.drawable.ic_user)
+        options.error(R.drawable.ic_user)
         Glide.with(activity!!)
                 .load("")
                 .apply(options)
