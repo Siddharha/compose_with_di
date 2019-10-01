@@ -28,6 +28,7 @@ import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.login.view.LoginActivity
@@ -419,7 +420,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
     public override fun onResume() {
         super.onResume()
-
+        MyApplication.getInstance().trackScreenView(this@RegistrationStepFiveActivity::class.java.simpleName)
 
     }
 

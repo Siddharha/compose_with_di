@@ -14,6 +14,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
@@ -147,6 +148,11 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
 
 
     override fun onBackPressed() {
+
+    }
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@EmailRequiredActivity::class.java.simpleName)
 
     }
 }

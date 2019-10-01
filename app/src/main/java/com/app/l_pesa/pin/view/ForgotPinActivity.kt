@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.*
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
@@ -479,6 +480,11 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         val intent = Intent(this@ForgotPinActivity, LoginActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+    }
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@ForgotPinActivity::class.java.simpleName)
 
     }
 }

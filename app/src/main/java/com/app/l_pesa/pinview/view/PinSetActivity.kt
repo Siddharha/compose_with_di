@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
@@ -287,6 +288,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
     public override fun onResume() {
         super.onResume()
+        MyApplication.getInstance().trackScreenView(this@PinSetActivity::class.java.simpleName)
 
     }
  }

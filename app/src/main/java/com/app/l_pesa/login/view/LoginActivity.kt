@@ -69,7 +69,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     private lateinit var  progressDialog   : ProgressDialog
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
-    private lateinit var  firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,11 +76,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        val bundle = Bundle()
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, resources.getString(R.string.app_name))
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
         initLoader()
         loadCountry()

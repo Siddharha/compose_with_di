@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.calculator.adapter.LoanProductAdapter
 import com.app.l_pesa.calculator.inter.ICallBackProducts
 import com.app.l_pesa.calculator.model.ResProducts
@@ -461,6 +462,12 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@LoanCalculatorActivity::class.java.simpleName)
+
     }
 
 

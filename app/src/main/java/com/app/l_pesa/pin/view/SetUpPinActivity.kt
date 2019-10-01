@@ -188,5 +188,5 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
 
     }
 
-    }
+}
 

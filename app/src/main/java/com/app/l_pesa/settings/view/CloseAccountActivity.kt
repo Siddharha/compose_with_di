@@ -33,7 +33,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.app.l_pesa.R.layout.activity_close_account)
+        setContentView(R.layout.activity_close_account)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@CloseAccountActivity)
@@ -50,7 +50,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
             else
             {
 
-                val alertDialog = AlertDialog.Builder(this@CloseAccountActivity, com.app.l_pesa.R.style.MyAlertDialogTheme)
+                val alertDialog = AlertDialog.Builder(this@CloseAccountActivity, R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(com.app.l_pesa.R.string.app_name))
                 alertDialog.setMessage(resources.getString(com.app.l_pesa.R.string.close_account_prompt))
                 alertDialog.setPositiveButton("YES") { _, _ -> closeAccount() }
@@ -188,6 +188,6 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 }
