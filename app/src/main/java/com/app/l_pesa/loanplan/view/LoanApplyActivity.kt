@@ -31,6 +31,7 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
@@ -441,6 +442,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     public override fun onResume() {
         super.onResume()
         locationWork()
+        MyApplication.getInstance().trackScreenView(this@LoanApplyActivity::class.java.simpleName)
 
     }
 

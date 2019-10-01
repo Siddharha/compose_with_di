@@ -8,7 +8,9 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.google.android.material.snackbar.Snackbar
@@ -155,6 +157,11 @@ class MainActivity : AppCompatActivity() {
                         e.printStackTrace()
                     }
                 }
+
+
+        MyApplication.getInstance().trackScreenView(this@MainActivity::class.java.simpleName)
+
+
     }
 
     companion object {

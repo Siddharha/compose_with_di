@@ -36,6 +36,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorActivity
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
@@ -545,6 +546,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     public override fun onResume() {
         super.onResume()
+        MyApplication.getInstance().trackScreenView(this@LoginActivity::class.java.simpleName)
 
     }
 

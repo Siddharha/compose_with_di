@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.registration.adapter.PersonalIdListAdapter
@@ -113,6 +114,12 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
     }
 
     override fun onBackPressed() {
+
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@RegistrationStepFourActivity::class.java.simpleName)
 
     }
 

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.help.model.HelpData
@@ -247,6 +248,12 @@ class HelpActivity : AppCompatActivity() {
     public override fun onStop() {
         super.onStop()
         countDownTimer.cancel()
+
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@HelpActivity::class.java.simpleName)
 
     }
 

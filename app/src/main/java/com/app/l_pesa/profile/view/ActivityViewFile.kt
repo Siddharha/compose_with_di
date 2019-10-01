@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.profile.model.ImageRequestListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -89,6 +90,12 @@ class ActivityViewFile : AppCompatActivity(), ImageRequestListener.Callback {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@ActivityViewFile::class.java.simpleName)
+
     }
 
 }

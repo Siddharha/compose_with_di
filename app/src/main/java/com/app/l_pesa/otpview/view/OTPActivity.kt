@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.OnOtpCompletionListener
@@ -283,6 +284,12 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@OTPActivity::class.java.simpleName)
+
     }
 
 }

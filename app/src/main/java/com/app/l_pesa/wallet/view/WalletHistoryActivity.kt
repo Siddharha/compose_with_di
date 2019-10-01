@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
@@ -366,6 +367,12 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     public override fun onStop() {
         super.onStop()
         countDownTimer.cancel()
+
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@WalletHistoryActivity::class.java.simpleName)
 
     }
 

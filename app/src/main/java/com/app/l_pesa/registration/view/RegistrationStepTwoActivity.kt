@@ -31,6 +31,7 @@ import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
@@ -46,11 +47,6 @@ import kotlin.collections.set
 class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private lateinit var progressDialog : ProgressDialog
-   /* private lateinit var fotoapparat    : Fotoapparat
-    private lateinit var photoState     : PhotoState
-    private lateinit var cameraStatus   : CameraState
-    private lateinit var flashState     : FlashState*/
-    //private lateinit var imageFile      : File
     private val  requestPhoto               = 12
     private var  captureImageStatus         : Boolean    = false
     private lateinit var photoFile          : File
@@ -365,6 +361,12 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@RegistrationStepTwoActivity::class.java.simpleName)
+
     }
 
 

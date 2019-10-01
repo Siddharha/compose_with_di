@@ -28,6 +28,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorFragment
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
@@ -679,6 +680,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     }
                 }
 
+        MyApplication.getInstance().trackScreenView(this@DashboardActivity::class.java.simpleName)
     }
 
     companion object {

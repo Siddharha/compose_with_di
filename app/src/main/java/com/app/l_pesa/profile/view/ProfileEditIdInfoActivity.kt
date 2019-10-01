@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
@@ -135,6 +136,12 @@ class ProfileEditIdInfoActivity : AppCompatActivity(), TabLayout.OnTabSelectedLi
             super.onBackPressed()
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@ProfileEditIdInfoActivity::class.java.simpleName)
+
     }
 
 }
