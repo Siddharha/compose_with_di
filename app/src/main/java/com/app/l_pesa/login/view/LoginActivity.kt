@@ -550,5 +550,4 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     }
 
-
 }

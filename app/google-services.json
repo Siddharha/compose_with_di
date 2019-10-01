@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "169215011592",
-    "firebase_url": "https://l-pesa-f52b3.firebaseio.com",
-    "project_id": "l-pesa-f52b3",
-    "storage_bucket": "l-pesa-f52b3.appspot.com"
+    "project_number": "15981648681",
+    "firebase_url": "https://l-pesa-mobile-ef238.firebaseio.com",
+    "project_id": "l-pesa-mobile-ef238",
+    "storage_bucket": "l-pesa-mobile-ef238.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:169215011592:android:bf2b38c70e0c1629",
+        "mobilesdk_app_id": "1:15981648681:android:1f20959cbf9d8119c37538",
         "android_client_info": {
           "package_name": "com.app.l_pesa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "169215011592-5mdvmp8lgo9ssu115226p4c5mtn3ikth.apps.googleusercontent.com",
+          "client_id": "15981648681-vl0is9hmrdsrj95sgncg0ttuptspu206.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCZW7Lx0bHzPdHrfs4oR90-XaG7u-9kjx4"
+          "current_key": "AIzaSyBu1Ws2SiI3bVhnj6-VHUJidui8-1zCARc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "169215011592-5mdvmp8lgo9ssu115226p4c5mtn3ikth.apps.googleusercontent.com",
+              "client_id": "15981648681-vl0is9hmrdsrj95sgncg0ttuptspu206.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

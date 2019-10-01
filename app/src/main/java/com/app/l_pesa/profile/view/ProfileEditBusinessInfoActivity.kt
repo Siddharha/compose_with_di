@@ -14,7 +14,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
@@ -285,7 +284,6 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
 
     public override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().trackScreenView(this@ProfileEditBusinessInfoActivity::class.java.simpleName)
 
     }
 

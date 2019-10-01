@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.adapter.SavingsTabAdapter
@@ -202,7 +201,6 @@ class LPKSavingsActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener 
 
     public override fun onResume() {
         super.onResume()
-        MyApplication.getInstance().trackScreenView(this@LPKSavingsActivity::class.java.simpleName)
 
     }
 

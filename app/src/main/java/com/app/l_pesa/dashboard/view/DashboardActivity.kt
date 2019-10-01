@@ -680,7 +680,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     }
                 }
 
-        MyApplication.getInstance().trackScreenView(this@DashboardActivity::class.java.simpleName)
+
     }
 
     companion object {
