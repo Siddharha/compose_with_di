@@ -8,7 +8,6 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.login.view.LoginActivity

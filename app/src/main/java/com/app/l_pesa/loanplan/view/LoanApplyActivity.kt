@@ -3,6 +3,7 @@ package com.app.l_pesa.loanplan.view
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.app.PendingIntent.getActivity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -28,6 +29,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
@@ -165,9 +167,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     {
         if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
         {
-            val manager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+           if (!checkIfLocationOpened())
+            {
 
                 alertMessageNoGps()
             }
@@ -191,6 +192,15 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.no_internet))
         }
     }
+
+    private fun checkIfLocationOpened(): Boolean {
+        val provider = Settings.Secure.getString(contentResolver, Settings.Secure.LOCATION_PROVIDERS_ALLOWED)
+        if (provider.contains("gps") || provider.contains("network"))
+        {
+            return true
+    }
+    return false
+}
 
     private fun loanApply()
     {
