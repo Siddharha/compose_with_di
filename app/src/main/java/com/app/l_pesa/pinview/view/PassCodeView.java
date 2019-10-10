@@ -1,5 +1,6 @@
 package com.app.l_pesa.pinview.view;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -22,7 +23,6 @@ import com.app.l_pesa.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class PassCodeView extends View {
     private boolean DEBUG = false;
@@ -53,7 +53,9 @@ public class PassCodeView extends View {
     private boolean skipKeyDraw = false;
     private int touchSlope = 5;
 
+    @SuppressLint("UseSparseArrays")
     private Map<Integer, Integer> touchXMap = new HashMap<>();
+    @SuppressLint("UseSparseArrays")
     private Map<Integer, Integer> touchYMap = new HashMap<>();
     private Typeface typeFace;
     private TextPaint textPaint;

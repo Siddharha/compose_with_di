@@ -14,11 +14,11 @@ class KeyRect {
     public Rect rect;
     public String value;
     public int rippleRadius = 0;
-    public int requiredRadius;
+    private int requiredRadius;
     public int circleAlpha;
     //private final Rect tempRect;
     public boolean hasRippleEffect = false;
-    public ValueAnimator animator;
+    private ValueAnimator animator;
     private final int MAX_RIPPLE_ALPHA = 180;
     private InterpolatedValueListener interpolatedValueListener;
     private int animationLeftRepeatCount = 2;
@@ -26,7 +26,7 @@ class KeyRect {
     private int cycleCount = 4;
     private RippleAnimListener rippleAnimListener;
 
-    public KeyRect(View view, Rect rect, String value) {
+     KeyRect(View view, Rect rect, String value) {
         this.view = view;
         this.rect = rect;
         //this.tempRect = new Rect(rect);
@@ -104,7 +104,7 @@ class KeyRect {
         void onValueUpdated();
     }
 
-     void setOnValueUpdateListener(InterpolatedValueListener listener) {
+    private void setOnValueUpdateListener(InterpolatedValueListener listener) {
         this.interpolatedValueListener = listener;
     }
 

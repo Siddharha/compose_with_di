@@ -28,7 +28,7 @@ public final class AnalyticsTrackers {
 
     private static AnalyticsTrackers sInstance;
 
-    public static synchronized void initialize(Context context) {
+    static synchronized void initialize(Context context) {
         if (sInstance != null) {
             throw new IllegalStateException("Extra call to initialize analytics trackers");
         }
@@ -57,12 +57,10 @@ public final class AnalyticsTrackers {
     public synchronized Tracker get(Target target) {
         if (!mTrackers.containsKey(target)) {
             Tracker tracker;
-            switch (target) {
-                case APP:
-                    tracker = GoogleAnalytics.getInstance(mContext).newTracker(R.xml.app_tracker);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unhandled analytics target " + target);
+            if (target == Target.APP) {
+                tracker = GoogleAnalytics.getInstance(mContext).newTracker(R.xml.app_tracker);
+            } else {
+                throw new IllegalArgumentException("Unhandled analytics target " + target);
             }
             mTrackers.put(target, tracker);
         }

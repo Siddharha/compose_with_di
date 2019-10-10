@@ -32,6 +32,8 @@ import androidx.core.view.ViewCompat;
 
 import com.app.l_pesa.R;
 
+import java.util.Objects;
+
 
 public class OtpView extends AppCompatEditText {
 
@@ -305,13 +307,13 @@ public class OtpView extends AppCompatEditText {
             }
             if (rtlTextDirection) {
                 int reversedPosition = otpViewItemCount - i;
-                if (getText().length() >= reversedPosition) {
+                if (Objects.requireNonNull(getText()).length() >= reversedPosition) {
                     drawInput(canvas, i);
                 } else if (!TextUtils.isEmpty(getHint()) && getHint().length() == otpViewItemCount) {
                     drawHint(canvas, i);
                 }
             } else {
-                if (getText().length() > i) {
+                if (Objects.requireNonNull(getText()).length() > i) {
                     drawInput(canvas, i);
                 } else if (!TextUtils.isEmpty(getHint()) && getHint().length() == otpViewItemCount) {
                     drawHint(canvas, i);

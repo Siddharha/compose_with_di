@@ -28,7 +28,7 @@ public class MyApplication extends Application {
         return mInstance;
     }
 
-    public synchronized Tracker getGoogleAnalyticsTracker() {
+    private synchronized Tracker getGoogleAnalyticsTracker() {
         AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
         return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
     }
