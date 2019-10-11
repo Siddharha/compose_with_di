@@ -306,15 +306,16 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val jsonObject = JsonObject()
         jsonObject.addProperty("title",txtTitle.text.toString())
-        jsonObject.addProperty("first_name",etNameF.text.toString().replace("  ", " "))
-        jsonObject.addProperty("middle_name",etNameM.text.toString().replace("  ", " "))
-        jsonObject.addProperty("last_name",etNameL.text.toString().replace("  ", " "))
+        jsonObject.addProperty("first_name", CommonMethod.removeExtraSpace(etNameF.text.toString()))
+        jsonObject.addProperty("middle_name",CommonMethod.removeExtraSpace(etNameM.text.toString()))
+        jsonObject.addProperty("last_name",CommonMethod.removeExtraSpace(etNameL.text.toString()))
         jsonObject.addProperty("email_address",etEmail.text.toString())
         jsonObject.addProperty("dob",dateRequest)
         jsonObject.addProperty("sex",gender)
         jsonObject.addProperty("merital_status",txtMarital.text.toString())
-        jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString().replace("  ", " "))
+        jsonObject.addProperty("mother_maiden_name",CommonMethod.removeExtraSpace(etMotherName.text.toString()))
         jsonObject.addProperty("profile_image",imageURL)
+
 
         val presenterPersonalInfo= PresenterPersonalInfo()
         presenterPersonalInfo.doChangePersonalInfo(this@ProfileEditPersonalActivity,jsonObject,this)

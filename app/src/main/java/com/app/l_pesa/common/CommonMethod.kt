@@ -167,5 +167,23 @@ object CommonMethod {
         fromDatePickerDialog.datePicker.maxDate = System.currentTimeMillis()
     }
 
+    fun removeExtraSpace(input: String): String {
+        var input = input
+        input = input.trim { it <= ' ' }
+        val x = ArrayList(Arrays.asList(*input.split("".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
+        var i = 0
+        while (i < x.size - 1) {
+            if (x[i] == " " && x[i + 1] == " ") {
+                x.removeAt(i)
+                i--
+            }
+            i++
+        }
+        var word = ""
+        for (each in x)
+            word += each
+        return word
+    }
+
 
 }
