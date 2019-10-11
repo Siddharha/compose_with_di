@@ -14,7 +14,7 @@
         android:id="@+id/txtInfo"
         android:layout_width="0dp"
         android:layout_height="@dimen/_85sdp"
-        android:text="@string/email_verification"
+        android:text="@string/mobile_verification"
         android:textSize="@dimen/_11sdp"
         android:padding="@dimen/_3sdp"
         android:layout_marginStart="@dimen/_10sdp"
