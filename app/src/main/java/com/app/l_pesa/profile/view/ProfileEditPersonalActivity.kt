@@ -306,14 +306,14 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         val jsonObject = JsonObject()
         jsonObject.addProperty("title",txtTitle.text.toString())
-        jsonObject.addProperty("first_name",etNameF.text.toString())
-        jsonObject.addProperty("middle_name",etNameM.text.toString())
-        jsonObject.addProperty("last_name",etNameL.text.toString())
+        jsonObject.addProperty("first_name",etNameF.text.toString().replace("  ", " "))
+        jsonObject.addProperty("middle_name",etNameM.text.toString().replace("  ", " "))
+        jsonObject.addProperty("last_name",etNameL.text.toString().replace("  ", " "))
         jsonObject.addProperty("email_address",etEmail.text.toString())
         jsonObject.addProperty("dob",dateRequest)
         jsonObject.addProperty("sex",gender)
         jsonObject.addProperty("merital_status",txtMarital.text.toString())
-        jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString())
+        jsonObject.addProperty("mother_maiden_name",etMotherName.text.toString().replace("  ", " "))
         jsonObject.addProperty("profile_image",imageURL)
 
         val presenterPersonalInfo= PresenterPersonalInfo()
