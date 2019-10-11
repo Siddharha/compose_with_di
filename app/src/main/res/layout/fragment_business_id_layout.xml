@@ -129,12 +129,15 @@
                     android:text="@string/enter_id_no"
                     android:textColor="@color/colorGreyDeep"
                     android:textSize="@dimen/_10sdp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@id/textView11"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/imageView11"
                     app:layout_constraintTop_toTopOf="@+id/view3"
-                    app:layout_constraintVertical_chainStyle="spread_inside" />
+                    app:layout_constraintVertical_chainStyle="spread_inside"
+
+                    />
 
                 <com.app.l_pesa.common.CommonTextRegular
                     android:id="@+id/textView11"
@@ -193,6 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/app_name"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@+id/textView10"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
