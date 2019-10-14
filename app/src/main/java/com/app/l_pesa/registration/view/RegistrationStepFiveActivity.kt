@@ -342,7 +342,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this@RegistrationStepFiveActivity, Manifest.permission.CAMERA)
                                 || ActivityCompat.shouldShowRequestPermissionRationale(this@RegistrationStepFiveActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                            showDialogOK("Permissions are required for this app",
+                            showDialogOK("Permissions are required for L-Pesa",
                                     DialogInterface.OnClickListener { _, which ->
                                         when (which) {
                                             DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()

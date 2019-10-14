@@ -492,7 +492,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
                     } else {
 
                         if (ActivityCompat.shouldShowRequestPermissionRationale(this@LoginActivity, Manifest.permission.READ_PHONE_STATE)) {
-                            showDialogOK("Permissions are required for this app",
+                            showDialogOK("Permissions are required for L-Pesa",
                                     DialogInterface.OnClickListener { _, which ->
                                         when (which) {
                                             DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
