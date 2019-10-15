@@ -81,8 +81,12 @@ class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallB
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             progressDialog.show()
-            val presenterInfoLPK= PresenterInfoLPK()
-            presenterInfoLPK.getInfoLPK(activity!!,this,"")
+
+            Thread(Runnable {
+                val presenterInfoLPK= PresenterInfoLPK()
+                presenterInfoLPK.getInfoLPK(activity!!,this,"")
+            }).start()
+
         }
         else
         {
