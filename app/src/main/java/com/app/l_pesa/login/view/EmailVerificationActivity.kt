@@ -7,6 +7,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.method.SingleLineTransformationMethod
 import android.text.style.RelativeSizeSpan
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
@@ -54,6 +55,7 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
             verifyField()
         }
 
+        etVerificationCode.transformationMethod = SingleLineTransformationMethod.getInstance()
         etVerificationCode.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
