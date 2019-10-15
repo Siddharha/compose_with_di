@@ -164,7 +164,7 @@
                             android:hint="@string/email"
                             android:maxLength="35"
                             android:maxLines="1"
-                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@. "
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._- "
                             android:inputType="textEmailAddress"
                             android:textSize="@dimen/_12sdp"
                             android:textColor="@color/textColors"/>

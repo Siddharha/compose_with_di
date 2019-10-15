@@ -95,7 +95,7 @@
             android:layout_height="@dimen/_40sdp"
             android:hint="@string/email_address"
             android:inputType="textEmailAddress"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@. "
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._- "
             android:maxLength="45"
             android:maxLines="1"
             android:textColorHint="@color/color_gray_text"
