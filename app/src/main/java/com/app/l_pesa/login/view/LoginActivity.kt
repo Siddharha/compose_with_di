@@ -352,15 +352,16 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
-        etPhone.requestFocus()
-        txtCountry.visibility=View.VISIBLE
-        txtCountry.text = resModelCountryList.country_name
-        etPhone.tag = resModelCountryList.country_code+"   "
-        val sharedPrefOBJ= SharedPref(this@LoginActivity)
-        sharedPrefOBJ.countryCode=resModelCountryList.code
-        sharedPrefOBJ.countryName=resModelCountryList.country_name
-        sharedPrefOBJ.countryIsdCode=resModelCountryList.country_code
-        sharedPrefOBJ.countryFlag=resModelCountryList.image
+            etPhone.requestFocus()
+            txtCountry.visibility=View.VISIBLE
+            txtCountry.text = resModelCountryList.country_name
+            etPhone.tag = resModelCountryList.country_code+"   "
+            val sharedPrefOBJ= SharedPref(this@LoginActivity)
+            sharedPrefOBJ.countryCode=resModelCountryList.code
+            sharedPrefOBJ.countryName=resModelCountryList.country_name
+            sharedPrefOBJ.countryIsdCode=resModelCountryList.country_code
+            sharedPrefOBJ.countryFlag=resModelCountryList.image
+
     }
 
 

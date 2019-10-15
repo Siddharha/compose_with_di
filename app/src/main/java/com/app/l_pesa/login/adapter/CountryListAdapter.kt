@@ -31,8 +31,13 @@ class CountryListAdapter(val context: Context,private var countryList: ArrayList
         viewHolder.txtCountry.text = countryList[position].country_name
         viewHolder.txtCountry.isAllCaps=true
         viewHolder.rlRootObj.setOnClickListener {
-            dialogOBJ.dismiss()
-            callBackOBJ.onClickCountry(countryList[position])
+
+            if(!countryList[position].country_name.contentEquals(context.getString(R.string.search_result_not_found)))
+            {
+                dialogOBJ.dismiss()
+                callBackOBJ.onClickCountry(countryList[position])
+            }
+
         }
 
 
