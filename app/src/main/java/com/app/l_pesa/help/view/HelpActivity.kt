@@ -168,8 +168,8 @@ class HelpActivity : AppCompatActivity() {
                     action = Intent.ACTION_SEND
                     data = Uri.parse("mailto:")
                     type = "text/plain"
-                    putExtra(Intent.EXTRA_EMAIL, helpData.support_email)
-                    putExtra(Intent.EXTRA_SUBJECT, "Subject of Email")
+                    putExtra(Intent.EXTRA_EMAIL,arrayOf(helpData.support_email))
+                    putExtra(Intent.EXTRA_SUBJECT, "L-Pesa Support Team")
                 }
                 if (intent.resolveActivity(packageManager) != null) {
                     intent.setPackage("com.google.android.gm")
