@@ -57,10 +57,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:hint="@string/verification_code"
-                android:inputType="numberSigned"
+                android:inputType="numberPassword"
                 android:maxLength="6"
                 android:maxLines="1"
-                android:digits="0123456789"
                 android:textColorHint="@color/color_gray_text"
                 android:textColor="@color/textColors"
                 android:textSize="@dimen/_12sdp" />
