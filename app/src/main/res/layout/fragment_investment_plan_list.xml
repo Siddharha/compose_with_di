@@ -48,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/_12sdp"
-                    android:text="@string/empty_loan_plan_message"
+                    android:text="@string/empty_investment_list_message"
                     android:gravity="center"
                     android:textColor="@color/textColors"
                     android:fontFamily="@font/montserrat"

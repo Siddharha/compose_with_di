@@ -77,6 +77,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
         shimmerLayout.stopShimmerAnimation()
         shimmerLayout.visibility=View.INVISIBLE
+        cardView.visibility=View.INVISIBLE
         val sharedPrefOBJ= SharedPref(activity!!)
         val json = Gson().toJson(data)
         sharedPrefOBJ.loanPlanList  =json
@@ -98,12 +99,14 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
        shimmerLayout.stopShimmerAnimation()
        shimmerLayout.visibility=View.INVISIBLE
        swipeRefreshLayout.isRefreshing = false
+       cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorInvestmentPlan(jsonMessage: String) {
 
         shimmerLayout.stopShimmerAnimation()
         shimmerLayout.visibility=View.INVISIBLE
+        cardView.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing = false
         Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }

@@ -18,6 +18,7 @@ class PresenterInvestmentPlan {
     fun getInvestmentPlan(contextOBJ: Context, callBackOBJ: ICallBackInvestmentPlan)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
+        println("TOKEN"+sharedPrefOBJ.accessToken)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getInvestmentPlan()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
