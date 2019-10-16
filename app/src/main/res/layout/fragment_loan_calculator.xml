@@ -109,7 +109,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/btn_round"
+            android:background="@drawable/ripple_green_button"
             android:fontFamily="@font/montserrat"
             android:text="@string/loan_calculate"
             android:textAllCaps="true"
