@@ -15,7 +15,7 @@ import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import java.text.DecimalFormat
 
-class WalletHistoryAdapter(val context: Context, private val listWithdrawalHistory: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>?) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class WalletHistoryAdapter(val context: Context, private val listWithdrawalHistory: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false

@@ -20,7 +20,6 @@ import android.text.method.LinkMovementMethod
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.ClickableSpan
 import android.text.style.RelativeSizeSpan
-import android.text.style.TypefaceSpan
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
@@ -54,7 +53,6 @@ import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject

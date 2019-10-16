@@ -22,9 +22,6 @@ import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
-import kotlinx.android.synthetic.main.fragment_loan_plan_list.shimmerLayout
-import kotlinx.android.synthetic.main.fragment_loan_plan_list.swipeRefreshLayout
-import kotlinx.android.synthetic.main.fragment_profile.*
 import java.util.*
 
 class CurrentLoan: Fragment(), ICallBackCurrentLoan {

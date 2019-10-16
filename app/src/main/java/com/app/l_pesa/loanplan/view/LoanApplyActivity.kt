@@ -3,7 +3,6 @@ package com.app.l_pesa.loanplan.view
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
-import android.app.PendingIntent.getActivity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -29,7 +28,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R

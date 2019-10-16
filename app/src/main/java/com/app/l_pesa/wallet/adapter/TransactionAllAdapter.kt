@@ -73,7 +73,7 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
         this.loadMoreListener = loadMoreListener
     }
 
-    class UserViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             private var txtRef                   : CommonTextRegular = itemView.findViewById(R.id.txtRef) as CommonTextRegular
             private var txtCreateDate            : CommonTextRegular = itemView.findViewById(R.id.txtCreateDate) as CommonTextRegular
@@ -108,7 +108,7 @@ class TransactionAllAdapter (val context: Context, private val listTransaction: 
 
     }
 
-    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }
 

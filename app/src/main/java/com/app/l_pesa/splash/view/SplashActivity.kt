@@ -38,7 +38,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     {
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
 
-            if (sharedPrefOBJ.accessToken != resources.getString(com.app.l_pesa.R.string.init))
+            if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
             {
                 if(CommonMethod.isNetworkAvailable(this@SplashActivity))
                 {
@@ -65,7 +65,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                             logoutProcess()
                         } else
                         {
-                            CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(com.app.l_pesa.R.string.no_internet))
+                            CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
                         }
 
                     }
@@ -96,7 +96,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     {
 
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
-        if (sharedPrefOBJ.countryList==resources.getString(com.app.l_pesa.R.string.init))
+        if (sharedPrefOBJ.countryList==resources.getString(R.string.init))
         {
             if(CommonMethod.isNetworkAvailable(this@SplashActivity))
             {
@@ -115,7 +115,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                         loadCountry()
                     } else
                     {
-                        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(com.app.l_pesa.R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
                     }
 
                 }
@@ -162,7 +162,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     }
 
     override fun onEmptyCountry() {
-        showSnackBar(resources.getString(com.app.l_pesa.R.string.no_country))
+        showSnackBar(resources.getString(R.string.no_country))
         buttonRetry.visibility  =View.VISIBLE
         progressBar.visibility  =View.INVISIBLE
     }
@@ -178,7 +178,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                 loadCountry()
             } else
             {
-                CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(com.app.l_pesa.R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
             }
 
         }

@@ -12,7 +12,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.profile.inter.ICallBackClickBusinessId
 
-class BusinessIdListAdapter (val context: Context, private val listIdType: ArrayList<ResDashboard.BusinessIdType>, private val dialogOBJ: Dialog,private val callBack: ICallBackClickBusinessId) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+class BusinessIdListAdapter (val context: Context, private val listIdType: ArrayList<ResDashboard.BusinessIdType>, private val dialogOBJ: Dialog,private val callBack: ICallBackClickBusinessId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 

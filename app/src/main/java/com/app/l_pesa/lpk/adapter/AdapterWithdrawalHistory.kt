@@ -189,5 +189,5 @@ class AdapterWithdrawalHistory (val context: Context, private val listWithdrawal
 
 
 
-    class LoadingViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
+    class LoadingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 

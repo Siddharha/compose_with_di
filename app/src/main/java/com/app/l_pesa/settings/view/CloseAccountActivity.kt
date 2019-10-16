@@ -45,14 +45,14 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
             hideKeyboard()
             if(TextUtils.isEmpty(etReason.text.toString().trim()))
             {
-                CommonMethod.customSnackBarError(rootLayout,this@CloseAccountActivity,resources.getString(com.app.l_pesa.R.string.required_reason_for_close_account))
+                CommonMethod.customSnackBarError(rootLayout,this@CloseAccountActivity,resources.getString(R.string.required_reason_for_close_account))
             }
             else
             {
 
                 val alertDialog = AlertDialog.Builder(this@CloseAccountActivity, R.style.MyAlertDialogTheme)
-                alertDialog.setTitle(resources.getString(com.app.l_pesa.R.string.app_name))
-                alertDialog.setMessage(resources.getString(com.app.l_pesa.R.string.close_account_prompt))
+                alertDialog.setTitle(resources.getString(R.string.app_name))
+                alertDialog.setMessage(resources.getString(R.string.close_account_prompt))
                 alertDialog.setPositiveButton("YES") { _, _ -> closeAccount() }
                         .setNegativeButton("CANCEL") { dialog, _ ->
                             dialog.dismiss()
@@ -106,7 +106,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
         }
         else
         {
-            CommonMethod.customSnackBarError(rootLayout,this@CloseAccountActivity,resources.getString(com.app.l_pesa.R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout,this@CloseAccountActivity,resources.getString(R.string.no_internet))
         }
     }
 
@@ -149,7 +149,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
         val sharedPrefOBJ= SharedPref(this@CloseAccountActivity)
         sharedPrefOBJ.removeShared()
         startActivity(Intent(this@CloseAccountActivity, MainActivity::class.java))
-        overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
         finish()
     }
 
@@ -163,7 +163,7 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
             android.R.id.home -> {
                 hideKeyboard()
                 onBackPressed()
-                overridePendingTransition(com.app.l_pesa.R.anim.left_in, com.app.l_pesa.R.anim.right_out)
+                overridePendingTransition(R.anim.left_in, R.anim.right_out)
                 true
             }
 

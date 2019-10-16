@@ -2,7 +2,6 @@ package com.app.l_pesa.pinview.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.TextUtils
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod

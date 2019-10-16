@@ -75,15 +75,15 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         ti_product_name.setOnClickListener {
 
             when {
-                ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.personal_loan) -> {
+                ti_loan_type.text.toString() == resources.getString(R.string.personal_loan) -> {
 
-                    if(personalLoanStatus==resources.getString(com.app.l_pesa.R.string.status_false))
+                    if(personalLoanStatus==resources.getString(R.string.status_false))
                     {
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.service_not_available))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
                     }
-                    else if(personalLoanStatus==resources.getString(com.app.l_pesa.R.string.status_error))
+                    else if(personalLoanStatus==resources.getString(R.string.status_error))
                     {
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.something_went_wrong))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.something_went_wrong))
                     }
                     else {
                         val currentProduct = Gson().fromJson<ResProducts.Data>(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)
@@ -92,15 +92,15 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
 
                 }
-                ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.business_loan) -> {
+                ti_loan_type.text.toString() == resources.getString(R.string.business_loan) -> {
 
-                    if(businessLoanStatus==resources.getString(com.app.l_pesa.R.string.status_false))
+                    if(businessLoanStatus==resources.getString(R.string.status_false))
                     {
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.service_not_available))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
                     }
-                    else if(businessLoanStatus==resources.getString(com.app.l_pesa.R.string.status_error))
+                    else if(businessLoanStatus==resources.getString(R.string.status_error))
                     {
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.something_went_wrong))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.something_went_wrong))
                     }
                     else
                     {
@@ -184,7 +184,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
                 }
                 else
                 {
-                    CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.no_internet))
+                    CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
                 }
             }
             else
@@ -199,7 +199,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     private fun getLoanValue()
     {
-        if(ti_loan_type.text.toString() == resources.getString(com.app.l_pesa.R.string.personal_loan))
+        if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
         {
                val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
                 if(sharedPrefOBJ.currentLoanProduct=="INIT")
@@ -212,7 +212,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
                     }
                     else
                     {
-                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.no_internet))
                     }
                 }
                 else
@@ -261,15 +261,15 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     private fun clearTextValues()
     {
-        txt_credit_score.text  = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_usd_values.text    = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_loan_amount.text   = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_total_payback.text = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_subscriptionF.text = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_subscriptionM.text = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_subscriptionL.text = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_interest_rate.text = resources.getText(com.app.l_pesa.R.string.dash_line)
-        txt_loan_period.text   = resources.getText(com.app.l_pesa.R.string.dash_line)
+        txt_credit_score.text  = resources.getText(R.string.dash_line)
+        txt_usd_values.text    = resources.getText(R.string.dash_line)
+        txt_loan_amount.text   = resources.getText(R.string.dash_line)
+        txt_total_payback.text = resources.getText(R.string.dash_line)
+        txt_subscriptionF.text = resources.getText(R.string.dash_line)
+        txt_subscriptionM.text = resources.getText(R.string.dash_line)
+        txt_subscriptionL.text = resources.getText(R.string.dash_line)
+        txt_interest_rate.text = resources.getText(R.string.dash_line)
+        txt_loan_period.text   = resources.getText(R.string.dash_line)
     }
 
     @SuppressLint("SetTextI18n")
@@ -364,7 +364,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
 
     override fun onSuccessCurrentLoan(data: ResProducts.Data) {
 
-        personalLoanStatus=resources.getString(com.app.l_pesa.R.string.status_true)
+        personalLoanStatus=resources.getString(R.string.status_true)
         dismiss()
         val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
         val currentProductList                        = Gson().toJson(data)
@@ -375,21 +375,21 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
     }
 
     override fun onEmptyCurrentLoan() {
-        personalLoanStatus=resources.getString(com.app.l_pesa.R.string.status_false)
+        personalLoanStatus=resources.getString(R.string.status_false)
         ti_product_name.text!!.clear()
-        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.service_not_available))
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorCurrentLoan(errorMessageOBJ: String) {
-        personalLoanStatus=resources.getString(com.app.l_pesa.R.string.status_error)
+        personalLoanStatus=resources.getString(R.string.status_error)
         ti_product_name.text!!.clear()
-        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.service_not_available))
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onSuccessBusinessLoan(data: ResProducts.Data) {
-        businessLoanStatus=resources.getString(com.app.l_pesa.R.string.status_true)
+        businessLoanStatus=resources.getString(R.string.status_true)
         dismiss()
         val sharedPrefOBJ= SharedPref(this@LoanCalculatorActivity)
         val businessProductList                        = Gson().toJson(data)
@@ -400,16 +400,16 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
     }
 
     override fun onEmptyBusinessLoan() {
-        businessLoanStatus=resources.getString(com.app.l_pesa.R.string.status_false)
+        businessLoanStatus=resources.getString(R.string.status_false)
         ti_product_name.text!!.clear()
-        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.service_not_available))
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 
     override fun onErrorBusinessLoan(errorMessageOBJ: String) {
-        businessLoanStatus=resources.getString(com.app.l_pesa.R.string.status_error)
+        businessLoanStatus=resources.getString(R.string.status_error)
         ti_product_name.text!!.clear()
-        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(com.app.l_pesa.R.string.service_not_available))
+        CommonMethod.customSnackBarError(rootLayout,this@LoanCalculatorActivity,resources.getString(R.string.service_not_available))
         dismiss()
     }
 

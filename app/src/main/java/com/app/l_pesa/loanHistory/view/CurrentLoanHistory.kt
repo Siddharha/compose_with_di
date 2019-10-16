@@ -20,7 +20,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.*
+import com.app.l_pesa.common.CommonEditTextRegular
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.adapter.CurrentLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackCurrentLoanHistory
