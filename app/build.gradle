@@ -91,7 +91,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
-    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar' //0.5.0
     implementation('com.github.bumptech.glide:glide:4.10.0') {
         exclude group: "com.android.support"
     }
@@ -99,8 +99,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation('com.amazonaws:aws-android-sdk-mobile-client:2.6.7@aar') { transitive = true }
-    implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-    implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+    implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+' //2.16.1
+    implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+' //2.16.1
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.play:core:1.6.3'
     implementation 'com.facebook.android:facebook-android-sdk:5.5.1'
