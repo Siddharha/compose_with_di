@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -36,7 +37,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/ic_loan_history_img"
+                    app:srcCompat="@drawable/ic_loan_history_img"
                     android:contentDescription="@string/app_name"
                     android:layout_marginTop="@dimen/_5sdp"/>
 

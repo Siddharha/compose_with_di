@@ -47,7 +47,7 @@
                             android:layout_gravity="center"
                             android:layout_width="@dimen/_35sdp"
                             android:layout_height="@dimen/_35sdp"
-                            android:src="@drawable/ic_loan_history_img"
+                            app:srcCompat="@drawable/ic_loan_history_img"
                             android:contentDescription="@string/app_name"
                             android:layout_marginTop="@dimen/_5sdp"/>
 

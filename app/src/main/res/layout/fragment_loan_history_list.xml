@@ -50,7 +50,7 @@
                     android:layout_height="@dimen/_35sdp"
                     android:scaleType="fitXY"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/ic_loan_history_img"
+                    app:srcCompat="@drawable/ic_loan_history_img"
                     android:contentDescription="@string/app_name"
                     android:layout_marginTop="@dimen/_5sdp"/>
 

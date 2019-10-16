@@ -43,7 +43,7 @@
                android:layout_width="@dimen/_25sdp"
                android:layout_height="@dimen/_22sdp"
                android:layout_gravity="end"
-               android:src="@drawable/ic_filter"
+               app:srcCompat="@drawable/ic_filter"
                android:layout_marginEnd="@dimen/_12sdp"
                android:background="?attr/selectableItemBackgroundBorderless"
                android:focusable="true"
