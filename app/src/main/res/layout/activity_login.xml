@@ -31,13 +31,13 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:textColor="@color/colorWhite"
                 android:focusable="true"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_10sdp"
                 android:textAllCaps="true"
                 android:drawableEnd="@drawable/ic_dropdown_white_icon"
-                android:drawablePadding="@dimen/_3sdp"
+                android:drawablePadding="@dimen/_2sdp"
                 android:textStyle="bold"
 
                 />
