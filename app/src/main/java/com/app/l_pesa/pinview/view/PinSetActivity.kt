@@ -86,7 +86,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
         pass_code_view.setTypeFace(font)
         pass_code_view.setKeyTextColor(ContextCompat.getColor(this@PinSetActivity, R.color.colorApp))
 
-        pass_code_view.setOnTextChangeListener(PassCodeView.TextChangeListener { text ->
+        pass_code_view.setOnTextChangeListener { text ->
             if (text.length == 6) {
 
                 val sharedPrefOBJ= SharedPref(this@PinSetActivity)
@@ -127,7 +127,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
                     pass_code_view.reset()
 
-                   // println("JSON"+jsonObject)
+                    // println("JSON"+jsonObject)
 
                     val presenterPinSet = PresenterPinSet()
                     presenterPinSet.dosetPin(this@PinSetActivity, jsonObject, this)
@@ -139,7 +139,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
                     pass_code_view.setError(true)
                 }
             }
-        })
+        }
 
     }
 
