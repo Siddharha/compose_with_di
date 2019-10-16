@@ -92,6 +92,17 @@
 
 #AWS Proguard ends here
 
+#Glide Proguard starts here
+
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+
+#Glide Proguard ends here
+
 -keepattributes Exceptions, Signature, InnerClasses
 
 -keep class com.app.l_pesa.common.** { *; }
