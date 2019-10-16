@@ -85,7 +85,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var imgFileAddress      = ""
 
     private lateinit  var progressDialog: ProgressDialog
-    private  val RequestPermission = 1
+    private  val requestPermission = 1
 
     companion object {
         fun newInstance(): Fragment {
@@ -210,7 +210,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
         if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), RequestPermission)
+            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), requestPermission)
             return false
         }
 
@@ -221,7 +221,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                                             permissions: Array<String>, grantResults: IntArray) {
 
         when (requestCode) {
-            RequestPermission -> {
+            requestPermission -> {
 
                 val perms = HashMap<String, Int>()
                 perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
