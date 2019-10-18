@@ -134,7 +134,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     private fun splashLoading() {
         Handler().postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
         }, 2000)
     }
@@ -157,7 +157,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         progressBar.visibility = View.INVISIBLE
 
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         finish()
     }
 
@@ -212,7 +212,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         sharedPrefOBJ.removeShared()
         progressBar.visibility = View.INVISIBLE
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-        overridePendingTransition(R.anim.right_in,R.anim.left_out)
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         finish()
     }
 
