@@ -149,12 +149,12 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
                         swipeRefreshLayout.isRefreshing=true
 
                         val jsonObject = JsonObject()
-                        jsonObject.addProperty("employer_type",etTypeEmp.text.toString())
-                        jsonObject.addProperty("employer_name",etNameEmp.text.toString())
-                        jsonObject.addProperty("department",etDepartment.text.toString())
-                        jsonObject.addProperty("position",etPosition.text.toString())
-                        jsonObject.addProperty("employees_id_number",etId.text.toString())
-                        jsonObject.addProperty("city",etCity.text.toString())
+                        jsonObject.addProperty("employer_type",CommonMethod.removeExtraSpace(etTypeEmp.text.toString()))
+                        jsonObject.addProperty("employer_name",CommonMethod.removeExtraSpace(etNameEmp.text.toString()))
+                        jsonObject.addProperty("department",CommonMethod.removeExtraSpace(etDepartment.text.toString()))
+                        jsonObject.addProperty("position",CommonMethod.removeExtraSpace(etPosition.text.toString()))
+                        jsonObject.addProperty("employees_id_number",CommonMethod.removeExtraSpace(etId.text.toString()))
+                        jsonObject.addProperty("city",CommonMethod.removeExtraSpace(etCity.text.toString()))
 
                         val presenterEmpInfo= PresenterEmpInfo()
                         presenterEmpInfo.doChangeEmpInfo(this@ProfileEditEmpInfoActivity,jsonObject,this)

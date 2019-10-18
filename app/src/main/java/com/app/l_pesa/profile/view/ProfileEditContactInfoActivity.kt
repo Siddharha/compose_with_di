@@ -119,10 +119,10 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
                         swipeRefreshLayout.isRefreshing=true
 
                         val jsonObject = JsonObject()
-                        jsonObject.addProperty("street_address",etAddress.text.toString())
-                        jsonObject.addProperty("postal_address",etPostalAddress.text.toString())
-                        jsonObject.addProperty("city",etCity.text.toString())
-                        jsonObject.addProperty("phone_number",etMob.text.toString())
+                        jsonObject.addProperty("street_address",CommonMethod.removeExtraSpace(etAddress.text.toString()))
+                        jsonObject.addProperty("postal_address",CommonMethod.removeExtraSpace(etPostalAddress.text.toString()))
+                        jsonObject.addProperty("city",CommonMethod.removeExtraSpace(etCity.text.toString()))
+                        jsonObject.addProperty("phone_number",CommonMethod.removeExtraSpace(etMob.text.toString()))
 
                         val presenterContactInfo= PresenterContactInfo()
                         presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)

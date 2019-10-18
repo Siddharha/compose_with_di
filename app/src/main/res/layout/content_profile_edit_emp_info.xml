@@ -57,9 +57,9 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:hint="@string/type_of_emp"
                         android:inputType="text"
-                        android:maxLength="20"
+                        android:maxLength="25"
                         android:maxLines="1"
-                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789- "
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._- "
                         android:textColor="@color/textColors"
                         android:textSize="@dimen/_12sdp" />
 

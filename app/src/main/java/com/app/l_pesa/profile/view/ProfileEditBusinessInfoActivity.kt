@@ -171,10 +171,10 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
                         swipeRefreshLayout.isRefreshing=true
 
                         val jsonObject = JsonObject()
-                        jsonObject.addProperty("business_name",etBusinessName.text.toString())
-                        jsonObject.addProperty("tin_number",etBusinessTinNo.text.toString())
+                        jsonObject.addProperty("business_name",CommonMethod.removeExtraSpace(etBusinessName.text.toString()))
+                        jsonObject.addProperty("tin_number",CommonMethod.removeExtraSpace(etBusinessTinNo.text.toString()))
                         jsonObject.addProperty("id_type",idType)
-                        jsonObject.addProperty("id_number",etBusinessIdNumber.text.toString())
+                        jsonObject.addProperty("id_number",CommonMethod.removeExtraSpace(etBusinessIdNumber.text.toString()))
 
                         val presenterBusinessInfo= PresenterBusinessInfo()
                         presenterBusinessInfo.doChangeBusinessInfo(this@ProfileEditBusinessInfoActivity,jsonObject,this)
