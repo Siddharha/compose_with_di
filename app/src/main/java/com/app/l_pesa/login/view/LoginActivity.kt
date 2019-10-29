@@ -53,6 +53,8 @@ import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -246,6 +248,10 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         {
             if(CommonMethod.isNetworkAvailable(this@LoginActivity))
             {
+
+                val logger = AppEventsLogger.newLogger(this@LoginActivity)
+                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT)
+
                 progressDialog.show()
                 val sharedPrefOBJ= SharedPref(this@LoginActivity)
                 buttonLogin.isClickable   = false
