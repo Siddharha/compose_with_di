@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">L-Pesa</string>
-    <string name="facebook_app_id">770436653385979</string>
-   <!-- <string name="facebook_app_id">377266739110350</string>-->
+ <!--   <string name="facebook_app_id">770436653385979</string>-->
+   <string name="facebook_app_id">377266739110350</string>
     <string name="starter_loan"> $1 Starter Loan</string>
     <string name="l_pesa_risk_free">The L-Pesa Risk Free</string>
     <string name="sign_in">Sign In</string>
