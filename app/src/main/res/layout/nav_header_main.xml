@@ -19,6 +19,7 @@
           app:civ_background_color="@android:color/white"
           app:civ_border_color="@color/colorAppDeep"
           app:civ_shadow="false"
+          android:background="@drawable/ic_user"
           android:contentDescription="@string/app_name"
           android:layout_centerInParent="true"
           android:layout_alignParentStart="true"
