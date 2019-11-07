@@ -109,7 +109,7 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
         }
 
-        bitmart.setOnClickListener {
+        constraintTreading.setOnClickListener {
 
             val openBitMart: Intent?
             val manager = activity?.packageManager
