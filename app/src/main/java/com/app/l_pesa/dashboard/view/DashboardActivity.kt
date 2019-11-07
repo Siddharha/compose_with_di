@@ -139,6 +139,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         alert.setTitle(resources.getString(R.string.app_name))
         alert.show()
 
+
+
     }
 
 
@@ -488,7 +490,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     {
         if(CommonMethod.isNetworkAvailable(this@DashboardActivity))
         {
-
             progressDialog.show()
             val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
             val jsonObject  = JsonObject()
@@ -644,8 +645,6 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             {
                 currentFragment.loadProfileInfo(false)
                 sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
-
-
             }
 
         }

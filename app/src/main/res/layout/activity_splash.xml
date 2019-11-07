@@ -14,7 +14,6 @@
             android:src="@drawable/lpesa_logo"
             android:contentDescription="@string/app_name"
             android:layout_centerInParent="true"
-
             />
 
         <com.app.l_pesa.common.CommonTextRegular

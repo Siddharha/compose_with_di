@@ -287,10 +287,10 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
+                println("JSON+"+jsonObject)
+
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
-
-
 
             }
             else
@@ -301,6 +301,10 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
 
     }
+
+
+
+
 
     override fun onSuccessLogin(data: PinData) {
 

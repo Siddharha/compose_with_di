@@ -53,7 +53,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
     private lateinit var adapterInvestmentHistory     : InvestmentHistoryAdapter
     private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
 
-    private var hasNext=false
+    private var hasNext =false
     private var after=""
 
     companion object {
@@ -92,7 +92,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
         listInvestment               = ArrayList()
         adapterInvestmentHistory     = InvestmentHistoryAdapter(activity!!, listInvestment,this)
         bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
-        bottomSheetBehavior.isHideable=true
+        bottomSheetBehavior.isHideable = true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         initLoader()
@@ -147,14 +147,14 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
         if(switchInvestment.isChecked)
         {
-            userDashBoard.savingInvestAutoStatus=1
+            userDashBoard.savingInvestAutoStatus = 1
             val json = Gson().toJson(userDashBoard)
             sharedPrefOBJ.userDashBoard      = json
 
         }
         else
         {
-            userDashBoard.savingInvestAutoStatus=0
+            userDashBoard.savingInvestAutoStatus = 0
             val json = Gson().toJson(userDashBoard)
             sharedPrefOBJ.userDashBoard      = json
         }
@@ -538,12 +538,10 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
                 bottomSheetBehavior.state =(BottomSheetBehavior.STATE_EXPANDED)
                 resetFilter()
-
             }
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         }
-
 
         etFromDate.setOnClickListener {
 

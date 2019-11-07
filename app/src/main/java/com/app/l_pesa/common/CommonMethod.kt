@@ -92,7 +92,7 @@ object CommonMethod {
         val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_error, null)
         (snackBarOBJ.view as ViewGroup).addView(customView)
 
-        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+        val txtTitle= customView.findViewById(R.id.txtTitle) as CommonTextRegular
 
         txtTitle.text = message
 

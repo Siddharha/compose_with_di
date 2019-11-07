@@ -15,7 +15,6 @@ import retrofit2.HttpException
 
 class PresenterLogout {
 
-
     @SuppressLint("CheckResult")
     fun doLogout(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogout)
     {

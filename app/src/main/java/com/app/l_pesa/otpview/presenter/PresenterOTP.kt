@@ -45,6 +45,7 @@ class PresenterOTP {
                         val jsonMessage = jsonStatus.getString("message")
 
                         callBackOBJ.onErrorVerifyOTP(jsonMessage)
+
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
                         callBackOBJ.onErrorVerifyOTP(errorMessageOBJ)

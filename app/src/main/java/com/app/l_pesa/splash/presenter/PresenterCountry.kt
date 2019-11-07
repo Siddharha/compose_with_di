@@ -24,12 +24,10 @@ class PresenterCountry{
                     responseBody
                 }
                 .subscribe({ response ->
-
                     try
                     {
                         if(response.data.countries_list.size>0)
                         {
-
                             callBackOBJ.onSuccessCountry(response.data)
                         }
                         else

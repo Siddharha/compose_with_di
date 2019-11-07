@@ -16,6 +16,8 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 
 class CountryListAdapter(val context: Context,private var countryList: ArrayList<ResModelCountryList>, private val dialogOBJ: Dialog,private val callBackOBJ:ICallBackCountryList) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
@@ -45,7 +47,8 @@ class CountryListAdapter(val context: Context,private var countryList: ArrayList
 
     override fun getItemCount(): Int = countryList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
+    {
 
         val recyclerView: RecyclerView.ViewHolder
 

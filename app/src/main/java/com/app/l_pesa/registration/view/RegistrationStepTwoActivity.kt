@@ -46,11 +46,11 @@ import kotlin.collections.set
 
 class RegistrationStepTwoActivity : AppCompatActivity() {
 
-    private lateinit var progressDialog : ProgressDialog
-    private val  requestPhoto               = 12
-    private var  captureImageStatus         : Boolean    = false
-    private lateinit var photoFile          : File
-    private lateinit var captureFilePath    : Uri
+    private lateinit var progressDialog: ProgressDialog
+    private val requestPhoto = 12
+    private var captureImageStatus: Boolean = false
+    private lateinit var photoFile: File
+    private lateinit var captureFilePath: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,44 +62,37 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         initLoader()
         imageProfile.setOnClickListener {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                if(checkAndRequestPermissions())
-                {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (checkAndRequestPermissions()) {
                     initCamera()
-                }
-                else
-                {
+                } else {
                     checkAndRequestPermissions()
                 }
-            }
-            else{
+            } else {
                 initCamera()
             }
         }
 
         buttonContinue.setOnClickListener {
 
-           if(captureImageStatus)
-           {
-               progressDialog.show()
-               Handler().postDelayed({
-                   dismiss()
-                   val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java)
-                   startActivity(intent)
-                   overridePendingTransition(R.anim.right_in, R.anim.left_out)
-               }, 2000)
+            if (captureImageStatus) {
+                progressDialog.show()
+                Handler().postDelayed({
+                    dismiss()
+                    val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                }, 2000)
 
-           }
-            else
-           {
-               CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepTwoActivity, resources.getString(R.string.required_profile_image))
-           }
+            } else {
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepTwoActivity, resources.getString(R.string.required_profile_image))
+            }
         }
 
     }
 
 
-    private fun initCamera(){
+    private fun initCamera() {
 
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
@@ -126,11 +119,10 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
+        when (requestCode) {
             requestPhoto ->
 
-                if (resultCode == Activity.RESULT_OK)
-                {
+                if (resultCode == Activity.RESULT_OK) {
                     setImage()
                 }
 
@@ -139,30 +131,25 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private fun setImage() {
 
-        val photoPath: Uri  = captureFilePath
+        val photoPath: Uri = captureFilePath
         try {
-            if(photoPath!=Uri.EMPTY)
-            {
-                    progressDialog.show()
-                    handleRotation(photoFile.absolutePath)
-                    Handler().postDelayed({
+            if (photoPath != Uri.EMPTY) {
+                progressDialog.show()
+                handleRotation(photoFile.absolutePath)
+                Handler().postDelayed({
                     dismiss()
                     imageProfile.setImageURI(null)
                     imageProfile.setImageURI(photoPath)
-                    captureImageStatus       = true
-                    val sharedPref=SharedPref(this@RegistrationStepTwoActivity)
-                    sharedPref.imagePath=photoFile.absolutePath
+                    captureImageStatus = true
+                    val sharedPref = SharedPref(this@RegistrationStepTwoActivity)
+                    sharedPref.imagePath = photoFile.absolutePath
                 }, 1000)
-            }
-            else
-            {
-                Toast.makeText(this@RegistrationStepTwoActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this@RegistrationStepTwoActivity, "Retake Photo", Toast.LENGTH_SHORT).show()
             }
 
-        }
-        catch (exp:Exception)
-        {
-            Toast.makeText(this@RegistrationStepTwoActivity,"Retake Photo", Toast.LENGTH_SHORT).show()
+        } catch (exp: Exception) {
+            Toast.makeText(this@RegistrationStepTwoActivity, "Retake Photo", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -219,10 +206,9 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     }
 
 
-    private fun initLoader()
-    {
-        progressDialog = ProgressDialog(this@RegistrationStepTwoActivity,R.style.MyAlertDialogStyle)
-        val message=   SpannableString(resources.getString(R.string.saving))
+    private fun initLoader() {
+        progressDialog = ProgressDialog(this@RegistrationStepTwoActivity, R.style.MyAlertDialogStyle)
+        val message = SpannableString(resources.getString(R.string.saving))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
@@ -234,18 +220,16 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     }
 
-    private fun dismiss()
-    {
-        if(progressDialog.isShowing)
-        {
+    private fun dismiss() {
+        if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
     }
 
     private fun checkAndRequestPermissions(): Boolean {
 
-        val permissionCamera        = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, Manifest.permission.CAMERA)
-        val permissionStorage       = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permissionCamera = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, Manifest.permission.CAMERA)
+        val permissionStorage = ContextCompat.checkSelfPermission(this@RegistrationStepTwoActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
         val listPermissionsNeeded = ArrayList<String>()
 
@@ -259,8 +243,6 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
             return false
         }
-
-
         return true
     }
 
@@ -271,14 +253,14 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
             REQUEST_ID_PERMISSIONS -> {
 
                 val perms = HashMap<String, Int>()
-                perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
-                perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]   = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.CAMERA] = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.WRITE_EXTERNAL_STORAGE] = PackageManager.PERMISSION_GRANTED
 
                 if (grantResults.isNotEmpty()) {
                     for (i in permissions.indices)
                         perms[permissions[i]] = grantResults[i]
-                        if (perms[Manifest.permission.CAMERA]                       == PackageManager.PERMISSION_GRANTED
-                            && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]    == PackageManager.PERMISSION_GRANTED) {
+                    if (perms[Manifest.permission.CAMERA] == PackageManager.PERMISSION_GRANTED
+                            && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE] == PackageManager.PERMISSION_GRANTED) {
 
                         initCamera()
                     } else {
@@ -306,7 +288,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(this@RegistrationStepTwoActivity,R.style.MyAlertDialogTheme)
+        AlertDialog.Builder(this@RegistrationStepTwoActivity, R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -315,7 +297,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(this@RegistrationStepTwoActivity,R.style.MyAlertDialogTheme)
+        val dialog = AlertDialog.Builder(this@RegistrationStepTwoActivity, R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
@@ -326,10 +308,9 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     companion object {
 
-        private const  val REQUEST_ID_PERMISSIONS = 1
+        private const val REQUEST_ID_PERMISSIONS = 1
 
     }
-
 
 
     private fun toolbarFont(context: Activity) {
@@ -358,6 +339,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)

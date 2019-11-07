@@ -9,8 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        >
+        android:theme="@style/AppTheme.AppBarOverlay">
 
 
         <androidx.appcompat.widget.Toolbar
@@ -25,20 +24,20 @@
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/txtCountry"
-                android:visibility="invisible"
-                android:contentDescription="@string/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:gravity="center"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:textColor="@color/colorWhite"
-                android:focusable="true"
-                android:textSize="@dimen/_10sdp"
-                android:textAllCaps="true"
+                android:contentDescription="@string/app_name"
                 android:drawableEnd="@drawable/ic_dropdown_white_icon"
                 android:drawablePadding="@dimen/_2sdp"
+                android:focusable="true"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
+                android:visibility="invisible"
 
                 />
 
@@ -48,161 +47,156 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
- <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:id="@+id/rootLayout"
-    android:layout_height="match_parent"
-    android:background="@color/colorWhite"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    >
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_75sdp"
-        android:layout_height="@dimen/_75sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_app_logo" />
-
-    <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txtHeader"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/sign_in"
-        android:gravity="center"
-        android:textColor="@color/colorTextBlack"
-        android:textSize="@dimen/_16sdp"
-        android:textStyle="bold"
-        android:padding="@dimen/_2sdp"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tilPhone"
-
-        />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/tilPhone"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        >
-        <com.app.l_pesa.common.CommonInputLayout
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            style="@style/customInputLayoutStyle"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:contentDescription="@string/app_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_app_logo" />
+
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:text="@string/sign_in"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tilPhone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+
+            />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/tilPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtHeader">
 
-            >
-
-            <com.app.l_pesa.common.PrefixEditText
-                android:id="@+id/etPhone"
+            <com.app.l_pesa.common.CommonInputLayout
+                style="@style/customInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:maxLength="15"
-                android:maxLines="1"
-                android:inputType="numberPassword"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_2sdp"
-                android:hint="@string/phone_no"
-                android:cursorVisible="true"
-                android:focusable="true"
-                android:longClickable="false"
-                android:textIsSelectable="false"
-                android:textColorHint="@color/color_gray_text"
-                android:textColor="@color/textColors"
-                android:textSize="@dimen/_12sdp" />
+                android:layout_height="wrap_content">
 
-        </com.app.l_pesa.common.CommonInputLayout>
+                <com.app.l_pesa.common.PrefixEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:cursorVisible="true"
+                    android:focusable="true"
+                    android:hint="@string/phone_no"
+                    android:inputType="numberPassword"
+                    android:longClickable="false"
+                    android:maxLength="15"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_2sdp"
+                    android:textColor="@color/textColors"
+                    android:textColorHint="@color/color_gray_text"
+                    android:textIsSelectable="false"
+                    android:textSize="@dimen/_12sdp" />
 
-    </androidx.core.widget.NestedScrollView>
+            </com.app.l_pesa.common.CommonInputLayout>
 
-    <com.app.l_pesa.common.CustomButtonRegular
-        android:id="@+id/buttonLogin"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:background="@drawable/bg_button_app"
-        android:fontFamily="@font/montserrat"
-        android:text="@string/login"
-        android:textAllCaps="true"
-        android:textSize="@dimen/_12sdp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        app:layout_constraintBottom_toTopOf="@+id/txtForgotPin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilPhone" />
+        </androidx.core.widget.NestedScrollView>
 
-    <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txtForgotPin"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:padding="@dimen/_2sdp"
-        android:text="@string/forgot_pin"
-        android:textSize="@dimen/_12sdp"
-        android:textColorHighlight="@android:color/white"
-        android:textColorLink="@color/colorAppDeep"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/colorSemiBlack"
-        app:layout_constraintBottom_toTopOf="@+id/txtRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+        <com.app.l_pesa.common.CustomButtonRegular
+            android:id="@+id/buttonLogin"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/bg_button_app"
+            android:fontFamily="@font/montserrat"
+            android:text="@string/login"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/txtForgotPin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tilPhone" />
 
-    <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/txtRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/_2sdp"
-        android:textSize="@dimen/_12sdp"
-        android:textColorHighlight="@android:color/white"
-        android:textColorLink="@color/colorAppDeep"
-        android:text="@string/create_account"
-        android:textColor="@color/colorSemiBlack"
-        android:fontFamily="@font/montserrat"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLoanCalculator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtForgotPin" />
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtForgotPin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:text="@string/forgot_pin"
+            android:textColor="@color/colorSemiBlack"
+            android:textColorHighlight="@android:color/white"
+            android:textColorLink="@color/colorAppDeep"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toTopOf="@+id/txtRegister"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
-    <com.app.l_pesa.common.CustomButtonRegular
-        android:id="@+id/buttonLoanCalculator"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/calculate_your_loan"
-        android:background="@drawable/yellow_button"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/montserrat"
-        android:textAllCaps="true"
-        android:textSize="@dimen/_12sdp"
-        android:textStyle="bold"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegister" />
+        <com.app.l_pesa.common.CommonTextRegular
+            android:id="@+id/txtRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:padding="@dimen/_2sdp"
+            android:text="@string/create_account"
+            android:textColor="@color/colorSemiBlack"
+            android:textColorHighlight="@android:color/white"
+            android:textColorLink="@color/colorAppDeep"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonLoanCalculator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtForgotPin" />
 
+        <com.app.l_pesa.common.CustomButtonRegular
+            android:id="@+id/buttonLoanCalculator"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/yellow_button"
+            android:fontFamily="@font/montserrat"
+            android:gravity="center"
+            android:text="@string/calculate_your_loan"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtRegister" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

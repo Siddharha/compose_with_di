@@ -51,7 +51,7 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
             shimmerLayout.startShimmerAnimation()
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
-            val presenterLoanPlans= PresenterLoanPlans()
+            val presenterLoanPlans = PresenterLoanPlans()
             presenterLoanPlans.doLoanPlans(activity!!,jsonObject,this)
         }
         else
