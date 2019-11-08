@@ -53,6 +53,8 @@ import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
@@ -290,6 +292,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
     @SuppressLint("SimpleDateFormat")
     private fun uploadData(imageURL: String)
     {
+        val logger = AppEventsLogger.newLogger(this@ProfileEditPersonalActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Edit Personal")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         var gender="M"
         gender = if(radioMale.isChecked) {
             "M"

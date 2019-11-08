@@ -29,6 +29,8 @@ import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.JsonObject
@@ -315,6 +317,12 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
 
     override fun onClickList() {
+
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Business Loan History")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         val bundle = Bundle()
         bundle.putString("LOAN_TYPE","business_loan")
         val intent = Intent(activity, LoanHistoryDetailsActivity::class.java)

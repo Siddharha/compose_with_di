@@ -22,6 +22,8 @@ import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackEmpInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterEmpInfo
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -144,6 +146,12 @@ class ProfileEditEmpInfoActivity : AppCompatActivity(), ICallBackEmpInfo {
                 {
                     if(CommonMethod.isNetworkAvailable(this@ProfileEditEmpInfoActivity))
                     {
+                        val logger = AppEventsLogger.newLogger(this@ProfileEditEmpInfoActivity)
+                        val params =  Bundle()
+                        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Edit Emp Info Section")
+                        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
+
                         buttonSubmit.isClickable=false
                         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                         swipeRefreshLayout.isRefreshing=true

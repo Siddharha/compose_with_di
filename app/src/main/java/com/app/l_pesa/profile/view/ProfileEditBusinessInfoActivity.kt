@@ -24,6 +24,8 @@ import com.app.l_pesa.profile.inter.ICallBackBusinessInfo
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterBusinessInfo
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -166,6 +168,12 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
                 {
                     if(CommonMethod.isNetworkAvailable(this@ProfileEditBusinessInfoActivity))
                     {
+                        val logger = AppEventsLogger.newLogger(this@ProfileEditBusinessInfoActivity)
+                        val params =  Bundle()
+                        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Edit Business Info Section")
+                        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
+
                         buttonSubmit.isClickable=false
                         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                         swipeRefreshLayout.isRefreshing=true
