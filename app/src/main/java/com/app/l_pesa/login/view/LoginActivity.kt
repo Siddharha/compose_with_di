@@ -251,9 +251,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
                 val logger = AppEventsLogger.newLogger(this@LoginActivity)
                 val params =  Bundle()
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, resources.getString(R.string.app_name))
-                params.putString(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, "Login")
-                logger.logEvent(AppEventsConstants.EVENT_NAME_SEARCHED, params)
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Login")
+                logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
                 progressDialog.show()
                 val sharedPrefOBJ= SharedPref(this@LoginActivity)

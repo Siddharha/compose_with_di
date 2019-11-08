@@ -36,6 +36,8 @@ import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.registration.inter.ICallBackRegisterThree
 import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_registration_step_five.*
@@ -266,6 +268,12 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     }
 
     override fun onSuccessRegistrationThree() {
+
+        val logger = AppEventsLogger.newLogger(this@RegistrationStepFiveActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_REGISTRATION_METHOD, "Registration")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION, params)
+
         dismiss()
         Toast.makeText(this@RegistrationStepFiveActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_LONG).show()
         startActivity(Intent(this@RegistrationStepFiveActivity, LoginActivity::class.java))

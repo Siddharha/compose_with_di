@@ -24,6 +24,8 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackLoginPin
 import com.app.l_pesa.pin.presenter.PresenterPassword
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_change_login_pin.*
@@ -117,6 +119,11 @@ class ChangeLoginPinActivity : AppCompatActivity(), ICallBackLoginPin {
             progressBar.visibility      = View.VISIBLE
             if(CommonMethod.isNetworkAvailable(this@ChangeLoginPinActivity))
             {
+                val logger = AppEventsLogger.newLogger(this@ChangeLoginPinActivity)
+                val params =  Bundle()
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Change Login Pin")
+                logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                 val jsonObject = JsonObject()
                 jsonObject.addProperty("old_pin",etCurrentPin.text.toString())
                 jsonObject.addProperty("new_pin",etNewPin.text.toString())

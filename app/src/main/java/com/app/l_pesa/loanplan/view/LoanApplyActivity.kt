@@ -41,6 +41,8 @@ import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
@@ -66,6 +68,11 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanApplyActivity)
+
+        val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Apply")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         locationWork()
         initData()
@@ -202,6 +209,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loanApply()
     {
+        val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
+        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION)
+
         val shared=SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()

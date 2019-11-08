@@ -19,6 +19,8 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import kotlinx.android.synthetic.main.activity_loan_plan_details.*
 import kotlinx.android.synthetic.main.content_loan_plan_details.*
 import java.text.DecimalFormat
@@ -42,6 +44,11 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
+        val logger = AppEventsLogger.newLogger(this@LoanPlanDetailsActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Plan Details")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 

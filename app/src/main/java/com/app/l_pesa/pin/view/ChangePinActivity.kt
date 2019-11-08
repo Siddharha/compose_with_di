@@ -20,6 +20,8 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackPin
 import com.app.l_pesa.pin.presenter.PresenterPin
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_change_pin.*
 import kotlinx.android.synthetic.main.content_change_pin.*
@@ -71,6 +73,11 @@ class ChangePinActivity : AppCompatActivity(), ICallBackPin {
             {
                 if(CommonMethod.isNetworkAvailable(this@ChangePinActivity))
                 {
+                    val logger = AppEventsLogger.newLogger(this@ChangePinActivity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Change Pin")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     progressBar.visibility=View.VISIBLE
                     buttonSubmit.isClickable=false
                     hideKeyboardView(this@ChangePinActivity)

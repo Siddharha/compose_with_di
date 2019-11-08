@@ -22,6 +22,8 @@ import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import com.app.l_pesa.loanHistory.presenter.PresenterPaybackSchedule
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_payback_scheduled.*
 import kotlinx.android.synthetic.main.content_loan_payback_scheduled.*
@@ -121,6 +123,12 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     private fun initLoad()
     {
+        val logger = AppEventsLogger.newLogger(this@LoanPaybackScheduledActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Payback Schedule")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
+
         swipeRefreshLayout.isRefreshing = true
         val bundle     = intent.extras
         val loanType   = bundle!!.getString("LOAN_TYPE")
