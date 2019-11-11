@@ -123,11 +123,6 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     private fun initLoad()
     {
-        val logger = AppEventsLogger.newLogger(this@LoanPaybackScheduledActivity)
-        val params =  Bundle()
-        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Payback Schedule")
-        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
-
 
         swipeRefreshLayout.isRefreshing = true
         val bundle     = intent.extras
@@ -139,6 +134,12 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         jsonObject.addProperty("loan_id",loanId)
 
         //println("JSON"+jsonObject)
+
+        val logger = AppEventsLogger.newLogger(this@LoanPaybackScheduledActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, loanId)
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Payback Schedule")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)

@@ -111,6 +111,11 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Business Loan History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing = true
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")

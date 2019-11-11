@@ -23,6 +23,8 @@ import com.app.l_pesa.help.model.HelpData
 import com.app.l_pesa.main.view.MainActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_help.*
 import kotlinx.android.synthetic.main.content_help.*
@@ -68,6 +70,11 @@ class HelpActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
+        val logger = AppEventsLogger.newLogger(this@HelpActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Help Section")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         val sharedPrefOBJ= SharedPref(this@HelpActivity)
         txtCountry.text = sharedPrefOBJ.countryName
 

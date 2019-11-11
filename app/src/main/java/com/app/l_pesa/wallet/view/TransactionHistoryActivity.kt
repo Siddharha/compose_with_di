@@ -23,6 +23,8 @@ import com.app.l_pesa.wallet.adapter.TransactionAllAdapter
 import com.app.l_pesa.wallet.inter.ICallBackTransaction
 import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_transaction_history.*
 import kotlinx.android.synthetic.main.content_transaction_history.*
@@ -76,6 +78,11 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         if(CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
         {
+            val logger = AppEventsLogger.newLogger(this@TransactionHistoryActivity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Transaction History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing=true
             val presenterTransactionAll= PresenterTransactionAll()
             presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,from_date,to_date,type,this)

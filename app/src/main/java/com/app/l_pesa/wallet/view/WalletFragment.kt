@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
@@ -25,18 +26,20 @@ import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.wallet.inter.ICallBackWallet
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawal
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_wallet.*
 import java.text.DecimalFormat
 
 
-class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallBackInfoLPK {
+class WalletFragment : Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
 
     private lateinit  var progressDialog: ProgressDialog
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return WalletFragment()
         }
     }
@@ -80,6 +83,10 @@ class WalletFragment : androidx.fragment.app.Fragment(), ICallBackWallet, ICallB
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Wallet Information")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
             progressDialog.show()
 
             Thread(Runnable {

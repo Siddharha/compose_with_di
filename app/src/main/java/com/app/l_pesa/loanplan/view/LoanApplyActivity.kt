@@ -69,11 +69,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanApplyActivity)
 
-        val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
-        val params =  Bundle()
-        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Apply")
-        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
-
         locationWork()
         initData()
 
@@ -123,10 +118,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun initData()
     {
-         val bundle  = intent.extras
-         productId   = bundle!!.getString("PRODUCT_ID")!!
-         loanType    = bundle.getString("LOAN_TYPE")!!
-
+        val bundle  = intent.extras
+        productId   = bundle!!.getString("PRODUCT_ID")!!
+        loanType    = bundle.getString("LOAN_TYPE")!!
 
         initTimer()
         initLoader()
@@ -209,8 +203,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loanApply()
     {
-        val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
-        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION)
+
 
         val shared=SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
@@ -230,6 +223,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         jsonObject.addProperty("latitude",shared.currentLat)
         jsonObject.addProperty("longitude",shared.currentLng)
 
+        val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
+        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION)
 
         val presenterLoanApply= PresenterLoanApply()
         presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)

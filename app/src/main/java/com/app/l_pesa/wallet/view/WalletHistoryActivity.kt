@@ -23,6 +23,8 @@ import com.app.l_pesa.wallet.adapter.WalletHistoryAdapter
 import com.app.l_pesa.wallet.inter.ICallBackWalletWithdrawalHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawalHistory
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_wallet_history.*
 import kotlinx.android.synthetic.main.content_wallet_history.*
@@ -85,6 +87,11 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
+            val logger = AppEventsLogger.newLogger(this@WalletHistoryActivity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Wallet History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory=PresenterWithdrawalHistory()
             presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,from_date,to_date,type,this)

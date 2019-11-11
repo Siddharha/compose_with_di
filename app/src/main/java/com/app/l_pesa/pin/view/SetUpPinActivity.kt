@@ -20,6 +20,8 @@ import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pin.inter.ICallBackSetPin
 import com.app.l_pesa.pin.presenter.PresenterPin
 import com.app.l_pesa.pinview.model.LoginData
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_set_up_pin.*
@@ -70,6 +72,11 @@ class SetUpPinActivity : AppCompatActivity(), ICallBackSetPin {
             {
                 if(CommonMethod.isNetworkAvailable(this@SetUpPinActivity))
                 {
+                    val logger = AppEventsLogger.newLogger(this@SetUpPinActivity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Change Transaction Pin")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     buttonSubmit.isClickable=false
                     hideKeyboardView(this@SetUpPinActivity)
                     swipeRefreshLayout.isRefreshing=true

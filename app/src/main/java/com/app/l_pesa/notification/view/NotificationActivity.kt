@@ -21,6 +21,8 @@ import com.app.l_pesa.notification.adapter.AdapterNotification
 import com.app.l_pesa.notification.inter.ICallBackNotification
 import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.notification.presenter.PresenterNotification
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.content_notification.*
 import java.util.*
@@ -59,6 +61,11 @@ class NotificationActivity : AppCompatActivity(), ICallBackNotification {
     {
         listNotificationHistory = ArrayList()
         adapterNotification     = AdapterNotification(this@NotificationActivity, listNotificationHistory)
+
+        val logger = AppEventsLogger.newLogger(this@NotificationActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Notification Section")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         if(CommonMethod.isNetworkAvailable(this@NotificationActivity))
         {

@@ -26,6 +26,8 @@ import com.app.l_pesa.otpview.inter.ICallBackVerifyOTP
 import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.otpview.presenter.PresenterOTP
 import com.app.l_pesa.pinview.view.PinSetActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_otp.*
@@ -76,6 +78,11 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
                 if(CommonMethod.isNetworkAvailable(this@OTPActivity))
                 {
+                    val logger = AppEventsLogger.newLogger(this@OTPActivity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "OTP Resend")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     progressDialog.show()
                     val sharedPrefOBJ= SharedPref(this@OTPActivity)
                     val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
@@ -174,6 +181,11 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
             val sharedPrefOBJ= SharedPref(this@OTPActivity)
             val modelDevice = Gson().fromJson<PinData>(sharedPrefOBJ.deviceInfo, PinData::class.java)
+
+            val logger = AppEventsLogger.newLogger(this@OTPActivity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "OTP Set")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
 
             val jsonObjectDeviceInfo = JsonObject()

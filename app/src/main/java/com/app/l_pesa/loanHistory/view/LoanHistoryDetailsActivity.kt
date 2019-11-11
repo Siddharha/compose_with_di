@@ -54,7 +54,9 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
 
         val logger = AppEventsLogger.newLogger(this@LoanHistoryDetailsActivity)
         val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, loanHistoryData?.loan_id.toString())
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan History Details")
+        params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY, loanHistoryData?.currency_code)
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount

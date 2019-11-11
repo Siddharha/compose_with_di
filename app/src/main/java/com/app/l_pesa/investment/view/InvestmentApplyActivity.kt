@@ -23,6 +23,8 @@ import com.app.l_pesa.investment.inter.ICallBackLoanPlanList
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterApplyInvestment
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_investment_apply.*
@@ -87,6 +89,14 @@ class InvestmentApplyActivity : AppCompatActivity(), ICallBackLoanPlanList {
             {
                 if(CommonMethod.isNetworkAvailable(this@InvestmentApplyActivity))
                 {
+
+                    val logger = AppEventsLogger.newLogger(this@InvestmentApplyActivity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, investmentPlanId.toString())
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Apply Investment")
+                    params.putString(AppEventsConstants.EVENT_PARAM_VALUE_TO_SUM, etAmount.text.toString())
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                     swipeRefreshLayout.isRefreshing=true
                     buttonDeposit.isClickable=false

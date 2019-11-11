@@ -37,10 +37,15 @@ import com.app.l_pesa.investment.presenter.*
 import com.app.l_pesa.lpk.inter.ICallBackInvestmentStatus
 import com.app.l_pesa.lpk.presenter.PresenterInvestmentStatus
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.content_investment_apply.*
 import kotlinx.android.synthetic.main.fragment_investment_history.*
+import kotlinx.android.synthetic.main.fragment_investment_history.rootLayout
+import kotlinx.android.synthetic.main.fragment_investment_history.swipeRefreshLayout
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 
@@ -99,6 +104,11 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Investment History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing = true
             val presenterInvestmentHistory= PresenterInvestmentHistory()
             presenterInvestmentHistory.getInvestmentHistory(activity!!,from_date,to_date,type,this)
