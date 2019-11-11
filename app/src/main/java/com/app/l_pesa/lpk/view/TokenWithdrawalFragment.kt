@@ -21,6 +21,8 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.inter.ICallBackTokenWithdrawal
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterTokenWithdrawal
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_token_withdrawal.*
@@ -79,6 +81,11 @@ class TokenWithdrawalFragment: Fragment(), ICallBackTokenWithdrawal {
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
+                    val logger = AppEventsLogger.newLogger(activity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Token Withdrawal")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     progressDialog.show()
                     buttonSubmit.isClickable=false
                     CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)

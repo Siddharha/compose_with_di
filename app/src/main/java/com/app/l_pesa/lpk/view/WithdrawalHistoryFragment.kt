@@ -14,6 +14,8 @@ import com.app.l_pesa.lpk.adapter.AdapterWithdrawalHistory
 import com.app.l_pesa.lpk.inter.ICallBackWithdrawalHistory
 import com.app.l_pesa.lpk.model.ResWithdrawalHistory
 import com.app.l_pesa.lpk.presenter.PresenterWithdrawalHistory
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_withdrawal_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
@@ -58,6 +60,11 @@ class WithdrawalHistoryFragment: Fragment() , ICallBackWithdrawalHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Withdrawal History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory= PresenterWithdrawalHistory()
             presenterWithdrawalHistory.getWithdrawalHistory(activity!!,from_date,to_date,type,this)

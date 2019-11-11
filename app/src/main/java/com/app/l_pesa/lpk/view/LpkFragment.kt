@@ -26,6 +26,8 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_lpk.*
 import android.content.pm.PackageManager
 import android.net.Uri
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 
 
 class LpkFragment: Fragment(), ICallBackInfoLPK {
@@ -73,6 +75,10 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
             (activity as DashboardActivity).visibleButton(false)
         }, 200)
 
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "LPK Section")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         constraintWithdrawal.setOnClickListener {
 
