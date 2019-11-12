@@ -184,10 +184,15 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
             }
 
-
         }
         else
         {
+            try {
+                CommonMethod.hideKeyboardView(this@LoanApplyActivity)
+            } catch (exp: Exception) {
+
+            }
+
             CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.no_internet))
         }
     }
