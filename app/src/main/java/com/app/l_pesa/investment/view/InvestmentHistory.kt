@@ -42,10 +42,7 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.content_investment_apply.*
 import kotlinx.android.synthetic.main.fragment_investment_history.*
-import kotlinx.android.synthetic.main.fragment_investment_history.rootLayout
-import kotlinx.android.synthetic.main.fragment_investment_history.swipeRefreshLayout
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
 

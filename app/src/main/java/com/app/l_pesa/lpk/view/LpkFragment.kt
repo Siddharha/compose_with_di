@@ -2,7 +2,9 @@ package com.app.l_pesa.lpk.view
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.Spannable
@@ -22,12 +24,10 @@ import com.app.l_pesa.lpk.inter.ICallBackInfoLPK
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.main.view.MainActivity
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_lpk.*
-import android.content.pm.PackageManager
-import android.net.Uri
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_lpk.*
 
 
 class LpkFragment: Fragment(), ICallBackInfoLPK {
