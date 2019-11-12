@@ -142,6 +142,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             else if(loanPurpose=="Others" && TextUtils.isEmpty(etDescription.text.toString()))
             {
                 etDescription.requestFocus()
+                hideKeyboard()
                 CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose_description))
             }
             else
@@ -157,9 +158,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         }
 
-
     }
-
 
 
     private fun applyLoan()
@@ -187,13 +186,17 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
         else
         {
-            try {
-                CommonMethod.hideKeyboardView(this@LoanApplyActivity)
-            } catch (exp: Exception) {
-
-            }
-
+            hideKeyboard()
             CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.no_internet))
+        }
+    }
+
+    private fun hideKeyboard()
+    {
+        try {
+            CommonMethod.hideKeyboardView(this@LoanApplyActivity)
+        } catch (exp: Exception) {
+
         }
     }
 
