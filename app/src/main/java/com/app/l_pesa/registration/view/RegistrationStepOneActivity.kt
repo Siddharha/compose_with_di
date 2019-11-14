@@ -474,6 +474,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
                 }
             }
         }
+       // toolbar.setTitleTextAppearance(context,R.style.ToolBarTextAppearance)
     }
 
     public override fun onResume() {
