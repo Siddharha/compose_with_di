@@ -640,13 +640,18 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val currentFragment =this@DashboardActivity.supportFragmentManager.findFragmentById(R.id.frame)
         if(currentFragment is ProfileFragment)
         {
+
             if(sharedPrefOBJ.profileUpdate==resources.getString(R.string.status_true))
             {
-                currentFragment.loadProfileInfo(false)
-                sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
+                 Handler().postDelayed({
+                    toolbar.title =resources.getString(R.string.nav_item_profile)
+                    navigateToFragment(ProfileFragment.newInstance())
+                    sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
+                }, 200)
 
 
             }
+
 
         }
         else if(currentFragment is DashboardFragment)
