@@ -641,15 +641,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if(currentFragment is ProfileFragment)
         {
 
-            if(sharedPrefOBJ.profileUpdate==resources.getString(R.string.status_true))
-            {
-                 Handler().postDelayed({
-                    toolbar.title =resources.getString(R.string.nav_item_profile)
-                    navigateToFragment(ProfileFragment.newInstance())
-                    sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_false)
-                }, 200)
+            if(sharedPrefOBJ.profileUpdate==resources.getString(R.string.status_true)) {
+                runOnUiThread {
+                        toolbar.title = resources.getString(R.string.nav_item_profile)
+                        navigateToFragment(ProfileFragment.newInstance())
+                        sharedPrefOBJ.profileUpdate = resources.getString(R.string.status_false)
 
-
+                }
             }
 
 

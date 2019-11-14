@@ -553,6 +553,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         dismiss()
         val sharedPref=SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
+        sharedPref.profileUpdate=resources.getString(R.string.status_true)
         val intent = Intent(activity!!, DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)

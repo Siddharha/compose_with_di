@@ -83,7 +83,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
     private lateinit  var captureFilePath    : Uri
 
     private lateinit  var progressDialog: ProgressDialog
-    private  val RequestPermission = 1
+    private val requestPermission = 1
 
     companion object {
         fun newInstance(): Fragment {
@@ -208,7 +208,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
         if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), RequestPermission)
+            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), requestPermission)
             return false
         }
 
@@ -219,7 +219,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
                                             permissions: Array<String>, grantResults: IntArray) {
 
         when (requestCode) {
-            RequestPermission -> {
+            requestPermission -> {
 
                 val perms = HashMap<String, Int>()
                 perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
@@ -505,6 +505,7 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         dismiss()
         val sharedPref= SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
+        sharedPref.profileUpdate=resources.getString(R.string.status_true)
         val intent = Intent(activity!!, DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
