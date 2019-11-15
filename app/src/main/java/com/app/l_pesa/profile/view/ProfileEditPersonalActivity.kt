@@ -305,10 +305,10 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
         }
 
 
-        val format        = SimpleDateFormat("yyyy-MM-dd")
+        val format        = SimpleDateFormat("yyyy-MM-dd", Locale.US)
         val date    = format.parse(txtDOB.text.toString())
 
-        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
         val dateRequest  = outputFormat.format(date!!)
 
         val jsonObject = JsonObject()
@@ -571,12 +571,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(),ICallBackTitle, ICallBac
 
         if(!TextUtils.isEmpty(profileData.userPersonalInfo!!.dob))
         {
-            /*val inputFormat =  SimpleDateFormat("yyyy-MM-dd")
-            val date = inputFormat.parse(profileData.userPersonalInfo!!.dob)
-
-            val outputFormat = SimpleDateFormat("dd-MM-yyyy")*/
-            //txtDOB.setText(outputFormat.format(date!!))
-            txtDOB.setText(profileData.userPersonalInfo!!.dob)
+           txtDOB.setText(profileData.userPersonalInfo!!.dob)
         }
 
         txtDOB.isFocusable=false

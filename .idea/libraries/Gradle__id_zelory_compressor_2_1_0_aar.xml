@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: id.zelory:compressor:2.1.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c2bc2bbae79c0135bc66805d8637839c/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c2bc2bbae79c0135bc66805d8637839c/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a588568c979d5bbee43cc5692c70ba1f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a588568c979d5bbee43cc5692c70ba1f/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
