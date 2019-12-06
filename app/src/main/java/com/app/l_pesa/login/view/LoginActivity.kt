@@ -86,6 +86,13 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         forgotPin()
         doCalculateLoan()
 
+        AppUpdater(this@LoginActivity)
+                .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
+                .setDisplay(Display.DIALOG)
+                .showAppUpdated(true)
+                .setCancelable(true)
+                .start()
+
     }
 
     private fun initLoader()
