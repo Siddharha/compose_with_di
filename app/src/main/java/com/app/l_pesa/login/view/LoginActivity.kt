@@ -55,9 +55,6 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
-import com.github.javiersantos.appupdater.AppUpdater
-import com.github.javiersantos.appupdater.enums.Display
-import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -86,12 +83,12 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         forgotPin()
         doCalculateLoan()
 
-        AppUpdater(this@LoginActivity)
+      /*  AppUpdater(this@LoginActivity)
                 .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
                 .setDisplay(Display.DIALOG)
                 .showAppUpdated(true)
                 .setCancelable(true)
-                .start()
+                .start()*/
 
     }
 

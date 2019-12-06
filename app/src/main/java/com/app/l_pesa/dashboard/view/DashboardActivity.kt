@@ -40,9 +40,6 @@ import com.app.l_pesa.settings.view.SettingsFragment
 import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.github.javiersantos.appupdater.AppUpdater
-import com.github.javiersantos.appupdater.enums.Display
-import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -72,12 +69,12 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         nav_view.setNavigationItemSelectedListener(this)
         initTimer()
 
-        AppUpdater(this@DashboardActivity)
+       /* AppUpdater(this@DashboardActivity)
                 .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
                 .setDisplay(Display.DIALOG)
                 .showAppUpdated(true)
                 .setCancelable(true)
-                .start()
+                .start()*/
     }
 
     private fun initTimer() {
