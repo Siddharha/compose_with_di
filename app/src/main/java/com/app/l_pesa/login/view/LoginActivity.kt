@@ -55,6 +55,9 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.github.javiersantos.appupdater.AppUpdater
+import com.github.javiersantos.appupdater.enums.Display
+import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -77,12 +80,12 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-
         initLoader()
         loadCountry()
         loginProcess()
         forgotPin()
         doCalculateLoan()
+
     }
 
     private fun initLoader()
@@ -537,6 +540,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
                 .setNegativeButton("Cancel") { _, _ -> finish() }
         dialog.show()
     }
+
 
     companion object {
 

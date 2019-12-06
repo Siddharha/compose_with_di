@@ -8,8 +8,8 @@ android {
         config {
             keyAlias 'android'
             keyPassword 'android'
-            storeFile file('/home/amiyo/AndroidProject/Office/l-pesa/app/KEY/lpesa.jks')
-            //storeFile file('/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/KEY/lpesa.jks')
+            //storeFile file('/home/amiyo/AndroidProject/Office/l-pesa/app/KEY/lpesa.jks')
+             storeFile file('/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/KEY/lpesa.jks')
             //storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
             storePassword 'android'
         }
@@ -20,7 +20,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 11
-        versionName "1.0.11"
+        versionName "1.0.11" 
 
     }
     buildTypes {
@@ -106,6 +106,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:5.5.1'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
+    implementation 'com.github.javiersantos:AppUpdater:2.7'
     /* implementation 'com.amazonaws:aws-android-sdk-s3:2.13.5'
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.13.5'*/
 

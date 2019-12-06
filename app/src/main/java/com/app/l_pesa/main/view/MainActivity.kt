@@ -12,6 +12,9 @@ import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
+import com.github.javiersantos.appupdater.AppUpdater
+import com.github.javiersantos.appupdater.enums.Display
+import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -26,7 +29,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
 
-    private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
+  /*  private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val appUpdatedListener: InstallStateUpdatedListener by lazy {
         object : InstallStateUpdatedListener {
             override fun onStateUpdate(installState: InstallState) {
@@ -37,14 +40,20 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        checkForAppUpdate()
+       // checkForAppUpdate()
         initUI()
+        AppUpdater(this@MainActivity)
+                .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
+                .setDisplay(Display.DIALOG)
+                .showAppUpdated(true)
+                .setCancelable(true)
+                .start()
 
     }
 
@@ -79,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkForAppUpdate() {
+    /*private fun checkForAppUpdate() {
         // Returns an intent object that you use to check for an update.
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
@@ -106,9 +115,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+*/
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == APP_UPDATE_REQUEST_CODE) {
             if (resultCode != Activity.RESULT_OK) {
@@ -128,11 +137,11 @@ class MainActivity : AppCompatActivity() {
         snackbar.setAction("RESTART") { appUpdateManager.completeUpdate() }
         snackbar.setActionTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorApp))
         snackbar.show()
-    }
+    }*/
 
     override fun onResume() {
         super.onResume()
-        appUpdateManager
+       /* appUpdateManager
                 .appUpdateInfo
                 .addOnSuccessListener { appUpdateInfo ->
 
@@ -155,7 +164,7 @@ class MainActivity : AppCompatActivity() {
                     } catch (e: IntentSender.SendIntentException) {
                         e.printStackTrace()
                     }
-                }
+                }*/
 
 
         MyApplication.getInstance().trackScreenView(this@MainActivity::class.java.simpleName)
