@@ -25,6 +25,8 @@ import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.lpk.inter.ICallBackWalletAddress
 import com.app.l_pesa.lpk.presenter.PresenterWalletAddress
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_wallet_address.*
@@ -134,6 +136,11 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
             else -> {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
+                    val logger = AppEventsLogger.newLogger(activity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Wallet Address")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     progressDialog.show()
                     buttonWalletAddress.isClickable=false
                     val presenterWalletAddress= PresenterWalletAddress()

@@ -25,6 +25,10 @@ object CommonMethod {
         return 300000
     }
 
+    fun splashTime(): Long {
+        return 2000
+    }
+
 
     //@IntRange(from = 0, to = 2)
     fun isNetworkAvailable(context: Context): Boolean {

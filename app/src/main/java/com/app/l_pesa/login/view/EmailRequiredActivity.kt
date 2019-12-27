@@ -21,6 +21,8 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.inter.ICallBackEmail
 import com.app.l_pesa.login.presenter.PresenterEmail
 import com.app.l_pesa.pinview.model.LoginData
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_email_required.*
@@ -70,6 +72,11 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
         {
             if(CommonMethod.isNetworkAvailable(this@EmailRequiredActivity))
             {
+                val logger = AppEventsLogger.newLogger(this@EmailRequiredActivity)
+                val params =  Bundle()
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Email Verify")
+                logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                 progressDialog.show()
 
                 val jsonObject = JsonObject()

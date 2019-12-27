@@ -59,7 +59,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
     }
 
-    fun loadProfileInfo(shimmerStatus: Boolean)
+    private fun loadProfileInfo(shimmerStatus: Boolean)
     {
         Handler().postDelayed({
             (activity as DashboardActivity).visibleFilter(false)
@@ -556,7 +556,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(BuildConfig.PROFILE_IMAGE_URL+userIdsPersonalInfo.fileName)
+                    .load(BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgInformation)
 

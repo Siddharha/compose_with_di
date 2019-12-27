@@ -40,7 +40,6 @@ class AdapterNotification(val context: Context, private val notificationList: Ar
 
         if (getItemViewType(position) == 0) {
             (holder as UserViewHolder).bindData(context, notificationList[position])
-
         }
     }
 

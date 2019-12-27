@@ -31,6 +31,8 @@ import com.app.l_pesa.login.inter.ICallBackCode
 import com.app.l_pesa.login.inter.ICallBackResend
 import com.app.l_pesa.login.presenter.PresenterEmail
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_email_verification.*
@@ -135,6 +137,11 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
         {
             if(CommonMethod.isNetworkAvailable(this@EmailVerificationActivity))
             {
+                val logger = AppEventsLogger.newLogger(this@EmailVerificationActivity)
+                val params =  Bundle()
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "OTP Verify")
+                logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                 progressDialog.show()
 
                 val jsonObject = JsonObject()
@@ -150,9 +157,6 @@ class EmailVerificationActivity : AppCompatActivity(), ICallBackCode, ICallBackD
             }
         }
 
-       /* Handler().postDelayed({
-            btnSubmit.isClickable   = true
-        }, 1000)*/
     }
 
     override fun onSuccessVerification() {

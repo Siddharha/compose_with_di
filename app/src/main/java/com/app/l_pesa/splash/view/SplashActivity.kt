@@ -43,16 +43,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                 if(CommonMethod.isNetworkAvailable(this@SplashActivity))
                 {
                     progressBar.visibility = View.VISIBLE
-                    /*val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
-                    if(userData.access_token==null)
-                    {splashLoading()
-                    }
-                    else
-                    {*/
-                        logoutProcess()
-                    //}
-
-
+                    logoutProcess()
                 }
                 else {
                     buttonRetry.visibility = View.VISIBLE
@@ -76,7 +67,6 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
             {
                 loadNext()
             }
-
 
 
     }
@@ -136,7 +126,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
-        }, 2000)
+        }, CommonMethod.splashTime())
     }
 
     private fun loadCountry() {
@@ -145,8 +135,13 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         txtHeader.visibility = View.INVISIBLE
         buttonRetry.visibility = View.INVISIBLE
         progressBar.visibility = View.VISIBLE
-        val presenterCountry = PresenterCountry()
-        presenterCountry.getCountry(this@SplashActivity, this)
+
+        Thread(Runnable {
+            val presenterCountry = PresenterCountry()
+            presenterCountry.getCountry(this@SplashActivity, this)
+        }).start()
+
+
     }
 
     override fun onSuccessCountry(countries_list: ResModelData) {

@@ -19,7 +19,7 @@ class PresenterEmpInfo {
     fun doChangeEmpInfo(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackEmpInfo) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doChangeEmpInfo(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java, sharedPrefOBJ.accessToken).doChangeEmpInfo(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -29,40 +29,32 @@ class PresenterEmpInfo {
                 .subscribe({ response ->
 
                     try {
-                        if (response.status.isSuccess)
-                        {
+                        if (response.status.isSuccess) {
                             callBackOBJ.onSuccessEmpInfo()
 
-                        } else
-                        {
+                        } else {
                             callBackOBJ.onFailureEmpInfo(response.status.message)
                         }
                     } catch (e: Exception) {
 
                     }
-                }, { error ->
-                    try
-                    {
-                        val errorVal         =    error as HttpException
-                        if(errorVal.code()>=400)
-                        {
-                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
-                            val  jsonStatus      =    jsonError.getJSONObject("status")
-                            val jsonMessage      =    jsonStatus.getString("message")
-                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                            if(jsonStatusCode==50002)
-                            {
+                }, { error ->
+                    try {
+                        val errorVal = error as HttpException
+                        if (errorVal.code() >= 400) {
+                            val jsonError = JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val jsonStatus = jsonError.getJSONObject("status")
+                            val jsonMessage = jsonStatus.getString("message")
+                            val jsonStatusCode = jsonStatus.getInt("statusCode")
+
+                            if (jsonStatusCode == 50002) {
                                 callBackOBJ.onSessionTimeOut(jsonMessage)
-                            }
-                            else
-                            {
+                            } else {
                                 callBackOBJ.onFailureEmpInfo(jsonMessage)
                             }
 
-
                         }
-
 
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)

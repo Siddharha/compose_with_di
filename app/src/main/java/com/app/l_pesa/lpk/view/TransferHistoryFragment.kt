@@ -25,6 +25,8 @@ import com.app.l_pesa.lpk.model.ResTransferHistory
 import com.app.l_pesa.lpk.presenter.PresenterSavingsUnlock
 import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_transfer_history.*
@@ -96,6 +98,11 @@ class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTrans
 
     private fun loadTokenHistory(from_date:String,to_date:String, type:String)
     {
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Token History")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         swipeRefreshLayout.isRefreshing = true
         val presenterTransferHistory = PresenterTransferHistory()
         presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,type,this)

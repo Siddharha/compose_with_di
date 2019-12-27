@@ -271,8 +271,8 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
                 val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 loadHistory(fromDate!!,toDate!!,"FILTER")
-
             }
+
         }
 
         imgCancel.setOnClickListener {

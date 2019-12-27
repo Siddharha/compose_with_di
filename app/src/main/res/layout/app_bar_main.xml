@@ -21,8 +21,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            >
+            app:titleTextAppearance="@style/Toolbar.TitleText">
 
            <com.app.l_pesa.common.CustomButtonRegular
                android:id="@+id/buttonRight"

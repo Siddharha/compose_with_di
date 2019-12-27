@@ -14,6 +14,8 @@ import com.app.l_pesa.lpk.adapter.AdapterInterestHistory
 import com.app.l_pesa.lpk.inter.ICallBackInterestHistory
 import com.app.l_pesa.lpk.model.ResInterestHistory
 import com.app.l_pesa.lpk.presenter.PresenterInterestHistory
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_interest_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
@@ -78,6 +80,11 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
     private fun loadInterestHistory(from_date:String,to_date:String,type:String)
     {
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Interest History")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         swipeRefreshLayout.isRefreshing = true
         val presenterInterestHistory = PresenterInterestHistory()
         presenterInterestHistory.getInterestHistory(activity!!,from_date,to_date,type,this)

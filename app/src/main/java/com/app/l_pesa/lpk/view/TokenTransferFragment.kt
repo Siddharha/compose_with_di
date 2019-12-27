@@ -20,6 +20,8 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.inter.ICallBackTokenTransfer
 import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterTokenTransfer
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_token_transfer.*
@@ -74,6 +76,11 @@ class TokenTransferFragment : Fragment(), ICallBackTokenTransfer {
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
+                    val logger = AppEventsLogger.newLogger(activity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Token Transfer")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     progressDialog.show()
                     buttonTransfer.isClickable=false
                     CommonMethod.hideKeyboardView(activity!! as AppCompatActivity)

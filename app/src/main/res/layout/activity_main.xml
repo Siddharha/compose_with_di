@@ -17,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
         app:srcCompat="@drawable/lpesa_logo" />
 
     <com.app.l_pesa.common.CommonTextRegular
@@ -50,6 +51,16 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/barrierText"
+
+        />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="textView"
+        app:barrierDirection="bottom"
         />
 
 
@@ -65,11 +76,20 @@
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         android:textAllCaps="true"
+        app:layout_constraintTop_toBottomOf="@+id/barrierButton"
         android:layout_marginBottom="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
 
+        />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="buttonSignUp"
+        app:barrierDirection="top"
         />
 
     <com.app.l_pesa.common.CommonTextRegular
@@ -86,6 +106,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignUp"
         />
 
     <com.app.l_pesa.common.CustomButtonRegular
@@ -103,6 +124,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+
          />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

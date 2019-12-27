@@ -2,14 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/screenBackground"
-    android:id="@+id/rlRoot"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".loanHistory.view.LoanHistoryDetailsActivity"
-    tools:showIn="@layout/activity_loan_history_details"
-   >
+    tools:showIn="@layout/activity_loan_history_details">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,17 +28,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/bg_white_view"
-                >
+                android:background="@drawable/bg_white_view">
 
 
                 <ImageView
                     android:id="@+id/img_loan"
-                    android:contentDescription="@string/app_name"
                     android:layout_width="@dimen/_27sdp"
                     android:layout_height="@dimen/_27sdp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:contentDescription="@string/app_name"
                     app:srcCompat="@drawable/ic_loan_amount_icon" />
 
 
@@ -49,8 +47,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/img_loan"
                     android:gravity="center"
-                    android:padding="@dimen/_3sdp"
-                    >
+                    android:padding="@dimen/_3sdp">
+
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_loan_product"
                         android:layout_width="wrap_content"
@@ -73,9 +71,9 @@
 
                 <View
                     android:id="@+id/viewDividerOne"
-                    android:layout_below="@+id/rlLoan"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
+                    android:layout_below="@+id/rlLoan"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/colorGrey" />
@@ -89,17 +87,16 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:baselineAligned="false"
                     android:orientation="horizontal"
-                    android:weightSum="1"
-                    >
+                    android:weightSum="1">
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight=".50"
                         android:orientation="horizontal"
-                        android:paddingEnd="@dimen/_1sdp"
                         android:paddingStart="@dimen/_5sdp"
                         android:paddingTop="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_1sdp"
                         android:paddingBottom="@dimen/_10sdp"
 
                         >
@@ -119,8 +116,8 @@
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:layout_toEndOf="@+id/txt_loan_no"
-                            android:paddingEnd="@dimen/_1sdp"
                             android:paddingStart="@dimen/_2sdp"
+                            android:paddingEnd="@dimen/_1sdp"
                             android:textColor="@color/color_semi_deep_black"
                             android:textSize="@dimen/_12sdp"
 
@@ -149,8 +146,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
-                            android:paddingEnd="@dimen/_1sdp"
                             android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_1sdp"
                             android:text="@string/interest_day"
                             android:textColor="@color/color_gray_light"
                             android:textSize="@dimen/_11sdp" />
@@ -161,8 +158,8 @@
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:layout_toEndOf="@+id/text_interest_rate"
-                            android:paddingEnd="@dimen/_1sdp"
                             android:paddingStart="@dimen/_2sdp"
+                            android:paddingEnd="@dimen/_1sdp"
                             android:textColor="@color/color_semi_deep_black"
                             android:textSize="@dimen/_12sdp"
 
@@ -180,8 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_title"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/bg_white_view"
-               >
+                android:background="@drawable/bg_white_view">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -206,10 +202,10 @@
                             tools:ignore="NestedWeights">
 
                             <ImageView
-                                android:contentDescription="@string/app_name"
-                                android:scaleType="fitXY"
                                 android:layout_width="@dimen/_23sdp"
                                 android:layout_height="@dimen/_23sdp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="fitXY"
                                 app:srcCompat="@drawable/ic_need_credit_score" />
 
                         </LinearLayout>
@@ -237,8 +233,8 @@
                     <View
                         android:layout_width="1px"
                         android:layout_height="match_parent"
-                        android:layout_marginBottom="@dimen/_5sdp"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
                         android:background="@color/color_gray_light" />
 
 
@@ -256,10 +252,10 @@
                             tools:ignore="NestedWeights">
 
                             <ImageView
-                                android:contentDescription="@string/app_name"
-                                android:scaleType="fitXY"
                                 android:layout_width="@dimen/_23sdp"
                                 android:layout_height="@dimen/_23sdp"
+                                android:contentDescription="@string/app_name"
+                                android:scaleType="fitXY"
                                 app:srcCompat="@drawable/ic_current_credit_score" />
 
                         </LinearLayout>
@@ -272,11 +268,11 @@
                             android:orientation="vertical"
                             android:padding="@dimen/_5sdp">
 
-                           <com.app.l_pesa.common.CommonTextRegular
+                            <com.app.l_pesa.common.CommonTextRegular
                                 android:id="@+id/txt_credit_score"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                               android:textColor="@color/color_gray_light"
+                                android:textColor="@color/color_gray_light"
                                 android:textSize="@dimen/_12sdp"
 
                                 />
@@ -291,23 +287,22 @@
             </RelativeLayout>
 
 
-        <RelativeLayout
+            <RelativeLayout
                 android:id="@+id/rlLoanAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlCredit"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/bg_white_view"
-                >
+                android:background="@drawable/bg_white_view">
 
 
                 <ImageView
                     android:id="@+id/icon_loan"
-                    android:contentDescription="@string/app_name"
                     android:layout_width="@dimen/_27sdp"
                     android:layout_height="@dimen/_27sdp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:contentDescription="@string/app_name"
                     app:srcCompat="@drawable/ic_loan_amount_icon" />
 
                 <RelativeLayout
@@ -316,8 +311,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/icon_loan"
                     android:gravity="center"
-                    android:padding="@dimen/_3sdp"
-                    >
+                    android:padding="@dimen/_3sdp">
+
                     <com.app.l_pesa.common.CommonTextRegular
                         android:id="@+id/txt_loan_amount"
                         android:layout_width="match_parent"
@@ -331,12 +326,11 @@
                         android:id="@+id/txt_loan_amount_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_below="@+id/txt_loan_amount"
+                        android:gravity="center"
                         android:textColor="@color/colorApp"
                         android:textSize="@dimen/_15sdp"
-                        android:textStyle="bold"
-                       />
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -345,8 +339,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rlLoanCurrency"
-                    android:layout_margin="@dimen/_5sdp"
-                    >
+                    android:layout_margin="@dimen/_5sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -371,10 +364,10 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY"
                                     app:srcCompat="@drawable/ic_after_currency_conversion" />
 
                             </LinearLayout>
@@ -410,8 +403,8 @@
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:background="@color/color_gray_light" />
 
 
@@ -430,10 +423,10 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY"
                                     app:srcCompat="@drawable/ic_after_currency_conversion" />
 
                             </LinearLayout>
@@ -472,9 +465,9 @@
 
                 <View
                     android:id="@+id/viewDividerAmount"
-                    android:layout_below="@+id/rlCurrency"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
+                    android:layout_below="@+id/rlCurrency"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/color_gray_light" />
@@ -511,10 +504,10 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY"
                                     app:srcCompat="@drawable/ic_conversion_charge" />
 
                             </LinearLayout>
@@ -550,8 +543,8 @@
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:background="@color/color_gray_light" />
 
 
@@ -570,10 +563,10 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY"
                                     app:srcCompat="@drawable/ic_interest_rate_icon" />
 
                             </LinearLayout>
@@ -612,22 +605,20 @@
 
             </RelativeLayout>
 
-        <RelativeLayout
+            <RelativeLayout
                 android:id="@+id/rlLoanDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlLoanAmount"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/bg_white_view"
-               >
+                android:background="@drawable/bg_white_view">
 
 
                 <RelativeLayout
                     android:id="@+id/rlDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                   >
+                    android:layout_margin="@dimen/_5sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -652,10 +643,10 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY"
                                     app:srcCompat="@drawable/ic_request_date" />
 
                             </LinearLayout>
@@ -673,10 +664,10 @@
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:text="@string/request_date"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_11sdp"
-                                    android:layout_marginTop="@dimen/_5sdp"/>
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_request_date"
@@ -694,8 +685,8 @@
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:background="@color/color_gray_light" />
 
 
@@ -714,10 +705,10 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY"
                                     app:srcCompat="@drawable/ic_approve_calendar_icon" />
 
                             </LinearLayout>
@@ -734,10 +725,10 @@
                                     android:id="@+id/txt_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:text="@string/approval_date"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_11sdp"
-                                    android:layout_marginTop="@dimen/_5sdp"/>
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_approval_date"
@@ -758,9 +749,9 @@
 
                 <View
                     android:id="@+id/viewDividerDate"
-                    android:layout_below="@+id/rlDate"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
+                    android:layout_below="@+id/rlDate"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@color/color_gray_light" />
@@ -771,8 +762,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/viewDividerDate"
                     android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/bg_white_view"
-                    >
+                    android:background="@drawable/bg_white_view">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -797,10 +787,10 @@
                                 tools:ignore="NestedWeights">
 
                                 <ImageView
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY"
                                     app:srcCompat="@drawable/ic_loan_duration" />
 
                             </LinearLayout>
@@ -816,10 +806,10 @@
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:text="@string/loan_duration"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_11sdp"
-                                    android:layout_marginTop="@dimen/_5sdp"/>
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_loan_duration"
@@ -837,8 +827,8 @@
                         <View
                             android:layout_width="1px"
                             android:layout_height="match_parent"
-                            android:layout_marginBottom="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
                             android:background="@color/color_gray_light" />
 
 
@@ -858,11 +848,10 @@
 
                                 <ImageView
                                     android:id="@+id/imgStatus"
-                                    android:contentDescription="@string/app_name"
-                                    android:scaleType="fitXY"
                                     android:layout_width="@dimen/_23sdp"
                                     android:layout_height="@dimen/_23sdp"
-                                     />
+                                    android:contentDescription="@string/app_name"
+                                    android:scaleType="fitXY" />
 
                             </LinearLayout>
 
@@ -877,10 +866,10 @@
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:text="@string/status"
                                     android:textColor="@color/color_gray_light"
-                                    android:textSize="@dimen/_11sdp"
-                                    android:layout_marginTop="@dimen/_5sdp"/>
+                                    android:textSize="@dimen/_11sdp" />
 
                                 <com.app.l_pesa.common.CommonTextRegular
                                     android:id="@+id/txt_status"
@@ -902,28 +891,27 @@
             </RelativeLayout>
 
 
-         <RelativeLayout
+            <RelativeLayout
                 android:id="@+id/rlPurpose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlLoanDate"
                 android:layout_margin="@dimen/_5sdp"
-                android:background="@drawable/bg_white_view"
-                >
+                android:background="@drawable/bg_white_view">
 
                 <RelativeLayout
                     android:id="@+id/rl_purpose_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/_5sdp"
                     android:gravity="center|start"
-                    >
+                    android:padding="@dimen/_5sdp">
+
                     <ImageView
                         android:id="@+id/img_purpose"
-                        android:contentDescription="@string/app_name"
-                        android:scaleType="fitXY"
                         android:layout_width="@dimen/_27sdp"
                         android:layout_height="@dimen/_27sdp"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/ic_loan_purpose" />
 
                     <com.app.l_pesa.common.CommonTextRegular
@@ -945,10 +933,10 @@
                     android:text=""
                     android:textColor="@color/color_gray_light"
                     android:textSize="@dimen/_12sdp" />
-         </RelativeLayout>
+            </RelativeLayout>
 
 
-        <RelativeLayout
+            <RelativeLayout
                 android:id="@+id/rlPayment"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_28sdp"
@@ -959,17 +947,17 @@
                     android:id="@+id/ll_pay_back_section"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:baselineAligned="false"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:baselineAligned="false">
+                    android:weightSum="1">
 
                     <LinearLayout
                         android:id="@+id/ll_payment_scheduled"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:layout_weight="0.5"
                         android:background="@drawable/blue_button"
                         android:gravity="center">
@@ -1006,34 +994,33 @@
 
             </RelativeLayout>
 
-        <RelativeLayout
+            <RelativeLayout
                 android:id="@+id/rlDisApproved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlPurpose"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@drawable/bg_white_view"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
 
                 <RelativeLayout
                     android:id="@+id/rl_disapproved_header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:gravity="center|start"
 
                     >
 
                     <ImageView
                         android:id="@+id/img_disapproved"
-                        android:scaleType="fitXY"
                         android:layout_width="@dimen/_27sdp"
                         android:layout_height="@dimen/_27sdp"
                         android:contentDescription="@string/app_name"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/ic_disapproved_icon" />
 
                     <com.app.l_pesa.common.CommonTextRegular
@@ -1052,13 +1039,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rl_disapproved_header"
+                    android:padding="@dimen/_3sdp"
                     android:textColor="@color/color_gray_light"
-                    android:textSize="@dimen/_12sdp"
-                    android:padding="@dimen/_3sdp"/>
+                    android:textSize="@dimen/_12sdp" />
 
             </RelativeLayout>
 
-      </RelativeLayout>
+        </RelativeLayout>
 
     </ScrollView>
 

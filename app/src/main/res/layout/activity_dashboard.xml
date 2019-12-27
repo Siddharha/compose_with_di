@@ -25,7 +25,6 @@
         app:menu="@menu/activity_main_drawer"
         android:background="@color/colorWhite"
         android:theme="@style/NavigationTheme"
-
        />
 
 </androidx.drawerlayout.widget.DrawerLayout>
