@@ -22,6 +22,8 @@ import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackContactInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterContactInfo
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -112,6 +114,11 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
 
                 else
                 {
+                    val logger = AppEventsLogger.newLogger(this@ProfileEditContactInfoActivity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Edit Contact Section")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     if(CommonMethod.isNetworkAvailable(this@ProfileEditContactInfoActivity))
                     {
                         buttonSubmit.isClickable=false

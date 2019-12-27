@@ -25,6 +25,8 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -66,6 +68,10 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             (activity as DashboardActivity).visibleButton(false)
         }, 200)
 
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Information")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         val options = RequestOptions()
         options.placeholder(R.drawable.ic_user)

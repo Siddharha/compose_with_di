@@ -62,10 +62,10 @@ object CommonMethod {
     fun dateConvert(inputDate:String): String? {
             return if(!TextUtils.isEmpty(inputDate))
             {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy")
+                val inputFormat  = SimpleDateFormat("dd/MM/yyyy", Locale.US)
                 val date         = inputFormat.parse(inputDate)
 
-                val outputFormat = SimpleDateFormat("MMM dd, yyyy")
+                val outputFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
                 outputFormat.format(date!!)
             }
             else ""
@@ -77,10 +77,10 @@ object CommonMethod {
 
         return if(!TextUtils.isEmpty(inputDate))
         {
-            val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+            val inputFormat  = SimpleDateFormat("dd-MM-yyyy", Locale.US)
             val date         = inputFormat.parse(inputDate)
 
-            val outputFormat = SimpleDateFormat("yyyy-MM-dd")
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
             outputFormat.format(date!!)
         }
         else ""

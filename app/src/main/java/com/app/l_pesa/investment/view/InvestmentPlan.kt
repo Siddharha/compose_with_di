@@ -19,6 +19,8 @@ import com.app.l_pesa.investment.inter.ICallBackInvestmentPlan
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterInvestmentPlan
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_investment_plan_list.*
 import java.text.DecimalFormat
@@ -59,6 +61,11 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Investment Plan")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             shimmerLayout.startShimmerAnimation()
             val presenterLoanPlans= PresenterInvestmentPlan()
             presenterLoanPlans.getInvestmentPlan(activity!!,this)

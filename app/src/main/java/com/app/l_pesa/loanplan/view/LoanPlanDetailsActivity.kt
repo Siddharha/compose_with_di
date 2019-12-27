@@ -19,6 +19,8 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import kotlinx.android.synthetic.main.activity_loan_plan_details.*
 import kotlinx.android.synthetic.main.content_loan_plan_details.*
 import java.text.DecimalFormat
@@ -42,11 +44,18 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
+
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
         val globalLoanPlanModel= GlobalLoanPlanModel.getInstance().modelData
         val sharedPref= SharedPref(this@LoanPlanDetailsActivity)
+
+        val logger = AppEventsLogger.newLogger(this@LoanPlanDetailsActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, globalLoanPlanModel?.productId.toString())
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Plan Details")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         txt_loan_product_price.text = fromHtml(resources.getString(R.string.loan_product)+"<font color='#333333'>"+" $"+format.format(globalLoanPlanModel!!.loanAmount).toString()+"</font>")
         txt_interest_rate.text = fromHtml(resources.getString(R.string.interest_rate)+"<font color='#333333'>"+" "+globalLoanPlanModel.loanInterestRate.toString()+"%"+"</font>")

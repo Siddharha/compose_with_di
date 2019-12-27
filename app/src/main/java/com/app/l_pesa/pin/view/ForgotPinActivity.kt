@@ -43,6 +43,8 @@ import com.app.l_pesa.pin.presenter.PresenterPassword
 import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
@@ -159,6 +161,11 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         {
             if(CommonMethod.isNetworkAvailable(this@ForgotPinActivity))
             {
+                val logger = AppEventsLogger.newLogger(this@ForgotPinActivity)
+                val params =  Bundle()
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Forgot Pin")
+                logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                 progressDialog.show()
                 val sharedPrefOBJ= SharedPref(this@ForgotPinActivity)
                 buttonRecoverPin.isClickable   = false

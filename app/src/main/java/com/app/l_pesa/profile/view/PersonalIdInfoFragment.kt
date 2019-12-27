@@ -56,6 +56,8 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
@@ -107,6 +109,12 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun initData()
     {
+
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Personal Id Information")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         listPersonalId = ArrayList()
         val sharedPrefOBJ= SharedPref(activity!!)
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
@@ -545,6 +553,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         dismiss()
         val sharedPref=SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
+        sharedPref.profileUpdate=resources.getString(R.string.status_true)
         val intent = Intent(activity!!, DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)

@@ -36,6 +36,8 @@ import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.pinview.inter.ICallBackPinSet
 import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.pinview.presenter.PresenterPinSet
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_pin_set.*
@@ -94,6 +96,11 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
                 if (CommonMethod.isNetworkAvailable(this@PinSetActivity))
                 {
+                    val logger = AppEventsLogger.newLogger(this@PinSetActivity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Pin Enter")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     progressDialog.show()
                     val jsonObjectDeviceInfo = JsonObject()
                     jsonObjectDeviceInfo.addProperty("phone_no", modelDevice.post_data.phone_no)

@@ -21,6 +21,8 @@ import com.app.l_pesa.loanHistory.inter.ICallBackPaymentHistory
 import com.app.l_pesa.loanHistory.model.ResPaymentHistory
 import com.app.l_pesa.loanHistory.presenter.PresenterPaymentHistory
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import kotlinx.android.synthetic.main.activity_loan_payment_history.*
 import kotlinx.android.synthetic.main.content_loan_payment_history.*
 import java.util.*
@@ -52,6 +54,13 @@ class LoanPaymentHistory : AppCompatActivity(),ICallBackPaymentHistory {
 
         if(CommonMethod.isNetworkAvailable(this@LoanPaymentHistory))
         {
+
+            val logger = AppEventsLogger.newLogger(this@LoanPaymentHistory)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, loanId)
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Payback History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing=true
             val presenterPaymentHistory= PresenterPaymentHistory()
             presenterPaymentHistory.getPaymentHistory(this@LoanPaymentHistory,loanType!!,loanId!!,this)

@@ -437,6 +437,7 @@
     <string name="to_date">To Date</string>
     <string name="apply_filter">Apply Filter</string>
     <string name="savings">Savings</string>
+    <string name="trading">Trading</string>
     <string name="withdrawal">Withdrawal</string>
     <string name="withdraw_on">Withdrawal on</string>
 

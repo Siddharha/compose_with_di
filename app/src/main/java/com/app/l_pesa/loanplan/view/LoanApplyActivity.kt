@@ -41,6 +41,8 @@ import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
@@ -116,10 +118,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun initData()
     {
-         val bundle  = intent.extras
-         productId   = bundle!!.getString("PRODUCT_ID")!!
-         loanType    = bundle.getString("LOAN_TYPE")!!
-
+        val bundle  = intent.extras
+        productId   = bundle!!.getString("PRODUCT_ID")!!
+        loanType    = bundle.getString("LOAN_TYPE")!!
 
         initTimer()
         initLoader()
@@ -210,6 +211,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loanApply()
     {
+
+
         val shared=SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()
@@ -228,6 +231,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         jsonObject.addProperty("latitude",shared.currentLat)
         jsonObject.addProperty("longitude",shared.currentLng)
 
+        val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
+        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION)
 
         val presenterLoanApply= PresenterLoanApply()
         presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)

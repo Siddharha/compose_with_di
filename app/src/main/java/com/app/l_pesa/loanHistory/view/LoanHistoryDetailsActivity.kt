@@ -22,6 +22,8 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_loan_history_details.*
 import kotlinx.android.synthetic.main.content_loan_history_details.*
@@ -49,6 +51,13 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         format.isDecimalSeparatorAlwaysShown = false
 
         val loanHistoryData= GlobalLoanHistoryModel.getInstance().modelData
+
+        val logger = AppEventsLogger.newLogger(this@LoanHistoryDetailsActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, loanHistoryData?.loan_id.toString())
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan History Details")
+        params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY, loanHistoryData?.currency_code)
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
         txt_loan_no_val.text = loanHistoryData.identity_number

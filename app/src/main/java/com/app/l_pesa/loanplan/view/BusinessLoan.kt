@@ -20,6 +20,8 @@ import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
 import java.util.*
@@ -57,6 +59,11 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
     private fun loanLoan()
     {
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Business Loan")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
             shimmerLayout.startShimmerAnimation()

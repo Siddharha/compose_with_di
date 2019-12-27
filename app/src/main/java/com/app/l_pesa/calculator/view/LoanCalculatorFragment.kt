@@ -27,6 +27,8 @@ import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.text.DecimalFormat
@@ -287,6 +289,11 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     @SuppressLint("SetTextI18n")
     private fun doCalculate()
     {
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Calculate")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         val sharedPrefOBJ= SharedPref(activity!!)
         val loanProduct = Gson().fromJson<ResProducts.ProductList>(sharedPrefOBJ.loanProduct, ResProducts.ProductList::class.java)
 

@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypefaceSpan
@@ -29,12 +30,12 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_lpk.*
 
 
-class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
+class LpkFragment: Fragment(), ICallBackInfoLPK {
 
     private lateinit  var progressDialog: ProgressDialog
 
     companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
+        fun newInstance(): Fragment {
             return LpkFragment()
         }
     }
@@ -54,8 +55,8 @@ class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
-        val message=   SpannableString(resources.getString(R.string.loading))
+        progressDialog = ProgressDialog(activity!!, R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(com.app.l_pesa.R.string.loading))
         val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
@@ -90,7 +91,7 @@ class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
             }
             else
             {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
             }
 
 
@@ -108,9 +109,28 @@ class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
             }
             else
             {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
             }
 
+
+        }
+
+        constraintTreading.setOnClickListener {
+
+            val openBitMart: Intent?
+            val manager = activity?.packageManager
+            try {
+                openBitMart = manager?.getLaunchIntentForPackage("com.bitmart.bitmarket")
+                if (openBitMart == null)
+                    throw PackageManager.NameNotFoundException()
+                openBitMart.addCategory(Intent.CATEGORY_LAUNCHER)
+                startActivity(openBitMart)
+            } catch (e: PackageManager.NameNotFoundException) {
+
+                val uri = Uri.parse("https://www.bitmart.com/")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
 
         }
     }
@@ -132,14 +152,14 @@ class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
         if(type=="WITHDRAWAL")
         {
             startActivity(Intent(activity, LPKWithdrawalActivity::class.java))
-            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            activity?.overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
             dismiss()
         }
         else
         {
 
             startActivity(Intent(activity, LPKSavingsActivity::class.java))
-            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            activity?.overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
 
             dismiss()
 
@@ -156,7 +176,7 @@ class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
 
     override fun onSessionTimeOut(message: String) {
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(activity!!, com.app.l_pesa.R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
@@ -164,12 +184,12 @@ class LpkFragment: androidx.fragment.app.Fragment(), ICallBackInfoLPK {
                     val sharedPrefOBJ= SharedPref(activity!!)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(activity!!, MainActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
                     activity!!.finish()
                 }
 
         val alert = dialogBuilder.create()
-        alert.setTitle(resources.getString(R.string.app_name))
+        alert.setTitle(resources.getString(com.app.l_pesa.R.string.app_name))
         alert.show()
 
     }
