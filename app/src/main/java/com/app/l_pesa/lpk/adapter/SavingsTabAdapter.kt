@@ -21,7 +21,7 @@ class SavingsTabAdapter(fm: FragmentManager, private var tabCount: Int): Fragmen
             }
             2 -> {
                   EarnedInterestFragment()
-                 }
+            }
 
             else -> null
         }
