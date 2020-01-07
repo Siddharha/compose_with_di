@@ -35,6 +35,7 @@
 
 -keepattributes Signature
 -keepattributes *Annotation*
+-keepattributes InnerClasses
 
 -keep class android.support.v4.app.** { *; }
 -keep interface android.support.v4.app.** { *; }

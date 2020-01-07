@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/kprogresshud/kprogresshud.iml" filepath="$PROJECT_DIR$/kprogresshud/kprogresshud.iml" />
-      <module fileurl="file://$PROJECT_DIR$/l-pesa.iml" filepath="$PROJECT_DIR$/l-pesa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/l-pesa-android-app.iml" filepath="$PROJECT_DIR$/l-pesa-android-app.iml" />
     </modules>
   </component>
 </project>
