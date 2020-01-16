@@ -12,8 +12,6 @@ android {
             //storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
             storePassword 'android'
             storeFile file('/home/cx-26/Sudipto/AndroidProject/NEWPROJECT/l-pesa-android-app/app/KEY/lpesa.jks')
-            //storeFile file('/home/cx-26/Sudipto/AndroidProject/Projects/LPesa/l-pesa/app/KEY/lpesa.jks')
-
         }
     }
     compileSdkVersion 29
