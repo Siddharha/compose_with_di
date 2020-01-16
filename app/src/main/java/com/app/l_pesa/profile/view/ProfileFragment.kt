@@ -3,27 +3,34 @@ package com.app.l_pesa.profile.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import android.os.Handler
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.*
-import java.lang.Exception
-import java.util.ArrayList
+import java.util.*
 
 
 class ProfileFragment: Fragment(), ICallBackUserInfo {
@@ -54,8 +61,24 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
     }
 
-    fun loadProfileInfo(shimmerStatus: Boolean)
+    private fun loadProfileInfo(shimmerStatus: Boolean)
     {
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 200)
+
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Information")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
+        val options = RequestOptions()
+        options.placeholder(R.drawable.ic_user)
+        Glide.with(activity!!)
+                .load("")
+                .apply(options)
+                .into(imgProfile)
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
@@ -199,24 +222,43 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         Toast.makeText(activity,message,Toast.LENGTH_SHORT).show()
     }
 
+    override fun onSessionTimeOut(jsonMessage: String) {
+
+        shimmerLayout.stopShimmerAnimation()
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(jsonMessage)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+    }
+
     @SuppressLint("SetTextI18n")
-    private fun setData(data: ResUserInfo.Data)
+    fun setData(data: ResUserInfo.Data)
     {
 
         val sharedPrefOBJ= SharedPref(activity!!)
-        val gson                          = Gson()
-        val profileData                   = gson.toJson(data)
+        val profileData            = Gson().toJson(data)
         sharedPrefOBJ.profileInfo         = profileData
+
+        getProfileInfo(data)
 
         /*Profile Information*/
 
         try {
-
             val options = RequestOptions()
-            options.error(R.drawable.ic_user_no_img_icon)
-            options.placeholder(R.drawable.ic_user_no_img_icon)
-            Glide.with(activity!!)
-                    .load(resources.getString(R.string.profile_image_url)+data.userInfo!!.profileImage)
+             Glide.with(activity!!)
+                    .load(BuildConfig.PROFILE_IMAGE_URL+data.userInfo!!.profileImage)
                     .apply(options)
                     .into(imgProfile)
         }
@@ -231,7 +273,17 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         txtPhone.text = data.userInfo!!.phoneNumber
         txtCreditScore.text = resources.getString(R.string.credit_score)+" "+data.userInfo!!.creditScore
-        txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo!!.dob
+
+
+        if(!TextUtils.isEmpty(data.userPersonalInfo!!.dob))
+        {
+            txtDOB.text = resources.getString(R.string.date_of_birth)+" "+data.userPersonalInfo!!.dob
+        }
+        else
+        {
+            txtDOB.text =resources.getString(R.string.date_of_birth)+" "+resources.getText(R.string.dash_line)
+        }
+
         if(!TextUtils.isEmpty(data.userPersonalInfo!!.sex))
         {
             if(data.userPersonalInfo!!.sex=="M")
@@ -246,7 +298,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtGender.text = resources.getString(R.string.gender)+resources.getText(R.string.dash_line)
+            txtGender.text = resources.getString(R.string.gender)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userPersonalInfo!!.meritalStatus))
@@ -255,7 +307,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtMartialStatus.text =resources.getText(R.string.dash_line)
+            txtMartialStatus.text =resources.getString(R.string.marital_status)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userPersonalInfo!!.motherMaidenName))
@@ -264,9 +316,8 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtMotherName.text =resources.getText(R.string.dash_line)
+            txtMotherName.text =resources.getString(R.string.mother_maiden_name)+" "+resources.getText(R.string.dash_line)
         }
-
 
 
         /* ID Information*/
@@ -301,8 +352,14 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             txtAddress.text=resources.getText(R.string.dash_line)
         }
 
-
-        txtContact.text=""+data.userContactInfo!!.phoneNumber
+        if(!TextUtils.isEmpty(data.userContactInfo!!.phoneNumber))
+        {
+            txtContact.text=data.userContactInfo!!.phoneNumber
+        }
+        else
+        {
+            txtContact.text=resources.getText(R.string.dash_line)
+        }
 
 
         /* Employment Info*/
@@ -313,7 +370,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtEmployeeType.text=resources.getText(R.string.dash_line)
+            txtEmployeeType.text=resources.getString(R.string.type_of_employer)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.employerName))
@@ -322,7 +379,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtEmployeeName.text=resources.getText(R.string.dash_line)
+            txtEmployeeName.text=resources.getString(R.string.name_of_employer)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.department))
@@ -331,16 +388,16 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtDepartment.text=resources.getText(R.string.dash_line)
+            txtDepartment.text=resources.getString(R.string.department)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.position))
         {
-            txtOccupation.text = resources.getString(R.string.occupation) + " " + data.userEmploymentInfo!!.position
+            txtOccupation.text = resources.getString(R.string.occupation)+" "+ data.userEmploymentInfo!!.position
         }
         else
         {
-            txtOccupation.text=resources.getText(R.string.dash_line)
+            txtOccupation.text=resources.getString(R.string.occupation)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.employeesIdNumber))
@@ -349,7 +406,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtEmployeeID.text=resources.getText(R.string.dash_line)
+            txtEmployeeID.text=resources.getString(R.string.employees_id_no)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userEmploymentInfo!!.city))
@@ -358,7 +415,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtEmployeeCity.text=resources.getText(R.string.dash_line)
+            txtEmployeeCity.text=resources.getString(R.string.city)+" "+resources.getText(R.string.dash_line)
         }
 
 
@@ -371,7 +428,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtBusinessName.text=resources.getText(R.string.dash_line)
+            txtBusinessName.text=resources.getString(R.string.business_name)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.tinNumber))
@@ -380,7 +437,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtTIN.text=resources.getText(R.string.dash_line)
+            txtTIN.text=resources.getString(R.string.tin_number)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.idType))
@@ -389,7 +446,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtBusinessIdType.text=resources.getText(R.string.dash_line)
+            txtBusinessIdType.text=resources.getString(R.string.id_type)+" "+resources.getText(R.string.dash_line)
         }
 
         if(!TextUtils.isEmpty(data.userBusinessInfo!!.idNumber))
@@ -398,10 +455,25 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
         else
         {
-            txtIdNo.text=resources.getText(R.string.dash_line)
+            txtIdNo.text=resources.getString(R.string.id_number)+" "+resources.getText(R.string.dash_line)
         }
 
 
+    }
+
+    private fun getProfileInfo(data: ResUserInfo.Data)
+    {
+        val sharedPrefOBJ= SharedPref(activity!!)
+        val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
+        userData.user_personal_info.first_name      =data.userPersonalInfo!!.firstName
+        userData.user_personal_info.middle_name     =data.userPersonalInfo!!.middleName
+        userData.user_personal_info.last_name       =data.userPersonalInfo!!.lastName
+        userData.user_personal_info.profile_image   =data.userPersonalInfo!!.profileImage
+        userData.user_info.credit_score             =data.userInfo!!.creditScore
+        val json = Gson().toJson(userData)
+        sharedPrefOBJ.userInfo = json
+
+        (activity!! as DashboardActivity).initData()
     }
 
     private fun returnIdType(idType:String): String {
@@ -444,7 +516,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(resources.getString(R.string.upload_business_url)+userIdsPersonalInfo.fileName)
+                    .load(BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgInformation)
 
@@ -490,7 +562,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
             Glide.with(activity!!)
-                    .load(resources.getString(R.string.profile_image_url)+userIdsPersonalInfo.fileName)
+                    .load(BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgInformation)
 

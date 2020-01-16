@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipeRefreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/llRoot"
+        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/screenBackground"
         android:orientation="vertical">
 
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -22,7 +16,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_4sdp">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/_3sdp">
@@ -114,8 +108,9 @@
                         android:fontFamily="@font/montserrat"
                         android:hint="@string/edit_id_number"
                         android:inputType="text|textNoSuggestions"
-                        android:maxLength="15"
+                        android:maxLength="20"
                         android:maxLines="1"
+                        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.#- "
                         android:textSize="@dimen/_12sdp" />
                 </com.app.l_pesa.common.CommonInputLayout>
 
@@ -165,7 +160,7 @@
                     android:background="@drawable/ripple_green_button"
                     android:fontFamily="@font/montserrat"
                     android:text="@string/submit"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -183,8 +178,8 @@
                     android:background="@drawable/bg_grey_view"
                     android:fontFamily="@font/montserrat"
                     android:text="@string/cancel"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorGrey"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorGreyDeep"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/buttonSubmit"
@@ -212,11 +207,11 @@
                     app:layout_constraintTop_toTopOf="@+id/textView11"
                     app:srcCompat="@drawable/ic_green_tick" />
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPersonalId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -227,4 +222,3 @@
 
     </LinearLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>

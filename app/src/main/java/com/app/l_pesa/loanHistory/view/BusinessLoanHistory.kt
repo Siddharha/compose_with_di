@@ -1,40 +1,46 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.TextInputLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.LinearLayoutManager
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonEditTextRegular
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.adapter.BusinessLoanHistoryAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
 import com.app.l_pesa.loanHistory.presenter.PresenterLoanHistory
+import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_loan_history_list.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import kotlin.collections.ArrayList
 
 
-class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
+class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog        : ProgressDialog
     private var listLoanHistoryBusiness         : ArrayList<ResLoanHistoryBusiness.LoanHistory>? = null
     private lateinit var adapterLoanHistory     : BusinessLoanHistoryAdapter
     private lateinit var bottomSheetBehavior    : BottomSheetBehavior<*>
@@ -74,11 +80,16 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(message)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
@@ -100,6 +111,11 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Business Loan History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing = true
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
@@ -107,6 +123,13 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
             presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,from_date,to_date,type,"",this)
 
         }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            swipeRefreshLayout.isRefreshing = false
+
+        }
+
 
     }
 
@@ -137,7 +160,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
             listLoanHistoryBusiness!!.addAll(loan_historyBusiness)
             adapterLoanHistory          = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterLoanHistory
 
@@ -255,8 +278,8 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
                 val toDate = CommonMethod.dateConvertYMD(etToDate.text.toString())
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 loadHistory(fromDate!!,toDate!!,"FILTER")
-
             }
+
         }
 
         imgCancel.setOnClickListener {
@@ -288,19 +311,23 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity!!,etFromDate)
+        CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity!!,etToDate)
+        CommonMethod.datePicker(activity!!,etToDate)
     }
 
 
     override fun onClickList() {
+
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Business Loan History")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         val bundle = Bundle()
         bundle.putString("LOAN_TYPE","business_loan")
         val intent = Intent(activity, LoanHistoryDetailsActivity::class.java)
@@ -314,7 +341,7 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
         val dialog = AlertDialog.Builder(activity!!)
 
         val font = ResourcesCompat.getFont(activity!!, R.font.montserrat)
-        val taskEditText    = CommonEditTextRegular(activity)
+        val taskEditText    = CommonEditTextRegular(activity!!)
         taskEditText.typeface=font
         val textInputLayout = TextInputLayout(activity)
 
@@ -375,6 +402,26 @@ class BusinessLoanHistory:Fragment(), ICallBackBusinessLoanHistory {
     override fun onFailureRemoveLoan(message: String) {
         dismissDialog()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 }

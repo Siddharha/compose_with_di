@@ -1,5 +1,6 @@
 package com.app.l_pesa.login.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -12,14 +13,9 @@ import org.json.JSONObject
 import retrofit2.HttpException
 
 
-/**
- * Created by Intellij Amiya on 28-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
-
 class PresenterLogin {
 
+    @SuppressLint("CheckResult")
     fun doLogin(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackLogin)
     {
         RetrofitHelper.getRetrofit(BaseService::class.java).doLogin(jsonRequest)
@@ -35,16 +31,12 @@ class PresenterLogin {
 
                       if(response.status.isSuccess)
                       {
-
-                          if(response.data.user_info.register_step=="3" || response.data.user_info.register_step=="")
-                          {
-                              callBackOBJ.onSuccessLogin(response.data)
-                          }
+                           callBackOBJ.onSuccessLogin(response.data)
 
                       }
                        else
                       {
-                              callBackOBJ.onErrorLogin(response.status.message)
+                           callBackOBJ.onErrorLogin(response.status.message)
 
                       }
 
@@ -59,7 +51,7 @@ class PresenterLogin {
                     {
                         val errorVal     = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
                         val jsonStatusCode        =    jsonStatus.getInt("statusCode")

@@ -2,20 +2,21 @@ package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.lpk.adapter.AdapterInterestHistory
 import com.app.l_pesa.lpk.inter.ICallBackInterestHistory
 import com.app.l_pesa.lpk.model.ResInterestHistory
 import com.app.l_pesa.lpk.presenter.PresenterInterestHistory
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_interest_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
@@ -79,6 +80,11 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
     private fun loadInterestHistory(from_date:String,to_date:String,type:String)
     {
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Interest History")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         swipeRefreshLayout.isRefreshing = true
         val presenterInterestHistory = PresenterInterestHistory()
         presenterInterestHistory.getInterestHistory(activity!!,from_date,to_date,type,this)
@@ -161,15 +167,13 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etFromDate)
+       CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etToDate)
+       CommonMethod.datePicker(activity!!,etToDate)
     }
 
     override fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?, from_date: String, to_date: String) {
@@ -185,7 +189,6 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
             listInterestHistory.addAll(userInterestHistory!!)
             adapterInterestHistory      = AdapterInterestHistory(activity!!, listInterestHistory)
             val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterInterestHistory
 
@@ -259,6 +262,10 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
         if(type=="FILTER")
         {
             txt_message.text = resources.getString(R.string.no_result_found)
+        }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_loan_history_message)
         }
         cardView.visibility=View.VISIBLE
     }

@@ -2,38 +2,38 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
-import com.app.l_pesa.login.presenter.PresenterLogin
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.adapter.IdListAdapter
 import com.app.l_pesa.profile.inter.ICallBackBusinessInfo
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterBusinessInfo
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-
 import kotlinx.android.synthetic.main.activity_profile_edit_business_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_business_info.*
-import java.util.HashMap
+import java.util.*
 
-class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallBackBusinessInfo, ICallBackLogin {
+class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallBackBusinessInfo {
 
     private var idType=""
 
@@ -114,9 +114,9 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         val dialog= Dialog(this@ProfileEditBusinessInfoActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recycler_country) as RecyclerView?
+        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter                = IdListAdapter(this@ProfileEditBusinessInfoActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditBusinessInfoActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager     = LinearLayoutManager(this@ProfileEditBusinessInfoActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
 
@@ -145,21 +145,22 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
             hashMapNew["id_type"]           = idType
             hashMapNew["id_number"]         = etBusinessIdNumber.text.toString()
 
+            CommonMethod.hideKeyboardView(this@ProfileEditBusinessInfoActivity)
             if(hashMapOLD==hashMapNew)
             {
                 CommonMethod.customSnackBarError(llRoot,this@ProfileEditBusinessInfoActivity,resources.getString(R.string.change_one_info))
             }
             else
             {
-                if(TextUtils.isEmpty(etBusinessName.text.toString()))
+                if(TextUtils.isEmpty(etBusinessName.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_business_name))
                 }
-                else if(TextUtils.isEmpty(etBusinessTinNo.text.toString()))
+                else if(TextUtils.isEmpty(etBusinessTinNo.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_tin_number))
                 }
-                else if(TextUtils.isEmpty(etBusinessIdNumber.text.toString()))
+                else if(TextUtils.isEmpty(etBusinessIdNumber.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_id_number))
                 }
@@ -167,15 +168,21 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
                 {
                     if(CommonMethod.isNetworkAvailable(this@ProfileEditBusinessInfoActivity))
                     {
+                        val logger = AppEventsLogger.newLogger(this@ProfileEditBusinessInfoActivity)
+                        val params =  Bundle()
+                        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Edit Business Info Section")
+                        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
+
                         buttonSubmit.isClickable=false
                         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
                         swipeRefreshLayout.isRefreshing=true
 
                         val jsonObject = JsonObject()
-                        jsonObject.addProperty("business_name",etBusinessName.text.toString())
-                        jsonObject.addProperty("tin_number",etBusinessTinNo.text.toString())
+                        jsonObject.addProperty("business_name",CommonMethod.removeExtraSpace(etBusinessName.text.toString()))
+                        jsonObject.addProperty("tin_number",CommonMethod.removeExtraSpace(etBusinessTinNo.text.toString()))
                         jsonObject.addProperty("id_type",idType)
-                        jsonObject.addProperty("id_number",etBusinessIdNumber.text.toString())
+                        jsonObject.addProperty("id_number",CommonMethod.removeExtraSpace(etBusinessIdNumber.text.toString()))
 
                         val presenterBusinessInfo= PresenterBusinessInfo()
                         presenterBusinessInfo.doChangeBusinessInfo(this@ProfileEditBusinessInfoActivity,jsonObject,this)
@@ -188,16 +195,16 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
                 }
             }
 
-
         }
     }
 
     override fun onSuccessBusinessInfo() {
 
+        swipeRefreshLayout.isRefreshing=false
         val sharedPrefOBJ = SharedPref(this@ProfileEditBusinessInfoActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditBusinessInfoActivity, jsonObject, this)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onFailureBusinessInfo(message: String) {
@@ -206,36 +213,25 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         customSnackBarError(llRoot,message)
     }
 
-    override fun onSuccessLogin(data: LoginData) {
-
-        val sharedPrefOBJ=SharedPref(this@ProfileEditBusinessInfoActivity)
-        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
-        sharedPrefOBJ.accessToken   = data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
-        swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
-
-    override fun onErrorLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        Toast.makeText(this@ProfileEditBusinessInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onIncompleteLogin(message: String) {
+    override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditBusinessInfoActivity)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ProfileEditBusinessInfoActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ProfileEditBusinessInfoActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
 
-    }
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
-    override fun onFailureLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,this@ProfileEditBusinessInfoActivity,jsonMessage)
     }
 
     private fun toolbarFont(context: Activity) {
@@ -243,10 +239,9 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -272,7 +267,7 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
         return when (item.itemId) {
             android.R.id.home -> {
 
-               if(swipeRefreshLayout.isRefreshing)
+               if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditBusinessInfoActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@ProfileEditBusinessInfoActivity,resources.getString(R.string.please_wait))
                 }
@@ -294,6 +289,12 @@ class ProfileEditBusinessInfoActivity : AppCompatActivity(), ICallBackId, ICallB
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@ProfileEditBusinessInfoActivity::class.java.simpleName)
+
     }
 
 }

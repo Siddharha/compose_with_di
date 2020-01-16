@@ -1,79 +1,74 @@
 package com.app.l_pesa.common
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Typeface
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.text.TextUtils
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
-import com.app.l_pesa.dashboard.view.DashboardActivity
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
-import java.util.regex.Matcher
+import java.util.*
 import java.util.regex.Pattern
 
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 object CommonMethod {
 
+    fun sessionTime(): Int {
+        return 300000
+    }
+
+    fun splashTime(): Long {
+        return 2000
+    }
+
+
+    //@IntRange(from = 0, to = 2)
     fun isNetworkAvailable(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-            var isConnected = false
-            val activeNetwork = connectivityManager.activeNetworkInfo
-            isConnected = activeNetwork != null && activeNetwork.isConnected
-
-        return isConnected
+        var result = false //var result = 0. Returns connection type. 0: none; 1: mobile data; 2: wifi
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            cm?.run {
+                cm.getNetworkCapabilities(cm.activeNetwork)?.run {
+                    if (hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        result = true //2
+                    } else if (hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        result = true  //1
+                    }
+                }
+            }
+        } else {
+            cm?.run {
+                cm.activeNetworkInfo?.run {
+                    if (type == ConnectivityManager.TYPE_WIFI) {
+                        result = true //2
+                    } else if (type == ConnectivityManager.TYPE_MOBILE) {
+                        result = true //1
+                    }
+                }
+            }
+        }
+        return result
     }
 
     @SuppressLint("SimpleDateFormat")
     fun dateConvert(inputDate:String): String? {
-
-       /* if(inputDate.contentEquals(":")) // Have Date Time
-        {
             return if(!TextUtils.isEmpty(inputDate))
             {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy HH:mm:ss") //05/04/2019 06:46:13
+                val inputFormat  = SimpleDateFormat("dd/MM/yyyy", Locale.US)
                 val date         = inputFormat.parse(inputDate)
 
-                val outputFormat = SimpleDateFormat("MMMM dd, yyyy HH:mm:ss")
-                outputFormat.format(date)
+                val outputFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
+                outputFormat.format(date!!)
             }
             else ""
-        }
-        else
-        {*/
-            return if(!TextUtils.isEmpty(inputDate))
-            {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy")
-                val date         = inputFormat.parse(inputDate)
-
-                val outputFormat = SimpleDateFormat("MMM dd, yyyy")
-                outputFormat.format(date)
-            }
-            else ""
-
-
 
     }
 
@@ -82,61 +77,16 @@ object CommonMethod {
 
         return if(!TextUtils.isEmpty(inputDate))
         {
-            val inputFormat  = SimpleDateFormat("dd-MM-yyyy")
+            val inputFormat  = SimpleDateFormat("dd-MM-yyyy", Locale.US)
             val date         = inputFormat.parse(inputDate)
 
-            val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-            outputFormat.format(date)
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            outputFormat.format(date!!)
         }
         else ""
 
-
-
     }
 
-    @SuppressLint("SimpleDateFormat")
-    fun dateTimeConvert(inputDate:String): String? {
-
-         return if(!TextUtils.isEmpty(inputDate))
-            {
-                val inputFormat  = SimpleDateFormat("dd/MM/yyyy HH:mm:ss") //05/04/2019 06:46:13
-                val date         = inputFormat.parse(inputDate)
-
-                val outputFormat = SimpleDateFormat("MMM dd, yyyy HH:mm:ss")
-                outputFormat.format(date)
-            }
-            else ""
-
-
-    }
-
-    fun fileCompress(fileOBJ: File): File
-    {
-        val bitOptionOBJ    = BitmapFactory.Options()
-        bitOptionOBJ.inJustDecodeBounds      = true
-        bitOptionOBJ.inSampleSize            = 6
-
-        var inputStream = FileInputStream(fileOBJ)
-        BitmapFactory.decodeStream(inputStream, null, bitOptionOBJ)
-        inputStream.close()
-        val requiredSize = 85
-        var scale = 1
-        while (bitOptionOBJ.outWidth / scale / 2 >= requiredSize && bitOptionOBJ.outHeight / scale / 2 >= requiredSize) {
-            scale *= 2
-        }
-
-        val bitOptionNewOBJ        = BitmapFactory.Options()
-        bitOptionNewOBJ.inSampleSize                = scale
-        inputStream                                 = FileInputStream(fileOBJ)
-        val selectedBitmap                  = BitmapFactory.decodeStream(inputStream, null, bitOptionNewOBJ)
-        inputStream.close()
-
-        fileOBJ.createNewFile()
-        val outputStream = FileOutputStream(fileOBJ)
-        selectedBitmap?.compress(Bitmap.CompressFormat.JPEG, 85 , outputStream)
-        return fileOBJ
-
-    }
 
     fun customSnackBarError(view: View,context: Context,message:String) {
 
@@ -146,7 +96,7 @@ object CommonMethod {
         val customView = LayoutInflater.from(context).inflate(R.layout.snackbar_error, null)
         (snackBarOBJ.view as ViewGroup).addView(customView)
 
-        val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
+        val txtTitle= customView.findViewById(R.id.txtTitle) as CommonTextRegular
 
         txtTitle.text = message
 
@@ -187,18 +137,6 @@ object CommonMethod {
 
     }
 
-    fun passwordRegex(password: String): Boolean {
-
-        val pattern: Pattern
-        val matcher: Matcher
-
-        val passwordPattern =  "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%^&+=])(?=\\S+\$).{8,16}\$"
-        pattern = Pattern.compile(passwordPattern)
-        matcher = pattern.matcher(password)
-        return matcher.matches()
-
-    }
-
 
     fun isValidEmailAddress(email: String): Boolean {
         val emailPattern = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
@@ -218,33 +156,38 @@ object CommonMethod {
 
     }
 
-    fun countNumeric(number: String): Int {
-        var flag = 0
-        for (i in 0 until number.length) {
-            if (Character.isDigit(number[i])) {
-                flag++
+    fun datePicker(ctx: Context, editText: CommonEditTextRegular) {
+
+        val newCalendar = Calendar.getInstance()
+        val fromDatePickerDialog = DatePickerDialog(ctx, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val newDate = Calendar.getInstance()
+            newDate.set(year, monthOfYear, dayOfMonth)
+            val myFormat = "dd-MM-yyyy"
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            editText.setText(sdf.format(newDate.time))
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH))
+
+        fromDatePickerDialog.show()
+        fromDatePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+    }
+
+    fun removeExtraSpace(input: String): String {
+        var input = input
+        input = input.trim { it <= ' ' }
+        val x = ArrayList(Arrays.asList(*input.split("".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
+        var i = 0
+        while (i < x.size - 1) {
+            if (x[i] == " " && x[i + 1] == " ") {
+                x.removeAt(i)
+                i--
             }
+            i++
         }
-        return flag
+        var word = ""
+        for (each in x)
+            word += each
+        return word
     }
-
-    fun hasSymbol(data: CharSequence): Boolean {
-        val password = data.toString()
-        return !password.matches("[A-Za-z0-9 ]*".toRegex())
-    }
-
-    fun hasUpperCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toLowerCase()
-    }
-
-    fun hasLowerCase(data: CharSequence): Boolean {
-        val password = data.toString()
-        return password != password.toUpperCase()
-    }
-
-
-
 
 
 }

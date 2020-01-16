@@ -4,4 +4,5 @@ interface ICallBackContactInfo {
 
     fun onSuccessContactInfo()
     fun onFailureContactInfo(message: String)
+    fun onSessionTimeOut(message: String)
 }

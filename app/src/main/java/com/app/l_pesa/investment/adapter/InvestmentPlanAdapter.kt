@@ -3,14 +3,14 @@ package com.app.l_pesa.investment.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.text.Html
 import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.investment.inter.ICallBackInvestmentPlan
 import com.app.l_pesa.investment.model.ResInvestmentPlan
@@ -43,7 +43,7 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val recyclerView: RecyclerView.ViewHolder
+        val recyclerView:RecyclerView.ViewHolder
 
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.layout_investment_plan_list, parent, false)
         recyclerView = SelectViewHolder(itemView)
@@ -65,7 +65,7 @@ class InvestmentPlanAdapter (val context: Context, private val investmentList: A
             var txtTitle             : TextView              = itemView.findViewById(R.id.txtTitle) as TextView
             var txtDuration          : TextView              = itemView.findViewById(R.id.txtDuration) as TextView
             var txtRate              : TextView              = itemView.findViewById(R.id.txtRate) as TextView
-            var rootLayout           : CardView              = itemView.findViewById(R.id.rootLayout) as CardView
+            var rootLayout           : CardView = itemView.findViewById(R.id.rootLayout) as CardView
 
 
 

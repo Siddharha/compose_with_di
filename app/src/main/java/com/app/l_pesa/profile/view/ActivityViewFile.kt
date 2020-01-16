@@ -3,18 +3,21 @@ package com.app.l_pesa.profile.view
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.profile.model.ImageRequestListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-
 import kotlinx.android.synthetic.main.activity_view_file.*
 import kotlinx.android.synthetic.main.content_activity_view_file.*
 
-class ActivityViewFile : AppCompatActivity() {
+class ActivityViewFile : AppCompatActivity(), ImageRequestListener.Callback {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,16 +31,34 @@ class ActivityViewFile : AppCompatActivity() {
 
     private fun initData()
     {
-        val bundle       = intent.extras
+        val bundle      = intent.extras
         val fileName     = bundle!!.getString("FILE_NAME")
+        loadImage(fileName!!)
 
-        val options = RequestOptions()
-        options.error(R.drawable.ic_id_no_image)
-        options.placeholder(R.drawable.ic_id_no_image)
-        Glide.with(this@ActivityViewFile)
-                .load(fileName)
-                .apply(options)
+    }
+
+    private fun loadImage(fullImageUrl: String) {
+
+        val requestOption = RequestOptions()
+                   .placeholder(R.drawable.ic_id_no_image).centerCrop()
+
+        Glide.with(this@ActivityViewFile).load(fullImageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .thumbnail(Glide.with(this@ActivityViewFile)
+                        .load(fullImageUrl)
+                        .apply(requestOption))
+                .apply(requestOption)
+                .listener(ImageRequestListener(this))
                 .into(imgFile)
+    }
+
+    override fun onFailure(message: String?) {
+
+    }
+
+    override fun onSuccess(dataSource: String) {
+
+        progressBar.visibility= View.INVISIBLE
     }
 
     private fun toolbarFont(context: Activity) {
@@ -45,10 +66,9 @@ class ActivityViewFile : AppCompatActivity() {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -70,6 +90,12 @@ class ActivityViewFile : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@ActivityViewFile::class.java.simpleName)
+
     }
 
 }

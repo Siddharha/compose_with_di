@@ -1,7 +1,7 @@
 package com.app.l_pesa.loanHistory.inter
 
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
-import java.util.ArrayList
+import java.util.*
 
 interface ICallBackCurrentLoanHistory {
 
@@ -15,4 +15,6 @@ interface ICallBackCurrentLoanHistory {
 
     fun onSuccessRemoveLoan(position: Int)
     fun onFailureRemoveLoan(message: String)
+
+    fun onSessionTimeOut(message: String)
 }

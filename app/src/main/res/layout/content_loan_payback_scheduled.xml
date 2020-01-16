@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
@@ -85,7 +85,7 @@
             >
 
             <com.app.l_pesa.common.CustomButtonRegular
-                android:id="@+id/button_pay_all"
+                android:id="@+id/buttonFullAmount"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_30sdp"
                 android:text="@string/pay_full_amount"
@@ -113,7 +113,7 @@
             />
     </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rlPayback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -122,5 +122,5 @@
     </LinearLayout>
 
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

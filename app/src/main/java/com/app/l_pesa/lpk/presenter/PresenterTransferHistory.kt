@@ -1,5 +1,6 @@
 package com.app.l_pesa.lpk.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,7 +14,8 @@ import retrofit2.HttpException
 
 class PresenterTransferHistory {
 
-    fun getTokenHistory(contextOBJ: Context, from_date:String,to_date:String,type:String,callBackOBJ: ICallBackTransferHistory)
+    @SuppressLint("CheckResult")
+    fun getTokenHistory(contextOBJ: Context, from_date:String, to_date:String, type:String, callBackOBJ: ICallBackTransferHistory)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getTokenHistory("",from_date,to_date)
@@ -52,13 +54,26 @@ class PresenterTransferHistory {
                     error ->
                     try
                     {
-                        val errorVal              = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus           =    jsonError.getJSONObject("status")
-                        val jsonMessage           =    jsonStatus.getString("message")
+                        val errorVal       = error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        callBackOBJ.onErrorTransferHistory(jsonMessage)
+                            callBackOBJ.onErrorTransferHistory(jsonMessage)
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+
+                            }
+                            else
+                            {
+                                callBackOBJ.onErrorTransferHistory(jsonMessage)
+                            }
+                        }
                     }
                     catch (exp: Exception)
                     {

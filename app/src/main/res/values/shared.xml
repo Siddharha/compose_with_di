@@ -3,6 +3,7 @@
 
     <string name="status_true">TRUE</string>
     <string name="status_false">FALSE</string>
+    <string name="status_error">ERROR</string>
 
     <string name="address_prof">Address Proof</string>
 
@@ -10,8 +11,5 @@
     <string name="open_tab_loan">LOAN</string>
     <string name="open_tab_profile">PROFILE</string>
 
-
-    <string name="profile_image_url">https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/</string>
-    <string name="upload_business_url">https://d2yh190ggw1qg8.cloudfront.net/uploads/business/</string>
 
 </resources>

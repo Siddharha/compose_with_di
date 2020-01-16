@@ -2,28 +2,34 @@ package com.app.l_pesa.wallet.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import android.os.CountDownTimer
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.wallet.adapter.TransactionAllAdapter
 import com.app.l_pesa.wallet.inter.ICallBackTransaction
 import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.presenter.PresenterTransactionAll
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_transaction_history.*
 import kotlinx.android.synthetic.main.content_transaction_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
 import java.util.*
-import android.support.annotation.NonNull
 
 
 class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
@@ -31,6 +37,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     private lateinit var listSavingsHistory           : ArrayList<ResWalletHistory.SavingsHistory>
     private lateinit var adapterTransactionHistory    : TransactionAllAdapter
     private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
+    private lateinit var countDownTimer               : CountDownTimer
 
     private var hasNext=false
     private var after=""
@@ -45,6 +52,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         swipeRefresh()
         initData("","","DEFAULT")
+        initTimer()
 
     }
 
@@ -70,6 +78,11 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
 
         if(CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
         {
+            val logger = AppEventsLogger.newLogger(this@TransactionHistoryActivity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Transaction History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing=true
             val presenterTransactionAll= PresenterTransactionAll()
             presenterTransactionAll.getTransactionAll(this@TransactionHistoryActivity,from_date,to_date,type,this)
@@ -103,7 +116,7 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
             listSavingsHistory.addAll(savingsHistory)
             adapterTransactionHistory   = TransactionAllAdapter(this@TransactionHistoryActivity, listSavingsHistory)
             val llmOBJ                  = LinearLayoutManager(this@TransactionHistoryActivity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterTransactionHistory
             adapterTransactionHistory.notifyDataSetChanged()
@@ -240,6 +253,10 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         {
             txt_message.text = resources.getString(R.string.no_result_found)
         }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_transactional_history_message)
+        }
         cardView.visibility=View.VISIBLE
     }
 
@@ -254,15 +271,34 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(this@TransactionHistoryActivity,etFromDate)
+         CommonMethod.datePicker(this@TransactionHistoryActivity,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(this@TransactionHistoryActivity,etToDate)
+        CommonMethod.datePicker(this@TransactionHistoryActivity,etToDate)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing=false
+        val dialogBuilder = AlertDialog.Builder(this@TransactionHistoryActivity,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@TransactionHistoryActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@TransactionHistoryActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
 
@@ -271,10 +307,9 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -284,9 +319,16 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@TransactionHistoryActivity))
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@TransactionHistoryActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                }
                 true
+
             }
 
             else -> super.onOptionsItemSelected(item)
@@ -296,6 +338,41 @@ class TransactionHistoryActivity : AppCompatActivity(), ICallBackTransaction {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
+    }
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@TransactionHistoryActivity::class.java.simpleName)
+
     }
 
 

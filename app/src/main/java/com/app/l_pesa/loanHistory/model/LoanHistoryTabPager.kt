@@ -1,14 +1,13 @@
 package com.app.l_pesa.loanHistory.model
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.app.l_pesa.loanHistory.view.BusinessLoanHistory
 import com.app.l_pesa.loanHistory.view.CurrentLoanHistory
 
 
-class LoanHistoryTabPager(fm: FragmentManager, //integer to count number of tabs
-    private var tabCount: Int)//Initializing tab count
+class LoanHistoryTabPager(fm: FragmentManager,private var tabCount: Int)//Initializing tab count
     : FragmentStatePagerAdapter(fm) {
 
     //Overriding method getItem

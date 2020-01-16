@@ -1,27 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_300sdp"
+    android:layout_height="@dimen/_275sdp"
     android:layout_gravity="center"
+    android:background="@color/colorWhite"
    >
+
+        <RelativeLayout
+            android:id="@+id/rootHeader"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+           >
+
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:fontFamily="@font/montserrat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/select_your_country"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_13sdp" />
+
+        </RelativeLayout>
 
         <com.app.l_pesa.common.CommonEditTextRegular
             android:id="@+id/etCountry"
+            android:layout_below="@+id/rootHeader"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:textColor="@color/textColors"
+            android:layout_height="@dimen/_42sdp"
+            android:textColor="@color/dark_text_color"
+            android:textColorHint="@color/colorGrey"
             android:textSize="@dimen/_12sdp"
             android:maxLines="1"
             android:ellipsize="end"
             android:inputType="text|textNoSuggestions"
             android:hint="@string/search_country"
-            android:layout_marginStart="@dimen/_3sdp"
-            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:fontFamily="@font/montserrat"
             />
 
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_country"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_below="@+id/etCountry"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

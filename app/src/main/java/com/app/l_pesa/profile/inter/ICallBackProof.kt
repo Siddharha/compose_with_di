@@ -7,4 +7,5 @@ interface ICallBackProof {
 
     fun onSuccessDeleteProof(position: Int)
     fun onFailureDeleteProof(message: String)
+    fun onSessionTimeOut(message: String)
 }

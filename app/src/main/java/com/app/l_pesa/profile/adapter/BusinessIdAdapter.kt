@@ -1,19 +1,18 @@
 package com.app.l_pesa.profile.adapter
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.profile.inter.ICallBackClickBusinessId
 import com.app.l_pesa.profile.model.ResUserInfo
-import java.util.ArrayList
+import java.util.*
 
 class BusinessIdAdapter(val context: Context, private val userIdsBusinessInfo: ArrayList<ResUserInfo.UserIdsBusinessInfo>, private val callBack: ICallBackClickBusinessId) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -72,8 +71,8 @@ class BusinessIdAdapter(val context: Context, private val userIdsBusinessInfo: A
             var txtIdNumber          : TextView     = itemView.findViewById(R.id.txtIdNumber) as TextView
             var txtIdType            : TextView     = itemView.findViewById(R.id.txtIdType) as TextView
             var txtUploadTime        : TextView     = itemView.findViewById(R.id.txtUploadTime) as TextView
-            var imgVerifiedStatus    : ImageView = itemView.findViewById(R.id.imgVerifiedStatus) as ImageView
-            var imgEdit              : ImageButton = itemView.findViewById(R.id.imgEdit) as ImageButton
+            var imgVerifiedStatus    : ImageView    = itemView.findViewById(R.id.imgVerifiedStatus) as ImageView
+            var imgEdit              : ImageButton  = itemView.findViewById(R.id.imgEdit) as ImageButton
 
         }
 

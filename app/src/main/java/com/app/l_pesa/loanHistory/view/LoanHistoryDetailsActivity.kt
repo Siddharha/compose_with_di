@@ -5,26 +5,28 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
-import android.widget.TextView
-import com.app.l_pesa.R
-import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
-
-import kotlinx.android.synthetic.main.activity_loan_history_details.*
-import kotlinx.android.synthetic.main.content_loan_history_details.*
-import android.text.Html
 import android.os.Build
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
+import android.os.Bundle
+import android.text.Html
 import android.text.Spanned
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_loan_history_details.*
+import kotlinx.android.synthetic.main.content_loan_history_details.*
 import java.text.DecimalFormat
 
 
@@ -49,6 +51,13 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         format.isDecimalSeparatorAlwaysShown = false
 
         val loanHistoryData= GlobalLoanHistoryModel.getInstance().modelData
+
+        val logger = AppEventsLogger.newLogger(this@LoanHistoryDetailsActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, loanHistoryData?.loan_id.toString())
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan History Details")
+        params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY, loanHistoryData?.currency_code)
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
         txt_loan_no_val.text = loanHistoryData.identity_number
@@ -196,10 +205,9 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -222,6 +230,12 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@LoanHistoryDetailsActivity::class.java.simpleName)
+
     }
 
 }

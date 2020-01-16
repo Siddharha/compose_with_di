@@ -1,14 +1,6 @@
 package com.app.l_pesa.splash.model
 
-import android.support.annotation.Keep
 import com.app.l_pesa.common.CommonStatusModel
-
-
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 
 
 data class ResModelCountry(val status:CommonStatusModel,val data:ResModelData)

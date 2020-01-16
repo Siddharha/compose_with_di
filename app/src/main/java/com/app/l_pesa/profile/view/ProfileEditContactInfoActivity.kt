@@ -1,35 +1,36 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.login.inter.ICallBackLogin
-import com.app.l_pesa.login.model.LoginData
-import com.app.l_pesa.login.presenter.PresenterLogin
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.inter.ICallBackContactInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterContactInfo
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_profile_edit_contact_info.*
 import kotlinx.android.synthetic.main.content_profile_edit_contact_info.*
 
-class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo, ICallBackLogin {
+class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,27 +92,33 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
             hashMapNew["mob"]              = etMob.text.toString()
 
 
+            CommonMethod.hideKeyboardView(this@ProfileEditContactInfoActivity)
             if(hashMapOLD == hashMapNew)
             {
                 CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,resources.getString(R.string.change_one_info))
             }
             else
             {
-                if(TextUtils.isEmpty(etAddress.text.toString()))
+                if(TextUtils.isEmpty(etAddress.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_street_address))
                 }
-                else if(TextUtils.isEmpty(etPostalAddress.text.toString()))
+                else if(TextUtils.isEmpty(etPostalAddress.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_postal_code))
                 }
-                else if(TextUtils.isEmpty(etCity.text.toString()))
+                else if(TextUtils.isEmpty(etCity.text.toString().trim()))
                 {
                     customSnackBarError(llRoot,resources.getString(R.string.required_city))
                 }
 
                 else
                 {
+                    val logger = AppEventsLogger.newLogger(this@ProfileEditContactInfoActivity)
+                    val params =  Bundle()
+                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Profile Edit Contact Section")
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
                     if(CommonMethod.isNetworkAvailable(this@ProfileEditContactInfoActivity))
                     {
                         buttonSubmit.isClickable=false
@@ -119,11 +126,10 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
                         swipeRefreshLayout.isRefreshing=true
 
                         val jsonObject = JsonObject()
-                        jsonObject.addProperty("street_address",etAddress.text.toString())
-                        jsonObject.addProperty("postal_address",etPostalAddress.text.toString())
-                        jsonObject.addProperty("city",etCity.text.toString())
-                        jsonObject.addProperty("phone_number",etMob.text.toString())
-
+                        jsonObject.addProperty("street_address",CommonMethod.removeExtraSpace(etAddress.text.toString()))
+                        jsonObject.addProperty("postal_address",CommonMethod.removeExtraSpace(etPostalAddress.text.toString()))
+                        jsonObject.addProperty("city",CommonMethod.removeExtraSpace(etCity.text.toString()))
+                        jsonObject.addProperty("phone_number",CommonMethod.removeExtraSpace(etMob.text.toString()))
 
                         val presenterContactInfo= PresenterContactInfo()
                         presenterContactInfo.doChangeContactInfo(this@ProfileEditContactInfoActivity,jsonObject,this)
@@ -147,10 +153,11 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
 
     override fun onSuccessContactInfo() {
 
+        swipeRefreshLayout.isRefreshing=false
         val sharedPrefOBJ = SharedPref(this@ProfileEditContactInfoActivity)
-        val jsonObject = JsonParser().parse(sharedPrefOBJ.loginRequest).asJsonObject
-        val presenterLoginObj = PresenterLogin()
-        presenterLoginObj.doLogin(this@ProfileEditContactInfoActivity, jsonObject, this)
+        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
+        onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     override fun onFailureContactInfo(message: String) {
@@ -160,37 +167,27 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         customSnackBarError(llRoot,message)
     }
 
-    override fun onSuccessLogin(data: LoginData) {
-
-        val sharedPrefOBJ=SharedPref(this@ProfileEditContactInfoActivity)
-        sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
-        sharedPrefOBJ.accessToken   = data.access_token
-        val gson = Gson()
-        val json = gson.toJson(data)
-        sharedPrefOBJ.userInfo      = json
+    override fun onSessionTimeOut(message: String) {
         swipeRefreshLayout.isRefreshing=false
-        onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
 
-    override fun onErrorLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        Toast.makeText(this@ProfileEditContactInfoActivity,jsonMessage, Toast.LENGTH_SHORT).show()
-    }
+        val dialogBuilder = AlertDialog.Builder(this@ProfileEditContactInfoActivity,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@ProfileEditContactInfoActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@ProfileEditContactInfoActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
 
-    override fun onIncompleteLogin(message: String) {
-
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 
-    override fun onFailureLogin(jsonMessage: String) {
-        swipeRefreshLayout.isRefreshing=false
-        buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,jsonMessage)
-    }
 
     private fun customSnackBarError(view: View, message:String) {
 
@@ -201,10 +198,8 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         (snackBarOBJ.view as ViewGroup).addView(customView)
         val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
         txtTitle.text = message
-
         snackBarOBJ.show()
     }
-
 
 
     private fun toolbarFont(context: Activity) {
@@ -212,10 +207,9 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -228,7 +222,7 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
         return when (item.itemId) {
             android.R.id.home -> {
 
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@ProfileEditContactInfoActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@ProfileEditContactInfoActivity,resources.getString(R.string.please_wait))
                 }
@@ -250,6 +244,12 @@ class ProfileEditContactInfoActivity : AppCompatActivity(), ICallBackContactInfo
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@ProfileEditContactInfoActivity::class.java.simpleName)
+
     }
 
 }

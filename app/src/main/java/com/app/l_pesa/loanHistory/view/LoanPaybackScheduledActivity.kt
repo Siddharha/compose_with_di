@@ -4,15 +4,17 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
@@ -20,6 +22,8 @@ import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import com.app.l_pesa.loanHistory.presenter.PresenterPaybackSchedule
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_payback_scheduled.*
 import kotlinx.android.synthetic.main.content_loan_payback_scheduled.*
@@ -65,14 +69,14 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         val sharedPref= SharedPref(this@LoanPaybackScheduledActivity)
         if(sharedPref.payFullAmount=="C" )
         {
-            button_pay_all.visibility= View.INVISIBLE
+            buttonFullAmount.visibility= View.INVISIBLE
             txt_interest_discount.visibility= View.GONE
         }
         else
         {
-            button_pay_all.visibility= View.VISIBLE
+            buttonFullAmount.visibility= View.VISIBLE
             txt_interest_discount.visibility= View.VISIBLE
-            button_pay_all.setOnClickListener {
+            buttonFullAmount.setOnClickListener {
 
                 if(swipeRefreshLayout.isRefreshing)
                 {
@@ -83,7 +87,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
                     if(dataOBJ!!.loanInfo!!.loanId!=0)
                     {
-                        payAll(dataOBJ!!)
+                        doPayAll(dataOBJ!!)
                     }
                 }
 
@@ -94,7 +98,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     }
 
     @SuppressLint("SetTextI18n")
-    private fun payAll(dataOBJ: ResPaybackSchedule.Data)
+    private fun doPayAll(dataOBJ: ResPaybackSchedule.Data)
     {
         val alertDialog         = AlertDialog.Builder(this@LoanPaybackScheduledActivity).create()
         val inflater            = LayoutInflater.from(this@LoanPaybackScheduledActivity)
@@ -119,6 +123,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     private fun initLoad()
     {
+
         swipeRefreshLayout.isRefreshing = true
         val bundle     = intent.extras
         val loanType   = bundle!!.getString("LOAN_TYPE")
@@ -128,7 +133,13 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         jsonObject.addProperty("loan_type",loanType)
         jsonObject.addProperty("loan_id",loanId)
 
-        println("JSON"+jsonObject)
+        //println("JSON"+jsonObject)
+
+        val logger = AppEventsLogger.newLogger(this@LoanPaybackScheduledActivity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_ID, loanId)
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Payback Schedule")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         val presenterPaybackSchedule= PresenterPaybackSchedule()
         presenterPaybackSchedule.doPaybackSchedule(this@LoanPaybackScheduledActivity,jsonObject,this)
@@ -147,7 +158,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         {
 
             val adapterPaymentSchedule         = PaymentScheduleAdapter(this@LoanPaybackScheduledActivity,data.schedule!!,data.loanInfo!!)
-            rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, LinearLayoutManager.VERTICAL, false)
+            rlPayback.layoutManager            = LinearLayoutManager(this@LoanPaybackScheduledActivity, RecyclerView.VERTICAL, false)
             rlPayback.adapter                  = adapterPaymentSchedule
         }
     }
@@ -165,10 +176,9 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -178,14 +188,13 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                if(swipeRefreshLayout.isRefreshing)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@LoanPaybackScheduledActivity))
                 {
                     CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
                 }
                 else
                 {
                     onBackPressed()
-                    overridePendingTransition(R.anim.left_in, R.anim.right_out)
 
                 }
                 true
@@ -198,15 +207,14 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
     override fun onBackPressed() {
 
-        if(swipeRefreshLayout.isRefreshing)
-        {
-            CommonMethod.customSnackBarError(llRoot,this@LoanPaybackScheduledActivity,resources.getString(R.string.please_wait))
-        }
-        else
-        {
-            super.onBackPressed()
-            overridePendingTransition(R.anim.left_in, R.anim.right_out)
-        }
+       super.onBackPressed()
+       overridePendingTransition(R.anim.left_in, R.anim.right_out)
+
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@LoanPaybackScheduledActivity::class.java.simpleName)
 
     }
 

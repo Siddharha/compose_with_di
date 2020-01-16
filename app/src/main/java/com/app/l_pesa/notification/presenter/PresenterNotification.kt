@@ -1,5 +1,6 @@
 package com.app.l_pesa.notification.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -13,6 +14,7 @@ import retrofit2.HttpException
 
 class PresenterNotification {
 
+    @SuppressLint("CheckResult")
     fun getNotification(contextOBJ: Context, callBackOBJ: ICallBackNotification)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -51,13 +53,25 @@ class PresenterNotification {
                     error ->
                     try
                     {
-                        val errorVal            = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus         =    jsonError.getJSONObject("status")
-                        val jsonMessage         =    jsonStatus.getString("message")
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onFailureNotification(jsonMessage)
+                            }
 
-                        callBackOBJ.onFailureNotification(jsonMessage)
+
+                        }
                     }
                     catch (exp: Exception)
                     {
@@ -69,7 +83,8 @@ class PresenterNotification {
     }
 
 
-    fun getNotificationPaginate(contextOBJ: Context, cursor:String,callBackOBJ: ICallBackNotification)
+    @SuppressLint("CheckResult")
+    fun getNotificationPaginate(contextOBJ: Context, cursor:String, callBackOBJ: ICallBackNotification)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
         RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).getNotification(cursor)
@@ -106,7 +121,7 @@ class PresenterNotification {
                     {
                         val errorVal            = error as HttpException
 
-                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError           =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus         =    jsonError.getJSONObject("status")
                         val jsonMessage         =    jsonStatus.getString("message")
 

@@ -1,185 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_40sdp"
-    android:id="@+id/ll_root"
-    android:background="@drawable/login_bg"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    tools:context=".registration.view.RegistrationStepOneActivity">
 
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="100dp"
-        android:layout_height="@dimen/_75sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/_40sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lpesa_logo" />
-
-    <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:shadowColor="#000000"
-        android:shadowDx="2.7"
-        android:shadowDy="2.7"
-        android:shadowRadius="1"
-        android:text="@string/sign_up"
-        android:textColor="@color/colorYellow"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/ll_flag_section"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/bg_black_view"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
 
 
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etPhone"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:cursorVisible="true"
-            android:focusable="true"
-            android:fontFamily="@font/montserrat"
-            android:hint="@string/phone_no"
-            android:inputType="numberSigned"
-            android:maxLines="1"
-            android:maxLength="15"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textColor="@color/colorSemiWhite"
-            android:textColorHint="@color/colorSemiWhite"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view_1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/img_country"
-            android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_18sdp"
-            android:layout_height="@dimen/_18sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/dropdown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-        <ImageView
-            android:id="@+id/dropdown"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:background="@drawable/ic_dropdown_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/view_1"
-            app:layout_constraintStart_toEndOf="@+id/img_country"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/view_1"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:background="@color/semi_white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/etPhone"
-            app:layout_constraintStart_toEndOf="@+id/dropdown"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/llEmail"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:background="@drawable/bg_black_view"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_flag_section">
-
-        <ImageView
-            android:id="@+id/img_password"
-            android:contentDescription="@string/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/view16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mail_icon" />
-
-        <View
-            android:id="@+id/view16"
-            android:layout_width="@dimen/_1sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_24sdp"
-            android:background="@color/semi_white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/etEmail"
-            app:layout_constraintStart_toEndOf="@+id/img_password"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etEmail"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:cursorVisible="true"
-            android:focusable="true"
-            android:fontFamily="@font/montserrat"
-            android:hint="@string/email_address"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:maxLength="35"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:textColor="@color/colorSemiWhite"
-            android:textColorHint="@color/colorSemiWhite"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view16"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText">
 
 
-    </android.support.constraint.ConstraintLayout>
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/txtCountry"
+                android:visibility="invisible"
+                android:contentDescription="@string/app_name"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:textColor="@color/colorWhite"
+                android:focusable="true"
+                android:textSize="@dimen/_10sdp"
+                android:textAllCaps="true"
+                android:drawableEnd="@drawable/ic_dropdown_white_icon"
+                android:drawablePadding="@dimen/_2sdp"
+                android:textStyle="bold"
 
-    <com.app.l_pesa.common.CustomButtonRegular
-        android:id="@+id/txtQualify"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:textStyle="bold"
-        android:background="@drawable/yellow_button"
-        android:text="@string/see_you_quality"
-        android:textColor="@color/semi_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llEmail" />
+                />
+
+        </androidx.appcompat.widget.Toolbar>
 
 
-</android.support.constraint.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        layout="@layout/layout_registration_step_one"
+      />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

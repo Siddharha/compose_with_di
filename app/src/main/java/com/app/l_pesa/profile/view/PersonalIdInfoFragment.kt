@@ -1,57 +1,70 @@
 package com.app.l_pesa.profile.view
 
+import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.ClipData
-import android.content.ContentUris
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
-import android.graphics.Color
+import android.graphics.*
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.DocumentsContract
+import android.os.Handler
 import android.provider.MediaStore
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.FileProvider
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.provider.Settings
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
-import android.view.*
-import android.widget.ImageView
+import android.text.style.RelativeSizeSpan
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.BitmapResize
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
-import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
-import com.app.l_pesa.profile.model.ResUserInfo
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.profile.adapter.AdapterPopupWindow
 import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
+import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.inter.ICallBackProof
 import com.app.l_pesa.profile.inter.ICallBackRecyclerCallbacks
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ModelWindowPopUp
+import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.gson.Gson
 import com.google.gson.JsonObject
+import id.zelory.compressor.Compressor
+import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import java.io.File
-import java.lang.Exception
+import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 
@@ -66,15 +79,17 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var personalIdName=""
     private var personalId=0
 
-    private val Photo             = 12
-    private val Gallery           = 13
+    private val requestPhoto      = 12
     private var captureImageStatus : Boolean    = false
-    private var photoFile          : File?      = null
-    private var captureFilePath    : Uri?       = null
+    private lateinit var photoFile          : File
+    private lateinit var captureFilePath    : Uri
     private var idTypeExists        = "FALSE"
     private var imgFileAddress      = ""
 
-   companion object {
+    private lateinit  var progressDialog: ProgressDialog
+    private  val requestPermission = 1
+
+    companion object {
         fun newInstance(): Fragment {
             return PersonalIdInfoFragment()
         }
@@ -87,13 +102,19 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        swipeRefresh()
+        initLoader()
         initData()
 
     }
 
     private fun initData()
     {
+
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Personal Id Information")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         listPersonalId = ArrayList()
         val sharedPrefOBJ= SharedPref(activity!!)
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
@@ -103,7 +124,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         {
             listPersonalId!!.addAll(profileInfo.userIdsPersonalInfo!!)
             personalIdAdapter                 = PersonalIdAdapter(activity!!,listPersonalId!!,this)
-            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
+            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
             rvPersonalId.adapter              = personalIdAdapter
         }
 
@@ -111,31 +132,29 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
             if(!captureImageStatus)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_image))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_image))
             }
             else if(personalId==0)
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_type))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_type))
                 showDialogIdType(sharedPrefOBJ)
             }
-            else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString()))
+            else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim()))
             {
-                CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.required_id_number))
+                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_number))
             }
             else
             {
                 if(CommonMethod.isNetworkAvailable(activity!!))
                 {
-
-                    swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-                    swipeRefreshLayout.isRefreshing=true
+                    progressDialog.show()
                     buttonSubmit.isClickable=false
 
                     /*if(idTypeExists=="TRUE")
                     {*/
-                        val presenterAWSPersonalId= PresenterAWSPersonalId()
-                       // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                        presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
+                    val presenterAWSPersonalId= PresenterAWSPersonalId()
+                    // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
+                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
                     /*}
                     else
                     {
@@ -147,7 +166,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 }
                 else
                 {
-                    CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                 }
             }
         }
@@ -166,28 +185,130 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         imgProfile.setOnClickListener {
 
-            val items = arrayOf<CharSequence>("Camera", "Gallery", "Cancel") // array list
-            val dialogView = AlertDialog.Builder(activity!!)
-            dialogView.setTitle("Choose Options")
-
-            dialogView.setItems(items) { dialog, item ->
-
-                when {
-                    items[item] == "Camera" -> // open camera
-                        cameraClick() // open default camera
-                    items[item] == "Gallery" -> // open gallery
-                        galleryClick() // open default gallery
-                    items[item] == "Cancel" -> // close dialog
-                        dialog.dismiss()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if(checkAndRequestPermissions())
+                {
+                    cameraClick()
+                }
+                else
+                {
+                    checkAndRequestPermissions()
                 }
             }
-            dialogView.show()
+            else{
+                cameraClick()
+            }
+
 
         }
 
+    }
+
+    private fun checkAndRequestPermissions(): Boolean {
+
+        val permissionCamera        = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA)
+        val permissionStorage       = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+        val listPermissionsNeeded = ArrayList<String>()
+
+        if (permissionCamera != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.CAMERA)
+        }
+        if (permissionStorage != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        if (listPermissionsNeeded.isNotEmpty()) {
+            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), requestPermission)
+            return false
+        }
+
+        return true
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<String>, grantResults: IntArray) {
+
+        when (requestCode) {
+            requestPermission -> {
+
+                val perms = HashMap<String, Int>()
+                perms[Manifest.permission.CAMERA]                   = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]   = PackageManager.PERMISSION_GRANTED
+
+                if (grantResults.isNotEmpty()) {
+                    for (i in permissions.indices)
+                        perms[permissions[i]] = grantResults[i]
+                    if (perms[Manifest.permission.CAMERA]                           == PackageManager.PERMISSION_GRANTED
+                            && perms[Manifest.permission.WRITE_EXTERNAL_STORAGE]    == PackageManager.PERMISSION_GRANTED) {
+
+                        cameraClick()
+                    } else {
+
+                        if (ActivityCompat.shouldShowRequestPermissionRationale( activity!!, Manifest.permission.CAMERA)
+                                || ActivityCompat.shouldShowRequestPermissionRationale( activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            showDialogOK("Permissions are required for L-Pesa",
+                                    DialogInterface.OnClickListener { _, which ->
+                                        when (which) {
+                                            DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
+                                            DialogInterface.BUTTON_NEGATIVE ->
+
+                                              activity!!.finish()
+                                        }
+                                    })
+                        } else {
+                            permissionDialog("You need to give some mandatory permissions to continue. Do you want to go to app settings?")
+
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
+    private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", okListener)
+                .create()
+                .show()
+    }
+
+    private fun permissionDialog(msg: String) {
+        val dialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        dialog.setMessage(msg)
+                .setPositiveButton("Yes") { _, _ ->
+                    startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
+                }
+                .setNegativeButton("Cancel") { _, _ -> activity!!.finish() }
+        dialog.show()
+    }
+
+
+
+    private fun dismiss()
+    {
+        if(progressDialog.isShowing)
+        {
+            progressDialog.dismiss()
+        }
+    }
+
+    private fun initLoader()
+    {
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(message)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
+
+    }
 
 
     override fun onSuccessUploadAWS(url: String) {
@@ -214,17 +335,30 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onFailureUploadAWS(string: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,activity!!,string)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,string)
     }
 
-    private fun swipeRefresh()
-    {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.setOnRefreshListener {
-        swipeRefreshLayout.isRefreshing=false
-        }
+    override fun onSessionTimeOut(message: String) {
+
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun showDialogIdType(sharedPrefOBJ: SharedPref)
@@ -237,7 +371,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             dialog.setContentView(R.layout.dialog_id_type)
             val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
             val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
-            recyclerView?.layoutManager     = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            recyclerView?.layoutManager     = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             recyclerView?.adapter           = personalIdAdapter
             dialog.show()
         }
@@ -291,27 +425,27 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
 
         else
+        {
+            if (name == resources.getString(R.string.address_prof))
             {
-                if (name == resources.getString(R.string.address_prof))
-                {
-                    ilIdNumber.visibility = View.INVISIBLE
-                    personalIdName = name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType = type
-                    personalId = id
-
-                }
-
-                else
-                {
-                    ilIdNumber.visibility = View.VISIBLE
-                    personalIdName = name
-                    etPersonalId.setText(personalIdName)
-                    personalIdType = type
-                    personalId = id
-                }
+                ilIdNumber.visibility = View.INVISIBLE
+                personalIdName = name
+                etPersonalId.setText(personalIdName)
+                personalIdType = type
+                personalId = id
 
             }
+
+            else
+            {
+                ilIdNumber.visibility = View.VISIBLE
+                personalIdName = name
+                etPersonalId.setText(personalIdName)
+                personalIdType = type
+                personalId = id
+            }
+
+        }
 
     }
 
@@ -323,7 +457,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         filterPopup?.isOutsideTouchable = true
         filterPopup?.isFocusable = true
         filterPopup?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        filterPopup?.showAsDropDown(llRoot,165,-400)
+        filterPopup?.showAsDropDown(rootLayout,165,-400)
 
     }
 
@@ -361,7 +495,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                     if(CommonMethod.isNetworkAvailable(activity!!))
                     {
-                        val alertDialog = AlertDialog.Builder(activity!!)
+                        val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                         alertDialog.setTitle(resources.getString(R.string.app_name))
                         alertDialog.setMessage(resources.getString(R.string.delete_this_item))
                         alertDialog.setPositiveButton("Yes") { _, _ -> deletePersonalIdProof(userIdsPersonalInfo,pos) }
@@ -371,7 +505,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     }
                     else
                     {
-                        CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                     }
                 }
                 else
@@ -382,7 +516,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         if(CommonMethod.isNetworkAvailable(activity!!))
                         {
                             val bundle = Bundle()
-                            bundle.putString("FILE_NAME",resources.getString(R.string.upload_business_url)+userIdsPersonalInfo.fileName)
+                            bundle.putString("FILE_NAME",BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                             val intent = Intent(activity, ActivityViewFile::class.java)
                             intent.putExtras(bundle)
                             startActivity(intent,bundle)
@@ -390,7 +524,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         }
                         else
                         {
-                            CommonMethod.customSnackBarError(llRoot,activity!!,resources.getString(R.string.no_internet))
+                            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
                         }
 
                     }
@@ -406,8 +540,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun deletePersonalIdProof(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int)
     {
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
-        swipeRefreshLayout.isRefreshing=true
+        progressDialog.show()
         val jsonObject = JsonObject()
         jsonObject.addProperty("user_type_id",userIdsPersonalInfo.id.toString())
 
@@ -417,8 +550,10 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onSuccessAddProof() {
 
+        dismiss()
         val sharedPref=SharedPref(activity!!)
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
+        sharedPref.profileUpdate=resources.getString(R.string.status_true)
         val intent = Intent(activity!!, DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -427,13 +562,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onFailureAddProof(message: String) {
 
-        swipeRefreshLayout.isRefreshing=false
+        dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(llRoot,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     override fun onSuccessDeleteProof(position: Int) {
-        swipeRefreshLayout.isRefreshing=false
+
+        dismiss()
         listPersonalId!!.removeAt(position)
         personalIdAdapter!!.notifyDataSetChanged()
         val sharedPrefOBJ= SharedPref(activity!!)
@@ -441,188 +577,129 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     override fun onFailureDeleteProof(message: String) {
-        swipeRefreshLayout.isRefreshing=false
-        CommonMethod.customSnackBarError(llRoot,activity!!,message)
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
     private fun cameraClick()
     {
-        activity!!.cacheDir.deleteRecursively()
+        //activity!!.cacheDir.deleteRecursively()
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(activity!!.filesDir, "images")
-        photoFile = File(imagePath, "user.jpg")
-        if (photoFile!!.exists()) {
-            photoFile!!.delete()
+        photoFile = File(imagePath, "personal.jpg")
+        if (photoFile.exists()) {
+            photoFile.delete()
         } else {
-            photoFile!!.parentFile.mkdirs()
+            photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(activity!!, BuildConfig.APPLICATION_ID + ".provider", photoFile!!)
+        captureFilePath = FileProvider.getUriForFile(activity!! as ProfileEditIdInfoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
 
-        captureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, captureFilePath)
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
-            val clip = ClipData.newUri(activity!!.contentResolver, "personal id photo", captureFilePath)
+            val clip = ClipData.newUri(activity!!.contentResolver, "id photo", captureFilePath)
             captureIntent.clipData = clip
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, Photo)
+        startActivityForResult(captureIntent, requestPhoto)
     }
 
 
-    private fun galleryClick()
-    {
-        val checkSelfPermission = ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity!!, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-        }
-        else{
-            openAlbum()
-        }
-    }
-
-    private fun openAlbum(){
-        val intent = Intent("android.intent.action.GET_CONTENT")
-        intent.type = "image/*"
-        startActivityForResult(intent, Gallery)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
-            1 ->
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    openAlbum()
-                }
-                else {
-                    Toast.makeText(activity!!, "You denied the permission", Toast.LENGTH_SHORT).show()
-                }
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
-            Photo ->
+            requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK)
                 {
                     setImage()
-                }
-            Gallery ->
-                if (resultCode == Activity.RESULT_OK) {
-                    handleImage(data)
-
                 }
         }
     }
 
     private fun setImage() {
 
+
+        val photoPath: Uri = captureFilePath
         try {
-            val imgSize = File(captureFilePath.toString())
-            val length  = imgSize.length() / 1024
-            if(length>3000) // Max Size Under 3MB
+            if(photoPath!=Uri.EMPTY)
             {
-                captureImageStatus = false
-                Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                val photoPath: Uri = captureFilePath ?: return
-                imgProfile.post {
-                    val pictureBitmap = BitmapResize.shrinkBitmap(
-                            activity!!,
-                            photoPath,
-                            imgProfile.width,
-                            imgProfile.height
-                    )
-                    imgProfile.setImageBitmap(pictureBitmap)
-                    imgProfile.scaleType = ImageView.ScaleType.CENTER_CROP
-                    CommonMethod.fileCompress(photoFile!!)
-                }
+                progressDialog.show()
+                handleRotation(photoFile.absolutePath)
+                Handler().postDelayed({
+                    dismiss()
+                    imgProfile.setImageURI(null)
+                    imgProfile.setImageURI(photoPath)
+                    captureImageStatus       = true
+                    photoFile   = Compressor(activity).compressToFile(photoFile)
+                }, 1000)
 
-                captureImageStatus = true
 
-            }
-        }
-        catch (exp:Exception)
-        {
-
-        }
-
-    }
-
-    private fun handleImage(data: Intent?) {
-        var imagePath=""
-        try
-        {
-            val uri = data!!.data
-            when {
-                DocumentsContract.isDocumentUri(activity, uri) -> try {
-                    val docId = DocumentsContract.getDocumentId(uri)
-                    if ("com.android.providers.media.documents" == uri!!.authority){
-                        val id = docId.split(":")[1]
-                        val section = MediaStore.Images.Media._ID + "=" + id
-                        imagePath = imagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, section)
-                    } else if ("com.android.providers.downloads.documents" == uri.authority){
-                        val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(docId))
-                        imagePath = imagePath(contentUri, null)
-                    }
-
-                }
-                catch (exp: Exception)
-                {
-
-                }
-                "content".equals(uri!!.scheme, ignoreCase = true) -> imagePath = imagePath(uri, null)
-                "file".equals(uri.scheme, ignoreCase = true) -> imagePath = uri.path!!
-            }
-            displayImage(imagePath)
-        }
-        catch (exp: Exception)
-        {
-
-        }
-    }
-
-    private fun imagePath(uri: Uri?, selection: String?): String {
-        var path: String? = null
-        val cursor = activity!!.contentResolver.query(uri!!, null, selection, null, null )
-        if (cursor != null){
-            if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
-            }
-            cursor.close()
-        }
-        return path!!
-    }
-
-    private fun displayImage(imagePath: String?){
-        if (imagePath != null) {
-
-            val imgSize = File(imagePath)
-            val length  = imgSize.length() / 1024
-            if(length>3000) // Max Size Under 3MB
-            {
-                captureImageStatus=false
-                Toast.makeText(activity, "Image size maximum 3Mb", Toast.LENGTH_SHORT).show()
             }
             else
             {
-                captureImageStatus=true
-                val bitmap = BitmapFactory.decodeFile(imagePath)
-                imgProfile.setImageBitmap(bitmap)
-                photoFile=imgSize
-                CommonMethod.fileCompress(photoFile!!)
+                Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
             }
 
         }
-        else {
-            captureImageStatus=false
-            Toast.makeText(activity!!, "Failed to get image", Toast.LENGTH_SHORT).show()
+        catch (exp:Exception)
+        {
+            Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+    private fun handleRotation(imgPath: String) {
+        BitmapFactory.decodeFile(imgPath)?.let { origin ->
+            try {
+                ExifInterface(imgPath).apply {
+                    getAttributeInt(
+                            ExifInterface.TAG_ORIENTATION,
+                            ExifInterface.ORIENTATION_UNDEFINED
+                    ).let { orientation ->
+                        when (orientation) {
+                            ExifInterface.ORIENTATION_ROTATE_90 -> origin.rotate(90f)
+                            ExifInterface.ORIENTATION_ROTATE_180 -> origin.rotate(180f)
+                            ExifInterface.ORIENTATION_ROTATE_270 -> origin.rotate(270f)
+                            ExifInterface.ORIENTATION_NORMAL -> origin
+                            else ->origin         //origin.rotate(270f)
+                        }.also { bitmap ->
+                            //Update the input file with the new bytes.
+                            try {
+                                FileOutputStream(imgPath).use { fos ->
+                                    bitmap.compress(
+                                            Bitmap.CompressFormat.JPEG,
+                                            100,
+                                            fos
+                                    )
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    }
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 
+    private fun Bitmap.rotate(degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        val scaledBitmap = Bitmap.createScaledBitmap(this, width, height, true)
+        return Bitmap.createBitmap(
+                scaledBitmap,
+                0,
+                0,
+                scaledBitmap.width,
+                scaledBitmap.height,
+                matrix,
+                true
+        )
+    }
 
 }

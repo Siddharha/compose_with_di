@@ -4,11 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 
-/**
- * Created by Intellij Amiya on 25-05-2018.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 class SharedPref @SuppressLint("CommitPrefEdits")
 constructor(context: Context) // Constructor
 {
@@ -17,26 +12,9 @@ constructor(context: Context) // Constructor
     private val pref: SharedPreferences
     private val editor: SharedPreferences.Editor
 
-    //Default value
-    var appVersion: String
-        get() = pref.getString(KEY_SET_APP_VERSION, "1.0.0")!!
-        set(appVersion) {
-            editor.remove(KEY_SET_APP_VERSION)
-            editor.putString(KEY_SET_APP_VERSION, appVersion)
-            editor.commit()
-        }
-
-
-    var loginRequest: String
-        get() = pref.getString(KEY_SET_LOGIN_REQUEST, "")!!
-        set(loginRequest) {
-            editor.remove(KEY_SET_LOGIN_REQUEST)
-            editor.putString(KEY_SET_LOGIN_REQUEST, loginRequest)
-            editor.commit()
-        }
 
     var countryList: String
-        get() = pref.getString(KEY_SET_COUNTRY_LIST, "")!!
+        get() = pref.getString(KEY_SET_COUNTRY_LIST, "INIT")!!
         set(countryList) {
             editor.remove(KEY_SET_COUNTRY_LIST)
             editor.putString(KEY_SET_COUNTRY_LIST, countryList)
@@ -87,6 +65,30 @@ constructor(context: Context) // Constructor
         set(countryCode) {
             editor.remove(KEY_SET_COUNTRY_CODE)
             editor.putString(KEY_SET_COUNTRY_CODE, countryCode)
+            editor.commit()
+        }
+
+    var countryIsdCode: String
+        get() = pref.getString(KEY_SET_COUNTRY_ISD_CODE, "")!!
+        set(countryIsdCode) {
+            editor.remove(KEY_SET_COUNTRY_ISD_CODE)
+            editor.putString(KEY_SET_COUNTRY_ISD_CODE, countryIsdCode)
+            editor.commit()
+        }
+
+    var countryName: String
+        get() = pref.getString(KEY_SET_COUNTRY_NAME, "")!!
+        set(countryName) {
+            editor.remove(KEY_SET_COUNTRY_NAME)
+            editor.putString(KEY_SET_COUNTRY_NAME, countryName)
+            editor.commit()
+        }
+
+    var countryFlag: String
+        get() = pref.getString(KEY_SET_COUNTRY_FLAG, "")!!
+        set(countryFlag) {
+            editor.remove(KEY_SET_COUNTRY_FLAG)
+            editor.putString(KEY_SET_COUNTRY_FLAG, countryFlag)
             editor.commit()
         }
 
@@ -170,12 +172,86 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var deviceInfo: String
+        get() = pref.getString(KEY_SET_DEVICE_INFO, "")!!
+        set(deviceInfo) {
+            editor.remove(KEY_SET_DEVICE_INFO)
+            editor.putString(KEY_SET_DEVICE_INFO, deviceInfo)
+            editor.commit()
+        }
+
+    var helpSupport: String
+        get() = pref.getString(KEY_SET_HELP_SUPPORT, "")!!
+        set(helpSupport) {
+            editor.remove(KEY_SET_HELP_SUPPORT)
+            editor.putString(KEY_SET_HELP_SUPPORT, helpSupport)
+            editor.commit()
+        }
+
+    var currentLoanProduct: String
+        get() = pref.getString(KEY_SET_CURRENT_LOAN_PRODUCT, "INIT")!!
+        set(currentLoanProduct) {
+            editor.remove(KEY_SET_CURRENT_LOAN_PRODUCT)
+            editor.putString(KEY_SET_CURRENT_LOAN_PRODUCT, currentLoanProduct)
+            editor.commit()
+        }
+
+    var businessLoanProduct: String
+        get() = pref.getString(KEY_SET_BUSINESS_LOAN_PRODUCT, "INIT")!!
+        set(businessLoanProduct) {
+            editor.remove(KEY_SET_BUSINESS_LOAN_PRODUCT)
+            editor.putString(KEY_SET_BUSINESS_LOAN_PRODUCT, businessLoanProduct)
+            editor.commit()
+        }
+
+    var loanProduct: String
+        get() = pref.getString(KEY_SET_LOAN_PRODUCT, "INIT")!!
+        set(loanProduct) {
+            editor.remove(KEY_SET_LOAN_PRODUCT)
+            editor.putString(KEY_SET_LOAN_PRODUCT, loanProduct)
+            editor.commit()
+        }
+
+    var currentLat: String
+        get() = pref.getString(KEY_SET_CURRENT_LAT, "")!!
+        set(currentLat) {
+            editor.remove(KEY_SET_CURRENT_LAT)
+            editor.putString(KEY_SET_CURRENT_LAT, currentLat)
+            editor.commit()
+        }
+    var currentLng: String
+        get() = pref.getString(KEY_SET_CURRENT_LNG, "")!!
+        set(currentLng) {
+            editor.remove(KEY_SET_CURRENT_LNG)
+            editor.putString(KEY_SET_CURRENT_LNG, currentLng)
+            editor.commit()
+        }
+    var imagePath: String
+        get() = pref.getString(KEY_SET_IMAGE_PATH, "")!!
+        set(imagePath) {
+            editor.remove(KEY_SET_IMAGE_PATH)
+            editor.putString(KEY_SET_IMAGE_PATH, imagePath)
+            editor.commit()
+        }
+
+    var verificationCode: String
+        get() = pref.getString(KEY_SET_VERIFICATION_CODE, "")!!
+        set(verificationCode) {
+            editor.remove(KEY_SET_VERIFICATION_CODE)
+            editor.putString(KEY_SET_VERIFICATION_CODE, verificationCode)
+            editor.commit()
+        }
+
     fun removeShared() {
 
         editor.remove("KEY_SET_ACCESS_TOKEN")
-        editor.remove("KEY_SET_LOGIN_REQUEST")
         editor.remove("KEY_SET_PROFILE_INFO")
         editor.remove("KEY_SET_LPK_INFO")
+        editor.remove("KEY_SET_CURRENT_LOAN_PRODUCT")
+        editor.remove("KEY_SET_BUSINESS_LOAN_PRODUCT")
+        editor.remove("KEY_SET_LOAN_PRODUCT")
+        editor.remove("KEY_SET_CURRENT_LAT")
+        editor.remove("KEY_SET_CURRENT_LNG")
         editor.commit()
         editor.apply()
     }
@@ -191,11 +267,10 @@ constructor(context: Context) // Constructor
         private const val PREF_NAME = "L_PESA"
 
         // All Shared Preferences Keys Declare as #public
-        private const val KEY_SET_APP_VERSION           = "KEY_SET_APP_VERSION"
+
         private const val KEY_SET_COUNTRY_LIST          = "KEY_SET_COUNTRY_LIST"
         private const val KEY_SET_COUNTRY_CODE          = "KEY_SET_COUNTRY_CODE"
         private const val KEY_SET_USER_INFO             = "KEY_SET_USER_INFO"
-        private const val KEY_SET_LOGIN_REQUEST         = "KEY_SET_LOGIN_REQUEST"
         private const val KEY_SET_ACCESS_TOKEN          = "KEY_SET_ACCESS_TOKEN"
         private const val KEY_SET_DASHBOARD             = "KEY_SET_DASHBOARD"
         private const val KEY_SET_CREDIT_SCORE          = "KEY_SET_CREDIT_SCORE"
@@ -210,6 +285,19 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_MAX_INVEST_INTEREST   = "KEY_SET_MAX_INVEST_INTEREST"
         private const val KEY_SET_CURRENT_LOAN_COUNT    = "KEY_SET_CURRENT_LOAN_COUNT"
         private const val KEY_SET_BUSINESS_LOAN_COUNT   = "KEY_SET_BUSINESS_LOAN_COUNT"
+        private const val KEY_SET_DEVICE_INFO           = "KEY_SET_DEVICE_INFO"
+        private const val KEY_SET_COUNTRY_NAME          = "KEY_SET_COUNTRY_NAME"
+        private const val KEY_SET_COUNTRY_FLAG          = "KEY_SET_COUNTRY_FLAG"
+        private const val KEY_SET_HELP_SUPPORT          = "KEY_SET_HELP_SUPPORT"
+        private const val KEY_SET_CURRENT_LOAN_PRODUCT  = "KEY_SET_CURRENT_LOAN_PRODUCT"
+        private const val KEY_SET_BUSINESS_LOAN_PRODUCT = "KEY_SET_BUSINESS_LOAN_PRODUCT"
+        private const val KEY_SET_LOAN_PRODUCT          = "KEY_SET_LOAN_PRODUCT"
+        private const val KEY_SET_CURRENT_LAT           = "KEY_SET_CURRENT_LAT"
+        private const val KEY_SET_CURRENT_LNG           = "KEY_SET_CURRENT_LNG"
+        private const val KEY_SET_IMAGE_PATH            = "KEY_SET_IMAGE_PATH"
+        private const val KEY_SET_VERIFICATION_CODE     = "KEY_SET_VERIFICATION_CODE"
+        private const val KEY_SET_COUNTRY_ISD_CODE      = "KEY_SET_COUNTRY_ISD_CODE"
+
     }
 
 

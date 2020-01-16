@@ -2,12 +2,12 @@ package com.app.l_pesa.wallet.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
@@ -15,7 +15,7 @@ import com.app.l_pesa.wallet.model.ResWalletHistory
 import java.text.DecimalFormat
 
 
-class TransactionAllAdapter (val context: Context, private val listTransaction: ArrayList<ResWalletHistory.SavingsHistory>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TransactionAllAdapter (val context: Context, private val listTransaction: ArrayList<ResWalletHistory.SavingsHistory>?) :RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
     private var                 isLoading           = false

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
@@ -28,7 +28,7 @@
         android:textSize="@dimen/_15sdp"
         android:textStyle="bold" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_10sdp"
@@ -36,7 +36,7 @@
         android:layout_marginBottom="@dimen/_10sdp"
         app:cardCornerRadius="@dimen/_4sdp">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/_10sdp">
@@ -59,6 +59,7 @@
                     android:inputType="text"
                     android:maxLength="20"
                     android:maxLines="1"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp" />
 
@@ -82,6 +83,7 @@
                     android:inputType="text"
                     android:maxLength="20"
                     android:maxLines="1"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp" />
 
@@ -127,6 +129,7 @@
                     android:inputType="text"
                     android:maxLength="20"
                     android:maxLines="1"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 "
                     android:textColor="@color/textColors"
                     android:textSize="@dimen/_12sdp" />
 
@@ -142,8 +145,9 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/ripple_green_button"
                 android:fontFamily="@font/montserrat"
+                android:textStyle="bold"
                 android:text="@string/submit"
-                android:textAllCaps="false"
+                android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonCancel"
@@ -160,9 +164,10 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/bg_grey_view"
                 android:text="@string/cancel"
-                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textAllCaps="true"
                 android:fontFamily="@font/montserrat"
-                android:textColor="@color/colorGrey"
+                android:textColor="@color/colorGreyDeep"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -170,10 +175,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/tilBusinessIdNumber" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
     </LinearLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

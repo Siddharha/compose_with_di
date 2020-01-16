@@ -12,12 +12,6 @@ import org.json.JSONObject
 import retrofit2.HttpException
 
 
-
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 class PresenterCountry{
 
     @SuppressLint("CheckResult")
@@ -30,12 +24,10 @@ class PresenterCountry{
                     responseBody
                 }
                 .subscribe({ response ->
-
                     try
                     {
                         if(response.data.countries_list.size>0)
                         {
-
                             callBackOBJ.onSuccessCountry(response.data)
                         }
                         else
@@ -54,9 +46,9 @@ class PresenterCountry{
                     {
                         val errorVal     = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus=    jsonError.getJSONObject("status")
-                        val jsonMessage    =    jsonStatus.getString("message")
+                        val jsonError                 =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                        val  jsonStatus    =    jsonError.getJSONObject("status")
+                        val jsonMessage        =    jsonStatus.getString("message")
 
                         callBackOBJ.onFailureCountry(jsonMessage)
                     }

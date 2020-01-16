@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app.l_pesa">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -10,25 +11,78 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <uses-feature
-        android:name="android.hardware.camera2"
-        android:required="false" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_round"
+        android:name=".analytics.MyApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
+        android:resizeableActivity="false"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
+        <!-- android:requestLegacyExternalStorage="true"-->
+
+        <activity
+            android:name=".settings.view.CloseAccountActivity"
+            android:label="@string/title_close_account"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
+
+        </activity>
+        <activity
+            android:name=".login.view.EmailVerificationActivity"
+            android:label="@string/title_email_verification"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".login.view.EmailRequiredActivity"
+            android:label="@string/title_email_verification"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".calculator.view.LoanCalculatorActivity"
+            android:label="@string/calculate_your_loan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".help.view.HelpActivity"
+            android:label="@string/help_support"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".pin.view.SetUpPinActivity"
+            android:label="@string/set_up_pin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".otpview.view.OTPActivity"
+            android:label="@string/otp"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"/>
+        <activity
+            android:name=".pinview.view.PinSetActivity"
+            android:label="@string/pin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".notification.view.NotificationActivity"
             android:label="@string/notification"
@@ -64,10 +118,6 @@
             android:label="@string/apply_an_investment"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".registration.view.RegistrationStepThreeActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".profile.view.ActivityViewFile"
@@ -114,7 +164,8 @@
             android:name=".profile.view.ProfileEditPersonalActivity"
             android:label="@string/personal_info"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+           android:windowSoftInputMode="stateHidden" />
+
         <activity
             android:name=".loanHistory.view.LoanPaybackScheduledActivity"
             android:label="@string/payment_schedule"
@@ -131,7 +182,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -142,74 +193,77 @@
 
         <activity
             android:name=".splash.view.SplashActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".main.MainActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".login.view.LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".registration.view.RegistrationStepOneActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".registration.view.RegistrationStepTwoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
-
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
         </activity>
         <activity
-            android:name=".password.view.ForgotPasswordActivity"
+            android:name=".main.view.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".login.view.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+        <activity
+            android:name=".registration.view.RegistrationStepOneActivity"
+            android:label="@string/registration_step_one"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".registration.view.RegistrationStepTwoActivity"
+            android:label="@string/registration_step_two"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".registration.view.RegistrationStepThreeActivity"
+            android:label="@string/registration_step_three"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".registration.view.RegistrationStepFourActivity"
+            android:label="@string/registration_step_four"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".registration.view.RegistrationStepFiveActivity"
+            android:label="@string/continue_to_register"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".pin.view.ForgotPinActivity"
+            android:label="@string/forgot_pin_title"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".dashboard.view.DashboardActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
-        </activity>
-        <activity
-            android:name=".password.view.ChangePasswordActivity"
-            android:label="@string/change_password"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".pin.view.ChangeLoginPinActivity"
+            android:label="@string/change_login_pin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".pin.view.ChangePinActivity"
-            android:label="@string/change_pin"
+            android:label="@string/change_transactional_pin"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateVisible" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <service android:name=".firebase.FirebaseMessagingIdService"
-            >
+        <service android:name=".firebase.FirebaseMessagingIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorWhite" />
@@ -219,6 +273,39 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <!--
+        Optionally, register AnalyticsReceiver and AnalyticsService to support background
+        dispatching on non-Google Play devices
+      -->
+        <receiver
+            android:name="com.google.android.gms.analytics.AnalyticsReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.analytics.AnalyticsService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!--
+             Optionally, register CampaignTrackingReceiver and CampaignTrackingService to enable
+             installation campaign reporting
+        -->
+        <receiver
+            android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

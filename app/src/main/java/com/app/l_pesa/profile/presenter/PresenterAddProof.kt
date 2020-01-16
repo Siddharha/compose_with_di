@@ -1,5 +1,6 @@
 package com.app.l_pesa.profile.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,6 +15,7 @@ import retrofit2.HttpException
 
 class PresenterAddProof {
 
+    @SuppressLint("CheckResult")
     fun doAddProof(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackProof) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -40,14 +42,25 @@ class PresenterAddProof {
                     }
                 }, { error ->
                     try {
-                        val errorVal = error as HttpException
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val  jsonStatus      =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
+
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onFailureAddProof(jsonMessage)
+                            }
 
 
-
-                        val jsonError   = JSONObject(errorVal.response().errorBody()?.string())
-                        val jsonStatus  = jsonError.getJSONObject("status")
-                        val jsonMessage = jsonStatus.getString("message")
-                        callBackOBJ.onFailureAddProof(jsonMessage)
+                        }
 
 
                     } catch (exp: Exception) {

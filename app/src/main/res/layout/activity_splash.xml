@@ -14,7 +14,6 @@
             android:src="@drawable/lpesa_logo"
             android:contentDescription="@string/app_name"
             android:layout_centerInParent="true"
-
             />
 
         <com.app.l_pesa.common.CommonTextRegular
@@ -67,8 +66,8 @@
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
-            android:layout_width="@dimen/_27sdp"
-            android:layout_height="@dimen/_27sdp"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
             android:indeterminateTint="@color/colorWhite"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"

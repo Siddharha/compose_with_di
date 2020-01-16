@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.presenter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
@@ -14,6 +15,7 @@ import retrofit2.HttpException
 
 class PresenterPaybackSchedule {
 
+    @SuppressLint("CheckResult")
     fun doPaybackSchedule(contextOBJ: Context, jsonRequest : JsonObject, callBackOBJ: ICallBackPaybackSchedule)
     {
         val sharedPrefOBJ = SharedPref(contextOBJ)
@@ -49,7 +51,7 @@ class PresenterPaybackSchedule {
                     {
                         val errorVal     = error as HttpException
 
-                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string())
+                        val jsonError             =    JSONObject(errorVal.response().errorBody()?.string()!!)
                         val  jsonStatus           =    jsonError.getJSONObject("status")
                         val jsonMessage           =    jsonStatus.getString("message")
 

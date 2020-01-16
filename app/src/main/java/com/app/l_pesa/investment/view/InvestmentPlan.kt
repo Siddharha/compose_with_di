@@ -3,12 +3,14 @@ package com.app.l_pesa.investment.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
@@ -16,12 +18,15 @@ import com.app.l_pesa.investment.adapter.InvestmentPlanAdapter
 import com.app.l_pesa.investment.inter.ICallBackInvestmentPlan
 import com.app.l_pesa.investment.model.ResInvestmentPlan
 import com.app.l_pesa.investment.presenter.PresenterInvestmentPlan
+import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_loan_plan_list.*
+import kotlinx.android.synthetic.main.fragment_investment_plan_list.*
 import java.text.DecimalFormat
 
 
-class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
+class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
 
     companion object {
@@ -31,7 +36,7 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_loan_plan_list, container,false)
+        return inflater.inflate(R.layout.fragment_investment_plan_list, container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +52,7 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent)
         swipeRefreshLayout.setOnRefreshListener {
-
+            swipeRefreshLayout.isRefreshing = true
             investmentPlan()
         }
     }
@@ -56,25 +61,38 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
     {
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            swipeRefreshLayout.isRefreshing = true
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Investment Plan")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
+            shimmerLayout.startShimmerAnimation()
             val presenterLoanPlans= PresenterInvestmentPlan()
             presenterLoanPlans.getInvestmentPlan(activity!!,this)
+        }
+        else
+        {
+            shimmerLayout.stopShimmerAnimation()
+            shimmerLayout.visibility=View.INVISIBLE
+            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            swipeRefreshLayout.isRefreshing = false
         }
 
     }
 
     override fun onSuccessInvestmentPlan(data: ResInvestmentPlan.Data) {
 
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
+        cardView.visibility=View.GONE
         val sharedPrefOBJ= SharedPref(activity!!)
-
-        val gSonData = Gson()
-        val json = gSonData.toJson(data)
+        val json = Gson().toJson(data)
         sharedPrefOBJ.loanPlanList  =json
 
         swipeRefreshLayout.isRefreshing    = false
         val investmentPlanAdapter          = InvestmentPlanAdapter(activity!!, data.investmentPlans!!,this)
-        rvLoan.layoutManager               = LinearLayoutManager(activity!!, LinearLayoutManager.VERTICAL, false)
-        rvLoan.adapter                     = investmentPlanAdapter
+        rvInvestment.layoutManager               = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
+        rvInvestment.adapter                     = investmentPlanAdapter
 
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
@@ -85,13 +103,19 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
     override fun onEmptyInvestmentPlan() {
 
+       shimmerLayout.stopShimmerAnimation()
+       shimmerLayout.visibility=View.INVISIBLE
        swipeRefreshLayout.isRefreshing = false
+       cardView.visibility=View.VISIBLE
     }
 
     override fun onErrorInvestmentPlan(jsonMessage: String) {
 
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility=View.INVISIBLE
+        cardView.visibility=View.GONE
         swipeRefreshLayout.isRefreshing = false
-        Toast.makeText(activity,""+jsonMessage,Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 
     override fun onClickInvestmentPlan(investmentPlan: ResInvestmentPlan.InvestmentPlan) {
@@ -101,6 +125,26 @@ class InvestmentPlan:Fragment(), ICallBackInvestmentPlan {
 
         startActivity(Intent(activity, InvestmentApplyActivity::class.java))
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+    }
+
+    override fun onSessionTimeOut(jsonMessage: String) {
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(jsonMessage)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
 
     }
 

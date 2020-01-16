@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipeRefreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
- <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rootLayout">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_15sdp">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -73,13 +69,14 @@
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                app:layout_constraintBottom_toTopOf="@+id/textView34"
+                app:layout_constraintBottom_toTopOf="@+id/txt_min_lpk_amount"
                 app:layout_constraintTop_toBottomOf="@+id/txtLockedVal">
 
                 <com.app.l_pesa.common.CommonEditTextRegular
                     android:id="@+id/etToken"
-                    android:inputType="numberSigned"
-                    android:maxLength="10"
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    android:maxLength="8"
                     android:textSize="@dimen/_13sdp"
                     android:longClickable="false"
                     android:layout_width="match_parent"
@@ -89,7 +86,7 @@
             </com.app.l_pesa.common.CommonInputLayout>
 
             <com.app.l_pesa.common.CommonTextRegular
-                android:id="@+id/textView34"
+                android:id="@+id/txt_min_lpk_amount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_15sdp"
@@ -98,7 +95,6 @@
                 android:drawableStart="@drawable/ic_info_icon"
                 android:drawablePadding="@dimen/_5sdp"
                 android:fontFamily="@font/montserrat"
-                android:text="@string/minimum_withdrawal_amount"
                 android:textColor="@color/colorSemiBlack"
                 android:textSize="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/buttonSubmit"
@@ -113,21 +109,21 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginBottom="@dimen/_22sdp"
-                android:background="@drawable/btn_round"
+                android:background="@drawable/ripple_green_button"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/submit"
-                android:textAllCaps="false"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_min_lpk_amount" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
-</android.support.v4.widget.SwipeRefreshLayout>

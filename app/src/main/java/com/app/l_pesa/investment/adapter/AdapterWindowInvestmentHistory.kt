@@ -2,19 +2,19 @@ package com.app.l_pesa.investment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.investment.inter.ICallBackPopUpWindow
 import com.app.l_pesa.investment.model.ModelWindowHistory
 import com.app.l_pesa.investment.model.ResInvestmentHistory
-import java.util.ArrayList
+import java.util.*
 
-class AdapterWindowInvestmentHistory (val context: Context, private val listInvestmentHistory: ArrayList<ModelWindowHistory>, val investmentList: ResInvestmentHistory.UserInvestment, private val callBack:ICallBackPopUpWindow) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterWindowInvestmentHistory (val context: Context, private val listInvestmentHistory: ArrayList<ModelWindowHistory>, private val investmentList: ResInvestmentHistory.UserInvestment, private val callBack:ICallBackPopUpWindow) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -45,7 +45,7 @@ class AdapterWindowInvestmentHistory (val context: Context, private val listInve
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var tvName      : TextView          = itemView.findViewById(R.id.txtData)
-            var rootLayout  : ConstraintLayout  = itemView.findViewById(R.id.rootLayout)
+            var rootLayout  : ConstraintLayout = itemView.findViewById(R.id.rootLayout)
 
         }
 

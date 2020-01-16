@@ -1,26 +1,32 @@
 package com.app.l_pesa.loanHistory.view
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.app.l_pesa.R
+import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.LoanHistoryTabPager
-
+import com.app.l_pesa.main.view.MainActivity
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_loan_list_history.*
 
-class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListener{
+
+class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener{
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
         toolbarFont(this@LoanHistoryListActivity)
 
         initUI()
+        initTimer()
 
 
     }
@@ -69,7 +76,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
 
             if(viewPager!!.currentItem==0)
             {
-                val fragment = adapter.instantiateItem(viewPager!!, 0) as Fragment
+                val fragment = adapter.instantiateItem(viewPager!!, 0) as androidx.fragment.app.Fragment
                 if (fragment is CurrentLoanHistory) {
                     fragment.doFilter()
 
@@ -77,7 +84,7 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
             }
             else
             {
-                val fragment = adapter.instantiateItem(viewPager!!, 1) as Fragment
+                val fragment = adapter.instantiateItem(viewPager!!, 1) as androidx.fragment.app.Fragment
                 if (fragment is BusinessLoanHistory) {
                     fragment.doFilter()
 
@@ -133,10 +140,9 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -159,6 +165,63 @@ class LoanHistoryListActivity : AppCompatActivity(),TabLayout.OnTabSelectedListe
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+     fun onSessionTimeOut(message: String) {
+
+        val dialogBuilder = AlertDialog.Builder(this@LoanHistoryListActivity,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@LoanHistoryListActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@LoanHistoryListActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
+    }
+
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@LoanHistoryListActivity::class.java.simpleName)
+
     }
 
 }

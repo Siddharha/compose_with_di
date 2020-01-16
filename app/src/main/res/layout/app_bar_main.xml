@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,20 +8,20 @@
     android:fitsSystemWindows="false"
     tools:context=".dashboard.view.DashboardActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
+        app:elevation="0dp"
+        >
 
-       <android.support.v7.widget.Toolbar
+       <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextAppearance="@style/Toolbar.TitleText"
-            >
+            app:titleTextAppearance="@style/Toolbar.TitleText">
 
            <com.app.l_pesa.common.CustomButtonRegular
                android:id="@+id/buttonRight"
@@ -42,16 +42,16 @@
                android:layout_width="@dimen/_25sdp"
                android:layout_height="@dimen/_22sdp"
                android:layout_gravity="end"
-               android:src="@drawable/ic_filter"
+               app:srcCompat="@drawable/ic_filter"
                android:layout_marginEnd="@dimen/_12sdp"
                android:background="?attr/selectableItemBackgroundBorderless"
                android:focusable="true"
 
                />
-       </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+       </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main"/>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

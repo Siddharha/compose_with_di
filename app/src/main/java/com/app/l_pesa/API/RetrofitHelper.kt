@@ -1,29 +1,27 @@
 package com.app.l_pesa.API
 
 import com.app.l_pesa.BuildConfig
+import com.app.l_pesa.BuildConfig.BASE_URL
+import com.app.l_pesa.BuildConfig.BASE_URL_DEV
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
+
 class RetrofitHelper {
+
     companion object {
 
-        private val BASE_URL = "http://35.158.245.118/v2/"
-       // private val BASE_URL_LIVE = "https://dev.securnyx360.com/api/v1/"
-        private val APPLICATION_JSON = "application/json"
-        private val CLIENT_TYPE = "A"
+
+        private const val APPLICATION_JSON = "application/json"
+        private const val CLIENT_TYPE = "A"
 
         private fun getOkHttpClient(accessToken: String): OkHttpClient {
             val okHttpClient = OkHttpClient.Builder()
-            okHttpClient.readTimeout(30, TimeUnit.SECONDS)
-            okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
+            okHttpClient.readTimeout(120, TimeUnit.SECONDS)
+            okHttpClient.connectTimeout(120, TimeUnit.SECONDS)
 
             okHttpClient.addInterceptor { chain ->
                 val original = chain.request()
@@ -50,24 +48,51 @@ class RetrofitHelper {
 
 
         fun <T> getRetrofit(service: Class<T>): T {
-            val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build()
-            return retrofit.create(service)
+           /* if(BuildConfig.DEBUG)
+            {
+                val retrofit = Retrofit.Builder()
+                        .baseUrl(BASE_URL_DEV)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .build()
+                return retrofit.create(service)
+            }
+            else
+            {*/
+                val retrofit = Retrofit.Builder()
+                        .baseUrl(BASE_URL_DEV)//BASE_URL_DEV//BASE_URL
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .build()
+                return retrofit.create(service)
+           // }
+
         }
 
         fun <T> getRetrofitToken(service: Class<T>, accessToken: String = ""): T {
-            val retrofit = Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(getOkHttpClient(accessToken))
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build()
-            return retrofit.create(service)
-        }
 
+           /* if(BuildConfig.DEBUG)
+            {
+                val retrofit = Retrofit.Builder()
+                        .baseUrl(BASE_URL_DEV)
+                        .client(getOkHttpClient(accessToken))
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .build()
+                return retrofit.create(service)
+            }
+            else
+            {
+              */  val retrofit = Retrofit.Builder()
+                        .baseUrl(BASE_URL_DEV) //BASE_URL_DEV//BASE_URL
+                        .client(getOkHttpClient(accessToken))
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .build()
+                return retrofit.create(service)
+            //}
+
+        }
 
     }
 }

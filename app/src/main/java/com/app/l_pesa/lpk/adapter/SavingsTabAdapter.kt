@@ -1,8 +1,8 @@
 package com.app.l_pesa.lpk.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.app.l_pesa.lpk.view.EarnedInterestFragment
 import com.app.l_pesa.lpk.view.TokenTransferFragment
 import com.app.l_pesa.lpk.view.TransferHistoryFragment
@@ -10,7 +10,7 @@ import com.app.l_pesa.lpk.view.TransferHistoryFragment
 class SavingsTabAdapter(fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment? {
         //Returning the current tabs
         return when (position) {
             0 -> {
@@ -21,7 +21,7 @@ class SavingsTabAdapter(fm: FragmentManager, private var tabCount: Int): Fragmen
             }
             2 -> {
                   EarnedInterestFragment()
-                 }
+            }
 
             else -> null
         }

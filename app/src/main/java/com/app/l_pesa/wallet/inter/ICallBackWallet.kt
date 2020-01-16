@@ -4,4 +4,5 @@ interface ICallBackWallet {
 
     fun onSuccessWalletWithdrawal(message: String)
     fun onErrorWalletWithdrawal(message: String)
+    fun onSessionTimeOut(message: String)
 }

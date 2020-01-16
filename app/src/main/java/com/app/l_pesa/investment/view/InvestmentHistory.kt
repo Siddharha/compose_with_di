@@ -1,26 +1,29 @@
 package com.app.l_pesa.investment.view
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.investment.adapter.AdapterWindowInvestmentHistory
@@ -33,27 +36,30 @@ import com.app.l_pesa.investment.model.ResInvestmentHistory
 import com.app.l_pesa.investment.presenter.*
 import com.app.l_pesa.lpk.inter.ICallBackInvestmentStatus
 import com.app.l_pesa.lpk.presenter.PresenterInvestmentStatus
+import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_investment_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.util.ArrayList
+import java.util.*
 
-class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus,ICallBackPopUpWindow {
+class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHistory, ICallBackEditHistory, ICallBackInvestmentStatus,ICallBackPopUpWindow {
 
 
-    private lateinit  var progressDialog: KProgressHUD
+    private lateinit  var progressDialog: ProgressDialog
     private var popupWindow : PopupWindow? = null
     private lateinit var listInvestment               : ArrayList<ResInvestmentHistory.UserInvestment>
     private lateinit var adapterInvestmentHistory     : InvestmentHistoryAdapter
     private lateinit var bottomSheetBehavior          : BottomSheetBehavior<*>
 
-    private var hasNext=false
+    private var hasNext =false
     private var after=""
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return InvestmentHistory()
         }
     }
@@ -88,13 +94,18 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         listInvestment               = ArrayList()
         adapterInvestmentHistory     = InvestmentHistoryAdapter(activity!!, listInvestment,this)
         bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
-        bottomSheetBehavior.isHideable=true
+        bottomSheetBehavior.isHideable = true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         initLoader()
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
+            val logger = AppEventsLogger.newLogger(activity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Investment History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing = true
             val presenterInvestmentHistory= PresenterInvestmentHistory()
             presenterInvestmentHistory.getInvestmentHistory(activity!!,from_date,to_date,type,this)
@@ -143,17 +154,15 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
         if(switchInvestment.isChecked)
         {
-            userDashBoard.savingInvestAutoStatus=1
-            val gson = Gson()
-            val json = gson.toJson(userDashBoard)
+            userDashBoard.savingInvestAutoStatus = 1
+            val json = Gson().toJson(userDashBoard)
             sharedPrefOBJ.userDashBoard      = json
 
         }
         else
         {
-            userDashBoard.savingInvestAutoStatus=0
-            val gson = Gson()
-            val json = gson.toJson(userDashBoard)
+            userDashBoard.savingInvestAutoStatus = 0
+            val json = Gson().toJson(userDashBoard)
             sharedPrefOBJ.userDashBoard      = json
         }
 
@@ -162,6 +171,26 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     override fun onErrorInvestmentStatus(message: String) {
         dismiss()
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun dismiss()
@@ -174,11 +203,16 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(message)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 
@@ -205,7 +239,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             listInvestment.addAll(userInvestment)
             adapterInvestmentHistory    = InvestmentHistoryAdapter(activity!!, listInvestment,this)
             val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
             rvLoan.adapter              = adapterInvestmentHistory
 
@@ -277,6 +311,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         {
             txt_message.text = resources.getString(R.string.no_result_found)
         }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_investment_message)
+        }
         cardView.visibility=View.VISIBLE
     }
 
@@ -327,7 +365,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         val view = inflater.inflate(R.layout.layout_recyclerview, null)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(recyclerView.context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
 
         val adapter = AdapterWindowInvestmentHistory(activity!!,filterItemList,investmentList,this)
         recyclerView.adapter = adapter
@@ -405,7 +443,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         {
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.apply_exit_point))
                 alertDialog.setPositiveButton("Yes") { _, _ -> investmentExitPoint(investmentList.investment_id.toString()) }
@@ -423,7 +461,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
         {
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.apply_withdrawal))
                 alertDialog.setPositiveButton("Yes") { _, _ -> investmentWithdrawal(investmentList.investment_id.toString()) }
@@ -442,7 +480,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
 
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.apply_reinvestment))
                 alertDialog.setPositiveButton("Yes") { _, _ ->  investmentReinvest(investmentList.investment_id.toString()) }
@@ -460,7 +498,7 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             if(CommonMethod.isNetworkAvailable(activity!!))
             {
 
-                val alertDialog = AlertDialog.Builder(activity!!)
+                val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.delete_exit_loan))
                 alertDialog.setPositiveButton("Yes") { _, _ ->
@@ -507,12 +545,10 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN -> {
                 bottomSheetBehavior.state =(BottomSheetBehavior.STATE_EXPANDED)
                 resetFilter()
-
             }
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
         }
-
 
         etFromDate.setOnClickListener {
 
@@ -579,14 +615,13 @@ class InvestmentHistory:Fragment(),ICallBackInvestmentHistory, ICallBackEditHist
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etFromDate)
+
+        CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etToDate)
+        CommonMethod.datePicker(activity!!,etToDate)
     }
 }

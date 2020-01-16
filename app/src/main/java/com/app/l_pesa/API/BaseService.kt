@@ -1,22 +1,31 @@
 package com.app.l_pesa.API
 
 
+import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.dashboard.model.ResDashboard
+import com.app.l_pesa.help.model.ResHelp
 import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
-import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.app.l_pesa.loanplan.model.ResLoanApply
+import com.app.l_pesa.loanplan.model.ResLoanPlans
+import com.app.l_pesa.login.model.ResCodeResend
+import com.app.l_pesa.login.model.ResEmailRequired
+import com.app.l_pesa.login.model.ResEmailVerification
 import com.app.l_pesa.login.model.ResLogin
 import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.*
 import com.app.l_pesa.notification.model.ResNotification
-import com.app.l_pesa.password.model.ResChangePassword
-import com.app.l_pesa.password.model.ResForgetPassword
+import com.app.l_pesa.otpview.model.ResSetOTP
+import com.app.l_pesa.pin.model.ResChangeLoginPin
 import com.app.l_pesa.pin.model.ResChangePin
+import com.app.l_pesa.pin.model.ResForgetPassword
+import com.app.l_pesa.pin.model.ResSetUpPin
+import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.ResRegistrationOne
 import com.app.l_pesa.registration.model.ResRegistrationThree
 import com.app.l_pesa.registration.model.ResRegistrationTwo
+import com.app.l_pesa.settings.model.ResCloseAccount
 import com.app.l_pesa.splash.model.ResModelCountry
 import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawal
@@ -28,18 +37,22 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-/**
- * Created by Intellij Amiya on 23-01-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 interface BaseService{
 
     @GET("countries_list?offset=0&limit=20")
     fun getCountryList(): Observable<ResModelCountry>
 
-    @POST("user/login")
+    @POST("user/login_pin_step1")
     fun doLogin(@Body request: JsonObject): Observable<ResLogin>
+
+    @POST("user/login_pin_step2")
+    fun doCheckPin(@Body request: JsonObject): Observable<ResSetPin>
+
+    @POST("user/login_otp_step2")
+    fun doCheckOTP(@Body request: JsonObject): Observable<ResSetOTP>
+
+    @POST("user/login_otp_resend")
+    fun doResendOTP(@Body request: JsonObject): Observable<ResSetOTP>
 
     @GET("user/info")
     fun getUserInfo(): Observable<ResUserInfo>
@@ -53,8 +66,11 @@ interface BaseService{
     @POST("settings/change_pin")
     fun doChangePin(@Body request: JsonObject): Observable<ResChangePin>
 
-    @POST("settings/change_password")
-    fun doChangePassword(@Body request: JsonObject): Observable<ResChangePassword>
+    @POST("settings/setup_pin")
+    fun doSetUpPin(@Body request: JsonObject): Observable<ResSetUpPin>
+
+    @POST("settings/change_apps_pin")
+    fun doChangeLoginPin(@Body request: JsonObject): Observable<ResChangeLoginPin>
 
     @POST("user/register")
     fun doRegister(@Body request: JsonObject): Observable<ResRegistrationOne>
@@ -167,6 +183,23 @@ interface BaseService{
     @GET("user/notifications")
     fun getNotification(@Query("cursors") cursors:String): Observable<ResNotification>
 
+    @POST("settings/help")
+    fun getHelp(): Observable<ResHelp>
+
+    @GET("loan_cal_load_products")
+    fun getLoanProducts(@Query("country_code") country_code:String,@Query("loan_type") loan_type:String): Observable<ResProducts>
+
+    @POST("user/add_edit_email")
+    fun doAddEditEmail(@Body request: JsonObject): Observable<ResEmailRequired>
+
+    @POST("user/verify_email")
+    fun doVerifyEmail(@Body request: JsonObject): Observable<ResEmailVerification>
+
+    @POST("user/resend_otp_email")
+    fun doResendCodeEmail(): Observable<ResCodeResend>
+
+    @POST("settings/close_account")
+    fun doCloseAccount(@Body request: JsonObject): Observable<ResCloseAccount>
 }
 
 

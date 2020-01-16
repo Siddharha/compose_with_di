@@ -1,36 +1,42 @@
 package com.app.l_pesa.lpk.view
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
+import android.app.ProgressDialog
+import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CustomTypefaceSpan
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.lpk.adapter.AdapterTransferHistory
 import com.app.l_pesa.lpk.inter.ICallBackTransferHistory
 import com.app.l_pesa.lpk.model.ResTransferHistory
 import com.app.l_pesa.lpk.presenter.PresenterSavingsUnlock
 import com.app.l_pesa.lpk.presenter.PresenterTransferHistory
+import com.app.l_pesa.main.view.MainActivity
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.gson.JsonObject
-import com.kaopiz.kprogresshud.KProgressHUD
 import kotlinx.android.synthetic.main.fragment_transfer_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 
-class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
+class TransferHistoryFragment : androidx.fragment.app.Fragment(), ICallBackTransferHistory {
 
-    private lateinit var progressDialog                : KProgressHUD
+    private lateinit var progressDialog                : ProgressDialog
     private lateinit var listTransferHistory           : ArrayList<ResTransferHistory.UserTransferHistory>
     private lateinit var adapterTransferHistory        : AdapterTransferHistory
     private lateinit var bottomSheetBehavior           : BottomSheetBehavior<*>
@@ -40,7 +46,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
 
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): androidx.fragment.app.Fragment {
             return TransferHistoryFragment()
         }
     }
@@ -92,6 +98,11 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     private fun loadTokenHistory(from_date:String,to_date:String, type:String)
     {
+        val logger = AppEventsLogger.newLogger(activity)
+        val params =  Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Token History")
+        logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
         swipeRefreshLayout.isRefreshing = true
         val presenterTransferHistory = PresenterTransferHistory()
         presenterTransferHistory.getTokenHistory(activity!!,from_date,to_date,type,this)
@@ -174,15 +185,13 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etFromDate)
+        CommonMethod.datePicker(activity!!,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(activity,etToDate)
+        CommonMethod.datePicker(activity!!,etToDate)
     }
 
     override fun onSuccessTransferHistory(userTransferHistory: ArrayList<ResTransferHistory.UserTransferHistory>, cursors: ResTransferHistory.Cursors?,from_date:String,to_date:String) {
@@ -198,7 +207,7 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
             listTransferHistory.addAll(userTransferHistory)
             adapterTransferHistory      = AdapterTransferHistory(activity!!, listTransferHistory,this)
             val llmOBJ                  = LinearLayoutManager(activity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterTransferHistory
 
@@ -265,6 +274,26 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         }
     }
 
+    override fun onSessionTimeOut(message: String) {
+        dismiss()
+        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(activity!!)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    activity!!.finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
+    }
+
     override fun onEmptyTransferHistory(type:String) {
 
         swipeRefreshLayout.isRefreshing = false
@@ -272,6 +301,10 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
         if(type=="FILTER")
         {
             txt_message.text = resources.getString(R.string.no_result_found)
+        }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_transfer_history_message)
         }
         cardView.visibility=View.VISIBLE
     }
@@ -303,11 +336,16 @@ class TransferHistoryFragment : Fragment(), ICallBackTransferHistory {
 
     private fun initLoader()
     {
-        progressDialog= KProgressHUD.create(activity)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f)
+        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(message)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
 
     }
 

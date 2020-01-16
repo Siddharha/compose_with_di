@@ -22,10 +22,9 @@ class PresenterAWSProfile {
 
     private var s3Client: AmazonS3Client? = null
 
-    fun uploadProfileImage(ctxOBJ: Context, callBack: ICallBackUpload, imageFile: File?)
-    {
+    fun uploadProfileImage(ctxOBJ: Context, callBack: ICallBackUpload, imageFile: File?) {
 
-        val sharedPref= SharedPref(ctxOBJ)
+        val sharedPref = SharedPref(ctxOBJ)
         val userData = Gson().fromJson<ResUserInfo.Data>(sharedPref.profileInfo, ResUserInfo.Data::class.java)
 
         val getTIME = System.currentTimeMillis()
@@ -35,7 +34,7 @@ class PresenterAWSProfile {
                 Regions.EU_CENTRAL_1
         )
 
-        s3Client    = AmazonS3Client(cachingCredentialsProvider)
+        s3Client = AmazonS3Client(cachingCredentialsProvider)
 
         val transferUtility = TransferUtility.builder()
                 .context(ctxOBJ)
@@ -45,10 +44,10 @@ class PresenterAWSProfile {
 
         s3Client!!.setRegion(Region.getRegion(Regions.EU_CENTRAL_1))
 
-        val userId=userData.userInfo!!.id.toString()+"_"
+        val userId = userData.userInfo!!.id.toString() + "_"
 
         val uploadObserver = transferUtility.upload(
-                BuildConfig.AWS_BUCKET+"/uploads/personal",
+                BuildConfig.AWS_BUCKET + "/uploads/personal",
                 "a_profile_$userId$getTIME.JPG",
                 imageFile,
                 CannedAccessControlList.PublicRead
@@ -57,10 +56,7 @@ class PresenterAWSProfile {
         uploadObserver.setTransferListener(object : TransferListener {
 
             override fun onStateChanged(id: Int, state: TransferState) {
-                if (TransferState.COMPLETED == state)
-                {
-                    val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
-                    println("AWS_URL"+url)
+                if (TransferState.COMPLETED == state) {
                     callBack.onSuccessUploadAWS(uploadObserver.key)
                 }
 
@@ -82,8 +78,7 @@ class PresenterAWSProfile {
     }
 
 
-    fun uploadProfileImageRegistration(ctxOBJ: Context, callBack: ICallBackUpload, imageFile: File?)
-    {
+    fun uploadProfileImageRegistration(ctxOBJ: Context, callBack: ICallBackUpload, imageFile: File?) {
 
         val getTIME = System.currentTimeMillis()
         val cachingCredentialsProvider = CognitoCachingCredentialsProvider(
@@ -92,7 +87,7 @@ class PresenterAWSProfile {
                 Regions.EU_CENTRAL_1
         )
 
-        s3Client    = AmazonS3Client(cachingCredentialsProvider)
+        s3Client = AmazonS3Client(cachingCredentialsProvider)
 
         val transferUtility = TransferUtility.builder()
                 .context(ctxOBJ)
@@ -103,7 +98,7 @@ class PresenterAWSProfile {
         s3Client!!.setRegion(Region.getRegion(Regions.EU_CENTRAL_1))
 
         val uploadObserver = transferUtility.upload(
-                BuildConfig.AWS_BUCKET+"/uploads/personal",
+                BuildConfig.AWS_BUCKET + "/uploads/personal",
                 "a_profile_$getTIME.JPG",
                 imageFile,
                 CannedAccessControlList.PublicRead
@@ -112,10 +107,9 @@ class PresenterAWSProfile {
         uploadObserver.setTransferListener(object : TransferListener {
 
             override fun onStateChanged(id: Int, state: TransferState) {
-                if (TransferState.COMPLETED == state)
-                {
-                    val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
-                    println("AWS_URL"+url)
+                if (TransferState.COMPLETED == state) {
+                    //val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
+                    //println("AWS_URL"+url)
                     callBack.onSuccessUploadAWS(uploadObserver.key)
                 }
 
@@ -136,8 +130,7 @@ class PresenterAWSProfile {
         })
     }
 
-    fun uploadPersonalID(ctxOBJ: Context, callBack: ICallBackUpload, imageFile: File?)
-    {
+    fun uploadPersonalID(ctxOBJ: Context, callBack: ICallBackUpload, imageFile: File?) {
 
         val getTIME = System.currentTimeMillis()
         val cachingCredentialsProvider = CognitoCachingCredentialsProvider(
@@ -146,7 +139,7 @@ class PresenterAWSProfile {
                 Regions.EU_CENTRAL_1
         )
 
-        s3Client    = AmazonS3Client(cachingCredentialsProvider)
+        s3Client = AmazonS3Client(cachingCredentialsProvider)
 
         val transferUtility = TransferUtility.builder()
                 .context(ctxOBJ)
@@ -157,7 +150,7 @@ class PresenterAWSProfile {
         s3Client!!.setRegion(Region.getRegion(Regions.EU_CENTRAL_1))
 
         val uploadObserver = transferUtility.upload(
-                BuildConfig.AWS_BUCKET+"/uploads/business",
+                BuildConfig.AWS_BUCKET + "/uploads/business",
                 "a_personal_$getTIME.JPG",
                 imageFile,
                 CannedAccessControlList.PublicRead
@@ -166,10 +159,9 @@ class PresenterAWSProfile {
         uploadObserver.setTransferListener(object : TransferListener {
 
             override fun onStateChanged(id: Int, state: TransferState) {
-                if (TransferState.COMPLETED == state)
-                {
-                    val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
-                    println("AWS_URL"+url)
+                if (TransferState.COMPLETED == state) {
+                    // val url = "https://" + BuildConfig.AWS_BUCKET+".s3.amazonaws.com/" + uploadObserver.key
+                    //println("AWS_URL"+url)
                     callBack.onSuccessUploadAWS(uploadObserver.key)
                 }
 

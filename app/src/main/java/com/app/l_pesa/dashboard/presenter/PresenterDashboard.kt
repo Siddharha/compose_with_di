@@ -12,11 +12,6 @@ import org.json.JSONObject
 import retrofit2.HttpException
 
 
-/**
- * Created by Intellij Amiya on 20-02-2019.
- * A good programmer is someone who looks both ways before crossing a One-way street.
- * Kindly follow https://source.android.com/setup/code-style
- */
 class PresenterDashboard {
 
     @SuppressLint("CheckResult")
@@ -47,12 +42,26 @@ class PresenterDashboard {
                     error ->
                     try
                     {
-                        val errorVal         = error as HttpException
-                        val jsonError        =    JSONObject(errorVal.response().errorBody()?.string())
-                        val  jsonStatus      =    jsonError.getJSONObject("status")
-                        val jsonMessage      =    jsonStatus.getString("message")
+                        val errorVal         =    error as HttpException
+                        if(errorVal.code()>=400)
+                        {
+                            val jsonError        =    JSONObject(errorVal.response().errorBody()?.string()!!)
+                            val jsonStatus       =    jsonError.getJSONObject("status")
+                            val jsonMessage      =    jsonStatus.getString("message")
+                            val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
-                        callBackOBJ.onFailureDashboard(jsonMessage)
+                            if(jsonStatusCode==50002)
+                            {
+                                callBackOBJ.onSessionTimeOut(jsonMessage)
+                            }
+                            else
+                            {
+                                callBackOBJ.onFailureDashboard(jsonMessage)
+                            }
+
+
+                        }
+
                     }
                     catch (exp: Exception)
                     {

@@ -2,20 +2,21 @@ package com.app.l_pesa.investment.view
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.investment.adapter.InvestmentTabPager
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
+class InvestmentFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
 
     private var tabLayout: TabLayout? = null
@@ -40,6 +41,12 @@ class InvestmentFragment : Fragment(),TabLayout.OnTabSelectedListener {
 
     private fun initUI()
     {
+        Handler().postDelayed({
+            (activity as DashboardActivity).visibleFilter(false)
+            (activity as DashboardActivity).visibleButton(false)
+        }, 200)
+
+
         tabLayout=activity!!.findViewById(R.id.tabLayout)
         viewPager=activity!!.findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.investment_plan)))

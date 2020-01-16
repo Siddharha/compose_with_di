@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="@dimen/_1sdp"
     android:background="@drawable/bg_white_view"
     android:orientation="horizontal"
@@ -41,7 +41,7 @@
                 >
                 <ImageView
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_ref_no"
+                    app:srcCompat="@drawable/ic_ref_no"
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
 
@@ -103,7 +103,7 @@
                 >
                 <ImageView
                     android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_request_date"
+                    app:srcCompat="@drawable/ic_request_date"
                     android:layout_width="@dimen/_22sdp"
                     android:layout_height="@dimen/_22sdp"
 
@@ -179,7 +179,7 @@
                     >
                     <ImageView
                         android:contentDescription="@string/app_name"
-                        android:src="@drawable/ic_loan_no_icon"
+                        app:srcCompat="@drawable/ic_loan_no_icon"
                         android:layout_width="@dimen/_22sdp"
                         android:layout_height="@dimen/_22sdp"
 
@@ -249,7 +249,7 @@
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/_10sdp"
                         android:text="@string/pay_now"
-                        android:textAllCaps="false"
+                        android:textAllCaps="true"
 
                         />
             </LinearLayout>
@@ -268,7 +268,7 @@
                    >
                     <ImageView
                         android:contentDescription="@string/app_name"
-                        android:src="@drawable/ic_approved_icon"
+                        app:srcCompat="@drawable/ic_approved_icon"
                         android:layout_width="@dimen/_22sdp"
                         android:layout_height="@dimen/_22sdp"
 

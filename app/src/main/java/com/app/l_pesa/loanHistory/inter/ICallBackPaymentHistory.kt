@@ -1,11 +1,12 @@
 package com.app.l_pesa.loanHistory.inter
 
 import com.app.l_pesa.loanHistory.model.ResPaymentHistory
-import java.util.ArrayList
+import java.util.*
 
 interface ICallBackPaymentHistory {
 
     fun onSuccessPaymentHistory(paymentHistory: ArrayList<ResPaymentHistory.PaymentHistory>)
     fun onEmptyPaymentHistory()
     fun onErrorPaymentHistory(message: String)
+    fun onSessionTimeOut(message: String)
 }

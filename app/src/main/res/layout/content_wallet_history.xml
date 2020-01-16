@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,12 +13,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/rootLayout"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="@color/screenBackground"
         >
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -28,7 +26,7 @@
                 android:layout_height="wrap_content"
                 >
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,7 +51,7 @@
                             android:layout_height="@dimen/_35sdp"
                             android:scaleType="fitXY"
                             android:adjustViewBounds="true"
-                            android:src="@drawable/ic_loan_history_img"
+                            app:srcCompat="@drawable/ic_loan_history_img"
                             android:contentDescription="@string/app_name"
                             android:layout_marginTop="@dimen/_5sdp"/>
 
@@ -65,7 +63,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_12sdp"
-                            android:text="@string/empty_loan_history_message"
+                            android:text="@string/empty_withdrawal_history_message"
                             android:gravity="center"
                             android:textColor="@color/textColors"
                             android:fontFamily="@font/montserrat"
@@ -75,9 +73,9 @@
                     </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rlList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,8 +84,8 @@
 
             </RelativeLayout>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

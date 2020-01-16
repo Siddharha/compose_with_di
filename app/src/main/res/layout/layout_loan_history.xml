@@ -34,7 +34,7 @@
                 >
 
                 <ImageView
-                    android:src="@drawable/ic_loan_no_icon"
+                    app:srcCompat="@drawable/ic_loan_no_icon"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:scaleType="fitXY"
@@ -42,7 +42,7 @@
                     android:contentDescription="@string/app_name"/>
 
                 <ImageView
-                    android:src="@drawable/ic_loan_amount_icon"
+                    app:srcCompat="@drawable/ic_loan_amount_icon"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_7sdp"
@@ -50,7 +50,7 @@
 
 
                 <ImageView
-                    android:src="@drawable/ic_interest_rate_icon"
+                    app:srcCompat="@drawable/ic_interest_rate_icon"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_7sdp"
@@ -291,7 +291,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".20"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_delete"
+                            app:srcCompat="@drawable/ic_delete"
                             android:visibility="invisible"
 
                             />

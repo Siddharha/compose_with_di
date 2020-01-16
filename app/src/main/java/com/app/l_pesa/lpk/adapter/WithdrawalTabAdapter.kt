@@ -1,8 +1,8 @@
 package com.app.l_pesa.lpk.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.app.l_pesa.lpk.view.TokenWithdrawalFragment
 import com.app.l_pesa.lpk.view.WalletAddressFragment
 import com.app.l_pesa.lpk.view.WithdrawalHistoryFragment

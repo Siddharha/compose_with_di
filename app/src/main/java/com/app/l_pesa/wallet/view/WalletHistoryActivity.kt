@@ -2,22 +2,30 @@ package com.app.l_pesa.wallet.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import android.os.CountDownTimer
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonClass
+import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.wallet.adapter.WalletHistoryAdapter
 import com.app.l_pesa.wallet.inter.ICallBackWalletWithdrawalHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.app.l_pesa.wallet.presenter.PresenterWithdrawalHistory
+import com.facebook.appevents.AppEventsConstants
+import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_wallet_history.*
 import kotlinx.android.synthetic.main.content_wallet_history.*
 import kotlinx.android.synthetic.main.layout_filter_by_date.*
@@ -28,6 +36,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     private lateinit var listWithdrawalHistory   : ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>
     private lateinit var adapterWalletHistory    : WalletHistoryAdapter
     private lateinit var bottomSheetBehavior     : BottomSheetBehavior<*>
+    private lateinit var countDownTimer          : CountDownTimer
 
     private var hasNext=false
     private var after=""
@@ -41,6 +50,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
         initLoad()
         swipeRefresh()
+        initTimer()
 
     }
 
@@ -77,6 +87,11 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
+            val logger = AppEventsLogger.newLogger(this@WalletHistoryActivity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Wallet History")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+
             swipeRefreshLayout.isRefreshing=true
             val presenterWithdrawalHistory=PresenterWithdrawalHistory()
             presenterWithdrawalHistory.getWithdrawalHistory(this@WalletHistoryActivity,from_date,to_date,type,this)
@@ -158,15 +173,13 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     private fun showDatePickerFrom()
     {
 
-       val commonClass= CommonClass()
-       commonClass.datePicker(this@WalletHistoryActivity,etFromDate)
+       CommonMethod.datePicker(this@WalletHistoryActivity,etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        val commonClass= CommonClass()
-        commonClass.datePicker(this@WalletHistoryActivity,etToDate)
+        CommonMethod.datePicker(this@WalletHistoryActivity,etToDate)
     }
 
     private fun resetFilter()
@@ -192,7 +205,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             listWithdrawalHistory.addAll(withdrawal_history)
             adapterWalletHistory        = WalletHistoryAdapter(this@WalletHistoryActivity, listWithdrawalHistory)
             val llmOBJ                  = LinearLayoutManager(this@WalletHistoryActivity)
-            llmOBJ.orientation          = LinearLayoutManager.VERTICAL
+            llmOBJ.orientation          = RecyclerView.VERTICAL
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterWalletHistory
             adapterWalletHistory.notifyDataSetChanged()
@@ -214,7 +227,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
 
     }
 
-    private fun loadMore(from_date: String, to_date: String)
+   /* private fun loadMore(from_date: String, to_date: String)
     {
         if(CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
         {
@@ -231,7 +244,7 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,resources.getString(R.string.no_internet))
         }
-    }
+    }*/
 
     override fun onSuccessWalletWithdrawalHistoryPaginate(withdrawal_history: ArrayList<ResWalletWithdrawalHistory.WithdrawalHistory>, cursors: ResWalletWithdrawalHistory.Cursors,from_date: String, to_date: String) {
 
@@ -268,7 +281,32 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         {
             txt_message.text = resources.getString(R.string.no_result_found)
         }
+        else
+        {
+            txt_message.text = resources.getString(R.string.empty_withdrawal_history_message)
+        }
         cardView.visibility=View.VISIBLE
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+        swipeRefreshLayout.isRefreshing = false
+        val dialogBuilder = AlertDialog.Builder(this@WalletHistoryActivity,R.style.MyAlertDialogTheme)
+        dialogBuilder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                    val sharedPrefOBJ= SharedPref(this@WalletHistoryActivity)
+                    sharedPrefOBJ.removeShared()
+                    startActivity(Intent(this@WalletHistoryActivity, MainActivity::class.java))
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    finish()
+                }
+
+        val alert = dialogBuilder.create()
+        alert.setTitle(resources.getString(R.string.app_name))
+        alert.show()
+
     }
 
     private fun toolbarFont(context: Activity) {
@@ -276,10 +314,9 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
-                val tv = view
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
-                if (tv.text == toolbar.title) {
-                    tv.typeface = titleFont
+                if (view.text == toolbar.title) {
+                    view.typeface = titleFont
                     break
                 }
             }
@@ -289,9 +326,16 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
-                onBackPressed()
-                overridePendingTransition(R.anim.left_in, R.anim.right_out)
+                if(swipeRefreshLayout.isRefreshing && CommonMethod.isNetworkAvailable(this@WalletHistoryActivity))
+                {
+                    CommonMethod.customSnackBarError(rootLayout,this@WalletHistoryActivity,resources.getString(R.string.please_wait))
+                }
+                else
+                {
+                    onBackPressed()
+                }
                 true
+
             }
 
             else -> super.onOptionsItemSelected(item)
@@ -301,6 +345,42 @@ class WalletHistoryActivity : AppCompatActivity(), ICallBackWalletWithdrawalHist
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+    }
+
+    private fun initTimer() {
+
+        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            override fun onFinish() {
+                onSessionTimeOut(resources.getString(R.string.session_time_out))
+                countDownTimer.cancel()
+
+            }}
+        countDownTimer.start()
+
+    }
+
+
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+
+        countDownTimer.cancel()
+        countDownTimer.start()
+    }
+
+
+    public override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        MyApplication.getInstance().trackScreenView(this@WalletHistoryActivity::class.java.simpleName)
+
     }
 
 }
