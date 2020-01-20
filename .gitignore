@@ -152,4 +152,4 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
->>>>>>> 4c6d95f59db32f88ee58c0ace91bebead17760c5
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
