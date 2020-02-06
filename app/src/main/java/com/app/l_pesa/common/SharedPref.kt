@@ -226,6 +226,30 @@ constructor(context: Context) // Constructor
             editor.putString(KEY_SET_CURRENT_LNG, currentLng)
             editor.commit()
         }
+    var address: String
+        get() = pref.getString(KEY_SET_CURRENT_ADDRESS, "")!!
+        set(address) {
+            editor.remove(KEY_SET_CURRENT_ADDRESS)
+            editor.putString(KEY_SET_CURRENT_ADDRESS, address)
+            editor.commit()
+        }
+
+    var locality: String
+        get() = pref.getString(KEY_SET_CURRENT_LOCALITY, "")!!
+        set(locality) {
+            editor.remove(KEY_SET_CURRENT_LOCALITY)
+            editor.putString(KEY_SET_CURRENT_LOCALITY, locality)
+            editor.commit()
+        }
+
+    var pincode: String
+        get() = pref.getString(KEY_SET_CURRENT_PINCODE, "")!!
+        set(pincode) {
+            editor.remove(KEY_SET_CURRENT_PINCODE)
+            editor.putString(KEY_SET_CURRENT_PINCODE, pincode)
+            editor.commit()
+        }
+
     var imagePath: String
         get() = pref.getString(KEY_SET_IMAGE_PATH, "")!!
         set(imagePath) {
@@ -294,6 +318,9 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_LOAN_PRODUCT          = "KEY_SET_LOAN_PRODUCT"
         private const val KEY_SET_CURRENT_LAT           = "KEY_SET_CURRENT_LAT"
         private const val KEY_SET_CURRENT_LNG           = "KEY_SET_CURRENT_LNG"
+        private const val KEY_SET_CURRENT_ADDRESS       = "KEY_SET_CURRENT_ADDRESS"
+        private const val KEY_SET_CURRENT_LOCALITY      = "KEY_SET_CURRENT_LOCALITY"
+        private const val KEY_SET_CURRENT_PINCODE       = "KEY_SET_CURRENT_PINCODE"
         private const val KEY_SET_IMAGE_PATH            = "KEY_SET_IMAGE_PATH"
         private const val KEY_SET_VERIFICATION_CODE     = "KEY_SET_VERIFICATION_CODE"
         private const val KEY_SET_COUNTRY_ISD_CODE      = "KEY_SET_COUNTRY_ISD_CODE"

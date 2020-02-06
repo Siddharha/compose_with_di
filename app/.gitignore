@@ -58,6 +58,7 @@ gen-external-apklibs
 .idea/tasks.xml
 
 # Sensitive or high-churn files:
+.idea/
 .idea/dataSources.ids
 .idea/dataSources.xml
 .idea/dataSources.local.xml

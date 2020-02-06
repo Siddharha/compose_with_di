@@ -8,10 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
-import android.location.Criteria
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
+import android.location.*
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -46,6 +43,7 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
+import java.util.*
 
 
 class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply, LocationListener {
@@ -61,6 +59,10 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private var loanType=""
     private var productId=""
+    private var add: String = ""
+    private var locality: String = ""
+    private var pincode: String = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +70,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanApplyActivity)
+
 
         locationWork()
         initData()
@@ -230,10 +233,15 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         jsonObject.addProperty("latitude",shared.currentLat)
         jsonObject.addProperty("longitude",shared.currentLng)
+        jsonObject.addProperty("address",shared.address)
+        jsonObject.addProperty("locality",shared.locality)
+        jsonObject.addProperty("pincode",shared.pincode)
 
         val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
         logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION)
-
+        //CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity,jsonObject.toString())
+        println("data is $jsonObject")
+        dismiss()
         val presenterLoanApply= PresenterLoanApply()
         presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)
 
@@ -368,6 +376,17 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         val sharedPref=SharedPref(this@LoanApplyActivity)
         sharedPref.currentLat=location.latitude.toString()
         sharedPref.currentLng=location.longitude.toString()
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val address = geocoder.getFromLocation(location.latitude,location.longitude,1)
+        for (i in address){
+            println("address is ${i.getAddressLine(0)}")
+            println("locality is ${i.locality}")
+            println("pincode is ${i.postalCode}")
+            sharedPref.address = i.getAddressLine(0)
+            sharedPref.locality = i.locality
+            sharedPref.pincode = i.postalCode
+
+        }
 
     }
 
