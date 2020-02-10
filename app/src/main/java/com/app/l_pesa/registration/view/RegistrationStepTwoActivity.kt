@@ -7,10 +7,7 @@ import android.content.ClipData
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
-import android.graphics.Typeface
+import android.graphics.*
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -33,7 +30,7 @@ import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypefaceSpan
+import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import java.io.File
@@ -211,7 +208,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         val message = SpannableString(resources.getString(R.string.saving))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)

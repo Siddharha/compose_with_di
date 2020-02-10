@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
@@ -79,7 +80,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)

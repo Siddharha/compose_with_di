@@ -2,6 +2,7 @@ package com.app.l_pesa.lpk.view
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
@@ -19,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypefaceSpan
+import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.lpk.inter.ICallBackWalletAddress
@@ -165,7 +166,7 @@ class WalletAddressFragment : androidx.fragment.app.Fragment(), ICallBackWalletA
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)

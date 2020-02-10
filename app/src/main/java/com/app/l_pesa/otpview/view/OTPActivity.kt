@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -18,10 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypefaceSpan
-import com.app.l_pesa.common.OnOtpCompletionListener
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.app.l_pesa.otpview.inter.ICallBackVerifyOTP
 import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.otpview.presenter.PresenterOTP
@@ -254,7 +252,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)

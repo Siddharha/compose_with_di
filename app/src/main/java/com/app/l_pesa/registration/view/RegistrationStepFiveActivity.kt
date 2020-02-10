@@ -30,7 +30,7 @@ import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypefaceSpan
+import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
@@ -291,7 +291,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         val message=   SpannableString(resources.getString(R.string.saving))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)

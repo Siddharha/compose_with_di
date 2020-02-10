@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.IntentSender
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -210,7 +211,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         val message = SpannableString(resources.getString(R.string.logging_out))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        message.setSpan(CustomTypeFaceSpan("", face, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
@@ -336,7 +337,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun applyFontToMenuItem(mi: MenuItem) {
         val font = ResourcesCompat.getFont(this@DashboardActivity, R.font.montserrat)
         val title = SpannableString(mi.title)
-        title.setSpan(CustomTypefaceSpan("", font!!), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        title.setSpan(CustomTypeFaceSpan("", font!!, Color.parseColor("#535559")), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         mi.title = title
     }
 

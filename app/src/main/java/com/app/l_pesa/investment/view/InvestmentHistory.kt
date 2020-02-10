@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypefaceSpan
+import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.investment.adapter.AdapterWindowInvestmentHistory
@@ -207,7 +207,7 @@ class InvestmentHistory: androidx.fragment.app.Fragment(),ICallBackInvestmentHis
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+        message.setSpan(CustomTypeFaceSpan("", face, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
