@@ -88,7 +88,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         toolbar.title = resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
 
-        checkForAppUpdate()
+        //checkForAppUpdate()
         initData()
         initMenu()
         initLoader()

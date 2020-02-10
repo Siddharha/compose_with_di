@@ -35,6 +35,7 @@ import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
 import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.inter.ICallBackDescription
+import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
 import com.facebook.appevents.AppEventsConstants
@@ -213,8 +214,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun loanApply()
     {
-
-
         val shared=SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()
@@ -235,9 +234,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         jsonObject.addProperty("address",shared.address)
         jsonObject.addProperty("locality",shared.locality)
         jsonObject.addProperty("pincode",shared.pincode)
-
+        val globalLoanPlanModel= GlobalLoanPlanModel.getInstance().modelData
         val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
-        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION)
+        println("Loan Amount is ${globalLoanPlanModel?.loanAmount}")
+        val params = Bundle()
+        params.putString(AppEventsConstants.EVENT_PARAM_DESCRIPTION,(globalLoanPlanModel!!.loanAmount).toString())
+        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION,params)
         //CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity,jsonObject.toString())
         println("data is $jsonObject")
         dismiss()

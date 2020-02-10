@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
 import android.os.Handler
+import android.view.Display
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
@@ -19,6 +21,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
+import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
@@ -29,28 +33,30 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
 
-    private var appUpdateManager: AppUpdateManager? = null
+    private var appUpdateManager1: AppUpdateManager? = null
     private var installStateUpdatedListener: InstallStateUpdatedListener? = null
+    private var fakeAppUpdateManager: FakeAppUpdateManager? = null
+    private var appUpdateInfo:AppUpdateInfo? = null
 
-  /*  private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
-    private val appUpdatedListener: InstallStateUpdatedListener by lazy {
-        object : InstallStateUpdatedListener {
-            override fun onStateUpdate(installState: InstallState) {
-                when {
-                    installState.installStatus() == InstallStatus.DOWNLOADED -> popupSnackbarForCompleteUpdate()
-                    installState.installStatus() == InstallStatus.INSTALLED -> appUpdateManager.unregisterListener(this)
+      private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
+      private val appUpdatedListener: InstallStateUpdatedListener by lazy {
+          object : InstallStateUpdatedListener {
+              override fun onStateUpdate(installState: InstallState) {
+                  when {
+                      installState.installStatus() == InstallStatus.DOWNLOADED -> popupSnackbarForCompleteUpdate()
+                      installState.installStatus() == InstallStatus.INSTALLED -> appUpdateManager.unregisterListener(this)
 
-                }
-            }
-        }
-    }*/
+                  }
+              }
+          }
+      }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initUI()
-        /*AppUpdater(this@MainActivity)
+       /* AppUpdater(this@MainActivity)
                 .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
                 .setDisplay(Display.DIALOG)
                 .showAppUpdated(true)
@@ -64,9 +70,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun onClickTermsPolicy(){
+    private fun onClickTermsPolicy() {
         val sharedPref = SharedPref(this@MainActivity)
-        tvMainTermsCondition.richText(getString(R.string.privacy_term_condition)){
+        tvMainTermsCondition.richText(getString(R.string.privacy_term_condition)) {
             spannables = listOf(
                     41..61 to { openTermCondition(this@MainActivity, sharedPref.countryCode) },
                     66..80 to { openPrivacyUrl(this@MainActivity, sharedPref.countryCode) }
@@ -76,19 +82,17 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    private fun initUI()
-    {
+    private fun initUI() {
 
         buttonLogin.setOnClickListener {
 
-            buttonLogin.isClickable       = false
+            buttonLogin.isClickable = false
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
             Handler().postDelayed({
-                buttonLogin.isClickable   = true
+                buttonLogin.isClickable = true
             }, 1000)
 
 
@@ -96,11 +100,11 @@ class MainActivity : AppCompatActivity() {
 
         buttonSignUp.setOnClickListener {
 
-            buttonSignUp.isClickable       = false
+            buttonSignUp.isClickable = false
             startActivity(Intent(this@MainActivity, RegistrationStepOneActivity::class.java))
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
             Handler().postDelayed({
-                buttonSignUp.isClickable   = true
+                buttonSignUp.isClickable = true
             }, 1000)
 
 
@@ -109,10 +113,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkForAppUpdate() {
         // Creates instance of the manager.
-        appUpdateManager = AppUpdateManagerFactory.create(this)
+        appUpdateManager1 = AppUpdateManagerFactory.create(this)
 
         // Returns an intent object that you use to check for an update.
-        val appUpdateInfoTask = appUpdateManager!!.appUpdateInfo
+        val appUpdateInfoTask = appUpdateManager1!!.appUpdateInfo
 
         // Create a listener to track request state updates.
         installStateUpdatedListener = InstallStateUpdatedListener { installState ->
@@ -125,35 +129,45 @@ class MainActivity : AppCompatActivity() {
 
         // Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
                 // Request the update.
-                if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                /*  if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
 
-                    // Before starting an update, register a listener for updates.
-                    appUpdateManager!!.registerListener(installStateUpdatedListener)
-                    // Start an update.
-                    startAppUpdateFlexible(appUpdateInfo)
-                } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                    // Start an update.
-                    startAppUpdateImmediate(appUpdateInfo)
-                }
+                      // Before starting an update, register a listener for updates.
+                      appUpdateManager!!.registerListener(installStateUpdatedListener)
+                      // Start an update.
+                      startAppUpdateFlexible(appUpdateInfo)
+                  } else if (appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                      // Start an update.
+                      startAppUpdateImmediate(appUpdateInfo)
+                  }*/
+
+                startAppUpdateImmediate(appUpdateInfo)
+               // fakeUpdate(appUpdateInfo)
             }
         }
     }
 
     private fun startAppUpdateImmediate(appUpdateInfo: AppUpdateInfo) {
         try {
-            appUpdateManager!!.startUpdateFlowForResult(
+            appUpdateManager1!!.startUpdateFlowForResult(
                     appUpdateInfo,
                     AppUpdateType.IMMEDIATE,
                     // The current activity making the update request.
                     this,
                     // Include a request code to later monitor this update request.
                     APP_UPDATE_REQUEST_CODE)
+
         } catch (e: IntentSender.SendIntentException) {
             e.printStackTrace()
         }
 
+    }
+
+    private fun fakeUpdate(appUpdateInfo: AppUpdateInfo) {
+        fakeAppUpdateManager = FakeAppUpdateManager(this@MainActivity)
+        fakeAppUpdateManager?.setUpdateAvailable(1)
+//        startAppUpdateImmediate(appUpdateInfo)
     }
 
     private fun startAppUpdateFlexible(appUpdateInfo: AppUpdateInfo) {
@@ -175,10 +189,32 @@ class MainActivity : AppCompatActivity() {
     public override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
 
-        when (requestCode) {
+        /*when (requestCode) {
 
-            APP_UPDATE_REQUEST_CODE -> if (resultCode != Activity.RESULT_OK) { //RESULT_OK / RESULT_CANCELED / RESULT_IN_APP_UPDATE_FAILED
-                unregisterInstallStateUpdListener()
+            APP_UPDATE_REQUEST_CODE -> if (resultCode != Activity.RESULT_OK) {
+
+              *//*  fakeAppUpdateManager = FakeAppUpdateManager(this@MainActivity)
+                fakeAppUpdateManager?.setUpdateAvailable(1)
+                fakeAppUpdateManager?.userAcceptsUpdate()
+                fakeAppUpdateManager?.downloadStarts()
+
+                Handler().postDelayed({
+                    fakeAppUpdateManager?.downloadCompletes()
+                    Toast.makeText(this, "Updated successfully!!", Toast.LENGTH_SHORT).show()
+                    fakeAppUpdateManager?.setUpdateAvailable(0)
+                }, 3000)*//*
+
+                //RESULT_OK / RESULT_CANCELED / RESULT_IN_APP_UPDATE_FAILED
+//                 unregisterInstallStateUpdListener()
+                //startAppUpdateImmediate(appUpdateInfo!!)
+            }
+        }*/
+
+        if (requestCode == APP_UPDATE_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                //log("Update flow failed! Result code: $resultCode")
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
             }
         }
     }
@@ -218,27 +254,27 @@ class MainActivity : AppCompatActivity() {
     }
 */
 
-   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == APP_UPDATE_REQUEST_CODE) {
-            if (resultCode != Activity.RESULT_OK) {
-                Toast.makeText(this@MainActivity,
-                        "App Update failed, please try again on the next app launch.",
-                        Toast.LENGTH_SHORT)
-                        .show()
-            }
-        }
-    }
+     /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         super.onActivityResult(requestCode, resultCode, data)
+         if (requestCode == APP_UPDATE_REQUEST_CODE) {
+             if (resultCode != Activity.RESULT_OK) {
+                 Toast.makeText(this@MainActivity,
+                         "App Update failed, please try again on the next app launch.",
+                         Toast.LENGTH_SHORT)
+                         .show()
+             }
+         }
+     }*/
 
-    private fun popupSnackbarForCompleteUpdate() {
-        val snackbar = Snackbar.make(
-                findViewById(R.id.drawer_layout),
-                "An update has just been downloaded.",
-                Snackbar.LENGTH_INDEFINITE)
-        snackbar.setAction("RESTART") { appUpdateManager.completeUpdate() }
-        snackbar.setActionTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorApp))
-        snackbar.show()
-    }*/
+     private fun popupSnackbarForCompleteUpdate() {
+         val snackbar = Snackbar.make(
+                 findViewById(R.id.drawer_layout),
+                 "An update has just been downloaded.",
+                 Snackbar.LENGTH_INDEFINITE)
+         snackbar.setAction("RESTART") { appUpdateManager?.completeUpdate() }
+         snackbar.setActionTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorApp))
+         snackbar.show()
+     }
 
 
     /**
@@ -250,11 +286,12 @@ class MainActivity : AppCompatActivity() {
                 findViewById(R.id.drawer_layout),
                 "An update has just been downloaded.",
                 Snackbar.LENGTH_INDEFINITE)
-        snackbar.setAction("RESTART"){ appUpdateManager!!.completeUpdate() }
+        snackbar.setAction("RESTART") { appUpdateManager!!.completeUpdate() }
         snackbar.setActionTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorApp))
         snackbar.show()
         unregisterInstallStateUpdListener()
     }
+
     private fun checkNewAppVersionState() {
         appUpdateManager!!
                 .appUpdateInfo
@@ -285,30 +322,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-       /* appUpdateManager
-                .appUpdateInfo
-                .addOnSuccessListener { appUpdateInfo ->
+         appUpdateManager
+                 ?.appUpdateInfo
+                 ?.addOnSuccessListener { appUpdateInfo ->
 
-                    // If the update is downloaded but not installed,
-                    // notify the user to complete the update.
-                    if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                        popupSnackbarForCompleteUpdate()
-                    }
+                     // If the update is downloaded but not installed,
+                     // notify the user to complete the update.
+                     if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                         popupSnackbarForCompleteUpdate()
+                     }
 
-                    //Check if Immediate update is required
-                    try {
-                        if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                            // If an in-app update is already running, resume the update.
-                            appUpdateManager.startUpdateFlowForResult(
-                                    appUpdateInfo,
-                                    AppUpdateType.IMMEDIATE,
-                                    this,
-                                    APP_UPDATE_REQUEST_CODE)
-                        }
-                    } catch (e: IntentSender.SendIntentException) {
-                        e.printStackTrace()
-                    }
-                }*/
+                     //Check if Immediate update is required
+                     try {
+                         if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                             // If an in-app update is already running, resume the update.
+                             appUpdateManager?.startUpdateFlowForResult(
+                                     appUpdateInfo,
+                                     AppUpdateType.IMMEDIATE,
+                                     this,
+                                     APP_UPDATE_REQUEST_CODE)
+                         }
+                     } catch (e: IntentSender.SendIntentException) {
+                         e.printStackTrace()
+                     }
+                 }
 
         checkNewAppVersionState()
         MyApplication.getInstance().trackScreenView(this@MainActivity::class.java.simpleName)
