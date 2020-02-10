@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rootLayout"
     android:background="@color/colorWhite"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
@@ -14,34 +13,33 @@
         android:id="@+id/txtInfo"
         android:layout_width="0dp"
         android:layout_height="@dimen/_85sdp"
-        android:text="@string/mobile_verification"
-        android:textSize="@dimen/_11sdp"
-        android:padding="@dimen/_3sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/dark_text_color"
         android:gravity="center|start"
         android:justificationMode="inter_word"
+        android:padding="@dimen/_3sdp"
+        android:text="@string/mobile_verification"
+        android:textColor="@color/dark_text_color"
+        android:textSize="@dimen/_11sdp"
         app:layout_constraintBottom_toTopOf="@+id/tilPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-       />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/tilPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@+id/tilEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInfo"
-        app:layout_constraintBottom_toTopOf="@+id/tilEmail"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/txtInfo">
+
         <com.app.l_pesa.common.CommonInputLayout
 
             style="@style/customInputLayoutStyle"
@@ -55,12 +53,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:hint="@string/phone_no"
                 android:inputType="numberPassword"
                 android:maxLength="15"
                 android:maxLines="1"
-                android:hint="@string/phone_no"
-                android:textColorHint="@color/color_gray_text"
                 android:textColor="@color/textColors"
+                android:textColorHint="@color/color_gray_text"
                 android:textSize="@dimen/_12sdp" />
 
         </com.app.l_pesa.common.CommonInputLayout>
@@ -72,37 +70,36 @@
         android:id="@+id/tilEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilPhone"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/tilPhone">
 
-    <com.app.l_pesa.common.CommonInputLayout
+        <com.app.l_pesa.common.CommonInputLayout
 
-        style="@style/customInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        >
-
-        <com.app.l_pesa.common.CommonEditTextRegular
-            android:id="@+id/etEmail"
+            style="@style/customInputLayoutStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:hint="@string/email_address"
-            android:inputType="textEmailAddress"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._- "
-            android:maxLength="45"
-            android:maxLines="1"
-            android:textColorHint="@color/color_gray_text"
-            android:textColor="@color/textColors"
-            android:textSize="@dimen/_12sdp" />
+            android:layout_height="wrap_content"
 
-    </com.app.l_pesa.common.CommonInputLayout>
+            >
+
+            <com.app.l_pesa.common.CommonEditTextRegular
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._- "
+                android:hint="@string/email_address"
+                android:inputType="textEmailAddress"
+                android:maxLength="45"
+                android:maxLines="1"
+                android:textColor="@color/textColors"
+                android:textColorHint="@color/color_gray_text"
+                android:textSize="@dimen/_12sdp" />
+
+        </com.app.l_pesa.common.CommonInputLayout>
 
     </androidx.core.widget.NestedScrollView>
 
@@ -111,22 +108,44 @@
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:background="@drawable/bg_button_app"
+        android:fontFamily="@font/montserrat"
         android:text="@string/continue_"
         android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textSize="@dimen/_12sdp"
         android:textColor="@color/colorWhite"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilEmail"
-
-
         />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="tvTermsCons" />
+
+    <TextView
+        android:id="@+id/tvTermsCons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:fontFamily="@font/montserrat"
+        android:gravity="center|bottom"
+        android:text="@string/privacy_term_condition"
+        android:textColor="@color/dark_text_color"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barrier1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

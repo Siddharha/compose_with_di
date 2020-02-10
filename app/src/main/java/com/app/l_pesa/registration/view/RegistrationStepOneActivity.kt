@@ -32,10 +32,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
-import com.app.l_pesa.common.CommonEditTextRegular
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypefaceSpan
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
+import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
+import com.app.l_pesa.common.CommonMethod.openTermCondition
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.registration.inter.ICallBackRegisterOne
@@ -68,6 +67,14 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,IC
         toolbarFont(this@RegistrationStepOneActivity)
 
         initData()
+        val sharedPref = SharedPref(this@RegistrationStepOneActivity)
+
+        tvTermsCons.richText(getString(R.string.privacy_term_condition)){
+            spannables = listOf(
+                    41..61 to { openTermCondition(this@RegistrationStepOneActivity, sharedPref.countryCode) },
+                    66..80 to { openPrivacyUrl(this@RegistrationStepOneActivity, sharedPref.countryCode) }
+            )
+        }
 
     }
 

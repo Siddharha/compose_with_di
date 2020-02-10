@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">L-Pesa</string>
- <!--   <string name="facebook_app_id">770436653385979</string>-->
-   <string name="facebook_app_id">377266739110350</string>
-   <string name="fb_login_protocol_scheme">fb377266739110350</string>
+    <!--   <string name="facebook_app_id">770436653385979</string>-->
+    <string name="facebook_app_id">377266739110350</string>
+    <string name="fb_login_protocol_scheme">fb377266739110350</string>
     <string name="starter_loan"> $1 Starter Loan</string>
     <string name="l_pesa_risk_free">The L-Pesa Risk Free</string>
     <string name="sign_in">Sign In</string>
@@ -506,5 +506,9 @@
     <string name="title_close_account">Close Account</string>
     <string name="close_account_prompt">Do you want to Close L-Pesa Account?</string>
 
+
+    <!-- signing in -->
+    <string name="privacy_term_condition">By registering your account you agree to Terms and Conditions and Privacy Policy</string>
+    <string name="privacy_term_condition_login">By signing in you agree to Terms and Conditions and Privacy Policy</string>
 
 </resources>

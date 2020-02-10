@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
+import com.app.l_pesa.common.CommonMethod.openTermCondition
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.richText
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
 import com.google.android.material.snackbar.Snackbar
@@ -55,7 +59,22 @@ class MainActivity : AppCompatActivity() {
 
         checkForAppUpdate()
 
+        onClickTermsPolicy()
+
     }
+
+
+    private fun onClickTermsPolicy(){
+        val sharedPref = SharedPref(this@MainActivity)
+        tvMainTermsCondition.richText(getString(R.string.privacy_term_condition)){
+            spannables = listOf(
+                    41..61 to { openTermCondition(this@MainActivity, sharedPref.countryCode) },
+                    66..80 to { openPrivacyUrl(this@MainActivity, sharedPref.countryCode) }
+            )
+        }
+
+    }
+
 
 
     private fun initUI()

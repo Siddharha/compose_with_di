@@ -382,6 +382,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             println("address is ${i.getAddressLine(0)}")
             println("locality is ${i.locality}")
             println("pincode is ${i.postalCode}")
+            println("others location ${i.subAdminArea}")
             sharedPref.address = i.getAddressLine(0)
             sharedPref.locality = i.locality
             sharedPref.pincode = i.postalCode

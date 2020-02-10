@@ -3,8 +3,10 @@ package com.app.l_pesa.common
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.net.Uri
 import android.os.Build
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -27,6 +29,19 @@ object CommonMethod {
 
     fun splashTime(): Long {
         return 2000
+    }
+
+
+    fun openPrivacyUrl(context: Context,countrycode: String) {
+        val uri = Uri.parse("https://l-pesa.com/$countrycode/pages/privacy-policy")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        context.startActivity(intent)
+    }
+
+    fun openTermCondition(context: Context, countrycode: String) {
+        val uri = Uri.parse("https://l-pesa.com/$countrycode/pages/term-service")
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        context.startActivity(intent)
     }
 
 

@@ -37,10 +37,9 @@ import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorActivity
-import com.app.l_pesa.common.CommonEditTextRegular
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypefaceSpan
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
+import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
+import com.app.l_pesa.common.CommonMethod.openTermCondition
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
@@ -90,6 +89,18 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
                 .setCancelable(true)
                 .start()*/
 
+        onClickTermPolicy()
+
+    }
+
+    private fun onClickTermPolicy(){
+        val sharedPref = SharedPref(this@LoginActivity)
+        tvLoginTermPolicy.richText(getString(R.string.privacy_term_condition_login)){
+            spannables = listOf(
+                    27..47 to { openTermCondition(this@LoginActivity, sharedPref.countryCode) },
+                    52..66 to { openPrivacyUrl(this@LoginActivity, sharedPref.countryCode) }
+            )
+        }
     }
 
     private fun initLoader()
