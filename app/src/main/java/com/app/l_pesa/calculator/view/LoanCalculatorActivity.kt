@@ -27,7 +27,6 @@ import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.calculator.presenter.PresenterCalculator
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
-import com.app.l_pesa.common.CustomTypefaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
@@ -125,7 +124,7 @@ class LoanCalculatorActivity : AppCompatActivity(), ICallBackProducts {
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
+       // message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
         progressDialog.isIndeterminate = true
         progressDialog.setMessage(message)
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
