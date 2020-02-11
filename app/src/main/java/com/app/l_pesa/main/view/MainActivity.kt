@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity() {
                 }, 3000)*//*
 
                 //RESULT_OK / RESULT_CANCELED / RESULT_IN_APP_UPDATE_FAILED
-//                 unregisterInstallStateUpdListener()
+                 unregisterInstallStateUpdListener()
                 //startAppUpdateImmediate(appUpdateInfo!!)
             }
         }*/
