@@ -51,6 +51,11 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_forgot_pin.*
+import kotlinx.android.synthetic.main.activity_forgot_pin.etPhone
+import kotlinx.android.synthetic.main.activity_forgot_pin.rootLayout
+import kotlinx.android.synthetic.main.activity_forgot_pin.toolbar
+import kotlinx.android.synthetic.main.activity_forgot_pin.txtCountry
+import kotlinx.android.synthetic.main.activity_login.*
 import java.util.HashMap
 import kotlin.collections.ArrayList
 import kotlin.collections.set
@@ -72,6 +77,17 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         initLoader()
         loadCountry()
         forgetPin()
+        onClickTermPolicy()
+    }
+
+    private fun onClickTermPolicy(){
+        val sharedPref = SharedPref(this@ForgotPinActivity)
+        tvForgotTermPolicy.richText(getString(R.string.privacy_term_condition_login)){
+            spannables = listOf(
+                    27..47 to { CommonMethod.openTermCondition(this@ForgotPinActivity, sharedPref.countryCode) },
+                    52..66 to { CommonMethod.openPrivacyUrl(this@ForgotPinActivity, sharedPref.countryCode) }
+            )
+        }
     }
 
     private fun initLoader()
