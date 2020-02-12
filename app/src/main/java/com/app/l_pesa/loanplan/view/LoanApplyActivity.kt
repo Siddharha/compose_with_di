@@ -17,6 +17,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.Window
@@ -40,25 +41,40 @@ import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationRequest
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
+import java.io.IOException
 import java.util.*
 
 
-class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply, LocationListener {
+class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply, LocationListener, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
 
-    private var loanPurpose=""
-    private val listTitle = arrayListOf("For Transport","To Pay Bills","To Clear Debit","To Buy Foodstuff","Emergency Purposes","To Buy Medicine","Build Credit","Others")
-    private lateinit var  progressDialog   : ProgressDialog
-    private lateinit var  countDownTimer   : CountDownTimer
+    private var loanPurpose = ""
+    private val listTitle = arrayListOf("For Transport", "To Pay Bills", "To Clear Debit", "To Buy Foodstuff", "Emergency Purposes", "To Buy Medicine", "Build Credit", "Others")
+    private lateinit var progressDialog: ProgressDialog
+    private lateinit var countDownTimer: CountDownTimer
 
     private lateinit var locationManager: LocationManager
     internal var provider: String? = null
 
-    private var loanType=""
-    private var productId=""
+    private var loanType = ""
+    private var productId = ""
+
+    private var location: Location? = null
+    private var googleApiClient: GoogleApiClient? = null
+    private var locationRequest: LocationRequest? = null
+
+    companion object {
+        val PLAY_SERVICES_REQUEST: Int = 100
+        val UPDATE_INTERVAL: Long = 5000 //5 sec
+        val FASTEST_INTERVAL: Long = 5000 //5 sec
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,18 +84,16 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanApplyActivity)
 
-
         locationWork()
         initData()
 
     }
 
-    private fun locationWork()
-    {
+    private fun locationWork() {
         if (ActivityCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Check Permissions Now
-            ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),0)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
         }
         // Getting LocationManager object
 
@@ -87,12 +101,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         // Creating an empty criteria object
         val criteria = Criteria()
-         provider = locationManager.getBestProvider(criteria, false)
+        provider = locationManager.getBestProvider(criteria, false)
 
         if (provider != null && provider != "") {
             if (!provider!!.contains("gps")) {
                 val poke = Intent()
-                poke.setClassName("com.android.settings","com.android.settings.widget.SettingsAppWidgetProvider")
+                poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider")
                 poke.addCategory(Intent.CATEGORY_ALTERNATIVE)
                 poke.data = Uri.parse("3")
                 sendBroadcast(poke)
@@ -110,15 +124,14 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 onLocationChanged(location)
 
         } else {
-            Toast.makeText(baseContext, "No Provider Found",Toast.LENGTH_SHORT).show()
+            Toast.makeText(baseContext, "No Provider Found", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun initData()
-    {
-        val bundle  = intent.extras
-        productId   = bundle!!.getString("PRODUCT_ID")!!
-        loanType    = bundle.getString("LOAN_TYPE")!!
+    private fun initData() {
+        val bundle = intent.extras
+        productId = bundle!!.getString("PRODUCT_ID")!!
+        loanType = bundle.getString("LOAN_TYPE")!!
 
         initTimer()
         initLoader()
@@ -132,20 +145,15 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         buttonSubmit.setOnClickListener {
 
-            if(TextUtils.isEmpty(loanPurpose))
-            {
+            if (TextUtils.isEmpty(loanPurpose)) {
                 showDescription()
-                CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose))
-            }
-            else if(loanPurpose=="Others" && TextUtils.isEmpty(etDescription.text.toString()))
-            {
+                CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.required_loan_purpose))
+            } else if (loanPurpose == "Others" && TextUtils.isEmpty(etDescription.text.toString())) {
                 etDescription.requestFocus()
                 hideKeyboard()
-                CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.required_loan_purpose_description))
-            }
-            else
-            {
-                val alertDialog = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
+                CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.required_loan_purpose_description))
+            } else {
+                val alertDialog = AlertDialog.Builder(this@LoanApplyActivity, R.style.MyAlertDialogTheme)
                 alertDialog.setTitle(resources.getString(R.string.app_name))
                 alertDialog.setMessage(resources.getString(R.string.want_to_apply_loan))
                 alertDialog.setPositiveButton("Yes") { _, _ -> applyLoan() }
@@ -159,16 +167,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
 
-    private fun applyLoan()
-    {
-        if(CommonMethod.isNetworkAvailable(this@LoanApplyActivity))
-        {
-           if (!checkIfLocationOpened())
-            {
+    private fun applyLoan() {
+        if (CommonMethod.isNetworkAvailable(this@LoanApplyActivity)) {
+            if (!checkIfLocationOpened()) {
 
                 alertMessageNoGps()
-            }
-            else {
+            } else {
 
                 val shared = SharedPref(this@LoanApplyActivity)
                 if (shared.currentLat != "") {
@@ -181,16 +185,13 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
             }
 
-        }
-        else
-        {
+        } else {
             hideKeyboard()
-            CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.no_internet))
         }
     }
 
-    private fun hideKeyboard()
-    {
+    private fun hideKeyboard() {
         try {
             CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         } catch (exp: Exception) {
@@ -200,57 +201,51 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun checkIfLocationOpened(): Boolean {
         val provider = Settings.Secure.getString(contentResolver, Settings.Secure.LOCATION_PROVIDERS_ALLOWED)
-        if (provider.contains("gps") || provider.contains("network"))
-        {
+        if (provider.contains("gps") || provider.contains("network")) {
             return true
+        }
+        return false
     }
-    return false
-}
 
-    private fun loanApply()
-    {
-        val shared=SharedPref(this@LoanApplyActivity)
+    private fun loanApply() {
+        val shared = SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()
-        jsonObject.addProperty("loan_type",loanType)
-        jsonObject.addProperty("product_id",productId)
-        if(loanPurpose=="Others")
-        {
-            jsonObject.addProperty("loan_purpose",etDescription.text.toString())
-        }
-        else
-        {
-            jsonObject.addProperty("loan_purpose",loanPurpose)
+        jsonObject.addProperty("loan_type", loanType)
+        jsonObject.addProperty("product_id", productId)
+        if (loanPurpose == "Others") {
+            jsonObject.addProperty("loan_purpose", etDescription.text.toString())
+        } else {
+            jsonObject.addProperty("loan_purpose", loanPurpose)
 
         }
 
-        jsonObject.addProperty("latitude",shared.currentLat)
-        jsonObject.addProperty("longitude",shared.currentLng)
+        jsonObject.addProperty("latitude", shared.currentLat)
+        jsonObject.addProperty("longitude", shared.currentLng)
         jsonObject.addProperty("address",shared.address)
         jsonObject.addProperty("locality",shared.locality)
         jsonObject.addProperty("pincode",shared.pincode)
 
-        val globalLoanPlanModel= GlobalLoanPlanModel.getInstance().modelData
+        val globalLoanPlanModel = GlobalLoanPlanModel.getInstance().modelData
         val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
         println("Loan Amount is ${globalLoanPlanModel?.loanAmount}")
 
         val params = Bundle()
-        params.putString(AppEventsConstants.EVENT_PARAM_DESCRIPTION,(globalLoanPlanModel!!.loanAmount).toString())
-        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION,params)
+        params.putString(AppEventsConstants.EVENT_PARAM_DESCRIPTION, (globalLoanPlanModel!!.loanAmount).toString())
+        logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION, params)
 
-        CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity,jsonObject.toString())
+        // CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity,jsonObject.toString())
 
         println("data is $jsonObject")
         dismiss()
-        val presenterLoanApply= PresenterLoanApply()
-        presenterLoanApply.doLoanApply(this@LoanApplyActivity,jsonObject,this)
+        val presenterLoanApply = PresenterLoanApply()
+        presenterLoanApply.doLoanApply(this@LoanApplyActivity, jsonObject, this)
 
     }
 
-    private fun loadDescription()
-    {
+    private fun loadDescription() {
         showDescription()
-        etChooseDescription.isFocusable =false
+        etChooseDescription.isFocusable = false
         etChooseDescription.setOnClickListener {
 
             showDescription()
@@ -258,47 +253,43 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     }
 
-    private fun showDescription()
-    {
+    private fun showDescription() {
 
-        val dialog= Dialog(this@LoanApplyActivity)
+        val dialog = Dialog(this@LoanApplyActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
-        val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-        val titleAdapter                = DescriptionAdapter(this@LoanApplyActivity, listTitle,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@LoanApplyActivity, RecyclerView.VERTICAL, false)
-        recyclerView?.adapter           = titleAdapter
+        val recyclerView = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val titleAdapter = DescriptionAdapter(this@LoanApplyActivity, listTitle, dialog, this)
+        recyclerView?.layoutManager = LinearLayoutManager(this@LoanApplyActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.adapter = titleAdapter
         dialog.show()
     }
 
     override fun onSelectDescription(s: String) {
 
         etChooseDescription.setText(s)
-        loanPurpose=s
-        if(loanPurpose=="Others")
-        {
-            txt_loan_description.visibility     = View.VISIBLE
-            tilDescription.visibility           = View.VISIBLE
-            txt_max_words.visibility            = View.VISIBLE
-            txt_loan_description.visibility     = View.VISIBLE
+        loanPurpose = s
+        if (loanPurpose == "Others") {
+            txt_loan_description.visibility = View.VISIBLE
+            tilDescription.visibility = View.VISIBLE
+            txt_max_words.visibility = View.VISIBLE
+            txt_loan_description.visibility = View.VISIBLE
             etDescription.requestFocus()
 
-        }
-        else
-        {
-            txt_loan_description.visibility     = View.GONE
-            tilDescription.visibility           = View.GONE
-            txt_max_words.visibility            = View.GONE
-            txt_loan_description.visibility     = View.GONE
+        } else {
+            txt_loan_description.visibility = View.GONE
+            tilDescription.visibility = View.GONE
+            txt_max_words.visibility = View.GONE
+            txt_loan_description.visibility = View.GONE
         }
     }
 
     override fun onSuccessLoanApply() {
 
-        Toast.makeText(this@LoanApplyActivity,resources.getString(R.string.loan_applied_successfully),Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@LoanApplyActivity, resources.getString(R.string.loan_applied_successfully), Toast.LENGTH_SHORT).show()
         dismiss()
-        val sharedPref=SharedPref(this@LoanApplyActivity)
-        sharedPref.navigationTab=resources.getString(R.string.open_tab_loan)
+        val sharedPref = SharedPref(this@LoanApplyActivity)
+        sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
         val intent = Intent(this@LoanApplyActivity, DashboardActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -307,19 +298,19 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     override fun onErrorLoanApply(message: String) {
         dismiss()
-        buttonSubmit.isClickable =true
-        CommonMethod.customSnackBarError(rootLayout,this@LoanApplyActivity,message)
+        buttonSubmit.isClickable = true
+        CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, message)
     }
 
     override fun onSessionTimeOut(jsonMessage: String) {
 
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity, R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(this@LoanApplyActivity)
+                    val sharedPrefOBJ = SharedPref(this@LoanApplyActivity)
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(this@LoanApplyActivity, MainActivity::class.java))
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -332,11 +323,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
 
-
-    private fun initLoader()
-    {
-        progressDialog = ProgressDialog(this@LoanApplyActivity,R.style.MyAlertDialogStyle)
-        val message=   SpannableString(resources.getString(R.string.loading))
+    private fun initLoader() {
+        progressDialog = ProgressDialog(this@LoanApplyActivity, R.style.MyAlertDialogStyle)
+        val message = SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         //message.setSpan(CustomTypefaceSpan("", face), 0, message.length, 0)
@@ -348,16 +337,14 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     }
 
-    private fun dismiss()
-    {
-        if(progressDialog.isShowing)
-        {
+    private fun dismiss() {
+        if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
     }
 
     private fun alertMessageNoGps() {
-        val builder = AlertDialog.Builder(this@LoanApplyActivity,R.style.MyAlertDialogTheme)
+        val builder = AlertDialog.Builder(this@LoanApplyActivity, R.style.MyAlertDialogTheme)
         builder.setMessage(
                 "Your GPS seems to be disabled, do you want to enable it?")
                 .setCancelable(false).setPositiveButton("Yes"
@@ -373,22 +360,35 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     override fun onLocationChanged(location: Location) {
 
-        val sharedPref=SharedPref(this@LoanApplyActivity)
-        sharedPref.currentLat=location.latitude.toString()
-        sharedPref.currentLng=location.longitude.toString()
+        val sharedPref = SharedPref(this@LoanApplyActivity)
+        sharedPref.currentLat = location.latitude.toString()
+        sharedPref.currentLng = location.longitude.toString()
+
+
         val geocoder = Geocoder(this, Locale.getDefault())
-        val address = geocoder.getFromLocation(location.latitude,location.longitude,1)
-        for (i in address){
-            println("address is ${i.getAddressLine(0)}")
-            println("locality is ${i.locality}")
-            println("pincode is ${i.postalCode}")
-            println("others location ${i.subAdminArea}")
-            sharedPref.address = i.getAddressLine(0)
-            sharedPref.locality = i.locality
-            sharedPref.pincode = i.postalCode
+        //val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
 
+        try {
+            Log.e("latitude", "inside latitude--${location.latitude}")
+            val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+            if (addresses != null && addresses.size > 0) {
+                sharedPref.address = addresses[0].getAddressLine(0)
+                sharedPref.locality = addresses[0].locality
+                val state: String = addresses[0].adminArea
+                val country: String = addresses[0].countryName
+                sharedPref.pincode = addresses[0].postalCode
+                val knownName: String = addresses[0].featureName
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
+        /*
+        if (address != null && address.size > 0) {
+            sharedPref.address = address[0].getAddressLine(0)
 
+            println("address is " + sharedPref.address)
+
+        }*/
     }
 
     override fun onProviderDisabled(provider: String) {
@@ -451,15 +451,17 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private fun initTimer() {
 
-        countDownTimer= object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
+        countDownTimer = object : CountDownTimer(CommonMethod.sessionTime().toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
             }
+
             override fun onFinish() {
                 onSessionTimeOut(resources.getString(R.string.session_time_out))
                 countDownTimer.cancel()
 
-            }}
+            }
+        }
         countDownTimer.start()
 
     }
@@ -484,6 +486,18 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         super.onResume()
         locationWork()
         MyApplication.getInstance().trackScreenView(this@LoanApplyActivity::class.java.simpleName)
+
+    }
+
+    override fun onConnected(p0: Bundle?) {
+
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
 
     }
 
