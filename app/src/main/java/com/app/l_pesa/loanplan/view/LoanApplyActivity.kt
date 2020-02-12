@@ -59,9 +59,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     private var loanType=""
     private var productId=""
-    private var add: String = ""
-    private var locality: String = ""
-    private var pincode: String = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,8 +98,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 sendBroadcast(poke)
             }
 
-            var location = locationManager
-                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            var location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
 
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0f, this)
 
@@ -112,7 +108,6 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 location = locationManager.getLastKnownLocation(provider!!)
             if (location != null)
                 onLocationChanged(location)
-
 
         } else {
             Toast.makeText(baseContext, "No Provider Found",Toast.LENGTH_SHORT).show()
@@ -234,13 +229,17 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         jsonObject.addProperty("address",shared.address)
         jsonObject.addProperty("locality",shared.locality)
         jsonObject.addProperty("pincode",shared.pincode)
+
         val globalLoanPlanModel= GlobalLoanPlanModel.getInstance().modelData
         val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
         println("Loan Amount is ${globalLoanPlanModel?.loanAmount}")
+
         val params = Bundle()
         params.putString(AppEventsConstants.EVENT_PARAM_DESCRIPTION,(globalLoanPlanModel!!.loanAmount).toString())
         logger.logEvent(AppEventsConstants.EVENT_NAME_SUBMIT_APPLICATION,params)
-        //CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity,jsonObject.toString())
+
+        CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity,jsonObject.toString())
+
         println("data is $jsonObject")
         dismiss()
         val presenterLoanApply= PresenterLoanApply()
