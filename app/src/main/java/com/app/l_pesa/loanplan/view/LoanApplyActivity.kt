@@ -43,7 +43,9 @@ import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
@@ -66,6 +68,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private var loanType = ""
     private var productId = ""
 
+    private var fusedLocationClient: FusedLocationProviderClient? = null
+    private val TAG = "Loan Apply Activity"
+
     private var location: Location? = null
     private var googleApiClient: GoogleApiClient? = null
     private var locationRequest: LocationRequest? = null
@@ -84,9 +89,27 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanApplyActivity)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         locationWork()
         initData()
+        getLastLocation()
 
+    }
+
+    private fun getLastLocation() {
+        Log.d(TAG, "getLastLocation:  getlastlocation")
+        //last location update:
+        fusedLocationClient!!.lastLocation
+                .addOnSuccessListener(this) { location ->
+                    Log.d(TAG, "onSuccess: location " + location!!.latitude + location.longitude)
+                    if (location != null) {
+                        val lat = location.latitude
+                        val lng = location.longitude
+                        Log.d(TAG, "onSuccess: $lat and $lng")
+                        Log.d(TAG, "onLatLngChange: $lat/$lng")
+                    }
+                }
     }
 
     private fun locationWork() {
@@ -372,6 +395,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             Log.e("latitude", "inside latitude--${location.latitude}")
             val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
             if (addresses != null && addresses.size > 0) {
+
                 sharedPref.address = addresses[0].getAddressLine(0)
                 sharedPref.locality = addresses[0].locality
                 val state: String = addresses[0].adminArea
