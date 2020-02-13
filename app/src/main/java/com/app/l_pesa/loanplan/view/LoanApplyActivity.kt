@@ -69,11 +69,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private var productId = ""
 
     private var fusedLocationClient: FusedLocationProviderClient? = null
+    private var locationRequest: LocationRequest? = null
     private val TAG = "Loan Apply Activity"
 
     private var location: Location? = null
     private var googleApiClient: GoogleApiClient? = null
-    private var locationRequest: LocationRequest? = null
+
 
     companion object {
         val PLAY_SERVICES_REQUEST: Int = 100
@@ -111,6 +112,28 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                     }
                 }
     }
+
+    override fun onStart() {
+        super.onStart()
+        if (googleApiClient != null) {
+            googleApiClient?.connect()
+        }
+    }
+
+    private fun startLocationUpdates() {
+        locationRequest = LocationRequest()
+        locationRequest!!.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest!!.interval = UPDATE_INTERVAL
+        locationRequest!!.fastestInterval = FASTEST_INTERVAL
+        if (ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "You need to enable permissions to display location !", Toast.LENGTH_SHORT).show()
+        }
+        //LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this)
+    }
+
 
     private fun locationWork() {
         if (ActivityCompat.checkSelfPermission(this,
@@ -514,7 +537,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     override fun onConnected(p0: Bundle?) {
-
+        startLocationUpdates()
     }
 
     override fun onConnectionSuspended(p0: Int) {
