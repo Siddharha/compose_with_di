@@ -213,7 +213,7 @@
             android:name=".registration.view.RegistrationStepOneActivity"
             android:label="@string/registration_step_one"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".registration.view.RegistrationStepTwoActivity"
             android:label="@string/registration_step_two"
