@@ -94,7 +94,10 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         locationWork()
         initData()
-        getLastLocation()
+        //getLastLocation()
+
+
+
 
     }
 
@@ -115,9 +118,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     override fun onStart() {
         super.onStart()
-        if (googleApiClient != null) {
+       /* if (googleApiClient != null) {
             googleApiClient?.connect()
-        }
+        }*/
     }
 
     private fun startLocationUpdates() {
@@ -141,7 +144,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             // Check Permissions Now
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
         }
-        // Getting LocationManager object
+
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
@@ -158,7 +161,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 sendBroadcast(poke)
             }
 
-            var location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+            var location = locationManager.getLastKnownLocation(provider)
 
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 0f, this)
 
@@ -268,6 +271,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         jsonObject.addProperty("latitude", shared.currentLat)
         jsonObject.addProperty("longitude", shared.currentLng)
+
         jsonObject.addProperty("address",shared.address)
         jsonObject.addProperty("locality",shared.locality)
         jsonObject.addProperty("pincode",shared.pincode)
@@ -411,31 +415,28 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         sharedPref.currentLng = location.longitude.toString()
 
 
-        val geocoder = Geocoder(this, Locale.getDefault())
+        val geocoder = Geocoder(this, Locale.ENGLISH)
         //val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-
-        try {
-            Log.e("latitude", "inside latitude--${location.latitude}")
-            val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-            if (addresses != null && addresses.size > 0) {
-
-                sharedPref.address = addresses[0].getAddressLine(0)
-                sharedPref.locality = addresses[0].locality
-                val state: String = addresses[0].adminArea
-                val country: String = addresses[0].countryName
-                sharedPref.pincode = addresses[0].postalCode
-                val knownName: String = addresses[0].featureName
+        if (Geocoder.isPresent()){
+            try {
+                Log.e("latitude", "inside latitude--${location.latitude}")
+                val addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                if (addresses != null && addresses.size > 0) {
+                    sharedPref.address = addresses[0].getAddressLine(0)
+                    sharedPref.locality = addresses[0].locality
+                    val state: String = addresses[0].adminArea
+                    val country: String = addresses[0].countryName
+                    sharedPref.pincode = addresses[0].postalCode
+                    val knownName: String = addresses[0].featureName
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
-        } catch (e: IOException) {
-            e.printStackTrace()
+        }else{
+            Toast.makeText(this@LoanApplyActivity,"Geocoder is not present in your country",Toast.LENGTH_LONG).show()
         }
-        /*
-        if (address != null && address.size > 0) {
-            sharedPref.address = address[0].getAddressLine(0)
 
-            println("address is " + sharedPref.address)
 
-        }*/
     }
 
     override fun onProviderDisabled(provider: String) {
@@ -537,7 +538,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     override fun onConnected(p0: Bundle?) {
-        startLocationUpdates()
+        //startLocationUpdates()
     }
 
     override fun onConnectionSuspended(p0: Int) {
