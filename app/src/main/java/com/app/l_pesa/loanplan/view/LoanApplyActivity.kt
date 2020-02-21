@@ -272,9 +272,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         jsonObject.addProperty("latitude", shared.currentLat)
         jsonObject.addProperty("longitude", shared.currentLng)
 
-        jsonObject.addProperty("address",shared.address)
+        /*jsonObject.addProperty("address",shared.address)
         jsonObject.addProperty("locality",shared.locality)
-        jsonObject.addProperty("pincode",shared.pincode)
+        jsonObject.addProperty("pincode",shared.pincode)*/
 
         val globalLoanPlanModel = GlobalLoanPlanModel.getInstance().modelData
         val logger = AppEventsLogger.newLogger(this@LoanApplyActivity)
@@ -415,7 +415,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         sharedPref.currentLng = location.longitude.toString()
 
 
-        val geocoder = Geocoder(this, Locale.ENGLISH)
+        /*val geocoder = Geocoder(this, Locale.ENGLISH)
         //val address = geocoder.getFromLocation(location.latitude, location.longitude, 1)
         if (Geocoder.isPresent()){
             try {
@@ -434,7 +434,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             }
         }else{
             Toast.makeText(this@LoanApplyActivity,"Geocoder is not present in your country",Toast.LENGTH_LONG).show()
-        }
+        }*/
 
 
     }
