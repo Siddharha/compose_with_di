@@ -65,7 +65,7 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
     private fun verifyField()
     {
         hideKeyboard()
-        if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
+        if(TextUtils.isEmpty(etEmail.text.toString()))
         {
             CommonMethod.customSnackBarError(rootLayout,this@EmailRequiredActivity,resources.getString(R.string.required_email))
         }
