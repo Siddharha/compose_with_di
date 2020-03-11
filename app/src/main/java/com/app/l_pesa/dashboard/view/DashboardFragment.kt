@@ -139,9 +139,11 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         swipeRefreshLayout.isRefreshing = false
     }
 
+
     @SuppressLint("SetTextI18n")
     private fun setData(dashBoard: ResDashboard.Data) {
-
+        println("max credit score : ${dashBoard.maxCreditScore.toFloat()}")
+        println("credit score : ${dashBoard.creditScore.toFloat()}")
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
