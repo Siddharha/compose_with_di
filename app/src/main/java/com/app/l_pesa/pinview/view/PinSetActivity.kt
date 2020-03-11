@@ -135,7 +135,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
                     pass_code_view.reset()
 
-                    println("JSON"+jsonObject)
+                    println("Pin Json Object $jsonObject")
 
                     val presenterPinSet = PresenterPinSet()
                     presenterPinSet.dosetPin(this@PinSetActivity, jsonObject, this)

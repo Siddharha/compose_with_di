@@ -255,6 +255,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             telephonyManager!!.imei
         } else {
             telephonyManager!!.deviceId
+
         }
 
         val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
@@ -305,7 +306,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
                 jsonObject.add("device_data",jsonObjectRequestChild)
 
-                println("JSON+"+jsonObject)
+                println("Login Json Object $jsonObject")
 
                 val presenterLoginObj=PresenterLogin()
                 presenterLoginObj.doLogin(this@LoginActivity,jsonObject,this)
