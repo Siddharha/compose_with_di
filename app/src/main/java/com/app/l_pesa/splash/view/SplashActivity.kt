@@ -50,7 +50,6 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                     progressBar.visibility = View.INVISIBLE
 
                     buttonRetry.setOnClickListener {
-
                         if (CommonMethod.isNetworkAvailable(this@SplashActivity))
                         {
                             logoutProcess()
@@ -58,7 +57,6 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                         {
                             CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
                         }
-
                     }
                 }
 
