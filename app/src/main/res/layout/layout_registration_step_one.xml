@@ -35,6 +35,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/tilEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,8 +121,49 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilEmail"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tilEmail" />
+
+    <com.app.l_pesa.common.CustomButtonRegular
+        android:id="@+id/btnFacebook"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/bg_facebook_app"
+        android:drawableStart="@drawable/ic_facebook"
+        android:fontFamily="@font/montserrat"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Login with Facebook"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
+
+    <com.app.l_pesa.common.CustomButtonRegular
+        android:id="@+id/btnGoogle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/bg_google_app"
+        android:drawableStart="@drawable/ic_google"
+        android:fontFamily="@font/montserrat"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="Sign in with Google"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebook" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier1"
