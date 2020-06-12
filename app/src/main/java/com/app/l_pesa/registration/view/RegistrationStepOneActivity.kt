@@ -39,9 +39,14 @@ import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
 import com.app.l_pesa.common.CommonMethod.openTermCondition
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
+import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.registration.inter.ICallBackEmailVerify
 import com.app.l_pesa.registration.inter.ICallBackRegisterOne
+import com.app.l_pesa.registration.model.Data
+import com.app.l_pesa.registration.model.EmailVerifyRequest
 import com.app.l_pesa.registration.model.RegistrationData
 import com.app.l_pesa.registration.presenter.PresenterRegistrationOne
+import com.app.l_pesa.registration.presenter.PresenterVerify
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.facebook.*
@@ -64,13 +69,13 @@ import kotlin.collections.ArrayList
 import kotlin.collections.set
 
 
-class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList,ICallBackRegisterOne,
-GoogleApiClient.OnConnectionFailedListener{
+class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, ICallBackRegisterOne,
+        GoogleApiClient.OnConnectionFailedListener, ICallBackEmailVerify {
 
     //working on google and fb email verification.
-    private lateinit var  progressDialog   : ProgressDialog
-    private lateinit var  alCountry        : ArrayList<ResModelCountryList>
-    private lateinit var  adapterCountry   : CountryListAdapter
+    private lateinit var progressDialog: ProgressDialog
+    private lateinit var alCountry: ArrayList<ResModelCountryList>
+    private lateinit var adapterCountry: CountryListAdapter
 
     //
     private var mGoogleSignInClient: GoogleSignInClient? = null
@@ -91,7 +96,7 @@ GoogleApiClient.OnConnectionFailedListener{
         initData()
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
 
-        tvTermsCons.richText(getString(R.string.privacy_term_condition)){
+        tvTermsCons.richText(getString(R.string.privacy_term_condition)) {
             spannables = listOf(
                     41..61 to { openTermCondition(this@RegistrationStepOneActivity, sharedPref.countryCode) },
                     66..80 to { openPrivacyUrl(this@RegistrationStepOneActivity, sharedPref.countryCode) }
@@ -100,8 +105,7 @@ GoogleApiClient.OnConnectionFailedListener{
 
     }
 
-    private fun initData()
-    {
+    private fun initData() {
         initLoader()
         loadCountry()
         checkQualify()
@@ -112,11 +116,11 @@ GoogleApiClient.OnConnectionFailedListener{
 
     }
 
-    private fun googleLogin(){
+    private fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
-        mGoogleApiClient = GoogleApiClient.Builder(this).enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso).build()
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
+        mGoogleApiClient = GoogleApiClient.Builder(this).enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         btnGoogle.setOnClickListener {
             val intent = mGoogleSignInClient?.signInIntent
@@ -125,27 +129,29 @@ GoogleApiClient.OnConnectionFailedListener{
 
     }
 
-    private fun fbLogin(){
+    private fun fbLogin() {
         callbackManager = CallbackManager.Factory.create()
 
         btnFacebook.setOnClickListener {
             LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
-            LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+            LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
                     loadFbInformation(result?.accessToken!!)
                 }
+
                 override fun onCancel() {
-                   // "Cancel".toast(this@RegistrationStepOneActivity)
+                    // "Cancel".toast(this@RegistrationStepOneActivity)
                 }
+
                 override fun onError(error: FacebookException?) {
-                  //  "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
+                    //  "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
                 }
             })
         }
     }
 
-    private fun loadFbInformation(currentAccessToken: AccessToken){
-        val graphRequest = GraphRequest.newMeRequest(currentAccessToken){ `object`, response ->
+    private fun loadFbInformation(currentAccessToken: AccessToken) {
+        val graphRequest = GraphRequest.newMeRequest(currentAccessToken) { `object`, response ->
             try {
                 val name = `object`.getString("first_name")
                 val lastName = `object`.getString("last_name")
@@ -155,34 +161,34 @@ GoogleApiClient.OnConnectionFailedListener{
 
                 "$email".toast(this@RegistrationStepOneActivity)
 
-            }catch (e: JSONException){
-                Log.i("error : ",e.localizedMessage!!)
+            } catch (e: JSONException) {
+                Log.i("error : ", e.localizedMessage!!)
             }
         }
 
         val bundle = Bundle()
-        bundle.putString("fields","first_name,last_name,email,id")
+        bundle.putString("fields", "first_name,last_name,email,id")
         graphRequest.parameters = bundle
         graphRequest.executeAsync()
     }
 
-    private fun googleLogout(){
+    private fun googleLogout() {
         mGoogleSignInClient?.signOut()
     }
 
-    private fun fbLogOut(){
+    private fun fbLogOut() {
         LoginManager.getInstance().logOut()
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode,resultCode,data)
-        if (requestCode == SIGN_IN){
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            if (task.isSuccessful){
+            if (task.isSuccessful) {
                 val account = task.result
                 "${account?.email}".toast(this@RegistrationStepOneActivity)
-            }else{
+            } else {
                 //"Login Failed".toast(this@RegistrationStepOneActivity)
             }
         }
@@ -194,10 +200,9 @@ GoogleApiClient.OnConnectionFailedListener{
         fbLogOut()
     }
 
-    private fun initLoader()
-    {
-        progressDialog = ProgressDialog(this@RegistrationStepOneActivity,R.style.MyAlertDialogStyle)
-        val message=   SpannableString(resources.getString(R.string.loading))
+    private fun initLoader() {
+        progressDialog = ProgressDialog(this@RegistrationStepOneActivity, R.style.MyAlertDialogStyle)
+        val message = SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
@@ -209,16 +214,13 @@ GoogleApiClient.OnConnectionFailedListener{
 
     }
 
-    private fun dismiss()
-    {
-        if(progressDialog.isShowing)
-        {
+    private fun dismiss() {
+        if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
     }
 
-    private fun checkQualify()
-    {
+    private fun checkQualify() {
         etPhone.transformationMethod = SingleLineTransformationMethod.getInstance()
         etEmail.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
@@ -230,130 +232,132 @@ GoogleApiClient.OnConnectionFailedListener{
         }
 
         btnSubmit.setOnClickListener {
-
             verifyField()
         }
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")
-    private fun verifyField()
-    {
+    private fun verifyField() {
         hideKeyboard()
 
-        if((etPhone.text.toString().length<9))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_phone))
-        }
-        else if(TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString()))
-        {
-            CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,resources.getString(R.string.required_email))
-        }
-
-        else
-        {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    checkAndRequestPermissions()
-                }
-                else
-                {
-                    registrationProcess()
-                }
+        if (TextUtils.isEmpty(etEmail.text.toString()) || !CommonMethod.isValidEmailAddress(etEmail.text.toString())) {
+            CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, resources.getString(R.string.required_email))
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                checkAndRequestPermissions()
+            } else {
+                //registrationProcess()
+                emailVerify()
+            }
 
 
         }
+    }
+
+    private fun emailVerify() {
+        progressDialog.show()
+        PresenterVerify().doEmailVerify(this@RegistrationStepOneActivity,
+                EmailVerifyRequest(
+                        "Normal",
+                        etEmail.text.toString().trim()
+                ),
+                this)
+    }
+
+    override fun onSuccessEmailVerify(data: Data) {
+        dismiss()
+        if (data.next == "otp_verify") {
+            val intent = Intent(this@RegistrationStepOneActivity, EmailVerifyActivity::class.java)
+            intent.putExtra("email",etEmail.text.toString().trim())
+            startActivity(intent)
+        }
+    }
+
+    override fun onErrorEmailVerify(jsonMessage: String) {
+        dismiss()
+        CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, jsonMessage)
+
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")
-    private fun registrationProcess()
-    {
+    private fun registrationProcess() {
 
-            val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
-            var getIMEI = ""
-            getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                telephonyManager!!.imei
+        var getIMEI = ""
+        getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            telephonyManager!!.imei
+        } else {
+            telephonyManager!!.deviceId
+        }
+
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+
+        if (TextUtils.isEmpty(telephonyManager.simSerialNumber)) {
+            CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, resources.getString(R.string.required_sim))
+        } else {
+            if (CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity)) {
+                val sharedPref = SharedPref(this@RegistrationStepOneActivity)
+                progressDialog.show()
+                val displayMetrics = resources.displayMetrics
+                val width = displayMetrics.widthPixels
+                val height = displayMetrics.heightPixels
+
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("phone_no", etPhone.text.toString())
+                jsonObject.addProperty("email_address", etEmail.text.toString())
+                jsonObject.addProperty("country_code", sharedPref.countryIsdCode)
+                jsonObject.addProperty("platform_type", "A")
+                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+
+                val jsonObjectRequestChild = JsonObject()
+                jsonObjectRequestChild.addProperty("device_id", deviceId)
+                jsonObjectRequestChild.addProperty("sdk", "" + Build.VERSION.SDK_INT)
+                jsonObjectRequestChild.addProperty("imei", getIMEI)
+                jsonObjectRequestChild.addProperty("imsi", "" + telephonyManager.subscriberId)
+                jsonObjectRequestChild.addProperty("simSerial_no", "" + telephonyManager.simSerialNumber)
+                jsonObjectRequestChild.addProperty("sim_operator_Name", "" + telephonyManager.simOperatorName)
+                jsonObjectRequestChild.addProperty("screen_height", "" + height)
+                jsonObjectRequestChild.addProperty("screen_width", "" + width)
+                jsonObjectRequestChild.addProperty("device", Build.DEVICE)
+                jsonObjectRequestChild.addProperty("model", Build.MODEL)
+                jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
+                jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
+                jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
+
+                jsonObject.add("device_data", jsonObjectRequestChild)
+
+                // println("JSON"+jsonObject.toString())
+
+                val presenterRegistrationOneObj = PresenterRegistrationOne()
+                presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity, jsonObject, this)
+
             } else {
-                telephonyManager!!.deviceId
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, resources.getString(R.string.no_internet))
             }
-
-            val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-
-            if (TextUtils.isEmpty(telephonyManager.simSerialNumber))
-            {
-                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, resources.getString(R.string.required_sim))
-            }else
-            {
-                if(CommonMethod.isNetworkAvailable(this@RegistrationStepOneActivity))
-                 {
-                    val sharedPref= SharedPref(this@RegistrationStepOneActivity)
-                    progressDialog.show()
-                    val displayMetrics = resources.displayMetrics
-                    val width = displayMetrics.widthPixels
-                    val height = displayMetrics.heightPixels
-
-                    val jsonObject = JsonObject()
-                    jsonObject.addProperty("phone_no", etPhone.text.toString())
-                    jsonObject.addProperty("email_address", etEmail.text.toString())
-                    jsonObject.addProperty("country_code", sharedPref.countryIsdCode)
-                    jsonObject.addProperty("platform_type", "A")
-                    jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
-
-                    val jsonObjectRequestChild = JsonObject()
-                    jsonObjectRequestChild.addProperty("device_id", deviceId)
-                    jsonObjectRequestChild.addProperty("sdk", "" + Build.VERSION.SDK_INT)
-                    jsonObjectRequestChild.addProperty("imei", getIMEI)
-                    jsonObjectRequestChild.addProperty("imsi", "" + telephonyManager.subscriberId)
-                    jsonObjectRequestChild.addProperty("simSerial_no", "" + telephonyManager.simSerialNumber)
-                    jsonObjectRequestChild.addProperty("sim_operator_Name", "" + telephonyManager.simOperatorName)
-                    jsonObjectRequestChild.addProperty("screen_height", "" + height)
-                    jsonObjectRequestChild.addProperty("screen_width", "" + width)
-                    jsonObjectRequestChild.addProperty("device", Build.DEVICE)
-                    jsonObjectRequestChild.addProperty("model", Build.MODEL)
-                    jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
-                    jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
-                    jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
-                    jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
-
-                    jsonObject.add("device_data", jsonObjectRequestChild)
-
-                    // println("JSON"+jsonObject.toString())
-
-                    val presenterRegistrationOneObj = PresenterRegistrationOne()
-                    presenterRegistrationOneObj.doRegistration(this@RegistrationStepOneActivity, jsonObject, this)
-
-                }
-                else
-                {
-                    CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, resources.getString(R.string.no_internet))
-                }
         }
 
 
     }
 
-    private fun hideKeyboard()
-    {
+    private fun hideKeyboard() {
         try {
             CommonMethod.hideKeyboardView(this@RegistrationStepOneActivity)
+        } catch (exp: Exception) {
         }
-        catch (exp:Exception)
-        {}
     }
 
 
-    private fun loadCountry()
-    {
-        val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
-        if(TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode))
-        {
-            etPhone.tag="+000   "
+    private fun loadCountry() {
+        val sharedPrefOBJ = SharedPref(this@RegistrationStepOneActivity)
+        if (TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode)) {
+            etPhone.tag = "+000   "
             showCountry()
-        }
-        else
-        {
-            txtCountry.visibility=View.VISIBLE
+        } else {
+            txtCountry.visibility = View.VISIBLE
             txtCountry.text = sharedPrefOBJ.countryName
-            etPhone.tag=sharedPrefOBJ.countryIsdCode+"   "
+            etPhone.tag = sharedPrefOBJ.countryIsdCode + "   "
         }
 
         txtCountry.setOnClickListener {
@@ -364,23 +368,22 @@ GoogleApiClient.OnConnectionFailedListener{
 
     }
 
-    private fun showCountry()
-    {
-        val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
+    private fun showCountry() {
+        val sharedPrefOBJ = SharedPref(this@RegistrationStepOneActivity)
         val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
-        val dialog= Dialog(this@RegistrationStepOneActivity)
+        val dialog = Dialog(this@RegistrationStepOneActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_country)
-        alCountry= ArrayList()
+        alCountry = ArrayList()
 
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-        val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
+        val recyclerView = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+        val etCountry = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
         alCountry.addAll(countryData.countries_list)
 
-        adapterCountry                  = CountryListAdapter(this@RegistrationStepOneActivity, alCountry,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
-        recyclerView?.adapter           = adapterCountry
+        adapterCountry = CountryListAdapter(this@RegistrationStepOneActivity, alCountry, dialog, this)
+        recyclerView?.layoutManager = LinearLayoutManager(this@RegistrationStepOneActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.adapter = adapterCountry
         dialog.show()
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(false)
@@ -392,7 +395,7 @@ GoogleApiClient.OnConnectionFailedListener{
 
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
             }
 
@@ -405,14 +408,14 @@ GoogleApiClient.OnConnectionFailedListener{
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
 
         etPhone.requestFocus()
-        val sharedPrefOBJ= SharedPref(this@RegistrationStepOneActivity)
-        sharedPrefOBJ.countryCode       =resModelCountryList.code
-        sharedPrefOBJ.countryName       =resModelCountryList.country_name
-        sharedPrefOBJ.countryIsdCode    =resModelCountryList.country_code
-        sharedPrefOBJ.countryFlag       =resModelCountryList.image
-        txtCountry.visibility           =View.VISIBLE
+        val sharedPrefOBJ = SharedPref(this@RegistrationStepOneActivity)
+        sharedPrefOBJ.countryCode = resModelCountryList.code
+        sharedPrefOBJ.countryName = resModelCountryList.country_name
+        sharedPrefOBJ.countryIsdCode = resModelCountryList.country_code
+        sharedPrefOBJ.countryFlag = resModelCountryList.image
+        txtCountry.visibility = View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
-        etPhone.tag = sharedPrefOBJ.countryIsdCode+"   "
+        etPhone.tag = sharedPrefOBJ.countryIsdCode + "   "
 
     }
 
@@ -424,91 +427,72 @@ GoogleApiClient.OnConnectionFailedListener{
         for (country in alCountry) {
             if (country.country_name.toLowerCase().startsWith(countryName.toLowerCase())) {
                 filteredCountry.add(country)
-            }
-            else
-            {
-
+            } else {
             }
         }
 
-        if(filteredCountry.size==0)
-        {
+        if (filteredCountry.size == 0) {
             filteredCountry.clear()
-            val emptyList=ResModelCountryList(0,resources.getString(R.string.search_result_not_found),"","","","","","","","","","","")
+            val emptyList = ResModelCountryList(0, resources.getString(R.string.search_result_not_found), "", "", "", "", "", "", "", "", "", "", "")
             filteredCountry.add(emptyList)
         }
-
         adapterCountry.filterList(filteredCountry)
-
     }
 
 
     override fun onSuccessRegistrationOne(data: RegistrationData) {
-
         dismiss()
-        val sharedPref              =SharedPref(this@RegistrationStepOneActivity)
-        if(data.next=="step3")
-        {
-            sharedPref.accessToken      =data.access_token
+        val sharedPref = SharedPref(this@RegistrationStepOneActivity)
+        if (data.next == "step3") {
+            sharedPref.accessToken = data.access_token
             val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepFourActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        }
-        else
-        {
-            sharedPref.accessToken      =data.access_token
-            sharedPref.verificationCode =data.otp
+        } else {
+            sharedPref.accessToken = data.access_token
+            sharedPref.verificationCode = data.otp
             val intent = Intent(this@RegistrationStepOneActivity, RegistrationStepTwoActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
-
-
     }
 
     override fun onErrorRegistrationOne(jsonMessage: String) {
-
         dismiss()
-        CommonMethod.customSnackBarError(rootLayout,this@RegistrationStepOneActivity,jsonMessage)
+        CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, jsonMessage)
     }
 
     private fun checkAndRequestPermissions(): Boolean {
-
-        val permissionPhoneState    = ContextCompat.checkSelfPermission(this@RegistrationStepOneActivity, Manifest.permission.READ_PHONE_STATE)
-
+        val permissionPhoneState = ContextCompat.checkSelfPermission(this@RegistrationStepOneActivity, Manifest.permission.READ_PHONE_STATE)
         val listPermissionsNeeded = ArrayList<String>()
-
         if (permissionPhoneState != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE)
         }
         if (listPermissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toTypedArray(), REQUEST_ID_PERMISSIONS)
             return false
-        }
-        else
-        {
-            registrationProcess()
+        } else {
+            //registrationProcess()
+            emailVerify()
         }
         return true
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
-
         when (requestCode) {
             REQUEST_ID_PERMISSIONS -> {
-
                 val perms = HashMap<String, Int>()
                 // Initialize the map with both permissions
-                perms[Manifest.permission.READ_PHONE_STATE]         = PackageManager.PERMISSION_GRANTED
+                perms[Manifest.permission.READ_PHONE_STATE] = PackageManager.PERMISSION_GRANTED
                 // Fill with actual results from user
                 if (grantResults.isNotEmpty()) {
                     for (i in permissions.indices)
                         perms[permissions[i]] = grantResults[i]
                     // Check for both permissions
-                    if (perms[Manifest.permission.READ_PHONE_STATE]  == PackageManager.PERMISSION_GRANTED) {
-
-                        registrationProcess()
+                    if (perms[Manifest.permission.READ_PHONE_STATE] == PackageManager.PERMISSION_GRANTED) {
+                        //registrationProcess()
+                        emailVerify()
                         //else any one or both the permissions are not granted
                     } else {
 
@@ -534,7 +518,7 @@ GoogleApiClient.OnConnectionFailedListener{
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(this@RegistrationStepOneActivity,R.style.MyAlertDialogTheme)
+        AlertDialog.Builder(this@RegistrationStepOneActivity, R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -543,7 +527,7 @@ GoogleApiClient.OnConnectionFailedListener{
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(this@RegistrationStepOneActivity,R.style.MyAlertDialogTheme)
+        val dialog = AlertDialog.Builder(this@RegistrationStepOneActivity, R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
@@ -554,7 +538,7 @@ GoogleApiClient.OnConnectionFailedListener{
 
     companion object {
 
-        private const  val REQUEST_ID_PERMISSIONS = 1
+        private const val REQUEST_ID_PERMISSIONS = 1
 
     }
 
@@ -572,9 +556,11 @@ GoogleApiClient.OnConnectionFailedListener{
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
         googleLogout()
         fbLogOut()
+        val intent = Intent(this@RegistrationStepOneActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
@@ -590,7 +576,6 @@ GoogleApiClient.OnConnectionFailedListener{
                 }
             }
         }
-       // toolbar.setTitleTextAppearance(context,R.style.ToolBarTextAppearance)
     }
 
     public override fun onResume() {
@@ -600,5 +585,6 @@ GoogleApiClient.OnConnectionFailedListener{
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {}
+
 
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/txtHeader"
+        android:layout_width="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        android:layout_height="@dimen/_50sdp"
+        android:text="@string/verification_code_one"
+        android:textSize="@dimen/_13sdp"
+        android:padding="@dimen/_3sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/dark_text_color"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:justificationMode="inter_word"
+        app:layout_constraintBottom_toTopOf="@+id/otp_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.app.l_pesa.common.OtpView
+        android:id="@+id/otpView"
+        style="@style/OtpWidget.OtpView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:inputType="numberPassword"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_14sdp"
+        android:cursorVisible="true"
+        android:focusable="true"
+        app:cursorWidth="1px"
+        app:cursorColor="@color/colorGreyDeep"
+        app:itemCount="6"
+        app:lineColor="@color/colorAquaDeep"
+        app:itemSpacing="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

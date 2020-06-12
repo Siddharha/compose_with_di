@@ -22,9 +22,7 @@ import com.app.l_pesa.pin.model.ResForgetPassword
 import com.app.l_pesa.pin.model.ResSetUpPin
 import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
-import com.app.l_pesa.registration.model.ResRegistrationOne
-import com.app.l_pesa.registration.model.ResRegistrationThree
-import com.app.l_pesa.registration.model.ResRegistrationTwo
+import com.app.l_pesa.registration.model.*
 import com.app.l_pesa.settings.model.ResCloseAccount
 import com.app.l_pesa.splash.model.ResModelCountry
 import com.app.l_pesa.wallet.model.ResWalletHistory
@@ -38,6 +36,16 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface BaseService{
+
+    @POST("registration/reg_email_verify")
+    fun doEmailVerify(@Body emailVerifyRequest: EmailVerifyRequest) : Observable<EmailVerifyResponse>
+
+    @POST("registration/reg_mobile_verify")
+    fun doMobileVerify(@Body reqVerifyMobile: ReqVerifyMobile): Observable<ResVerifyMobile>
+
+    /**
+     * ---------------
+     * */
 
     @GET("countries_list?offset=0&limit=20")
     fun getCountryList(): Observable<ResModelCountry>

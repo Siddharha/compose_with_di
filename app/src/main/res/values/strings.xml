@@ -511,4 +511,7 @@
     <string name="privacy_term_condition">By registering your account you agree to Terms and Conditions and Privacy Policy</string>
     <string name="privacy_term_condition_login">By signing in you agree to Terms and Conditions and Privacy Policy</string>
 
+    <!--New Registration-->
+    <string name="mobile_verification_title">Enter your Mobile Number and Continue.</string>
+    <string name="verification_code_one">Enter Verification Code</string>
 </resources>
