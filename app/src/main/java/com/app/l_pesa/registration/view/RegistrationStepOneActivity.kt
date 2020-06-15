@@ -31,6 +31,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.l_pesa.API.Result
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
@@ -40,10 +41,12 @@ import com.app.l_pesa.common.CommonMethod.openTermCondition
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.registration.inter.EmailVerifyListener
 import com.app.l_pesa.registration.inter.ICallBackEmailVerify
 import com.app.l_pesa.registration.inter.ICallBackRegisterOne
 import com.app.l_pesa.registration.model.Data
 import com.app.l_pesa.registration.model.EmailVerifyRequest
+import com.app.l_pesa.registration.model.EmailVerifyResponse
 import com.app.l_pesa.registration.model.RegistrationData
 import com.app.l_pesa.registration.presenter.PresenterRegistrationOne
 import com.app.l_pesa.registration.presenter.PresenterVerify
@@ -64,13 +67,14 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 import org.json.JSONException
+import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
 
 
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, ICallBackRegisterOne,
-        GoogleApiClient.OnConnectionFailedListener, ICallBackEmailVerify {
+        GoogleApiClient.OnConnectionFailedListener, ICallBackEmailVerify, EmailVerifyListener {
 
     //working on google and fb email verification.
     private lateinit var progressDialog: ProgressDialog
@@ -144,7 +148,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 }
 
                 override fun onError(error: FacebookException?) {
-                    //  "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
+                      "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
+
                 }
             })
         }
@@ -160,6 +165,14 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 val imageUrl = "https://graph.facebook.com/$id/picture?type=normal"
 
                 "$email".toast(this@RegistrationStepOneActivity)
+
+                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+                intent.putExtra("email",email)
+                intent.putExtra("social_image",imageUrl)
+                intent.putExtra("name",name)
+                intent.putExtra("social", "Facebook")
+                intent.putExtra("id",id)
+                startActivity(intent)
 
             } catch (e: JSONException) {
                 Log.i("error : ", e.localizedMessage!!)
@@ -188,6 +201,15 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             if (task.isSuccessful) {
                 val account = task.result
                 "${account?.email}".toast(this@RegistrationStepOneActivity)
+
+                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+                intent.putExtra("email",account?.email)
+                intent.putExtra("social_image",account?.photoUrl.toString())
+                intent.putExtra("name",account?.displayName)
+                intent.putExtra("social", "Google")
+                intent.putExtra("id",account?.id)
+                startActivity(intent)
+
             } else {
                 //"Login Failed".toast(this@RegistrationStepOneActivity)
             }
@@ -221,7 +243,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     }
 
     private fun checkQualify() {
-        etPhone.transformationMethod = SingleLineTransformationMethod.getInstance()
         etEmail.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -256,12 +277,28 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
     private fun emailVerify() {
         progressDialog.show()
+        Log.i("email request : ",EmailVerifyRequest("Normal",etEmail.text.toString().trim()).toString())
         PresenterVerify().doEmailVerify(this@RegistrationStepOneActivity,
                 EmailVerifyRequest(
                         "Normal",
                         etEmail.text.toString().trim()
-                ),
-                this)
+                ), this)
+    }
+
+    override fun onEmailVerifyResponse(result: Result<Any>) {
+        dismiss()
+        when(result){
+            is Result.Success -> {
+                val s = (result.data as EmailVerifyResponse).status?.isSuccess.toString()
+
+                "$s".toast(this@RegistrationStepOneActivity)
+
+            }
+
+            is Result.Error -> {
+                (result.exception.localizedMessage.orEmpty()).toast(this@RegistrationStepOneActivity)
+            }
+        }
     }
 
     override fun onSuccessEmailVerify(data: Data) {
@@ -270,6 +307,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             val intent = Intent(this@RegistrationStepOneActivity, EmailVerifyActivity::class.java)
             intent.putExtra("email",etEmail.text.toString().trim())
             startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
     }
 
@@ -277,6 +315,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         dismiss()
         CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, jsonMessage)
 
+    }
+
+    override fun onErrorEmailCode(code: JSONObject) {
+        dismiss()
+        //CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, code.getString("status"))
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")
@@ -585,6 +628,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {}
+
 
 
 }

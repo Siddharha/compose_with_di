@@ -32,7 +32,9 @@ import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
+import kotlinx.android.synthetic.main.nav_header_main.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -49,12 +51,26 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     private lateinit var photoFile: File
     private lateinit var captureFilePath: Uri
 
+    private var socialImage: String? = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_two)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepTwoActivity)
+
+        socialImage = intent.getStringExtra("social_image")
+
+        if (socialImage!!.isNotEmpty()){
+            captureImageStatus = true
+            Glide.with(this@RegistrationStepTwoActivity)
+                    .load(socialImage)
+                    .into(imageProfile)
+        }
+
+        println("social img is $socialImage")
+
 
         initLoader()
         imageProfile.setOnClickListener {
@@ -72,7 +88,9 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
         buttonContinue.setOnClickListener {
 
-            if (captureImageStatus) {
+            if (imgProfile.drawable == null) {
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepTwoActivity, resources.getString(R.string.required_profile_image))
+            } else {
                 progressDialog.show()
                 Handler().postDelayed({
                     dismiss()
@@ -81,8 +99,6 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                 }, 2000)
 
-            } else {
-                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepTwoActivity, resources.getString(R.string.required_profile_image))
             }
         }
 

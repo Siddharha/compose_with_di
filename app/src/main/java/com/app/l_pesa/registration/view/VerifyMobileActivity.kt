@@ -37,8 +37,11 @@ import com.app.l_pesa.common.*
 import com.app.l_pesa.common.CommonMethod.customSnackBarError
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
+import com.app.l_pesa.registration.inter.MobileVerifyListener
 import com.app.l_pesa.registration.model.DeviceData
+import com.app.l_pesa.registration.model.NextStage
 import com.app.l_pesa.registration.model.ReqVerifyMobile
+import com.app.l_pesa.registration.presenter.PresenterVerify
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.google.android.material.snackbar.Snackbar
@@ -49,7 +52,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList {
+class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVerifyListener {
 
     private lateinit var progressDialog: ProgressDialog
     private lateinit var alCountry: ArrayList<ResModelCountryList>
@@ -76,9 +79,9 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList {
         toolbarFont(this@VerifyMobileActivity)
         //
         email = intent.getStringExtra("email")
-        image = intent.getStringExtra("image")
+        image = intent.getStringExtra("social_image")
         tag = intent.getStringExtra("social")
-        socialId = intent.getStringExtra("socialId")
+        socialId = intent.getStringExtra("id")
 
         category = when {
             tag.equals("Google") -> {
@@ -94,6 +97,8 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList {
         //
         initLoader()
         getMobile()
+        loadCountry()
+        onClickTermPolicy()
 
     }
 
@@ -114,6 +119,16 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList {
     private fun dismiss() {
         if (progressDialog.isShowing) {
             progressDialog.dismiss()
+        }
+    }
+
+    private fun onClickTermPolicy() {
+        val sharedPref = SharedPref(this@VerifyMobileActivity)
+        tvForgotTermPolicy.richText(getString(R.string.privacy_term_condition_login)) {
+            spannables = listOf(
+                    27..47 to { CommonMethod.openTermCondition(this@VerifyMobileActivity, sharedPref.countryCode) },
+                    52..66 to { CommonMethod.openPrivacyUrl(this@VerifyMobileActivity, sharedPref.countryCode) }
+            )
         }
     }
 
@@ -175,7 +190,8 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList {
         for (country in alCountry) {
             if (country.country_name.toLowerCase().startsWith(countryName.toLowerCase())) {
                 filteredCountry.add(country)
-            } else { }
+            } else {
+            }
         }
         if (filteredCountry.size == 0) {
             filteredCountry.clear()
@@ -230,48 +246,66 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList {
 
         val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-        if (TextUtils.isEmpty(telephonyManager.simSerialNumber)) {
+        /*if (TextUtils.isEmpty(telephonyManager.simSerialNumber)) {
             CommonMethod.customSnackBarError(rootLayout, this@VerifyMobileActivity, resources.getString(R.string.required_sim))
+        } else {*/
+        if (CommonMethod.isNetworkAvailable(this@VerifyMobileActivity)) {
+            val displayMetrics = resources.displayMetrics
+            val width = displayMetrics.widthPixels
+            val height = displayMetrics.heightPixels
+
+            val sharedPrefOBJ = SharedPref(this@VerifyMobileActivity)
+
+            progressDialog.show()
+            var uniqueID = UUID.randomUUID().toString()
+
+
+            val reqVerifyMobile = ReqVerifyMobile(
+                    sharedPrefOBJ.countryIsdCode,
+                    etPhoneVerify.text.toString().trim(),
+                    email,
+                    category,
+                    socialId,
+                    FirebaseInstanceId.getInstance().token.toString(),
+                    "A",
+                    DeviceData(
+                            uniqueID,
+                            height.toString(),
+                            width.toString(),
+                            Build.DEVICE,
+                            Build.MODEL,
+                            Build.PRODUCT,
+                            Build.MANUFACTURER,
+                            BuildConfig.VERSION_NAME,
+                            BuildConfig.VERSION_CODE.toString()
+                    )
+            )
+
+            Log.i("request : ", reqVerifyMobile.toString())
+
+            PresenterVerify().doMobileVerify(this@VerifyMobileActivity, reqVerifyMobile, this)
         } else {
-            if (CommonMethod.isNetworkAvailable(this@VerifyMobileActivity)) {
-                val displayMetrics = resources.displayMetrics
-                val width = displayMetrics.widthPixels
-                val height = displayMetrics.heightPixels
-
-                val sharedPrefOBJ = SharedPref(this@VerifyMobileActivity)
-
-                progressDialog.show()
-                var uniqueID = UUID.randomUUID().toString()
-
-
-                val reqVerifyMobile = ReqVerifyMobile(
-                        sharedPrefOBJ.countryIsdCode,
-                        etPhoneVerify.text.toString().trim(),
-                        email,
-                        category,
-                        socialId,
-                        FirebaseInstanceId.getInstance().token.toString(),
-                        "A",
-                        DeviceData(
-                                uniqueID,
-                                height.toString(),
-                                width.toString(),
-                                Build.DEVICE,
-                                Build.MODEL,
-                                Build.PRODUCT,
-                                Build.MANUFACTURER,
-                                BuildConfig.VERSION_NAME,
-                                BuildConfig.VERSION_CODE.toString()
-                        )
-                )
-
-                Log.i("request : ", reqVerifyMobile.toString())
-
-                //PresenterVerifyMobile().doVerifyMobile(this@VerifyMobileActivity, reqVerifyMobile, this)
-            }
+            CommonMethod.customSnackBarError(verifyLayout, this@VerifyMobileActivity, resources.getString(R.string.no_internet))
         }
 
 
+    }
+
+    override fun onResponseVerifyMobile(data: NextStage) {
+        dismiss()
+        val sharedPref = SharedPref(this@VerifyMobileActivity)
+        if (data.next == "profile_image_name") {
+            sharedPref.accessToken = data.access_token!!
+            val intent = Intent(this@VerifyMobileActivity, RegistrationStepTwoActivity::class.java)
+            intent.putExtra("social_image", image)
+            startActivity(intent)
+        }
+
+    }
+
+    override fun onFailure(msg: String) {
+        dismiss()
+        customSnackBarError(verifyLayout, msg)
     }
 
 

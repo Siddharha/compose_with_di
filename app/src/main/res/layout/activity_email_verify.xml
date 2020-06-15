@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_marginTop="@dimen/_15sdp"
-        android:inputType="numberPassword"
+        android:inputType="number"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/_14sdp"
         android:cursorVisible="true"

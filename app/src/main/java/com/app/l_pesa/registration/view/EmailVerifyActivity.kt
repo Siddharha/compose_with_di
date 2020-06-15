@@ -8,9 +8,14 @@ import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.TextView
 import com.app.l_pesa.R
-import kotlinx.android.synthetic.main.activity_otp.*
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.OnOtpCompletionListener
+import kotlinx.android.synthetic.main.activity_email_verify.*
+import kotlinx.android.synthetic.main.activity_otp.toolbar
 
-class EmailVerifyActivity : AppCompatActivity() {
+class EmailVerifyActivity : AppCompatActivity() , OnOtpCompletionListener{
+
+    private var email: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +26,10 @@ class EmailVerifyActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@EmailVerifyActivity)
 
+        //
+        email = intent.getStringExtra("email")
+
+        otpView.setOtpCompletionListener(this)
 
     }
 
@@ -46,6 +55,19 @@ class EmailVerifyActivity : AppCompatActivity() {
             }
 
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onOtpCompleted(otp: String) {
+        if (otp.length > 5){
+            doVerifyEmail(otp)
+        }
+    }
+
+    private fun doVerifyEmail(otp: String) {
+        CommonMethod.hideKeyboardView(this@EmailVerifyActivity)
+        if (CommonMethod.isNetworkAvailable(this@EmailVerifyActivity)){
+            
         }
     }
 }

@@ -30,6 +30,8 @@ import com.app.l_pesa.wallet.model.ResWalletWithdrawal
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.google.gson.JsonObject
 import io.reactivex.Observable
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
