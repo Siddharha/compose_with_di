@@ -63,6 +63,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     private var tag: String? = null
     private var socialId: String? = null
     private var category: String? = null
+    private var name: String? = null
 
     companion object {
         private const val REQUEST_ID_PERMISSIONS = 1
@@ -82,6 +83,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         image = intent.getStringExtra("social_image")
         tag = intent.getStringExtra("social")
         socialId = intent.getStringExtra("id")
+        name = intent.getStringExtra("name")
 
         category = when {
             tag.equals("Google") -> {
@@ -298,6 +300,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             sharedPref.accessToken = data.access_token!!
             val intent = Intent(this@VerifyMobileActivity, RegistrationStepTwoActivity::class.java)
             intent.putExtra("social_image", image)
+            intent.putExtra("name", name)
             startActivity(intent)
         }
 

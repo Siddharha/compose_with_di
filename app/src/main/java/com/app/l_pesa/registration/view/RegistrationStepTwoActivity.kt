@@ -52,6 +52,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     private lateinit var captureFilePath: Uri
 
     private var socialImage: String? = ""
+    private var name: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +62,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         toolbarFont(this@RegistrationStepTwoActivity)
 
         socialImage = intent.getStringExtra("social_image")
+        name = intent.getStringExtra("name")
 
         if (socialImage!!.isNotEmpty()){
             captureImageStatus = true
@@ -96,6 +98,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
                     dismiss()
                     val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java)
                     intent.putExtra("social_image", socialImage)
+                    intent.putExtra("social_name", name)
                     startActivity(intent)
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                 }, 2000)
@@ -355,6 +358,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        SharedPref(this@RegistrationStepTwoActivity).removeImagePath()
         super.onBackPressed()
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }

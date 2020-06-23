@@ -45,6 +45,9 @@ interface BaseService{
     @POST("registration/reg_mobile_verify")
     fun doMobileVerify(@Body reqVerifyMobile: ReqVerifyMobile): Observable<ResVerifyMobile>
 
+    @POST("registration/reg_name_verify")
+    fun doNameVerify(@Body reqNameVerify: ReqNameVerify) : Observable<ResNameVerify>
+
     /**
      * ---------------
      * */

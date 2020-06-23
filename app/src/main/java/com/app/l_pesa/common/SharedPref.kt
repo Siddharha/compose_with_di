@@ -280,6 +280,12 @@ constructor(context: Context) // Constructor
         editor.apply()
     }
 
+    fun removeImagePath(){
+        editor.remove("KEY_SET_IMAGE_PATH")
+        editor.commit()
+        editor.apply()
+    }
+
     init {
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         editor = pref.edit()
