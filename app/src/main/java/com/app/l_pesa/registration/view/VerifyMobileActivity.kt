@@ -82,7 +82,11 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         email = intent.getStringExtra("email")
         image = intent.getStringExtra("social_image")
         tag = intent.getStringExtra("social")
-        socialId = intent.getStringExtra("id")
+        socialId = if (socialId != null && socialId!!.isNotEmpty()){
+            intent.getStringExtra("id")
+        }else{
+            ""
+        }
         name = intent.getStringExtra("name")
 
         category = when {

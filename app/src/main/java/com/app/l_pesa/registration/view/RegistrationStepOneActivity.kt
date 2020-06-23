@@ -270,8 +270,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 //registrationProcess()
                 emailVerify()
             }
-
-
         }
     }
 

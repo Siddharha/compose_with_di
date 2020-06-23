@@ -31,6 +31,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
@@ -275,6 +276,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION, params)
 
         dismiss()
+        SharedPref(this@RegistrationStepFiveActivity).removeImagePath()
         Toast.makeText(this@RegistrationStepFiveActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_LONG).show()
         startActivity(Intent(this@RegistrationStepFiveActivity, LoginActivity::class.java))
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
