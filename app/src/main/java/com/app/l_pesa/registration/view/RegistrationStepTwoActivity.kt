@@ -88,13 +88,14 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
         buttonContinue.setOnClickListener {
 
-            if (imgProfile.drawable == null) {
+            if (imageProfile.drawable == null) {
                 CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepTwoActivity, resources.getString(R.string.required_profile_image))
             } else {
                 progressDialog.show()
                 Handler().postDelayed({
                     dismiss()
                     val intent = Intent(this@RegistrationStepTwoActivity, RegistrationStepThreeActivity::class.java)
+                    intent.putExtra("social_image", socialImage)
                     startActivity(intent)
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
                 }, 2000)

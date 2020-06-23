@@ -35,6 +35,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
 
     private lateinit  var progressDialog    : ProgressDialog
     private lateinit  var imageFile         : File
+    private var sImage: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +43,8 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepThreeActivity)
+
+        sImage = intent.getStringExtra("social_image")
 
         initLoader()
         initData()
@@ -51,23 +54,19 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
 
     private fun initData()
     {
-
         val sharedPref=SharedPref(this@RegistrationStepThreeActivity)
         imageFile   = File(sharedPref.imagePath)
-        imageFile   = Compressor(this@RegistrationStepThreeActivity).compressToFile(imageFile)
+        //imageFile   = Compressor(this@RegistrationStepThreeActivity).compressToFile(imageFile)
 
         val imagePath = BitmapFactory.decodeFile(imageFile.absolutePath)
         imageView.setImageBitmap(imagePath)
 
         imageEdit.setOnClickListener {
-
             onBackPressed()
             overridePendingTransition(R.anim.left_in, R.anim.right_out)
-
         }
 
         btnSubmit.setOnClickListener {
-
             hideKeyboard()
             if (TextUtils.isEmpty(etName.text.toString()))
             {
@@ -144,6 +143,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
         jsonObject.addProperty("name",etName.text.toString())
         jsonObject.addProperty("image",url)
         jsonObject.addProperty("otp",etCode.text.toString())
+
 
         val presenterRegistrationTwo= PresenterRegistrationTwo()
         presenterRegistrationTwo.doRegistrationStepTwo(this@RegistrationStepThreeActivity,jsonObject,this)
