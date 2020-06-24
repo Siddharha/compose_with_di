@@ -64,6 +64,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     private var socialId: String? = null
     private var category: String? = null
     private var name: String? = null
+    private var socId: String? = null
 
     companion object {
         private const val REQUEST_ID_PERMISSIONS = 1
@@ -82,11 +83,17 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         email = intent.getStringExtra("email")
         image = intent.getStringExtra("social_image")
         tag = intent.getStringExtra("social")
-        socialId = if (socialId != null && socialId!!.isNotEmpty()){
-            intent.getStringExtra("id")
+        //
+        socialId = intent.getStringExtra("id")
+        socId = if (socialId != null){
+            socialId!!
         }else{
-            ""
+            "''"
         }
+
+        println("id is now : $socId")
+
+        println("id is : $socialId")
         name = intent.getStringExtra("name")
 
         category = when {
@@ -265,13 +272,12 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             progressDialog.show()
             var uniqueID = UUID.randomUUID().toString()
 
-
             val reqVerifyMobile = ReqVerifyMobile(
                     sharedPrefOBJ.countryIsdCode,
                     etPhoneVerify.text.toString().trim(),
                     email,
                     category,
-                    socialId,
+                    socId,
                     FirebaseInstanceId.getInstance().token.toString(),
                     "A",
                     DeviceData(

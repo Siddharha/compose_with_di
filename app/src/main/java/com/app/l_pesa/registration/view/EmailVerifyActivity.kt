@@ -96,6 +96,7 @@ class EmailVerifyActivity : AppCompatActivity() , OnOtpCompletionListener, ICall
 
     override fun onVerifyFailure(msg: String) {
         dismiss()
+        otpView.text?.clear()
         CommonMethod.customSnackBarError(rootLayoutVerify, this@EmailVerifyActivity, msg)
     }
 

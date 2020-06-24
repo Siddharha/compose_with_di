@@ -86,6 +86,13 @@ class PresenterVerify {
                         val jsonError = JSONObject(errorVal.response().errorBody()?.string()!!)
                         val jsonStatus = jsonError.getJSONObject("status")
                         val jsonMessage = jsonStatus.getString("message")
+                        val jsonStatusCode   =    jsonStatus.getInt("statusCode")
+
+                        /*if (jsonStatusCode == 50002){
+                            mobileVerifyListener.onFailure(jsonMessage)
+                        }else{
+                            mobileVerifyListener.onFailure(jsonMessage)
+                        }*/
 
                         mobileVerifyListener.onFailure(jsonMessage)
 
