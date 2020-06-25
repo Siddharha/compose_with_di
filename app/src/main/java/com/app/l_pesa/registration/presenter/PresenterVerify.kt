@@ -11,6 +11,7 @@ import com.app.l_pesa.registration.inter.MobileVerifyListener
 import com.app.l_pesa.registration.model.EmailVerifyRequest
 import com.app.l_pesa.registration.model.EmailVerifyResponse
 import com.app.l_pesa.registration.model.ReqVerifyMobile
+import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
@@ -60,7 +61,7 @@ class PresenterVerify {
     }
 
     @SuppressLint("CheckResult")
-    fun doMobileVerify(contextOBJ: Context, reqVerifyMobile: ReqVerifyMobile, mobileVerifyListener: MobileVerifyListener) {
+    fun doMobileVerify(contextOBJ: Context, reqVerifyMobile: JsonObject, mobileVerifyListener: MobileVerifyListener) {
         RetrofitHelper.getRetrofit(BaseService::class.java).doMobileVerify(reqVerifyMobile)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -86,7 +87,6 @@ class PresenterVerify {
                         val jsonError = JSONObject(errorVal.response().errorBody()?.string()!!)
                         val jsonStatus = jsonError.getJSONObject("status")
                         val jsonMessage = jsonStatus.getString("message")
-                        val jsonStatusCode   =    jsonStatus.getInt("statusCode")
 
                         /*if (jsonStatusCode == 50002){
                             mobileVerifyListener.onFailure(jsonMessage)

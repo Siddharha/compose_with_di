@@ -46,7 +46,7 @@ interface BaseService{
     fun doOtpVerify(@Body reqVerifyCode: ReqVerifyCode): Observable<ResVerifyCode>
 
     @POST("registration/reg_mobile_verify")
-    fun doMobileVerify(@Body reqVerifyMobile: ReqVerifyMobile): Observable<ResVerifyMobile>
+    fun doMobileVerify(@Body reqVerifyMobile: JsonObject): Observable<ResVerifyMobile>
 
     @POST("registration/reg_name_verify")
     fun doNameVerify(@Body reqNameVerify: ReqNameVerify) : Observable<ResNameVerify>

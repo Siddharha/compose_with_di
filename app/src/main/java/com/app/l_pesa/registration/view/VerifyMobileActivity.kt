@@ -47,6 +47,7 @@ import com.app.l_pesa.splash.model.ResModelData
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_verify_mobile.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -88,14 +89,11 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         socId = if (socialId != null){
             socialId!!
         }else{
-            "''"
+            ""
         }
-
         println("id is now : $socId")
-
         println("id is : $socialId")
         name = intent.getStringExtra("name")
-
         category = when {
             tag.equals("Google") -> {
                 "Google"
@@ -112,7 +110,6 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         getMobile()
         loadCountry()
         onClickTermPolicy()
-
     }
 
 
@@ -248,7 +245,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     }
 
     private fun doMobileVerify() {
-        val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        /*val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
         var getIMEI = ""
         getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -257,7 +254,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             telephonyManager!!.deviceId
         }
 
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)*/
 
         /*if (TextUtils.isEmpty(telephonyManager.simSerialNumber)) {
             CommonMethod.customSnackBarError(rootLayout, this@VerifyMobileActivity, resources.getString(R.string.required_sim))
@@ -293,9 +290,32 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
                     )
             )
 
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("country_code",sharedPrefOBJ.countryCode)
+            jsonObject.addProperty("phone_no",etPhoneVerify.text.toString().trim())
+            jsonObject.addProperty("email_address",email)
+            jsonObject.addProperty("category",category)
+            jsonObject.addProperty("social_id",socId)
+            jsonObject.addProperty("device_token",FirebaseInstanceId.getInstance().token.toString())
+            jsonObject.addProperty("platform_type","A")
+
+            val jsonObjectChild = JsonObject()
+            jsonObjectChild.addProperty("device_id",uniqueID)
+            jsonObjectChild.addProperty("screen_height",height.toString())
+            jsonObjectChild.addProperty("screen_width",width.toString())
+            jsonObjectChild.addProperty("device",Build.DEVICE)
+            jsonObjectChild.addProperty("model",Build.MODEL)
+            jsonObjectChild.addProperty("product",Build.PRODUCT)
+            jsonObjectChild.addProperty("manufacturer",Build.MANUFACTURER)
+            jsonObjectChild.addProperty("app_version",BuildConfig.VERSION_NAME)
+            jsonObjectChild.addProperty("app_version_code",BuildConfig.VERSION_CODE)
+
+            jsonObject.add("device_data",jsonObjectChild)
+
+            Log.i("verify request", jsonObject.toString())
             Log.i("request : ", reqVerifyMobile.toString())
 
-            PresenterVerify().doMobileVerify(this@VerifyMobileActivity, reqVerifyMobile, this)
+            PresenterVerify().doMobileVerify(this@VerifyMobileActivity, jsonObject, this)
         } else {
             CommonMethod.customSnackBarError(verifyLayout, this@VerifyMobileActivity, resources.getString(R.string.no_internet))
         }

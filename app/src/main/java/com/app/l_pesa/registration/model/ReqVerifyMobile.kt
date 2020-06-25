@@ -5,7 +5,7 @@ data class ReqVerifyMobile(
     val phone_no: String? = null,
     val email_address: String? = null,
     val category: String? = null,
-    val social_id: String? = " ",
+    val social_id: String? = null,
     val device_token: String? = null,
     val platform_type: String? = null,
     val device_data: DeviceData? = null
