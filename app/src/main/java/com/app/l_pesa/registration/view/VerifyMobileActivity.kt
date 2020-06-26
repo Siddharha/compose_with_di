@@ -291,7 +291,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             )
 
             val jsonObject = JsonObject()
-            jsonObject.addProperty("country_code",sharedPrefOBJ.countryCode)
+            jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
             jsonObject.addProperty("phone_no",etPhoneVerify.text.toString().trim())
             jsonObject.addProperty("email_address",email)
             jsonObject.addProperty("category",category)
@@ -308,12 +308,12 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             jsonObjectChild.addProperty("product",Build.PRODUCT)
             jsonObjectChild.addProperty("manufacturer",Build.MANUFACTURER)
             jsonObjectChild.addProperty("app_version",BuildConfig.VERSION_NAME)
-            jsonObjectChild.addProperty("app_version_code",BuildConfig.VERSION_CODE)
+            jsonObjectChild.addProperty("app_version_code",BuildConfig.VERSION_CODE.toString())
 
             jsonObject.add("device_data",jsonObjectChild)
 
             Log.i("verify request", jsonObject.toString())
-            Log.i("request : ", reqVerifyMobile.toString())
+            //Log.i("request : ", reqVerifyMobile.toString())
 
             PresenterVerify().doMobileVerify(this@VerifyMobileActivity, jsonObject, this)
         } else {

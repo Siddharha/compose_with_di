@@ -164,7 +164,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 val id = `object`.getString("id")
                 val imageUrl = "https://graph.facebook.com/$id/picture?type=normal"
 
-                "$email".toast(this@RegistrationStepOneActivity)
+               // "$email".toast(this@RegistrationStepOneActivity)
 
                 val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
                 intent.putExtra("email",email)
@@ -200,7 +200,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             if (task.isSuccessful) {
                 val account = task.result
-                "${account?.email}".toast(this@RegistrationStepOneActivity)
+                //"${account?.email}".toast(this@RegistrationStepOneActivity)
 
                 val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
                 intent.putExtra("email",account?.email)

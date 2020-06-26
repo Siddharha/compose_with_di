@@ -90,7 +90,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
                         val presenterAWSProfile = PresenterAWSProfile()
                         presenterAWSProfile.uploadProfileImageRegistration(this@RegistrationStepThreeActivity, this, imageFile)
                     } else {
-                        //CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepThreeActivity, resources.getString(R.string.image_not_found))
+                        progressDialog.show()
                         uploadInformation(sImage!!)
                     }
 
@@ -130,7 +130,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
     override fun onSuccessUploadAWS(url: String) {
 
         uploadInformation(url)
-        "$url".toast(this@RegistrationStepThreeActivity)
+       // "$url".toast(this@RegistrationStepThreeActivity)
     }
 
     override fun onFailureUploadAWS(string: String) {
@@ -146,7 +146,7 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
          val presenterRegistrationTwo = PresenterRegistrationTwo()
          presenterRegistrationTwo.doRegistrationStepTwo(this@RegistrationStepThreeActivity, jsonObject, this)*/
 
-        "$url".toast(this@RegistrationStepThreeActivity)
+        //"$url".toast(this@RegistrationStepThreeActivity)
 
         val reqNameVerify = ReqNameVerify(
                 etName.text.toString().trim(), url

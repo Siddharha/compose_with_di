@@ -51,7 +51,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
     private lateinit var photoFile: File
     private lateinit var captureFilePath: Uri
 
-    private var socialImage: String? = ""
+    private var socialImage: String? = null
     private var name: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,14 +64,15 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         socialImage = intent.getStringExtra("social_image")
         name = intent.getStringExtra("name")
 
-        if (socialImage!!.isNotEmpty()){
-            captureImageStatus = true
+        println("social img is $socialImage")
+
+        if (socialImage != null){
             Glide.with(this@RegistrationStepTwoActivity)
                     .load(socialImage)
                     .into(imageProfile)
+        }else{
+            imageProfile.setImageURI(null)
         }
-
-        println("social img is $socialImage")
 
 
         initLoader()
