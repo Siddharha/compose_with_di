@@ -17,7 +17,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.text.*
-import android.text.method.SingleLineTransformationMethod
 import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.MenuItem
@@ -59,6 +58,7 @@ import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInResult
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.iid.FirebaseInstanceId
@@ -68,6 +68,7 @@ import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
@@ -80,6 +81,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     private lateinit var progressDialog: ProgressDialog
     private lateinit var alCountry: ArrayList<ResModelCountryList>
     private lateinit var adapterCountry: CountryListAdapter
+
+    private lateinit var btnGoogle: CustomButtonRegular
 
     //
     private var mGoogleSignInClient: GoogleSignInClient? = null
@@ -96,6 +99,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepOneActivity)
         FacebookSdk.sdkInitialize(applicationContext)
+
+        btnGoogle = findViewById(R.id.btnGoogle)
 
         initData()
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
@@ -127,7 +132,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
         btnGoogle.setOnClickListener {
-            val intent = mGoogleSignInClient?.signInIntent
+            //val intent = mGoogleSignInClient?.signInIntent
+            val intent = Auth.GoogleSignInApi?.getSignInIntent(mGoogleApiClient)
             startActivityForResult(intent, SIGN_IN)
         }
 
@@ -149,7 +155,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
                 override fun onError(error: FacebookException?) {
                       "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
-
                 }
             })
         }
@@ -162,17 +167,21 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 val lastName = `object`.getString("last_name")
                 val email = `object`.getString("email")
                 val id = `object`.getString("id")
-                val imageUrl = "https://graph.facebook.com/$id/picture?type=normal"
-
+                //val imageUrl = "https://graph.facebook.com/$id/picture?type=normal"
+                //val imageUrl = `object`.getString("picture")
                // "$email".toast(this@RegistrationStepOneActivity)
 
-                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+                val url = URL("https://graph.facebook.com/$id/picture?type=normal")
+
+                "$id / $name / $url".toast(this@RegistrationStepOneActivity)
+
+               /* val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
                 intent.putExtra("email",email)
-                intent.putExtra("social_image",imageUrl)
+                intent.putExtra("social_image","")
                 intent.putExtra("name",name)
                 intent.putExtra("social", "Facebook")
                 intent.putExtra("id",id)
-                startActivity(intent)
+                startActivity(intent)*/
 
             } catch (e: JSONException) {
                 Log.i("error : ", e.localizedMessage!!)
@@ -180,13 +189,16 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         }
 
         val bundle = Bundle()
-        bundle.putString("fields", "first_name,last_name,email,id")
+        bundle.putString("fields", "first_name,last_name,email,id,picture.type(normal)")
         graphRequest.parameters = bundle
         graphRequest.executeAsync()
     }
 
     private fun googleLogout() {
-        mGoogleSignInClient?.signOut()
+        //mGoogleSignInClient?.signOut()
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback {
+            "Logout".toast(this@RegistrationStepOneActivity)
+        }
     }
 
     private fun fbLogOut() {
@@ -198,10 +210,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         callbackManager.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            if (task.isSuccessful) {
+            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+            /*if (task.isSuccessful) {
                 val account = task.result
                 //"${account?.email}".toast(this@RegistrationStepOneActivity)
-
                 val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
                 intent.putExtra("email",account?.email)
                 intent.putExtra("social_image",account?.photoUrl.toString())
@@ -212,7 +224,42 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
             } else {
                 //"Login Failed".toast(this@RegistrationStepOneActivity)
-            }
+            }*/
+            handleResult(result)
+        }
+    }
+    private fun handleResult(result: GoogleSignInResult?) {
+        if (result!!.isSuccess){
+            val account = result.signInAccount
+            "Hello : ${account?.email} : ${account?.photoUrl.toString()}".toast(this@RegistrationStepOneActivity)
+
+            val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+            intent.putExtra("email",account?.email)
+            intent.putExtra("social_image",account?.photoUrl.toString())
+            intent.putExtra("name",account?.displayName)
+            intent.putExtra("social", "Google")
+            intent.putExtra("id",account?.id)
+            startActivity(intent)
+
+          /*  if (account?.photoUrl.toString().isNotEmpty()){
+                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+                intent.putExtra("email",account?.email)
+                intent.putExtra("social_image",account?.photoUrl.toString())
+                intent.putExtra("name",account?.displayName)
+                intent.putExtra("social", "Google")
+                intent.putExtra("id",account?.id)
+                startActivity(intent)
+            }else{
+                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+                intent.putExtra("email",account?.email)
+                intent.putExtra("social_image","")
+                intent.putExtra("name",account?.displayName)
+                intent.putExtra("social", "Google")
+                intent.putExtra("id",account?.id)
+                startActivity(intent)
+            }*/
+
+
         }
     }
 

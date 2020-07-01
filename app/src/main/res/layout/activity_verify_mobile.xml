@@ -86,12 +86,9 @@
             app:layout_constraintTop_toBottomOf="@+id/txtHeader">
 
             <com.app.l_pesa.common.CommonInputLayout
-
                 style="@style/customInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
+                android:layout_height="wrap_content">
 
                 <com.app.l_pesa.common.PrefixEditText
                     android:id="@+id/etPhoneVerify"
@@ -101,7 +98,7 @@
                     android:cursorVisible="true"
                     android:focusable="true"
                     android:hint="@string/phone_no"
-                    android:inputType="numberPassword"
+                    android:inputType="phone"
                     android:longClickable="false"
                     android:maxLength="15"
                     android:maxLines="1"

@@ -6,7 +6,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,10 +13,8 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.telephony.TelephonyManager
 import android.text.*
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.RelativeSizeSpan
@@ -25,6 +22,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,7 +32,6 @@ import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.*
-import com.app.l_pesa.common.CommonMethod.customSnackBarError
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.registration.inter.MobileVerifyListener
@@ -211,7 +208,6 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         adapterCountry.filterList(filteredCountry)
     }
 
-
     private fun getMobile() {
         etPhoneVerify.transformationMethod = SingleLineTransformationMethod.getInstance()
         etPhoneVerify.setOnEditorActionListener { _, actionId, _ ->
@@ -222,7 +218,6 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             }
             handled
         }
-
         btnVerifyMobile.setOnClickListener {
             verifyField()
         }
@@ -259,7 +254,8 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         /*if (TextUtils.isEmpty(telephonyManager.simSerialNumber)) {
             CommonMethod.customSnackBarError(rootLayout, this@VerifyMobileActivity, resources.getString(R.string.required_sim))
         } else {*/
-        if (CommonMethod.isNetworkAvailable(this@VerifyMobileActivity)) {
+        if (CommonMethod.isNetworkAvailable(this@VerifyMobileActivity))
+        {
             val displayMetrics = resources.displayMetrics
             val width = displayMetrics.widthPixels
             val height = displayMetrics.heightPixels
