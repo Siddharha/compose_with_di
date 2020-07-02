@@ -169,12 +169,9 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 val id = `object`.getString("id")
                 //val imageUrl = "https://graph.facebook.com/$id/picture?type=normal"
                 //val imageUrl = `object`.getString("picture")
-               // "$email".toast(this@RegistrationStepOneActivity)
-
+                // "$email".toast(this@RegistrationStepOneActivity)
                 val url = URL("https://graph.facebook.com/$id/picture?type=normal")
-
-               // "$id / $name / $url".toast(this@RegistrationStepOneActivity)
-
+                // "$id / $name / $url".toast(this@RegistrationStepOneActivity)
                 val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
                 intent.putExtra("email",email)
                 intent.putExtra("social_image",url)
@@ -182,7 +179,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 intent.putExtra("social", "Facebook")
                 intent.putExtra("id",id)
                 startActivity(intent)
-
             } catch (e: JSONException) {
                 Log.i("error : ", e.localizedMessage!!)
             }
@@ -211,20 +207,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         if (requestCode == SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-            /*if (task.isSuccessful) {
-                val account = task.result
-                //"${account?.email}".toast(this@RegistrationStepOneActivity)
-                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
-                intent.putExtra("email",account?.email)
-                intent.putExtra("social_image",account?.photoUrl.toString())
-                intent.putExtra("name",account?.displayName)
-                intent.putExtra("social", "Google")
-                intent.putExtra("id",account?.id)
-                startActivity(intent)
 
-            } else {
-                //"Login Failed".toast(this@RegistrationStepOneActivity)
-            }*/
             handleResult(result)
         }
     }
@@ -240,26 +223,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             intent.putExtra("social", "Google")
             intent.putExtra("id",account?.id)
             startActivity(intent)
-
-          /*  if (account?.photoUrl.toString().isNotEmpty()){
-                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
-                intent.putExtra("email",account?.email)
-                intent.putExtra("social_image",account?.photoUrl.toString())
-                intent.putExtra("name",account?.displayName)
-                intent.putExtra("social", "Google")
-                intent.putExtra("id",account?.id)
-                startActivity(intent)
-            }else{
-                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
-                intent.putExtra("email",account?.email)
-                intent.putExtra("social_image","")
-                intent.putExtra("name",account?.displayName)
-                intent.putExtra("social", "Google")
-                intent.putExtra("id",account?.id)
-                startActivity(intent)
-            }*/
-
-
         }
     }
 
