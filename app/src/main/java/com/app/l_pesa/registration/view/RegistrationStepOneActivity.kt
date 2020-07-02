@@ -146,7 +146,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
             LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
-                    loadFbInformation(result?.accessToken!!)
+                    loadFbInformation(result?.accessToken)
                 }
 
                 override fun onCancel() {
@@ -160,7 +160,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         }
     }
 
-    private fun loadFbInformation(currentAccessToken: AccessToken) {
+    private fun loadFbInformation(currentAccessToken: AccessToken?) {
         val graphRequest = GraphRequest.newMeRequest(currentAccessToken) { `object`, response ->
             try {
                 val name = `object`.getString("first_name")
@@ -173,15 +173,15 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
                 val url = URL("https://graph.facebook.com/$id/picture?type=normal")
 
-                "$id / $name / $url".toast(this@RegistrationStepOneActivity)
+               // "$id / $name / $url".toast(this@RegistrationStepOneActivity)
 
-               /* val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+                val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
                 intent.putExtra("email",email)
-                intent.putExtra("social_image","")
+                intent.putExtra("social_image",url)
                 intent.putExtra("name",name)
                 intent.putExtra("social", "Facebook")
                 intent.putExtra("id",id)
-                startActivity(intent)*/
+                startActivity(intent)
 
             } catch (e: JSONException) {
                 Log.i("error : ", e.localizedMessage!!)
@@ -197,7 +197,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     private fun googleLogout() {
         //mGoogleSignInClient?.signOut()
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback {
-            "Logout".toast(this@RegistrationStepOneActivity)
+            //"Logout".toast(this@RegistrationStepOneActivity)
         }
     }
 
@@ -231,7 +231,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     private fun handleResult(result: GoogleSignInResult?) {
         if (result!!.isSuccess){
             val account = result.signInAccount
-            "Hello : ${account?.email} : ${account?.photoUrl.toString()}".toast(this@RegistrationStepOneActivity)
+           // "Hello : ${account?.email} : ${account?.photoUrl.toString()}".toast(this@RegistrationStepOneActivity)
 
             val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
             intent.putExtra("email",account?.email)
