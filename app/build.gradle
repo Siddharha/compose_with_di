@@ -103,13 +103,15 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+' //2.16.1
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.play:core:1.6.3'
-    implementation 'com.facebook.android:facebook-android-sdk:5.5.1'
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     /* implementation 'com.amazonaws:aws-android-sdk-s3:2.13.5'
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.13.5'*/
 
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation(name:'sinch-android-verification-1.6.1', ext:'aar')
+    implementation 'gun0912.ted:tedpermission:2.2.2'
 
 
 

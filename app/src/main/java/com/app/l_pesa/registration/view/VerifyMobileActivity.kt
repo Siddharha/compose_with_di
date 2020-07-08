@@ -22,6 +22,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
@@ -45,7 +46,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
+import com.sinch.verification.*
 import kotlinx.android.synthetic.main.activity_verify_mobile.*
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -230,27 +235,62 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             customSnackBarError(rootLayout, resources.getString(R.string.required_phone_email))
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                checkAndRequestPermissions()
+                //checkAndRequestPermissions()
+                checkPermissions()
             } else {
                 //doForgotPinProcess()
-                doMobileVerify()
+                //doMobileVerify()
+                progressDialog.setTitle("Mobile Verification")
+                progressDialog.setMessage("Please wait...")
+                progressDialog.show()
+                println("data : " + this.etPhoneVerify.tag + etPhoneVerify.text.toString())
+                startVerification(etPhoneVerify.tag.toString() + etPhoneVerify.text.toString())
             }
 
         }
     }
 
+    private fun checkPermissions(){
+        val permissionListener: PermissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {
+                progressDialog.setTitle("Mobile Verification")
+                progressDialog.setMessage("Please wait...")
+                progressDialog.show()
+                //"${etPhoneVerify.tag}${etPhoneVerify.text.toString()}".toast(this@VerifyMobileActivity)
+                startVerification( etPhoneVerify.tag.toString() + etPhoneVerify.text.toString())
+            }
+
+            override fun onPermissionDenied(deniedPermissions: List<String>) {
+                Toast.makeText(this@VerifyMobileActivity, "Permission denied", Toast.LENGTH_SHORT)
+                        .show()
+            }
+        }
+        TedPermission.with(this)
+                .setPermissionListener(permissionListener)
+                .setPermissions(
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.CALL_PHONE
+                ).check()
+    }
+
+    private fun startVerification(phone: String){
+        val config = SinchVerification.config().applicationKey("f523cf73-5e20-4813-949f-f3cdca5d2244")
+                .context(applicationContext).build()
+        val listener = MyVerificationListener()
+        val verification = SinchVerification.createFlashCallVerification(config,phone,listener)
+        verification.initiate()
+    }
+
+
     private fun doMobileVerify() {
         /*val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
-
         var getIMEI = ""
         getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             telephonyManager!!.imei
         } else {
             telephonyManager!!.deviceId
         }
-
         val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)*/
-
         /*if (TextUtils.isEmpty(telephonyManager.simSerialNumber)) {
             CommonMethod.customSnackBarError(rootLayout, this@VerifyMobileActivity, resources.getString(R.string.required_sim))
         } else {*/
@@ -262,9 +302,9 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
 
             val sharedPrefOBJ = SharedPref(this@VerifyMobileActivity)
 
+            progressDialog.setMessage("Loading....")
             progressDialog.show()
             var uniqueID = UUID.randomUUID().toString()
-
             val reqVerifyMobile = ReqVerifyMobile(
                     sharedPrefOBJ.countryIsdCode,
                     etPhoneVerify.text.toString().trim(),
@@ -310,13 +350,10 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
 
             Log.i("verify request", jsonObject.toString())
             //Log.i("request : ", reqVerifyMobile.toString())
-
             PresenterVerify().doMobileVerify(this@VerifyMobileActivity, jsonObject, this)
         } else {
             CommonMethod.customSnackBarError(verifyLayout, this@VerifyMobileActivity, resources.getString(R.string.no_internet))
         }
-
-
     }
 
     override fun onResponseVerifyMobile(data: NextStage) {
@@ -342,7 +379,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         etPhoneVerify.requestFocus()
         txtCountry.visibility = View.VISIBLE
         txtCountry.text = resModelCountryList.country_name
-        etPhoneVerify.tag = resModelCountryList.country_code + "   "
+        etPhoneVerify.tag = resModelCountryList.country_code + ""
         val sharedPrefOBJ = SharedPref(this@VerifyMobileActivity)
         sharedPrefOBJ.countryCode = resModelCountryList.code
         sharedPrefOBJ.countryName = resModelCountryList.country_name
@@ -483,6 +520,74 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    inner class MyVerificationListener: VerificationListener{
+        override fun onInitiated(p0: InitiationResult?) {}
+        override fun onInitiationFailed(e: Exception?) {
+            dismiss()
+            when (e) {
+                is InvalidInputException -> {
+                    Toast.makeText(
+                            this@VerifyMobileActivity,
+                            "Incorrect number provided",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ServiceErrorException -> {
+                    Toast.makeText(this@VerifyMobileActivity, "Sinch service error" + e.localizedMessage, Toast.LENGTH_LONG)
+                            .show()
+                }
+                else -> {
+                    Toast.makeText(
+                            this@VerifyMobileActivity,
+                            "Other system error, check your network state",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        override fun onVerified() {
+           /* AlertDialog.Builder(this@VerifyMobileActivity)
+                    .setMessage("Verification Successful!")
+                    .setPositiveButton(
+                            "Done"
+                    ) { dialog, whichButton ->
+                        dialog.cancel()
+                    }
+                    .show()*/
+            doMobileVerify()
+        }
+
+        override fun onVerificationFailed(e: Exception?) {
+            dismiss()
+            when (e) {
+                is CodeInterceptionException -> {
+                    Toast.makeText(
+                            this@VerifyMobileActivity,
+                            "Intercepting the verification call automatically failed / " + e.getLocalizedMessage(),
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ServiceErrorException -> {
+                    Toast.makeText(this@VerifyMobileActivity, "Sinch service error", Toast.LENGTH_LONG)
+                            .show()
+                }
+                else -> {
+                    Toast.makeText(
+                            this@VerifyMobileActivity,
+                            "Other system error, check your network state",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        override fun onVerificationFallback() {
+
+        }
+
     }
 
 
