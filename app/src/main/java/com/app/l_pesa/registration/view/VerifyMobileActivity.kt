@@ -69,6 +69,8 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     private var name: String? = null
     private var socId: String? = null
 
+    private var uniqueID: String? = null
+
     companion object {
         private const val REQUEST_ID_PERMISSIONS = 1
     }
@@ -304,8 +306,16 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
 
             progressDialog.setMessage("Loading....")
             progressDialog.show()
-            var uniqueID = UUID.randomUUID().toString()
-            val reqVerifyMobile = ReqVerifyMobile(
+            if (sharedPrefOBJ.uuid.isEmpty()){
+                uniqueID = UUID.randomUUID().toString()
+                sharedPrefOBJ.uuid = uniqueID!!
+                Log.i("VM : ","$uniqueID")
+            }else{
+                uniqueID = sharedPrefOBJ.uuid
+                Log.i("VM 1 : ","$uniqueID")
+            }
+
+            /*val reqVerifyMobile = ReqVerifyMobile(
                     sharedPrefOBJ.countryIsdCode,
                     etPhoneVerify.text.toString().trim(),
                     email,
@@ -324,7 +334,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
                             BuildConfig.VERSION_NAME,
                             BuildConfig.VERSION_CODE.toString()
                     )
-            )
+            )*/
 
             val jsonObject = JsonObject()
             jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)

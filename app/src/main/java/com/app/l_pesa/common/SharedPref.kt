@@ -12,6 +12,13 @@ constructor(context: Context) // Constructor
     private val pref: SharedPreferences
     private val editor: SharedPreferences.Editor
 
+    var uuid: String
+        get() = pref.getString(KEY_SET_UUID, "")!!
+        set(uuid) {
+            editor.remove(KEY_SET_UUID)
+            editor.putString(KEY_SET_UUID, uuid)
+            editor.commit()
+        }
 
     var countryList: String
         get() = pref.getString(KEY_SET_COUNTRY_LIST, "INIT")!!
@@ -297,7 +304,7 @@ constructor(context: Context) // Constructor
         private const val PREF_NAME = "L_PESA"
 
         // All Shared Preferences Keys Declare as #public
-
+        private const val KEY_SET_UUID                  = "KEY_SET_UUID"
         private const val KEY_SET_COUNTRY_LIST          = "KEY_SET_COUNTRY_LIST"
         private const val KEY_SET_COUNTRY_CODE          = "KEY_SET_COUNTRY_CODE"
         private const val KEY_SET_USER_INFO             = "KEY_SET_USER_INFO"

@@ -21,6 +21,7 @@ import android.text.method.LinkMovementMethod
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.ClickableSpan
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
@@ -59,13 +60,14 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_login.*
-import java.util.HashMap
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
 
 
 class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
+    private var deviceId: String? = null
     private lateinit var  progressDialog   : ProgressDialog
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
@@ -257,8 +259,21 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             telephonyManager!!.deviceId
 
         }
-
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        val sharedPref = SharedPref(this@LoginActivity)
+        if (sharedPref.uuid.isEmpty()){
+            deviceId = UUID.randomUUID().toString()
+            sharedPref.uuid = deviceId!!
+            println("new uuid : $deviceId")
+            Log.i("uuid 1 ", "$deviceId")
+        }else{
+            deviceId = sharedPref.uuid
+           // deviceId = UUID.randomUUID().toString()
+            //sharedPref.uuid = deviceId!!
+            Log.i("uuid 2 ", "$deviceId")
+           // Log.i("uuid 3 ", "${sharedPref.uuid}")
+        }
+        //11798829-ebf0-41e5-ba57-50e9a05226a1
+        //val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
         if (TextUtils.isEmpty(telephonyManager.simSerialNumber))
         {
@@ -288,13 +303,16 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
                 jsonObject.addProperty("platform_type","A")
                 jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
+
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)
-                jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
+
+                /*jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
                 jsonObjectRequestChild.addProperty("imei",getIMEI)
                 jsonObjectRequestChild.addProperty("imsi","" + telephonyManager.subscriberId)
                 jsonObjectRequestChild.addProperty("simSerial_no","" + telephonyManager.simSerialNumber)
-                jsonObjectRequestChild.addProperty("sim_operator_Name","" + telephonyManager.simOperatorName)
+                jsonObjectRequestChild.addProperty("sim_operator_Name","" + telephonyManager.simOperatorName)*/
+
                 jsonObjectRequestChild.addProperty("screen_height",""+height)
                 jsonObjectRequestChild.addProperty("screen_width",""+width)
                 jsonObjectRequestChild.addProperty("device", Build.DEVICE)
