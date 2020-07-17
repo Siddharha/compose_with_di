@@ -19,7 +19,7 @@
         android:gravity="center|start"
         android:justificationMode="inter_word"
         android:padding="@dimen/_3sdp"
-        android:text="@string/mobile_verification"
+        android:text="@string/register_one_text"
         android:textColor="@color/dark_text_color"
         android:textSize="@dimen/_11sdp"
         app:layout_constraintBottom_toTopOf="@+id/tilPhone"
