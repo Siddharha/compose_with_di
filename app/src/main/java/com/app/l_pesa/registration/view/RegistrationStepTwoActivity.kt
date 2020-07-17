@@ -125,10 +125,12 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            captureIntent.putExtra("android.intent.extras.CAMERA_FACING",1)
         } else {
             val clip = ClipData.newUri(this@RegistrationStepTwoActivity.contentResolver, "user photo", captureFilePath)
             captureIntent.clipData = clip
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            captureIntent.putExtra("android.intent.extras.CAMERA_FACING",1)
         }
 
         startActivityForResult(captureIntent, requestPhoto)
