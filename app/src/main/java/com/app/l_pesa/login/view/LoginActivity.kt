@@ -15,7 +15,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
-import android.telephony.TelephonyManager
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.method.SingleLineTransformationMethod
@@ -236,7 +235,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         else
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                checkAndRequestPermissions()
+                //checkAndRequestPermissions()
+                doLoginProcess()
             }
             else
             {
@@ -250,15 +250,15 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     @SuppressLint("MissingPermission", "HardwareIds")
     private fun doLoginProcess()
     {
-        val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        //val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
-        var getIMEI = ""
+        /*var getIMEI = ""
         getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             telephonyManager!!.imei
         } else {
             telephonyManager!!.deviceId
 
-        }
+        }*/
         val sharedPref = SharedPref(this@LoginActivity)
         if (sharedPref.uuid.isEmpty()){
             deviceId = UUID.randomUUID().toString()
@@ -543,6 +543,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
                             showDialogOK("Permissions are required for L-Pesa",
                                     DialogInterface.OnClickListener { _, which ->
                                         when (which) {
+
+
                                             DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
                                             DialogInterface.BUTTON_NEGATIVE ->
 
