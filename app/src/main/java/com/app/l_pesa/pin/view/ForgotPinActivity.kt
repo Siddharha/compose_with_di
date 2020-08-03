@@ -19,6 +19,7 @@ import android.telephony.TelephonyManager
 import android.text.*
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
@@ -56,7 +57,8 @@ import kotlinx.android.synthetic.main.activity_forgot_pin.rootLayout
 import kotlinx.android.synthetic.main.activity_forgot_pin.toolbar
 import kotlinx.android.synthetic.main.activity_forgot_pin.txtCountry
 import kotlinx.android.synthetic.main.activity_login.*
-import java.util.HashMap
+import java.sql.DriverManager.println
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
 
@@ -65,6 +67,8 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     private lateinit var  progressDialog   : ProgressDialog
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
+
+    private var deviceId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,71 +163,83 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     @SuppressLint("MissingPermission", "HardwareIds")
     private fun doForgotPinProcess()
     {
-        val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        /*val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
 
         var getIMEI = ""
         getIMEI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             telephonyManager!!.imei
         } else {
             telephonyManager!!.deviceId
+        }*/
+
+        val sharedPref = SharedPref(this@ForgotPinActivity)
+        if (sharedPref.uuid.isEmpty()){
+            deviceId = UUID.randomUUID().toString()
+            sharedPref.uuid = deviceId!!
+            println("new uuid : $deviceId")
+        }else{
+            deviceId = sharedPref.uuid
+            Log.i("uuid 2 ", "$deviceId")
         }
 
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+       // val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-        if (TextUtils.isEmpty(telephonyManager.simSerialNumber))
+       /* if (TextUtils.isEmpty(telephonyManager.simSerialNumber))
         {
             CommonMethod.customSnackBarError(rootLayout, this@ForgotPinActivity, resources.getString(R.string.required_sim))
         }
         else
         {
-            if(CommonMethod.isNetworkAvailable(this@ForgotPinActivity))
-            {
-                val logger = AppEventsLogger.newLogger(this@ForgotPinActivity)
-                val params =  Bundle()
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Forgot Pin")
-                logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
+        }*/
+        if(CommonMethod.isNetworkAvailable(this@ForgotPinActivity))
+        {
+            val logger = AppEventsLogger.newLogger(this@ForgotPinActivity)
+            val params =  Bundle()
+            params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Forgot Pin")
+            logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
-                progressDialog.show()
-                val sharedPrefOBJ= SharedPref(this@ForgotPinActivity)
-                buttonRecoverPin.isClickable   = false
+            progressDialog.show()
+            val sharedPrefOBJ= SharedPref(this@ForgotPinActivity)
+            buttonRecoverPin.isClickable   = false
 
-                val displayMetrics = resources.displayMetrics
-                val width = displayMetrics.widthPixels
-                val height = displayMetrics.heightPixels
+            val displayMetrics = resources.displayMetrics
+            val width = displayMetrics.widthPixels
+            val height = displayMetrics.heightPixels
 
-                val jsonObject = JsonObject()
-                jsonObject.addProperty("phone_no",etPhone.text.toString())
-                jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
-                jsonObject.addProperty("platform_type","A")
-                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("phone_no",etPhone.text.toString())
+            jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
+            jsonObject.addProperty("platform_type","A")
+            jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
-                val jsonObjectRequestChild = JsonObject()
-                jsonObjectRequestChild.addProperty("device_id", deviceId)
-                jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
-                jsonObjectRequestChild.addProperty("imei",getIMEI)
-                jsonObjectRequestChild.addProperty("imsi","" + telephonyManager.subscriberId)
-                jsonObjectRequestChild.addProperty("simSerial_no","" + telephonyManager.simSerialNumber)
-                jsonObjectRequestChild.addProperty("sim_operator_Name","" + telephonyManager.simOperatorName)
-                jsonObjectRequestChild.addProperty("screen_height",""+height)
-                jsonObjectRequestChild.addProperty("screen_width",""+width)
-                jsonObjectRequestChild.addProperty("device", Build.DEVICE)
-                jsonObjectRequestChild.addProperty("model", Build.MODEL)
-                jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
-                jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
-                jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
-                jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
+            val jsonObjectRequestChild = JsonObject()
+            jsonObjectRequestChild.addProperty("device_id", deviceId)
 
-                jsonObject.add("device_data",jsonObjectRequestChild)
+            /*jsonObjectRequestChild.addProperty("sdk",""+Build.VERSION.SDK_INT)
+            jsonObjectRequestChild.addProperty("imei",getIMEI)
+            jsonObjectRequestChild.addProperty("imsi","" + telephonyManager.subscriberId)
+            jsonObjectRequestChild.addProperty("simSerial_no","" + telephonyManager.simSerialNumber)
+            jsonObjectRequestChild.addProperty("sim_operator_Name","" + telephonyManager.simOperatorName)*/
 
-                val presenterForgetPassword= PresenterPassword()
-                presenterForgetPassword.doForgetPassword(this@ForgotPinActivity,jsonObject,this)
+            jsonObjectRequestChild.addProperty("screen_height",""+height)
+            jsonObjectRequestChild.addProperty("screen_width",""+width)
+            jsonObjectRequestChild.addProperty("device", Build.DEVICE)
+            jsonObjectRequestChild.addProperty("model", Build.MODEL)
+            jsonObjectRequestChild.addProperty("product", Build.PRODUCT)
+            jsonObjectRequestChild.addProperty("manufacturer", Build.MANUFACTURER)
+            jsonObjectRequestChild.addProperty("app_version", BuildConfig.VERSION_NAME)
+            jsonObjectRequestChild.addProperty("app_version_code", BuildConfig.VERSION_CODE.toString())
+
+            jsonObject.add("device_data",jsonObjectRequestChild)
+
+            val presenterForgetPassword= PresenterPassword()
+            presenterForgetPassword.doForgetPassword(this@ForgotPinActivity,jsonObject,this)
 
 
-            }
-            else
-            {
-                CommonMethod.customSnackBarError(rootLayout,this@ForgotPinActivity,resources.getString(R.string.no_internet))
-            }
+        }
+        else
+        {
+            CommonMethod.customSnackBarError(rootLayout,this@ForgotPinActivity,resources.getString(R.string.no_internet))
         }
     }
 

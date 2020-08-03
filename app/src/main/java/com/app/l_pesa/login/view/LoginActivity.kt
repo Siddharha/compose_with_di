@@ -58,7 +58,12 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.sinch.verification.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.rootLayout
+import kotlinx.android.synthetic.main.activity_login.toolbar
+import kotlinx.android.synthetic.main.activity_login.txtCountry
+import kotlinx.android.synthetic.main.activity_verify_mobile.*
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
@@ -353,11 +358,16 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         if(data.next_step=="next_otp")
         {
-            val json = Gson().toJson(data)
+           /* val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, OTPActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)*/
+            val json = Gson().toJson(data)
+            sharedPrefOBJ.deviceInfo      = json
+            progressDialog.setMessage("Loading...")
+            progressDialog.show()
+            startVerification(etPhone.tag.toString() + etPhone.text.toString())
         }
         else
         {
@@ -395,6 +405,14 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         buttonLogin.isClickable   = true
         CommonMethod.customSnackBarError(rootLayout,this@LoginActivity,jsonMessage)
 
+    }
+
+    private fun startVerification(phone: String){
+        val config = SinchVerification.config().applicationKey("f523cf73-5e20-4813-949f-f3cdca5d2244")
+                .context(applicationContext).build()
+        val listener = MyVerificationListener()
+        val verification = SinchVerification.createFlashCallVerification(config,phone,listener)
+        verification.initiate()
     }
 
     override fun onClickCountry(resModelCountryList: ResModelCountryList) {
@@ -600,6 +618,69 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     public override fun onResume() {
         super.onResume()
         MyApplication.getInstance().trackScreenView(this@LoginActivity::class.java.simpleName)
+
+    }
+
+    inner class MyVerificationListener: VerificationListener {
+        override fun onInitiated(p0: InitiationResult?) {}
+        override fun onInitiationFailed(e: java.lang.Exception?) {
+            dismiss()
+            when (e) {
+                is InvalidInputException -> {
+                    Toast.makeText(
+                            this@LoginActivity,
+                            "Incorrect number provided",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ServiceErrorException -> {
+                    Toast.makeText(this@LoginActivity, "Service Error Pls try again later" + e.localizedMessage, Toast.LENGTH_LONG)
+                            .show()
+                }
+                else -> {
+                    Toast.makeText(
+                            this@LoginActivity,
+                            "Other system error, check your network state",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        override fun onVerified() {
+            dismiss()
+            val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }
+
+        override fun onVerificationFailed(e: java.lang.Exception?) {
+            dismiss()
+            when (e) {
+                is CodeInterceptionException -> {
+                    Toast.makeText(
+                            this@LoginActivity,
+                            "Intercepting the verification call automatically failed / " + e.getLocalizedMessage(),
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ServiceErrorException -> {
+                    Toast.makeText(this@LoginActivity, "Sinch service error", Toast.LENGTH_LONG)
+                            .show()
+                }
+                else -> {
+                    Toast.makeText(
+                            this@LoginActivity,
+                            "Other system error, check your network state",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        override fun onVerificationFallback() {
+
+        }
 
     }
 

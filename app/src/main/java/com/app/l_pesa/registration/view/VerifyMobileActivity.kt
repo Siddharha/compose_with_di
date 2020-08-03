@@ -51,6 +51,7 @@ import com.gun0912.tedpermission.TedPermission
 import com.sinch.verification.*
 import kotlinx.android.synthetic.main.activity_verify_mobile.*
 import java.lang.Exception
+import java.sql.DriverManager.println
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -546,7 +547,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
                     ).show()
                 }
                 is ServiceErrorException -> {
-                    Toast.makeText(this@VerifyMobileActivity, "Sinch service error" + e.localizedMessage, Toast.LENGTH_LONG)
+                    Toast.makeText(this@VerifyMobileActivity, "Service Error Pls try again later" + e.localizedMessage, Toast.LENGTH_LONG)
                             .show()
                 }
                 else -> {
@@ -560,14 +561,6 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         }
 
         override fun onVerified() {
-           /* AlertDialog.Builder(this@VerifyMobileActivity)
-                    .setMessage("Verification Successful!")
-                    .setPositiveButton(
-                            "Done"
-                    ) { dialog, whichButton ->
-                        dialog.cancel()
-                    }
-                    .show()*/
             doMobileVerify()
         }
 
