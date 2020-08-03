@@ -8,6 +8,7 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.pin.inter.ICallBackChangePin
 import com.app.l_pesa.pin.inter.ICallBackLoginPin
+import com.app.l_pesa.pin.inter.ICallBackSms
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -51,6 +52,45 @@ class PresenterPassword {
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
                         callBackOBJ.onErrorResetPin(errorMessageOBJ)
+                    }
+
+                })
+    }
+
+    @SuppressLint("CheckResult")
+    fun doForgetPasswordSms(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackSms) {
+
+        RetrofitHelper.getRetrofit(BaseService::class.java).doForgetPasswordSms(jsonRequest)
+
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+                }
+                .subscribe({ response ->
+
+                    try {
+                        if (response.status.isSuccess) {
+                            callBackOBJ.onSuccessSms(response.data)
+
+                        } else {
+                            callBackOBJ.onErrorSms(response.status.message)
+                        }
+                    } catch (e: Exception) {
+
+                    }
+                }, { error ->
+                    try {
+                        val errorVal = error as HttpException
+
+                        val jsonError = JSONObject(errorVal.response().errorBody()?.string()!!)
+                        val jsonStatus = jsonError.getJSONObject("status")
+                        val jsonMessage = jsonStatus.getString("message")
+
+                        callBackOBJ.onErrorSms(jsonMessage)
+                    } catch (exp: Exception) {
+                        val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
+                        callBackOBJ.onErrorSms(errorMessageOBJ)
                     }
 
                 })

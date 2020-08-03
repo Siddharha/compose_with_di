@@ -16,10 +16,7 @@ import com.app.l_pesa.logout.model.ResLogout
 import com.app.l_pesa.lpk.model.*
 import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.otpview.model.ResSetOTP
-import com.app.l_pesa.pin.model.ResChangeLoginPin
-import com.app.l_pesa.pin.model.ResChangePin
-import com.app.l_pesa.pin.model.ResForgetPassword
-import com.app.l_pesa.pin.model.ResSetUpPin
+import com.app.l_pesa.pin.model.*
 import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.*
@@ -78,6 +75,9 @@ interface BaseService{
 
     @POST("forget_password")
     fun doForgetPassword(@Body request: JsonObject): Observable<ResForgetPassword>
+
+    @POST("forget_password_send_new_pin")
+    fun doForgetPasswordSms(@Body request: JsonObject): Observable<ResForgotSms>
 
     @POST("settings/change_pin")
     fun doChangePin(@Body request: JsonObject): Observable<ResChangePin>

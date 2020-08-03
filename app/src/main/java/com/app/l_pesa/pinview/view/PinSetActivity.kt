@@ -43,6 +43,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_pin_set.*
 import kotlinx.android.synthetic.main.content_pin_set.*
+import java.sql.DriverManager.println
 
 class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard, ICallBackHelp  {
 
@@ -111,11 +112,13 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
                     val jsonObjectDeviceData = JsonObject()
                     jsonObjectDeviceData.addProperty("device_id", modelDevice.post_data.device_data.device_id)
-                    jsonObjectDeviceData.addProperty("sdk", modelDevice.post_data.device_data.sdk)
+
+                    /*jsonObjectDeviceData.addProperty("sdk", modelDevice.post_data.device_data.sdk)
                     jsonObjectDeviceData.addProperty("imei", modelDevice.post_data.device_data.imei)
                     jsonObjectDeviceData.addProperty("imsi", modelDevice.post_data.device_data.imsi)
                     jsonObjectDeviceData.addProperty("simSerial_no", modelDevice.post_data.device_data.simSerial_no)
-                    jsonObjectDeviceData.addProperty("sim_operator_Name", modelDevice.post_data.device_data.sim_operator_Name)
+                    jsonObjectDeviceData.addProperty("sim_operator_Name", modelDevice.post_data.device_data.sim_operator_Name)*/
+
                     jsonObjectDeviceData.addProperty("screen_height", modelDevice.post_data.device_data.screen_height)
                     jsonObjectDeviceData.addProperty("screen_width", modelDevice.post_data.device_data.screen_width)
                     jsonObjectDeviceData.addProperty("device", modelDevice.post_data.device_data.device)
@@ -131,6 +134,7 @@ class PinSetActivity : AppCompatActivity(), ICallBackPinSet, ICallBackDashboard,
 
                     jsonObject.addProperty("phone_number", modelDevice.access_phone)
                     jsonObject.addProperty("apps_pin", pass_code_view.passCodeText.toString())
+                    jsonObject.addProperty("master_device_id", sharedPrefOBJ.uuid)
                     jsonObject.add("device_info", jsonObjectDeviceInfo)
 
                     pass_code_view.reset()

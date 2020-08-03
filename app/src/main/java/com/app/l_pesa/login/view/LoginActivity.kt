@@ -64,6 +64,7 @@ import kotlinx.android.synthetic.main.activity_login.rootLayout
 import kotlinx.android.synthetic.main.activity_login.toolbar
 import kotlinx.android.synthetic.main.activity_login.txtCountry
 import kotlinx.android.synthetic.main.activity_verify_mobile.*
+import java.sql.DriverManager.println
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
@@ -356,13 +357,27 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         dismiss()
         val sharedPrefOBJ=SharedPref(this@LoginActivity)
 
-        if(data.next_step=="next_otp")
+        if (sharedPrefOBJ.uuid == data.master_device){
+            val json = Gson().toJson(data)
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }else{
+            val json = Gson().toJson(data)
+            sharedPrefOBJ.deviceInfo      = json
+            progressDialog.setMessage("Loading...")
+            progressDialog.show()
+            startVerification(etPhone.tag.toString() + etPhone.text.toString())
+        }
+
+       /* if(data.next_step=="next_pin")
         {
-           /* val json = Gson().toJson(data)
+           *//* val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, OTPActivity::class.java)
             startActivity(intent)
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)*/
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)*//*
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
             progressDialog.setMessage("Loading...")
@@ -376,7 +391,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
-        }
+        }*/
 
     }
 

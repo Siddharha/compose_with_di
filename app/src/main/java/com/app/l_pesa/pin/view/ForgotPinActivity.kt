@@ -268,7 +268,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     override fun onSuccessResetPin(data: PinData) {
         dismiss()
         buttonRecoverPin.isClickable=true
-        if(data.next_step=="next_otp")
+        /*if(data.next_step=="next_otp")
         {
             Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_otp_via_sms),Toast.LENGTH_LONG).show()
             val sharedPrefOBJ=SharedPref(this@ForgotPinActivity)
@@ -287,7 +287,12 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
             val intent = Intent(this@ForgotPinActivity, PinSetActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }*/
+        if (data.next_step == "next_login"){
+
         }
+
+
     }
 
     override fun onErrorResetPin(message: String) {
