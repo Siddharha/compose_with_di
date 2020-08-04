@@ -6,7 +6,7 @@ import com.app.l_pesa.common.CommonStatusModel
 
 class ResForgetPassword(val status: CommonStatusModel, val data: PinData)
 
-data class PinData(val post_data: PostData, val access_phone:String, val next_step:String)
+data class PinData(val post_data: PostData, val access_phone:String,val master_device:String, val next_step:String)
 
 data class PostData(val phone_no:String,val country_code:String,val platform_type:String,val device_token:String, val device_data: DeviceData)
 

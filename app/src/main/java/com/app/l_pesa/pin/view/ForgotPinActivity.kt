@@ -40,6 +40,8 @@ import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.otpview.view.OTPActivity
 import com.app.l_pesa.pin.inter.ICallBackChangePin
+import com.app.l_pesa.pin.inter.ICallBackSms
+import com.app.l_pesa.pin.model.Data
 import com.app.l_pesa.pin.model.PinData
 import com.app.l_pesa.pin.presenter.PresenterPassword
 import com.app.l_pesa.pinview.view.PinSetActivity
@@ -51,6 +53,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.sinch.verification.*
 import kotlinx.android.synthetic.main.activity_forgot_pin.*
 import kotlinx.android.synthetic.main.activity_forgot_pin.etPhone
 import kotlinx.android.synthetic.main.activity_forgot_pin.rootLayout
@@ -68,6 +71,8 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
 
+    private lateinit var sharedPref: SharedPref
+
     private var deviceId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,6 +82,8 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@ForgotPinActivity)
+
+        sharedPref = SharedPref(this@ForgotPinActivity)
 
         initLoader()
         loadCountry()
@@ -288,11 +295,47 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }*/
-        if (data.next_step == "next_login"){
-
+        if (sharedPref.uuid == data.master_device){
+            forgotPasswordSms()
+        }else{
+            progressDialog.setMessage("Verifying...")
+            progressDialog.show()
+            startVerification(etPhone.tag.toString()+etPhone.text.toString())
         }
 
 
+    }
+
+    private fun forgotPasswordSms(){
+        val jsonObject = JsonObject()
+        val value = sharedPref.countryIsdCode + etPhone.text.toString()
+
+        jsonObject.addProperty("phone_no",value)
+        jsonObject.addProperty("master_device_id",sharedPref.uuid)
+
+        println("request is $jsonObject")
+        //Toast.makeText(this@ForgotPinActivity, "$jsonObject", Toast.LENGTH_SHORT).show()
+
+        progressDialog.show()
+
+        PresenterPassword().doForgetPasswordSms(this@ForgotPinActivity,jsonObject,object :ICallBackSms{
+            override fun onSuccessSms(data: Data) {
+                dismiss()
+                if (data.next_step == "next_login"){
+                    Toast.makeText(this@ForgotPinActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@ForgotPinActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                }
+            }
+
+            override fun onErrorSms(message: String) {
+                dismiss()
+                customSnackBarError(rootLayout,message)
+            }
+
+        })
     }
 
     override fun onErrorResetPin(message: String) {
@@ -530,6 +573,75 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
     public override fun onResume() {
         super.onResume()
         MyApplication.getInstance().trackScreenView(this@ForgotPinActivity::class.java.simpleName)
+
+    }
+
+    private fun startVerification(phone: String){
+        val config = SinchVerification.config().applicationKey("f523cf73-5e20-4813-949f-f3cdca5d2244")
+                .context(applicationContext).build()
+        val listener = MyVerificationListener()
+        val verification = SinchVerification.createFlashCallVerification(config,phone,listener)
+        verification.initiate()
+    }
+
+    inner class MyVerificationListener: VerificationListener {
+        override fun onInitiated(p0: InitiationResult?) {}
+        override fun onInitiationFailed(e: java.lang.Exception?) {
+            dismiss()
+            when (e) {
+                is InvalidInputException -> {
+                    Toast.makeText(
+                            this@ForgotPinActivity,
+                            "Incorrect number provided",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ServiceErrorException -> {
+                    Toast.makeText(this@ForgotPinActivity, "Service Error Pls try again later" + e.localizedMessage, Toast.LENGTH_LONG)
+                            .show()
+                }
+                else -> {
+                    Toast.makeText(
+                            this@ForgotPinActivity,
+                            "Other system error, check your network state",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        override fun onVerified() {
+            "success".toast(this@ForgotPinActivity)
+            forgotPasswordSms()
+        }
+
+        override fun onVerificationFailed(e: java.lang.Exception?) {
+            dismiss()
+            when (e) {
+                is CodeInterceptionException -> {
+                    Toast.makeText(
+                            this@ForgotPinActivity,
+                            "Intercepting the verification call automatically failed / " + e.getLocalizedMessage(),
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ServiceErrorException -> {
+                    Toast.makeText(this@ForgotPinActivity, "Sinch service error", Toast.LENGTH_LONG)
+                            .show()
+                }
+                else -> {
+                    Toast.makeText(
+                            this@ForgotPinActivity,
+                            "Other system error, check your network state",
+                            Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        override fun onVerificationFallback() {
+
+        }
 
     }
 }
