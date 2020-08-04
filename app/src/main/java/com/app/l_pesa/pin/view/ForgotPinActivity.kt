@@ -300,7 +300,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         }else{
             progressDialog.setMessage("Verifying...")
             progressDialog.show()
-            startVerification(etPhone.tag.toString()+etPhone.text.toString())
+            startVerification(sharedPref.countryIsdCode+etPhone.text.toString())
         }
 
 

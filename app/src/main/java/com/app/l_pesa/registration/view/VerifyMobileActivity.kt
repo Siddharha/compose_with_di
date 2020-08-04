@@ -246,8 +246,9 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
                 progressDialog.setTitle("Mobile Verification")
                 progressDialog.setMessage("Please wait...")
                 progressDialog.show()
-                println("data : " + this.etPhoneVerify.tag + etPhoneVerify.text.toString())
-                startVerification(etPhoneVerify.tag.toString() + etPhoneVerify.text.toString())
+                val sharedPref = SharedPref(this@VerifyMobileActivity)
+                println("data : " + sharedPref.countryIsdCode + etPhoneVerify.text.toString())
+                startVerification(sharedPref.countryIsdCode + etPhoneVerify.text.toString())
             }
 
         }
@@ -260,7 +261,8 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
                 progressDialog.setMessage("Verifieng Mobile No...")
                 progressDialog.show()
                 //"${etPhoneVerify.tag}${etPhoneVerify.text.toString()}".toast(this@VerifyMobileActivity)
-                startVerification( etPhoneVerify.tag.toString() + etPhoneVerify.text.toString())
+                val sharedPref = SharedPref(this@VerifyMobileActivity)
+                startVerification( sharedPref.countryIsdCode + etPhoneVerify.text.toString())
             }
 
             override fun onPermissionDenied(deniedPermissions: List<String>) {

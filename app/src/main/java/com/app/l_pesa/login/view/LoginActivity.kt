@@ -58,6 +58,8 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import com.sinch.verification.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.rootLayout
@@ -241,8 +243,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         else
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                //checkAndRequestPermissions()
-                doLoginProcess()
+                checkAndRequestPermissions()
+                //doLoginProcess()
             }
             else
             {
@@ -251,6 +253,30 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
 
         }
+    }
+
+    private fun checkPermissions(){
+        val permissionListener: PermissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {
+                progressDialog.setTitle("Mobile Verification")
+                progressDialog.setMessage("Verifieng Mobile No...")
+                progressDialog.show()
+                //"${etPhoneVerify.tag}${etPhoneVerify.text.toString()}".toast(this@VerifyMobileActivity)
+                val sharedPref = SharedPref(this@LoginActivity)
+                startVerification( sharedPref.countryIsdCode + etPhone.text.toString())
+            }
+
+            override fun onPermissionDenied(deniedPermissions: List<String>) {
+                Toast.makeText(this@LoginActivity, "Permission denied", Toast.LENGTH_SHORT)
+                        .show()
+            }
+        }
+        TedPermission.with(this@LoginActivity)
+                .setPermissionListener(permissionListener)
+                .setPermissions(
+                        Manifest.permission.READ_CALL_LOG,
+                        Manifest.permission.CALL_PHONE
+                ).check()
     }
 
     @SuppressLint("MissingPermission", "HardwareIds")
@@ -368,7 +394,10 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             sharedPrefOBJ.deviceInfo      = json
             progressDialog.setMessage("Loading...")
             progressDialog.show()
-            startVerification(etPhone.tag.toString() + etPhone.text.toString())
+            //Toast.makeText(this@LoginActivity,sharedPrefOBJ.countryIsdCode + etPhone.text.toString(), Toast.LENGTH_SHORT).show()
+            startVerification(sharedPrefOBJ.countryIsdCode + etPhone.text.toString())
+            //checkPermissions()
+
         }
 
        /* if(data.next_step=="next_pin")
@@ -426,6 +455,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         val config = SinchVerification.config().applicationKey("f523cf73-5e20-4813-949f-f3cdca5d2244")
                 .context(applicationContext).build()
         val listener = MyVerificationListener()
+        //val defaultRegion = PhoneNumberUtils.getDefaultCountryIso(this@LoginActivity)
+        //val phoneNumberInE164 = PhoneNumberUtils.formatNumberToE164(phone,defaultRegion)
         val verification = SinchVerification.createFlashCallVerification(config,phone,listener)
         verification.initiate()
     }
