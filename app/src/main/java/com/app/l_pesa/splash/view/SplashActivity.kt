@@ -1,24 +1,31 @@
 package com.app.l_pesa.splash.view
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.toast
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.splash.inter.ICallBackCountry
+import com.app.l_pesa.splash.inter.ICallBackVersion
 import com.app.l_pesa.splash.model.ResModelData
 import com.app.l_pesa.splash.presenter.PresenterCountry
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.activity_splash.rootLayout
+import kotlinx.android.synthetic.main.activity_splash.txtHeader
 
 
 class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
@@ -29,68 +36,56 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         setContentView(R.layout.activity_splash)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
-        initUI()
+        //initUI()
+        checkVersion()
 
     }
 
 
-    private fun initUI()
-    {
+    private fun initUI() {
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
 
-            if (sharedPrefOBJ.accessToken != resources.getString(R.string.init))
-            {
-                if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-                {
-                    progressBar.visibility = View.VISIBLE
-                    logoutProcess()
-                }
-                else {
-                    buttonRetry.visibility = View.VISIBLE
-                    progressBar.visibility = View.INVISIBLE
+        if (sharedPrefOBJ.accessToken != resources.getString(R.string.init)) {
+            if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
+                progressBar.visibility = View.VISIBLE
+                logoutProcess()
+            } else {
+                buttonRetry.visibility = View.VISIBLE
+                progressBar.visibility = View.INVISIBLE
 
-                    buttonRetry.setOnClickListener {
-                        if (CommonMethod.isNetworkAvailable(this@SplashActivity))
-                        {
-                            logoutProcess()
-                        } else
-                        {
-                            CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
-                        }
+                buttonRetry.setOnClickListener {
+                    if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
+                        logoutProcess()
+                    } else {
+                        CommonMethod.customSnackBarError(rootLayout!!, this@SplashActivity, resources.getString(R.string.no_internet))
                     }
                 }
+            }
 
-            }
-            else
-            {
-                loadNext()
-            }
+        } else {
+            loadNext()
+        }
 
 
     }
 
-    private fun logoutProcess()
-    {
+    private fun logoutProcess() {
         buttonRetry.visibility = View.INVISIBLE
-        val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-        val jsonObject  = JsonObject()
-        jsonObject.addProperty("device_id",deviceId)
+        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("device_id", deviceId)
 
-        val presenterLogoutObj= PresenterLogout()
-        presenterLogoutObj.doLogout(this@SplashActivity,jsonObject,this)
+        val presenterLogoutObj = PresenterLogout()
+        presenterLogoutObj.doLogout(this@SplashActivity, jsonObject, this)
     }
 
-    private fun loadNext()
-    {
+    private fun loadNext() {
 
         val sharedPrefOBJ = SharedPref(this@SplashActivity)
-        if (sharedPrefOBJ.countryList==resources.getString(R.string.init))
-        {
-            if(CommonMethod.isNetworkAvailable(this@SplashActivity))
-            {
+        if (sharedPrefOBJ.countryList == resources.getString(R.string.init)) {
+            if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
                 loadCountry()
-            }
-            else {
+            } else {
                 txtTitle.visibility = View.VISIBLE
                 txtHeader.visibility = View.VISIBLE
                 buttonRetry.visibility = View.VISIBLE
@@ -98,20 +93,16 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
                 buttonRetry.setOnClickListener {
 
-                    if (CommonMethod.isNetworkAvailable(this@SplashActivity))
-                    {
+                    if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
                         loadCountry()
-                    } else
-                    {
-                        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
+                    } else {
+                        CommonMethod.customSnackBarError(rootLayout!!, this@SplashActivity, resources.getString(R.string.no_internet))
                     }
 
                 }
             }
 
-        }
-        else
-        {
+        } else {
             progressBar.visibility = View.VISIBLE
             splashLoading()
         }
@@ -156,22 +147,20 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     override fun onEmptyCountry() {
         showSnackBar(resources.getString(R.string.no_country))
-        buttonRetry.visibility  =View.VISIBLE
-        progressBar.visibility  =View.INVISIBLE
+        buttonRetry.visibility = View.VISIBLE
+        progressBar.visibility = View.INVISIBLE
     }
 
     override fun onFailureCountry(jsonMessage: String) {
         showSnackBar(jsonMessage)
-        buttonRetry.visibility  =View.VISIBLE
-        progressBar.visibility  =View.INVISIBLE
+        buttonRetry.visibility = View.VISIBLE
+        progressBar.visibility = View.INVISIBLE
         buttonRetry.setOnClickListener {
 
-            if (CommonMethod.isNetworkAvailable(this@SplashActivity))
-            {
+            if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
                 loadCountry()
-            } else
-            {
-                CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  resources.getString(R.string.no_internet))
+            } else {
+                CommonMethod.customSnackBarError(rootLayout!!, this@SplashActivity, resources.getString(R.string.no_internet))
             }
 
         }
@@ -180,7 +169,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     private fun showSnackBar(message: String) {
         progressBar.visibility = View.INVISIBLE
-        CommonMethod.customSnackBarError(rootLayout!!,this@SplashActivity,  message)
+        CommonMethod.customSnackBarError(rootLayout!!, this@SplashActivity, message)
     }
 
 
@@ -199,13 +188,51 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         loadMain()
     }
 
-    private fun loadMain()
-    {
-        val sharedPrefOBJ= SharedPref(this@SplashActivity)
+    private fun loadMain() {
+        val sharedPrefOBJ = SharedPref(this@SplashActivity)
         sharedPrefOBJ.removeShared()
         progressBar.visibility = View.INVISIBLE
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+        finish()
+    }
+
+    private fun checkVersion() {
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("version", "1017")
+        progressBar.visibility = View.VISIBLE
+        PresenterCountry().checkVersion(this@SplashActivity, jsonObject, object : ICallBackVersion {
+            override fun onResponse(status: Boolean) {
+                progressBar.visibility = View.INVISIBLE
+                if (status) {
+                    //"$status".toast(this@SplashActivity)
+                    initUI()
+                } else {
+                   // "$status".toast(this@SplashActivity)
+                    val dialog = AlertDialog.Builder(this@SplashActivity, R.style.MyAlertDialogTheme)
+                    dialog.setCancelable(false)
+                    dialog.setTitle("Update Available")
+                    dialog.setMessage("New Version available in Play Store.")
+                            .setPositiveButton("Update Now") { _, _ ->
+                                goToPlayStore()
+                            }
+                            .setNegativeButton("Cancel") { _, _ -> finish() }
+                    dialog.show()
+                }
+            }
+
+            override fun onFailureCountry(jsonMessage: String) {
+                progressBar.visibility = View.INVISIBLE
+                CommonMethod.customSnackBarError(rootLayout!!, this@SplashActivity, jsonMessage)
+            }
+
+        })
+    }
+
+    private fun goToPlayStore() {
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = Uri.parse("https://play.google.com/store/apps/details?id=com.app.l_pesa")
+        startActivity(i)
         finish()
     }
 

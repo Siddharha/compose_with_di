@@ -22,6 +22,7 @@ import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.registration.model.*
 import com.app.l_pesa.settings.model.ResCloseAccount
 import com.app.l_pesa.splash.model.ResModelCountry
+import com.app.l_pesa.splash.model.ResVersionCheck
 import com.app.l_pesa.wallet.model.ResWalletHistory
 import com.app.l_pesa.wallet.model.ResWalletWithdrawal
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
@@ -51,6 +52,9 @@ interface BaseService{
     /**
      * ---------------
      * */
+
+    @POST("check_version")
+    fun checkVersion(@Body reqVersion: JsonObject) : Observable<ResVersionCheck>
 
     @GET("countries_list?offset=0&limit=20")
     fun getCountryList(): Observable<ResModelCountry>
