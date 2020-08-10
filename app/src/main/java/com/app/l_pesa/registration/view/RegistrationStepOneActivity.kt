@@ -143,7 +143,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         callbackManager = CallbackManager.Factory.create()
 
         btnFacebook.setOnClickListener {
-            /*LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
             LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
                     loadFbInformation(result?.accessToken)
@@ -156,7 +156,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 override fun onError(error: FacebookException?) {
                       "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
                 }
-            })*/
+            })
         }
     }
 
