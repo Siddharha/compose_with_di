@@ -333,6 +333,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             jsonObject.addProperty("phone_no",etPhone.text.toString())
             jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
             jsonObject.addProperty("platform_type","A")
+            jsonObject.addProperty("is_new_version","new")
             jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
 

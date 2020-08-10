@@ -216,6 +216,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
             val jsonObject = JsonObject()
             jsonObject.addProperty("phone_no",etPhone.text.toString())
             jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
+            jsonObject.addProperty("is_new_version","new")
             jsonObject.addProperty("platform_type","A")
             jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
 
@@ -611,7 +612,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         }
 
         override fun onVerified() {
-            "success".toast(this@ForgotPinActivity)
+           // "success".toast(this@ForgotPinActivity)
             forgotPasswordSms()
         }
 

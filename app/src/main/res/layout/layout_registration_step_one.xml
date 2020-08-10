@@ -12,7 +12,7 @@
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/txtInfo"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_85sdp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:fontFamily="@font/montserrat"

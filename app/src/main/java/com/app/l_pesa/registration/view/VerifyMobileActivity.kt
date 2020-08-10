@@ -258,7 +258,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
         val permissionListener: PermissionListener = object : PermissionListener {
             override fun onPermissionGranted() {
                 progressDialog.setTitle("Mobile Verification")
-                progressDialog.setMessage("Verifieng Mobile No...")
+                progressDialog.setMessage("Verifying Mobile No...")
                 progressDialog.show()
                 //"${etPhoneVerify.tag}${etPhoneVerify.text.toString()}".toast(this@VerifyMobileActivity)
                 val sharedPref = SharedPref(this@VerifyMobileActivity)
