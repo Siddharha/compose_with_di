@@ -238,8 +238,8 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             customSnackBarError(rootLayout, resources.getString(R.string.required_phone_email))
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                //checkAndRequestPermissions()
-                checkPermissions()
+                checkAndRequestPermissions()
+                //checkPermissions()
             } else {
                 //doForgotPinProcess()
                 //doMobileVerify()
@@ -416,7 +416,13 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             return false
         } else {
             //doForgotPinProcess()
-            doMobileVerify()
+            //doMobileVerify()
+            progressDialog.setTitle("Mobile Verification")
+            progressDialog.setMessage("Please wait...")
+            progressDialog.show()
+            val sharedPref = SharedPref(this@VerifyMobileActivity)
+            println("data : " + sharedPref.countryIsdCode + etPhoneVerify.text.toString())
+            startVerification(sharedPref.countryIsdCode + etPhoneVerify.text.toString())
         }
         return true
     }

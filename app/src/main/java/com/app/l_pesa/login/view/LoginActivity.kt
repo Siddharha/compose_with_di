@@ -255,29 +255,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         }
     }
 
-    private fun checkPermissions(){
-        val permissionListener: PermissionListener = object : PermissionListener {
-            override fun onPermissionGranted() {
-                progressDialog.setTitle("Mobile Verification")
-                progressDialog.setMessage("Verifieng Mobile No...")
-                progressDialog.show()
-                //"${etPhoneVerify.tag}${etPhoneVerify.text.toString()}".toast(this@VerifyMobileActivity)
-                val sharedPref = SharedPref(this@LoginActivity)
-                startVerification( sharedPref.countryIsdCode + etPhone.text.toString())
-            }
-
-            override fun onPermissionDenied(deniedPermissions: List<String>) {
-                Toast.makeText(this@LoginActivity, "Permission denied", Toast.LENGTH_SHORT)
-                        .show()
-            }
-        }
-        TedPermission.with(this@LoginActivity)
-                .setPermissionListener(permissionListener)
-                .setPermissions(
-                        Manifest.permission.READ_CALL_LOG,
-                        Manifest.permission.CALL_PHONE
-                ).check()
-    }
 
     @SuppressLint("MissingPermission", "HardwareIds")
     private fun doLoginProcess()
@@ -401,7 +378,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         }
 
-       /* if(data.next_step=="next_pin")
+       /* if(data.next_step=="next_pin")a
         {
            *//* val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
