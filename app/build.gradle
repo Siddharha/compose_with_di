@@ -19,8 +19,8 @@ android {
         applicationId "com.app.l_pesa"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 16
-        versionName "1.0.16"
+        versionCode 20
+        versionName "1.0.20"
 
     }
     buildTypes {
@@ -112,6 +112,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
     implementation(name:'sinch-android-verification-1.6.1', ext:'aar')
     implementation 'gun0912.ted:tedpermission:2.2.2'
+
+    implementation "com.google.android.gms:play-services-auth-api-phone:17.4.0"
 
 
 

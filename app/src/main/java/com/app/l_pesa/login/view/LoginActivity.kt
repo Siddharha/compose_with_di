@@ -243,8 +243,9 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         else
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                checkAndRequestPermissions()
-                //doLoginProcess()
+                //checkAndRequestPermissions()
+                doLoginProcess()
+                //checkPermissions()
             }
             else
             {
@@ -253,6 +254,31 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
 
         }
+    }
+
+    private fun checkPermissions(){
+        val permissionListener: PermissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {
+               /* progressDialog.setTitle("Mobile Verification")
+                progressDialog.setMessage("Verifieng Mobile No...")
+                progressDialog.show()
+                //"${etPhoneVerify.tag}${etPhoneVerify.text.toString()}".toast(this@VerifyMobileActivity)
+                val sharedPref = SharedPref(this@LoginActivity)
+                startVerification( sharedPref.countryIsdCode + etPhone.text.toString())*/
+                doLoginProcess()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: List<String>) {
+                Toast.makeText(this@LoginActivity, "Permission denied", Toast.LENGTH_SHORT)
+                        .show()
+            }
+        }
+        TedPermission.with(this@LoginActivity)
+                .setPermissionListener(permissionListener)
+                .setPermissions(
+                        Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.CALL_PHONE
+                ).check()
     }
 
 
@@ -370,11 +396,17 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         }else{
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
-            progressDialog.setMessage("Loading...")
+            progressDialog.setMessage("Verify User...")
             progressDialog.show()
-            //Toast.makeText(this@LoginActivity,sharedPrefOBJ.countryIsdCode + etPhone.text.toString(), Toast.LENGTH_SHORT).show()
-            startVerification(sharedPrefOBJ.countryIsdCode + etPhone.text.toString())
+            //println("number is " + sharedPrefOBJ.countryIsdCode+etPhone.text.toString())
+            progressDialog.dismiss()
+           /* Toast.makeText(this@LoginActivity,sharedPrefOBJ.countryIsdCode + etPhone.text.toString(), Toast.LENGTH_SHORT).show()
+            startVerification(sharedPrefOBJ.countryIsdCode + etPhone.text.toString())*/
             //checkPermissions()
+            sharedPrefOBJ.deviceInfo      = json
+            val intent = Intent(this@LoginActivity, OTPActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
         }
 

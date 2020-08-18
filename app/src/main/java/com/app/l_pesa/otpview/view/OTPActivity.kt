@@ -92,12 +92,14 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
                     jsonObjectDeviceInfo.addProperty("device_token", modelDevice.post_data.device_token)
 
                     val jsonObjectDeviceData = JsonObject()
-                    jsonObjectDeviceData.addProperty("device_id", modelDevice.post_data.device_data.device_id)
-                    jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
+                    jsonObjectDeviceData.addProperty("device_id", sharedPrefOBJ.uuid)
+
+                    /*jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
                     jsonObjectDeviceData.addProperty("imei",modelDevice.post_data.device_data.imei)
                     jsonObjectDeviceData.addProperty("imsi",modelDevice.post_data.device_data.imsi)
                     jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.post_data.device_data.simSerial_no)
-                    jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)
+                    jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)*/
+
                     jsonObjectDeviceData.addProperty("screen_height",modelDevice.post_data.device_data.screen_height)
                     jsonObjectDeviceData.addProperty("screen_width",modelDevice.post_data.device_data.screen_width)
                     jsonObjectDeviceData.addProperty("device", modelDevice.post_data.device_data.device)
@@ -193,12 +195,14 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
 
 
             val jsonObjectDeviceData = JsonObject()
-            jsonObjectDeviceData.addProperty("device_id", modelDevice.post_data.device_data.device_id)
-            jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
+            jsonObjectDeviceData.addProperty("device_id", sharedPrefOBJ.uuid)
+
+           /* jsonObjectDeviceData.addProperty("sdk",modelDevice.post_data.device_data.sdk)
             jsonObjectDeviceData.addProperty("imei",modelDevice.post_data.device_data.imei)
             jsonObjectDeviceData.addProperty("imsi",modelDevice.post_data.device_data.imsi)
             jsonObjectDeviceData.addProperty("simSerial_no",modelDevice.post_data.device_data.simSerial_no)
-            jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)
+            jsonObjectDeviceData.addProperty("sim_operator_Name",modelDevice.post_data.device_data.sim_operator_Name)*/
+
             jsonObjectDeviceData.addProperty("screen_height",modelDevice.post_data.device_data.screen_height)
             jsonObjectDeviceData.addProperty("screen_width",modelDevice.post_data.device_data.screen_width)
             jsonObjectDeviceData.addProperty("device", modelDevice.post_data.device_data.device)

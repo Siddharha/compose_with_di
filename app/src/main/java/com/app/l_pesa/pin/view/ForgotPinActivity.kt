@@ -155,7 +155,8 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         else
         {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                checkAndRequestPermissions()
+                //checkAndRequestPermissions()
+                doForgotPinProcess()
             }
             else
             {
@@ -299,9 +300,10 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
         if (sharedPref.uuid == data.master_device){
             forgotPasswordSms()
         }else{
-            progressDialog.setMessage("Verifying...")
+            /*progressDialog.setMessage("Verifying...")
             progressDialog.show()
-            startVerification(sharedPref.countryIsdCode+etPhone.text.toString())
+            startVerification(sharedPref.countryIsdCode+etPhone.text.toString())*/
+            forgotPasswordSms()
         }
 
 
