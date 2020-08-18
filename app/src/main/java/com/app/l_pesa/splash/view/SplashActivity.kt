@@ -199,7 +199,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     private fun checkVersion() {
         val jsonObject = JsonObject()
-        jsonObject.addProperty("version", "1020")
+        jsonObject.addProperty("version", "1021")
         progressBar.visibility = View.VISIBLE
         PresenterCountry().checkVersion(this@SplashActivity, jsonObject, object : ICallBackVersion {
             override fun onResponse(status: Boolean) {
