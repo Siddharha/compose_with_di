@@ -56,6 +56,8 @@ object CommonMethod {
                         result = true //2
                     } else if (hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
                         result = true  //1
+                    }else if (hasTransport(NetworkCapabilities.TRANSPORT_VPN)){
+                        result = true //3
                     }
                 }
             }
@@ -66,6 +68,8 @@ object CommonMethod {
                         result = true //2
                     } else if (type == ConnectivityManager.TYPE_MOBILE) {
                         result = true //1
+                    } else if (type == ConnectivityManager.TYPE_VPN){
+                        result = true
                     }
                 }
             }

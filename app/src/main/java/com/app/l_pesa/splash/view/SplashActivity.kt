@@ -198,6 +198,34 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     }
 
     private fun checkVersion() {
+        //
+        if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
+            checkingVersion()
+        } else {
+            txtTitle.visibility = View.VISIBLE
+            txtHeader.visibility = View.VISIBLE
+            buttonRetry.visibility = View.VISIBLE
+            progressBar.visibility = View.INVISIBLE
+
+            buttonRetry.setOnClickListener {
+                if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
+                    checkingVersion()
+                } else {
+                    CommonMethod.customSnackBarError(rootLayout!!, this@SplashActivity, resources.getString(R.string.no_internet))
+                }
+
+            }
+        }
+
+
+    }
+
+    private fun checkingVersion(){
+        //
+        txtTitle.visibility = View.INVISIBLE
+        txtHeader.visibility = View.INVISIBLE
+        buttonRetry.visibility = View.INVISIBLE
+        //
         val jsonObject = JsonObject()
         jsonObject.addProperty("version", "1021")
         progressBar.visibility = View.VISIBLE
@@ -208,7 +236,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                     //"$status".toast(this@SplashActivity)
                     initUI()
                 } else {
-                   // "$status".toast(this@SplashActivity)
+                    // "$status".toast(this@SplashActivity)
                     val dialog = AlertDialog.Builder(this@SplashActivity, R.style.MyAlertDialogTheme)
                     dialog.setCancelable(false)
                     dialog.setTitle("Update Available")
