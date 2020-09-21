@@ -154,6 +154,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 }
 
                 override fun onError(error: FacebookException?) {
+                    Log.e("response","${error?.localizedMessage}")
                       "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
                 }
             })

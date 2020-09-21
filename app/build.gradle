@@ -10,8 +10,9 @@ android {
             keyPassword 'android'
             //storeFile file('/home/cx-26/Sudipto/AndroidProject/NEW PROJECT/LPesa/l-pesa/app/KEY/lpesa.jks')
             //storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
+
             storePassword 'android'
-            storeFile file('D:\\AndroidPlusProject\\Codelogicx\\sudiptoproject\\L-pesa Project\\master\\l-pesa-android-app\\app\\KEY\\lpesa.jks')
+            storeFile file('/Users/siddharthamaji/Documents/Android_project/l-pesa-android-app/app/KEY/lpesa.jks')
         }
     }
     compileSdkVersion 29
@@ -28,7 +29,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles 'proguard-rules.pro'
-           /* debuggable true*/
+            debuggable true
             signingConfig signingConfigs.config
             proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
@@ -74,6 +75,7 @@ android {
 }
 
 dependencies {
+    
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -112,6 +114,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
     implementation(name:'sinch-android-verification-1.6.1', ext:'aar')
     implementation 'gun0912.ted:tedpermission:2.2.2'
+    implementation 'org.jetbrains.anko:anko-common:0.9'
 
     implementation "com.google.android.gms:play-services-auth-api-phone:17.4.0"
 

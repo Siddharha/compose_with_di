@@ -38,9 +38,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypeFaceSpan
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
@@ -604,6 +602,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
 
         startActivityForResult(captureIntent, requestPhoto)
+
+
     }
 
 

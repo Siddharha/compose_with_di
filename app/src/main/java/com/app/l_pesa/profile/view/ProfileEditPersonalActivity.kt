@@ -34,9 +34,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypeFaceSpan
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.adapter.MaritalListAdapter
@@ -344,7 +342,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
     }
 
     private fun cameraClick() {
-        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+       /* val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
         if (photoFile.exists()) {
@@ -363,7 +361,14 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
 
-        startActivityForResult(captureIntent, requestPhoto)
+        startActivityForResult(captureIntent, requestPhoto)*/
+
+        val intent_cam = Intent(this, CamViewActivity::class.java)
+        intent_cam.putExtra(CamUtil.CAM_FACING,1)
+        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
+        startActivityForResult(intent_cam,requestPhoto)
 
     }
 
@@ -374,15 +379,18 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
             requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK) {
-                    setImage()
+
+                    //photoFile = Compressor(this@ProfileEditPersonalActivity).compressToFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
+                   // captureFilePath = Uri.fromFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
+                    setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
                 }
 
         }
     }
 
-    private fun setImage() {
-
-        val photoPath: Uri = captureFilePath
+    private fun setImage(filepath:String) {
+        photoFile = File(filepath)
+        val photoPath: Uri = Uri.fromFile(photoFile)//captureFilePath
         try {
             if (photoPath != Uri.EMPTY) {
                 progressDialog.show()

@@ -29,9 +29,7 @@ import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
-import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CustomTypeFaceSpan
-import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.*
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import kotlinx.android.synthetic.main.nav_header_main.*
@@ -112,7 +110,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private fun initCamera() {
 
-        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+       /* val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val imagePath = File(filesDir, "images")
         photoFile = File(imagePath, "user.jpg")
         if (photoFile.exists()) {
@@ -133,7 +131,14 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
             captureIntent.putExtra("android.intent.extras.CAMERA_FACING",1)
         }
 
-        startActivityForResult(captureIntent, requestPhoto)
+        startActivityForResult(captureIntent, requestPhoto)*/
+
+        val intent_cam = Intent(this, CamViewActivity::class.java)
+        intent_cam.putExtra(CamUtil.CAM_FACING,1)
+        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
+        startActivityForResult(intent_cam,requestPhoto)
 
     }
 
@@ -143,15 +148,17 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
             requestPhoto ->
 
                 if (resultCode == Activity.RESULT_OK) {
-                    setImage()
+                   // setImage()
+                    setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
                 }
 
         }
     }
 
-    private fun setImage() {
-
-        val photoPath: Uri = captureFilePath
+    private fun setImage(filepath:String) {
+        photoFile = File(filepath)
+        //val photoPath: Uri = captureFilePath
+        val photoPath: Uri = Uri.fromFile(photoFile)//captureFilePath
         try {
             if (photoPath != Uri.EMPTY) {
                 progressDialog.show()
