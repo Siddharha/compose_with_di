@@ -40,7 +40,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".common.CamViewActivity"></activity>
+        <activity android:name=".profile.view.ProfileEditStatementInfoActivity"></activity>
+        <activity android:name=".common.CamViewActivity" />
         <activity android:name=".registration.view.EmailVerifyActivity" />
         <activity
             android:name=".registration.view.VerifyMobileActivity"

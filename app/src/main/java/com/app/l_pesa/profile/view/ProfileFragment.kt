@@ -191,6 +191,18 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             }
 
         }
+
+        imgEditStInfo.setOnClickListener {
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            {
+                startActivity(Intent(activity, ProfileEditStatementInfoActivity::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else
+            {
+                customSnackBarError(llRoot,resources.getString(R.string.please_wait))
+            }
+        }
     }
 
 

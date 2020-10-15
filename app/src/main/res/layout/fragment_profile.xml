@@ -824,7 +824,93 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/imgEditStInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?selectableItemBackgroundBorderless"
+                            android:contentDescription="@string/app_name"
+                            android:padding="@dimen/_5sdp"
+                            app:layout_constraintBottom_toTopOf="@+id/view14"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_edit_pencil_icon" />
+
+                        <com.app.l_pesa.common.CommonTextRegular
+                            android:id="@+id/textViewSt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:text="@string/Statement_info"
+                            android:textColor="@color/textColors"
+                            android:textSize="@dimen/_14sdp"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/montserrat"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view14"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/colorGreyLight"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textViewSt" />
+
+                        <com.app.l_pesa.common.CommonTextRegular
+                            android:id="@+id/tvNoOfSt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:maxLines="1"
+                            android:textColor="@color/textColors"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="normal"
+                            app:fontFamily="@font/montserrat"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view14"
+                            tools:text="No Of Statements: 0" />
+
+                        <com.app.l_pesa.common.CommonTextRegular
+                            android:id="@+id/tvLastUploaded"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginBottom="8dp"
+                            android:maxLines="1"
+                            android:textColor="@color/textColors"
+                            android:textSize="@dimen/_11sdp"
+                            android:textStyle="normal"
+                            app:fontFamily="@font/montserrat"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvNoOfSt"
+                            tools:text="Last Uploaded date: " />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
