@@ -1,6 +1,7 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
@@ -11,14 +12,15 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
@@ -36,9 +38,11 @@ import java.net.URI
 import java.util.ArrayList
 
 lateinit var captureFilePath: Uri
+private lateinit var sharedPref:SharedPref
 class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPersonalId {
     lateinit var listPersonalIdTEst:ArrayList<ResUserInfo.UserIdsPersonalInfo>
     private lateinit var personalIdAdapter:PersonalIdAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_statement_info)
@@ -46,6 +50,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this)
+        sharedPref= SharedPref(this)
         initData()
         onActionPerform()
     }
@@ -100,7 +105,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
 
     override fun onBackPressed() {
 
-        val sharedPref= SharedPref(this)
+
         if(sharedPref.profileUpdate==resources.getString(R.string.status_true))
         {
             sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
@@ -167,6 +172,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
     }
 
 
+
 }
 
 class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() {
@@ -177,7 +183,20 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() 
          super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.add_statement_bottomsheet_layout, container, false)
         onActionPerform(view)
+        loadData(view)
         return view
+    }
+
+    private fun loadData(v: View) {
+        val typs = ArrayList<String>()
+        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPref.userDashBoard, ResDashboard.Data::class.java)
+        if(userDashBoard.personalIdTypes!!.size>0)
+        {
+            for(itm in userDashBoard.personalIdTypes!!){
+                typs.add(itm.name)
+            }
+        }
+        v.spStType.adapter = ArrayAdapter<String>(activity,android.R.layout.simple_spinner_dropdown_item,typs)
     }
 
     fun onActionPerform(v:View){
@@ -232,3 +251,4 @@ private fun openPDF(activity: Activity) {
 //    startActivityForResult(Intent.createChooser(intent,"ChooseFile"), REQUEST_CODE_DOC);
 
 }
+
