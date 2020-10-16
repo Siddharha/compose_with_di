@@ -4,26 +4,25 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
-import com.app.l_pesa.profile.adapter.PersonalIdListAdapter
 import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.facebook.appevents.AppEventsConstants
@@ -46,7 +45,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_statement_info)
-        toolbar.title = "Upload Statements"
+        toolbar.title = "Statements"
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this)
@@ -56,7 +55,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
     }
 
     private fun initData() {
-
+        captureFilePath = Uri.EMPTY
         val logger = AppEventsLogger.newLogger(this)
         val params = Bundle()
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Personal Id Information")
@@ -130,6 +129,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
         when (item.itemId) {
             R.id.mnuAdd ->{
                 val bottomSheetDialog =  AddStatementBottomsheet(this)
+                captureFilePath = Uri.EMPTY
                 bottomSheetDialog.show(supportFragmentManager, "bottom_sheet_statement")
                 return true
             }
@@ -208,8 +208,23 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() 
             dismiss()
         }
         v.buttonSubmit.setOnClickListener {
-
+            if(captureFilePath == Uri.EMPTY) {
+                //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
+                showErrText("Please Upload PDF statement!")
+            } else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
+                showErrText("Please enter duration period!")
+            }
         }
+    }
+
+    private fun showErrText(s:String) {
+        val t = Toast.makeText(activity, s, Toast.LENGTH_LONG)
+        t.view.setBackgroundColor(Color.RED)
+        t.view.setPadding(10, 0, 10, 0)
+        val ttv = t.view.findViewById<TextView>(android.R.id.message)
+        ttv.setTextColor(Color.WHITE)
+        ttv.setPadding(5, 5, 5, 5)
+        t.show()
     }
 }
 
