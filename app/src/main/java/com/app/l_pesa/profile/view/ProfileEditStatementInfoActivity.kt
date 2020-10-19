@@ -2,6 +2,7 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.Color
@@ -259,6 +260,22 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    fun listPopup(context:Context,view:View,itemId:Int) {
+        val popup =  PopupMenu(context, view)
+
+        popup.menuInflater.inflate(R.menu.statement_popup_menu, popup.menu)
+
+        popup.menu.getItem(0).setOnMenuItemClickListener {
+            callDeleteAPI(itemId)
+           return@setOnMenuItemClickListener true
+        }
+        popup.show()
+    }
+
+    private fun callDeleteAPI(itemId: Int) {
+        Toast.makeText(this,"Not Implemented yet!",Toast.LENGTH_LONG).show()
+
+    }
 }
 
 class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(), ICallBackStatementUpload {
@@ -400,4 +417,6 @@ private fun openPDF(activity: Activity) {
     }
     activity.startActivityForResult(intent, 111)
 }
+
+
 

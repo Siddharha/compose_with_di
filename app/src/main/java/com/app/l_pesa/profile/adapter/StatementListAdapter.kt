@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.profile.model.statement.StatementListResponse
+import com.app.l_pesa.profile.view.ProfileEditStatementInfoActivity
 import kotlinx.android.synthetic.main.statement_list_cell.view.*
 
 
@@ -44,6 +45,9 @@ class StatementListAdapter (
                     imgVerified.visibility = View.GONE
                 }
 
+                imgMore.setOnClickListener {
+                    (context as ProfileEditStatementInfoActivity).listPopup(context,it,item.id)
+                }
                 }
 
             }
