@@ -43,8 +43,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_profile_edit_id_info.toolbar
 import kotlinx.android.synthetic.main.activity_profile_edit_statement_info.*
+import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.view.*
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import org.jetbrains.anko.contentView
 import org.jetbrains.anko.toast
 import java.io.File
 import java.net.URI
@@ -53,7 +55,7 @@ import java.util.ArrayList
 val FILE_REQUEST_CODE = 1001
 
 //lateinit var captureFilePath: Uri
-lateinit var pdfFile:File
+ var pdfFile:File?=null
 lateinit var progressDialog:ProgressDialog
 private lateinit var sharedPref:SharedPref
 lateinit var statementTyps : ArrayList<String>
@@ -61,6 +63,7 @@ lateinit var statementTypIds : ArrayList<Int>
 lateinit var  presenterStatement: PresenterStatement
 lateinit var statementList:ArrayList<StatementListResponse.Data>
 private lateinit var statementListAdapter: StatementListAdapter
+lateinit var bottomSheetDialog:AddStatementBottomsheet
 class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +83,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
 
     private fun initLoader()
     {
+        bottomSheetDialog =  AddStatementBottomsheet(this)
         progressDialog = ProgressDialog(this,R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(this.assets, "fonts/Montserrat-Regular.ttf")
@@ -128,7 +132,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         }
 
         imgAdd.setOnClickListener {
-            val bottomSheetDialog =  AddStatementBottomsheet(this)
+
             bottomSheetDialog.show(supportFragmentManager, "bottom_sheet_statement")
         }
     }
@@ -173,8 +177,6 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.mnuAdd ->{
-                val bottomSheetDialog =  AddStatementBottomsheet(this)
-                //captureFilePath = Uri.EMPTY
                 bottomSheetDialog.show(supportFragmentManager, "bottom_sheet_statement")
                 return true
             }
@@ -248,6 +250,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
                                 Intent.FLAG_GRANT_READ_URI_PERMISSION
                         )
                          pdfFile = DocumentUtils.getFile(this,documentUri)//use pdf as file
+                        bottomSheetDialog.tvFileName.text = pdfFile?.name
                     }
                 }
             }
@@ -283,16 +286,26 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
             dismiss()
         }
         v.buttonSubmit.setOnClickListener {
-            if(!pdfFile.isFile) {
-                //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
-                showErrText("Please Upload PDF statement!")
-            } else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
-                showErrText("Please enter duration period!")
-            }else{
-                progressDialog.show()
-                val presenterAWSStatement= PresenterAWSStatement()
-                presenterAWSStatement.uploadStatementFile(activity,this,pdfFile)
+            try{
+                if(pdfFile !=null){
+                    if(!pdfFile?.isFile!! && v.tvFileName.text.isNotEmpty()) {
+                        //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
+                        showErrText("Please Upload PDF statement!")
+                    } else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
+                        showErrText("Please enter duration period!")
+                    }else{
+                        progressDialog.show()
+                        val presenterAWSStatement= PresenterAWSStatement()
+                        presenterAWSStatement.uploadStatementFile(activity,this,pdfFile)
+                    }
+                }else{
+                    showErrText("Please Upload PDF statement!")
+                }
+
+            }catch (e:Exception){
+                e.printStackTrace()
             }
+
         }
 
         v.spStType.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
@@ -324,7 +337,7 @@ val jsonObject = JsonObject()
         jsonObject.addProperty("type_id",_selectedTypeId) // Static
         jsonObject.addProperty("file_name",url)
         jsonObject.addProperty("document_number","12345678")
-        jsonObject.addProperty("period","")
+        jsonObject.addProperty("period", bottomSheetDialog.etStatementPeriod.text.toString())
 //        if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
 //        {
 //            jsonObject.addProperty("id_number","")
@@ -357,6 +370,8 @@ val jsonObject = JsonObject()
         }
 
         val msg = "File added"
+        dismiss()
+        presenterStatement.doGetStatementType(activity,ProfileEditStatementInfoActivity())
     }
 
     override fun onFailureUploadStatement(string: String) {
@@ -365,7 +380,7 @@ val jsonObject = JsonObject()
         }
 
         showErrText(string)
-       // customSnackBarError(this.view!!,activity,string)
+        //customSnackBarError(contextView,activity,string)
     }
 
     override fun onUploadTimeOut(string: String) {
