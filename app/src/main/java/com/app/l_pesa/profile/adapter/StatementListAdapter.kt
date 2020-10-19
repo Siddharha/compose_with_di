@@ -46,7 +46,7 @@ class StatementListAdapter (
                 }
 
                 imgMore.setOnClickListener {
-                    (context as ProfileEditStatementInfoActivity).listPopup(context,it,item.id)
+                    (context as ProfileEditStatementInfoActivity).listPopup(context,it,item)
                 }
                 }
 

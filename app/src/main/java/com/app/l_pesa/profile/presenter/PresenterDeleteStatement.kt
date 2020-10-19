@@ -6,6 +6,7 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.inter.ICallBackStatementDelete
 import com.app.l_pesa.profile.inter.ICallBackStatementUpload
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,13 +14,13 @@ import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
 import retrofit2.HttpException
 
-class PresenterAddStatement {
+class PresenterDeleteStatement {
 
     @SuppressLint("CheckResult")
-    fun doAddStatement(contextOBJ: Context, jsonObject: JsonObject, callBackOBJ: ICallBackStatementUpload) {
+    fun doDeleteStatement(contextOBJ: Context, jsonObject: JsonObject, callBackOBJ: ICallBackStatementDelete) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doAddStatement(jsonObject)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doDeleteStatement(jsonObject)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -31,11 +32,11 @@ class PresenterAddStatement {
                     try {
                         if (response.status.isSuccess)
                         {
-                            callBackOBJ.onSucessUploadStatement()
+                            callBackOBJ.onSuccessStatementDelete()
 
                         } else
                         {
-                            callBackOBJ.onFailureUploadStatement(response.status.message)
+                            callBackOBJ.onFailureStatementDelete(response.status.message)
                         }
                     } catch (e: Exception) {
 
@@ -52,11 +53,11 @@ class PresenterAddStatement {
 
                             if(jsonStatusCode==50002)
                             {
-                                callBackOBJ.onUploadTimeOut(jsonMessage)
+                                callBackOBJ.onDeleteTimeOut(jsonMessage)
                             }
                             else
                             {
-                                callBackOBJ.onFailureUploadStatement(jsonMessage)
+                                callBackOBJ.onFailureStatementDelete(jsonMessage)
                             }
 
 
@@ -65,7 +66,7 @@ class PresenterAddStatement {
 
                     } catch (exp: Exception) {
                         val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
-                        callBackOBJ.onFailureUploadStatement(errorMessageOBJ)
+                        callBackOBJ.onFailureStatementDelete(errorMessageOBJ)
                     }
 
                 })

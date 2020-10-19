@@ -4,53 +4,42 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.provider.OpenableColumns
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
-import android.util.Log
 import android.view.*
 import android.widget.*
-import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonMethod.customSnackBarError
+import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.DocumentUtils
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
-import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.profile.adapter.StatementListAdapter
 import com.app.l_pesa.profile.inter.ICallBackStatement
+import com.app.l_pesa.profile.inter.ICallBackStatementDelete
 import com.app.l_pesa.profile.inter.ICallBackStatementUpload
-import com.app.l_pesa.profile.model.ResUserInfo
-import com.app.l_pesa.profile.model.statement.StatementAddPayload
 import com.app.l_pesa.profile.model.statement.StatementListResponse
 import com.app.l_pesa.profile.model.statement.StatementTypeResponse
 import com.app.l_pesa.profile.presenter.*
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_profile_edit_id_info.toolbar
 import kotlinx.android.synthetic.main.activity_profile_edit_statement_info.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.view.*
-import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
-import org.jetbrains.anko.contentView
-import org.jetbrains.anko.toast
 import java.io.File
-import java.net.URI
 import java.util.ArrayList
 
 val FILE_REQUEST_CODE = 1001
@@ -65,7 +54,7 @@ lateinit var  presenterStatement: PresenterStatement
 lateinit var statementList:ArrayList<StatementListResponse.Data>
 private lateinit var statementListAdapter: StatementListAdapter
 lateinit var bottomSheetDialog:AddStatementBottomsheet
-class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement {
+class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement, ICallBackStatementDelete {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_statement_info)
@@ -260,21 +249,73 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    fun listPopup(context:Context,view:View,itemId:Int) {
+    fun listPopup(context:Context,view:View,itm:StatementListResponse.Data) {
         val popup =  PopupMenu(context, view)
 
         popup.menuInflater.inflate(R.menu.statement_popup_menu, popup.menu)
 
         popup.menu.getItem(0).setOnMenuItemClickListener {
-            callDeleteAPI(itemId)
+            callDeleteAPI(itm.id)
            return@setOnMenuItemClickListener true
+        }
+        popup.menu.getItem(1).setOnMenuItemClickListener {
+            showPdf(itm.fileName)
+            return@setOnMenuItemClickListener true
         }
         popup.show()
     }
 
-    private fun callDeleteAPI(itemId: Int) {
-        Toast.makeText(this,"Not Implemented yet!",Toast.LENGTH_LONG).show()
+    private fun showPdf(fileName: String) {
+        if(!TextUtils.isEmpty(fileName))
+        {
+            if(CommonMethod.isNetworkAvailable(this))
+            {
+//                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.BUSINESS_IMAGE_URL+fileName))
+//                startActivity(browserIntent)
 
+                val intent =  Intent(Intent.ACTION_VIEW)
+
+                intent.type = "application/pdf"
+                intent.data = Uri.parse(BuildConfig.BUSINESS_IMAGE_URL+fileName)
+                startActivity(intent)
+            }
+
+
+        }
+    }
+
+    private fun callDeleteAPI(itemId: Int) {
+
+        progressDialog.show()
+        val presenterDeleteStatement = PresenterDeleteStatement()
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("user_statement_id",itemId)
+        // Static
+        presenterDeleteStatement.doDeleteStatement(this,jsonObject,this)
+        //Toast.makeText(this,"Not Implemented yet!",Toast.LENGTH_LONG).show()
+
+    }
+
+    override fun onSuccessStatementDelete() {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        presenterStatement.doGetStatementType(this,this)
+        Toast.makeText(this,"Statement Deleted",Toast.LENGTH_LONG).show()
+    }
+
+    override fun onFailureStatementDelete(string: String) {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        Toast.makeText(this,string,Toast.LENGTH_LONG).show()
+    }
+
+    override fun onDeleteTimeOut(string: String) {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        Toast.makeText(this,string,Toast.LENGTH_LONG).show()
     }
 }
 

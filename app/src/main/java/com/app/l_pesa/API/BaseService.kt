@@ -19,7 +19,7 @@ import com.app.l_pesa.otpview.model.ResSetOTP
 import com.app.l_pesa.pin.model.*
 import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
-import com.app.l_pesa.profile.model.statement.StatementAddPayload
+import com.app.l_pesa.profile.model.statement.StatementDeleteResponse
 import com.app.l_pesa.profile.model.statement.StatementAddResponse
 import com.app.l_pesa.profile.model.statement.StatementListResponse
 import com.app.l_pesa.profile.model.statement.StatementTypeResponse
@@ -32,8 +32,6 @@ import com.app.l_pesa.wallet.model.ResWalletWithdrawal
 import com.app.l_pesa.wallet.model.ResWalletWithdrawalHistory
 import com.google.gson.JsonObject
 import io.reactivex.Observable
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -90,6 +88,9 @@ interface BaseService{
 
     @POST("add_statement")
     fun doAddStatement(@Body request: JsonObject): Observable<StatementAddResponse>
+
+    @POST("delete_statement")
+    fun doDeleteStatement(@Body request: JsonObject): Observable<StatementDeleteResponse>
     //------------------------
 
     @POST("forget_password")
