@@ -1,12 +1,19 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.OpenableColumns
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.*
 import android.widget.*
@@ -15,30 +22,42 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
+import com.app.l_pesa.common.CommonMethod.customSnackBarError
+import com.app.l_pesa.common.CustomTypeFaceSpan
+import com.app.l_pesa.common.DocumentUtils
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
 import com.app.l_pesa.profile.adapter.StatementListAdapter
 import com.app.l_pesa.profile.inter.ICallBackStatement
+import com.app.l_pesa.profile.inter.ICallBackStatementUpload
 import com.app.l_pesa.profile.model.ResUserInfo
+import com.app.l_pesa.profile.model.statement.StatementAddPayload
 import com.app.l_pesa.profile.model.statement.StatementListResponse
 import com.app.l_pesa.profile.model.statement.StatementTypeResponse
-import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
-import com.app.l_pesa.profile.presenter.PresenterStatement
+import com.app.l_pesa.profile.presenter.*
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_profile_edit_id_info.toolbar
 import kotlinx.android.synthetic.main.activity_profile_edit_statement_info.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.view.*
+import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import org.jetbrains.anko.toast
 import java.io.File
 import java.net.URI
 import java.util.ArrayList
 
-lateinit var captureFilePath: Uri
+val FILE_REQUEST_CODE = 1001
+
+//lateinit var captureFilePath: Uri
+lateinit var pdfFile:File
+lateinit var progressDialog:ProgressDialog
 private lateinit var sharedPref:SharedPref
 lateinit var statementTyps : ArrayList<String>
+lateinit var statementTypIds : ArrayList<Int>
 lateinit var  presenterStatement: PresenterStatement
 lateinit var statementList:ArrayList<StatementListResponse.Data>
 private lateinit var statementListAdapter: StatementListAdapter
@@ -53,12 +72,30 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         presenterStatement = PresenterStatement()
         sharedPref= SharedPref(this)
         statementTyps = ArrayList()
+        statementTypIds = ArrayList()
+        initLoader()
         initData()
         onActionPerform()
     }
 
+    private fun initLoader()
+    {
+        progressDialog = ProgressDialog(this,R.style.MyAlertDialogStyle)
+        val message=   SpannableString(resources.getString(R.string.loading))
+        val face = Typeface.createFromAsset(this.assets, "fonts/Montserrat-Regular.ttf")
+        message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        progressDialog.isIndeterminate = true
+        progressDialog.setMessage(message)
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
+        progressDialog.setCanceledOnTouchOutside(false)
+
+    }
+
     private fun initData() {
-        captureFilePath = Uri.EMPTY
+       // captureFilePath = Uri.EMPTY
+        progressDialog.show()
         val logger = AppEventsLogger.newLogger(this)
         val params = Bundle()
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Personal Id Information")
@@ -137,7 +174,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         when (item.itemId) {
             R.id.mnuAdd ->{
                 val bottomSheetDialog =  AddStatementBottomsheet(this)
-                captureFilePath = Uri.EMPTY
+                //captureFilePath = Uri.EMPTY
                 bottomSheetDialog.show(supportFragmentManager, "bottom_sheet_statement")
                 return true
             }
@@ -146,36 +183,14 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        if (requestCode == 165) {
-            if (resultCode == RESULT_OK) {
-                val uri = intent?.data
-               // val m_data = data
-                Log.d("Hello", captureFilePath.path!!)
-         //       val fileImagePath = getRealPathFromURI(uri!!)
-             //   val type = intent.type
-
-            //    Log.d("Hello", fileImagePath + "");
-//                if (uri != null) {
-//                    var path = uri.toString()
-//                    if (path.toLowerCase().startsWith("file://")) {
-//                        // Selected file/directory path is below
-//                        path = ( File(URI.create(path))).absolutePath
-//                        Log.d("Hel", path)
-//                    }
-//
-//                }
-            } else{
-                Log.d("Hello", "Back from pick with cancel status");
-        }
-    }
-    }
-
     override fun onSuccessGetStatementType(statementTypes: List<StatementTypeResponse.Data.StatementType>) {
         if(statementTypes.isNotEmpty())
         {
+            statementTyps.clear()
+            statementTypIds.clear()
             for(itm in statementTypes){
                 statementTyps.add(itm.typeName)
+                statementTypIds.add(itm.id)
             }
 
             callStatementListAPI()
@@ -191,6 +206,10 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
     }
 
     override fun onSuccessGetStatementList(list: List<StatementListResponse.Data>) {
+
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
         statementList.addAll(list)
 
         if(statementList.isEmpty()){
@@ -202,19 +221,47 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
     }
 
     override fun onFailureGetStatementList(message: String) {
-
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
     }
 
     override fun onSessionTimeOut(message: String) {
-
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+//                101 -> {
+//                    data?.data?.also { uri ->
+//                        Log.i(TAG, "Uri: $uri")
+//                        baseAdapter?.add(ImageArray(null, null, uri.toString()))
+//                    }
+//                }
+                111 -> {
+                    data?.data?.also { documentUri ->
+                        contentResolver?.takePersistableUriPermission(
+                                documentUri,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        )
+                         pdfFile = DocumentUtils.getFile(this,documentUri)//use pdf as file
+                    }
+                }
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 
 }
 
-class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() {
+class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(), ICallBackStatementUpload {
 
     private val activity = activity
+    lateinit var _selectedTypeId:String
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.add_statement_bottomsheet_layout, container, false)
@@ -230,17 +277,31 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() 
     fun onActionPerform(v:View){
         v.btnBrowse.setOnClickListener {
             openPDF(activity)
-            v.tvFileName.text = "statement.pdf"
+            //v.tvFileName.text = pdfFile.name
         }
         v.buttonCancel.setOnClickListener {
             dismiss()
         }
         v.buttonSubmit.setOnClickListener {
-            if(captureFilePath == Uri.EMPTY) {
+            if(!pdfFile.isFile) {
                 //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
                 showErrText("Please Upload PDF statement!")
             } else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
                 showErrText("Please enter duration period!")
+            }else{
+                progressDialog.show()
+                val presenterAWSStatement= PresenterAWSStatement()
+                presenterAWSStatement.uploadStatementFile(activity,this,pdfFile)
+            }
+        }
+
+        v.spStType.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                _selectedTypeId = statementTypIds[position].toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
             }
         }
     }
@@ -255,44 +316,73 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() 
         t.show()
     }
 
+    override fun onSuccessUploadAWS(url: String) {
+//        val statementAddPayload = StatementAddPayload("1650763",url,"",_selectedTypeId)
+//
+        val presenterAddStatement = PresenterAddStatement()
+val jsonObject = JsonObject()
+        jsonObject.addProperty("type_id",_selectedTypeId) // Static
+        jsonObject.addProperty("file_name",url)
+        jsonObject.addProperty("document_number","12345678")
+        jsonObject.addProperty("period","")
+//        if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
+//        {
+//            jsonObject.addProperty("id_number","")
+//        }
+//        else
+//        {
+//            jsonObject.addProperty("id_number",etIdNumber.text.toString())
+//        }
+//
+//        jsonObject.addProperty("type_name","Personal")
+//
+//        val presenterAddProof= PresenterAddProof()
+//        presenterAddProof.doAddProof(activity!!,jsonObject,this)
+        presenterAddStatement.doAddStatement(activity,jsonObject,this)
+    }
+
+    override fun onFailureUploadAWS(string: String) {
+       if(progressDialog.isShowing){
+           progressDialog.dismiss()
+       }
+    }
+
+    override fun onProgressUploadAWS(progress: Int) {
+
+    }
+
+    override fun onSucessUploadStatement() {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+
+        val msg = "File added"
+    }
+
+    override fun onFailureUploadStatement(string: String) {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+
+        showErrText(string)
+       // customSnackBarError(this.view!!,activity,string)
+    }
+
+    override fun onUploadTimeOut(string: String) {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        val msg = string
+    }
+
 }
 
 private fun openPDF(activity: Activity) {
-
-    val filePath = File(activity.filesDir, "images")
-    val pdfFile = File(filePath, "statement.pdf")
-    if (pdfFile.exists()) {
-        pdfFile.delete()
-    } else {
-        pdfFile.parentFile!!.mkdirs()
+    val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        type = "application/pdf"
+        addCategory(Intent.CATEGORY_OPENABLE)
+        flags = flags or Intent.FLAG_GRANT_READ_URI_PERMISSION
     }
-    captureFilePath = FileProvider.getUriForFile(activity.baseContext, BuildConfig.APPLICATION_ID + ".provider", pdfFile)
-    val intent =  Intent(Intent.ACTION_GET_CONTENT)
-    intent.type = "application/pdf"
-   // intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
-   // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-   // intent.addCategory(Intent.CATEGORY_OPENABLE)
-    intent.data = captureFilePath
-    activity.startActivityForResult(intent, 165)
-
-
-
-//    val intent = Intent(Intent.ACTION_GET_CONTENT);
-//    intent.addCategory(Intent.CATEGORY_OPENABLE);
-//
-//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//        intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
-//        if (mimeTypes.length > 0) {
-//            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-//        }
-//    } else {
-//        String mimeTypesStr = "";
-//        for (String mimeType : mimeTypes) {
-//            mimeTypesStr += mimeType + "|";
-//        }
-//        intent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
-//    }
-//    startActivityForResult(Intent.createChooser(intent,"ChooseFile"), REQUEST_CODE_DOC);
-
+    activity.startActivityForResult(intent, 111)
 }
 
