@@ -19,6 +19,8 @@ import com.app.l_pesa.otpview.model.ResSetOTP
 import com.app.l_pesa.pin.model.*
 import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.profile.model.*
+import com.app.l_pesa.profile.model.statement.StatementListResponse
+import com.app.l_pesa.profile.model.statement.StatementTypeResponse
 import com.app.l_pesa.registration.model.*
 import com.app.l_pesa.settings.model.ResCloseAccount
 import com.app.l_pesa.splash.model.ResModelCountry
@@ -76,6 +78,14 @@ interface BaseService{
 
     @GET("user/dashboard")
     fun getDashboard(): Observable<ResDashboard>
+
+    //Statement section------
+    @GET("get_statement_types")
+    fun getStatementType(): Observable<StatementTypeResponse>
+
+    @GET("list_statements")
+    fun getStatementList(): Observable<StatementListResponse>
+    //------------------------
 
     @POST("forget_password")
     fun doForgetPassword(@Body request: JsonObject): Observable<ResForgetPassword>

@@ -1,13 +1,10 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,13 +15,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanplan.adapter.PersonalIdAdapter
-import com.app.l_pesa.profile.inter.ICallBackClickPersonalId
+import com.app.l_pesa.profile.adapter.StatementListAdapter
+import com.app.l_pesa.profile.inter.ICallBackStatement
 import com.app.l_pesa.profile.model.ResUserInfo
+import com.app.l_pesa.profile.model.statement.StatementListResponse
+import com.app.l_pesa.profile.model.statement.StatementTypeResponse
+import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
+import com.app.l_pesa.profile.presenter.PresenterStatement
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -38,10 +38,11 @@ import java.util.ArrayList
 
 lateinit var captureFilePath: Uri
 private lateinit var sharedPref:SharedPref
-class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPersonalId {
-    lateinit var listPersonalIdTEst:ArrayList<ResUserInfo.UserIdsPersonalInfo>
-    private lateinit var personalIdAdapter:PersonalIdAdapter
-
+lateinit var statementTyps : ArrayList<String>
+lateinit var  presenterStatement: PresenterStatement
+lateinit var statementList:ArrayList<StatementListResponse.Data>
+private lateinit var statementListAdapter: StatementListAdapter
+class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_statement_info)
@@ -49,7 +50,9 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this)
+        presenterStatement = PresenterStatement()
         sharedPref= SharedPref(this)
+        statementTyps = ArrayList()
         initData()
         onActionPerform()
     }
@@ -61,20 +64,25 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Personal Id Information")
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
-        listPersonalIdTEst = ArrayList()
-        val sharedPrefOBJ = SharedPref(this)
-        val profileInfo = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
-        listPersonalIdTEst.clear()
+        statementList = ArrayList()
+        //val sharedPrefOBJ = SharedPref(this)
+       // val profileInfo = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        statementList.clear()
 
-        if (profileInfo.userIdsPersonalInfo!!.size > 0) {
+      //  if (profileInfo.userIdsPersonalInfo!!.size > 0) {
             cvNoItm.visibility = View.GONE
-            listPersonalIdTEst.addAll(profileInfo.userIdsPersonalInfo!!)
-            personalIdAdapter = PersonalIdAdapter(this, listPersonalIdTEst, this)
+            //statementList.addAll(profileInfo.userIdsPersonalInfo!!)
+            statementListAdapter = StatementListAdapter(statementList, this, R.layout.statement_list_cell)
             rlStatements.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-            rlStatements.adapter = personalIdAdapter
-        }else{
-            cvNoItm.visibility = View.VISIBLE
-        }
+            rlStatements.adapter = statementListAdapter
+//        }else{
+//            cvNoItm.visibility = View.VISIBLE
+//        }
+
+        //load data from API ----//
+        presenterStatement.doGetStatementType(this,this)
+        //------End-----------//
+
     }
     private fun onActionPerform() {
         toolbar.setNavigationOnClickListener {
@@ -163,14 +171,43 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
     }
     }
 
-    override fun onClickIdList(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, position: Int, it: View) {
-        TODO("Not yet implemented")
+    override fun onSuccessGetStatementType(statementTypes: List<StatementTypeResponse.Data.StatementType>) {
+        if(statementTypes.isNotEmpty())
+        {
+            for(itm in statementTypes){
+                statementTyps.add(itm.typeName)
+            }
+
+            callStatementListAPI()
+        }
     }
 
-    override fun onSelectIdType(id: Int, name: String, type: String) {
-        TODO("Not yet implemented")
+    private fun callStatementListAPI() {
+        presenterStatement.doGetStatementList(this,this)
     }
 
+    override fun onFailureGetStatementType(message: String) {
+
+    }
+
+    override fun onSuccessGetStatementList(list: List<StatementListResponse.Data>) {
+        statementList.addAll(list)
+
+        if(statementList.isEmpty()){
+            cvNoItm.visibility = View.VISIBLE
+        }else{
+            cvNoItm.visibility = View.GONE
+        }
+        statementListAdapter.notifyDataSetChanged()
+    }
+
+    override fun onFailureGetStatementList(message: String) {
+
+    }
+
+    override fun onSessionTimeOut(message: String) {
+
+    }
 
 
 }
@@ -178,7 +215,6 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackClickPers
 class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() {
 
     private val activity = activity
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.add_statement_bottomsheet_layout, container, false)
@@ -187,16 +223,8 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() 
         return view
     }
 
-    private fun loadData(v: View) {
-        val typs = ArrayList<String>()
-        val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPref.userDashBoard, ResDashboard.Data::class.java)
-        if(userDashBoard.personalIdTypes!!.size>0)
-        {
-            for(itm in userDashBoard.personalIdTypes!!){
-                typs.add(itm.name)
-            }
-        }
-        v.spStType.adapter = ArrayAdapter<String>(activity,android.R.layout.simple_spinner_dropdown_item,typs)
+    private fun loadData(v:View) {
+        v.spStType.adapter = ArrayAdapter<String>(activity,android.R.layout.simple_spinner_dropdown_item,statementTyps)
     }
 
     fun onActionPerform(v:View){
@@ -226,6 +254,7 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment() 
         ttv.setPadding(5, 5, 5, 5)
         t.show()
     }
+
 }
 
 private fun openPDF(activity: Activity) {
