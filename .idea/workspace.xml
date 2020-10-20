@@ -11,12 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/StatementListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/StatementListAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackStatementDelete.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackStatementDelete.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/presenter/PresenterDeleteStatement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/presenter/PresenterDeleteStatement.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/statement_list_cell.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/statement_list_cell.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit_statement_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit_statement_info.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/add_statement_bottomsheet_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/add_statement_bottomsheet_layout.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603123785062</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="statement upload module p-4">
+      <created>1603173356241</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1603173356242</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -332,7 +338,8 @@
     <MESSAGE value="statement upload module p-1" />
     <MESSAGE value="statement upload module p-2" />
     <MESSAGE value="statement upload module p-3" />
-    <option name="LAST_COMMIT_MESSAGE" value="statement upload module p-3" />
+    <MESSAGE value="statement upload module p-4" />
+    <option name="LAST_COMMIT_MESSAGE" value="statement upload module p-4" />
   </component>
   <component name="WindowStateProjectService">
     <state x="245" y="161" key="#PSD" timestamp="1600428006398">
@@ -368,34 +375,34 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1603172728251" />
-    <state x="339" y="24" key="CommitChangelistDialog2" timestamp="1603123784671">
+    <state x="339" y="24" key="CommitChangelistDialog2" timestamp="1603173355743">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="24" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1603123784671" />
-    <state width="538" height="511" key="DebuggerActiveHint" timestamp="1603114188738">
+    <state x="339" y="24" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1603173355743" />
+    <state width="538" height="511" key="DebuggerActiveHint" timestamp="1603176872889">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="538" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1603114188738" />
-    <state width="1398" height="304" key="GridCell.Tab.0.bottom" timestamp="1603172800493">
+    <state width="538" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1603176872889" />
+    <state width="1398" height="304" key="GridCell.Tab.0.bottom" timestamp="1603176745447">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.bottom/0.23.1440.797@0.23.1440.797" timestamp="1600434886239" />
-    <state width="1398" height="304" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1603172800493" />
-    <state width="1398" height="304" key="GridCell.Tab.0.center" timestamp="1603172800492">
+    <state width="1398" height="304" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1603176745447" />
+    <state width="1398" height="304" key="GridCell.Tab.0.center" timestamp="1603176745447">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.center/0.23.1440.797@0.23.1440.797" timestamp="1600434886238" />
-    <state width="1398" height="304" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1603172800492" />
-    <state width="1398" height="304" key="GridCell.Tab.0.left" timestamp="1603172800492">
+    <state width="1398" height="304" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1603176745447" />
+    <state width="1398" height="304" key="GridCell.Tab.0.left" timestamp="1603176745446">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.left/0.23.1440.797@0.23.1440.797" timestamp="1600434886237" />
-    <state width="1398" height="304" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1603172800492" />
-    <state width="1398" height="304" key="GridCell.Tab.0.right" timestamp="1603172800493">
+    <state width="1398" height="304" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1603176745446" />
+    <state width="1398" height="304" key="GridCell.Tab.0.right" timestamp="1603176745447">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.right/0.23.1440.797@0.23.1440.797" timestamp="1600434886239" />
-    <state width="1398" height="304" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1603172800493" />
+    <state width="1398" height="304" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1603176745447" />
     <state x="430" y="144" key="MultipleFileMergeDialog" timestamp="1600239302821">
       <screen x="0" y="23" width="1440" height="797" />
     </state>
@@ -404,10 +411,10 @@
       <screen x="0" y="23" width="1440" height="797" />
     </state>
     <state x="221" y="60" key="SettingsEditor/0.23.1440.797@0.23.1440.797" timestamp="1600329454828" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1603123786341">
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1603173359182">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1603123786341" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1603173359182" />
     <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1603168918024">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -473,12 +480,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>399</line>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>455</line>
+          <line>463</line>
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -488,12 +490,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>424</line>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>372</line>
+          <line>378</line>
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -513,22 +510,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>435</line>
+          <line>442</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>309</line>
+          <line>312</line>
           <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>217</line>
+          <line>220</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
-          <line>223</line>
+          <line>226</line>
           <option name="timeStamp" value="113" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -545,6 +542,11 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/StatementListAdapter.kt</url>
           <line>46</line>
           <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt</url>
+          <line>426</line>
+          <option name="timeStamp" value="117" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

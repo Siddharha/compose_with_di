@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="No Statement Uploaded yet. Add one by tapping + button."
                     android:textAlignment="center"
-                    android:textSize="@dimen/_18sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:textStyle="bold" />
 
                 <ImageButton

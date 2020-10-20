@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/ccMain"
     android:layout_height="wrap_content">
 
     <com.app.l_pesa.common.CommonTextRegular
@@ -127,18 +128,43 @@
             </LinearLayout>
 
             <com.app.l_pesa.common.CommonInputLayout
-                android:id="@+id/ilIdNumber"
+                android:id="@+id/ilDocNo"
                 style="@style/customInputLayoutStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@+id/view3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/llUpload">
+
+                <com.app.l_pesa.common.CommonEditTextRegular
+                    android:id="@+id/etDocNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.#- "
+                    android:fontFamily="@font/montserrat"
+                    android:hint="Document Number"
+                    android:inputType="text|textNoSuggestions"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:textSize="@dimen/_12sdp" />
+            </com.app.l_pesa.common.CommonInputLayout>
+
+            <com.app.l_pesa.common.CommonInputLayout
+                android:id="@+id/ilIdNumber"
+                style="@style/customInputLayoutStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/view3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ilDocNo">
 
                 <com.app.l_pesa.common.CommonEditTextRegular
                     android:id="@+id/etStatementPeriod"

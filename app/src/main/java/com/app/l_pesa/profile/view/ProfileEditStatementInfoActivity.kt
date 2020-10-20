@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonMethod.customSnackBarError
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.DocumentUtils
 import com.app.l_pesa.common.SharedPref
@@ -35,10 +36,12 @@ import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.activity_profile_edit_id_info.toolbar
 import kotlinx.android.synthetic.main.activity_profile_edit_statement_info.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.view.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.File
 import java.util.ArrayList
 
@@ -358,9 +361,12 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
                     if(!pdfFile?.isFile!! && v.tvFileName.text.isNotEmpty()) {
                         //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
                         showErrText("Please Upload PDF statement!")
-                    } else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
+                    }else if(v.etDocNo.text?.isEmpty()!!){
+                        showErrText("Please enter Document Number period!")
+                    }
+                    else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
                         showErrText("Please enter duration period!")
-                    }else{
+                    } else{
                         progressDialog.show()
                         val presenterAWSStatement= PresenterAWSStatement()
                         presenterAWSStatement.uploadStatementFile(activity,this,pdfFile)
@@ -403,7 +409,7 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
 val jsonObject = JsonObject()
         jsonObject.addProperty("type_id",_selectedTypeId) // Static
         jsonObject.addProperty("file_name",url)
-        jsonObject.addProperty("document_number","12345678")
+        jsonObject.addProperty("document_number", bottomSheetDialog.etDocNo.text.toString())
         jsonObject.addProperty("period", bottomSheetDialog.etStatementPeriod.text.toString())
 //        if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
 //        {
@@ -425,6 +431,7 @@ val jsonObject = JsonObject()
        if(progressDialog.isShowing){
            progressDialog.dismiss()
        }
+
     }
 
     override fun onProgressUploadAWS(progress: Int) {
@@ -455,6 +462,7 @@ val jsonObject = JsonObject()
             progressDialog.dismiss()
         }
         val msg = string
+       showErrText(string)
     }
 
 }
