@@ -38,7 +38,7 @@ class StatementListAdapter (
             with(itemView){
                 tvName.text = item.typeName
                 tvFile.text = item.fileName
-                tvLastCreated.text = item.created
+                tvLastCreated.text = "Uploaded on : ${item.created}"
 
                 if (item.verified ==1){
                     imgVerified.setBackgroundResource(R.drawable.ic_approved_icon)

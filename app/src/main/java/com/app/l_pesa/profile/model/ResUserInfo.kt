@@ -37,6 +37,10 @@ class ResUserInfo {
         @Expose
         var userIdsBusinessInfo: ArrayList<UserIdsBusinessInfo>? = null
 
+        @SerializedName("total_statements")
+        @Expose
+        var totalStatements: Int?=0
+
     }
 
     inner class Status {

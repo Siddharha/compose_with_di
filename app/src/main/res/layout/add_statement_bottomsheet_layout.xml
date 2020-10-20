@@ -1,88 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/ccMain"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.app.l_pesa.common.CommonTextRegular
-        android:id="@+id/commonTextRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Upload Statement"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="@dimen/_4sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/commonTextRegular"
-        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/_3sdp">
 
-            <View
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:background="@color/divider_color"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <com.app.l_pesa.common.CommonTextRegular
+                android:id="@+id/commonTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Upload Statement"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:id="@+id/commonInputLayout2"
                 style="@style/customInputLayoutStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/ilIdNumber"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/commonTextRegular">
+
                 <com.app.l_pesa.common.CommonTextRegular
                     android:id="@+id/hggh"
-                    android:gravity="left|center_vertical"
-                    android:layout_weight="1"
-                    android:textAlignment="gravity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:fontFamily="@font/montserrat"
+                    android:gravity="left|center_vertical"
                     android:hint="Statement Type: "
                     android:inputType="text|textNoSuggestions"
                     android:maxLength="20"
                     android:maxLines="1"
+                    android:textAlignment="gravity"
                     android:textSize="@dimen/_12sdp" />
+
                 <Spinner
                     android:id="@+id/spStType"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:entries="@array/statement_list"
-                    tools:listitem="@layout/support_simple_spinner_dropdown_item"
 
-                    android:layout_height="wrap_content"/>
+                    tools:listitem="@layout/support_simple_spinner_dropdown_item" />
             </LinearLayout>
 
             <LinearLayout
@@ -146,6 +124,7 @@
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.#- "
                     android:fontFamily="@font/montserrat"
                     android:hint="Document Number"
+                    android:imeOptions="actionNext"
                     android:inputType="text|textNoSuggestions"
                     android:maxLength="20"
                     android:maxLines="1"
@@ -160,8 +139,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/view3"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ilDocNo">
@@ -183,27 +161,28 @@
                 android:id="@+id/textView10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:drawablePadding="@dimen/_2sdp"
                 android:fontFamily="@font/montserrat"
                 android:lineSpacingExtra="@dimen/_1sdp"
                 android:text="Please add statement period correctly"
                 android:textColor="@color/colorGreyDeep"
                 android:textSize="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/textView11"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/imageView11"
-                app:layout_constraintTop_toTopOf="@+id/view3"
+                app:layout_constraintTop_toBottomOf="@+id/ilIdNumber"
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <com.app.l_pesa.common.CommonTextRegular
                 android:id="@+id/textView11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:drawablePadding="@dimen/_2sdp"
                 android:fontFamily="@font/montserrat"
                 android:lineSpacingExtra="@dimen/_1sdp"
@@ -220,8 +199,8 @@
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_27sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/ripple_green_button"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/submit"
@@ -231,24 +210,23 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonCancel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toBottomOf="@+id/textView11"
+                app:layout_constraintVertical_bias="0.0" />
 
             <com.app.l_pesa.common.CustomButtonRegular
                 android:id="@+id/buttonCancel"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_27sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:background="@drawable/bg_grey_view"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/cancel"
                 android:textAllCaps="true"
                 android:textColor="@color/colorGreyDeep"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonSubmit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/buttonSubmit"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toTopOf="@+id/buttonSubmit" />
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -274,5 +252,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

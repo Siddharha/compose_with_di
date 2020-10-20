@@ -1,6 +1,7 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
 import android.view.*
 import android.widget.*
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -77,6 +79,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
     private fun initLoader()
     {
         bottomSheetDialog =  AddStatementBottomsheet(this)
+
         progressDialog = ProgressDialog(this,R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(this.assets, "fonts/Montserrat-Regular.ttf")
@@ -259,6 +262,10 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
 
         popup.menuInflater.inflate(R.menu.statement_popup_menu, popup.menu)
 
+        if(itm.verified==1){
+            popup.menu.getItem(0).isVisible = false
+        }
+
         popup.menu.getItem(0).setOnMenuItemClickListener {
             callDeleteAPI(itm.id)
            return@setOnMenuItemClickListener true
@@ -335,9 +342,11 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
 
     private val activity = activity
     lateinit var _selectedTypeId:String
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.add_statement_bottomsheet_layout, container, false)
+
         onActionPerform(view)
         loadData(view)
         return view

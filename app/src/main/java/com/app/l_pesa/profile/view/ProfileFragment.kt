@@ -352,6 +352,9 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             }
         }
 
+        //Statement info
+        tvNoOfSt.text = "No of uploaded statements: ${data.totalStatements}"
+
 
         /*Contact Information*/
 

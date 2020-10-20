@@ -868,6 +868,7 @@
                             android:layout_height="1dp"
                             android:layout_marginStart="13dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginEnd="13dp"
                             android:background="@color/colorGreyLight"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -877,26 +878,9 @@
                             android:id="@+id/tvNoOfSt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:maxLines="1"
-                            android:textColor="@color/textColors"
-                            android:textSize="@dimen/_11sdp"
-                            android:textStyle="normal"
-                            app:fontFamily="@font/montserrat"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/view14"
-                            tools:text="No Of Statements: 0" />
-
-                        <com.app.l_pesa.common.CommonTextRegular
-                            android:id="@+id/tvLastUploaded"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="13dp"
                             android:layout_marginBottom="8dp"
                             android:maxLines="1"
                             android:textColor="@color/textColors"
@@ -906,8 +890,9 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvNoOfSt"
-                            tools:text="Last Uploaded date: " />
+                            app:layout_constraintTop_toBottomOf="@id/view14"
+                            tools:text="No of Statements: 0" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
