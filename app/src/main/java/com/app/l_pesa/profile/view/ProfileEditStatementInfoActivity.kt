@@ -202,6 +202,8 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         if(progressDialog.isShowing){
             progressDialog.dismiss()
         }
+
+        statementList.clear()
         statementList.addAll(list)
 
         if(statementList.isEmpty()){
@@ -289,7 +291,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         progressDialog.show()
         val presenterDeleteStatement = PresenterDeleteStatement()
         val jsonObject = JsonObject()
-        jsonObject.addProperty("user_statement_id",itemId)
+        jsonObject.addProperty("user_statement_id",itemId.toString())
         // Static
         presenterDeleteStatement.doDeleteStatement(this,jsonObject,this)
         //Toast.makeText(this,"Not Implemented yet!",Toast.LENGTH_LONG).show()
@@ -309,6 +311,13 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
             progressDialog.dismiss()
         }
         Toast.makeText(this,string,Toast.LENGTH_LONG).show()
+    }
+
+    override fun isFailureStatementDelete(bool: Boolean) {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        Toast.makeText(this,"Unable to delete",Toast.LENGTH_LONG).show()
     }
 
     override fun onDeleteTimeOut(string: String) {
@@ -428,8 +437,8 @@ val jsonObject = JsonObject()
         }
 
         val msg = "File added"
+        presenterStatement.doGetStatementList(activity,activity as ProfileEditStatementInfoActivity)
         dismiss()
-        presenterStatement.doGetStatementType(activity,ProfileEditStatementInfoActivity())
     }
 
     override fun onFailureUploadStatement(string: String) {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.l_pesa.R
 import com.app.l_pesa.profile.model.statement.StatementListResponse
 import com.app.l_pesa.profile.view.ProfileEditStatementInfoActivity
 import kotlinx.android.synthetic.main.statement_list_cell.view.*
@@ -40,9 +41,10 @@ class StatementListAdapter (
                 tvLastCreated.text = item.created
 
                 if (item.verified ==1){
-                    imgVerified.visibility = View.VISIBLE
+                    imgVerified.setBackgroundResource(R.drawable.ic_approved_icon)
                 }else{
-                    imgVerified.visibility = View.GONE
+
+                    imgVerified.setBackgroundResource(R.drawable.ic_loan_pending)
                 }
 
                 imgMore.setOnClickListener {

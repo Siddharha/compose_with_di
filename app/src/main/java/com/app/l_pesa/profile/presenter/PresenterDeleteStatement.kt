@@ -36,7 +36,7 @@ class PresenterDeleteStatement {
 
                         } else
                         {
-                            callBackOBJ.onFailureStatementDelete(response.status.message)
+                            callBackOBJ.isFailureStatementDelete(response.status.isSuccess)
                         }
                     } catch (e: Exception) {
 
