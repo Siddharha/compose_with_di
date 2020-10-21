@@ -218,6 +218,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
             cvNoItm.visibility = View.GONE
         }
         statementListAdapter.notifyDataSetChanged()
+
     }
 
     override fun onFailureGetStatementList(message: String) {
@@ -314,6 +315,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         }
         presenterStatement.doGetStatementType(this,this)
         Toast.makeText(this,"Statement Deleted",Toast.LENGTH_LONG).show()
+        sharedPref.profileUpdate=resources.getString(R.string.status_true)
     }
 
     override fun onFailureStatementDelete(string: String) {
@@ -454,6 +456,7 @@ val jsonObject = JsonObject()
 
         val msg = "File added"
         presenterStatement.doGetStatementList(activity,activity as ProfileEditStatementInfoActivity)
+        sharedPref.profileUpdate=resources.getString(R.string.status_true)
         dismiss()
     }
 

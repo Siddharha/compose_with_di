@@ -178,7 +178,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         }
 
-        imgEditIdInfo.setOnClickListener {
+        cvIdInfo.setOnClickListener {
 
             if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
@@ -192,7 +192,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         }
 
-        imgEditStInfo.setOnClickListener {
+        cvStatementInfo.setOnClickListener {
             if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
             {
                 startActivity(Intent(activity, ProfileEditStatementInfoActivity::class.java))

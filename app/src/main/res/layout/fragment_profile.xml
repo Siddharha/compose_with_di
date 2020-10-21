@@ -666,6 +666,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvIdInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -696,6 +697,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
+                            android:visibility="gone"
                             android:id="@+id/imgEditIdInfo"
                             android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
@@ -824,7 +826,9 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cvStatementInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -845,7 +849,8 @@
                             app:layout_constraintBottom_toTopOf="@+id/view14"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_edit_pencil_icon" />
+                            app:srcCompat="@drawable/ic_edit_pencil_icon"
+                            android:visibility="gone" />
 
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/textViewSt"
