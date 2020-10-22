@@ -16,6 +16,7 @@ import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
 import android.view.*
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +44,7 @@ import kotlinx.android.synthetic.main.activity_profile_edit_id_info.toolbar
 import kotlinx.android.synthetic.main.activity_profile_edit_statement_info.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.view.*
+import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.File
 import java.util.ArrayList
@@ -268,9 +270,25 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         }
 
         popup.menu.getItem(0).setOnMenuItemClickListener {
-            progressDialog.show()
-            val presenterAWSStatement = PresenterAWSStatement()
-            presenterAWSStatement.deleteStatementAWS(this,this,itm.fileName,itm.id)
+            if(CommonMethod.isNetworkAvailable(this))
+            {
+                val alertDialog = AlertDialog.Builder(this,R.style.MyAlertDialogTheme)
+                alertDialog.setTitle(resources.getString(R.string.app_name))
+                alertDialog.setMessage("Are you sure to delete this statement?")
+                alertDialog.setPositiveButton("Delete") { _, _ ->
+                    progressDialog.show()
+                    val presenterAWSStatement = PresenterAWSStatement()
+                    presenterAWSStatement.deleteStatementAWS(this,this,itm.fileName,itm.id)
+                }
+                alertDialog.setNegativeButton("Dismiss"){dialod,_->
+                    dialod.dismiss()
+                }
+
+                alertDialog.show()
+            }else{
+                CommonMethod.customSnackBarError(rootLayout,this,resources.getString(R.string.no_internet))
+            }
+
 
            return@setOnMenuItemClickListener true
         }
