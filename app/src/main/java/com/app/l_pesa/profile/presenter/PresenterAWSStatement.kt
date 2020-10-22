@@ -15,10 +15,13 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.inter.ICallBackStatementDelete
 import com.app.l_pesa.profile.inter.ICallBackStatementUpload
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.onComplete
 import java.io.File
 
 
@@ -53,8 +56,8 @@ class PresenterAWSStatement {
 
         try {
             val uploadObserver = transferUtility.upload(
-                    BuildConfig.AWS_BUCKET + "/uploads/business",
-                    "a_per_$userId$getTIME.PDF",
+                    BuildConfig.AWS_BUCKET + "/uploads/statements",
+                    "a_st_$userId$getTIME.PDF",
                     stFile,
                     CannedAccessControlList.PublicRead
             )
@@ -90,29 +93,39 @@ class PresenterAWSStatement {
     }
 
 
-//    fun deletePersonalAWS(ctxOBJ: Context, fileName: String)
-//    {
-//
-//        try {
-//            val cachingCredentialsProvider = CognitoCachingCredentialsProvider(
-//                    ctxOBJ,
-//                    BuildConfig.AWS_PULL, // Identity Pool ID
-//                    Regions.EU_CENTRAL_1
-//            )
-//
-//            s3Client    = AmazonS3Client(cachingCredentialsProvider)
-//
-//            s3Client!!.deleteObject(DeleteObjectRequest(BuildConfig.AWS_BUCKET+"/uploads/business",fileName))
-//        } catch (e: AmazonServiceException) {
-//            // The call was transmitted successfully, but Amazon S3 couldn't process
-//            // it, so it returned an error response.
-//            e.printStackTrace()
-//        } catch (e: Exception) {
-//            // Amazon S3 couldn't be contacted for a response, or the client
-//            // couldn't parse the response from Amazon S3.
-//            e.printStackTrace()
-//        }
-//
-//
-//    }
+    fun deleteStatementAWS(ctxOBJ: Context, callBack: ICallBackStatementDelete, fileName: String,id:Int)
+    {
+
+        try {
+            val cachingCredentialsProvider = CognitoCachingCredentialsProvider(
+                    ctxOBJ,
+                    BuildConfig.AWS_PULL, // Identity Pool ID
+                    Regions.EU_CENTRAL_1
+            )
+
+
+            s3Client    = AmazonS3Client(cachingCredentialsProvider)
+            s3Client!!.setRegion(Region.getRegion(Regions.EU_CENTRAL_1))
+
+            doAsync {
+                s3Client?.deleteObject(DeleteObjectRequest(BuildConfig.AWS_BUCKET+"/uploads/statements",fileName))
+                callBack.onSuccessDeleteAWS(id)
+            }
+
+
+
+        } catch (e: AmazonServiceException) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace()
+            callBack.onFailureDeleteAWS(e.errorMessage)
+        } catch (e: Exception) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace()
+            callBack.onFailureDeleteAWS(e.message!!)
+        }
+
+
+    }
 }

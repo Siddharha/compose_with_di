@@ -268,7 +268,10 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         }
 
         popup.menu.getItem(0).setOnMenuItemClickListener {
-            callDeleteAPI(itm.id)
+            progressDialog.show()
+            val presenterAWSStatement = PresenterAWSStatement()
+            presenterAWSStatement.deleteStatementAWS(this,this,itm.fileName,itm.id)
+
            return@setOnMenuItemClickListener true
         }
         popup.menu.getItem(1).setOnMenuItemClickListener {
@@ -289,7 +292,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
                 val intent =  Intent(Intent.ACTION_VIEW)
 
                 intent.type = "application/pdf"
-                intent.data = Uri.parse(BuildConfig.BUSINESS_IMAGE_URL+fileName)
+                intent.data = Uri.parse(BuildConfig.STATEMENT_PDF_URL+fileName)
                 startActivity(intent)
             }
 
@@ -299,7 +302,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
 
     private fun callDeleteAPI(itemId: Int) {
 
-        progressDialog.show()
+
         val presenterDeleteStatement = PresenterDeleteStatement()
         val jsonObject = JsonObject()
         jsonObject.addProperty("user_statement_id",itemId.toString())
@@ -337,6 +340,21 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
             progressDialog.dismiss()
         }
         Toast.makeText(this,string,Toast.LENGTH_LONG).show()
+    }
+
+    override fun onSuccessDeleteAWS(id:Int) {
+
+        runOnUiThread {
+            callDeleteAPI(id)
+        }
+
+    }
+
+    override fun onFailureDeleteAWS(string: String) {
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+       customSnackBarError(window.decorView,this,string)
     }
 }
 
