@@ -516,7 +516,7 @@
     <string name="mobile_verification_title">Enter your mobile number and continue.</string>
     <string name="verification_code_one">Enter Verification Code</string>
     <string name="Statement_info">Statement Information</string>
-    <string name="upload_pdf_statement">Please Upload correct pdf statement here</string>
+    <string name="upload_pdf_statement">Please Upload correct pdf statement file.</string>
 
 
     <!--test items-->

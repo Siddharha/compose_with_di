@@ -58,8 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:entries="@array/statement_list"
-
+                    tools:entries="@array/statement_list"
                     tools:listitem="@layout/support_simple_spinner_dropdown_item" />
             </LinearLayout>
 
@@ -126,7 +125,8 @@
                     android:hint="Document Number"
                     android:imeOptions="actionNext"
                     android:inputType="text|textNoSuggestions"
-                    android:maxLength="20"
+                    android:maxLength="50"
+                    android:singleLine="true"
                     android:maxLines="1"
                     android:textSize="@dimen/_12sdp" />
             </com.app.l_pesa.common.CommonInputLayout>
@@ -151,8 +151,9 @@
                     android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.#- "
                     android:fontFamily="@font/montserrat"
                     android:hint="Statement Period"
+                    android:singleLine="true"
                     android:inputType="text|textNoSuggestions"
-                    android:maxLength="20"
+                    android:maxLength="50"
                     android:maxLines="1"
                     android:textSize="@dimen/_12sdp" />
             </com.app.l_pesa.common.CommonInputLayout>
@@ -167,7 +168,7 @@
                 android:drawablePadding="@dimen/_2sdp"
                 android:fontFamily="@font/montserrat"
                 android:lineSpacingExtra="@dimen/_1sdp"
-                android:text="Please add statement period correctly"
+                android:text="Please add document number and statement period of statement file."
                 android:textColor="@color/colorGreyDeep"
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"

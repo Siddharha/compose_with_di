@@ -128,7 +128,6 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         }
 
         imgAdd.setOnClickListener {
-
             bottomSheetDialog.show(supportFragmentManager, "bottom_sheet_statement")
         }
     }
@@ -173,6 +172,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.mnuAdd ->{
+
                 bottomSheetDialog.show(supportFragmentManager, "bottom_sheet_statement")
                 return true
             }
@@ -374,6 +374,7 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
 
     private fun loadData(v:View) {
         v.spStType.adapter = ArrayAdapter<String>(activity,android.R.layout.simple_spinner_dropdown_item,statementTyps)
+
     }
 
     fun onActionPerform(v:View){
@@ -386,8 +387,8 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
         }
         v.buttonSubmit.setOnClickListener {
             try{
-                if(pdfFile !=null){
-                    if(!pdfFile?.isFile!! && v.tvFileName.text.isNotEmpty()) {
+                if(pdfFile !=null && v.tvFileName.text.isNotEmpty()){
+                    if(!pdfFile?.isFile!!) {
                         //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
                         showErrText("Please Upload PDF statement!")
                     }else if(v.etDocNo.text?.isEmpty()!!){
