@@ -44,8 +44,6 @@ import kotlinx.android.synthetic.main.activity_profile_edit_id_info.toolbar
 import kotlinx.android.synthetic.main.activity_profile_edit_statement_info.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.view.*
-import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.File
 import java.util.ArrayList
 
@@ -97,7 +95,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
 
     private fun initData() {
        // captureFilePath = Uri.EMPTY
-        progressDialog.show()
+
         val logger = AppEventsLogger.newLogger(this)
         val params = Bundle()
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Personal Id Information")
@@ -119,7 +117,19 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
 //        }
 
         //load data from API ----//
-        presenterStatement.doGetStatementType(this,this)
+        if(CommonMethod.isNetworkAvailable(this)) {
+            presenterStatement.doGetStatementType(this, this)
+            progressDialog.show()
+        }else{
+            val dialog = AlertDialog.Builder(this,R.style.MyAlertDialogStyle)
+            dialog.setMessage(resources.getString(R.string.no_internet))
+            dialog.setNegativeButton("Dismiss"){d,_->
+                onBackPressed()
+            }
+            dialog.setCancelable(false)
+            dialog.show()
+            CommonMethod.customSnackBarError(rootView,this,resources.getString(R.string.no_internet))
+        }
         //------End-----------//
 
     }
@@ -286,7 +296,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
 
                 alertDialog.show()
             }else{
-                CommonMethod.customSnackBarError(rootLayout,this,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rlStatements,this,resources.getString(R.string.no_internet))
             }
 
 
@@ -404,27 +414,34 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
             dismiss()
         }
         v.buttonSubmit.setOnClickListener {
-            try{
-                if(pdfFile !=null && v.tvFileName.text.isNotEmpty()){
-                    if(!pdfFile?.isFile!!) {
-                        //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
-                        showErrText("Please Upload PDF statement!")
-                    }else if(v.etDocNo.text?.isEmpty()!!){
-                        showErrText("Please enter Document Number period!")
-                    }
-                    else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
-                        showErrText("Please enter duration period!")
-                    } else{
-                        progressDialog.show()
-                        val presenterAWSStatement= PresenterAWSStatement()
-                        presenterAWSStatement.uploadStatementFile(activity,this,pdfFile)
-                    }
-                }else{
-                    showErrText("Please Upload PDF statement!")
-                }
 
-            }catch (e:Exception){
-                e.printStackTrace()
+            if(CommonMethod.isNetworkAvailable(activity)){
+
+                try{
+                    if(pdfFile !=null && v.tvFileName.text.isNotEmpty()){
+                        if(!pdfFile?.isFile!!) {
+                            //CommonMethod.customSnackBarError(v.rootView,activity,"Please Upload PDF statement!")
+                            showErrText("Please Upload PDF statement!")
+                        }else if(v.etDocNo.text?.isEmpty()!!){
+                            showErrText("Please enter Document Number period!")
+                        }
+                        else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
+                            showErrText("Please enter duration period!")
+                        } else{
+                            progressDialog.show()
+                            val presenterAWSStatement= PresenterAWSStatement()
+                            presenterAWSStatement.uploadStatementFile(activity,this,pdfFile)
+                        }
+                    }else{
+                        showErrText("Please Upload PDF statement!")
+                    }
+
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+            }else{
+                //customSnackBarError(rlStatements,this,resources.getString(R.string.no_internet))
+                showErrText(resources.getString(R.string.no_internet))
             }
 
         }
