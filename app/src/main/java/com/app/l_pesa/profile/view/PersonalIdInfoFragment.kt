@@ -60,6 +60,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
+import org.jetbrains.anko.runOnUiThread
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -338,6 +339,18 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         CommonMethod.customSnackBarError(rootLayout,activity!!,string)
     }
 
+    override fun onSucessDeleteUploadAWS(userIdsPersonalInfo:ResUserInfo.UserIdsPersonalInfo,pos: Int) {
+
+        context?.runOnUiThread {
+            deletePersonalIdProof(userIdsPersonalInfo,pos)
+        }
+
+    }
+
+    override fun onFailureDeleteAWS(message: String) {
+        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+    }
+
     override fun onSessionTimeOut(message: String) {
 
         dismiss()
@@ -496,7 +509,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         val alertDialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
                         alertDialog.setTitle(resources.getString(R.string.app_name))
                         alertDialog.setMessage(resources.getString(R.string.delete_this_item))
-                        alertDialog.setPositiveButton("Yes") { _, _ -> deletePersonalIdProof(userIdsPersonalInfo,pos) }
+                        alertDialog.setPositiveButton("Yes") { _, _ ->
+                            progressDialog.show()
+                            val presenterAWSPersonalId = PresenterAWSPersonalId()
+                            presenterAWSPersonalId.deletePersonalAWS(context!!,
+                                    this@PersonalIdInfoFragment,
+                                    userIdsPersonalInfo.fileName,
+                                    userIdsPersonalInfo,pos)
+                         }
                                 .setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
                         alertDialog.show()
 
@@ -538,7 +558,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun deletePersonalIdProof(userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int)
     {
-        progressDialog.show()
+
         val jsonObject = JsonObject()
         jsonObject.addProperty("user_type_id",userIdsPersonalInfo.id.toString())
 

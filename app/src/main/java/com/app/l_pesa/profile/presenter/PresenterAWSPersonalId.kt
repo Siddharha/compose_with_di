@@ -18,6 +18,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
+import org.jetbrains.anko.doAsync
 import java.io.File
 
 
@@ -84,7 +85,7 @@ class PresenterAWSPersonalId {
     }
 
 
-    fun deletePersonalAWS(ctxOBJ: Context, fileName: String)
+    fun deletePersonalAWS(ctxOBJ: Context,callBack: ICallBackUpload, fileName: String,userIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo,pos:Int)
     {
 
         try {
@@ -95,16 +96,23 @@ class PresenterAWSPersonalId {
             )
 
             s3Client    = AmazonS3Client(cachingCredentialsProvider)
+            s3Client!!.setRegion(Region.getRegion(Regions.EU_CENTRAL_1))
 
-            s3Client!!.deleteObject(DeleteObjectRequest(BuildConfig.AWS_BUCKET+"/uploads/business",fileName))
+            doAsync {
+                s3Client!!.deleteObject(DeleteObjectRequest(BuildConfig.AWS_BUCKET+"/uploads/business",fileName))
+                callBack.onSucessDeleteUploadAWS(userIdsPersonalInfo,pos)
+            }
+
         } catch (e: AmazonServiceException) {
             // The call was transmitted successfully, but Amazon S3 couldn't process
             // it, so it returned an error response.
             e.printStackTrace()
+            callBack.onFailureDeleteAWS(e.errorMessage)
         } catch (e: Exception) {
             // Amazon S3 couldn't be contacted for a response, or the client
             // couldn't parse the response from Amazon S3.
             e.printStackTrace()
+            callBack.onFailureDeleteAWS(e.message!!)
         }
 
 

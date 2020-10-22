@@ -321,6 +321,14 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         CommonMethod.customSnackBarError(rootLayout,activity!!,string)
     }
 
+    override fun onSucessDeleteUploadAWS(UserIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int) {
+        //
+    }
+
+    override fun onFailureDeleteAWS(message: String) {
+        //
+    }
+
     override fun onSessionTimeOut(message: String) {
 
         dismiss()

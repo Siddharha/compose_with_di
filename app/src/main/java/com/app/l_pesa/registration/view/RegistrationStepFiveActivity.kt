@@ -34,6 +34,7 @@ import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.view.LoginActivity
 import com.app.l_pesa.profile.inter.ICallBackUpload
+import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.registration.inter.ICallBackRegisterThree
 import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
@@ -251,6 +252,14 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
     override fun onFailureUploadAWS(string: String) {
         dismiss()
         CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepFiveActivity, string)
+    }
+
+    override fun onSucessDeleteUploadAWS(UserIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int) {
+        //
+    }
+
+    override fun onFailureDeleteAWS(message: String) {
+        //
     }
 
     private fun uploadInformation(url: String)

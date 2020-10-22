@@ -246,6 +246,14 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
         CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, string)
     }
 
+    override fun onSucessDeleteUploadAWS(UserIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos: Int) {
+        //
+    }
+
+    override fun onFailureDeleteAWS(message: String) {
+        //
+    }
+
     @SuppressLint("SimpleDateFormat")
     private fun uploadData(imageURL: String) {
         val logger = AppEventsLogger.newLogger(this@ProfileEditPersonalActivity)
