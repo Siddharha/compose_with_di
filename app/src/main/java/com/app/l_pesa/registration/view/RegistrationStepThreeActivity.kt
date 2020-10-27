@@ -147,6 +147,10 @@ class RegistrationStepThreeActivity : AppCompatActivity(), ICallBackUpload, ICal
         //
     }
 
+    override fun onSucessProfileImgDeleteAWS() {
+        //
+    }
+
     private fun uploadInformation(url: String) {
         /* val jsonObject = JsonObject()
          jsonObject.addProperty("name", etName.text.toString())

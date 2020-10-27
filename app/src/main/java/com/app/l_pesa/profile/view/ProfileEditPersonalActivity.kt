@@ -208,7 +208,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
                         buttonSubmit.isClickable = false
                         if (captureImageStatus) {
                             val presenterAWSProfile = PresenterAWSProfile()
-                            presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity, this, photoFile)
+                            presenterAWSProfile.deleteProfileAWS(this@ProfileEditPersonalActivity,this, profileData.userInfo!!.profileImage)
+                            //presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity, this, photoFile)
                         } else {
                             uploadData(profileData.userPersonalInfo!!.profileImage)
                         }
@@ -252,6 +253,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
 
     override fun onFailureDeleteAWS(message: String) {
         //
+    }
+
+    override fun onSucessProfileImgDeleteAWS() {
+        val presenterAWSProfile = PresenterAWSProfile()
+        presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity, this, photoFile)
     }
 
     @SuppressLint("SimpleDateFormat")

@@ -262,6 +262,10 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         //
     }
 
+    override fun onSucessProfileImgDeleteAWS() {
+        //
+    }
+
     private fun uploadInformation(url: String)
     {
         val bundle     = intent.extras

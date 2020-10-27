@@ -8,4 +8,5 @@ interface ICallBackUpload {
     fun onFailureUploadAWS(string: String)
     fun onSucessDeleteUploadAWS(UserIdsPersonalInfo: ResUserInfo.UserIdsPersonalInfo, pos:Int)
     fun onFailureDeleteAWS(message:String)
+    fun onSucessProfileImgDeleteAWS()
 }

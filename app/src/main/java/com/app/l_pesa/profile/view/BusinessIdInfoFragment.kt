@@ -329,6 +329,10 @@ class BusinessIdInfoFragment : Fragment(), ICallBackClickBusinessId, ICallBackPr
         //
     }
 
+    override fun onSucessProfileImgDeleteAWS() {
+        //
+    }
+
     override fun onSessionTimeOut(message: String) {
 
         dismiss()

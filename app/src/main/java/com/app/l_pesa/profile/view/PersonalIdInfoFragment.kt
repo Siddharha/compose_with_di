@@ -351,6 +351,10 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         CommonMethod.customSnackBarError(rootLayout,activity!!,message)
     }
 
+    override fun onSucessProfileImgDeleteAWS() {
+        //
+    }
+
     override fun onSessionTimeOut(message: String) {
 
         dismiss()

@@ -1,6 +1,7 @@
 package com.app.l_pesa.profile.presenter
 
 import android.content.Context
+import com.amazonaws.AmazonServiceException
 import com.amazonaws.auth.CognitoCachingCredentialsProvider
 import com.amazonaws.mobile.client.AWSMobileClient
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
@@ -10,12 +11,15 @@ import com.amazonaws.regions.Region
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.CannedAccessControlList
+import com.amazonaws.services.s3.model.DeleteObjectRequest
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.profile.inter.ICallBackStatementDelete
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.google.gson.Gson
+import org.jetbrains.anko.doAsync
 import java.io.File
 
 class PresenterAWSProfile {
@@ -180,6 +184,42 @@ class PresenterAWSProfile {
             }
 
         })
+    }
+
+    fun deleteProfileAWS(ctxOBJ: Context, callBack: ICallBackUpload, fileName: String)
+    {
+
+        try {
+            val cachingCredentialsProvider = CognitoCachingCredentialsProvider(
+                    ctxOBJ,
+                    BuildConfig.AWS_PULL, // Identity Pool ID
+                    Regions.EU_CENTRAL_1
+            )
+
+
+            s3Client    = AmazonS3Client(cachingCredentialsProvider)
+            s3Client!!.setRegion(Region.getRegion(Regions.EU_CENTRAL_1))
+
+            doAsync {
+                s3Client?.deleteObject(DeleteObjectRequest(BuildConfig.AWS_BUCKET+"/uploads/personal",fileName))
+                callBack.onSucessProfileImgDeleteAWS()
+            }
+
+
+
+        } catch (e: AmazonServiceException) {
+            // The call was transmitted successfully, but Amazon S3 couldn't process
+            // it, so it returned an error response.
+            e.printStackTrace()
+            callBack.onFailureDeleteAWS(e.errorMessage)
+        } catch (e: Exception) {
+            // Amazon S3 couldn't be contacted for a response, or the client
+            // couldn't parse the response from Amazon S3.
+            e.printStackTrace()
+            callBack.onFailureDeleteAWS(e.message!!)
+        }
+
+
     }
 
 }
