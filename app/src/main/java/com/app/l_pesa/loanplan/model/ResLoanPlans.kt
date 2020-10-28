@@ -202,6 +202,11 @@ class ResLoanPlans {
         @Expose
         var actualLoanAmount: Double = 0.0
 
+
+        @SerializedName("bannerText")
+        @Expose
+        var bannerText: String = ""
+
     }
 
 }

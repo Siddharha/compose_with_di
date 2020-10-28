@@ -15,6 +15,7 @@ import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
 import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.inter.ICallBackBusinessLoan
 import com.app.l_pesa.loanplan.model.ResLoanPlans
+import com.facebook.shimmer.ShimmerFrameLayout
 import java.text.DecimalFormat
 
 
@@ -46,6 +47,15 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
         viewHolder.buttonLoanStatus.text   = loanPlanList[position].details!!.btnText
         viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details!!.btnHexColor))
 
+        if(!loanPlanList[position].details?.bannerText.isNullOrBlank()) {
+            viewHolder.smBanner.visibility = View.VISIBLE
+            viewHolder.bannerText.text = loanPlanList[position].details?.bannerText
+            viewHolder.smBanner.startShimmerAnimation()
+
+        }else{
+            viewHolder.smBanner.visibility = View.GONE
+            viewHolder.smBanner.stopShimmerAnimation()
+        }
 
         when {
             loanPlanList[position].details!!.btnColor.contentEquals("green")-> viewHolder.buttonLoanStatus.setBackgroundResource(R.drawable.bg_transparent_border_green_view)
@@ -110,6 +120,8 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
             var txtDuration          : TextView              = itemView.findViewById(R.id.txtDuration) as TextView
             var txtRate              : TextView              = itemView.findViewById(R.id.txtRate) as TextView
             var buttonLoanStatus     : CustomButtonRegular   = itemView.findViewById(R.id.buttonLoanStatus) as CustomButtonRegular
+            var bannerText          : TextView              = itemView.findViewById(R.id.tvBanner) as TextView
+            var smBanner            : ShimmerFrameLayout = itemView.findViewById(R.id.smBanner) as ShimmerFrameLayout
 
 
         }
