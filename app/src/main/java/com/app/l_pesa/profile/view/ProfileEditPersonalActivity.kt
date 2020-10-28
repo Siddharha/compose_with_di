@@ -19,8 +19,10 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.text.*
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.MenuItem
 import android.view.Window
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -46,6 +48,11 @@ import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.profile.presenter.PresenterPersonalInfo
+import com.app.l_pesa.registration.inter.ICallBackEmailVerify
+import com.app.l_pesa.registration.model.Data
+import com.app.l_pesa.registration.model.EmailVerifyRequest
+import com.app.l_pesa.registration.presenter.PresenterVerify
+import com.app.l_pesa.registration.view.EmailVerifyActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.facebook.appevents.AppEventsConstants
@@ -55,6 +62,9 @@ import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_profile_edit_personal.*
 import kotlinx.android.synthetic.main.content_profile_edit_personal.*
+import kotlinx.android.synthetic.main.content_profile_edit_personal.etEmail
+import kotlinx.android.synthetic.main.layout_registration_step_one.*
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -62,7 +72,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload {
+class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload, ICallBackEmailVerify {
 
     private val requestPhoto = 10
     private var captureImageStatus: Boolean = false
@@ -124,6 +134,12 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
         if (!TextUtils.isEmpty(profileData.userPersonalInfo!!.emailAddress)) {
             etEmail.setText(profileData.userPersonalInfo!!.emailAddress)
         }
+        if(profileData.userPersonalInfo?.emailVerify ==1){
+            etEmail.inputType = InputType.TYPE_NULL
+            etEmail.setTextColor( Color.GRAY)
+            commonInputLayout7.isEnabled = false
+
+        }
         if (!TextUtils.isEmpty(profileData.userPersonalInfo!!.motherMaidenName)) {
             etMotherName.setText(profileData.userPersonalInfo!!.motherMaidenName)
         }
@@ -152,74 +168,91 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
 
         buttonSubmit.setOnClickListener {
 
-            var gender = "M"
-            gender = if (radioMale.isChecked) {
-                "M"
-            } else {
-                "F"
-            }
+            if(profileData.userPersonalInfo?.emailVerify ==0){
+                //startActivity(Intent(this,EmailVerifyActivity::class.java))
 
-            val hashMapOLD = HashMap<String, String>()
-            hashMapOLD["title"] = "" + profileData.userPersonalInfo!!.title
-            hashMapOLD["nameF"] = "" + profileData.userPersonalInfo!!.firstName
-            hashMapOLD["nameM"] = "" + profileData.userPersonalInfo!!.middleName
-            hashMapOLD["nameL"] = "" + profileData.userPersonalInfo!!.lastName
-            hashMapOLD["email"] = "" + profileData.userPersonalInfo!!.emailAddress
-            hashMapOLD["dob"] = "" + profileData.userPersonalInfo!!.dob
-            hashMapOLD["status"] = "" + profileData.userPersonalInfo!!.meritalStatus
-            hashMapOLD["motherM"] = "" + profileData.userPersonalInfo!!.motherMaidenName
-            hashMapOLD["sex"] = "" + profileData.userPersonalInfo!!.sex
-            hashMapOLD["imgChange"] = "false"
+                val dialog = AlertDialog.Builder(this)
+                dialog.setMessage("Please verify Your Email Id before updating your profile.")
+                dialog.setPositiveButton("Verify"){d,_->
+                    emailVerify()
+                    d.dismiss()
+                }
+                dialog.setNegativeButton("Dismiss"){d,_->
+                    d.dismiss()
+                }
 
-            val hashMapNew = HashMap<String, String>()
-            hashMapNew["title"] = txtTitle.text.toString()
-            hashMapNew["nameF"] = etNameF.text.toString()
-            hashMapNew["nameM"] = etNameM.text.toString()
-            hashMapNew["nameL"] = etNameL.text.toString()
-            hashMapNew["email"] = etEmail.text.toString()
-            hashMapNew["dob"] = txtDOB.text.toString()
-            hashMapNew["status"] = txtMarital.text.toString()
-            hashMapNew["motherM"] = etMotherName.text.toString()
-            hashMapNew["sex"] = gender
-            hashMapNew["imgChange"] = captureImageStatus.toString()
-
-            CommonMethod.hideKeyboardView(this@ProfileEditPersonalActivity)
-            if (hashMapOLD == hashMapNew) {
-                CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.change_one_info))
-            } else {
-                if (TextUtils.isEmpty(txtTitle.text.toString().trim())) {
-                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_title))
-                } else if (TextUtils.isEmpty(etNameF.text.toString().trim())) {
-                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_name_f))
-                } else if (TextUtils.isEmpty(etNameL.text.toString().trim())) {
-                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_name_l))
-                } else if (TextUtils.isEmpty(etEmail.text.toString().trim())) {
-                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_email))
-                } else if (TextUtils.isEmpty(txtDOB.text.toString())) {
-                    showDatePicker()
-                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_date_of_birth))
-                } else if (TextUtils.isEmpty(etMotherName.text.toString().trim())) {
-                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_mother_maiden_name))
-                } else if (!radioMale.isChecked && !radioFemale.isChecked) {
-                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_gender))
+            }else{
+                var gender = "M"
+                gender = if (radioMale.isChecked) {
+                    "M"
                 } else {
-                    if (CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity)) {
-                        progressDialog.show()
-                        buttonSubmit.isClickable = false
-                        if (captureImageStatus) {
-                            val presenterAWSProfile = PresenterAWSProfile()
-                            presenterAWSProfile.deleteProfileAWS(this@ProfileEditPersonalActivity,this, profileData.userInfo!!.profileImage)
-                            //presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity, this, photoFile)
-                        } else {
-                            uploadData(profileData.userPersonalInfo!!.profileImage)
-                        }
+                    "F"
+                }
+
+                val hashMapOLD = HashMap<String, String>()
+                hashMapOLD["title"] = "" + profileData.userPersonalInfo!!.title
+                hashMapOLD["nameF"] = "" + profileData.userPersonalInfo!!.firstName
+                hashMapOLD["nameM"] = "" + profileData.userPersonalInfo!!.middleName
+                hashMapOLD["nameL"] = "" + profileData.userPersonalInfo!!.lastName
+                hashMapOLD["email"] = "" + profileData.userPersonalInfo!!.emailAddress
+                hashMapOLD["dob"] = "" + profileData.userPersonalInfo!!.dob
+                hashMapOLD["status"] = "" + profileData.userPersonalInfo!!.meritalStatus
+                hashMapOLD["motherM"] = "" + profileData.userPersonalInfo!!.motherMaidenName
+                hashMapOLD["sex"] = "" + profileData.userPersonalInfo!!.sex
+                hashMapOLD["imgChange"] = "false"
+
+                val hashMapNew = HashMap<String, String>()
+                hashMapNew["title"] = txtTitle.text.toString()
+                hashMapNew["nameF"] = etNameF.text.toString()
+                hashMapNew["nameM"] = etNameM.text.toString()
+                hashMapNew["nameL"] = etNameL.text.toString()
+                hashMapNew["email"] = etEmail.text.toString()
+                hashMapNew["dob"] = txtDOB.text.toString()
+                hashMapNew["status"] = txtMarital.text.toString()
+                hashMapNew["motherM"] = etMotherName.text.toString()
+                hashMapNew["sex"] = gender
+                hashMapNew["imgChange"] = captureImageStatus.toString()
+
+                CommonMethod.hideKeyboardView(this@ProfileEditPersonalActivity)
+                if (hashMapOLD == hashMapNew) {
+                    CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.change_one_info))
+                } else {
+                    if (TextUtils.isEmpty(txtTitle.text.toString().trim())) {
+                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_title))
+                    } else if (TextUtils.isEmpty(etNameF.text.toString().trim())) {
+                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_name_f))
+                    } else if (TextUtils.isEmpty(etNameL.text.toString().trim())) {
+                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_name_l))
+                    } else if (TextUtils.isEmpty(etEmail.text.toString().trim())) {
+                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_email))
+                    } else if (TextUtils.isEmpty(txtDOB.text.toString())) {
+                        showDatePicker()
+                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_date_of_birth))
+                    } else if (TextUtils.isEmpty(etMotherName.text.toString().trim())) {
+                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_mother_maiden_name))
+                    } else if (!radioMale.isChecked && !radioFemale.isChecked) {
+                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.required_gender))
                     } else {
-                        CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.no_internet))
+                        if (CommonMethod.isNetworkAvailable(this@ProfileEditPersonalActivity)) {
+                            progressDialog.show()
+                            buttonSubmit.isClickable = false
+                            if (captureImageStatus) {
+                                val presenterAWSProfile = PresenterAWSProfile()
+                                presenterAWSProfile.deleteProfileAWS(this@ProfileEditPersonalActivity,this, profileData.userInfo!!.profileImage)
+                                //presenterAWSProfile.uploadProfileImage(this@ProfileEditPersonalActivity, this, photoFile)
+                            } else {
+                                uploadData(profileData.userPersonalInfo!!.profileImage)
+                            }
+                        } else {
+                            CommonMethod.customSnackBarError(rootConstraint, this@ProfileEditPersonalActivity, resources.getString(R.string.no_internet))
+                        }
+
                     }
 
                 }
-
             }
+
+
 
         }
     }
@@ -753,4 +786,31 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
 
     }
 
+    private fun emailVerify() {
+        com.app.l_pesa.profile.view.progressDialog.show()
+        Log.i("email request : ", EmailVerifyRequest("Normal",etEmail.text.toString().trim()).toString())
+        PresenterVerify().doEmailVerify(this,
+                EmailVerifyRequest(
+                        "Normal",
+                        etEmail.text.toString().trim()
+                ), this)
+    }
+
+    override fun onSuccessEmailVerify(data: Data) {
+        val intent = Intent(this, EmailVerifyActivity::class.java)
+        intent.putExtra("email",etEmail.text.toString().trim())
+        startActivity(intent)
+        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+    }
+
+    override fun onErrorEmailVerify(jsonMessage: String) {
+        CommonMethod.customSnackBarError(rootLayout, this, jsonMessage)
+    }
+
+    override fun onErrorEmailCode(code: JSONObject) {
+        CommonMethod.customSnackBarError(rootLayout, this, "Unable to get Verification Code from given email!")
+    }
+
+
 }
+

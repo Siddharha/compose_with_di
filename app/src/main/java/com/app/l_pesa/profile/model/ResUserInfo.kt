@@ -240,5 +240,9 @@ class ResUserInfo {
         @Expose
         var profileImage: String = ""
 
+        @SerializedName("email_address_verify")
+        @Expose
+        var emailVerify:Int = 0
+
     }
 }
