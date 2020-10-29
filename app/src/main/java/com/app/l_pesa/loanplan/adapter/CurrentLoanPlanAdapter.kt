@@ -45,16 +45,16 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
         viewHolder.txtRate.text            = context.resources.getString(R.string.rate)+" "+loanPlanList[position].details!!.loanInterestRate.toString()+"%"
 
         if(!loanPlanList[position].details?.bannerText.isNullOrBlank()) {
-            viewHolder.smBanner.visibility = View.VISIBLE
+            viewHolder.smBanner.visibility = View.GONE
             viewHolder.stApproval.visibility = View.VISIBLE
-            viewHolder.bannerText.text = loanPlanList[position].details?.bannerText
-            viewHolder.smBanner.startShimmerAnimation()
+            viewHolder.stApproval.text = loanPlanList[position].details?.bannerText
+            //viewHolder.smBanner.startShimmerAnimation()
 
 
         }else{
             viewHolder.smBanner.visibility = View.GONE
             viewHolder.stApproval.visibility = View.GONE
-            viewHolder.smBanner.stopShimmerAnimation()
+            //viewHolder.smBanner.stopShimmerAnimation()
         }
 
         viewHolder.buttonLoanStatus.text   = loanPlanList[position].details!!.btnText
