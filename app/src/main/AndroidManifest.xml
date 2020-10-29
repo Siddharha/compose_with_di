@@ -39,6 +39,7 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".profile.view.ProfileEditStatementInfoActivity"></activity>
         <activity android:name=".common.CamViewActivity" />

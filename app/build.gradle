@@ -119,6 +119,9 @@ dependencies {
     implementation 'org.jetbrains.anko:anko-common:0.9'
 
     implementation "com.google.android.gms:play-services-auth-api-phone:17.4.0"
+    implementation ('com.haozhang.libary:android-slanted-textview:1.2'){
+        exclude group: "com.android.support"
+    }
 
 
 

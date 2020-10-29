@@ -16,6 +16,7 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.inter.ICallBackBusinessLoan
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.haozhang.lib.SlantedTextView
 import java.text.DecimalFormat
 
 
@@ -48,13 +49,15 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
         viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details!!.btnHexColor))
 
         if(!loanPlanList[position].details?.bannerText.isNullOrBlank()) {
-            viewHolder.smBanner.visibility = View.VISIBLE
-            viewHolder.bannerText.text = loanPlanList[position].details?.bannerText
-            viewHolder.smBanner.startShimmerAnimation()
+            viewHolder.smBanner.visibility = View.GONE
+            viewHolder.stApproval.visibility = View.VISIBLE
+            viewHolder.stApproval.text = loanPlanList[position].details?.bannerText
+            //viewHolder.smBanner.startShimmerAnimation()
 
         }else{
+            viewHolder.stApproval.visibility = View.GONE
             viewHolder.smBanner.visibility = View.GONE
-            viewHolder.smBanner.stopShimmerAnimation()
+            //viewHolder.smBanner.stopShimmerAnimation()
         }
 
         when {
@@ -122,7 +125,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
             var buttonLoanStatus     : CustomButtonRegular   = itemView.findViewById(R.id.buttonLoanStatus) as CustomButtonRegular
             var bannerText          : TextView              = itemView.findViewById(R.id.tvBanner) as TextView
             var smBanner            : ShimmerFrameLayout = itemView.findViewById(R.id.smBanner) as ShimmerFrameLayout
-
+            var stApproval          : SlantedTextView = itemView.findViewById(R.id.stApproval) as SlantedTextView
 
         }
 

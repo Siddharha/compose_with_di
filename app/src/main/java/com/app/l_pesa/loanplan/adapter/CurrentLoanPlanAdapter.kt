@@ -15,6 +15,7 @@ import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
 import com.app.l_pesa.loanplan.inter.ICallBackCurrentLoan
 import com.app.l_pesa.loanplan.model.ResLoanPlans
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.haozhang.lib.SlantedTextView
 import java.text.DecimalFormat
 
 
@@ -45,11 +46,14 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
         if(!loanPlanList[position].details?.bannerText.isNullOrBlank()) {
             viewHolder.smBanner.visibility = View.VISIBLE
+            viewHolder.stApproval.visibility = View.VISIBLE
             viewHolder.bannerText.text = loanPlanList[position].details?.bannerText
             viewHolder.smBanner.startShimmerAnimation()
 
+
         }else{
             viewHolder.smBanner.visibility = View.GONE
+            viewHolder.stApproval.visibility = View.GONE
             viewHolder.smBanner.stopShimmerAnimation()
         }
 
@@ -121,6 +125,7 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
            var buttonLoanStatus     : CustomButtonRegular   = itemView.findViewById(R.id.buttonLoanStatus) as CustomButtonRegular
             var bannerText          : TextView              = itemView.findViewById(R.id.tvBanner) as TextView
             var smBanner            : ShimmerFrameLayout    = itemView.findViewById(R.id.smBanner) as ShimmerFrameLayout
+            var stApproval          : SlantedTextView       = itemView.findViewById(R.id.stApproval) as SlantedTextView
 
 
         }
