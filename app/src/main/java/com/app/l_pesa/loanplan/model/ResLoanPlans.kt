@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanplan.model
 
+import androidx.annotation.Nullable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
@@ -203,10 +204,52 @@ class ResLoanPlans {
         var actualLoanAmount: Double = 0.0
 
 
-        @SerializedName("bannerText")
+        @SerializedName("bannerObject")
         @Expose
-        var bannerText: String = ""
+        var bannerObject: BannerObject? = null
 
     }
+
+    data class BannerObject(
+            @SerializedName("text")
+            @Expose
+            var text: String = "",
+
+            @SerializedName("fontSize")
+            @Expose
+            var fontSize: Int = 12,
+
+            @SerializedName("isShimmer")
+            @Expose
+            var isShimmer: Boolean = true,
+
+            @SerializedName("fontColor")
+            @Expose
+            var fontColor: String = "#4d0000",
+
+            @SerializedName("backColor")
+            @Expose
+            var backColor: String = "#f28400",
+
+            @SerializedName("isBanner")
+            @Expose
+            var isBanner: Boolean = false,
+
+
+            @SerializedName("style")
+            @Expose
+            var style: BannerStyle? = null
+
+    )
+
+    data class BannerStyle(
+            @SerializedName("isBanner")
+            @Expose
+            var type: Int = 0,
+
+            @SerializedName("position")
+            @Expose
+            var position: String = "right"
+    )
 
 }

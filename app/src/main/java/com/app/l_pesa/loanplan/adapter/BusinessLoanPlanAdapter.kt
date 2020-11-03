@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CustomButtonRegular
@@ -48,16 +49,40 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
         viewHolder.buttonLoanStatus.text   = loanPlanList[position].details!!.btnText
         viewHolder.buttonLoanStatus.setTextColor(Color.parseColor(loanPlanList[position].details!!.btnHexColor))
 
-        if(!loanPlanList[position].details?.bannerText.isNullOrBlank()) {
-            viewHolder.smBanner.visibility = View.GONE
-            viewHolder.stApproval.visibility = View.VISIBLE
-            viewHolder.stApproval.text = loanPlanList[position].details?.bannerText
-            //viewHolder.smBanner.startShimmerAnimation()
+        try {
+            if (loanPlanList[position].details?.bannerObject!=null) {
+                viewHolder.smBanner.visibility = View.VISIBLE
+                //viewHolder.stApproval.visibility = View.GONE
+                viewHolder.bannerText.text = loanPlanList[position].details?.bannerObject?.text
+                viewHolder.bannerBaseText.text = loanPlanList[position].details?.bannerObject?.text
+                viewHolder.flBanner.setCardBackgroundColor(Color.parseColor(loanPlanList[position].details?.bannerObject?.backColor))
+                viewHolder.bannerText.setTextColor(Color.parseColor(loanPlanList[position].details?.bannerObject?.fontColor))
+                viewHolder.bannerText.textSize = loanPlanList[position].details?.bannerObject?.fontSize?.toFloat()!!
 
-        }else{
-            viewHolder.stApproval.visibility = View.GONE
-            viewHolder.smBanner.visibility = View.GONE
-            //viewHolder.smBanner.stopShimmerAnimation()
+                if(loanPlanList[position].details?.bannerObject?.text.isNullOrEmpty()){
+                    viewHolder.flBanner.visibility = View.GONE
+                    // viewHolder.stApproval.visibility = View.GONE
+                }else{
+                    viewHolder.flBanner.visibility = View.VISIBLE
+                    // viewHolder.stApproval.visibility = View.VISIBLE
+                }
+//                if(loanPlanList[position].details?.bannerObject?.isShimmer!!){
+//
+//                    viewHolder.smBanner.startShimmerAnimation()
+//                }else{
+//                    viewHolder.smBanner.stopShimmerAnimation()
+//                    viewHolder.smBanner.clearAnimation()
+//                }
+
+
+            } else {
+                viewHolder.flBanner.visibility = View.GONE
+                viewHolder.stApproval.visibility = View.GONE
+                // viewHolder.smBanner.stopShimmerAnimation()
+                // viewHolder.smBanner.clearAnimation()
+            }
+        }catch (e:Exception){
+            e.printStackTrace()
         }
 
         when {
@@ -124,8 +149,10 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
             var txtRate              : TextView              = itemView.findViewById(R.id.txtRate) as TextView
             var buttonLoanStatus     : CustomButtonRegular   = itemView.findViewById(R.id.buttonLoanStatus) as CustomButtonRegular
             var bannerText          : TextView              = itemView.findViewById(R.id.tvBanner) as TextView
+            var bannerBaseText          : TextView              = itemView.findViewById(R.id.tvBanner) as TextView
             var smBanner            : ShimmerFrameLayout = itemView.findViewById(R.id.smBanner) as ShimmerFrameLayout
             var stApproval          : SlantedTextView = itemView.findViewById(R.id.stApproval) as SlantedTextView
+            var flBanner : CardView = itemView.findViewById(R.id.flBanner) as CardView
 
         }
 

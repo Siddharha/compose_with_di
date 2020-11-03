@@ -237,11 +237,23 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         if(progressDialog.isShowing){
             progressDialog.dismiss()
         }
+
+        if(statementList.isEmpty()){
+            cvNoItm.visibility = View.VISIBLE
+        }else{
+            cvNoItm.visibility = View.GONE
+        }
     }
 
     override fun onSessionTimeOut(message: String) {
         if(progressDialog.isShowing){
             progressDialog.dismiss()
+        }
+
+        if(statementList.isEmpty()){
+            cvNoItm.visibility = View.VISIBLE
+        }else{
+            cvNoItm.visibility = View.GONE
         }
     }
 

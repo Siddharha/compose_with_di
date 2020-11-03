@@ -18,31 +18,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/smBanner"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/flBanner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/yellow_button"
-                    android:padding="@dimen/_5sdp"
-                    android:rotation="0"
+                    android:background="@drawable/banner_shape"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/txtRate"
                     app:layout_constraintTop_toBottomOf="@+id/txtRate"
                     app:layout_constraintVertical_bias="1.0">
-
                     <com.app.l_pesa.common.CommonTextRegular
-                        android:id="@+id/tvBanner"
+                        android:id="@+id/tvBannerBase"
+                        android:layout_margin="@dimen/_5sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:textColor="#3E0000"
+                        android:textColor="#000000"
                         android:textStyle="bold"
                         tools:text="$10 Loan approval in 5 sec." />
-                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/smBanner"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.app.l_pesa.common.CommonTextRegular
+                            android:id="@+id/tvBanner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#502500"
+                            android:textStyle="bold"
+                            tools:text="$10 Loan approval in 5 sec." />
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                </com.google.android.material.card.MaterialCardView>
                 <com.app.l_pesa.common.CommonTextRegular
                     android:id="@+id/txtLoanAmount"
                     android:layout_width="@dimen/_45sdp"
@@ -137,6 +150,7 @@
 
         <com.haozhang.lib.SlantedTextView
             android:id="@+id/stApproval"
+            android:visibility="gone"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:gravity="center"

@@ -95,7 +95,7 @@ class PresenterStatement {
                             callBackOBJ.onFailureGetStatementList(response.status.message)
                         }
                     } catch (e: Exception) {
-
+                        e.printStackTrace()
                     }
                 }, { error ->
                     try {
