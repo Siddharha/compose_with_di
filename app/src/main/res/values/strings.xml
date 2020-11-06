@@ -517,6 +517,7 @@
     <string name="verification_code_one">Enter Verification Code</string>
     <string name="Statement_info">Statement Information</string>
     <string name="upload_pdf_statement">Please Upload correct pdf statement file.</string>
+    <string name="aadhaar_card">Aadhaar Card</string>
 
 
     <!--test items-->

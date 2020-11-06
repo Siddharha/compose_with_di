@@ -88,7 +88,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         toolbar.title = resources.getString(R.string.nav_item_dashboard)
         setSupportActionBar(toolbar)
 
-        //checkForAppUpdate()
+
         initData()
         initMenu()
         initLoader()
@@ -620,7 +620,22 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
         MyApplication.getInstance().trackScreenView(this@DashboardActivity::class.java.simpleName)
 
+//checkFakeUpdate()
 
+    }
+
+    private fun checkFakeUpdate() {
+        // Returns an intent object that you use to check for an update.
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    AppUpdateType.FLEXIBLE,
+                    this,
+                    APP_UPDATE_REQUEST_CODE)
+        }
     }
 
     companion object {

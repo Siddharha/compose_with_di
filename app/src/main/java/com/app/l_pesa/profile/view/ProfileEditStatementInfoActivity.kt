@@ -1,6 +1,7 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
@@ -45,7 +46,8 @@ import kotlinx.android.synthetic.main.activity_profile_edit_statement_info.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.*
 import kotlinx.android.synthetic.main.add_statement_bottomsheet_layout.view.*
 import java.io.File
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
 val FILE_REQUEST_CODE = 1001
 
@@ -402,14 +404,24 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
 
     private val activity = activity
     lateinit var _selectedTypeId:String
+     private var  year:Int?=null
+     private var month:Int?=null
+     private var  day:Int?=null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
          super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.add_statement_bottomsheet_layout, container, false)
-
+        setupDateData()
         onActionPerform(view)
         loadData(view)
         return view
+    }
+
+    private fun setupDateData() {
+        val calendar = Calendar.getInstance()
+        year = calendar.get(Calendar.YEAR)
+        month = calendar.get(Calendar.MONTH)
+        day = calendar.get(Calendar.DAY_OF_MONTH)
     }
 
     private fun loadData(v:View) {
@@ -417,7 +429,22 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
 
     }
 
+
+
     fun onActionPerform(v:View){
+
+        v.tvFrom.setOnClickListener {
+            val dialog = DatePickerDialog(context!!,dateListener(v,0), year!!, month!!, day!!)
+            dialog.show()
+
+        }
+
+        v.tvTo.setOnClickListener {
+            val dialog = DatePickerDialog(context!!,dateListener(v,1), year!!, month!!, day!!)
+            dialog.show()
+
+        }
+
         v.btnBrowse.setOnClickListener {
             openPDF(activity)
             //v.tvFileName.text = pdfFile.name
@@ -437,7 +464,7 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
                         }else if(v.etDocNo.text?.isEmpty()!!){
                             showErrText("Please enter Document Number period!")
                         }
-                        else if (v.ilIdNumber.editText?.text?.isEmpty()!!){
+                        else if (v.tvFrom.text?.isEmpty()!! || v.tvTo.text?.isEmpty()!!){
                             showErrText("Please enter duration period!")
                         } else{
                             progressDialog.show()
@@ -469,6 +496,35 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
         }
     }
 
+    private fun dateListener(v: View,type:Int)= //
+            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+
+                when (type) {
+                    0 -> v.tvFrom.text = "$dayOfMonth/$month/$year"
+                    1 -> v.tvTo.text = "$dayOfMonth/$month/$year"
+                }
+
+                if(!isDatesValid(v.tvFrom.text,v.tvTo.text)){
+                    Toast.makeText(context,"Date is not valid!",Toast.LENGTH_LONG).show()
+                    v.tvFrom.text = ""
+                    v.tvTo.text = ""
+                }
+
+            }
+
+    private fun isDatesValid(t1: CharSequence?, t2: CharSequence?): Boolean {
+
+        if(t1.toString().isNotEmpty() && t2.toString().isNotEmpty()) {
+            val dfDate = SimpleDateFormat("dd/MM/yyyy")
+
+            val t1Date = t1.toString()
+            val t2Date = t2.toString()
+            return dfDate.parse(t1Date)?.before(dfDate.parse(t2Date)!!)!!
+        }else{
+            return true
+        }
+    }
+
     private fun showErrText(s:String) {
         val t = Toast.makeText(activity, s, Toast.LENGTH_LONG)
         t.view.setBackgroundColor(Color.RED)
@@ -487,7 +543,8 @@ val jsonObject = JsonObject()
         jsonObject.addProperty("type_id",_selectedTypeId) // Static
         jsonObject.addProperty("file_name",url)
         jsonObject.addProperty("document_number", bottomSheetDialog.etDocNo.text.toString())
-        jsonObject.addProperty("period", bottomSheetDialog.etStatementPeriod.text.toString())
+        jsonObject.addProperty("period", "From ${bottomSheetDialog.tvFrom.text.toString()} to ${bottomSheetDialog.tvTo.text.toString()}")
+        //jsonObject.addProperty("period", bottomSheetDialog.etStatementPeriod.text.toString())
 //        if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
 //        {
 //            jsonObject.addProperty("id_number","")

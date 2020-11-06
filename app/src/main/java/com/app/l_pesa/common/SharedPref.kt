@@ -51,6 +51,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var zoopGatewayId: String
+        get() = pref.getString(KEY_SET_GATEWAY_ID, "INIT")!!
+        set(zoopGatewayId) {
+            editor.remove(KEY_SET_GATEWAY_ID)
+            editor.putString(KEY_SET_GATEWAY_ID, zoopGatewayId)
+            editor.commit()
+        }
+
     var userDashBoard: String
         get() = pref.getString(KEY_SET_DASHBOARD, "INIT")!!
         set(dashboard) {
@@ -337,6 +345,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_IMAGE_PATH            = "KEY_SET_IMAGE_PATH"
         private const val KEY_SET_VERIFICATION_CODE     = "KEY_SET_VERIFICATION_CODE"
         private const val KEY_SET_COUNTRY_ISD_CODE      = "KEY_SET_COUNTRY_ISD_CODE"
+        private const val KEY_SET_GATEWAY_ID = "KEY_SET_GATEWAY_ID"
 
     }
 

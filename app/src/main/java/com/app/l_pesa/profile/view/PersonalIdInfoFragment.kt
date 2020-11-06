@@ -2,6 +2,7 @@ package com.app.l_pesa.profile.view
 
 import android.Manifest
 import android.app.Activity
+import android.app.Activity.RESULT_CANCELED
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.ClipData
@@ -21,6 +22,9 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
+import android.util.Base64.DEFAULT
+import android.util.Base64.decode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,20 +58,30 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
+import com.app.l_pesa.profile.zoop.ICallBackZoop
+import com.app.l_pesa.profile.zoop.PresenterZoop
+import com.app.l_pesa.profile.zoop.ZoopInitFailureResponse
+import com.app.l_pesa.profile.zoop.ZoopInitResponse
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
+import kotlinx.android.synthetic.main.confirm_aadhaar_layout.*
 import kotlinx.android.synthetic.main.fragment_personal_id_layout.*
 import org.jetbrains.anko.runOnUiThread
+import org.json.JSONException
+import org.json.JSONObject
+import sdk.zoop.one.offline_aadhaar.zoopActivity.ZoopConsentActivity
+import sdk.zoop.one.offline_aadhaar.zoopUtils.ZoopConstantUtils.*
+import android.util.Base64
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
 
 
-class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload {
+class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackProof, ICallBackUpload, ICallBackZoop {
 
 
     private var filterPopup : PopupWindow? = null
@@ -77,7 +91,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var personalIdType=""
     private var personalIdName=""
     private var personalId=0
-
+    lateinit var sharedPrefOBJ:SharedPref
     private val requestPhoto      = 12
     private var captureImageStatus : Boolean    = false
     private lateinit var photoFile          : File
@@ -115,7 +129,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         listPersonalId = ArrayList()
-        val sharedPrefOBJ= SharedPref(activity!!)
+        sharedPrefOBJ= SharedPref(activity!!)
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
         listPersonalId!!.clear()
 
@@ -129,45 +143,17 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         buttonSubmit.setOnClickListener {
 
-            if(!captureImageStatus)
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_image))
-            }
-            else if(personalId==0)
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_type))
-                showDialogIdType(sharedPrefOBJ)
-            }
-            else if(etPersonalId.text.toString()!=resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim()))
-            {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_id_number))
-            }
-            else
-            {
-                if(CommonMethod.isNetworkAvailable(activity!!))
-                {
+            if(sharedPrefOBJ.countryCode == "in") {
+                if (etPersonalId.text.toString().contentEquals("Aadhaar Card")) {
                     progressDialog.show()
-                    buttonSubmit.isClickable=false
-
-                    /*if(idTypeExists=="TRUE")
-                    {*/
-                    val presenterAWSPersonalId= PresenterAWSPersonalId()
-                    // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                    presenterAWSPersonalId.uploadPersonalId(activity!!,this,photoFile)
-                    /*}
-                    else
-                    {
-                        val presenterAWSPersonalId= PresenterAWSPersonalId()
-                        presenterAWSPersonalId.uploadPersonalId(activity!!,this,captureFile)
-                    }*/
-
+                    val presenterZoop = PresenterZoop()
+                    presenterZoop.doOfflineAadharInit(activity!!, this)
 
                 }
-                else
-                {
-                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
-                }
+            }else{
+                updateIdData(sharedPrefOBJ)
             }
+
         }
 
         buttonCancel.setOnClickListener {
@@ -201,6 +187,38 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         }
 
+    }
+
+    private fun updateIdData(sharedPrefOBJ: SharedPref) {
+        if (!captureImageStatus) {
+            CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_image))
+        } else if (personalId == 0) {
+            CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
+            showDialogIdType(sharedPrefOBJ)
+        } else if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim())) {
+            CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
+        } else {
+            if (CommonMethod.isNetworkAvailable(activity!!)) {
+                progressDialog.show()
+                buttonSubmit.isClickable = false
+
+                /*if(idTypeExists=="TRUE")
+                    {*/
+                val presenterAWSPersonalId = PresenterAWSPersonalId()
+                // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
+                presenterAWSPersonalId.uploadPersonalId(activity!!, this, photoFile)
+                /*}
+                    else
+                    {
+                        val presenterAWSPersonalId= PresenterAWSPersonalId()
+                        presenterAWSPersonalId.uploadPersonalId(activity!!,this,captureFile)
+                    }*/
+
+
+            } else {
+                CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.no_internet))
+            }
+        }
     }
 
     private fun checkAndRequestPermissions(): Boolean {
@@ -422,13 +440,27 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                     if (name == resources.getString(R.string.address_prof)) {
                         ilIdNumber.visibility = View.INVISIBLE
+                        imgProfile.visibility = View.VISIBLE
+                        textView9.visibility = View.VISIBLE
                         personalIdName = name
                         etPersonalId.setText(personalIdName)
                         personalIdType = type
                         personalId = id
 
-                    } else {
+                    }else if (name == resources.getString(R.string.aadhaar_card)) {
+                    ilIdNumber.visibility = View.GONE
+                    personalIdName = name
+                    etPersonalId.setText(personalIdName)
+                        imgProfile.visibility = View.GONE
+                        textView9.visibility = View.GONE
+                    personalIdType = type
+                    personalId = id
+
+
+                }else {
                         ilIdNumber.visibility = View.VISIBLE
+                        imgProfile.visibility = View.VISIBLE
+                        textView9.visibility = View.VISIBLE
                         personalIdName = name
                         etPersonalId.setText(personalIdName)
                         personalIdType = type
@@ -641,7 +673,117 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 {
                     setImage()
                 }
+            REQUEST_AADHAARAPI ->
+                {
+                    var requestType = "null";
+                    if (data?.hasExtra(ZOOP_REQUEST_TYPE)!!) {
+                        requestType = data.getStringExtra(ZOOP_REQUEST_TYPE)!!
+                        //Log.d(ZOOP_TAG, " res 1" + requestType);
+                    } else {
+                        //Log.d(ZOOP_TAG, " res 1" + requestType);
+                    }
+
+                    if (resultCode == RESULT_CANCELED) {
+                        val responseString = data . getStringExtra (ZOOP_RESULT)
+                        CommonMethod.customSnackBarError(rootLayout, activity!!, "Aadhaar Not Verified!")
+                        Log.e("SDK test error ", requestType + " err " + responseString + resultCode);
+                    }
+
+                    if (requestType.equals(OFFLINE_AADHAAR,true)) {
+                        //String responseString1 = data.getStringExtra(ZOOP_RESULT);
+                        if (resultCode == OFFLINE_AADHAAR_SUCCESS) {
+                            val responseString = data. getStringExtra (ZOOP_RESULT)
+//                            tvResult.setVisibility(View.VISIBLE)
+//                            resultDisplayLayout.setVisibility(View.VISIBLE);
+//                            llResultBg.setVisibility(View.VISIBLE);
+
+                            try {
+                                val jsonObject =  JSONObject(responseString!!)
+                                //parseResultJson(jsonObject)
+                                showConfirmAadhaarPopup(jsonObject)
+                                CommonMethod.customSnackBarSuccess(rootLayout, activity!!, "Aadhaar verified with ${jsonObject.getString("id")}")
+                            } catch ( e: JSONException) {
+                                e.printStackTrace();
+                            }
+
+                           // tvResult.setText(String.format("complete Response: %s", responseString));
+                           // Log.d("SDK test result ", requestType + " res " + responseString);
+                        }
+
+                        if (resultCode == OFFLINE_AADHAAR_ERROR) {
+                            val errorString = data . getStringExtra (ZOOP_RESULT)
+
+                            try {
+                                val jResp = JSONObject(errorString!!)
+                                //sdk_response
+                                CommonMethod.customSnackBarError(rootLayout, activity!!, "${jResp.getString("sdk_response")}")
+                                // tvResult.setText(errorString);
+//                            tvResult.setVisibility(View.VISIBLE);
+//                            resultDisplayLayout.setVisibility(View.GONE);
+//                            llResultBg.setVisibility(View.GONE);
+//                            tvResult.setText(errorString);
+                                Log.d("SDK test error ", requestType + " err " + errorString);
+                            }catch (e:java.lang.Exception){
+                                e.printStackTrace()
+                            }
+                        }
+                    } else {
+                       // Log.d(ZOOP_TAG, " res 1" + requestType);
+                    }
+                }
         }
+
+
+
+    }
+
+    private fun showConfirmAadhaarPopup(jsonObject: JSONObject) {
+        val jsonObjectTrans = jsonObject.optJSONObject("transaction_data")
+        val imgUser = jsonObjectTrans?.optString("Image")
+        val AadharNo = jsonObjectTrans?.optString("AadhaarInfo")
+        val AddressEnglish = jsonObjectTrans?.optString("AddressEnglish")
+        val EmailInfo = jsonObjectTrans?.optString("EmailInfo")
+        val PhoneInfo = jsonObjectTrans?.optString("PhoneInfo")
+        val UserSelfie = jsonObjectTrans?.optString("UserSelfie")
+
+        val basicInfo = jsonObjectTrans?.optJSONObject("BasicInfo")
+        val UserName = basicInfo?.optString("Name")
+        val DOB = basicInfo?.optString("DOB")
+        val Gender = basicInfo?.optString("Gender")
+
+        val dialog = Dialog(activity!!)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.confirm_aadhaar_layout)
+
+        with(dialog){
+
+            val imageBytes = Base64.decode(imgUser, Base64.DEFAULT)
+            val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes?.size!!)
+            imgAadhaar.setImageBitmap(decodedImage)
+
+            val imageBytesSelfy = Base64.decode(imgUser, Base64.DEFAULT)
+            val decodedImageSelfy = BitmapFactory.decodeByteArray(imageBytesSelfy, 0, imageBytesSelfy?.size!!)
+            imgUserSelfy.setImageBitmap(decodedImageSelfy)
+            tvAddress.text = AddressEnglish
+            tvEmail.text = if(EmailInfo?.isNotBlank()!!) EmailInfo else "---"
+            tvPhone.text =  if(PhoneInfo?.isNotBlank()!!) PhoneInfo else "---"
+            tvAadhaar.text = AadharNo
+            tvName.text = UserName
+            tvDob.text = DOB
+            tvGender.text = Gender
+
+            yesBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        }
+//        val body = dialog.findViewById(R.id.body) as TextView
+//        body.text = title
+//        val yesBtn = dialog.findViewById(R.id.yesBtn) as Button
+//        val noBtn = dialog.findViewById(R.id.noBtn) as TextView
+//        noBtn.setOnClickListener { dialog.dismiss() }
+            dialog.show()
     }
 
     private fun setImage() {
@@ -724,6 +866,41 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                 matrix,
                 true
         )
+    }
+
+    override fun onSucessInit(response: ZoopInitResponse) {
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        sharedPrefOBJ.zoopGatewayId = response.id   //setting zoop trans id to pref.
+        openOfflineAadhaarActivity()
+       // updateIdData(sharedPrefOBJ)
+    }
+
+    private fun openOfflineAadhaarActivity() {
+        val gatewayIntent =  Intent(activity!!, ZoopConsentActivity::class.java)
+        gatewayIntent.putExtra(ZOOP_TRANSACTION_ID, sharedPrefOBJ.zoopGatewayId)
+        gatewayIntent.putExtra(ZOOP_BASE_URL, "preprod.aadhaarapi.com")
+       // gatewayIntent.putExtra(ZOOP_EMAIL, Email) //not mandatory
+//gatewayIntent.putExtra(ZOOP_UID, uid); //not mandatory
+     //   gatewayIntent.putExtra(ZOOP_PHONE, phone); //not mandatory
+      //  gatewayIntent.putExtra(ZOOP_IS_ASSIST_MODE_ONLY, false); //not mandatory
+        gatewayIntent.putExtra(ZOOP_REQUEST_TYPE, OFFLINE_AADHAAR)
+        startActivityForResult(gatewayIntent, REQUEST_AADHAARAPI)
+    }
+
+    override fun onFailureInit(response: ZoopInitFailureResponse) {
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        Toast.makeText(activity!!,response.message,Toast.LENGTH_LONG).show()
+    }
+
+    override fun onUnknownErr(mgs: String) {
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        Toast.makeText(activity!!,mgs,Toast.LENGTH_LONG).show()
     }
 
 }

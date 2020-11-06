@@ -1,6 +1,7 @@
 package com.app.l_pesa.splash.view
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -226,8 +227,15 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         txtHeader.visibility = View.INVISIBLE
         buttonRetry.visibility = View.INVISIBLE
         //
+        var version = ""
+        try {
+            val pInfo = this.packageManager.getPackageInfo(this.packageName, 0)
+            version = pInfo.versionName.replace(".","")
+        } catch ( e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
         val jsonObject = JsonObject()
-        jsonObject.addProperty("version", "1021")
+        jsonObject.addProperty("version", version)
         progressBar.visibility = View.VISIBLE
         PresenterCountry().checkVersion(this@SplashActivity, jsonObject, object : ICallBackVersion {
             override fun onResponse(status: Boolean) {
