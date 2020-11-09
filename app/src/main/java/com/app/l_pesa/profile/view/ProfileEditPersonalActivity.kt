@@ -74,6 +74,7 @@ import java.util.*
 
 class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBackMarital, ICallBackPersonalInfo, ICallBackUpload, ICallBackEmailVerify {
 
+    private lateinit var profileData:ResUserInfo.Data
     private val requestPhoto = 10
     private var captureImageStatus: Boolean = false
     private lateinit var photoFile: File
@@ -88,7 +89,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
         toolbarFont(this@ProfileEditPersonalActivity)
 
         val sharedPrefOBJ = SharedPref(this@ProfileEditPersonalActivity)
-        val profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
+        profileData = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
         initLoader()
         initData(profileData)
         loadTitle(profileData)
@@ -375,15 +376,21 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
 
         imgProfile.setOnClickListener {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (checkAndRequestPermissions()) {
-                    cameraClick()
+            if(profileData.userPersonalInfo?.profileImageVerify ==1){
+                Toast.makeText(this,"Profile Image already verified.",Toast.LENGTH_LONG).show()
+
+            }else{
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkAndRequestPermissions()) {
+                        cameraClick()
+                    } else {
+                        checkAndRequestPermissions()
+                    }
                 } else {
-                    checkAndRequestPermissions()
+                    cameraClick()
                 }
-            } else {
-                cameraClick()
             }
+
 
         }
     }

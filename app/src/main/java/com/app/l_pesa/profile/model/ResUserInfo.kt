@@ -41,6 +41,8 @@ class ResUserInfo {
         @Expose
         var totalStatements: Int?=0
 
+
+
     }
 
     inner class Status {
@@ -243,6 +245,10 @@ class ResUserInfo {
         @SerializedName("email_address_verify")
         @Expose
         var emailVerify:Int = 0
+
+        @SerializedName("profile_image_verify")
+        @Expose
+        var profileImageVerify:Int = 0
 
     }
 }
