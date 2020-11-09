@@ -317,6 +317,12 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             intent.putExtra("email",etEmail.text.toString().trim())
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }else if (data.next == "phone_number"){
+            val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+            intent.putExtra("email",etEmail.text.toString().trim())
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
     }
 
