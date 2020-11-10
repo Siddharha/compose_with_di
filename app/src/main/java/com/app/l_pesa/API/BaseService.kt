@@ -111,6 +111,9 @@ interface BaseService{
     @POST("user/register")
     fun doRegister(@Body request: JsonObject): Observable<ResRegistrationOne>
 
+    @GET("get_id_types")
+    fun doGetIdList(@Query("country") countryCode:String): Observable<RegisterPageIdListResp>
+
     @POST("user/step_2")
     fun doRegisterTwo(@Body request: JsonObject): Observable<ResRegistrationTwo>
 

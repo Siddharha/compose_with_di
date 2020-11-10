@@ -180,7 +180,7 @@
                     android:padding="@dimen/_5sdp"
                     android:fontFamily="@font/montserrat"
                     android:layout_height="wrap_content"
-                    android:hint="Select Start Date " />
+                    android:hint="Start Statement Period" />
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/_1sdp"
@@ -192,7 +192,7 @@
                     android:layout_width="match_parent"
                     android:padding="@dimen/_5sdp"
                     android:layout_height="wrap_content"
-                    android:hint="Select End Date " />
+                    android:hint="End Statement Period" />
             </LinearLayout>
 
             <com.app.l_pesa.common.CommonTextRegular

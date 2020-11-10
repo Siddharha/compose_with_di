@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.Window
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,26 +15,37 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.profile.adapter.TitleListAdapter
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.registration.adapter.PersonalIdListAdapter
+import com.app.l_pesa.registration.inter.ICallBackRegisterFour
+import com.app.l_pesa.registration.model.RegisterPageIdListResp
+import com.app.l_pesa.registration.presenter.PresenterRegistrationFour
 import kotlinx.android.synthetic.main.activity_registration_step_four.*
 import kotlinx.android.synthetic.main.layout_registration_step_four.*
 
-class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
+class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBackRegisterFour {
 
 
-    private val idList     = arrayListOf("1","2","3","4")
-    private val idNameList = arrayListOf("Passport", "Driving License", "National ID","Voter ID")
+    lateinit var idList:ArrayList<String>
+    lateinit var idNameList:ArrayList<String> /*= arrayListOf("Passport", "Driving License", "National ID","Voter ID")*/
     private var typeId     =""
+    private lateinit var titleAdapter:PersonalIdListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_four)
         setSupportActionBar(toolbar)
         toolbarFont(this@RegistrationStepFourActivity)
-
+        idNameList = ArrayList()
+        idList = ArrayList()
+        getIdList()
         initUI()
 
+    }
+
+    private fun getIdList() {
+        PresenterRegistrationFour().doGetIdList(this,"in",this)
     }
 
     private fun showId()
@@ -42,7 +54,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.layout_list_single)
         val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-        val titleAdapter                = PersonalIdListAdapter(this@RegistrationStepFourActivity, idList,idNameList,dialog,this)
+        titleAdapter                = PersonalIdListAdapter(this@RegistrationStepFourActivity, idList,idNameList,dialog,this)
         recyclerView?.layoutManager     = LinearLayoutManager(this@RegistrationStepFourActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter           = titleAdapter
         dialog.show()
@@ -52,7 +64,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
 
     private fun initUI()
     {
-        showId()
+       // showId()
 
         etIdType.setOnClickListener {
 
@@ -121,6 +133,20 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId {
         super.onResume()
         MyApplication.getInstance().trackScreenView(this@RegistrationStepFourActivity::class.java.simpleName)
 
+    }
+
+    override fun onSuccessIdListResp(list: List<RegisterPageIdListResp.Data.IdType>) {
+        idNameList.clear()
+        idList.clear()
+       for(itm in list){
+           idNameList.add(itm.name)
+           idList.add(itm.id.toString())
+       }
+        titleAdapter.notifyDataSetChanged()
+    }
+
+    override fun onErrorIdListResp(jsonMessage: String) {
+        Log.e("resp",jsonMessage)
     }
 
 
