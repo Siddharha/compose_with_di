@@ -58,10 +58,10 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSPersonalId
 import com.app.l_pesa.profile.presenter.PresenterAddProof
 import com.app.l_pesa.profile.presenter.PresenterDeleteProof
-import com.app.l_pesa.profile.zoop.ICallBackZoop
-import com.app.l_pesa.profile.zoop.PresenterZoop
-import com.app.l_pesa.profile.zoop.ZoopInitFailureResponse
-import com.app.l_pesa.profile.zoop.ZoopInitResponse
+import com.app.l_pesa.zoop.ICallBackZoop
+import com.app.l_pesa.zoop.PresenterZoop
+import com.app.l_pesa.zoop.ZoopInitFailureResponse
+import com.app.l_pesa.zoop.ZoopInitResponse
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
@@ -149,6 +149,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     val presenterZoop = PresenterZoop()
                     presenterZoop.doOfflineAadharInit(activity!!, this)
 
+                }else{
+                    updateIdData(sharedPrefOBJ)
                 }
             }else{
                 updateIdData(sharedPrefOBJ)
@@ -882,9 +884,9 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         gatewayIntent.putExtra(ZOOP_TRANSACTION_ID, sharedPrefOBJ.zoopGatewayId)
         gatewayIntent.putExtra(ZOOP_BASE_URL, "preprod.aadhaarapi.com")
        // gatewayIntent.putExtra(ZOOP_EMAIL, Email) //not mandatory
-//gatewayIntent.putExtra(ZOOP_UID, uid); //not mandatory
+       // gatewayIntent.putExtra(ZOOP_UID, 238114456672); //not mandatory
      //   gatewayIntent.putExtra(ZOOP_PHONE, phone); //not mandatory
-      //  gatewayIntent.putExtra(ZOOP_IS_ASSIST_MODE_ONLY, false); //not mandatory
+        gatewayIntent.putExtra(ZOOP_IS_ASSIST_MODE_ONLY, true) //not mandatory
         gatewayIntent.putExtra(ZOOP_REQUEST_TYPE, OFFLINE_AADHAAR)
         startActivityForResult(gatewayIntent, REQUEST_AADHAARAPI)
     }

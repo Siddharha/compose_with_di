@@ -1,14 +1,8 @@
-package com.app.l_pesa.profile.zoop
+package com.app.l_pesa.zoop
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
-import com.app.l_pesa.common.CommonMethod
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import org.json.JSONObject
 import retrofit2.Call
-import retrofit2.HttpException
 import retrofit2.Response
 
 class PresenterZoop {

@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
 import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonMethod.requestEmailHint
+import com.app.l_pesa.common.CommonMethod.requestHint
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.inter.ICallBackEmail
@@ -33,7 +35,7 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
 
 
     private lateinit var  progressDialog   : ProgressDialog
-
+    private val EMAIL_VERIFICATION = 100
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,7 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
             }
             handled
         }
+
 
     }
 

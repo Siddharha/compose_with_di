@@ -1,4 +1,4 @@
-package com.app.l_pesa.profile.zoop
+package com.app.l_pesa.zoop
 
 interface ICallBackZoop {
     fun onSucessInit(response: ZoopInitResponse)

@@ -42,6 +42,7 @@ import com.app.l_pesa.registration.model.ReqVerifyMobile
 import com.app.l_pesa.registration.presenter.PresenterVerify
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
+import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
@@ -50,6 +51,8 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.sinch.verification.*
 import kotlinx.android.synthetic.main.activity_verify_mobile.*
+import kotlinx.android.synthetic.main.activity_verify_mobile.rootLayout
+import kotlinx.android.synthetic.main.layout_registration_step_one.*
 import java.lang.Exception
 import java.sql.DriverManager.println
 import java.util.*
@@ -61,7 +64,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     private lateinit var progressDialog: ProgressDialog
     private lateinit var alCountry: ArrayList<ResModelCountryList>
     private lateinit var adapterCountry: CountryListAdapter
-
+    private val sharedPrefOBJ : SharedPref by lazy{ SharedPref(this@VerifyMobileActivity)}
     private var email: String? = null
     private var image: String? = null
     private var tag: String? = null
@@ -69,6 +72,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     private var category: String? = null
     private var name: String? = null
     private var socId: String? = null
+    private val PHONE_REQ_HINT = 1
 
     private var uniqueID: String? = null
 
@@ -111,12 +115,25 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             }
         }
         //
+        CommonMethod.requestHint(this,PHONE_REQ_HINT)
         initLoader()
         getMobile()
         loadCountry()
         onClickTermPolicy()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == PHONE_REQ_HINT){
+            if (resultCode == RESULT_OK) {
+                val credential = data?.getParcelableExtra<Credential>(Credential.EXTRA_KEY)
+                //Log.e("cred",credential?.id!!)
+
+                etPhoneVerify.setText(credential?.id?.removePrefix(sharedPrefOBJ.countryIsdCode))
+                // credential.getId();  <-- will need to process phone number string
+            }
+        }
+    }
 
     private fun initLoader() {
         progressDialog = ProgressDialog(this@VerifyMobileActivity, R.style.MyAlertDialogStyle)
@@ -148,7 +165,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     }
 
     private fun loadCountry() {
-        val sharedPrefOBJ = SharedPref(this@VerifyMobileActivity)
+
         if (TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode)) {
             etPhoneVerify.tag = "+000   "
             showCountry()

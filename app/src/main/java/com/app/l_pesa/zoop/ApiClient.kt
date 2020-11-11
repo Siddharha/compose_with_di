@@ -1,11 +1,9 @@
-package com.app.l_pesa.profile.zoop
+package com.app.l_pesa.zoop
 
-import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.BuildConfig.*
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 

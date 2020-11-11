@@ -41,6 +41,7 @@ import com.app.l_pesa.calculator.view.LoanCalculatorActivity
 import com.app.l_pesa.common.*
 import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
 import com.app.l_pesa.common.CommonMethod.openTermCondition
+import com.app.l_pesa.common.CommonMethod.requestHint
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.inter.ICallBackLogin
@@ -55,6 +56,10 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.credentials.Credential
+import com.google.android.gms.auth.api.credentials.Credentials
+import com.google.android.gms.auth.api.credentials.HintRequest
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -78,6 +83,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     private lateinit var  progressDialog   : ProgressDialog
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
+    private val CREDENTIAL_PICKER_REQUEST = 1
+    private val sharedPrefOBJ: SharedPref by lazy{SharedPref(this@LoginActivity)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +92,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
+        requestHint(this,CREDENTIAL_PICKER_REQUEST)
         initLoader()
         loadCountry()
         loginProcess()
@@ -156,7 +163,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         buttonLoanCalculator.setOnClickListener {
 
             buttonLoanCalculator.isClickable   = false
-            val sharedPrefOBJ= SharedPref(this@LoginActivity)
+
             sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
             sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
             startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
@@ -184,6 +191,9 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         }))
 
+        etPhone.setOnClickListener {
+           // requestHint()
+        }
         etPhone.transformationMethod = SingleLineTransformationMethod.getInstance()
         etPhone.setOnEditorActionListener { _, actionId, _ ->
             var handled = false
@@ -673,8 +683,22 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     public override fun onResume() {
         super.onResume()
+
         MyApplication.getInstance().trackScreenView(this@LoginActivity::class.java.simpleName)
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREDENTIAL_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                val credential = data?.getParcelableExtra<Credential>(Credential.EXTRA_KEY)
+                //Log.e("cred",credential?.id!!)
+
+                etPhone.setText(credential?.id?.removePrefix(sharedPrefOBJ.countryIsdCode))
+                // credential.getId();  <-- will need to process phone number string
+            }
+        }
     }
 
     inner class MyVerificationListener: VerificationListener {
@@ -740,4 +764,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     }
 
+
 }
+

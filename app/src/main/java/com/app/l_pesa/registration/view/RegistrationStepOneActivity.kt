@@ -37,6 +37,7 @@ import com.app.l_pesa.analytics.MyApplication
 import com.app.l_pesa.common.*
 import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
 import com.app.l_pesa.common.CommonMethod.openTermCondition
+import com.app.l_pesa.common.CommonMethod.requestEmailHint
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.main.view.MainActivity
@@ -55,6 +56,7 @@ import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -64,8 +66,13 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_registration_step_one.*
+import kotlinx.android.synthetic.main.activity_registration_step_one.toolbar
+import kotlinx.android.synthetic.main.activity_registration_step_one.txtCountry
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
+import kotlinx.android.synthetic.main.layout_registration_step_one.etPhone
+import kotlinx.android.synthetic.main.layout_registration_step_one.rootLayout
 import org.json.JSONException
 import org.json.JSONObject
 import java.net.URL
@@ -81,7 +88,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     private lateinit var progressDialog: ProgressDialog
     private lateinit var alCountry: ArrayList<ResModelCountryList>
     private lateinit var adapterCountry: CountryListAdapter
-
+    private val EMAIL_HINT_REQ = 1
     private lateinit var btnGoogle: CustomButtonRegular
 
     //
@@ -101,7 +108,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         FacebookSdk.sdkInitialize(applicationContext)
 
         btnGoogle = findViewById(R.id.btnGoogle)
-
+        requestEmailHint(this,EMAIL_HINT_REQ)
         initData()
         val sharedPref = SharedPref(this@RegistrationStepOneActivity)
 
@@ -210,6 +217,16 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
 
             handleResult(result)
+        }
+
+        if(requestCode == EMAIL_HINT_REQ){
+            if (resultCode == RESULT_OK) {
+                val credential = data?.getParcelableExtra<Credential>(Credential.EXTRA_KEY)
+                //Log.e("cred",credential?.id!!)
+
+                etEmail.setText(credential?.id)
+                // credential.getId();  <-- will need to process phone number string
+            }
         }
     }
     private fun handleResult(result: GoogleSignInResult?) {

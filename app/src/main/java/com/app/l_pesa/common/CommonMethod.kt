@@ -1,6 +1,7 @@
 package com.app.l_pesa.common
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -16,6 +17,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
+import com.google.android.gms.auth.api.credentials.Credentials
+import com.google.android.gms.auth.api.credentials.HintRequest
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
@@ -208,5 +211,22 @@ object CommonMethod {
         return word
     }
 
+     fun requestHint(activity: Activity,cred_req:Int) {
+        val hintRequest =  HintRequest.Builder()
+                .setPhoneNumberIdentifierSupported(true)
+                .build()
+        val intent = Credentials.getClient(activity.baseContext).getHintPickerIntent(hintRequest)
+        activity.startIntentSenderForResult(intent.intentSender, cred_req, null, 0, 0, 0)
+
+         }
+    fun requestEmailHint(activity: Activity,cred_req:Int) {
+        val hintRequest =  HintRequest.Builder()
+                .setEmailAddressIdentifierSupported(true)
+
+                .build()
+        val intent = Credentials.getClient(activity.baseContext).getHintPickerIntent(hintRequest)
+        activity.startIntentSenderForResult(intent.intentSender, cred_req, null, 0, 0, 0)
+
+    }
 
 }
