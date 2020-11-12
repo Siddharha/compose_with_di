@@ -15,6 +15,7 @@ import android.media.Image
 import android.media.ImageReader
 import android.os.*
 import android.util.DisplayMetrics
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Size
 import android.util.SparseIntArray
@@ -62,9 +63,13 @@ class CamViewActivity : AppCompatActivity() {
 
     private fun onActionPerform() {
         fabCapture.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                takePicture()
-            }
+                try {
+                    takePicture()
+                    fabCapture.isEnabled = false
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
+
         }
 
         fabCamSwitch.setOnClickListener {
@@ -103,8 +108,7 @@ class CamViewActivity : AppCompatActivity() {
         val characteristics =
                 manager.getCameraCharacteristics(cameraDevice!!.id)
         var jpegSizes: Array<Size>? = null
-        if (characteristics != null) jpegSizes =
-                characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+         jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
                         ?.getOutputSizes(ImageFormat.JPEG)
 
         //Capture image with custom size
@@ -182,11 +186,12 @@ class CamViewActivity : AppCompatActivity() {
 
         cameraDevice?.createCaptureSession(outputSurface,object : CameraCaptureSession.StateCallback() {
             override fun onConfigureFailed(session: CameraCaptureSession) {
-
+                fabCapture.isEnabled = true
             }
 
             override fun onConfigured(session: CameraCaptureSession) {
                 try {
+
                     session.capture(
                             captureBuilder.build(),
                             captureListener,
@@ -266,15 +271,16 @@ class CamViewActivity : AppCompatActivity() {
 
         textureListener = object : TextureView.SurfaceTextureListener{
             override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture?, width: Int, height: Int) {
-
+                Log.e("texture","resized")
             }
 
             override fun onSurfaceTextureUpdated(surface: SurfaceTexture?) {
-
+                Log.e("texture","updated")
             }
 
             override fun onSurfaceTextureDestroyed(surface: SurfaceTexture?): Boolean {
-                return false
+                Log.e("texture","changed")
+                return true
             }
 
             override fun onSurfaceTextureAvailable(surface: SurfaceTexture?, width: Int, height: Int) {
@@ -305,7 +311,6 @@ class CamViewActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun createCameraPreview() {
-        try {
             val texture: SurfaceTexture = txMain.surfaceTexture!!
             texture.setDefaultBufferSize(imageDimension!!.width, imageDimension!!.height)
             setAspectRatioTextureView(imageDimension!!.width, imageDimension!!.height)
@@ -324,9 +329,7 @@ class CamViewActivity : AppCompatActivity() {
                     Toast.makeText(this@CamViewActivity, "Changed", Toast.LENGTH_SHORT).show()
                 }
             }, null)
-        } catch (@SuppressLint("NewApi") e: CameraAccessException) {
-            e.printStackTrace()
-        }
+
 
     }
 
@@ -334,23 +337,17 @@ class CamViewActivity : AppCompatActivity() {
     private fun updatePreview() {
         if (cameraDevice == null) Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
         captureRequestBuilder!!.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO)
+        cameraCaptureSessions!!.setRepeatingRequest(captureRequestBuilder!!.build(), null, mBackgroundHandler)
 
-        try {
 
-            cameraCaptureSessions!!.setRepeatingRequest(captureRequestBuilder!!.build(), null, mBackgroundHandler)
-
-        } catch (@SuppressLint("NewApi") e: CameraAccessException) {
-            e.printStackTrace()
-        }
     }
 
 
     @SuppressLint("RestrictedApi")
     private fun openCamera() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             val manager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
-            try {
+
                 if (intent.getBooleanExtra(CamUtil.CAM_SWITCH_OPT,false)) {
                     fabCamSwitch.visibility = View.VISIBLE
                 }else{
@@ -375,10 +372,8 @@ class CamViewActivity : AppCompatActivity() {
                     return
                 }
                 manager.openCamera(cameraId!!, stateCallback!!, null)
-            } catch (@SuppressLint("NewApi") e: CameraAccessException) {
-                e.printStackTrace()
-            }
-        }
+
+
 
     }
 

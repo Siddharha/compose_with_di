@@ -246,7 +246,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     }
 
     private fun fbLogOut() {
-        LoginManager.getInstance().logOut()
+        //LoginManager.getInstance().logOut()
     }
 
 
@@ -326,8 +326,8 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
     override fun onDestroy() {
         super.onDestroy()
-        googleLogout()
-        fbLogOut()
+      //  googleLogout()
+       // fbLogOut()
     }
 
     private fun initLoader() {
@@ -712,7 +712,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
     override fun onBackPressed() {
         googleLogout()
-        fbLogOut()
+        //fbLogOut()
         val intent = Intent(this@RegistrationStepOneActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

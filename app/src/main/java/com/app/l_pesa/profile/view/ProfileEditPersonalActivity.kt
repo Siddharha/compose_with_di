@@ -436,7 +436,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
 
                     //photoFile = Compressor(this@ProfileEditPersonalActivity).compressToFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
                    // captureFilePath = Uri.fromFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
-                    setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
+                    try {
+                        setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
 
         }
@@ -449,14 +453,14 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
             if (photoPath != Uri.EMPTY) {
                 progressDialog.show()
                 handleRotation(photoFile.absolutePath)
-                Handler().postDelayed({
+            //    Handler().postDelayed({
                     dismiss()
                     imgProfile.setImageURI(null)
                     imgProfile.setImageURI(photoPath)
 
                     captureImageStatus = true
                     photoFile = Compressor(this@ProfileEditPersonalActivity).compressToFile(photoFile)
-                }, 1000)
+             //   }, 1000)
 
             } else {
                 Toast.makeText(this@ProfileEditPersonalActivity, "Retake Photo", Toast.LENGTH_SHORT).show()

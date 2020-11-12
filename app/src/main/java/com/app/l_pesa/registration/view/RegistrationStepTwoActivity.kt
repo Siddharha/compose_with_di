@@ -149,7 +149,11 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
                 if (resultCode == Activity.RESULT_OK) {
                    // setImage()
-                    setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
+                    try {
+                        setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
 
         }
@@ -171,6 +175,8 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
                     val sharedPref = SharedPref(this@RegistrationStepTwoActivity)
                     sharedPref.imagePath = photoFile.absolutePath
                 }, 1000)
+
+
             } else {
                 Toast.makeText(this@RegistrationStepTwoActivity, "Retake Photo", Toast.LENGTH_SHORT).show()
             }
