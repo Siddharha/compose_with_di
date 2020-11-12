@@ -24,6 +24,7 @@ import android.view.View
 import android.view.Window
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -57,12 +58,10 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.credentials.Credential
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.auth.api.signin.GoogleSignInResult
+import com.google.android.gms.auth.api.signin.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.tasks.Task
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -95,9 +94,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private var mGoogleApiClient: GoogleApiClient? = null
     private val SIGN_IN = 202
+    private  val RC_SIGN_IN = 101
 
     //
-    private lateinit var callbackManager: CallbackManager
+    //private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,10 +125,19 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         initLoader()
         loadCountry()
         checkQualify()
-
+        setupNewGoogleSignIn()
         //
-        googleLogin()
-        fbLogin()
+        //googleLogin()
+        //fbLogin()
+        onActionPerform()
+
+    }
+
+    private fun onActionPerform() {
+
+        btnGoogle.setOnClickListener {
+            signInGoogle()
+        }
 
     }
 
@@ -138,18 +147,38 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso).build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        btnGoogle.setOnClickListener {
-            //val intent = mGoogleSignInClient?.signInIntent
+       /* btnGoogle.setOnClickListener {
+            val intent = mGoogleSignInClient?.signInIntent
             val intent = Auth.GoogleSignInApi?.getSignInIntent(mGoogleApiClient)
             startActivityForResult(intent, SIGN_IN)
-        }
+
+        }*/
 
     }
 
-    private fun fbLogin() {
-        callbackManager = CallbackManager.Factory.create()
+    private fun signInGoogle() {
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+       if(account !=null){
+           Toast.makeText(this,"User Already signed in Logging out before New Login.",Toast.LENGTH_LONG).show()
 
-        btnFacebook.setOnClickListener {
+           googleLogout()
+       }else{
+           val signInIntent = mGoogleSignInClient?.signInIntent
+           startActivityForResult(signInIntent, RC_SIGN_IN)
+       }
+    }
+
+    private fun setupNewGoogleSignIn() {
+        val gso =  GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+    }
+
+    private fun fbLogin() {
+      //  callbackManager = CallbackManager.Factory.create()
+
+      /*  btnFacebook.setOnClickListener {
             LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
             LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
@@ -165,7 +194,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                       "Error + ${error?.localizedMessage}".toast(this@RegistrationStepOneActivity)
                 }
             })
-        }
+        }*/
     }
 
     private fun loadFbInformation(currentAccessToken: AccessToken?) {
@@ -199,10 +228,21 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     }
 
     private fun googleLogout() {
-        //mGoogleSignInClient?.signOut()
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback {
-            //"Logout".toast(this@RegistrationStepOneActivity)
+        if(progressDialog.isShowing){
+            progressDialog.dismiss()
+            progressDialog.show()
         }
+        mGoogleSignInClient?.signOut()?.addOnCompleteListener {
+            if(progressDialog.isShowing){
+                progressDialog.dismiss()
+            }
+            signInGoogle()
+        }?.addOnFailureListener {
+            if(progressDialog.isShowing){
+                progressDialog.dismiss()
+            }
+        }
+
     }
 
     private fun fbLogOut() {
@@ -211,12 +251,36 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data)
+       // callbackManager.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
 
             handleResult(result)
+        }
+
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            progressDialog.show()
+            mGoogleSignInClient?.signOut()?.addOnCompleteListener {
+                if(progressDialog.isShowing){
+                    progressDialog.dismiss()
+                }
+                handleSignInResult(task)
+            }?.addOnFailureListener {
+                if(progressDialog.isShowing){
+                    progressDialog.dismiss()
+                }
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, "Unable to Login due to Unknown problem. please try again after some time!")
+            }?.addOnCanceledListener {
+                if(progressDialog.isShowing){
+                    progressDialog.dismiss()
+                }
+                CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepOneActivity, "Login Cancelled!")
+            }
+
         }
 
         if(requestCode == EMAIL_HINT_REQ){
@@ -229,6 +293,22 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             }
         }
     }
+
+    private fun handleSignInResult(task: Task<GoogleSignInAccount>?) {
+        if(task?.isSuccessful!!){
+            val result = task.result
+            // "Hello : ${account?.email} : ${account?.photoUrl.toString()}".toast(this@RegistrationStepOneActivity)
+
+            val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+            intent.putExtra("email",result?.email)
+            intent.putExtra("social_image",result?.photoUrl.toString())
+            intent.putExtra("name",result?.displayName)
+            intent.putExtra("social", "Google")
+            intent.putExtra("id",result?.id)
+            startActivity(intent)
+        }
+    }
+
     private fun handleResult(result: GoogleSignInResult?) {
         if (result!!.isSuccess){
             val account = result.signInAccount
