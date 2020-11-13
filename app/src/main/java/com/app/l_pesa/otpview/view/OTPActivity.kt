@@ -59,6 +59,7 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
      }
 
     private fun initialize(){
+       // otp_view.isEnabled = false
         smsBroadcastReceiver = SMSBroadcastReceiver()
         val filter =  IntentFilter("com.google.android.gms.auth.api.phone.SMS_RETRIEVED")
         registerReceiver(smsBroadcastReceiver,filter)
