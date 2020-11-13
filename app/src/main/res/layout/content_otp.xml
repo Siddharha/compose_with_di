@@ -64,37 +64,47 @@
                 />
 
             <TextView
+                android:id="@+id/otp_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Status"
+                app:layout_constraintBottom_toTopOf="@+id/txtResend"
+                app:layout_constraintEnd_toEndOf="@+id/otp_view"
+                app:layout_constraintTop_toBottomOf="@+id/otp_view" />
+
+            <TextView
                 android:id="@+id/txtResend"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/_2sdp"
                 android:text="@string/resend_verification"
                 android:textColor="@color/colorAppDeep"
-                android:textStyle="bold"
-                android:padding="@dimen/_2sdp"
                 android:textSize="@dimen/_12sdp"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/otp_view"
 
-                />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/txtTimer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:padding="@dimen/_2sdp"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/_12sdp"
-                android:gravity="center"
                 android:visibility="invisible"
-                android:padding="@dimen/_2sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/otp_view"
 
-                />
+                app:layout_constraintBottom_toTopOf="@+id/txtResend"
+                app:layout_constraintEnd_toStartOf="@+id/otp_txt"
+                app:layout_constraintStart_toStartOf="@+id/otp_view"
+                app:layout_constraintTop_toBottomOf="@+id/otp_view" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.app.l_pesa.analytics;
 
 import android.app.Application;
 
+import com.app.l_pesa.sms_retrieval.AppSignatureHelper;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -20,6 +21,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //--------OTP Hash code creation
+        AppSignatureHelper appSignature = new AppSignatureHelper(this); //Should be removed in production
+        appSignature.getAppSignatures();
+        //------------------------------
         mInstance = this;
 
         AnalyticsTrackers.initialize(this);

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -24,8 +25,11 @@ import com.app.l_pesa.otpview.inter.ICallBackVerifyOTP
 import com.app.l_pesa.otpview.model.PinData
 import com.app.l_pesa.otpview.presenter.PresenterOTP
 import com.app.l_pesa.pinview.view.PinSetActivity
+import com.app.l_pesa.sms_retrieval.OTPReceiveListener
+import com.app.l_pesa.sms_retrieval.SMSBroadcastReceiver
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_otp.*
@@ -33,11 +37,12 @@ import kotlinx.android.synthetic.main.content_otp.*
 import java.util.concurrent.TimeUnit
 
 
-class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerifyOTP {
+class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerifyOTP, OTPReceiveListener {
 
 
     private var clickCount=0
     private lateinit var  progressDialog   : ProgressDialog
+    lateinit var smsBroadcastReceiver: SMSBroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +50,39 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@OTPActivity)
-
+        initialize()
         initLoader()
+        startSmsListener()
         loadResend()
         otp_view.setOtpCompletionListener(this)
 
      }
+
+    private fun initialize(){
+        smsBroadcastReceiver = SMSBroadcastReceiver()
+        val filter =  IntentFilter("com.google.android.gms.auth.api.phone.SMS_RETRIEVED")
+        registerReceiver(smsBroadcastReceiver,filter)
+    }
+
+    private fun startSmsListener() {
+        val client = SmsRetriever.getClient(this /* context */)
+        val task = client.startSmsRetriever()
+        // Listen for success/failure of the start Task. If in a background thread, this
+        // can be made blocking using Tasks.await(task, [timeout]);
+        task.addOnSuccessListener {
+            // Successfully started retriever, expect broadcast intent
+            // ...
+            smsBroadcastReceiver.smsInti(this)
+            otp_txt.text = "Waiting for the OTP"
+        }
+
+        task.addOnFailureListener {
+            // Failed to start retriever, inspect Exception for more details
+            // ...
+            otp_txt.text = "Cannot Start SMS Retriever"
+        }
+    }
+
 
     override fun onOtpCompleted(otp: String) {
 
@@ -302,6 +334,15 @@ class OTPActivity : AppCompatActivity(), OnOtpCompletionListener, ICallBackVerif
     public override fun onResume() {
         super.onResume()
         MyApplication.getInstance().trackScreenView(this@OTPActivity::class.java.simpleName)
+
+    }
+
+    override fun onOTPReceived(otp: String) {
+        otp_view.setText(otp)
+        //doVerifyOTP(otp)
+    }
+
+    override fun onOTPTimeOut() {
 
     }
 
