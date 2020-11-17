@@ -435,9 +435,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
                 if (resultCode == Activity.RESULT_OK) {
 
                     //photoFile = Compressor(this@ProfileEditPersonalActivity).compressToFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
-                   // captureFilePath = Uri.fromFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
+                    //captureFilePath = Uri.fromFile(File(data.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
                     try {
+
                         setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
+
                     }catch (e:Exception){
                         e.printStackTrace()
                     }
@@ -448,6 +450,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
 
     private fun setImage(filepath:String) {
         photoFile = File(filepath)
+       // captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID, photoFile)
+        //photoFile = Compressor(this@ProfileEditPersonalActivity).compressToFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
+        // captureFilePath = Uri.fromFile(File(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!))
+       // Log.e("path",captureFilePath.path!!)
+
         val photoPath: Uri = Uri.fromFile(photoFile)//captureFilePath
         try {
             if (photoPath != Uri.EMPTY) {
@@ -467,7 +474,13 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
             }
 
         } catch (exp: Exception) {
-            Toast.makeText(this@ProfileEditPersonalActivity, "Retake Photo", Toast.LENGTH_SHORT).show()
+
+            try {
+                captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
+                Toast.makeText(this@ProfileEditPersonalActivity, captureFilePath.path, Toast.LENGTH_SHORT).show()
+            }catch(e:Exception){
+                e.printStackTrace()
+            }
         }
 
 

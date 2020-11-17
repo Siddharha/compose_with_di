@@ -141,10 +141,22 @@ class CamViewActivity : AppCompatActivity() {
         if(intent.getIntExtra(CamUtil.CAM_FACING,0) == 1){
             captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, 270)
         }
-        file = File(
-                Environment.getExternalStorageDirectory().toString() + "/" + UUID.randomUUID()
-                        .toString() + ".jpg"
-        )
+
+        val imagePath = File(filesDir, "images")
+
+//        file = File(
+//                Environment.getExternalStorageDirectory().toString() + "/images/" + UUID.randomUUID()
+//                        .toString() + ".jpg"
+//        )
+        file = File(imagePath, UUID.randomUUID()
+                .toString() + ".jpg")
+        if (file?.exists()!!) {
+            file?.delete()
+        } else {
+            file?.parentFile!!.mkdirs()
+        }
+        //captureFilePath = FileProvider.getUriForFile(this@ProfileEditPersonalActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
+
 
         val readerListener = ImageReader.OnImageAvailableListener { imageReader ->
             var image: Image? = null
