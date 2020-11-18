@@ -35,18 +35,18 @@
                         android:id="@+id/etCurrentPin"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:digits="0123456789"
                         android:hint="@string/current_pin"
                         android:inputType="numberSigned"
+                        android:longClickable="false"
                         android:maxLength="6"
                         android:maxLines="1"
-                        android:digits="0123456789"
+                        android:textColorHint="@color/colorGreyDeep"
                         android:textSize="@dimen/_13sdp"
                         app:autoSizeMaxTextSize="@dimen/_14sdp"
                         app:autoSizeMinTextSize="@dimen/_10sdp"
                         app:autoSizeStepGranularity="0.2sp"
-                        app:autoSizeTextType="uniform"
-                        android:textColorHint="@color/colorGreyDeep"
-                        android:longClickable="false"/>
+                        app:autoSizeTextType="uniform" />
 
                 </com.app.l_pesa.common.CommonInputLayout>
 

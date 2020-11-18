@@ -12,18 +12,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/analytics/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/analytics/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/SMSBroadcastReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/SMSBroadcastReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_change_login_pin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_change_login_pin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_change_pin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_change_pin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_registration_step_one.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_registration_step_one.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -509,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605590403720</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="implement fb_t_001">
+      <created>1605694074317</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1605694074317</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -564,7 +564,8 @@
     <MESSAGE value="1. goolge login fixed&#10;2. front cam crashing issue handled" />
     <MESSAGE value="auto SMS otp integration done in login" />
     <MESSAGE value="front camera capture issue solved" />
-    <option name="LAST_COMMIT_MESSAGE" value="front camera capture issue solved" />
+    <MESSAGE value="implement fb_t_001" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement fb_t_001" />
   </component>
   <component name="WindowStateProjectService">
     <state x="245" y="162" key="#PSD" timestamp="1605687212142">
@@ -613,10 +614,10 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1605693761907" />
-    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1605590403070">
+    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1605694073503">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1605590403069" />
+    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1605694073503" />
     <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1605693105893">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -649,10 +650,10 @@
       <screen x="0" y="23" width="1440" height="797" />
     </state>
     <state x="221" y="60" key="SettingsEditor/0.23.1440.797@0.23.1440.797" timestamp="1600329454828" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1605590407445">
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1605694076808">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1605590407445" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1605694076808" />
     <state width="720" height="398" key="XDebugger.FullValuePopup" timestamp="1604483863368">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -925,12 +926,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>196</line>
+          <line>217</line>
           <option name="timeStamp" value="214" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>201</line>
+          <line>222</line>
           <option name="timeStamp" value="215" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -967,26 +968,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditPersonalActivity.kt</url>
           <line>477</line>
           <option name="timeStamp" value="252" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>152</line>
-          <option name="timeStamp" value="255" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>168</line>
-          <option name="timeStamp" value="256" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>172</line>
-          <option name="timeStamp" value="257" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>160</line>
-          <option name="timeStamp" value="259" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

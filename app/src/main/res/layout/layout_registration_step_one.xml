@@ -140,7 +140,7 @@
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
@@ -148,12 +148,13 @@
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/btnSubmit"
         app:layout_constraintStart_toStartOf="@+id/btnSubmit"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebook" />
 
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/btnGoogle"

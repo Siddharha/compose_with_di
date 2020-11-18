@@ -77,7 +77,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
 
-import com.facebook.appevents.AppEventsLogger;
+import com.facebook.appevents.AppEventsLogger
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 
 
@@ -145,24 +146,25 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             signInGoogle()
         }
 
-        login_button.registerCallback(callbackManager,object :FacebookCallback<LoginResult>{
+        val accessToken = AccessToken.getCurrentAccessToken()
+        val isLoggedIn = accessToken != null && !accessToken.isExpired
+        if(isLoggedIn){
+
+            btnFacebook.setOnClickListener {
+                getEmailFromGraphAPI(accessToken)
+                //fbLogOut()
+            }
+
+        }else{
+            btnFacebook.setOnClickListener {
+                login_button.performClick()
+            }
+
+        }
+
+        login_button.registerCallback(callbackManager,object :FacebookCallback<LoginResult>{  //For functionality. by default it will not be visible
             override fun onSuccess(result: LoginResult?) {
-                val parameters =  Bundle()
-                parameters.putString("fields", "id,name,email,gender, birthday")
-
-                GraphRequest(
-                        AccessToken.getCurrentAccessToken(),
-                        result?.accessToken?.userId,
-                        parameters,
-                        HttpMethod.GET
-
-                ) {
-                    val response = it.jsonObject
-                    val emailId = response.optString("email")
-                    etEmail.setText(emailId)
-                    btnSubmit.performClick()
-                    fbLogOut()
-                }.executeAsync()
+                getEmailFromGraphAPI(result?.accessToken!!)
             }
 
             override fun onCancel() {
@@ -174,6 +176,25 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             }
         })
 
+    }
+
+    private fun getEmailFromGraphAPI(accessToken: AccessToken) {
+        val parameters = Bundle()
+        parameters.putString("fields", "email")
+
+        GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                accessToken.userId,
+                parameters,
+                HttpMethod.GET
+
+        ) {
+            val response = it.jsonObject
+            val emailId = response.optString("email")
+            etEmail.setText(emailId)
+            btnSubmit.performClick()
+            fbLogOut()
+        }.executeAsync()
     }
 
     private fun googleLogin() {
@@ -281,7 +302,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     }
 
     private fun fbLogOut() {
-        //LoginManager.getInstance().logOut()
+        LoginManager.getInstance().logOut()
     }
 
 
@@ -357,12 +378,6 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             intent.putExtra("id",account?.id)
             startActivity(intent)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-      //  googleLogout()
-       // fbLogOut()
     }
 
     private fun initLoader() {
