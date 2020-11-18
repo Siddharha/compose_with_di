@@ -142,30 +142,30 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
 
         buttonSubmit.setOnClickListener {
-
-            if(sharedPrefOBJ.countryCode == "in") {
-                if (etPersonalId.text.toString().contentEquals("Aadhaar Card")) {
-                    if (!captureImageStatus) {
-                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_image))
-                    } else if (personalId == 0) {
-                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
-                        showDialogIdType(sharedPrefOBJ)
-                    } else if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim())) {
-                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
-                    } else {
-                        if (CommonMethod.isNetworkAvailable(activity!!)) {
-                            progressDialog.show()
-                            val presenterZoop = PresenterZoop()
-                            presenterZoop.doOfflineAadharInit(activity!!, this)
-                        }
-                    }
-
-                }else{
-                    updateIdData(sharedPrefOBJ)
-                }
-            }else{
-                updateIdData(sharedPrefOBJ)
-            }
+            updateIdData(sharedPrefOBJ)
+//            if(sharedPrefOBJ.countryCode == "in") {
+//                if (etPersonalId.text.toString().contentEquals("Aadhaar Card")) {
+//                    if (!captureImageStatus) {
+//                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_image))
+//                    } else if (personalId == 0) {
+//                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
+//                        showDialogIdType(sharedPrefOBJ)
+//                    } else if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim())) {
+//                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
+//                    } else {
+//                        if (CommonMethod.isNetworkAvailable(activity!!)) {
+//                            progressDialog.show()
+//                            val presenterZoop = PresenterZoop()
+//                            presenterZoop.doOfflineAadharInit(activity!!, this)
+//                        }
+//                    }
+//
+//                }else{
+//                    updateIdData(sharedPrefOBJ)
+//                }
+//            }else{
+//                updateIdData(sharedPrefOBJ)
+//            }
 
         }
 
@@ -460,7 +460,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         personalIdType = type
                         personalId = id
 
-                    }else if (name == resources.getString(R.string.aadhaar_card)) {
+                    }/*else if (name == resources.getString(R.string.aadhaar_card)) {
 
                     personalIdName = name
                     etPersonalId.setText(personalIdName)
@@ -471,7 +471,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     personalId = id
 
 
-                }else {
+                }*/else {
                         ilIdNumber.visibility = View.VISIBLE
                         //imgProfile.visibility = View.VISIBLE
                         //textView9.visibility = View.VISIBLE

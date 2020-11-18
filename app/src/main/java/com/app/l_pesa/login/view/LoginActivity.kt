@@ -92,7 +92,11 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        requestHint(this,CREDENTIAL_PICKER_REQUEST)
+
+        val sharedPrefOBJ= SharedPref(this@LoginActivity)
+        if(!TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode)) {
+            requestHint(this, CREDENTIAL_PICKER_REQUEST)
+        }
         initLoader()
         loadCountry()
         loginProcess()

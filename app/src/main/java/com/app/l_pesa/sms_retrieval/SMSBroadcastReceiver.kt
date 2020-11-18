@@ -31,7 +31,7 @@ class SMSBroadcastReceiver : BroadcastReceiver() {
                     // by sending the code back to your server for SMS authenticity.
                     // But here we are just passing it to MainActivity
 
-                    otp = otp.replace("<#>Test App OTP: ", "").split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+                    otp = otp.replace("<#> your L-Pesa Verification Code is : ", "").split("ID: ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
                     otpReceiver?.onOTPReceived(otp)
 
 

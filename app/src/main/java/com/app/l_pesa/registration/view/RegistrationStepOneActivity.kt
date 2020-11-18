@@ -54,8 +54,6 @@ import com.app.l_pesa.registration.presenter.PresenterVerify
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.facebook.*
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.gms.auth.api.signin.*
@@ -79,6 +77,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
 
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult
+
 
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, ICallBackRegisterOne,
         GoogleApiClient.OnConnectionFailedListener, ICallBackEmailVerify, EmailVerifyListener {
@@ -95,7 +96,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     private var mGoogleApiClient: GoogleApiClient? = null
     private val SIGN_IN = 202
     private  val RC_SIGN_IN = 101
-
+    private val callbackManager : CallbackManager by lazy{ CallbackManager.Factory.create()}
     //
     //private lateinit var callbackManager: CallbackManager
 
@@ -105,7 +106,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepOneActivity)
-        FacebookSdk.sdkInitialize(applicationContext)
+       // FacebookSdk.sdkInitialize(applicationContext)
 
         btnGoogle = findViewById(R.id.btnGoogle)
         requestEmailHint(this,EMAIL_HINT_REQ)
@@ -125,6 +126,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         initLoader()
         loadCountry()
         checkQualify()
+        initFbLogin()
         setupNewGoogleSignIn()
         //
         //googleLogin()
@@ -133,11 +135,44 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
     }
 
+    private fun initFbLogin() {
+        login_button.setReadPermissions("email")
+    }
+
     private fun onActionPerform() {
 
         btnGoogle.setOnClickListener {
             signInGoogle()
         }
+
+        login_button.registerCallback(callbackManager,object :FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                val parameters =  Bundle()
+                parameters.putString("fields", "id,name,email,gender, birthday")
+
+                GraphRequest(
+                        AccessToken.getCurrentAccessToken(),
+                        result?.accessToken?.userId,
+                        parameters,
+                        HttpMethod.GET
+
+                ) {
+                    val response = it.jsonObject
+                    val emailId = response.optString("email")
+                    etEmail.setText(emailId)
+                    btnSubmit.performClick()
+                    fbLogOut()
+                }.executeAsync()
+            }
+
+            override fun onCancel() {
+                Log.e("res","Cancelled")
+            }
+
+            override fun onError(error: FacebookException?) {
+                Log.e("res",error?.message!!)
+            }
+        })
 
     }
 
@@ -197,7 +232,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         }*/
     }
 
-    private fun loadFbInformation(currentAccessToken: AccessToken?) {
+   /* private fun loadFbInformation(currentAccessToken: AccessToken?) {
         val graphRequest = GraphRequest.newMeRequest(currentAccessToken) { `object`, response ->
             try {
                 val name = `object`.getString("first_name")
@@ -226,7 +261,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         graphRequest.parameters = bundle
         graphRequest.executeAsync()
     }
-
+*/
     private fun googleLogout() {
         if(progressDialog.isShowing){
             progressDialog.dismiss()
@@ -251,7 +286,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-       // callbackManager.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
@@ -711,7 +746,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     }
 
     override fun onBackPressed() {
-        googleLogout()
+        //googleLogout()
         //fbLogOut()
         val intent = Intent(this@RegistrationStepOneActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK

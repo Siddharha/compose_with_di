@@ -145,12 +145,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/btnSubmit"
+        app:layout_constraintStart_toStartOf="@+id/btnSubmit"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
+
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/btnGoogle"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:background="@drawable/bg_google_app"
         android:drawableStart="@drawable/ic_google"
@@ -164,7 +174,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFacebook" />
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier1"
