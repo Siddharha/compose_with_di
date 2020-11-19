@@ -697,7 +697,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageButton
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:id="@+id/imgEditIdInfo"
                             android:contentDescription="@string/app_name"
                             android:layout_width="wrap_content"
@@ -850,7 +850,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/ic_edit_pencil_icon"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
 
                         <com.app.l_pesa.common.CommonTextRegular
                             android:id="@+id/textViewSt"
