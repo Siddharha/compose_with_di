@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">L-Pesa</string>
     <!--   <string name="facebook_app_id">770436653385979</string>-->
-   <!-- <string name="facebook_app_id">377266739110350</string>
-    <string name="fb_login_protocol_scheme">fb377266739110350</string>-->
+    <string name="facebook_app_id">377266739110350</string>
+    <string name="fb_login_protocol_scheme">fb377266739110350</string>
 
-    <string name="facebook_app_id">304581870595435</string>
-    <string name="fb_login_protocol_scheme">fb304581870595435</string>
+    <!--<string name="facebook_app_id">304581870595435</string>
+    <string name="fb_login_protocol_scheme">fb304581870595435</string>-->
 
     <string name="starter_loan"> $1 Starter Loan</string>
     <string name="l_pesa_risk_free">The L-Pesa Risk Free</string>
@@ -198,7 +198,7 @@
     <string name="change_transactional_pin">Change Transactional PIN</string>
     <string name="current_pin">Current Pin</string>
     <string name="your_security_pin">Your Security PIN</string>
-    <string name="your_otp_code">You are signing on a different device. To ensure that you own this device, enter the verification code sent on your registered mobile number.</string>
+    <string name="your_otp_code">An OTP will be sent to your registered mobile number and will be automatically verified. In case you don\'t have your registered mobile number then the verification code will have to be entered manually by you</string>
     <string name="resend_verification">Resend Verification Code</string>
     <string name="set_up_pin">Setup PIN</string>
     <string name="current_login_pin">Current Login PIN</string>
