@@ -63,21 +63,16 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_registration_step_one.*
 import kotlinx.android.synthetic.main.activity_registration_step_one.toolbar
 import kotlinx.android.synthetic.main.activity_registration_step_one.txtCountry
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 import kotlinx.android.synthetic.main.layout_registration_step_one.etPhone
 import kotlinx.android.synthetic.main.layout_registration_step_one.rootLayout
-import org.json.JSONException
 import org.json.JSONObject
-import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
 
-import com.facebook.appevents.AppEventsLogger
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 
@@ -138,6 +133,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
     private fun initFbLogin() {
         login_button.setReadPermissions("email")
+
     }
 
     private fun onActionPerform() {
@@ -179,8 +175,9 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
     }
 
     private fun getEmailFromGraphAPI(accessToken: AccessToken) {
+       // Log.e("token",accessToken.token)
         val parameters = Bundle()
-        parameters.putString("fields", "email")
+        parameters.putString("fields", "email,id,name")
 
         GraphRequest(
                 AccessToken.getCurrentAccessToken(),
@@ -190,9 +187,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
         ) {
             val response = it.jsonObject
-            val emailId = response.optString("email")
-            etEmail.setText(emailId)
-            btnSubmit.performClick()
+
+           // etEmail.setText(emailId)
+            //btnSubmit.performClick()
+            handleFacebookResult(response,accessToken.token)
             fbLogOut()
         }.executeAsync()
     }
@@ -378,6 +376,28 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
             intent.putExtra("id",account?.id)
             startActivity(intent)
         }
+    }
+
+    private fun handleFacebookResult(result: JSONObject?, token: String) {
+
+        Log.e("resp",result.toString())
+            // "Hello : ${account?.email} : ${account?.photoUrl.toString()}".toast(this@RegistrationStepOneActivity)
+        val emailId = result?.optString("email")
+        val userId = result?.optString("id")
+        val userName = result?.optString("name")
+        val socialImg = "https://graph.facebook.com/"+
+                userId+
+                "/picture?type=large&access_token=$token"
+
+        Log.e("img",socialImg)
+            val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)
+            intent.putExtra("email",emailId)
+            intent.putExtra("social_image",socialImg)
+            intent.putExtra("name",userName)
+            intent.putExtra("social", "Facebook")
+            intent.putExtra("id",userId)
+            startActivity(intent)
+
     }
 
     private fun initLoader() {

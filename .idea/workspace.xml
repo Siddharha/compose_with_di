@@ -6,21 +6,24 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="tok" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/SMSBroadcastReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/SMSBroadcastReceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="My_Device" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="TA64301Q5P" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -527,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1605857891008</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="implement fb_t_004">
+      <created>1605877303977</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1605877303978</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -628,38 +638,38 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="561" y="293" key="AndroidCreateXmlResourceDialog/0.23.1440.808@0.23.1440.808" timestamp="1604578594464" />
-    <state x="576" y="194" key="AndroidProcessChooserDialog" timestamp="1605693761907">
+    <state x="576" y="194" key="AndroidProcessChooserDialog" timestamp="1605965053927">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1605693761907" />
-    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1605857890479">
+    <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1605965053927" />
+    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1605877303284">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1605857890479" />
+    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1605877303284" />
     <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1605693105893">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1094" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1605693105893" />
-    <state width="1398" height="162" key="GridCell.Tab.0.bottom" timestamp="1605768743548">
+    <state width="1398" height="187" key="GridCell.Tab.0.bottom" timestamp="1605967143696">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.bottom/0.23.1440.797@0.23.1440.797" timestamp="1600434886239" />
-    <state width="1398" height="162" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1605768743548" />
-    <state width="1398" height="162" key="GridCell.Tab.0.center" timestamp="1605768743547">
+    <state width="1398" height="187" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1605967143696" />
+    <state width="1398" height="187" key="GridCell.Tab.0.center" timestamp="1605967143695">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.center/0.23.1440.797@0.23.1440.797" timestamp="1600434886238" />
-    <state width="1398" height="162" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1605768743547" />
-    <state width="1398" height="162" key="GridCell.Tab.0.left" timestamp="1605768743546">
+    <state width="1398" height="187" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1605967143695" />
+    <state width="1398" height="187" key="GridCell.Tab.0.left" timestamp="1605967143695">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.left/0.23.1440.797@0.23.1440.797" timestamp="1600434886237" />
-    <state width="1398" height="162" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1605768743546" />
-    <state width="1398" height="162" key="GridCell.Tab.0.right" timestamp="1605768743547">
+    <state width="1398" height="187" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1605967143695" />
+    <state width="1398" height="187" key="GridCell.Tab.0.right" timestamp="1605967143696">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="162" key="GridCell.Tab.0.right/0.23.1440.797@0.23.1440.797" timestamp="1600434886239" />
-    <state width="1398" height="162" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1605768743547" />
+    <state width="1398" height="187" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1605967143696" />
     <state x="430" y="144" key="MultipleFileMergeDialog" timestamp="1600239302821">
       <screen x="0" y="23" width="1440" height="797" />
     </state>
@@ -668,10 +678,10 @@
       <screen x="0" y="23" width="1440" height="797" />
     </state>
     <state x="221" y="60" key="SettingsEditor/0.23.1440.797@0.23.1440.797" timestamp="1600329454828" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1605857893676">
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1605877306483">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1605857893676" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1605877306483" />
     <state width="720" height="398" key="XDebugger.FullValuePopup" timestamp="1604483863368">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -680,11 +690,11 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="100" y="123" width="1240" height="597" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.808@0.23.1440.808" timestamp="1605865945946" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1605849242162">
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1605964242330">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="390" y="254" key="com.intellij.ide.util.TipDialog/0.23.1440.797@0.23.1440.797" timestamp="1600583566542" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1605849242162" />
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1605964242330" />
     <state x="500" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600319276690">
       <screen x="0" y="23" width="1440" height="797" />
     </state>
@@ -944,12 +954,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>217</line>
+          <line>215</line>
           <option name="timeStamp" value="214" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
-          <line>222</line>
+          <line>220</line>
           <option name="timeStamp" value="215" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
