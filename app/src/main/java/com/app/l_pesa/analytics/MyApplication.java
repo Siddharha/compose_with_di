@@ -23,8 +23,8 @@ public class MyApplication extends Application {
         super.onCreate();
 
         //--------OTP Hash code creation
-        AppSignatureHelper appSignature = new AppSignatureHelper(this); //Should be removed in production
-        appSignature.getAppSignatures();
+       // AppSignatureHelper appSignature = new AppSignatureHelper(this); //Should be removed in production
+       // appSignature.getAppSignatures();
         //------------------------------
         mInstance = this;
 

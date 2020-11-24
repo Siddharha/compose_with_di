@@ -2,6 +2,7 @@ package com.app.l_pesa.profile.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
@@ -23,12 +24,14 @@ class PresenterUserInfo {
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
                     responseBody
+
                 }
                 .subscribe({ response ->
 
                     try {
                         if (response.status!!.isSuccess)
                         {
+                          //  Log.e("response",response.data.toString())
                             callBackOBJ.onSuccessUserInfo(response.data!!)
 
                         } else
