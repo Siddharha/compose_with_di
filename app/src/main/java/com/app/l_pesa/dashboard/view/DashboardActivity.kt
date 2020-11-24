@@ -266,10 +266,19 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             val options = RequestOptions()
             options.placeholder(R.drawable.ic_user)
-            Glide.with(this@DashboardActivity)
-                    .load(BuildConfig.PROFILE_IMAGE_URL + userData.user_personal_info.profile_image)
-                    .apply(options)
-                    .into(imgProfile)
+
+            if(!userData.user_personal_info.profile_image.contains("http",false)){
+                Glide.with(this@DashboardActivity)
+                        .load(BuildConfig.PROFILE_IMAGE_URL + userData.user_personal_info.profile_image)
+                        .apply(options)
+                        .into(imgProfile)
+            }else{
+                Glide.with(this@DashboardActivity)
+                        .load(userData.user_personal_info.profile_image)
+                        .apply(options)
+                        .into(imgProfile)
+            }
+
 
         }
 

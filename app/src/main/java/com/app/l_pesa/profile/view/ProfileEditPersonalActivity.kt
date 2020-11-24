@@ -118,10 +118,21 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
     private fun initData(profileData: ResUserInfo.Data) {
         val options = RequestOptions()
         options.placeholder(R.drawable.ic_user)
-        Glide.with(this@ProfileEditPersonalActivity)
-                .load(BuildConfig.PROFILE_IMAGE_URL + profileData.userInfo!!.profileImage)
-                .apply(options)
-                .into(imgProfile)
+
+        val pImg = profileData.userInfo!!.profileImage
+
+        if(pImg.contains("http",false)){
+            Glide.with(this@ProfileEditPersonalActivity)
+                    .load(pImg)
+                    .apply(options)
+                    .into(imgProfile)
+        }else{
+            Glide.with(this@ProfileEditPersonalActivity)
+                    .load(BuildConfig.PROFILE_IMAGE_URL + profileData.userInfo!!.profileImage)
+                    .apply(options)
+                    .into(imgProfile)
+        }
+
 
         if (!TextUtils.isEmpty(profileData.userPersonalInfo!!.firstName)) {
             etNameF.setText(profileData.userPersonalInfo!!.firstName)

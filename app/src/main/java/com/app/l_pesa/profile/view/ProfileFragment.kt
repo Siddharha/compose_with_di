@@ -265,19 +265,37 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         getProfileInfo(data)
 
+        val pImg = data.userInfo!!.profileImage
         /*Profile Information*/
 
-        try {
-            val options = RequestOptions()
-             Glide.with(activity!!)
-                    .load(BuildConfig.PROFILE_IMAGE_URL+data.userInfo!!.profileImage)
-                    .apply(options)
-                    .into(imgProfile)
-        }
-        catch (exception: Exception)
-        {
+        if(pImg.contains("http",false)){
+            try {
+                val options = RequestOptions()
+                Glide.with(activity!!)
+                        .load(pImg)
+                        .apply(options)
+                        .into(imgProfile)
+            }
+            catch (exception: Exception)
+            {
 
+            }
+        }else{
+            try {
+                val options = RequestOptions()
+                Glide.with(activity!!)
+                        .load(BuildConfig.PROFILE_IMAGE_URL+data.userInfo!!.profileImage)
+                        .apply(options)
+                        .into(imgProfile)
+            }
+            catch (exception: Exception)
+            {
+
+            }
         }
+
+
+
         if(!TextUtils.isEmpty(data.userPersonalInfo!!.emailAddress))
         {
             txtEmail.text=data.userPersonalInfo!!.emailAddress
@@ -527,9 +545,11 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     {
         try {
 
+
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
+
             Glide.with(activity!!)
                     .load(BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)

@@ -117,11 +117,11 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
             {
                 if (CommonMethod.isNetworkAvailable(this@RegistrationStepFourActivity)) {
 
-                    if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
+                    /*if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
                         progressDialog.show()
                         val presenterZoop = PresenterZoop()
                         presenterZoop.doOfflineAadharInit(this, this)
-                    }else {
+                    }else {*/
                     val bundle     = Bundle()
                     bundle.putString("id_type",typeId)
                     bundle.putString("id_number",etIdNumber.text.toString())
@@ -129,7 +129,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
                     intent.putExtras(bundle)
                     startActivity(intent,bundle)
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    }
+                   // }
                 }
                 else{
                     CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepFourActivity, resources.getString(R.string.no_internet))
@@ -145,11 +145,11 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
             etIdType.setText(idNameList[position])
             typeId = idList[position]
 
-        if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
+    /*    if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
             tilNumber.visibility = View.GONE
         }else{
             tilNumber.visibility = View.VISIBLE
-        }
+        }*/
 
     }
 
