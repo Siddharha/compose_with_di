@@ -385,9 +385,10 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
         val emailId = result?.optString("email")
         val userId = result?.optString("id")
         val userName = result?.optString("name")
-        val socialImg = "https://graph.facebook.com/"+
+        val socialImg = /*"https://graph.facebook.com/"+
                 userId+
-                "/picture?type=large&access_token=$token"
+                "/picture?type=large&access_token=$token"*/
+                "https://graph.facebook.com/"+userId+"/picture?type=large"
 
         Log.e("img",socialImg)
             val intent = Intent(this@RegistrationStepOneActivity,VerifyMobileActivity::class.java)

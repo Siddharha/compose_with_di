@@ -663,4 +663,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         countDownTimer.cancel()
 
     }
+
+    fun gotoCompleteProfile() {
+        Handler().postDelayed({
+            toolbar.title = resources.getString(R.string.nav_item_profile)
+            navigateToFragment(ProfileFragment.newInstance())
+             val sharedPrefOBJ = SharedPref(this@DashboardActivity)
+            sharedPrefOBJ.profileUpdate = resources.getString(R.string.status_false)
+        }, 200)
+
+    }
 }

@@ -161,6 +161,9 @@ class ResDashboard {
         @SerializedName("business_id_types")
         @Expose
         var businessIdTypes: ArrayList<BusinessIdType>? = null
+        @SerializedName("profile_complete_percentage")
+        @Expose
+        var profileCompletePercentage: Int?=0
 
     }
 

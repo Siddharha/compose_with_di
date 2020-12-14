@@ -10,7 +10,7 @@ class PresenterZoop {
     @SuppressLint("CheckResult")
     fun doOfflineAadharInit(contextOBJ: Context, callBackOBJ: ICallBackZoop) {
 
-        val bodyInp = ZoopInitPayload("N","Testing purpose","http://54.93.191.91/zoopapi/index.php")
+        val bodyInp = ZoopInitPayload("N","Testing purpose","http://54.93.191.91/zoop/endpoint")
         val apiClient = ApiClient().getClient().create(ZoopBaseService::class.java)
         val call = apiClient.doOfflineAadharInit(bodyInp)
 

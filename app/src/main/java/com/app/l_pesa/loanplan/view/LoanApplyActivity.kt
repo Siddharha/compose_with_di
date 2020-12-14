@@ -227,6 +227,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                 if (shared.currentLat != "") {
                     progressDialog.show()
                     buttonSubmit.isClickable = false
+                    buttonSubmit.isEnabled = false
                     loanApply()
                 } else {
                     CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.please_wait))
@@ -335,7 +336,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     override fun onSuccessLoanApply() {
-
+        buttonSubmit.isEnabled = true
         Toast.makeText(this@LoanApplyActivity, resources.getString(R.string.loan_applied_successfully), Toast.LENGTH_SHORT).show()
         dismiss()
         val sharedPref = SharedPref(this@LoanApplyActivity)
@@ -349,6 +350,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     override fun onErrorLoanApply(message: String) {
         dismiss()
         buttonSubmit.isClickable = true
+        buttonSubmit.isEnabled = true
         CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, message)
     }
 

@@ -98,6 +98,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private lateinit var captureFilePath    : Uri
     private var idTypeExists        = "FALSE"
     private var imgFileAddress      = ""
+    private var ZOOP_REF_ID = ""
 
     private lateinit  var progressDialog: ProgressDialog
     private  val requestPermission = 1
@@ -142,30 +143,30 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
 
         buttonSubmit.setOnClickListener {
-            updateIdData(sharedPrefOBJ)
-//            if(sharedPrefOBJ.countryCode == "in") {
-//                if (etPersonalId.text.toString().contentEquals("Aadhaar Card")) {
-//                    if (!captureImageStatus) {
-//                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_image))
-//                    } else if (personalId == 0) {
-//                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
-//                        showDialogIdType(sharedPrefOBJ)
-//                    } else if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim())) {
-//                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
-//                    } else {
-//                        if (CommonMethod.isNetworkAvailable(activity!!)) {
-//                            progressDialog.show()
-//                            val presenterZoop = PresenterZoop()
-//                            presenterZoop.doOfflineAadharInit(activity!!, this)
-//                        }
-//                    }
-//
-//                }else{
-//                    updateIdData(sharedPrefOBJ)
-//                }
-//            }else{
-//                updateIdData(sharedPrefOBJ)
-//            }
+//            updateIdData(sharedPrefOBJ)
+            if(sharedPrefOBJ.countryCode == "in") {
+                if (etPersonalId.text.toString().contentEquals("Aadhaar Card")) {
+                    if (!captureImageStatus) {
+                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_image))
+                    } else if (personalId == 0) {
+                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
+                        showDialogIdType(sharedPrefOBJ)
+                    } else if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim())) {
+                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
+                    } else {
+                        if (CommonMethod.isNetworkAvailable(activity!!)) {
+                            progressDialog.show()
+                            val presenterZoop = PresenterZoop()
+                            presenterZoop.doOfflineAadharInit(activity!!, this)
+                        }
+                    }
+
+                }else{
+                    updateIdData(sharedPrefOBJ)
+                }
+            }else{
+                updateIdData(sharedPrefOBJ)
+            }
 
         }
 
@@ -233,6 +234,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             }
         }
     }
+
 
     private fun checkAndRequestPermissions(): Boolean {
 
@@ -347,6 +349,12 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         //jsonObject.addProperty("id_image","per_new_138308_7397641a67801aad9fe694c4cfd3c48a.jpg") // Static
         jsonObject.addProperty("id_image",url) // Static
         jsonObject.addProperty("id_type",personalId.toString())
+
+        if(etPersonalId.text.toString().contentEquals("Aadhaar Card"))
+        {
+            jsonObject.addProperty("zoop_ref_id",ZOOP_REF_ID)
+        }
+
         if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
         {
             jsonObject.addProperty("id_number","")
@@ -764,6 +772,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         val UserName = basicInfo?.optString("Name")
         val DOB = basicInfo?.optString("DOB")
         val Gender = basicInfo?.optString("Gender")
+        val id = basicInfo?.optString("id")
 
         val dialog = Dialog(activity!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -788,6 +797,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             tvGender.text = Gender
 
             yesBtn.setOnClickListener {
+                ZOOP_REF_ID = id!!
                 updateIdData(sharedPrefOBJ)
             dialog.dismiss()
         }

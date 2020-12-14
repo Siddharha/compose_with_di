@@ -31,6 +31,7 @@ import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
 import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import java.text.DecimalFormat
@@ -58,6 +59,13 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         swipeRefresh()
         initUI()
         initData()
+        onActionPerform()
+    }
+
+    private fun onActionPerform() {
+        btnProfile.setOnClickListener {
+            (context as DashboardActivity).gotoCompleteProfile()
+        }
     }
 
     private fun initUI() {
@@ -144,6 +152,16 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
     private fun setData(dashBoard: ResDashboard.Data) {
         println("max credit score : ${dashBoard.maxCreditScore.toFloat()}")
         println("credit score : ${dashBoard.creditScore.toFloat()}")
+        println("profileCompletePercentage: ${dashBoard.profileCompletePercentage}")
+
+        if(dashBoard.profileCompletePercentage!!<100){
+            llProfileComp.visibility = View.VISIBLE
+            pbProfile.progress = dashBoard.profileCompletePercentage!!
+            tvProgress.text = "${dashBoard.profileCompletePercentage} %"
+        }else{
+            llProfileComp.visibility = View.GONE
+        }
+
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
 
