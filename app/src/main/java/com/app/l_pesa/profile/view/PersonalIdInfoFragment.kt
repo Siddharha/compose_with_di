@@ -367,6 +367,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         jsonObject.addProperty("type_name","Personal")
 
         val presenterAddProof= PresenterAddProof()
+        println("confirm aadhaar: ${jsonObject}")
         presenterAddProof.doAddProof(activity!!,jsonObject,this)
 
     }
@@ -772,7 +773,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         val UserName = basicInfo?.optString("Name")
         val DOB = basicInfo?.optString("DOB")
         val Gender = basicInfo?.optString("Gender")
-        val id = basicInfo?.optString("id")
+        val zoop_id = jsonObject.optString("id")
 
         val dialog = Dialog(activity!!)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -797,7 +798,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             tvGender.text = Gender
 
             yesBtn.setOnClickListener {
-                ZOOP_REF_ID = id!!
+                ZOOP_REF_ID = zoop_id!!
                 updateIdData(sharedPrefOBJ)
             dialog.dismiss()
         }
