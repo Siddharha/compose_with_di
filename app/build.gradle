@@ -41,6 +41,7 @@ android {
             /* buildConfigField("String", 'BASE_URL', '"http://40.76.68.66/v2/"') //http://20.36.32.60*/
             buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')
             buildConfigField("String", 'ZOOP_PRE_BASE_URL', '"https://preprod.aadhaarapi.com/"') //For Pre-Production
+            buildConfigField("String", 'ZOOP_PROD_BASE_URL', '"https://prod.aadhaarapi.com/"') //For Production
 
         }
         build {

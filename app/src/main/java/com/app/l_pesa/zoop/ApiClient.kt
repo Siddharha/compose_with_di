@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import sdk.zoop.one.offline_aadhaar.zoopUtils.ZoopConstantUtils.ZOOP_BASE_URL
 import java.util.concurrent.TimeUnit
 
 
@@ -22,8 +23,8 @@ class ApiClient {
                 val originalRequest = chain.request()
 
                 val builder = originalRequest.newBuilder()
-                builder.header("qt_api_key", "0df72ce0-37ab-4852-a0ab-7b94c7eb8494")
-                builder.header("qt_agency_id", "caf33c4c-f14b-4c8e-8282-11db5758ed9e")
+           //     builder.header("qt_api_key", "21bf7b62-3b4d-4f11-96a3-f990721d473f") //Pre Prod api key 0df72ce0-37ab-4852-a0ab-7b94c7eb8494
+            //    builder.header("qt_agency_id", "caf33c4c-f14b-4c8e-8282-11db5758ed9e") //Pre Pro Agency id caf33c4c-f14b-4c8e-8282-11db5758ed9e
                 builder.header("Content-Type", "application/json")
                 val newRequest = builder.build()
                 chain.proceed(newRequest)
@@ -41,7 +42,7 @@ class ApiClient {
 
             if (retrofit == null) {
                 retrofit = Retrofit.Builder()
-                        .baseUrl(ZOOP_PRE_BASE_URL)
+                        .baseUrl(BASE_URL_DEV)
                         .client(okHttpClient.build())
                         .addConverterFactory(GsonConverterFactory.create(gson))
                         .build()

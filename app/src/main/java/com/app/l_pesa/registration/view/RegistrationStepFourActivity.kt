@@ -228,7 +228,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
         if (progressDialog.isShowing){
             progressDialog.dismiss()
         }
-        pref.zoopGatewayId = response.id   //setting zoop trans id to pref.
+        pref.zoopGatewayId = response.data.response.id   //setting zoop trans id to pref.
         openOfflineAadhaarActivity()
     }
 

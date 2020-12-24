@@ -669,7 +669,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         } else {
             photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(activity!! as ProfileEditIdInfoActivity, BuildConfig.APPLICATION_ID + ".provider", photoFile)
+        captureFilePath = FileProvider.getUriForFile(activity!! as ProfileEditIdInfoActivity, /*BuildConfig.APPLICATION_ID + ".provider"*/"com.app.l_pesa", photoFile)
 
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -898,7 +898,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         if (progressDialog.isShowing){
             progressDialog.dismiss()
         }
-        sharedPrefOBJ.zoopGatewayId = response.id   //setting zoop trans id to pref.
+        sharedPrefOBJ.zoopGatewayId = response.data.response.id   //setting zoop trans id to pref.
         openOfflineAadhaarActivity()
        // updateIdData(sharedPrefOBJ)
     }
@@ -906,7 +906,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private fun openOfflineAadhaarActivity() {
         val gatewayIntent =  Intent(activity!!, ZoopConsentActivity::class.java)
         gatewayIntent.putExtra(ZOOP_TRANSACTION_ID, sharedPrefOBJ.zoopGatewayId)
-        gatewayIntent.putExtra(ZOOP_BASE_URL, "preprod.aadhaarapi.com")
+        gatewayIntent.putExtra(ZOOP_BASE_URL, "prod.aadhaarapi.com")
        // gatewayIntent.putExtra(ZOOP_EMAIL, Email) //not mandatory
        // gatewayIntent.putExtra(ZOOP_UID, 238114456672); //not mandatory
      //   gatewayIntent.putExtra(ZOOP_PHONE, phone); //not mandatory
