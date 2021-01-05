@@ -60,6 +60,7 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         initUI()
         initData()
         onActionPerform()
+        loadDashboard()
     }
 
     private fun onActionPerform() {

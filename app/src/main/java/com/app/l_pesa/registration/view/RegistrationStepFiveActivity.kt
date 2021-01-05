@@ -271,11 +271,15 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         val bundle     = intent.extras
         val type       = bundle!!.getString("id_type")
         val number     = bundle.getString("id_number")
-
+        val zoopId     = bundle.getString("zoop_id")
         val jsonObject = JsonObject()
         jsonObject.addProperty("id_image",url)
         jsonObject.addProperty("type_id",type)
         jsonObject.addProperty("id_number",number)
+
+        if(zoopId?.isNotEmpty()!!){
+        jsonObject.addProperty("zoop_ref_id",zoopId)
+        }
 
         val presenterRegistrationThree= PresenterRegistrationThree()
         presenterRegistrationThree.doRegistrationStepThree(this@RegistrationStepFiveActivity,jsonObject,this)

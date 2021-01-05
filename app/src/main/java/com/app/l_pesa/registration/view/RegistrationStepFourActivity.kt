@@ -53,6 +53,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
     lateinit var idNameList:ArrayList<String> /*= arrayListOf("Passport", "Driving License", "National ID","Voter ID")*/
     private var typeId     =""
     lateinit var pref:SharedPref
+    private var zoop_id = ""
     private lateinit var titleAdapter:PersonalIdListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -117,11 +118,11 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
             {
                 if (CommonMethod.isNetworkAvailable(this@RegistrationStepFourActivity)) {
 
-                    /*if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
+                    if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
                         progressDialog.show()
                         val presenterZoop = PresenterZoop()
                         presenterZoop.doOfflineAadharInit(this, this)
-                    }else {*/
+                    }else {
                     val bundle     = Bundle()
                     bundle.putString("id_type",typeId)
                     bundle.putString("id_number",etIdNumber.text.toString())
@@ -129,7 +130,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
                     intent.putExtras(bundle)
                     startActivity(intent,bundle)
                     overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                   // }
+                    }
                 }
                 else{
                     CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepFourActivity, resources.getString(R.string.no_internet))
@@ -214,7 +215,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
     private fun openOfflineAadhaarActivity() {
         val gatewayIntent =  Intent(this, ZoopConsentActivity::class.java)
         gatewayIntent.putExtra(ZoopConstantUtils.ZOOP_TRANSACTION_ID, pref.zoopGatewayId)
-        gatewayIntent.putExtra(ZoopConstantUtils.ZOOP_BASE_URL, "preprod.aadhaarapi.com")
+        gatewayIntent.putExtra(ZoopConstantUtils.ZOOP_BASE_URL, "prod.aadhaarapi.com")
         // gatewayIntent.putExtra(ZOOP_EMAIL, Email) //not mandatory
 //gatewayIntent.putExtra(ZOOP_UID, uid); //not mandatory
         //   gatewayIntent.putExtra(ZOOP_PHONE, phone); //not mandatory
@@ -320,7 +321,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
         val UserName = basicInfo?.optString("Name")
         val DOB = basicInfo?.optString("DOB")
         val Gender = basicInfo?.optString("Gender")
-
+         zoop_id = jsonObject.optString("id")
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -347,6 +348,8 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
                 val bundle     = Bundle()
                 bundle.putString("id_type",typeId)
                 bundle.putString("id_number",etIdNumber.text.toString())
+                bundle.putString("zoop_id",zoop_id)
+                //TODO: need to pass zoop id to final reg. before that have to confirm in api this param already there or not?
                 val intent = Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java)
                 intent.putExtras(bundle)
                 startActivity(intent,bundle)

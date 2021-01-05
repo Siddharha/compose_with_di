@@ -12,19 +12,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/ApiClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/ApiClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/PresenterZoop.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/PresenterZoop.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/ZoopBaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/ZoopBaseService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/ZoopInitResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/zoop/ZoopInitResponse.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/file_paths.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/file_paths.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,13 +230,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00001" summary="~ updated project">
-      <created>1579175294199</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1579175294199</updated>
     </task>
     <task id="LOCAL-00002" summary="~ Implement on Profile Section where email address will be edited now.">
       <created>1579178275120</created>
@@ -580,7 +567,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608127539432</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="implement zoop_final">
+      <created>1608797801330</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1608797801336</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -611,7 +605,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="statement upload module p-4_t2" />
     <MESSAGE value="statement upload module p-4_t3" />
     <MESSAGE value="statement upload module p-4_t4" />
     <MESSAGE value="statement upload module p-4_t5" />
@@ -636,19 +629,17 @@
     <MESSAGE value="implement fb_t_007" />
     <MESSAGE value="implement zoop_01" />
     <MESSAGE value="implement zoop_03" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement zoop_03" />
+    <MESSAGE value="implement zoop_final" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement zoop_final" />
   </component>
   <component name="WindowStateProjectService">
     <state x="245" y="162" key="#PSD" timestamp="1605687212142">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="245" y="160" key="#PSD/0.23.1440.797@0.23.1440.797" timestamp="1600329715519" />
-    <state x="245" y="161" key="#PSD/0.23.1440.804@0.23.1440.804" timestamp="1600428006398" />
     <state x="245" y="162" key="#PSD/0.23.1440.808@0.23.1440.808" timestamp="1605687212142" />
     <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606216741222">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="184" y="83" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.797@0.23.1440.797" timestamp="1600329830051" />
     <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.808@0.23.1440.808" timestamp="1606216741222" />
     <state x="499" y="144" key="#com.intellij.ide.util.MemberChooser" timestamp="1605689105562">
       <screen x="0" y="23" width="1440" height="808" />
@@ -686,10 +677,10 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1608716601753" />
-    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1608127538873">
+    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1608797800625">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1608127538873" />
+    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1608797800625" />
     <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1608713927051">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -697,35 +688,23 @@
     <state width="1398" height="281" key="GridCell.Tab.0.bottom" timestamp="1608790623731">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="162" key="GridCell.Tab.0.bottom/0.23.1440.797@0.23.1440.797" timestamp="1600434886239" />
     <state width="1398" height="281" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1608790623731" />
     <state width="1398" height="281" key="GridCell.Tab.0.center" timestamp="1608790623728">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="162" key="GridCell.Tab.0.center/0.23.1440.797@0.23.1440.797" timestamp="1600434886238" />
     <state width="1398" height="281" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1608790623728" />
     <state width="1398" height="281" key="GridCell.Tab.0.left" timestamp="1608790623727">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="162" key="GridCell.Tab.0.left/0.23.1440.797@0.23.1440.797" timestamp="1600434886237" />
     <state width="1398" height="281" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1608790623727" />
     <state width="1398" height="281" key="GridCell.Tab.0.right" timestamp="1608790623729">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="162" key="GridCell.Tab.0.right/0.23.1440.797@0.23.1440.797" timestamp="1600434886239" />
     <state width="1398" height="281" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1608790623729" />
-    <state x="430" y="144" key="MultipleFileMergeDialog" timestamp="1600239302821">
-      <screen x="0" y="23" width="1440" height="797" />
-    </state>
-    <state x="430" y="144" key="MultipleFileMergeDialog/0.23.1440.797@0.23.1440.797" timestamp="1600239302821" />
-    <state x="221" y="60" key="SettingsEditor" timestamp="1600329454828">
-      <screen x="0" y="23" width="1440" height="797" />
-    </state>
-    <state x="221" y="60" key="SettingsEditor/0.23.1440.797@0.23.1440.797" timestamp="1600329454828" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1608127542703">
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1608797896154">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1608127542703" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1608797896154" />
     <state width="720" height="398" key="XDebugger.FullValuePopup" timestamp="1606199390050">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -734,31 +713,14 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="100" y="123" width="1240" height="597" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.808@0.23.1440.808" timestamp="1606220569075" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1608795761033">
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1609822577777">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="390" y="254" key="com.intellij.ide.util.TipDialog/0.23.1440.797@0.23.1440.797" timestamp="1600583566542" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1608795761033" />
-    <state x="500" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600319276690">
-      <screen x="0" y="23" width="1440" height="797" />
-    </state>
-    <state x="500" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.797@0.23.1440.797" timestamp="1600319276690" />
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1609822577777" />
     <state x="229" y="164" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1603114393132">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="229" y="164" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1440.808@0.23.1440.808" timestamp="1603114393132" />
-    <state x="453" y="141" key="git4idea.branch.GitSmartOperationDialog" timestamp="1600239295653">
-      <screen x="0" y="23" width="1440" height="797" />
-    </state>
-    <state x="453" y="141" key="git4idea.branch.GitSmartOperationDialog/0.23.1440.797@0.23.1440.797" timestamp="1600239295653" />
-    <state x="406" y="282" key="psd.add.jar.dependency.panel.dimension" timestamp="1600428003356">
-      <screen x="0" y="23" width="1440" height="804" />
-    </state>
-    <state x="406" y="282" key="psd.add.jar.dependency.panel.dimension/0.23.1440.804@0.23.1440.804" timestamp="1600428003356" />
-    <state x="267" y="172" key="psd.add.library.dependency.panel.dimension" timestamp="1600427981660">
-      <screen x="0" y="23" width="1440" height="804" />
-    </state>
-    <state x="267" y="172" key="psd.add.library.dependency.panel.dimension/0.23.1440.804@0.23.1440.804" timestamp="1600427981660" />
     <state x="482" y="58" key="refactoring.ChangeSignatureDialog" timestamp="1602767076439">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -888,12 +850,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt</url>
-          <line>196</line>
+          <line>197</line>
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt</url>
-          <line>77</line>
+          <line>78</line>
           <option name="timeStamp" value="188" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -913,7 +875,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt</url>
-          <line>186</line>
+          <line>187</line>
           <option name="timeStamp" value="193" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -928,53 +890,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>286</line>
-          <option name="timeStamp" value="197" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>299</line>
+          <line>303</line>
           <option name="timeStamp" value="198" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>291</line>
-          <option name="timeStamp" value="199" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>288</line>
-          <option name="timeStamp" value="200" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>275</line>
-          <option name="timeStamp" value="201" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>276</line>
-          <option name="timeStamp" value="202" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>277</line>
-          <option name="timeStamp" value="203" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>270</line>
-          <option name="timeStamp" value="204" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>271</line>
-          <option name="timeStamp" value="205" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>272</line>
-          <option name="timeStamp" value="206" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepOneActivity.kt</url>
