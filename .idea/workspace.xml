@@ -13,10 +13,7 @@
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFourActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
     </list>
@@ -78,7 +75,7 @@
     <property name="DEBUGGABLE_PROCESS" value="com.app.l_pesa" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="TA64301Q5P" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-11-24T05:42:48.866Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-01-12T09:40:53.314Z" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
@@ -230,13 +227,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00002" summary="~ Implement on Profile Section where email address will be edited now.">
-      <created>1579178275120</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1579178275120</updated>
     </task>
     <task id="LOCAL-00003" summary="~ Implement on Profile Section where email address will be edited now.">
       <created>1579178307303</created>
@@ -574,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608797801336</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="implement zoop_final_Done">
+      <created>1609850665735</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1609850665736</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -605,7 +602,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="statement upload module p-4_t3" />
     <MESSAGE value="statement upload module p-4_t4" />
     <MESSAGE value="statement upload module p-4_t5" />
     <MESSAGE value="statement upload module p-4_t6" />
@@ -630,7 +626,8 @@
     <MESSAGE value="implement zoop_01" />
     <MESSAGE value="implement zoop_03" />
     <MESSAGE value="implement zoop_final" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement zoop_final" />
+    <MESSAGE value="implement zoop_final_Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement zoop_final_Done" />
   </component>
   <component name="WindowStateProjectService">
     <state x="245" y="162" key="#PSD" timestamp="1605687212142">
@@ -677,34 +674,34 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1608716601753" />
-    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1608797800625">
+    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1609850664922">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1608797800625" />
+    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1609850664922" />
     <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1608713927051">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1094" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1608713927051" />
-    <state width="1398" height="281" key="GridCell.Tab.0.bottom" timestamp="1608790623731">
+    <state width="1398" height="281" key="GridCell.Tab.0.bottom" timestamp="1610445379008">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1608790623731" />
-    <state width="1398" height="281" key="GridCell.Tab.0.center" timestamp="1608790623728">
+    <state width="1398" height="281" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1610445379008" />
+    <state width="1398" height="281" key="GridCell.Tab.0.center" timestamp="1610445379008">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1608790623728" />
-    <state width="1398" height="281" key="GridCell.Tab.0.left" timestamp="1608790623727">
+    <state width="1398" height="281" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1610445379008" />
+    <state width="1398" height="281" key="GridCell.Tab.0.left" timestamp="1610445379007">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1608790623727" />
-    <state width="1398" height="281" key="GridCell.Tab.0.right" timestamp="1608790623729">
+    <state width="1398" height="281" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1610445379007" />
+    <state width="1398" height="281" key="GridCell.Tab.0.right" timestamp="1610445379008">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1608790623729" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1608797896154">
+    <state width="1398" height="281" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1610445379008" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1609850676532">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1608797896154" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1609850676532" />
     <state width="720" height="398" key="XDebugger.FullValuePopup" timestamp="1606199390050">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -713,10 +710,10 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="100" y="123" width="1240" height="597" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.808@0.23.1440.808" timestamp="1606220569075" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1609822577777">
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1610950480538">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1609822577777" />
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1610950480538" />
     <state x="229" y="164" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1603114393132">
       <screen x="0" y="23" width="1440" height="808" />
     </state>

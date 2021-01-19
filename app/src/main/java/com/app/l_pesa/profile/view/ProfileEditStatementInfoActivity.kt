@@ -500,8 +500,8 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
 
                 when (type) {
-                    0 -> v.tvFrom.text = "$dayOfMonth/$month/$year"
-                    1 -> v.tvTo.text = "$dayOfMonth/$month/$year"
+                    0 -> v.tvFrom.text = "$dayOfMonth/${month +1}/$year"
+                    1 -> v.tvTo.text = "$dayOfMonth/${month +1}/$year"
                 }
 
                 if(!isDatesValid(v.tvFrom.text,v.tvTo.text)){
