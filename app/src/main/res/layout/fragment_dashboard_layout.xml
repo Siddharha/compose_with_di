@@ -234,11 +234,11 @@
 
               </LinearLayout>
 
-              <LinearLayout
+              <FrameLayout
                   android:id="@+id/ll_banner"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_weight="1"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="0"
                   android:layout_marginStart="@dimen/_10sdp"
                   android:layout_marginTop="@dimen/_7sdp"
                   android:layout_marginEnd="@dimen/_10sdp"
@@ -248,13 +248,14 @@
                   <ImageView
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:scaleType="centerInside"
-
+                      android:scaleType="centerCrop"
+                      android:layout_margin="@dimen/_5sdp"
+                      android:adjustViewBounds="true"
                       android:src="@drawable/add_banner"
                       android:contentDescription="@string/app_name" />
 
 
-              </LinearLayout>
+              </FrameLayout>
               <LinearLayout
                   android:layout_marginEnd="@dimen/_10sdp"
                   android:layout_marginStart="@dimen/_10sdp"

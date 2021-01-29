@@ -12,10 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditStatementInfoActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,13 +229,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00003" summary="~ Implement on Profile Section where email address will be edited now.">
-      <created>1579178307303</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1579178307303</updated>
     </task>
     <task id="LOCAL-00004" summary="~Clean up code....">
       <created>1579493039365</created>
@@ -571,7 +566,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609850665736</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="date picker issue fixes">
+      <created>1611051551098</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1611051551102</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -602,7 +604,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="statement upload module p-4_t4" />
     <MESSAGE value="statement upload module p-4_t5" />
     <MESSAGE value="statement upload module p-4_t6" />
     <MESSAGE value="statement upload module p-4_t7" />
@@ -627,21 +628,22 @@
     <MESSAGE value="implement zoop_03" />
     <MESSAGE value="implement zoop_final" />
     <MESSAGE value="implement zoop_final_Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement zoop_final_Done" />
+    <MESSAGE value="date picker issue fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="date picker issue fixes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="245" y="162" key="#PSD" timestamp="1605687212142">
+    <state x="245" y="162" key="#PSD" timestamp="1611918575861">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="245" y="162" key="#PSD/0.23.1440.808@0.23.1440.808" timestamp="1605687212142" />
+    <state x="245" y="162" key="#PSD/0.23.1440.808@0.23.1440.808" timestamp="1611918575861" />
     <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606216741222">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="184" y="84" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.808@0.23.1440.808" timestamp="1606216741222" />
-    <state x="499" y="144" key="#com.intellij.ide.util.MemberChooser" timestamp="1605689105562">
+    <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser" timestamp="1611919800529">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="499" y="144" key="#com.intellij.ide.util.MemberChooser/0.23.1440.808@0.23.1440.808" timestamp="1605689105562" />
+    <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser/0.23.1440.808@0.23.1440.808" timestamp="1611919800529" />
     <state x="204" y="354" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1605006825808">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -650,14 +652,6 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="483" y="309" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.23.1440.808@0.23.1440.808" timestamp="1605006830236" />
-    <state x="262" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603097347720">
-      <screen x="0" y="23" width="1440" height="808" />
-    </state>
-    <state x="262" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.808@0.23.1440.808" timestamp="1603097347720" />
-    <state x="458" y="175" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602753864152">
-      <screen x="0" y="23" width="1440" height="808" />
-    </state>
-    <state x="458" y="175" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.808@0.23.1440.808" timestamp="1602753864152" />
     <state x="483" y="92" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1604471895596">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -674,10 +668,10 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1608716601753" />
-    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1609850664922">
+    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1611051550634">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1609850664922" />
+    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1611051550634" />
     <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1608713927051">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -698,10 +692,10 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1398" height="281" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1610445379008" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1609850676532">
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1611051552959">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1609850676532" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1611051552959" />
     <state width="720" height="398" key="XDebugger.FullValuePopup" timestamp="1606199390050">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -710,18 +704,10 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="100" y="123" width="1240" height="597" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.808@0.23.1440.808" timestamp="1606220569075" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1610950480538">
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1611918150037">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1610950480538" />
-    <state x="229" y="164" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1603114393132">
-      <screen x="0" y="23" width="1440" height="808" />
-    </state>
-    <state x="229" y="164" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1440.808@0.23.1440.808" timestamp="1603114393132" />
-    <state x="482" y="58" key="refactoring.ChangeSignatureDialog" timestamp="1602767076439">
-      <screen x="0" y="23" width="1440" height="808" />
-    </state>
-    <state x="482" y="58" key="refactoring.ChangeSignatureDialog/0.23.1440.808@0.23.1440.808" timestamp="1602767076439" />
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1611918150037" />
     <state x="385" y="155" width="670" height="676" key="search.everywhere.popup" timestamp="1605517722570">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
