@@ -99,6 +99,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     private var idTypeExists        = "FALSE"
     private var imgFileAddress      = ""
     private var ZOOP_REF_ID = ""
+    private var ZOOP_AADHAAR_ID = ""
 
     private lateinit  var progressDialog: ProgressDialog
     private  val requestPermission = 1
@@ -151,15 +152,19 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     } else if (personalId == 0) {
                         CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
                         showDialogIdType(sharedPrefOBJ)
-                    } else if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim())) {
-                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
-                    } else {
+                    } else
+                       // if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) &&
+                             //   TextUtils.isEmpty(etIdNumber.text.toString().trim()))
+                 //   {
+                  //      CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
+                  //  }
+                   // else {
                         if (CommonMethod.isNetworkAvailable(activity!!)) {
                             progressDialog.show()
                             val presenterZoop = PresenterZoop()
                             presenterZoop.doOfflineAadharInit(activity!!, this)
                         }
-                    }
+                  //  }
 
                 }else{
                     updateIdData(sharedPrefOBJ)
@@ -361,7 +366,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
         else
         {
-            jsonObject.addProperty("id_number",etIdNumber.text.toString())
+            jsonObject.addProperty("id_number",ZOOP_AADHAAR_ID)
         }
 
         jsonObject.addProperty("type_name","Personal")
@@ -469,18 +474,18 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         personalIdType = type
                         personalId = id
 
-                    }/*else if (name == resources.getString(R.string.aadhaar_card)) {
+                    }else if (name == resources.getString(R.string.aadhaar_card)) {
 
                     personalIdName = name
                     etPersonalId.setText(personalIdName)
-                        //ilIdNumber.visibility = View.INVISIBLE
+                        ilIdNumber.visibility = View.INVISIBLE
                         //imgProfile.visibility = View.GONE
                         //textView9.visibility = View.GONE
                     personalIdType = type
                     personalId = id
 
 
-                }*/else {
+                }else {
                         ilIdNumber.visibility = View.VISIBLE
                         //imgProfile.visibility = View.VISIBLE
                         //textView9.visibility = View.VISIBLE
@@ -724,7 +729,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                                 val jsonObject =  JSONObject(responseString!!)
                                 //parseResultJson(jsonObject)
                                 showConfirmAadhaarPopup(jsonObject)
-                                CommonMethod.customSnackBarSuccess(rootLayout, activity!!, "Aadhaar verified with ${jsonObject.getString("id")}")
+                                //CommonMethod.customSnackBarSuccess(rootLayout, activity!!, "Aadhaar verified with ${jsonObject.getString("id")}")
                             } catch ( e: JSONException) {
                                 e.printStackTrace();
                             }
@@ -798,7 +803,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             tvGender.text = Gender
 
             yesBtn.setOnClickListener {
-                ZOOP_REF_ID = zoop_id!!
+                ZOOP_REF_ID = zoop_id
+                ZOOP_AADHAAR_ID = AadharNo!!
                 updateIdData(sharedPrefOBJ)
             dialog.dismiss()
         }

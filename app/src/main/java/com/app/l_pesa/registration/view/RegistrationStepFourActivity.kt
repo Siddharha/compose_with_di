@@ -54,6 +54,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
     private var typeId     =""
     lateinit var pref:SharedPref
     private var zoop_id = ""
+    private var zoop_aadhaar_no = ""
     private lateinit var titleAdapter:PersonalIdListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,12 +111,12 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
 
             }
 
-            if(TextUtils.isEmpty(etIdNumber.text.toString()))
+           /* if(TextUtils.isEmpty(etIdNumber.text.toString()))
             {
                 CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepFourActivity, resources.getString(R.string.required_id_number))
             }
             else
-            {
+            {*/
                 if (CommonMethod.isNetworkAvailable(this@RegistrationStepFourActivity)) {
 
                     if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
@@ -125,7 +126,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
                     }else {
                     val bundle     = Bundle()
                     bundle.putString("id_type",typeId)
-                    bundle.putString("id_number",etIdNumber.text.toString())
+                    bundle.putString("id_number",zoop_aadhaar_no)
                     val intent = Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent,bundle)
@@ -135,7 +136,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
                 else{
                     CommonMethod.customSnackBarError(rootLayout, this@RegistrationStepFourActivity, resources.getString(R.string.no_internet))
                 }
-            }
+            //}
 
         }
 
@@ -146,11 +147,11 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
             etIdType.setText(idNameList[position])
             typeId = idList[position]
 
-    /*    if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
+        if(pref.countryCode =="in" && etIdType.text.toString() == "Aadhaar Card"){
             tilNumber.visibility = View.GONE
         }else{
             tilNumber.visibility = View.VISIBLE
-        }*/
+        }
 
     }
 
@@ -322,6 +323,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
         val DOB = basicInfo?.optString("DOB")
         val Gender = basicInfo?.optString("Gender")
          zoop_id = jsonObject.optString("id")
+        zoop_aadhaar_no = AadharNo!!
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -347,7 +349,7 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
             yesBtn.setOnClickListener {
                 val bundle     = Bundle()
                 bundle.putString("id_type",typeId)
-                bundle.putString("id_number",etIdNumber.text.toString())
+                bundle.putString("id_number",zoop_aadhaar_no)
                 bundle.putString("zoop_id",zoop_id)
                 //TODO: need to pass zoop id to final reg. before that have to confirm in api this param already there or not?
                 val intent = Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java)
