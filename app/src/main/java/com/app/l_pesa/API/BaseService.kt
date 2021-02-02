@@ -112,7 +112,9 @@ interface BaseService{
     fun doRegister(@Body request: JsonObject): Observable<ResRegistrationOne>
 
     @GET("get_id_types")
-    fun doGetIdList(@Query("country") countryCode:String): Observable<RegisterPageIdListResp>
+    fun doGetIdList(@Query("country") type:String,
+                    @Query("country") type2:String,
+                    @Query("country") countryCode:String): Observable<RegisterPageIdListResp>
 
     @POST("user/step_2")
     fun doRegisterTwo(@Body request: JsonObject): Observable<ResRegistrationTwo>

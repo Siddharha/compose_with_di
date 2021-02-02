@@ -35,7 +35,11 @@ class PresenterRegistrationThree {
                         }
                         else
                         {
-                            callBackOBJ.onErrorRegistrationThree(response.status.message)
+                            if(response?.status?.statusCode == 40000){
+                                callBackOBJ.onErrorRegistrationThree("Unable to verify ID number!")
+                            }else{
+                                callBackOBJ.onErrorRegistrationThree(response.status.message)
+                            }
                         }
 
                     }

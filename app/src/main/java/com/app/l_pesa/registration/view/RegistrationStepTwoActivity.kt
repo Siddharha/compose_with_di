@@ -174,7 +174,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
                     captureImageStatus = true
                     val sharedPref = SharedPref(this@RegistrationStepTwoActivity)
                     sharedPref.imagePath = photoFile.absolutePath
-                }, 1000)
+                }, 5000)
 
 
             } else {

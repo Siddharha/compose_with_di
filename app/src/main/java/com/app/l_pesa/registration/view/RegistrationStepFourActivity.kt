@@ -126,7 +126,8 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
                     }else {
                     val bundle     = Bundle()
                     bundle.putString("id_type",typeId)
-                    bundle.putString("id_number",zoop_aadhaar_no)
+                    bundle.putString("id_number",etIdNumber.text.toString())
+                        bundle.putString("zoop_id",zoop_id)
                     val intent = Intent(this@RegistrationStepFourActivity, RegistrationStepFiveActivity::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent,bundle)

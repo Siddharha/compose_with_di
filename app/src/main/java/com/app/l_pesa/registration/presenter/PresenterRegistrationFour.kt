@@ -20,7 +20,7 @@ class PresenterRegistrationFour {
 
     @SuppressLint("CheckResult")
     fun doGetIdList(contextOBJ: Context, countryCode : String, callBackOBJ: ICallBackRegisterFour) {
-        RetrofitHelper.getRetrofit(BaseService::class.java).doGetIdList(countryCode)
+        RetrofitHelper.getRetrofit(BaseService::class.java).doGetIdList("personal","identity",countryCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
