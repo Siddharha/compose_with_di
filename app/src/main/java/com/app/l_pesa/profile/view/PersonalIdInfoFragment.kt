@@ -358,15 +358,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         if(etPersonalId.text.toString().contentEquals("Aadhaar Card"))
         {
             jsonObject.addProperty("zoop_ref_id",ZOOP_REF_ID)
-        }
-
-        if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
+            jsonObject.addProperty("id_number",ZOOP_AADHAAR_ID)
+        }else if(etPersonalId.text.toString()==resources.getString(R.string.address_prof))
         {
             jsonObject.addProperty("id_number","")
         }
         else
         {
-            jsonObject.addProperty("id_number",ZOOP_AADHAAR_ID)
+            jsonObject.addProperty("id_number",etIdNumber.text.toString())
         }
 
         jsonObject.addProperty("type_name","Personal")
