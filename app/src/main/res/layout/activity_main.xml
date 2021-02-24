@@ -120,7 +120,7 @@
         android:textStyle="bold"
         android:textAllCaps="true"
         android:fontFamily="@font/montserrat"
-        android:textColor="@color/colorWhite"
+        android:textColor="#fff"
         app:layout_constraintBottom_toTopOf="@id/tvMainTermsCondition"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,6 +2,8 @@ package com.app.l_pesa.analytics;
 
 import android.app.Application;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.app.l_pesa.sms_retrieval.AppSignatureHelper;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -21,7 +23,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         //--------OTP Hash code creation
        // AppSignatureHelper appSignature = new AppSignatureHelper(this); //Should be removed in production
        // appSignature.getAppSignatures();

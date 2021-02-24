@@ -136,7 +136,7 @@
             android:fontFamily="@font/montserrat"
             android:text="@string/login"
             android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
+            android:textColor="?android:textColorPrimaryInverse"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/txtForgotPin"

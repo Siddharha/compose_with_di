@@ -29,7 +29,7 @@
                 android:layout_marginBottom="@dimen/_12sdp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/earn_credit_coins"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/dark_text_color"
                 android:textSize="@dimen/_15sdp"
                 android:textStyle="bold" />
 

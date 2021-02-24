@@ -18,7 +18,7 @@
             android:layout_centerInParent="true"
             android:layout_marginStart="@dimen/_5sdp"
             android:contentDescription="@string/app_name"
-            app:civ_background_color="@android:color/white"
+            app:civ_background_color="@color/colorWhite"
             app:civ_border_color="@color/colorAppDeep"
             app:civ_border_width="0dp"
             app:civ_shadow="false" />
@@ -33,7 +33,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
-            android:textColor="@color/colorWhite"
+            android:textColor="#fff"
             android:textSize="@dimen/_12sdp" />
 
         <com.app.l_pesa.common.CommonTextRegular
@@ -48,7 +48,7 @@
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
             android:text="@string/credit_score"
-            android:textColor="@color/colorWhite"
+            android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/_11sdp" />
 
     </RelativeLayout>

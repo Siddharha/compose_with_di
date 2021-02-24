@@ -78,7 +78,7 @@ class PresenterVerify {
                         }
 
                     } catch (e: Exception) {
-
+                        mobileVerifyListener.onFailure("Unable to verify your number! please contact L-Pesa team")
                     }
                 }, { error ->
                     try {

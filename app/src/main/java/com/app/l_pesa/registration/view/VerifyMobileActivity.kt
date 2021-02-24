@@ -167,12 +167,12 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     private fun loadCountry() {
 
         if (TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode)) {
-            etPhoneVerify.tag = "+000   "
+            etPhoneVerify.tag = "+000  "
             showCountry()
         } else {
             txtCountry.visibility = View.VISIBLE
             txtCountry.text = sharedPrefOBJ.countryName
-            etPhoneVerify.tag = sharedPrefOBJ.countryIsdCode + "   "
+            etPhoneVerify.tag = sharedPrefOBJ.countryIsdCode + "  "
         }
 
         txtCountry.setOnClickListener {
@@ -251,9 +251,9 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
     @SuppressLint("MissingPermission")
     private fun verifyField() {
         hideKeyBoard()
-        if (etPhoneVerify.text.toString().length < 9) {
-            customSnackBarError(rootLayout, resources.getString(R.string.required_phone_email))
-        } else {
+       // if (etPhoneVerify.text.toString().length < 9) {
+          //  customSnackBarError(rootLayout, resources.getString(R.string.required_phone_email))
+       // } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 //checkAndRequestPermissions()
                 //checkPermissions()
@@ -270,7 +270,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
                 startVerification(sharedPref.countryIsdCode + etPhoneVerify.text.toString())*/
             }
 
-        }
+       // }
     }
 
     private fun checkPermissions(){

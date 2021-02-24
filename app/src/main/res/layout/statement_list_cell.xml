@@ -10,7 +10,7 @@
 
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/tvName"
-        android:textColor="@color/colorBlack"
+        android:textColor="?android:textColorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,7 +25,7 @@
         android:id="@+id/tvFile"
         android:singleLine="true"
         android:ellipsize="start"
-        android:textColor="@color/colorSemiBlack"
+        android:textColor="?android:textColorSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -66,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:tint="@color/tint_icon_color"
         app:layout_constraintBottom_toBottomOf="@+id/tvName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

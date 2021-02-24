@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00695c</color>
+   <!-- <color name="colorPrimary">#00695c</color>
     <color name="colorPrimaryLight">#7EDBCF</color>
     <color name="colorPrimaryDark">#00695c</color>
     <color name="colorAccent">#00695c</color>
@@ -49,7 +49,6 @@
 
     <color name="default_thumb_color">#ff6f00</color>
     <color name="default_track_color">#c3a9a9a9</color>
-    <color name="tint_icon_color">#00FFFFFF</color>
 
     <array name="default_index_gradient">
         <item>@color/color_green_success</item>
@@ -58,7 +57,15 @@
 
     <array name="default_track_gradient">
         <item>@color/default_track_color</item>
-    </array>
-
-
+    </array>-->
+    <color name="semi_white">#454545</color>
+    <color name="dark_text_color">#B3BDCA</color>
+    <color name="colorApp">#008575</color>
+    <color name="screenBackground">#1E1E1E</color>
+    <color name="colorWhite">#313131</color>
+ <color name="colorAppDeep">#00D1B7</color>
+ <color name="textColors">#C7CBD3</color>
+ <color name="colorTextBlack">#FFFFFF</color>
+ <color name="tint_icon_color">#9ACAC5</color>
+ <color name="colorLightBlack">#1E1E1E</color>
 </resources>
