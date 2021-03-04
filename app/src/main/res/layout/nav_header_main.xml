@@ -48,7 +48,7 @@
             android:fontFamily="@font/montserrat"
             android:maxLines="1"
             android:text="@string/credit_score"
-            android:textColor="?android:textColorPrimary"
+            android:textColor="#fff"
             android:textSize="@dimen/_11sdp" />
 
     </RelativeLayout>

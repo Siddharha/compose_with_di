@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.l_pesa.R
@@ -42,6 +43,7 @@ class SettingsFragment :Fragment(), ICallBackListClick {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
         initData()
@@ -124,6 +126,11 @@ class SettingsFragment :Fragment(), ICallBackListClick {
             else if(position==5)
             {
                 startActivity(Intent(activity, CloseAccountActivity::class.java))
+                activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+            else if(position==6)
+            {
+                startActivity(Intent(activity, AppearanceAccountActivity::class.java))
                 activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
             }
           else{

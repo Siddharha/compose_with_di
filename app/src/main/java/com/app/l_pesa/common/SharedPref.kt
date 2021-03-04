@@ -36,6 +36,13 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var isDarkTheme: Boolean
+        get() = pref.getBoolean(KEY_SET_DARK_THEME,false)
+        set(isDarkTheme) {
+            editor.remove(KEY_SET_DARK_THEME)
+            editor.putBoolean(KEY_SET_DARK_THEME, isDarkTheme)
+            editor.commit()
+        }
     var profileInfo: String
         get() = pref.getString(KEY_SET_PROFILE_INFO, "")!!
         set(profileInfo) {
@@ -345,7 +352,8 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_IMAGE_PATH            = "KEY_SET_IMAGE_PATH"
         private const val KEY_SET_VERIFICATION_CODE     = "KEY_SET_VERIFICATION_CODE"
         private const val KEY_SET_COUNTRY_ISD_CODE      = "KEY_SET_COUNTRY_ISD_CODE"
-        private const val KEY_SET_GATEWAY_ID = "KEY_SET_GATEWAY_ID"
+        private const val KEY_SET_GATEWAY_ID            = "KEY_SET_GATEWAY_ID"
+        private const val KEY_SET_DARK_THEME            = "KEY_SET_DARK_THEME"
 
     }
 

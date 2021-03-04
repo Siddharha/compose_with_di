@@ -164,6 +164,7 @@
         <item>Notification</item>
         <item>Help &amp; Support</item>
         <item>Close Account</item>
+        <item>Appearance</item>
     </string-array>
 
     <string-array name="settings_item_icon_pin">
@@ -173,6 +174,7 @@
         <item>@drawable/ic_notifications</item>
         <item>@drawable/ic_help</item>
         <item>@drawable/ic_close_account</item>
+        <item>@drawable/ic_theme</item>
     </string-array>
 
     <string-array name="settings_item_icon">
@@ -182,6 +184,7 @@
         <item>@drawable/ic_notifications</item>
         <item>@drawable/ic_help</item>
         <item>@drawable/ic_close_account</item>
+        <item>@drawable/ic_theme</item>
     </string-array>
 
     <string-array name="settings_item_name">
@@ -191,6 +194,7 @@
         <item>Notification</item>
         <item>Help &amp; Support</item>
         <item>Close Account</item>
+        <item>Appearance</item>
     </string-array>
 
     <!--Pin section-->

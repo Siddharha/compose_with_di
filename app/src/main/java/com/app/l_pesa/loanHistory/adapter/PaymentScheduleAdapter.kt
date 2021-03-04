@@ -14,12 +14,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
+import com.app.l_pesa.loanHistory.payment.PayUtil
 import java.text.DecimalFormat
 
 
@@ -90,31 +92,42 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
                 }
                 else
                 {
-
-                    val alertDialog         = AlertDialog.Builder(context).create()
-                    val inflater            = LayoutInflater.from(context)
-                    val dialogView          = inflater.inflate(R.layout.dialog_payment_schedule, null)
-                    alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                    alertDialog!!.setCancelable(true)
-                    alertDialog.setCanceledOnTouchOutside(true)
-                    alertDialog.setView(dialogView)
-                    alertDialog.show()
-
-                    val txtTitle   = dialogView.findViewById<CommonTextRegular>(R.id.txtTitle)
-                    val txtContent = dialogView.findViewById<TextView>(R.id.txtContent)
-                    val txtData    = dialogView.findViewById<TextView>(R.id.txtData)
-
-                    txtTitle.text   =   loanInfo.payment_message!!.header
-                    txtContent.text =   loanInfo.payment_message!!.header2
-                    txtData.text    =   "Amount to pay is: "+loanInfo.currencyCode+" "+alScheduleOBJ[position].payanytime!!.repayAmount.toString()+"\n"+
-                                        "Reference number is: "+loanInfo.identityNumber+"\n"+
-                                        "L-Pesa Short code is: "+loanInfo.merchantCode.toString()
+                    if(alScheduleOBJ[position].paymentType == 0){
+                    commonPopupPayment(position)
+                    }else{
+                        paymentFromAppUI(alScheduleOBJ[position])
+                    }
 
                 }
             }
         }
 
 
+    }
+
+    private fun paymentFromAppUI(schedule: ResPaybackSchedule.Schedule) {
+        PayUtil.loanPaymentUI((context as AppCompatActivity),schedule)
+    }
+
+    private fun commonPopupPayment(position: Int) {
+        val alertDialog = AlertDialog.Builder(context).create()
+        val inflater = LayoutInflater.from(context)
+        val dialogView = inflater.inflate(R.layout.dialog_payment_schedule, null)
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        alertDialog!!.setCancelable(true)
+        alertDialog.setCanceledOnTouchOutside(true)
+        alertDialog.setView(dialogView)
+        alertDialog.show()
+
+        val txtTitle = dialogView.findViewById<CommonTextRegular>(R.id.txtTitle)
+        val txtContent = dialogView.findViewById<TextView>(R.id.txtContent)
+        val txtData = dialogView.findViewById<TextView>(R.id.txtData)
+
+        txtTitle.text = loanInfo.payment_message!!.header
+        txtContent.text = loanInfo.payment_message!!.header2
+        txtData.text = "Amount to pay is: " + loanInfo.currencyCode + " " + alScheduleOBJ[position].payanytime!!.repayAmount.toString() + "\n" +
+                "Reference number is: " + loanInfo.identityNumber + "\n" +
+                "L-Pesa Short code is: " + loanInfo.merchantCode.toString()
     }
 
     private fun fromHtml(source: String): Spanned {

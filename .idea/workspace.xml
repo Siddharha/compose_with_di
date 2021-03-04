@@ -10,25 +10,32 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-night/bg_drawer_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-night/bg_text_drawer.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-night/colors.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/values-night/styles.xml" afterDir="false" />
+    <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="theme dark light added and default set to light for now.">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/payment/PayUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/payment/PaymentUIBottomSheetDialogFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/settings/view/AppearanceAccountActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_theme.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_appearance_account.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_appreance_account.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/payment_ui_dialog_bottom_sheet.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/RetrofitHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/RetrofitHelper.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/analytics/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/analytics/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/presenter/PresenterVerify.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/presenter/PresenterVerify.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/VerifyMobileActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/VerifyMobileActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResPaybackSchedule.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/settings/view/SettingsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/settings/view/SettingsFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable-night/bg_text_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-night/bg_text_drawer.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_one.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_registration_step_one.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_profile_edit_personal.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/statement_list_cell.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/statement_list_cell.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/styles.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,14 +59,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="Kotlin File" />
         <option value="Kotlin Object" />
         <option value="resourceFile" />
-        <option value="layoutResourceFile_vertical" />
         <option value="Kotlin Interface" />
-        <option value="Kotlin Class" />
         <option value="Class" />
+        <option value="Kotlin Class" />
+        <option value="layoutResourceFile_vertical" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -124,6 +131,9 @@
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="com.app.l_pesa.profile.zoop" />
+    </key>
+    <key name="android.template.-237829363">
+      <recent name="com.app.l_pesa.settings.view" />
     </key>
     <key name="android.template.-2119156293">
       <recent name="com.app.l_pesa.profile.view" />
@@ -243,13 +253,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00010" summary="statement upload module p-3">
-      <created>1603100509377</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1603100509378</updated>
     </task>
     <task id="LOCAL-00011" summary="statement upload module p-3">
       <created>1603116660622</created>
@@ -587,7 +590,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612782291723</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="theme dark light added and default set to light for now.">
+      <created>1614144525580</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1614144525581</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -618,7 +628,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="statement upload module p-4_t7" />
     <MESSAGE value="statement upload module p-4_t8" />
     <MESSAGE value="statement upload module p-4_t9" />
     <MESSAGE value="statement upload module p-4_t10" />
@@ -643,7 +652,8 @@
     <MESSAGE value="date picker issue fixes" />
     <MESSAGE value="bug fix 2" />
     <MESSAGE value="bug fix 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix 3" />
+    <MESSAGE value="theme dark light added and default set to light for now." />
+    <option name="LAST_COMMIT_MESSAGE" value="theme dark light added and default set to light for now." />
   </component>
   <component name="WindowStateProjectService">
     <state x="245" y="162" key="#PSD" timestamp="1611918575861">
@@ -658,6 +668,10 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser/0.23.1440.808@0.23.1440.808" timestamp="1611919800529" />
+    <state x="308" y="188" key="AndroidCreateResourceFileDialog" timestamp="1614845939264">
+      <screen x="0" y="23" width="1440" height="808" />
+    </state>
+    <state x="308" y="188" key="AndroidCreateResourceFileDialog/0.23.1440.808@0.23.1440.808" timestamp="1614845939264" />
     <state x="561" y="288" key="AndroidCreateXmlResourceDialog" timestamp="1613546867479">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -666,50 +680,46 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1613623111739" />
-    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1612782291130">
+    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1614858777274">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1612782291130" />
-    <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1612251309591">
+    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1614858777274" />
+    <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1614229856163">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1094" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1612251309591" />
-    <state width="1398" height="361" key="GridCell.Tab.0.bottom" timestamp="1613644991342">
+    <state width="1094" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1614229856163" />
+    <state width="1398" height="361" key="GridCell.Tab.0.bottom" timestamp="1614264350432">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="361" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1613644991342" />
-    <state width="1398" height="361" key="GridCell.Tab.0.center" timestamp="1613644991341">
+    <state width="1398" height="361" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1614264350432" />
+    <state width="1398" height="361" key="GridCell.Tab.0.center" timestamp="1614264350431">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="361" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1613644991341" />
-    <state width="1398" height="361" key="GridCell.Tab.0.left" timestamp="1613644991340">
+    <state width="1398" height="361" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1614264350431" />
+    <state width="1398" height="361" key="GridCell.Tab.0.left" timestamp="1614264350430">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="361" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1613644991340" />
-    <state width="1398" height="361" key="GridCell.Tab.0.right" timestamp="1613644991341">
+    <state width="1398" height="361" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1614264350430" />
+    <state width="1398" height="361" key="GridCell.Tab.0.right" timestamp="1614264350431">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="361" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1613644991341" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1612782294381">
+    <state width="1398" height="361" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1614264350431" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1614144530804">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1612782294381" />
-    <state width="720" height="398" key="XDebugger.FullValuePopup" timestamp="1606199390050">
-      <screen x="0" y="23" width="1440" height="808" />
-    </state>
-    <state width="720" height="398" key="XDebugger.FullValuePopup/0.23.1440.808@0.23.1440.808" timestamp="1606199390050" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1614144530804" />
     <state x="100" y="123" width="1240" height="597" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1606220569075">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="100" y="123" width="1240" height="597" key="com.android.tools.idea.avdmanager.AvdListDialog/0.23.1440.808@0.23.1440.808" timestamp="1606220569075" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1614142393919">
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1614852117433">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1614142393919" />
-    <state x="385" y="155" width="670" height="676" key="search.everywhere.popup" timestamp="1605517722570">
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1614852117433" />
+    <state x="482" y="63" key="refactoring.ChangeSignatureDialog" timestamp="1614167024791">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="385" y="155" width="670" height="676" key="search.everywhere.popup/0.23.1440.808@0.23.1440.808" timestamp="1605517722570" />
+    <state x="482" y="63" key="refactoring.ChangeSignatureDialog/0.23.1440.808@0.23.1440.808" timestamp="1614167024791" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1063,6 +1073,36 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/presenter/PresenterVerify.kt</url>
           <line>72</line>
           <option name="timeStamp" value="317" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt</url>
+          <line>97</line>
+          <option name="timeStamp" value="318" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt</url>
+          <line>95</line>
+          <option name="timeStamp" value="319" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt</url>
+          <line>94</line>
+          <option name="timeStamp" value="320" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanPaybackScheduledActivity.kt</url>
+          <line>150</line>
+          <option name="timeStamp" value="321" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/view/LoanPaybackScheduledActivity.kt</url>
+          <line>151</line>
+          <option name="timeStamp" value="322" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/settings/view/SettingsFragment.kt</url>
+          <line>84</line>
+          <option name="timeStamp" value="323" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/AppSignatureHelper.java</url>

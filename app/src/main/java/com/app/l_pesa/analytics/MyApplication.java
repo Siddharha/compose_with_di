@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.app.l_pesa.common.SharedPref;
 import com.app.l_pesa.sms_retrieval.AppSignatureHelper;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
@@ -20,16 +21,22 @@ public class MyApplication extends Application {
 
     private static MyApplication mInstance;
 
+
     @Override
     public void onCreate() {
         super.onCreate();
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+
         //--------OTP Hash code creation
        // AppSignatureHelper appSignature = new AppSignatureHelper(this); //Should be removed in production
        // appSignature.getAppSignatures();
         //------------------------------
         mInstance = this;
-
+        if(new SharedPref(mInstance).isDarkTheme()){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
         AnalyticsTrackers.initialize(this);
         AnalyticsTrackers.getInstance().get(AnalyticsTrackers.Target.APP);
 

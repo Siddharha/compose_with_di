@@ -68,4 +68,5 @@
  <color name="colorTextBlack">#FFFFFF</color>
  <color name="tint_icon_color">#9ACAC5</color>
  <color name="colorLightBlack">#1E1E1E</color>
+ <color name="colorMenuTab">#E1E1E1</color>
 </resources>

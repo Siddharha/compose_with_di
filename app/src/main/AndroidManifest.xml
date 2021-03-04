@@ -39,9 +39,10 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="android:allowBackup"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".profile.view.ProfileEditStatementInfoActivity"></activity>
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup">
+        <activity android:name=".settings.view.AppearanceAccountActivity"></activity>
+        <activity android:name=".profile.view.ProfileEditStatementInfoActivity" />
         <activity android:name=".common.CamViewActivity" />
         <activity android:name=".registration.view.EmailVerifyActivity" />
         <activity
@@ -184,9 +185,6 @@
             android:label="@string/loan_historyCurrent"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-
-
-
         <activity
             android:name=".splash.view.SplashActivity"
             android:screenOrientation="portrait"
@@ -272,35 +270,38 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-        <!--  <meta-data
+        <!--
+  <meta-data
               android:name="com.facebook.sdk.ApplicationId"
               android:value="@string/facebook_app_id" />
 
           <activity
               android:name="com.facebook.FacebookActivity"
               android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-              android:label="@string/app_name" />-->
-
-       <!-- <activity
+              android:label="@string/app_name" />
+        -->
+        <!--
+ <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
@@ -311,7 +312,8 @@
 
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <!--
         Optionally, register AnalyticsReceiver and AnalyticsService to support background
         dispatching on non-Google Play devices
@@ -339,8 +341,8 @@
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-
-       <!-- <provider
+        <!--
+ <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
@@ -348,8 +350,8 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
-        </provider>-->
-
+        </provider>
+        -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.app.l_pesa"
@@ -358,19 +360,21 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-           <!-- <meta-data
+            <!--
+                <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>-->
+                android:resource="@xml/provider_paths"/>
+            -->
         </provider>
 
-
-        <receiver android:name=".sms_retrieval.SMSBroadcastReceiver" android:exported="true"
+        <receiver
+            android:name=".sms_retrieval.SMSBroadcastReceiver"
+            android:exported="true"
             android:permission="com.google.android.gms.auth.api.phone.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

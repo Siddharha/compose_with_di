@@ -30,6 +30,7 @@ class ResPaybackSchedule {
         @SerializedName("loan_id")
         @Expose
         var loanId: Int = 0
+
         @SerializedName("identity_number")
         @Expose
         var identityNumber: String = ""
@@ -151,6 +152,10 @@ class ResPaybackSchedule {
         @SerializedName("payanytime")
         @Expose
         var payanytime: Payanytime? = null
+
+        @SerializedName("payment_type")
+        @Expose
+        var paymentType: Int = 1
 
     }
 
