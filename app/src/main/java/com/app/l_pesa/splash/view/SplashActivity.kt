@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.common.isGooglePlayServicesAvailable
 import com.app.l_pesa.common.toast
 import com.app.l_pesa.logout.inter.ICallBackLogout
 import com.app.l_pesa.logout.presenter.PresenterLogout
@@ -38,9 +39,17 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
 
         //initUI()
-        checkVersion()
+
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(isGooglePlayServicesAvailable(this)){
+            checkVersion()
+        }
+    }
+
 
 
     private fun initUI() {
