@@ -1,6 +1,7 @@
 package com.app.l_pesa.analytics;
 
 import android.app.Application;
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -12,6 +13,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.StandardExceptionParser;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 public class MyApplication extends Application {
@@ -20,6 +22,7 @@ public class MyApplication extends Application {
             .getSimpleName();
 
     private static MyApplication mInstance;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
 
     @Override
@@ -32,6 +35,7 @@ public class MyApplication extends Application {
        // appSignature.getAppSignatures();
         //------------------------------
         mInstance = this;
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(mInstance);
         if(new SharedPref(mInstance).isDarkTheme()){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else{
@@ -44,6 +48,9 @@ public class MyApplication extends Application {
         AppEventsLogger.activateApp(this);*/
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+
+
+
     }
 
     public static synchronized MyApplication getInstance() {
@@ -53,6 +60,24 @@ public class MyApplication extends Application {
     private synchronized Tracker getGoogleAnalyticsTracker() {
         AnalyticsTrackers analyticsTrackers = AnalyticsTrackers.getInstance();
         return analyticsTrackers.get(AnalyticsTrackers.Target.APP);
+    }
+
+    public void getGoogleAnalyticsLogger(String method,int type){
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.METHOD, method);
+
+        if(type ==0) {
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle);
+        }else {
+            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.LOGIN, bundle);
+        }
+    }
+
+    public void getGoogleAnalyticsLogger(String contentId,String contentType){
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.CONTENT, contentId);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, contentType);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
     }
 
     /***

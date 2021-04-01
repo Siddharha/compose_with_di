@@ -292,6 +292,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         params.putString(AppEventsConstants.EVENT_PARAM_REGISTRATION_METHOD, "Registration")
         logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION, params)
 
+        MyApplication.getInstance().getGoogleAnalyticsLogger("Sign Up",0) //0 for sign up
         dismiss()
         SharedPref(this@RegistrationStepFiveActivity).removeImagePath()
         Toast.makeText(this@RegistrationStepFiveActivity,resources.getString(R.string.sent_pin_via_sms),Toast.LENGTH_LONG).show()

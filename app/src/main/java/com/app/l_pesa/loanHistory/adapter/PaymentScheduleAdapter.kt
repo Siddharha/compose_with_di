@@ -106,7 +106,7 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
     }
 
     private fun paymentFromAppUI(schedule: ResPaybackSchedule.Schedule) {
-        PayUtil.loanPaymentUI((context as AppCompatActivity),schedule)
+        PayUtil.loanPaymentUI((context as AppCompatActivity),schedule,loanInfo)
     }
 
     private fun commonPopupPayment(position: Int) {

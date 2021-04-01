@@ -241,6 +241,9 @@ interface BaseService{
 
     @POST("settings/close_account")
     fun doCloseAccount(@Body request: JsonObject): Observable<ResCloseAccount>
+
+    @POST("do_payment")
+    fun doPayment(@Body request: PayoutPayload): Observable<ResLoanPayment>
 }
 
 

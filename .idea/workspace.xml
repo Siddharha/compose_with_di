@@ -11,18 +11,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/inter/ICallBackPaymentPayout.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/PayoutPayload.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/model/ResLoanPayment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/presenter/PresenterPayout.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/RetrofitHelper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/RetrofitHelper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/Utility.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/Utility.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/splash/view/SplashActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/splash/view/SplashActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/analytics/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/analytics/MyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/adapter/PaymentScheduleAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/payment/PayUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/payment/PayUtil.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/payment/PaymentUIBottomSheetDialogFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/payment/PaymentUIBottomSheetDialogFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/payment_ui_dialog_bottom_sheet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/payment_ui_dialog_bottom_sheet.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="TA64301Q5P" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="My_Device" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -43,9 +57,9 @@
         <option value="resourceFile" />
         <option value="Kotlin Interface" />
         <option value="Class" />
-        <option value="Kotlin Class" />
         <option value="layoutResourceFile_vertical" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -102,23 +116,23 @@
       <recent name="com.app.l_pesa.common" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.app.l_pesa.loanHistory.inter" />
+      <recent name="com.app.l_pesa.loanHistory.presenter" />
       <recent name="com.app.l_pesa.profile.inter" />
       <recent name="com.app.l_pesa.registration.inter" />
       <recent name="com.app.l_pesa.registration.presenter" />
-      <recent name="com.app.l_pesa.profile.zoop" />
-      <recent name="com.app.l_pesa.profile.presenter" />
-    </key>
-    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
-      <recent name="com.app.l_pesa.profile.zoop" />
-    </key>
-    <key name="android.template.-237829363">
-      <recent name="com.app.l_pesa.settings.view" />
     </key>
     <key name="android.template.-2119156293">
       <recent name="com.app.l_pesa.profile.view" />
     </key>
+    <key name="android.template.-237829363">
+      <recent name="com.app.l_pesa.settings.view" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.app.l_pesa" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.app.l_pesa.profile.zoop" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable-night" />
@@ -232,13 +246,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00012" summary="statement upload module p-3">
-      <created>1603119782044</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1603119782044</updated>
     </task>
     <task id="LOCAL-00013" summary="statement upload module p-3">
       <created>1603121112722</created>
@@ -576,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614858888003</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="playsServices checking updated">
+      <created>1615528626379</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1615528626381</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -607,7 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="statement upload module p-4_t9" />
     <MESSAGE value="statement upload module p-4_t10" />
     <MESSAGE value="statement upload module p-4_r1" />
     <MESSAGE value="statement upload module p-4_r2" />
@@ -632,17 +645,18 @@
     <MESSAGE value="bug fix 3" />
     <MESSAGE value="theme dark light added and default set to light for now." />
     <MESSAGE value="dark theme implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="dark theme implemented" />
+    <MESSAGE value="playsServices checking updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="playsServices checking updated" />
   </component>
   <component name="WindowStateProjectService">
     <state x="245" y="162" key="#PSD" timestamp="1611918575861">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="245" y="162" key="#PSD/0.23.1440.808@0.23.1440.808" timestamp="1611918575861" />
-    <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser" timestamp="1611919800529">
+    <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser" timestamp="1617111164150">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser/0.23.1440.808@0.23.1440.808" timestamp="1611919800529" />
+    <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser/0.23.1440.808@0.23.1440.808" timestamp="1617111164150" />
     <state x="308" y="188" key="AndroidCreateResourceFileDialog" timestamp="1614845939264">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -651,46 +665,46 @@
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="561" y="288" key="AndroidCreateXmlResourceDialog/0.23.1440.808@0.23.1440.808" timestamp="1613546867479" />
-    <state x="576" y="194" key="AndroidProcessChooserDialog" timestamp="1613623111739">
+    <state x="576" y="194" key="AndroidProcessChooserDialog" timestamp="1617173299270">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1613623111739" />
-    <state x="339" y="23" key="CommitChangelistDialog2" timestamp="1614858887203">
+    <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1617173299270" />
+    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1615528625723">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="339" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1614858887203" />
+    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1615528625723" />
     <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1614229856163">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state width="1094" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1614229856163" />
-    <state width="1398" height="281" key="GridCell.Tab.0.bottom" timestamp="1615527460302">
+    <state width="1398" height="361" key="GridCell.Tab.0.bottom" timestamp="1617182441255">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1615527460302" />
-    <state width="1398" height="281" key="GridCell.Tab.0.center" timestamp="1615527460301">
+    <state width="1398" height="361" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1617182441255" />
+    <state width="1398" height="361" key="GridCell.Tab.0.center" timestamp="1617182441254">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1615527460301" />
-    <state width="1398" height="281" key="GridCell.Tab.0.left" timestamp="1615527460300">
+    <state width="1398" height="361" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1617182441254" />
+    <state width="1398" height="361" key="GridCell.Tab.0.left" timestamp="1617182441253">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1615527460300" />
-    <state width="1398" height="281" key="GridCell.Tab.0.right" timestamp="1615527460301">
+    <state width="1398" height="361" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1617182441253" />
+    <state width="1398" height="361" key="GridCell.Tab.0.right" timestamp="1617182441254">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state width="1398" height="281" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1615527460301" />
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1614858890597">
+    <state width="1398" height="361" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1617182441254" />
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2" timestamp="1615528629277">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1614858890597" />
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1615523728536">
+    <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1615528629277" />
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1617264774874">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1615523728536" />
-    <state x="482" y="63" key="refactoring.ChangeSignatureDialog" timestamp="1614167024791">
+    <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1617264774874" />
+    <state x="482" y="63" key="refactoring.ChangeSignatureDialog" timestamp="1617110669910">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
-    <state x="482" y="63" key="refactoring.ChangeSignatureDialog/0.23.1440.808@0.23.1440.808" timestamp="1614167024791" />
+    <state x="482" y="63" key="refactoring.ChangeSignatureDialog/0.23.1440.808@0.23.1440.808" timestamp="1617110669910" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -832,7 +846,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/registration/view/RegistrationStepFiveActivity.kt</url>
-          <line>303</line>
+          <line>304</line>
           <option name="timeStamp" value="198" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -1074,6 +1088,36 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/settings/view/SettingsFragment.kt</url>
           <line>84</line>
           <option name="timeStamp" value="323" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/presenter/PresenterPayout.kt</url>
+          <line>34</line>
+          <option name="timeStamp" value="326" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/presenter/PresenterPayout.kt</url>
+          <line>36</line>
+          <option name="timeStamp" value="327" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/presenter/PresenterPayout.kt</url>
+          <line>40</line>
+          <option name="timeStamp" value="328" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/presenter/PresenterPayout.kt</url>
+          <line>61</line>
+          <option name="timeStamp" value="329" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/presenter/PresenterPayout.kt</url>
+          <line>65</line>
+          <option name="timeStamp" value="330" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanHistory/presenter/PresenterPayout.kt</url>
+          <line>74</line>
+          <option name="timeStamp" value="331" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/AppSignatureHelper.java</url>

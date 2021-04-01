@@ -417,6 +417,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
            /* Toast.makeText(this@LoginActivity,sharedPrefOBJ.countryIsdCode + etPhone.text.toString(), Toast.LENGTH_SHORT).show()
             startVerification(sharedPrefOBJ.countryIsdCode + etPhone.text.toString())*/
             //checkPermissions()
+            MyApplication.getInstance().getGoogleAnalyticsLogger("Login",1) //0 for sign up
             sharedPrefOBJ.deviceInfo      = json
             val intent = Intent(this@LoginActivity, OTPActivity::class.java)
             startActivity(intent)

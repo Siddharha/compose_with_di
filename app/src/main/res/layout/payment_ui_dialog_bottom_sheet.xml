@@ -25,14 +25,27 @@
         android:layout_height="wrap_content"
         tools:text="Short Code : 987987"
         android:textSize="14sp" />
-    <EditText
-        android:id="@+id/etAmount"
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_margin="@dimen/_5sdp"
-        android:hint="Enter Amount"
-        tools:text="10.0 USD" />
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/etAmount1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="@dimen/_5sdp"
+            android:text="10.0 USD" />
+        <CheckBox
+            android:visibility="gone"
+            android:id="@+id/etAmount2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_margin="@dimen/_5sdp"
+            android:hint="Enter Amount"
+            tools:text="10.0 USD" />
+    </RadioGroup>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

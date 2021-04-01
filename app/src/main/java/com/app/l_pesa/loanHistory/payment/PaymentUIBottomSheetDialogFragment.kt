@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.l_pesa.R
+import com.app.l_pesa.loanHistory.inter.ICallBackPaymentPayout
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.payment_ui_dialog_bottom_sheet.view.*
 
-class PaymentUIBottomSheetDialogFragment(sch: ResPaybackSchedule.Schedule) : BottomSheetDialogFragment() {
+class PaymentUIBottomSheetDialogFragment(sch: ResPaybackSchedule.Schedule, loanInfo: ResPaybackSchedule.LoanInfo) : BottomSheetDialogFragment(),ICallBackPaymentPayout {
     private val schedule = sch
+    private val loanInfo = loanInfo
   /*  @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.content_dialog_bottom_sheet, container, false);
@@ -28,13 +32,31 @@ class PaymentUIBottomSheetDialogFragment(sch: ResPaybackSchedule.Schedule) : Bot
         val v = inflater.inflate(R.layout.payment_ui_dialog_bottom_sheet, container, false)
         loadData(v)
         v.btnPay.setOnClickListener {
-            PayUtil.payNow(schedule)
+
+            if(v.etAmount1.isChecked) {
+                PayUtil.payNow(requireContext(),schedule,loanInfo,this)
+            }else {
+                Snackbar.make(v,"Please select amount to be paid.",Snackbar.LENGTH_SHORT).show()
+            }
         }
         return v
     }
 
     private fun loadData(v: View) {
-        v.etAmount.setText(schedule.paidAmount.toString())
+        v.etAmount1.setText(schedule.paidAmount.toString())
        // v.tvHistoryID.setText(schedule.loanHistoryId)
+    }
+
+    override fun onSuccessLoanPayment() {
+        Toast.makeText(requireContext(),"payment successful",Toast.LENGTH_SHORT).show()
+        dismiss()
+    }
+
+    override fun onSessionTimeOut(jsonMessage: String) {
+
+    }
+
+    override fun onErrorLoanPayment(message: String) {
+        Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
     }
 }
