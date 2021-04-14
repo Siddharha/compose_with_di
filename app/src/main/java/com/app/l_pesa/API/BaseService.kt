@@ -119,7 +119,7 @@ interface BaseService{
     @POST("user/step_2")
     fun doRegisterTwo(@Body request: JsonObject): Observable<ResRegistrationTwo>
 
-    @POST("user/step_3")
+    @POST("user/step_3") //Will change to new method
     fun doRegisterThree(@Body request: JsonObject): Observable<ResRegistrationThree>
 
     @POST("user/logout")

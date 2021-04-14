@@ -7,7 +7,7 @@
     android:id="@+id/rootLayout"
     android:padding="@dimen/_10sdp"
     android:orientation="vertical"
-    android:background="@color/colorSemiWhite">
+    android:background="@color/screenBackground">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

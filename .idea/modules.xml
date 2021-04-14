@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Android_project-l-pesa-android-app.iml" filepath="$PROJECT_DIR$/.idea/modules/Android_project-l-pesa-android-app.iml" group="l-pesa-android-app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/L_Pesa.iml" filepath="$PROJECT_DIR$/.idea/modules/L_Pesa.iml" group="L_Pesa" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="L_Pesa/app" />
-      <module fileurl="file://$PROJECT_DIR$/l-pesa.iml" filepath="$PROJECT_DIR$/l-pesa.iml" />
-      <module fileurl="file://$PROJECT_DIR$/l-pesa-android-app.iml" filepath="$PROJECT_DIR$/l-pesa-android-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/L_Pesa.iml" filepath="$PROJECT_DIR$/.idea/modules/L_Pesa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/L_Pesa.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/L_Pesa.app.iml" />
     </modules>
   </component>
 </project>
