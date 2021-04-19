@@ -140,7 +140,7 @@
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
@@ -159,6 +159,7 @@
     <com.app.l_pesa.common.CustomButtonRegular
         android:id="@+id/btnGoogle"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="8dp"
