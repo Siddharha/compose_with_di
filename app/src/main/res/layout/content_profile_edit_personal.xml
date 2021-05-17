@@ -314,33 +314,33 @@
                             android:button="@drawable/custom_female_radio_button" />
                     </RadioGroup>
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonSubmit"
                         android:layout_width="@dimen/_120sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:layout_marginBottom="4dp"
                         android:background="@drawable/ripple_green_button"
                         android:fontFamily="@font/montserrat"
                         android:text="@string/submit"
                         android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="#fff"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/imageView10"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/buttonCancel"
                         android:layout_width="@dimen/_120sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_4sdp"
                         android:background="@drawable/bg_grey_view"
                         android:fontFamily="@font/montserrat"
                         android:text="@string/cancel"
                         android:textAllCaps="true"
-                        android:textColor="@color/colorGreyDeep"
+                        android:textColor="#fff"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView10"

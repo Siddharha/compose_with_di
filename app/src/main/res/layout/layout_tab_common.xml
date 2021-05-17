@@ -18,6 +18,8 @@
         app:tabGravity="fill"
         app:tabBackground="@drawable/tab_ripple"
         app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/tabSelectedTextColors"
+        app:tabTextColor="@color/tabTextColors"
         app:tabTextAppearance="@style/styleTabLayout"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 

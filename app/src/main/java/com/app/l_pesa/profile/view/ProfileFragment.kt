@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.facebook.shimmer.Shimmer
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -223,8 +224,16 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     override fun onSuccessUserInfo(data: ResUserInfo.Data) {
 
-        swipeRefreshLayout.isRefreshing=false
-        shimmerLayout.stopShimmer()
+         swipeRefreshLayout.isRefreshing=false
+        if (shimmerLayout.isShimmerStarted) {
+            shimmerLayout.stopShimmer()
+                    shimmerLayout.setShimmer(Shimmer.AlphaHighlightBuilder()
+                                    .setBaseAlpha(1f)
+                                    .setIntensity(0f)
+                                    .build())
+            shimmerLayout.stopShimmer()
+            shimmerLayout.clearAnimation()
+        }
         setData(data)
     }
 

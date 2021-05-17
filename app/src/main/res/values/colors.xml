@@ -50,6 +50,8 @@
     <color name="default_thumb_color">#ff6f00</color>
     <color name="default_track_color">#c3a9a9a9</color>
     <color name="tint_icon_color">#00FFFFFF</color>
+    <color name="tabTextColors">#77FFFFFF</color>
+    <color name="tabSelectedTextColors">#FFFFFF</color>
 
     <array name="default_index_gradient">
         <item>@color/color_green_success</item>

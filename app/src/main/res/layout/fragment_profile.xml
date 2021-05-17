@@ -9,6 +9,7 @@
        >
 
       <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/screenBackground"
@@ -493,7 +494,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginBottom="8dp"
                             android:text="@string/personal_info"
                             android:textColor="@color/textColors"
                             android:textSize="@dimen/_14sdp"
@@ -510,6 +513,9 @@
                             android:id="@+id/imgEditPersonalInfo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
                             android:background="?selectableItemBackgroundBorderless"
                             android:contentDescription="@string/app_name"
                             android:padding="@dimen/_5sdp"
