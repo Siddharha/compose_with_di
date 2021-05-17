@@ -10,7 +10,7 @@ import com.app.l_pesa.lpk.view.WithdrawalHistoryFragment
 class WithdrawalTabAdapter (fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         //Returning the current tabs
         return when (position) {
             0 -> {
@@ -19,11 +19,9 @@ class WithdrawalTabAdapter (fm: FragmentManager, private var tabCount: Int): Fra
             1 -> {
                 WithdrawalHistoryFragment()
             }
-            2 -> {
+            else -> {
                 WalletAddressFragment()
             }
-
-            else -> null
         }
     }
 

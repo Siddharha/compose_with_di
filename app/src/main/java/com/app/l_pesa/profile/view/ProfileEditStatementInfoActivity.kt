@@ -527,11 +527,11 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
 
     private fun showErrText(s:String) {
         val t = Toast.makeText(activity, s, Toast.LENGTH_LONG)
-        t.view.setBackgroundColor(Color.RED)
-        t.view.setPadding(10, 0, 10, 0)
-        val ttv = t.view.findViewById<TextView>(android.R.id.message)
-        ttv.setTextColor(Color.WHITE)
-        ttv.setPadding(5, 5, 5, 5)
+        t.view?.setBackgroundColor(Color.RED)
+        t.view?.setPadding(10, 0, 10, 0)
+        val ttv = t.view?.findViewById<TextView>(android.R.id.message)
+        ttv?.setTextColor(Color.WHITE)
+        ttv?.setPadding(5, 5, 5, 5)
         t.show()
     }
 

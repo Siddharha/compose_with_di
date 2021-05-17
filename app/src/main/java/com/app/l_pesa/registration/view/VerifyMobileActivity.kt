@@ -31,27 +31,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.*
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.registration.inter.MobileVerifyListener
-import com.app.l_pesa.registration.model.DeviceData
 import com.app.l_pesa.registration.model.NextStage
-import com.app.l_pesa.registration.model.ReqVerifyMobile
 import com.app.l_pesa.registration.presenter.PresenterVerify
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.sinch.verification.*
 import kotlinx.android.synthetic.main.activity_verify_mobile.*
-import kotlinx.android.synthetic.main.activity_verify_mobile.rootLayout
 import kotlinx.android.synthetic.main.layout_registration_step_one.*
 import java.lang.Exception
 import java.sql.DriverManager.println
@@ -365,7 +362,7 @@ class VerifyMobileActivity : AppCompatActivity(), ICallBackCountryList, MobileVe
             jsonObject.addProperty("email_address",email)
             jsonObject.addProperty("category",category)
             jsonObject.addProperty("social_id",socId)
-            jsonObject.addProperty("device_token",FirebaseInstanceId.getInstance().token.toString())
+            jsonObject.addProperty("device_token",FirebaseMessaging.getInstance().token.toString())
             jsonObject.addProperty("platform_type","A")
 
             val jsonObjectChild = JsonObject()

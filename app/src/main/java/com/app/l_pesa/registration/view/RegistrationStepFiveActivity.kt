@@ -28,7 +28,7 @@ import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref

@@ -34,7 +34,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.API.Result
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.*
 import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
 import com.app.l_pesa.common.CommonMethod.openTermCondition
@@ -60,7 +60,6 @@ import com.google.android.gms.auth.api.signin.*
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.tasks.Task
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_registration_step_one.toolbar
@@ -75,6 +74,7 @@ import kotlin.collections.set
 
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, ICallBackRegisterOne,
@@ -305,6 +305,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -534,7 +535,7 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
                 jsonObject.addProperty("email_address", etEmail.text.toString())
                 jsonObject.addProperty("country_code", sharedPref.countryIsdCode)
                 jsonObject.addProperty("platform_type", "A")
-                jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+                jsonObject.addProperty("device_token", FirebaseMessaging.getInstance().token.toString())
 
                 val jsonObjectRequestChild = JsonObject()
                 jsonObjectRequestChild.addProperty("device_id", deviceId)

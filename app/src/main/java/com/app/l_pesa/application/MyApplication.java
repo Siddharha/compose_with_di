@@ -1,12 +1,13 @@
-package com.app.l_pesa.analytics;
+package com.app.l_pesa.application;
 
 import android.app.Application;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDexApplication;
 
+import com.app.l_pesa.analytics.AnalyticsTrackers;
 import com.app.l_pesa.common.SharedPref;
-import com.app.l_pesa.sms_retrieval.AppSignatureHelper;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.analytics.GoogleAnalytics;
@@ -16,7 +17,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
 
     public static final String TAG = MyApplication.class
             .getSimpleName();

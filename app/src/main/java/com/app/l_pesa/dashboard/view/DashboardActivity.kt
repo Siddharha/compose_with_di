@@ -29,7 +29,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorFragment
 import com.app.l_pesa.common.*
 import com.app.l_pesa.investment.view.InvestmentFragment
@@ -50,7 +50,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
 import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType

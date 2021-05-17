@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.profile.model.ImageRequestListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions

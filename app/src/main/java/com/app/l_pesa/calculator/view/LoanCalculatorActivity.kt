@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.calculator.adapter.LoanProductAdapter
 import com.app.l_pesa.calculator.inter.ICallBackProducts
 import com.app.l_pesa.calculator.model.ResProducts

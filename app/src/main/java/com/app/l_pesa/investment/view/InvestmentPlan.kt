@@ -66,13 +66,13 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
             params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Investment Plan")
             logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
-            shimmerLayout.startShimmerAnimation()
+            shimmerLayout.startShimmer()
             val presenterLoanPlans= PresenterInvestmentPlan()
             presenterLoanPlans.getInvestmentPlan(activity!!,this)
         }
         else
         {
-            shimmerLayout.stopShimmerAnimation()
+            shimmerLayout.stopShimmer()
             shimmerLayout.visibility=View.INVISIBLE
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
             swipeRefreshLayout.isRefreshing = false
@@ -82,7 +82,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
     override fun onSuccessInvestmentPlan(data: ResInvestmentPlan.Data) {
 
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.startShimmer()
         shimmerLayout.visibility=View.INVISIBLE
         cardView.visibility=View.GONE
         val sharedPrefOBJ= SharedPref(activity!!)
@@ -103,7 +103,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
     override fun onEmptyInvestmentPlan() {
 
-       shimmerLayout.stopShimmerAnimation()
+       shimmerLayout.startShimmer()
        shimmerLayout.visibility=View.INVISIBLE
        swipeRefreshLayout.isRefreshing = false
        cardView.visibility=View.VISIBLE
@@ -111,7 +111,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
     override fun onErrorInvestmentPlan(jsonMessage: String) {
 
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.startShimmer()
         shimmerLayout.visibility=View.INVISIBLE
         cardView.visibility=View.GONE
         swipeRefreshLayout.isRefreshing = false

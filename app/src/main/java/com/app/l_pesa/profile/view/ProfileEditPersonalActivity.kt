@@ -6,7 +6,6 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.ClipData
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,15 +13,12 @@ import android.graphics.*
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.provider.MediaStore
 import android.provider.Settings
 import android.text.*
 import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.MenuItem
 import android.view.Window
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -35,7 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.*
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pinview.model.LoginData

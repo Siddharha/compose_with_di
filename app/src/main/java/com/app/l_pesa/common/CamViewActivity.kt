@@ -159,9 +159,9 @@ class CamViewActivity : AppCompatActivity() {
 
 
         val readerListener = ImageReader.OnImageAvailableListener { imageReader ->
-            var image: Image? = null
+            var image: Image
             try {
-                image = reader!!.acquireLatestImage()
+                image = reader.acquireLatestImage()
                 val buffer: ByteBuffer = image.planes[0].buffer
                 val bytes = ByteArray(buffer.capacity())
                 buffer.get(bytes)
@@ -171,9 +171,7 @@ class CamViewActivity : AppCompatActivity() {
             } catch (e: IOException) {
                 e.printStackTrace()
             } finally {
-                {
-                    if (image != null) image.close()
-                }
+                Log.e("response","Some error happens in readerListener")
             }
         }
 
@@ -282,22 +280,38 @@ class CamViewActivity : AppCompatActivity() {
         ORIENTATIONS.append(Surface.ROTATION_270,180)
 
         textureListener = object : TextureView.SurfaceTextureListener{
-            override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture?, width: Int, height: Int) {
+            override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
                 Log.e("texture","resized")
             }
 
-            override fun onSurfaceTextureUpdated(surface: SurfaceTexture?) {
+            override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
                 Log.e("texture","updated")
             }
 
-            override fun onSurfaceTextureDestroyed(surface: SurfaceTexture?): Boolean {
+            override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
                 Log.e("texture","changed")
                 return true
             }
 
-            override fun onSurfaceTextureAvailable(surface: SurfaceTexture?, width: Int, height: Int) {
+            override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {
                 openCamera()
             }
+            /*         override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture?, width: Int, height: Int) {
+                         Log.e("texture","resized")
+                     }
+
+                     override fun onSurfaceTextureUpdated(surface: SurfaceTexture?) {
+                         Log.e("texture","updated")
+                     }
+
+                     override fun onSurfaceTextureDestroyed(surface: SurfaceTexture?): Boolean {
+                         Log.e("texture","changed")
+                         return true
+                     }
+
+                     override fun onSurfaceTextureAvailable(surface: SurfaceTexture?, width: Int, height: Int) {
+                         openCamera()
+                     }*/
 
         }
 

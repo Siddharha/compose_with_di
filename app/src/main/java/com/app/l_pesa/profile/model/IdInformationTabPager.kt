@@ -10,17 +10,16 @@ import com.app.l_pesa.profile.view.PersonalIdInfoFragment
 class IdInformationTabPager(fm: FragmentManager, private var tabCount: Int): FragmentStatePagerAdapter(fm) {
 
     //Overriding method getItem
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         //Returning the current tabs
         return when (position) {
             0 -> {
                 PersonalIdInfoFragment()
             }
-            1 -> {
+            else -> {
                 BusinessIdInfoFragment()
             }
 
-            else -> null
         }
     }
 

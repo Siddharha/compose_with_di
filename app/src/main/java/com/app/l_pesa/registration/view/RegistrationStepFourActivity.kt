@@ -10,7 +10,6 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
 import android.util.Base64
 import android.util.Log
@@ -21,11 +20,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.profile.adapter.TitleListAdapter
 import com.app.l_pesa.profile.inter.ICallBackId
 import com.app.l_pesa.zoop.ICallBackZoop
 import com.app.l_pesa.zoop.PresenterZoop

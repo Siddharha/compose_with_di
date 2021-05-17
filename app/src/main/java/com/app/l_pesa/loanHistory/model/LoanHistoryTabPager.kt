@@ -11,17 +11,16 @@ class LoanHistoryTabPager(fm: FragmentManager,private var tabCount: Int)//Initia
     : FragmentStatePagerAdapter(fm) {
 
     //Overriding method getItem
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         //Returning the current tabs
         return when (position) {
             0 -> {
                 CurrentLoanHistory()
             }
-            1 -> {
+            else -> {
                 BusinessLoanHistory()
             }
 
-            else -> null
         }
     }
 

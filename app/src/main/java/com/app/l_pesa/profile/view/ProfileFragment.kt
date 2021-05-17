@@ -84,11 +84,11 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         {
             if(shimmerStatus)
             {
-                shimmerLayout.startShimmerAnimation()
+                shimmerLayout.startShimmer()
             }
             else
             {
-                shimmerLayout.stopShimmerAnimation()
+                shimmerLayout.stopShimmer()
             }
 
             val presenterUserInfo= PresenterUserInfo()
@@ -97,13 +97,13 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         else
         {
             swipeRefreshLayout.isRefreshing=false
-            shimmerLayout.startShimmerAnimation()
+            shimmerLayout.startShimmer()
             customSnackBarError(llRoot,resources.getString(R.string.no_internet))
         }
 
         imgEditPersonalInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                     startActivity(Intent(activity, ProfileEditPersonalActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -119,7 +119,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditContactInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                     startActivity(Intent(activity, ProfileEditContactInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -135,7 +135,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditEmpInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                     startActivity(Intent(activity, ProfileEditEmpInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -151,7 +151,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditEmpInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                     startActivity(Intent(activity, ProfileEditEmpInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -166,7 +166,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditBusinessInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                     startActivity(Intent(activity, ProfileEditBusinessInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -180,7 +180,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         imgEditIdInfo.setOnClickListener {
 
-            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                     startActivity(Intent(activity, ProfileEditIdInfoActivity::class.java))
                     activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -193,7 +193,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }
 
         imgEditStInfo.setOnClickListener {
-            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isAnimationStarted)
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                 startActivity(Intent(activity, ProfileEditStatementInfoActivity::class.java))
                 activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
@@ -224,19 +224,19 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     override fun onSuccessUserInfo(data: ResUserInfo.Data) {
 
         swipeRefreshLayout.isRefreshing=false
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.stopShimmer()
         setData(data)
     }
 
     override fun onErrorUserInfo(message: String) {
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.stopShimmer()
         swipeRefreshLayout.isRefreshing=false
         Toast.makeText(activity,message,Toast.LENGTH_SHORT).show()
     }
 
     override fun onSessionTimeOut(jsonMessage: String) {
 
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.stopShimmer()
         swipeRefreshLayout.isRefreshing=false
         val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)

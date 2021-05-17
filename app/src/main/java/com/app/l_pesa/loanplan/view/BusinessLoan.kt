@@ -66,7 +66,7 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
 
         if(CommonMethod.isNetworkAvailable(activity!!))
         {
-            shimmerLayout.startShimmerAnimation()
+            shimmerLayout.startShimmer()
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanPlans= PresenterLoanPlans()
@@ -74,7 +74,7 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
         }
         else
         {
-            shimmerLayout.stopShimmerAnimation()
+            shimmerLayout.stopShimmer()
             shimmerLayout.visibility=View.INVISIBLE
             CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
             swipeRefreshLayout.isRefreshing = false
@@ -83,7 +83,7 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onSuccessLoanPlans(item: ArrayList<ResLoanPlans.Item>, appliedProduct: ResLoanPlans.AppliedProduct?) {
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.stopShimmer()
         shimmerLayout.visibility=View.INVISIBLE
         val sharedPref= SharedPref(activity!!)
         sharedPref.businessLoanCount="1"
@@ -97,7 +97,7 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onEmptyLoanPlans() {
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.stopShimmer()
         shimmerLayout.visibility=View.INVISIBLE
         val sharedPref= SharedPref(activity!!)
         sharedPref.businessLoanCount="0"
@@ -108,7 +108,7 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
     }
 
     override fun onFailureLoanPlans(jsonMessage: String) {
-        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.stopShimmer()
         shimmerLayout.visibility=View.INVISIBLE
         val sharedPref= SharedPref(activity!!)
         sharedPref.businessLoanCount="0"

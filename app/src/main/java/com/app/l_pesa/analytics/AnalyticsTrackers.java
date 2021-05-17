@@ -28,7 +28,7 @@ public final class AnalyticsTrackers {
 
     private static AnalyticsTrackers sInstance;
 
-    static synchronized void initialize(Context context) {
+    public static synchronized void initialize(Context context) {
         if (sInstance != null) {
             throw new IllegalStateException("Extra call to initialize analytics trackers");
         }

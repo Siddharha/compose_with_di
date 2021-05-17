@@ -29,7 +29,7 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
@@ -49,7 +49,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
-import java.io.IOException
 import java.util.*
 
 
@@ -63,7 +62,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     private lateinit var countDownTimer: CountDownTimer
 
     private lateinit var locationManager: LocationManager
-    internal var provider: String? = null
+    private lateinit var provider: String
 
     private var loanType = ""
     private var productId = ""
@@ -92,6 +91,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+        initialize()
         locationWork()
         initData()
         //getLastLocation()
@@ -101,11 +101,26 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
 
     }
 
+    private fun initialize(){
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val criteria = Criteria()
+        provider = locationManager.getBestProvider(criteria, false)!!
+    }
+
     private fun getLastLocation() {
         Log.d(TAG, "getLastLocation:  getlastlocation")
         //last location update:
-        fusedLocationClient!!.lastLocation
-                .addOnSuccessListener(this) { location ->
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        fusedLocationClient?.lastLocation?.addOnSuccessListener(this) { location ->
                     Log.d(TAG, "onSuccess: location " + location!!.latitude + location.longitude)
                     if (location != null) {
                         val lat = location.latitude
@@ -146,14 +161,12 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         }
 
 
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
 
         // Creating an empty criteria object
-        val criteria = Criteria()
-        provider = locationManager.getBestProvider(criteria, false)
 
-        if (provider != null && provider != "") {
-            if (!provider!!.contains("gps")) {
+        if (provider != "") {
+            if (!provider.contains("gps")) {
                 val poke = Intent()
                 poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider")
                 poke.addCategory(Intent.CATEGORY_ALTERNATIVE)

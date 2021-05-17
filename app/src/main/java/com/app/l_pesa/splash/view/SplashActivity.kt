@@ -33,14 +33,19 @@ import kotlinx.android.synthetic.main.activity_splash.txtHeader
 class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
 
+    lateinit var sharedPrefOBJ:SharedPref
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-
+        initialize()
         //initUI()
 
 
+    }
+
+    private fun initialize(){
+        sharedPrefOBJ = SharedPref(this)
     }
 
     override fun onResume() {
@@ -53,7 +58,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
 
     private fun initUI() {
-        val sharedPrefOBJ = SharedPref(this@SplashActivity)
+       // val sharedPrefOBJ = SharedPref(this@SplashActivity)
 
         if (sharedPrefOBJ.accessToken != resources.getString(R.string.init)) {
             if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
@@ -91,7 +96,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     private fun loadNext() {
 
-        val sharedPrefOBJ = SharedPref(this@SplashActivity)
+     //   val sharedPrefOBJ = SharedPref(this@SplashActivity)
         if (sharedPrefOBJ.countryList == resources.getString(R.string.init)) {
             if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
                 loadCountry()
@@ -146,7 +151,8 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     override fun onSuccessCountry(countries_list: ResModelData) {
 
         val json = Gson().toJson(countries_list)
-        val sharedPrefOBJ = SharedPref(this@SplashActivity)
+    //    val sharedPrefOBJ = SharedPref(this@SplashActivity)
+        //sharedPrefOBJ.countryList = ""    //TEST CLEAR
         sharedPrefOBJ.countryList = json
         progressBar.visibility = View.INVISIBLE
 
@@ -199,7 +205,6 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     }
 
     private fun loadMain() {
-        val sharedPrefOBJ = SharedPref(this@SplashActivity)
         sharedPrefOBJ.removeShared()
         progressBar.visibility = View.INVISIBLE
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
@@ -251,6 +256,8 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                 progressBar.visibility = View.INVISIBLE
                 if (status) {
                     //"$status".toast(this@SplashActivity)
+
+                    sharedPrefOBJ.countryList = resources.getString(R.string.init) //removing country list --->Test
                     initUI()
                 } else {
                     // "$status".toast(this@SplashActivity)

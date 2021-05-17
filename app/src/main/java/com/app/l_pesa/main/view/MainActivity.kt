@@ -1,16 +1,13 @@
 package com.app.l_pesa.main.view
 
-import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
 import android.os.Handler
-import android.view.Display
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
 import com.app.l_pesa.common.CommonMethod.openTermCondition
 import com.app.l_pesa.common.SharedPref
@@ -317,7 +314,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun unregisterInstallStateUpdListener() {
         if (appUpdateManager != null && installStateUpdatedListener != null)
-            appUpdateManager!!.unregisterListener(installStateUpdatedListener)
+            appUpdateManager!!.unregisterListener(installStateUpdatedListener!!)
     }
 
     override fun onResume() {

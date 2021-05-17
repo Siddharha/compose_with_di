@@ -28,7 +28,7 @@
         android:xlargeScreens="true" />
 
     <application
-        android:name=".analytics.MyApplication"
+        android:name=".application.MyApplication"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher_foreground"

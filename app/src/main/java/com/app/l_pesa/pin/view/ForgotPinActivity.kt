@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,7 +14,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.telephony.TelephonyManager
 import android.text.*
 import android.text.method.SingleLineTransformationMethod
 import android.text.style.RelativeSizeSpan
@@ -33,24 +31,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.*
 import com.app.l_pesa.login.adapter.CountryListAdapter
 import com.app.l_pesa.login.inter.ICallBackCountryList
 import com.app.l_pesa.login.view.LoginActivity
-import com.app.l_pesa.otpview.view.OTPActivity
 import com.app.l_pesa.pin.inter.ICallBackChangePin
 import com.app.l_pesa.pin.inter.ICallBackSms
 import com.app.l_pesa.pin.model.Data
 import com.app.l_pesa.pin.model.PinData
 import com.app.l_pesa.pin.presenter.PresenterPassword
-import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.sinch.verification.*
@@ -219,7 +215,7 @@ class ForgotPinActivity : AppCompatActivity(),  ICallBackCountryList, ICallBackC
             jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
             jsonObject.addProperty("is_new_version","new")
             jsonObject.addProperty("platform_type","A")
-            jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+            jsonObject.addProperty("device_token", FirebaseMessaging.getInstance().token.toString())
 
             val jsonObjectRequestChild = JsonObject()
             jsonObjectRequestChild.addProperty("device_id", deviceId)

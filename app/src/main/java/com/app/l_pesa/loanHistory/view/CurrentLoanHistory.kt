@@ -348,7 +348,7 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
         val taskEditText    = CommonEditTextRegular(activity!!)
         taskEditText.typeface=font
         taskEditText.setTextColor(ContextCompat.getColor(activity!!,R.color.colorTextBlackLight))
-        val textInputLayout = TextInputLayout(activity)
+        val textInputLayout = TextInputLayout(activity!!)
 
         val container =  FrameLayout(activity!!)
         val  params   =  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)

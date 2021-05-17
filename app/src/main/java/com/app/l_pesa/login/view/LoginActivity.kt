@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -36,7 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorActivity
 import com.app.l_pesa.common.*
 import com.app.l_pesa.common.CommonMethod.openPrivacyUrl
@@ -56,11 +55,8 @@ import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.credentials.Credential
-import com.google.android.gms.auth.api.credentials.Credentials
-import com.google.android.gms.auth.api.credentials.HintRequest
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.gun0912.tedpermission.PermissionListener
@@ -351,7 +347,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             jsonObject.addProperty("country_code",sharedPrefOBJ.countryIsdCode)
             jsonObject.addProperty("platform_type","A")
             jsonObject.addProperty("is_new_version","new")
-            jsonObject.addProperty("device_token", FirebaseInstanceId.getInstance().token.toString())
+            jsonObject.addProperty("device_token", FirebaseMessaging.getInstance().token.toString())
 
 
             val jsonObjectRequestChild = JsonObject()

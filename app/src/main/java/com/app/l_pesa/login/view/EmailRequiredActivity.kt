@@ -15,10 +15,8 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.common.CommonMethod.requestEmailHint
-import com.app.l_pesa.common.CommonMethod.requestHint
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.login.inter.ICallBackEmail

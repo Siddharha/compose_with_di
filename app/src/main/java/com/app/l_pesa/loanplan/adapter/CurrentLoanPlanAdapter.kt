@@ -67,9 +67,9 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
                 }
                 if(loanPlanList[position].details?.bannerObject?.isShimmer!!){
 
-                    viewHolder.smBanner.startShimmerAnimation()
+                    viewHolder.smBanner.startShimmer()
                 }else{
-                    viewHolder.smBanner.stopShimmerAnimation()
+                    viewHolder.smBanner.stopShimmer()
                     viewHolder.smBanner.clearAnimation()
                 }
 
@@ -77,7 +77,7 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
             } else {
                 viewHolder.flBanner.visibility = View.GONE
                 viewHolder.stApproval.visibility = View.GONE
-                viewHolder.smBanner.stopShimmerAnimation()
+                viewHolder.smBanner.stopShimmer()
                 viewHolder.smBanner.clearAnimation()
             }
         }catch (e:Exception){

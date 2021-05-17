@@ -336,12 +336,12 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
     override fun onRemoveLoan(position: Int, loanHistoryBusiness: ResLoanHistoryBusiness.LoanHistory)
     {
-        val dialog = AlertDialog.Builder(activity!!)
+        val dialog = AlertDialog.Builder(requireContext())
 
         val font = ResourcesCompat.getFont(activity!!, R.font.montserrat)
         val taskEditText    = CommonEditTextRegular(activity!!)
         taskEditText.typeface=font
-        val textInputLayout = TextInputLayout(activity)
+        val textInputLayout = TextInputLayout(activity!!)
 
         val container =  FrameLayout(activity!!)
         val  params   =  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)

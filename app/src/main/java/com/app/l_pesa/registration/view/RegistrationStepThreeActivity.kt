@@ -16,11 +16,10 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.app.l_pesa.R
-import com.app.l_pesa.analytics.MyApplication
+import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.common.toast
 import com.app.l_pesa.profile.inter.ICallBackUpload
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
@@ -28,7 +27,6 @@ import com.app.l_pesa.registration.inter.ICallBackRegisterTwo
 import com.app.l_pesa.registration.model.ReqNameVerify
 import com.app.l_pesa.registration.presenter.PresenterRegistrationTwo
 import com.bumptech.glide.Glide
-import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_registration_step_three.*
 import kotlinx.android.synthetic.main.layout_registration_step_three.*
