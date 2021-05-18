@@ -41,7 +41,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".allservices.SasaDoctorActivity"></activity>
+        <service
+            android:name=".dev_options.DataObserverService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".allservices.SasaDoctorActivity" />
         <activity android:name=".settings.view.AppearanceAccountActivity" />
         <activity android:name=".profile.view.ProfileEditStatementInfoActivity" />
         <activity android:name=".common.CamViewActivity" />
