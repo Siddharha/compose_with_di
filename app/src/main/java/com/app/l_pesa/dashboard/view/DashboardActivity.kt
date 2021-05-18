@@ -33,6 +33,7 @@ import com.app.l_pesa.allservices.AllServicesFragment
 import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorFragment
 import com.app.l_pesa.common.*
+import com.app.l_pesa.dev_options.DevFragment
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
 import com.app.l_pesa.loanplan.view.LoanPlansFragment
@@ -191,9 +192,15 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         for (i in 0 until m.size()) {
             val mi = m.getItem(i)
             val subMenu = mi.subMenu
+
+
             if (subMenu != null && subMenu.size() > 0) {
                 for (j in 0 until subMenu.size()) {
                     val subMenuItem = subMenu.getItem(j)
+
+                    if(subMenuItem.itemId == R.id.action_dev ){
+                        subMenuItem.isVisible = BuildConfig.DEBUG //to enable debug option based on build
+                    }
                     applyFontToMenuItem(subMenuItem)
                 }
             }
@@ -354,7 +361,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         // Handle navigation view item clicks here.
         val currentFragment = this@DashboardActivity.supportFragmentManager.findFragmentById(R.id.frame)
 
-        item.isVisible = BuildConfig.DEBUG //to enable debug option based on build
+
 
         when (item.itemId) {
 
@@ -401,6 +408,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     navigateToFragment(PointsFragment.newInstance())
                 }
 
+            }
+            R.id.action_dev ->{
+                if (currentFragment is PointsFragment) {
+                } else {
+                    toolbar.title = resources.getString(R.string.nav_item_dev)
+                    navigateToFragment(DevFragment.newInstance())
+                }
             }
             R.id.action_investment -> {
                 if (currentFragment is InvestmentFragment) {
