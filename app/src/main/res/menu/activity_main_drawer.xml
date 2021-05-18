@@ -48,6 +48,10 @@
             android:icon="@drawable/ic_settings_icon"
             android:title="@string/nav_item_settings" />
         <item
+            android:id="@+id/action_dev"
+            android:icon="@drawable/ic_dev_options"
+            android:title="@string/nav_item_dev" />
+        <item
             android:id="@+id/action_logout"
             android:icon="@drawable/ic_logout_icon"
             android:title="@string/nav_item_logout" />

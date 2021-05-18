@@ -354,6 +354,8 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         // Handle navigation view item clicks here.
         val currentFragment = this@DashboardActivity.supportFragmentManager.findFragmentById(R.id.frame)
 
+        item.isVisible = BuildConfig.DEBUG //to enable debug option based on build
+
         when (item.itemId) {
 
             R.id.action_dashboard -> {

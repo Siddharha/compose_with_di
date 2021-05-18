@@ -546,7 +546,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     }
 
-    @Throws(IOException::class)
     private fun showCountry()
     {
 

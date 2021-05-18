@@ -30,10 +30,10 @@ android {
     }*/
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles 'proguard-rules.pro'
-            debuggable true
+            debuggable false
             signingConfig signingConfigs.config
             proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
@@ -43,24 +43,24 @@ android {
             buildConfigField("String", 'STATEMENT_PDF_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/statements/"')
             buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
             /* buildConfigField("String", 'BASE_URL', '"http://40.76.68.66/v2/"') //http://20.36.32.60*/
-            buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')
+           /* buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')*/
             buildConfigField("String", 'ZOOP_PRE_BASE_URL', '"https://preprod.aadhaarapi.com/"') //For Pre-Production
             buildConfigField("String", 'ZOOP_PROD_BASE_URL', '"https://prod.aadhaarapi.com/"') //For Production
 
         }
-        build {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            debuggable false
+            debuggable true
             signingConfig signingConfigs.config
             buildConfigField("String", 'AWS_PULL', '"eu-central-1:a50ad0e2-bed2-42dc-a6b1-8f225f37f5f3"')
             buildConfigField("String", 'AWS_BUCKET', '"lpesa-profile-identity-proof"')
             buildConfigField("String", 'PROFILE_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/"')
             buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
             buildConfigField("String", 'STATEMENT_PDF_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/statements/"')
-            buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
+            buildConfigField("String", 'BASE_URL', '"http://api-dev.l-pesa.com/v2/"')
             /* buildConfigField("String", 'BASE_URL', '"http://40.76.68.66/v2/"') //http://20.36.32.60*/
-            buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')
+            /*buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')*/
             buildConfigField("String", 'ZOOP_PRE_BASE_URL', '"https://preprod.aadhaarapi.com/"') //For Pre-Production
 
         }
@@ -73,12 +73,12 @@ android {
     }*/
 
     android {
-     /*   lintOptions {
+        lintOptions {
             checkReleaseBuilds false
             // Or, if you prefer, you can continue to check for errors in release builds,
             // but continue the build even when errors are found:
             abortOnError false
-        }*/
+        }
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
