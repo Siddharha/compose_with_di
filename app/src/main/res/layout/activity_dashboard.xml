@@ -18,13 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:itemTextAppearance="@style/NavDrawerTextStyle"
         app:headerLayout="@layout/nav_header_main"
-        app:itemBackground="@drawable/bg_drawer_item"
-        app:itemTextColor="@drawable/bg_text_drawer"
         app:menu="@menu/activity_main_drawer"
-        android:background="@color/colorWhite"
-        android:theme="@style/NavigationTheme"
+        app:itemTextColor="@color/drawer_item_selector"
+        app:theme="@style/AppTheme"
        />
+    <!--app:itemTextAppearance="@style/NavDrawerTextStyle"-->
+   <!-- app:itemTextColor="@drawable/bg_text_drawer"-->
 
 </androidx.drawerlayout.widget.DrawerLayout>

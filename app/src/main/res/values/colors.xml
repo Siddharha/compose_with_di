@@ -52,6 +52,8 @@
     <color name="tint_icon_color">#00FFFFFF</color>
     <color name="tabTextColors">#77FFFFFF</color>
     <color name="tabSelectedTextColors">#FFFFFF</color>
+    <color name="buttonTextColor">#FFFFFF</color>
+    <color name="drawer_item_select_color">#00695c</color>
 
     <array name="default_index_gradient">
         <item>@color/color_green_success</item>

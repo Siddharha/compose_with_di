@@ -64,7 +64,7 @@
                             android:id="@+id/buttonApplyLoan"
                             style="?android:attr/borderlessButtonStyle"
                             android:layout_width="@dimen/_120sdp"
-                            android:layout_height="@dimen/_30sdp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_7sdp"
                             android:layout_marginBottom="@dimen/_7sdp"

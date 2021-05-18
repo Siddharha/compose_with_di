@@ -58,9 +58,10 @@
     <array name="default_track_gradient">
         <item>@color/default_track_color</item>
     </array>-->
+ <color name="colorAccent">#00FFDF</color>
     <color name="semi_white">#454545</color>
     <color name="dark_text_color">#B3BDCA</color>
-    <color name="colorApp">#008575</color>
+    <color name="colorApp">#00FFE0</color>
     <color name="screenBackground">#1E1E1E</color>
     <color name="colorWhite">#313131</color>
  <color name="colorAppDeep">#00D1B7</color>
@@ -69,4 +70,8 @@
  <color name="tint_icon_color">#9ACAC5</color>
  <color name="colorLightBlack">#1E1E1E</color>
  <color name="colorMenuTab">#E1E1E1</color>
+ <color name="text_color_blue">#A6D1FF</color>
+ <color name="drawer_item_select_color">#00FFDF</color>
+ <color name="total_lpk_color">#8AB5F4</color>
+ <color name="colorSemiBlack">#DAE6F3</color>
 </resources>

@@ -345,7 +345,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private fun applyFontToMenuItem(mi: MenuItem) {
         val font = ResourcesCompat.getFont(this@DashboardActivity, R.font.montserrat)
         val title = SpannableString(mi.title)
-        title.setSpan(CustomTypeFaceSpan("", font!!, Color.parseColor("#535559")), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+       // title.setSpan(CustomTypeFaceSpan("", font!!, Color.parseColor("#535559")), 0, title.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         mi.title = title
     }
 

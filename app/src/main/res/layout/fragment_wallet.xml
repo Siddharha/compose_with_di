@@ -251,7 +251,7 @@
                 android:fontFamily="@font/montserrat"
                 android:text="@string/withdraw"
                 android:textAllCaps="true"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/buttonTextColor"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

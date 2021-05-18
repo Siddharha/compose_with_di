@@ -113,7 +113,7 @@
             android:fontFamily="@font/montserrat"
             android:text="@string/loan_calculate"
             android:textAllCaps="true"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/buttonTextColor"
             android:textStyle="bold"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
