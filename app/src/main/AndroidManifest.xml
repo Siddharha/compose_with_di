@@ -41,7 +41,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".settings.view.AppearanceAccountActivity"></activity>
+        <activity android:name=".allservices.SasaDoctorActivity"></activity>
+        <activity android:name=".settings.view.AppearanceAccountActivity" />
         <activity android:name=".profile.view.ProfileEditStatementInfoActivity" />
         <activity android:name=".common.CamViewActivity" />
         <activity android:name=".registration.view.EmailVerifyActivity" />

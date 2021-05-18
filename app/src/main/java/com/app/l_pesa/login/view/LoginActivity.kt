@@ -67,6 +67,7 @@ import kotlinx.android.synthetic.main.activity_login.rootLayout
 import kotlinx.android.synthetic.main.activity_login.toolbar
 import kotlinx.android.synthetic.main.activity_login.txtCountry
 import kotlinx.android.synthetic.main.activity_verify_mobile.*
+import java.io.IOException
 import java.sql.DriverManager.println
 import java.util.*
 import kotlin.collections.ArrayList
@@ -545,8 +546,10 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     }
 
+    @Throws(IOException::class)
     private fun showCountry()
     {
+
         val sharedPrefOBJ= SharedPref(this@LoginActivity)
         val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
