@@ -526,6 +526,7 @@
     <string name="Statement_info">Statement Information</string>
     <string name="upload_pdf_statement">Please Upload correct pdf statement file.</string>
     <string name="aadhaar_card">Aadhaar Card</string>
+    <string name="nav_item_services">Services</string>
 
 
     <!--test items-->
@@ -533,4 +534,6 @@
         <item>M-Paisa</item>
         <item>Airtel Money</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

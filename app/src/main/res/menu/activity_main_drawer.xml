@@ -36,6 +36,10 @@
             android:icon="@drawable/menu_lpk_icon"
             android:title="@string/nav_item_lpk" />
         <item
+            android:id="@+id/action_services"
+            android:icon="@drawable/ic_delivery_box"
+            android:title="@string/nav_item_services" />
+        <item
             android:id="@+id/action_wallet"
             android:icon="@drawable/ic_menu_wallet_icon"
             android:title="@string/nav_item_wallet" />
