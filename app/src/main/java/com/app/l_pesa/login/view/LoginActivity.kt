@@ -134,6 +134,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)
 
+
+
     }
 
     private fun dismiss()
@@ -549,40 +551,45 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     private fun showCountry()
     {
 
-        val sharedPrefOBJ= SharedPref(this@LoginActivity)
-        val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
+        try{
+            val sharedPrefOBJ= SharedPref(this@LoginActivity)
+            val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
-        val dialog= Dialog(this@LoginActivity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_country)
-        alCountry= ArrayList()
+            val dialog= Dialog(this@LoginActivity)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_country)
+            alCountry= ArrayList()
 
-        val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-        val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
-        alCountry.addAll(countryData.countries_list)
+            val recyclerView    = dialog.findViewById(R.id.recyclerView) as RecyclerView?
+            val etCountry       = dialog.findViewById(R.id.etCountry) as CommonEditTextRegular?
+            alCountry.addAll(countryData.countries_list)
 
-        adapterCountry                  = CountryListAdapter(this@LoginActivity, alCountry,dialog,this)
-        recyclerView?.layoutManager     = LinearLayoutManager(this@LoginActivity, RecyclerView.VERTICAL, false)
-        recyclerView?.adapter           = adapterCountry
-        dialog.show()
-        dialog.setCancelable(false)
-        dialog.setCanceledOnTouchOutside(false)
-        etCountry!!.addTextChangedListener(object : TextWatcher {
+            adapterCountry                  = CountryListAdapter(this@LoginActivity, alCountry,dialog,this)
+            recyclerView?.layoutManager     = LinearLayoutManager(this@LoginActivity, RecyclerView.VERTICAL, false)
+            recyclerView?.adapter           = adapterCountry
+            dialog.show()
+            dialog.setCancelable(false)
+            dialog.setCanceledOnTouchOutside(false)
+            etCountry!!.addTextChangedListener(object : TextWatcher {
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
-                filterCountry(s.toString())
+                    filterCountry(s.toString())
 
-            }
+                }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,after: Int) {
 
-            }
+                }
 
-            override fun afterTextChanged(s: Editable) {
+                override fun afterTextChanged(s: Editable) {
 
-            }
-        })
+                }
+            })
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+
     }
 
 

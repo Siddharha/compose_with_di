@@ -6,4 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".allservices.SasaDoctorActivity">
 
+    <ImageView
+        android:id="@+id/imgSasaLogo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:srcCompat="@color/colorPrimary" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumber"
+        tools:text="sid@gmail.com" />
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/tvSasaDoctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorApp"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:text="Link Your Account with Sasa Doctor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSasaLogo" />
+
+    <com.app.l_pesa.common.CommonTextRegular
+        android:id="@+id/tvNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="?android:textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tvSasaDoctor"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="@+id/tvSasaDoctor"
+        app:layout_constraintTop_toBottomOf="@+id/tvSasaDoctor"
+        tools:text="nn5609834bcjbcufuf" />
+
+    <com.app.l_pesa.common.CustomButtonRegular
+        android:id="@+id/btnLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/blue_button"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:paddingLeft="@dimen/_5sdp"
+        android:paddingRight="@dimen/_5sdp"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonTextColor"
+        android:text="Link my account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
