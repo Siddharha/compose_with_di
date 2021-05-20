@@ -26,6 +26,9 @@ class SasaDoctorActivity : AppCompatActivity(), ICallBackSasaUser, ICallBackSasa
     }
 
     private fun onActionPerform() {
+        srDetails.setOnRefreshListener {
+            reloadPage()
+        }
         btnLink.setOnClickListener {
             if(sasaLinkStatus.link != "detail") {
                 presenterSasaDoctor.doPayment(this, this)
@@ -95,11 +98,22 @@ class SasaDoctorActivity : AppCompatActivity(), ICallBackSasaUser, ICallBackSasa
                     "\nTo make payment, use pay-bill number: ${data.payBill}, account number: ${data.refNo}. This is your serial number ${data.serialNumber}. " +
                     "\nThis serial number will be valid after your successful payment.")
             setNegativeButton("Dismiss") {d,_->
-                        d.dismiss()
+                reloadPage()
+                d.dismiss()
                     }
             create()
             show()
         }
+    }
+
+    private fun reloadPage() {
+        clSasaLink.visibility = View.GONE
+        pbLoader.visibility = View.VISIBLE
+
+        if(srDetails.isRefreshing){
+            srDetails.isRefreshing = false
+        }
+        loadUserInfo()
     }
 
     private fun showUserLinkForSasaDialog(data:SasaUserInfoResponse.Data.ButtonInfo.Data) {
@@ -109,19 +123,12 @@ class SasaDoctorActivity : AppCompatActivity(), ICallBackSasaUser, ICallBackSasa
 
             /* setMessage("You will receive SMS with payments details. This is your serial number - ${serialNumber}." +
                      " \nThis number will be valid after your successful payment.\nCopy the serial number for farther use.")*/
-            var message = "Actual amount: ${data.actualAmount}" +
-                    "\nRequest Created: ${data.created}"+
-                    "\nPayment Id: ${data.id}" +
-                    "\nIdentity No.: ${data.identityNumber}"+
-                    "\nLPesa amount: ${data.lpesaAmount}"+
-                    "\nPayment Status: ${data.paymentStatus}"+
-                    "\nProvider Transfer amount: ${data.providerTransferAmount}"+
-                    "\nProvider type: ${data.providerType}"+
-                    "\nSerial ID: ${data.serialNumber}"+
-                    "\nValid From: ${data.validFrom}"+
-                    "\nSerial Upto: ${data.validUpto}"+
-                    "\nUser status: ${data.status}"
-            message = message.replace("null","---")
+            var message =  "\nSerial ID: ${data.serialNumber}\n"+
+                    "\nRef. No: ${data.identityNumber}\n"+
+                    "\nPayment Status: ${data.paymentStatus}\n"+
+                    "\nActual amount: ${data.actualAmount}\n" +
+                    if(data.status != "pending"){"\nValid from: ${data.validFrom}  upto: ${data.validUpto}"}else{""}
+            message = message.replace("null","- - -")
             setMessage(message)
 
             setNegativeButton("Dismiss") {d,_->
