@@ -36,6 +36,14 @@ constructor(context: Context) // Constructor
             editor.commit()
         }
 
+    var userNumber: String
+        get() = pref.getString(KEY_SET_USER_NUMBER, "")!!
+        set(userInfo) {
+            editor.remove(KEY_SET_USER_NUMBER)
+            editor.putString(KEY_SET_USER_NUMBER, userInfo)
+            editor.commit()
+        }
+
     var isDarkTheme: Boolean
         get() = pref.getBoolean(KEY_SET_DARK_THEME,false)
         set(isDarkTheme) {
@@ -354,6 +362,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_COUNTRY_ISD_CODE      = "KEY_SET_COUNTRY_ISD_CODE"
         private const val KEY_SET_GATEWAY_ID            = "KEY_SET_GATEWAY_ID"
         private const val KEY_SET_DARK_THEME            = "KEY_SET_DARK_THEME"
+        private const val KEY_SET_USER_NUMBER           = "KEY_SET_USER_NUMBER"
 
     }
 

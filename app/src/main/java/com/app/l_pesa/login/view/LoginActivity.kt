@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     private lateinit var  alCountry        : ArrayList<ResModelCountryList>
     private lateinit var  adapterCountry   : CountryListAdapter
     private val CREDENTIAL_PICKER_REQUEST = 1
-    private val sharedPrefOBJ: SharedPref by lazy{SharedPref(this@LoginActivity)}
+    private lateinit var sharedPrefOBJ: SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,15 +90,12 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val sharedPrefOBJ= SharedPref(this@LoginActivity)
-        if(!TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode)) {
-            requestHint(this, CREDENTIAL_PICKER_REQUEST)
-        }
         initLoader()
         loadCountry()
         loginProcess()
         forgotPin()
         doCalculateLoan()
+        loadLastEnteredNumber()
 
       /*  AppUpdater(this@LoginActivity)
                 .setUpdateFrom(UpdateFrom.GOOGLE_PLAY)
@@ -109,6 +106,14 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         onClickTermPolicy()
 
+    }
+
+    private fun loadLastEnteredNumber() {
+       // Log.e("user_info",sharedPrefOBJ.userNumber)
+        /*if(!TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode)) {
+            requestHint(this, CREDENTIAL_PICKER_REQUEST)
+        }*/
+        etPhone.setText(sharedPrefOBJ.userNumber)
     }
 
     private fun onClickTermPolicy(){
@@ -123,6 +128,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     private fun initLoader()
     {
+        sharedPrefOBJ = SharedPref(this)
         progressDialog = ProgressDialog(this@LoginActivity,R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(assets, "fonts/Montserrat-Regular.ttf")
@@ -399,7 +405,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         dismiss()
         val sharedPrefOBJ=SharedPref(this@LoginActivity)
-
+        sharedPrefOBJ.userNumber = etPhone.text.toString()
         if (sharedPrefOBJ.uuid == data.master_device){
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json

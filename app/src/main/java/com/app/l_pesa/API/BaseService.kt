@@ -1,6 +1,7 @@
 package com.app.l_pesa.API
 
 
+import com.app.l_pesa.allservices.models.SasaPaymentResponse
 import com.app.l_pesa.allservices.models.SasaUserInfoResponse
 import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.dashboard.model.ResDashboard
@@ -249,6 +250,9 @@ interface BaseService{
 
     @GET("sasa_doctors/get_user_info")
     fun getSasaUserInfo(): Observable<SasaUserInfoResponse>
+
+    @GET("sasa_doctors/do_payment")
+    fun doSasaDrPayment(): Observable<SasaPaymentResponse>
 }
 
 

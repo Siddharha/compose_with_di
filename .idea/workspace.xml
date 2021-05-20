@@ -6,20 +6,22 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="user_info" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/inter/ICallBackSasaUser.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/models/SasaUserInfoResponse.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/presenter/PresenterSasaDoctor.kt" afterDir="false" />
+    <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="sasa doctor UI for user link done">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/inter/ICallBackSasaPayment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/models/SasaPaymentResponse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/AllServicesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/AllServicesFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/SasaDoctorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/SasaDoctorActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/models/SasaUserInfoResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/models/SasaUserInfoResponse.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/presenter/PresenterSasaDoctor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/presenter/PresenterSasaDoctor.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common/SharedPref.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sasa_doctor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sasa_doctor.xml" afterDir="false" />
     </list>
@@ -46,11 +48,11 @@
       <list>
         <option value="Kotlin File" />
         <option value="Kotlin Object" />
-        <option value="Kotlin Interface" />
         <option value="layoutResourceFile_vertical" />
         <option value="layoutResourceFile" />
         <option value="resourceFile" />
         <option value="Class" />
+        <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -76,7 +78,7 @@
   <component name="PropertiesComponent">
     <property name="ApkExportedModule" value="L_Pesa.app" />
     <property name="BundleExportedModule" value="app" />
-    <property name="DEBUGGABLE_DEVICE" value="motorola-xt1052-TA64301Q5P" />
+    <property name="DEBUGGABLE_DEVICE" value="xiaomi-redmi_5-379700347d94" />
     <property name="DEBUGGABLE_PROCESS" value="com.app.l_pesa" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="379700347d94" />
@@ -255,13 +257,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00024" summary="statement upload module p-4_t5">
-      <created>1603358938790</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1603358938792</updated>
     </task>
     <task id="LOCAL-00025" summary="statement upload module p-4_t6">
       <created>1603805672569</created>
@@ -599,7 +594,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621350191809</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="sasa doctor UI for user link done">
+      <created>1621433536309</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1621433536311</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -629,7 +631,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="auto SMS otp integration done in login" />
     <MESSAGE value="front camera capture issue solved" />
     <MESSAGE value="implement fb_t_001" />
     <MESSAGE value="implement fb_t_002" />
@@ -654,17 +655,18 @@
     <MESSAGE value="sasa doctor UI added" />
     <MESSAGE value="sasa doctor implementation 001" />
     <MESSAGE value="Dev option enabled for dev build" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dev option enabled for dev build" />
+    <MESSAGE value="sasa doctor UI for user link done" />
+    <option name="LAST_COMMIT_MESSAGE" value="sasa doctor UI for user link done" />
   </component>
   <component name="WindowStateProjectService">
     <state x="245" y="164" key="#PSD" timestamp="1621231223921">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
     <state x="245" y="164" key="#PSD/0.23.1440.804@0.23.1440.804" timestamp="1621231223921" />
-    <state x="886" y="172" key="#com.intellij.ide.util.MemberChooser" timestamp="1621427782152">
+    <state x="886" y="172" key="#com.intellij.ide.util.MemberChooser" timestamp="1621495501271">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state x="886" y="172" key="#com.intellij.ide.util.MemberChooser/0.23.1440.804@0.23.1440.804" timestamp="1621427782152" />
+    <state x="886" y="172" key="#com.intellij.ide.util.MemberChooser/0.23.1440.804@0.23.1440.804" timestamp="1621495501271" />
     <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser/0.23.1440.808@0.23.1440.808" timestamp="1617111164150" />
     <state x="484" y="223" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1621427423801">
       <screen x="0" y="23" width="1440" height="804" />
@@ -688,53 +690,59 @@
     </state>
     <state x="561" y="287" key="AndroidCreateXmlResourceDialog/0.23.1440.804@0.23.1440.804" timestamp="1621343885185" />
     <state x="561" y="288" key="AndroidCreateXmlResourceDialog/0.23.1440.808@0.23.1440.808" timestamp="1613546867479" />
-    <state x="576" y="194" key="AndroidProcessChooserDialog" timestamp="1617173299270">
-      <screen x="0" y="23" width="1440" height="808" />
+    <state x="576" y="193" key="AndroidProcessChooserDialog" timestamp="1621508278072">
+      <screen x="0" y="23" width="1440" height="804" />
     </state>
+    <state x="576" y="193" key="AndroidProcessChooserDialog/0.23.1440.804@0.23.1440.804" timestamp="1621508278072" />
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1617173299270" />
-    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1621350191482">
+    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1621509613725">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.804@0.23.1440.804" timestamp="1621350191482" />
+    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.804@0.23.1440.804" timestamp="1621509613725" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1618828415852" />
-    <state width="1094" height="511" key="DebuggerActiveHint" timestamp="1614229856163">
-      <screen x="0" y="23" width="1440" height="808" />
+    <state width="1094" height="509" key="DebuggerActiveHint" timestamp="1621508578609">
+      <screen x="0" y="23" width="1440" height="804" />
     </state>
+    <state width="1094" height="509" key="DebuggerActiveHint/0.23.1440.804@0.23.1440.804" timestamp="1621508578609" />
     <state width="1094" height="511" key="DebuggerActiveHint/0.23.1440.808@0.23.1440.808" timestamp="1614229856163" />
-    <state width="1398" height="279" key="GridCell.Tab.0.bottom" timestamp="1621432258680">
+    <state width="1398" height="205" key="GridCell.Tab.0.bottom" timestamp="1621511192538">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state width="1398" height="279" key="GridCell.Tab.0.bottom/0.23.1440.804@0.23.1440.804" timestamp="1621432258680" />
+    <state width="1398" height="205" key="GridCell.Tab.0.bottom/0.23.1440.804@0.23.1440.804" timestamp="1621511192538" />
     <state width="1398" height="281" key="GridCell.Tab.0.bottom/0.23.1440.808@0.23.1440.808" timestamp="1620042656169" />
-    <state width="1398" height="279" key="GridCell.Tab.0.center" timestamp="1621432258679">
+    <state width="1398" height="205" key="GridCell.Tab.0.center" timestamp="1621511192536">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state width="1398" height="279" key="GridCell.Tab.0.center/0.23.1440.804@0.23.1440.804" timestamp="1621432258679" />
+    <state width="1398" height="205" key="GridCell.Tab.0.center/0.23.1440.804@0.23.1440.804" timestamp="1621511192536" />
     <state width="1398" height="281" key="GridCell.Tab.0.center/0.23.1440.808@0.23.1440.808" timestamp="1620042656168" />
-    <state width="1398" height="279" key="GridCell.Tab.0.left" timestamp="1621432258678">
+    <state width="1398" height="205" key="GridCell.Tab.0.left" timestamp="1621511192536">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state width="1398" height="279" key="GridCell.Tab.0.left/0.23.1440.804@0.23.1440.804" timestamp="1621432258678" />
+    <state width="1398" height="205" key="GridCell.Tab.0.left/0.23.1440.804@0.23.1440.804" timestamp="1621511192536" />
     <state width="1398" height="281" key="GridCell.Tab.0.left/0.23.1440.808@0.23.1440.808" timestamp="1620042656167" />
-    <state width="1398" height="279" key="GridCell.Tab.0.right" timestamp="1621432258679">
+    <state width="1398" height="205" key="GridCell.Tab.0.right" timestamp="1621511192537">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state width="1398" height="279" key="GridCell.Tab.0.right/0.23.1440.804@0.23.1440.804" timestamp="1621432258679" />
+    <state width="1398" height="205" key="GridCell.Tab.0.right/0.23.1440.804@0.23.1440.804" timestamp="1621511192537" />
     <state width="1398" height="281" key="GridCell.Tab.0.right/0.23.1440.808@0.23.1440.808" timestamp="1620042656168" />
     <state x="221" y="66" key="SettingsEditor" timestamp="1621243077266">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
     <state x="221" y="66" key="SettingsEditor/0.23.1440.804@0.23.1440.804" timestamp="1621243077266" />
     <state x="221" y="66" key="SettingsEditor/0.23.1440.808@0.23.1440.808" timestamp="1620037631123" />
-    <state x="320" y="149" key="Vcs.Push.Dialog.v2" timestamp="1621350193406">
+    <state x="320" y="149" key="Vcs.Push.Dialog.v2" timestamp="1621433538173">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state x="320" y="149" key="Vcs.Push.Dialog.v2/0.23.1440.804@0.23.1440.804" timestamp="1621350193406" />
+    <state x="320" y="149" key="Vcs.Push.Dialog.v2/0.23.1440.804@0.23.1440.804" timestamp="1621433538173" />
     <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1618828421237" />
     <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1617264774874">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
     <state x="390" y="257" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1617264774874" />
+    <state x="451" y="254" key="org.jetbrains.kotlin.idea.testIntegration.KotlinCreateTestDialog" timestamp="1621503548728">
+      <screen x="0" y="23" width="1440" height="804" />
+    </state>
+    <state x="451" y="254" key="org.jetbrains.kotlin.idea.testIntegration.KotlinCreateTestDialog/0.23.1440.804@0.23.1440.804" timestamp="1621503548728" />
     <state x="482" y="63" key="refactoring.ChangeSignatureDialog" timestamp="1617110669910">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -1159,8 +1167,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/presenter/PresenterSasaDoctor.kt</url>
-          <line>31</line>
+          <line>32</line>
           <option name="timeStamp" value="332" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/login/view/LoginActivity.kt</url>
+          <line>111</line>
+          <option name="timeStamp" value="336" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/AppSignatureHelper.java</url>
