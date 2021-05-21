@@ -46,7 +46,7 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <activity android:name=".allservices.SasaDoctorActivity" />
+        <activity android:name=".allservices.views.SasaDoctorActivity" />
         <activity android:name=".settings.view.AppearanceAccountActivity" />
         <activity android:name=".profile.view.ProfileEditStatementInfoActivity" />
         <activity android:name=".common.CamViewActivity" />

@@ -1,5 +1,6 @@
-package com.app.l_pesa.allservices
+package com.app.l_pesa.allservices.views
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import com.app.l_pesa.allservices.models.SasaUserInfoResponse
 import com.app.l_pesa.allservices.presenter.PresenterSasaDoctor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_sasa_doctor.*
+import kotlinx.android.synthetic.main.sasa_link_status_dialog.*
 
 class SasaDoctorActivity : AppCompatActivity(), ICallBackSasaUser, ICallBackSasaPayment {
     private lateinit var presenterSasaDoctor: PresenterSasaDoctor
@@ -117,23 +119,40 @@ class SasaDoctorActivity : AppCompatActivity(), ICallBackSasaUser, ICallBackSasa
     }
 
     private fun showUserLinkForSasaDialog(data:SasaUserInfoResponse.Data.ButtonInfo.Data) {
-        val alertDialog = AlertDialog.Builder(this)
+        val alertDialog = Dialog(this,R.style.MyAlertDialogTheme)
         alertDialog.apply {
             setCancelable(false)
 
             /* setMessage("You will receive SMS with payments details. This is your serial number - ${serialNumber}." +
                      " \nThis number will be valid after your successful payment.\nCopy the serial number for farther use.")*/
-            var message =  "\nSerial ID: ${data.serialNumber}\n"+
+      /*      var message =  "\nSerial ID: ${data.serialNumber}\n"+
                     "\nRef. No: ${data.identityNumber}\n"+
                     "\nPayment Status: ${data.paymentStatus}\n"+
                     "\nActual amount: ${data.actualAmount}\n" +
                     if(data.status != "pending"){"\nValid from: ${data.validFrom}  upto: ${data.validUpto}"}else{""}
             message = message.replace("null","- - -")
-            setMessage(message)
+            setMessage(message)*/
+            setContentView(R.layout.sasa_link_status_dialog)
+            tvSlId.text = data.serialNumber
+            tvRefNo.text = data.identityNumber
+            tvPaymentStatus.text = data.paymentStatus
+            tvActualAmount.text = data.actualAmount
+            tvValidThrough.text = "from ${data.validFrom} to ${data.validUpto}"
 
-            setNegativeButton("Dismiss") {d,_->
-                d.dismiss()
+            if(data.status != "pending"){
+                tvValidThrough.visibility = View.VISIBLE
+                ValidThroughKey.visibility = View.VISIBLE
+            }else{
+                tvValidThrough.visibility = View.GONE
+                ValidThroughKey.visibility = View.GONE
             }
+            btnDismiss.setOnClickListener {
+                dismiss()
+            }
+
+//            setNegativeButton("Dismiss") {d,_->
+//                d.dismiss()
+//            }
             create()
             show()
         }

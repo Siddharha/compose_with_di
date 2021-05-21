@@ -11,10 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/sasa_link_status_dialog.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/SasaDoctorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/SasaDoctorActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/AllServicesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/views/AllServicesFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/SasaDoctorActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/views/SasaDoctorActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sasa_doctor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sasa_doctor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_all_services.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_all_services.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +45,11 @@
         <option value="Kotlin File" />
         <option value="Kotlin Object" />
         <option value="layoutResourceFile_vertical" />
-        <option value="layoutResourceFile" />
         <option value="resourceFile" />
         <option value="Class" />
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -133,6 +138,7 @@
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/views" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/common" />
       <recent name="$PROJECT_DIR$/app/libs" />
     </key>
@@ -248,13 +254,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00026" summary="statement upload module p-4_t7">
-      <created>1603885368006</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1603885368006</updated>
     </task>
     <task id="LOCAL-00027" summary="statement upload module p-4_t8">
       <created>1603891054240</created>
@@ -592,7 +591,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621511535961</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="sasa doctor UI for user link done">
+      <created>1621516672863</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1621516672863</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -667,14 +673,15 @@
       <screen x="0" y="23" width="1440" height="804" />
     </state>
     <state x="463" y="322" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1440.804@0.23.1440.804" timestamp="1621231602560" />
-    <state x="100" y="123" width="1240" height="608" key="AVDManager" timestamp="1620037636786">
-      <screen x="0" y="23" width="1440" height="808" />
-    </state>
-    <state x="100" y="123" width="1240" height="608" key="AVDManager/0.23.1440.808@0.23.1440.808" timestamp="1620037636786" />
-    <state x="308" y="187" key="AndroidCreateResourceFileDialog" timestamp="1621325058442">
+    <state x="100" y="123" width="1240" height="605" key="AVDManager" timestamp="1621595446724">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state x="308" y="187" key="AndroidCreateResourceFileDialog/0.23.1440.804@0.23.1440.804" timestamp="1621325058442" />
+    <state x="100" y="123" width="1240" height="605" key="AVDManager/0.23.1440.804@0.23.1440.804" timestamp="1621595446724" />
+    <state x="100" y="123" width="1240" height="608" key="AVDManager/0.23.1440.808@0.23.1440.808" timestamp="1620037636786" />
+    <state x="308" y="187" key="AndroidCreateResourceFileDialog" timestamp="1621585386477">
+      <screen x="0" y="23" width="1440" height="804" />
+    </state>
+    <state x="308" y="187" key="AndroidCreateResourceFileDialog/0.23.1440.804@0.23.1440.804" timestamp="1621585386477" />
     <state x="308" y="188" key="AndroidCreateResourceFileDialog/0.23.1440.808@0.23.1440.808" timestamp="1614845939264" />
     <state x="561" y="287" key="AndroidCreateXmlResourceDialog" timestamp="1621343885185">
       <screen x="0" y="23" width="1440" height="804" />
@@ -686,10 +693,10 @@
     </state>
     <state x="576" y="193" key="AndroidProcessChooserDialog/0.23.1440.804@0.23.1440.804" timestamp="1621508278072" />
     <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1617173299270" />
-    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1621511535225">
+    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1621516672453">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.804@0.23.1440.804" timestamp="1621511535225" />
+    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.804@0.23.1440.804" timestamp="1621516672453" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1618828415852" />
     <state width="1094" height="509" key="DebuggerActiveHint" timestamp="1621508578609">
       <screen x="0" y="23" width="1440" height="804" />
@@ -721,10 +728,10 @@
     </state>
     <state x="221" y="66" key="SettingsEditor/0.23.1440.804@0.23.1440.804" timestamp="1621243077266" />
     <state x="221" y="66" key="SettingsEditor/0.23.1440.808@0.23.1440.808" timestamp="1620037631123" />
-    <state x="320" y="149" key="Vcs.Push.Dialog.v2" timestamp="1621511572791">
+    <state x="320" y="149" key="Vcs.Push.Dialog.v2" timestamp="1621516675546">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
-    <state x="320" y="149" key="Vcs.Push.Dialog.v2/0.23.1440.804@0.23.1440.804" timestamp="1621511572791" />
+    <state x="320" y="149" key="Vcs.Push.Dialog.v2/0.23.1440.804@0.23.1440.804" timestamp="1621516675546" />
     <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1618828421237" />
     <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1617264774874">
       <screen x="0" y="23" width="1440" height="808" />

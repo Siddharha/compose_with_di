@@ -29,7 +29,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.R
-import com.app.l_pesa.allservices.AllServicesFragment
+import com.app.l_pesa.allservices.views.AllServicesFragment
 import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorFragment
 import com.app.l_pesa.common.*

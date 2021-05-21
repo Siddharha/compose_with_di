@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".allservices.AllServicesFragment">
+    tools:context=".allservices.views.AllServicesFragment">
 
     <com.app.l_pesa.common.CommonTextRegular
         android:id="@+id/tvNoService"
