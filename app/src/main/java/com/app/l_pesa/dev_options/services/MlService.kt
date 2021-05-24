@@ -2,6 +2,7 @@ package com.app.l_pesa.dev_options.services
 
 import android.Manifest
 import android.app.Notification
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,6 +19,7 @@ import com.app.l_pesa.dev_options.inter.ICallBackUserLocationUpdate
 import com.app.l_pesa.dev_options.models.UserLocationPayload
 import com.app.l_pesa.dev_options.models.UserLocationUpdateResponse
 import com.app.l_pesa.dev_options.presenter.PresenterMLService
+import com.app.l_pesa.splash.view.SplashActivity
 import com.google.android.gms.location.*
 
 class MlService : Service(), ICallBackUserLocationUpdate {
@@ -61,6 +63,12 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     }
 
     private fun showServiceNotification(notificationTitle:String) {
+        val i= Intent(this, SplashActivity::class.java)
+
+        i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+
+        val pi= PendingIntent.getActivity(this, 0,
+                i, 0)
           var notification: Notification?=null
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
           /*  val name = notificationTitle
@@ -76,6 +84,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
             var builder = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                     .setSmallIcon(R.drawable.lpesa_logo)
                     .setContentTitle(notificationTitle)
+                    .setContentIntent(pi)
                     .setContentText(resources.getString(R.string.ml_service_notification_desc))
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
@@ -88,7 +97,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
                     .setAutoCancel(true)
                     .setContentTitle(notificationTitle)
                     .setContentText(resources.getString(R.string.ml_service_notification_desc))
-                  /*  .setContentIntent(pi)*/
+                    .setContentIntent(pi)
                     .setSmallIcon(R.drawable.lpesa_logo)
                     .setWhen(System.currentTimeMillis())
                     .build()
