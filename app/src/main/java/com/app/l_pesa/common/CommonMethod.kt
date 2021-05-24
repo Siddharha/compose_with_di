@@ -2,7 +2,9 @@ package com.app.l_pesa.common
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityManager
 import android.app.DatePickerDialog
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -17,12 +19,14 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
+import com.app.l_pesa.dev_options.services.MlService
 import com.google.android.gms.auth.api.credentials.Credentials
 import com.google.android.gms.auth.api.credentials.HintRequest
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.reflect.KClass
 
 object CommonMethod {
 
@@ -227,6 +231,24 @@ object CommonMethod {
         val intent = Credentials.getClient(activity.baseContext).getHintPickerIntent(hintRequest)
         activity.startIntentSenderForResult(intent.intentSender, cred_req, null, 0, 0, 0)
 
+    }
+
+    fun getCurrentDateTime():String{
+        val time = Calendar.getInstance().time
+        val sdf =  SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        return sdf.format(time)
+    }
+
+    fun isServiceRunning(context: Context, serviceClass: Class<*>):Boolean {
+        val manager =  context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.name.equals(service.service.className)) {
+                //Log.i ("isMyServiceRunning?", true+"");
+                return true
+            }
+        }
+        //Log.i ("isMyServiceRunning?", false+"")
+        return false
     }
 
 }

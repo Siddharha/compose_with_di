@@ -33,7 +33,7 @@ import com.app.l_pesa.allservices.views.AllServicesFragment
 import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.calculator.view.LoanCalculatorFragment
 import com.app.l_pesa.common.*
-import com.app.l_pesa.dev_options.DevFragment
+import com.app.l_pesa.dev_options.views.DevFragment
 import com.app.l_pesa.investment.view.InvestmentFragment
 import com.app.l_pesa.loanHistory.view.LoanHistoryListActivity
 import com.app.l_pesa.loanplan.view.LoanPlansFragment

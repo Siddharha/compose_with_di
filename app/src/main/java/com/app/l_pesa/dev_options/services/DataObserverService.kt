@@ -1,4 +1,4 @@
-package com.app.l_pesa.dev_options
+package com.app.l_pesa.dev_options.services
 
 import android.app.Service
 import android.content.Intent

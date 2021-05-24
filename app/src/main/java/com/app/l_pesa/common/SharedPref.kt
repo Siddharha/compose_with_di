@@ -51,6 +51,15 @@ constructor(context: Context) // Constructor
             editor.putBoolean(KEY_SET_DARK_THEME, isDarkTheme)
             editor.commit()
         }
+
+    var isMlService: Boolean
+        get() = pref.getBoolean(KEY_SET_ML_SERVICE,false)
+        set(isDarkTheme) {
+            editor.remove(KEY_SET_ML_SERVICE)
+            editor.putBoolean(KEY_SET_ML_SERVICE, isDarkTheme)
+            editor.commit()
+        }
+
     var profileInfo: String
         get() = pref.getString(KEY_SET_PROFILE_INFO, "")!!
         set(profileInfo) {
@@ -363,6 +372,7 @@ constructor(context: Context) // Constructor
         private const val KEY_SET_GATEWAY_ID            = "KEY_SET_GATEWAY_ID"
         private const val KEY_SET_DARK_THEME            = "KEY_SET_DARK_THEME"
         private const val KEY_SET_USER_NUMBER           = "KEY_SET_USER_NUMBER"
+        private const val KEY_SET_ML_SERVICE            = "KEY_SET_ML_SERVICE"
 
     }
 
