@@ -5,6 +5,7 @@ import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dev_options.inter.ICallBackUserLocationUpdate
 import com.app.l_pesa.dev_options.models.UserLocationPayload
 import com.app.l_pesa.login.inter.ICallBackLogin
@@ -20,7 +21,8 @@ class PresenterMLService {
     @SuppressLint("CheckResult")
     fun doUserLocationUpdate(contextOBJ: Context, userLocationPayload : UserLocationPayload, callBackOBJ: ICallBackUserLocationUpdate)
     {
-        RetrofitHelper.getRetrofit(BaseService::class.java).doUpdateLocation(userLocationPayload)
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doUpdateLocation(userLocationPayload)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { responseBody ->
