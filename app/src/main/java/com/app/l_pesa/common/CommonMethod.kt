@@ -235,7 +235,7 @@ object CommonMethod {
 
     fun getCurrentDateTime():String{
         val time = Calendar.getInstance().time
-        val sdf =  SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        val sdf =  SimpleDateFormat("yyyy-mm-dd HH:mm:ss", Locale.getDefault())
         return sdf.format(time)
     }
 
