@@ -1,20 +1,25 @@
 package com.app.l_pesa.dev_options.services
 
 import android.Manifest
-import android.app.Notification
-import android.app.PendingIntent
-import android.app.Service
+import android.annotation.TargetApi
+import android.app.*
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.os.Build
 import android.os.IBinder
 import android.os.Looper
 import android.util.Log
+import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
 import com.app.l_pesa.dev_options.broadcust.ObserverRestarter
+import com.app.l_pesa.dev_options.broadcust.SMSreceiver
 import com.app.l_pesa.dev_options.inter.ICallBackUserLocationUpdate
 import com.app.l_pesa.dev_options.models.UserLocationPayload
 import com.app.l_pesa.dev_options.models.UserLocationUpdateResponse
@@ -23,12 +28,40 @@ import com.app.l_pesa.splash.view.SplashActivity
 import com.google.android.gms.location.*
 
 class MlService : Service(), ICallBackUserLocationUpdate {
-    private val NOTIFICATION_ID = 1337
-    private val NOTIFICATION_CHANNEL_ID = "notification"
+    private val NOTIFICATION_ID = 1
+    private var NOTIFICATION_CHANNEL_ID = ""
     private var isRunning:Boolean = false
     private val mFusedLocationClient:FusedLocationProviderClient by lazy{ LocationServices.getFusedLocationProviderClient(this)}
     private val presenterMLService:PresenterMLService by lazy { PresenterMLService() }
+
+    private val mSMSreceiver by lazy { SMSreceiver() }
+    private val mIntentFilter by lazy { IntentFilter() }
+
+    override fun onCreate() {
+        super.onCreate()
+        smsBroadcast()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            NOTIFICATION_CHANNEL_ID = createChannel()
+        else {
+            NOTIFICATION_CHANNEL_ID = ""
+        }
+
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        locationService()
+        showServiceNotification("L-Pesa service")
+        isRunning = true
+        // startForeground(LOCATION_SERVICE_ID,)
+        return(START_STICKY)
+    }
+
+    private fun smsBroadcast() {
+        mIntentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
+        registerReceiver(mSMSreceiver, mIntentFilter)
+    }
+
+    private fun locationService() {
         val locationReq = LocationRequest.create().apply {
             interval = 4000
             fastestInterval = 2000
@@ -36,7 +69,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             /*maxWaitTime= 100*/
         }
-                /*LocationRequest()
+        /*LocationRequest()
         locationReq.apply {
             interval = 4000
             fastestInterval = 2000
@@ -53,13 +86,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
         ) {
 
         }
-                mFusedLocationClient.requestLocationUpdates(locationReq, locationCallback, Looper.getMainLooper())
-
-        isRunning = true
-
-        showServiceNotification("L-Pesa service")
-        // startForeground(LOCATION_SERVICE_ID,)
-        return(START_STICKY)
+        mFusedLocationClient.requestLocationUpdates(locationReq, locationCallback, Looper.getMainLooper())
     }
 
     private fun showServiceNotification(notificationTitle:String) {
@@ -133,6 +160,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
 
     override fun onDestroy() {
         super.onDestroy()
+        unregisterReceiver(mSMSreceiver)
                 // sendServiceBroadcast()
         mFusedLocationClient.removeLocationUpdates(locationCallback)
         stop()
@@ -171,5 +199,25 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     }
 
     override fun onFailureLocationUpdate(jsonMessage: String) {
+    }
+
+    @NonNull
+    @TargetApi(26)
+    private fun createChannel() : String{
+        val mNotificationManager =  this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val name = "snap map fake location "
+        val importance = NotificationManager.IMPORTANCE_LOW
+
+        val mChannel =  NotificationChannel("snap map channel", name, importance)
+
+        mChannel.enableLights(true)
+        mChannel.lightColor = Color.BLUE
+        if (mNotificationManager != null) {
+            mNotificationManager.createNotificationChannel(mChannel)
+        } else {
+            stopSelf()
+        }
+        return "snap map channel"
     }
 }

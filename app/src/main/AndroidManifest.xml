@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
 
     <!--Permission for ML user-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
@@ -362,6 +364,14 @@
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped"/>
+        <receiver android:name=".dev_options.broadcust.SMSreceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+        <intent-filter>
+            <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+        </intent-filter>
+        </receiver>
         <!--
  <provider
             android:name="androidx.core.content.FileProvider"

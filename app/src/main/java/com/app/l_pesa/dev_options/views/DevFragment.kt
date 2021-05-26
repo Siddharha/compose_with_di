@@ -19,7 +19,7 @@ class DevFragment : Fragment() {
 
     private lateinit var pref:SharedPref
     private lateinit var rootView: View
-    private val LOCATION_PERMISSION_CODE = 100
+    private val PERMISSION_CODE = 100
     private val serviceIntent:Intent by lazy{Intent(requireContext(), MlService::class.java)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,13 +52,26 @@ class DevFragment : Fragment() {
                     if (ActivityCompat.checkSelfPermission(
                                     requireContext(),
                                     Manifest.permission.ACCESS_FINE_LOCATION
-                            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            ) != PackageManager.PERMISSION_GRANTED &&
+
+                            ActivityCompat.checkSelfPermission(
+                                    requireContext(),
+                                    Manifest.permission.READ_SMS
+                            ) != PackageManager.PERMISSION_GRANTED &&
+
+                            ActivityCompat.checkSelfPermission(
+                                    requireContext(),
+                                    Manifest.permission.RECEIVE_SMS
+                            ) != PackageManager.PERMISSION_GRANTED &&
+
+                            ActivityCompat.checkSelfPermission(
                                     requireContext(),
                                     Manifest.permission.ACCESS_COARSE_LOCATION
                             ) != PackageManager.PERMISSION_GRANTED
                     ) {
                         rootView.smObserver.isChecked = false
-                        ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),LOCATION_PERMISSION_CODE)
+                        ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS),PERMISSION_CODE)
                     }else{
                         requireContext().startService(serviceIntent)
                     }
