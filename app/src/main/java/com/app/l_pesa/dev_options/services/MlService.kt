@@ -48,6 +48,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
 
     }
 
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         locationService()
         showServiceNotification("L-Pesa service")
@@ -160,11 +161,13 @@ class MlService : Service(), ICallBackUserLocationUpdate {
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(mSMSreceiver)
+            unregisterReceiver(mSMSreceiver)
+
                 // sendServiceBroadcast()
         mFusedLocationClient.removeLocationUpdates(locationCallback)
         stop()
     }
+
 
     private fun sendServiceBroadcast() {
         val broadcastIntent = Intent()
@@ -200,6 +203,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
 
     override fun onFailureLocationUpdate(jsonMessage: String) {
     }
+    
 
     @NonNull
     @TargetApi(26)

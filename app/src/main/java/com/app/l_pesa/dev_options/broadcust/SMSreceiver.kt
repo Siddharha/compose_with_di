@@ -5,11 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Telephony
 import android.util.Log
+import com.app.l_pesa.common.CommonMethod
+import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
+import com.app.l_pesa.dev_options.inter.ICallBackUserSMSUpdate
+import com.app.l_pesa.dev_options.models.UserSMSPayload
+import com.app.l_pesa.dev_options.models.UserSMSUpdateResponse
+import com.app.l_pesa.dev_options.presenter.PresenterMLService
+import com.app.l_pesa.dev_options.services.MlService
 
-class SMSreceiver : BroadcastReceiver() {
+class SMSreceiver : BroadcastReceiver(), ICallBackUserSMSUpdate {
     val SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED"
+    private val _presenterMLService :PresenterMLService by lazy { PresenterMLService() }
     override fun onReceive(context: Context?, intent: Intent?) {
         // final String tag = TAG + ".onReceive";
+
         val bundle = intent?.extras
         if (bundle == null) {
             //Log.w(tag, "BroadcastReceiver failed, no intent data to process.");
@@ -30,7 +39,32 @@ class SMSreceiver : BroadcastReceiver() {
 
                 Log.e("sms","From $smsOriginatingAddress -> $smsDisplayMessage")
                // processReceivedSms(smsOriginatingAddress, smsDisplayMessage)
+
+                if(CommonMethod.isServiceRunning(context!!, MlService::class.java)){
+                    _presenterMLService.doUserSMSUpdate(context!!, UserSMSPayload(UserSMSPayload.SmsObject(
+                            smsDisplayMessage,smsOriginatingAddress,getCurrentDateTime(),""
+                    )),this)
+                }
+
             }
         }
+    }
+
+    override fun onSuccessSMSUpdate(status: UserSMSUpdateResponse.Status) {
+        if(status.isSuccess){
+            print(status.message)
+        }
+    }
+
+    override fun onErrorSMSUpdate(message: String) {
+
+    }
+
+    override fun onIncompleteSMSUpdate(jsonMessage: String) {
+
+    }
+
+    override fun onFailureSMSUpdate(jsonMessage: String) {
+
     }
 }

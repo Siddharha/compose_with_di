@@ -14,6 +14,7 @@ import com.app.l_pesa.common.CommonMethod.isServiceRunning
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dev_options.services.MlService
 import kotlinx.android.synthetic.main.fragment_dev.view.*
+import org.jetbrains.anko.doAsync
 
 class DevFragment : Fragment() {
 
@@ -48,6 +49,8 @@ class DevFragment : Fragment() {
 
     private fun onActionPerform() {
         rootView.smObserver.setOnCheckedChangeListener { _, isChecked ->
+
+
                 if(isChecked){
                     if (ActivityCompat.checkSelfPermission(
                                     requireContext(),
@@ -73,12 +76,22 @@ class DevFragment : Fragment() {
                         ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
                                 Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS),PERMISSION_CODE)
                     }else{
-                        requireContext().startService(serviceIntent)
+                        doAsync {
+                            requireContext().startService(serviceIntent)
+                        }
+
                     }
 
                 }else{
-                    requireContext().stopService(serviceIntent)
+                    doAsync {
+                        if(isServiceRunning(requireContext(),MlService::class.java)){
+                        requireContext().stopService(serviceIntent)
+                        }
+                    }
+
                 }
+
+
 
 
         }

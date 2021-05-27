@@ -8,6 +8,7 @@ import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.dev_options.models.UserLocationPayload
 import com.app.l_pesa.dev_options.models.UserLocationUpdateResponse
 import com.app.l_pesa.dev_options.models.UserSMSPayload
+import com.app.l_pesa.dev_options.models.UserSMSUpdateResponse
 import com.app.l_pesa.help.model.ResHelp
 import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
@@ -262,7 +263,7 @@ interface BaseService{
 
     //POST /store/sms
     @POST("store/sms")
-    fun doUpdateSMS(@Body request: UserSMSPayload): Observable<Any>
+    fun doUpdateSMS(@Body request: UserSMSPayload): Observable<UserSMSUpdateResponse>
 }
 
 
