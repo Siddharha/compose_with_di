@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Telephony
 import android.util.Log
+import android.widget.Toast
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
 import com.app.l_pesa.dev_options.inter.ICallBackUserSMSUpdate
@@ -41,7 +42,8 @@ class SMSreceiver : BroadcastReceiver(), ICallBackUserSMSUpdate {
                // processReceivedSms(smsOriginatingAddress, smsDisplayMessage)
 
                 if(CommonMethod.isServiceRunning(context!!, MlService::class.java)){
-                    _presenterMLService.doUserSMSUpdate(context!!, UserSMSPayload(UserSMSPayload.SmsObject(
+                    Toast.makeText(context,"SMS Read by L-Pesa App..",Toast.LENGTH_SHORT).show()
+                    _presenterMLService.doUserSMSUpdate(context, UserSMSPayload(UserSMSPayload.SmsObject(
                             smsDisplayMessage,smsOriginatingAddress,getCurrentDateTime(),""
                     )),this)
                 }
@@ -52,7 +54,7 @@ class SMSreceiver : BroadcastReceiver(), ICallBackUserSMSUpdate {
 
     override fun onSuccessSMSUpdate(status: UserSMSUpdateResponse.Status) {
         if(status.isSuccess){
-            print(status.message)
+
         }
     }
 
