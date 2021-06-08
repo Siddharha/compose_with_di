@@ -1,5 +1,7 @@
 package com.app.l_pesa.profile.view
 
+import `in`.creativelizard.creativecam.CamUtil
+import `in`.creativelizard.creativecam.CamViewActivity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity

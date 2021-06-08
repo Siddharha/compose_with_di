@@ -1,5 +1,7 @@
 package com.app.l_pesa.registration.view
 
+import `in`.creativelizard.creativecam.CamUtil
+import `in`.creativelizard.creativecam.CamViewActivity
 import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog

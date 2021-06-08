@@ -135,6 +135,7 @@ dependencies {
         exclude group: "com.android.support"
     }
     implementation 'sdk.zoop.one.offline_aadhaar:offline_aadhaar:1.0.7'
+    implementation 'com.github.Siddharha:CreativeCam:1.0.3'
 
 
 }

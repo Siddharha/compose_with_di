@@ -52,7 +52,9 @@ class DevFragment : Fragment() {
 
 
                 if(isChecked){
-                    if (ActivityCompat.checkSelfPermission(
+
+                    if (
+                            ActivityCompat.checkSelfPermission(
                                     requireContext(),
                                     Manifest.permission.ACCESS_FINE_LOCATION
                             ) != PackageManager.PERMISSION_GRANTED &&
@@ -71,7 +73,8 @@ class DevFragment : Fragment() {
                                     requireContext(),
                                     Manifest.permission.ACCESS_COARSE_LOCATION
                             ) != PackageManager.PERMISSION_GRANTED
-                    ) {
+                    )
+                    {
                         rootView.smObserver.isChecked = false
                         ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
                                 Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS),PERMISSION_CODE)
@@ -82,7 +85,7 @@ class DevFragment : Fragment() {
 
                     }
 
-                }else{
+                } else{
                     doAsync {
                         if(isServiceRunning(requireContext(),MlService::class.java)){
                         requireContext().stopService(serviceIntent)

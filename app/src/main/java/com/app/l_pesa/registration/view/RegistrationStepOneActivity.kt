@@ -597,7 +597,11 @@ class RegistrationStepOneActivity : AppCompatActivity(), ICallBackCountryList, I
 
     private fun showCountry() {
         val sharedPrefOBJ = SharedPref(this@RegistrationStepOneActivity)
-        val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
+        val countryData = try{Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)}catch (e:Exception){
+            ResModelData(arrayListOf(ResModelCountryList(0,"","",
+                    "","","","","",
+                    "","","","","")))
+        }
 
         val dialog = Dialog(this@RegistrationStepOneActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
