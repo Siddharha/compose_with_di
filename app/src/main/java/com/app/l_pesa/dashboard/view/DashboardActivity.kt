@@ -193,14 +193,14 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             val mi = m.getItem(i)
             val subMenu = mi.subMenu
 
+            if(mi.itemId == R.id.action_dev ){
+                mi.isVisible = false//BuildConfig.DEBUG //to enable debug option based on build
+            }
+
 
             if (subMenu != null && subMenu.size() > 0) {
                 for (j in 0 until subMenu.size()) {
                     val subMenuItem = subMenu.getItem(j)
-
-                    if(subMenuItem.itemId == R.id.action_dev ){
-                        subMenuItem.isVisible = BuildConfig.DEBUG //to enable debug option based on build
-                    }
                     applyFontToMenuItem(subMenuItem)
                 }
             }

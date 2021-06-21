@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.app.l_pesa.R
 import com.app.l_pesa.allservices.inter.ICallBackSasaPayment
@@ -78,11 +79,11 @@ class SasaDoctorActivity : AppCompatActivity(), ICallBackSasaUser, ICallBackSasa
     }
 
     override fun onSessionTimeOut(jsonMessage: String) {
-        //
+        Toast.makeText(this,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 
     override fun onErrorUserInfo(jsonMessage: String) {
-       //
+       Toast.makeText(this,jsonMessage,Toast.LENGTH_SHORT).show()
     }
 
     override fun onSuccessPayment(data: SasaPaymentResponse.Data) {

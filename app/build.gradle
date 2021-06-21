@@ -20,8 +20,8 @@ android {
         applicationId "com.app.l_pesa"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 30
-        versionName "1.0.30"
+        versionCode 31
+        versionName "1.0.31"
         multiDexEnabled true
 
     }
@@ -30,9 +30,10 @@ android {
     }*/
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles 'proguard-rules.pro'
+            minifyEnabled false
+            shrinkResources false
+           /* proguardFiles 'proguard-rules.pro'*/
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
             signingConfig signingConfigs.config
             proguardFile '/home/amiyo/AndroidProject/L_Pesa/l-pesa/app/proguard-rules.pro'
@@ -58,10 +59,13 @@ android {
             buildConfigField("String", 'PROFILE_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/personal/"')
             buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
             buildConfigField("String", 'STATEMENT_PDF_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/statements/"')
-            buildConfigField("String", 'BASE_URL', '"http://api-dev.l-pesa.com/v2/"')
+            //buildConfigField("String", 'BASE_URL', '"http://api-dev.l-pesa.com/v2/"')
+            buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
+            //"http://api-live.l-pesa.com/v2/"
             /* buildConfigField("String", 'BASE_URL', '"http://40.76.68.66/v2/"') //http://20.36.32.60*/
             /*buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')*/
             buildConfigField("String", 'ZOOP_PRE_BASE_URL', '"https://preprod.aadhaarapi.com/"') //For Pre-Production
+            buildConfigField("String", 'ZOOP_PROD_BASE_URL', '"https://prod.aadhaarapi.com/"') //For Production
 
         }
 

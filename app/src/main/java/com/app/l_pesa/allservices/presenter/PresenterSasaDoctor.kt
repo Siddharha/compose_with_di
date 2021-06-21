@@ -30,7 +30,7 @@ class PresenterSasaDoctor {
                 .subscribe({ response ->
 
                     try {
-                       // Log.e("response",Gson().toJson(response))
+                        Log.e("response",Gson().toJson(response))
                   //      callBackOBJ.onSuccessUserInfo(response)
                         if (response.status.isSuccess)
                         {
@@ -42,7 +42,7 @@ class PresenterSasaDoctor {
                             callBackOBJ.onErrorUserInfo(response.status.message)
                         }
                     } catch (e: Exception) {
-
+                        Log.e("response",response.toString())
                     }
                 }, { error ->
                     try {
