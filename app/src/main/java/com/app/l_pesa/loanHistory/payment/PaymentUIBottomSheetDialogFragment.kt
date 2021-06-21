@@ -12,8 +12,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.payment_ui_dialog_bottom_sheet.view.*
 
-class PaymentUIBottomSheetDialogFragment(sch: ResPaybackSchedule.Schedule, loanInfo: ResPaybackSchedule.LoanInfo) : BottomSheetDialogFragment(),ICallBackPaymentPayout {
-    private val schedule = sch
+class PaymentUIBottomSheetDialogFragment(loanInfo: ResPaybackSchedule.LoanInfo) : BottomSheetDialogFragment(),ICallBackPaymentPayout {
+   // private val schedule = sch
     private val loanInfo = loanInfo
   /*  @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,16 +34,20 @@ class PaymentUIBottomSheetDialogFragment(sch: ResPaybackSchedule.Schedule, loanI
         v.btnPay.setOnClickListener {
 
             if(v.etAmount1.isChecked) {
-                PayUtil.payNow(requireContext(),schedule,loanInfo,this)
+                PayUtil.payNow(requireContext(),loanInfo,this)
             }else {
-                Snackbar.make(v,"Please select amount to be paid.",Snackbar.LENGTH_SHORT).show()
+               Toast.makeText(requireContext(),"Please select amount to be paid.",Toast.LENGTH_SHORT).show()
             }
+        }
+
+        v.btnCancel.setOnClickListener {
+            dismiss()
         }
         return v
     }
 
     private fun loadData(v: View) {
-        v.etAmount1.setText(schedule.paidAmount.toString())
+        v.etAmount1.text = loanInfo.payfullamount?.loanAmount.toString()
        // v.tvHistoryID.setText(schedule.loanHistoryId)
     }
 

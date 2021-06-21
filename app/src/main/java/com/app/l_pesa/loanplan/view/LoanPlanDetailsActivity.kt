@@ -1,8 +1,10 @@
 package com.app.l_pesa.loanplan.view
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +15,8 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod
@@ -28,6 +32,7 @@ import java.text.DecimalFormat
 class LoanPlanDetailsActivity : AppCompatActivity() {
 
     private lateinit var countDownTimer: CountDownTimer
+    private val MY_PERMISSIONS_REQUEST_LOCATION = 1001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,14 +75,24 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
 
         Button_apply_loan.setOnClickListener {
 
-            val bundleOBJ  = intent.extras
-            val bundle     = Bundle()
-            bundle.putString("PRODUCT_ID",globalLoanPlanModel.productId.toString())
-            bundle.putString("LOAN_TYPE",bundleOBJ!!.getString("LOAN_TYPE"))
-            val intent = Intent(this@LoanPlanDetailsActivity, LoanApplyActivity::class.java)
-            intent.putExtras(bundle)
-            startActivity(intent,bundle)
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            //
+            if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        MY_PERMISSIONS_REQUEST_LOCATION)
+            }else{
+                val bundleOBJ  = intent.extras
+                val bundle     = Bundle()
+                bundle.putString("PRODUCT_ID",globalLoanPlanModel.productId.toString())
+                bundle.putString("LOAN_TYPE",bundleOBJ!!.getString("LOAN_TYPE"))
+                val intent = Intent(this@LoanPlanDetailsActivity, LoanApplyActivity::class.java)
+                intent.putExtras(bundle)
+                startActivity(intent,bundle)
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }
+
 
         }
     }
@@ -174,6 +189,38 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         super.onResume()
         MyApplication.getInstance().trackScreenView(this@LoanPlanDetailsActivity::class.java.simpleName)
 
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when (requestCode) {
+             MY_PERMISSIONS_REQUEST_LOCATION -> {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.isNotEmpty()
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(this,
+                                    Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        //Request location updates:
+                        Button_apply_loan.performClick()
+                        //locationManager.requestLocationUpdates(provider, 400, 1, this);
+                    }
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+
+                }
+                return
+            }
+
+        }
     }
 
 

@@ -21,6 +21,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
+import com.app.l_pesa.loanHistory.payment.PayUtil
 import com.app.l_pesa.loanHistory.presenter.PresenterPaybackSchedule
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
@@ -87,7 +88,10 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
                     if(dataOBJ!!.loanInfo!!.loanId!=0)
                     {
+
                         doPayAll(dataOBJ!!)
+                       // commonPopupPayment(dataOBJ)
+                        //PayUtil.loanPaymentUI(this,dataOBJ?.loanInfo!!)
                     }
                 }
 
@@ -96,6 +100,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
 
     }
+
 
     @SuppressLint("SetTextI18n")
     private fun doPayAll(dataOBJ: ResPaybackSchedule.Data)

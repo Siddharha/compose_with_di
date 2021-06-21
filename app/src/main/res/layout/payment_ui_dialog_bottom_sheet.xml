@@ -18,7 +18,7 @@
     <TextView
         android:layout_margin="@dimen/_5sdp"
         android:id="@+id/tvHistoryID"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorApp"
         android:textAlignment="textEnd"
         android:textStyle="bold"
         android:layout_width="match_parent"
@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textColor="?android:textColorPrimary"
             android:layout_margin="@dimen/_5sdp"
             android:text="10.0 USD" />
         <CheckBox
@@ -51,18 +52,19 @@
         android:layout_height="wrap_content"
         android:gravity="right">
         <Button
+            android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_3sdp"
             android:text="Cancel"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:background="@drawable/bg_button_yellow"/>
         <Button
             android:id="@+id/btnPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_3sdp"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:text="Pay"
             android:background="@drawable/bg_button_green"/>
     </LinearLayout>

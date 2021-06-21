@@ -92,11 +92,11 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
                 }
                 else
                 {
-                    if(alScheduleOBJ[position].paymentType == 0){
+                  //  if(alScheduleOBJ[position].paymentType == 0){
                     commonPopupPayment(position)
-                    }else{
-                        paymentFromAppUI(alScheduleOBJ[position])
-                    }
+//                    }else{
+//                        paymentFromAppUI()
+//                    }
 
                 }
             }
@@ -105,8 +105,8 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
 
     }
 
-    private fun paymentFromAppUI(schedule: ResPaybackSchedule.Schedule) {
-        PayUtil.loanPaymentUI((context as AppCompatActivity),schedule,loanInfo)
+    private fun paymentFromAppUI() {
+        PayUtil.loanPaymentUI((context as AppCompatActivity),loanInfo)
     }
 
     private fun commonPopupPayment(position: Int) {
