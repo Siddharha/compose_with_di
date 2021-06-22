@@ -558,7 +558,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
     {
 
         try{
-            val sharedPrefOBJ= SharedPref(this@LoginActivity)
+
             val countryData = Gson().fromJson<ResModelData>(sharedPrefOBJ.countryList, ResModelData::class.java)
 
             val dialog= Dialog(this@LoginActivity)

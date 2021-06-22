@@ -105,6 +105,12 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
             setDashBoard(dashBoard)
         }
 
+       if(sharedPrefOBJ.countryName == "Kenya") {
+           imgSasaBanner.visibility = View.VISIBLE
+       }else{
+           imgSasaBanner.visibility = View.GONE
+       }
+
 
     }
 
