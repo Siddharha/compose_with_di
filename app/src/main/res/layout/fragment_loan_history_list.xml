@@ -2,8 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/screenBackground">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/rootLayout"
@@ -72,7 +71,6 @@
                             android:fontFamily="@font/montserrat"
                             android:text="@string/apply_loan"
                             android:textAllCaps="false"
-                            android:textColor="@color/colorWhite"
                             android:textStyle="bold" />
 
 
@@ -97,9 +95,9 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/bottom_sheet"
+        android:background="?colorSurface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
         android:clipToPadding="true"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 

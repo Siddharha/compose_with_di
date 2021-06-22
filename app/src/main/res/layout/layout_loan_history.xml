@@ -1,9 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlRoot"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:id="@+id/ll_personal_information_card"
@@ -86,14 +86,15 @@
                         android:id="@+id/txt_loan_no"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textColor="#000000"
                         android:textSize="@dimen/_10sdp"
+                        android:textColor="?android:textColorPrimary"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@+id/txt_loan"
                         android:gravity="center|start"
                         android:paddingStart="@dimen/_1sdp"
                         android:paddingEnd="@dimen/_1sdp"
                         android:fontFamily="@font/montserrat"
-                        android:text=""/>
+                        tools:text="11000332"/>
 
                 </RelativeLayout>
 
@@ -117,14 +118,15 @@
                         android:id="@+id/txt_loan_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textColor="#000000"
+                        android:textColor="?android:textColorPrimary"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:textSize="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/txt_amount"
                         android:gravity="center|start"
                         android:paddingStart="@dimen/_1sdp"
                         android:paddingEnd="@dimen/_1sdp"
                         android:fontFamily="@font/montserrat"
-                        android:text=""/>
+                        tools:text="$2.00 "/>
 
                 </RelativeLayout>
 
@@ -147,14 +149,15 @@
                         android:id="@+id/txt_interest_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textColor="#000000"
+                        android:textColor="?android:textColorPrimary"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:fontFamily="@font/montserrat"
                         android:textSize="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/txt_rate"
                         android:gravity="center|start"
                         android:paddingStart="@dimen/_1sdp"
                         android:paddingEnd="@dimen/_1sdp"
-                        android:text=""/>
+                        tools:text="0.9%"/>
 
                 </RelativeLayout>
 
@@ -213,7 +216,7 @@
                         android:id="@+id/txt_applied_on"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=""
+                        tools:text="Completed on"
                         android:fontFamily="@font/montserrat"
                         android:gravity="center|start"
                         android:textSize="@dimen/_10sdp"
@@ -225,7 +228,7 @@
                         android:id="@+id/txt_applied_on_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=""
+                        tools:text="12/12/2021"
                         android:fontFamily="@font/montserrat"
                         android:textColor="@color/color_semi_deep_black"
                         android:textSize="@dimen/_10sdp"
@@ -279,7 +282,7 @@
                             android:paddingStart="@dimen/_2sdp"
                             android:gravity="center|start"
                             android:paddingEnd="@dimen/_1sdp"
-                            android:text=""
+                            tools:text="Completed"
                             android:fontFamily="@font/montserrat"
                             android:textColor="#8e8963"
                             android:textSize="@dimen/_10sdp" />

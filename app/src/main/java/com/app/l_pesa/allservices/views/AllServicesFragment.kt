@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_all_services.view.*
 
 class AllServicesFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private val sasaLogo = "https://play-lh.googleusercontent.com/nSizQBW5A6z19AHpKBYxKBoTLG9kQ9Sn80ixHpP7PgEmx1MJciKa002aFzYCxIjPpVs=s200-rw"
+
   private lateinit var rootView: View
   private  val pref: SharedPref by lazy{SharedPref(requireContext())}
 
@@ -29,7 +29,7 @@ class AllServicesFragment : Fragment() {
             rootView.tvNoService.visibility = View.GONE
 
             Glide.with(rootView)
-                    .load(sasaLogo)
+                    .load(resources.getString(R.string.sasa_logo_url))
                     .into(rootView.imgLogo)
         }
 
@@ -55,7 +55,6 @@ class AllServicesFragment : Fragment() {
     private fun onActionPerform(){
         rootView.cvSasaDoctor.setOnClickListener {
             val intent = Intent(requireContext(), SasaDoctorActivity::class.java)
-            intent.putExtra("logo",sasaLogo)
             startActivity(intent)
         }
     }

@@ -55,7 +55,7 @@ class SasaDoctorActivity : AppCompatActivity(), ICallBackSasaUser, ICallBackSasa
     override fun onSuccessUserInfo(data: SasaUserInfoResponse.Data) {
         clSasaLink.visibility = View.VISIBLE
         pbLoader.visibility = View.GONE
-        Glide.with(this).load(intent.getStringExtra("logo")).into(imgSasaLogo)
+        Glide.with(this).load(resources.getString(R.string.sasa_logo_url)).into(imgSasaLogo)
         data.userInfo.apply {
             tvEmail.text = emailAddress
             tvNumber.text = phoneNumber

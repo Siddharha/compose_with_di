@@ -11,13 +11,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +33,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorApp"
                     app:srcCompat="@drawable/ic_black_white_cross"
                     android:background="?attr/selectableItemBackgroundBorderless"/>
 
@@ -42,14 +41,16 @@
                     android:id="@+id/txtFilter"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_32sdp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/montserrat"
                     android:gravity="center"
                     android:text="@string/filter"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/_16sdp"
-                    android:fontFamily="@font/montserrat"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonReset"
+                    app:layout_constraintStart_toEndOf="@+id/imgCancel"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.app.l_pesa.common.CustomButtonRegular
@@ -59,12 +60,10 @@
                     android:background="@drawable/bg_transparent_border_black_view"
                     android:text="@string/reset"
                     android:textAllCaps="true"
+                    android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/_12sdp"
-                    android:textColor="@color/colorBlack"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.05"
-                    app:layout_constraintStart_toEndOf="@+id/txtFilter"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -90,7 +89,7 @@
                 android:fontFamily="@font/montserrat"
                 android:gravity="center|start"
                 android:text="@string/from_date"
-                android:textColor="@color/colorBlack"
+                android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/_13sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/etFromDate"
                 app:layout_constraintBottom_toTopOf="@+id/viewDivider"
@@ -107,7 +106,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:hint="@string/from_date"
-                android:textColor="@color/textColors"
+                android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/_12sdp"
                 app:fontFamily="@font/montserrat"
                 android:cursorVisible="false"
@@ -128,6 +127,7 @@
                 android:contentDescription="@string/app_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:tint="?android:textColorPrimary"
                 android:layout_marginEnd="@dimen/_3sdp"
                 app:srcCompat="@drawable/ic_black_white_cross"
                 app:layout_constraintStart_toEndOf="@+id/etFromDate"
@@ -165,7 +165,7 @@
                 android:gravity="center|start"
                 android:text="@string/to_date"
                 android:textSize="@dimen/_13sdp"
-                android:textColor="@color/colorBlack"
+                android:textColor="?android:textColorPrimary"
                 app:layout_constraintTop_toBottomOf="@+id/viewDivider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/etToDate"
@@ -183,7 +183,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:hint="@string/to_date"
-                android:textColor="@color/textColors"
+                android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/_12sdp"
                 app:fontFamily="@font/montserrat"
                 android:cursorVisible="false"
@@ -207,6 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_3sdp"
+                app:tint="?android:textColorPrimary"
                 app:srcCompat="@drawable/ic_black_white_cross"
                 app:layout_constraintStart_toEndOf="@+id/etToDate"
                 app:layout_constraintTop_toTopOf="@+id/etToDate"

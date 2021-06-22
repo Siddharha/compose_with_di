@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
+import com.app.l_pesa.allservices.views.SasaDoctorActivity
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
@@ -66,6 +67,9 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
     private fun onActionPerform() {
         btnProfile.setOnClickListener {
             (context as DashboardActivity).gotoCompleteProfile()
+        }
+        imgSasaBanner.setOnClickListener {
+            requireActivity().startActivity(Intent(requireContext(),SasaDoctorActivity::class.java))
         }
     }
 
@@ -131,6 +135,8 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
             swipeRefreshLayout.isRefreshing = false
             CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.no_internet))
         }
+
+        svDashboard.smoothScrollTo(0,0)
     }
 
     private fun setDashBoard(dashBoard: ResDashboard.Data) {
