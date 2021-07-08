@@ -99,7 +99,7 @@ class PresenterSasaDoctor {
                             callBackOBJ.onErrorUserPayment(response.status.message)
                         }
                     } catch (e: Exception) {
-
+                        callBackOBJ.onErrorUserPayment(e.printStackTrace().toString())
                     }
                 }, { error ->
                     try {

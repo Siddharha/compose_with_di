@@ -404,7 +404,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             R.id.action_points -> {
                 if (currentFragment is PointsFragment) {
                 } else {
-                    toolbar.title = resources.getString(R.string.nav_item_airtime_credit)
+                    toolbar.title = resources.getString(R.string.nav_item_buy_credit)
                     navigateToFragment(PointsFragment.newInstance())
                 }
 

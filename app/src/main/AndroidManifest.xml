@@ -14,12 +14,12 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
+<!--    <uses-permission android:name="android.permission.RECEIVE_SMS"/>-->
+<!--    <uses-permission android:name="android.permission.READ_SMS"/>-->
 
-    <!--Permission for ML user-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+<!--    &lt;!&ndash;Permission for ML user&ndash;&gt;-->
+<!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>-->
+<!--    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>-->
 
     <uses-feature
         android:name="android.hardware.camera"
