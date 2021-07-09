@@ -11,25 +11,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/points/adapters/PointsAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/points/view/HowItWorksFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/points/view/PlansFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/points/view/PurchaseHistoryFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_how_it_works.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_plans.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_purchase_history.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bscscan.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/coingecko.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/coinmarketcap.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dext.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/etherscan.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/oneinch.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pancakeswap.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/polygonscan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/quickswap.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/unifarm.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/uniswap.webp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/presenter/PresenterSasaDoctor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/allservices/presenter/PresenterSasaDoctor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/points/view/PointsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/points/view/PointsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_points.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_points.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +100,8 @@
     <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/L_Pesa/app/src/main/java/com/app/l_pesa/common/CommonInputLayout.kt_SELECTED" value="CommonInputLayout" />
     <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/L_Pesa/app/src/main/java/com/app/l_pesa/pinview/view/PassCodeView.java_SELECTED" value="PassCodeView" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-night" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="multi-representation-preview/Users/siddharthamaji/Documents/Android_project/L_Pesa/app/src/main/java/com/app/l_pesa/common/CircularImageView.java_selected" value="Custom views" />
     <property name="multi-representation-preview/Users/siddharthamaji/Documents/Android_project/L_Pesa/app/src/main/java/com/app/l_pesa/common/CommonEditTextRegular.kt_selected" value="Custom views" />
     <property name="multi-representation-preview/Users/siddharthamaji/Documents/Android_project/L_Pesa/app/src/main/java/com/app/l_pesa/common/CommonInputLayout.kt_selected" value="Custom views" />
@@ -147,9 +143,9 @@
       <recent name="com.app.l_pesa.profile.view" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable-night" />
       <recent name="$PROJECT_DIR$/app/src/main/res/values-night" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -273,13 +269,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00041" summary="implement fb_t_002">
-      <created>1605707138100</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1605707138100</updated>
     </task>
     <task id="LOCAL-00042" summary="implement fb_t_003">
       <created>1605769334439</created>
@@ -617,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624367448917</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="add points to buy">
+      <created>1625727524735</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1625727524737</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -647,7 +643,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implement fb_t_001" />
     <MESSAGE value="implement fb_t_002" />
     <MESSAGE value="implement fb_t_003" />
     <MESSAGE value="implement fb_t_004" />
@@ -672,7 +667,8 @@
     <MESSAGE value="Dev option enabled for dev build" />
     <MESSAGE value="sasa doctor UI for user link done" />
     <MESSAGE value="location service implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="location service implemented" />
+    <MESSAGE value="add points to buy" />
+    <option name="LAST_COMMIT_MESSAGE" value="add points to buy" />
   </component>
   <component name="WindowStateProjectService">
     <state x="433" y="126" key="#Images" timestamp="1624281166154">
@@ -689,7 +685,6 @@
     <state x="886" y="170" key="#com.intellij.ide.util.MemberChooser/0.23.1440.796@0.23.1440.796" timestamp="1625723141887" />
     <state x="886" y="171" key="#com.intellij.ide.util.MemberChooser/0.23.1440.800@0.23.1440.800" timestamp="1622107928112" />
     <state x="886" y="172" key="#com.intellij.ide.util.MemberChooser/0.23.1440.804@0.23.1440.804" timestamp="1621846949168" />
-    <state x="886" y="173" key="#com.intellij.ide.util.MemberChooser/0.23.1440.808@0.23.1440.808" timestamp="1617111164150" />
     <state x="174" y="356" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1621847002384">
       <screen x="0" y="23" width="1440" height="804" />
     </state>
@@ -726,10 +721,10 @@
     </state>
     <state x="576" y="192" key="AndroidProcessChooserDialog/0.23.1440.800@0.23.1440.800" timestamp="1624249907784" />
     <state x="576" y="193" key="AndroidProcessChooserDialog/0.23.1440.804@0.23.1440.804" timestamp="1621853629656" />
-    <state x="576" y="194" key="AndroidProcessChooserDialog/0.23.1440.808@0.23.1440.808" timestamp="1617173299270" />
-    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1624367448265">
-      <screen x="0" y="23" width="1440" height="800" />
+    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1625727523987">
+      <screen x="0" y="23" width="1440" height="796" />
     </state>
+    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.796@0.23.1440.796" timestamp="1625727523987" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.800@0.23.1440.800" timestamp="1624367448265" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.804@0.23.1440.804" timestamp="1621923084356" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1618828415852" />
@@ -767,12 +762,17 @@
     </state>
     <state x="221" y="66" key="SettingsEditor/0.23.1440.804@0.23.1440.804" timestamp="1621243077266" />
     <state x="221" y="66" key="SettingsEditor/0.23.1440.808@0.23.1440.808" timestamp="1620037631123" />
-    <state x="320" y="148" key="Vcs.Push.Dialog.v2" timestamp="1624367451228">
-      <screen x="0" y="23" width="1440" height="800" />
+    <state x="320" y="147" key="Vcs.Push.Dialog.v2" timestamp="1625727528225">
+      <screen x="0" y="23" width="1440" height="796" />
     </state>
+    <state x="320" y="147" key="Vcs.Push.Dialog.v2/0.23.1440.796@0.23.1440.796" timestamp="1625727528225" />
     <state x="320" y="148" key="Vcs.Push.Dialog.v2/0.23.1440.800@0.23.1440.800" timestamp="1624367451228" />
     <state x="320" y="149" key="Vcs.Push.Dialog.v2/0.23.1440.804@0.23.1440.804" timestamp="1621923092056" />
     <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1618828421237" />
+    <state x="497" y="206" key="chooseDestDirectoryDialog" timestamp="1625817564017">
+      <screen x="0" y="23" width="1440" height="796" />
+    </state>
+    <state x="497" y="206" key="chooseDestDirectoryDialog/0.23.1440.796@0.23.1440.796" timestamp="1625817564017" />
     <state x="390" y="257" key="com.intellij.ide.util.TipDialog" timestamp="1617264774874">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
@@ -785,7 +785,6 @@
       <screen x="0" y="23" width="1440" height="804" />
     </state>
     <state x="482" y="63" key="refactoring.ChangeSignatureDialog/0.23.1440.804@0.23.1440.804" timestamp="1621841631952" />
-    <state x="482" y="63" key="refactoring.ChangeSignatureDialog/0.23.1440.808@0.23.1440.808" timestamp="1617110669910" />
     <state x="385" y="155" width="670" height="676" key="search.everywhere.popup" timestamp="1617606438112">
       <screen x="0" y="23" width="1440" height="808" />
     </state>
