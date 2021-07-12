@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
@@ -29,6 +30,7 @@ import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_lpk.*
+import org.jetbrains.anko.doAsync
 
 
 class LpkFragment: Fragment(), ICallBackInfoLPK {
@@ -134,6 +136,31 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
             }
 
         }
+
+        doAsync {
+            for(i in 0 until  llLpkTrading.childCount){
+                var tradingUrl = ""
+                when(i){
+                    0 -> tradingUrl = "https://bit.ly/3hJYgsK"
+                    1 -> tradingUrl = "https://bit.ly/3jWjLcr"
+                    2 -> tradingUrl = "https://bit.ly/3hqpzJH"
+                    3 -> tradingUrl = "https://bit.ly/2VnZX7L"
+                    4 -> tradingUrl = "https://bit.ly/2Uyo0jz"
+                    5 -> tradingUrl = "https://bit.ly/3jVnS8r"
+                    6 -> tradingUrl = "https://bit.ly/34bxC5h"
+                    7 -> tradingUrl = "https://bit.ly/3AFS1yv"
+                    8 -> tradingUrl = "https://bit.ly/3hlNSID"
+                    9 -> tradingUrl = "https://bit.ly/3dTUT1a"
+                    10 -> tradingUrl = "https://bit.ly/3hLf4iT"
+                }
+                (llLpkTrading.getChildAt(i) as CardView).setOnClickListener {
+                    val uri = Uri.parse(tradingUrl)
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    startActivity(intent)
+                }
+            }
+        }
+
     }
 
     private fun dismiss()

@@ -11,19 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/bscscan.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/coingecko.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/coinmarketcap.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dext.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/etherscan.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/oneinch.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pancakeswap.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/polygonscan.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/quickswap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/unifarm.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/uniswap.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/lpk/view/LpkFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_lpk.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -269,13 +258,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00042" summary="implement fb_t_003">
-      <created>1605769334439</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1605769334444</updated>
     </task>
     <task id="LOCAL-00043" summary="implement fb_t_004">
       <created>1605857891008</created>
@@ -613,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625727524737</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="add points to buy">
+      <created>1625818612692</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1625818612692</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -721,10 +710,10 @@
     </state>
     <state x="576" y="192" key="AndroidProcessChooserDialog/0.23.1440.800@0.23.1440.800" timestamp="1624249907784" />
     <state x="576" y="193" key="AndroidProcessChooserDialog/0.23.1440.804@0.23.1440.804" timestamp="1621853629656" />
-    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1625727523987">
+    <state x="214" y="23" key="CommitChangelistDialog2" timestamp="1625818612060">
       <screen x="0" y="23" width="1440" height="796" />
     </state>
-    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.796@0.23.1440.796" timestamp="1625727523987" />
+    <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.796@0.23.1440.796" timestamp="1625818612060" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.800@0.23.1440.800" timestamp="1624367448265" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.804@0.23.1440.804" timestamp="1621923084356" />
     <state x="214" y="23" key="CommitChangelistDialog2/0.23.1440.808@0.23.1440.808" timestamp="1618828415852" />
@@ -762,10 +751,10 @@
     </state>
     <state x="221" y="66" key="SettingsEditor/0.23.1440.804@0.23.1440.804" timestamp="1621243077266" />
     <state x="221" y="66" key="SettingsEditor/0.23.1440.808@0.23.1440.808" timestamp="1620037631123" />
-    <state x="320" y="147" key="Vcs.Push.Dialog.v2" timestamp="1625727528225">
+    <state x="320" y="147" key="Vcs.Push.Dialog.v2" timestamp="1625818614121">
       <screen x="0" y="23" width="1440" height="796" />
     </state>
-    <state x="320" y="147" key="Vcs.Push.Dialog.v2/0.23.1440.796@0.23.1440.796" timestamp="1625727528225" />
+    <state x="320" y="147" key="Vcs.Push.Dialog.v2/0.23.1440.796@0.23.1440.796" timestamp="1625818614121" />
     <state x="320" y="148" key="Vcs.Push.Dialog.v2/0.23.1440.800@0.23.1440.800" timestamp="1624367451228" />
     <state x="320" y="149" key="Vcs.Push.Dialog.v2/0.23.1440.804@0.23.1440.804" timestamp="1621923092056" />
     <state x="320" y="150" key="Vcs.Push.Dialog.v2/0.23.1440.808@0.23.1440.808" timestamp="1618828421237" />
