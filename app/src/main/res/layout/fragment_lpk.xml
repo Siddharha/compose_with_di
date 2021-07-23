@@ -652,6 +652,79 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvSushiSwapTreading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/_3sdp"
+            android:layout_margin="@dimen/_7sdp"
+
+            >
+
+            <LinearLayout
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp">
+
+
+                <ImageView
+                    android:layout_weight="0"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_name"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_3sdp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/sushi_swap" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="@string/lpk"
+                        android:textColor="@color/color_deep_gold"
+                        android:textSize="@dimen/_19sdp"
+                        />
+
+                    <com.app.l_pesa.common.CommonTextRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        android:text="@string/trading"
+                        android:textSize="@dimen/_16sdp"
+                        android:textColor="@color/dark_text_color"
+
+                        app:layout_constraintEnd_toStartOf="@+id/imgNextTreading"
+                        />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/app_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_go_arrow" />
+
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
             android:id="@+id/cvEtherscanTreading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1020,6 +1093,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:cardCornerRadius="@dimen/_3sdp"
         android:layout_margin="@dimen/_7sdp"
 

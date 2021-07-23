@@ -19,7 +19,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Upload Statement"
+                android:text="Mobile Money Statement"
                 android:textSize="@dimen/_20sdp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

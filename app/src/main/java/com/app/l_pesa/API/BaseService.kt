@@ -24,6 +24,7 @@ import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.otpview.model.ResSetOTP
 import com.app.l_pesa.pin.model.*
 import com.app.l_pesa.pinview.model.ResSetPin
+import com.app.l_pesa.points.view.CreditPlanResponse
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.profile.model.statement.StatementDeleteResponse
 import com.app.l_pesa.profile.model.statement.StatementAddResponse
@@ -264,6 +265,9 @@ interface BaseService{
     //POST /store/sms
     @POST("store/sms")
     fun doUpdateSMS(@Body request: UserSMSPayload): Observable<UserSMSUpdateResponse>
+
+    @GET("buy_credit_score/plans")
+    fun getAllCreditPlans():Observable<CreditPlanResponse>
 }
 
 

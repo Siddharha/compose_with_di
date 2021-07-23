@@ -141,17 +141,18 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
             for(i in 0 until  llLpkTrading.childCount){
                 var tradingUrl = ""
                 when(i){
-                    0 -> tradingUrl = "https://bit.ly/3hJYgsK"
-                    1 -> tradingUrl = "https://bit.ly/3jWjLcr"
-                    2 -> tradingUrl = "https://bit.ly/3hqpzJH"
-                    3 -> tradingUrl = "https://bit.ly/2VnZX7L"
-                    4 -> tradingUrl = "https://bit.ly/2Uyo0jz"
-                    5 -> tradingUrl = "https://bit.ly/3jVnS8r"
-                    6 -> tradingUrl = "https://bit.ly/34bxC5h"
-                    7 -> tradingUrl = "https://bit.ly/3AFS1yv"
-                    8 -> tradingUrl = "https://bit.ly/3hlNSID"
-                    9 -> tradingUrl = "https://bit.ly/3dTUT1a"
-                    10 -> tradingUrl = "https://bit.ly/3hLf4iT"
+                    0 -> tradingUrl = "https://bit.ly/3hJYgsK" //coinmarketcap
+                    1 -> tradingUrl = "https://bit.ly/3jWjLcr" //coingecko
+                    2 -> tradingUrl = "https://bit.ly/3hqpzJH" //bscscan
+                    3 -> tradingUrl = "https://bit.ly/2UW8eQ0" //pancakeswap
+                    4 -> tradingUrl = "https://bit.ly/2Uyo0jz" //polygonscan
+                    5 -> tradingUrl = "https://bit.ly/3jVnS8r" //quickswap
+                    6 -> tradingUrl = "https://bit.ly/3dQwSrB" //SushiSwap
+                    7 -> tradingUrl = "https://bit.ly/34bxC5h" //etherscan
+                    8 -> tradingUrl = "https://bit.ly/3AFS1yv" //uniswap
+                    9 -> tradingUrl = "https://bit.ly/3hlNSID" //1inch
+                    10 -> tradingUrl = "https://bit.ly/3dTUT1a" //dextools
+                    11 -> tradingUrl = "https://bit.ly/3hLf4iT" //unifarm
                 }
                 (llLpkTrading.getChildAt(i) as CardView).setOnClickListener {
                     val uri = Uri.parse(tradingUrl)
