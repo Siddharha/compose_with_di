@@ -81,8 +81,11 @@ class CreditPlanListAdapter (val context: Context, private val planlist: ArrayLi
 
             itemView.apply{
                 tvLoanPlanContent.text = plan.pointTitle
-            setOnClickListener {
-                iCallBackCreditPlan.onCreditPlanClickList()
+                setOnClickListener {
+                    iCallBackCreditPlan.onCreditPlanClickList()
+                }
+                fabApply.setOnClickListener {
+                iCallBackCreditPlan.onCreditPlanItemClickList(plan)
             }
             }
         }
