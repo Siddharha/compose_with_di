@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rootLayout"
-    android:background="@color/colorWhite"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <com.app.l_pesa.common.CommonTextRegular
@@ -30,37 +29,42 @@
 
     <FrameLayout
         android:id="@+id/frameImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_75sdp"
-        android:layout_height="@dimen/_75sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@+id/tilName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInfo"
-        app:layout_constraintBottom_toTopOf="@+id/tilName">
+        app:layout_constraintTop_toBottomOf="@+id/txtInfo">
 
-    <com.app.l_pesa.common.CircularImageView
-        android:id="@+id/imageView"
-        android:contentDescription="@string/app_name"
-        android:layout_width="@dimen/_75sdp"
-        android:layout_height="@dimen/_75sdp"
-        android:scaleType="centerCrop"
-        app:civ_border_width="0dp"
-        app:srcCompat="@drawable/ic_user"
-        app:civ_background_color="@android:color/white"
-        app:civ_border_color="@android:color/white"
-        app:civ_shadow="false"
-
-        />
-
-        <ImageView
-            android:id="@+id/imageEdit"
+        <com.app.l_pesa.common.CircularImageView
+            android:id="@+id/imageView"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_75sdp"
             android:contentDescription="@string/app_name"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_edit_image"
-            android:layout_gravity="top|end"
+            app:civ_background_color="@android:color/white"
+            app:civ_border_color="@android:color/white"
+            app:civ_border_width="1dp"
+            app:civ_shadow="false"
+            app:srcCompat="@drawable/ic_user"
+
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/imageEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:contentDescription="@string/app_name"
+            android:scaleType="center"
+            app:backgroundTint="@color/colorYellow"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_edit_pencil_icon"
 
             />
 
@@ -70,14 +74,14 @@
         android:id="@+id/tilName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tilCode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameImage"
-        app:layout_constraintBottom_toTopOf="@+id/tilCode"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/frameImage">
+
         <com.app.l_pesa.common.CommonInputLayout
 
             style="@style/customInputLayoutStyle"
@@ -95,8 +99,8 @@
                 android:inputType="textCapSentences"
                 android:maxLength="35"
                 android:maxLines="1"
-                android:textColorHint="@color/color_gray_text"
                 android:textColor="@color/textColors"
+                android:textColorHint="@color/color_gray_text"
                 android:textSize="@dimen/_12sdp" />
 
         </com.app.l_pesa.common.CommonInputLayout>
@@ -147,16 +151,16 @@
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
-        android:fontFamily="@font/montserrat"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/bg_button_app"
+        android:fontFamily="@font/montserrat"
         android:text="@string/continue_"
+        android:textColor="#fff"
         android:textAllCaps="true"
-        android:textStyle="bold"
         android:textSize="@dimen/_12sdp"
-        android:textColor="@color/colorWhite"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilCode"

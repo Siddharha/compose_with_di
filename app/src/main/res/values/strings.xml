@@ -55,7 +55,7 @@
     <string name="selfie_verification">A selfie - take a photograph of yourself and make sure that your face is clearly visible.</string>
     <string name="email_selfie_verification">Enter your full name and continue. You can also edit your selfie.</string>
     <string name="identity_verification">To complete your registration with L-Pesa, kindly select an ID proof below and enter the ID number. Please keep your selected ID card ready in hand.</string>
-    <string name="identity_photo_verification">Take a photograph of your ID and make sure that your personal details are clear and easy to read.</string>
+    <string name="identity_photo_verification">Take a photograph of your ID and make sure that your personal details are clear and easy to read. Tap on square image box to upload your ID image</string>
     <string name="no_location_detected">
         No location detected. Make sure location is enabled on the device.
     </string>
@@ -388,8 +388,8 @@
     <string name="personal_id_information">Personal ID Information</string>
     <string name="business_id_information">Business ID Information</string>
     <string name="id_image">ID Image*</string>
-    <string name="required_profile_image">Upload your profile avatar.</string>
-    <string name="required_id_image">Upload a copy of your ID.</string>
+    <string name="required_profile_image">Upload your profile image. tap on circular yellow button to upload image.</string>
+    <string name="required_id_image">Upload a copy of your ID.Tap on Square Image box to upload your ID image</string>
     <string name="personal_id_type">Personal ID Type*</string>
     <string name="business_type">Business ID Type*</string>
     <string name="edit_id_number">ID Number*</string>

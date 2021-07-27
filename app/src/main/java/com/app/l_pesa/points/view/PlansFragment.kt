@@ -17,6 +17,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.common.toast
 import com.app.l_pesa.points.ICallBackCreditPlan
 import com.app.l_pesa.points.adapters.CreditPlanListAdapter
+import com.app.l_pesa.points.models.ApplyCreditPlanPayload
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -107,8 +108,33 @@ class PlansFragment : Fragment(), ICallBackCreditPlan {
            tvDesc.text = itm.description
             tvPrice.text = itm.price
             tvScore.text = itm.creditScore.toString()
+
+            btnApply.setOnClickListener {
+                applyCreditPlan(itm)
+            }
         }
 
+    }
+
+    @SuppressLint("CheckResult")
+    private fun applyCreditPlan(itm: CreditPlanResponse.Data.Plan) {
+        val creditApplyPayload = ApplyCreditPlanPayload(itm.price, itm.creditScore.toString())
+        RetrofitHelper.getRetrofitToken(BaseService::class.java, pref.accessToken).applyCreditPlan(creditApplyPayload)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { responseBody ->
+                    responseBody
+
+                }
+                .subscribe { response ->
+    //                            if(response.status.isSuccess){
+    //                                planList.clear()
+    //                                planList.addAll(response.data.plans)
+    //                                creditPlanListAdapter.notifyDataChanged()
+    //                            }
+                    //rootView.tvDisplay.text = response.toString()
+
+                }
     }
 
 

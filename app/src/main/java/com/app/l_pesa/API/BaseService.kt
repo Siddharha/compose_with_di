@@ -24,6 +24,7 @@ import com.app.l_pesa.notification.model.ResNotification
 import com.app.l_pesa.otpview.model.ResSetOTP
 import com.app.l_pesa.pin.model.*
 import com.app.l_pesa.pinview.model.ResSetPin
+import com.app.l_pesa.points.models.ApplyCreditPlanPayload
 import com.app.l_pesa.points.view.CreditPlanResponse
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.profile.model.statement.StatementDeleteResponse
@@ -268,6 +269,9 @@ interface BaseService{
 
     @GET("buy_credit_score/plans")
     fun getAllCreditPlans():Observable<CreditPlanResponse>
+
+    @POST("buy_credit_score/apply")
+    fun applyCreditPlan(@Body request: ApplyCreditPlanPayload):Observable<Any>
 }
 
 

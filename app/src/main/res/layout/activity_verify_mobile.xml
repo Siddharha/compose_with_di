@@ -50,7 +50,7 @@
         android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.app.l_pesa.common.CommonTextRegular
@@ -116,6 +116,7 @@
         <com.app.l_pesa.common.CustomButtonRegular
             android:id="@+id/btnVerifyMobile"
             android:layout_width="0dp"
+            android:textColor="#fff"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"
@@ -124,7 +125,6 @@
             android:fontFamily="@font/montserrat"
             android:text="@string/submit"
             android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

@@ -72,7 +72,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
 
         initLoader()
-        imageProfile.setOnClickListener {
+        fabProfile.setOnClickListener {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkAndRequestPermissions()) {
