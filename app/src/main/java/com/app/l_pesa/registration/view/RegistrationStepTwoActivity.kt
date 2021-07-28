@@ -132,10 +132,12 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         startActivityForResult(captureIntent, requestPhoto)*/
 
         val intent_cam = Intent(this, CamViewActivity::class.java)
-        intent_cam.putExtra(CamUtil.CAM_FACING,1)
+        intent_cam.putExtra(CamUtil.CAM_FACING,0)
         intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
-        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
-        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,Color.WHITE)
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,Color.WHITE)
+
         startActivityForResult(intent_cam,requestPhoto)
 
     }
@@ -167,8 +169,9 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
                 handleRotation(photoFile.absolutePath)
                 Handler().postDelayed({
                     dismiss()
-                    imageProfile.setImageURI(null)
-                    imageProfile.setImageURI(photoPath)
+                   // imageProfile.setImageURI(null)
+                    Glide.with(this).load(photoFile).into(imageProfile)
+                   // imageProfile.setImageURI(photoPath)
                     captureImageStatus = true
                     val sharedPref = SharedPref(this@RegistrationStepTwoActivity)
                     sharedPref.imagePath = photoFile.absolutePath

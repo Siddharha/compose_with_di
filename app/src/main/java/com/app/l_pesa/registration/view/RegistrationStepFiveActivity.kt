@@ -1,5 +1,7 @@
 package com.app.l_pesa.registration.view
 
+import `in`.creativelizard.creativecam.CamUtil
+import `in`.creativelizard.creativecam.CamViewActivity
 import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
@@ -8,6 +10,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.*
+import android.hardware.camera2.CameraCharacteristics
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -38,6 +41,7 @@ import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterAWSProfile
 import com.app.l_pesa.registration.inter.ICallBackRegisterThree
 import com.app.l_pesa.registration.presenter.PresenterRegistrationThree
+import com.bumptech.glide.Glide
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.gson.JsonObject
@@ -53,7 +57,7 @@ import kotlin.collections.set
 
 class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterThree {
 
-    private val  requestPhoto               = 12
+    private val  requestPhoto               = 13
     private var  captureImageStatus         : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
@@ -110,26 +114,38 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
     private fun initCamera(){
 
-        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val imagePath = File(filesDir, "images")
-        photoFile = File(imagePath, "personal.jpg")
-        if (photoFile.exists()) {
-            photoFile.delete()
-        } else {
-            photoFile.parentFile!!.mkdirs()
-        }
-        captureFilePath = FileProvider.getUriForFile(this@RegistrationStepFiveActivity, BuildConfig.APPLICATION_ID, photoFile)
+//        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        val imagePath = File(filesDir, "images")
+//        photoFile = File(imagePath, "personal.jpg")
+//        if (photoFile.exists()) {
+//            photoFile.delete()
+//        } else {
+//            photoFile.parentFile!!.mkdirs()
+//        }
+//        captureFilePath = FileProvider.getUriForFile(this@RegistrationStepFiveActivity, BuildConfig.APPLICATION_ID, photoFile)
+//
+//        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+//        } else {
+//            val clip = ClipData.newUri(this@RegistrationStepFiveActivity.contentResolver, "id photo", captureFilePath)
+//            captureIntent.clipData = clip
+//            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+//        }
+//
+//        startActivityForResult(captureIntent, requestPhoto)
 
-        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        } else {
-            val clip = ClipData.newUri(this@RegistrationStepFiveActivity.contentResolver, "id photo", captureFilePath)
-            captureIntent.clipData = clip
-            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        }
+        val intent_cam = Intent(this, CamViewActivity::class.java)
+        intent_cam.putExtra(CamUtil.CAM_FACING, 1)
+//        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
+//        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
+//        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
 
-        startActivityForResult(captureIntent, requestPhoto)
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,Color.WHITE)
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,Color.WHITE)
+
+        startActivityForResult(intent_cam,requestPhoto)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -139,15 +155,16 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
                 if (resultCode == Activity.RESULT_OK)
                 {
-                    setImage()
+                    setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
                 }
 
         }
     }
 
-    private fun setImage() {
-
-        val photoPath: Uri  = captureFilePath
+    private fun setImage(filepath:String) {
+        photoFile = File(filepath)
+      //  val photoPath: Uri  = captureFilePath
+        val photoPath: Uri = Uri.fromFile(photoFile)//captureFilePath
         try {
             if(photoPath!=Uri.EMPTY)
             {
@@ -155,9 +172,10 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
                 handleRotation(photoFile.absolutePath)
                 Handler().postDelayed({
                     dismiss()
-                    imageCard.setBackgroundColor(Color.TRANSPARENT)
-                    imageCard.setImageURI(null)
-                    imageCard.setImageURI(photoPath)
+                    imageCard.setBackgroundResource(R.drawable.bg_button_green)
+                   // imageCard.setImageURI(null)
+                    //imageCard.setImageURI(photoPath)
+                    Glide.with(this).load(photoFile).into(imageCard)
                     captureImageStatus       = true
                     photoFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(photoFile)
                 }, 2000)
@@ -351,6 +369,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {
             REQUEST_ID_PERMISSIONS -> {

@@ -34,14 +34,13 @@
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        android:contentDescription="@string/app_name"
         android:background="@drawable/ic_upload_id"
-        app:layout_constraintTop_toBottomOf="@+id/txtInfo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toTopOf="@+id/layoutBottom"
         app:layout_constraintDimensionRatio="H,2:1"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInfo">
 
 
         <!--<ImageView

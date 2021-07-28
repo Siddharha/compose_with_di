@@ -427,10 +427,11 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
         startActivityForResult(captureIntent, requestPhoto)*/
 
         val intent_cam = Intent(this, CamViewActivity::class.java)
-        intent_cam.putExtra(CamUtil.CAM_FACING,1)
+        intent_cam.putExtra(CamUtil.CAM_FACING,0)
         intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
-        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
-        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,Color.WHITE)
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,Color.WHITE)
         startActivityForResult(intent_cam,requestPhoto)
 
     }
@@ -472,7 +473,8 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
             //    Handler().postDelayed({
                     dismiss()
                     imgProfile.setImageURI(null)
-                    imgProfile.setImageURI(photoPath)
+//                    imgProfile.setImageURI(photoPath)
+                Glide.with(this).load(photoFile).into(imgProfile)
 
                     captureImageStatus = true
                     photoFile = Compressor(this@ProfileEditPersonalActivity).compressToFile(photoFile)
@@ -667,6 +669,7 @@ class ProfileEditPersonalActivity : AppCompatActivity(), ICallBackTitle, ICallBa
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {
             REQUEST_ID_PERMISSIONS -> {
