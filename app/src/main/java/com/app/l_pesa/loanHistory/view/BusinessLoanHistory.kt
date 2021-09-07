@@ -64,7 +64,7 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
         swipeRefresh()
         buttonApplyLoan.setOnClickListener {
 
-            val sharedPref = SharedPref(activity!!)
+            val sharedPref = SharedPref(requireActivity())
             sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
             sharedPref.openTabLoan = "BUSINESS"
             val intent = Intent(activity, DashboardActivity::class.java)
@@ -78,9 +78,9 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog = ProgressDialog(requireActivity(),R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
-        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
@@ -102,12 +102,12 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
     private fun loadHistory(from_date: String, to_date: String,type:String)
     {
         listLoanHistoryBusiness      = ArrayList()
-        adapterLoanHistory           = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
+        adapterLoanHistory           = BusinessLoanHistoryAdapter(requireActivity(), listLoanHistoryBusiness!!,this)
         bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             val logger = AppEventsLogger.newLogger(activity)
             val params =  Bundle()
@@ -118,12 +118,12 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryBusiness(activity!!,jsonObject,from_date,to_date,type,"",this)
+            presenterLoanHistory.getLoanHistoryBusiness(requireActivity(),jsonObject,from_date,to_date,type,"",this)
 
         }
         else
         {
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
             swipeRefreshLayout.isRefreshing = false
 
         }
@@ -148,15 +148,15 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
         cardView.visibility  = View.GONE
         rvLoan.visibility    = View.VISIBLE
 
-        activity!!.runOnUiThread {
+        requireActivity().runOnUiThread {
             hasNext =cursors.hasNext
             after   =cursors.after
             swipeRefreshLayout.isRefreshing = false
-            val shared=SharedPref(activity!!)
+            val shared=SharedPref(requireActivity())
             shared.userCreditScore=user_credit_score.toString()
             listLoanHistoryBusiness!!.clear()
             listLoanHistoryBusiness!!.addAll(loan_historyBusiness)
-            adapterLoanHistory          = BusinessLoanHistoryAdapter(activity!!, listLoanHistoryBusiness!!,this)
+            adapterLoanHistory          = BusinessLoanHistoryAdapter(requireActivity(), listLoanHistoryBusiness!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
@@ -225,9 +225,9 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
     private fun loadMore(from_date: String, to_date: String)
     {
 
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
-            val loanStatusModel  = ResLoanHistoryBusiness.LoanHistory(0,"",0.0,"",
+            val loanStatusModel  = ResLoanHistoryBusiness.LoanHistory(0,"",0.0,"",true,"",
                     "","","",
                     "","","","","",
                     "","","","","","","","","","")
@@ -237,7 +237,7 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","business_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryPaginateBusiness(activity!!,jsonObject,from_date,to_date,after,this)
+            presenterLoanHistory.getLoanHistoryPaginateBusiness(requireActivity(),jsonObject,from_date,to_date,after,this)
 
         }
 
@@ -269,7 +269,7 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
         buttonFilterSubmit.setOnClickListener {
 
             if (TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString())) {
-                CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.you_have_select_from_date_to_date))
+                CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.you_have_select_from_date_to_date))
             } else {
 
                 val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
@@ -309,13 +309,13 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        CommonMethod.datePicker(activity!!,etFromDate)
+        CommonMethod.datePicker(requireActivity(),etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        CommonMethod.datePicker(activity!!,etToDate)
+        CommonMethod.datePicker(requireActivity(),etToDate)
     }
 
 
@@ -338,12 +338,12 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
     {
         val dialog = AlertDialog.Builder(requireContext())
 
-        val font = ResourcesCompat.getFont(activity!!, R.font.montserrat)
-        val taskEditText    = CommonEditTextRegular(activity!!)
+        val font = ResourcesCompat.getFont(requireActivity(), R.font.montserrat)
+        val taskEditText    = CommonEditTextRegular(requireActivity())
         taskEditText.typeface=font
-        val textInputLayout = TextInputLayout(activity!!)
+        val textInputLayout = TextInputLayout(requireActivity())
 
-        val container =  FrameLayout(activity!!)
+        val container =  FrameLayout(requireActivity())
         val  params   =  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         params.setMargins(resources.getDimensionPixelOffset(R.dimen._15sdp), 0, resources.getDimensionPixelOffset(R.dimen._15sdp), 0)
@@ -358,11 +358,11 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
                     if(TextUtils.isEmpty(taskEditText.text.toString()))
                     {
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_cancellation_reason))
+                        CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.required_cancellation_reason))
                     }
                     else
                     {
-                        if(CommonMethod.isNetworkAvailable(activity!!))
+                        if(CommonMethod.isNetworkAvailable(requireActivity()))
                         {
                             dialog.dismiss()
                             progressDialog.show()
@@ -373,12 +373,12 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
                             jsonObject.addProperty("cancel_reason",taskEditText.text.toString())
 
                             val presenterLoanHistory=PresenterLoanHistory()
-                            presenterLoanHistory.cancelLoanHistoryBusiness(activity!!,jsonObject,this,position)
+                            presenterLoanHistory.cancelLoanHistoryBusiness(requireActivity(),jsonObject,this,position)
                         }
                         else
                         {
                             dialog.dismiss()
-                            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                            CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
                         }
                     }
 
@@ -399,21 +399,21 @@ class BusinessLoanHistory: Fragment(), ICallBackBusinessLoanHistory {
 
     override fun onFailureRemoveLoan(message: String) {
         dismissDialog()
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 
     override fun onSessionTimeOut(message: String) {
         swipeRefreshLayout.isRefreshing = false
-        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(requireActivity(),R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(activity!!)
+                    val sharedPrefOBJ= SharedPref(requireActivity())
                     sharedPrefOBJ.removeShared()
-                    startActivity(Intent(activity!!, MainActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    activity!!.finish()
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    requireActivity().finish()
                 }
 
         val alert = dialogBuilder.create()

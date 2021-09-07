@@ -51,8 +51,10 @@ import com.app.l_pesa.otpview.view.OTPActivity
 import com.app.l_pesa.pin.view.ForgotPinActivity
 import com.app.l_pesa.pinview.view.PinSetActivity
 import com.app.l_pesa.registration.view.RegistrationStepOneActivity
+import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.model.ResModelCountryList
 import com.app.l_pesa.splash.model.ResModelData
+import com.app.l_pesa.splash.presenter.PresenterCountry
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.gms.auth.api.credentials.Credential
@@ -74,7 +76,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.set
 
 
-class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
+class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin, ICallBackCountry {
 
     private var deviceId: String? = null
     private lateinit var  progressDialog   : ProgressDialog
@@ -175,9 +177,13 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
             sharedPrefOBJ.currentLoanProduct=resources.getString(R.string.init)
             sharedPrefOBJ.businessLoanProduct=resources.getString(R.string.init)
-            startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
-            overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
+            try {
+                startActivity(Intent(this@LoginActivity, LoanCalculatorActivity::class.java))
+                overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }catch (e:Exception){
+
+            }
             Handler().postDelayed({
                 buttonLoanCalculator.isClickable   = true
             }, 1000)
@@ -409,9 +415,14 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         if (sharedPrefOBJ.uuid == data.master_device){
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
+
+            try{
             val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }catch (e:Exception){
+
+            }
         }else{
             val json = Gson().toJson(data)
             sharedPrefOBJ.deviceInfo      = json
@@ -424,10 +435,14 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             //checkPermissions()
             MyApplication.getInstance().getGoogleAnalyticsLogger("Login",1) //0 for sign up
             sharedPrefOBJ.deviceInfo      = json
+
+            try{
             val intent = Intent(this@LoginActivity, OTPActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }catch (e:Exception){
 
+            }
         }
 
        /* if(data.next_step=="next_pin")a
@@ -459,10 +474,14 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         dismiss()
         Toast.makeText(this@LoginActivity,message,Toast.LENGTH_LONG).show()
         buttonLogin.isClickable   = true
+
+        try{
         val intent = Intent(this@LoginActivity, RegistrationStepOneActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.right_in, R.anim.left_out)
+        }catch (e:Exception){
 
+        }
     }
 
     override fun onErrorLogin(jsonMessage: String) {
@@ -594,6 +613,8 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
             })
         }catch (e:Exception){
             e.printStackTrace()
+            val presenterCountry = PresenterCountry()
+            presenterCountry.getCountry(this, this)
         }
 
     }
@@ -675,7 +696,11 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
         val dialog = AlertDialog.Builder(this@LoginActivity,R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
+                    try{
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
+                    }catch (e:Exception){
+
+                    }
                 }
                 .setNegativeButton("Cancel") { _, _ -> finish() }
         dialog.show()
@@ -691,10 +716,14 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
     override fun onBackPressed() {
 
+        try{
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }catch (e:Exception){
+
+        }
     }
 
     public override fun onResume() {
@@ -745,9 +774,13 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         override fun onVerified() {
             dismiss()
+            try{
             val intent = Intent(this@LoginActivity, PinSetActivity::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            }catch (e:Exception){
+
+            }
         }
 
         override fun onVerificationFailed(e: java.lang.Exception?) {
@@ -778,6 +811,25 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin {
 
         }
 
+    }
+
+    override fun onSuccessCountry(countries_list: ResModelData) {
+        val json = Gson().toJson(countries_list)
+        //    val sharedPrefOBJ = SharedPref(this@SplashActivity)
+        //sharedPrefOBJ.countryList = ""    //TEST CLEAR
+        sharedPrefOBJ.countryList = json
+    }
+
+    override fun onEmptyCountry() {
+        Toast.makeText(
+            this@LoginActivity,
+            "No Country list found! please try after sometime.",
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
+    override fun onFailureCountry(jsonMessage: String) {
+        showCountry()
     }
 
 

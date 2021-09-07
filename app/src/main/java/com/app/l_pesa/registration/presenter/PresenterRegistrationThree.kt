@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
+import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.registration.inter.ICallBackRegisterThree
@@ -36,7 +37,7 @@ class PresenterRegistrationThree {
                         else
                         {
                             if(response?.status?.statusCode == 40000){
-                                callBackOBJ.onErrorRegistrationThree("Unable to verify ID number!")
+                                callBackOBJ.onErrorRegistrationThree(contextOBJ.getString(R.string.unable_to_verify_id))
                             }else{
                                 callBackOBJ.onErrorRegistrationThree(response.status.message)
                             }

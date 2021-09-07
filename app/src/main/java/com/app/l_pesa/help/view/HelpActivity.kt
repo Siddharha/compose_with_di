@@ -85,7 +85,7 @@ class HelpActivity : AppCompatActivity() {
                 .into(imgCountry)
 
 
-      val helpData = Gson().fromJson<HelpData>(sharedPrefOBJ.helpSupport, HelpData::class.java)
+      val helpData = Gson().fromJson(sharedPrefOBJ.helpSupport, HelpData::class.java)
 
 
         if(!TextUtils.isEmpty(helpData.support_contact_no))

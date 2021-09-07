@@ -58,9 +58,9 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(activity!!, R.style.MyAlertDialogStyle)
+        progressDialog = ProgressDialog(requireActivity(), R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(com.app.l_pesa.R.string.loading))
-        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
@@ -85,16 +85,16 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
         constraintWithdrawal.setOnClickListener {
 
-            if(CommonMethod.isNetworkAvailable(activity!!))
+            if(CommonMethod.isNetworkAvailable(requireActivity()))
             {
                 constraintWithdrawal.isClickable=false
                 progressDialog.show()
                 val presenterInfoLPK=PresenterInfoLPK()
-                presenterInfoLPK.getInfoLPK(activity!!,this,"WITHDRAWAL")
+                presenterInfoLPK.getInfoLPK(requireActivity(),this,"WITHDRAWAL")
             }
             else
             {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(com.app.l_pesa.R.string.no_internet))
             }
 
 
@@ -102,17 +102,17 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
         constraintSavings.setOnClickListener {
 
-            if(CommonMethod.isNetworkAvailable(activity!!))
+            if(CommonMethod.isNetworkAvailable(requireActivity()))
             {
                 constraintSavings.isClickable=false
                 progressDialog.show()
                 val presenterInfoLPK=PresenterInfoLPK()
-                presenterInfoLPK.getInfoLPK(activity!!,this,"SAVINGS")
+                presenterInfoLPK.getInfoLPK(requireActivity(),this,"SAVINGS")
 
             }
             else
             {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(com.app.l_pesa.R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(com.app.l_pesa.R.string.no_internet))
             }
 
 
@@ -141,18 +141,19 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
             for(i in 0 until  llLpkTrading.childCount){
                 var tradingUrl = ""
                 when(i){
-                    0 -> tradingUrl = "https://bit.ly/3hJYgsK" //coinmarketcap
-                    1 -> tradingUrl = "https://bit.ly/3jWjLcr" //coingecko
-                    2 -> tradingUrl = "https://bit.ly/3hqpzJH" //bscscan
-                    3 -> tradingUrl = "https://bit.ly/2UW8eQ0" //pancakeswap
-                    4 -> tradingUrl = "https://bit.ly/2Uyo0jz" //polygonscan
-                    5 -> tradingUrl = "https://bit.ly/3jVnS8r" //quickswap
-                    6 -> tradingUrl = "https://bit.ly/3dQwSrB" //SushiSwap
-                    7 -> tradingUrl = "https://bit.ly/34bxC5h" //etherscan
-                    8 -> tradingUrl = "https://bit.ly/3AFS1yv" //uniswap
-                    9 -> tradingUrl = "https://bit.ly/3hlNSID" //1inch
-                    10 -> tradingUrl = "https://bit.ly/3dTUT1a" //dextools
-                    11 -> tradingUrl = "https://bit.ly/3hLf4iT" //unifarm
+                    0-> tradingUrl = "https://ico.lpesa.io"//Lpk Trading main website
+                    1 -> tradingUrl = "https://bit.ly/3hJYgsK" //coinmarketcap
+                    2 -> tradingUrl = "https://bit.ly/3jWjLcr" //coingecko
+                    3 -> tradingUrl = "https://bit.ly/3hqpzJH" //bscscan
+                    4 -> tradingUrl = "https://bit.ly/2UW8eQ0" //pancakeswap
+                    5 -> tradingUrl = "https://bit.ly/2Uyo0jz" //polygonscan
+                    6 -> tradingUrl = "https://bit.ly/3jVnS8r" //quickswap
+                    7 -> tradingUrl = "https://bit.ly/3dQwSrB" //SushiSwap
+                    8 -> tradingUrl = "https://bit.ly/34bxC5h" //etherscan
+                    9 -> tradingUrl = "https://bit.ly/3AFS1yv" //uniswap
+                    10 -> tradingUrl = "https://bit.ly/3hlNSID" //1inch
+                    11 -> tradingUrl = "https://bit.ly/3dTUT1a" //dextools
+                    12 -> tradingUrl = "https://bit.ly/3hLf4iT" //unifarm
                 }
                 (llLpkTrading.getChildAt(i) as CardView).setOnClickListener {
                     val uri = Uri.parse(tradingUrl)
@@ -174,7 +175,7 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
     override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
 
-        val sharedPrefOBJ= SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(requireActivity())
         val json = Gson().toJson(data)
         sharedPrefOBJ.lpkInfo= json
 
@@ -205,16 +206,16 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
 
     override fun onSessionTimeOut(message: String) {
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!, com.app.l_pesa.R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(requireActivity(), com.app.l_pesa.R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(activity!!)
+                    val sharedPrefOBJ= SharedPref(requireActivity())
                     sharedPrefOBJ.removeShared()
-                    startActivity(Intent(activity!!, MainActivity::class.java))
-                    activity!!.overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
-                    activity!!.finish()
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().overridePendingTransition(com.app.l_pesa.R.anim.right_in, com.app.l_pesa.R.anim.left_out)
+                    requireActivity().finish()
                 }
 
         val alert = dialogBuilder.create()
@@ -227,6 +228,6 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
         dismiss()
         constraintWithdrawal.isClickable=true
         constraintSavings.isClickable=true
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 }

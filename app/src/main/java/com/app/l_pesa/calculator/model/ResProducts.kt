@@ -22,6 +22,9 @@ class ResProducts {
         @SerializedName("product_list")
         @Expose
         var productList: ArrayList<ProductList>? = null
+        @SerializedName("is_dollar")
+        @Expose
+        var isDollar: Int = 0
 
     }
 
@@ -48,6 +51,9 @@ class ResProducts {
         @SerializedName("loan_amount")
         @Expose
         var loanAmount: Double = 0.0
+        @SerializedName("loan_amount_txt")
+        @Expose
+        var loanAmountTxt: String = ""
         @SerializedName("color_code")
         @Expose
         var colorCode: String = ""
@@ -132,6 +138,7 @@ class ResProducts {
         @SerializedName("discount_due")
         @Expose
         var discountDue: String = ""
+
 
     }
 

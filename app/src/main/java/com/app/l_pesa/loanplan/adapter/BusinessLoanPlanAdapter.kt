@@ -32,7 +32,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
         val viewHolder = holder as SelectViewHolder
 
         viewHolder.txtRequiredScore.text    = context.resources.getString(R.string.credit_score)+" "+loanPlanList[position].details!!.requiredCreditScore.toString()
-        viewHolder.txtLoanAmount.text       = "$"+format.format(loanPlanList[position].details!!.loanAmount).toString()
+        viewHolder.txtLoanAmount.text       = loanPlanList[position].details!!.loanAmountTxt
 
         if(loanPlanList[position].details!!.loanPeriodType=="D")
         {
@@ -108,7 +108,7 @@ class BusinessLoanPlanAdapter (val context: Context, private val loanPlanList: A
                 if(loanPlanList[position].details!!.btnStatus=="disable" && loanPlanList[position].details!!.productId==appliedProduct.productId)
                 {
                     val modelData=   GlobalLoanHistoryModel.getInstance()
-                    val loanData =   ResLoanHistoryCurrent.LoanHistory(appliedProduct.loanId,appliedProduct.identityNumber,appliedProduct.loanAmount,appliedProduct.interestRate,
+                    val loanData =   ResLoanHistoryCurrent.LoanHistory(appliedProduct.loanId,appliedProduct.identityNumber,appliedProduct.loanAmount,"",false,appliedProduct.interestRate,
                             appliedProduct.convertionDollarValue.toString(),appliedProduct.convertionLoanAmount.toString(),appliedProduct.actualLoanAmount.toString(),appliedProduct.appliedDate,
                             appliedProduct.sanctionedDate,appliedProduct.finishedDate,appliedProduct.disapproveDate,appliedProduct.loanStatus,appliedProduct.currencyCode,appliedProduct.dueDate,
                             appliedProduct.duration,appliedProduct.conversionCharge,appliedProduct.conversionChargeAmount,appliedProduct.loanPurposeMessage,appliedProduct.crScWhenRequestingLoan,

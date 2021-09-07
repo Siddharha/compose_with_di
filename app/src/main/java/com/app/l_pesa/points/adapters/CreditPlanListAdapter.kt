@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.points.ICallBackCreditPlan
-import com.app.l_pesa.points.view.CreditPlanResponse
+import com.app.l_pesa.points.inter.ICallBackCreditPlan
+import com.app.l_pesa.points.models.CreditPlanResponse
 import kotlinx.android.synthetic.main.credit_plan_list_cell.view.*
 
 class CreditPlanListAdapter (val context: Context, private val planlist: ArrayList<CreditPlanResponse.Data.Plan>, private val callBackCreditPlan: ICallBackCreditPlan) :RecyclerView.Adapter<RecyclerView.ViewHolder>() {

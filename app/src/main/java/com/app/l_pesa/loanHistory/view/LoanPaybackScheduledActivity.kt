@@ -21,7 +21,6 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.adapter.PaymentScheduleAdapter
 import com.app.l_pesa.loanHistory.inter.ICallBackPaybackSchedule
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
-import com.app.l_pesa.loanHistory.payment.PayUtil
 import com.app.l_pesa.loanHistory.presenter.PresenterPaybackSchedule
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger

@@ -66,15 +66,15 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
     private fun initData()
     {
         listInterestHistory= ArrayList()
-        adapterInterestHistory= AdapterInterestHistory(activity!!,listInterestHistory)
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        adapterInterestHistory= AdapterInterestHistory(requireActivity(),listInterestHistory)
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             loadInterestHistory("","","DEFAULT")
         }
         else
         {
             swipeRefreshLayout.isRefreshing = false
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
         }
     }
 
@@ -87,7 +87,7 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
         swipeRefreshLayout.isRefreshing = true
         val presenterInterestHistory = PresenterInterestHistory()
-        presenterInterestHistory.getInterestHistory(activity!!,from_date,to_date,type,this)
+        presenterInterestHistory.getInterestHistory(requireActivity(),from_date,to_date,type,this)
     }
 
     fun doFilter()
@@ -117,11 +117,11 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
             if(TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString()))
             {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.you_have_select_from_date_to_date))
+                CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.you_have_select_from_date_to_date))
             }
             else
             {
-                if(CommonMethod.isNetworkAvailable(activity!!))
+                if(CommonMethod.isNetworkAvailable(requireActivity()))
                 {
                     val fromDate=CommonMethod.dateConvertYMD(etFromDate.text.toString())
                     val toDate  =CommonMethod.dateConvertYMD(etToDate.text.toString())
@@ -131,7 +131,7 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
                 else
                 {
                     swipeRefreshLayout.isRefreshing = false
-                    CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                    CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
                 }
 
             }
@@ -167,13 +167,13 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-       CommonMethod.datePicker(activity!!,etFromDate)
+       CommonMethod.datePicker(requireActivity(),etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-       CommonMethod.datePicker(activity!!,etToDate)
+       CommonMethod.datePicker(requireActivity(),etToDate)
     }
 
     override fun onSuccessInterestHistory(userInterestHistory: ArrayList<ResInterestHistory.UserInterestHistory>?, cursors: ResInterestHistory.Cursors?, from_date: String, to_date: String) {
@@ -181,13 +181,13 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
         cardView.visibility=View.INVISIBLE
         rlList.visibility=View.VISIBLE
 
-        activity!!.runOnUiThread {
+        requireActivity().runOnUiThread {
 
             swipeRefreshLayout.isRefreshing = false
 
             listInterestHistory.clear()
             listInterestHistory.addAll(userInterestHistory!!)
-            adapterInterestHistory      = AdapterInterestHistory(activity!!, listInterestHistory)
+            adapterInterestHistory      = AdapterInterestHistory(requireActivity(), listInterestHistory)
             val llmOBJ                  = LinearLayoutManager(activity)
             rlList.layoutManager        = llmOBJ
             rlList.adapter              = adapterInterestHistory
@@ -235,7 +235,7 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
     private fun loadMore(from_date: String, to_date: String)
     {
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             val loadModel  = ResInterestHistory.UserInterestHistory(0,0,0,"",
                             "","","",
@@ -246,12 +246,12 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
 
 
             val presenterInterestHistory = PresenterInterestHistory()
-            presenterInterestHistory.getInterestHistoryPaginate(activity!!,after,from_date,to_date,this)
+            presenterInterestHistory.getInterestHistoryPaginate(requireActivity(),after,from_date,to_date,this)
 
         }
         else{
             swipeRefreshLayout.isRefreshing = false
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
         }
     }
 
@@ -275,6 +275,6 @@ class EarnedInterestFragment : Fragment(), ICallBackInterestHistory {
         rlList.visibility=View.INVISIBLE
         cardView.visibility=View.INVISIBLE
         swipeRefreshLayout.isRefreshing = false
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 }

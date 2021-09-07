@@ -243,7 +243,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
                     buttonSubmit.isEnabled = false
                     loanApply()
                 } else {
-                    CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.please_wait))
+                    CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.location_not_available))
                 }
 
             }

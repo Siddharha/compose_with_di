@@ -15,6 +15,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.provider.Settings
 import android.text.Spannable
@@ -48,6 +49,7 @@ import com.google.gson.JsonObject
 import id.zelory.compressor.Compressor
 import kotlinx.android.synthetic.main.activity_registration_step_five.*
 import kotlinx.android.synthetic.main.layout_registration_step_five.*
+import org.jetbrains.anko.longToast
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -135,17 +137,26 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 //
 //        startActivityForResult(captureIntent, requestPhoto)
 
-        val intent_cam = Intent(this, CamViewActivity::class.java)
-        intent_cam.putExtra(CamUtil.CAM_FACING, 1)
+        try {
+            val intent_cam = Intent(this, CamViewActivity::class.java)
+            intent_cam.putExtra(CamUtil.CAM_FACING, 1)
 //        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
 //        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
 //        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
 
-        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
-        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,Color.WHITE)
-        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,Color.WHITE)
+            intent_cam.putExtra(
+                CamUtil.CAPTURE_BTN_COLOR,
+                ContextCompat.getColor(this, R.color.colorApp)
+            )
+            intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR, Color.WHITE)
+            intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR, Color.WHITE)
 
-        startActivityForResult(intent_cam,requestPhoto)
+            startActivityForResult(intent_cam, requestPhoto)
+        }catch (e:Exception){
+            Toast.makeText(this, e.message!!, Toast.LENGTH_SHORT).show()
+        }finally {
+            //this.longToast("Unable to capture image! try again.")
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -168,17 +179,18 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         try {
             if(photoPath!=Uri.EMPTY)
             {
-                progressDialog.show()
+                //progressDialog.show()
                 handleRotation(photoFile.absolutePath)
-                Handler().postDelayed({
-                    dismiss()
-                    imageCard.setBackgroundResource(R.drawable.bg_button_green)
-                   // imageCard.setImageURI(null)
-                    //imageCard.setImageURI(photoPath)
-                    Glide.with(this).load(photoFile).into(imageCard)
-                    captureImageStatus       = true
-                    photoFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(photoFile)
-                }, 2000)
+                imageCard.setBackgroundResource(R.drawable.bg_button_green)
+                // imageCard.setImageURI(null)
+                //imageCard.setImageURI(photoPath)
+                Glide.with(this).load(photoFile).into(imageCard)
+                captureImageStatus       = true
+                photoFile   = Compressor(this@RegistrationStepFiveActivity).compressToFile(photoFile)
+//                Handler(Looper.getMainLooper()).postDelayed({
+//                    dismiss()
+//
+//                }, 2000)
 
             }
             else

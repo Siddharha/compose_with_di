@@ -62,7 +62,7 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Plan Details")
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
-        txt_loan_product_price.text = fromHtml(resources.getString(R.string.loan_product)+"<font color='#333333'>"+" $"+format.format(globalLoanPlanModel!!.loanAmount).toString()+"</font>")
+        txt_loan_product_price.text = fromHtml(resources.getString(R.string.loan_product)+"<font color='#333333'>"+globalLoanPlanModel!!.currencyCode+" "+format.format(globalLoanPlanModel!!.loanAmount).toString()+"</font>")
         txt_interest_rate.text = fromHtml(resources.getString(R.string.interest_rate)+"<font color='#333333'>"+" "+globalLoanPlanModel.loanInterestRate.toString()+"%"+"</font>")
         txt_required_credit_score.text = fromHtml(resources.getString(R.string.required_credit_score)+"<font color='#333333'>"+ globalLoanPlanModel.requiredCreditScore.toString()+"</font>")
         txt_currency_conversion_rate.text = fromHtml(resources.getString(R.string.currency_conversion_rate)+"<font color='#333333'>"+" "+ globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.convertionDollarValue)+"</font>")

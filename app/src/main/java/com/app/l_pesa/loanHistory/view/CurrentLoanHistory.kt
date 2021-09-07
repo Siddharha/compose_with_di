@@ -68,7 +68,7 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
 
         buttonApplyLoan.setOnClickListener {
 
-            val sharedPref = SharedPref(activity!!)
+            val sharedPref = SharedPref(requireActivity())
             sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
             sharedPref.openTabLoan = "CURRENT"
             val intent = Intent(activity, DashboardActivity::class.java)
@@ -80,9 +80,9 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog = ProgressDialog(requireActivity(),R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
-        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
@@ -104,12 +104,12 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
     private fun loadHistory(from_date: String, to_date: String,type:String)
     {
         listLoanHistoryCurrent       = ArrayList()
-        adapterLoanHistory           = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
+        adapterLoanHistory           = CurrentLoanHistoryAdapter(requireActivity(), listLoanHistoryCurrent!!,this)
         bottomSheetBehavior          = BottomSheetBehavior.from<View>(bottom_sheet)
         bottomSheetBehavior.isHideable=true
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
 
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             val logger = AppEventsLogger.newLogger(activity)
             val params =  Bundle()
@@ -120,12 +120,12 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistory(activity!!,jsonObject,from_date,to_date,type,"",this)
+            presenterLoanHistory.getLoanHistory(requireActivity(),jsonObject,from_date,to_date,type,"",this)
 
         }
         else
         {
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
                 swipeRefreshLayout.isRefreshing = false
 
         }
@@ -172,7 +172,7 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
         buttonFilterSubmit.setOnClickListener {
 
             if (TextUtils.isEmpty(etFromDate.text.toString()) && TextUtils.isEmpty(etToDate.text.toString())) {
-                CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.you_have_select_from_date_to_date))
+                CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.you_have_select_from_date_to_date))
             } else {
 
                 val fromDate = CommonMethod.dateConvertYMD(etFromDate.text.toString())
@@ -212,13 +212,13 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
     @SuppressLint("SetTextI18n")
     private fun showDatePickerFrom()
     {
-        CommonMethod.datePicker(activity!!,etFromDate)
+        CommonMethod.datePicker(requireActivity(),etFromDate)
     }
 
     @SuppressLint("SetTextI18n")
     private fun showDatePickerTo()
     {
-        CommonMethod.datePicker(activity!!,etToDate)
+        CommonMethod.datePicker(requireActivity(),etToDate)
     }
 
 
@@ -227,15 +227,15 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
         cardView.visibility  = View.GONE
         rvLoan.visibility    = View.VISIBLE
 
-        activity!!.runOnUiThread {
+        requireActivity().runOnUiThread {
             hasNext =cursors.hasNext
             after   =cursors.after
             swipeRefreshLayout.isRefreshing = false
-            val shared=SharedPref(activity!!)
+            val shared=SharedPref(requireActivity())
             shared.userCreditScore=user_credit_score.toString()
             listLoanHistoryCurrent!!.clear()
             listLoanHistoryCurrent!!.addAll(loan_historyCurrent)
-            adapterLoanHistory          = CurrentLoanHistoryAdapter(activity!!, listLoanHistoryCurrent!!,this)
+            adapterLoanHistory          = CurrentLoanHistoryAdapter(requireActivity(), listLoanHistoryCurrent!!,this)
             val llmOBJ                  = LinearLayoutManager(activity)
             llmOBJ.orientation          = RecyclerView.VERTICAL
             rvLoan.layoutManager        = llmOBJ
@@ -306,9 +306,9 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
     private fun loadMore(from_date: String, to_date: String)
     {
 
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
-            val loanStatusModel  = ResLoanHistoryCurrent.LoanHistory(0,"",0.0,"",
+            val loanStatusModel  = ResLoanHistoryCurrent.LoanHistory(0,"",0.0,"",false,"",
                                     "","","",
                                     "","","","","",
                                     "","","","","","","","","","")
@@ -318,7 +318,7 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanHistory= PresenterLoanHistory()
-            presenterLoanHistory.getLoanHistoryPaginate(activity!!,jsonObject,from_date,to_date,after,this)
+            presenterLoanHistory.getLoanHistoryPaginate(requireActivity(),jsonObject,from_date,to_date,after,this)
 
         }
 
@@ -342,15 +342,15 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
     override fun onRemoveLoan(position: Int, loanHistoryCurrent: ResLoanHistoryCurrent.LoanHistory)
     {
 
-        val dialog = AlertDialog.Builder(activity!!)
+        val dialog = AlertDialog.Builder(requireActivity())
 
-        val font = ResourcesCompat.getFont(activity!!, R.font.montserrat)
-        val taskEditText    = CommonEditTextRegular(activity!!)
+        val font = ResourcesCompat.getFont(requireActivity(), R.font.montserrat)
+        val taskEditText    = CommonEditTextRegular(requireActivity())
         taskEditText.typeface=font
-        taskEditText.setTextColor(ContextCompat.getColor(activity!!,R.color.colorTextBlackLight))
-        val textInputLayout = TextInputLayout(activity!!)
+        taskEditText.setTextColor(ContextCompat.getColor(requireActivity(),R.color.colorTextBlackLight))
+        val textInputLayout = TextInputLayout(requireActivity())
 
-        val container =  FrameLayout(activity!!)
+        val container =  FrameLayout(requireActivity())
         val  params   =  FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
         params.setMargins(resources.getDimensionPixelOffset(R.dimen._15sdp), 0, resources.getDimensionPixelOffset(R.dimen._15sdp), 0)
@@ -365,11 +365,11 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
 
                     if(TextUtils.isEmpty(taskEditText.text.toString().trim()))
                     {
-                        CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_cancellation_reason))
+                        CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.required_cancellation_reason))
                     }
                     else
                     {
-                        if(CommonMethod.isNetworkAvailable(activity!!))
+                        if(CommonMethod.isNetworkAvailable(requireActivity()))
                         {
                             dialog.dismiss()
                             progressDialog.show()
@@ -380,12 +380,12 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
                             jsonObject.addProperty("cancel_reason",taskEditText.text.toString())
 
                             val presenterLoanHistory=PresenterLoanHistory()
-                            presenterLoanHistory.cancelLoanHistory(activity!!,jsonObject,this,position)
+                            presenterLoanHistory.cancelLoanHistory(requireActivity(),jsonObject,this,position)
                         }
                         else
                         {
                             dialog.dismiss()
-                            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+                            CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
                         }
                     }
 
@@ -406,21 +406,21 @@ class CurrentLoanHistory: Fragment(), ICallBackCurrentLoanHistory {
 
     override fun onFailureRemoveLoan(message: String) {
         dismissDialog()
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 
     override fun onSessionTimeOut(message: String) {
         dismissDialog()
-        val dialogBuilder = AlertDialog.Builder(activity!!, R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(requireActivity(), R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(activity!!)
+                    val sharedPrefOBJ= SharedPref(requireActivity())
                     sharedPrefOBJ.removeShared()
-                    startActivity(Intent(activity!!, MainActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    activity!!.finish()
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    requireActivity().finish()
                 }
 
         val alert = dialogBuilder.create()

@@ -1,12 +1,12 @@
 package com.app.l_pesa.points.view
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,15 +14,16 @@ import com.app.l_pesa.API.BaseService
 import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.common.toast
-import com.app.l_pesa.points.ICallBackCreditPlan
+import com.app.l_pesa.points.inter.ICallBackCreditPlan
 import com.app.l_pesa.points.adapters.CreditPlanListAdapter
 import com.app.l_pesa.points.models.ApplyCreditPlanPayload
+import com.app.l_pesa.points.models.CreditPlanResponse
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bottom_sheet_apply_credit_plan.view.*
 import kotlinx.android.synthetic.main.fragment_plans.view.*
+import org.jetbrains.anko.longToast
 
 class PlansFragment : Fragment(), ICallBackCreditPlan {
 
@@ -44,6 +45,13 @@ class PlansFragment : Fragment(), ICallBackCreditPlan {
     }
 
     private fun onActionPerform() {
+
+        rootView.apply {
+            swPlans.setOnRefreshListener {
+                planList.clear()
+                getAllPlans()
+            }
+        }
         bottomSheetBehavior.addBottomSheetCallback(object :
                 BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -61,6 +69,10 @@ class PlansFragment : Fragment(), ICallBackCreditPlan {
                 }
             }
         })
+
+        rootView.flLayer.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 
     private fun initialize(){
@@ -82,6 +94,11 @@ class PlansFragment : Fragment(), ICallBackCreditPlan {
 
                 }
                 .subscribe { response ->
+                    rootView.apply {
+                        if(swPlans.isRefreshing){
+                            swPlans.isRefreshing = false
+                        }
+                    }
                     if(response.status.isSuccess){
                         planList.clear()
                         planList.addAll(response.data.plans)
@@ -118,23 +135,53 @@ class PlansFragment : Fragment(), ICallBackCreditPlan {
 
     @SuppressLint("CheckResult")
     private fun applyCreditPlan(itm: CreditPlanResponse.Data.Plan) {
-        val creditApplyPayload = ApplyCreditPlanPayload(itm.price, itm.creditScore.toString())
+        val creditApplyPayload = ApplyCreditPlanPayload(itm.id.toString())
         RetrofitHelper.getRetrofitToken(BaseService::class.java, pref.accessToken).applyCreditPlan(creditApplyPayload)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map { responseBody ->
-                    responseBody
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { responseBody ->
+                responseBody
+            }
+            .subscribe ({ response ->
 
+                try{
+                                if(response.status.isSuccess){
+                                    //planList.clear()
+                                        val msg = response.status.message
+                                    showAlertMsg(msg)
+                                }else{
+                                    val msg = response.status.message
+                                    showAlertMsg(msg)
+                                }
+                }catch (e:Exception){
+                    e.printStackTrace()
                 }
-                .subscribe { response ->
-    //                            if(response.status.isSuccess){
-    //                                planList.clear()
-    //                                planList.addAll(response.data.plans)
-    //                                creditPlanListAdapter.notifyDataChanged()
-    //                            }
                     //rootView.tvDisplay.text = response.toString()
 
-                }
+                },
+                    { error ->
+                        requireContext().longToast(error.localizedMessage!!)
+                        //                            if(response.status.isSuccess){
+                        //                                planList.clear()
+                        //                                planList.addAll(response.data.plans)
+                        //                                creditPlanListAdapter.notifyDataChanged()
+                        //                            }
+                        //rootView.tvDisplay.text = response.toString()
+
+                    })
+    }
+
+    private fun showAlertMsg(msg: String) {
+        val alert = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        alert.apply {
+            setMessage(msg)
+            setCancelable(false)
+            setPositiveButton("Dismiss") { d, _ ->
+                d.dismiss()
+            }
+
+        }
+        alert.create().show()
     }
 
 

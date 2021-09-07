@@ -25,7 +25,9 @@ import com.app.l_pesa.otpview.model.ResSetOTP
 import com.app.l_pesa.pin.model.*
 import com.app.l_pesa.pinview.model.ResSetPin
 import com.app.l_pesa.points.models.ApplyCreditPlanPayload
-import com.app.l_pesa.points.view.CreditPlanResponse
+import com.app.l_pesa.points.models.ApplyCreditResponse
+import com.app.l_pesa.points.models.CreditPlanHistoryResponse
+import com.app.l_pesa.points.models.CreditPlanResponse
 import com.app.l_pesa.profile.model.*
 import com.app.l_pesa.profile.model.statement.StatementDeleteResponse
 import com.app.l_pesa.profile.model.statement.StatementAddResponse
@@ -271,7 +273,11 @@ interface BaseService{
     fun getAllCreditPlans():Observable<CreditPlanResponse>
 
     @POST("buy_credit_score/apply")
-    fun applyCreditPlan(@Body request: ApplyCreditPlanPayload):Observable<Any>
+    fun applyCreditPlan(@Body request: ApplyCreditPlanPayload):Observable<ApplyCreditResponse>
+
+    @GET("buy_credit_score/user_list")
+    fun getAllCreditPlanHistory(@Query("cursors") cursor:String,@Query("from_date") fromDate:String,
+                                @Query("to_date") toDate:String,@Query("ref_no") refNo:String):Observable<CreditPlanHistoryResponse>
 }
 
 

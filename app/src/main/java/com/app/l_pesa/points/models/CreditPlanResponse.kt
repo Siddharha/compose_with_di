@@ -1,4 +1,4 @@
-package com.app.l_pesa.points.view
+package com.app.l_pesa.points.models
 import com.google.gson.annotations.SerializedName
 
 

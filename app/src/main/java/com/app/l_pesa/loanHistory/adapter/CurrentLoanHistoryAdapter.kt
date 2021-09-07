@@ -84,7 +84,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
             format.isDecimalSeparatorAlwaysShown = false
 
             itemView.txt_loan_no.text=loanHistoryCurrent.identity_number
-            itemView.txt_loan_amount.text="$"+format.format(loanHistoryCurrent.loan_amount).toString()
+            itemView.txt_loan_amount.text=loanHistoryCurrent.loan_amount_txt
             itemView.txt_interest_rate.text=loanHistoryCurrent.interest_rate
 
             when {

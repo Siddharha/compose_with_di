@@ -109,7 +109,8 @@
     <string name="no_internet">You are not connected to the internet!</string>
     <string name="image_not_found">Image file not found</string>
     <string name="you_have_select_from_date_to_date">Select at least one date to filter.</string>
-    <string name="please_wait">Please wait...</string>
+    <string name="please_wait">Please wait..</string>
+    <string name="location_not_available">Unable to get user location. please make sure you enabled gps.</string>
     <string name="no_internet_details">You are not connected to internet, make sure Wi-Fi/Data is on, Airplane mode is off and try again.</string>
     <string name="retry">Retry</string>
     <string name="init">INIT</string>
@@ -542,5 +543,6 @@
     <string name="sasa_logo_url">https://play-lh.googleusercontent.com/nSizQBW5A6z19AHpKBYxKBoTLG9kQ9Sn80ixHpP7PgEmx1MJciKa002aFzYCxIjPpVs=s200-rw</string>
     <string name="nav_item_buy_credit">Buy Points</string>
     <string name="how_it_works_points">Purchase your L-Pesa Credit Score Points L-Pesa is a progressive finance platform that has grown in popularity due to its micro loans. This product offerings have made it possible for people from all walks of life to access finance, so that they can build up their finances and improve their quality of life. In line with always offering L-Pesa customers the latest financial products, it is now possible to purchase credit points to add to your l-pesa credit score rating.  $100 Loan - Be a Preferred Customer in a seconds.  It is now easier to become an L-Pesa Preferred Customer in a seconds. Typically, you would need to accumulate your credit score points following several successful transactions to attain Preferred Customer status. Now, you can accelerate your points accumulation by choosing to purchase between 1 to 32 points.  The higher your L-Pesa credit score, the easier it is for you to become a Preferred Customer and get access to larger loans in record time. Each member now has the opportunity to purchase a credit score points. With 100 credit score points, you can become an L-Pesa Preferred Customer within a secounds. As a Preferred Customer, it becomes possible to take advantage of a starting loan package worth $100. This value is much higher than the $1 you would start with as a normal customer. Furthermore, the weekly repayment amount is only $7 Once you have completed the repayment of the $100 loan, your loan package will increase three fold, allowing you access up to $700.  Finding a financing initiative that is as generous as L-Pesa anywhere else is close to impossible.  *Convert the USD amounts to TZS for better understanding.  Update your profile and add Credit Score Points ?Update your profile now!  How to pay your SMS Buy Points Bill payment to L-Pesa:  Dial *150*01# from Tigo-Pesa number, menu comes, select 4 (Pay Bill) after that another menu comes, select 3 (Business Number) and L-Pesa Business Number is 302600, after that you will be required to add your loan reference number, (You received it with SMS Bill Repayment SMS) THEN AMOUNT (add the exact amount on the SMS) Then go on to finalize the transaction by placing your Tigo-Pesa PIN.</string>
+    <string name="unable_to_verify_id">Unable to verify ID number!</string>
 
 </resources>

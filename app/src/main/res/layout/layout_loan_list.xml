@@ -60,6 +60,7 @@
                     android:id="@+id/txtLoanAmount"
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="@dimen/_45sdp"
+                    android:padding="@dimen/_2sdp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_aquamarine_circle"

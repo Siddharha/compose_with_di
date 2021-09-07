@@ -23,7 +23,7 @@ class LoanProductAdapter(val context: Context, private val listData: ArrayList<R
         val viewHolder = holder as SelectViewHolder
         val format = DecimalFormat()
         format.isDecimalSeparatorAlwaysShown = false
-        viewHolder.titleText.text = "$ "+format.format(listData[position].loanAmount)
+        viewHolder.titleText.text = listData[position].loanAmountTxt
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()
             callBack.onClickProduct(listData[position],product)

@@ -86,15 +86,15 @@
                         android:id="@+id/txt_loan_no"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textSize="@dimen/_10sdp"
-                        android:textColor="?android:textColorPrimary"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_toEndOf="@+id/txt_loan"
+                        android:fontFamily="@font/montserrat"
                         android:gravity="center|start"
                         android:paddingStart="@dimen/_1sdp"
                         android:paddingEnd="@dimen/_1sdp"
-                        android:fontFamily="@font/montserrat"
-                        tools:text="11000332"/>
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/_10sdp"
+                        tools:text="11000332" />
 
                 </RelativeLayout>
 
@@ -118,15 +118,15 @@
                         android:id="@+id/txt_loan_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:textColor="?android:textColorPrimary"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:textSize="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/txt_amount"
+                        android:fontFamily="@font/montserrat"
                         android:gravity="center|start"
                         android:paddingStart="@dimen/_1sdp"
                         android:paddingEnd="@dimen/_1sdp"
-                        android:fontFamily="@font/montserrat"
-                        tools:text="$2.00 "/>
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/_10sdp"
+                        tools:text="$2.00 " />
 
                 </RelativeLayout>
 

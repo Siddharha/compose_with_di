@@ -165,6 +165,9 @@ class ResLoanPlans {
         @SerializedName("loan_amount")
         @Expose
         var loanAmount: Double = 0.0
+        @SerializedName("loan_amount_txt")
+        @Expose
+        var loanAmountTxt: String=""
         @SerializedName("loan_period")
         @Expose
         var loanPeriod: Int = 0

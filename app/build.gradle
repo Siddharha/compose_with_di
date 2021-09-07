@@ -60,7 +60,7 @@ android {
             buildConfigField("String", 'BUSINESS_IMAGE_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/business/"')
             buildConfigField("String", 'STATEMENT_PDF_URL', '"https://d2yh190ggw1qg8.cloudfront.net/uploads/statements/"')
             buildConfigField("String", 'BASE_URL', '"http://api-dev.l-pesa.com/v2/"')
-            //buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
+   //         buildConfigField("String", 'BASE_URL', '"http://api-live.l-pesa.com/v2/"')
             //"http://api-live.l-pesa.com/v2/"
             /* buildConfigField("String", 'BASE_URL', '"http://40.76.68.66/v2/"') //http://20.36.32.60*/
             /*buildConfigField("String", 'BASE_URL_DEV', '"http://api-dev.l-pesa.com/v2/"')*/

@@ -1,21 +1,18 @@
-package com.app.l_pesa.loanHistory.adapter
+package com.app.l_pesa.points.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory
-import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
-import com.app.l_pesa.loanHistory.model.ResLoanHistoryBusiness
-import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
-import kotlinx.android.synthetic.main.layout_loan_history.view.*
+import com.app.l_pesa.points.models.CreditPlanHistoryResponse
+import com.app.l_pesa.points.inter.ICallBackCreditPlanHistory
+import kotlinx.android.synthetic.main.layout_credit_loan_history.view.*
 import java.text.DecimalFormat
 
-class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryCurrentList: ArrayList<ResLoanHistoryBusiness.LoanHistory>, private val callBackBusiness: ICallBackBusinessLoanHistory) :RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PurchaseCreditHistoryListAdapter (val context: Context, private val creditLoanHistoryCurrentList: ArrayList<CreditPlanHistoryResponse.Data.UserBuyPoints>, private val callBackCreditHistory: ICallBackCreditPlanHistory) :RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     private lateinit var        loadMoreListener    : OnLoadMoreListener
@@ -27,7 +24,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
         val inflater = LayoutInflater.from(context)
         return if (viewType == 0)
         {
-            UserViewHolder(inflater.inflate(R.layout.layout_loan_history, parent, false))
+            UserViewHolder(inflater.inflate(R.layout.layout_credit_loan_history, parent, false))
         } else {
             LoadingViewHolder(inflater.inflate(R.layout.layout_load_more, parent, false))
         }
@@ -42,14 +39,14 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
         }
 
         if (getItemViewType(position) == 0) {
-            (holder as UserViewHolder).bindData(context, loanHistoryCurrentList[position],callBackBusiness,position)
+            (holder as UserViewHolder).bindData(context, creditLoanHistoryCurrentList[position],callBackCreditHistory,position)
 
         }
     }
 
     override fun getItemViewType(position: Int): Int
     {
-        return if(loanHistoryCurrentList[position].loan_id!=0){
+        return if(creditLoanHistoryCurrentList[position].id!=0){
             0
         }else{
             1
@@ -57,7 +54,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
     }
 
     override fun getItemCount(): Int {
-        return loanHistoryCurrentList.size
+        return creditLoanHistoryCurrentList.size
     }
 
 
@@ -79,16 +76,19 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
 
 
         @SuppressLint("SetTextI18n", "CheckResult", "SimpleDateFormat")
-        fun  bindData(context: Context, loanHistoryBusiness: ResLoanHistoryBusiness.LoanHistory, callBackCurrent: ICallBackBusinessLoanHistory,position: Int)
+        fun  bindData(context: Context, creditPlanHistory: CreditPlanHistoryResponse.Data.UserBuyPoints, iCallBackCreditPlanHistory: ICallBackCreditPlanHistory, position: Int)
         {
             val format = DecimalFormat()
             format.isDecimalSeparatorAlwaysShown = false
 
-            itemView.txt_loan_no.text=loanHistoryBusiness.identity_number
-            itemView.txt_loan_amount.text=loanHistoryBusiness.loan_amount_txt
-            itemView.txt_interest_rate.text=loanHistoryBusiness.interest_rate
 
-            when {
+            itemView.tvTitle.text = creditPlanHistory.bpTitle
+            itemView.tvAmount.text =  creditPlanHistory.currencyCode+" " + creditPlanHistory.buyPointAmount.toString()
+//            itemView.txt_loan_no.text=loanHistoryBusiness.identity_number
+//            itemView.txt_loan_amount.text="$"+format.format(loanHistoryBusiness.loan_amount).toString()
+//            itemView.txt_interest_rate.text=loanHistoryBusiness.interest_rate
+
+          /*  when {
                 loanHistoryBusiness.loan_status=="A" -> {
                     itemView.txt_applied_on_date.text=loanHistoryBusiness.sanctioned_date
                     itemView.txt_applied_on.text = context.resources.getString(R.string.approved_on)
@@ -136,19 +136,19 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
 
                     itemView.img_delete.visibility=View.INVISIBLE
                 }
-            }
+            }*/
 
 
-            val modelData           = GlobalLoanHistoryModel.getInstance()
+        //    val modelData           = GlobalLoanHistoryModel.getInstance()
 
 
-            itemView.ll_card_left.setOnClickListener {
+       /*     itemView.ll_card_left.setOnClickListener {
 
-                val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.loan_amount_txt,loanHistoryBusiness.currency_flag,loanHistoryBusiness.interest_rate,
-                        loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
-                        loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
-                        loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
-                        loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
+                val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.interest_rate,
+                    loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
+                    loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
+                    loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
+                    loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
 
                 modelData.modelData=modelDataBusiness
                 callBackCurrent.onClickList()
@@ -156,11 +156,11 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
 
             itemView.rl_card_right.setOnClickListener {
 
-                val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.loan_amount_txt,loanHistoryBusiness.currency_flag,loanHistoryBusiness.interest_rate,
-                        loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
-                        loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
-                        loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
-                        loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
+                val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.interest_rate,
+                    loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
+                    loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
+                    loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
+                    loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
 
                 modelData.modelData=modelDataBusiness
                 callBackCurrent.onClickList()
@@ -175,17 +175,17 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                 }
                 else
                 {
-                    val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.loan_amount_txt,loanHistoryBusiness.currency_flag,loanHistoryBusiness.interest_rate,
-                            loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
-                            loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
-                            loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
-                            loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
+                    val modelDataBusiness   = ResLoanHistoryCurrent.LoanHistory(loanHistoryBusiness.loan_id,loanHistoryBusiness.identity_number,loanHistoryBusiness.loan_amount,loanHistoryBusiness.interest_rate,
+                        loanHistoryBusiness.convertion_dollar_value,loanHistoryBusiness.convertion_loan_amount,loanHistoryBusiness.actual_loan_amount,loanHistoryBusiness.applied_date,
+                        loanHistoryBusiness.sanctioned_date,loanHistoryBusiness.finished_date,loanHistoryBusiness.disapprove_date,loanHistoryBusiness.loan_status,loanHistoryBusiness.currency_code,loanHistoryBusiness.due_date,
+                        loanHistoryBusiness.duration,loanHistoryBusiness.conversion_charge,loanHistoryBusiness.conversion_charge_amount,loanHistoryBusiness.loan_purpose_message,loanHistoryBusiness.cr_sc_when_requesting_loan,
+                        loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
 
                     modelData.modelData=modelDataBusiness
                     callBackCurrent.onClickList()
                 }
 
-            }
+            }*/
 
 
         }

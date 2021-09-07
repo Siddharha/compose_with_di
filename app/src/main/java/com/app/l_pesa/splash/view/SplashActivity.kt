@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -28,6 +29,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.activity_splash.rootLayout
 import kotlinx.android.synthetic.main.activity_splash.txtHeader
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
@@ -97,7 +100,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     private fun loadNext() {
 
      //   val sharedPrefOBJ = SharedPref(this@SplashActivity)
-        if (sharedPrefOBJ.countryList == resources.getString(R.string.init)) {
+        if (sharedPrefOBJ.countryList == resources.getString(R.string.init) || sharedPrefOBJ.countryList.isEmpty()) {
             if (CommonMethod.isNetworkAvailable(this@SplashActivity)) {
                 loadCountry()
             } else {
@@ -126,7 +129,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     }
 
     private fun splashLoading() {
-        Handler().postDelayed({
+        Handler(Looper.myLooper()!!).postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
@@ -139,17 +142,15 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         txtHeader.visibility = View.INVISIBLE
         buttonRetry.visibility = View.INVISIBLE
         progressBar.visibility = View.VISIBLE
+        val presenterCountry = PresenterCountry()
+            presenterCountry.getCountry(this@SplashActivity, this@SplashActivity)
 
-        Thread(Runnable {
-            val presenterCountry = PresenterCountry()
-            presenterCountry.getCountry(this@SplashActivity, this)
-        }).start()
+
 
 
     }
 
     override fun onSuccessCountry(countries_list: ResModelData) {
-
         val json = Gson().toJson(countries_list)
     //    val sharedPrefOBJ = SharedPref(this@SplashActivity)
         //sharedPrefOBJ.countryList = ""    //TEST CLEAR

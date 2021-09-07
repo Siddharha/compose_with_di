@@ -59,18 +59,33 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY, loanHistoryData?.currency_code)
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
-        txt_loan_product_price.text=" $"+loanHistoryData!!.loan_amount
+        txt_loan_product_price.text=loanHistoryData!!.loan_amount_txt
         txt_loan_no_val.text = loanHistoryData.identity_number
         txt_interest_rate.text = loanHistoryData.interest_rate
         txt_loan_amount_value.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.actual_loan_amount.toDouble()).toString()
         txt_request_date.text = loanHistoryData.applied_date
 
         txt_loan_duration.text = loanHistoryData.duration
-        txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.convertion_dollar_value.toDouble()).toString()
-        txt_currency_conversion.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.convertion_loan_amount.toDouble()).toString()
+
+        if(loanHistoryData.convertion_dollar_value.isEmpty()){
+            txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+"0"
+        }else if(!loanHistoryData.currency_flag){
+            txt_currency_conversion_rate.text = "n/a"
+        } else{
+            txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.convertion_dollar_value.toDouble()).toString()
+        }
+
+        if(!loanHistoryData.currency_flag){
+            txt_currency_conversion.text = "n/a"
+            txt_conversion_charge.text = "n/a"
+        }else{
+            txt_currency_conversion.text = loanHistoryData.currency_code+" "+format.format(loanHistoryData.convertion_loan_amount.toDouble()).toString()
+            txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+" "+ format.format(loanHistoryData.conversion_charge_amount.toDouble()).toString()+")"
+        }
+
         txt_processing_fee.text = loanHistoryData.processing_fees+" ("+loanHistoryData.currency_code+" "+format.format(loanHistoryData.processing_fees_amount.toDouble()).toString()+")"
         txt_purpose.text = loanHistoryData.loan_purpose_message
-        txt_conversion_charge.text = loanHistoryData.conversion_charge+" ("+loanHistoryData.currency_code+" "+ format.format(loanHistoryData.conversion_charge_amount.toDouble()).toString()+")"
+
 
         txt_credit_score.text =  fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+shared.userCreditScore+"</font>")
         txt_credit_score_at_time.text = fromHtml(resources.getString(R.string.previous_credit_score)+"<font color='#333333'>"+loanHistoryData.cr_sc_when_requesting_loan+"</font>")
