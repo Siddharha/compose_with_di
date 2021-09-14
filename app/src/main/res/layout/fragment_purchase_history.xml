@@ -13,5 +13,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
+<TextView
+    android:id="@+id/tvNoHistory"
+    android:textSize="@dimen/_15sdp"
+    android:visibility="gone"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="No History found!"/>
 </FrameLayout>

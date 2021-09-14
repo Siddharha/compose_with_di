@@ -83,6 +83,8 @@ class PurchaseCreditHistoryListAdapter (val context: Context, private val credit
 
 
             itemView.tvTitle.text = creditPlanHistory.bpTitle
+            itemView.tvRefId.text = "Ref ID: "+creditPlanHistory.identityNumber
+            itemView.tvDate.text = creditPlanHistory.appliedDate
             itemView.tvAmount.text =  creditPlanHistory.currencyCode+" " + creditPlanHistory.buyPointAmount.toString()
 //            itemView.txt_loan_no.text=loanHistoryBusiness.identity_number
 //            itemView.txt_loan_amount.text="$"+format.format(loanHistoryBusiness.loan_amount).toString()

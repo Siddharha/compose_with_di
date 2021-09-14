@@ -120,6 +120,7 @@ class PurchaseHistoryFragment : Fragment(), ICallBackCreditPlanHistory {
                 srHistory.isRefreshing = false
             }
         }
+        rootView.tvNoHistory.visibility = View.GONE
         hasNext =cursors.hasNext
         after   =cursors.after
         if(creditLoanHistory.size!=0)
@@ -135,18 +136,44 @@ class PurchaseHistoryFragment : Fragment(), ICallBackCreditPlanHistory {
             catch (e:Exception)
             {}
         }
+
+        if(creditLoanHistory.isEmpty()) {
+            rootView.tvNoHistory.visibility = View.VISIBLE
+            rootView.tvNoHistory.text = "No History found!"
+        }else{
+            rootView.tvNoHistory.visibility = View.GONE
+        }
     }
 
     override fun onEmptyCreditHistory(type: String) {
-        TODO("Not yet implemented")
+        rootView.apply {
+            if (srHistory.isRefreshing){
+                srHistory.isRefreshing = false
+            }
+
+            if(creditLoanHistory.isEmpty()) {
+                rootView.tvNoHistory.visibility = View.VISIBLE
+                rootView.tvNoHistory.text = "No History found!"
+            }else{
+                rootView.tvNoHistory.visibility = View.GONE
+            }
+        }
     }
 
     override fun onFailureLoanHistory(jsonMessage: String) {
-        TODO("Not yet implemented")
+        rootView.apply {
+            if (srHistory.isRefreshing){
+                srHistory.isRefreshing = false
+            }
+            tvNoHistory.visibility = View.VISIBLE
+            tvNoHistory.text = jsonMessage
+        }
+
+
     }
 
     override fun onClickList() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onRemoveCredit(
@@ -154,7 +181,7 @@ class PurchaseHistoryFragment : Fragment(), ICallBackCreditPlanHistory {
         loanHistoryCredit: CreditPlanHistoryResponse.Data.UserBuyPoints
     ) {
         rootView.apply {
-            if (!srHistory.isRefreshing){
+            if (srHistory.isRefreshing){
                 srHistory.isRefreshing = false
             }
         }
@@ -162,7 +189,7 @@ class PurchaseHistoryFragment : Fragment(), ICallBackCreditPlanHistory {
 
     override fun onSuccessRemoveCredit(position: Int) {
         rootView.apply {
-            if (!srHistory.isRefreshing){
+            if (srHistory.isRefreshing){
                 srHistory.isRefreshing = false
             }
         }
@@ -170,7 +197,7 @@ class PurchaseHistoryFragment : Fragment(), ICallBackCreditPlanHistory {
 
     override fun onFailureRemoveCredit(message: String) {
         rootView.apply {
-            if (!srHistory.isRefreshing){
+            if (srHistory.isRefreshing){
                 srHistory.isRefreshing = false
             }
         }

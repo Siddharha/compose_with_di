@@ -34,7 +34,7 @@
                 android:gravity="center"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/textColors"
                 android:focusable="true"
                 android:textSize="@dimen/_10sdp"
                 android:textAllCaps="true"

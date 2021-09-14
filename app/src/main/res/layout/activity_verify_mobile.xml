@@ -33,7 +33,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:textAllCaps="true"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/textColors"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
                 android:visibility="invisible"

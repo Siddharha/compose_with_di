@@ -15,8 +15,12 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_lpk_savings.xml" value="0.11879432624113476" />
         <entry key="app/src/main/res/layout/activity_registration_step_five.xml" value="0.13405797101449277" />
+        <entry key="app/src/main/res/layout/activity_registration_step_four.xml" value="0.11574074074074074" />
+        <entry key="app/src/main/res/layout/activity_registration_step_one.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_registration_step_three.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_sasa_doctor.xml" value="0.24051282051282052" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.11879432624113476" />
+        <entry key="app/src/main/res/layout/activity_verify_mobile.xml" value="0.11574074074074074" />
         <entry key="app/src/main/res/layout/content_loan_history_details.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/content_loan_plan_details.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/content_lpk_savings.xml" value="0.11879432624113476" />
@@ -34,7 +38,7 @@
         <entry key="app/src/main/res/layout/fragment_token_transfer.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_token_withdrawal.xml" value="0.18795289855072464" />
         <entry key="app/src/main/res/layout/fragment_wallet_address.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/layout_credit_loan_history.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_credit_loan_history.xml" value="0.22" />
         <entry key="app/src/main/res/layout/layout_filter_by_date.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_investment_history_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_list_dashboard_loan.xml" value="0.24427083333333333" />
@@ -43,6 +47,8 @@
         <entry key="app/src/main/res/layout/layout_loan_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_popup_window_investment.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_registration_step_five.xml" value="0.11879432624113476" />
+        <entry key="app/src/main/res/layout/layout_registration_step_four.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_registration_step_three.xml" value="0.24427083333333333" />
       </map>
     </option>
   </component>

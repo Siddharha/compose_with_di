@@ -61,7 +61,6 @@
         <activity android:name=".allservices.views.SasaDoctorActivity" />
         <activity android:name=".settings.view.AppearanceAccountActivity" />
         <activity android:name=".profile.view.ProfileEditStatementInfoActivity" />
-        <activity android:name=".common.CamViewActivity" />
         <activity android:name=".registration.view.EmailVerifyActivity" />
         <activity
             android:name=".registration.view.VerifyMobileActivity"

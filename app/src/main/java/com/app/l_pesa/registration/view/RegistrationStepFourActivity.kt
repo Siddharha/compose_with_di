@@ -59,12 +59,20 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_four)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@RegistrationStepFourActivity)
         initialize()
+        onActionPerform()
         initLoader()
         getIdList()
         initUI()
 
+    }
+
+    private fun onActionPerform() {
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun initialize(){
@@ -169,7 +177,8 @@ class RegistrationStepFourActivity : AppCompatActivity(), ICallBackId, ICallBack
     }
 
     override fun onBackPressed() {
-
+        super.onBackPressed()
+        overridePendingTransition(R.anim.left_in, R.anim.right_out)
     }
 
     public override fun onResume() {

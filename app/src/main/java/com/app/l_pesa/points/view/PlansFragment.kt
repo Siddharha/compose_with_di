@@ -86,6 +86,12 @@ class PlansFragment : Fragment(), ICallBackCreditPlan {
 
     @SuppressLint("CheckResult")
     private fun getAllPlans() {
+        rootView.apply{
+            if(!swPlans.isRefreshing){
+                swPlans.isRefreshing = true
+            }
+        }
+
         RetrofitHelper.getRetrofitToken(BaseService::class.java,pref.accessToken).getAllCreditPlans()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
