@@ -129,17 +129,17 @@ dependencies {
     /* implementation 'com.amazonaws:aws-android-sdk-s3:2.13.5'
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.13.5'*/
 
-    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation(name:'sinch-android-verification-1.6.1', ext:'aar')
     implementation 'gun0912.ted:tedpermission:2.2.2'
     implementation 'org.jetbrains.anko:anko-common:0.9'
     implementation "androidx.multidex:multidex:$multidex_version"
-    implementation "com.google.android.gms:play-services-auth-api-phone:17.5.0"
+    implementation "com.google.android.gms:play-services-auth-api-phone:17.5.1"
     implementation ('com.haozhang.libary:android-slanted-textview:1.2'){
         exclude group: "com.android.support"
     }
     implementation 'sdk.zoop.one.offline_aadhaar:offline_aadhaar:1.0.7'
-    implementation 'com.github.Siddharha:CreativeCam:1.0.7'
+    implementation 'com.github.Siddharha:CreativeCam:1.1.0'
 
 
 }

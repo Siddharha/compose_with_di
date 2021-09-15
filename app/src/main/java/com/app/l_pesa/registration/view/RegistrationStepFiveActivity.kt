@@ -59,7 +59,7 @@ import kotlin.collections.set
 
 class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICallBackRegisterThree {
 
-    private val  requestPhoto               = 13
+    private val  requestPhoto               = 16
     private var  captureImageStatus         : Boolean    = false
     private lateinit var photoFile          : File
     private lateinit var captureFilePath    : Uri
@@ -137,26 +137,29 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 //
 //        startActivityForResult(captureIntent, requestPhoto)
 
-        try {
             val intent_cam = Intent(this, CamViewActivity::class.java)
+            //intent_cam.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
             intent_cam.putExtra(CamUtil.CAM_FACING, 1)
 //        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
 //        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
 //        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
 
-            intent_cam.putExtra(
-                CamUtil.CAPTURE_BTN_COLOR,
-                ContextCompat.getColor(this, R.color.colorApp)
-            )
-            intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR, Color.WHITE)
-            intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR, Color.WHITE)
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,ContextCompat.getColor(this,R.color.colorLightBlack))
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,ContextCompat.getColor(this,R.color.screenBackground))
 
             startActivityForResult(intent_cam, requestPhoto)
-        }catch (e:Exception){
-            Toast.makeText(this, e.message!!, Toast.LENGTH_SHORT).show()
-        }finally {
-            //this.longToast("Unable to capture image! try again.")
-        }
+
+
+//        val intent_cam = Intent(this, CamViewActivity::class.java)
+//       // intent_cam.flags = Intent.FLAG_ACTIVITY_NEW_TASK /*or Intent.FLAG_ACTIVITY_SINGLE_TOP*/
+//        intent_cam.putExtra(CamUtil.CAM_FACING,1)
+//        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,true)
+//        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
+//        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,Color.WHITE)
+//        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,Color.WHITE)
+//
+//        startActivityForResult(intent_cam,requestPhoto)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

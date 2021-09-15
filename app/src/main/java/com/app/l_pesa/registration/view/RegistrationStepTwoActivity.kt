@@ -132,11 +132,12 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         startActivityForResult(captureIntent, requestPhoto)*/
 
         val intent_cam = Intent(this, CamViewActivity::class.java)
+        //intent_cam.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
         intent_cam.putExtra(CamUtil.CAM_FACING,0)
         intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
         intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
-        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,Color.WHITE)
-        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,Color.WHITE)
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,ContextCompat.getColor(this,R.color.colorLightBlack))
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,ContextCompat.getColor(this,R.color.screenBackground))
 
         startActivityForResult(intent_cam,requestPhoto)
 
