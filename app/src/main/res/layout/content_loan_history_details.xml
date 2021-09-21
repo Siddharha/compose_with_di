@@ -118,9 +118,9 @@
                             android:layout_toEndOf="@+id/txt_loan_no"
                             android:paddingStart="@dimen/_2sdp"
                             android:paddingEnd="@dimen/_1sdp"
-                            android:textColor="@color/color_semi_deep_black"
+                            android:textColor="@color/text_color_blue"
                             android:textSize="@dimen/_12sdp"
-
+                            tools:text="vxcvxcv"
                             />
 
                     </RelativeLayout>
@@ -160,8 +160,9 @@
                             android:layout_toEndOf="@+id/text_interest_rate"
                             android:paddingStart="@dimen/_2sdp"
                             android:paddingEnd="@dimen/_1sdp"
-                            android:textColor="@color/color_semi_deep_black"
+                            android:textColor="@color/textColors"
                             android:textSize="@dimen/_12sdp"
+                            tools:text="vxcvxcv"
 
                             />
 
@@ -221,9 +222,9 @@
                                 android:id="@+id/txt_credit_score_at_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_gray_light"
+                                android:textColor="@color/textColors"
                                 android:textSize="@dimen/_12sdp"
-
+                                tools:text="vxcvxcv"
                                 />
 
                         </RelativeLayout>
@@ -272,8 +273,9 @@
                                 android:id="@+id/txt_credit_score"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/color_gray_light"
+                                android:textColor="@color/textColors"
                                 android:textSize="@dimen/_12sdp"
+                                tools:text="vxcvxcv"
 
                                 />
 
@@ -318,8 +320,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
+                        tools:text="vxcvxcv"
                         android:text="@string/actual_loan_amount"
-                        android:textColor="@color/color_semi_deep_black"
+                        android:textColor="@color/text_color_blue"
                         android:textSize="@dimen/_14sdp" />
 
                     <com.app.l_pesa.common.CommonTextRegular
@@ -328,7 +331,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txt_loan_amount"
                         android:gravity="center"
-                        android:textColor="@color/colorApp"
+                        tools:text="vxcvxcv"
+                        android:textColor="@color/textColors"
                         android:textSize="@dimen/_15sdp"
                         android:textStyle="bold" />
 
@@ -391,7 +395,8 @@
                                     android:id="@+id/txt_currency_conversion_rate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    tools:text="vxcvxcv"
+                                    android:textColor="@color/textColors"
                                     android:textSize="@dimen/_12sdp"
 
                                     />
@@ -450,7 +455,8 @@
                                     android:id="@+id/txt_currency_conversion"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    android:textColor="@color/textColors"
+                                    tools:text="vxcvxcv"
                                     android:textSize="@dimen/_12sdp"
 
                                     />
@@ -531,8 +537,9 @@
                                     android:id="@+id/txt_conversion_charge"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    android:textColor="@color/textColors"
                                     android:textSize="@dimen/_12sdp"
+                                    tools:text="vxcvxcv"
 
                                     />
 
@@ -590,8 +597,9 @@
                                     android:id="@+id/txt_processing_fee"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    android:textColor="@color/textColors"
                                     android:textSize="@dimen/_12sdp"
+                                    tools:text="vxcvxcv"
 
                                     />
 
@@ -673,8 +681,9 @@
                                     android:id="@+id/txt_request_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    android:textColor="@color/textColors"
                                     android:textSize="@dimen/_12sdp"
+                                    tools:text="vxcvxcv"
 
                                     />
 
@@ -734,9 +743,9 @@
                                     android:id="@+id/txt_approval_date"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    android:textColor="@color/textColors"
                                     android:textSize="@dimen/_12sdp"
-
+                                    tools:text="vxcvxcv"
                                     />
 
                             </LinearLayout>
@@ -815,9 +824,9 @@
                                     android:id="@+id/txt_loan_duration"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    android:textColor="@color/textColors"
                                     android:textSize="@dimen/_12sdp"
-
+                                    tools:text="vxcvxcv"
                                     />
 
                             </LinearLayout>
@@ -875,9 +884,9 @@
                                     android:id="@+id/txt_status"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/color_gray_text"
+                                    android:textColor="@color/textColors"
                                     android:textSize="@dimen/_12sdp"
-
+                                    tools:text="vxcvxcv"
                                     />
 
                             </LinearLayout>
@@ -896,7 +905,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rlLoanDate"
-                android:layout_margin="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/bg_white_view">
 
                 <RelativeLayout
@@ -920,8 +932,9 @@
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_toEndOf="@+id/img_purpose"
                         android:text="@string/loan_purpose"
-                        android:textColor="@color/color_semi_deep_black"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textColor="@color/textColors"
+                        android:textSize="@dimen/_12sdp"
+                        tools:text="vxcvxcv" />
                 </RelativeLayout>
 
                 <com.app.l_pesa.common.CommonTextRegular
@@ -930,9 +943,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rl_purpose_header"
                     android:padding="@dimen/_3sdp"
-                    android:text=""
-                    android:textColor="@color/color_gray_light"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textColor="@color/text_color_blue"
+                    android:textSize="@dimen/_12sdp"
+                    tools:text="vxcvxcv" />
             </RelativeLayout>
 
 

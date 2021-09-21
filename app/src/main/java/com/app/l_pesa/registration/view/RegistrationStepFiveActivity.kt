@@ -267,7 +267,7 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
 
         if(CommonMethod.isNetworkAvailable(this@RegistrationStepFiveActivity))
         {
-            progressDialog.show()
+            progressDialog.show() 
             val presenterAWSProfile= PresenterAWSProfile()
             presenterAWSProfile.uploadPersonalID(this@RegistrationStepFiveActivity,this,photoFile)
         }

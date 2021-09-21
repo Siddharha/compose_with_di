@@ -10,7 +10,9 @@
         <entry key="app/src/main/res/layout/activity_change_pin.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_email_verify.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_forgot_pin.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/activity_loan_apply.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_loan_apply.xml" value="0.2512675109115774" />
+        <entry key="app/src/main/res/layout/activity_loan_history_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_loan_payback_scheduled.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_plan_details.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_lpk_savings.xml" value="0.11879432624113476" />
@@ -21,6 +23,7 @@
         <entry key="app/src/main/res/layout/activity_sasa_doctor.xml" value="0.24051282051282052" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.11879432624113476" />
         <entry key="app/src/main/res/layout/activity_verify_mobile.xml" value="0.11574074074074074" />
+        <entry key="app/src/main/res/layout/content_loan_apply.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/content_loan_history_details.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/content_loan_plan_details.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/content_lpk_savings.xml" value="0.11879432624113476" />
@@ -31,6 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_interest_history.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_loan_calculator.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_loan_history_list.xml" value="0.18518518518518517" />
+        <entry key="app/src/main/res/layout/fragment_loan_plan_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_lpk.xml" value="0.15489130434782608" />
         <entry key="app/src/main/res/layout/fragment_plans.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_points.xml" value="0.24427083333333333" />
@@ -49,6 +53,7 @@
         <entry key="app/src/main/res/layout/layout_registration_step_five.xml" value="0.11879432624113476" />
         <entry key="app/src/main/res/layout/layout_registration_step_four.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_registration_step_three.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_tab_common.xml" value="0.24427083333333333" />
       </map>
     </option>
   </component>

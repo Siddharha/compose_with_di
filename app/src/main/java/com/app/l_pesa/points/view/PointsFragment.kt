@@ -18,7 +18,7 @@ class PointsFragment: Fragment() {
     private val pointsAdapter:PointsAdapter by lazy { PointsAdapter(this) }
     lateinit var rootView: View
     companion object {
-        fun newInstance(): Fragment {
+        fun newInstance(): Fragment { 
             return PointsFragment()
         }
     }

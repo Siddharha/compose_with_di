@@ -371,8 +371,9 @@
     <!--Loan-->
     <string name="loan_plan_details">Loan Plan Details</string>
     <string name="description_of_loan_purpose">Loan Purpose</string>
-    <string name="choose_loan_purpose_description">Choose Purpose:</string>
+    <string name="choose_loan_purpose_description">Choose Terms and Purpose:</string>
     <string name="choose_description">Select Purpose</string>
+    <string name="choose_terms">Select Loan Terms</string>
     <string name="loan_purpose_description">Describe Your Purpose:</string>
     <string name="required_loan_purpose">Please select the purpose of application.</string>
     <string name="required_loan_purpose_description">Please describe why you need the loan.</string>

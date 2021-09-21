@@ -198,6 +198,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         initTimer()
         initLoader()
         loadDescription()
+        loadTerms()
 
         buttonCancel.setOnClickListener {
 
@@ -315,6 +316,13 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             showDescription()
         }
 
+    }
+
+    private fun loadTerms(){
+        tilChooseTerm.isFocusable = false
+        etChooseTerm.setOnClickListener {
+            showDescription()
+        }
     }
 
     private fun showDescription() {
