@@ -40,6 +40,9 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand />
@@ -71,7 +74,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Siddhartha_new_flow" />
+        <entry key="$PROJECT_DIR$" value="L_Pesa_Modern_build" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -268,6 +271,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.l-pesa-android-app [build]" />
         <item itemvalue="Gradle.l-pesa-android-app [build]" />
         <item itemvalue="Gradle.l-pesa-android-app [build]" />
         <item itemvalue="Gradle.l-pesa-android-app [build]" />
@@ -660,7 +664,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implement fb_t_003" />
     <MESSAGE value="implement fb_t_004" />
     <MESSAGE value="implement fb_t_005" />
     <MESSAGE value="implement fb_t_006" />
@@ -685,7 +688,8 @@
     <MESSAGE value="location service implemented" />
     <MESSAGE value="add points to buy" />
     <MESSAGE value="bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
+    <MESSAGE value="next build" />
+    <option name="LAST_COMMIT_MESSAGE" value="next build" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
