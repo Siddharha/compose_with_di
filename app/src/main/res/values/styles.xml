@@ -44,6 +44,7 @@
 
     <style name="customInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/colorAquaDeep</item>
+        <item name="hintTextColor">@color/colorAccent</item>
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="fontFamily">@font/montserrat</item>
         <item name="boxStrokeWidth">1pt</item>
@@ -54,6 +55,7 @@
     <style name="TextInputLayoutHintText" parent="TextAppearance.Design.Hint">
         <item name="android:fontFamily">@font/montserrat</item>
         <item name="fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="OtpWidget.OtpView" parent="Widget.AppCompat.EditText">

@@ -47,9 +47,13 @@
         <entry key="app/src/main/res/layout/layout_filter_by_date.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_investment_history_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_list_dashboard_loan.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_list_loan_terms.xml" value="0.22407407407407406" />
+        <entry key="app/src/main/res/layout/layout_list_single.xml" value="0.22407407407407406" />
         <entry key="app/src/main/res/layout/layout_load_more.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_loan_history.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_loan_list.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_marital.xml" value="0.22407407407407406" />
+        <entry key="app/src/main/res/layout/layout_marital_loan_term_cell.xml" value="0.22407407407407406" />
         <entry key="app/src/main/res/layout/layout_popup_window_investment.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_registration_step_five.xml" value="0.11879432624113476" />
         <entry key="app/src/main/res/layout/layout_registration_step_four.xml" value="0.24427083333333333" />

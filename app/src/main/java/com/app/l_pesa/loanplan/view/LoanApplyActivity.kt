@@ -35,8 +35,10 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
 import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
-import com.app.l_pesa.loanplan.inter.ICallBackDescription
+import com.app.l_pesa.loanplan.adapter.LoanTermsListAdapter
+import com.app.l_pesa.loanplan.inter.ICallBackTermsDescription
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
+import com.app.l_pesa.loanplan.model.LoanTermItem
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
 import com.app.l_pesa.main.view.MainActivity
 import com.facebook.appevents.AppEventsConstants
@@ -52,12 +54,38 @@ import kotlinx.android.synthetic.main.content_loan_apply.*
 import java.util.*
 
 
-class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLoanApply, LocationListener, GoogleApiClient.ConnectionCallbacks,
+class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallBackLoanApply, LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
 
     private var loanPurpose = ""
     private val listTitle = arrayListOf("For Transport", "To Pay Bills", "To Clear Debit", "To Buy Foodstuff", "Emergency Purposes", "To Buy Medicine", "Build Credit", "Others")
+    private val listTerms = arrayListOf(
+        LoanTermItem(
+            id = 0,
+            title = "28 Days",
+            paymentDuration = "1 monthly payment",
+            totalAmountDue = "1,175"
+        ),
+        LoanTermItem(
+            id = 0,
+            title = "28 Days",
+            paymentDuration = "1 monthly payment",
+            totalAmountDue = "1,175"
+        ),
+        LoanTermItem(
+            id = 0,
+            title = "28 Days",
+            paymentDuration = "1 monthly payment",
+            totalAmountDue = "1,175"
+        ),
+        LoanTermItem(
+            id = 0,
+            title = "28 Days",
+            paymentDuration = "1 monthly payment",
+            totalAmountDue = "1,175"
+        )
+    )
     private lateinit var progressDialog: ProgressDialog
     private lateinit var countDownTimer: CountDownTimer
 
@@ -309,7 +337,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     private fun loadDescription() {
-        showDescription()
+
         etChooseDescription.isFocusable = false
         etChooseDescription.setOnClickListener {
 
@@ -319,9 +347,10 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
     }
 
     private fun loadTerms(){
+        showTerms()
         tilChooseTerm.isFocusable = false
         etChooseTerm.setOnClickListener {
-            showDescription()
+            showTerms()
         }
     }
 
@@ -332,6 +361,18 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
         dialog.setContentView(R.layout.layout_list_single)
         val recyclerView = dialog.findViewById(R.id.recyclerView) as RecyclerView?
         val titleAdapter = DescriptionAdapter(this@LoanApplyActivity, listTitle, dialog, this)
+        recyclerView?.layoutManager = LinearLayoutManager(this@LoanApplyActivity, RecyclerView.VERTICAL, false)
+        recyclerView?.adapter = titleAdapter
+        dialog.show()
+    }
+
+    private fun showTerms() {
+
+        val dialog = Dialog(this@LoanApplyActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.layout_list_loan_terms)
+        val recyclerView = dialog.findViewById(R.id.rvLoanTerms) as RecyclerView?
+        val titleAdapter = LoanTermsListAdapter(this@LoanApplyActivity, listTerms, dialog, this)
         recyclerView?.layoutManager = LinearLayoutManager(this@LoanApplyActivity, RecyclerView.VERTICAL, false)
         recyclerView?.adapter = titleAdapter
         dialog.show()
@@ -354,6 +395,17 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackDescription, ICallBackLo
             txt_max_words.visibility = View.GONE
             txt_loan_description.visibility = View.GONE
         }
+    }
+
+    override fun onSelectTerms(t: LoanTermItem) {
+        // txt_loan_description.visibility = View.GONE
+        //tilDescription.visibility = View.GONE
+        //txt_max_words.visibility = View.GONE
+        //txt_loan_description.visibility = View.GONE
+        tilChooseTerm.visibility = View.VISIBLE
+        etChooseTerm.setText(t.title)
+        showDescription()
+
     }
 
     override fun onSuccessLoanApply() {

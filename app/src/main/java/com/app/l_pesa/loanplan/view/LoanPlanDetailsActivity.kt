@@ -62,16 +62,23 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Loan Plan Details")
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
-        txt_loan_product_price.text = fromHtml(resources.getString(R.string.loan_product)+"<font color='#333333'>"+globalLoanPlanModel!!.currencyCode+" "+format.format(globalLoanPlanModel!!.loanAmount).toString()+"</font>")
-        txt_interest_rate.text = fromHtml(resources.getString(R.string.interest_rate)+"<font color='#333333'>"+" "+globalLoanPlanModel.loanInterestRate.toString()+"%"+"</font>")
-        txt_required_credit_score.text = fromHtml(resources.getString(R.string.required_credit_score)+"<font color='#333333'>"+ globalLoanPlanModel.requiredCreditScore.toString()+"</font>")
-        txt_currency_conversion_rate.text = fromHtml(resources.getString(R.string.currency_conversion_rate)+"<font color='#333333'>"+" "+ globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.convertionDollarValue)+"</font>")
-        txt_loan_after_currency_conversion.text = fromHtml(resources.getString(R.string.loan_after_currency_conversion)+"<font color='#333333'>"+" "+ globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.convertionLoanAmount).toString()+"</font>")
-        txt_credit_score.text = fromHtml(resources.getString(R.string.current_credit_score)+"<font color='#333333'>"+sharedPref.userCreditScore+"</font>")
+        var txtColor = "#333333"
+        txtColor = if(!sharedPref.isDarkTheme){
+            "#006a85"
+        }else{
+            "#03cafc"
+        }
+
+        txt_loan_product_price.text = fromHtml(resources.getString(R.string.loan_product)+" <font color='$txtColor'>"+globalLoanPlanModel!!.currencyCode+" "+format.format(globalLoanPlanModel!!.loanAmount).toString()+"</font>")
+        txt_interest_rate.text = fromHtml(resources.getString(R.string.interest_rate)+" <font color='$txtColor'>"+" "+globalLoanPlanModel.loanInterestRate.toString()+"%"+"</font>")
+        txt_required_credit_score.text = fromHtml(resources.getString(R.string.required_credit_score)+" <font color='$txtColor'>"+ globalLoanPlanModel.requiredCreditScore.toString()+"</font>")
+        txt_currency_conversion_rate.text = fromHtml(resources.getString(R.string.currency_conversion_rate)+" <font color='$txtColor'>"+" "+ globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.convertionDollarValue)+"</font>")
+        txt_loan_after_currency_conversion.text = fromHtml(resources.getString(R.string.loan_after_currency_conversion)+" <font color='$txtColor'>"+" "+ globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.convertionLoanAmount).toString()+"</font>")
+        txt_credit_score.text = fromHtml(resources.getString(R.string.current_credit_score)+" <font color='$txtColor'>"+sharedPref.userCreditScore+"</font>")
         txt_loan_amount_value.text = globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.actualLoanAmount)
         txt_loan_status.text = globalLoanPlanModel.btnText
-        txt_conversion_charge.text =fromHtml(resources.getString(R.string.conversion_charge)+"<font color='#333333'>"+" "+ globalLoanPlanModel.conversionCharge.toString()+"% ("+globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.conversionChargeAmount)+")"+"</font>")
-        txt_processing_fee.text =fromHtml(resources.getString(R.string.processing_fee)+"<font color='#333333'>"+" "+ globalLoanPlanModel.processingFees.toString()+"% ("+globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.processingFeesAmount)+")"+"</font>")
+        txt_conversion_charge.text =fromHtml(resources.getString(R.string.conversion_charge)+" <font color='$txtColor'>"+" "+ globalLoanPlanModel.conversionCharge.toString()+"% ("+globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.conversionChargeAmount)+")"+"</font>")
+        txt_processing_fee.text =fromHtml(resources.getString(R.string.processing_fee)+" <font color='$txtColor'>"+" "+ globalLoanPlanModel.processingFees.toString()+"% ("+globalLoanPlanModel.currencyCode+" "+format.format(globalLoanPlanModel.processingFeesAmount)+")"+"</font>")
 
         Button_apply_loan.setOnClickListener {
 

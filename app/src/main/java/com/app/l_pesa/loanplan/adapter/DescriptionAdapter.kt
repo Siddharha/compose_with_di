@@ -9,9 +9,9 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
-import com.app.l_pesa.loanplan.inter.ICallBackDescription
+import com.app.l_pesa.loanplan.inter.ICallBackTermsDescription
 
-class DescriptionAdapter (val context: Context, private val titleText: ArrayList<String>, private val dialogOBJ: Dialog, private val callBack: ICallBackDescription) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DescriptionAdapter (val context: Context, private val titleText: ArrayList<String>, private val dialogOBJ: Dialog, private val callBackTerms: ICallBackTermsDescription) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -19,7 +19,7 @@ class DescriptionAdapter (val context: Context, private val titleText: ArrayList
         viewHolder.titleText.text = titleText[position]
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()
-            callBack.onSelectDescription(titleText[position])
+            callBackTerms.onSelectDescription(titleText[position])
         }
 
 
