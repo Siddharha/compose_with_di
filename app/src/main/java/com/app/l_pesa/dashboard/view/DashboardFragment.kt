@@ -98,8 +98,8 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
    private fun initData() {
 
         initLoader()
-        val sharedPrefOBJ = SharedPref(activity!!)
-        val dashBoard = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
+        val sharedPrefOBJ = SharedPref(requireActivity())
+        val dashBoard = Gson().fromJson(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
         if (dashBoard != null) {
             setDashBoard(dashBoard)
@@ -116,9 +116,9 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog = ProgressDialog(requireActivity(),R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
-        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypeFaceSpan("", face, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
@@ -130,16 +130,16 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
     }
 
     private fun loadDashboard() {
-        if (CommonMethod.isNetworkAvailable(activity!!))
+        if (CommonMethod.isNetworkAvailable(requireActivity()))
         {
             swipeRefreshLayout.isRefreshing = true
-            val sharedPrefOBJ = SharedPref(activity!!)
+            val sharedPrefOBJ = SharedPref(requireActivity())
 
             val presenterDashboard = PresenterDashboard()
-            presenterDashboard.getDashboard(activity!!, sharedPrefOBJ.accessToken, this)
+            presenterDashboard.getDashboard(requireActivity(), sharedPrefOBJ.accessToken, this)
         } else {
             swipeRefreshLayout.isRefreshing = false
-            CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.no_internet))
         }
 
         svDashboard.smoothScrollTo(0,0)
@@ -198,7 +198,7 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
                 adapterDashBoard.notifyDataSetChanged()
             }
 
-            val sharedPrefOBJ = SharedPref(activity!!)
+            val sharedPrefOBJ = SharedPref(requireActivity())
             val gson = Gson()
             val dashBoardData = gson.toJson(dashBoard)
             sharedPrefOBJ.userDashBoard = dashBoardData
@@ -219,12 +219,12 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         {
             progressDialog.show()
             val presenterInfoLPK= PresenterInfoLPK()
-            presenterInfoLPK.getInfoLPK(activity!!,this,"SAVINGS")
+            presenterInfoLPK.getInfoLPK(requireActivity(),this,"SAVINGS")
 
         }
         else
         {
-            val sharedPref = SharedPref(activity!!)
+            val sharedPref = SharedPref(requireActivity())
             sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
             sharedPref.openTabLoan = type
 
@@ -238,7 +238,7 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
 
     override fun onSuccessInfoLPK(data: ResInfoLPK.Data?, type: String) {
 
-        val sharedPrefOBJ= SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(requireActivity())
         val gson = Gson()
         val json = gson.toJson(data)
         sharedPrefOBJ.lpkInfo= json
@@ -251,23 +251,23 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
 
     override fun onErrorInfoLPK(message: String) {
         dismiss()
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 
    override fun onSessionTimeOut(jsonMessage: String) {
 
         swipeRefreshLayout.isRefreshing = false
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!, R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(requireActivity(), R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(activity!!)
+                    val sharedPrefOBJ= SharedPref(requireActivity())
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(activity, MainActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    activity!!.finish()
+                    requireActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    requireActivity().finish()
                 }
 
        val alert = dialogBuilder.create()
@@ -277,7 +277,7 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
 
     override fun onClickPay(type: String, loan_id: String) {
 
-        val sharedPref = SharedPref(activity!!)
+        val sharedPref = SharedPref(requireActivity())
         sharedPref.payFullAmount = "A"
         val bundle = Bundle()
         bundle.putString("LOAN_TYPE", type)
