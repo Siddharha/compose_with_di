@@ -14,6 +14,7 @@ import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
 import com.app.l_pesa.loanplan.model.ResLoanApply
 import com.app.l_pesa.loanplan.model.ResLoanPlans
+import com.app.l_pesa.loanplan.model.ResLoanTenure
 import com.app.l_pesa.login.model.ResCodeResend
 import com.app.l_pesa.login.model.ResEmailRequired
 import com.app.l_pesa.login.model.ResEmailVerification
@@ -278,6 +279,9 @@ interface BaseService{
     @GET("buy_credit_score/user_list")
     fun getAllCreditPlanHistory(@Query("cursors") cursor:String,@Query("from_date") fromDate:String,
                                 @Query("to_date") toDate:String,@Query("ref_no") refNo:String):Observable<CreditPlanHistoryResponse>
+
+    @POST("loan/tenure")
+    fun getLoanTenure(@Body request: JsonObject): Observable<ResLoanTenure>
 }
 
 

@@ -9,17 +9,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.loanplan.inter.ICallBackTermsDescription
-import com.app.l_pesa.loanplan.model.LoanTermItem
+import com.app.l_pesa.loanplan.model.ResLoanTenure
 
 
-class LoanTermsListAdapter (val context: Context, private val listTerms: ArrayList<LoanTermItem>, private val dialogOBJ: Dialog, private val callBackTerms: ICallBackTermsDescription) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LoanTermsListAdapter (val context: Context, private val listTerms: List<ResLoanTenure.Data.Option>, private val dialogOBJ: Dialog, private val callBackTerms: ICallBackTermsDescription) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         val viewHolder = holder as SelectViewHolder
-        viewHolder.titleText.text = listTerms[position].title
-        viewHolder.durationDateText.text = listTerms[position].paymentDuration
-        viewHolder.dueDateText.text = listTerms[position].totalAmountDue
+        viewHolder.titleText.text = "${listTerms[position].weeks} Weeks (${listTerms[position].days} Days)"
+        //viewHolder.durationDateText.text = listTerms[position].default
+        viewHolder.dueDateText.text = listTerms[position].due
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()
             callBackTerms.onSelectTerms(listTerms[position])
@@ -44,7 +44,7 @@ class LoanTermsListAdapter (val context: Context, private val listTerms: ArrayLi
         private class SelectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
             var titleText : TextView = itemView.findViewById(R.id.tvTitleLoanTerm) as TextView
-            var durationDateText : TextView = itemView.findViewById(R.id.tvDuration) as TextView
+            //var durationDateText : TextView = itemView.findViewById(R.id.tvDuration) as TextView
             var dueDateText : TextView = itemView.findViewById(R.id.tvTotalDueVal) as TextView
             var rlRootObj : View = itemView
 

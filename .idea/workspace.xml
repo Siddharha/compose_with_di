@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
@@ -14,19 +14,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/inter/ICallBackLoanTenure.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/ResLoanTenure.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/presenter/PresenterLoanApplyTenure.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/API/BaseService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dev_options/broadcust/SMSreceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dev_options/broadcust/SMSreceiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/LoanTermsListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/adapter/LoanTermsListAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/inter/ICallBackTermsDescription.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/inter/ICallBackTermsDescription.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/model/LoanTermItem.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/BusinessLoan.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/CurrentLoan.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanPlansFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/PersonalIdInfoFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_marital_loan_term_cell.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_marital_loan_term_cell.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[379700347d94]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/siddharthamaji/.android/avd/My_Device.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -56,8 +69,8 @@
         <option value="Class" />
         <option value="Kotlin Object" />
         <option value="Kotlin Interface" />
-        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -110,7 +123,11 @@
     <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/L_Pesa/app/src/main/java/com/app/l_pesa/common/OtpView.java_SELECTED" value="OtpView" />
     <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/L_Pesa/app/src/main/java/com/app/l_pesa/pinview/view/PassCodeView.java_SELECTED" value="PassCodeView" />
     <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/lpesa/app/src/main/java/com/app/l_pesa/common/CircularImageView.java_CircularImageView_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/lpesa/app/src/main/java/com/app/l_pesa/common/CircularImageView.java_SELECTED" value="CircularImageView" />
     <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/lpesa/app/src/main/java/com/app/l_pesa/common/CommonEditTextRegular.kt_CommonEditTextRegular_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/lpesa/app/src/main/java/com/app/l_pesa/common/CommonEditTextRegular.kt_SELECTED" value="CommonEditTextRegular" />
+    <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/lpesa/app/src/main/java/com/app/l_pesa/common/OtpView.java_OtpView_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-view/Users/siddharthamaji/Documents/Android_project/lpesa/app/src/main/java/com/app/l_pesa/common/OtpView.java_SELECTED" value="OtpView" />
     <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
@@ -163,11 +180,11 @@
       <recent name="com.app.l_pesa.common" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.app.l_pesa.loanplan.inter" />
+      <recent name="com.app.l_pesa.loanplan.presenter" />
       <recent name="com.app.l_pesa.loanplan.adapter" />
       <recent name="com.app.l_pesa.points.presenter" />
       <recent name="com.app.l_pesa.points.models" />
-      <recent name="com.app.l_pesa.points.adapters" />
-      <recent name="com.app.l_pesa.dev_options.models" />
     </key>
     <key name="android.template.910172888">
       <recent name="com.app.l_pesa.allservices" />
@@ -288,13 +305,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00052" summary="date picker issue fixes">
-      <created>1611051551098</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1611051551102</updated>
     </task>
     <task id="LOCAL-00053" summary="date picker issue fixes">
       <created>1611921034224</created>
@@ -632,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632231187032</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="next build">
+      <created>1633503037841</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1633503037842</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1129,32 +1146,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt</url>
-          <line>459</line>
+          <line>458</line>
           <option name="timeStamp" value="403" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt</url>
-          <line>294</line>
+          <line>293</line>
           <option name="timeStamp" value="404" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt</url>
-          <line>304</line>
+          <line>303</line>
           <option name="timeStamp" value="405" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt</url>
-          <line>309</line>
+          <line>308</line>
           <option name="timeStamp" value="408" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt</url>
-          <line>305</line>
+          <line>304</line>
           <option name="timeStamp" value="410" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/calculator/view/LoanCalculatorFragment.kt</url>
-          <line>307</line>
+          <line>306</line>
           <option name="timeStamp" value="411" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -1266,6 +1283,21 @@
           <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.Siddharha/CreativeCam/1.0.7/2e934b540e6f02d7b18eb843f3b71edce8d38c8f/CreativeCam-1.0.7-sources.jar!/in/creativelizard/creativecam/CamViewActivity.kt</url>
           <line>137</line>
           <option name="timeStamp" value="438" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/presenter/PresenterLoanApplyTenure.kt</url>
+          <line>27</line>
+          <option name="timeStamp" value="439" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/presenter/PresenterLoanApplyTenure.kt</url>
+          <line>56</line>
+          <option name="timeStamp" value="440" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/loanplan/view/LoanApplyActivity.kt</url>
+          <line>319</line>
+          <option name="timeStamp" value="441" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/AppSignatureHelper.java</url>

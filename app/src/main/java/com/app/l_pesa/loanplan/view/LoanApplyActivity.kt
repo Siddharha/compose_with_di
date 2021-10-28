@@ -36,10 +36,12 @@ import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.loanHistory.inter.ICallBackLoanApply
 import com.app.l_pesa.loanplan.adapter.DescriptionAdapter
 import com.app.l_pesa.loanplan.adapter.LoanTermsListAdapter
+import com.app.l_pesa.loanplan.inter.ICallBackLoanTenure
 import com.app.l_pesa.loanplan.inter.ICallBackTermsDescription
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
-import com.app.l_pesa.loanplan.model.LoanTermItem
+import com.app.l_pesa.loanplan.model.ResLoanTenure
 import com.app.l_pesa.loanplan.presenter.PresenterLoanApply
+import com.app.l_pesa.loanplan.presenter.PresenterLoanApplyTenure
 import com.app.l_pesa.main.view.MainActivity
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
@@ -52,6 +54,7 @@ import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallBackLoanApply, LocationListener, GoogleApiClient.ConnectionCallbacks,
@@ -59,8 +62,10 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
 
 
     private var loanPurpose = ""
+    private var loanTanure = "" //Need to send weeks value as String
     private val listTitle = arrayListOf("For Transport", "To Pay Bills", "To Clear Debit", "To Buy Foodstuff", "Emergency Purposes", "To Buy Medicine", "Build Credit", "Others")
-    private val listTerms = arrayListOf(
+    private  val listTerms:ArrayList<ResLoanTenure.Data.Option> by lazy { ArrayList() }
+    /*= arrayListOf(
         LoanTermItem(
             id = 0,
             title = "28 Days",
@@ -85,7 +90,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
             paymentDuration = "1 monthly payment",
             totalAmountDue = "1,175"
         )
-    )
+    )*/
     private lateinit var progressDialog: ProgressDialog
     private lateinit var countDownTimer: CountDownTimer
 
@@ -226,8 +231,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
         initTimer()
         initLoader()
         loadDescription()
-        loadTerms()
-
+        loadTerms(productId)
+        etChooseTerm.setText("9 Weeks")
         buttonCancel.setOnClickListener {
 
             onBackPressed()
@@ -311,7 +316,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
             jsonObject.addProperty("loan_purpose", loanPurpose)
 
         }
-
+        if(loanTanure.isNotBlank()){
+        jsonObject.addProperty("tenure",loanTanure)
+        }
         jsonObject.addProperty("latitude", shared.currentLat)
         jsonObject.addProperty("longitude", shared.currentLng)
 
@@ -346,12 +353,50 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
 
     }
 
-    private fun loadTerms(){
-        showTerms()
-        tilChooseTerm.isFocusable = false
-        etChooseTerm.setOnClickListener {
-            showTerms()
+    private fun loadTerms(productId:String){
+
+        if(!progressDialog.isShowing){
+            progressDialog.show()
         }
+        val jsonObject = JsonObject()
+        jsonObject.addProperty("product_id",productId)
+        val presenterLoanPlans = PresenterLoanApplyTenure()
+        presenterLoanPlans.getLoanTenureList(this,jsonObject,object :ICallBackLoanTenure{
+            override fun onSuccessLoanTenureList(item: List<ResLoanTenure.Data.Option>) {
+                if(progressDialog.isShowing){
+                    progressDialog.dismiss()
+                }
+                if(listTerms.isNotEmpty()){
+                    listTerms.clear()
+                }
+                listTerms.addAll(item)
+                showTerms()
+                tilChooseTerm.isFocusable = false
+                etChooseTerm.setOnClickListener {
+                    showTerms()
+                }
+            }
+
+            override fun onEmptyLoanTenureList() {
+                if(progressDialog.isShowing){
+                    progressDialog.dismiss()
+                }
+            }
+
+            override fun onFailureLoanTenureList(jsonMessage: String) {
+                if(progressDialog.isShowing){
+                    progressDialog.dismiss()
+                }
+            }
+
+            override fun onSessionTimeOut(message: String) {
+                if(progressDialog.isShowing){
+                    progressDialog.dismiss()
+                }
+            }
+
+        })
+
     }
 
     private fun showDescription() {
@@ -397,13 +442,15 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
         }
     }
 
-    override fun onSelectTerms(t: LoanTermItem) {
+    override fun onSelectTerms(t: ResLoanTenure.Data.Option) {
         // txt_loan_description.visibility = View.GONE
         //tilDescription.visibility = View.GONE
         //txt_max_words.visibility = View.GONE
         //txt_loan_description.visibility = View.GONE
         tilChooseTerm.visibility = View.VISIBLE
-        etChooseTerm.setText(t.title)
+        etChooseTerm.setText("${t.weeks} Weeks")
+        if(t.default){
+        loanTanure = t.weeks.toString()}
         showDescription()
 
     }
@@ -473,11 +520,11 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
         builder.setMessage(
                 "Your GPS seems to be disabled, do you want to enable it?")
                 .setCancelable(false).setPositiveButton("Yes"
-                ) { dialog, id ->
+                ) { _, _ ->
                     startActivity(Intent(
                             Settings.ACTION_LOCATION_SOURCE_SETTINGS))
                 }
-                .setNegativeButton("No") { dialog, id -> dialog.cancel() }
+                .setNegativeButton("No") { dialog, _ -> dialog.cancel() }
         val alert = builder.create()
         alert.setCancelable(false)
         alert.show()

@@ -49,8 +49,8 @@ class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
         }, 200)
 
 
-        tabLayout=activity!!.findViewById(R.id.tabLayout)
-        viewPager=activity!!.findViewById(R.id.viewPager)
+        tabLayout=requireActivity().findViewById(R.id.tabLayout)
+        viewPager=requireActivity().findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.personal_loan_plans)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.business_loan_plans)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
@@ -61,7 +61,7 @@ class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
         changeTabsFont()
         tabLayout!!.addOnTabSelectedListener(this)
 
-        val sharedPref= SharedPref(activity!!)
+        val sharedPref= SharedPref(requireActivity())
 
         Handler().postDelayed(
                 {

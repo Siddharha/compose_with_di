@@ -53,19 +53,19 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "Personal Loan")
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             shimmerLayout.startShimmer()
             val jsonObject = JsonObject()
             jsonObject.addProperty("loan_type","current_loan")
             val presenterLoanPlans = PresenterLoanPlans()
-            presenterLoanPlans.doLoanPlans(activity!!,jsonObject,this)
+            presenterLoanPlans.doLoanPlans(requireActivity(),jsonObject,this)
         }
         else
         {
             shimmerLayout.stopShimmer()
             shimmerLayout.visibility=View.INVISIBLE
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
             swipeRefreshLayout.isRefreshing = false
         }
 
@@ -85,21 +85,21 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
 
         shimmerLayout.stopShimmer()
         shimmerLayout.visibility=View.INVISIBLE
-        val sharedPref=SharedPref(activity!!)
+        val sharedPref=SharedPref(requireActivity())
         sharedPref.currentLoanCount="1"
         (activity as DashboardActivity).isVisibleToolbarRight()
         cardView.visibility   = View.GONE
         rvLoan.visibility     = View.VISIBLE
         swipeRefreshLayout.isRefreshing = false
-        val currentLoanAdapter   = CurrentLoanPlanAdapter(activity!!, item, appliedProduct!!, this)
-        rvLoan.layoutManager     = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
+        val currentLoanAdapter   = CurrentLoanPlanAdapter(requireActivity(), item, appliedProduct!!, this)
+        rvLoan.layoutManager     = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
         rvLoan.adapter = currentLoanAdapter
     }
 
     override fun onEmptyLoanPlans() {
         shimmerLayout.stopShimmer()
         shimmerLayout.visibility=View.INVISIBLE
-        val sharedPref=SharedPref(activity!!)
+        val sharedPref=SharedPref(requireActivity())
         sharedPref.currentLoanCount="0"
         (activity as DashboardActivity).isVisibleToolbarRight()
         rvLoan.visibility   = View.GONE
@@ -111,11 +111,11 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
     override fun onFailureLoanPlans(jsonMessage: String) {
         shimmerLayout.stopShimmer()
         shimmerLayout.visibility=View.INVISIBLE
-        val sharedPref=SharedPref(activity!!)
+        val sharedPref=SharedPref(requireActivity())
         sharedPref.currentLoanCount="0"
         (activity as DashboardActivity).isVisibleToolbarRight()
         swipeRefreshLayout.isRefreshing = false
-        CommonMethod.customSnackBarError(rootLayout,activity!!,jsonMessage)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),jsonMessage)
     }
 
     override fun onSuccessLoanPlansDetails(details: ResLoanPlans.Details?) {
@@ -143,16 +143,16 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
     override fun onSessionTimeOut(message: String) {
 
         swipeRefreshLayout.isRefreshing = false
-        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(requireActivity(),R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(activity!!)
+                    val sharedPrefOBJ= SharedPref(requireActivity())
                     sharedPrefOBJ.removeShared()
-                    startActivity(Intent(activity!!, MainActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    activity!!.finish()
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    requireActivity().finish()
                 }
 
         val alert = dialogBuilder.create()

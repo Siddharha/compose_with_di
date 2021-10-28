@@ -39,7 +39,7 @@ class SMSreceiver : BroadcastReceiver(), ICallBackUserSMSUpdate {
                 val smsDisplayMessage = message.displayMessageBody
 
                 Log.e("sms","From $smsOriginatingAddress -> $smsDisplayMessage")
-               // processReceivedSms(smsOriginatingAddress, smsDisplayMessage)
+                // processReceivedSms(smsOriginatingAddress, smsDisplayMessage)
 
                 if(CommonMethod.isServiceRunning(context!!, MlService::class.java)){
                     Toast.makeText(context,"SMS Read by L-Pesa App..",Toast.LENGTH_SHORT).show()

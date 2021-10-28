@@ -4,6 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.1515625" />
+        <entry key="app/src/main/res/layout/activity_loan_apply.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_loan_calculator.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_sasa_doctor.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_all_services.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_dev.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_loan_calculator.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_loan_plan_list.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_marital_loan_term_cell.xml" value="0.24427083333333333" />
       </map>
     </option>
   </component>

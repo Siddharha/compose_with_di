@@ -131,15 +131,15 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         logger.logEvent(AppEventsConstants.EVENT_NAME_VIEWED_CONTENT, params)
 
         listPersonalId = ArrayList()
-        sharedPrefOBJ= SharedPref(activity!!)
+        sharedPrefOBJ= SharedPref(requireActivity())
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
         listPersonalId!!.clear()
 
         if(profileInfo.userIdsPersonalInfo!!.size>0)
         {
             listPersonalId!!.addAll(profileInfo.userIdsPersonalInfo!!)
-            personalIdAdapter                 = PersonalIdAdapter(activity!!,listPersonalId!!,this)
-            rvPersonalId.layoutManager        = LinearLayoutManager(activity!!, RecyclerView.VERTICAL, false)
+            personalIdAdapter                 = PersonalIdAdapter(requireActivity(),listPersonalId!!,this)
+            rvPersonalId.layoutManager        = LinearLayoutManager(requireActivity(), RecyclerView.VERTICAL, false)
             rvPersonalId.adapter              = personalIdAdapter
         }
 
@@ -148,9 +148,9 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             if(sharedPrefOBJ.countryCode == "in") {
                 if (etPersonalId.text.toString().contentEquals("Aadhaar Card")) {
                     if (!captureImageStatus) {
-                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_image))
+                        CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.required_id_image))
                     } else if (personalId == 0) {
-                        CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
+                        CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.required_id_type))
                         showDialogIdType(sharedPrefOBJ)
                     } else
                        // if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) &&
@@ -159,10 +159,10 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                   //      CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
                   //  }
                    // else {
-                        if (CommonMethod.isNetworkAvailable(activity!!)) {
+                        if (CommonMethod.isNetworkAvailable(requireActivity())) {
                             progressDialog.show()
                             val presenterZoop = PresenterZoop()
-                            presenterZoop.doOfflineAadharInit(activity!!, this)
+                            presenterZoop.doOfflineAadharInit(requireActivity(), this)
                         }
                   //  }
 
@@ -177,8 +177,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         buttonCancel.setOnClickListener {
 
-            activity!!.onBackPressed()
-            activity!!.overridePendingTransition(R.anim.left_in, R.anim.right_out)
+            requireActivity().onBackPressed()
+            requireActivity().overridePendingTransition(R.anim.left_in, R.anim.right_out)
         }
 
         etPersonalId.isFocusable=false
@@ -210,14 +210,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun updateIdData(sharedPrefOBJ: SharedPref) {
         if (!captureImageStatus) {
-            CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_image))
+            CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.required_id_image))
         } else if (personalId == 0) {
-            CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_type))
+            CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.required_id_type))
             showDialogIdType(sharedPrefOBJ)
         } else if (etPersonalId.text.toString() != resources.getString(R.string.address_prof) && TextUtils.isEmpty(etIdNumber.text.toString().trim())) {
-            CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.required_id_number))
+            CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.required_id_number))
         } else {
-            if (CommonMethod.isNetworkAvailable(activity!!)) {
+            if (CommonMethod.isNetworkAvailable(requireActivity())) {
                 progressDialog.show()
                 buttonSubmit.isClickable = false
 
@@ -225,7 +225,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                     {*/
                 val presenterAWSPersonalId = PresenterAWSPersonalId()
                 // presenterAWSPersonalId.deletePersonalAWS(activity!!,imgFileAddress)
-                presenterAWSPersonalId.uploadPersonalId(activity!!, this, photoFile)
+                presenterAWSPersonalId.uploadPersonalId(requireActivity(), this, photoFile)
                 /*}
                     else
                     {
@@ -235,7 +235,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
 
             } else {
-                CommonMethod.customSnackBarError(rootLayout, activity!!, resources.getString(R.string.no_internet))
+                CommonMethod.customSnackBarError(rootLayout, requireActivity(), resources.getString(R.string.no_internet))
             }
         }
     }
@@ -243,8 +243,8 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun checkAndRequestPermissions(): Boolean {
 
-        val permissionCamera        = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA)
-        val permissionStorage       = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permissionCamera        = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA)
+        val permissionStorage       = ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
         val listPermissionsNeeded = ArrayList<String>()
 
@@ -255,7 +255,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
         if (listPermissionsNeeded.isNotEmpty()) {
-            ActivityCompat.requestPermissions(activity!!, listPermissionsNeeded.toTypedArray(), requestPermission)
+            ActivityCompat.requestPermissions(requireActivity(), listPermissionsNeeded.toTypedArray(), requestPermission)
             return false
         }
 
@@ -281,15 +281,15 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                         cameraClick()
                     } else {
 
-                        if (ActivityCompat.shouldShowRequestPermissionRationale( activity!!, Manifest.permission.CAMERA)
-                                || ActivityCompat.shouldShowRequestPermissionRationale( activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale( requireActivity(), Manifest.permission.CAMERA)
+                                || ActivityCompat.shouldShowRequestPermissionRationale( requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                             showDialogOK("Permissions are required for L-Pesa",
                                     DialogInterface.OnClickListener { _, which ->
                                         when (which) {
                                             DialogInterface.BUTTON_POSITIVE -> checkAndRequestPermissions()
                                             DialogInterface.BUTTON_NEGATIVE ->
 
-                                              activity!!.finish()
+                                              requireActivity().finish()
                                         }
                                     })
                         } else {
@@ -304,7 +304,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     private fun showDialogOK(message: String, okListener: DialogInterface.OnClickListener) {
-        AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        AlertDialog.Builder(requireActivity(),R.style.MyAlertDialogTheme)
                 .setMessage(message)
                 .setPositiveButton("OK", okListener)
                 .setNegativeButton("Cancel", okListener)
@@ -313,12 +313,12 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     private fun permissionDialog(msg: String) {
-        val dialog = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        val dialog = AlertDialog.Builder(requireActivity(),R.style.MyAlertDialogTheme)
         dialog.setMessage(msg)
                 .setPositiveButton("Yes") { _, _ ->
                     startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.app.l_pesa")))
                 }
-                .setNegativeButton("Cancel") { _, _ -> activity!!.finish() }
+                .setNegativeButton("Cancel") { _, _ -> requireActivity().finish() }
         dialog.show()
     }
 
@@ -334,9 +334,9 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog = ProgressDialog(requireActivity(),R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
-        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
@@ -372,7 +372,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         val presenterAddProof= PresenterAddProof()
         println("confirm aadhaar: ${jsonObject}")
-        presenterAddProof.doAddProof(activity!!,jsonObject,this)
+        presenterAddProof.doAddProof(requireActivity(),jsonObject,this)
 
     }
 
@@ -380,7 +380,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(rootLayout,activity!!,string)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),string)
     }
 
     override fun onSucessDeleteUploadAWS(userIdsPersonalInfo:ResUserInfo.UserIdsPersonalInfo,pos: Int) {
@@ -392,7 +392,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     override fun onFailureDeleteAWS(message: String) {
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 
     override fun onSucessProfileImgDeleteAWS() {
@@ -402,16 +402,16 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     override fun onSessionTimeOut(message: String) {
 
         dismiss()
-        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(requireActivity(),R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(activity!!)
+                    val sharedPrefOBJ= SharedPref(requireActivity())
                     sharedPrefOBJ.removeShared()
-                    startActivity(Intent(activity!!, MainActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    activity!!.finish()
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    requireActivity().finish()
                 }
 
         val alert = dialogBuilder.create()
@@ -425,11 +425,11 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         val userDashBoard  = Gson().fromJson<ResDashboard.Data>(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
         if(userDashBoard.personalIdTypes!!.size>0)
         {
-            val dialog= Dialog(activity!!)
+            val dialog= Dialog(requireActivity())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_id_type)
             val recyclerView                = dialog.findViewById(R.id.recyclerView) as RecyclerView?
-            val personalIdAdapter           = PersonalIdListAdapter(activity!!, userDashBoard.personalIdTypes!!,dialog,this)
+            val personalIdAdapter           = PersonalIdListAdapter(requireActivity(), userDashBoard.personalIdTypes!!,dialog,this)
             recyclerView?.layoutManager     = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             recyclerView?.adapter           = personalIdAdapter
             dialog.show()
@@ -448,7 +448,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     override fun onSelectIdType(id: Int, name: String, type: String) {
 
-        val sharedPrefOBJ= SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(requireActivity())
         val profileInfo  = Gson().fromJson<ResUserInfo.Data>(sharedPrefOBJ.profileInfo, ResUserInfo.Data::class.java)
         val totalSize = 0 until profileInfo.userIdsPersonalInfo!!.size
 
@@ -549,13 +549,13 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         }
 
 
-        val inflater = activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.layout_recyclerview, null)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, DividerItemDecoration.VERTICAL))
 
-        val adapter = AdapterPopupWindow(activity!!)
+        val adapter = AdapterPopupWindow(requireActivity())
         adapter.addAlertFilter(filterItemList)
         recyclerView.adapter = adapter
         adapter.selectedItem(selectedItem)
@@ -626,16 +626,16 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         jsonObject.addProperty("user_type_id",userIdsPersonalInfo.id.toString())
 
         val presenterDeleteProof= PresenterDeleteProof()
-        presenterDeleteProof.doDeleteProof(activity!!,jsonObject,pos,this)
+        presenterDeleteProof.doDeleteProof(requireActivity(),jsonObject,pos,this)
     }
 
     override fun onSuccessAddProof() {
 
         dismiss()
-        val sharedPref=SharedPref(activity!!)
+        val sharedPref=SharedPref(requireActivity())
         sharedPref.navigationTab=resources.getString(R.string.open_tab_profile)
         sharedPref.profileUpdate=resources.getString(R.string.status_true)
-        val intent = Intent(activity!!, DashboardActivity::class.java)
+        val intent = Intent(requireActivity(), DashboardActivity::class.java)
         startActivity(intent)
         activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
@@ -645,7 +645,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
         dismiss()
         buttonSubmit.isClickable=true
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 
     override fun onSuccessDeleteProof(position: Int) {
@@ -653,33 +653,33 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         dismiss()
         listPersonalId!!.removeAt(position)
         personalIdAdapter!!.notifyDataSetChanged()
-        val sharedPrefOBJ= SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(requireActivity())
         sharedPrefOBJ.profileUpdate=resources.getString(R.string.status_true)
     }
 
     override fun onFailureDeleteProof(message: String) {
         dismiss()
-        CommonMethod.customSnackBarError(rootLayout,activity!!,message)
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),message)
     }
 
     private fun cameraClick()
     {
         //activity!!.cacheDir.deleteRecursively()
         val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val imagePath = File(activity!!.filesDir, "images")
+        val imagePath = File(requireActivity().filesDir, "images")
         photoFile = File(imagePath, "personal.jpg")
         if (photoFile.exists()) {
             photoFile.delete()
         } else {
             photoFile.parentFile!!.mkdirs()
         }
-        captureFilePath = FileProvider.getUriForFile(activity!! as ProfileEditIdInfoActivity, /*BuildConfig.APPLICATION_ID + ".provider"*/"com.app.l_pesa", photoFile)
+        captureFilePath = FileProvider.getUriForFile(requireActivity() as ProfileEditIdInfoActivity, /*BuildConfig.APPLICATION_ID + ".provider"*/"com.app.l_pesa", photoFile)
 
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
-            val clip = ClipData.newUri(activity!!.contentResolver, "id photo", captureFilePath)
+            val clip = ClipData.newUri(requireActivity().contentResolver, "id photo", captureFilePath)
             captureIntent.clipData = clip
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         }
@@ -712,7 +712,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                     if (resultCode == RESULT_CANCELED) {
                         val responseString = data . getStringExtra (ZOOP_RESULT)
-                        CommonMethod.customSnackBarError(rootLayout, activity!!, "Aadhaar Not Verified!")
+                        CommonMethod.customSnackBarError(rootLayout, requireActivity(), "Aadhaar Not Verified!")
                         Log.e("SDK test error ", requestType + " err " + responseString + resultCode);
                     }
 
