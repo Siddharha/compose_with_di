@@ -31,6 +31,7 @@ import com.facebook.appevents.AppEventsLogger
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_lpk.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class LpkFragment: Fragment(), ICallBackInfoLPK {
@@ -54,6 +55,13 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
         initLoader()
         initData()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
     }
 
     private fun initLoader()
@@ -115,6 +123,26 @@ class LpkFragment: Fragment(), ICallBackInfoLPK {
                 CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(com.app.l_pesa.R.string.no_internet))
             }
 
+
+        }
+
+
+
+        cvLPKTreadingBanner.setOnClickListener {
+
+            if (!progressDialog.isShowing){
+                progressDialog.show()
+            }
+            doAsync {
+                val uri = Uri.parse("https://ico.lpesa.io")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+
+                uiThread {
+                    startActivity(intent)
+
+                }
+
+            }
 
         }
 

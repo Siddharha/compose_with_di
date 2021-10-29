@@ -14,6 +14,26 @@
 
     android:orientation="vertical"
     >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvLPKTreadingBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_3sdp"
+        android:layout_margin="@dimen/_7sdp"
+        >
+        <ImageView
+            android:id="@+id/imgLpk"
+            android:contentDescription="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_3sdp"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/txtLineOne"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/lpk_banner" />
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
 
@@ -211,6 +231,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/llLpkTrading"
+        android:visibility="gone"
         android:orientation="vertical">
         <androidx.cardview.widget.CardView
             android:id="@+id/cvLPKTreading"

@@ -381,18 +381,69 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
                 if(progressDialog.isShowing){
                     progressDialog.dismiss()
                 }
+
+                val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity, R.style.MyAlertDialogTheme)
+                dialogBuilder.setMessage("Unable to find any Tenure for the loan. Default will be applied")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { dialog, _ ->
+                        dialog.dismiss()
+                        val sharedPrefOBJ = SharedPref(this@LoanApplyActivity)
+                        sharedPrefOBJ.removeShared()
+                        startActivity(Intent(this@LoanApplyActivity, MainActivity::class.java))
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                        finish()
+                    }
+
+                val alert = dialogBuilder.create()
+                alert.setTitle(resources.getString(R.string.app_name))
+                alert.show()
+
             }
 
             override fun onFailureLoanTenureList(jsonMessage: String) {
                 if(progressDialog.isShowing){
                     progressDialog.dismiss()
                 }
+
+                val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity, R.style.MyAlertDialogTheme)
+                dialogBuilder.setMessage(jsonMessage)
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { dialog, _ ->
+                        dialog.dismiss()
+                        val sharedPrefOBJ = SharedPref(this@LoanApplyActivity)
+                        sharedPrefOBJ.removeShared()
+                        startActivity(Intent(this@LoanApplyActivity, MainActivity::class.java))
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                        finish()
+                    }
+
+                val alert = dialogBuilder.create()
+                alert.setTitle(resources.getString(R.string.app_name))
+                alert.show()
+
             }
 
             override fun onSessionTimeOut(message: String) {
                 if(progressDialog.isShowing){
                     progressDialog.dismiss()
                 }
+                val dialogBuilder = AlertDialog.Builder(this@LoanApplyActivity, R.style.MyAlertDialogTheme)
+                dialogBuilder.setMessage(message)
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { dialog, _ ->
+                        dialog.dismiss()
+                        val sharedPrefOBJ = SharedPref(this@LoanApplyActivity)
+                        sharedPrefOBJ.removeShared()
+                        startActivity(Intent(this@LoanApplyActivity, MainActivity::class.java))
+                        overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                        finish()
+                    }
+
+                val alert = dialogBuilder.create()
+                alert.setTitle(resources.getString(R.string.app_name))
+                alert.show()
+
+
             }
 
         })
