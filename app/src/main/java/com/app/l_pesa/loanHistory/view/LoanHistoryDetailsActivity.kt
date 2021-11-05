@@ -22,9 +22,16 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.GlobalLoanHistoryModel
+import com.app.l_pesa.loanHistory.model.ResLoanDetails
+import com.app.l_pesa.loanHistory.model.ResLoanHistoryCurrent
+import com.app.l_pesa.loanplan.inter.ICallBackLoanDetails
+import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
+import com.app.l_pesa.loanplan.model.ResLoanPlans
+import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_history_details.*
 import kotlinx.android.synthetic.main.content_loan_history_details.*
 import java.text.DecimalFormat
@@ -40,6 +47,43 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         toolbarFont(this@LoanHistoryDetailsActivity)
 
         initData()
+        onRefrash()
+    }
+
+    private fun onRefrash() {
+        srDetails.setOnRefreshListener {
+
+            val loanHistoryData= GlobalLoanHistoryModel.getInstance()
+            val jsonObject = JsonObject()
+            //appliedProduct.loanId
+            val loanType = intent.getStringExtra("LOAN_TYPE")
+            jsonObject.addProperty("loan_type", loanType)
+            val presenterLoanPlans = PresenterLoanPlans()
+            presenterLoanPlans.getLoanDetails(this,jsonObject,object : ICallBackLoanDetails {
+                override fun onFailureLoanDetails(jsonMessage: String) {
+                    if(srDetails.isRefreshing){
+                        srDetails.isRefreshing = false
+                    }
+                }
+
+                override fun onSessionTimeOut(message: String) {
+                    if(srDetails.isRefreshing){
+                        srDetails.isRefreshing = false
+                    }
+                }
+
+                override fun onSuccessLoanPlansDetails(details: ResLoanDetails.Data) {
+                    if(srDetails.isRefreshing){
+                        srDetails.isRefreshing = false
+                    }
+                    loanHistoryData.modelData?.loan_status = details.loanStatus
+                    initData()
+                }
+
+            })
+        }
+
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -163,7 +207,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
             }
             else
             {
-                customSnackBarError(rlRoot,resources.getString(R.string.no_internet))
+                customSnackBarError(srDetails,resources.getString(R.string.no_internet))
             }
         }
 
@@ -184,7 +228,7 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
             }
             else
             {
-                customSnackBarError(rlRoot,resources.getString(R.string.no_internet))
+                customSnackBarError(srDetails,resources.getString(R.string.no_internet))
             }
         }
 

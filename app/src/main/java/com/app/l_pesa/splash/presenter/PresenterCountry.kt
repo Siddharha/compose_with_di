@@ -2,10 +2,9 @@ package com.app.l_pesa.splash.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.app.l_pesa.API.BaseService
-import com.app.l_pesa.API.RetrofitHelper
+import com.app.l_pesa.api.BaseService
+import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.login.inter.ICallBackLogin
 import com.app.l_pesa.splash.inter.ICallBackCountry
 import com.app.l_pesa.splash.inter.ICallBackVersion
 import com.google.gson.JsonObject

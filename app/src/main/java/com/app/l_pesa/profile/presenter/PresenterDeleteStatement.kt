@@ -2,12 +2,11 @@ package com.app.l_pesa.profile.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.app.l_pesa.API.BaseService
-import com.app.l_pesa.API.RetrofitHelper
+import com.app.l_pesa.api.BaseService
+import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.profile.inter.ICallBackStatementDelete
-import com.app.l_pesa.profile.inter.ICallBackStatementUpload
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

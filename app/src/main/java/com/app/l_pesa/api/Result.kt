@@ -1,4 +1,4 @@
-package com.app.l_pesa.API
+package com.app.l_pesa.api
 
 import java.lang.Exception
 

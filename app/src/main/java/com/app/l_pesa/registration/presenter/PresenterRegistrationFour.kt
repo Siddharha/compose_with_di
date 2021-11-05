@@ -2,14 +2,10 @@ package com.app.l_pesa.registration.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.app.l_pesa.API.BaseService
-import com.app.l_pesa.API.RetrofitHelper
+import com.app.l_pesa.api.BaseService
+import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.registration.inter.ICallBackRegisterFour
-import com.app.l_pesa.registration.inter.ICallBackRegisterOne
-import com.app.l_pesa.registration.inter.ICallVerifyCode
-import com.app.l_pesa.registration.model.ReqVerifyCode
-import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject

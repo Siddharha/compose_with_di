@@ -21,12 +21,15 @@ import com.app.l_pesa.R
 import com.app.l_pesa.application.MyApplication
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.loanplan.inter.ICallBackLoanDetails
 import com.app.l_pesa.loanplan.model.GlobalLoanPlanModel
+import com.app.l_pesa.loanplan.model.ResLoanPlans
+import com.app.l_pesa.loanplan.presenter.PresenterLoanPlans
 import com.app.l_pesa.main.view.MainActivity
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_plan_details.*
-import kotlinx.android.synthetic.main.content_loan_plan_details.*
 import java.text.DecimalFormat
 
 class LoanPlanDetailsActivity : AppCompatActivity() {
@@ -44,7 +47,10 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
         initData()
         initTimer()
 
+
     }
+
+
 
     @SuppressLint("SetTextI18n")
     private fun initData()

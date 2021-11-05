@@ -2,8 +2,8 @@ package com.app.l_pesa.loanHistory.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.app.l_pesa.API.BaseService
-import com.app.l_pesa.API.RetrofitHelper
+import com.app.l_pesa.api.BaseService
+import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.inter.ICallBackBusinessLoanHistory

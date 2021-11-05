@@ -2,23 +2,17 @@ package com.app.l_pesa.registration.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.app.l_pesa.API.BaseService
-import com.app.l_pesa.API.RetrofitHelper
+import com.app.l_pesa.api.BaseService
+import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
-import com.app.l_pesa.registration.inter.EmailVerifyListener
 import com.app.l_pesa.registration.inter.ICallBackEmailVerify
 import com.app.l_pesa.registration.inter.MobileVerifyListener
 import com.app.l_pesa.registration.model.EmailVerifyRequest
-import com.app.l_pesa.registration.model.EmailVerifyResponse
-import com.app.l_pesa.registration.model.ReqVerifyMobile
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.HttpException
-import retrofit2.Response
 
 
 class PresenterVerify {

@@ -1,4 +1,4 @@
-package com.app.l_pesa.API
+package com.app.l_pesa.api
 
 
 import com.app.l_pesa.allservices.models.SasaPaymentResponse
@@ -138,6 +138,10 @@ interface BaseService{
 
     @POST("products/list")
     fun doLoanList(@Body request: JsonObject): Observable<ResLoanPlans>
+
+     //products/details
+     @POST("loan/detail")
+     fun getLoanDetails(@Body request: JsonObject): Observable<ResLoanDetails>
 
     @POST("loan/history")
     fun doLoanHistory(@Body request: JsonObject,@Query("cursors") cursors:String,@Query("from_date") from_date:String,@Query("to_date") to_date:String ): Observable<ResLoanHistoryCurrent>

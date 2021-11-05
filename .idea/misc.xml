@@ -4,15 +4,30 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.1515625" />
+        <entry key="app/src/main/res/drawable/progress_thumb.xml" value="0.2604166666666667" />
+        <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_apply.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_calculator.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_loan_history_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_loan_payback_scheduled.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_loan_plan_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_registration_step_two.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_sasa_doctor.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_view_file.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/content_loan_history_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/content_loan_payback_scheduled.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/content_loan_plan_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/dialog_payment_schedule.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_all_services.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_business_id_layout.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_dashboard_layout.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_dev.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_loan_calculator.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_loan_plan_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_lpk.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_list_placeholder.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_loan_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_marital_loan_term_cell.xml" value="0.24427083333333333" />
       </map>
     </option>

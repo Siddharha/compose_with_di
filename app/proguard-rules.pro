@@ -108,8 +108,8 @@
 -keep class com.app.l_pesa.common.** { *; }
 -keepclassmembers class com.app.l_pesa.common.** { *; }
 
--keep class com.app.l_pesa.API.** { *; }
--keepclassmembers class com.app.l_pesa.API.** { *; }
+-keep class com.app.l_pesa.api.** { *; }
+-keepclassmembers class com.app.l_pesa.api.** { *; }
 
 -keep class com.app.l_pesa.splash.** { *; }
 -keepclassmembers class com.app.l_pesa.splash.** { *; }

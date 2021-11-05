@@ -31,6 +31,8 @@ import com.app.l_pesa.common.*
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_registration_step_two.*
 import kotlinx.android.synthetic.main.nav_header_main.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -49,7 +51,7 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
     private var socialImage: String? = null
     private var name: String? = null
-
+    private val sharedPref:SharedPref by lazy{ SharedPref(this@RegistrationStepTwoActivity)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_step_two)
@@ -131,16 +133,28 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
 
         startActivityForResult(captureIntent, requestPhoto)*/
 
-        val intent_cam = Intent(this, CamViewActivity::class.java)
-        //intent_cam.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        intent_cam.putExtra(CamUtil.CAM_FACING,0)
-        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
-        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
-        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,ContextCompat.getColor(this,R.color.colorLightBlack))
-        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,ContextCompat.getColor(this,R.color.screenBackground))
+        try {
+            val intent_cam = Intent(this, CamViewActivity::class.java)
+            //intent_cam.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            intent_cam.putExtra(CamUtil.CAM_FACING, 0)
+            intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT, false)
+            intent_cam.putExtra(
+                CamUtil.CAPTURE_BTN_COLOR,
+                ContextCompat.getColor(this, R.color.colorApp)
+            )
+            intent_cam.putExtra(
+                CamUtil.CAPTURE_BTN_ICON_COLOR,
+                ContextCompat.getColor(this, R.color.colorLightBlack)
+            )
+            intent_cam.putExtra(
+                CamUtil.CAPTURE_CONTROL_COLOR,
+                ContextCompat.getColor(this, R.color.screenBackground)
+            )
 
-        startActivityForResult(intent_cam,requestPhoto)
-
+            startActivityForResult(intent_cam, requestPhoto)
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -167,16 +181,32 @@ class RegistrationStepTwoActivity : AppCompatActivity() {
         try {
             if (photoPath != Uri.EMPTY) {
                 progressDialog.show()
-                handleRotation(photoFile.absolutePath)
-                Handler().postDelayed({
-                    dismiss()
-                   // imageProfile.setImageURI(null)
-                    Glide.with(this).load(photoFile).into(imageProfile)
-                   // imageProfile.setImageURI(photoPath)
+                doAsync {
+                    handleRotation(photoFile.absolutePath)
+
+                    // imageProfile.setImageURI(photoPath)
                     captureImageStatus = true
-                    val sharedPref = SharedPref(this@RegistrationStepTwoActivity)
+
                     sharedPref.imagePath = photoFile.absolutePath
-                }, 5000)
+
+                    uiThread {
+                        if (progressDialog.isShowing){
+                            progressDialog.dismiss()
+                        }
+                        Glide.with(this@RegistrationStepTwoActivity).load(photoFile).into(imageProfile)
+                    }
+                }
+
+
+//                Handler().postDelayed({
+//                    dismiss()
+//                   // imageProfile.setImageURI(null)
+//                    Glide.with(this).load(photoFile).into(imageProfile)
+//                   // imageProfile.setImageURI(photoPath)
+//                    captureImageStatus = true
+//                    val sharedPref = SharedPref(this@RegistrationStepTwoActivity)
+//                    sharedPref.imagePath = photoFile.absolutePath
+//                }, 5000)
 
 
             } else {

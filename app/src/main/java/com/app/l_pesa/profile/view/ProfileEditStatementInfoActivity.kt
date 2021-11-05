@@ -2,14 +2,12 @@ package com.app.l_pesa.profile.view
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -18,7 +16,7 @@ import android.text.style.RelativeSizeSpan
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.BuildConfig
@@ -49,7 +47,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-val FILE_REQUEST_CODE = 1001
+//const val FILE_REQUEST_CODE = 1001
 
 //lateinit var captureFilePath: Uri
  var pdfFile:File?=null
@@ -434,13 +432,13 @@ class AddStatementBottomsheet(activity: Activity) : BottomSheetDialogFragment(),
     fun onActionPerform(v:View){
 
         v.tvFrom.setOnClickListener {
-            val dialog = DatePickerDialog(context!!,dateListener(v,0), year!!, month!!, day!!)
+            val dialog = DatePickerDialog(requireContext(),dateListener(v,0), year!!, month!!, day!!)
             dialog.show()
 
         }
 
         v.tvTo.setOnClickListener {
-            val dialog = DatePickerDialog(context!!,dateListener(v,1), year!!, month!!, day!!)
+            val dialog = DatePickerDialog(requireContext(),dateListener(v,1), year!!, month!!, day!!)
             dialog.show()
 
         }

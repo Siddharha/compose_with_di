@@ -500,7 +500,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
         //txt_loan_description.visibility = View.GONE
         tilChooseTerm.visibility = View.VISIBLE
         etChooseTerm.setText("${t.weeks} Weeks")
-        if(t.default){
+        if(!t.default){
         loanTanure = t.weeks.toString()}
         showDescription()
 

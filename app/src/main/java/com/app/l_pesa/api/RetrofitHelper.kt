@@ -1,4 +1,4 @@
-package com.app.l_pesa.API
+package com.app.l_pesa.api
 
 import com.app.l_pesa.BuildConfig
 import com.app.l_pesa.BuildConfig.BASE_URL

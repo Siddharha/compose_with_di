@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.l_pesa.API.BaseService
-import com.app.l_pesa.API.RetrofitHelper
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.points.adapters.PurchaseCreditHistoryListAdapter

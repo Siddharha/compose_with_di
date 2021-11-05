@@ -676,13 +676,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         captureFilePath = FileProvider.getUriForFile(requireActivity() as ProfileEditIdInfoActivity, /*BuildConfig.APPLICATION_ID + ".provider"*/"com.app.l_pesa", photoFile)
 
         captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        } else {
-            val clip = ClipData.newUri(requireActivity().contentResolver, "id photo", captureFilePath)
-            captureIntent.clipData = clip
-            captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-        }
+        captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
 
         startActivityForResult(captureIntent, requestPhoto)
 
@@ -743,7 +737,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
                             try {
                                 val jResp = JSONObject(errorString!!)
                                 //sdk_response
-                                CommonMethod.customSnackBarError(rootLayout, activity!!, "${jResp.getString("sdk_response")}")
+                                CommonMethod.customSnackBarError(rootLayout, requireActivity(), "${jResp.getString("sdk_response")}")
                                 // tvResult.setText(errorString);
 //                            tvResult.setVisibility(View.VISIBLE);
 //                            resultDisplayLayout.setVisibility(View.GONE);
@@ -779,7 +773,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         val Gender = basicInfo?.optString("Gender")
         val zoop_id = jsonObject.optString("id")
 
-        val dialog = Dialog(activity!!)
+        val dialog = Dialog(requireActivity())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.confirm_aadhaar_layout)
@@ -838,13 +832,13 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             }
             else
             {
-                Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(),"Retake Photo", Toast.LENGTH_SHORT).show()
             }
 
         }
         catch (exp:Exception)
         {
-            Toast.makeText(activity!!,"Retake Photo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(),"Retake Photo", Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -909,7 +903,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
     }
 
     private fun openOfflineAadhaarActivity() {
-        val gatewayIntent =  Intent(activity!!, ZoopConsentActivity::class.java)
+        val gatewayIntent =  Intent(requireActivity(), ZoopConsentActivity::class.java)
         gatewayIntent.putExtra(ZOOP_TRANSACTION_ID, sharedPrefOBJ.zoopGatewayId)
         gatewayIntent.putExtra(ZOOP_BASE_URL, "prod.aadhaarapi.com")
        // gatewayIntent.putExtra(ZOOP_EMAIL, Email) //not mandatory
@@ -924,14 +918,14 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         if (progressDialog.isShowing){
             progressDialog.dismiss()
         }
-        Toast.makeText(activity!!,response.message,Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(),response.message,Toast.LENGTH_LONG).show()
     }
 
     override fun onUnknownErr(mgs: String) {
         if (progressDialog.isShowing){
             progressDialog.dismiss()
         }
-        Toast.makeText(activity!!,mgs,Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(),mgs,Toast.LENGTH_LONG).show()
     }
 
 }
