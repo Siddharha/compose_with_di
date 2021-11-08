@@ -20,7 +20,6 @@
             app:titleTextAppearance="@style/Toolbar.TitleText"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-
     <include layout="@layout/content_loan_history_details" />
 
 

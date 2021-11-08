@@ -46,7 +46,7 @@ data class ResLoanDetails(
         @SerializedName("interest_rt")
         val interestRt: Double,
         @SerializedName("loan_amount")
-        val loanAmount: Int,
+        val loanAmount: Double,
         @SerializedName("loan_amount_txt")
         val loanAmountTxt: String,
         @SerializedName("loan_id")
@@ -70,7 +70,7 @@ data class ResLoanDetails(
         @SerializedName("sanctioned_date")
         val sanctionedDate: String,
         @SerializedName("total_payback")
-        val totalPayback: String
+        val totalPayback: Int
     )
 
     data class Status(

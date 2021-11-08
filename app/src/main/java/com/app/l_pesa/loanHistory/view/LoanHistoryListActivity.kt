@@ -6,6 +6,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.TextView
@@ -58,7 +59,7 @@ class LoanHistoryListActivity : AppCompatActivity(), TabLayout.OnTabSelectedList
 
         val sharedPref= SharedPref(this@LoanHistoryListActivity)
 
-        Handler().postDelayed(
+        Handler(Looper.myLooper()!!).postDelayed(
                 {
                     if(sharedPref.openTabLoan=="CURRENT")
                     {

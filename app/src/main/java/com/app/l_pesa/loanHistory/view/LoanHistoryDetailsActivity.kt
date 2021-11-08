@@ -39,48 +39,82 @@ import java.text.DecimalFormat
 
 class LoanHistoryDetailsActivity : AppCompatActivity() {
 
+    var total_payback = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loan_history_details)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this@LoanHistoryDetailsActivity)
-
-        initData()
+        loadData()
         onRefrash()
+    }
+
+    private fun loadData() {
+        doLoadDetails()
+    }
+
+    private fun doLoadDetails() {
+        val loanHistoryData= GlobalLoanHistoryModel.getInstance()
+        val jsonObject = JsonObject()
+        //appliedProduct.loanId
+        val loanType = intent.getStringExtra("LOAN_TYPE")
+        jsonObject.addProperty("loan_type", loanType)
+        val presenterLoanPlans = PresenterLoanPlans()
+        presenterLoanPlans.getLoanDetails(this,jsonObject,object : ICallBackLoanDetails {
+            override fun onFailureLoanDetails(jsonMessage: String) {
+                if(srDetails.isRefreshing){
+                    srDetails.isRefreshing = false
+                }
+            }
+
+            override fun onSessionTimeOut(message: String) {
+                if(srDetails.isRefreshing){
+                    srDetails.isRefreshing = false
+                }
+            }
+
+            override fun onSuccessLoanPlansDetails(details: ResLoanDetails.Data) {
+                if(srDetails.isRefreshing){
+                    srDetails.isRefreshing = false
+
+                }
+                if(flLoader.visibility == View.VISIBLE){
+                flLoader.visibility = View.GONE
+                }
+                loanHistoryData.modelData?.apply {
+                    total_payback = details.totalPayback
+                    loan_status = details.loanStatus
+                    loan_amount_txt = details.loanAmountTxt
+                    actual_loan_amount = details.actualLoanAmount.toString()
+                    applied_date = details.appliedDate
+                    conversion_charge = details.conversionCharge.toString()
+                    conversion_charge_amount = details.conversionChargeAmount.toString()
+                    convertion_dollar_value = details.convertionDollarValue.toString()
+                    convertion_loan_amount = details.convertionLoanAmount.toString()
+                    cr_sc_when_requesting_loan = details.crScWhenRequestingLoan
+                    currency_code = details.currencyCode
+                    currency_flag = details.currencyFlag
+                    disapprove_date = details.disapproveDate
+                    disapprove_reason = details.disapproveReason
+                    due_date = details.dueDate
+                    duration = details.duration
+                    finished_date = details.finishedDate
+                    processing_fees = details.processingFees.toString()
+                    processing_fees_amount = details.processingFeesAmount.toString()
+                    sanctioned_date = details.sanctionedDate
+                }
+
+                initData()
+            }
+
+        })
     }
 
     private fun onRefrash() {
         srDetails.setOnRefreshListener {
+            doLoadDetails()
 
-            val loanHistoryData= GlobalLoanHistoryModel.getInstance()
-            val jsonObject = JsonObject()
-            //appliedProduct.loanId
-            val loanType = intent.getStringExtra("LOAN_TYPE")
-            jsonObject.addProperty("loan_type", loanType)
-            val presenterLoanPlans = PresenterLoanPlans()
-            presenterLoanPlans.getLoanDetails(this,jsonObject,object : ICallBackLoanDetails {
-                override fun onFailureLoanDetails(jsonMessage: String) {
-                    if(srDetails.isRefreshing){
-                        srDetails.isRefreshing = false
-                    }
-                }
-
-                override fun onSessionTimeOut(message: String) {
-                    if(srDetails.isRefreshing){
-                        srDetails.isRefreshing = false
-                    }
-                }
-
-                override fun onSuccessLoanPlansDetails(details: ResLoanDetails.Data) {
-                    if(srDetails.isRefreshing){
-                        srDetails.isRefreshing = false
-                    }
-                    loanHistoryData.modelData?.loan_status = details.loanStatus
-                    initData()
-                }
-
-            })
         }
 
 
@@ -110,6 +144,8 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
         txt_request_date.text = loanHistoryData.applied_date
 
         txt_loan_duration.text = loanHistoryData.duration
+
+        tvTotalLoanAmount.text = loanHistoryData.currency_code+" "+total_payback.toString()
 
         if(loanHistoryData.convertion_dollar_value.isEmpty()){
             txt_currency_conversion_rate.text = loanHistoryData.currency_code+" "+"0"
@@ -160,21 +196,29 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
             loanHistoryData.loan_status=="C" -> {
                 rlDisApproved.visibility=View.GONE
                 txt_status.text = resources.getString(R.string.completed)
+                rlTotalDue.visibility = View.GONE
+                viewDividerTotalDue.visibility = View.GONE
                 imgStatus.setBackgroundResource(R.drawable.ic_approved_icon)
             }
             loanHistoryData.loan_status=="A" -> {
                 rlDisApproved.visibility=View.GONE
+                rlTotalDue.visibility = View.VISIBLE
+                viewDividerTotalDue.visibility = View.VISIBLE
                 txt_status.text = resources.getString(R.string.approved)
                 imgStatus.setBackgroundResource(R.drawable.ic_approved_icon)
             }
             loanHistoryData.loan_status=="P" -> {
                 rlDisApproved.visibility=View.GONE
+                rlTotalDue.visibility = View.GONE
                 txt_status.text = resources.getString(R.string.pending)
                 imgStatus.setBackgroundResource(R.drawable.ic_loan_pending)
                 rlPayment.visibility=View.GONE
+                viewDividerTotalDue.visibility = View.GONE
             }
             loanHistoryData.loan_status=="DA" -> {
                 txt_status.text = resources.getString(R.string.disapproved)
+                rlTotalDue.visibility = View.GONE
+                viewDividerTotalDue.visibility = View.GONE
                 txt_status.setTextColor(Color.RED)
                 imgStatus.setBackgroundResource(R.drawable.ic_loan_disapproved)
                 rlDisApproved.visibility=View.VISIBLE
@@ -184,6 +228,8 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
             else -> {
                 rlDisApproved.visibility=View.GONE
                 txt_status.text = resources.getString(R.string.due)
+                rlTotalDue.visibility = View.GONE
+                viewDividerTotalDue.visibility = View.GONE
                 txt_status.setTextColor(Color.RED)
                 imgStatus.setBackgroundResource(R.drawable.ic_due_icon)
             }
