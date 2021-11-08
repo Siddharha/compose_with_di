@@ -42,6 +42,12 @@ class CurrentLoan: Fragment(), ICallBackCurrentLoan {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       // loadLoan()
+       // swipeRefresh()
+    }
+
+    override fun onResume() {
+        super.onResume()
         loadLoan()
         swipeRefresh()
     }

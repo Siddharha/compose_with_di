@@ -70,7 +70,7 @@ data class ResLoanDetails(
         @SerializedName("sanctioned_date")
         val sanctionedDate: String,
         @SerializedName("total_payback")
-        val totalPayback: Int
+        val totalPayback: String
     )
 
     data class Status(

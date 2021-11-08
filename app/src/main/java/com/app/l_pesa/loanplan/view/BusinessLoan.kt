@@ -42,6 +42,12 @@ class BusinessLoan:Fragment(), ICallBackBusinessLoan {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       // loanLoan()
+        //swipeRefresh()
+    }
+
+    override fun onResume() {
+        super.onResume()
         loanLoan()
         swipeRefresh()
     }
