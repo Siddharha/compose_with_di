@@ -10,17 +10,17 @@ data class ResLoanDetails(
 ) {
     data class Data(
         @SerializedName("actual_loan_amount")
-        val actualLoanAmount: Int,
+        val actualLoanAmount: String,
         @SerializedName("applied_date")
         val appliedDate: String,
         @SerializedName("conversion_charge")
-        val conversionCharge: Double,
+        val conversionCharge: String,
         @SerializedName("conversion_charge_amount")
-        val conversionChargeAmount: Int,
+        val conversionChargeAmount: String,
         @SerializedName("convertion_dollar_value")
-        val convertionDollarValue: Int,
+        val convertionDollarValue: String,
         @SerializedName("convertion_loan_amount")
-        val convertionLoanAmount: Int,
+        val convertionLoanAmount: String,
         @SerializedName("cr_sc_when_requesting_loan")
         val crScWhenRequestingLoan: String,
         @SerializedName("currency_code")
@@ -44,9 +44,9 @@ data class ResLoanDetails(
         @SerializedName("interest_rate")
         val interestRate: String,
         @SerializedName("interest_rt")
-        val interestRt: Double,
+        val interestRt: String,
         @SerializedName("loan_amount")
-        val loanAmount: Double,
+        val loanAmount: String,
         @SerializedName("loan_amount_txt")
         val loanAmountTxt: String,
         @SerializedName("loan_id")
@@ -60,17 +60,17 @@ data class ResLoanDetails(
         @SerializedName("lost_date")
         val lostDate: String,
         @SerializedName("no_of_weeks")
-        val noOfWeeks: Int,
+        val noOfWeeks: String,
         @SerializedName("processing_fees")
-        val processingFees: Int,
+        val processingFees: String,
         @SerializedName("processing_fees_amount")
-        val processingFeesAmount: Int,
+        val processingFeesAmount: String,
         @SerializedName("product_id")
-        val productId: Int,
+        val productId: String,
         @SerializedName("sanctioned_date")
         val sanctionedDate: String,
         @SerializedName("total_payback")
-        val totalPayback: Int
+        val totalPayback: String
     )
 
     data class Status(
@@ -79,6 +79,6 @@ data class ResLoanDetails(
         @SerializedName("message")
         val message: String,
         @SerializedName("statusCode")
-        val statusCode: Int
+        val statusCode: String
     )
 }

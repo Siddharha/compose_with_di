@@ -39,7 +39,7 @@ import java.text.DecimalFormat
 
 class LoanHistoryDetailsActivity : AppCompatActivity() {
 
-    var total_payback = 0
+    var total_payback = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loan_history_details)

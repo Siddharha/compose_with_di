@@ -11,6 +11,9 @@
         <entry key="app/src/main/res/layout/activity_loan_history_details.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_payback_scheduled.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_plan_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_registration_step_five.xml" value="0.20277777777777778" />
+        <entry key="app/src/main/res/layout/activity_registration_step_four.xml" value="0.20277777777777778" />
+        <entry key="app/src/main/res/layout/activity_registration_step_three.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/layout/activity_registration_step_two.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_sasa_doctor.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_view_file.xml" value="0.24427083333333333" />
@@ -25,11 +28,14 @@
         <entry key="app/src/main/res/layout/fragment_loan_calculator.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_loan_plan_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_lpk.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_personal_id_layout.xml" value="0.18703703703703703" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_list_placeholder.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_loan_history.xml" value="0.24051282051282052" />
         <entry key="app/src/main/res/layout/layout_loan_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_marital_loan_term_cell.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/layout_registration_step_five.xml" value="0.20277777777777778" />
+        <entry key="app/src/main/res/layout/payment_ui_dialog_bottom_sheet.xml" value="0.25" />
       </map>
     </option>
   </component>

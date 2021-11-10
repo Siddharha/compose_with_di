@@ -22,6 +22,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -147,7 +148,9 @@ class RegistrationStepFiveActivity : AppCompatActivity(), ICallBackUpload, ICall
         intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(this,R.color.colorApp))
         intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,ContextCompat.getColor(this,R.color.colorLightBlack))
         intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,ContextCompat.getColor(this,R.color.screenBackground))
-
+        intent_cam.putExtra(CamUtil.TARGET_BOX, View.VISIBLE)
+        intent_cam.putExtra(CamUtil.TARGET_COLOR, Color.parseColor("#00bcd4"))
+        intent_cam.putExtra(CamUtil.TARGET_WIDTH, 5)
             startActivityForResult(intent_cam, requestPhoto)
 
 

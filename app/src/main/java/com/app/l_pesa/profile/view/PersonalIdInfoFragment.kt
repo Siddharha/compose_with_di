@@ -1,5 +1,7 @@
 package com.app.l_pesa.profile.view
 
+import `in`.creativelizard.creativecam.CamUtil
+import `in`.creativelizard.creativecam.CamViewActivity
 import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
@@ -664,23 +666,36 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
     private fun cameraClick()
     {
-        //activity!!.cacheDir.deleteRecursively()
-        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        val imagePath = File(requireActivity().filesDir, "images")
-        photoFile = File(imagePath, "personal.jpg")
-        if (photoFile.exists()) {
-            photoFile.delete()
-        } else {
-            photoFile.parentFile!!.mkdirs()
-        }
-        captureFilePath = FileProvider.getUriForFile(requireActivity() as ProfileEditIdInfoActivity, /*BuildConfig.APPLICATION_ID + ".provider"*/"com.app.l_pesa", photoFile)
+//        //activity!!.cacheDir.deleteRecursively()
+//        val captureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//        val imagePath = File(requireActivity().filesDir, "images")
+//        photoFile = File(imagePath, "personal.jpg")
+//        if (photoFile.exists()) {
+//            photoFile.delete()
+//        } else {
+//            photoFile.parentFile!!.mkdirs()
+//        }
+//        captureFilePath = FileProvider.getUriForFile(requireActivity() as ProfileEditIdInfoActivity, /*BuildConfig.APPLICATION_ID + ".provider"*/"com.app.l_pesa", photoFile)
+//
+//        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
+//        captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+//
+//        startActivityForResult(captureIntent, requestPhoto)
 
-        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, captureFilePath)
-        captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        val intent_cam = Intent(requireContext(), CamViewActivity::class.java)
+        //intent_cam.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        intent_cam.putExtra(CamUtil.CAM_FACING, 1)
+//        intent_cam.putExtra(CamUtil.CAM_SWITCH_OPT,false)
+//        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,"#00695c")
+//        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,"#ffffff")
 
-        startActivityForResult(captureIntent, requestPhoto)
-
-
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_COLOR,ContextCompat.getColor(requireContext(),R.color.colorApp))
+        intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,ContextCompat.getColor(requireContext(),R.color.colorLightBlack))
+        intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,ContextCompat.getColor(requireContext(),R.color.screenBackground))
+        intent_cam.putExtra(CamUtil.TARGET_BOX, View.VISIBLE)
+        intent_cam.putExtra(CamUtil.TARGET_COLOR, Color.parseColor("#00bcd4"))
+        intent_cam.putExtra(CamUtil.TARGET_WIDTH, 5)
+        startActivityForResult(intent_cam, requestPhoto)
     }
 
 
@@ -692,7 +707,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
 
                 if (resultCode == Activity.RESULT_OK)
                 {
-                    setImage()
+                    setImage(data?.getStringExtra(CamUtil.IMG_FILE_PATH)!!)
                 }
             REQUEST_AADHAARAPI ->
                 {
@@ -811,10 +826,11 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
             dialog.show()
     }
 
-    private fun setImage() {
+    private fun setImage(filepath:String) {
 
-
-        val photoPath: Uri = captureFilePath
+        photoFile = File(filepath)
+       // val photoPath: Uri = captureFilePath
+        val photoPath: Uri = Uri.fromFile(photoFile)//captureFilePath
         try {
             if(photoPath!=Uri.EMPTY)
             {
