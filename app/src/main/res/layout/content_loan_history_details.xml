@@ -949,7 +949,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_weight="1"
                                             android:layout_height="wrap_content"
-                                            android:text="Total Loan Amount: "
+                                            android:text="Total Payback Amount : "
                                             android:textColor="@color/color_gray_light"
                                             android:textSize="@dimen/_11sdp" />
 
