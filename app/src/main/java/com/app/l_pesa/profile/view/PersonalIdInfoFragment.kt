@@ -693,6 +693,7 @@ class PersonalIdInfoFragment : Fragment(), ICallBackClickPersonalId, ICallBackPr
         intent_cam.putExtra(CamUtil.CAPTURE_BTN_ICON_COLOR,ContextCompat.getColor(requireContext(),R.color.colorLightBlack))
         intent_cam.putExtra(CamUtil.CAPTURE_CONTROL_COLOR,ContextCompat.getColor(requireContext(),R.color.screenBackground))
         intent_cam.putExtra(CamUtil.TARGET_BOX, View.VISIBLE)
+        intent_cam.putExtra(CamUtil.TARGET_BOX_TYPE, 1)
         intent_cam.putExtra(CamUtil.TARGET_COLOR, Color.parseColor("#00bcd4"))
         intent_cam.putExtra(CamUtil.TARGET_WIDTH, 5)
         startActivityForResult(intent_cam, requestPhoto)
