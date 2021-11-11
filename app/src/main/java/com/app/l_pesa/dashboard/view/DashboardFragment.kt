@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
@@ -14,8 +15,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.app.l_pesa.R
 import com.app.l_pesa.allservices.views.SasaDoctorActivity
 import com.app.l_pesa.common.CommonMethod
@@ -37,16 +42,22 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import java.text.DecimalFormat
 
-
+private const val BANNER_PAGES = 2
 class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
 
 
    private lateinit  var progressDialog: ProgressDialog
-
+   private val addPagerAdapter:ScreenSlidePagerAdapter by lazy{ScreenSlidePagerAdapter(this)}
    companion object {
         fun newInstance(): androidx.fragment.app.Fragment {
             return DashboardFragment()
         }
+    }
+
+    private inner class ScreenSlidePagerAdapter(fa: Fragment) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = BANNER_PAGES
+
+        override fun createFragment(position: Int): Fragment = ScreenSlidePageAdFragment(position)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,8 +71,40 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         swipeRefresh()
         initUI()
         initData()
+        loadAdBanner()
         onActionPerform()
         loadDashboard()
+    }
+
+    private fun loadAdBanner() {
+        pagerAdBanner.adapter = addPagerAdapter
+        pagerAdBanner.isUserInputEnabled = false
+        val h = Handler(Looper.myLooper()!!)
+        var r = Runnable {
+            pagerAdBanner.setCurrentItem(1,true)
+        }
+
+        h.postDelayed(r,3000)
+
+        pagerAdBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if(position == 0){
+                    Handler(Looper.myLooper()!!).postDelayed({
+                        pagerAdBanner.setCurrentItem(1,true)
+
+                    },3000)
+
+                }else if(position == 1){
+
+                    Handler(Looper.myLooper()!!).postDelayed({
+                        pagerAdBanner.setCurrentItem(0,true)
+
+                    },3000)
+                }
+            }
+        })
+
     }
 
     private fun onActionPerform() {
