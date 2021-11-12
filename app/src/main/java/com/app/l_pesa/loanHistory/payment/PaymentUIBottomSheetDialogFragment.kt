@@ -1,5 +1,6 @@
 package com.app.l_pesa.loanHistory.payment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.app.l_pesa.R
 import com.app.l_pesa.loanHistory.inter.ICallBackPaymentPayout
+import com.app.l_pesa.loanHistory.model.ResLoanPayment
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
@@ -36,7 +38,13 @@ class PaymentUIBottomSheetDialogFragment(loanInfo: ResPaybackSchedule.LoanInfo) 
             if(v.etAmount1.isChecked) {
                 PayUtil.payNow(requireContext(),loanInfo,this)
             }else {
-               Toast.makeText(requireContext(),"Please select amount to be paid.",Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Please select amount to be paid.")
+                    .setNegativeButton("dismiss"){d,_->
+                        d.dismiss()
+                    }
+                    .create().show()
+              // Toast.makeText(requireContext(),"Please select amount to be paid.",Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -47,14 +55,26 @@ class PaymentUIBottomSheetDialogFragment(loanInfo: ResPaybackSchedule.LoanInfo) 
     }
 
     private fun loadData(v: View) {
-        v.etAmount1.text = loanInfo.payfullamount?.loanAmount.toString()
+        v.etAmount1.text = "${loanInfo.currencyCode} ${loanInfo.payfullamount?.loanAmount.toString()}"
        // v.tvHistoryID.setText(schedule.loanHistoryId)
     }
 
-    override fun onSuccessLoanPayment() {
-        Toast.makeText(requireContext(),"payment successful",Toast.LENGTH_SHORT).show()
+    override fun onSuccessLoanPayment(loanPaymentData: ResLoanPayment.Data) {
+
+        if(loanPaymentData.responseCode =="0") {
+            Toast.makeText(requireContext(), loanPaymentData.customerMessage, Toast.LENGTH_SHORT)
+                .show()
+        }else{
+            Toast.makeText(requireContext(), loanPaymentData.customerMessage, Toast.LENGTH_SHORT)
+                .show()
+        }
         dismiss()
     }
+
+//    override fun onSuccessLoanPayment() {
+//        Toast.makeText(requireContext(),"payment successful",Toast.LENGTH_SHORT).show()
+//        dismiss()
+//    }
 
     override fun onSessionTimeOut(jsonMessage: String) {
 

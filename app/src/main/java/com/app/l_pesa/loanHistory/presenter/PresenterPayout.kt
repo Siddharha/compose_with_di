@@ -32,7 +32,7 @@ class PresenterPayout {
 
                         if(response?.status!!.isSuccess)
                         {
-                            callBackOBJ.onSuccessLoanPayment()
+                            callBackOBJ.onSuccessLoanPayment(response.data)
                         }
                         else
                         {

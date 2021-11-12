@@ -89,19 +89,28 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         pagerAdBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if(position == 0){
-                    Handler(Looper.myLooper()!!).postDelayed({
-                        pagerAdBanner.setCurrentItem(1,true)
 
-                    },3000)
 
-                }else if(position == 1){
-
-                    Handler(Looper.myLooper()!!).postDelayed({
-                        pagerAdBanner.setCurrentItem(0,true)
-
-                    },3000)
+                    if (position == 0) {
+                        Handler(Looper.myLooper()!!).postDelayed({
+                            try {
+                            pagerAdBanner.setCurrentItem(1, true)
+ }catch (e:Exception){
+                    e.printStackTrace()
                 }
+                        }, 3000)
+
+                    } else if (position == 1) {
+
+                        Handler(Looper.myLooper()!!).postDelayed({
+                            try {
+                            pagerAdBanner.setCurrentItem(0, true)
+}catch (e:Exception){
+                    e.printStackTrace()
+                }
+                        }, 3000)
+                    }
+
             }
         })
 
