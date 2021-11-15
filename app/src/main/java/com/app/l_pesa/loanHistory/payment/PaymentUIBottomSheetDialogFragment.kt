@@ -14,9 +14,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.payment_ui_dialog_bottom_sheet.view.*
 
-class PaymentUIBottomSheetDialogFragment(loanInfo: ResPaybackSchedule.LoanInfo) : BottomSheetDialogFragment(),ICallBackPaymentPayout {
+class PaymentUIBottomSheetDialogFragment(loanAmount: Double,
+                                         loanRefNo:String,
+loanCurrencyCode:String,paymentType:String) : BottomSheetDialogFragment(),ICallBackPaymentPayout {
    // private val schedule = sch
-    private val loanInfo = loanInfo
+    private val loanAmount = loanAmount
+    private val loanRefNo = loanRefNo
+    private val loanCurrencyCode = loanCurrencyCode
+    private val paymentType = paymentType
+    private  lateinit var v:View
   /*  @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.content_dialog_bottom_sheet, container, false);
@@ -31,21 +37,32 @@ class PaymentUIBottomSheetDialogFragment(loanInfo: ResPaybackSchedule.LoanInfo) 
     }*/
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.payment_ui_dialog_bottom_sheet, container, false)
+        v = inflater.inflate(R.layout.payment_ui_dialog_bottom_sheet, container, false)
         loadData(v)
         v.btnPay.setOnClickListener {
 
-            if(v.etAmount1.isChecked) {
-                PayUtil.payNow(requireContext(),loanInfo,this)
-            }else {
-                AlertDialog.Builder(requireContext())
-                    .setMessage("Please select amount to be paid.")
+            AlertDialog.Builder(requireContext())
+                    .setMessage("Do you want to pay suggested amount?")
+                .setPositiveButton("Pay"){d,_->
+                    v.llLoader.visibility = View.VISIBLE
+                    PayUtil.payNow(requireContext(),loanAmount,loanRefNo,this)
+                    d.dismiss()
+                }
                     .setNegativeButton("dismiss"){d,_->
                         d.dismiss()
                     }
                     .create().show()
-              // Toast.makeText(requireContext(),"Please select amount to be paid.",Toast.LENGTH_SHORT).show()
-            }
+          //  if(v.etAmount1.isChecked) {
+
+//            }else {
+//                AlertDialog.Builder(requireContext())
+//                    .setMessage("Please select amount to be paid.")
+//                    .setNegativeButton("dismiss"){d,_->
+//                        d.dismiss()
+//                    }
+//                    .create().show()
+//              // Toast.makeText(requireContext(),"Please select amount to be paid.",Toast.LENGTH_SHORT).show()
+//            }
         }
 
         v.btnCancel.setOnClickListener {
@@ -55,12 +72,14 @@ class PaymentUIBottomSheetDialogFragment(loanInfo: ResPaybackSchedule.LoanInfo) 
     }
 
     private fun loadData(v: View) {
-        v.etAmount1.text = "${loanInfo.currencyCode} ${loanInfo.payfullamount?.loanAmount.toString()}"
+
+        v.tvSc.text = paymentType
+        v.etAmount1.text = "$loanCurrencyCode $loanAmount"
        // v.tvHistoryID.setText(schedule.loanHistoryId)
     }
 
     override fun onSuccessLoanPayment(loanPaymentData: ResLoanPayment.Data) {
-
+        v.llLoader.visibility = View.GONE
         if(loanPaymentData.responseCode =="0") {
             Toast.makeText(requireContext(), loanPaymentData.customerMessage, Toast.LENGTH_SHORT)
                 .show()
@@ -77,10 +96,11 @@ class PaymentUIBottomSheetDialogFragment(loanInfo: ResPaybackSchedule.LoanInfo) 
 //    }
 
     override fun onSessionTimeOut(jsonMessage: String) {
-
+        v.llLoader.visibility = View.GONE
     }
 
     override fun onErrorLoanPayment(message: String) {
+        v.llLoader.visibility = View.GONE
         Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
     }
 }

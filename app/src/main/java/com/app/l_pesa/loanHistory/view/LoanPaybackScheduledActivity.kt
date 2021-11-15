@@ -90,9 +90,17 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
                     {
 
                        // doPayAll(dataOBJ!!)
-                       // commonPopupPayment(dataOBJ)
 
-                        PayUtil.loanPaymentUI(this,dataOBJ?.loanInfo!!)
+                           if(dataOBJ?.loanInfo?.currencyCode == "KES"){
+                               PayUtil.loanPaymentUI(this,dataOBJ?.loanInfo?.payfullamount?.loanAmount!!,
+                                   dataOBJ?.loanInfo?.identityNumber!!,dataOBJ?.loanInfo?.currencyCode!!,"Pay Full Amount") //Stk payment enabled for kenya
+                           }else{
+                               doPayAll(dataOBJ!!)
+                                //commonPopupPayment(dataOBJ)
+                           }
+
+
+
                     }
                 }
 

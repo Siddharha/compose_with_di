@@ -13,13 +13,15 @@ import com.google.gson.Gson
 class PayUtil {
 
     companion object{
-        fun loanPaymentUI(activity: AppCompatActivity,loanInfo: ResPaybackSchedule.LoanInfo):BottomSheetDialogFragment{
-            val d = PaymentUIBottomSheetDialogFragment(loanInfo)
+        fun loanPaymentUI(activity: AppCompatActivity,loanAmount:Double,
+                          loanRefNo:String,loanCurrencyCode:String,paymentType:String):BottomSheetDialogFragment{
+            val d = PaymentUIBottomSheetDialogFragment(loanAmount,loanRefNo,loanCurrencyCode,paymentType)
             d.show(activity.supportFragmentManager, "Dialog")
             return d
         }
 
-        fun payNow(context: Context, loanInfo: ResPaybackSchedule.LoanInfo, frg: PaymentUIBottomSheetDialogFragment) {
+
+        fun payNow(context: Context, loanAmount: Double,loanRefNo:String, frg: PaymentUIBottomSheetDialogFragment) {
             //schedule.paidAmount
             val presenterPayout= PresenterPayout()
             val sharedPrefOBJ= SharedPref(context)
@@ -28,11 +30,13 @@ class PayUtil {
             //                "Reference number is: "+dataOBJ.loanInfo!!.identityNumber+"\n"+
             //                "L-Pesa Short code is: "+dataOBJ.loanInfo!!.merchantCode.toString()
             val payoutPayload = PayoutPayload(PayoutPayload.PaymentDetails(
-                    loanInfo.payfullamount?.loanAmount!!,"${loanInfo.identityNumber}",modelDevice.post_data.phone_no
+                    loanAmount,loanRefNo,modelDevice.post_data.phone_no
             ))
             presenterPayout.doPayout(context,payoutPayload,frg)
            //
         }
+
+
 
     }
 }

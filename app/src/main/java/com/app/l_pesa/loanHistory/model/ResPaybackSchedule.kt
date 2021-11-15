@@ -102,7 +102,7 @@ class ResPaybackSchedule {
         var alertMgs: String = ""
         @SerializedName("repayAmount")
         @Expose
-        var repayAmount: Int = 0
+        var repayAmount: Double = 0.0
         @SerializedName("mgsText")
         @Expose
         var mgsText: String = ""

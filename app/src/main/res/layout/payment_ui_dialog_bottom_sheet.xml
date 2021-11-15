@@ -13,7 +13,7 @@
         android:textColor="?android:textColorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pay Back"
+        tools:text="Pay Back"
         android:textSize="18sp"
         android:textStyle="bold" />
     <TextView
@@ -27,17 +27,18 @@
         android:layout_height="wrap_content"
         tools:text="Short Code : 987987"
         android:textSize="14sp" />
+    <TextView
+        android:id="@+id/etAmount1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="?android:textColorPrimary"
+        android:layout_margin="@dimen/_5sdp"
+        android:text="10.0 USD" />
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <CheckBox
-            android:id="@+id/etAmount1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textColor="?android:textColorPrimary"
-            android:layout_margin="@dimen/_5sdp"
-            android:text="10.0 USD" />
+
         <CheckBox
             android:visibility="gone"
             android:id="@+id/etAmount2"
@@ -49,27 +50,49 @@
             tools:text="10.0 USD" />
     </RadioGroup>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorApp"
-        android:gravity="right">
-        <Button
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_3sdp"
-            android:text="Cancel"
-            android:textColor="?android:textColorPrimaryInverse"
-            android:background="@android:color/transparent"/>
-        <Button
-            android:id="@+id/btnPay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_3sdp"
-            android:textColor="?android:textColorPrimaryInverse"
-            android:text="Pay"
-            android:background="@android:color/transparent"/>
-    </LinearLayout>
+            android:background="@color/colorApp"
+            android:gravity="right">
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:text="Cancel"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:background="@android:color/transparent"/>
+            <Button
+                android:id="@+id/btnPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_3sdp"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:text="Stk payment"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llLoader"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:alpha="0.9"
+            android:background="@color/colorApp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:textColor="?android:textColorPrimaryInverse"
+                android:text="Loading..."/>
+        </LinearLayout>
+
+    </FrameLayout>
+
 
 </LinearLayout>

@@ -92,11 +92,12 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
                 }
                 else
                 {
-                  //  if(alScheduleOBJ[position].paymentType == 0){
-                    commonPopupPayment(position)
-//                    }else{
-//                        paymentFromAppUI()
-//                    }
+                    if(alScheduleOBJ[position].currencyCode == "KES"){
+
+                        paymentFromAppUI(alScheduleOBJ[position]) //STK push enabled for Kenya user
+                   }else{
+                        commonPopupPayment(position)
+                    }
 
                 }
             }
@@ -105,8 +106,10 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
 
     }
 
-    private fun paymentFromAppUI() {
-        PayUtil.loanPaymentUI((context as AppCompatActivity),loanInfo)
+    private fun paymentFromAppUI(s:ResPaybackSchedule.Schedule) {
+        PayUtil.loanPaymentUI((context as AppCompatActivity),
+            s.payanytime?.repayAmount!!,loanInfo.identityNumber
+        ,loanInfo.currencyCode,"Pay Instalment")
     }
 
     private fun commonPopupPayment(position: Int) {
