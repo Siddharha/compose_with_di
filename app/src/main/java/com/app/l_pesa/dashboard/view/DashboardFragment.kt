@@ -2,6 +2,7 @@ package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -16,10 +17,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.app.l_pesa.R
 import com.app.l_pesa.allservices.views.SasaDoctorActivity
@@ -27,6 +26,7 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.adapter.LoanListAdapter
+import com.app.l_pesa.dashboard.adapter.ScreenSlidePagerAdapter
 import com.app.l_pesa.dashboard.inter.ICallBackDashboard
 import com.app.l_pesa.dashboard.inter.ICallBackListOnClick
 import com.app.l_pesa.dashboard.model.ResDashboard
@@ -37,28 +37,23 @@ import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
 import com.app.l_pesa.main.view.MainActivity
-import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import java.text.DecimalFormat
 
-private const val BANNER_PAGES = 2
-class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
+class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
 
 
    private lateinit  var progressDialog: ProgressDialog
-   private val addPagerAdapter:ScreenSlidePagerAdapter by lazy{ScreenSlidePagerAdapter(this)}
+    private val adPagerAdapter: ScreenSlidePagerAdapter by lazy { ScreenSlidePagerAdapter(this) }
+
    companion object {
-        fun newInstance(): androidx.fragment.app.Fragment {
-            return DashboardFragment()
-        }
+       fun newInstance(): Fragment {
+           return DashboardFragment()
+       }
     }
 
-    private inner class ScreenSlidePagerAdapter(fa: Fragment) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = BANNER_PAGES
 
-        override fun createFragment(position: Int): Fragment = ScreenSlidePageAdFragment(position)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -71,48 +66,63 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         swipeRefresh()
         initUI()
         initData()
-        loadAdBanner()
         onActionPerform()
         loadDashboard()
     }
 
-    private fun loadAdBanner() {
-        pagerAdBanner.adapter = addPagerAdapter
-        pagerAdBanner.isUserInputEnabled = false
-        val h = Handler(Looper.myLooper()!!)
-        var r = Runnable {
-            pagerAdBanner.setCurrentItem(1,true)
+    override fun onResume() {
+        super.onResume()
+        try{
+            loadAdBanner()
+
+        }catch (e:Exception){
+            e.printStackTrace()
         }
+    }
 
-        h.postDelayed(r,3000)
+    private fun loadAdBanner() {
 
-        pagerAdBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
+        try{
+            val h = Handler(Looper.myLooper()!!)
+            var r = Runnable {
+                pagerAdBanner.setCurrentItem(1,true)
+            }
+
+            h.postDelayed(r,3000)
+
+            pagerAdBanner.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
 
 
                     if (position == 0) {
                         Handler(Looper.myLooper()!!).postDelayed({
                             try {
-                            pagerAdBanner.setCurrentItem(1, true)
- }catch (e:Exception){
-                    e.printStackTrace()
-                }
+                                pagerAdBanner.setCurrentItem(1, true)
+                            }catch (e:Exception){
+                                e.printStackTrace()
+                            }
                         }, 3000)
 
                     } else if (position == 1) {
 
                         Handler(Looper.myLooper()!!).postDelayed({
                             try {
-                            pagerAdBanner.setCurrentItem(0, true)
-}catch (e:Exception){
-                    e.printStackTrace()
-                }
+                                pagerAdBanner.setCurrentItem(0, true)
+                            }catch (e:Exception){
+                                e.printStackTrace()
+                            }
                         }, 3000)
                     }
 
-            }
-        })
+                }
+            })
+        }catch (e:Exception){
+            e.printStackTrace()
+        }finally {
+            //
+        }
+
 
     }
 
@@ -120,15 +130,16 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         btnProfile.setOnClickListener {
             (context as DashboardActivity).gotoCompleteProfile()
         }
-        imgSasaBanner.setOnClickListener {
-            requireActivity().startActivity(Intent(requireContext(),SasaDoctorActivity::class.java))
-        }
+
     }
 
     private fun initUI() {
-        Handler().postDelayed({
+        pagerAdBanner.adapter = adPagerAdapter
+        pagerAdBanner.isUserInputEnabled = false
+        Handler(Looper.myLooper()!!).postDelayed({
             (activity as DashboardActivity).visibleFilter(false)
             (activity as DashboardActivity).visibleButton(false)
+
         }, 200)
         initSeekBar()
     }
@@ -157,11 +168,11 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
             setDashBoard(dashBoard)
         }
 
-       if(sharedPrefOBJ.countryName == "Kenya") {
-           imgSasaBanner.visibility = View.VISIBLE
-       }else{
-           imgSasaBanner.visibility = View.GONE
-       }
+//       if(sharedPrefOBJ.countryName == "Kenya") {
+//           imgSasaBanner.visibility = View.VISIBLE
+//       }else{
+//           imgSasaBanner.visibility = View.GONE
+//       }
 
 
     }
@@ -195,6 +206,8 @@ class DashboardFragment: androidx.fragment.app.Fragment(), ICallBackDashboard, I
         }
 
         svDashboard.smoothScrollTo(0,0)
+
+
     }
 
     private fun setDashBoard(dashBoard: ResDashboard.Data) {

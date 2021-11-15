@@ -39,21 +39,22 @@ class AppearanceAccountActivity : AppCompatActivity() {
         swDark.setOnCheckedChangeListener { buttonView, isChecked ->
 
             doAsync {
-                if (isChecked){
+                if (isChecked) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }else{
+                } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
                 pref.isDarkTheme = isChecked
-                uiThread {
-                    showThemeChangeDialog()
-                    //onBackPressed()
-                }
             }
+//                uiThread {
+//                    showThemeChangeDialog()
+//                    //onBackPressed()
+//                }
+//            }
 
-            //AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+         //   AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             //finish()
-            ///startActivity(Intent(this,AppearanceAccountActivity::class.java))
+           // startActivity(Intent(this,AppearanceAccountActivity::class.java))
         }
     }
 

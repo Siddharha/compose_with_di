@@ -9,26 +9,57 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.app.l_pesa.R
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_screen_slide_page_ad_1.view.*
+import kotlinx.android.synthetic.main.fragment_screen_slide_page_ad_1.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class ScreenSlidePageAdFragment(page:Int) : Fragment() {
+class ScreenSlidePageAdFragment : Fragment() {
 
-    private val page = page
-    private lateinit var rootView:View
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        rootView = inflater.inflate(R.layout.fragment_screen_slide_page_ad_1, container, false)
 
-        rootView.apply {
+    private var page = 0
+    //private lateinit var rootView:View
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        rootView = inflater.inflate(R.layout.fragment_screen_slide_page_ad_1, container, false)
+//
+//
+//
+//        return rootView
+//
+//
+//    }
+    companion object {
+        fun defiInstance(): Fragment {
+            val f = ScreenSlidePageAdFragment()
+            f.setPage(0)
+            return f
+        }
+        fun loanInstance(): Fragment {
+            val f =ScreenSlidePageAdFragment()
+            f.setPage(1)
+            return f
+        }
+    }
+
+    private fun setPage(p: Int) {
+        page = p
+
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        return inflater.inflate(R.layout.fragment_screen_slide_page_ad_1, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
             when(page){
                 0 -> {
-                    Glide.with(requireContext()).load(R.drawable.lpk_banner).into(this.imgBanner)
-                    this.setOnClickListener {
+                    Glide.with(requireContext()).load(R.drawable.lpk_banner).into(imgBanner)
+                    imgBanner.setOnClickListener {
                         doAsync {
                             val uri = Uri.parse("https://ico.lpesa.io")
                             val intent = Intent(Intent.ACTION_VIEW, uri)
@@ -37,7 +68,7 @@ class ScreenSlidePageAdFragment(page:Int) : Fragment() {
                                 startActivity(intent)
 
                             }
-                    }
+                        }
 
 
                     }
@@ -46,10 +77,6 @@ class ScreenSlidePageAdFragment(page:Int) : Fragment() {
                     Glide.with(requireContext()).load(R.drawable.doller_loan).into(this.imgBanner)
                 }//
             }
-        }
-
-        return rootView
-
 
     }
 

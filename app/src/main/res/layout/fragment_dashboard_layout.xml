@@ -184,21 +184,21 @@
 
                       <com.warkiz.widget.IndicatorStayLayout
                           android:id="@+id/seekBarLayout"
-                          android:layout_below="@+id/credit_score_label"
                           android:layout_width="match_parent"
-                          android:layout_height="wrap_content">
+                          android:layout_height="wrap_content"
+                          android:layout_below="@+id/credit_score_label">
 
                           <com.warkiz.widget.IndicatorSeekBar
                               android:id="@+id/seekBar"
                               android:layout_width="match_parent"
                               android:layout_height="wrap_content"
+                              app:isb_indicator_color="@color/colorRedLight"
                               app:isb_show_indicator="rectangle"
+                              app:isb_thumb_color="#08a9ea"
                               app:isb_track_background_color="@color/colorRedLight"
                               app:isb_track_background_size="@dimen/_3sdp"
                               app:isb_track_progress_color="#2bbd83"
                               app:isb_track_progress_size="@dimen/_5sdp"
-                              app:isb_thumb_color="#08a9ea"
-                              app:isb_indicator_color="@color/colorRedLight"
 
                               />
 
@@ -252,16 +252,6 @@
                       android:layout_height="@dimen/_250sdp"/>
 
 
-                  <ImageView
-                      android:id="@+id/imgSasaBanner"
-                      android:visibility="gone"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:scaleType="centerCrop"
-                      android:layout_margin="@dimen/_5sdp"
-                      android:adjustViewBounds="true"
-                      android:src="@drawable/sasa_banner"
-                      android:contentDescription="@string/app_name" />
               </LinearLayout>
               <LinearLayout
                   android:layout_marginEnd="@dimen/_10sdp"
