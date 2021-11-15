@@ -34,6 +34,7 @@ import java.text.DecimalFormat
 class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedule {
 
     private var dataOBJ :ResPaybackSchedule.Data ?=null
+    private val pref:SharedPref by lazy { SharedPref(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +92,7 @@ class LoanPaybackScheduledActivity : AppCompatActivity(), ICallBackPaybackSchedu
 
                        // doPayAll(dataOBJ!!)
 
-                           if(dataOBJ?.loanInfo?.currencyCode == "KES"){
+                        if(pref.countryName == "Kenya"){
                                PayUtil.loanPaymentUI(this,dataOBJ?.loanInfo?.payfullamount?.loanAmount!!,
                                    dataOBJ?.loanInfo?.identityNumber!!,dataOBJ?.loanInfo?.currencyCode!!,"Pay Full Amount") //Stk payment enabled for kenya
                            }else{

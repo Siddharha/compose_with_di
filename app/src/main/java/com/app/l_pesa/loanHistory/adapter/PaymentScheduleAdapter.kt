@@ -20,6 +20,7 @@ import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.CustomButtonRegular
+import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.loanHistory.model.ResPaybackSchedule
 import com.app.l_pesa.loanHistory.payment.PayUtil
 import java.text.DecimalFormat
@@ -92,7 +93,8 @@ class PaymentScheduleAdapter(val context: Context, private var alScheduleOBJ: Ar
                 }
                 else
                 {
-                    if(alScheduleOBJ[position].currencyCode == "KES"){
+                    val pref = SharedPref(context)
+                    if(pref.countryName == "Kenya"){
 
                         paymentFromAppUI(alScheduleOBJ[position]) //STK push enabled for Kenya user
                    }else{
