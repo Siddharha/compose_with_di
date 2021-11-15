@@ -81,8 +81,12 @@ loanCurrencyCode:String,paymentType:String) : BottomSheetDialogFragment(),ICallB
     override fun onSuccessLoanPayment(loanPaymentData: ResLoanPayment.Data) {
         v.llLoader.visibility = View.GONE
         if(loanPaymentData.responseCode =="0") {
-            Toast.makeText(requireContext(), loanPaymentData.customerMessage, Toast.LENGTH_SHORT)
-                .show()
+            AlertDialog.Builder(requireContext())
+                .setMessage("${loanPaymentData.customerMessage}. Payment process will be complete once payment confirmed from STK Push")
+                .setNegativeButton("dismiss"){d,_->
+                    d.dismiss()
+                }
+                .create().show()
         }else{
             Toast.makeText(requireContext(), loanPaymentData.customerMessage, Toast.LENGTH_SHORT)
                 .show()
@@ -97,10 +101,22 @@ loanCurrencyCode:String,paymentType:String) : BottomSheetDialogFragment(),ICallB
 
     override fun onSessionTimeOut(jsonMessage: String) {
         v.llLoader.visibility = View.GONE
+        AlertDialog.Builder(requireContext())
+            .setMessage(jsonMessage)
+            .setNegativeButton("dismiss"){d,_->
+                d.dismiss()
+            }
+            .create().show()
     }
 
     override fun onErrorLoanPayment(message: String) {
         v.llLoader.visibility = View.GONE
-        Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
+        AlertDialog.Builder(requireContext())
+            .setMessage("${message}. Payment process not completed!")
+            .setNegativeButton("dismiss"){d,_->
+                d.dismiss()
+            }
+            .create().show()
+       // Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
     }
 }
