@@ -1,82 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+    android:orientation="vertical"
+    android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash"
     android:id="@+id/rootLayout">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"/>
 
         <ImageView
+            android:layout_weight="1"
             android:id="@+id/imageView"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_120sdp"
-            android:src="@drawable/lpesa_logo"
             android:contentDescription="@string/app_name"
-            android:layout_centerInParent="true"
-            />
-
-        <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/txtTitle"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_14sdp"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:text="@string/no_internet"
-            android:visibility="invisible"/>
-
-        <com.app.l_pesa.common.CommonTextRegular
-            android:id="@+id/txtHeader"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_11sdp"
-            android:layout_below="@+id/txtTitle"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:text="@string/no_internet_details"
-            android:visibility="invisible"/>
-
-
-        <com.app.l_pesa.common.CustomButtonRegular
-            android:id="@+id/buttonRetry"
-            android:layout_width="@dimen/_125sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:gravity="center"
-            android:textSize="@dimen/_12sdp"
-            android:layout_below="@+id/txtHeader"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/colorSemiBlack"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/bg_button_yellow"
-            android:text="@string/retry"
-            android:visibility="invisible"/>
-
-
-
+            android:src="@drawable/lpesa_logo" />
         <ProgressBar
+            android:layout_margin="@dimen/_5sdp"
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
-            android:layout_width="@dimen/_32sdp"
-            android:layout_height="@dimen/_32sdp"
-            android:indeterminateTint="@color/colorWhite"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+
             android:layout_marginBottom="@dimen/_10sdp"
-            android:visibility="invisible"
+            android:indeterminateTint="#fff"
 
-            />
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/llAlert"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="?colorSurface" >
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/txtTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:text="@string/no_internet"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/_15sdp"
+                    android:visibility="visible" />
+
+                <com.app.l_pesa.common.CommonTextRegular
+                    android:id="@+id/txtHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:gravity="center"
+                    android:text="@string/no_internet_details"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"/>
+
+                <com.app.l_pesa.common.CustomButtonRegular
+                    android:id="@+id/buttonRetry"
+                    android:layout_width="@dimen/_125sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/bg_button_yellow"
+                    android:gravity="center"
+                    android:text="@string/retry"
+                    android:textColor="#000"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
 
 
 
-</RelativeLayout>
+        </LinearLayout>
+
+
+
+</LinearLayout>
 

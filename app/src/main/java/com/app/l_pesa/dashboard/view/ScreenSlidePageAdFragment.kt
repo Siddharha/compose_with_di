@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.app.l_pesa.R
+import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_screen_slide_page_ad_1.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -17,6 +20,7 @@ class ScreenSlidePageAdFragment : Fragment() {
 
 
     private var page = 0
+    private val pref:SharedPref by lazy { SharedPref(requireContext()) }
     //private lateinit var rootView:View
 //    override fun onCreateView(
 //        inflater: LayoutInflater,
@@ -75,6 +79,17 @@ class ScreenSlidePageAdFragment : Fragment() {
                 }
                 1 ->{
                     Glide.with(requireContext()).load(R.drawable.doller_loan).into(this.imgBanner)
+                    imgBanner.setOnClickListener {
+                        doAsync {
+                            pref.openTabLoan = "CURRENT"
+                            uiThread {
+                                (context as DashboardActivity).navigateToFragment(LoanPlansFragment.newInstance())
+                            }
+                        }
+
+
+                    }
+
                 }//
             }
 

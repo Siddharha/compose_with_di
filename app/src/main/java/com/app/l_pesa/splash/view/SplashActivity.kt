@@ -68,6 +68,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                 progressBar.visibility = View.VISIBLE
                 logoutProcess()
             } else {
+                llAlert.visibility = View.VISIBLE
                 buttonRetry.visibility = View.VISIBLE
                 progressBar.visibility = View.INVISIBLE
 
@@ -89,6 +90,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
 
     private fun logoutProcess() {
         buttonRetry.visibility = View.INVISIBLE
+        llAlert.visibility = View.INVISIBLE
         val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
         val jsonObject = JsonObject()
         jsonObject.addProperty("device_id", deviceId)
@@ -107,6 +109,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
                 txtTitle.visibility = View.VISIBLE
                 txtHeader.visibility = View.VISIBLE
                 buttonRetry.visibility = View.VISIBLE
+                llAlert.visibility = View.VISIBLE
                 progressBar.visibility = View.INVISIBLE
 
                 buttonRetry.setOnClickListener {
@@ -141,6 +144,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         txtTitle.visibility = View.INVISIBLE
         txtHeader.visibility = View.INVISIBLE
         buttonRetry.visibility = View.INVISIBLE
+        llAlert.visibility = View.INVISIBLE
         progressBar.visibility = View.VISIBLE
         val presenterCountry = PresenterCountry()
             presenterCountry.getCountry(this@SplashActivity, this@SplashActivity)
@@ -165,12 +169,14 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     override fun onEmptyCountry() {
         showSnackBar(resources.getString(R.string.no_country))
         buttonRetry.visibility = View.VISIBLE
+        llAlert.visibility = View.VISIBLE
         progressBar.visibility = View.INVISIBLE
     }
 
     override fun onFailureCountry(jsonMessage: String) {
         showSnackBar(jsonMessage)
         buttonRetry.visibility = View.VISIBLE
+        llAlert.visibility = View.VISIBLE
         progressBar.visibility = View.INVISIBLE
         buttonRetry.setOnClickListener {
 
@@ -221,6 +227,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
             txtTitle.visibility = View.VISIBLE
             txtHeader.visibility = View.VISIBLE
             buttonRetry.visibility = View.VISIBLE
+            llAlert.visibility = View.VISIBLE
             progressBar.visibility = View.INVISIBLE
 
             buttonRetry.setOnClickListener {
@@ -241,6 +248,7 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
         txtTitle.visibility = View.INVISIBLE
         txtHeader.visibility = View.INVISIBLE
         buttonRetry.visibility = View.INVISIBLE
+        llAlert.visibility = View.INVISIBLE
         //
         var version = ""
         try {

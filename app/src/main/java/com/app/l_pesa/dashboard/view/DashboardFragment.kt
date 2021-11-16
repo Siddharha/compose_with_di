@@ -85,7 +85,11 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         try{
             val h = Handler(Looper.myLooper()!!)
             var r = Runnable {
-                pagerAdBanner.setCurrentItem(1,true)
+                try {
+                    pagerAdBanner.setCurrentItem(1, true)
+                }catch (e:Exception){
+                    e.printStackTrace()
+                }
             }
 
             h.postDelayed(r,3000)

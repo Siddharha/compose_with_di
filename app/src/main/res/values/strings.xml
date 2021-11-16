@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">L-Pesa</string>
-    <!--   <string name="facebook_app_id">770436653385979</string>-->
+<!--       <string name="facebook_app_id">770436653385979</string>-->
     <string name="facebook_app_id">377266739110350</string>
     <string name="fb_login_protocol_scheme">fb377266739110350</string>
 
@@ -153,7 +153,7 @@
     <string name="nav_item_loan">Loan</string>
     <string name="nav_item_airtime_credit">Airtime Credit</string>
     <string name="nav_item_investment">Investment</string>
-    <string name="nav_item_lpk">LPK (Kripton)</string>
+    <string name="nav_item_lpk">LPK DeF</string>
     <string name="nav_item_wallet">Wallet</string>
     <string name="nav_item_settings">Settings</string>
     <string name="nav_item_logout">Logout</string>

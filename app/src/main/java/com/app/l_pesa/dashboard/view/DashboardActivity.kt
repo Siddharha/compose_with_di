@@ -435,7 +435,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             }
             R.id.action_services -> {
-                if (currentFragment is LpkFragment) {
+                if (currentFragment is AllServicesFragment) {
                 } else {
                     toolbar.title = resources.getString(R.string.nav_item_services)
                     navigateToFragment(AllServicesFragment.newInstance())
@@ -515,7 +515,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         finish()
     }
 
-    private fun navigateToFragment(fragmentToNavigate: androidx.fragment.app.Fragment) {
+     fun navigateToFragment(fragmentToNavigate: androidx.fragment.app.Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
         fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
