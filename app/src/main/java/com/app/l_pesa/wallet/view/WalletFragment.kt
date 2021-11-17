@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.RelativeSizeSpan
@@ -61,9 +62,9 @@ class WalletFragment : Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
     private fun initLoader()
     {
-        progressDialog = ProgressDialog(activity!!,R.style.MyAlertDialogStyle)
+        progressDialog = ProgressDialog(requireActivity(),R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
-        val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+        val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
         message.setSpan(RelativeSizeSpan(1.0f), 0, message.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         message.setSpan(CustomTypeFaceSpan("", face!!, Color.parseColor("#535559")), 0, message.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         progressDialog.isIndeterminate = true
@@ -77,12 +78,12 @@ class WalletFragment : Fragment(), ICallBackWallet, ICallBackInfoLPK {
     @SuppressLint("SetTextI18n")
     private fun initData()
     {
-        Handler().postDelayed({
+        Handler(Looper.myLooper()!!).postDelayed({
             (activity as DashboardActivity).visibleFilter(false)
             (activity as DashboardActivity).visibleButton(false)
         }, 200)
 
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             val logger = AppEventsLogger.newLogger(activity)
             val params =  Bundle()
@@ -92,13 +93,13 @@ class WalletFragment : Fragment(), ICallBackWallet, ICallBackInfoLPK {
 
             Thread(Runnable {
                 val presenterInfoLPK= PresenterInfoLPK()
-                presenterInfoLPK.getInfoLPK(activity!!,this,"")
+                presenterInfoLPK.getInfoLPK(requireActivity(),this,"")
             }).start()
 
         }
         else
         {
-            CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.no_internet))
+            CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
         }
 
 
@@ -107,7 +108,7 @@ class WalletFragment : Fragment(), ICallBackWallet, ICallBackInfoLPK {
             if(etWithdrawalAmount.text.toString().isEmpty())
             {
                 CommonMethod.hideKeyboardView(activity as AppCompatActivity)
-                CommonMethod.customSnackBarError(rootLayout,activity!!,resources.getString(R.string.required_withdrawal_amount))
+                CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.required_withdrawal_amount))
             }
             else
             {

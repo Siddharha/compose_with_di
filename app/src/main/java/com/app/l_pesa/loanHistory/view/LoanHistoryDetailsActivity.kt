@@ -56,59 +56,70 @@ class LoanHistoryDetailsActivity : AppCompatActivity() {
 
     private fun doLoadDetails() {
         val loanHistoryData= GlobalLoanHistoryModel.getInstance()
-        val jsonObject = JsonObject()
-        //appliedProduct.loanId
-        val loanType = intent.getStringExtra("LOAN_TYPE")
-        jsonObject.addProperty("loan_type", loanType)
-        val presenterLoanPlans = PresenterLoanPlans()
-        presenterLoanPlans.getLoanDetails(this,jsonObject,object : ICallBackLoanDetails {
-            override fun onFailureLoanDetails(jsonMessage: String) {
-                if(srDetails.isRefreshing){
-                    srDetails.isRefreshing = false
-                }
-            }
 
-            override fun onSessionTimeOut(message: String) {
-                if(srDetails.isRefreshing){
-                    srDetails.isRefreshing = false
-                }
-            }
-
-            override fun onSuccessLoanPlansDetails(details: ResLoanDetails.Data) {
-                if(srDetails.isRefreshing){
-                    srDetails.isRefreshing = false
-
-                }
-                if(flLoader.visibility == View.VISIBLE){
-                flLoader.visibility = View.GONE
-                }
-                loanHistoryData.modelData?.apply {
-                    total_payback = details.totalPayback
-                    loan_status = details.loanStatus
-                    loan_amount_txt = details.loanAmountTxt
-                    actual_loan_amount = details.actualLoanAmount.toString()
-                    applied_date = details.appliedDate
-                    conversion_charge = details.conversionCharge.toString()
-                    conversion_charge_amount = details.conversionChargeAmount.toString()
-                    convertion_dollar_value = details.convertionDollarValue.toString()
-                    convertion_loan_amount = details.convertionLoanAmount.toString()
-                    cr_sc_when_requesting_loan = details.crScWhenRequestingLoan
-                    currency_code = details.currencyCode
-                    currency_flag = details.currencyFlag
-                    disapprove_date = details.disapproveDate
-                    disapprove_reason = details.disapproveReason
-                    due_date = details.dueDate
-                    duration = details.duration
-                    finished_date = details.finishedDate
-                    processing_fees = details.processingFees.toString()
-                    processing_fees_amount = details.processingFeesAmount.toString()
-                    sanctioned_date = details.sanctionedDate
+        if(loanHistoryData.modelData?.is_loan_history!!){
+            flLoader.visibility = View.GONE
+            srDetails.isEnabled = false
+            initData()
+        }else{
+            srDetails.isEnabled = true
+            val jsonObject = JsonObject()
+            //appliedProduct.loanId
+            val loanType = intent.getStringExtra("LOAN_TYPE")
+            jsonObject.addProperty("loan_type", loanType)
+            val presenterLoanPlans = PresenterLoanPlans()
+            presenterLoanPlans.getLoanDetails(this,jsonObject,object : ICallBackLoanDetails {
+                override fun onFailureLoanDetails(jsonMessage: String) {
+                    if(srDetails.isRefreshing){
+                        srDetails.isRefreshing = false
+                    }
                 }
 
-                initData()
-            }
+                override fun onSessionTimeOut(message: String) {
+                    if(srDetails.isRefreshing){
+                        srDetails.isRefreshing = false
+                    }
+                }
 
-        })
+                override fun onSuccessLoanPlansDetails(details: ResLoanDetails.Data) {
+                    if(srDetails.isRefreshing){
+                        srDetails.isRefreshing = false
+
+                    }
+                    if(flLoader.visibility == View.VISIBLE){
+                        flLoader.visibility = View.GONE
+                    }
+                    loanHistoryData.modelData?.apply {
+                        total_payback = details.totalPayback
+                        loan_status = details.loanStatus
+                        loan_amount_txt = details.loanAmountTxt
+                        actual_loan_amount = details.actualLoanAmount.toString()
+                        applied_date = details.appliedDate
+                        conversion_charge = details.conversionCharge.toString()
+                        conversion_charge_amount = details.conversionChargeAmount.toString()
+                        convertion_dollar_value = details.convertionDollarValue.toString()
+                        convertion_loan_amount = details.convertionLoanAmount.toString()
+                        cr_sc_when_requesting_loan = details.crScWhenRequestingLoan
+                        currency_code = details.currencyCode
+                        currency_flag = details.currencyFlag
+                        disapprove_date = details.disapproveDate
+                        disapprove_reason = details.disapproveReason
+                        due_date = details.dueDate
+                        duration = details.duration
+                        finished_date = details.finishedDate
+                        processing_fees = details.processingFees.toString()
+                        processing_fees_amount = details.processingFeesAmount.toString()
+                        sanctioned_date = details.sanctionedDate
+                    }
+
+                    initData()
+                }
+
+            })
+
+
+        }
+
     }
 
     private fun onRefrash() {

@@ -59,7 +59,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
     private fun investmentPlan()
     {
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             val logger = AppEventsLogger.newLogger(activity)
             val params =  Bundle()
@@ -68,7 +68,7 @@ class InvestmentPlan: Fragment(), ICallBackInvestmentPlan {
 
             shimmerLayout.startShimmer()
             val presenterLoanPlans= PresenterInvestmentPlan()
-            presenterLoanPlans.getInvestmentPlan(activity!!,this)
+            presenterLoanPlans.getInvestmentPlan(requireActivity(),this)
         }
         else
         {

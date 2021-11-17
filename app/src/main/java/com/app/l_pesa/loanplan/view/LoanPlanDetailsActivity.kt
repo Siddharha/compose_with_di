@@ -5,6 +5,9 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +15,7 @@ import android.os.CountDownTimer
 import android.text.Html
 import android.text.Spanned
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -119,13 +123,16 @@ class LoanPlanDetailsActivity : AppCompatActivity() {
     }
 
     private fun toolbarFont(context: Activity) {
-
+        val imgBack = toolbar.navigationIcon
+        val mMode = PorterDuff.Mode.SRC_ATOP
+        imgBack?.setColorFilter(Color.parseColor("#ffffff"),mMode)
         for (i in 0 until toolbar.childCount) {
             val view = toolbar.getChildAt(i)
             if (view is TextView) {
                 val titleFont = Typeface.createFromAsset(context.assets, "fonts/Montserrat-Regular.ttf")
                 if (view.text == toolbar.title) {
                     view.typeface = titleFont
+                    view.setTextColor(Color.parseColor("#ffffff"))
                     break
                 }
             }

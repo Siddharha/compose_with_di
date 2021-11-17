@@ -3,6 +3,7 @@ package com.app.l_pesa.investment.view
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,14 +42,14 @@ class InvestmentFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     private fun initUI()
     {
-        Handler().postDelayed({
+        Handler(Looper.myLooper()!!).postDelayed({
             (activity as DashboardActivity).visibleFilter(false)
             (activity as DashboardActivity).visibleButton(false)
         }, 200)
 
 
-        tabLayout=activity!!.findViewById(R.id.tabLayout)
-        viewPager=activity!!.findViewById(R.id.viewPager)
+        tabLayout=requireActivity().findViewById(R.id.tabLayout)
+        viewPager=requireActivity().findViewById(R.id.viewPager)
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.investment_plan)))
         tabLayout!!.addTab(tabLayout!!.newTab().setText(resources.getString(R.string.investment_history)))
         tabLayout!!.tabGravity = TabLayout.GRAVITY_FILL
@@ -101,7 +102,7 @@ class InvestmentFragment : Fragment(), TabLayout.OnTabSelectedListener {
             for (i in 0 until tabChildsCount) {
                 val tabViewChild = vgTab.getChildAt(i)
                 if (tabViewChild is TextView) {
-                    val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+                    val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
                     tabViewChild.typeface = face
                 }
             }

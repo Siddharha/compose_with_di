@@ -1139,7 +1139,7 @@
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <FrameLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/flLoader"
             android:background="?colorSurface"
             android:layout_width="match_parent"

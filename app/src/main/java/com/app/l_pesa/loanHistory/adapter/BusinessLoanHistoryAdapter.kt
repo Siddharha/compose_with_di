@@ -151,6 +151,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                         loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
 
                 modelData.modelData=modelDataBusiness
+                modelData.modelData?.is_loan_history=true
                 callBackCurrent.onClickList()
             }
 
@@ -163,6 +164,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                         loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
 
                 modelData.modelData=modelDataBusiness
+                modelData.modelData?.is_loan_history=true
                 callBackCurrent.onClickList()
 
             }
@@ -182,6 +184,7 @@ class BusinessLoanHistoryAdapter (val context: Context, private val loanHistoryC
                             loanHistoryBusiness.processing_fees,loanHistoryBusiness.processing_fees_amount,loanHistoryBusiness.disapprove_reason)
 
                     modelData.modelData=modelDataBusiness
+                    modelData.modelData?.is_loan_history=true
                     callBackCurrent.onClickList()
                 }
 

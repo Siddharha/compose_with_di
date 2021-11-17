@@ -120,6 +120,7 @@ class CurrentLoanPlanAdapter (val context: Context, private val loanPlanList: Ar
 
                    modelData.modelData=loanData
                    callBackObj.onSuccessLoanHistory()
+                   modelData.modelData?.is_loan_history=false
 
                }
                 else

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.app.l_pesa.R
@@ -51,6 +52,11 @@ class FirebaseMessagingIdService : FirebaseMessagingService() {
             }
 
 
+    }
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        Log.e("FCM token", "onNewToken: $token", )
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

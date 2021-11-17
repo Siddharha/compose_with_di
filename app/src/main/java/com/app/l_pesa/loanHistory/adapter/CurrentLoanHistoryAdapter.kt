@@ -137,13 +137,11 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
                 }
             }
 
-
-
-
             itemView.ll_card_left.setOnClickListener {
 
                 val modelData=GlobalLoanHistoryModel.getInstance()
                 modelData.modelData=loanHistoryCurrent
+                modelData.modelData?.is_loan_history=true
                 callBackCurrent.onClickList()
             }
 
@@ -151,6 +149,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
 
                 val modelData=GlobalLoanHistoryModel.getInstance()
                 modelData.modelData=loanHistoryCurrent
+                modelData.modelData?.is_loan_history=true
                 callBackCurrent.onClickList()
 
             }
@@ -165,6 +164,7 @@ class CurrentLoanHistoryAdapter (val context: Context, private val loanHistoryCu
                 {
                     val modelData=GlobalLoanHistoryModel.getInstance()
                     modelData.modelData=loanHistoryCurrent
+                    modelData.modelData?.is_loan_history=true
                     callBackCurrent.onClickList()
                 }
 

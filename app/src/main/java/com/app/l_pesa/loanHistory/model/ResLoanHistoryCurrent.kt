@@ -38,7 +38,8 @@ class ResLoanHistoryCurrent(val status: CommonStatusModel, val data: Data) {
            var cr_sc_when_requesting_loan:String,
            var processing_fees:String,
            var processing_fees_amount:String,
-           var disapprove_reason:String
+           var disapprove_reason:String,
+           var is_loan_history:Boolean =false
 
   )
 
