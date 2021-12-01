@@ -10,9 +10,17 @@
         <entry key="app/src/main/res/layout/activity_loan_apply.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_calculator.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_history_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_loan_list_history.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_payback_scheduled.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_loan_payment_history.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_loan_plan_details.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/activity_profile_edit_business_info.xml" value="0.22037037037037038" />
+        <entry key="app/src/main/res/layout/activity_profile_edit_contact_info.xml" value="0.22037037037037038" />
+        <entry key="app/src/main/res/layout/activity_profile_edit_emp_info.xml" value="0.20555555555555555" />
+        <entry key="app/src/main/res/layout/activity_profile_edit_id_info.xml" value="0.20555555555555555" />
+        <entry key="app/src/main/res/layout/activity_profile_edit_more_about.xml" value="0.18981481481481483" />
+        <entry key="app/src/main/res/layout/activity_profile_edit_personal.xml" value="0.20555555555555555" />
         <entry key="app/src/main/res/layout/activity_registration_step_five.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/layout/activity_registration_step_four.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/layout/activity_registration_step_three.xml" value="0.20277777777777778" />
@@ -23,6 +31,11 @@
         <entry key="app/src/main/res/layout/content_loan_history_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_loan_payback_scheduled.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/content_loan_plan_details.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/content_profile_edit_emp_info.xml" value="0.18981481481481483" />
+        <entry key="app/src/main/res/layout/content_profile_edit_id_info.xml" value="0.1574074074074074" />
+        <entry key="app/src/main/res/layout/content_profile_edit_personal.xml" value="0.20555555555555555" />
+        <entry key="app/src/main/res/layout/dialog_id_type.xml" value="0.1574074074074074" />
+        <entry key="app/src/main/res/layout/dialog_more_about.xml" value="0.1574074074074074" />
         <entry key="app/src/main/res/layout/dialog_payment_schedule.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_all_services.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_business_id_layout.xml" value="0.24427083333333333" />
@@ -32,7 +45,7 @@
         <entry key="app/src/main/res/layout/fragment_loan_plan_list.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_lpk.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_personal_id_layout.xml" value="0.18703703703703703" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_screen_slide_page_ad_1.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/layout_list_placeholder.xml" value="0.24427083333333333" />

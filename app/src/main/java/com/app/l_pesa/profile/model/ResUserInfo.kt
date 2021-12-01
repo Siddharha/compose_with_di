@@ -15,6 +15,14 @@ class ResUserInfo {
 
     inner class Data {
 
+        @SerializedName("business_info")
+        @Expose
+        var businessInfo: Boolean? = true
+
+        @SerializedName("employee_info")
+        @Expose
+        var employeeInfo: Boolean? = true
+
         @SerializedName("user_info")
         @Expose
         var userInfo: UserInfo? = null

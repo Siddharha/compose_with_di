@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,10 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pinview.model.LoginData
+import com.app.l_pesa.profile.inter.ICallBackProfileBusinessValidate
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
+import com.app.l_pesa.profile.presenter.PresenterProfile
 import com.app.l_pesa.profile.presenter.PresenterUserInfo
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -30,7 +33,10 @@ import com.facebook.appevents.AppEventsLogger
 import com.facebook.shimmer.Shimmer
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.imgProfile
+import kotlinx.android.synthetic.main.fragment_profile.txtDOB
 import java.util.*
 
 
@@ -52,6 +58,70 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         swipeRefresh()
         loadProfileInfo(true)
+        onActionPerform()
+    }
+
+    private fun onActionPerform() {
+        swIsEmp.setOnCheckedChangeListener { s, isChecked ->
+
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("business_info", isChecked)
+            val presenterBusinessValidator = PresenterProfile()
+            presenterBusinessValidator.isEmployed(requireContext(), jsonObject,object:ICallBackProfileBusinessValidate{
+                override fun onSessionTimeOut(jsonMessage: String) {
+                    s.isChecked = !isChecked
+                }
+
+                override fun onFailureHasBusiness(jsonMessage: String) {
+                    s.isChecked = !isChecked
+                }
+
+                override fun onSuccessHasBusiness() {
+                    empInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
+                    cvBAndPInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
+                }
+
+            })
+
+
+
+        }
+
+        swIsBusiness.setOnCheckedChangeListener { s, isChecked ->
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("employment_info", isChecked)
+            val presenterEmployeeValidator = PresenterProfile()
+
+            presenterEmployeeValidator.isEmployed(requireContext(), jsonObject,object:ICallBackProfileBusinessValidate{
+                override fun onSessionTimeOut(jsonMessage: String) {
+                    s.isChecked = false
+                }
+
+                override fun onFailureHasBusiness(jsonMessage: String) {
+                    s.isChecked = false
+                }
+
+                override fun onSuccessHasBusiness() {
+                    empInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
+                    cvBAndPInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
+                }
+
+            })
+        }
+
+        imgEditMoreOfYou.setOnClickListener {
+            //edit more about you
+            if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
+            {
+                startActivity(Intent(activity, ProfileEditMoreAboutActivity::class.java))
+                activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+
+            }
+            else
+            {
+                customSnackBarError(llRoot,resources.getString(R.string.please_wait))
+            }
+        }
     }
 
     private fun swipeRefresh()
@@ -64,7 +134,8 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     private fun loadProfileInfo(shimmerStatus: Boolean)
     {
-        Handler().postDelayed({
+
+        Handler(Looper.myLooper()!!).postDelayed({
             (activity as DashboardActivity).visibleFilter(false)
             (activity as DashboardActivity).visibleButton(false)
         }, 200)
@@ -76,12 +147,12 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         val options = RequestOptions()
         options.placeholder(R.drawable.ic_user)
-        Glide.with(activity!!)
+        Glide.with(requireActivity())
                 .load("")
                 .apply(options)
                 .into(imgProfile)
 
-        if(CommonMethod.isNetworkAvailable(activity!!))
+        if(CommonMethod.isNetworkAvailable(requireActivity()))
         {
             if(shimmerStatus)
             {
@@ -93,7 +164,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             }
 
             val presenterUserInfo= PresenterUserInfo()
-            presenterUserInfo.getProfileInfo(activity!!,this)
+            presenterUserInfo.getProfileInfo(requireActivity(),this)
         }
         else
         {
@@ -210,9 +281,9 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     private fun customSnackBarError(view: View, message:String) {
 
         val snackBarOBJ = Snackbar.make(view, "", Snackbar.LENGTH_SHORT)
-        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(activity!!,R.color.colorRed))
+        snackBarOBJ.view.setBackgroundColor(ContextCompat.getColor(requireActivity(),R.color.colorRed))
         (snackBarOBJ.view as ViewGroup).removeAllViews()
-        val customView = LayoutInflater.from(activity!!).inflate(R.layout.snackbar_error, null)
+        val customView = LayoutInflater.from(requireActivity()).inflate(R.layout.snackbar_error, null)
         (snackBarOBJ.view as ViewGroup).addView(customView)
 
         val txtTitle=customView.findViewById(R.id.txtTitle) as CommonTextRegular
@@ -247,16 +318,16 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
         shimmerLayout.stopShimmer()
         swipeRefreshLayout.isRefreshing=false
-        val dialogBuilder = AlertDialog.Builder(activity!!,R.style.MyAlertDialogTheme)
+        val dialogBuilder = AlertDialog.Builder(requireActivity(),R.style.MyAlertDialogTheme)
         dialogBuilder.setMessage(jsonMessage)
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialog, _ ->
                     dialog.dismiss()
-                    val sharedPrefOBJ= SharedPref(activity!!)
+                    val sharedPrefOBJ= SharedPref(requireActivity())
                     sharedPrefOBJ.removeShared()
                     startActivity(Intent(activity, MainActivity::class.java))
-                    activity!!.overridePendingTransition(R.anim.right_in, R.anim.left_out)
-                    activity!!.finish()
+                    requireActivity().overridePendingTransition(R.anim.right_in, R.anim.left_out)
+                    requireActivity().finish()
                 }
 
         val alert = dialogBuilder.create()
@@ -268,7 +339,13 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
     fun setData(data: ResUserInfo.Data)
     {
 
-        val sharedPrefOBJ= SharedPref(activity!!)
+        swIsEmp.isChecked = data.employeeInfo!!
+        swIsBusiness.isChecked = data.businessInfo!!
+
+        empInfo.visibility = if(data.employeeInfo!!) View.VISIBLE else View.GONE
+        cvBAndPInfo.visibility = if(data.businessInfo!!) View.VISIBLE else View.GONE
+
+        val sharedPrefOBJ= SharedPref(requireActivity())
         val profileData            = Gson().toJson(data)
         sharedPrefOBJ.profileInfo         = profileData
 
@@ -280,7 +357,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         if(pImg.contains("http",false)){
             try {
                 val options = RequestOptions()
-                Glide.with(activity!!)
+                Glide.with(requireActivity())
                         .load(pImg)
                         .apply(options)
                         .into(imgProfile)
@@ -292,7 +369,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         }else{
             try {
                 val options = RequestOptions()
-                Glide.with(activity!!)
+                Glide.with(requireActivity())
                         .load(BuildConfig.PROFILE_IMAGE_URL+data.userInfo!!.profileImage)
                         .apply(options)
                         .into(imgProfile)
@@ -505,7 +582,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
 
     private fun getProfileInfo(data: ResUserInfo.Data)
     {
-        val sharedPrefOBJ= SharedPref(activity!!)
+        val sharedPrefOBJ= SharedPref(requireActivity())
         val userData = Gson().fromJson<LoginData>(sharedPrefOBJ.userInfo, LoginData::class.java)
         userData.user_personal_info.first_name      =data.userPersonalInfo!!.firstName
         userData.user_personal_info.middle_name     =data.userPersonalInfo!!.middleName
@@ -515,7 +592,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         val json = Gson().toJson(userData)
         sharedPrefOBJ.userInfo = json
 
-        (activity!! as DashboardActivity).initData()
+        (requireActivity() as DashboardActivity).initData()
     }
 
     private fun returnIdType(idType:String): String {
@@ -559,7 +636,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
 
-            Glide.with(activity!!)
+            Glide.with(requireActivity())
                     .load(BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgInformation)
@@ -605,7 +682,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             val options = RequestOptions()
             options.error(R.drawable.ic_id_no_image)
             options.placeholder(R.drawable.ic_id_no_image)
-            Glide.with(activity!!)
+            Glide.with(requireActivity())
                     .load(BuildConfig.BUSINESS_IMAGE_URL+userIdsPersonalInfo.fileName)
                     .apply(options)
                     .into(imgInformation)

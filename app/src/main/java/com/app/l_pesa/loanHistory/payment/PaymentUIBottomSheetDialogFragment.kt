@@ -82,7 +82,7 @@ loanCurrencyCode:String,paymentType:String) : BottomSheetDialogFragment(),ICallB
         v.llLoader.visibility = View.GONE
         if(loanPaymentData.responseCode =="0") {
             AlertDialog.Builder(requireContext())
-                .setMessage("${loanPaymentData.customerMessage}. Payment process will be complete once payment confirmed from STK Push")
+                .setMessage("The payment process will be complete once the confirmation is received from STK push.")
                 .setNegativeButton("dismiss"){d,_->
                     d.dismiss()
                 }

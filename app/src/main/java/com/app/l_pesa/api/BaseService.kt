@@ -254,6 +254,12 @@ interface BaseService{
     @POST("user/resend_otp_email")
     fun doResendCodeEmail(): Observable<ResCodeResend>
 
+    @POST("user/profile_not_applicable_status")
+    fun isEmployed(@Body request: JsonObject):Observable<Any>
+
+    @GET("user-additional-info-options")
+    fun getAdditionalUserInfoDropdowns(): Observable<ResUserAdditionalInfoDropdowns>
+
     @POST("settings/close_account")
     fun doCloseAccount(@Body request: JsonObject): Observable<ResCloseAccount>
 
@@ -286,6 +292,8 @@ interface BaseService{
 
     @POST("loan/tenure")
     fun getLoanTenure(@Body request: JsonObject): Observable<ResLoanTenure>
+
+
 }
 
 
