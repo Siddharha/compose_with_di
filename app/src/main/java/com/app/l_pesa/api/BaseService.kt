@@ -255,7 +255,7 @@ interface BaseService{
     fun doResendCodeEmail(): Observable<ResCodeResend>
 
     @POST("user/profile_not_applicable_status")
-    fun isEmployed(@Body request: JsonObject):Observable<Any>
+    fun setFinStatus(@Body request: JsonObject):Observable<ResPersonFinStatus>
 
     @GET("user-additional-info-options")
     fun getAdditionalUserInfoDropdowns(): Observable<ResUserAdditionalInfoDropdowns>

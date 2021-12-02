@@ -7,7 +7,7 @@ import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.profile.inter.ICallBackProfileAdditionalInfo
-import com.app.l_pesa.profile.inter.ICallBackProfileBusinessValidate
+import com.app.l_pesa.profile.inter.ICallBackProfileFinValidate
 import com.google.gson.JsonObject
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -17,10 +17,10 @@ import retrofit2.HttpException
 class PresenterProfile {
 //getAdditionalUserInfoDropdowns
     @SuppressLint("CheckResult")
-    fun isEmployed(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackProfileBusinessValidate) {
+    fun setIsEmp(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackProfileFinValidate) {
 
         val sharedPrefOBJ = SharedPref(contextOBJ)
-        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).isEmployed(jsonRequest)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).setFinStatus(jsonRequest)
 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -29,18 +29,18 @@ class PresenterProfile {
                 }
                 .subscribe({ response ->
 
-//                    try {
-//                        if (response.status.isSuccess)
-//                        {
-//                            callBackOBJ.onSuccessPersonalInfo()
-//
-//                        } else
-//                        {
-//                            callBackOBJ.onFailurePersonalInfo(response.status.message)
-//                        }
-//                    } catch (e: Exception) {
-//
-//                    }
+                    try {
+                        if (response.status.isSuccess)
+                        {
+                            callBackOBJ.onSuccessIsEmp(response.status.message)
+
+                        } else
+                        {
+                            callBackOBJ.onFailureIsEmp(response.status.message)
+                        }
+                    } catch (e: Exception) {
+
+                    }
                 }, { error ->
                     try
                     {
@@ -69,6 +69,61 @@ class PresenterProfile {
                     }
 
                 })
+    }
+
+    @SuppressLint("CheckResult")
+    fun setHasBusiness(contextOBJ: Context, jsonRequest: JsonObject, callBackOBJ: ICallBackProfileFinValidate) {
+
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).setFinStatus(jsonRequest)
+
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { responseBody ->
+                responseBody
+            }
+            .subscribe({ response ->
+
+                try {
+                    if (response.status.isSuccess)
+                    {
+                        callBackOBJ.onSuccessHasBusiness(response.status.message)
+
+                    } else
+                    {
+                        callBackOBJ.onFailureHasBusiness(response.status.message)
+                    }
+                } catch (e: Exception) {
+
+                }
+            }, { error ->
+                try
+                {
+                    val errorVal         =    error as HttpException
+                    if(errorVal.code()>=400)
+                    {
+                        val jsonError        =    JSONObject(errorVal.response()?.errorBody()?.string()!!)
+                        val  jsonStatus      =    jsonError.getJSONObject("status")
+                        val jsonMessage      =    jsonStatus.getString("message")
+                        val jsonStatusCode   =    jsonStatus.getInt("statusCode")
+
+                        if(jsonStatusCode==50002)
+                        {
+                            callBackOBJ.onSessionTimeOut(jsonMessage)
+                        }
+                        else
+                        {
+                            callBackOBJ.onFailureHasBusiness(jsonMessage)
+                        }
+
+                    }
+
+                } catch (exp: Exception) {
+                    val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
+                    callBackOBJ.onFailureHasBusiness(errorMessageOBJ)
+                }
+
+            })
     }
 
     @SuppressLint("CheckResult")

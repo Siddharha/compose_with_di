@@ -21,7 +21,7 @@ import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pinview.model.LoginData
-import com.app.l_pesa.profile.inter.ICallBackProfileBusinessValidate
+import com.app.l_pesa.profile.inter.ICallBackProfileFinValidate
 import com.app.l_pesa.profile.inter.ICallBackUserInfo
 import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterProfile
@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.fragment_profile.txtDOB
 import java.util.*
 
 
-class ProfileFragment: Fragment(), ICallBackUserInfo {
+class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidate {
 
 
     companion object {
@@ -67,21 +67,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             val jsonObject = JsonObject()
             jsonObject.addProperty("business_info", isChecked)
             val presenterBusinessValidator = PresenterProfile()
-            presenterBusinessValidator.isEmployed(requireContext(), jsonObject,object:ICallBackProfileBusinessValidate{
-                override fun onSessionTimeOut(jsonMessage: String) {
-                    s.isChecked = !isChecked
-                }
-
-                override fun onFailureHasBusiness(jsonMessage: String) {
-                    s.isChecked = !isChecked
-                }
-
-                override fun onSuccessHasBusiness() {
-                    empInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
-                    cvBAndPInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
-                }
-
-            })
+            presenterBusinessValidator.setIsEmp(requireContext(), jsonObject,this)
 
 
 
@@ -92,21 +78,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
             jsonObject.addProperty("employment_info", isChecked)
             val presenterEmployeeValidator = PresenterProfile()
 
-            presenterEmployeeValidator.isEmployed(requireContext(), jsonObject,object:ICallBackProfileBusinessValidate{
-                override fun onSessionTimeOut(jsonMessage: String) {
-                    s.isChecked = false
-                }
-
-                override fun onFailureHasBusiness(jsonMessage: String) {
-                    s.isChecked = false
-                }
-
-                override fun onSuccessHasBusiness() {
-                    empInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
-                    cvBAndPInfo.visibility = if(isChecked) View.VISIBLE else View.GONE
-                }
-
-            })
+            presenterEmployeeValidator.setHasBusiness(requireContext(), jsonObject,this)
         }
 
         imgEditMoreOfYou.setOnClickListener {
@@ -333,6 +305,24 @@ class ProfileFragment: Fragment(), ICallBackUserInfo {
         val alert = dialogBuilder.create()
         alert.setTitle(resources.getString(R.string.app_name))
         alert.show()
+    }
+
+    override fun onFailureHasBusiness(jsonMessage: String) {
+        swIsBusiness.isChecked = !swIsBusiness.isChecked
+    }
+
+    override fun onSuccessHasBusiness(jsonMessage: String) {
+        cvBAndPInfo.visibility = if(swIsBusiness.isChecked) View.VISIBLE else View.GONE
+    }
+
+    override fun onFailureIsEmp(jsonMessage: String) {
+        swIsEmp.isChecked = !swIsEmp.isChecked
+
+    }
+
+    override fun onSuccessIsEmp(jsonMessage: String) {
+        empInfo.visibility = if(swIsEmp.isChecked) View.VISIBLE else View.GONE
+
     }
 
     @SuppressLint("SetTextI18n")
