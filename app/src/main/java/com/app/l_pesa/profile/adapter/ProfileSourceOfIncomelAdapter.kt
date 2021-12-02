@@ -12,9 +12,10 @@ import com.app.l_pesa.R
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.profile.inter.ICallBackAdditionalInfoDropdown
 import com.app.l_pesa.profile.inter.ICallBackClickMoreAbout
+import com.app.l_pesa.profile.inter.ICallBackProfileAdditionalInfo
 import com.app.l_pesa.profile.model.ResUserAdditionalInfoDropdowns
 
-class ProfileEduLvlAdapter (val context: Context, private val listIdType: ArrayList<ResUserAdditionalInfoDropdowns.Data.EducationalLevel>, private val dialogOBJ: Dialog, private val callBack: ICallBackAdditionalInfoDropdown) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ProfileSourceOfIncomelAdapter (val context: Context, private val listIdType: ArrayList<ResUserAdditionalInfoDropdowns.Data.IncomeSource>, private val dialogOBJ: Dialog, private val callBack: ICallBackAdditionalInfoDropdown) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -22,8 +23,7 @@ class ProfileEduLvlAdapter (val context: Context, private val listIdType: ArrayL
         viewHolder.titleText.text = listIdType[position].name
         viewHolder.rlRootObj.setOnClickListener {
             dialogOBJ.dismiss()
-            callBack.onDropdownEduLvlSelected(listIdType[position])
-            //callBack.onSelectIdType(listIdType[position].id,listIdType[position].name,listIdType[position].type)
+            callBack.onDropdownSourceOfIncomeSelected(listIdType[position])
         }
 
     }
