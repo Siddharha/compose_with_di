@@ -45,6 +45,10 @@ class ResUserInfo {
         @Expose
         var userIdsBusinessInfo: ArrayList<UserIdsBusinessInfo>? = null
 
+        @SerializedName("user_additional_info")
+        @Expose
+        var additionalInfo: AdditionalInfo? = null
+
         @SerializedName("total_statements")
         @Expose
         var totalStatements: Int?=0
@@ -258,5 +262,20 @@ class ResUserInfo {
         @Expose
         var profileImageVerify:Int = 0
 
+    }
+
+    inner class AdditionalInfo{
+        @SerializedName("id")
+        @Expose
+        var id: Int = 0
+        @SerializedName("net_monthly_income")
+        @Expose
+        var netMonthlyIncome: String = ""
+        @SerializedName("education_level")
+        @Expose
+        var educationLevel: String = ""
+        @SerializedName("source_of_income")
+        @Expose
+        var sourceOfIncome: String = ""
     }
 }

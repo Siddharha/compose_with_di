@@ -14,12 +14,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/ProfileSourceOfIncomelAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackAdditionalInfoDropdown.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/ProfileNetMonthlyIncomeAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackSaveAdditionalInfo.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/presenter/PresenterSaveAdditionalInfo.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/ProfileEduLvlAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/adapter/ProfileEduLvlAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/api/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/api/BaseService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackAdditionalInfoDropdown.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/inter/ICallBackAdditionalInfoDropdown.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/model/ResUserInfo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/model/ResUserInfo.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditMoreAboutActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditMoreAboutActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit_more_about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_profile_edit_more_about.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,8 +188,8 @@
       <recent name="com.app.l_pesa.common" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="com.app.l_pesa.profile.adapter" />
       <recent name="com.app.l_pesa.profile.presenter" />
+      <recent name="com.app.l_pesa.profile.adapter" />
       <recent name="com.app.l_pesa.loanplan.inter" />
       <recent name="com.app.l_pesa.loanplan.presenter" />
       <recent name="com.app.l_pesa.loanplan.adapter" />
@@ -307,13 +313,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Dev option enabled for dev build">
-      <created>1621349781223</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1621349781224</updated>
     </task>
     <task id="LOCAL-00072" summary="Dev option enabled for dev build">
       <created>1621350191809</created>
@@ -651,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638426072861</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="profile mandatory dropdown for additional info implemented">
+      <created>1638433656182</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1638433656182</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -681,7 +687,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implement zoop_final" />
     <MESSAGE value="implement zoop_final_Done" />
     <MESSAGE value="date picker issue fixes" />
     <MESSAGE value="bug fix 2" />
@@ -706,7 +711,8 @@
     <MESSAGE value="banner based on 3 sec changes in dashboard" />
     <MESSAGE value="repayment UI completed" />
     <MESSAGE value="loading details loan history from history list solved" />
-    <option name="LAST_COMMIT_MESSAGE" value="loading details loan history from history list solved" />
+    <MESSAGE value="profile mandatory dropdown for additional info implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="profile mandatory dropdown for additional info implemented" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1390,6 +1396,21 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileFragment.kt</url>
           <line>332</line>
           <option name="timeStamp" value="491" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditMoreAboutActivity.kt</url>
+          <line>104</line>
+          <option name="timeStamp" value="492" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditMoreAboutActivity.kt</url>
+          <line>109</line>
+          <option name="timeStamp" value="493" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/profile/view/ProfileEditMoreAboutActivity.kt</url>
+          <line>114</line>
+          <option name="timeStamp" value="494" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/sms_retrieval/AppSignatureHelper.java</url>

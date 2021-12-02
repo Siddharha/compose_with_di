@@ -340,7 +340,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
         sharedPrefOBJ.profileInfo         = profileData
 
         getProfileInfo(data)
-
+        getAdditionalInfo(data.additionalInfo)
         val pImg = data.userInfo!!.profileImage
         /*Profile Information*/
 
@@ -568,6 +568,12 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
         }
 
 
+    }
+
+    private fun getAdditionalInfo(additionalInfo: ResUserInfo.AdditionalInfo?) {
+        txtEduLvl.text = "Education Level: ${additionalInfo?.educationLevel}"
+        txtSoI.text = "Source of income: ${additionalInfo?.sourceOfIncome}"
+        txtNetMonthlyIncome.text = "Net monthly income: ${additionalInfo?.netMonthlyIncome}"
     }
 
     private fun getProfileInfo(data: ResUserInfo.Data)

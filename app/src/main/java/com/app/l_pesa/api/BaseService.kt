@@ -90,6 +90,8 @@ interface BaseService{
     @GET("user/dashboard")
     fun getDashboard(): Observable<ResDashboard>
 
+    @POST("user/update-user-additional-info")
+    fun saveAdditionalInfo(@Body request: JsonObject): Observable<ResPersonFinStatus>
     //Statement section------
     @GET("get_statement_types")
     fun getStatementType(): Observable<StatementTypeResponse>

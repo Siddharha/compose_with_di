@@ -116,7 +116,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tilNameEmp">
 
                         <com.app.l_pesa.common.CommonEditTextRegular
-                            android:id="@+id/etDepartment"
+                            android:id="@+id/etMonthlyIncome"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:focusable="false"
