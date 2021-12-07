@@ -1,8 +1,10 @@
 package com.app.l_pesa.profile.view
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.Window
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +23,18 @@ import com.app.l_pesa.profile.model.ResUserAdditionalInfoDropdowns
 import com.app.l_pesa.profile.presenter.PresenterProfile
 import com.app.l_pesa.profile.presenter.PresenterSaveAdditionalInfo
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_profile_edit_id_info.*
 import kotlinx.android.synthetic.main.activity_profile_edit_more_about.*
+import kotlinx.android.synthetic.main.activity_profile_edit_more_about.toolbar
 
 class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbout,
     ICallBackAdditionalInfoDropdown {
     private val pref:SharedPref by lazy { SharedPref(this) }
+    private val pregressDialog:ProgressDialog by lazy { ProgressDialog(this).apply {
+        setMessage("Loading...")
+        setCancelable(false)
+        create()
+    } }
     private lateinit var eduLvlValue:String
     private lateinit var incomeSourceValue:String
     private lateinit var netIncomeValue:String
@@ -35,7 +44,8 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_more_about)
-
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         loadDropdownDatas()
         onActionPerform()
     }
@@ -75,6 +85,17 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
             }
 
         })
+
+        if(intent.hasExtra("additional_info")){
+        val additionalInfoString = intent.getStringExtra("additional_info")
+            val additionalInfoStringArray = additionalInfoString?.split("*")!!
+            etEduLvl.setText(additionalInfoStringArray[0])
+            eduLvlValue = additionalInfoStringArray[0]
+            etNameEmp.setText(additionalInfoStringArray[1])
+            incomeSourceValue = additionalInfoStringArray[1]
+            etMonthlyIncome.setText(additionalInfoStringArray[2])
+            netIncomeValue = additionalInfoStringArray[2]
+        }
     }
 
     private fun onActionPerform() {
@@ -91,33 +112,54 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
         }
 
         buttonSubmit.setOnClickListener {
-            val jsonObject = JsonObject()
-            jsonObject.addProperty("net_monthly_income", netIncomeValue)
-            jsonObject.addProperty("source_of_income", incomeSourceValue)
-            jsonObject.addProperty("education_level", eduLvlValue)
-            val presenterSaveAdditionalInfo = PresenterSaveAdditionalInfo()
+            if (eduLvlValue.isEmpty()){
+                etEduLvl.error = "Please select Educational Level"
+            }
+            else if (incomeSourceValue.isEmpty()){
+                etNameEmp.error = "Please select Income Source"
 
-            presenterSaveAdditionalInfo.doSaveAdditionalInfo(this,
-                jsonObject,
-                object: ICallBackSaveAdditionalInfo {
-                    override fun onSessionTimeOut(jsonMessage: String) {
-                        Toast.makeText(this@ProfileEditMoreAboutActivity,jsonMessage,Toast.LENGTH_SHORT).show()
-                        //jsonMessage.toast(this@ProfileEditMoreAboutActivity,Toast.LENGTH_SHORT).show()
-                    }
+            }
+            else if (netIncomeValue.isEmpty()){
+                etMonthlyIncome.error = "Please select Net Income"
 
-                    override fun onFailureSaveAdditionalInfo(jsonMessage: String) {
-                        Toast.makeText(this@ProfileEditMoreAboutActivity,jsonMessage,Toast.LENGTH_SHORT).show()
-                       // jsonMessage.toast(this@ProfileEditMoreAboutActivity,Toast.LENGTH_SHORT).show()
-                    }
+            }else{
+                pregressDialog.show()
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("net_monthly_income", netIncomeValue)
+                jsonObject.addProperty("source_of_income", incomeSourceValue)
+                jsonObject.addProperty("education_level", eduLvlValue)
+                val presenterSaveAdditionalInfo = PresenterSaveAdditionalInfo()
 
-                    override fun onSucessSaveAdditionalInfo(message: String) {
-                        Toast.makeText(this@ProfileEditMoreAboutActivity,message,Toast.LENGTH_SHORT).show()
-                        //message.toast(this@ProfileEditMoreAboutActivity,Toast.LENGTH_SHORT).show()
-                    }
+                presenterSaveAdditionalInfo.doSaveAdditionalInfo(this,
+                    jsonObject,
+                    object: ICallBackSaveAdditionalInfo {
+                        override fun onSessionTimeOut(jsonMessage: String) {
+                            if (pregressDialog.isShowing) pregressDialog.dismiss()
+                            Toast.makeText(this@ProfileEditMoreAboutActivity,jsonMessage,Toast.LENGTH_SHORT).show()
+                            //jsonMessage.toast(this@ProfileEditMoreAboutActivity,Toast.LENGTH_SHORT).show()
+                        }
 
-                })
+                        override fun onFailureSaveAdditionalInfo(jsonMessage: String) {
+                            if (pregressDialog.isShowing) pregressDialog.dismiss()
+                            Toast.makeText(this@ProfileEditMoreAboutActivity,jsonMessage,Toast.LENGTH_SHORT).show()
+                            // jsonMessage.toast(this@ProfileEditMoreAboutActivity,Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onSucessSaveAdditionalInfo(message: String) {
+                            if (pregressDialog.isShowing) pregressDialog.dismiss()
+                            Toast.makeText(this@ProfileEditMoreAboutActivity,message,Toast.LENGTH_SHORT).show()
+                            //message.toast(this@ProfileEditMoreAboutActivity,Toast.LENGTH_SHORT).show()
+                            pref.profileUpdate=resources.getString(R.string.status_true)
+                            onBackPressed()
+                        }
+
+                    })
+            }
+
         }
-
+        buttonCancel.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun showDialogMonthlyIncome() {
@@ -168,17 +210,17 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
 
     override fun onDropdownSourceOfIncomeSelected(incomeSource: ResUserAdditionalInfoDropdowns.Data.IncomeSource) {
         etNameEmp.setText(incomeSource.name)
-        incomeSourceValue = incomeSource.value
+        incomeSourceValue = incomeSource.name
     }
 
     override fun onDropdownEduLvlSelected(educationalLevel: ResUserAdditionalInfoDropdowns.Data.EducationalLevel) {
         etEduLvl.setText(educationalLevel.name)
-        eduLvlValue = educationalLevel.value
+        eduLvlValue = educationalLevel.name
     }
 
     override fun onDropdownNetMonthlyIncomeSelected(netMonthlyIncome: ResUserAdditionalInfoDropdowns.Data.NetMonthlyIncome) {
         etMonthlyIncome.setText(netMonthlyIncome.name)
-        netIncomeValue = netMonthlyIncome.value
+        netIncomeValue = netMonthlyIncome.name
     }
 }
 

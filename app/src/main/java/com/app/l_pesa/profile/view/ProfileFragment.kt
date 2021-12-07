@@ -42,7 +42,15 @@ import java.util.*
 
 class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidate {
 
-
+private lateinit var eduLvl:String
+private lateinit var incomeSource:String
+private lateinit var netIncome:String
+private val progressDialog: AlertDialog by lazy {
+    AlertDialog.Builder(requireContext())
+        .setMessage("Loading...")
+        .setCancelable(false)
+        .create()
+}
     companion object {
         fun newInstance(): Fragment {
             return ProfileFragment()
@@ -64,6 +72,9 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
     private fun onActionPerform() {
         swIsEmp.setOnCheckedChangeListener { s, isChecked ->
 
+            if (!progressDialog.isShowing){
+                progressDialog.show()
+            }
             val jsonObject = JsonObject()
             jsonObject.addProperty("business_info", isChecked)
             val presenterBusinessValidator = PresenterProfile()
@@ -74,6 +85,9 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
         }
 
         swIsBusiness.setOnCheckedChangeListener { s, isChecked ->
+            if (!progressDialog.isShowing){
+                progressDialog.show()
+            }
             val jsonObject = JsonObject()
             jsonObject.addProperty("employment_info", isChecked)
             val presenterEmployeeValidator = PresenterProfile()
@@ -85,7 +99,9 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
             //edit more about you
             if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
-                startActivity(Intent(activity, ProfileEditMoreAboutActivity::class.java))
+                val intent = Intent(activity, ProfileEditMoreAboutActivity::class.java)
+                intent.putExtra("additional_info","$eduLvl*$incomeSource*$netIncome")
+                startActivity(intent)
                 activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
             }
@@ -309,18 +325,30 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
 
     override fun onFailureHasBusiness(jsonMessage: String) {
         swIsBusiness.isChecked = !swIsBusiness.isChecked
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
     }
 
     override fun onSuccessHasBusiness(jsonMessage: String) {
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
         cvBAndPInfo.visibility = if(swIsBusiness.isChecked) View.VISIBLE else View.GONE
     }
 
     override fun onFailureIsEmp(jsonMessage: String) {
         swIsEmp.isChecked = !swIsEmp.isChecked
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
 
     }
 
     override fun onSuccessIsEmp(jsonMessage: String) {
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
         empInfo.visibility = if(swIsEmp.isChecked) View.VISIBLE else View.GONE
 
     }
@@ -572,8 +600,11 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
 
     private fun getAdditionalInfo(additionalInfo: ResUserInfo.AdditionalInfo?) {
         txtEduLvl.text = "Education Level: ${additionalInfo?.educationLevel}"
+        eduLvl = additionalInfo?.educationLevel!!
         txtSoI.text = "Source of income: ${additionalInfo?.sourceOfIncome}"
+        incomeSource = additionalInfo?.sourceOfIncome
         txtNetMonthlyIncome.text = "Net monthly income: ${additionalInfo?.netMonthlyIncome}"
+        netIncome = additionalInfo?.netMonthlyIncome
     }
 
     private fun getProfileInfo(data: ResUserInfo.Data)

@@ -165,6 +165,10 @@ class ResDashboard {
         @Expose
         var profileCompletePercentage: Int?=0
 
+        @SerializedName("loan_eligibility")
+        @Expose
+        var loanEligibility: Boolean?=false
+
     }
 
 }

@@ -65,7 +65,7 @@ class ScreenSlidePageAdFragment : Fragment() {
                     Glide.with(requireContext()).load(R.drawable.lpk_banner).into(imgBanner)
                     imgBanner.setOnClickListener {
                         doAsync {
-                            val uri = Uri.parse("https://ico.lpesa.io")
+                            val uri = Uri.parse("https://www.lpkdefi.com")
                             val intent = Intent(Intent.ACTION_VIEW, uri)
 
                             uiThread {

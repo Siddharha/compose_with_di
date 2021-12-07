@@ -69,6 +69,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private var doubleBackStatus = false
     private lateinit var progressDialog: ProgressDialog
     private lateinit var countDownTimer: CountDownTimer
+    private var lb:Boolean = true
 
     private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val appUpdatedListener: InstallStateUpdatedListener by lazy {
@@ -392,13 +393,33 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
             }
             R.id.action_loan -> {
-                if (currentFragment is LoanPlansFragment) {
+                if(lb){
+                     if (currentFragment is LoanPlansFragment) {
                 } else {
                     val sharedPref = SharedPref(this@DashboardActivity)
                     sharedPref.openTabLoan = "CURRENT"
                     toolbar.title = resources.getString(R.string.nav_item_loan)
                     navigateToFragment(LoanPlansFragment.newInstance())
                 }
+                }else{
+                    val dialog = AlertDialog.Builder(this)
+                    dialog.apply {
+                        setTitle("Please Complete your profile")
+                        setMessage("You are not eligible for Loan. Please complete all necessary details from profile.")
+                        setPositiveButton("Complete Profile"){d,_ ->
+                          gotoCompleteProfile()
+                            d.dismiss()
+                        }
+                        setNegativeButton("Close LPesa"){d,_->
+                           finish()
+                            d.dismiss()
+                        }
+                        setCancelable(false)
+                        create()
+                        show()
+                    }
+                }
+
 
             }
             R.id.action_points -> {
@@ -697,5 +718,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             sharedPrefOBJ.profileUpdate = resources.getString(R.string.status_false)
         }, 200)
 
+    }
+
+    fun onLoanEligibility(loanEligibility: Boolean?) {
+        lb = loanEligibility!!
     }
 }

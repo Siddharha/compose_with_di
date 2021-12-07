@@ -2,7 +2,6 @@ package com.app.l_pesa.dashboard.view
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -21,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.app.l_pesa.R
-import com.app.l_pesa.allservices.views.SasaDoctorActivity
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CustomTypeFaceSpan
 import com.app.l_pesa.common.SharedPref
@@ -217,6 +215,29 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     private fun setDashBoard(dashBoard: ResDashboard.Data) {
 
         setData(dashBoard)
+        checkLoanEligibility(dashBoard)
+    }
+
+    private fun checkLoanEligibility(dashBoard: ResDashboard.Data) {
+        (requireContext() as DashboardActivity).onLoanEligibility(dashBoard.loanEligibility)
+        if(!dashBoard.loanEligibility!!){
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.apply {
+            setTitle("Please Complete your profile")
+            setMessage("You are not eligible for Loan. Please complete all necessary details from profile.")
+            setPositiveButton("Complete Profile"){d,_ ->
+                (requireContext() as DashboardActivity).gotoCompleteProfile()
+                d.dismiss()
+            }
+            setNegativeButton("Close LPesa"){d,_->
+                (requireContext() as DashboardActivity).finish()
+                d.dismiss()
+            }
+            setCancelable(false)
+            create()
+            show()
+        }
+        }
     }
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {

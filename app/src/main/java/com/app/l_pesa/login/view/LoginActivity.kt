@@ -115,6 +115,7 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin, 
         /*if(!TextUtils.isEmpty(sharedPrefOBJ.countryIsdCode)) {
             requestHint(this, CREDENTIAL_PICKER_REQUEST)
         }*/
+
         etPhone.setText(sharedPrefOBJ.userNumber)
     }
 
@@ -141,9 +142,6 @@ class LoginActivity : AppCompatActivity(),ICallBackCountryList, ICallBackLogin, 
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progressDialog.setCancelable(false)
         progressDialog.setCanceledOnTouchOutside(false)
-
-
-
     }
 
     private fun dismiss()
