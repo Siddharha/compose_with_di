@@ -77,7 +77,7 @@ private val progressDialog: AlertDialog by lazy {
                     progressDialog.show()
                 }
                 val jsonObject = JsonObject()
-                jsonObject.addProperty("business_info", isChecked)
+                jsonObject.addProperty("employment_info", isChecked)
                 val presenterBusinessValidator = PresenterProfile()
                 presenterBusinessValidator.setIsEmp(requireContext(), jsonObject, this)
 
@@ -95,8 +95,9 @@ private val progressDialog: AlertDialog by lazy {
             if (!progressDialog.isShowing){
                 progressDialog.show()
             }
+                //business_info
             val jsonObject = JsonObject()
-            jsonObject.addProperty("employment_info", isChecked)
+            jsonObject.addProperty("business_info", isChecked)
             val presenterEmployeeValidator = PresenterProfile()
 
             presenterEmployeeValidator.setHasBusiness(requireContext(), jsonObject,this)
