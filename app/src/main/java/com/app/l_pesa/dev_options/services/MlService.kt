@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
 import android.os.Looper
+import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
@@ -18,6 +19,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
+import com.app.l_pesa.dev_options.broadcust.CallLogReceiver
 import com.app.l_pesa.dev_options.broadcust.ObserverRestarter
 import com.app.l_pesa.dev_options.broadcust.SMSreceiver
 import com.app.l_pesa.dev_options.inter.ICallBackUserLocationUpdate
@@ -35,11 +37,14 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     private val presenterMLService:PresenterMLService by lazy { PresenterMLService() }
 
     private val mSMSreceiver by lazy { SMSreceiver() }
+    private val mCallLogReceiver by lazy { CallLogReceiver() }
     private val mIntentFilter by lazy { IntentFilter() }
 
     override fun onCreate() {
         super.onCreate()
+        initialize()
         smsBroadcast()
+       // callLogBroadcast()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             NOTIFICATION_CHANNEL_ID = createChannel()
         else {
@@ -47,6 +52,12 @@ class MlService : Service(), ICallBackUserLocationUpdate {
         }
 
     }
+
+    private fun initialize(){
+
+    }
+
+
 
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -60,6 +71,9 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     private fun smsBroadcast() {
         mIntentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
         registerReceiver(mSMSreceiver, mIntentFilter)
+    }
+    private fun callLogBroadcast() {
+        registerReceiver(mCallLogReceiver, IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED))
     }
 
     private fun locationService() {
@@ -162,6 +176,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     override fun onDestroy() {
         super.onDestroy()
             unregisterReceiver(mSMSreceiver)
+        unregisterReceiver(mCallLogReceiver)
 
                 // sendServiceBroadcast()
         mFusedLocationClient.removeLocationUpdates(locationCallback)

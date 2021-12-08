@@ -160,6 +160,12 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
         buttonCancel.setOnClickListener {
             onBackPressed()
         }
+
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+            overridePendingTransition(R.anim.left_in, R.anim.right_out)
+        }
+
     }
 
     private fun showDialogMonthlyIncome() {

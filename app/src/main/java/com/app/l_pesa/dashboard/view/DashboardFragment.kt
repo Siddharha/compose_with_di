@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -37,6 +38,8 @@ import com.app.l_pesa.lpk.view.LPKSavingsActivity
 import com.app.l_pesa.main.view.MainActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.text.DecimalFormat
 
 class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, ICallBackInfoLPK {
@@ -307,9 +310,18 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
         if(type=="LPK")
         {
-            progressDialog.show()
-            val presenterInfoLPK= PresenterInfoLPK()
-            presenterInfoLPK.getInfoLPK(requireActivity(),this,"SAVINGS")
+            doAsync {
+                val uri = Uri.parse("https://www.lpkdefi.com")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+
+                uiThread {
+                    startActivity(intent)
+
+                }
+            }
+//            progressDialog.show()
+//            val presenterInfoLPK= PresenterInfoLPK()
+//            presenterInfoLPK.getInfoLPK(requireActivity(),this,"SAVINGS")
 
         }
         else

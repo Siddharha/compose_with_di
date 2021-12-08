@@ -45,6 +45,7 @@ class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidat
 private lateinit var eduLvl:String
 private lateinit var incomeSource:String
 private lateinit var netIncome:String
+private lateinit var rootView: View
 private val progressDialog: AlertDialog by lazy {
     AlertDialog.Builder(requireContext())
         .setMessage("Loading...")
@@ -57,8 +58,8 @@ private val progressDialog: AlertDialog by lazy {
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        return inflater.inflate(R.layout.fragment_profile, container,false)
+        rootView = inflater.inflate(R.layout.fragment_profile, container,false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,20 +72,26 @@ private val progressDialog: AlertDialog by lazy {
 
     private fun onActionPerform() {
         swIsEmp.setOnCheckedChangeListener { s, isChecked ->
+            if(CommonMethod.isNetworkAvailable(requireContext())) {
+                if (!progressDialog.isShowing) {
+                    progressDialog.show()
+                }
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("business_info", isChecked)
+                val presenterBusinessValidator = PresenterProfile()
+                presenterBusinessValidator.setIsEmp(requireContext(), jsonObject, this)
 
-            if (!progressDialog.isShowing){
-                progressDialog.show()
+            }else{
+                s.isChecked = !isChecked
+                CommonMethod.customSnackBarError(rootView,requireContext(),"Network not available!")
             }
-            val jsonObject = JsonObject()
-            jsonObject.addProperty("business_info", isChecked)
-            val presenterBusinessValidator = PresenterProfile()
-            presenterBusinessValidator.setIsEmp(requireContext(), jsonObject,this)
-
-
 
         }
 
         swIsBusiness.setOnCheckedChangeListener { s, isChecked ->
+
+            if(CommonMethod.isNetworkAvailable(requireContext()))
+            {
             if (!progressDialog.isShowing){
                 progressDialog.show()
             }
@@ -93,6 +100,10 @@ private val progressDialog: AlertDialog by lazy {
             val presenterEmployeeValidator = PresenterProfile()
 
             presenterEmployeeValidator.setHasBusiness(requireContext(), jsonObject,this)
+            }else{
+                s.isChecked = !isChecked
+                CommonMethod.customSnackBarError(rootView,requireContext(),"Network not available!")
+            }
         }
 
         imgEditMoreOfYou.setOnClickListener {
