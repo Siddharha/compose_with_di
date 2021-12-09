@@ -611,12 +611,27 @@ private val progressDialog: AlertDialog by lazy {
     }
 
     private fun getAdditionalInfo(additionalInfo: ResUserInfo.AdditionalInfo?) {
-        txtEduLvl.text = "Education Level: ${additionalInfo?.educationLevel}"
-        eduLvl = additionalInfo?.educationLevel!!
-        txtSoI.text = "Source of income: ${additionalInfo?.sourceOfIncome}"
-        incomeSource = additionalInfo?.sourceOfIncome
+
+        if(additionalInfo?.educationLevel !=null){
+            txtEduLvl.text = "Education Level: ${additionalInfo?.educationLevel}"
+            eduLvl = additionalInfo?.educationLevel!!
+        }else{
+            eduLvl = ""
+        }
+
+        if(additionalInfo?.sourceOfIncome !=null){
+            txtSoI.text = "Source of income: ${additionalInfo?.sourceOfIncome}"
+            incomeSource = additionalInfo?.sourceOfIncome!!
+        }else{
+            incomeSource = ""
+        }
+
+        if(additionalInfo?.netMonthlyIncome !=null){
         txtNetMonthlyIncome.text = "Net monthly income: ${additionalInfo?.netMonthlyIncome}"
-        netIncome = additionalInfo?.netMonthlyIncome
+        netIncome = additionalInfo?.netMonthlyIncome!!
+        }else{
+            netIncome = ""
+        }
     }
 
     private fun getProfileInfo(data: ResUserInfo.Data)

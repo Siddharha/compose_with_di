@@ -270,12 +270,12 @@ class ResUserInfo {
         var id: Int = 0
         @SerializedName("net_monthly_income")
         @Expose
-        var netMonthlyIncome: String = ""
+        var netMonthlyIncome: String? = null
         @SerializedName("education_level")
         @Expose
-        var educationLevel: String = ""
+        var educationLevel: String? = null
         @SerializedName("source_of_income")
         @Expose
-        var sourceOfIncome: String = ""
+        var sourceOfIncome: String? = null
     }
 }
