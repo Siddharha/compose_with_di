@@ -1,67 +1,114 @@
 package com.app.l_pesa.dev_options.broadcust
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.provider.Telephony
+import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 import android.util.Log
 import android.widget.Toast
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
+import com.app.l_pesa.common.toast
 import com.app.l_pesa.dev_options.inter.ICallBackUserCallLogUpdate
 import com.app.l_pesa.dev_options.inter.ICallBackUserSMSUpdate
+import com.app.l_pesa.dev_options.models.UserCallLogPayload
+import com.app.l_pesa.dev_options.models.UserCallLogUpdateResponse
 import com.app.l_pesa.dev_options.models.UserSMSPayload
 import com.app.l_pesa.dev_options.models.UserSMSUpdateResponse
 import com.app.l_pesa.dev_options.presenter.PresenterMLService
 import com.app.l_pesa.dev_options.services.MlService
+import java.lang.Exception
 
-class CallLogReceiver : BroadcastReceiver(), ICallBackUserCallLogUpdate {
+class CallLogReceiver : BroadcastReceiver() {
+
+    private var caller_number = ""
    // val CAL_LOG_RECEIVED = TelephonyManager.ACTION_PHONE_STATE_CHANGED
-  //  private val _presenterMLService :PresenterMLService by lazy { PresenterMLService() }
+    private val _presenterMLService :PresenterMLService by lazy { PresenterMLService() }
+
     override fun onReceive(context: Context?, intent: Intent?) {
-        val state = intent?.getStringExtra(TelephonyManager.EXTRA_STATE)
-        if (state == null) {
+       try {
+           println("Receiver start")
+           val state = intent!!.getStringExtra(TelephonyManager.EXTRA_STATE)
+           var incomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)
 
-            //Outgoing call
-            val number = intent?.getStringExtra(Intent.EXTRA_PHONE_NUMBER)
-            Log.e("tag", "Outgoing number : " + number)
+           if(incomingNumber == null){
+//               val telephony =
+//                   context!!.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+//               telephony.listen(object : PhoneStateListener() {
+//                   override fun onCallStateChanged(state: Int, incNumber: String) {
+//                       super.onCallStateChanged(state, incNumber)
+//                      // println("incomingNumber : $incomingNumber")
+//                      // incomingNumber = incNumber
+//                       //Log.e("Incoming Number", "Number is ,$incNumber")
+//                       //Log.e("State", "State is ,$state")
+//                   }
+//               }, PhoneStateListener.LISTEN_CALL_STATE)
+           }else{
+               //Log.e("Incoming Number", "Number is ,$incomingNumber")
+              // Log.e("State", "State is ,$state")
+           }
 
-        } else if (state == TelephonyManager.EXTRA_STATE_OFFHOOK) {
+           if (state == TelephonyManager.EXTRA_STATE_RINGING) {
+              // Toast.makeText(context, "Incoming Call State", Toast.LENGTH_SHORT).show()
+//               Toast.makeText(
+//                   context,
+//                   "Ringing State Number is -$incomingNumber",
+//                   Toast.LENGTH_SHORT
+//               ).show()
 
-            Log.e("tag", "EXTRA_STATE_OFFHOOK");
+               if(incomingNumber !=null){
 
-        } else if (state == TelephonyManager.EXTRA_STATE_IDLE) {
+                   if(caller_number ==""){
+                       caller_number = incomingNumber
+                   }
+                   _presenterMLService.doUserCallLogUpdate(context!!, UserCallLogPayload(
+                       contactName = "",
+                       number = caller_number,
+                       timeStamp = getCurrentDateTime(),
+                       type = ""),object :ICallBackUserCallLogUpdate{
+                       override fun onSuccessCalLogUpdate(s: UserCallLogUpdateResponse) {
+                           //
+                           if (s.status.isSuccess){
+                               Toast.makeText(context,s.status.message,Toast.LENGTH_SHORT).show()
+                           }
+                       }
 
-            Log.e("tag", "EXTRA_STATE_IDLE")
+                       override fun onErrorCalLogUpdate(message: String) {
+                           //
+                       }
 
-        } else if (state == TelephonyManager.EXTRA_STATE_RINGING) {
+                       override fun onIncompleteCalLogUpdate(jsonMessage: String) {
+                           //
+                       }
 
-            //Incoming call
-            val number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)
-            Log.e("tag", "Incoming number : " + number)
+                       override fun onFailureCalLogUpdate(jsonMessage: String) {
+                           //
+                       }
 
-        } else
-            Log.e("tag", "none");
+                   })
+               }
+           }
+           if (state == TelephonyManager.EXTRA_STATE_OFFHOOK) {
+               caller_number = ""
+               //Toast.makeText(context, "Call Received State", Toast.LENGTH_SHORT).show()
+//               Toast.makeText(
+//                   context,
+//                   "Recived  Number is -$incomingNumber",
+//                   Toast.LENGTH_SHORT
+//               ).show()
+           }
+           if (state == TelephonyManager.EXTRA_STATE_IDLE) {
+               caller_number = ""
+               //Toast.makeText(context, "Call Idle State", Toast.LENGTH_SHORT).show()
+           }
+       } catch (e: Exception) {
+           e.printStackTrace()
+       }
     }
 
-    override fun onSuccessCalLogUpdate(status: Any) {
-//        if(status.isSuccess){
-//
-//        }
-    }
-
-    override fun onErrorCalLogUpdate(message: String) {
-
-    }
-
-    override fun onIncompleteCalLogUpdate(jsonMessage: String) {
-
-    }
-
-    override fun onFailureCalLogUpdate(jsonMessage: String) {
-
-    }
 //        val bundle = intent?.extras
 //        if (bundle == null) {
 //            //Log.w(tag, "BroadcastReceiver failed, no intent data to process.");

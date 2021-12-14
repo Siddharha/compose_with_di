@@ -235,8 +235,10 @@ object CommonMethod {
 
     fun getCurrentDateTime():String{
         val time = Calendar.getInstance().time
-        val sdf =  SimpleDateFormat("yyyy-mm-dd HH:mm:ss", Locale.getDefault())
-        return sdf.format(time)
+        val sdf =  SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+
+        val timestamp = sdf.format(time)
+        return timestamp
     }
 
     fun isServiceRunning(context: Context, serviceClass: Class<*>):Boolean {

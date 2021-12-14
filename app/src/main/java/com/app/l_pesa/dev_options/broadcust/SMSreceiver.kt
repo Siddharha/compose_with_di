@@ -26,7 +26,7 @@ class SMSreceiver : BroadcastReceiver(), ICallBackUserSMSUpdate {
             return
         }
         if (intent.action.equals(SMS_RECEIVED)) {
-            // Log.d(tag, "SMS_RECEIVED");
+             Log.d("sms", "SMS_RECEIVED");
 
             for ( message in Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
                 // Log.d(tag, "KitKat or newer");

@@ -6,8 +6,10 @@ import com.app.l_pesa.api.BaseService
 import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
+import com.app.l_pesa.dev_options.inter.ICallBackUserCallLogUpdate
 import com.app.l_pesa.dev_options.inter.ICallBackUserLocationUpdate
 import com.app.l_pesa.dev_options.inter.ICallBackUserSMSUpdate
+import com.app.l_pesa.dev_options.models.UserCallLogPayload
 import com.app.l_pesa.dev_options.models.UserLocationPayload
 import com.app.l_pesa.dev_options.models.UserSMSPayload
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -140,5 +142,67 @@ class PresenterMLService {
                     }
 
                 })
+    }
+
+    @SuppressLint("CheckResult")
+    fun doUserCallLogUpdate(contextOBJ: Context, userCallLogPayload: UserCallLogPayload, callBackOBJ: ICallBackUserCallLogUpdate)
+    {
+        val sharedPrefOBJ = SharedPref(contextOBJ)
+        RetrofitHelper.getRetrofitToken(BaseService::class.java,sharedPrefOBJ.accessToken).doUpdateCallLog(userCallLogPayload)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { responseBody ->
+                responseBody
+            }
+            .subscribe({ response ->
+
+                try
+                {
+
+                    if(response.status.isSuccess)
+                    {
+                        callBackOBJ.onSuccessCalLogUpdate(response)
+
+                    }
+                    else
+                    {
+                        callBackOBJ.onErrorCalLogUpdate(response.status.message)
+
+                    }
+
+                }
+                catch (e: Exception)
+                {
+
+                }
+            }, {
+                    error ->
+                try
+                {
+                    val errorVal     = error as HttpException
+
+                    val jsonError             =    JSONObject(errorVal.response()?.errorBody()?.string()!!)
+                    val  jsonStatus           =    jsonError.getJSONObject("status")
+                    val jsonMessage           =    jsonStatus.getString("message")
+                    val jsonStatusCode        =    jsonStatus.getInt("statusCode")
+
+                    if(jsonStatusCode==10008)
+                    {
+                        callBackOBJ.onIncompleteCalLogUpdate(jsonMessage)
+                    }
+                    else
+                    {
+                        callBackOBJ.onFailureCalLogUpdate(jsonMessage)
+                    }
+
+
+                }
+                catch (exp: Exception)
+                {
+                    val errorMessageOBJ= CommonMethod.commonCatchBlock(exp,contextOBJ)
+                    callBackOBJ.onFailureCalLogUpdate(errorMessageOBJ)
+                }
+
+            })
     }
 }

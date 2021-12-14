@@ -5,10 +5,7 @@ import com.app.l_pesa.allservices.models.SasaPaymentResponse
 import com.app.l_pesa.allservices.models.SasaUserInfoResponse
 import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.dev_options.models.UserLocationPayload
-import com.app.l_pesa.dev_options.models.UserLocationUpdateResponse
-import com.app.l_pesa.dev_options.models.UserSMSPayload
-import com.app.l_pesa.dev_options.models.UserSMSUpdateResponse
+import com.app.l_pesa.dev_options.models.*
 import com.app.l_pesa.help.model.ResHelp
 import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*
@@ -281,6 +278,9 @@ interface BaseService{
     //POST /store/sms
     @POST("store/sms")
     fun doUpdateSMS(@Body request: UserSMSPayload): Observable<UserSMSUpdateResponse>
+
+    @POST("store/call_log")
+    fun doUpdateCallLog(@Body request: UserCallLogPayload): Observable<UserCallLogUpdateResponse>
 
     @GET("buy_credit_score/plans")
     fun getAllCreditPlans():Observable<CreditPlanResponse>

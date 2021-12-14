@@ -11,8 +11,10 @@ import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
 import android.os.Looper
+import android.provider.Telephony
 import android.telephony.TelephonyManager
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -38,13 +40,12 @@ class MlService : Service(), ICallBackUserLocationUpdate {
 
     private val mSMSreceiver by lazy { SMSreceiver() }
     private val mCallLogReceiver by lazy { CallLogReceiver() }
-    private val mIntentFilter by lazy { IntentFilter() }
 
     override fun onCreate() {
         super.onCreate()
         initialize()
         smsBroadcast()
-       // callLogBroadcast()
+        callLogBroadcast()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             NOTIFICATION_CHANNEL_ID = createChannel()
         else {
@@ -69,8 +70,9 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     }
 
     private fun smsBroadcast() {
-        mIntentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
-        registerReceiver(mSMSreceiver, mIntentFilter)
+        val mIntentFilter = IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION)
+       // mIntentFilter.addAction("android.provider.Telephony.SMS_RECEIVED")
+        registerReceiver(mSMSreceiver,mIntentFilter )
     }
     private fun callLogBroadcast() {
         registerReceiver(mCallLogReceiver, IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED))
@@ -80,7 +82,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
         val locationReq = LocationRequest.create().apply {
             interval = 4000
             fastestInterval = 2000
-            smallestDisplacement = 1500f
+            smallestDisplacement = 150f
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             /*maxWaitTime= 100*/
         }
@@ -160,6 +162,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
         override fun onLocationResult(locationResult: LocationResult) {
             val lat = locationResult.lastLocation.latitude
             val lon = locationResult.lastLocation.longitude
+            Toast.makeText(applicationContext, "lat: $lat, lon: $lon", Toast.LENGTH_SHORT).show()
               // Log.e("respo","${lat}, ${lon}")
             presenterMLService.doUserLocationUpdate(
                     this@MlService,
@@ -207,6 +210,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     override fun onSuccessLocationUpdate(status: UserLocationUpdateResponse.Status) {
         if(status.isSuccess){
          Log.e("respo","${status.message}")
+            Toast.makeText(applicationContext, status.message, Toast.LENGTH_SHORT).show()
         }
     }
 
