@@ -1,25 +1,15 @@
-package com.app.l_pesa.dev_options.broadcust
+package com.app.l_pesa.user_device_data.broadcust
 
-import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.provider.Telephony
-import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
-import android.util.Log
 import android.widget.Toast
-import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
-import com.app.l_pesa.common.toast
-import com.app.l_pesa.dev_options.inter.ICallBackUserCallLogUpdate
-import com.app.l_pesa.dev_options.inter.ICallBackUserSMSUpdate
-import com.app.l_pesa.dev_options.models.UserCallLogPayload
-import com.app.l_pesa.dev_options.models.UserCallLogUpdateResponse
-import com.app.l_pesa.dev_options.models.UserSMSPayload
-import com.app.l_pesa.dev_options.models.UserSMSUpdateResponse
-import com.app.l_pesa.dev_options.presenter.PresenterMLService
-import com.app.l_pesa.dev_options.services.MlService
+import com.app.l_pesa.user_device_data.inter.ICallBackUserCallLogUpdate
+import com.app.l_pesa.user_device_data.models.UserCallLogPayload
+import com.app.l_pesa.user_device_data.models.UserCallLogUpdateResponse
+import com.app.l_pesa.user_device_data.presenter.PresenterMLService
 import java.lang.Exception
 
 class CallLogReceiver : BroadcastReceiver() {

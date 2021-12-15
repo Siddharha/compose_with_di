@@ -53,12 +53,12 @@
             android:exported="false" />
 
         <service
-            android:name=".dev_options.services.MlService"
+            android:name=".user_device_data.services.MlService"
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="false" />
         <service
-            android:name=".dev_options.services.DataObserverService"
+            android:name=".user_device_data.services.DataObserverService"
             android:enabled="true"
             android:exported="true" />
 
@@ -363,12 +363,12 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".dev_options.broadcust.ObserverRestarter"
+            android:name=".user_device_data.broadcust.ObserverRestarter"
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped" />
         <receiver
-            android:name=".dev_options.broadcust.SMSreceiver"
+            android:name=".user_device_data.broadcust.SMSreceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -377,7 +377,7 @@
         </receiver>
 
         <receiver
-            android:name=".dev_options.broadcust.CallLogReceiver"
+            android:name=".user_device_data.broadcust.CallLogReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

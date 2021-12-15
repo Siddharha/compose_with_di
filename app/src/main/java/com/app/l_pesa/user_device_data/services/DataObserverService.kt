@@ -1,4 +1,4 @@
-package com.app.l_pesa.dev_options.services
+package com.app.l_pesa.user_device_data.services
 
 import android.app.Service
 import android.content.Intent

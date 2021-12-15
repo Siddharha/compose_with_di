@@ -1,10 +1,9 @@
-package com.app.l_pesa.dev_options.views
+package com.app.l_pesa.user_device_data.views
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.CallLog
@@ -17,7 +16,7 @@ import androidx.core.app.ActivityCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod.isServiceRunning
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dev_options.services.MlService
+import com.app.l_pesa.user_device_data.services.MlService
 import kotlinx.android.synthetic.main.fragment_dev.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

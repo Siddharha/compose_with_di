@@ -1,4 +1,4 @@
-package com.app.l_pesa.dev_options.services
+package com.app.l_pesa.user_device_data.services
 
 import android.Manifest
 import android.annotation.TargetApi
@@ -21,13 +21,13 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.app.l_pesa.R
 import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
-import com.app.l_pesa.dev_options.broadcust.CallLogReceiver
-import com.app.l_pesa.dev_options.broadcust.ObserverRestarter
-import com.app.l_pesa.dev_options.broadcust.SMSreceiver
-import com.app.l_pesa.dev_options.inter.ICallBackUserLocationUpdate
-import com.app.l_pesa.dev_options.models.UserLocationPayload
-import com.app.l_pesa.dev_options.models.UserLocationUpdateResponse
-import com.app.l_pesa.dev_options.presenter.PresenterMLService
+import com.app.l_pesa.user_device_data.broadcust.CallLogReceiver
+import com.app.l_pesa.user_device_data.broadcust.ObserverRestarter
+import com.app.l_pesa.user_device_data.broadcust.SMSreceiver
+import com.app.l_pesa.user_device_data.inter.ICallBackUserLocationUpdate
+import com.app.l_pesa.user_device_data.models.UserLocationPayload
+import com.app.l_pesa.user_device_data.models.UserLocationUpdateResponse
+import com.app.l_pesa.user_device_data.presenter.PresenterMLService
 import com.app.l_pesa.splash.view.SplashActivity
 import com.google.android.gms.location.*
 

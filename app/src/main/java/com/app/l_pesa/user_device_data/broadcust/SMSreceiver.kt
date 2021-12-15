@@ -1,4 +1,4 @@
-package com.app.l_pesa.dev_options.broadcust
+package com.app.l_pesa.user_device_data.broadcust
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -8,11 +8,11 @@ import android.util.Log
 import android.widget.Toast
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonMethod.getCurrentDateTime
-import com.app.l_pesa.dev_options.inter.ICallBackUserSMSUpdate
-import com.app.l_pesa.dev_options.models.UserSMSPayload
-import com.app.l_pesa.dev_options.models.UserSMSUpdateResponse
-import com.app.l_pesa.dev_options.presenter.PresenterMLService
-import com.app.l_pesa.dev_options.services.MlService
+import com.app.l_pesa.user_device_data.inter.ICallBackUserSMSUpdate
+import com.app.l_pesa.user_device_data.models.UserSMSPayload
+import com.app.l_pesa.user_device_data.models.UserSMSUpdateResponse
+import com.app.l_pesa.user_device_data.presenter.PresenterMLService
+import com.app.l_pesa.user_device_data.services.MlService
 
 class SMSreceiver : BroadcastReceiver(), ICallBackUserSMSUpdate {
     val SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED"

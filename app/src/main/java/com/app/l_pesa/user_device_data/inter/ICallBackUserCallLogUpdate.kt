@@ -1,6 +1,6 @@
-package com.app.l_pesa.dev_options.inter
+package com.app.l_pesa.user_device_data.inter
 
-import com.app.l_pesa.dev_options.models.UserCallLogUpdateResponse
+import com.app.l_pesa.user_device_data.models.UserCallLogUpdateResponse
 
 interface ICallBackUserCallLogUpdate {
     fun onSuccessCalLogUpdate(s:UserCallLogUpdateResponse)

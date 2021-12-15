@@ -1,4 +1,4 @@
-package com.app.l_pesa.dev_options.presenter
+package com.app.l_pesa.user_device_data.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,12 +6,12 @@ import com.app.l_pesa.api.BaseService
 import com.app.l_pesa.api.RetrofitHelper
 import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dev_options.inter.ICallBackUserCallLogUpdate
-import com.app.l_pesa.dev_options.inter.ICallBackUserLocationUpdate
-import com.app.l_pesa.dev_options.inter.ICallBackUserSMSUpdate
-import com.app.l_pesa.dev_options.models.UserCallLogPayload
-import com.app.l_pesa.dev_options.models.UserLocationPayload
-import com.app.l_pesa.dev_options.models.UserSMSPayload
+import com.app.l_pesa.user_device_data.inter.ICallBackUserCallLogUpdate
+import com.app.l_pesa.user_device_data.inter.ICallBackUserLocationUpdate
+import com.app.l_pesa.user_device_data.inter.ICallBackUserSMSUpdate
+import com.app.l_pesa.user_device_data.models.UserCallLogPayload
+import com.app.l_pesa.user_device_data.models.UserLocationPayload
+import com.app.l_pesa.user_device_data.models.UserSMSPayload
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.json.JSONObject

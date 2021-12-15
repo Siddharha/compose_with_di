@@ -1,6 +1,6 @@
-package com.app.l_pesa.dev_options.inter
+package com.app.l_pesa.user_device_data.inter
 
-import com.app.l_pesa.dev_options.models.UserLocationUpdateResponse
+import com.app.l_pesa.user_device_data.models.UserLocationUpdateResponse
 
 interface ICallBackUserLocationUpdate {
     fun onSuccessLocationUpdate(status: UserLocationUpdateResponse.Status)

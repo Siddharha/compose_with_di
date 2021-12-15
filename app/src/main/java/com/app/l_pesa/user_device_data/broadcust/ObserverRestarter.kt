@@ -1,11 +1,10 @@
-package com.app.l_pesa.dev_options.broadcust
+package com.app.l_pesa.user_device_data.broadcust
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import com.app.l_pesa.common.SharedPref
-import com.app.l_pesa.dev_options.services.MlService
+import com.app.l_pesa.user_device_data.services.MlService
 
 class ObserverRestarter : BroadcastReceiver() {
 

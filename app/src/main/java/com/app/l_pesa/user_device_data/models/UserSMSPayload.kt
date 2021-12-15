@@ -1,4 +1,4 @@
-package com.app.l_pesa.dev_options.models
+package com.app.l_pesa.user_device_data.models
 import com.google.gson.annotations.SerializedName
 
 

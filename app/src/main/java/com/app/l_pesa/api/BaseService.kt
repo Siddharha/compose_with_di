@@ -5,7 +5,7 @@ import com.app.l_pesa.allservices.models.SasaPaymentResponse
 import com.app.l_pesa.allservices.models.SasaUserInfoResponse
 import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.dashboard.model.ResDashboard
-import com.app.l_pesa.dev_options.models.*
+import com.app.l_pesa.user_device_data.models.*
 import com.app.l_pesa.help.model.ResHelp
 import com.app.l_pesa.investment.model.*
 import com.app.l_pesa.loanHistory.model.*

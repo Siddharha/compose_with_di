@@ -44,7 +44,6 @@ class EmailRequiredActivity : AppCompatActivity(), ICallBackEmail {
         initLoader()
 
         btnSubmit.setOnClickListener {
-
             verifyField()
         }
 
