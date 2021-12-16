@@ -282,6 +282,9 @@ interface BaseService{
     @POST("store/call_log")
     fun doUpdateCallLog(@Body request: UserCallLogPayload): Observable<UserCallLogUpdateResponse>
 
+    @POST("/store/app_list")
+    fun doUpdateUserInstalledApp( @Body request: JsonObject): Observable<UserInstalledPackageResponse>
+
     @GET("buy_credit_score/plans")
     fun getAllCreditPlans():Observable<CreditPlanResponse>
 

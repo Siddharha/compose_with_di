@@ -29,6 +29,7 @@ import com.app.l_pesa.user_device_data.models.UserLocationPayload
 import com.app.l_pesa.user_device_data.models.UserLocationUpdateResponse
 import com.app.l_pesa.user_device_data.presenter.PresenterMLService
 import com.app.l_pesa.splash.view.SplashActivity
+import com.app.l_pesa.user_device_data.broadcust.PackageChangeReceiver
 import com.google.android.gms.location.*
 
 class MlService : Service(), ICallBackUserLocationUpdate {
@@ -40,18 +41,28 @@ class MlService : Service(), ICallBackUserLocationUpdate {
 
     private val mSMSreceiver by lazy { SMSreceiver() }
     private val mCallLogReceiver by lazy { CallLogReceiver() }
+    private val mPackageChangeReceiver by lazy { PackageChangeReceiver() }
 
     override fun onCreate() {
         super.onCreate()
         initialize()
         smsBroadcast()
         callLogBroadcast()
+        packageChangeBroadcast()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             NOTIFICATION_CHANNEL_ID = createChannel()
         else {
             NOTIFICATION_CHANNEL_ID = ""
         }
 
+    }
+
+    private fun packageChangeBroadcast() {
+        val mIntentFilter = IntentFilter()
+        mIntentFilter.addAction(Intent.ACTION_PACKAGE_ADDED)
+        mIntentFilter.addAction(Intent.ACTION_PACKAGE_REMOVED)
+        mIntentFilter.addDataScheme("package")
+        registerReceiver(mPackageChangeReceiver,mIntentFilter )
     }
 
     private fun initialize(){
@@ -76,6 +87,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
     }
     private fun callLogBroadcast() {
         registerReceiver(mCallLogReceiver, IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED))
+        //mPackageChangeReceiver
     }
 
     private fun locationService() {
@@ -180,6 +192,7 @@ class MlService : Service(), ICallBackUserLocationUpdate {
         super.onDestroy()
             unregisterReceiver(mSMSreceiver)
         unregisterReceiver(mCallLogReceiver)
+        unregisterReceiver(mPackageChangeReceiver)
 
                 // sendServiceBroadcast()
         mFusedLocationClient.removeLocationUpdates(locationCallback)

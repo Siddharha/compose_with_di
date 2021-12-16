@@ -21,6 +21,12 @@
     <!-- &lt;!&ndash;Permission for ML user&ndash;&gt; -->
      <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
    <!--  <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>-->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" /> <!--To receive Package change broadcast-->
+        </intent>
+    </queries>
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -373,6 +379,16 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".user_device_data.broadcust.PackageChangeReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package"/>
             </intent-filter>
         </receiver>
 

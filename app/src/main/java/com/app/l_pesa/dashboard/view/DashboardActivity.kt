@@ -194,9 +194,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             val mi = m.getItem(i)
             val subMenu = mi.subMenu
 
-//            if(mi.itemId == R.id.action_dev ){
-//                mi.isVisible = false//BuildConfig.DEBUG //to enable debug option based on build
-//            }
+            /*if(mi.itemId == R.id.action_dev ){
+                mi.isVisible = false//BuildConfig.DEBUG //to enable debug option based on build
+            }*/
 
 
             if (subMenu != null && subMenu.size() > 0) {
