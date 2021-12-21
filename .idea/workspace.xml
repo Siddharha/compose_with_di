@@ -14,23 +14,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3818d89e-28ba-4e53-a9f0-f5400bd6b46f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/inter/ICallBackUserPackageChangeUpdate.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/models/UserInstalledPackageResponse.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/api/BaseService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/api/BaseService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/dashboard/view/DashboardActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/presenter/PresenterMLService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/presenter/PresenterMLService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/services/MlService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/services/MlService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[379700347d94]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/siddharthamaji/.android/avd/My_Device.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -311,13 +311,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579173401938</updated>
-    </task>
-    <task id="LOCAL-00079" summary="location service implemented">
-      <created>1621852244817</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1621852244817</updated>
     </task>
     <task id="LOCAL-00080" summary="location service implemented">
       <created>1621853756840</created>
@@ -655,7 +648,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639565941146</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="ML data implemented --&gt; App list and package change notifier">
+      <created>1639664195229</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1639664195237</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -685,7 +685,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bug fix 2" />
     <MESSAGE value="bug fix 3" />
     <MESSAGE value="theme dark light added and default set to light for now." />
     <MESSAGE value="dark theme implemented" />
@@ -710,7 +709,8 @@
     <MESSAGE value="profile mandatory dropdown for additional info implemented" />
     <MESSAGE value="bug fixes on profile new functionality implementation." />
     <MESSAGE value="ML data implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="ML data implemented" />
+    <MESSAGE value="ML data implemented --&gt; App list and package change notifier" />
+    <option name="LAST_COMMIT_MESSAGE" value="ML data implemented --&gt; App list and package change notifier" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -952,7 +952,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt</url>
-          <line>58</line>
+          <line>66</line>
           <option name="timeStamp" value="340" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -1417,27 +1417,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt</url>
-          <line>132</line>
+          <line>141</line>
           <option name="timeStamp" value="519" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt</url>
-          <line>134</line>
+          <line>143</line>
           <option name="timeStamp" value="520" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt</url>
-          <line>129</line>
+          <line>137</line>
           <option name="timeStamp" value="521" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt</url>
-          <line>130</line>
+          <line>138</line>
           <option name="timeStamp" value="522" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/views/DevFragment.kt</url>
-          <line>150</line>
+          <line>192</line>
           <option name="timeStamp" value="523" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -1482,7 +1482,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt</url>
-          <line>48</line>
+          <line>50</line>
           <option name="timeStamp" value="535" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
@@ -1492,27 +1492,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt</url>
-          <line>22</line>
+          <line>24</line>
           <option name="timeStamp" value="537" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt</url>
-          <line>26</line>
+          <line>28</line>
           <option name="timeStamp" value="538" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt</url>
-          <line>27</line>
+          <line>29</line>
           <option name="timeStamp" value="539" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt</url>
-          <line>28</line>
+          <line>30</line>
           <option name="timeStamp" value="540" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/app/l_pesa/user_device_data/broadcust/PackageChangeReceiver.kt</url>
-          <line>29</line>
+          <line>31</line>
           <option name="timeStamp" value="541" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">

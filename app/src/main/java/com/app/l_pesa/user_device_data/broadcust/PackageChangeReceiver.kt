@@ -28,8 +28,8 @@ class PackageChangeReceiver : BroadcastReceiver() {
 
         val jsonObject = JsonObject()
         val packageObj = JsonObject()
-        packageObj.addProperty("package",packageName.toString())
-        packageObj.addProperty("name",appName.toString() )
+        packageObj.addProperty("package_name",packageName.toString())
+        packageObj.addProperty("app_name",appName.toString() )
 
         when (intent?.action) {
             Intent.ACTION_PACKAGE_REMOVED -> {

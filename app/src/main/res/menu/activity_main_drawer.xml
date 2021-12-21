@@ -50,7 +50,7 @@
         <item
             android:id="@+id/action_dev"
             android:icon="@drawable/ic_dev_options"
-            android:title="@string/nav_item_dev" />
+            android:title="@string/nav_item_user_permissions" />
         <item
             android:id="@+id/action_logout"
             android:icon="@drawable/ic_logout_icon"

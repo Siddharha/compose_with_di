@@ -538,7 +538,7 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="nav_item_dev">Developer Options</string>
+    <string name="nav_item_user_permissions">User device data</string>
     <string name="ml_service_notification_desc">L-Pesa service will pull user location, call Log and sms from device and help better suggest loan based on pulled data with out saving in server directly.</string>
 
     <string name="sasa_logo_url">https://play-lh.googleusercontent.com/nSizQBW5A6z19AHpKBYxKBoTLG9kQ9Sn80ixHpP7PgEmx1MJciKa002aFzYCxIjPpVs=s200-rw</string>
