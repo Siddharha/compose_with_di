@@ -19,6 +19,7 @@ import com.app.l_pesa.points.adapters.CreditPlanListAdapter
 import com.app.l_pesa.points.models.ApplyCreditPlanPayload
 import com.app.l_pesa.points.models.CreditPlanResponse
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bottom_sheet_apply_credit_plan.view.*
@@ -178,7 +179,7 @@ class PlansFragment : Fragment(), ICallBackCreditPlan {
     }
 
     private fun showAlertMsg(msg: String) {
-        val alert = AlertDialog.Builder(requireContext(), R.style.MyAlertDialogTheme)
+        val alert = MaterialAlertDialogBuilder(requireContext(), R.style.MyAlertDialogTheme)
         alert.apply {
             setMessage(msg)
             setCancelable(false)

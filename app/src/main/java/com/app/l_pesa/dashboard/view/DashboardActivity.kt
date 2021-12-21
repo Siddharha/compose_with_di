@@ -48,6 +48,7 @@ import com.app.l_pesa.settings.view.SettingsFragment
 import com.app.l_pesa.wallet.view.WalletFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -194,9 +195,9 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
             val mi = m.getItem(i)
             val subMenu = mi.subMenu
 
-//            if(mi.itemId == R.id.action_dev ){
-//                mi.isVisible = false//BuildConfig.DEBUG //to enable debug option based on build
-//            }
+            if(mi.itemId == R.id.action_dev ){
+                mi.isVisible = false//BuildConfig.DEBUG //to enable debug option based on build
+            }
 
 
             if (subMenu != null && subMenu.size() > 0) {
@@ -402,21 +403,27 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
                     navigateToFragment(LoanPlansFragment.newInstance())
                 }
                 }else{
-                    val dialog = AlertDialog.Builder(this)
+                    val dialog = MaterialAlertDialogBuilder(this,R.style.MyAlertDialogTheme)
                     dialog.apply {
-                        setTitle("Please Complete your profile")
-                        setMessage("You are not eligible for Loan. Please complete all necessary details from profile.")
-                        setPositiveButton("Complete Profile"){d,_ ->
-                          gotoCompleteProfile()
-                            d.dismiss()
-                        }
-                        setNegativeButton("Close LPesa"){d,_->
-                           finish()
-                            d.dismiss()
-                        }
-                        setCancelable(false)
-                        create()
-                        show()
+            setTitle("Please Complete your profile")
+            setMessage("Hey, we are glad to see you! Please fill in all details and complete your profile to get pre-qualified for a loan!")
+            setPositiveButton("Complete Profile"){d,_ ->
+               gotoCompleteProfile()
+                d.dismiss()
+            }
+            setNegativeButton("Dismiss"){d,_->
+                d.dismiss()
+                if (currentFragment is LoanPlansFragment) {
+                } else {
+                    val sharedPref = SharedPref(this@DashboardActivity)
+                    sharedPref.openTabLoan = "CURRENT"
+                    toolbar.title = resources.getString(R.string.nav_item_loan)
+                    navigateToFragment(LoanPlansFragment.newInstance())
+                }
+            }
+            setCancelable(false)
+            create()
+            show()
                     }
                 }
 

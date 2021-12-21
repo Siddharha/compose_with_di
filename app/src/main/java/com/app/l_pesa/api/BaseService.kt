@@ -61,7 +61,7 @@ interface BaseService{
 
     /**
      * ---------------
-     * */
+     **/
 
     @POST("check_version")
     fun checkVersion(@Body reqVersion: JsonObject) : Observable<ResVersionCheck>

@@ -36,6 +36,7 @@ import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
 import com.app.l_pesa.main.view.MainActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
 import org.jetbrains.anko.doAsync
@@ -46,8 +47,24 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
 
    private lateinit  var progressDialog: ProgressDialog
+   private var loanElegibilityFlag:Boolean = false
     private val adPagerAdapter: ScreenSlidePagerAdapter by lazy { ScreenSlidePagerAdapter(this) }
-
+    val dialog:AlertDialog by lazy {
+        val d = MaterialAlertDialogBuilder(requireContext(),R.style.MyAlertDialogTheme)
+        d.apply {
+            setTitle("Please Complete your profile")
+            setMessage("Hey, we are glad to see you! Please fill in all details and complete your profile to get pre-qualified for a loan!")
+            setPositiveButton("Complete Profile"){d,_ ->
+                (requireContext() as DashboardActivity).gotoCompleteProfile()
+                d.dismiss()
+            }
+            setNegativeButton("Dismiss"){d,_->
+                d.dismiss()
+            }
+            setCancelable(false)
+        }
+        d.create()
+    }
    companion object {
        fun newInstance(): Fragment {
            return DashboardFragment()
@@ -170,6 +187,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         val dashBoard = Gson().fromJson(sharedPrefOBJ.userDashBoard, ResDashboard.Data::class.java)
 
         if (dashBoard != null) {
+
             setDashBoard(dashBoard)
         }
 
@@ -218,33 +236,22 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     private fun setDashBoard(dashBoard: ResDashboard.Data) {
 
         setData(dashBoard)
-        checkLoanEligibility(dashBoard)
     }
 
     private fun checkLoanEligibility(dashBoard: ResDashboard.Data) {
         (requireContext() as DashboardActivity).onLoanEligibility(dashBoard.loanEligibility)
         if(!dashBoard.loanEligibility!!){
-        val dialog = AlertDialog.Builder(requireContext())
-        dialog.apply {
-            setTitle("Please Complete your profile")
-            setMessage("You are not eligible for Loan. Please complete all necessary details from profile.")
-            setPositiveButton("Complete Profile"){d,_ ->
-                (requireContext() as DashboardActivity).gotoCompleteProfile()
-                d.dismiss()
+
+            if(!dialog.isShowing){
+                dialog.show()
             }
-            setNegativeButton("Close LPesa"){d,_->
-                (requireContext() as DashboardActivity).finish()
-                d.dismiss()
-            }
-            setCancelable(false)
-            create()
-            show()
-        }
+
         }
     }
 
     override fun onSuccessDashboard(data: ResDashboard.Data) {
         swipeRefreshLayout.isRefreshing = false
+        loanElegibilityFlag = true
         setData(data)
     }
 
@@ -295,6 +302,11 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
             val gson = Gson()
             val dashBoardData = gson.toJson(dashBoard)
             sharedPrefOBJ.userDashBoard = dashBoardData
+
+        if(loanElegibilityFlag) {
+            loanElegibilityFlag = false
+            checkLoanEligibility(dashBoard)
+        }
 
     }
 
