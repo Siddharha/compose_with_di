@@ -38,7 +38,7 @@ class PresenterSaveAdditionalInfo {
                             callBackOBJ.onFailureSaveAdditionalInfo(response.status.message)
                         }
                     } catch (e: Exception) {
-
+                        callBackOBJ.onFailureSaveAdditionalInfo(response.status.message)
                     }
                 }, { error ->
                     try {

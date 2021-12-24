@@ -1,6 +1,7 @@
 package com.app.l_pesa.loanplan.view
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
@@ -9,9 +10,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Typeface
 import android.location.*
+import android.location.LocationListener
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Looper
 import android.provider.Settings
 import android.text.Spannable
 import android.text.SpannableString
@@ -47,9 +50,7 @@ import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_loan_apply.*
 import kotlinx.android.synthetic.main.content_loan_apply.*
@@ -60,7 +61,7 @@ import kotlin.collections.ArrayList
 class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallBackLoanApply, LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-
+    private val pref:SharedPref by lazy { SharedPref(this) }
     private var loanPurpose = ""
     private var loanTanure = "" //Need to send weeks value as String
     private val listTitle = arrayListOf("For Transport", "To Pay Bills", "To Clear Debit", "To Buy Foodstuff", "Emergency Purposes", "To Buy Medicine", "Build Credit", "Others")
@@ -263,6 +264,7 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
     }
 
 
+    @SuppressLint("MissingPermission")
     private fun applyLoan() {
         if (CommonMethod.isNetworkAvailable(this@LoanApplyActivity)) {
             if (!checkIfLocationOpened()) {
@@ -277,6 +279,18 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
                     buttonSubmit.isEnabled = false
                     loanApply()
                 } else {
+
+//                    if(pref.currentLat.isEmpty()){
+//                        fusedLocationClient?.requestLocationUpdates(locationRequest,
+//                            object : LocationCallback() {
+//                                override fun onLocationResult(l: LocationResult) {
+//                                    super.onLocationResult(l)
+//                                    pref.currentLat = l.lastLocation.latitude.toString()
+//                                    pref.currentLat = l.lastLocation.longitude.toString()
+//                                }
+//
+//                            }, Looper.getMainLooper())
+//                    }
                     CommonMethod.customSnackBarError(rootLayout, this@LoanApplyActivity, resources.getString(R.string.location_not_available))
                 }
 
@@ -304,8 +318,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
         return false
     }
 
+    @SuppressLint("MissingPermission")
     private fun loanApply() {
-        val shared = SharedPref(this@LoanApplyActivity)
         CommonMethod.hideKeyboardView(this@LoanApplyActivity)
         val jsonObject = JsonObject()
         jsonObject.addProperty("loan_type", loanType)
@@ -319,8 +333,8 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
         if(loanTanure.isNotBlank()){
         jsonObject.addProperty("tenure",loanTanure)
         }
-        jsonObject.addProperty("latitude", shared.currentLat)
-        jsonObject.addProperty("longitude", shared.currentLng)
+        jsonObject.addProperty("latitude", pref.currentLat)
+        jsonObject.addProperty("longitude", pref.currentLng)
 
         /*jsonObject.addProperty("address",shared.address)
         jsonObject.addProperty("locality",shared.locality)
@@ -705,6 +719,9 @@ class LoanApplyActivity : AppCompatActivity(), ICallBackTermsDescription, ICallB
 
     public override fun onResume() {
         super.onResume()
+
+
+
         locationWork()
         MyApplication.getInstance().trackScreenView(this@LoanApplyActivity::class.java.simpleName)
 

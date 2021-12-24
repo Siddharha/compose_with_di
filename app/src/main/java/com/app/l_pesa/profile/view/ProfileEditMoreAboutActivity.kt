@@ -20,8 +20,10 @@ import com.app.l_pesa.profile.inter.ICallBackClickMoreAbout
 import com.app.l_pesa.profile.inter.ICallBackProfileAdditionalInfo
 import com.app.l_pesa.profile.inter.ICallBackSaveAdditionalInfo
 import com.app.l_pesa.profile.model.ResUserAdditionalInfoDropdowns
+import com.app.l_pesa.profile.model.ResUserInfo
 import com.app.l_pesa.profile.presenter.PresenterProfile
 import com.app.l_pesa.profile.presenter.PresenterSaveAdditionalInfo
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_profile_edit_id_info.*
 import kotlinx.android.synthetic.main.activity_profile_edit_more_about.*
@@ -86,15 +88,21 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
 
         })
 
-        if(intent.hasExtra("additional_info")){
-        val additionalInfoString = intent.getStringExtra("additional_info")
-            val additionalInfoStringArray = additionalInfoString?.split("*")!!
-            etEduLvl.setText(additionalInfoStringArray[0])
-            eduLvlValue = additionalInfoStringArray[0]
-            etNameEmp.setText(additionalInfoStringArray[1])
-            incomeSourceValue = additionalInfoStringArray[1]
-            etMonthlyIncome.setText(additionalInfoStringArray[2])
-            netIncomeValue = additionalInfoStringArray[2]
+        //intent.putExtra("edu_info",Gson().toJson(eduLvl))
+        //                intent.putExtra("inc_info",Gson().toJson(incomeSource))
+        //                intent.putExtra("net_info",Gson().toJson(netIncome))
+
+        if(intent.hasExtra("edu_info")){
+        val eduInfo = Gson().fromJson(intent.getStringExtra("edu_info"),ResUserInfo.AdditionalInfoKeyValue::class.java)
+            val incInfo = Gson().fromJson(intent.getStringExtra("inc_info"),ResUserInfo.AdditionalInfoKeyValue::class.java)
+            val netInfo = Gson().fromJson(intent.getStringExtra("net_info"),ResUserInfo.AdditionalInfoKeyValue::class.java)
+           // val additionalInfoStringArray = additionalInfoString?.split("*")!!
+            etEduLvl.setText(eduInfo.nameAdditional)
+            eduLvlValue = eduInfo.valueAdditional!!
+            etNameEmp.setText(incInfo.nameAdditional)
+            incomeSourceValue = incInfo.valueAdditional!!
+            etMonthlyIncome.setText(netInfo.nameAdditional)
+            netIncomeValue = netInfo.valueAdditional!!
         }
     }
 
@@ -216,17 +224,17 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
 
     override fun onDropdownSourceOfIncomeSelected(incomeSource: ResUserAdditionalInfoDropdowns.Data.IncomeSource) {
         etNameEmp.setText(incomeSource.name)
-        incomeSourceValue = incomeSource.name
+        incomeSourceValue = incomeSource.value
     }
 
     override fun onDropdownEduLvlSelected(educationalLevel: ResUserAdditionalInfoDropdowns.Data.EducationalLevel) {
         etEduLvl.setText(educationalLevel.name)
-        eduLvlValue = educationalLevel.name
+        eduLvlValue = educationalLevel.value
     }
 
     override fun onDropdownNetMonthlyIncomeSelected(netMonthlyIncome: ResUserAdditionalInfoDropdowns.Data.NetMonthlyIncome) {
         etMonthlyIncome.setText(netMonthlyIncome.name)
-        netIncomeValue = netMonthlyIncome.name
+        netIncomeValue = netMonthlyIncome.value
     }
 }
 

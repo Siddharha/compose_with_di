@@ -42,9 +42,9 @@ import java.util.*
 
 class ProfileFragment: Fragment(), ICallBackUserInfo, ICallBackProfileFinValidate {
 
-private lateinit var eduLvl:String
-private lateinit var incomeSource:String
-private lateinit var netIncome:String
+private  var eduLvl:ResUserInfo.AdditionalInfoKeyValue ?=null
+private  var incomeSource:ResUserInfo.AdditionalInfoKeyValue ?=null
+private  var netIncome:ResUserInfo.AdditionalInfoKeyValue ?=null
 private lateinit var rootView: View
 private val progressDialog: AlertDialog by lazy {
     AlertDialog.Builder(requireContext())
@@ -112,7 +112,10 @@ private val progressDialog: AlertDialog by lazy {
             if(!swipeRefreshLayout.isRefreshing && !shimmerLayout.isShimmerStarted)
             {
                 val intent = Intent(activity, ProfileEditMoreAboutActivity::class.java)
-                intent.putExtra("additional_info","$eduLvl*$incomeSource*$netIncome")
+                intent.putExtra("edu_info",Gson().toJson(eduLvl))
+                intent.putExtra("inc_info",Gson().toJson(incomeSource))
+                intent.putExtra("net_info",Gson().toJson(netIncome))
+                //*$incomeSource*$netIncome
                 startActivity(intent)
                 activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
 
@@ -613,24 +616,24 @@ private val progressDialog: AlertDialog by lazy {
     private fun getAdditionalInfo(additionalInfo: ResUserInfo.AdditionalInfo?) {
 
         if(additionalInfo?.educationLevel !=null){
-            txtEduLvl.text = "Education Level: ${additionalInfo?.educationLevel}"
-            eduLvl = additionalInfo?.educationLevel!!
+            txtEduLvl.text = "Education Level: ${additionalInfo?.educationLevel?.nameAdditional}"
+            eduLvl = additionalInfo.educationLevel!!
         }else{
-            eduLvl = ""
+            eduLvl = null
         }
 
         if(additionalInfo?.sourceOfIncome !=null){
-            txtSoI.text = "Source of income: ${additionalInfo?.sourceOfIncome}"
-            incomeSource = additionalInfo?.sourceOfIncome!!
+            txtSoI.text = "Source of income: ${additionalInfo?.sourceOfIncome?.nameAdditional}"
+            incomeSource = additionalInfo.sourceOfIncome!!
         }else{
-            incomeSource = ""
+            incomeSource = null
         }
 
         if(additionalInfo?.netMonthlyIncome !=null){
-        txtNetMonthlyIncome.text = "Net monthly income: ${additionalInfo?.netMonthlyIncome}"
-        netIncome = additionalInfo?.netMonthlyIncome!!
+        txtNetMonthlyIncome.text = "Net monthly income: ${additionalInfo?.netMonthlyIncome?.nameAdditional}"
+        netIncome = additionalInfo.netMonthlyIncome!!
         }else{
-            netIncome = ""
+            netIncome = null
         }
     }
 
