@@ -15,6 +15,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -62,6 +63,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.sql.DriverManager
+import java.util.*
 
 
 class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, ICallBackLogout {
@@ -72,6 +75,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private lateinit var countDownTimer: CountDownTimer
     private var lb:Boolean = true
 
+    private val pref:SharedPref by lazy { SharedPref(this) }
     private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val appUpdatedListener: InstallStateUpdatedListener by lazy {
         object : InstallStateUpdatedListener {
@@ -507,12 +511,25 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         if (CommonMethod.isNetworkAvailable(this@DashboardActivity))
         {
             progressDialog.show()
-            val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-            val jsonObject = JsonObject()
-            jsonObject.addProperty("device_id", deviceId)
+           // val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-            val presenterLogoutObj = PresenterLogout()
-            presenterLogoutObj.doLogout(this@DashboardActivity, jsonObject, this)
+            var deviceId = ""
+            if (pref.uuid.isNotEmpty()){
+                deviceId = pref.uuid
+                // deviceId = UUID.randomUUID().toString()
+                //sharedPref.uuid = deviceId!!
+               // Log.i("uuid 2 ", "$deviceId")
+                // Log.i("uuid 3 ", "${sharedPref.uuid}")
+                val jsonObject = JsonObject()
+                jsonObject.addProperty("device_id", deviceId)
+
+                val presenterLogoutObj = PresenterLogout()
+                presenterLogoutObj.doLogout(this@DashboardActivity, jsonObject, this)
+            }else{
+                logout()
+            }
+
+
         } else {
             CommonMethod.customSnackBarError(drawer_layout, this@DashboardActivity, resources.getString(R.string.no_internet))
         }

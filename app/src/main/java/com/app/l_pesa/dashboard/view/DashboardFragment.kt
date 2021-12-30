@@ -269,7 +269,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
         if(dashBoard.profileCompletePercentage!!<100){
             llProfileComp.visibility = View.VISIBLE
-            pbProfile.progress = dashBoard.profileCompletePercentage!!
+            pbProfile.progress = dashBoard.profileCompletePercentage!!.toInt()
             tvProgress.text = "${dashBoard.profileCompletePercentage} %"
         }else{
             llProfileComp.visibility = View.GONE

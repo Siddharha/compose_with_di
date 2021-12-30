@@ -46,12 +46,15 @@ private  var eduLvl:ResUserInfo.AdditionalInfoKeyValue ?=null
 private  var incomeSource:ResUserInfo.AdditionalInfoKeyValue ?=null
 private  var netIncome:ResUserInfo.AdditionalInfoKeyValue ?=null
 private lateinit var rootView: View
+private  var isPrepareToggleSwitch:Boolean = false
 private val progressDialog: AlertDialog by lazy {
     AlertDialog.Builder(requireContext())
         .setMessage("Loading...")
         .setCancelable(false)
         .create()
 }
+
+
     companion object {
         fun newInstance(): Fragment {
             return ProfileFragment()
@@ -72,7 +75,9 @@ private val progressDialog: AlertDialog by lazy {
 
     private fun onActionPerform() {
         swIsEmp.setOnCheckedChangeListener { s, isChecked ->
-            if(CommonMethod.isNetworkAvailable(requireContext())) {
+
+            if(isPrepareToggleSwitch){
+                          if(CommonMethod.isNetworkAvailable(requireContext())) {
                 if (!progressDialog.isShowing) {
                     progressDialog.show()
                 }
@@ -85,12 +90,15 @@ private val progressDialog: AlertDialog by lazy {
                 s.isChecked = !isChecked
                 CommonMethod.customSnackBarError(rootView,requireContext(),"Network not available!")
             }
+            }
+
 
         }
 
         swIsBusiness.setOnCheckedChangeListener { s, isChecked ->
 
-            if(CommonMethod.isNetworkAvailable(requireContext()))
+            if(isPrepareToggleSwitch){
+                     if(CommonMethod.isNetworkAvailable(requireContext()))
             {
             if (!progressDialog.isShowing){
                 progressDialog.show()
@@ -105,6 +113,8 @@ private val progressDialog: AlertDialog by lazy {
                 s.isChecked = !isChecked
                 CommonMethod.customSnackBarError(rootView,requireContext(),"Network not available!")
             }
+            }
+
         }
 
         imgEditMoreOfYou.setOnClickListener {
@@ -610,7 +620,7 @@ private val progressDialog: AlertDialog by lazy {
             txtIdNo.text=resources.getString(R.string.id_number)+" "+resources.getText(R.string.dash_line)
         }
 
-
+        isPrepareToggleSwitch = true
     }
 
     private fun getAdditionalInfo(additionalInfo: ResUserInfo.AdditionalInfo?) {

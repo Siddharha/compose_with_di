@@ -91,12 +91,21 @@ class SplashActivity : AppCompatActivity(), ICallBackCountry, ICallBackLogout {
     private fun logoutProcess() {
         buttonRetry.visibility = View.INVISIBLE
         llAlert.visibility = View.INVISIBLE
-        val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-        val jsonObject = JsonObject()
-        jsonObject.addProperty("device_id", deviceId)
+        //val deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-        val presenterLogoutObj = PresenterLogout()
-        presenterLogoutObj.doLogout(this@SplashActivity, jsonObject, this)
+        var deviceId = ""
+        if (sharedPrefOBJ.uuid.isNotEmpty()) {
+            deviceId = sharedPrefOBJ.uuid
+            val jsonObject = JsonObject()
+            jsonObject.addProperty("device_id", deviceId)
+
+            val presenterLogoutObj = PresenterLogout()
+            presenterLogoutObj.doLogout(this@SplashActivity, jsonObject, this)
+
+        }else{
+            loadMain()
+        }
+
     }
 
     private fun loadNext() {

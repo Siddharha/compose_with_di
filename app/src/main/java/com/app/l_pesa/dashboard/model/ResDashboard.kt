@@ -163,7 +163,7 @@ class ResDashboard {
         var businessIdTypes: ArrayList<BusinessIdType>? = null
         @SerializedName("profile_complete_percentage")
         @Expose
-        var profileCompletePercentage: Int?=0
+        var profileCompletePercentage: Float?=0.0f
 
         @SerializedName("loan_eligibility")
         @Expose

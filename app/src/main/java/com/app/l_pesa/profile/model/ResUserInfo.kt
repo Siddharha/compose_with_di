@@ -282,9 +282,9 @@ class ResUserInfo {
     inner class AdditionalInfoKeyValue{
         @SerializedName("name")
         @Expose
-        var nameAdditional: String? = null
+        var nameAdditional: String = ""
         @SerializedName("value")
         @Expose
-        var valueAdditional: String? = null
+        var valueAdditional: String = ""
     }
 }
