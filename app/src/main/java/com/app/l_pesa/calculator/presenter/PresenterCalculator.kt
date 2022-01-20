@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.app.l_pesa.api.BaseService
 import com.app.l_pesa.api.RetrofitHelper
+import com.app.l_pesa.calculator.inter.ICallBackCalculateLoan
 import com.app.l_pesa.calculator.inter.ICallBackProducts
 import com.app.l_pesa.common.CommonMethod
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -95,4 +96,77 @@ class PresenterCalculator {
 
                 })
     }
+
+    @SuppressLint("CheckResult")
+    fun getCalculateLoan(contextOBJ: Context,
+                         productId: String,
+                         selectedCountry: String,
+                         selectCurrency: String,
+                         loan_type: String,
+                         callBackOBJ: ICallBackCalculateLoan
+    ) {
+
+        RetrofitHelper.getRetrofit(BaseService::class.java)
+            .getCalculateLoan(
+                productId,
+                selectedCountry,
+                selectCurrency,
+                loan_type)
+
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { responseBody ->
+                responseBody
+            }
+            .subscribe({ response ->
+
+                try {
+                    if (response.status.isSuccess)
+                    {
+                        callBackOBJ.onSuccessCalculateLoan(response.data)
+
+                    } else
+                    {
+
+                            callBackOBJ.onErrorCalculateLoan(response.status.message)
+
+                    }
+                } catch (e: Exception) {
+
+                }
+            }, { error ->
+                try {
+                    val errorVal         =    error as HttpException
+                    if(errorVal.code()>=400)
+                    {
+                        val jsonError        =    JSONObject(errorVal.response()?.errorBody()?.string()!!)
+                        val  jsonStatus      =    jsonError.getJSONObject("status")
+                        val jsonMessage      =    jsonStatus.getString("message")
+                        val jsonStatusCode   =    jsonStatus.getInt("statusCode")
+
+                        if(jsonStatusCode==50002)
+                        {
+                            callBackOBJ.onSessionTimeOut(jsonMessage)
+                        }
+                        else
+                        {
+
+                                callBackOBJ.onErrorCalculateLoan(jsonMessage)
+
+                        }
+
+
+                    }
+
+
+                } catch (exp: Exception) {
+                    val errorMessageOBJ = CommonMethod.commonCatchBlock(exp, contextOBJ)
+
+                        callBackOBJ.onErrorCalculateLoan(errorMessageOBJ)
+
+                }
+
+            })
+    }
+
 }

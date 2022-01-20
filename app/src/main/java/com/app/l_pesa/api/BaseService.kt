@@ -3,6 +3,7 @@ package com.app.l_pesa.api
 
 import com.app.l_pesa.allservices.models.SasaPaymentResponse
 import com.app.l_pesa.allservices.models.SasaUserInfoResponse
+import com.app.l_pesa.calculator.model.ResCalculation
 import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.dashboard.model.ResDashboard
 import com.app.l_pesa.user_device_data.models.*
@@ -243,6 +244,15 @@ interface BaseService{
 
     @GET("loan_cal_load_products")
     fun getLoanProducts(@Query("country_code") country_code:String,@Query("loan_type") loan_type:String): Observable<ResProducts>
+
+    @GET("website/loan_calculator")
+    fun getCalculateLoan(
+        @Query("product_id") product_id:String,
+        @Query("selected_country") selected_country:String,
+        @Query("select_currency") select_currency:String,
+        @Query("loan_type") loan_type:String
+    ): Observable<ResCalculation>
+
 
     @POST("user/add_edit_email")
     fun doAddEditEmail(@Body request: JsonObject): Observable<ResEmailRequired>

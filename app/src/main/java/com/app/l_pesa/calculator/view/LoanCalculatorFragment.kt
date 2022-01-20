@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.l_pesa.R
 import com.app.l_pesa.calculator.adapter.LoanProductAdapter
+import com.app.l_pesa.calculator.inter.ICallBackCalculateLoan
 import com.app.l_pesa.calculator.inter.ICallBackProducts
+import com.app.l_pesa.calculator.model.ResCalculation
 import com.app.l_pesa.calculator.model.ResProducts
 import com.app.l_pesa.calculator.presenter.PresenterCalculator
 import com.app.l_pesa.common.CommonMethod
@@ -35,12 +37,13 @@ import kotlinx.android.synthetic.main.fragment_loan_calculator.*
 import java.text.DecimalFormat
 
 
-class LoanCalculatorFragment:Fragment(), ICallBackProducts{
+class LoanCalculatorFragment:Fragment(), ICallBackProducts, ICallBackCalculateLoan {
 
     private lateinit  var progressDialog: ProgressDialog
     private var usdValue=0.0
     private var personalLoanStatus="FALSE"
     private var businessLoanStatus="FALSE"
+    private var selectedLoanType = ""
     private val sharedPrefOBJ:SharedPref by lazy {SharedPref(requireActivity())}
 
     private val currentProduct:ResProducts.Data by lazy{ Gson().fromJson(sharedPrefOBJ.currentLoanProduct, ResProducts.Data::class.java)}
@@ -196,6 +199,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                 progressDialog.show()
                 val presenterCalculatorOBJ= PresenterCalculator()
                 presenterCalculatorOBJ.getLoanProducts(requireActivity(),sharedPrefOBJ.countryCode,"business_loan",this)
+                selectedLoanType = "business_loan"
             }
             else
             {
@@ -225,6 +229,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
                     progressDialog.show()
                     val presenterCalculatorOBJ=PresenterCalculator()
                     presenterCalculatorOBJ.getLoanProducts(requireActivity(),sharedPrefOBJ.countryCode,"current_loan",this)
+                    selectedLoanType = "current_loan"
                 }
                 else
                 {
@@ -271,7 +276,8 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         }
         else
         {
-            doCalculate()
+            //doCalculate()
+            doCalculateFromAPI()
         }
     }
 
@@ -288,6 +294,35 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
         txt_loan_period.text   = resources.getText(R.string.dash_line)
     }
 
+    private fun doCalculateFromAPI(){
+        //calculate loan online.
+        val loanProduct:ResProducts.ProductList by lazy {Gson().fromJson(sharedPrefOBJ.loanProduct, ResProducts.ProductList::class.java)}
+        val sharedPrefOBJ= SharedPref(requireActivity())
+
+            if(CommonMethod.isNetworkAvailable(requireActivity()))
+            {
+                if(selectedLoanType.isNotEmpty()){
+                    progressDialog.show()
+                    val presenterCalculatorOBJ= PresenterCalculator()
+                    presenterCalculatorOBJ.getCalculateLoan(requireActivity(),
+                        loanProduct.id.toString(),
+                        sharedPrefOBJ.countryCode,
+                        loanProduct.currencyCode,
+                        selectedLoanType,//"business_loan", //current_loan
+                        this)
+                }else{
+                    CommonMethod.customSnackBarError(rootLayout,requireActivity(),"Select Loan Type before calculating!")
+
+                }
+
+            }
+            else
+            {
+                CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.no_internet))
+            }
+
+
+    }
     @SuppressLint("SetTextI18n")
     private fun doCalculate()
     {
@@ -437,6 +472,29 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts{
     override fun onErrorBusinessLoan(errorMessageOBJ: String) {
         businessLoanStatus=resources.getString(R.string.status_error)
         ti_product_name.text!!.clear()
+        CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.service_not_available))
+        dismiss()
+    }
+
+    override fun onSuccessCalculateLoan(data: ResCalculation.Data) {
+        val loanProduct:ResProducts.ProductList by lazy {Gson().fromJson(sharedPrefOBJ.loanProduct, ResProducts.ProductList::class.java)}
+
+        data.apply {
+            txt_credit_score.text = requiredCreditScore.toString()
+            txt_usd_values.text = currentRate
+            txt_loan_amount.text = loanProduct.currencyCode+" "+loanAmount
+            txt_loan_period.text = loanPeriod.toString()
+            txt_interest_rate.text = loanInterestRate + " %"
+            txt_total_payback.text = loanProduct.currencyCode+" "+totalPayBack
+            txt_subscriptionF.text = loanProduct.currencyCode+" "+firstWeeklyPayment
+            txt_subscriptionM.text = loanProduct.currencyCode+" "+midWeeklyPayment
+            txt_subscriptionL.text = loanProduct.currencyCode+" "+lastWeeklyPayment
+        }
+        dismiss()
+
+    }
+
+    override fun onErrorCalculateLoan(errorMessageOBJ: String) {
         CommonMethod.customSnackBarError(rootLayout,requireActivity(),resources.getString(R.string.service_not_available))
         dismiss()
     }

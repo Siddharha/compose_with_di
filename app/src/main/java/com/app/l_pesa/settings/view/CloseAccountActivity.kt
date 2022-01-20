@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.content_close_account.*
 class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
 
     private lateinit var  progressDialog   : ProgressDialog
+    private val pref : SharedPref by lazy { SharedPref(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,13 +97,20 @@ class CloseAccountActivity : AppCompatActivity(), ICallBackCloseAccount {
         {
             progressDialog.show()
 
-            val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-            val jsonObject         = JsonObject()
-            jsonObject.addProperty("device_id",deviceId)
-            jsonObject.addProperty("reason",etReason.text.toString())
+//           xc val deviceId    = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
-            val presenterAccountOBJ= PresenterAccount()
-            presenterAccountOBJ.doCloseAccount(this@CloseAccountActivity,jsonObject,this)
+            var deviceId = ""
+            if (pref.uuid.isNotEmpty()) {
+                deviceId = pref.uuid
+               // val jsonObject = JsonObject()
+                val jsonObject         = JsonObject()
+                jsonObject.addProperty("device_id",deviceId)
+                jsonObject.addProperty("reason",etReason.text.toString())
+
+                val presenterAccountOBJ= PresenterAccount()
+                presenterAccountOBJ.doCloseAccount(this@CloseAccountActivity,jsonObject,this)
+            }
+
 
         }
         else
