@@ -29,7 +29,7 @@ data class ResCalculation(
         @SerializedName("loan_interest_rate")
         val loanInterestRate: String,
         @SerializedName("loan_period")
-        val loanPeriod: Int,
+        val loanPeriod: String,
         @SerializedName("mid_weekly_payment")
         val midWeeklyPayment: String,
         @SerializedName("periodic_payment_amount")

@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.app.l_pesa.R
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.dashboard.view.DashboardFragment
 import com.app.l_pesa.loanplan.model.LoanTabPager
 import com.google.android.material.tabs.TabLayout
 
@@ -22,9 +23,22 @@ class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
 
-    companion object {
-        fun newInstance(): Fragment {
-            return LoanPlansFragment()
+//    companion object {
+//        fun newInstance(): Fragment {
+//            return LoanPlansFragment()
+//        }
+//    }
+
+    companion object{
+        var instance: LoanPlansFragment?=null
+
+        var newInstance : ()-> LoanPlansFragment = {
+            if(instance!=null){
+                instance!!
+            }else{
+                instance = LoanPlansFragment()
+                instance!!
+            }
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -88,7 +102,7 @@ class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         viewPager!!.currentItem = p0!!.position
-        val sharedPref= SharedPref(activity!!)
+        val sharedPref= SharedPref(requireActivity())
         if(viewPager!!.currentItem==0)
         {
             sharedPref.openTabLoan="CURRENT"
@@ -110,7 +124,7 @@ class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
             for (i in 0 until tabChildsCount) {
                 val tabViewChild = vgTab.getChildAt(i)
                 if (tabViewChild is TextView) {
-                    val face = Typeface.createFromAsset(activity!!.assets, "fonts/Montserrat-Regular.ttf")
+                    val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
                     tabViewChild.typeface = face
                 }
             }

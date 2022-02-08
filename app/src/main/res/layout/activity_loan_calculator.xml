@@ -26,8 +26,13 @@
             />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/fragment_loan_calculator" />
+    <fragment
+        android:name="com.app.l_pesa.calculator.view.LoanCalculatorFragment"
+        android:id="@+id/loanCalculator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    <!--<include layout="@layout/fragment_loan_calculator" />-->
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

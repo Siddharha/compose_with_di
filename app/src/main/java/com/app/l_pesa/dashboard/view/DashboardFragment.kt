@@ -36,6 +36,7 @@ import com.app.l_pesa.lpk.model.ResInfoLPK
 import com.app.l_pesa.lpk.presenter.PresenterInfoLPK
 import com.app.l_pesa.lpk.view.LPKSavingsActivity
 import com.app.l_pesa.main.view.MainActivity
+import com.app.l_pesa.profile.view.ProfileFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_dashboard_layout.*
@@ -48,7 +49,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
    private lateinit  var progressDialog: ProgressDialog
    private var loanElegibilityFlag:Boolean = false
-    private val adPagerAdapter: ScreenSlidePagerAdapter by lazy { ScreenSlidePagerAdapter(this) }
+    val bannerList :ArrayList<ResDashboard.Banner> by lazy { ArrayList() }
+
     val dialog:AlertDialog by lazy {
         val d = MaterialAlertDialogBuilder(requireContext(),R.style.MyAlertDialogTheme)
         d.apply {
@@ -65,10 +67,24 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         }
         d.create()
     }
-   companion object {
-       fun newInstance(): Fragment {
-           return DashboardFragment()
-       }
+
+//   companion object {
+//       fun newInstance(): Fragment {
+//           return DashboardFragment()
+//       }
+//    }
+
+    companion object{
+        var instance: DashboardFragment?=null
+
+        var newInstance : ()-> DashboardFragment = {
+            if(instance!=null){
+                instance!!
+            }else{
+                instance = DashboardFragment()
+                instance!!
+            }
+        }
     }
 
 
@@ -95,10 +111,16 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
         }catch (e:Exception){
             e.printStackTrace()
+        }finally {
+           // "error"
         }
     }
 
     private fun loadAdBanner() {
+
+        val adPagerAdapter = ScreenSlidePagerAdapter(this,bannerList)
+        pagerAdBanner.adapter = adPagerAdapter
+        pagerAdBanner.isUserInputEnabled = false
 
         try{
             val h = Handler(Looper.myLooper()!!)
@@ -156,8 +178,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
     }
 
     private fun initUI() {
-        pagerAdBanner.adapter = adPagerAdapter
-        pagerAdBanner.isUserInputEnabled = false
+
         Handler(Looper.myLooper()!!).postDelayed({
             (activity as DashboardActivity).visibleFilter(false)
             (activity as DashboardActivity).visibleButton(false)
@@ -202,6 +223,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
     private fun initLoader()
     {
+
         progressDialog = ProgressDialog(requireActivity(),R.style.MyAlertDialogStyle)
         val message=   SpannableString(resources.getString(R.string.loading))
         val face = Typeface.createFromAsset(requireActivity().assets, "fonts/Montserrat-Regular.ttf")
@@ -266,6 +288,8 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         println("max credit score : ${dashBoard.maxCreditScore.toFloat()}")
         println("credit score : ${dashBoard.creditScore.toFloat()}")
         println("profileCompletePercentage: ${dashBoard.profileCompletePercentage}")
+        bannerList.clear()
+        bannerList.addAll(dashBoard.banners!!)
 
         if(dashBoard.profileCompletePercentage!!<100){
             llProfileComp.visibility = View.VISIBLE

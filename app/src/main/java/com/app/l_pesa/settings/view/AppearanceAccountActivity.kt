@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
@@ -37,28 +39,18 @@ class AppearanceAccountActivity : AppCompatActivity() {
     }
     private fun onActionPerform() {
         swDark.setOnCheckedChangeListener { buttonView, isChecked ->
-
             doAsync {
                 pref.isDarkTheme = isChecked
 
-                uiThread {
-                    if (isChecked) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    } else {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    }
+                //  uiThread {
+                if (isChecked) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
+                // }
 
             }
-//                uiThread {
-//                    showThemeChangeDialog()
-//                    //onBackPressed()
-//                }
-//            }
-
-         //   AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            //finish()
-           // startActivity(Intent(this,AppearanceAccountActivity::class.java))
         }
     }
 
@@ -75,10 +67,10 @@ class AppearanceAccountActivity : AppCompatActivity() {
                 .create().show()
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.left_in, R.anim.right_out)
-    }
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//        overridePendingTransition(R.anim.left_in, R.anim.right_out)
+//    }
 
     private fun toolbarFont(context: Activity) {
 

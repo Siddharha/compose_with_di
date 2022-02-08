@@ -60,8 +60,13 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts, ICallBackCalculateLo
         super.onViewCreated(view, savedInstanceState)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            (activity as DashboardActivity).visibleFilter(false)
-            (activity as DashboardActivity).visibleButton(false)
+
+            try {
+                (activity as DashboardActivity).visibleFilter(false)
+                (activity as DashboardActivity).visibleButton(false)
+            }catch (e:Exception){
+                Log.e("error: ","Calculator opening without user login!")
+            }
         }, 200)
 
 
@@ -190,7 +195,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts, ICallBackCalculateLo
 
     private fun getBusinessLoanProduct()
     {
-
+        selectedLoanType = "business_loan"
         val sharedPrefOBJ= SharedPref(requireActivity())
         if(sharedPrefOBJ.businessLoanProduct=="INIT")
         {
@@ -199,7 +204,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts, ICallBackCalculateLo
                 progressDialog.show()
                 val presenterCalculatorOBJ= PresenterCalculator()
                 presenterCalculatorOBJ.getLoanProducts(requireActivity(),sharedPrefOBJ.countryCode,"business_loan",this)
-                selectedLoanType = "business_loan"
+
             }
             else
             {
@@ -221,6 +226,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts, ICallBackCalculateLo
     {
         if(ti_loan_type.text.toString() == resources.getString(R.string.personal_loan))
         {
+            selectedLoanType = "current_loan"
             val sharedPrefOBJ= SharedPref(requireActivity())
             if(sharedPrefOBJ.currentLoanProduct=="INIT")
             {
@@ -229,7 +235,7 @@ class LoanCalculatorFragment:Fragment(), ICallBackProducts, ICallBackCalculateLo
                     progressDialog.show()
                     val presenterCalculatorOBJ=PresenterCalculator()
                     presenterCalculatorOBJ.getLoanProducts(requireActivity(),sharedPrefOBJ.countryCode,"current_loan",this)
-                    selectedLoanType = "current_loan"
+
                 }
                 else
                 {

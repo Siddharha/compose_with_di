@@ -3,6 +3,7 @@ package com.app.l_pesa.dashboard.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 
 
@@ -117,6 +118,25 @@ class ResDashboard {
 
     }
 
+    inner class Banner:Serializable{
+
+
+        @SerializedName("link")
+        @Expose
+        var link: String = ""
+        @SerializedName("type")
+        @Expose
+        var type: String = ""
+
+        @SerializedName("redirect")
+        @Expose
+        var redirect: String = ""
+
+        @SerializedName("image")
+        @Expose
+        var image: String = ""
+    }
+
     inner class Data {
 
         @SerializedName("currency_code")
@@ -161,6 +181,12 @@ class ResDashboard {
         @SerializedName("business_id_types")
         @Expose
         var businessIdTypes: ArrayList<BusinessIdType>? = null
+
+        @SerializedName("banners")
+        @Expose
+        var banners: ArrayList<Banner>? = null
+
+
         @SerializedName("profile_complete_percentage")
         @Expose
         var profileCompletePercentage: Float?=0.0f

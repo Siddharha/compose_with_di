@@ -19,6 +19,7 @@ import com.app.l_pesa.common.CommonMethod
 import com.app.l_pesa.common.CommonTextRegular
 import com.app.l_pesa.common.SharedPref
 import com.app.l_pesa.dashboard.view.DashboardActivity
+import com.app.l_pesa.loanplan.view.LoanPlansFragment
 import com.app.l_pesa.main.view.MainActivity
 import com.app.l_pesa.pinview.model.LoginData
 import com.app.l_pesa.profile.inter.ICallBackProfileFinValidate
@@ -55,9 +56,22 @@ private val progressDialog: AlertDialog by lazy {
 }
 
 
-    companion object {
-        fun newInstance(): Fragment {
-            return ProfileFragment()
+//    companion object {
+//        fun newInstance(): Fragment {
+//            return ProfileFragment()
+//        }
+//    }
+
+    companion object{
+        var instance: ProfileFragment?=null
+
+        var newInstance : ()-> ProfileFragment = {
+            if(instance!=null){
+                instance!!
+            }else{
+                instance = ProfileFragment()
+                instance!!
+            }
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

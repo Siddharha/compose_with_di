@@ -74,7 +74,7 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     private lateinit var progressDialog: ProgressDialog
     private lateinit var countDownTimer: CountDownTimer
     private var lb:Boolean = true
-
+    val sharedPref:SharedPref by lazy {SharedPref(this@DashboardActivity)}
     private val pref:SharedPref by lazy { SharedPref(this) }
     private val appUpdateManager: AppUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
     private val appUpdatedListener: InstallStateUpdatedListener by lazy {
@@ -241,13 +241,13 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
 
     private fun initFragment() {
-        val sharedPref = SharedPref(this@DashboardActivity)
-        when {
-            sharedPref.navigationTab == resources.getString(R.string.open_tab_loan) -> {
+
+        when (sharedPref.navigationTab) {
+            resources.getString(R.string.open_tab_loan) -> {
                 navigateToFragment(LoanPlansFragment.newInstance())
                 sharedPref.navigationTab = resources.getString(R.string.open_tab_default)
             }
-            sharedPref.navigationTab == resources.getString(R.string.open_tab_profile) -> {
+            resources.getString(R.string.open_tab_profile) -> {
                 navigateToFragment(ProfileFragment.newInstance())
                 sharedPref.navigationTab = resources.getString(R.string.open_tab_default)
             }
@@ -561,11 +561,18 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
     }
 
      fun navigateToFragment(fragmentToNavigate: androidx.fragment.app.Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
-        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+
+             val fragmentTransaction = supportFragmentManager.beginTransaction()
+             fragmentTransaction.replace(R.id.frame, fragmentToNavigate)
+             fragmentTransaction.setCustomAnimations(
+                 android.R.anim.slide_in_left,
+                 android.R.anim.slide_out_right,
+                 android.R.anim.slide_in_left,
+                 android.R.anim.slide_out_right
+             )
+             fragmentTransaction.addToBackStack(null)
+             fragmentTransaction.commit()
+
     }
 
     fun visibleFilter(isVisible: Boolean) {
