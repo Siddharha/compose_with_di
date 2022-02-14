@@ -96,6 +96,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         setSupportActionBar(toolbar)
 
 
+       initialize()
+    }
+
+    private fun initialize(){
         initData()
         initMenu()
         initLoader()
@@ -753,5 +757,10 @@ class DashboardActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
 
     fun onLoanEligibility(loanEligibility: Boolean?) {
         lb = loanEligibility!!
+    }
+
+    fun onBannerFragmentRedirectLoanPlan() {
+
+            navigateToFragment(LoanPlansFragment.newInstance())
     }
 }

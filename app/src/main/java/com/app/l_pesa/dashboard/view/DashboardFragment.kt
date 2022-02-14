@@ -79,6 +79,16 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 
         var newInstance : ()-> DashboardFragment = {
             if(instance!=null){
+//               instance?.activity?.supportFragmentManager?.beginTransaction()?.remove(instance!!)?.commitAllowingStateLoss()
+//                instance?.activity?.supportFragmentManager?.beginTransaction()?.add(instance!!,"dashboard")?.commitAllowingStateLoss()
+//                instance?.apply {
+//                    swipeRefresh()
+//                    initUI()
+//                    initData()
+//                    onActionPerform()
+//                    loadDashboard()
+//                    onResume()
+//                }
                 instance!!
             }else{
                 instance = DashboardFragment()
@@ -365,10 +375,10 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
             val sharedPref = SharedPref(requireActivity())
             sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
             sharedPref.openTabLoan = type
-
-            val intent = Intent(activity, DashboardActivity::class.java)
-            startActivity(intent)
-            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
+            (context as DashboardActivity).onBannerFragmentRedirectLoanPlan()
+//            val intent = Intent(activity, DashboardActivity::class.java)
+//            startActivity(intent)
+//            activity?.overridePendingTransition(R.anim.right_in, R.anim.left_out)
         }
 
 

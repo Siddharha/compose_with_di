@@ -121,7 +121,9 @@ class ScreenSlidePageAdFragment : Fragment() {
                             doAsync {
                                 pref.openTabLoan = "CURRENT"
                                 uiThread {
-                                    (context as DashboardActivity).navigateToFragment(LoanPlansFragment.newInstance())
+                                    (context as DashboardActivity).onBannerFragmentRedirectLoanPlan()
+
+                                       // .navigateToFragment(LoanPlansFragment.newInstance())
                                 }
                             }
 
