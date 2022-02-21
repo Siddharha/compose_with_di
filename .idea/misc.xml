@@ -60,6 +60,7 @@
         <entry key="app/src/main/res/layout/layout_registration_step_five.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/layout/payment_ui_dialog_bottom_sheet.xml" value="0.25" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/menu/menu_statement_add.xml" value="0.24427083333333333" />
       </map>
     </option>
   </component>

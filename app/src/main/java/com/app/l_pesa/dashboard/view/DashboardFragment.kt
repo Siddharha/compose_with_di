@@ -50,7 +50,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
    private lateinit  var progressDialog: ProgressDialog
    private var loanElegibilityFlag:Boolean = false
     val bannerList :ArrayList<ResDashboard.Banner> by lazy { ArrayList() }
-
+    val sharedPref by lazy{ SharedPref(requireActivity())}
     val dialog:AlertDialog by lazy {
         val d = MaterialAlertDialogBuilder(requireContext(),R.style.MyAlertDialogTheme)
         d.apply {
@@ -89,6 +89,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
 //                    loadDashboard()
 //                    onResume()
 //                }
+
                 instance!!
             }else{
                 instance = DashboardFragment()
@@ -372,7 +373,7 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         }
         else
         {
-            val sharedPref = SharedPref(requireActivity())
+
             sharedPref.navigationTab = resources.getString(R.string.open_tab_loan)
             sharedPref.openTabLoan = type
             (context as DashboardActivity).onBannerFragmentRedirectLoanPlan()

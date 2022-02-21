@@ -265,7 +265,6 @@
         <activity
             android:name=".dashboard.view.DashboardActivity"
             android:screenOrientation="portrait"
-            android:launchMode="singleInstance"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".pin.view.ChangeLoginPinActivity"

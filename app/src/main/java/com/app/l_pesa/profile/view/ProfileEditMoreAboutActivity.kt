@@ -37,9 +37,9 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
         setCancelable(false)
         create()
     } }
-    private lateinit var eduLvlValue:String
-    private lateinit var incomeSourceValue:String
-    private lateinit var netIncomeValue:String
+    private  var eduLvlValue:String = ""
+    private  var incomeSourceValue:String = ""
+    private  var netIncomeValue:String = ""
     private val eduLvls:ArrayList<ResUserAdditionalInfoDropdowns.Data.EducationalLevel> by lazy { ArrayList() }
     private val incomeSources:ArrayList<ResUserAdditionalInfoDropdowns.Data.IncomeSource> by lazy { ArrayList() }
     private val netMonthlyIncomeList:ArrayList<ResUserAdditionalInfoDropdowns.Data.NetMonthlyIncome> by lazy { ArrayList() }
@@ -97,12 +97,18 @@ class ProfileEditMoreAboutActivity : AppCompatActivity(), ICallBackClickMoreAbou
             val incInfo = Gson().fromJson(intent.getStringExtra("inc_info"),ResUserInfo.AdditionalInfoKeyValue::class.java)
             val netInfo = Gson().fromJson(intent.getStringExtra("net_info"),ResUserInfo.AdditionalInfoKeyValue::class.java)
            // val additionalInfoStringArray = additionalInfoString?.split("*")!!
+
+            try{
             etEduLvl.setText(eduInfo.nameAdditional)
-            eduLvlValue = eduInfo.valueAdditional!!
+            eduLvlValue = eduInfo.valueAdditional
             etNameEmp.setText(incInfo.nameAdditional)
-            incomeSourceValue = incInfo.valueAdditional!!
+            incomeSourceValue = incInfo.valueAdditional
             etMonthlyIncome.setText(netInfo.nameAdditional)
-            netIncomeValue = netInfo.valueAdditional!!
+            netIncomeValue = netInfo.valueAdditional
+            }catch (e :Exception)
+            {
+                e.printStackTrace()
+            }
         }
     }
 

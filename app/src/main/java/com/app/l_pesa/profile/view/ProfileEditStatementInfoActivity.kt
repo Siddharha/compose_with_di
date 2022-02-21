@@ -64,6 +64,7 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_edit_statement_info)
         toolbar.title = "Statements"
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbarFont(this)
@@ -186,6 +187,11 @@ class ProfileEditStatementInfoActivity : AppCompatActivity(), ICallBackStatement
             R.id.mnuAdd ->{
 
                 bottomSheetDialog.show(supportFragmentManager, "bottom_sheet_statement")
+                return true
+            }
+            R.id.mnuHelp ->{
+                Toast.makeText(this,"Help will be available shortly. " +
+                        "for farther help connect L-Pesa subbort.",Toast.LENGTH_SHORT).show()
                 return true
             }
 
