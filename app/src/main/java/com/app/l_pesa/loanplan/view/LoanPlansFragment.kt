@@ -23,24 +23,24 @@ class LoanPlansFragment : Fragment(), TabLayout.OnTabSelectedListener {
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
 
-//    companion object {
-//        fun newInstance(): Fragment {
-//            return LoanPlansFragment()
-//        }
-//    }
-
-    companion object{
-        var instance: LoanPlansFragment?=null
-
-        var newInstance : ()-> LoanPlansFragment = {
-            if(instance!=null){
-                instance!!
-            }else{
-                instance = LoanPlansFragment()
-                instance!!
-            }
+    companion object {
+        fun newInstance(): Fragment {
+            return LoanPlansFragment()
         }
     }
+
+//    companion object{
+//        var instance: LoanPlansFragment?=null
+//
+//        var newInstance : ()-> LoanPlansFragment = {
+//            if(instance!=null){
+//                instance!!
+//            }else{
+//                instance = LoanPlansFragment()
+//                instance!!
+//            }
+//        }
+//    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.layout_tab_common, container,false)

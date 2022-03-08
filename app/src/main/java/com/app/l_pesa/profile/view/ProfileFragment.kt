@@ -56,24 +56,24 @@ private val progressDialog: AlertDialog by lazy {
 }
 
 
-//    companion object {
-//        fun newInstance(): Fragment {
-//            return ProfileFragment()
-//        }
-//    }
-
-    companion object{
-        var instance: ProfileFragment?=null
-
-        var newInstance : ()-> ProfileFragment = {
-            if(instance!=null){
-                instance!!
-            }else{
-                instance = ProfileFragment()
-                instance!!
-            }
+    companion object {
+        fun newInstance(): Fragment {
+            return ProfileFragment()
         }
     }
+
+//    companion object{
+//        var instance: ProfileFragment?=null
+//
+//        var newInstance : ()-> ProfileFragment = {
+//            if(instance!=null){
+//                instance!!
+//            }else{
+//                instance = ProfileFragment()
+//                instance!!
+//            }
+//        }
+//    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_profile, container,false)
         return rootView

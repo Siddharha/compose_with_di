@@ -68,35 +68,35 @@ class DashboardFragment: Fragment(), ICallBackDashboard, ICallBackListOnClick, I
         d.create()
     }
 
-//   companion object {
-//       fun newInstance(): Fragment {
-//           return DashboardFragment()
-//       }
-//    }
-
-    companion object{
-        var instance: DashboardFragment?=null
-
-        var newInstance : ()-> DashboardFragment = {
-            if(instance!=null){
-//               instance?.activity?.supportFragmentManager?.beginTransaction()?.remove(instance!!)?.commitAllowingStateLoss()
-//                instance?.activity?.supportFragmentManager?.beginTransaction()?.add(instance!!,"dashboard")?.commitAllowingStateLoss()
-//                instance?.apply {
-//                    swipeRefresh()
-//                    initUI()
-//                    initData()
-//                    onActionPerform()
-//                    loadDashboard()
-//                    onResume()
-//                }
-
-                instance!!
-            }else{
-                instance = DashboardFragment()
-                instance!!
-            }
-        }
+   companion object {
+       fun newInstance(): Fragment {
+           return DashboardFragment()
+       }
     }
+
+//    companion object{
+//        var instance: DashboardFragment?=null
+//
+//        var newInstance : ()-> DashboardFragment = {
+//            if(instance!=null){
+////               instance?.activity?.supportFragmentManager?.beginTransaction()?.remove(instance!!)?.commitAllowingStateLoss()
+////                instance?.activity?.supportFragmentManager?.beginTransaction()?.add(instance!!,"dashboard")?.commitAllowingStateLoss()
+////                instance?.apply {
+////                    swipeRefresh()
+////                    initUI()
+////                    initData()
+////                    onActionPerform()
+////                    loadDashboard()
+////                    onResume()
+////                }
+//
+//                instance!!
+//            }else{
+//                instance = DashboardFragment()
+//                instance!!
+//            }
+//        }
+//    }
 
 
 
