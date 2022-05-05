@@ -12,7 +12,7 @@ android {
             //storeFile file('/home/amiyo/AndroidProject/Office/L-Pesa Intellij/l-pesa/app/KEY/lpesa.jks')
 
             storePassword 'android'
-            storeFile file('/Users/siddharthamaji/Documents/Android_project/l-pesa-android-app/app/KEY/lpesa.jks')
+            storeFile file('/home/siddhartha/Documents/android_apps/l-pesa-android-app/app/KEY/lpesa.jks')
         }
     }
     compileSdkVersion 30
