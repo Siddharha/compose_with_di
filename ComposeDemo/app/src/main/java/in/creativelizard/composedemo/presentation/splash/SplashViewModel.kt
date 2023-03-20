@@ -11,6 +11,7 @@ class SplashViewModel : ViewModel() {
             delay(1000)
             onLoadSplash.invoke()
             //test
+            //test 2
         }
     }
 
