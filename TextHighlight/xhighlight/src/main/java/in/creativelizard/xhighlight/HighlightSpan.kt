@@ -10,26 +10,25 @@ import android.widget.TextView
 
 class HighlightSpan(
     private val type: HighlightSpanType,
-                  private val tagColor:Int,
+                  private val highlightColor:Int,
                   private val onHashTagClick: ((String) -> Unit)) : ClickableSpan() {
     override fun updateDrawState(ds: TextPaint) {
         super.updateDrawState(ds)
         when(type) {
                HighlightSpanType.USER_TAG -> {
-                  // ds.isUnderlineText = false
+                   ds.isUnderlineText = false
                    ds.typeface = Typeface.DEFAULT_BOLD
-                   ds.color = Color.GREEN
-                   ds.setARGB(Color.alpha(tagColor), Color.red(tagColor), Color.green(tagColor), Color.blue(tagColor))
+                   ds.setARGB(Color.alpha(highlightColor), Color.red(highlightColor), Color.green(highlightColor), Color.blue(highlightColor))
                }
 
             HighlightSpanType.LINK ->{
-                ds.color = ds.linkColor
-                ds.setARGB(Color.alpha(tagColor), Color.red(tagColor), Color.green(tagColor), Color.blue(tagColor))
+                ds.isUnderlineText = false
+                ds.setARGB(Color.alpha(highlightColor), Color.red(highlightColor), Color.green(highlightColor), Color.blue(highlightColor))
             }
 
             HighlightSpanType.HASH_TAG ->{
-                ds.color = ds.linkColor
-                ds.setARGB(Color.alpha(tagColor), Color.red(tagColor), Color.green(tagColor), Color.blue(tagColor))
+                ds.isUnderlineText = false
+                ds.setARGB(Color.alpha(highlightColor), Color.red(highlightColor), Color.green(highlightColor), Color.blue(highlightColor))
             }
 
         }

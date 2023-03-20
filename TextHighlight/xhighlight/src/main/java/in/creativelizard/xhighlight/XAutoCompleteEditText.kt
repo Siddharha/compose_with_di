@@ -3,35 +3,37 @@ package `in`.creativelizard.xhighlight
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.TypedArray
-import android.text.Editable
-import android.text.Spannable
-import android.text.Spanned
-import android.text.TextWatcher
+import android.text.*
+import android.text.method.LinkMovementMethod
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
 import android.util.AttributeSet
 import android.util.Log
+import android.widget.AutoCompleteTextView
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.text.clearSpans
+import kotlinx.coroutines.delay
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
-class XEditText : AppCompatEditText, TextWatcher {
+class XAutoCompleteEditText : androidx.appcompat.widget.AppCompatAutoCompleteTextView, TextWatcher {
 
     private var defaultColor: Int = ContextCompat.getColor(context, R.color.colorBlack)
     private var tagColor1: Int = ContextCompat.getColor(context, R.color.colorBlue)
     private var tagColor2: Int = ContextCompat.getColor(context, R.color.colorBlue)
     private var tagColor3: Int = ContextCompat.getColor(context, R.color.colorBlue)
     var userList:List<User>? = null
-    private lateinit var spanable: Spannable
+    var spanable: Spannable? = null
 
     constructor(context: Context) : super(context) {
         init(attrs = null)
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(
-        context,
-        attrs
+    context,
+    attrs
     ) {
         init(attrs)
     }
@@ -39,7 +41,7 @@ class XEditText : AppCompatEditText, TextWatcher {
     constructor(
         context: Context,
         attrs: AttributeSet?,
-        defStyleAttr: Int
+    defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr) {
         init(attrs)
     }
@@ -50,18 +52,18 @@ class XEditText : AppCompatEditText, TextWatcher {
     }
 
     private fun init(attrs: AttributeSet?) {
-        spanable = this.text!!
-        val a: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.XEditText)
-        tagColor1 = a.getColor(R.styleable.XEditText_hashTagColor, tagColor1)
-        tagColor2 = a.getColor(R.styleable.XEditText_userTagColor, tagColor2)
-        tagColor3 = a.getColor(R.styleable.XEditText_linkColor, tagColor3)
-        defaultColor = a.getColor(R.styleable.XEditText_android_textColor, defaultColor)
+        spanable = this.text
+        val a: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.XAutoCompleteEditText)
+        tagColor1 = a.getColor(R.styleable.XAutoCompleteEditText_autoHashTagColor, tagColor1)
+        tagColor2 = a.getColor(R.styleable.XAutoCompleteEditText_autoUserTagColor, tagColor2)
+        tagColor3 = a.getColor(R.styleable.XAutoCompleteEditText_autoLinkColor, defaultColor)
+        defaultColor = a.getColor(R.styleable.XAutoCompleteEditText_android_textColor, defaultColor)
         a.recycle()
         addTextChangedListener(this)
     }
 
     private fun changeTheColorHash(s: String, start: Int) {
-        spanable.setSpan(
+        spanable?.setSpan(
             ForegroundColorSpan(tagColor1),
             start,
             start + s.length,
@@ -69,7 +71,7 @@ class XEditText : AppCompatEditText, TextWatcher {
         )
     }
     private fun changeTheColorLink(s: String, start: Int) {
-        spanable.setSpan(
+        spanable?.setSpan(
             ForegroundColorSpan(tagColor3),
             start,
             start + s.length,
@@ -79,39 +81,40 @@ class XEditText : AppCompatEditText, TextWatcher {
 
     private fun changeTheColorAt(s: String, start: Int) {
 
-            spanable
-                .setSpan(
-                    ForegroundColorSpan(tagColor2),
-                    start,
-                    start + s.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            spanable.setSpan(
-                StyleSpan(android.graphics.Typeface.BOLD),
+        spanable
+            ?.setSpan(
+                ForegroundColorSpan(tagColor2),
                 start,
                 start + s.length,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
+        spanable?.setSpan(
+            StyleSpan(android.graphics.Typeface.BOLD),
+            start,
+            start + s.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
 
     }
 
     private fun changeTheColorAtNoListMatch(s: String, start: Int) {
 
+
         spanable
-            .setSpan(
+            ?.setSpan(
                 ForegroundColorSpan(defaultColor),
                 start,
                 start + s.length,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+        spanable?.removeSpan(StyleSpan(android.graphics.Typeface.BOLD))
 
     }
 
     @SuppressLint("ResourceType")
     private fun changeTheColor2(s: String, start: Int) {
-        spanable.setSpan(
+        spanable?.setSpan(
             ForegroundColorSpan(defaultColor),
             start,
             start + s.length,
@@ -154,10 +157,7 @@ class XEditText : AppCompatEditText, TextWatcher {
                     changeTheColorLink(str, fullStr.indexOf(str[0], customStr.length, false))
                 } else {
                     if (str.trim().isNotEmpty()) {
-                        changeTheColor2(
-                            str,
-                            fullStr.indexOf(str[0], customStr.length, false)
-                        )
+                        changeTheColorAtNoListMatch(str, fullStr.indexOf(str[0], customStr.length, false))
                     }
                 }
                 customStr += str

@@ -41,5 +41,4 @@
             format="color" />
         <attr name="android:textColor"/>
     </declare-styleable>
-
 </resources>

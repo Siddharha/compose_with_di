@@ -14,7 +14,7 @@ import java.util.regex.Pattern
 class XTextView : androidx.appcompat.widget.AppCompatTextView {
 
       var setOnHashTagClickListener: ((String) -> Unit)? = null
-     var setOnUserTagClickListener: ((String) -> Unit)? = null
+     var setOnUserTagClickListener: ((String,Int) -> Unit)? = null
      var setOnLinkTagClickListener: ((String) -> Unit)? = null
     var userList:List<User>? = null
     var clickIntent: Intent = Intent()
@@ -139,21 +139,32 @@ class XTextView : androidx.appcompat.widget.AppCompatTextView {
             val hashTagEnd = span[1]
             val theWord = commentsContent.subSequence(hashTagStart + 1, hashTagEnd).toString()
 
-            Log.e("user",userList.toString())
+            //Log.e("user",userList.toString())
+            if(userList !=null){
+                userList.also {
 
-            userList?.also {
 
-                if(userList.map { it.name }.contains(theWord)){
-                    commentsContent.setSpan(
-                        HighlightSpan(HighlightSpanType.USER_TAG,tagColor2){
-                            setOnUserTagClickListener?.invoke(it)
-                        },
-                        hashTagStart,
-                        hashTagEnd, 0
-                    )
+                    if(userList.mapIndexed {i,user -> user.name }.contains(theWord)){
+                        commentsContent.setSpan(
+                            HighlightSpan(HighlightSpanType.USER_TAG,tagColor2){ userName->
+                                setOnUserTagClickListener?.invoke(userName,userList[i].id)
+                            },
+                            hashTagStart,
+                            hashTagEnd, 0
+                        )
+                    }
+
                 }
-
+            }else{
+                commentsContent.setSpan(
+                    HighlightSpan(HighlightSpanType.USER_TAG,tagColor2){ userName->
+                        setOnUserTagClickListener?.invoke(userName,-1)
+                    },
+                    hashTagStart,
+                    hashTagEnd, 0
+                )
             }
+
 
         }
     }
