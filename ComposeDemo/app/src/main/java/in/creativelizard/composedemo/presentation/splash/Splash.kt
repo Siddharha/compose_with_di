@@ -1,4 +1,5 @@
 package `in`.creativelizard.composedemo.presentation.splash
+import `in`.creativelizard.composedemo.utils.PageRoute
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,7 +17,7 @@ import androidx.navigation.NavHostController
 fun SplashPage(navController: NavHostController?) {
         val viewModel = hiltViewModel<SplashViewModel>()
         viewModel.onLoadSplash{
-                navController?.navigate("login")
+                navController?.navigate(PageRoute.LOGIN)
         }
     Scaffold (
         backgroundColor = Color.Red
