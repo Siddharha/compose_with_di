@@ -12,10 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import javax.inject.Inject
 
 @Composable
 fun LoginPage(navController: NavHostController?=null) {
+    val viewModel:LoginViewModel = hiltViewModel()
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
@@ -35,7 +38,7 @@ fun LoginPage(navController: NavHostController?=null) {
                 modifier = Modifier.padding(5.dp))
 
             Button(onClick = {
-
+                viewModel.onLogin()
             }) {
                 Text(text = "Login")
             }
