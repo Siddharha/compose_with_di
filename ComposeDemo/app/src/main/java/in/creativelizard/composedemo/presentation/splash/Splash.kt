@@ -14,7 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 
 @Composable
-fun SplashPage(navController: NavHostController?) {
+fun SplashPage(navController: NavHostController? = null) {
         val viewModel = hiltViewModel<SplashViewModel>()
         viewModel.onLoadSplash{
                 navController?.navigate(PageRoute.LOGIN)
@@ -34,5 +34,5 @@ fun SplashPage(navController: NavHostController?) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-        SplashPage(null)
+        SplashPage()
 }

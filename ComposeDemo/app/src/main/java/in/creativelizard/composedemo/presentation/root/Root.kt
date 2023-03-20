@@ -19,10 +19,3 @@ fun RootPage(){
     }
 
 }
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-        RootPage()
-
-}
